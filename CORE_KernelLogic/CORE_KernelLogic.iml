@@ -3,7 +3,21 @@
   <component name="FlexBuildConfigurationManager" active="CORE_KernelLogic">
     <configurations>
       <configuration name="CORE_KernelLogic" target-platform="Desktop" output-type="Library" output-file="CORE_KernelLogic.swc" output-folder="$MODULE_DIR$/../out/production/CORE_KernelLogic">
-        <dependencies target-player="50.2">
+        <dependencies>
+          <entries>
+            <entry module-name="LIB_KyoLib" build-configuration-name="LIB_KyoLib">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="CORE_Shared" build-configuration-name="CORE_Shared">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="5a507b33-defe-4906-8103-4eea980146fc">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="bc382900-ffda-476a-bd45-a326c557957a">
+              <dependency linkage="External" />
+            </entry>
+          </entries>
           <sdk name="flex4.16.1-air50.2.4.1" />
         </dependencies>
         <compiler-options />
@@ -17,9 +31,35 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/swf" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="LIB_KyoLib" exported="" />
+    <orderEntry type="module" module-name="CORE_Shared" exported="" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="5a507b33-defe-4906-8103-4eea980146fc" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/swc" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/lib/swc" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="bc382900-ffda-476a-bd45-a326c557957a" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/swf" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/lib/swf" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
