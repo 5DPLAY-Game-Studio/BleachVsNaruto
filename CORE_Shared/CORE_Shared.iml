@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="CORE_Shared">
     <configurations>
-      <configuration name="CORE_Shared" target-platform="Desktop" output-type="Library" output-file="CORE_Shared.swc" output-folder="$MODULE_DIR$/../out/production/CORE_Shared">
+      <configuration name="CORE_Shared" pure-as="true" output-type="Library" output-file="CORE_Shared.swc" output-folder="$MODULE_DIR$/../out/production/CORE_Shared">
         <dependencies target-player="50.2">
           <sdk name="flex4.16.1-air50.2.4.1" />
         </dependencies>
