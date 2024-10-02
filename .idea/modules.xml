@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BleachVsNaruto.iml" filepath="$PROJECT_DIR$/BleachVsNaruto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CORE_KernelLogic/CORE_KernelLogic.iml" filepath="$PROJECT_DIR$/CORE_KernelLogic/CORE_KernelLogic.iml" />
       <module fileurl="file://$PROJECT_DIR$/CORE_Shared/CORE_Shared.iml" filepath="$PROJECT_DIR$/CORE_Shared/CORE_Shared.iml" />
       <module fileurl="file://$PROJECT_DIR$/CORE_Utils/CORE_Utils.iml" filepath="$PROJECT_DIR$/CORE_Utils/CORE_Utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/LIB_KyoLib/LIB_KyoLib.iml" filepath="$PROJECT_DIR$/LIB_KyoLib/LIB_KyoLib.iml" />
