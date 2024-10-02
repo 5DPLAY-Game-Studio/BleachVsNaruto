@@ -80,7 +80,7 @@
 		 * 时长等视频信息
 		 */
 		public function get videoMetaData():Object{
-			return _video.metaData;
+			return _video.metadata;
 		}
 
 		public function SuperPlayer(width:Number, height:Number)
@@ -285,7 +285,7 @@ internal class InsVideo extends Sprite {
 
 	public var loopPlay:Boolean;
 	public var playing:Boolean;
-	public var metaData:Object;
+	public var metadata:Object;
 
 	private var flvVideo:Video;
 	private var flvURL:String;
@@ -333,7 +333,7 @@ internal class InsVideo extends Sprite {
 		}
 	}
 	private function onMetaData(obj:Object):void{
-		metaData = obj;
+		metadata = obj;
 		dispatchEvent(new Event(META_DATA));
 	}
 
