@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BleachVsNaruto.iml" filepath="$PROJECT_DIR$/BleachVsNaruto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LIB_KyoLib/LIB_KyoLib.iml" filepath="$PROJECT_DIR$/LIB_KyoLib/LIB_KyoLib.iml" />
     </modules>
   </component>
 </project>
