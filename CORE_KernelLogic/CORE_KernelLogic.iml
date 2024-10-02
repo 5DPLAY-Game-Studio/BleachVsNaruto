@@ -2,8 +2,8 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="CORE_KernelLogic">
     <configurations>
-      <configuration name="CORE_KernelLogic" target-platform="Desktop" output-type="Library" output-file="CORE_KernelLogic.swc" output-folder="$MODULE_DIR$/../out/production/CORE_KernelLogic">
-        <dependencies>
+      <configuration name="CORE_KernelLogic" pure-as="true" output-type="Library" output-file="CORE_KernelLogic.swc" output-folder="$MODULE_DIR$/../out/production/CORE_KernelLogic">
+        <dependencies target-player="50.2">
           <entries>
             <entry module-name="LIB_KyoLib" build-configuration-name="LIB_KyoLib">
               <dependency linkage="Merged" />
