@@ -14,7 +14,7 @@
             <entry library-id="5a507b33-defe-4906-8103-4eea980146fc">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="bc382900-ffda-476a-bd45-a326c557957a">
+            <entry library-id="8eca6756-ed54-4747-aada-4c117071543e">
               <dependency linkage="External" />
             </entry>
           </entries>
@@ -32,8 +32,8 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/assets" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lib/swf" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/swf_swc" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -52,13 +52,13 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="bc382900-ffda-476a-bd45-a326c557957a" />
+        <properties id="8eca6756-ed54-4747-aada-4c117071543e" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/lib/swf" />
+          <root url="file://$MODULE_DIR$/lib/swf_swc" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/lib/swf" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/lib/swf_swc" recursive="false" />
       </library>
     </orderEntry>
   </component>
