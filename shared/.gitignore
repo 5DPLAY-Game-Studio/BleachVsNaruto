@@ -1,0 +1,7 @@
+# 共享目录
+/swf/*.*
+!/swf/.gitkeep
+
+/assets/*/
+/assets/*.*
+!/assets/.gitkeep
