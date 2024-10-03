@@ -37,7 +37,7 @@ package net.play5d.game.bvn.win.utils
 			return _i;
 		}
 
-		[Embed(source="//win_ui.swf")]
+		[Embed(source="/../swf/win_ui.swf")]
 		public var win_ui:Class;
 
 		private var _swfPool:Dictionary;
