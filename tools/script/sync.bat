@@ -85,19 +85,19 @@ if !errorlevel!==0 (
 	goto END
 )
 
-echo D|xcopy "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_PC%" /E /y >nul
+echo D|xcopy "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_DEV%" /E /y >nul
 if !errorlevel!==0 (
-	echo Copy material directory [%ASSETS_DIR_SHELL_PC%] successfully.
+	echo Copy material directory [%ASSETS_DIR_SHELL_DEV%] successfully.
 ) else (
-	echo Failed to copy material directory [%ASSETS_DIR_SHELL_PC%].
+	echo Failed to copy material directory [%ASSETS_DIR_SHELL_DEV%].
 	goto END
 )
 
-echo D|xcopy "%ASSETS_DIR%" "%SHELL_DIR_MOB%" /E /y >nul
+echo D|xcopy "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_MOB%" /E /y >nul
 if !errorlevel!==0 (
-	echo Copy material directory [%ASSETS_DIR_SHELL_PC%] successfully.
+	echo Copy material directory [%ASSETS_DIR_SHELL_MOB%] successfully.
 ) else (
-	echo Failed to copy material directory [%ASSETS_DIR_SHELL_PC%].
+	echo Failed to copy material directory [%ASSETS_DIR_SHELL_MOB%].
 	goto END
 )
 
