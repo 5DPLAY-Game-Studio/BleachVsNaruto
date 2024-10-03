@@ -26,7 +26,7 @@
         <compiler-options>
           <option name="additionalOptions" value="-swf-version 37 -optimize=true -use-network=true -use-direct-blit=true -use-gpu=true" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/launch-app.xml" package-file-name="test">
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/launch-app.xml" package-file-name="launch">
           <files-to-package>
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/../shared/assets" path-in-package="assets" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/lib/icon" path-in-package="icon" />
