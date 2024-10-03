@@ -1,6 +1,2 @@
 # 输出文件目录
 /out/
-
-# 共享目录
-/shared/swf/*.*
-!/shared/swf/.gitkeep
