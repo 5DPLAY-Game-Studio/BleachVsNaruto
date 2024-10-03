@@ -1,0 +1,11 @@
+/dev/assets/*/
+/dev/assets/*.*
+!/dev/assets/.gitkeep
+
+/pc/assets/*/
+/pc/assets/*.*
+!/pc/assets/.gitkeep
+
+/mob/assets/*/
+/mob/assets/*.*
+!/mob/assets/.gitkeep
