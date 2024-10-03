@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.win
 {
 	import flash.desktop.NativeApplication;
@@ -12,7 +30,7 @@ package net.play5d.game.bvn.win
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import flash.utils.ByteArray;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.GameQuailty;
 	import net.play5d.game.bvn.MainGame;
@@ -38,20 +56,20 @@ package net.play5d.game.bvn.win
 	import net.play5d.game.bvn.win.input.InputManager;
 	import net.play5d.game.bvn.win.utils.FileUtils;
 	import net.play5d.game.bvn.win.views.ViewManager;
-	
+
 	public class GameInterfaceManager implements IGameInterface
 	{
-		
+
 		private static var _extendsConfig:ExtendConfig = new ExtendConfig();
-		
+
 		public static function get config():ExtendConfig{
 			return _extendsConfig;
 		}
-		
+
 		public function GameInterfaceManager()
 		{
 		}
-		
+
 		public function initTitleUI(ui:DisplayObject):void{
 			var logomc:Sprite = (ui as Sprite).getChildByName('logo_mc') as Sprite;
 			if(!logomc) return;
@@ -67,26 +85,26 @@ package net.play5d.game.bvn.win
 				logobbs.addEventListener(MouseEvent.MOUSE_UP,URL.bbs,false,0,true);
 			}
 		}
-		
+
 		public function moreGames():void
 		{
 			URL.website();
 		}
-		
+
 		public function submitScore(score:int):void{
 		}
-		
+
 		public function showRank():void
 		{
 		}
-		
+
 		public function saveGame(data:Object):void
 		{
 			var json:String = JSON.stringify(data);
 			FileUtils.writeAppFloderFile('bvnsave.sav',json);
 			trace('saveData' , json);
 		}
-		
+
 		public function loadGame():Object
 		{
 			var url:String = FileUtils.getAppFloderFileUrl('bvnsave.sav');
@@ -95,32 +113,32 @@ package net.play5d.game.bvn.win
 			var o:Object = JSON.parse(json);
 			return o;
 		}
-		
+
 		public function getFighterCtrl(player:int):IFighterActionCtrl
 		{
 			return null;
 		}
-		
+
 		public function getGameMenu():Array
 		{
 			var a:Array = [
-				
+
 				{txt:'TEAM PLAY',cn:'小队模式',children:[
 					{txt:'TEAM ACRADE',cn:'闯关模式'},
 					{txt:'TEAM VS PEOPLE',cn:'2P对战'},
 					{txt:'TEAM VS CPU',cn:'对战电脑'}
 				]},
-				
+
 				{txt:'SINGLE PLAY',cn:'单人模式',children:[
 					{txt:'SINGLE ACRADE',cn:'闯关模式'},
 					{txt:'SINGLE VS PEOPLE',cn:'2P对战'},
 					{txt:'SINGLE VS CPU',cn:'对战电脑'}
 				]},
-				
+
 				{txt:'LAN PLAY',cn:'局域网对战',func:function():void{
 					LANGameCtrl.I.goLANGameState();
 				}},
-				
+
 				/*{txt:'SURVIVOR',cn:'挑战模式'},*/ //暂未开放
 				{txt:'OPTION',cn:'游戏设置'},
 				{txt:'TRAINING',cn:'练习模式'},
@@ -132,7 +150,7 @@ package net.play5d.game.bvn.win
 			];
 			return a;
 		}
-		
+
 		public function getSettingMenu():Array
 		{
 			return [
@@ -217,11 +235,11 @@ package net.play5d.game.bvn.win
 				},
 			];
 		}
-		
+
 		public function getGameInput(type:String):Vector.<IGameInput>{
-			
+
 			var vec:Vector.<IGameInput> = new Vector.<IGameInput>();
-			
+
 			switch(type){
 				case GameInputType.MENU:
 					vec.push(InputManager.I.key_menu);
@@ -243,11 +261,11 @@ package net.play5d.game.bvn.win
 			}
 			return vec;
 		}
-		
+
 		public function getConfigExtend():IExtendConfig{
 			return _extendsConfig;
 		}
-		
+
 		public function afterBuildGame():void{
 			var map:MapMain = GameCtrl.I.gameState.getMap();
 			if(map.mapLayer) map.mapLayer.cacheAsBitmapMatrix = new Matrix();
@@ -255,62 +273,62 @@ package net.play5d.game.bvn.win
 			if(map.frontFixLayer) map.frontFixLayer.cacheAsBitmapMatrix = new Matrix();
 			if(map.bgLayer) map.bgLayer.cacheAsBitmap = true;
 		}
-		
+
 		/**
-		 * 更新输入设置 
+		 * 更新输入设置
 		 */
 		public function updateInputConfig():Boolean{
 			if(LANServerCtrl.I.active || LANClientCtrl.I.active){
-				
+
 				/**
 				 * 使用锁帧同步算法进行游戏操作同步
 				 * 客户端采集操作数据，定时发给服务器，服务器定时更新服务端和客户端
 				 * 服务端在同样的时间线采集操作数据，定时更新并发送到客户端
 				 */
-				
+
 				InputManager.I.key_menu.enabled = false;
 				InputManager.I.key_p1.enabled = false;
 				InputManager.I.key_p2.enabled = false;
-				
+
 				InputManager.I.joy_menu.enabled = false;
 				InputManager.I.joy_p1.enabled = false;
 				InputManager.I.joy_p2.enabled = false;
-				
+
 //				InputManager.I.socket_input_menu.enabled = false;
 				InputManager.I.socket_input_p1.enabled = true;
 				InputManager.I.socket_input_p2.enabled = true;
-				
+
 				if(LANServerCtrl.I.active){
 					InputManager.I.socket_input_p1.setInputers([InputManager.I.key_p1 , InputManager.I.joy_p1]);
 				}
-				
+
 				if(LANClientCtrl.I.active){
 					InputManager.I.key_p2.setConfig(GameData.I.config.key_p1);
 					InputManager.I.joy_p2.setConfig(_extendsConfig.joy1Config);
 					InputManager.I.socket_input_p2.setInputers([InputManager.I.key_p2 , InputManager.I.joy_p2]);
 				}
-				
+
 				return true;
 			}
-			
+
 			InputManager.I.key_menu.setConfig(GameData.I.config.key_menu);
 			InputManager.I.key_p1.setConfig(GameData.I.config.key_p1);
 			InputManager.I.key_p2.setConfig(GameData.I.config.key_p2);
-			
+
 			InputManager.I.joy_menu.setConfig(_extendsConfig.joyMenuConfig);
 			InputManager.I.joy_p1.setConfig(_extendsConfig.joy1Config);
 			InputManager.I.joy_p2.setConfig(_extendsConfig.joy2Config);
-			
+
 //			InputManager.I.socket_input_menu.enabled = false;
 			InputManager.I.socket_input_p1.enabled = false;
 			InputManager.I.socket_input_p2.enabled = false;
-			
-			
+
+
 //			_extendsConfig.updateJoyConfig();
-			
+
 			return true;
 		}
-		
+
 		public function applyConfig(config:ConfigVO):void{
 			switch(config.quality){
 				case GameQuailty.BEST:
@@ -339,44 +357,44 @@ package net.play5d.game.bvn.win
 					GameConfig.FPS_SHINE_EFFECT = 10;
 					break;
 			}
-			
+
 			if(_extendsConfig.isFullScreen){
 				MainGame.I.stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 			}else{
 				MainGame.I.stage.displayState = StageDisplayState.NORMAL;
 			}
-			
+
 		}
-		
+
 		public function getCreadits(creditsInfo:String):Sprite{
 			var sp:Sprite = new Sprite();
-			
+
 //			creditsInfo += '安卓手机版 : <a href="' + URL.markURL('https://www.3839.com/a/103303.htm') + '" target="_blank">安卓手机版本下载</a>'+"<br/>";
 			creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') + '" target="_blank">www.1212321.com</a>'+"&nbsp;&nbsp; ";
 			creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.5dplay.net/') + '" target="_blank">bbs.5dplay.net</a>'+"<br/>";
-			
+
 			creditsInfo += '5dplay.net 已转向 1212321.com，并以新的面孔出现，请知晓。' + "<br/>";
 			creditsInfo += '游戏做到今天非常不易，期待您的捐赠（金额不限），谢谢！' + "<br/>";
-			
+
 			var txt:TextField = new TextField();
-			
+
 			var tf:TextFormat = new TextFormat();
 			tf.font = "微软雅黑";
 			tf.size = 20;
 			tf.color = 0xffff00;
 			tf.leading = 15;
-			
+
 			txt.defaultTextFormat = tf;
-			
+
 			txt.multiline = true;
 			txt.htmlText = creditsInfo;
 			txt.autoSize = TextFieldAutoSize.LEFT;
-			
+
 			txt.x = 50;
 			txt.y = 30;
-			
+
 			sp.addChild(txt);
-			
+
 			var android:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getAndroid());
 			android.y = 400;
 			android.x = 300;
@@ -384,7 +402,7 @@ package net.play5d.game.bvn.win
 			android.height = 194;
 			android.addEventListener(MouseEvent.MOUSE_OVER,payOverHandler);
 			sp.addChild(android);
-			
+
 			var alipay:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getAlipay());
 			alipay.y = 400;
 			alipay.x = android.x + 170;
@@ -393,7 +411,7 @@ package net.play5d.game.bvn.win
 			alipay.alpha = 0.2;
 			alipay.addEventListener(MouseEvent.MOUSE_OVER , payOverHandler);
 			sp.addChild(alipay);
-			
+
 			var weixin:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getWeixin());
 			weixin.y = 400;
 			weixin.x = alipay.x + 170;
@@ -401,7 +419,7 @@ package net.play5d.game.bvn.win
 			weixin.height = 194;
 			weixin.addEventListener(MouseEvent.MOUSE_OVER , payOverHandler);
 			sp.addChild(weixin);
-			
+
 //			var pateronSp:Sprite = new Sprite();
 //			var pateron:Bitmap = EmbedAssetUtils.getPatreon();
 //			pateron.width = 100;
@@ -412,14 +430,14 @@ package net.play5d.game.bvn.win
 //			pateronSp.buttonMode = true;
 //			pateronSp.addEventListener(MouseEvent.MOUSE_UP,URL.supportUS,false,0,true);
 //			sp.addChild(pateronSp);
-			
+
 			function payOverHandler(e:MouseEvent):void{
 				if(e.currentTarget == alipay){
 					alipay.alpha = 1;
 					weixin.alpha = 0.2;
 					android.alpha = 0.2;
 				}
-				
+
 				if(e.currentTarget == weixin){
 					alipay.alpha = 0.2;
 					weixin.alpha = 1;
@@ -431,18 +449,18 @@ package net.play5d.game.bvn.win
 					android.alpha = 1;
 				}
 			}
-			
+
 			return sp;
 		}
-		
+
 		public function checkFile(url:String, file:ByteArray):Boolean{
 			return true;
 			//return GameSafeKeeper.I.checkFile(url, file);
 		}
-		
+
 		public function addMosouMoney(back:Function):void {
 			back(100 + Math.random() * 200);
 		}
-		
+
 	}
 }

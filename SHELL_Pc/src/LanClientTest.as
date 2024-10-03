@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package
 {
 	import flash.desktop.NativeApplication;
@@ -8,7 +26,7 @@ package
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	import flash.utils.setTimeout;
-	
+
 	import net.play5d.game.bvn.debug.Debugger;
 	import net.play5d.game.bvn.GameQuailty;
 	import net.play5d.game.bvn.MainGame;
@@ -24,12 +42,12 @@ package
 	import net.play5d.game.bvn.win.data.HostVO;
 	import net.play5d.game.bvn.win.utils.Loger;
 	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	
+
 	[SWF(width="800", height="600", frameRate="30", backgroundColor="#000000")]
 	public class LanClientTest extends Sprite
 	{
 		private var _mainGame:MainGame;
-		
+
 		public function LanClientTest()
 		{
 			if(stage){
@@ -38,62 +56,62 @@ package
 				addEventListener(Event.ADDED_TO_STAGE,initlize);
 			}
 		}
-		
+
 		private function initlize(e:Event = null):void{
-			
+
 			GameLoger.setLoger(new Loger());
-			
+
 			GameLoger.log("init...");
-			
+
 			removeEventListener(Event.ADDED_TO_STAGE,initlize);
-			
+
 			GameInterface.instance = new GameInterfaceManager();
-			
+
 			GameInterfaceManager.config.isFullScreen = false;
-			
+
 //			if(GameInterfaceManager.config.isFullScreen){
 //				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 //			}
-			
+
 			GameUI.BITMAP_UI = true;
-			
+
 			GameData.I.config.AI_level = 1;
 			GameData.I.config.quality = GameQuailty.MEDIUM;
 			GameData.I.config.keyInputMode = 0;
-			
+
 			URL.MARK = 'bvn_win'+MainGame.VERSION;
-			
+
 			buildGame();
-			
+
 			stage.addEventListener(KeyboardEvent.KEY_DOWN,keyDownHandler);
-			
+
 			setWindowTemp();
-			
+
 		}
-		
+
 		private function buildGame():void{
-			
+
 			GameLoger.log("buildGame");
-			
+
 			_mainGame = new MainGame();
 			_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
 			if(Debugger.DEBUG_ENABLED) Debugger.initDebug(stage);
-			
+
 		}
-		
+
 		private function initBackHandler():void{
-			
+
 			GameLoger.log("init ok");
-			
+
 			UIAssetUtil.I.initalize(testClient);
 			//			_mainGame.goMenu();
 			//			_mainGame.goCongratulations();
 		}
-		
+
 		private function initFailHandler(msg:String):void{
 			GameLoger.log("init fail");
 		}
-		
+
 		private function keyDownHandler(e:KeyboardEvent):void{
 			if(e.keyCode == Keyboard.ESCAPE){
 				e.preventDefault();
@@ -106,22 +124,22 @@ package
 				}
 			}
 		}
-		
+
 		private function setWindowTemp():void{
 			setTimeout(function():void{
 //				NativeApplication.nativeApplication.activeWindow.width = 400;
 //				NativeApplication.nativeApplication.activeWindow.height = 300;
 //				NativeApplication.nativeApplication.activeWindow.x = 10;
 //				NativeApplication.nativeApplication.activeWindow.y = 200;
-				
+
 				NativeApplication.nativeApplication.activeWindow.width = 800;
 				NativeApplication.nativeApplication.activeWindow.height = 600;
 				NativeApplication.nativeApplication.activeWindow.x = 1000;
 				NativeApplication.nativeApplication.activeWindow.y = 100;
-				
+
 			},200);
 		}
-		
+
 		private function testClient():void{
 			var host:HostVO = new HostVO();
 			host.ip = "127.0.0.1";
@@ -130,13 +148,13 @@ package
 			LANClientCtrl.I.initlize();
 			LANClientCtrl.I.join(host , joinBack);
 		}
-		
+
 		private function joinBack(succ:Boolean , msg:String):void{
 			if(!succ) return;
 			LANClientCtrl.I.gameStart();
 			GameMode.currentMode = GameMode.TEAM_VS_PEOPLE;
 			MainGame.I.goSelect();
 		}
-		
+
 	}
 }

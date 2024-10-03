@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.win.sockets
 {
 	import flash.events.Event;
@@ -7,18 +25,18 @@ package net.play5d.game.bvn.win.sockets
 	import flash.net.ObjectEncoding;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
-	
+
 	import net.play5d.game.bvn.win.sockets.events.SocketEvent;
-	
+
 	public class SocketClient extends EventDispatcher
 	{
-		
+
 		private var _clientSocket:Socket;
-		
+
 		public var isConnected:Boolean;
-		
+
 		private var _packetBuffer:PacketBuffer;
-		
+
 		public function SocketClient()
 		{
 			_clientSocket = new Socket();
@@ -27,16 +45,16 @@ package net.play5d.game.bvn.win.sockets
 			_clientSocket.addEventListener(Event.CLOSE, onClose);//监听连接事件
 			_clientSocket.addEventListener(IOErrorEvent.IO_ERROR,onError);
 			_clientSocket.addEventListener(ProgressEvent.SOCKET_DATA,onSocketData);
-			
+
 			_packetBuffer = new PacketBuffer();
 		}
-		
-		
-		
+
+
+
 		public function getSocketServer():String{
 			return _clientSocket.remoteAddress+':'+_clientSocket.remotePort;
 		}
-		
+
 		/**
 		 * 开始连接服务器
 		 * @param host ip地址
@@ -47,9 +65,9 @@ package net.play5d.game.bvn.win.sockets
 			log('开始连接服务器 :: '+host+':'+port);
 			_clientSocket.connect(host, port);
 		}
-		
+
 		/**
-		 * 断开连接 
+		 * 断开连接
 		 */
 		public function close():void{
 			log('关闭链接');
@@ -59,7 +77,7 @@ package net.play5d.game.bvn.win.sockets
 				trace(e);
 			}
 		}
-		
+
 		/**
 		 * 连接服务器成功
 		 */
@@ -70,13 +88,13 @@ package net.play5d.game.bvn.win.sockets
 			isConnected = true;
 			dispatchEvent(new SocketEvent(SocketEvent.CLIENT_CONNECT));
 		}
-		
+
 		private function onClose(e:Event):void{
 			log('服务器断开!');
 			isConnected = false;
 			dispatchEvent(new SocketEvent(SocketEvent.CLOSE));
 		}
-		
+
 		/**
 		 * 接收到服务器发送的数据
 		 */
@@ -84,37 +102,37 @@ package net.play5d.game.bvn.win.sockets
 		{
 			var buffer:ByteArray = new ByteArray();
 			_clientSocket.readBytes( buffer, 0, _clientSocket.bytesAvailable );
-			
+
 			PacketUtils.uncompress(buffer);
-			
+
 			_packetBuffer.push(buffer);
-			
+
 			var packets:Array = _packetBuffer.getPackets();
-			for each(var data:ByteArray in packets)  
-			{  
+			for each(var data:ByteArray in packets)
+			{
 				var se:SocketEvent = new SocketEvent(SocketEvent.RECEIVE_DATA);
 				se.data = data;
 				dispatchEvent(se);
-				
+
 				log( "Received from Server ::" + data );
-				
+
 			}
 		}
-		
+
 		public function send(msg:Object):void{
 			try{
 				if( _clientSocket != null && _clientSocket.connected )
 				{
 					var bytes:ByteArray;
-					
+
 					if(msg is ByteArray){
 						bytes = PacketUtils.addByteArrayHead(msg as ByteArray);
 					}else{
 						bytes = PacketUtils.createByteArrayWithHead(msg);
 					}
-					
+
 					if(!bytes) return;
-					
+
 					PacketUtils.compress(bytes);
 					_clientSocket.writeBytes(bytes,0,bytes.bytesAvailable);
 					_clientSocket.flush();
@@ -124,12 +142,12 @@ package net.play5d.game.bvn.win.sockets
 				log( error.message );
 			}
 		}
-		
+
 		public function sendJSON(msg:Object):void{
 			var jsonStr:String = JSON.stringify(msg);
 			send(jsonStr);
 		}
-		
+
 		private function onError(e:IOErrorEvent):void
 		{
 			log(e.toString());
@@ -138,12 +156,12 @@ package net.play5d.game.bvn.win.sockets
 			se.error = e.toString();
 			dispatchEvent(se);
 		}
-		
+
 		private function log(message:String):void
 		{
 //			trace(message);
 		}
-		
-		
+
+
 	}
 }
