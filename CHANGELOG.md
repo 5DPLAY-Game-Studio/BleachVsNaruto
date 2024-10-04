@@ -18,7 +18,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
-
+[3.7.0.0.10042024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/releases/tag/3.7.0.0.10042024_alpha
 
 [#1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/1
 [#2]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/2
