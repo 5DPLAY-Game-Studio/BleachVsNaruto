@@ -3,7 +3,7 @@ package net.play5d.game.bvn.fighter
 	import flash.display.MovieClip;
 	import flash.geom.ColorTransform;
 	import flash.geom.Rectangle;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.ctrl.GameLogic;
 	import net.play5d.game.bvn.ctrl.mosou_ctrls.MosouLogic;
@@ -20,73 +20,73 @@ package net.play5d.game.bvn.fighter
 	import net.play5d.game.bvn.interfaces.BaseGameSprite;
 	import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
-	
+
 	/**
-	 * 作为人物模板基类使用 
+	 * 作为人物模板基类使用
 	 */
 	public class FighterMain extends BaseGameSprite
 	{
 		public var qi:Number = 0;
 		public var qiMax:Number = 300;
-		
+
 		public var energy:Number = 100; //体力，关系到瞬步，防御
 		public var energyMax:Number = 100; //体力，关系到瞬步，防御
 		public var energyOverLoad:Boolean = false; //体力超载
-		
+
 		public var customHpMax:int = 0; //自定义血量
-		
+
 		public var fzqi:Number = 100; //辅助气
 		public const fzqiMax:Number = 100;
-		
+
 		private var _speed:Number = 6;
 		public var speed:Number = 6;
 		public var jumpPower:Number = 15;
-		
+
 		public var isSteelBody:Boolean = false; //刚身状态
 		public var isSuperSteelBody:Boolean = false; //超级刚身状态
-		
+
 		public var data:FighterVO; //角色数据
 		public var mosouPlayerData:MosouFighterVO; //无双模式时有效
 		public var mosouEnemyData:MosouEnemyVO; //无双模式时有效
-		
+
 		public var airHitTimes:int = 1; //允许空中打几次
 		public var jumpTimes:int = 2; //允许跳几次
-		
-		public var actionState:int = FighterActionState.NORNAL;  //动作状态
-		
+
+		public var actionState:int = FighterActionState.NORMAL;  //动作状态
+
 		public var defenseType:int = FighterDefenseType.SWOARD; //防御类型
-		
+
 		public var lastHitVO:HitVO; //上一次攻击到其他角色的动作
-		
+
 		public var introSaid:Boolean = false; //是否播放过开场
-		
+
 		public var mosouLogic:MosouFighterLogic;
-		
+
 		private var _buffCtrler:FighterBuffCtrler;
-		
+
 		private var _currentHurts:Vector.<HitVO>;
-		
+
 		private var _mosouPlayerLogic:MosouFighterLogic;
-		
+
 		//当前被攻击的数据
 		public var hurtHit:HitVO;
 		public var defenseHit:HitVO;
-		
+
 		public var targetTeams:Vector.<TeamVO>;
 		private var _currentTarget:IGameSprite;
-		
+
 		private var _fighterCtrl:FighterCtrler;
 		private var _energyAddGap:int;
-		
+
 		private var _explodeHitVO:HitVO;
 		private var _explodeHitFrame:int;
 		private var _explodeSteelFrame:int;
 		private var _replaceSkillFrame:int;
-		
+
 		private var _speedBack:Number = 0;
-		
+
 		private var _colorTransform:ColorTransform;
-		
+
 		public function get colorTransform():ColorTransform{
 			return _colorTransform;
 		}
@@ -94,26 +94,26 @@ package net.play5d.game.bvn.fighter
 			_colorTransform = v;
 			_mainMc.transform.colorTransform = v ? v : new ColorTransform();
 		}
-		
+
 		public function changeColor(v:ColorTransform):void{
 			_mainMc.transform.colorTransform = v;
 		}
 		public function resumeColor():void{
 			_mainMc.transform.colorTransform = _colorTransform ? _colorTransform : new ColorTransform();
 		}
-		
+
 		public function getMosouLogic():MosouFighterLogic{
 			return _mosouPlayerLogic;
 		}
-		
+
 		public override function setActive(v:Boolean):void{
 			super.setActive(v);
 			if(!v && _fighterCtrl && _fighterCtrl.getEffectCtrl()) _fighterCtrl.getEffectCtrl().clean();
 		}
-		
+
 		public override function destory(dispose:Boolean = true):void{
 			if(!dispose) return;
-			
+
 			if(_fighterCtrl){
 				_fighterCtrl.destory();
 				_fighterCtrl = null;
@@ -126,31 +126,31 @@ package net.play5d.game.bvn.fighter
 				_buffCtrler.destory();
 				_buffCtrler = null;
 			}
-			
+
 			if(data){
 				data = null;
 			}
-			
+
 			if(mosouEnemyData){
 				mosouEnemyData = null;
 			}
-			
+
 			targetTeams = null;
 			_currentTarget = null;
 			_currentHurts = null;
-			
+
 			super.destory(dispose);
 		}
-		
+
 		public override function set attackRate(value:Number):void{
 			super.attackRate = value;
 			if(_fighterCtrl && _fighterCtrl.hitModel){
 				_fighterCtrl.hitModel.setPowerRate(value);
 			}
 		}
-		
+
 		/**
-		 * 当前被打的攻击力总和 
+		 * 当前被打的攻击力总和
 		 */
 		public function currentHurtDamage():int{
 			if(!_currentHurts) return 0;
@@ -160,34 +160,34 @@ package net.play5d.game.bvn.fighter
 			}
 			return damage;
 		}
-		
+
 		/**
-		 * 最后一次被打的HITVO 
+		 * 最后一次被打的HITVO
 		 */
 		public function getLastHurtHitVO():HitVO{
 			if(!_currentHurts) return null;
 			return _currentHurts[_currentHurts.length-1];
 		}
-		
+
 		public function hurtBreakHit():Boolean{
 			for each(var i:HitVO in _currentHurts){
 				if(i.isBreakDef) return true;
 			}
 			return false;
 		}
-		
+
 		public function clearHurtHits():void{
 			_currentHurts = null;
 		}
-		
+
 		public function getCtrler():FighterCtrler{
 			return _fighterCtrl;
 		}
-		
+
 		public function getBuffCtrl():FighterBuffCtrler{
 			return _buffCtrler;
 		}
-		
+
 		public function getCurrentTarget():IGameSprite{
 			if(_currentTarget){
 				var bsp:BaseGameSprite = _currentTarget as BaseGameSprite;
@@ -195,18 +195,18 @@ package net.play5d.game.bvn.fighter
 					return _currentTarget;
 				}
 			}
-			
+
 			var targets:Vector.<IGameSprite> = getTargets();
 			var targetsOrder:Array = [];
 			if(targets && targets.length > 0){
-				
+
 				for each(var i:IGameSprite in targets){
-					
+
 					if(i.getBodyArea() == null){
 						targetsOrder.push({fighter:i,order:5});
 						continue;
 					}
-					
+
 					if(i is FighterMain && (i as FighterMain).isAlive && i.getActive()){
 						var msd:MosouEnemyVO = (i as FighterMain).mosouEnemyData;
 						if(msd){
@@ -225,13 +225,13 @@ package net.play5d.game.bvn.fighter
 					}
 				}
 				targetsOrder.sortOn('order',Array.NUMERIC);
-				
+
 				_currentTarget = targetsOrder[0].fighter;
 			}
-			
+
 			return _currentTarget;
 		}
-		
+
 		public function getTargets():Vector.<IGameSprite>{
 			if(!targetTeams || targetTeams.length < 1) return null;
 			var ts:Vector.<IGameSprite> = new Vector.<IGameSprite>();
@@ -240,75 +240,75 @@ package net.play5d.game.bvn.fighter
 			}
 			return ts;
 		}
-		
+
 		public function getMC():FighterMC{
 			if(!_fighterCtrl) return null;
 			if(!_fighterCtrl.getMcCtrl()) return null;
 			return _fighterCtrl.getMcCtrl().getFighterMc();
 		}
-		
+
 		public function FighterMain(mainMc:MovieClip)
 		{
 			super(mainMc);
-			
+
 			introSaid = false;
 			_area = null;
-			
+
 			if(!mainMc){
 				throw new Error("人物创建失败, mainMc is null !");
 			}
 		}
-		
+
 		public function initMosouFighter(v:MosouFighterVO):void{
 			mosouPlayerData = v;
 			_mosouPlayerLogic = new MosouFighterLogic(v);
 			updateProperties();
 		}
-		
+
 		public function initMosouEnemy(v:MosouEnemyVO):void{
 			mosouEnemyData = v;
 		}
-		
+
 		public function updateProperties():void{
 			if(!mosouPlayerData || !_mosouPlayerLogic) return;
-			
+
 			hp = hpMax = _mosouPlayerLogic.getHP();
 			qiMax = _mosouPlayerLogic.getQI();
 			energy = energyMax = _mosouPlayerLogic.getEnergy();
-			
+
 			qi = qiMax;
-			
+
 			if(_mosouPlayerLogic){
 				_mosouPlayerLogic.initFighterProps(this);
 			}
 		}
-		
+
 		public function setActionCtrl(ctrler:IFighterActionCtrl):void{
 			if(_fighterCtrl){
 				_fighterCtrl.setActionCtrl(ctrler);
 				ctrler.initlize();
 			}
 		}
-		
+
 		public function initlized():Boolean{
 			return _fighterCtrl != null;
 		}
-		
+
 		public function initlize():void{
-			
+
 			if(_fighterCtrl){
 				throw new Error('fighter 已完成化！');
 				return;
 			}
-			
+
 			_fighterCtrl = new FighterCtrler();
 			_buffCtrler = new FighterBuffCtrler(this);
-			
+
 			_fighterCtrl.initFighter(this);
-			
+
 			_mainMc.gotoAndStop(data ? data.startFrame+1 : 2);
 		}
-		
+
 		public function onMcInited():void{
 			if(_mosouPlayerLogic){
 				_mosouPlayerLogic.initFighterProps(this);
@@ -317,14 +317,14 @@ package net.play5d.game.bvn.fighter
 				MosouLogic.I.initEnemyProps(this);
 			}
 		}
-		
+
 		public function initAttackAddDmg(normal:int, skill:int = 0, bisha:int = 0):void{
 			if(!_fighterCtrl || !_fighterCtrl.hitModel) return;
-			
+
 			var hitObj:Object = _fighterCtrl.hitModel.getAll();
 			for(var i:String in hitObj){
 				var hv:HitVO = hitObj[i];
-				
+
 				if(hv.isBisha()){
 					hv.powerAdd = bisha;
 				}else if(hv.isSkill()){
@@ -332,18 +332,18 @@ package net.play5d.game.bvn.fighter
 				}else{
 					hv.powerAdd = normal;
 				}
-				
+
 			}
 		}
-		
+
 		public override function renderAnimate():void{
 			super.renderAnimate();
-			
+
 			if(_destoryed) return;
-			
+
 			renderEnergy();
 			renderFzQi();
-			
+
 			if(_fighterCtrl) _fighterCtrl.renderAnimate();
 			if(_explodeHitFrame > 0){
 				_explodeHitFrame--;
@@ -356,7 +356,7 @@ package net.play5d.game.bvn.fighter
 					isAllowBeHit = true;
 				}
 			}
-			
+
 			if(_explodeSteelFrame > 0){
 				_explodeSteelFrame--;
 				_fighterCtrl.getMcCtrl().setSteelBody(true, true);
@@ -364,7 +364,7 @@ package net.play5d.game.bvn.fighter
 					_fighterCtrl.getMcCtrl().setSteelBody(false);
 				}
 			}
-			
+
 			if(_replaceSkillFrame > 0){
 				_replaceSkillFrame--;
 				if(_replaceSkillFrame <= 0){
@@ -372,35 +372,35 @@ package net.play5d.game.bvn.fighter
 				}
 			}
 		}
-		
+
 		public override function render():void{
 			super.render();
-			
+
 			if(_destoryed) return;
-			
+
 			if(_fighterCtrl) _fighterCtrl.render();
 			if(_buffCtrler) _buffCtrler.render();
-			
+
 			if(hp < 0) hp = 0;
 			if(hp > hpMax) hp = hpMax;
-			
+
 			if(qi < 0) qi = 0;
 			if(qi > qiMax) qi = qiMax;
-			
+
 			if(fzqi < 0) fzqi = 0;
 			if(fzqi > fzqiMax) fzqi = fzqiMax;
 		}
-		
+
 		public function jump():void{
 			_g = 0;
 			setVelocity(0,-jumpPower);
 			setDamping(0,GameConfig.JUMP_DAMPING);
 		}
-		
+
 //		public override function applayG(g:Number):void{
 //			super.applayG(g);
 //		}
-		
+
 		/**
 		 * 当前攻击的攻击数据 return [HitVO];
 		 */
@@ -410,22 +410,22 @@ package net.play5d.game.bvn.fighter
 			}
 			return _fighterCtrl.getCurrentHits();
 		}
-		
+
 		public override function getBodyArea():Rectangle{
 //			if(!isAllowBeHit) return null;
 			if(!_fighterCtrl) return null;
 			return _fighterCtrl.getBodyArea();
 		}
-		
-		
+
+
 		/**
-		 * 攻击到其他人 
+		 * 攻击到其他人
 		 * @param target 被攻击对象
 		 */
 		public override function hit(hitvo:HitVO , target:IGameSprite):void{
 			super.hit(hitvo , target);
 			lastHitVO = hitvo;
-			
+
 			var addqi:Number = 0;
 			if(target is FighterMain){
 				if(hitvo.isBisha()){
@@ -435,10 +435,10 @@ package net.play5d.game.bvn.fighter
 				}
 				if(addqi > GameConfig.QI_ADD_HIT_MAX) addqi = GameConfig.QI_ADD_HIT_MAX;
 			}
-			
+
 			addQi(addqi);
 			GameLogic.hitTarget(hitvo , this , target);
-			
+
 		}
 		/**
 		 * 被攻击
@@ -449,18 +449,18 @@ package net.play5d.game.bvn.fighter
 			if(!isAllowBeHit) return;
 			super.beHit(hitvo , hitRect);
 			_fighterCtrl.getMcCtrl().beHit(hitvo , hitRect);
-			
+
 			var addqi:Number = hitvo.power * GameConfig.QI_ADD_HURT_RATE
 			if(addqi > GameConfig.QI_ADD_HURT_MAX) addqi = GameConfig.QI_ADD_HURT_MAX;
 			addQi(addqi);
-			
+
 			if(actionState == FighterActionState.HURT_ING || actionState == FighterActionState.HURT_FLYING){
 				_currentHurts ||= new Vector.<HitVO>();
 				_currentHurts.push(hitvo);
 			}
-			
+
 		}
-		
+
 		private function renderEnergy():void{
 			if(_energyAddGap > 0){
 				_energyAddGap--;
@@ -481,24 +481,24 @@ package net.play5d.game.bvn.fighter
 				}
 			}
 		}
-		
+
 		private function renderFzQi():void{
 			if(fzqi < fzqiMax){
 				fzqi += GameConfig.FUZHU_QU_ADD_PERFRAME;
 			}
 		}
-		
+
 		public function hasEnergy(v:Number , allowOverflow:Boolean = false):Boolean{
-			
+
 			if(energy >= v) return true;
-			
+
 			if(allowOverflow){
 				if(!energyOverLoad) return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		public function useEnergy(v:Number):void{
 			energy -= v;
 			_energyAddGap = GameConfig.USE_ENERGY_CD * GameConfig.FPS_ANIMATE;
@@ -507,54 +507,54 @@ package net.play5d.game.bvn.fighter
 				energyOverLoad = true;
 			}
 		}
-		
+
 		public function useQi(v:Number):Boolean{
 			if(qi < v) return false;
 			qi -= v;
 			return true;
 		}
-		
+
 		public function addQi(v:Number):void{
 			qi += v;
 			if(qi > qiMax) qi = qiMax;
 		}
-		
+
 		/**
-		 * 开场 
+		 * 开场
 		 */
 		public function sayIntro():void{
 			introSaid = true;
 			_fighterCtrl.getMcCtrl().sayIntro();
 		}
-		
+
 		/**
 		 * 胜利动作
 		 */
 		public function win():void{
 			_fighterCtrl.getMcCtrl().doWin();
 		}
-		
+
 		/**
-		 * 站立 
+		 * 站立
 		 */
 		public function idle():void{
 			_fighterCtrl.getMcCtrl().idle();
 		}
-		
+
 		/**
-		 * 失败动作 
+		 * 失败动作
 		 */
 		public function lose():void{
 			_fighterCtrl.getMcCtrl().doLose();
 		}
-		
+
 		/**
 		 * 攻击范围（用于AI）
 		*/
 		public function getHitRange(id:String):Rectangle{
 			return _fighterCtrl.getHitRange(id);
 		}
-		
+
 		/**
 		 * 灵压爆发
 		 */
@@ -572,7 +572,7 @@ package net.play5d.game.bvn.fighter
 			_explodeSteelFrame = 60; //2s
 			isAllowBeHit = false;
 		}
-		
+
 		/**
 		 * 替身术
 		 */
@@ -586,45 +586,45 @@ package net.play5d.game.bvn.fighter
 			_fighterCtrl.setDirectToTarget();
 			_replaceSkillFrame = 30;
 		}
-		
+
 //		public function onChangeMC():void{
 //			_area = _mainMc.getBounds(_mainMc);
 //			_area = getBodyArea();
 //		}
-		
+
 		public override function getArea():Rectangle{
 			_area ||= getBodyArea();
 			return _area;
 		}
-		
+
 		public function hasWankai():Boolean{
 			return _fighterCtrl.getMcCtrl().getFighterMc().checkFrame('万解');
 		}
-		
+
 		public function die():void{
 			hp = 0;
 			isAlive = false;
-			
+
 			if(!FighterActionState.isHurting(actionState) && actionState != FighterActionState.DEAD){
 				_fighterCtrl.getMcCtrl().getFighterMc().playHurtDown();
 			}
-			
+
 		}
-		
+
 		/**
-		 * 复活 
+		 * 复活
 		 */
 		public function relive(reset:Boolean = false):void{
 			isAlive = true;
-			
+
 			if(reset){
 				hp = hpMax;
 				qi = 0;
 			}
-			
+
 			idle();
 		}
-		
+
 		/**
 		 * 无关模式的小兵
 		 */
@@ -632,7 +632,7 @@ package net.play5d.game.bvn.fighter
 			if(!mosouEnemyData) return false;
 			return !mosouEnemyData.isBoss;
 		}
-		
+
 		/**
 		 * 无关模式的BOSS
 		 */
@@ -640,6 +640,6 @@ package net.play5d.game.bvn.fighter
 			if(!mosouEnemyData) return false;
 			return mosouEnemyData.isBoss;
 		}
-		
+
 	}
 }
