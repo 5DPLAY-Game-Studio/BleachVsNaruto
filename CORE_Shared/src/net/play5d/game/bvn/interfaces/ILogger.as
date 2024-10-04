@@ -21,7 +21,7 @@ package net.play5d.game.bvn.interfaces {
 /**
  * 日志记录器接口
  */
-public interface ILoger {
+public interface ILogger {
 
     /**
      * 记录日志
