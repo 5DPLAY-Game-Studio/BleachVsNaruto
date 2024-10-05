@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.ctrl.game_ctrls
 {
 	import net.play5d.game.bvn.ctrl.EffectCtrl;
@@ -12,60 +30,60 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	public class BaseFighterEventCtrl
 	{
 		private var _attackers:Array = [];
-		
+
 		public function BaseFighterEventCtrl()
 		{
 		}
-		
+
 		public function initlize():void{
 			FighterEventDispatcher.removeAllListeners();
-			
+
 			FighterEventDispatcher.addEventListener(FighterEvent.FIRE_BULLET,fireBullet);
 			FighterEventDispatcher.addEventListener(FighterEvent.ADD_ATTACKER,addAttacker);
-			
+
 		}
-		
+
 		/**
 		 * 发射子弹 ，通过事件帧听
 		 */
 		private function fireBullet(event:FighterEvent):void{
 			var params:Object = event.params;
 			if(!params || !params.mc) return;
-			
+
 			var bullet:Bullet = new Bullet(params.mc , params);
 			bullet.onRemove = removeBullet;
 			bullet.setHitVO(params.hitVO);
-			
+
 			GameCtrl.I.addGameSprite(event.fighter.team.id , bullet);
 		}
-		
+
 		/**
 		 * 移除子弹 , 通过bullet.onRemove传入
 		 */
 		private function removeBullet(bullet:Bullet):void{
 			GameCtrl.I.removeGameSprite(bullet);
 		}
-		
+
 		private function addAttacker(event:FighterEvent):void{
 			var params:Object = event.params;
 			if(!params || !params.mc) return;
-			
+
 			var attacker:FighterAttacker = new FighterAttacker(params.mc , params);
 			attacker.onRemove = removeAttacker;
 			attacker.setOwner(event.fighter);
 			attacker.init();
-			
+
 			_attackers.push(attacker);
-			
+
 			GameCtrl.I.addGameSprite(event.fighter.team.id , attacker);
 		}
-		
+
 		private function removeAttacker(attacker:FighterAttacker):void{
 			GameCtrl.I.removeGameSprite(attacker);
 			var id:int = _attackers.indexOf(attacker);
 			if(id != -1) _attackers.splice(id,1);
 		}
-		
+
 		public function getAttacker(name:String , team:int):FighterAttacker{
 			for each(var i:FighterAttacker in _attackers){
 				if(i.name == name && i.team.id == team){
@@ -74,11 +92,11 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 			}
 			return null;
 		}
-		
+
 		public function destory():void{
 			FighterEventDispatcher.removeAllListeners();
 		}
-		
-		
+
+
 	}
 }

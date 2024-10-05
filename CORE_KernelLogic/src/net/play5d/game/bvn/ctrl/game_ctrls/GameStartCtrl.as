@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.ctrl.game_ctrls
 {
 	import net.play5d.game.bvn.GameConfig;
@@ -10,7 +28,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.ui.mosou.MosouUI;
 
 	/**
-	 * 游戏开场控制 
+	 * 游戏开场控制
 	 */
 	public class GameStartCtrl
 	{
@@ -24,37 +42,37 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 		private var _holdFrame:int;
 		private var _uiPlaying:Boolean;
 		private var _introTeamId:int = -1; //-1=both
-		
+
 		private var _mousouFinish:Boolean = false;
-		
+
 		public function GameStartCtrl(state:GameState)
 		{
 			_state = state;
 		}
-		
+
 		public function destory():void{
 			_p1 = null;
 			_p2 = null;
 			_state = null;
 		}
-		
+
 		public function render():Boolean{
 			if(_isStart1v1) return renderStart1v1();
 			if(_isStartNextRound) return renderNextRound();
 			if(_isStartMosou) return renderStartMosou();
 			return false;
 		}
-		
+
 		private function renderStartMosou():Boolean{
 			return _mousouFinish;
 		}
-		
+
 		public function start1v1(p1:FighterMain , p2:FighterMain , introTeamId:int = -1):void{
 			_p1 = p1;
 			_p2 = p2;
 			_isStart1v1 = true;
 			_introTeamId = introTeamId;
-			
+
 			switch(introTeamId){
 				case 1:
 					SoundCtrl.I.smartPlayGameBGM(p1.data.id);
@@ -65,11 +83,11 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 				default:
 					SoundCtrl.I.smartPlayGameBGM(p2.data.id);
 			}
-			
+
 			preRenderStart();
-			
+
 		}
-		
+
 		public function startMosou():void{
 			_isStartMosou = true;
 			_mousouFinish = false;
@@ -77,12 +95,12 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 				_mousouFinish = true;
 			});
 		}
-		
+
 		private function preRenderStart():void{
 			_step = -1;
-			
+
 			var initStep:int = 0;
-			
+
 			switch(_introTeamId){
 				case -1:
 					initStep = 0;
@@ -95,22 +113,22 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 					_state.cameraFocusOne(_p2.getDisplay());
 					initStep = 2;
 					break;
-				
+
 			}
-			
+
 			_state.camera.updateNow();
 			StateCtrl.I.transOut(function():void{
 				_step = initStep;
 			},true);
 		}
-		
+
 		private function renderStart1v1():Boolean{
 			if(_uiPlaying) return false;
-			
+
 			if(_p1.actionState == FighterActionState.KAI_CHANG || _p2.actionState == FighterActionState.KAI_CHANG) return false;
-			
+
 			if(_holdFrame-- > 0) return false;
-			
+
 			switch(_step){
 				case 0:
 					if(_introTeamId == -1 || _introTeamId == 1){
@@ -159,24 +177,24 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 					_p2 = null;
 					return true;
 			}
-			
+
 			return false;
 		}
-		
+
 		public function startNextRound():void{
 			_isStartNextRound = true;
-			
+
 			_uiPlaying = true;
 			StateCtrl.I.transOut(null,true);
-			
+
 			_state.gameUI.getUI().showStart(function():void{
 				_uiPlaying = false;
 			});
-			
+
 		}
-		
+
 		public function skip():void{
-			
+
 			if(_isStart1v1){
 				if(_step < 5){
 					StateCtrl.I.quickTrans();
@@ -184,24 +202,24 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 					_uiPlaying = false;
 					_step = 6;
 					_state.gameUI.getUI().fadIn(true);
-					
+
 					_p1.idle();
 					_p2.idle();
-					
+
 					_holdFrame = 0.5 * GameConfig.FPS_GAME;
 				}
 			}
-			
+
 			if(_isStartNextRound){
-				
+
 			}
-			
+
 		}
-		
+
 		private function renderNextRound():Boolean{
 			return _uiPlaying == false;
 		}
-		
-		
+
+
 	}
 }

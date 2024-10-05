@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.ctrl.game_ctrls
 {
 	import net.play5d.game.bvn.GameConfig;
@@ -6,38 +24,38 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.fighter.FighterMain;
 
 	/**
-	 * 练习模式控制类 
+	 * 练习模式控制类
 	 */
 	public class TrainingCtrler
 	{
 		public static var RECOVER_HP:Boolean = true;
 		public static var RECOVER_QI:Boolean = true;
 		public static var RECOVER_FZ_QI:Boolean = true;
-		
+
 		private var _trainAddDelay:Object;
-		
+
 		public function TrainingCtrler()
 		{
 		}
-		
+
 		private var _fighters:Array;
 		public function initlize(fighters:Array):void{
 			_fighters = fighters;
-			
+
 			for each(var i:FighterMain in _fighters){
 				i.qi = i.qiMax;
 			}
-			
+
 			_trainAddDelay = {};
-			
+
 			StateCtrl.I.transOut(null,true);
 		}
-		
+
 		public function destory():void{
 			_fighters = null;
 			_trainAddDelay = null;
 		}
-		
+
 		public function render():void{
 			for each(var i:FighterMain in _fighters){
 				var hpid:String = i.id+"_hp";
@@ -55,7 +73,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 						}
 					}
 				}
-				
+
 				var qiid:String = i.id+"_qi";
 				if(_trainAddDelay[qiid] != undefined && _trainAddDelay[qiid] > 0){
 					_trainAddDelay[qiid]--;
@@ -67,7 +85,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 						_trainAddDelay[qiid] = 2 * GameConfig.FPS_GAME;
 					}
 				}
-				
+
 				var fzid:String = i.id+"fz";
 				if(_trainAddDelay[fzid] != undefined && _trainAddDelay[fzid] > 0){
 					_trainAddDelay[fzid]--;
@@ -79,10 +97,10 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 						_trainAddDelay[fzid] = 2 * GameConfig.FPS_GAME;
 					}
 				}
-				
+
 			}
 		}
-		
-		
+
+
 	}
 }
