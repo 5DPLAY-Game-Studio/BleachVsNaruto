@@ -23,37 +23,37 @@ package net.play5d.game.bvn.test
 	public class SwfLib implements ISwfLib
 	{
 
-		[Embed(source="/../../shared/swf/common_ui.swf")]
+		[Embed(source="/../../shared/lib/swf/common_ui.swf")]
 		private var _common_ui:Class;
 
-		[Embed(source="/../../shared/swf/fight.swf")]
+		[Embed(source="/../../shared/lib/swf/fight.swf")]
 		private var _fight:Class;
 
-		[Embed(source="/../../shared/swf/gameover.swf")]
+		[Embed(source="/../../shared/lib/swf/gameover.swf")]
 		private var _gameover:Class;
 
-		[Embed(source="/../../shared/swf/howtoplay.swf")]
+		[Embed(source="/../../shared/lib/swf/howtoplay.swf")]
 		private var _howtoplay:Class;
 
-		[Embed(source="/../../shared/swf/loading.swf")]
+		[Embed(source="/../../shared/lib/swf/loading.swf")]
 		private var _loading:Class;
 
-		[Embed(source="/../../shared/swf/select.swf")]
+		[Embed(source="/../../shared/lib/swf/select.swf")]
 		private var _select:Class;
 
-		[Embed(source="/../../shared/swf/setting.swf")]
+		[Embed(source="/../../shared/lib/swf/setting.swf")]
 		private var _setting:Class;
 
-		[Embed(source="/../../shared/swf/title.swf")]
+		[Embed(source="/../../shared/lib/swf/title.swf")]
 		private var _title:Class;
 
-		[Embed(source="/../../shared/swf/mosou.swf")]
+		[Embed(source="/../../shared/lib/swf/mosou.swf")]
 		private var _mosou:Class;
 
-		[Embed(source="/../../shared/swf/bigmap.swf")]
+		[Embed(source="/../../shared/lib/swf/bigmap.swf")]
 		private var _bigMap:Class;
 
-		[Embed(source="/../../shared/swf/dialog_ui.swf")]
+		[Embed(source="/../../shared/lib/swf/dialog_ui.swf")]
 		private var _dialog:Class;
 
 		public function SwfLib()
