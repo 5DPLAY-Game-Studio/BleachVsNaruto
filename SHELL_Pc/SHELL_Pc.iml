@@ -17,7 +17,7 @@
             <entry module-name="CORE_Shared" build-configuration-name="CORE_Shared">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="62ded823-b2fb-4ce7-b277-789ab1a6257d">
+            <entry library-id="ef6e0931-b920-4f05-849c-6c34150775b7">
               <dependency linkage="External" />
             </entry>
           </entries>
@@ -55,13 +55,13 @@
     <orderEntry type="module" module-name="CORE_Shared" exported="" />
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="62ded823-b2fb-4ce7-b277-789ab1a6257d" />
+        <properties id="ef6e0931-b920-4f05-849c-6c34150775b7" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../CORE_KernelLogic/lib/swf_swc" />
+          <root url="file://$MODULE_DIR$/../shared/lib/swc" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../CORE_KernelLogic/lib/swf_swc" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
       </library>
     </orderEntry>
   </component>

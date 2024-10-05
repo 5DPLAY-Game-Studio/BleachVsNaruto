@@ -17,7 +17,7 @@
             <entry module-name="CORE_Shared" build-configuration-name="CORE_Shared">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="641dc3f0-1cbd-4bca-96de-949c2346c760">
+            <entry library-id="a4f07e4f-cc8c-4f6b-a35a-75584191119f">
               <dependency linkage="External" />
             </entry>
           </entries>
@@ -43,20 +43,20 @@
     </content>
     <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
-      <library type="flex">
-        <properties id="641dc3f0-1cbd-4bca-96de-949c2346c760" />
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../CORE_KernelLogic/lib/swf_swc" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../CORE_KernelLogic/lib/swf_swc" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="module" module-name="CORE_Shared" exported="" />
     <orderEntry type="module" module-name="LIB_KyoLib" exported="" />
     <orderEntry type="module" module-name="CORE_KernelLogic" exported="" />
     <orderEntry type="module" module-name="CORE_Utils" exported="" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="a4f07e4f-cc8c-4f6b-a35a-75584191119f" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../shared/lib/swc" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

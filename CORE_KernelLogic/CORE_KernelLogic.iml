@@ -14,7 +14,7 @@
             <entry library-id="5a507b33-defe-4906-8103-4eea980146fc">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-id="8eca6756-ed54-4747-aada-4c117071543e">
+            <entry library-id="297e33f8-0d40-492b-b548-0a7303e862dd">
               <dependency linkage="External" />
             </entry>
           </entries>
@@ -51,13 +51,13 @@
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library type="flex">
-        <properties id="8eca6756-ed54-4747-aada-4c117071543e" />
+        <properties id="297e33f8-0d40-492b-b548-0a7303e862dd" />
         <CLASSES>
-          <root url="file://$MODULE_DIR$/lib/swf_swc" />
+          <root url="file://$MODULE_DIR$/../shared/lib/swc" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/lib/swf_swc" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
       </library>
     </orderEntry>
   </component>
