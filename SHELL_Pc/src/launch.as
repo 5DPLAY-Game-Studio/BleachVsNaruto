@@ -77,7 +77,7 @@ package
 
 			GameData.I.config.AI_level = 1;
 			GameData.I.config.quality = GameQuailty.MEDIUM;
-			GameData.I.config.keyInputMode = 0;
+			GameData.I.config.keyInputMode = 1;
 
 			URL.MARK = 'bvn_win'+MainGame.VERSION;
 
