@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.socket
 {
 	import flash.events.Event;
@@ -13,28 +31,28 @@ package net.play5d.kyo.socket
 	public class KyoSocket
 	{
 		/**
-		 * 字符串编码格式 
+		 * 字符串编码格式
 		 */
 		public var charset:String = 'UTF-8';
 		/**
-		 * 断线后自动重新连接服务器 
+		 * 断线后自动重新连接服务器
 		 */
 		public var autoConnect:Boolean;
 		/**
-		 * 自动重连时间间隔（秒） 
+		 * 自动重连时间间隔（秒）
 		 */
 		public var autoConnectGap:int = 1;
-		
+
 		public var on_error:Function;
 		public var on_connect:Function;
 		public var on_close:Function;
 		public var on_data:Function;
-		
+
 		private var _socket:Socket;
 		public function get connected():Boolean{
 			return _socket.connected;
 		}
-		
+
 		public function KyoSocket()
 		{
 		}
@@ -42,7 +60,7 @@ package net.play5d.kyo.socket
 		public function connect(host:String = 'localhost' , port:int = 0):void{
 			_host = host;
 			_port = port;
-			
+
 			_socket = new Socket(host,port);
 			_socket.addEventListener(Event.CLOSE,closeHandler);
 			_socket.addEventListener(Event.CONNECT,connectHandler);
@@ -50,7 +68,7 @@ package net.play5d.kyo.socket
 			_socket.addEventListener(SecurityErrorEvent.SECURITY_ERROR,ercurityErrorHandler);
 			_socket.addEventListener(ProgressEvent.SOCKET_DATA,dataHandler);
 		}
-		
+
 		public function sendMsg(msg:* , length:int = 32):void{
 			if(!connected) return;
 			if(msg is int){
@@ -77,12 +95,12 @@ package net.play5d.kyo.socket
 			_socket.writeObject(o);
 			_socket.flush();
 		}
-		
+
 		private function onConnectClose():void{
 			if(autoConnect) setTimeout(reConnect , autoConnectGap * 1000);
 			if(on_close != null) on_close();
 		}
-		
+
 		private function closeHandler(e:Event):void{
 			trace('连接中断');
 			onConnectClose();
@@ -109,11 +127,11 @@ package net.play5d.kyo.socket
 				on_data(buffer);
 			}
 		}
-		
+
 		public function reConnect():void{
 			if(_socket.connected) return;
 			_socket.connect(_host,_port);
 		}
-		
+
 	}
 }
