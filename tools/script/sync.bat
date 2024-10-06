@@ -77,29 +77,9 @@ if exist "%ASSETS_DIR_SHELL_MOB%" (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: 复制素材到外壳通道素材
-echo D|xcopy "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_PC%" /E /y >nul
-if !errorlevel!==0 (
-	echo Copy material directory [%ASSETS_DIR_SHELL_PC%] successfully.
-) else (
-	echo Failed to copy material directory [%ASSETS_DIR_SHELL_PC%].
-	goto END
-)
-
-echo D|xcopy "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_DEV%" /E /y >nul
-if !errorlevel!==0 (
-	echo Copy material directory [%ASSETS_DIR_SHELL_DEV%] successfully.
-) else (
-	echo Failed to copy material directory [%ASSETS_DIR_SHELL_DEV%].
-	goto END
-)
-
-echo D|xcopy "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_MOB%" /E /y >nul
-if !errorlevel!==0 (
-	echo Copy material directory [%ASSETS_DIR_SHELL_MOB%] successfully.
-) else (
-	echo Failed to copy material directory [%ASSETS_DIR_SHELL_MOB%].
-	goto END
-)
+call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_PC%"
+call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_DEV%"
+call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_MOB%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -116,6 +96,17 @@ exit -1
 :EXIST
 if not exist %1 (
 	echo [%1] does not exist.
+	goto END
+)
+goto :EOF
+
+:: 复制文件
+:COPY
+echo D|xcopy %1 %2 /E /y >nul
+if !errorlevel!==0 (
+	echo Copy directory [%2] successfully.
+) else (
+	echo Failed to copy directory [%2].
 	goto END
 )
 goto :EOF
