@@ -40,41 +40,9 @@ set ASSETS_DIR_SHELL_DEV=%SHELL_DIR_DEV%\%ASSETS_NAME%
 set ASSETS_DIR_SHELL_MOB=%SHELL_DIR_MOB%\%ASSETS_NAME%
 
 :: 清空外壳通道目录下的素材文件夹
-if exist "%ASSETS_DIR_SHELL_PC%" (
-	del /f /s /q "%ASSETS_DIR_SHELL_PC%\*.*" >nul
-	rd /s /q "%ASSETS_DIR_SHELL_PC%" >nul
-	
-	if !errorlevel!==0 (
-		echo Delete directory [%ASSETS_DIR_SHELL_PC%] successfully.
-	) else (
-		echo Failed to delete directory [%ASSETS_DIR_SHELL_PC%].
-		goto END
-	)
-)
-if exist "%ASSETS_DIR_SHELL_DEV%" (
-	del /f /s /q "%ASSETS_DIR_SHELL_DEV%\*.*" >nul
-	rd /s /q "%ASSETS_DIR_SHELL_DEV%" >nul
-	
-	if !errorlevel!==0 (
-		echo Delete directory [%ASSETS_DIR_SHELL_DEV%] successfully.
-	) else (
-		echo Failed to delete directory [%ASSETS_DIR_SHELL_DEV%].
-		goto END
-	)
-)
-if exist "%ASSETS_DIR_SHELL_MOB%" (
-	del /f /s /q "%ASSETS_DIR_SHELL_MOB%\*.*" >nul
-	rd /s /q "%ASSETS_DIR_SHELL_MOB%" >nul
-	
-	if !errorlevel!==0 (
-		echo Delete directory [%ASSETS_DIR_SHELL_MOB%] successfully.
-	) else (
-		echo Failed to delete directory [%ASSETS_DIR_SHELL_MOB%].
-		goto END
-	)
-)
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+call :DEL "%ASSETS_DIR_SHELL_PC%"
+call :DEL "%ASSETS_DIR_SHELL_DEV%"
+call :DEL "%ASSETS_DIR_SHELL_MOB%"
 
 :: 复制素材到外壳通道素材
 call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_PC%"
@@ -97,6 +65,21 @@ exit -1
 if not exist %1 (
 	echo [%1] does not exist.
 	goto END
+)
+goto :EOF
+
+:: 删除文件
+:DEL
+if exist %1 (
+	del /f /s /q "%~1\*.*" >nul
+	rd /s /q %1 >nul
+	
+	if !errorlevel!==0 (
+		echo Delete directory [%1] successfully.
+	) else (
+		echo Failed to delete directory [%1].
+		goto END
+	)
 )
 goto :EOF
 
