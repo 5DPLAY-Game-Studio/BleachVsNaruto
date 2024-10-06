@@ -1,25 +1,43 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.display.ui.ppt.effect
 {
 	import com.greensock.TweenLite;
-	
+
 	import flash.display.DisplayObject;
 	import flash.events.Event;
-	
+
 	public class PPTef_scrollV extends BasePPTEffect
 	{
 		private var _tween:TweenLite;
 		public var direct:int = 1;
-		
+
 		public function PPTef_scrollV(direct:int=1)
 		{
 			super();
 			this.direct = direct;
 		}
-		
+
 		protected override function initStart():void{
 			_sp.y = 0;
 			_currentPic.y = 0;
-			
+
 			switch(direct){
 				case 1:
 					_prevPic.y = -_pointer.size.y;
@@ -57,7 +75,7 @@ package net.play5d.kyo.display.ui.ppt.effect
 					break;
 			}
 		}
-		
+
 		public override function tweenBack():void{
 			var t:Number = duration / 2;
 			_tween = TweenLite.to(_sp,t,{y:0});
@@ -68,8 +86,8 @@ package net.play5d.kyo.display.ui.ppt.effect
 		public override function tweenStop():void{
 			if(_tween) _tween.kill();
 		}
-		
-		
+
+
 		protected override function onDraging():void{
 			_sp.y = mousePoint().y - _downP.y;
 		}

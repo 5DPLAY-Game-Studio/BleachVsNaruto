@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.display.ui
 {
 	import flash.display.MovieClip;
@@ -13,7 +31,7 @@ package net.play5d.kyo.display.ui
 		private var _nornalFrame:Object;
 		private var _overFrame:Object;
 		private var _unenabledFrame:Object;
-		
+
 		public function KyoMCButton(mc:MovieClip , nornalFrame:Object = 1 , selectFrame:Object = null , overFrame:Object = null , unenabledFrame:Object = null)
 		{
 			this.mc = mc;
@@ -24,10 +42,10 @@ package net.play5d.kyo.display.ui
 			_selectFrame = selectFrame;
 			_overFrame = overFrame;
 			_unenabledFrame = unenabledFrame;
-			
+
 			goFrame(_nornalFrame);
 		}
-		
+
 		public function set focus(v:Boolean):void{
 			if(v){
 				goFrame(_selectFrame);
@@ -35,7 +53,7 @@ package net.play5d.kyo.display.ui
 				goFrame(_nornalFrame);
 			}
 		}
-		
+
 		public function set enabled(v:Boolean):void{
 			mc.mouseEnabled = v;
 			if(v){
@@ -44,14 +62,14 @@ package net.play5d.kyo.display.ui
 				goFrame(_unenabledFrame);
 			}
 		}
-		
+
 		private function goFrame(frame:Object):void{
 			if(frame) mc.gotoAndStop(frame);
 		}
-		
+
 		private function handler(e:Event):void{
 			dispatchEvent(e);
 		}
-		
+
 	}
 }
