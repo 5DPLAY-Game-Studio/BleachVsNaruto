@@ -1,13 +1,31 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.encoder
 {
 	import flash.geom.*;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
-	
+
 	/**
 	 * Class that converts BitmapData into a valid PNG
-	 */        
+	 */
 	public class PNGEncoder
 	{
 		/**
@@ -18,7 +36,7 @@ package net.play5d.kyo.encoder
 		 * @langversion ActionScript 3.0
 		 * @playerversion Flash 9.0
 		 * @tiptext
-		 */                        
+		 */
 		public static function encode(img:BitmapData):ByteArray {
 			// Create output byte array
 			var png:ByteArray = new ByteArray();
@@ -61,11 +79,11 @@ package net.play5d.kyo.encoder
 			// return PNG
 			return png;
 		}
-		
+
 		private static var crcTable:Array;
 		private static var crcTableComputed:Boolean = false;
-		
-		private static function writeChunk(png:ByteArray, 
+
+		private static function writeChunk(png:ByteArray,
 										   type:uint, data:ByteArray):void {
 			if (!crcTableComputed) {
 				crcTableComputed = true;
@@ -75,7 +93,7 @@ package net.play5d.kyo.encoder
 					c = n;
 					for (var k:uint = 0; k < 8; k++) {
 						if (c & 1) {
-							c = uint(uint(0xedb88320) ^ 
+							c = uint(uint(0xedb88320) ^
 								uint(c >>> 1));
 						} else {
 							c = uint(c >>> 1);
@@ -99,7 +117,7 @@ package net.play5d.kyo.encoder
 			c = 0xffffffff;
 			for (var i:int = 0; i < (e-p); i++) {
 				c = uint(crcTable[
-					(c ^ png.readUnsignedByte()) & 
+					(c ^ png.readUnsignedByte()) &
 					uint(0xff)] ^ uint(c >>> 8));
 			}
 			c = uint(c^uint(0xffffffff));
