@@ -1,9 +1,27 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.utils
 {
 	public class KyoRandom
 	{
 		/**
-		 * 从数组中随机取出一个元素 
+		 * 从数组中随机取出一个元素
 		 */
 		public static function getRandomInArray(array:Object,deleteSelect:Boolean = false):*{
 			if(array == null || array.length < 1) return null;
@@ -12,10 +30,10 @@ package net.play5d.kyo.utils
 			if(deleteSelect) array.splice(r,1);
 			return item;
 		}
-		
+
 		/**
-		 * 随机从数组中取出多个元素 
-		 * @param array 
+		 * 随机从数组中取出多个元素
+		 * @param array
 		 * @param amount 数量
 		 * @param repeat 是否允许重复
 		 */
@@ -30,16 +48,16 @@ package net.play5d.kyo.utils
 			}
 			return r;
 		}
-		
+
 		/**
-		 * 从参数中随机取出一个元素 
+		 * 从参数中随机取出一个元素
 		 */
 		public static function getRandomOne(...params):*{
 			return getRandomInArray(params);
 		}
-		
+
 		/**
-		 * 在两个Number范围中随机 
+		 * 在两个Number范围中随机
 		 */
 		public static function between(A:Number,B:Number):Number{
 			var s:Number;
@@ -56,7 +74,7 @@ package net.play5d.kyo.utils
 			if(r > e) r = e;
 			return r;
 		}
-		
+
 		/**
 		 * 按机率随机 必会选出一个
 		 * @param attributeName 数组元素中机率属性(Number)的名称
@@ -77,14 +95,14 @@ package net.play5d.kyo.utils
 			}
 			throw Error('无法按机率选择，请检查数据');
 		}
-		
+
 		/**
 		 * 按机率随机 轻量级，有可能是NULL
 		 * @param attributeName 数组元素中机率属性(Number)的名称 [ 0~1之间的Number ]
 		 */
 		public static function getRandomByRateLite(array:Array,attributeName:String,randMx:Number = 1):*{
 			array.sortOn(attributeName , Array.NUMERIC);
-			
+
 			var rad:Number = Math.random() * randMx;
 			var rate:Number = 0;
 			var a:Array = [];
@@ -102,7 +120,7 @@ package net.play5d.kyo.utils
 			}
 			return getRandomInArray(a);
 		}
-		
+
 		/**
 		 * 在一定范围中随机取一个随机的整数队列
 		 * @param from 小的数字
@@ -116,11 +134,11 @@ package net.play5d.kyo.utils
 			arraySortRandom(a);
 			return a;
 		}
-		
+
 		/**
-		 * 将一个数组随机排序 
+		 * 将一个数组随机排序
 		 * @param array
-		 * 
+		 *
 		 */
 		public static function arraySortRandom(array:Array):void{
 			function taxis(element1:*,element2:*):int{
@@ -133,15 +151,15 @@ package net.play5d.kyo.utils
 			}
 			array.sort(taxis);
 		}
-		
+
 		/**
-		 * 随机的颜色 
+		 * 随机的颜色
 		 * @param from
 		 * @param to
 		 */
 		public static function getRandomColor(from:uint = 0 , to:uint = 0xffffff):uint{
 			return from + (to - from) * Math.random();
 		}
-		
+
 	}
 }
