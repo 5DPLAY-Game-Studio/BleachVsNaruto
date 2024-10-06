@@ -29,7 +29,7 @@ package net.play5d.game.bvn.win.data
 		public var joy1Config:JoyStickConfigVO = new JoyStickConfigVO();
 		public var joy2Config:JoyStickConfigVO = new JoyStickConfigVO();
 
-		public var isFullScreen:Boolean = true;
+		public var isFullScreen:Boolean = false;
 
 		private var _isInitDefaultJoystick:Boolean;
 
