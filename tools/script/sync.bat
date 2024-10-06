@@ -51,6 +51,8 @@ call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_MOB%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:: 结束操作
+echo.
 echo Sync assets successfully.
 exit
 
@@ -63,7 +65,7 @@ exit -1
 :: 判断文件是否存在，不存在给出提示信息
 :EXIST
 if not exist %1 (
-	echo [%1] does not exist.
+	echo [%~1] does not exist.
 	goto END
 )
 goto :EOF
@@ -75,9 +77,9 @@ if exist %1 (
 	rd /s /q %1 >nul
 	
 	if !errorlevel!==0 (
-		echo Delete directory [%1] successfully.
+		echo Delete directory [%~1] successfully.
 	) else (
-		echo Failed to delete directory [%1].
+		echo Failed to delete directory [%~1].
 		goto END
 	)
 )
@@ -87,9 +89,9 @@ goto :EOF
 :COPY
 echo D|xcopy %1 %2 /E /y >nul
 if !errorlevel!==0 (
-	echo Copy directory [%2] successfully.
+	echo Copy directory [%~2] successfully.
 ) else (
-	echo Failed to copy directory [%2].
+	echo Failed to copy directory [%~2].
 	goto END
 )
 goto :EOF
