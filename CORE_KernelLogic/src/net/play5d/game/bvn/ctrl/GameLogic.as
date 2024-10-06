@@ -42,7 +42,7 @@ package net.play5d.game.bvn.ctrl
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.game.bvn.map.FloorVO;
 	import net.play5d.game.bvn.map.MapMain;
-	import net.play5d.game.bvn.state.GameCamera;
+	import net.play5d.game.bvn.stage.GameCamera;
 	import net.play5d.game.bvn.ui.select.SelectIndexUI;
 	import net.play5d.game.bvn.utils.ResUtils;
 

@@ -1,11 +1,11 @@
-package net.play5d.game.bvn.state
+package net.play5d.game.bvn.stage
 {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
+
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.ctrl.AssetManager;
 	import net.play5d.game.bvn.ctrl.GameLogic;
@@ -22,7 +22,7 @@ package net.play5d.game.bvn.state
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
 	import net.play5d.kyo.stage.Istage;
 	import net.play5d.kyo.utils.KyoTimeout;
-	
+
 	public class GameOverState implements Istage
 	{
 		private var _ui:stg_gameover_mc;
@@ -32,32 +32,32 @@ package net.play5d.game.bvn.state
 		private var _keyEnabled:Boolean = true;
 		private var _char:FighterMain;
 		private var _btns:Array = [];
-		
+
 		public function GameOverState()
 		{
 			StateCtrl.I.clearTrans();
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.gameover , ResUtils.GAME_OVER);
 			_ui.gotoAndStop(1);
 		}
-		
+
 		public function showContinue():void{
 			_ui.addEventListener(Event.COMPLETE,showContinueComplete,false,0,true);
 			_ui.gotoAndPlay("continue");
 			addChar();
-			
+
 			SoundCtrl.I.BGM(AssetManager.I.getSound("continue"));
 		}
 		private function showContinueComplete(e:Event):void{
 			_ui.removeEventListener(Event.COMPLETE,showContinueComplete);
 //			var yesbtn:DisplayObject = _ui.getChildByName('btn_yes');
 //			var nobtn:DisplayObject = _ui.getChildByName('btn_no');
-			
+
 			initBtn('btn_yes');
 			initBtn('btn_no');
-			
+
 			initArrow('btn_yes');
 		}
-		
+
 		private function initBtn(name:String):void{
 			var btn:Sprite = _ui.getChildByName(name) as Sprite;
 			if(!btn) return;
@@ -66,7 +66,7 @@ package net.play5d.game.bvn.state
 			btn.addEventListener(MouseEvent.CLICK, btnMouseHandler);
 			_btns.push(btn);
 		}
-		
+
 		private function btnMouseHandler(e:MouseEvent):void{
 			var target:DisplayObject = e.currentTarget as DisplayObject;
 			switch(e.type){
@@ -79,10 +79,10 @@ package net.play5d.game.bvn.state
 					break;
 			}
 		}
-		
+
 		private function render():void{
 			if(!_keyEnabled) return;
-			
+
 			if(GameInputer.left(GameInputType.MENU,1)){
 				setArrow('btn_yes');
 			}
@@ -92,9 +92,9 @@ package net.play5d.game.bvn.state
 			if(GameInputer.select(GameInputType.MENU,1)){
 				selectHandler();
 			}
-			
+
 		}
-		
+
 		private function selectHandler():void{
 			switch(_arrowSelected){
 				case 'btn_yes':
@@ -109,27 +109,27 @@ package net.play5d.game.bvn.state
 			}
 			SoundCtrl.I.sndConfrim();
 		}
-		
+
 		private function initArrow(defaultId:String = null):void{
 			if(!_arrow){
 				_arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui , 'select_arrow_mc');
 				_ui.addChild(_arrow);
 			}
-			
+
 			if(defaultId) setArrow(defaultId);
-			
+
 //			if(!_keyInited){
 //				KeyBoardCtrl.I.addEventListener(KeyEvent.KEY_DOWN,onKeyDown);
 //				KeyBoardCtrl.I.setFocus();
 //			}
-			
+
 			GameRender.add(render);
 			GameInputer.focus();
-			
+
 			_keyEnabled = true;
-			
+
 		}
-		
+
 		private function removeArrow():void{
 			if(_arrow){
 				try{
@@ -139,7 +139,7 @@ package net.play5d.game.bvn.state
 			}
 			_keyEnabled = false;
 		}
-		
+
 		private function setArrow(name:String):void{
 			_arrowSelected = name;
 			var btn:DisplayObject = _ui.getChildByName(name);
@@ -149,7 +149,7 @@ package net.play5d.game.bvn.state
 				SoundCtrl.I.sndSelect();
 			}
 		}
-		
+
 		private function addChar():void{
 			var ct:Sprite = _ui.getChildByName('ct_char') as Sprite;
 			if(ct){
@@ -169,12 +169,12 @@ package net.play5d.game.bvn.state
 				}catch(e:Error){
 					trace(e);
 				}
-				
+
 			}else{
 				KyoTimeout.setFrameout(addChar,2);
 			}
 		}
-		
+
 		private function showContYes():void{
 			_ui.addEventListener(Event.COMPLETE,showContYesComplete,false,0,true);
 			_ui.gotoAndPlay("continue_yes");
@@ -191,7 +191,7 @@ package net.play5d.game.bvn.state
 			GameLogic.loseScoreByContinue();
 			MainGame.I.goSelect();
 		}
-		
+
 		private function showContNo():void{
 			_ui.addEventListener(Event.COMPLETE,showContNoComplete,false,0,true);
 			_ui.gotoAndPlay("continue_no");
@@ -201,16 +201,16 @@ package net.play5d.game.bvn.state
 			_ui.removeEventListener(Event.COMPLETE,showContNoComplete);
 			showGameOver();
 		}
-		
+
 		public function showGameOver():void{
 			_ui.addEventListener(Event.COMPLETE,gameOverComplete,false,0,true);
 			_ui.gotoAndPlay("gameover");
 			SoundCtrl.I.playSwcSound(snd_gameover);
 			SoundCtrl.I.BGM(null);
-			
+
 			addScore();
 		}
-		
+
 		private function addScore():void{
 			var ct:Sprite = _ui.getChildByName('ct_score') as Sprite;
 			if(ct){
@@ -222,34 +222,34 @@ package net.play5d.game.bvn.state
 				KyoTimeout.setFrameout(addScore,1);
 			}
 		}
-		
+
 		private function gameOverComplete(e:Event):void{
 			_ui.removeEventListener(Event.COMPLETE,gameOverComplete);
-			
+
 			GameEvent.dispatchEvent(GameEvent.GAME_OVER);
-			
+
 			initBtn('btn_back');
 			initArrow('btn_back');
 		}
-		
+
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
-		
+
 		public function build():void
 		{
 		}
-		
+
 		public function afterBuild():void
 		{
 			GameEvent.dispatchEvent(GameEvent.GAME_OVER_CONTINUE);
 		}
-		
+
 		public function destory(back:Function=null):void
 		{
 			GameRender.remove(render);
-			
+
 			if(_btns){
 				for each(var b:DisplayObject in _btns){
 					b.removeEventListener(MouseEvent.MOUSE_OVER, btnMouseHandler);
@@ -257,17 +257,17 @@ package net.play5d.game.bvn.state
 				}
 				_btns = null;
 			}
-			
+
 			if(_char){
 				try{
 					_char.mc.parent.removeChild(_char.mc);
 				}catch(e:Error){}
 				_char = null;
 			}
-			
+
 			GameCtrl.I.gameRunData.continueLoser = null;
 			GameCtrl.I.destory();
-			
+
 		}
 	}
 }

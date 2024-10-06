@@ -41,7 +41,7 @@ package net.play5d.game.bvn.ctrl
 	import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
 	import net.play5d.game.bvn.interfaces.BaseGameSprite;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
-	import net.play5d.game.bvn.state.GameState;
+	import net.play5d.game.bvn.stage.GameState;
 	import net.play5d.game.bvn.utils.EffectManager;
 	import net.play5d.game.bvn.views.effects.BitmapFilterView;
 	import net.play5d.game.bvn.views.effects.BlackBackView;

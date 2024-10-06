@@ -43,7 +43,7 @@ package
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.KyoSharedObject;
 	import net.play5d.kyo.display.ui.KyoSimpButton;
-	import net.play5d.game.bvn.state.LoadingState;
+	import net.play5d.game.bvn.stage.LoadingState;
 
 	[SWF(width="1000", height="600", frameRate="30", backgroundColor="#000000")]
 	public class FighterTester extends Sprite

@@ -1,4 +1,4 @@
-package net.play5d.game.bvn.state
+package net.play5d.game.bvn.stage
 {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -8,7 +8,7 @@ package net.play5d.game.bvn.state
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.utils.setTimeout;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.ctrl.AssetManager;
@@ -23,39 +23,39 @@ package net.play5d.game.bvn.state
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.display.shapes.Box;
 	import net.play5d.kyo.stage.Istage;
-	
+
 	public class MenuState extends Sprite implements Istage
 	{
 		private var _ui:stg_title;
 		private var _btnGroup:MenuBtnGroup;
 		private var _versionTxt:TextField;
-		
+
 		public static var MenuPosition:Point = new Point(470, 100);
 		public static var MenuGap:Point = new Point(-40, 5);
-		
+
 		public function MenuState()
 		{
 		}
-		
+
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
-		
+
 		public function build():void
 		{
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.title , ResUtils.TITLE);
 			_ui.gotoAndStop(1);
 			GameInterface.instance.initTitleUI(_ui);
 			GameInputer.enabled = false;
-			
+
 			SoundCtrl.I.BGM(AssetManager.I.getSound('op'));
 		}
-		
+
 		public function afterBuild():void
 		{
 			_ui.gotoAndPlay(2);
-			
+
 			setTimeout(function():void{
 				_ui.buttonMode = true;
 				_ui.useHandCursor = true;
@@ -64,58 +64,58 @@ package net.play5d.game.bvn.state
 				}else{
 					_ui.addEventListener(MouseEvent.CLICK,showBtns);
 				}
-				
+
 				GameRender.add(render);
 				GameInputer.focus();
 				GameInputer.enabled = true;
-				
+
 			},500);
-			
+
 			_versionTxt = new TextField();
 			UIUtils.formatText(_versionTxt , {color:0,size:18});
-			
+
 			_versionTxt.text = MainGame.VERSION_LABEL;
 			_versionTxt.autoSize = TextFieldAutoSize.LEFT;
 			_versionTxt.x = GameConfig.GAME_SIZE.x - _versionTxt.width - 15;
 			_versionTxt.y = GameConfig.GAME_SIZE.y - _versionTxt.height - 10;
 			_ui.addChild(_versionTxt);
-			
+
 			var b:Box = new Box(_versionTxt.width + 10, _versionTxt.height + 10, 0xffffff, 0);
 			b.x = _versionTxt.x - 5;
 			b.y = _versionTxt.y - 5;
 			b.buttonMode = true;
 			b.addEventListener(MouseEvent.CLICK, versionClickHandler);
 			_ui.addChild(b);
-			
+
 //			if(GameData.I.isFristRun && MainGame.UPDATE_INFO){
 //				GameData.I.isFristRun = false;
 //				GameUI.alert('UPDATE',MainGame.UPDATE_INFO);
 //			}
 		}
-		
+
 		private function versionClickHandler(e:MouseEvent):void{
 			if(MainGame.UPDATE_INFO) GameUI.alert('UPDATE', MainGame.UPDATE_INFO);
 		}
-		
+
 		private function render():void{
 			if(GameInputer.anyKey(1)){
 				showBtns();
 			}
 		}
-		
+
 		private function showBtns(...params):void{
 			_ui.removeEventListener(MouseEvent.CLICK, showBtns);
 			_ui.removeEventListener(TouchEvent.TOUCH_TAP, showBtns);
-			
+
 			GameRender.remove(render);
-			
+
 			_ui.buttonMode = false;
 			_ui.useHandCursor = false;
-			
+
 			_ui.gotoAndPlay("menu");
-			
+
 			SoundCtrl.I.playSwcSound(snd_menu5);
-			
+
 			_btnGroup = new MenuBtnGroup();
 			_btnGroup.enabled = false;
 			_btnGroup.x = MenuPosition.x;
@@ -127,19 +127,19 @@ package net.play5d.game.bvn.state
 			}else{
 				_ui.addChild(_btnGroup);
 			}
-			
+
 			_btnGroup.build();
 			_btnGroup.fadIn(0.2,0.04);
 			setTimeout(function():void{
 				_btnGroup.enabled = true;
 			},400);
 		}
-		
+
 //		private function btnCom(e:Event):void{
 //			_ui.removeEventListener(Event.COMPLETE,btnCom);
-//			
+//
 //		}
-		
+
 		public function destory(back:Function=null):void
 		{
 			if(_btnGroup){

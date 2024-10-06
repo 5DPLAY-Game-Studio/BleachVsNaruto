@@ -1,60 +1,60 @@
-package net.play5d.game.bvn.state
+package net.play5d.game.bvn.stage
 {
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
+
 	/**
-	 * 2D镜头 
+	 * 2D镜头
 	 * @modify 2011.1.26
 	 * @author kyo
 	 */
 	public class GameCamera
 	{
 		/**
-		 * 大于1时，缓动开始生效，值越大，缓动越慢 
+		 * 大于1时，缓动开始生效，值越大，缓动越慢
 		 */
 		public var tweenSpd:int;
 		public var stageSize:Point;
-		
+
 		/**
-		 * 是否跟随X 
+		 * 是否跟随X
 		 */
 		public var focusX:Boolean = true;
 		/**
-		 * 是否跟随Y 
+		 * 是否跟随Y
 		 */
 		public var focusY:Boolean;
-		
+
 		/**
-		 * 焦点位置偏移X 
+		 * 焦点位置偏移X
 		 */
 		public var offsetX:Number = 0;
 		/**
 		 * 焦点位置偏移Y
-		 */ 
+		 */
 		public var offsetY:Number = 0;
-		
-		
+
+
 		/**
-		 * 自动缩放，跟随多个对象的位置，只有一个焦点时无效 
+		 * 自动缩放，跟随多个对象的位置，只有一个焦点时无效
 		 */
 		public var autoZoom:Boolean = false;
 		/**
-		 * 最小比例 
+		 * 最小比例
 		 */
 		public var autoZoomMin:Number = 1;
 		/**
-		 * 最大比例 
+		 * 最大比例
 		 */
 		public var autoZoomMax:Number = 3;
-	
+
 //		public var x:Number = 0;
 //		public var y:Number = 0;
-		
+
 		private var _zoom:Number = 1;
 		private var _noTweenRect:Rectangle;
-		
+
 		private var _stage:DisplayObject;
 		private var _stageBounds:Rectangle;
 		private var _rect:Rectangle;
@@ -63,18 +63,18 @@ package net.play5d.game.bvn.state
 		private var _stageScale:Number = 1;
 //		private var _scrollRect:Rectangle = new Rectangle();
 		/**
-		 * fixForderRect 
+		 * fixForderRect
 		 */
 		private var _fbR:Rectangle;
 		private var _foffsetX:Number = 0;
 		private var _foffsetY:Number = 0;
 		private var _screenSize:Point;
-		
-		
+
+
 		public function getScreenRect(withTween:Boolean = false):Rectangle{
 			return withTween ? _rect : _noTweenRect;
 		}
-		
+
 		/**
 		 * 2D摄像机 构造函数  ! 注意：需要调用render()函数才能生效
 		 * @param stage 场景
@@ -87,23 +87,23 @@ package net.play5d.game.bvn.state
 			_stage = stage;
 			_rect = new Rectangle(0,0,screenSize.x,screenSize.y);
 			_noTweenRect = new Rectangle(0,0,screenSize.x,screenSize.y);
-			
+
 			_screenSize = new Point(screenSize.x,screenSize.y);
 			if(fixBorder) _fbR = new Rectangle();
-			
+
 			this.stageSize = stageSize;
 			if(!this.stageSize) setStageSizeFromDisplay(_stage);
-			
+
 			setStageBounds();
 		}
-		
+
 		public function updateNow():void{
 			var oldTweenSpd:Number = tweenSpd;
 			tweenSpd = 0;
 			render();
 			tweenSpd = oldTweenSpd;
 		}
-		
+
 		public function setStageBounds(rect:Rectangle = null):void{
 			if(!rect){
 				_stageBounds = _stage.getBounds(_stage);
@@ -112,11 +112,11 @@ package net.play5d.game.bvn.state
 			}
 			setZoom(_zoom);
 		}
-		
+
 		public function setStageSizeFromDisplay(d:DisplayObject):void{
 			stageSize = new Point(d.width / d.scaleX + _stageBounds.x, d.height / d.scaleY + _stageBounds.y);
 		}
-		
+
 		public function getZoom(withTween:Boolean = false):Number
 		{
 			return withTween ? _stageScale : _zoom;
@@ -126,13 +126,13 @@ package net.play5d.game.bvn.state
 		public function setZoom(value:Number):void
 		{
 			_zoom = value;
-			
+
 			_noTweenRect.width = _screenSize.x / _zoom;
 			_noTweenRect.height = _screenSize.y / _zoom;
-			
+
 			_foffsetX = _screenSize.x / 2 / _zoom;
 			_foffsetY = _screenSize.y / 2 / _zoom;
-			
+
 			//边界
 			if(_fbR){
 				_fbR.x = _stageBounds.x * _zoom;
@@ -141,12 +141,12 @@ package net.play5d.game.bvn.state
 				_fbR.height = _stageBounds.height - _screenSize.y / _zoom;
 			}
 		}
-		
+
 		public function focus(focusArr:Array , notween:Boolean = false):void{
 			_focus = focusArr;
-			
+
 			_point = _focus.length > 1 ? new Point() : null;
-			
+
 			if(notween){
 				var tweenBK:int = tweenSpd;
 				tweenSpd = 0;
@@ -154,47 +154,47 @@ package net.play5d.game.bvn.state
 				tweenSpd = tweenBK;
 			}
 		}
-		
+
 		public function move(x:Number , y:Number):void{
 			_focus = null;
 			_point = new Point(x,y);
 		}
-		
+
 		public function moveCenter():void{
 			_focus = null;
 			_point = new Point(stageSize.x / 2 , stageSize.y / 2);
 		}
-		
+
 		public function render():void{
 			if(!_focus && !_point) return;
-			
+
 			if(_focus.length > 1){
 				renderTwo(_focus[0] , _focus[_focus.length-1]);
 			}
-			
+
 			if(focusX) renderX();
 			if(focusY) renderY();
 			if(_stageScale != _zoom) renderZoom();
-			
+
 			//应用设置
 			applySet();
-			
+
 		}
-		
+
 		private function applySet():void{
 			_stage.scrollRect = _rect;
 //			_stage.x = -_rect.x;
 //			_stage.y = -_rect.y;
 			_stage.scaleX = _stage.scaleY = _stageScale;
 		}
-		
+
 		/**
-		 * 计算两者的中间位置 
+		 * 计算两者的中间位置
 		 */
 		private function renderTwo(a:DisplayObject , b:DisplayObject):void{
 			var distanceX:Number = 0;
 			var distanceY:Number = 0;
-			
+
 			if(focusX){
 				var l:DisplayObject,r:DisplayObject;
 				if(a.x < b.x){
@@ -219,28 +219,28 @@ package net.play5d.game.bvn.state
 				distanceY = d.y - u.y;
 				_point.y = u.y + distanceY / 2;
 			}
-			
+
 			if(autoZoom){
 				var zoomX:Number = _zoom;
 				var zoomY:Number = _zoom;
-				
+
 				if(focusX) zoomX = _screenSize.x / distanceX * 0.8;
 				if(focusY) zoomY = _screenSize.y / distanceY * 0.8;
-				
+
 				var zoom:Number = Math.min(zoomX , zoomY);
 				renderAutoZoom(zoom);
 			}
 		}
-		
+
 		/**
-		 * 自动缩放 
+		 * 自动缩放
 		 */
 		private function renderAutoZoom(zoom:Number):void{
 			if(zoom < autoZoomMin) zoom = autoZoomMin;
 			if(zoom > autoZoomMax) zoom = autoZoomMax;
 			setZoom(zoom);
 		}
-		
+
 		private function renderX():void{
 			var fx:Number;
 			fx = _point ? _point.x : _focus[0].x;
@@ -248,7 +248,7 @@ package net.play5d.game.bvn.state
 //			fx *= _zoom;
 			setX(fx);
 		}
-		
+
 		private function renderY():void{
 			var fy:Number;
 			fy = _point ? _point.y : _focus[0].y;
@@ -256,39 +256,39 @@ package net.play5d.game.bvn.state
 //			fy *= _zoom;
 			setY(fy);
 		}
-		
+
 		public function setX(v:Number):void{
-			
+
 			if(_fbR){
 				if(v < _fbR.x) v = _fbR.x;
 				if(v > _fbR.width) v = _fbR.width;
 			}
-			
+
 			_noTweenRect.x = v;
-			
+
 			if(tweenSpd > 1){
 				_rect.x += (v - _rect.x) / tweenSpd;
 			}else{
 				_rect.x = v;
 			}
 		}
-		
+
 		public function setY(v:Number):void{
-			
+
 			if(_fbR){
 				if(v < _fbR.y) v = _fbR.y;
 				if(v > _fbR.height) v = _fbR.height;
 			}
-			
+
 			_noTweenRect.y = v;
-			
+
 			if(tweenSpd > 1){
 				_rect.y += (v - _rect.y) / tweenSpd;
 			}else{
 				_rect.y = v;
 			}
 		}
-		
+
 		private function renderZoom():void{
 			if(_zoom <= 0) throw new Error('zoom 不能 <= 0 !');
 			if(tweenSpd > 1){
@@ -299,6 +299,6 @@ package net.play5d.game.bvn.state
 			_rect.width = (_screenSize.x / _stageScale + 1) >> 0;
 			_rect.height = (_screenSize.y / _stageScale + 1) >> 0;
 		}
-		
+
 	}
 }

@@ -23,7 +23,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.ctrl.StateCtrl;
 	import net.play5d.game.bvn.fighter.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.state.GameState;
+	import net.play5d.game.bvn.stage.GameState;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.ui.mosou.MosouUI;
 

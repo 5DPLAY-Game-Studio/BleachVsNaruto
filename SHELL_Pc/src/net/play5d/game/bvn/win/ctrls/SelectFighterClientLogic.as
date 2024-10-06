@@ -21,8 +21,8 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.events.GameEvent;
-	import net.play5d.game.bvn.state.LoadingState;
-	import net.play5d.game.bvn.state.SelectFighterStage;
+	import net.play5d.game.bvn.stage.LoadingState;
+	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.win.utils.SelectFighterDataType;
 
 	public class SelectFighterClientLogic

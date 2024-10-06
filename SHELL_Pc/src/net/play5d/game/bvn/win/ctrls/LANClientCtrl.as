@@ -30,9 +30,9 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.events.GameEvent;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.interfaces.GameInterface;
-	import net.play5d.game.bvn.state.GameState;
-	import net.play5d.game.bvn.state.LoadingState;
-	import net.play5d.game.bvn.state.SelectFighterStage;
+	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.LoadingState;
+	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.win.data.HostVO;
 	import net.play5d.game.bvn.win.data.LanGameModel;

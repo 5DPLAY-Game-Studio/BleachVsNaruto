@@ -1,4 +1,4 @@
-package net.play5d.game.bvn.state
+package net.play5d.game.bvn.stage
 {
 	import flash.display.DisplayObject;
 	import flash.events.Event;

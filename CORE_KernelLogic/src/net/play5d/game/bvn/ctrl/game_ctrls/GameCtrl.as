@@ -56,7 +56,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.game.bvn.map.MapMain;
-	import net.play5d.game.bvn.state.GameState;
+	import net.play5d.game.bvn.stage.GameState;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.utils.KeyBoarder;
 	import net.play5d.game.bvn.utils.MCUtils;

@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.win.views
 {
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.state.SettingState;
+	import net.play5d.game.bvn.stage.SettingState;
 	import net.play5d.game.bvn.win.GameInterfaceManager;
 	import net.play5d.game.bvn.win.data.ExtendConfig;
 	import net.play5d.game.bvn.win.input.JoyStickConfigVO;
