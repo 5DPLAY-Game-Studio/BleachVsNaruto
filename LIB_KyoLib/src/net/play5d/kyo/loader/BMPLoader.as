@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.loader
 {
 	import flash.display.Bitmap;
@@ -11,16 +29,16 @@ package net.play5d.kyo.loader
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
-	
+
 	public class BMPLoader extends EventDispatcher
 	{
 		public static const EVENT_PARSE_ERROR:String = 'parseError';
-		
+
 		public function BMPLoader() {
 		}
-		
+
 		public var content:Bitmap;
-		
+
 		private var _loader:URLLoader;
 		private var _binaryArray:ByteArray;
 		private var _crtPos:int=0;
@@ -41,7 +59,7 @@ package net.play5d.kyo.loader
 		private var biClrImportant:int;
 		private var arrayRGBQuad:Array;
 		private var int1:int,int2:int,int3:int,int4:int;
-		
+
 		public function load(uq:URLRequest):void{
 			_loader = new URLLoader();
 			_loader.dataFormat=URLLoaderDataFormat.BINARY;
@@ -49,7 +67,7 @@ package net.play5d.kyo.loader
 			_loader.addEventListener(Event.COMPLETE,onBmpLoadComplete);
 			_loader.load(uq);
 		}
-		
+
 		/**
 		 * 读取字节 1个字节
 		 */
@@ -57,7 +75,7 @@ package net.play5d.kyo.loader
 			_crtPos++;
 			return _binaryArray.readByte();
 		}
-		
+
 		/**
 		 * 读取字节(非负) 2个字节
 		 */
@@ -65,10 +83,10 @@ package net.play5d.kyo.loader
 			_crtPos++;
 			return _binaryArray.readUnsignedByte();
 		}
-		
+
 		private var short1:int;
 		private var short2:int;
-		
+
 		/**
 		 * 读16位
 		 */
@@ -89,7 +107,7 @@ package net.play5d.kyo.loader
 			int4=_binaryArray.readUnsignedByte();
 			return int4<<24|int3<<16|int2<<8|int1;
 		}
-		
+
 		/**
 		 * 读32位
 		 */
@@ -101,7 +119,7 @@ package net.play5d.kyo.loader
 			int4=_binaryArray.readByte();
 			return int4<<24|int3<<16|int2<<8|int1;
 		}
-		
+
 		private function onError(e:IOErrorEvent):void{
 			dispatchEvent(e);
 		}
@@ -115,7 +133,7 @@ package net.play5d.kyo.loader
 				dispatchEvent(new Event(Event.COMPLETE));
 			}
 		}
-		
+
 		private function parseBmpData():BitmapData {
 			//设置当前的解析字节数为0
 			_crtPos=0;
@@ -145,7 +163,7 @@ package net.play5d.kyo.loader
 			biYPelsPerMeter=readint();
 			biClrUsed=readint();
 			biClrImportant=readint();
-			
+
 			var i:int,j:int;
 			var r:int,g:int,b:int;
 			var numline:int=0;
@@ -222,56 +240,56 @@ package net.play5d.kyo.loader
 							ix6=ix0&0x0f&4;
 							ix7=ix0&0x0f&2;
 							ix8=ix0&0x0f&1;
-							
+
 							rgb8=arrayRGBQuad[ix1];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix2];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix3];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix4];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix5];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix6];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix7];
 							r=rgb8.r;
 							g=rgb8.g;
 							b=rgb8.b;
 							bmd.setPixel(i,j,r<<16|g<<8|b);
 							i++;
-							
+
 							rgb8=arrayRGBQuad[ix8];
 							r=rgb8.r;
 							g=rgb8.g;
@@ -289,6 +307,6 @@ package net.play5d.kyo.loader
 			}
 			return bmd;
 		}
-		
+
 	}
 }

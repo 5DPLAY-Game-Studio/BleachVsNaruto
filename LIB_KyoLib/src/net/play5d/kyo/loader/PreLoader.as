@@ -1,10 +1,28 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.loader
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.utils.getDefinitionByName;
-	
+
 	public class PreLoader extends MovieClip
 	{
 		public var showLoadbar:Boolean = true;
@@ -13,17 +31,17 @@ package net.play5d.kyo.loader
 		{
 			super();
 			addEventListener(Event.ADDED_TO_STAGE,onAddStage);
-			
+
 			stop();
 		}
-		
+
 		private function onAddStage(e:Event):void{
 			var w:Number = stage.stageWidth - 200;
 			var h:Number = stage.stageHeight - 50;
-			
+
 			initlize(w,h);
 		}
-		
+
 		public function initlize(width:Number,height:Number):void{
 			if(showLoadbar){
 				_loadbar = new LoaderBar(800,15);
@@ -35,31 +53,31 @@ package net.play5d.kyo.loader
 				_loadbar.initlize();
 				addChild(_loadbar);
 			}
-			
+
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS,loadProgress);
 			loaderInfo.addEventListener(Event.COMPLETE,loadComplete);
 		}
-		
+
 		protected var _loadbar:LoaderBar;
 		private function loadProgress(e:ProgressEvent):void{
 			var p:Number = e.bytesLoaded / e.bytesTotal;
 			onProgress(p);
 		}
-		
+
 		protected function onProgress(p:Number):void{
 			if(_loadbar) _loadbar.update(p);
 		}
-		
+
 		protected function loadComplete(e:Event):void{
 			if(_loadbar) removeChild(_loadbar);
-			
+
 			loaderInfo.removeEventListener(ProgressEvent.PROGRESS,loadProgress);
 			loaderInfo.removeEventListener(Event.COMPLETE,loadComplete);
-			
+
 			this.gotoAndStop(2);
 			var main:Class = getDefinitionByName(_mainClass) as Class;
 			addChild(new main());
 		}
-		
+
 	}
 }
