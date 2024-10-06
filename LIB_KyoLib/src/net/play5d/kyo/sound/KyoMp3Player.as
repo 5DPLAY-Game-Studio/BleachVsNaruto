@@ -1,10 +1,28 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.sound
 {
 	import flash.events.Event;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.net.URLRequest;
-	
+
 	import net.play5d.kyo.utils.KyoRandom;
 	import net.play5d.kyo.utils.KyoUtils;
 
@@ -15,19 +33,19 @@ package net.play5d.kyo.sound
 		public static const MODE_ALL_ONCE:String = 'all_once_mode';
 		public static const MODE_ONE_ONCE:String = 'one_once_mode';
 		public static const MODE_RANDOM:String = 'random_mode';
-		
+
 		public var playMode:String;
-		
+
 		public var list:Array = [];
 		private var _sound:Sound;
 		private var _channel:SoundChannel;
 		private var _current:String;
 		private var _pausedPos:int;
-		
+
 		public function KyoMp3Player()
 		{
 		}
-		
+
 		public function play(v:String = null):void{
 			if(!v){
 				if(_pausedPos > 0){
@@ -40,19 +58,19 @@ package net.play5d.kyo.sound
 					throw new Error('mp3 list 为空，不能播放音乐');
 				}
 			}
-			
-			
+
+
 			stop();
 			_pausedPos = 0;
 			_current = v;
 			KyoUtils.array_push_notHas(list,v);
-			
+
 			_sound = new Sound(new URLRequest(v));
 			_channel = _sound.play();
 			_channel.addEventListener(Event.SOUND_COMPLETE,onSoundComplete);
-			
+
 		}
-		
+
 		public function stop():void{
 			if(_channel){
 				_channel.removeEventListener(Event.SOUND_COMPLETE,onSoundComplete);
@@ -61,12 +79,12 @@ package net.play5d.kyo.sound
 				_sound = null;
 			}
 		}
-		
+
 		public function pause():void{
 			_pausedPos = _channel.position;
 			_channel.stop();
 		}
-		
+
 		public function next(loop:Boolean = true):void{
 			if(!list) return;
 			var id:int = list.indexOf(_current) + 1;
@@ -77,10 +95,10 @@ package net.play5d.kyo.sound
 					stop();
 					return;
 				}
-			} 
+			}
 			play(list[id]);
 		}
-		
+
 		public function prev(loop:Boolean = true):void{
 			if(!list) return;
 			var id:int = list.indexOf(_current) - 1;
@@ -91,14 +109,14 @@ package net.play5d.kyo.sound
 					stop();
 					return;
 				}
-			} 
+			}
 			play(list[id]);
 		}
-		
-		
+
+
 		private function onSoundComplete(e:Event):void{
 			_channel.removeEventListener(Event.SOUND_COMPLETE,onSoundComplete);
-			
+
 			switch(playMode){
 				case MODE_ALL_LOOP:
 					next();
@@ -117,8 +135,8 @@ package net.play5d.kyo.sound
 					break;
 			}
 		}
-		
-		
+
+
 
 	}
 }

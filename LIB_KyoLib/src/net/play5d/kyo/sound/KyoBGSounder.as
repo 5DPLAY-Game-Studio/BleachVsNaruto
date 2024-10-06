@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.sound
 {
 	import flash.events.Event;
@@ -17,13 +35,13 @@ package net.play5d.kyo.sound
 			_i ||= new KyoBGSounder();
 			return _i;
 		}
-		
+
 		/**
-		 * 音乐URL链接或者声音CLASS对象 
+		 * 音乐URL链接或者声音CLASS对象
 		 */
 		public var sound:Object;
 		public var playing:Boolean;
-		
+
 		private var _snd:Sound;
 		private var _channel:SoundChannel;
 		private var _soundTransform:SoundTransform = new SoundTransform();
@@ -39,17 +57,17 @@ package net.play5d.kyo.sound
 			_soundTransform.volume = value;
 			if(_channel) _channel.soundTransform = _soundTransform;
 		}
-		
-		
+
+
 		/**
-		 * 播放背景音乐 
+		 * 播放背景音乐
 		 * @param snd 为空时，播放sound对象
 		 * @param isLoop 循环播放
 		 */
 		public function play(snd:Object = null, isLoop:Boolean = true):void{
 			trace('bgm play');
 			if(_snd) return;
-			
+
 			if(!snd){
 				snd = sound;
 			}
@@ -62,13 +80,13 @@ package net.play5d.kyo.sound
 			if(sound is String) _snd = new Sound(new URLRequest(sound as String));
 			if(sound is Class) _snd = new sound();
 			if(sound is Sound) _snd = sound as Sound;
-			
+
 			playsnd(0, isLoop);
 			playing = true;
 		}
-		
+
 		/**
-		 * 停止音乐 
+		 * 停止音乐
 		 */
 		public function stop():void{
 			trace('bgm stop');
@@ -86,7 +104,7 @@ package net.play5d.kyo.sound
 			}
 			playing = false;
 		}
-		
+
 		public function pause():void{
 			trace('bgm pause');
 			if(_channel){
@@ -94,7 +112,7 @@ package net.play5d.kyo.sound
 				_channel.stop();
 			}
 		}
-		
+
 		public function resume():void{
 			trace('bgm resume');
 			if(_channel){
@@ -102,9 +120,9 @@ package net.play5d.kyo.sound
 				playsnd(_channelPausePosition);
 			}
 		}
-		
+
 		/**
-		 * 关闭时打开；打开时关闭 
+		 * 关闭时打开；打开时关闭
 		 */
 		public function toogle():void{
 			if(playing){
@@ -113,18 +131,18 @@ package net.play5d.kyo.sound
 				play();
 			}
 		}
-		
+
 		private function playsnd(position:int = 0, isLoop:Boolean = true):void{
 			if(!_snd) return;
 			_channel = _snd.play(position, 1, _soundTransform);
-			
+
 			_channel.removeEventListener(Event.SOUND_COMPLETE, playCompleteHandler);
-			
+
 			if(isLoop){
 				_channel.addEventListener(Event.SOUND_COMPLETE, playCompleteHandler);
 			}
 		}
-		
+
 		private function playCompleteHandler(e:Event):void{
 			if(_channel){
 				_channel.removeEventListener(Event.SOUND_COMPLETE, playCompleteHandler);
@@ -132,6 +150,6 @@ package net.play5d.kyo.sound
 			}
 			playsnd(0);
 		}
-		
+
 	}
 }
