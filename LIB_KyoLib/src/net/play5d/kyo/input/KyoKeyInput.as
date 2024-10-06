@@ -1,9 +1,27 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.input
 {
 	import flash.display.Stage;
 	import flash.events.KeyboardEvent;
 	import flash.utils.getTimer;
-	
+
 	import net.play5d.kyo.utils.KyoUtils;
 
 	public class KyoKeyInput
@@ -15,16 +33,16 @@ package net.play5d.kyo.input
 //		}
 		public var stage:Stage;
 		public var orderKeyAble:Boolean = true;
-		
+
 		private var _orderKeys:Array = [];
 		private var _lastDownTime:int;
 		private var _downCodes:Object = {};
-		
+
 		public function KyoKeyInput(stage:Stage)
 		{
 			this.stage = stage;
 		}
-		
+
 		private var _keys:Object = {};
 		private var _map:Object;
 		private var _isOn:Boolean;
@@ -32,7 +50,7 @@ package net.play5d.kyo.input
 		private var _downF:Function;
 		private var _upF:Function;
 		/**
-		 * 设置按键映射 
+		 * 设置按键映射
 		 * @param array 数组数据格式  ：[{name:String , code:int}] 或 [KyoKeyVO]
 		 */
 		public function mappingKeyCode(array:Array):void{
@@ -42,7 +60,7 @@ package net.play5d.kyo.input
 			}
 			updateMapping();
 		}
-		
+
 		/**
 		 * 增加按键映射， KyoKeyVO类型
 		 * @param o 格式：{name:String , code:int} 或 KyoKeyVO
@@ -55,10 +73,10 @@ package net.play5d.kyo.input
 				k = new KyoKeyVO(o.name,o.code);
 			}
 			_keys[k.name] = k;
-			
+
 			updateMapping();
 		}
-		
+
 		/**
 		 * 减少按键映射， KyoKeyVO类型
 		 * @param o 格式：String 或 KyoKeyVO
@@ -72,14 +90,14 @@ package net.play5d.kyo.input
 				updateMapping();
 			}
 		}
-		
+
 		public function clearMappingKeyCode():void{
 			_keys = {};
 			_map = {};
 		}
-		
+
 		/**
-		 * 检查按键设置 
+		 * 检查按键设置
 		 */
 		public function checkOK():Boolean{
 			for(var i:String in _keys){
@@ -87,16 +105,16 @@ package net.play5d.kyo.input
 			}
 			return true;
 		}
-		
+
 		/**
-		 * 输出按键设置 
+		 * 输出按键设置
 		 */
 		public function printKeys():Object{
 			var o:Object = {};
 			for each(var i:KyoKeyVO in _keys) o[i.name] = i.code;
 			return o;
 		}
-		
+
 		/**
 		 *开启按键侦听
 		 */
@@ -107,13 +125,13 @@ package net.play5d.kyo.input
 			stage.addEventListener(KeyboardEvent.KEY_DOWN,keyHandler);
 			stage.addEventListener(KeyboardEvent.KEY_UP,keyHandler);
 		}
-		
+
 		private function updateMapping():void{
 			_map = {};
 			for each(var i:KyoKeyVO in _keys) _map[i.code] = i;
 			turnOn();
 		}
-		
+
 		/**
 		 *关闭按键侦听
 		 */
@@ -124,7 +142,7 @@ package net.play5d.kyo.input
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN,keyHandler);
 			stage.removeEventListener(KeyboardEvent.KEY_UP,keyHandler);
 		}
-		
+
 		/**
 		 * 根据键位(常量)判断是否按键 :String
 		 */
@@ -138,7 +156,7 @@ package net.play5d.kyo.input
 			return isDown;
 		}
 		/**
-		 * 根据按键CODE判断是否按键 
+		 * 根据按键CODE判断是否按键
 		 */
 		public function isDownCode(...params):Boolean{
 			var isDown:Boolean;
@@ -148,7 +166,7 @@ package net.play5d.kyo.input
 			}
 			return isDown;
 		}
-		
+
 		/**
 		 * 根据键位(常量)判断是否按过键  , String 或 KyoKeyVO
 		 */
@@ -162,9 +180,9 @@ package net.play5d.kyo.input
 			}
 			return isDown;
 		}
-		
+
 		/**
-		 * 根据按键CODE判断是否按过键 
+		 * 根据按键CODE判断是否按过键
 		 */
 		public function isPressCode(...params):Boolean{
 			var isDown:Boolean = isDownCode.apply(null,params);
@@ -175,7 +193,7 @@ package net.play5d.kyo.input
 			}
 			return isDown;
 		}
-		
+
 		/**
 		 * 按键回调函数(参数:key常量)
 		 * @param down 按下时调用
@@ -185,17 +203,17 @@ package net.play5d.kyo.input
 			_downF = down;
 			_upF = up;
 		}
-		
+
 		/**
-		 * 连续按键队列的最大值 
+		 * 连续按键队列的最大值
 		 */
 		public var maxOrderKeyLength:int = 10;
 		/**
-		 * 连续按键时间限定(毫秒) 
+		 * 连续按键时间限定(毫秒)
 		 */
 		public var orderKeyDuration:int = 200;
 		/**
-		 * 判断是否按顺序按键 
+		 * 判断是否按顺序按键
 		 * @param params [KyoKeyVO]
 		 */
 		public function inorder(...params):Boolean{
@@ -216,12 +234,12 @@ package net.play5d.kyo.input
 		public function clearDown():void{
 			_downCodes = {};
 		}
-		
+
 		private function keyHandler(e:KeyboardEvent):void{
 			var ki:KyoKeyVO;
-			
+
 			if(_map) ki = _map[e.keyCode] as KyoKeyVO;
-			
+
 			if(e.type == KeyboardEvent.KEY_DOWN){
 				if(ki){
 					if(!ki.isDown)pushOrder(ki);
@@ -241,7 +259,7 @@ package net.play5d.kyo.input
 				delete _downCodes[e.keyCode];
 			}
 		}
-		
+
 		private function pushOrder(k:KyoKeyVO):void{
 			if(!orderKeyAble) return;
 			if(getTimer() - _lastDownTime > orderKeyDuration){
@@ -251,6 +269,6 @@ package net.play5d.kyo.input
 			_orderKeys.push(k);
 			if(_orderKeys.length > maxOrderKeyLength) _orderKeys.shift();
 		}
-		
+
 	}
 }
