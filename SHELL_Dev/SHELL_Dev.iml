@@ -24,6 +24,15 @@
           <sdk name="flex4.16.1-air50.2.4.1" />
         </dependencies>
         <compiler-options>
+          <map>
+            <entry key="metadata.contributor" value="5dplay.net" />
+            <entry key="metadata.creator" value="5dplay.net" />
+            <entry key="metadata.date" value="10.04.2024" />
+            <entry key="metadata.description" value="BleachVsNaruto" />
+            <entry key="metadata.language" value="zh_CN" />
+            <entry key="metadata.publisher" value="5DPLAY Game Studio" />
+            <entry key="metadata.title" value="FighterTester" />
+          </map>
           <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true" />
         </compiler-options>
         <packaging-air-desktop />
