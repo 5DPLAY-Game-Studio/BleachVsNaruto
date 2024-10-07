@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="SHELL_Dev" type="FlashRunConfigurationType">
+  <configuration default="false" name="SHELL_Dev FighterTester" type="FlashRunConfigurationType">
     <option name="BCName" value="FighterTester" />
     <option name="IOSSimulatorDevice" value="" />
     <option name="IOSSimulatorSdkPath" value="" />
