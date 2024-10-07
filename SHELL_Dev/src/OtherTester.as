@@ -28,13 +28,13 @@ package
 	import net.play5d.kyo.utils.KyoUtils;
 
 	[SWF(backgroundColor="0")]
-	public class OtherTest extends Sprite
+	public class OtherTester extends Sprite
 	{
 
 		[Embed(source="/test.png")]
 		private var testPng:Class;
 
-		public function OtherTest()
+		public function OtherTester()
 		{
 			var test:DisplayObject = new testPng();
 			test.x = test.y = 100;
