@@ -1,36 +1,54 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.web.js
 {
 	import flash.external.*;
 	import flash.utils.*;
-	
-	
-	
+
+
+
 	public dynamic class JSEnv extends Proxy
 	{
 		// an instance refered to window
 		public static var $:JSEnv = new JSEnv(0);
-		
-		
-		/********** callback **********/	
+
+
+		/********** callback **********/
 		private static var _init:* =
 			ExternalInterface.addCallback("Notify", handleNotify);
-		
+
 		private static var FN:Array = [];
 		private static function handleNotify(id:uint, This:String, ...args):void
 		{
 			var AS_Args:Array = [];
 			var arg:*;
-			
+
 			for each(arg in args)
 			{
 				AS_Args.push(toAS(arg));
 			}
-			
+
 			FN[id].apply(toAS(This), AS_Args);
 		}
 		/*********************************/
-		
-		
+
+
 		private static function InsertArg(base:Array, args:Array):Array
 		{
 			var arg:*;
@@ -38,10 +56,10 @@ package net.play5d.kyo.web.js
 			{
 				base.push(toJS(arg));
 			}
-			
+
 			return base;
 		}
-		
+
 		/**
 		 * js function proxy
 		 */
@@ -51,26 +69,26 @@ package net.play5d.kyo.web.js
 			{
 				var arr:Array;
 				var ret:*;
-				
+
 				if(this == "[object global]")
 				{
 					//trace("Call: " + id);
-					arr = ["js_call", id]; 
+					arr = ["js_call", id];
 				}
 				else
 				{
 					//trace("New: " + id);
 					arr = ["js_new", id];
 				}
-				
+
 				arr = InsertArg(arr, args);
-				
+
 				ret = ExternalInterface.call.apply(null, arr);
 				return toAS(ret);
 			}
 		}
-		
-		
+
+
 		private static function toAS(val:*):*
 		{
 			if(val is String)
@@ -79,47 +97,47 @@ package net.play5d.kyo.web.js
 				{
 				case "_OBJ":
 					return new JSEnv(+val.substr(4));
-					
+
 				case "_FUN":
 					return JS_Proxy(+val.substr(4)) as Function;
 				}
 			}
-			
+
 			return val;
 		}
-		
-		
+
+
 		private static function toJS(val:*):*
 		{
 			if(val is JSEnv)
 			{
 				return "_OBJ" + val.obj_id;
 			}
-			
+
 			if(val is Function)
 			{
 				FN.push(val);
 				return "_FUN" + (FN.length-1);
 			}
-			
+
 			return val;
 		}
-		
-		
+
+
 		private var obj_id:int;
-		
+
 		public function JSEnv(id:int)
 		{
 			obj_id = id;
 		}
-		
-		
+
+
 		override flash_proxy function hasProperty(name:*):Boolean
 		{
 			//trace("Has: " + name);
 			return ExternalInterface.call("js_in", obj_id, name+"");
 		}
-		
+
 		/**
 		 * obj.method(...)
 		 */
@@ -129,11 +147,11 @@ package net.play5d.kyo.web.js
 
 			var arr:Array = ["js_method", obj_id, name+""];
 			arr = InsertArg(arr, args);
-			
+
 			var ret:* = ExternalInterface.call.apply(null, arr);
 			return toAS(ret);
 		}
-		
+
 		/**
 		 * X = obj[name]
 		 */
@@ -143,7 +161,7 @@ package net.play5d.kyo.web.js
 			var ret:* = ExternalInterface.call("js_get", obj_id, name+"");
 			return toAS(ret);
 		}
-		
+
 		/**
 		 * obj[name] = X
 		 */

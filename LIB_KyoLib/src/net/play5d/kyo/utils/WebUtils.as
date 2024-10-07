@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.utils
 {
 	import flash.display.Sprite;
@@ -16,9 +34,9 @@ package net.play5d.kyo.utils
 	{
 //		public static var allowGetURL:Boolean = true;
 //		public static var setURLtoClipboard:Boolean = false;
-//		
+//
 //		public static var getUrlBack:Function;
-		
+
 		public static function getURL(url:String , target:String = "_blank"):void{
 			if(!url){
 				trace('getURL: url is null');
@@ -32,7 +50,7 @@ package net.play5d.kyo.utils
 				trace(e);
 			}
 		}
-		
+
 		public static function addJSCallBack(functionName:String , closure:Function , jsReady:String = null , debugTxt:TextField = null):void{
 			if(jsReady == null){
 				try{
@@ -60,7 +78,7 @@ package net.play5d.kyo.utils
 				timer.start();
 			}
 		}
-		
+
 		public static function checkLockedURL(...params):Boolean{
 			for each(var i:Object in params){
 				if(i is Array){
@@ -73,7 +91,7 @@ package net.play5d.kyo.utils
 			}
 			return true;
 		}
-		
+
 		private static var _url:String;
 		private static function checkURL(url:String):Boolean{
 			if(_url == null){
@@ -90,9 +108,9 @@ package net.play5d.kyo.utils
 			}
 			return _url.indexOf(url) != -1;
 		}
-		
+
 		/**
-		 * 获取URL传来的参数 
+		 * 获取URL传来的参数
 		 * @param stage
 		 * @param checkVar 检测传来的属性KEY
 		 * @param back 成功后调用，有一个参数Object，即URL参数集合
@@ -110,48 +128,48 @@ package net.play5d.kyo.utils
 				}
 			}
 		}
-		
+
 		public static function getLocalUrl(s:Stage):String{
 			var url:String = s.loaderInfo.url;
 			var i:int = url.lastIndexOf('/');
 			url = url.substr(0,i+1);
 			return url;
 		}
-		
+
 		public static function replaceUrl(txt:String , matchKey:String , urlPath:String):String{
 			var v:String = txt.replace(matchKey,matchKey+urlPath);
 			v = v.replace(urlPath+'http://','http://');
 			return v;
 		}
-		
+
 		public static function getUrlFloder(url:String):String{
 			var x:int = url.lastIndexOf('/');
 			return url.substr(0,x+1);
 		}
-		
+
 		public static function getLocalFloder(url:String):String{
 			var x:int = url.lastIndexOf('\\');
 			return url.substr(0,x+1);
 		}
-		
+
 		public static function getFileName(stage:Stage):String{
 			var url:String = stage.loaderInfo.url;
 			var x:int = url.lastIndexOf('/');
 			return url.substr(x+1);
 		}
-		
+
 		public static function getStageUrlFloder(stage:Stage):String{
 			var url:String = stage.loaderInfo.url;
 			return getUrlFloder(url);
 		}
-		
+
 		public static function refresh():void{
 			getURL('javascript:location.reload();',"_self");
 		}
-		
+
 		public static function alert(v:String):void{
 			getURL('javascript:alert("'+v+'");',"_self");
 		}
-		
+
 	}
 }

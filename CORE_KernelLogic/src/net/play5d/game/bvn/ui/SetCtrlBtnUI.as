@@ -1,13 +1,31 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.ui
 {
 	import com.greensock.TweenLite;
-	
+
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.EventDispatcher;
 	import flash.events.KeyboardEvent;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.data.GameData;
@@ -20,34 +38,34 @@ package net.play5d.game.bvn.ui
 	public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI
 	{
 		public var ui:keyset_mc;
-		
+
 		private var _keyMappings:Array;
 		private var _keyMap:Object;
 		private var _keyConfig:KeyConfigVO;
 		private var _btnGroup:SetBtnGroup;
 		private var _dialog:SetBtnDialog;
 		private var _tmpKeyConfig:KeyConfigVO;
-		
+
 		private var _setKeyIndex:int;
-		
+
 		public function SetCtrlBtnUI()
 		{
-			
+
 			ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting , 'keyset_mc');
-			
+
 			_btnGroup = new SetBtnGroup();
 			_btnGroup.startY = 30;
 			_btnGroup.initKeySet();
 			_btnGroup.addEventListener(SetBtnEvent.SELECT,onBtnSelect);
-			
+
 			ui.addChild(_btnGroup);
-			
+
 			_dialog = new SetBtnDialog();
 			ui.addChild(_dialog.ui);
-			
+
 			initKeyMapping();
 		}
-		
+
 		public function destory():void{
 			 if(_btnGroup){
 				 try{
@@ -58,17 +76,17 @@ package net.play5d.game.bvn.ui
 				 _btnGroup = null;
 			 }
 		}
-		
+
 		public function getUI():DisplayObject{
 			return ui;
 		}
-		
+
 		public function setKey(v:KeyConfigVO):void{
 			_keyConfig = v;
 			_tmpKeyConfig = v.clone();
 			updateKeyMapping();
 		}
-		
+
 		private function updateKeyMapping():void{
 			_keyMap['up'].setKey(_tmpKeyConfig.up);
 			_keyMap['down'].setKey(_tmpKeyConfig.down);
@@ -81,7 +99,7 @@ package net.play5d.game.bvn.ui
 			_keyMap['superKill'].setKey(_tmpKeyConfig.superKill);
 			_keyMap['beckons'].setKey(_tmpKeyConfig.beckons);
 		}
-		
+
 		private function initKeyMapping():void{
 			var kmc:MovieClip = ui.keysmc;
 			var keys:Array = [
@@ -96,10 +114,10 @@ package net.play5d.game.bvn.ui
 				{id:'superKill',name:'SUPER SKILL',cn:'大招'},
 				{id:'beckons',name:'SPECIAL',cn:'特殊'}
 			];
-			
+
 			_keyMappings = [];
 			_keyMap = {};
-			
+
 			for(var i:int ; i < keys.length ; i++){
 				var kui:Sprite = kmc.getChildByName('k'+i) as Sprite;
 				var o:Object = keys[i];
@@ -111,16 +129,16 @@ package net.play5d.game.bvn.ui
 				_keyMappings.push(km);
 				_keyMap[km.keyId] = km;
 			}
-			
+
 		}
-		
+
 		private function onBtnSelect(e:SetBtnEvent):void{
 			switch(e.selectedLabel){
 				case 'SET ALL':
-					
+
 					MainGame.I.stage.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);
 					MainGame.I.stage.focus = MainGame.I.stage;
-					
+
 					_setKeyIndex = -1;
 					_btnGroup.keyEnable = false;
 					setNextKey();
@@ -138,7 +156,7 @@ package net.play5d.game.bvn.ui
 					break;
 			}
 		}
-		
+
 		private function setNextKey():void{
 			_setKeyIndex++;
 			var km:KeyMapping = _keyMappings[_setKeyIndex];
@@ -149,28 +167,28 @@ package net.play5d.game.bvn.ui
 				_btnGroup.keyEnable = true;
 			}
 		}
-		
+
 		private function onKeyDown(e:KeyboardEvent):void{
 			if(!_dialog.isShow) return;
-			
+
 			var km:KeyMapping = _keyMappings[_setKeyIndex];
 			if(!km) return;
-			
+
 			var keyId:String = km.keyId;
 			if(!keyId) return;
-			
+
 			var keyName:String = KyoKeyCode.code2name(e.keyCode);
 			if(!keyName) return;
-			
+
 			_tmpKeyConfig[keyId] = e.keyCode;
 			km.setKey(e.keyCode , keyName);
-			
+
 			_dialog.hide();
-			
+
 			setNextKey();
-			
+
 		}
-		
+
 		public function fadIn():void{
 			var duration:Number = 0.3;
 			ui.y = GameConfig.GAME_SIZE.y;
@@ -180,7 +198,7 @@ package net.play5d.game.bvn.ui
 			_btnGroup.setArrowIndex(0);
 			ui.visible = true;
 		}
-		
+
 		public function fadOut():void{
 			var duration:Number = 0.3;
 			_btnGroup.keyEnable = false;
@@ -188,6 +206,6 @@ package net.play5d.game.bvn.ui
 				ui.visible = false;
 			}});
 		}
-		
+
 	}
 }

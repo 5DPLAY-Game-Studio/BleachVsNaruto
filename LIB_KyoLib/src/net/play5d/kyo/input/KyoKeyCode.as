@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.input
 {
 	public class KyoKeyCode
@@ -12,7 +30,7 @@ package net.play5d.kyo.input
 		public static const N7:KyoKeyVO = new KyoKeyVO('7',55);
 		public static const N8:KyoKeyVO = new KyoKeyVO('8',56);
 		public static const N9:KyoKeyVO = new KyoKeyVO('9',57);
-		
+
 		public static const Num0:KyoKeyVO = new KyoKeyVO('Num0',96);
 		public static const Num1:KyoKeyVO = new KyoKeyVO('Num1',97);
 		public static const Num2:KyoKeyVO = new KyoKeyVO('Num2',98);
@@ -23,7 +41,7 @@ package net.play5d.kyo.input
 		public static const Num7:KyoKeyVO = new KyoKeyVO('Num7',103);
 		public static const Num8:KyoKeyVO = new KyoKeyVO('Num8',104);
 		public static const Num9:KyoKeyVO = new KyoKeyVO('Num9',105);
-		
+
 		public static const A:KyoKeyVO = new KyoKeyVO('A',65);
 		public static const B:KyoKeyVO = new KyoKeyVO('B',66);
 		public static const C:KyoKeyVO = new KyoKeyVO('C',67);
@@ -50,35 +68,35 @@ package net.play5d.kyo.input
 		public static const X:KyoKeyVO = new KyoKeyVO('X',88);
 		public static const Y:KyoKeyVO = new KyoKeyVO('Y',89);
 		public static const Z:KyoKeyVO = new KyoKeyVO('Z',90);
-		
+
 		public static const UP:KyoKeyVO = new KyoKeyVO('UP',38);
 		public static const DOWN:KyoKeyVO = new KyoKeyVO('DOWN',40);
 		public static const LEFT:KyoKeyVO = new KyoKeyVO('LEFT',37);
 		public static const RIGHT:KyoKeyVO = new KyoKeyVO('RIGHT',39);
-		
+
 		public static const Delete:KyoKeyVO = new KyoKeyVO('DELETE',46);
 		public static const End:KyoKeyVO = new KyoKeyVO('END',35);
 		public static const PageDown:KyoKeyVO = new KyoKeyVO('PAGEDOWN',34);
 		public static const PageUp:KyoKeyVO = new KyoKeyVO('PAGEUP',33);
 		public static const Insert:KyoKeyVO = new KyoKeyVO('INSERT',45);
 		public static const Home:KyoKeyVO = new KyoKeyVO('HOME',36);
-		
+
 		public static const SPACE:KyoKeyVO = new KyoKeyVO('SPACE',32);
-		
+
 		private static var _keyArray:Array = [N0,N1,N2,N3,N4,N5,N6,N7,N8,N9,
 											Num0,Num1,Num2,Num3,Num4,Num5,Num6,Num7,Num8,Num9,
 											A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,
 											UP,DOWN,LEFT,RIGHT,
 											Delete,End,PageDown,PageUp,Insert,Home
 										];
-		
+
 		public static function code2name(code:int):String{
 			for each(var i:KyoKeyVO in _keyArray){
 				if(i.code == code) return i.name;
 			}
 			return null;
 		}
-		
+
 		public function KyoKeyCode()
 		{
 		}

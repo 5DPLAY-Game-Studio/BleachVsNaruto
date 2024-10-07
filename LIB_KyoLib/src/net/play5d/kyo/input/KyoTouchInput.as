@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.input
 {
 	import flash.display.Stage;
@@ -10,24 +28,24 @@ package net.play5d.kyo.input
 	{
 		public var slidePos:int = 20;
 		public var enableArea:Rectangle;
-		
+
 		private var _stage:Stage;
 		private var _downPoint:Point;
 		public function KyoTouchInput(stage:Stage)
 		{
 			_stage = stage;
-			
+
 			enbaled = true;
 		}
-		
+
 		public function set enbaled(v:Boolean):void{
 			_stage.removeEventListener(MouseEvent.MOUSE_DOWN,mouseHandler);
 			_stage.removeEventListener(MouseEvent.MOUSE_UP,mouseHandler);
-			
+
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN,mouseHandler);
 			_stage.addEventListener(MouseEvent.MOUSE_UP,mouseHandler);
 		}
-		
+
 		private function checkarea(sx:Number,sy:Number):Boolean{
 			if(enableArea){
 				if(sx > enableArea.width || sx < enableArea.x) return false;
@@ -35,7 +53,7 @@ package net.play5d.kyo.input
 			}
 			return true;
 		}
-		
+
 		private function mouseHandler(e:MouseEvent):void{
 			switch(e.type){
 				case MouseEvent.MOUSE_DOWN:
@@ -50,7 +68,7 @@ package net.play5d.kyo.input
 					break;
 			}
 		}
-		
+
 		private function doSlide():void{
 			if(!_downPoint) return;
 			if(!checkarea(_stage.mouseX,_stage.mouseY)) return;

@@ -1,10 +1,28 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.fighter
 {
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.ctrl.GameLogic;
 	import net.play5d.game.bvn.fighter.ctrler.FighterAttackerCtrler;
@@ -13,71 +31,71 @@ package net.play5d.game.bvn.fighter
 	import net.play5d.game.bvn.fighter.utils.McAreaCacher;
 	import net.play5d.game.bvn.interfaces.BaseGameSprite;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
-	
+
 	public class FighterAttacker extends BaseGameSprite
 	{
 		public var onRemove:Function;
 		public var isAttacking:Boolean;
-		
+
 		private var _ctrler:FighterAttackerCtrler;
 		private var _owner:IGameSprite;
-		
+
 		public var moveToTargetX:Boolean;
 		public var moveToTargetY:Boolean;
-		
+
 		public var followTargetX:Boolean;
 		public var followTargetY:Boolean;
-		
+
 		public var rangeX:Point;
 		public var rangeY:Point;
-		
+
 		private var _startX:Number = 0;
 		private var _startY:Number = 0;
-		
+
 //		public var x:Number = 0;
 //		public var y:Number = 0;
-		
+
 		private var _hitAreaCache:McAreaCacher = new McAreaCacher("hit");
 		private var _hitCheckAreaCache:McAreaCacher = new McAreaCacher("hit_check");
 		private var _rectCache:Object = {};
 		private var _mcOrgPoint:Point;
-		
+
 //		private var _offset:Point = new Point();
-		
+
 		private var _isRenderMainAnimate:Boolean = true;
-		
+
 		public function getOwner():IGameSprite{
 			return _owner;
 		}
-		
+
 		public function get name():String{
 			return _mainMc.name;
 		}
-		
+
 		public function getCtrler():FighterAttackerCtrler{
 			return _ctrler;
 		}
-		
+
 		public function FighterAttacker(mainmc:MovieClip , params:Object = null)
 		{
 			super(mainmc);
-			
+
 			_mcOrgPoint = new Point(mainmc.x , mainmc.y);
-			
+
 			_startX = _mcOrgPoint.x;
 			_startY = _mcOrgPoint.y;
-			
+
 			_x = _startX;
 			_y = _startY;
-			
+
 			_ctrler = new FighterAttackerCtrler(this);
-			
+
 			if(mainmc.setAttackerCtrler){
 				mainmc.setAttackerCtrler(_ctrler);
 			}
-			
+
 			if(params){
-				
+
 				if(params.x != undefined){
 					if(params.x is Number){
 						_startX = params.x + _mcOrgPoint.x;
@@ -90,7 +108,7 @@ package net.play5d.game.bvn.fighter
 						}
 					}
 				}
-				
+
 				if(params.y != undefined){
 					if(params.y is Number){
 						_startY = params.y + _mcOrgPoint.y;
@@ -103,13 +121,13 @@ package net.play5d.game.bvn.fighter
 						}
 					}
 				}
-				
+
 				if(params.applyG != undefined) isApplyG = params.applyG == true;
-				
+
 			}
-			
+
 		}
-		
+
 		public override function destory(dispose:Boolean = true):void{
 			if(_hitAreaCache){
 				_hitAreaCache.destory();
@@ -126,28 +144,28 @@ package net.play5d.game.bvn.fighter
 			_rectCache = null;
 			_owner = null;
 			_mcOrgPoint = null;
-			
+
 			super.destory(true);
 		}
-		
+
 		public function setOwner(v:IGameSprite):void{
 			_owner = v;
-			
+
 			direct = v.direct;
-			
+
 			if(_owner is FighterMain) _ctrler.effect = (_owner as FighterMain).getCtrler().getEffectCtrl();
 			if(_owner is Assister) _ctrler.effect = (_owner as Assister).getCtrler().effect;
 		}
-		
+
 		public function init():void{
-			
+
 			if(!_owner) return;
-			
+
 //			var ownerDisplay:DisplayObject = _owner.getDisplay();
-			
+
 //			if(direct > 0) _x += ownerDisplay.x;
 //			if(direct < 0) _x -= ownerDisplay.x;
-			
+
 			if(direct > 0){
 				_x = _owner.x + _startX;
 			}else{
@@ -155,17 +173,17 @@ package net.play5d.game.bvn.fighter
 			}
 //			_x += ownerDisplay.x;
 			_y += _owner.y;
-			
+
 			if(_owner is FighterMain){
 				var fmc:FighterMC = (_owner as FighterMain).getMC();
 				_x += fmc.x;
 				_y += fmc.y;
 			}
-			
+
 //			_x *= direct;
-			
+
 			if(!moveToTargetX && !moveToTargetY) return;
-			
+
 			var target:IGameSprite = getTarget();
 			if(target){
 				if(moveToTargetX){
@@ -194,11 +212,11 @@ package net.play5d.game.bvn.fighter
 					_y = ty;
 				}
 			}
-			
+
 			isAttacking = true;
-			
+
 		}
-		
+
 		public override function renderAnimate():void{
 			if(!_isRenderMainAnimate) return;
 			super.renderAnimate();
@@ -206,131 +224,131 @@ package net.play5d.game.bvn.fighter
 			findHitArea();
 			if(mc.currentFrame == mc.totalFrames-1) removeSelf();
 		}
-		
+
 		public override function render():void
 		{
 			super.render();
 			_ctrler.render();
 			renderFollowTarget();
 		}
-		
+
 		public function stopFollowTarget():void{
 			followTargetX = false;
 			followTargetY = false;
 		}
-		
+
 		private function renderFollowTarget():void{
 			if(!followTargetX && !followTargetY) return;
 			var target:IGameSprite = getTarget();
 			if(!target) return;
-			
+
 //			var targetDisplay:DisplayObject = target.getDisplay();
 //			if(!targetDisplay) return;
-			
+
 			if(followTargetX) _x = target.x + (_startX * direct);
 			if(followTargetY) _y = target.y + _startY;
 		}
-		
+
 		public function moveToTarget(offsetX:Number = NaN , offsetY:Number = NaN):void{
 			var target:IGameSprite = getTarget();
 			if(!target) return;
-			
+
 //			var targetDisplay:DisplayObject = target.getDisplay();
 //			if(!targetDisplay) return;
-			
+
 			if(!isNaN(offsetX)) _x = target.x + (offsetX * direct);
 			if(!isNaN(offsetY)) _y = target.y + offsetY;
 		}
-		
+
 		public function stop():void{
 			_isRenderMainAnimate = false;
 		}
-		
+
 		public function gotoAndPlay(frame:String):void{
 			_mainMc.gotoAndStop(frame);
 			_isRenderMainAnimate = true;
 		}
-		
+
 		public function gotoAndStop(frame:String):void{
 			_mainMc.gotoAndStop(frame);
 			_isRenderMainAnimate = false;
 		}
-		
+
 		public function getTargets():Vector.<IGameSprite>{
 			if(_owner is FighterMain) return (_owner as FighterMain).getTargets();
 			if(_owner is Assister) return (_owner as Assister).getTargets();
 			return null;
 		}
-		
+
 		private function getTarget():IGameSprite{
 			if(_owner is FighterMain) return (_owner as FighterMain).getCurrentTarget();
 			if(_owner is Assister) return (_owner as Assister).getCurrentTarget();
 			return null;
 		}
-		
+
 		public function removeSelf():void{
 			if(onRemove != null) onRemove(this);
 		}
-		
+
 		/**
 		 * 当前攻击的攻击数据 return [FighterHitVO];
 		 */
 		public override function getCurrentHits():Array{
 			if(!_hitAreaCache) return null;
-			
+
 			var areas:Array = _hitAreaCache.getAreaByFrame(_mainMc.currentFrame) as Array;
-			
+
 //			trace('get cache' , _mainMc.currentFrame , areas);
-			
+
 			if(!areas || areas.length < 1) return null;
-			
+
 			var hits:Array = [];
-			
+
 			var i:int;
 			var dobj:Object;
 			var hitvo:HitVO;
 			var area:Rectangle , area2:Rectangle;
-			
+
 			for(i ; i < areas.length ; i++){
 				dobj = areas[i];
 				var dname:String = dobj.name;
 				hitvo = dobj.hitVO;
-				
+
 				if(!hitvo) continue;
-				
+
 				area = dobj.area;
 				//缓存取出后，需要对重新计算位置
 				hitvo.currentArea = getCurrentRect(area , 'hit'+i);
 				hits.push(hitvo);
 			}
-			
+
 			return hits;
 		}
-		
+
 		public function getHitCheckRect(name:String):Rectangle{
 			var area:Rectangle = getCheckHitRect(name);
 			if(area == null) return null;
 			return getCurrentRect(area , "hit_check");
 		}
-		
+
 		public function getCheckHitRect(name:String):Rectangle{
 			var d:DisplayObject = _mainMc.getChildByName(name);
 			if(!d) return null;
-			
+
 			var cacheObj:Object = _hitCheckAreaCache.getAreaByDisplay(d);
-			
+
 			if(cacheObj) return cacheObj.area;
-			
+
 			var rect:Rectangle = d.getBounds(_mainMc);
-			
+
 			_hitCheckAreaCache.cacheAreaByDisplay(d,rect);
-			
+
 			return rect;
 		}
-		
+
 		private function getCurrentRect(rect:Rectangle , cacheId:String = null):Rectangle{
 			var newRect:Rectangle;
-			
+
 			if(cacheId == null){
 				newRect = new Rectangle();
 			}else{
@@ -341,17 +359,17 @@ package net.play5d.game.bvn.fighter
 					_rectCache[cacheId] = newRect;
 				}
 			}
-			
+
 			newRect.x = rect.x * direct + _x;
 			if(direct < 0) newRect.x -= rect.width;
-			
+
 			newRect.y = rect.y + _y;
 			newRect.width = rect.width;
 			newRect.height = rect.height;
 			return newRect;
 		}
-		
-		
+
+
 		private function getHitModel():FighterHitModel{
 			if(_owner is FighterMain){
 				return (_owner as FighterMain).getCtrler().hitModel;
@@ -362,28 +380,28 @@ package net.play5d.game.bvn.fighter
 			throw new Error("不支持的owner类型!");
 			return null;
 		}
-		
-		
+
+
 		private function findHitArea():void{
 			if(!_hitAreaCache) return;
 			var hitModel:FighterHitModel = getHitModel();
 			if(!hitModel) return;
-			
+
 			//判断是否已定义过
 			if(_hitAreaCache.areaFrameDefined(_mainMc.currentFrame)) return;
-			
+
 			//取帧缓存
 			var area:Object = _hitAreaCache.getAreaByFrame(_mainMc.currentFrame);
 			if(area != null) return; //已有，跳出
-			
+
 			var areaRects:Array = [];
-			
+
 			for(var i:int ; i < _mainMc.numChildren ; i++){
 				var d:DisplayObject = _mainMc.getChildAt(i);
 				var hitvo:HitVO = hitModel.getHitVOByDisplayName(d.name);
-				
+
 				if(d == null || hitvo == null) continue;
-				
+
 				//取缓存
 				var areaCached:Object = _hitAreaCache.getAreaByDisplay(d);
 				if(areaCached == null){
@@ -395,20 +413,20 @@ package net.play5d.game.bvn.fighter
 					areaRects.push(areaCached);
 				}
 			}
-			
+
 			if(areaRects.length < 1) areaRects = null;
-			
+
 			//写入帧缓存
 			_hitAreaCache.cacheAreaByFrame(_mainMc.currentFrame , areaRects);
 //			trace('cache' , _mainMc.currentFrame);
 		}
-		
+
 		private function getOwnerFighter():FighterMain{
 			if(_owner is FighterMain) return _owner as FighterMain;
 			if(_owner is Assister) return (_owner as Assister).getOwner() as FighterMain;
 			return null;
 		}
-		
+
 		public override function hit(hitvo:HitVO, target:IGameSprite):void{
 			var owner:FighterMain = getOwnerFighter();
 			if(target && owner){
@@ -417,6 +435,6 @@ package net.play5d.game.bvn.fighter
 				GameLogic.hitTarget(hitvo , owner , target);
 			}
 		}
-		
+
 	}
 }

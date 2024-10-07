@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.kyo.effect
 {
 	import flash.display.Bitmap;
@@ -10,17 +28,17 @@ package net.play5d.kyo.effect
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	
+
 	import net.play5d.kyo.utils.KyoUtils;
-	
+
 	public class DisplayEffect
 	{
 		public function DisplayEffect()
 		{
 		}
-		
+
 		/**
-		 * 残影效果 
+		 * 残影效果
 		 * @param d 图形
 		 * @param alphaLose 每帧减少残影的透明数
 		 * @param startAlpha 初始的残影透明度
@@ -29,65 +47,65 @@ package net.play5d.kyo.effect
 		public static function ghostShadow(d:DisplayObject , alphaLose:Number = 0.1 , startAlpha:Number = 1 , colorTransFrom:ColorTransform = null):void{
 			var pt:DisplayObjectContainer = d.parent;
 			if(!pt) return;
-			
+
 			var oo:Object = {'parent':pt , 'alphaLose':alphaLose};
 			var po:Object = {'alpha':startAlpha};
-			
+
 			var bp:InsShadow = createInsShadow(d,oo,po);
 			if(!bp) return;
 			if(colorTransFrom){
 				bp.bitmap.transform.colorTransform = colorTransFrom;
 			}
-			
+
 			pt.addChild(bp.bitmap);
 			pt.addChild(d);
-			
+
 			bp.initlize();
 		}
-		
+
 		/**
-		 * 缩放影子效果 
+		 * 缩放影子效果
 		 * @param d
 		 * @param scaleAdd 尺寸比例每帧增加数
 		 * @param alphaLose
 		 * @param startAlpha
 		 * @param colorTransFrom
-		 * 
+		 *
 		 */
 		public static function zoomShadow(d:DisplayObject , scaleAdd:Number = .1 , alphaLose:Number = 0.05 , startAlpha:Number = 1 , colorTransFrom:ColorTransform = null , parent:DisplayObjectContainer = null , size:Point = null):DisplayObject{
 			parent ||= d.parent;
 			if(!parent) return null;
-			
+
 			var oo:Object = {'parent':parent , 'alphaLose':alphaLose , 'scaleAdd':scaleAdd};
 			var po:Object = {'alpha':startAlpha};
-			
+
 			var bp:InsShadow = createInsShadow(d,oo,po,size);
 			if(!bp) return null;
 			if(colorTransFrom){
 				bp.bitmap.transform.colorTransform = colorTransFrom;
 			}
-			
+
 			parent.addChild(bp.bitmap);
 			bp.initlize();
-			
+
 			return bp.bitmap;
 		}
-		
+
 		private static function createInsShadow(d:DisplayObject , prams:Object = null , bpPrams:Object = null , size:Point = null):InsShadow{
 			var bmp:Bitmap = KyoUtils.drawDisplay(d);
 			if(!bmp) return null;
-			
+
 			var bp:InsShadow = new InsShadow();
 			bp.bitmap = bmp;
 			bp.bitmap.scaleX = d.scaleX;
 			bp.bitmap.scaleY = d.scaleY;
-			
+
 			var bds:Rectangle = d.getBounds(d);
 			bp.bitmap.x = d.x + bds.x * d.scaleX;
 			bp.bitmap.y = d.y + bds.y * d.scaleY;
-			
+
 			bp.size = size;
-			
+
 			var i:String;
 			if(prams){
 				for(i in prams){
@@ -99,17 +117,17 @@ package net.play5d.kyo.effect
 					bp.bitmap[i] = bpPrams[i];
 				}
 			}
-			
+
 			return bp;
 		}
-		
+
 		/**
-		 * 在场景中加入MC元件效果 
+		 * 在场景中加入MC元件效果
 		 * @param child
 		 * @param effect
 		 * @param pos
-		 * @return 
-		 * 
+		 * @return
+		 *
 		 */
 		public static function mcEffect(child:DisplayObjectContainer , effect:Class , pos:Point = null):MovieClip{
 			var mc:MovieClip = new effect();
@@ -127,10 +145,10 @@ package net.play5d.kyo.effect
 			child.addChild(mc);
 			return mc;
 		}
-		
+
 		public static function shake(stage:DisplayObject,frames:int = 1,strange:int = 2):void{
 			stage.removeEventListener(Event.ENTER_FRAME,enterframe);
-			
+
 			stage.addEventListener(Event.ENTER_FRAME,enterframe);
 			var frame:int;
 			function enterframe(e:Event):void{
@@ -146,7 +164,7 @@ package net.play5d.kyo.effect
 				stage.y += strange * ii;
 			}
 		}
-		
+
 	}
 }
 
@@ -163,7 +181,7 @@ internal class InsShadow{
 	public var parent:DisplayObjectContainer;
 	public var scaleAdd:Number = 0;
 	public var size:Point;
-	
+
 	private var _scaleAddP:Point;
 	private var _poLose:Point;
 	public function InsShadow(){
@@ -172,15 +190,15 @@ internal class InsShadow{
 		_scaleAddP = new Point(scaleAdd,scaleAdd);
 		size ||= new Point(bitmap.width , bitmap.height);
 		_poLose = new Point(size.x * scaleAdd / 2 , size.y * scaleAdd / 2);
-		
+
 		if(bitmap.scaleX < 0){
 			_scaleAddP.x *= -1;
 			_poLose.x *= -1;
 		}
-		
+
 		bitmap.addEventListener(Event.ENTER_FRAME,enterFrame);
 	}
-	
+
 	private function enterFrame(e:Event):void{
 		bitmap.alpha -= alphaLose;
 		if(scaleAdd != 0){
@@ -189,7 +207,7 @@ internal class InsShadow{
 			bitmap.x -= _poLose.x;
 			bitmap.y -= _poLose.y;
 		}
-		
+
 		if(bitmap.alpha <= 0){
 			bitmap.removeEventListener(Event.ENTER_FRAME,enterFrame);
 			parent.removeChild(bitmap);
