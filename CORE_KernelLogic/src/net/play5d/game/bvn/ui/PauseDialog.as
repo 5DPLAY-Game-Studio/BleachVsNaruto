@@ -1,8 +1,26 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.ui
 {
 	import flash.display.Sprite;
 	import flash.events.DataEvent;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
@@ -14,16 +32,16 @@ package net.play5d.game.bvn.ui
 		private var _bg:Sprite;
 		private var _btnGroup:SetBtnGroup;
 		private var _moveList:MoveListSp;
-		
+
 		public function PauseDialog()
 		{
 			_bg = new Sprite();
 			_bg.graphics.beginFill(0,0.5);
 			_bg.graphics.drawRect(0,0,GameConfig.GAME_SIZE.x , GameConfig.GAME_SIZE.y);
 			_bg.graphics.endFill();
-			
+
 			addChild(_bg);
-			
+
 			_btnGroup = new SetBtnGroup();
 			_btnGroup.setBtnData([
 				{label:'GAME TITLE',cn:'返回标题'},
@@ -31,10 +49,10 @@ package net.play5d.game.bvn.ui
 				{label:'CONTINUE',cn:'继续游戏'}
 			],2);
 			_btnGroup.addEventListener(SetBtnEvent.SELECT,btnGroupSelectHandler);
-			
+
 			addChild(_btnGroup);
 		}
-		
+
 		public function destory():void{
 			if(_btnGroup){
 				_btnGroup.removeEventListener(SetBtnEvent.SELECT,btnGroupSelectHandler);
@@ -46,30 +64,30 @@ package net.play5d.game.bvn.ui
 				_moveList = null;
 			}
 		}
-		
+
 		public function isShowing():Boolean{
 			return visible;
 		}
-		
+
 		public function show():void{
 			this.visible = true;
 			_btnGroup.keyEnable = true;
 			_btnGroup.setArrowIndex(2);
 		}
-		
+
 		public function hide():Boolean{
 			if(_moveList && _moveList.isShowing()){
 				hideMoveList();
 				return false;
 			}
-			
-			
+
+
 			this.visible = false;
 			_btnGroup.keyEnable = false;
 //			GameUI.closeConfrim();
 			return true;
 		}
-		
+
 		private function btnGroupSelectHandler(e:SetBtnEvent):void{
 			if(GameUI.showingDialog()) return;
 			switch(e.selectedLabel){
@@ -90,23 +108,23 @@ package net.play5d.game.bvn.ui
 					break;
 			}
 		}
-		
+
 		private function showMoveList():void{
 			if(!_moveList){
 				_moveList = new MoveListSp();
 				_moveList.onBackSelect = hideMoveList;
 				addChild(_moveList);
 			}
-			
+
 			_btnGroup.keyEnable = false;
 			_moveList.show();
 		}
-		
+
 		private function hideMoveList():void{
 			_moveList.hide();
 			_btnGroup.keyEnable = true;
 			GameEvent.dispatchEvent(GameEvent.PAUSE_GAME_MENU, "movelist-back");
 		}
-		
+
 	}
 }

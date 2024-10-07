@@ -1,7 +1,25 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.fighter.vos
 {
 	import flash.geom.Point;
-	
+
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.interfaces.BaseGameSprite;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
@@ -10,14 +28,14 @@ package net.play5d.game.bvn.fighter.vos
 	{
 		public var x:Number;
 		public var y:Number;
-		
+
 		public var followMcName:String;
-		
+
 		public var target:IGameSprite;
-		
+
 		//移动速度，为NULL时，直接移动到相应位置
 		public var speed:Point;
-		
+
 		/**
 		 * params:{
 		 * 		x:Number X位置
@@ -29,11 +47,11 @@ package net.play5d.game.bvn.fighter.vos
 		public function MoveTargetParamVO(params:Object = null)
 		{
 			if(!params) return;
-			
+
 			x = params.x != undefined ? params.x : 0;
 			y = params.y != undefined ? params.y : 0;
 			followMcName = params.followmc != undefined ? params.followmc : null;
-			
+
 			if(params.speed){
 				speed = new Point();
 				if(params.speed is Number){
@@ -43,9 +61,9 @@ package net.play5d.game.bvn.fighter.vos
 					speed.y = params.speed.y != undefined ? params.speed.y * GameConfig.SPEED_PLUS : 0;
 				}
 			}
-			
+
 		}
-		
+
 		public function setTarget(v:IGameSprite):void{
 			target = v;
 			if(target is BaseGameSprite){
@@ -53,7 +71,7 @@ package net.play5d.game.bvn.fighter.vos
 				(target as BaseGameSprite).setVelocity(0,0);
 			}
 		}
-		
+
 		public function clear():void{
 			if(target){
 				if(target is BaseGameSprite){
@@ -61,6 +79,6 @@ package net.play5d.game.bvn.fighter.vos
 				}
 			}
 		}
-		
+
 	}
 }

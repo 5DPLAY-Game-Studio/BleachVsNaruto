@@ -1,12 +1,30 @@
+/*
+ * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.play5d.game.bvn.ui.dialog.mosou_state
 {
 	import com.greensock.TweenLite;
-	
+
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextFormatAlign;
-	
+
 	import net.play5d.game.bvn.ctrl.AssetManager;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.GameData;
@@ -18,29 +36,29 @@ package net.play5d.game.bvn.ui.dialog.mosou_state
 	{
 		private var _ui:Sprite;
 		private var _data:MosouFighterVO;
-		
+
 		private var _nametxt:Text;
 		private var _leveltxt:Text;
-		
+
 		public function getUI():Sprite{
 			return _ui;
 		}
-		
+
 		public function BigFaceUI(ui:Sprite)
 		{
 			_ui = ui;
 		}
-		
+
 		public function getFighter():MosouFighterVO{
 			return _data;
 		}
-		
+
 		public function setFighter(data:MosouFighterVO):void{
 			_data = data;
 			updateTexts();
 			updateFace();
 		}
-		
+
 		private function updateTexts():void{
 			if(_nametxt == null){
 				_nametxt = new Text(0xffff00, 24);
@@ -50,7 +68,7 @@ package net.play5d.game.bvn.ui.dialog.mosou_state
 				_nametxt.y = 197;
 				_ui.addChild(_nametxt);
 			}
-			
+
 			if(_leveltxt == null){
 				_leveltxt = new Text(0xffffff);
 				_leveltxt.width = 270;
@@ -59,22 +77,22 @@ package net.play5d.game.bvn.ui.dialog.mosou_state
 				_leveltxt.y = 230;
 				_ui.addChild(_leveltxt);
 			}
-			
-			
+
+
 			_nametxt.text = FighterModel.I.getFighterName(_data.id);
 			_leveltxt.text = "Lv." + _data.getLevel();
 		}
-		
+
 		private function updateFace():void{
 			var ct:Sprite = _ui.getChildByName("ct") as Sprite;
 			if(!ct) return;
-			
+
 			ct.removeChildren();
-			
+
 			var faceImg:DisplayObject = AssetManager.I.getFighterFaceWin(FighterModel.I.getFighter(_data.id));
 			if(faceImg) ct.addChild(faceImg);
 		}
-		
+
 		public function updatePos(pos:int ,tween:Boolean = true):void{
 			var obj:Object = {};
 			switch(pos){
@@ -104,11 +122,11 @@ package net.play5d.game.bvn.ui.dialog.mosou_state
 				_ui.scaleY = obj.scaleY;
 			}
 		}
-		
+
 		public function updateLeader():void{
 			var isLeaderMc:Sprite = _ui.getChildByName('isLeaderMc') as Sprite;
 			if(isLeaderMc) isLeaderMc.visible = _data == GameData.I.mosouData.getLeader();
 		}
-		
+
 	}
 }
