@@ -24,7 +24,7 @@
 3. 导入素材同步工具
     - 执行 ***文件(F) -> 管理 IDE 设置 -> 导入设置***，在弹出的 ***导入文件的位置*** 对话框中选择工程目录下的 ***tools\idea_settings\5DPLAY_TOOLS.zip***，在弹出的 ***选择要导入的组件*** 对话框中单击【确认】按钮，按要求重启 IDEA
 
-### 二进制资源 TagAssets
+### 标记资源 TagAssets
 1. 在仓库 [BleachVsNaruto_TagAssets] 内可下载对应 tag 标记的完整二进制素材用于构建完整工程
 2. 进入 [TagAssets\tag] 页面，选择与本工程 [BleachVsNaruto\tag] **名称相同**的资源，下载后将所有资源覆盖在本工程下
 
