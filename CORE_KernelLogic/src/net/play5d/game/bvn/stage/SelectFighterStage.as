@@ -145,76 +145,76 @@ package net.play5d.game.bvn.stage
 			GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
 		}
 
-		private function initPageBtn():void{
-			// 雨兮定制
-			var upBtn:SimpleButton = _ui.getChildByName("bu2") as SimpleButton;
-			var upBtn2:SimpleButton = _ui.getChildByName("bu4") as SimpleButton;
-			var downBtn:SimpleButton = _ui.getChildByName("bu1") as SimpleButton;
-			var downBtn2:SimpleButton = _ui.getChildByName("bu3") as SimpleButton;
-
-			if(GameConfig.TOUCH_MODE){
-				if(upBtn){
-					upBtn.addEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-					upBtn.visible = true;
-				}
-				if(upBtn2){
-					upBtn2.addEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-					upBtn2.visible = true;
-				}
-				if(downBtn){
-					downBtn.addEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-					downBtn.visible = true;
-				}
-				if(downBtn2){
-					downBtn2.addEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-					downBtn2.visible = true;
-				}
-			}else{
-				if(upBtn){
-					upBtn.addEventListener(MouseEvent.CLICK, pageUpHandler);
-					upBtn.visible = true;
-				}
-				if(upBtn2){
-					upBtn2.addEventListener(MouseEvent.CLICK, pageUpHandler);
-					upBtn2.visible = true;
-				}
-				if(downBtn){
-					downBtn.addEventListener(MouseEvent.CLICK, pageDownHandler);
-					downBtn.visible = true;
-				}
-				if(downBtn2){
-					downBtn2.addEventListener(MouseEvent.CLICK, pageDownHandler);
-					downBtn2.visible = true;
-				}
-			}
-		}
-		private function removePageBtn():void{
-			var upBtn:SimpleButton = _ui.getChildByName("bu2") as SimpleButton;
-			var upBtn2:SimpleButton = _ui.getChildByName("bu4") as SimpleButton;
-			var downBtn:SimpleButton = _ui.getChildByName("bu1") as SimpleButton;
-			var downBtn2:SimpleButton = _ui.getChildByName("bu3") as SimpleButton;
-
-			if(upBtn){
-				upBtn.removeEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-				upBtn.removeEventListener(MouseEvent.CLICK, pageUpHandler);
-				upBtn.visible = false;
-			}
-			if(upBtn2){
-				upBtn2.removeEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-				upBtn2.removeEventListener(MouseEvent.CLICK, pageUpHandler);
-				upBtn2.visible = false;
-			}
-			if(downBtn){
-				downBtn.removeEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-				downBtn.removeEventListener(MouseEvent.CLICK, pageDownHandler);
-				downBtn.visible = false;
-			}
-			if(downBtn2){
-				downBtn2.removeEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-				downBtn2.removeEventListener(MouseEvent.CLICK, pageDownHandler);
-				downBtn2.visible = false;
-			}
-		}
+//		private function initPageBtn():void{
+//			// 雨兮定制
+//			var upBtn:SimpleButton = _ui.getChildByName("bu2") as SimpleButton;
+//			var upBtn2:SimpleButton = _ui.getChildByName("bu4") as SimpleButton;
+//			var downBtn:SimpleButton = _ui.getChildByName("bu1") as SimpleButton;
+//			var downBtn2:SimpleButton = _ui.getChildByName("bu3") as SimpleButton;
+//
+//			if(GameConfig.TOUCH_MODE){
+//				if(upBtn){
+//					upBtn.addEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
+//					upBtn.visible = true;
+//				}
+//				if(upBtn2){
+//					upBtn2.addEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
+//					upBtn2.visible = true;
+//				}
+//				if(downBtn){
+//					downBtn.addEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
+//					downBtn.visible = true;
+//				}
+//				if(downBtn2){
+//					downBtn2.addEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
+//					downBtn2.visible = true;
+//				}
+//			}else{
+//				if(upBtn){
+//					upBtn.addEventListener(MouseEvent.CLICK, pageUpHandler);
+//					upBtn.visible = true;
+//				}
+//				if(upBtn2){
+//					upBtn2.addEventListener(MouseEvent.CLICK, pageUpHandler);
+//					upBtn2.visible = true;
+//				}
+//				if(downBtn){
+//					downBtn.addEventListener(MouseEvent.CLICK, pageDownHandler);
+//					downBtn.visible = true;
+//				}
+//				if(downBtn2){
+//					downBtn2.addEventListener(MouseEvent.CLICK, pageDownHandler);
+//					downBtn2.visible = true;
+//				}
+//			}
+//		}
+//		private function removePageBtn():void{
+//			var upBtn:SimpleButton = _ui.getChildByName("bu2") as SimpleButton;
+//			var upBtn2:SimpleButton = _ui.getChildByName("bu4") as SimpleButton;
+//			var downBtn:SimpleButton = _ui.getChildByName("bu1") as SimpleButton;
+//			var downBtn2:SimpleButton = _ui.getChildByName("bu3") as SimpleButton;
+//
+//			if(upBtn){
+//				upBtn.removeEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
+//				upBtn.removeEventListener(MouseEvent.CLICK, pageUpHandler);
+//				upBtn.visible = false;
+//			}
+//			if(upBtn2){
+//				upBtn2.removeEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
+//				upBtn2.removeEventListener(MouseEvent.CLICK, pageUpHandler);
+//				upBtn2.visible = false;
+//			}
+//			if(downBtn){
+//				downBtn.removeEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
+//				downBtn.removeEventListener(MouseEvent.CLICK, pageDownHandler);
+//				downBtn.visible = false;
+//			}
+//			if(downBtn2){
+//				downBtn2.removeEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
+//				downBtn2.removeEventListener(MouseEvent.CLICK, pageDownHandler);
+//				downBtn2.visible = false;
+//			}
+//		}
 
 		private function pageUpHandler(e:Event):void{
 			if(_fighterListUI.height <= GameConfig.GAME_SIZE.y) return;
@@ -250,9 +250,9 @@ package net.play5d.game.bvn.stage
 
 			GameInputer.enabled = false;
 			setTimeout(initSelecter,_tweenTime);
-
-			initPageBtn();
-			initBackBtn();
+			// 雨兮定制删除
+//			initPageBtn();
+			if(GameConfig.TOUCH_MODE) initBackBtn();
 //			initSelecter();
 		}
 
@@ -263,9 +263,9 @@ package net.play5d.game.bvn.stage
 			_selectState = SELECT_STATE_ASSIST;
 			buildList(_config.assistList);
 			GameInputer.enabled = false;
-
-			initPageBtn();
-			initBackBtn();
+			// 雨兮定制删除
+//			initPageBtn();
+			if(GameConfig.TOUCH_MODE) initBackBtn();
 			setTimeout(initSelecter,_tweenTime);
 		}
 
@@ -329,7 +329,7 @@ package net.play5d.game.bvn.stage
 				_p2SelectedGroup = null;
 			}
 
-			removePageBtn();
+//			removePageBtn();
 
 		}
 
@@ -1142,7 +1142,7 @@ package net.play5d.game.bvn.stage
 				GameInputer.enabled = true;
 			}});
 
-			initBackBtn();
+			if(GameConfig.TOUCH_MODE) initBackBtn();
 		}
 
 		private function mapPrevHandler():void{

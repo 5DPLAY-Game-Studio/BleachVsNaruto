@@ -62,7 +62,7 @@ package net.play5d.game.bvn.stage
 
 			_ui.addChild(_btnGroup);
 
-			initBackBtn();
+			if(GameConfig.TOUCH_MODE)  initBackBtn();
 
 			_man = _ui.ichigo;
 
