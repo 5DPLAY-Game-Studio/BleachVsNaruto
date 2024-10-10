@@ -96,7 +96,14 @@ package
 			GameLoger.log("buildGame");
 
 			_mainGame = new MainGame();
-			_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
+			//_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
+			_mainGame.initlize(this, stage, function ():void {
+				_mainGame.goLanguage(function ():void {
+					GameData.I.saveData();
+					_mainGame.initalizeLoad(initBackHandler, initFailHandler);
+				});
+
+			}, initFailHandler);
 			if(Debugger.DEBUG_ENABLED) Debugger.initDebug(stage);
 
 			stage.addEventListener(KeyboardEvent.KEY_DOWN,keyDownHandler);

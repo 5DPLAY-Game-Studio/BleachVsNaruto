@@ -103,7 +103,13 @@ package
 			GameData.I.config.keyInputMode = 1;
 
 			_mainGame = new MainGame();
-			_mainGame.initlize(_gameSprite,stage,initBackHandler,initFailHandler);
+			_mainGame.initlize(_gameSprite,stage,function ():void {
+				_mainGame.goLanguage(function ():void {
+					GameData.I.saveData();
+					_mainGame.initalizeLoad(initBackHandler,initFailHandler);
+				});
+
+			},initFailHandler);
 
 			StateCtrl.I.transEnabled = false;//跳过黑屏遮盖
 

@@ -39,6 +39,9 @@ package net.play5d.game.bvn.data
 
 		public var select_config:SelectStageConfigVO = new SelectStageConfigVO();
 
+		// 显示语言
+		public var language:String = null;
+
 		public var AI_level:int = 1;
 		public var fighterHP:Number = 1; //HP比例
 		public var fightTime:int = 60;
@@ -95,6 +98,7 @@ package net.play5d.game.bvn.data
 			o.key_p1 = key_p1.toSaveObj();
 			o.key_p2 = key_p2.toSaveObj();
 
+			o.language = language;
 			o.AI_level = AI_level;
 			o.fighterHP = fighterHP;
 			o.fightTime = fightTime;

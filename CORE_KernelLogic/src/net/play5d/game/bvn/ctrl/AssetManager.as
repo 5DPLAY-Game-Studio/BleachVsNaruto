@@ -188,6 +188,11 @@ package net.play5d.game.bvn.ctrl
 			}
 		}
 
+		public function getClass(className:String, swfPath:String):Class {
+			var cls:Class = _swfLoader.getClass(className , swfPath);
+			return cls;
+		}
+
 		public function getEffect(className:String):*{
 			var cls:Class = _swfLoader.getClass(className , _effectSwfPath);
 			return new cls();
@@ -282,6 +287,11 @@ package net.play5d.game.bvn.ctrl
 
 		public function disposeAsset(url:String):void{
 			_assetLoader.dispose(url);
+		}
+
+		public function loadSWFs(loadarray:Array , back:Function = null,process:Function = null):void{
+			loadGraphics(loadarray , back,process)
+
 		}
 
 		private function loadGraphics(loadarray:Array , back:Function = null,process:Function = null):void{

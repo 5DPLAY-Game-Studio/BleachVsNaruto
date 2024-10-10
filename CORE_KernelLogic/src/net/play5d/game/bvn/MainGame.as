@@ -44,8 +44,9 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.stage.GameOverState;
 	import net.play5d.game.bvn.stage.GameState;
 	import net.play5d.game.bvn.stage.HowToPlayState;
-	import net.play5d.game.bvn.stage.LoadingMosouState;
-	import net.play5d.game.bvn.stage.LoadingState;
+import net.play5d.game.bvn.stage.LanguageStage;
+import net.play5d.game.bvn.stage.LoadingMosouState;
+import net.play5d.game.bvn.stage.LoadingState;
 	import net.play5d.game.bvn.stage.LogoState;
 	import net.play5d.game.bvn.stage.MenuState;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
@@ -89,7 +90,7 @@ package net.play5d.game.bvn
 			I = this;
 		}
 
-		public function initlize(root:Sprite , stage:Stage , initBack:Function = null , initFail:Function = null):void{
+		public function initlize(root:Sprite , stage:Stage , initBack:Function = null , initFail:Function = null):void {
 			ResUtils.I.initalize(resInitBack , initFail);
 
 			KyoTimeout.init(root);
@@ -99,7 +100,6 @@ package net.play5d.game.bvn
 			}
 
 			function resInitBack():void{
-
 				AssetManager.I.init();
 
 				GameLoger.log("res init ok");
@@ -113,32 +113,36 @@ package net.play5d.game.bvn
 				GameLoger.log("init game inputer");
 				GameInputer.initlize(_stage);
 
-//				GameLoger.log("init game data");
-//				GameData.I.loadData();
-//
-//				GameLoger.log("init config");
-//				GameData.I.config.applyConfig();
-//
-//				GameLoger.log("init inputer config");
-//				GameInputer.updateConfig();
-
 				GameLoger.log("init scroll");
 				root.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x,GameConfig.GAME_SIZE.y);
 
 				GameLoger.log("init stagectrl");
 				stageCtrl = new KyoStageCtrl(_rootSprite);
 
-				GameLoger.log("init loading");
+				GameLoger.log("init config");
+				GameData.I.config.applyConfig();
 
-				var loadingState:GameLoadingState = new GameLoadingState();
-				stageCtrl.goStage(loadingState);
-				loadingState.loadGame(loadGameBack , initFail);
+				GameLoger.log("init inputer config");
+				GameInputer.updateConfig();
 
-				GameEvent.dispatchEvent(GameEvent.LOAD_GAME_START);
+				GameData.I.loadSaveData();
+
+				if(initBack != null){
+					initBack();
+				}
 			}
+		}
+
+		public function initalizeLoad(initBack:Function = null , initFail:Function = null):void{
+			GameLoger.log("init loading");
+
+			var loadingState:GameLoadingState = new GameLoadingState();
+			stageCtrl.goStage(loadingState);
+			loadingState.loadGame(loadGameBack , initFail);
+
+			GameEvent.dispatchEvent(GameEvent.LOAD_GAME_START);
 
 			function loadGameBack():void{
-
 				GameLoger.log("init game data");
 				GameData.I.initData();
 
@@ -368,6 +372,18 @@ package net.play5d.game.bvn
 			setQuality(GameConfig.QUALITY_UI);
 
 			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WorldMapState);
+		}
+
+		/**
+		 * 前往【语言选择】场景
+		 */
+		public function goLanguage(clickCallBack:Function = null):void {
+			var languageStage:LanguageStage = new LanguageStage();
+			languageStage.clickCallBack = clickCallBack;
+			stageCtrl.goStage(languageStage);
+
+			setFPS(GameConfig.FPS_UI);
+			setQuality(GameConfig.QUALITY_UI);
 		}
 
 	}

@@ -143,7 +143,7 @@ package net.play5d.game.bvn.data
 
 		public function initData():void{
 			mosouData.init();
-			GameData.I.loadSaveData();
+//			GameData.I.loadSaveData();
 		}
 
 		public function saveData():void{
@@ -157,9 +157,8 @@ package net.play5d.game.bvn.data
 			GameInterface.instance.saveGame(o);
 		}
 
-		private function loadSaveData():void{
+		public function loadSaveData():void{
 			var o:Object = GameInterface.instance.loadGame();
-//			var o:Object = JSON.parse('{"config":{"AI_level":5,"extend_config":{"isFullScreen":false,"joy_p2":{"attack":{"value":1,"id":6},"right2":{"value":0.5,"id":0},"jump":{"value":1,"id":4},"deviceIsSet":false,"up":{"value":1,"id":16},"dash":{"value":1,"id":5},"select":{"value":1,"id":13},"left":{"value":1,"id":18},"back":{"value":1,"id":12},"up2":{"value":0.5,"id":1},"down":{"value":1,"id":17},"down2":{"value":-0.5,"id":1},"deviceId":null,"left2":{"value":-0.5,"id":0},"skill":{"value":1,"id":7},"superSkill":{"value":1,"id":9},"right":{"value":1,"id":19},"waikai":{"value":1,"id":10},"special":{"value":1,"id":8}},"joy_p1":{"attack":{"value":1,"id":6},"right2":{"value":0.5,"id":0},"jump":{"value":1,"id":4},"deviceIsSet":false,"up":{"value":1,"id":16},"dash":{"value":1,"id":5},"select":{"value":1,"id":13},"left":{"value":1,"id":18},"back":{"value":1,"id":12},"up2":{"value":0.5,"id":1},"down":{"value":1,"id":17},"down2":{"value":-0.5,"id":1},"deviceId":null,"left2":{"value":-0.5,"id":0},"skill":{"value":1,"id":7},"superSkill":{"value":1,"id":9},"right":{"value":1,"id":19},"waikai":{"value":1,"id":10},"special":{"value":1,"id":8}},"joy_menu":{"attack":{"value":1,"id":6},"right2":{"value":0.5,"id":0},"jump":{"value":1,"id":4},"deviceIsSet":false,"up":{"value":1,"id":16},"dash":{"value":1,"id":5},"select":{"value":1,"id":13},"left":{"value":1,"id":18},"back":{"value":1,"id":12},"up2":{"value":0.5,"id":1},"down":{"value":1,"id":17},"down2":{"value":-0.5,"id":1},"deviceId":null,"left2":{"value":-0.5,"id":0},"skill":{"value":1,"id":7},"superSkill":{"value":1,"id":9},"right":{"value":1,"id":19},"waikai":{"value":1,"id":10},"special":{"value":1,"id":8}},"lan_name":"someone"},"key_p2":{"skill":100,"attack":97,"down":40,"selects":[97],"jump":98,"up":38,"beckons":102,"dash":99,"superKill":101,"right":39,"left":37},"key_p1":{"skill":85,"attack":74,"down":83,"selects":[74],"jump":75,"up":87,"beckons":79,"dash":76,"superKill":73,"right":68,"left":65},"fighterHP":1,"bgmVolume":0.7,"keyInputMode":1,"quality":"medium","fightTime":60,"soundVolume":0.7},"id":"bvn3.5A","mosou":{"fighterData":[{"exp":3016,"level":20,"id":"ichigo"},{"exp":3529,"level":20,"id":"naruto"},{"exp":2659,"level":20,"id":"sakura"}],"userId":null,"currentMapId":"map1","currentAreaId":"p2_2","money":15163,"fighterTeam":["naruto","sakura","ichigo"],"lastLogin":0,"userName":null,"mapData":[{"isOpen":false,"areas":[{"missions":[{"stars":1,"id":"1"},{"stars":1,"id":"2"}],"id":"p1","name":null},{"missions":[{"stars":1,"id":"1"},{"stars":1,"id":"2"}],"id":"p2","name":null},{"missions":[],"id":"p2_1","name":null},{"missions":[{"stars":1,"id":"1"},{"stars":1,"id":"2"}],"id":"p2_2","name":null}],"id":"map1"}]}}');
 			if(!o || o.id != SAVE_ID) return;
 
 			trace('loadSaveData', JSON.stringify(o));
