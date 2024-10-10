@@ -56,6 +56,9 @@ package
 		[Embed(source="/../../shared/lib/swf/dialog_ui.swf")]
 		private var _dialog:Class;
 
+		[Embed(source="/../../shared/lib/swf/language.swf")]
+		private var _language:Class;
+
 		public function SwfLib()
 		{
 		}
@@ -112,6 +115,11 @@ package
 		public function get dialog():Class
 		{
 			return _dialog;
+		}
+
+		public function get language():Class
+		{
+			return _language;
 		}
 
 	}

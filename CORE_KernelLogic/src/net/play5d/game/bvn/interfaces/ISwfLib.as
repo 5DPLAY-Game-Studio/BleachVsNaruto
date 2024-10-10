@@ -32,6 +32,6 @@ package net.play5d.game.bvn.interfaces
 		function get mosou():Class;
 		function get bigMap():Class;
 		function get dialog():Class;
-
+		function get language():Class;
 	}
 }
