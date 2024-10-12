@@ -42,7 +42,7 @@ package net.play5d.game.bvn.ui
 
 			if(GameUI.SHOW_CN_TEXT){
 				_txt = new TextField();
-				UIUtils.formatText(_txt , {color:0xfded65 , size:20 , font:"黑体" , align:TextFormatAlign.RIGHT});
+				UIUtils.formatText(_txt , {color:0xfded65 , size:16 , align:TextFormatAlign.RIGHT});
 				_txt.y = 4;
 				addChild(_txt);
 			}

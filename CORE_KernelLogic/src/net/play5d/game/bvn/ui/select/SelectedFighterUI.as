@@ -72,7 +72,7 @@ package net.play5d.game.bvn.ui.select
 					_text.width = ui.width - 10;
 				}
 
-				_text.y = ui.height - 25;
+				_text.y = ui.height - 30;
 				ui.addChild(_text);
 			}
 		}

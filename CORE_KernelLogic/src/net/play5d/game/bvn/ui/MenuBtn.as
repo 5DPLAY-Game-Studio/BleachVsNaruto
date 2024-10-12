@@ -77,10 +77,10 @@ package net.play5d.game.bvn.ui
 
 			if(GameUI.SHOW_CN_TEXT){
 				_cnTxt = new BitmapText();
-				UIUtils.formatText(_cnTxt.textfield , {font:"黑体",size:18});
+				UIUtils.formatText(_cnTxt.textfield , {size:18});
 				_cnTxt.text = cn;
 				_cnTxt.x = 10;
-				_cnTxt.y = 45;
+				_cnTxt.y = 43;
 				ui.bg.addChild(_cnTxt);
 			}
 

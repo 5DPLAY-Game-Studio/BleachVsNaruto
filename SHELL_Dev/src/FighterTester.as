@@ -39,6 +39,7 @@ package
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.test.GameInterfaceManager;
 	import net.play5d.game.bvn.test.SwfLib;
+	import net.play5d.game.bvn.ui.UIUtils;
 	import net.play5d.game.bvn.utils.AssetLoader;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.KyoSharedObject;
@@ -105,6 +106,9 @@ package
 			_mainGame = new MainGame();
 			_mainGame.initlize(_gameSprite,stage,function ():void {
 				_mainGame.goLanguage(function ():void {
+					trace('字体名称：'+FONT.fontName);
+					UIUtils.LOCK_FONT = FONT.fontName;
+
 					GameData.I.saveData();
 					_mainGame.initalizeLoad(initBackHandler,initFailHandler);
 				});

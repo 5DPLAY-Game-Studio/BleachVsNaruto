@@ -31,7 +31,8 @@ package
 	import net.play5d.game.bvn.debug.Debugger;
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.utils.GameLoger;
+import net.play5d.game.bvn.ui.UIUtils;
+import net.play5d.game.bvn.utils.GameLoger;
 	import net.play5d.game.bvn.utils.GameSafeKeeper;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.game.bvn.utils.URL;
@@ -99,6 +100,9 @@ package
 			//_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
 			_mainGame.initlize(this, stage, function ():void {
 				_mainGame.goLanguage(function ():void {
+					trace('字体名称：'+FONT.fontName);
+					UIUtils.LOCK_FONT = FONT.fontName;
+
 					GameData.I.saveData();
 					_mainGame.initalizeLoad(initBackHandler, initFailHandler);
 				});
