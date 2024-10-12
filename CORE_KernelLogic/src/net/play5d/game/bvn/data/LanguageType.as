@@ -35,16 +35,17 @@ public class LanguageType {
     public static const KOREAN:String              = 'ko';
     // 越南语
     public static const VIETNAMESE:String          = 'vi';
-
     // 所有语言
     [ArrayElementType('String')]
-    private static const _languages:Array = [
+    private static const _languages:Array          = [
         CHINESE_SIMPLIFIED, CHINESE_TRADITIONAL,
         ENGLISH,
         JAPANESE,
         KOREAN,
         VIETNAMESE
     ];
+    // 当前语言
+    public static var currentLang:String;
 
     /**
      * 是否支持当前语言
