@@ -43,7 +43,7 @@ public class LanguageStage implements Istage {
     [ArrayElementType('InsCountry')]
     private var _insCountries:Array = [];
 
-    // 点击回调函数
+    // 点击回调事件
     private var _clickCallBack:Function;
 
     /**
@@ -102,6 +102,22 @@ public class LanguageStage implements Istage {
      * @param back 回调函数
      */
     public function destory(back:Function = null):void {
+        if (_loadingBar) {
+            _loadingBar = null;
+        }
+
+        if (_insCountries) {
+            for each (var country:InsCountry in _insCountries) {
+                country.removeEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
+                country.removeEventListener(MouseEvent.CLICK, clickHandler);
+                country.destroy();
+            }
+
+            _insCountries = null;
+        }
+
+        _clickCallBack = null;
+        _ui            = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -147,14 +163,14 @@ public class LanguageStage implements Istage {
         // 开始载入字体
         AssetManager.I.loadSWFs(
                 loadUrls,
-                function () {
+                function ():void {
+                    // 载入字体成功回调
+
                     _loadingBar.visible = false;
                     _ui.removeChild(_loadingBar);
 
-                    // 注册字体
-                    registerFont(loadUrls);
                     // 添加语言项目
-                    addLanguageItem(languages);
+                    addLanguageItem(languages, loadUrls);
                 },
                 loadProgress
         );
@@ -169,36 +185,54 @@ public class LanguageStage implements Istage {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * 注册字体
-     * @param fontPathArr 字体路径数组
-     */
-    private function registerFont(fontPathArr:Array):void {
-        for each (var fontPath:String in fontPathArr) {
-            var fontCls:Class = AssetManager.I.getClass('font', fontPath);
-//            trace(new fontCls().fontName);
-            // 注册字体
-            Font.registerFont(fontCls);
-        }
-    }
+//    /**
+//     * 注册字体
+//     * @param fontPathArr 字体路径数组
+//     */
+//    private function registerFont(fontPathArr:Array):void {
+//        for each (var fontPath:String in fontPathArr) {
+//            var fontCls:Class = AssetManager.I.getClass('font', fontPath);
+////            trace(new fontCls().fontName);
+//            // 注册字体
+//            Font.registerFont(fontCls);
+//        }
+//    }
 
     /**
      * 添加语言项目
      * @param langArr
+     * @param fontPathArr 字体路径数组
      */
-    private function addLanguageItem(langArr:Array):void {
+    private function addLanguageItem(langArr:Array, fontPathArr:Array):void {
+        if (langArr.length != fontPathArr.length) {
+            throw new Error('语言元素数目不匹配！');
+        }
+
         var len:int    = langArr.length;
         var gap:Number = GameConfig.GAME_SIZE.y / (
                 len + 1
         );
 
         for (var i:int = 1; i <= len; i++) {
-            var lang:String        = langArr[i - 1];
+            // 当前语言
+            var lang:String     = langArr[i - 1];
+            // 当前字体路径
+            var fontPath:String = fontPathArr[i - 1];
+            // 当前字体类
+            var fontCls:Class   = AssetManager.I.getClass('font', fontPath);
+
+            // 注册字体
+            Font.registerFont(fontCls);
+
+            // 国家元件
             var country:InsCountry = new InsCountry();
+
+            // 判断是否和存档的语言一致
             if (GameData.I.config.language == lang) {
                 country.selected = true;
             }
             country.language   = lang;
+            country.fontCls    = fontCls;
             country.y          = i * gap - country.height / 2;
             country.x          = GameConfig.GAME_SIZE.x / 2 - country.width / 2;
             country.buttonMode = true;
@@ -248,14 +282,19 @@ public class LanguageStage implements Istage {
         SoundCtrl.I.sndConfrim();
 
         var target:InsCountry = e.currentTarget.parent as InsCountry;
+        // 所选语言
         var language:String   = target.language;
+        // 所选语言的字体类
+        var fontCls:Class     = target.fontCls;
 
-        // 如果是不支持的语言，设定默认语言是简体中文
+        // 如果是不支持的语言，输出不支持
         if (!LanguageType.isSupported(language)) {
-            language = LanguageType.CHINESE_SIMPLIFIED;
+            throw new Error('不支持的语言！');
         }
 
         GameData.I.config.language = language;
+        LanguageType.currentLang   = language;
+        FONT                       = new fontCls() as Font;
 
         if (_clickCallBack != null) {
             _clickCallBack();
@@ -273,6 +312,9 @@ import flash.display.Sprite;
 import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 
+/**
+ * 内部国家语言类
+ */
 class InsCountry extends Sprite {
     // 国旗与文本的间隔
     private const GAP:int                   = 25;
@@ -282,10 +324,12 @@ class InsCountry extends Sprite {
     private const WIDTH_COEFFICIENT:Number  = 2;
 
     public function InsCountry():void {
-        _top  = new Sprite();
+        _top = new Sprite();
+
         _mc   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_country');
         _txt  = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_country_text');
         _base = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_base');
+
         _top.addChild(_mc);
         _top.addChild(_txt);
 
@@ -296,7 +340,6 @@ class InsCountry extends Sprite {
         _txt.stop();
 
         _txt.x = _mc.width + GAP;
-
 
         addChild(_base);
         addChild(_top);
@@ -336,6 +379,7 @@ class InsCountry extends Sprite {
 
     // 顶部元件
     private var _top:Sprite;
+
     /**
      * 顶部元件
      */
@@ -345,6 +389,7 @@ class InsCountry extends Sprite {
 
     // 当前语言
     private var _language:String;
+
     /**
      * 当前语言
      */
@@ -354,6 +399,7 @@ class InsCountry extends Sprite {
 
     public function set language(v:String):void {
         _language = v;
+
         if (
                 MCUtils.hasFrameLabel(_cMc, v) &&
                 MCUtils.hasFrameLabel(_txt, v)
@@ -367,8 +413,23 @@ class InsCountry extends Sprite {
         _cMc.gotoAndStop(1);
     }
 
+    // 字体类
+    private var _fontCls:Class;
+
+    /**
+     * 字体类
+     */
+    public function get fontCls():Class {
+        return _fontCls;
+    }
+
+    public function set fontCls(v:Class):void {
+        _fontCls = v;
+    }
+
     // 是否被选中
     private var _selected:Boolean;
+
     /**
      * 是否被选中
      */
@@ -384,18 +445,8 @@ class InsCountry extends Sprite {
 
         _selected = b;
 
-        if (b) {
-            // 展开 _base
-            TweenLite.to(_base, 0.2, {
-                width: width * WIDTH_COEFFICIENT
-            });
-
-            return;
-        }
-
-        // 缩进 _base
         TweenLite.to(_base, 0.2, {
-            width: 0
+            width: b ? width * WIDTH_COEFFICIENT : 0
         });
     }
 
@@ -414,6 +465,35 @@ class InsCountry extends Sprite {
             useWeakReference:Boolean = false
     ):void {
         _top.addEventListener(type, listener, useCapture, priority, useWeakReference);
+    }
+
+    /**
+     * 移除一个事件侦听器
+     * @param type 事件的类型
+     * @param listener 处理事件的侦听器函数
+     * @param useCapture 确定侦听器是运行于捕获阶段还是运行于目标和冒泡阶段
+     */
+    override public function removeEventListener(
+            type:String, listener:Function,
+            useCapture:Boolean = false
+    ):void {
+        _top.removeEventListener(type, listener, useCapture);
+    }
+
+    /**
+     * 销毁
+     */
+    public function destroy():void {
+        _pMc = null;
+        _cMc = null;
+
+        _mc  = null;
+        _txt = null;
+
+        _top  = null;
+        _base = null;
+
+        _fontCls = null;
     }
 
 //    public function setProgress(progress:Number = 0):void {
