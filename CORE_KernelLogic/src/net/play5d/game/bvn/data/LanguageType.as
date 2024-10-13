@@ -55,5 +55,13 @@ public class LanguageType {
     public static function isSupported(language:String):Boolean {
         return _languages.indexOf(language) != -1;
     }
+
+    /**
+     * 是否为简体中文
+     * @return 是否为简体中文
+     */
+    public static function isSimplifiedChinese():Boolean {
+        return currentLang && currentLang == CHINESE_SIMPLIFIED;
+    }
 }
 }
