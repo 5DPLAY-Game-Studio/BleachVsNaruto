@@ -16,25 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display
-{
-	import flash.display.BitmapData;
+package net.play5d.kyo.display {
+import flash.display.BitmapData;
 
-	public class BitmapMCFrameVO
-	{
-		public var x:Number = 0;
-		public var y:Number = 0;
-		public var bd:BitmapData;
-		public var frameLabel:String;
-		public function BitmapMCFrameVO()
-		{
-		}
+public class BitmapMCFrameVO {
+    public function BitmapMCFrameVO() {
+    }
+    public var x:Number = 0;
+    public var y:Number = 0;
+    public var bd:BitmapData;
+    public var frameLabel:String;
 
-		public function destory():void{
-			if(bd){
-				bd.dispose();
-				bd = null;
-			}
-		}
-	}
+    public function destory():void {
+        if (bd) {
+            bd.dispose();
+            bd = null;
+        }
+    }
+}
 }
