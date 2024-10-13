@@ -16,27 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.sound
-{
-	import flash.media.Sound;
-	import flash.net.URLRequest;
+package net.play5d.kyo.sound {
+import flash.media.Sound;
+import flash.net.URLRequest;
 
-	public class KyoSoundLite
-	{
-		public function KyoSoundLite()
-		{
-		}
+public class KyoSoundLite {
+    public static function play(sound:Object, times:int = 1):void {
+        var s:Sound;
+        if (sound is Class) {
+            s = new sound();
+        }
+        if (sound is String) {
+            s = new Sound(new URLRequest(sound as String));
+        }
+        if (s) {
+            s.play(0, times);
+        }
+    }
 
-		public static function play(sound:Object, times:int = 1):void{
-			var s:Sound;
-			if(sound is Class){
-				s = new sound();
-			}
-			if(sound is String){
-				s = new Sound(new URLRequest(sound as String));
-			}
-			if(s) s.play(0,times);
-		}
+    public function KyoSoundLite() {
+    }
 
-	}
+}
 }
