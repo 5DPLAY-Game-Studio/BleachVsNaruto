@@ -40,7 +40,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.stage.CongratulateStage;
 	import net.play5d.game.bvn.stage.CreditsStage;
-	import net.play5d.game.bvn.stage.GameLoadingState;
+	import net.play5d.game.bvn.stage.GameLoadingStage;
 	import net.play5d.game.bvn.stage.GameOverState;
 	import net.play5d.game.bvn.stage.GameState;
 	import net.play5d.game.bvn.stage.HowToPlayState;
@@ -136,7 +136,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 		public function initalizeLoad(initBack:Function = null , initFail:Function = null):void{
 			GameLoger.log("init loading");
 
-			var loadingState:GameLoadingState = new GameLoadingState();
+			var loadingState:GameLoadingStage = new GameLoadingStage();
 			stageCtrl.goStage(loadingState);
 			loadingState.loadGame(loadGameBack , initFail);
 

@@ -28,14 +28,14 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.stage.Istage;
 
-	public class GameLoadingState implements Istage
+	public class GameLoadingStage implements Istage
 	{
 		private var _ui:loading_cover_mc;
 
 		private var _initBack:Function;
 		private var _initFail:Function;
 
-		public function GameLoadingState()
+		public function GameLoadingStage()
 		{
 		}
 
