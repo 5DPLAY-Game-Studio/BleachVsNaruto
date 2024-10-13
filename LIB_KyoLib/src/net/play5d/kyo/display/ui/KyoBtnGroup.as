@@ -16,23 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui
-{
-	public class KyoBtnGroup
-	{
-		private var _btns:Object;
-		public function KyoBtnGroup(btns:Object)
-		{
-			_btns = btns;
-		}
+package net.play5d.kyo.display.ui {
+public class KyoBtnGroup {
+    public function KyoBtnGroup(btns:Object) {
+        _btns = btns;
+    }
+    private var _btns:Object;
 
-		public function focus(btn:IKyoButton):void{
-			for each(var i:IKyoButton in _btns){
-				if(i == btn) continue;
-				i.focus = false;
-			}
-			btn.focus = true;
-		}
+    public function focus(btn:IKyoButton):void {
+        for each(var i:IKyoButton in _btns) {
+            if (i == btn) {
+                continue;
+            }
+            i.focus = false;
+        }
+        btn.focus = true;
+    }
 
-	}
+}
 }

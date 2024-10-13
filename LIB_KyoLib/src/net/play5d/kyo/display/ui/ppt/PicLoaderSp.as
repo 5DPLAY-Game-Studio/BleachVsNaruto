@@ -16,111 +16,116 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui.ppt
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.geom.Point;
+package net.play5d.kyo.display.ui.ppt {
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.geom.Point;
 
-	import net.play5d.kyo.SuperPlayer;
+import net.play5d.kyo.SuperPlayer;
 
-	public class PicLoaderSp extends Sprite
-	{
-		private var _player:SuperPlayer;
-		private var _size:Point;
-		private var _url:String;
-		public var onFinish:Function;
-		public var isBitmap:Boolean;
+public class PicLoaderSp extends Sprite {
+    public function PicLoaderSp(size:Point) {
+        this._size = size;
+    }
+    public var onFinish:Function;
+    public var isBitmap:Boolean;
+    private var _player:SuperPlayer;
+    private var _size:Point;
+    private var _url:String;
 
-		public function PicLoaderSp(size:Point)
-		{
-			this._size = size;
-		}
+    public function initlize(v:String):void {
+        _url           = v;
+        var pfx:String = getPrefix(v);
+        var pa:Array   = ['jpg', 'jpeg', 'gif', 'png'];
+        isBitmap       = pa.indexOf(pfx) != -1;
+    }
 
-		public function initlize(v:String):void{
-			_url = v;
-			var pfx:String = getPrefix(v);
-			var pa:Array = ['jpg','jpeg','gif','png'];
-			isBitmap = pa.indexOf(pfx) != -1;
-		}
+    public final function unload():void {
+        removeLoader();
+    }
 
-		private function getPrefix(v:String):String{
-			var x:int = v.indexOf('.');
-			var pf:String = v.substr(x+1);
-			return pf.toLocaleLowerCase();
-		}
+    public final function destory():void {
+        removeLoader();
+    }
 
-		public final function unload():void{
-			removeLoader();
-		}
+    public final function load(back:Function = null, isCurrent:Boolean = false):void {
+        if (!_url) {
+            trace('PicLoader : url is null!');
+            return;
+        }
+        removeLoader();
+        loadurl(_url, back, isCurrent);
+    }
 
-		public final function destory():void{
-			removeLoader();
-		}
+    public function finish():Boolean {
+        if (_player && _player.type == SuperPlayer.TYPE_VIDEO) {
+            return _player.videoPlaying == false;
+        }
+        return true;
+    }
 
-		public final function load(back:Function = null , isCurrent:Boolean = false):void{
-			if(!_url){
-				trace('PicLoader : url is null!');
-				return;
-			}
-			removeLoader();
-			loadurl(_url,back,isCurrent);
-		}
+    private function getPrefix(v:String):String {
+        var x:int     = v.indexOf('.');
+        var pf:String = v.substr(x + 1);
+        return pf.toLocaleLowerCase();
+    }
 
-		public function finish():Boolean{
-			if(_player && _player.type == SuperPlayer.TYPE_VIDEO){
-				return _player.videoPlaying == false;
-			}
-			return true;
-		}
+    private function loadurl(url:String, back:Function, isCurrent:Boolean):void {
+        if (!isCurrent) {
+            if (isBitmap) {
+                graphics.beginFill(0, 1);
+                graphics.drawRect(0, 0, _size.x, _size.y);
+                graphics.endFill();
 
-		private function loadurl(url:String , back:Function , isCurrent:Boolean):void{
-			if(!isCurrent){
-				if(isBitmap){
-					graphics.beginFill(0,1);
-					graphics.drawRect(0,0,_size.x,_size.y);
-					graphics.endFill();
-
-					if(back != null) back();
-					return;
-				}
-			}
+                if (back != null) {
+                    back();
+                }
+                return;
+            }
+        }
 
 
-			_player = new SuperPlayer(_size.x,_size.y);
-			_player.addEventListener(SuperPlayer.EVENT_LOAD_COMPLETE,loadBack);
-			_player.addEventListener(SuperPlayer.EVENT_LOAD_FAIL,loadBack);
-			_player.addEventListener(SuperPlayer.EVENT_PLAY_COMPLETE,playBack);
-			_player.play(url);
-			addChild(_player);
+        _player = new SuperPlayer(_size.x, _size.y);
+        _player.addEventListener(SuperPlayer.EVENT_LOAD_COMPLETE, loadBack);
+        _player.addEventListener(SuperPlayer.EVENT_LOAD_FAIL, loadBack);
+        _player.addEventListener(SuperPlayer.EVENT_PLAY_COMPLETE, playBack);
+        _player.play(url);
+        addChild(_player);
 
-			function loadBack(e:Event):void{
-				_player.removeEventListener(SuperPlayer.EVENT_LOAD_COMPLETE,loadBack);
-				_player.removeEventListener(SuperPlayer.EVENT_LOAD_FAIL,loadBack);
+        function loadBack(e:Event):void {
+            _player.removeEventListener(SuperPlayer.EVENT_LOAD_COMPLETE, loadBack);
+            _player.removeEventListener(SuperPlayer.EVENT_LOAD_FAIL, loadBack);
 
-				if(back != null) back();
-			}
-		}
+            if (back != null) {
+                back();
+            }
+        }
+    }
 
-		private function playBack(e:Event):void{
-			if(onFinish != null) onFinish();
-		}
+    private function removeLoader():void {
+        if (!_player) {
+            return;
+        }
 
-		private function removeLoader():void{
-			if(!_player) return;
+        graphics.clear();
 
-			graphics.clear();
+        try {
+            removeChild(_player);
+        }
+        catch (e:Error) {
+        }
 
-			try{
-				removeChild(_player);
-			}catch(e:Error){}
+        _player.removeEventListener(SuperPlayer.EVENT_PLAY_COMPLETE, playBack);
 
-			_player.removeEventListener(SuperPlayer.EVENT_PLAY_COMPLETE,playBack);
+        _player.destory();
+        _player = null;
+    }
 
-			_player.destory();
-			_player = null;
-		}
+    private function playBack(e:Event):void {
+        if (onFinish != null) {
+            onFinish();
+        }
+    }
 
-	}
+}
 }

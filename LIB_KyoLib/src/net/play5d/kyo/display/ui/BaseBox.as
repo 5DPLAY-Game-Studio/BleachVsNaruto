@@ -16,51 +16,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui
-{
-	import flash.display.Sprite;
-	import flash.events.Event;
+package net.play5d.kyo.display.ui {
+import flash.display.Sprite;
+import flash.events.Event;
 
-	public class BaseBox extends Sprite
-	{
-		public var gapX:Number;
-		public var gapY:Number;
+public class BaseBox extends Sprite {
+    public function BaseBox() {
+    }
+    public var gapX:Number;
+    public var gapY:Number;
 
-		protected var _instances:Array;
+    protected var _instances:Array;
 
-		private var _repeater:KyoRepeater;
+    public final function get instances():Array {
+        return _instances;
+    }
 
-		public final function get repeater():KyoRepeater
-		{
-			return _repeater;
-		}
+    public final function set instances(v:Array):void {
+        _instances = v;
+        build();
+    }
 
-		public final function set repeater(value:KyoRepeater):void
-		{
-			_repeater = value;
-			buildByRepeater();
-		}
+    private var _repeater:KyoRepeater;
 
-		protected function build():void{}
+    public final function get repeater():KyoRepeater {
+        return _repeater;
+    }
 
-		protected function buildByRepeater():void{}
+    public final function set repeater(value:KyoRepeater):void {
+        _repeater = value;
+        buildByRepeater();
+    }
 
-		public final function get instances():Array{
-			return _instances;
-		}
+    protected function build():void {
+    }
 
-		public final function set instances(v:Array):void{
-			_instances = v;
-			build();
-		}
+    protected function buildByRepeater():void {
+    }
 
-		public function BaseBox()
-		{
-		}
-
-		public function removeAll(e:Event):void{
-			for(var i:String in _instances)delete _instances[i];
-			_instances = null;
-		}
-	}
+    public function removeAll(e:Event):void {
+        for (var i:String in _instances) {
+            delete _instances[i];
+        }
+        _instances = null;
+    }
+}
 }

@@ -16,197 +16,221 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
+package net.play5d.kyo.display.ui {
+import flash.display.DisplayObject;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.geom.Point;
+import flash.geom.Rectangle;
 
-	public class KyoScrollPane extends Sprite
-	{
-		public var dragType:int;
-		public var maskSize:Point;
-		public var scrollBar:IKyoScrollBar;
-		public var dragPixel:int = 5;
+public class KyoScrollPane extends Sprite {
+    public function KyoScrollPane(maskSize:Point, source:DisplayObject = null, dragType:int = KyoDragType.DRAG_TYPE_V) {
+        this.dragType = dragType;
+        this.maskSize = maskSize;
+        if (source) {
+            this.source = source;
+        }
 
-		protected var _downPoint:Point;
-		protected var _downListPoint:Point;
-		protected var _haveToDrag:Boolean;
+        this.addEventListener(MouseEvent.MOUSE_DOWN, beginDrag);
+    }
+    public var dragType:int;
+    public var maskSize:Point;
+    public var scrollBar:IKyoScrollBar;
+    public var dragPixel:int = 5;
+    protected var _downPoint:Point;
+    protected var _downListPoint:Point;
+    protected var _haveToDrag:Boolean;
+    protected var _draging:Boolean;
+    private var _downSR:Rectangle;
+    private var _width:Number;
+    private var _height:Number;
 
-		private var _source:DisplayObject;
-		private var _downSR:Rectangle;
-		private var _width:Number;
-		private var _height:Number;
+    private var _source:DisplayObject;
 
-		public function KyoScrollPane(maskSize:Point, source:DisplayObject=null, dragType:int = KyoDragType.DRAG_TYPE_V)
-		{
-			this.dragType = dragType;
-			this.maskSize = maskSize;
-			if(source) this.source = source;
+    public function get source():DisplayObject {
+        return _source;
+    }
 
-			this.addEventListener(MouseEvent.MOUSE_DOWN,beginDrag);
-		}
+    public function set source(value:DisplayObject):void {
+        _source = value;
 
-		public function destory():void{
-			this.removeEventListener(MouseEvent.MOUSE_DOWN,beginDrag);
-			removeEventListener(Event.ENTER_FRAME,draging);
-			if(stage) stage.removeEventListener(MouseEvent.MOUSE_UP,endDrag);
-		}
+        _source.x = _source.y = 0;
+        addChild(_source);
+        update();
+    }
 
-		public function get source():DisplayObject
-		{
-			return _source;
-		}
+    protected function get mousePoint():Point {
+        var xx:Number = _downPoint.x - stage.mouseX;
+        var yy:Number = _downPoint.y - stage.mouseY;
+        return new Point(xx, yy);
+    }
 
-		public function set source(value:DisplayObject):void
-		{
-			_source = value;
+    private function get allowDrag():Boolean {
+        switch (dragType) {
+        case KyoDragType.DRAG_TYPE_BOTH:
+            if ((
+                        _width < maskSize.x
+                ) && (
+                        _height < maskSize.y
+                )) {
+                return false;
+            }
+            break;
+        case KyoDragType.DRAG_TYPE_H:
+            if (_width < maskSize.x) {
+                return false;
+            }
+            break;
+        case KyoDragType.DRAG_TYPE_V:
+            if (_height < maskSize.y) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-			_source.x = _source.y = 0;
-			addChild(_source);
-			update();
-		}
+    public function destory():void {
+        this.removeEventListener(MouseEvent.MOUSE_DOWN, beginDrag);
+        removeEventListener(Event.ENTER_FRAME, draging);
+        if (stage) {
+            stage.removeEventListener(MouseEvent.MOUSE_UP, endDrag);
+        }
+    }
 
-		public function update():void{
-			_width = _source.width;
-			_height = _source.height;
+    public function update():void {
+        _width  = _source.width;
+        _height = _source.height;
 
-			scrollRect = new Rectangle(0,0,maskSize.x,maskSize.y);
+        scrollRect = new Rectangle(0, 0, maskSize.x, maskSize.y);
 
-			graphics.clear();
-			graphics.beginFill(0,0);
-			graphics.drawRect(0,0,_width,_height);
-			graphics.endFill();
+        graphics.clear();
+        graphics.beginFill(0, 0);
+        graphics.drawRect(0, 0, _width, _height);
+        graphics.endFill();
 
-			updateScrollBar();
-		}
+        updateScrollBar();
+    }
 
-		public function move(x:Number,y:Number):void{
-			var rect:Rectangle = scrollRect.clone();
-			rect.x -= x;
-			rect.y -= y;
-			checkout(rect);
-			scrollRect = rect;
-		}
+    public function move(x:Number, y:Number):void {
+        var rect:Rectangle = scrollRect.clone();
+        rect.x -= x;
+        rect.y -= y;
+        checkout(rect);
+        scrollRect = rect;
+    }
 
-		private function beginDrag(e:MouseEvent):void{
-			if(!allowDrag) return;
+    protected final function removeListener():void {
+        if (stage) {
+            stage.removeEventListener(MouseEvent.MOUSE_UP, endDrag);
+            stage.mouseChildren = true;
+        }
+    }
 
-			_downSR = scrollRect;
-			_downPoint = new Point(stage.mouseX,stage.mouseY);
-			_downListPoint = new Point(this.x , this.y);
+    protected function checkDraging(xx:Number, yy:Number):void {
+        switch (dragType) {
+        case KyoDragType.DRAG_TYPE_BOTH:
+            _draging ||= Math.abs(xx) > dragPixel || Math.abs(yy) > dragPixel;
+            break;
+        case KyoDragType.DRAG_TYPE_H:
+            _draging ||= Math.abs(xx) > dragPixel;
+            break;
+        case KyoDragType.DRAG_TYPE_V:
+            _draging ||= Math.abs(yy) > dragPixel;
+            break;
+        }
+        if (_draging) {
+            if (stage) {
+                stage.mouseChildren = false;
+            }
+        }
+    }
 
-			addEventListener(Event.ENTER_FRAME,draging);
-			_draging = false;
-			if(stage) stage.addEventListener(MouseEvent.MOUSE_UP,endDrag);
-		}
+    protected function updateScrollBar():void {
+        if (!scrollBar) {
+            return;
+        }
+        switch (dragType) {
+        case KyoDragType.DRAG_TYPE_BOTH:
+            break;
+        case KyoDragType.DRAG_TYPE_H:
+            scrollBar.update(scrollRect.x / _width);
+            break;
+        case KyoDragType.DRAG_TYPE_V:
+            scrollBar.update(scrollRect.y / _height);
+            break;
+        }
+    }
 
-		private function get allowDrag():Boolean{
-			switch(dragType){
-				case KyoDragType.DRAG_TYPE_BOTH:
-					if((_width < maskSize.x) && (_height < maskSize.y)) return false;
-					break;
-				case KyoDragType.DRAG_TYPE_H:
-					if(_width < maskSize.x) return false;
-					break;
-				case KyoDragType.DRAG_TYPE_V:
-					if(_height < maskSize.y) return false;
-			}
-			return true;
-		}
+    private function checkout(rect:Rectangle):void {
+        var w:Number = _width - maskSize.x;
+        var h:Number = _height - maskSize.y;
+        if (rect.x > w) {
+            rect.x = w;
+        }
+        if (rect.y > h) {
+            rect.y = h;
+        }
+        if (rect.x < 0) {
+            rect.x = 0;
+        }
+        if (rect.y < 0) {
+            rect.y = 0;
+        }
+    }
 
-		protected var _draging:Boolean;
-		protected function draging(e:Event):void{
-			var pp:Point = mousePoint;
-			checkDraging(pp.x,pp.y);
-			var w:Number = maskSize.x;
-			var h:Number = maskSize.y;
-			var rect:Rectangle = new Rectangle(0,0,w,h);
-			switch(dragType){
-				case KyoDragType.DRAG_TYPE_BOTH:
-					rect.x = pp.x;
-					rect.y = pp.y;
-					break;
-				case KyoDragType.DRAG_TYPE_H:
-					rect.x = pp.x;
-					break;
-				case KyoDragType.DRAG_TYPE_V:
-					rect.y = pp.y;
-					break;
-			}
-			if(_draging){
-				if(_downSR){
-					rect.x += _downSR.x;
-					rect.y += _downSR.y;
-				}
-				//				trace(rect);
-				checkout(rect);
+    protected function draging(e:Event):void {
+        var pp:Point = mousePoint;
+        checkDraging(pp.x, pp.y);
+        var w:Number       = maskSize.x;
+        var h:Number       = maskSize.y;
+        var rect:Rectangle = new Rectangle(0, 0, w, h);
+        switch (dragType) {
+        case KyoDragType.DRAG_TYPE_BOTH:
+            rect.x = pp.x;
+            rect.y = pp.y;
+            break;
+        case KyoDragType.DRAG_TYPE_H:
+            rect.x = pp.x;
+            break;
+        case KyoDragType.DRAG_TYPE_V:
+            rect.y = pp.y;
+            break;
+        }
+        if (_draging) {
+            if (_downSR) {
+                rect.x += _downSR.x;
+                rect.y += _downSR.y;
+            }
+            //				trace(rect);
+            checkout(rect);
 
-				scrollRect = rect;
-				updateScrollBar();
-			}
-		}
+            scrollRect = rect;
+            updateScrollBar();
+        }
+    }
 
-		protected function get mousePoint():Point{
-			var xx:Number = _downPoint.x - stage.mouseX;
-			var yy:Number = _downPoint.y - stage.mouseY;
-			return new Point(xx , yy);
-		}
-
-		protected final function removeListener():void{
-			if(stage){
-				stage.removeEventListener(MouseEvent.MOUSE_UP,endDrag);
-				stage.mouseChildren = true;
-			}
-		}
-		protected function endDrag(e:MouseEvent):void{
-			removeListener();
-			removeEventListener(Event.ENTER_FRAME,draging);
+    protected function endDrag(e:MouseEvent):void {
+        removeListener();
+        removeEventListener(Event.ENTER_FRAME, draging);
 //			setTimeout(function():void{mouseEnabled = mouseChildren = true;},1000);
-		}
+    }
 
-		protected function checkDraging(xx:Number,yy:Number):void{
-			switch(dragType){
-				case KyoDragType.DRAG_TYPE_BOTH:
-					_draging ||= Math.abs(xx) > dragPixel ||  Math.abs(yy) > dragPixel;
-					break;
-				case KyoDragType.DRAG_TYPE_H:
-					_draging ||= Math.abs(xx) > dragPixel;
-					break;
-				case KyoDragType.DRAG_TYPE_V:
-					_draging ||= Math.abs(yy) > dragPixel;
-					break;
-			}
-			if(_draging){
-				if(stage) stage.mouseChildren = false;
-			}
-		}
+    private function beginDrag(e:MouseEvent):void {
+        if (!allowDrag) {
+            return;
+        }
 
-		private function checkout(rect:Rectangle):void{
-			var w:Number = _width - maskSize.x;
-			var h:Number = _height - maskSize.y;
-			if(rect.x > w) rect.x = w;
-			if(rect.y > h) rect.y = h;
-			if(rect.x < 0) rect.x = 0;
-			if(rect.y < 0) rect.y = 0;
-		}
+        _downSR        = scrollRect;
+        _downPoint     = new Point(stage.mouseX, stage.mouseY);
+        _downListPoint = new Point(this.x, this.y);
 
-		protected function updateScrollBar():void{
-			if(!scrollBar) return;
-			switch(dragType){
-				case KyoDragType.DRAG_TYPE_BOTH:
-					break;
-				case KyoDragType.DRAG_TYPE_H:
-					scrollBar.update(scrollRect.x / _width);
-					break;
-				case KyoDragType.DRAG_TYPE_V:
-					scrollBar.update(scrollRect.y / _height);
-					break;
-			}
-		}
+        addEventListener(Event.ENTER_FRAME, draging);
+        _draging = false;
+        if (stage) {
+            stage.addEventListener(MouseEvent.MOUSE_UP, endDrag);
+        }
+    }
 
-	}
+}
 }

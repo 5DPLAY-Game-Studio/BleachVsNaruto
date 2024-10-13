@@ -16,55 +16,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui.ppt
-{
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
+package net.play5d.kyo.display.ui.ppt {
+import flash.events.EventDispatcher;
 
-	public class PPTLoaderCtrl extends EventDispatcher
-	{
-		public function PPTLoaderCtrl()
-		{
-		}
+public class PPTLoaderCtrl extends EventDispatcher {
+    public function PPTLoaderCtrl() {
+    }
+    public var curIndex:int;
+    public var totalIndex:int;
+    private var _loaders:Array;
 
-		private var _loaders:Array;
+    public function loadQueue(loaders:Array):void {
+        _loaders = loaders;
 
-		public var curIndex:int;
-		public var totalIndex:int;
+        curIndex   = 0;
+        totalIndex = loaders.length;
 
-		public function loadQueue(loaders:Array):void{
-			_loaders = loaders;
+        loadNext();
+    }
 
-			curIndex = 0;
-			totalIndex = loaders.length;
+    private function loadNext():void {
+        if (_loaders.length < 1) {
+            dispatchEvent(new PicPointerEvent(PicPointerEvent.LOAD_COMPLETE));
+            return;
+        }
 
-			loadNext();
-		}
+        curIndex++;
 
-		private function loadNext():void{
-			if(_loaders.length < 1){
-				dispatchEvent(new PicPointerEvent(PicPointerEvent.LOAD_COMPLETE));
-				return;
-			}
+        var l:PicLoader = _loaders.shift();
+        l.load(loadSuccess, loadFail, loadProcess);
 
-			curIndex ++;
+    }
 
-			var l:PicLoader = _loaders.shift();
-			l.load(loadSuccess,loadFail,loadProcess);
+    private function loadSuccess(l:PicLoader):void {
+        loadNext();
+    }
 
-		}
+    private function loadFail(l:PicLoader):void {
+        loadNext();
+    }
 
-		private function loadSuccess(l:PicLoader):void{
-			loadNext();
-		}
+    private function loadProcess(l:PicLoader, per:Number):void {
+        dispatchEvent(new PicPointerEvent(PicPointerEvent.LOAD_PROCESS, per));
+    }
 
-		private function loadFail(l:PicLoader):void{
-			loadNext();
-		}
-
-		private function loadProcess(l:PicLoader , per:Number):void{
-			dispatchEvent(new PicPointerEvent(PicPointerEvent.LOAD_PROCESS,per));
-		}
-
-	}
+}
 }

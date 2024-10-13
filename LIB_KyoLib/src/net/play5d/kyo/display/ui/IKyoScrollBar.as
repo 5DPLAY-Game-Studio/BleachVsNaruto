@@ -16,13 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui
-{
-	import flash.events.IEventDispatcher;
+package net.play5d.kyo.display.ui {
+import flash.events.IEventDispatcher;
 
-	public interface IKyoScrollBar extends IEventDispatcher
-	{
-		function update(pos:Number):void;
-		function set enabled(v:Boolean):void;
-	}
+public interface IKyoScrollBar extends IEventDispatcher {
+    function set enabled(v:Boolean):void;
+
+    function update(pos:Number):void;
+}
 }

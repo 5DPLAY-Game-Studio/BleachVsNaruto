@@ -16,11 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.display.ui
-{
-	public interface IiphoneBtn
-	{
-		function onDrag():void;
-		function destory():void;
-	}
+package net.play5d.kyo.display.ui {
+public interface IiphoneBtn {
+    function onDrag():void;
+
+    function destory():void;
+}
 }
