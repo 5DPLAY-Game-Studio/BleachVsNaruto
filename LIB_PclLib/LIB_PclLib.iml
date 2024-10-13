@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="LIB_KyoLib">
+  <component name="FlexBuildConfigurationManager" active="LIB_PclLib">
     <configurations>
-      <configuration name="LIB_KyoLib" target-platform="Desktop" output-type="Library" output-file="LIB_KyoLib.swc" output-folder="$MODULE_DIR$/../out/production/LIB_KyoLib">
+      <configuration name="LIB_PclLib" output-type="Library" output-file="LIB_PclLib.swc" output-folder="$MODULE_DIR$/../out/production/LIB_PclLib">
         <dependencies target-player="50.2">
-          <entries>
-            <entry module-name="LIB_PclLib" build-configuration-name="LIB_PclLib">
-              <dependency linkage="Include" />
-            </entry>
-          </entries>
           <sdk name="flex4.16.1-air50.2.4.1" />
         </dependencies>
         <compiler-options />
@@ -22,11 +17,9 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/lib/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="LIB_PclLib" exported="" />
   </component>
 </module>
