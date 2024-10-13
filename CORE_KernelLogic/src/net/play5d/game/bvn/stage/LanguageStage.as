@@ -29,6 +29,7 @@ import net.play5d.game.bvn.ctrl.AssetManager;
 import net.play5d.game.bvn.ctrl.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.LanguageType;
+import net.play5d.game.bvn.utils.MultiLangUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.Istage;
 
@@ -296,9 +297,8 @@ public class LanguageStage implements Istage {
         LanguageType.currentLang   = language;
         FONT                       = new fontCls() as Font;
 
-        if (_clickCallBack != null) {
-            _clickCallBack();
-        }
+        // 加载语言 Json 文件
+        MultiLangUtils.I.initialize(language, _clickCallBack, loadConfigFail);
     }
 
 }
