@@ -16,81 +16,89 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.utils
-{
-	import flash.display.BitmapData;
-	import flash.display.BlendMode;
-	import flash.display.GradientType;
-	import flash.display.Graphics;
-	import flash.display.Shape;
+package net.play5d.kyo.utils {
+import flash.display.BitmapData;
+import flash.display.BlendMode;
+import flash.display.GradientType;
+import flash.display.Graphics;
+import flash.display.Shape;
 
-	public class KyoDrawUtils
-	{
-		public function KyoDrawUtils()
-		{
-		}
+public class KyoDrawUtils {
+    private static var _drawShape:Shape;
 
-		private static var _drawShape:Shape;
+    public static function drawRing(
+            width:Number, radius:Number, angle:int, color:Object = 0xffff00, alpha:Number = 1):BitmapData {
 
-		public static function drawRing(width:Number, radius:Number, angle:int, color:Object = 0xffff00, alpha:Number = 1):BitmapData{
+        var bd:BitmapData = new BitmapData(radius * 2, radius * 2, true, 0);
 
-			var bd:BitmapData = new BitmapData(radius * 2, radius * 2, true, 0);
+        if (!_drawShape) {
+            _drawShape = new Shape();
+        }
+        drawSector(_drawShape.graphics, radius, radius, radius, angle, -90, color, alpha);
+        bd.draw(_drawShape);
+        _drawShape.graphics.clear();
 
-			if(!_drawShape) _drawShape = new Shape();
-			drawSector(_drawShape.graphics, radius, radius, radius, angle, -90, color, alpha);
-			bd.draw(_drawShape);
-			_drawShape.graphics.clear();
+        _drawShape.graphics.beginFill(0xff0000, 1);
+        _drawShape.graphics.drawCircle(radius, radius, radius - width);
+        _drawShape.graphics.endFill();
 
-			_drawShape.graphics.beginFill(0xff0000, 1);
-			_drawShape.graphics.drawCircle(radius, radius, radius - width);
-			_drawShape.graphics.endFill();
+        bd.draw(_drawShape, null, null, BlendMode.ERASE);
+        _drawShape.graphics.clear();
 
-			bd.draw(_drawShape, null, null, BlendMode.ERASE);
-			_drawShape.graphics.clear();
+        return bd;
+    }
 
-			return bd;
-		}
-
-		public static function drawSector(graphics:Graphics, x:Number = 200, y:Number = 200, r:Number = 100, angle:Number = 60, startFrom:Number = 0, color:Object = 0xFFFFFF, alpha:Number = 1):void
-		{
-			graphics.clear();
-			if(color is Array){
-				var alphaArr:Array = [];
-				for(var j:int; j < color.length; j++) alphaArr.push(alpha);
-				graphics.beginGradientFill(GradientType.LINEAR, color as Array, alphaArr, [128, 255]);
-			}else{
-				graphics.beginFill(color as uint, alpha);
-			}
+    public static function drawSector(
+            graphics:Graphics, x:Number = 200, y:Number = 200, r:Number = 100, angle:Number = 60, startFrom:Number = 0,
+            color:Object                                                                                           = 0xFFFFFF, alpha:Number                                                                  = 1
+    ):void {
+        graphics.clear();
+        if (color is Array) {
+            var alphaArr:Array = [];
+            for (var j:int; j < color.length; j++) {
+                alphaArr.push(alpha);
+            }
+            graphics.beginGradientFill(GradientType.LINEAR, color as Array, alphaArr, [128, 255]);
+        }
+        else {
+            graphics.beginFill(color as uint, alpha);
+        }
 //			graphics.lineStyle(0,color);
 //			graphics.lineTo(x,y);
 
-			angle = (Math.abs(angle) > 360) ? 360 : angle;
+        angle = (
+                        Math.abs(angle) > 360
+                ) ? 360 : angle;
 
-			var n:int = Math.ceil(Math.abs(angle)/45);
-			var angleA:Number = angle / n;
+        var n:int         = Math.ceil(Math.abs(angle) / 45);
+        var angleA:Number = angle / n;
 
-			angleA = angleA * Math.PI/180;
-			startFrom = startFrom * Math.PI / 180;
+        angleA    = angleA * Math.PI / 180;
+        startFrom = startFrom * Math.PI / 180;
 
-			graphics.moveTo(x+r*Math.cos(startFrom),y+r*Math.sin(startFrom));
+        graphics.moveTo(x + r * Math.cos(startFrom), y + r * Math.sin(startFrom));
 
-			var i:int;
-			var angleMid:Number, bx:Number, by:Number, cx:Number, cy:Number;
+        var i:int;
+        var angleMid:Number, bx:Number, by:Number, cx:Number, cy:Number;
 
-			for(i = 1; i <= n; i++)
-			{
-				startFrom += angleA;
-				angleMid = startFrom - angleA/2;
-				bx = x + r/Math.cos(angleA/2) * Math.cos(angleMid);
-				by = y + r/Math.cos(angleA/2) * Math.sin(angleMid);
-				cx = x + r*Math.cos(startFrom);
-				cy = y + r*Math.sin(startFrom);
-				graphics.curveTo(bx,by,cx,cy);
-			}
+        for (i = 1; i <= n; i++) {
+            startFrom += angleA;
+            angleMid = startFrom - angleA / 2;
+            bx       = x + r / Math.cos(angleA / 2) * Math.cos(angleMid);
+            by       = y + r / Math.cos(angleA / 2) * Math.sin(angleMid);
+            cx       = x + r * Math.cos(startFrom);
+            cy       = y + r * Math.sin(startFrom);
+            graphics.curveTo(bx, by, cx, cy);
+        }
 
-			if(angle != 360) graphics.lineTo(x,y);
-			graphics.endFill();
-		}
+        if (angle != 360) {
+            graphics.lineTo(x, y);
+        }
+        graphics.endFill();
+    }
 
-	}
+    public function KyoDrawUtils() {
+    }
+
+}
 }

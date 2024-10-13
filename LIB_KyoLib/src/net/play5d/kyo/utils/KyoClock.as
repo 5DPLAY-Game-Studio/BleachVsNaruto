@@ -16,119 +16,122 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.utils
-{
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
+package net.play5d.kyo.utils {
+import flash.events.TimerEvent;
+import flash.utils.Timer;
 
-	/**
-	 * 时钟类
-	 * @author kyo
-	 */
-	public class KyoClock
-	{
-		/**
-		 * 获取当前时间
-		 * 如果需要对时间进行格式化，请参考 net.play5d.kyo.utils.KyoTimerFormat
-		 * @return
-		 */
-		public var now:Date = new Date();
+/**
+ * 时钟类
+ * @author kyo
+ */
+public class KyoClock {
+    public function KyoClock() {
+    }
+    /**
+     * 获取当前时间
+     * 如果需要对时间进行格式化，请参考 net.play5d.kyo.utils.KyoTimerFormat
+     * @return
+     */
+    public var now:Date = new Date();
+    private var _timer:Timer;
+    private var _functions:Array = [];
+    private var _td:String;
 
-		private var _timer:Timer;
-		private var _functions:Array = [];
+    public function get isam():Boolean {
+        return now.hours < 12;
+    }
 
-		public function KyoClock()
-		{
-		}
+    /**
+     * xx:xx
+     */
+    public function get time():String {
+        return KyoTimerFormat.getTime(now, ':', false);
+    }
 
-		private var _td:String;
+    /**
+     * xx:xx:xx
+     */
+    public function get time2():String {
+        return KyoTimerFormat.getTime(now, ':', true);
+    }
 
-		public function getTime(type24:Boolean = true , srcond:Boolean = false , ampm:Boolean = false):String{
-			var sr:String = KyoTimerFormat.getTime(now,':',srcond,type24);
-			if(ampm){
-				var apm:String = now.hours < 12 ? 'am' : 'pm';
-				sr += ' ' + apm;
-			}
-			return sr;
-		}
+    public function get date():String {
+        return now.fullYear + '.' + (
+               now.month + 1
+        ) + '.' + now.date;
+    }
 
-		public function get isam():Boolean{
-			return now.hours < 12;
-		}
+    public function get day():String {
+        return KyoTimerFormat.getDay(now, 2);
+    }
 
-		/**
-		 * xx:xx
-		 */
-		public function get time():String{
-			return KyoTimerFormat.getTime(now,':',false);
-		}
+    public function getTime(type24:Boolean = true, srcond:Boolean = false, ampm:Boolean = false):String {
+        var sr:String = KyoTimerFormat.getTime(now, ':', srcond, type24);
+        if (ampm) {
+            var apm:String = now.hours < 12 ? 'am' : 'pm';
+            sr += ' ' + apm;
+        }
+        return sr;
+    }
 
-		/**
-		 * xx:xx:xx
-		 */
-		public function get time2():String{
-			return KyoTimerFormat.getTime(now,':',true);
-		}
+    public function getDateStr(ys:String = '年', ms:String = '月', ds:String = '日'):String {
+        return now.fullYear + ys + KyoTimerFormat.formatNum(now.month + 1) + ms + KyoTimerFormat.formatNum(now.date) +
+               ds;
+    }
 
-		public function get date():String{
-			return now.fullYear + '.' + (now.month+1) + '.' + now.date;
-		}
+    public function addCallBack(fun:Function, params:Array = null):void {
+        var i:int = _functions.indexOf(fun);
+        if (i == -1) {
+            _functions.push([fun, params]);
+        }
+    }
 
-		public function getDateStr(ys:String = '年' , ms:String = '月' , ds:String = '日'):String{
-			return now.fullYear + ys + KyoTimerFormat.formatNum(now.month+1) + ms + KyoTimerFormat.formatNum(now.date) + ds;
-		}
+    public function removeCallBack(fun:Function):void {
+        var i:int = _functions.indexOf(fun);
+        if (i == -1) {
+            _functions.splice(i, 1);
+        }
+    }
 
-		public function get day():String{
-			return KyoTimerFormat.getDay(now,2);
-		}
+    public function start(delay:Number = 1):void {
+        delay *= 1000;
+        if (!_timer) {
+            _timer = new Timer(delay);
+            _timer.addEventListener(TimerEvent.TIMER, onTimer);
+        }
+        _timer.delay = delay;
+        _timer.reset();
+        _timer.start();
+    }
 
-		public function addCallBack(fun:Function,params:Array = null):void{
-			var i:int = _functions.indexOf(fun);
-			if(i == -1){
-				_functions.push([fun,params]);
-			}
-		}
+    public function stop():void {
+        if (_timer) {
+            _timer.stop();
+        }
+    }
 
-		public function removeCallBack(fun:Function):void{
-			var i:int = _functions.indexOf(fun);
-			if(i == -1) _functions.splice(i,1);
-		}
+    public function reset():void {
+        if (_timer) {
+            _timer.reset();
+        }
+    }
 
-		public function start(delay:Number = 1):void{
-			delay *= 1000;
-			if(!_timer){
-				_timer = new Timer(delay);
-				_timer.addEventListener(TimerEvent.TIMER,onTimer);
-			}
-			_timer.delay = delay;
-			_timer.reset();
-			_timer.start();
-		}
+    public function clear():void {
+        stop();
+        if (_timer) {
+            _timer.removeEventListener(TimerEvent.TIMER, onTimer);
+            _timer = null;
+        }
+        _functions = null;
+    }
 
-		public function stop():void{
-			if(_timer)_timer.stop();
-		}
-
-		public function reset():void{
-			if(_timer)_timer.reset();
-		}
-
-		public function clear():void{
-			stop();
-			if(_timer){
-				_timer.removeEventListener(TimerEvent.TIMER,onTimer);
-				_timer = null;
-			}
-			_functions = null;
-		}
-
-		private function onTimer(e:TimerEvent):void{
-			now = new Date();
-			for each(var i:Array in _functions){
-				var f:Function = i[0];
-				var p:Array = i[1];
-				f.apply(null,p);
-			}
-		}
-	}
+    private function onTimer(e:TimerEvent):void {
+        now = new Date();
+        for each(var i:Array in _functions) {
+            var f:Function = i[0];
+            var p:Array    = i[1];
+            f.apply(null, p);
+        }
+    }
+}
 }

@@ -16,33 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.utils
-{
-	public class ArrayLite
-	{
-		public var length:int;
-		private var _o:Object;
-		public function ArrayLite()
-		{
-			super();
-			_o = {};
-		}
+package net.play5d.kyo.utils {
+public class ArrayLite {
+    public function ArrayLite() {
+        super();
+        _o = {};
+    }
+    public var length:int;
+    private var _o:Object;
 
-		public function push(id:Object , value:*):void{
-			if(!_o[id]) length ++;
-			_o[id] = value;
-		}
+    public function push(id:Object, value:*):void {
+        if (!_o[id]) {
+            length++;
+        }
+        _o[id] = value;
+    }
 
-		public function getItem(id:Object):*{
-			return _o[id];
-		}
+    public function getItem(id:Object):* {
+        return _o[id];
+    }
 
-		public function remove(id:Object):void{
-			if(!_o[id]) return;
+    public function remove(id:Object):void {
+        if (!_o[id]) {
+            return;
+        }
 
-			delete _o[id];
-			length--;
-			if(length < 0) length = 0;
-		}
-	}
+        delete _o[id];
+        length--;
+        if (length < 0) {
+            length = 0;
+        }
+    }
+}
 }

@@ -16,20 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.utils.vo
-{
-	import flash.display.Bitmap;
-	import flash.display.Loader;
+package net.play5d.kyo.utils.vo {
+public class KyoWeaterVO {
+    public function KyoWeaterVO() {
+    }
+    public var high:int;
+    public var low:int;
+    public var code:int;
 
-	public class KyoWeaterVO
-	{
-		public var high:int;
-		public var low:int;
-		public var code:int;
-
-		public function KyoWeaterVO()
-		{
-		}
-
-	}
+}
 }
