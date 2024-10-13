@@ -39,7 +39,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.input.GameInputer;
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.stage.CongratulateStage;
-	import net.play5d.game.bvn.stage.CreditsState;
+	import net.play5d.game.bvn.stage.CreditsStage;
 	import net.play5d.game.bvn.stage.GameLoadingState;
 	import net.play5d.game.bvn.stage.GameOverState;
 	import net.play5d.game.bvn.stage.GameState;
@@ -325,10 +325,10 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * 制作组界面
 		 */
 		public function goCredits():void{
-			stageCtrl.goStage(new CreditsState());
+			stageCtrl.goStage(new CreditsStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, CreditsState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, CreditsStage);
 		}
 
 		/**
