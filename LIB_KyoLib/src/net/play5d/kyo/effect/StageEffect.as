@@ -16,106 +16,113 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.kyo.effect
-{
-	import com.greensock.TweenLite;
-	import com.greensock.plugins.ColorTransformPlugin;
-	import com.greensock.plugins.TweenPlugin;
+package net.play5d.kyo.effect {
+import com.greensock.TweenLite;
+import com.greensock.plugins.ColorTransformPlugin;
+import com.greensock.plugins.TweenPlugin;
 
-	import flash.display.Bitmap;
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.geom.ColorTransform;
+import flash.display.Bitmap;
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.geom.ColorTransform;
 
-	import net.play5d.kyo.utils.KyoUtils;
+import net.play5d.kyo.utils.KyoUtils;
 
-	public class StageEffect
-	{
-		private static var _i:StageEffect;
-		public static function get I():StageEffect{
-			_i ||= new StageEffect();
-			return _i;
-		}
-		public var stage:DisplayObject;
-		private var _tweening:Boolean;
+public class StageEffect {
+    private static var _i:StageEffect;
 
-		public function StageEffect()
-		{
-		}
+    public static function get I():StageEffect {
+        _i ||= new StageEffect();
+        return _i;
+    }
 
-		public function shine(duration:Number = 1 , color:uint = 0xffffff , alpha:Number = 0.5):void{
-			TweenPlugin.activate([ColorTransformPlugin]);
-			stage.transform.colorTransform = new ColorTransform();
-			TweenLite.from(stage,duration,{colorTransform:{tint:color,tintAmount:alpha}});
-		}
+    public function StageEffect() {
+    }
+    public var stage:DisplayObject;
+    private var _tweening:Boolean;
+    private var _shakeBack:Function;
 
-		private var _shakeBack:Function;
-		public function shake(x:uint , y:uint , back:Function=null , gapFrame:int = 1):void{
-			var iii:int = 1;
-			var n:int;
-			stage.x = stage.y = 0;
+    public function shine(duration:Number = 1, color:uint = 0xffffff, alpha:Number = 0.5):void {
+        TweenPlugin.activate([ColorTransformPlugin]);
+        stage.transform.colorTransform = new ColorTransform();
+        TweenLite.from(stage, duration, {colorTransform: {tint: color, tintAmount: alpha}});
+    }
 
-			doBack();
-			_shakeBack = back;
+    public function shake(x:uint, y:uint, back:Function = null, gapFrame:int = 1):void {
+        var iii:int = 1;
+        var n:int;
+        stage.x     = stage.y = 0;
 
-			stage.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
-			stage.addEventListener(Event.ENTER_FRAME , onEnterFrame);
+        doBack();
+        _shakeBack = back;
 
-			function doBack():void{
-				if(_shakeBack != null){
-					_shakeBack();
-					_shakeBack = null;
-				}
-			}
+        stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+        stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 
-			function onEnterFrame(e:Event):void{
-				n++;
-				if(n % gapFrame != 0) return;
+        function doBack():void {
+            if (_shakeBack != null) {
+                _shakeBack();
+                _shakeBack = null;
+            }
+        }
 
-				stage.x = x * iii;
-				stage.y = y * iii;
+        function onEnterFrame(e:Event):void {
+            n++;
+            if (n % gapFrame != 0) {
+                return;
+            }
 
-				iii *= -1;
+            stage.x = x * iii;
+            stage.y = y * iii;
 
-				if(n % 2 == 0){
-					if(x > 0) x--;
-					if(y > 0) y--;
-				}
+            iii *= -1;
 
-				if(x <= 0 && y <= 0){
-					stage.removeEventListener(Event.ENTER_FRAME , onEnterFrame);
-					stage.x = 0;
-					stage.y = 0;
-					doBack();
-				}
-			}
-		}
+            if (n % 2 == 0) {
+                if (x > 0) {
+                    x--;
+                }
+                if (y > 0) {
+                    y--;
+                }
+            }
 
-		public function applyColorTransform(ct:ColorTransform):void{
-			stage.transform.colorTransform = ct;
-		}
+            if (x <= 0 && y <= 0) {
+                stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+                stage.x = 0;
+                stage.y = 0;
+                doBack();
+            }
+        }
+    }
 
-		public function bigShadow():void{
-			var pt:DisplayObjectContainer = stage.parent;
-			if(!pt) return;
-			var bp:Bitmap = KyoUtils.drawDisplay(stage,false);
-			pt.addChild(bp);
-			bp.addEventListener(Event.ENTER_FRAME,onEnterFrame);
-			function onEnterFrame(e:Event):void{
-				bp.x -= 6.5;
-				bp.y -= 6.5;
-				bp.scaleX += 0.04;
-				bp.scaleY += 0.04;
-				bp.alpha -= 0.1;
-				if(bp.alpha <= 0){
-					bp.removeEventListener(Event.ENTER_FRAME,onEnterFrame);
-					pt.removeChild(bp);
-					bp.bitmapData.dispose();
-					bp = null;
-				}
-			}
-		}
+    public function applyColorTransform(ct:ColorTransform):void {
+        stage.transform.colorTransform = ct;
+    }
 
-	}
+    public function bigShadow():void {
+        var pt:DisplayObjectContainer = stage.parent;
+        if (!pt) {
+            return;
+        }
+        var bp:Bitmap = KyoUtils.drawDisplay(stage, false);
+        pt.addChild(bp);
+        bp.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+
+        function onEnterFrame(e:Event):void {
+            bp.x -= 6.5;
+            bp.y -= 6.5;
+            bp.scaleX += 0.04;
+            bp.scaleY += 0.04;
+            bp.alpha -= 0.1;
+            if (bp.alpha <= 0) {
+                bp.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+                pt.removeChild(bp);
+                bp.bitmapData.dispose();
+                bp = null;
+            }
+        }
+    }
+
+}
 }
