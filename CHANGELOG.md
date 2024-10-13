@@ -1,6 +1,16 @@
 # 更新日志
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.10132024_alpha] - 2024-10-13
+### 新增
+- 游戏语言设置场景
+- 初始化 LIB_PclLib 模块
+### 更改
+- 更改游戏加载方式，使其适应新增的语言设置场景
+### 修复
+- 修复当在非 MOB 模式下时，会有返回按钮的问题
+- 修复设定字体时，字体效果不生效的问题
+
 ## [3.7.0.0.10062024_alpha] - 2024-10-06
 ### 更改
 - 修改默认操作方式为经典模式
@@ -26,6 +36,8 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.10132024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10062024_alpha...3.7.0.0.10132024_alpha
+[3.7.0.0.10062024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10042024_alpha...3.7.0.0.10062024_alpha
 [3.7.0.0.10042024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/releases/tag/3.7.0.0.10042024_alpha
 
 [#1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/1
