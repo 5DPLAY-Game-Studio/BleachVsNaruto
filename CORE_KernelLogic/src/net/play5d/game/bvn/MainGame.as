@@ -38,7 +38,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.input.GameInputType;
 	import net.play5d.game.bvn.input.GameInputer;
 	import net.play5d.game.bvn.interfaces.GameInterface;
-	import net.play5d.game.bvn.stage.CongratulateState;
+	import net.play5d.game.bvn.stage.CongratulateStage;
 	import net.play5d.game.bvn.stage.CreditsState;
 	import net.play5d.game.bvn.stage.GameLoadingState;
 	import net.play5d.game.bvn.stage.GameOverState;
@@ -343,7 +343,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * 通关
 		 */
 		public function goCongratulations():void{
-			stageCtrl.goStage(new CongratulateState());
+			stageCtrl.goStage(new CongratulateStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 		}
