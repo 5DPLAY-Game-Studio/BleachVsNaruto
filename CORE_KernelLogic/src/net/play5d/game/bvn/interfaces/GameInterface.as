@@ -38,27 +38,26 @@ package net.play5d.game.bvn.interfaces
 		public static function getDefaultMenu():Array{
 			var a:Array = [
 
-				{txt:'TEAM PLAY',cn:'小队模式',children:[
-					{txt:'TEAM ACRADE',cn:'闯关模式'},
-					{txt:'TEAM VS PEOPLE',cn:'2P对战'},
-					{txt:'TEAM VS CPU',cn:'对战电脑'}
+				{txt:'TEAM PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.txt'),children:[
+					{txt:'TEAM ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_acrade.txt')},
+					{txt:'TEAM VS PEOPLE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_vs_people.txt')},
+					{txt:'TEAM VS CPU',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_vs_cpu.txt')}
 				]},
 
-				{txt:'SINGLE PLAY',cn:'单人模式',children:[
-					{txt:'SINGLE ACRADE',cn:'闯关模式'},
-					{txt:'SINGLE VS PEOPLE',cn:'2P对战'},
-					{txt:'SINGLE VS CPU',cn:'对战电脑'}
+				{txt:'SINGLE PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.txt'),children:[
+					{txt:'SINGLE ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_acrade.txt')},
+					{txt:'SINGLE VS PEOPLE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_vs_people.txt')},
+					{txt:'SINGLE VS CPU',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_vs_cpu.txt')}
 				]},
 
-				{txt:'MUSOU PLAY',cn:'无双模式',children:[
-					{txt:'MUSOU ACRADE',cn:'无双模式'}
+				{txt:'MUSOU PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.txt'),children:[
+					{txt:'MUSOU ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.child.musou_acrade.txt')}
 				]},
 
-				/*{txt:'SURVIVOR',cn:'挑战模式'},*/ //暂未开放
-				{txt:'OPTION',cn:'游戏设置'},
-				{txt:'TRAINING',cn:'练习模式'},
-				{txt:'CREDITS',cn:'制作组'},
-				{txt:'MORE GAMES',cn:'更多游戏'}
+				{txt:'OPTION',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.option.txt')},
+				{txt:'TRAINING',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.training.txt')},
+				{txt:'CREDITS',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.credits.txt')},
+				{txt:'MORE GAMES',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.more_games.txt')}
 			];
 			return a;
 		}
