@@ -32,7 +32,7 @@
 ### 构建项目
 - 单击 ***构建(B) -> 构建项目(P)*** 选项或按下 ***Ctrl + F9*** 快捷键以快速构建工程
 ### 调试项目
-- 单击 ***运行(U) -> 调试...*** 选项或按下 ***Alt + Shift + F9*** 快捷键，在弹出的 ***调试*** 菜单中选择 ***SHELL_Dev***，编译完成片刻后将执行编译结果
+- 单击 ***运行(U) -> 调试...*** 选项或按下 ***Alt + Shift + F9*** 快捷键，在弹出的 ***调试*** 菜单中选择 ***SHELL_Dev FighterTester***，编译完成片刻后将执行编译结果
 
 [Intellij IDEA 2022.1.4]: https://download.jetbrains.com/idea/ideaIU-2022.1.4.exe?_gl=1*ctjhlb*_gcl_au*MTMxNjgyNzEyOC4xNzI0ODYxMjEz*_ga*MTE0MDQ4OTE2Ni4xNzI0ODYxMjEx*_ga_9J976DJZ68*MTcyODI2ODM2NC44LjEuMTcyODI2ODM3MC41NC4wLjA.
 [flex4.16.1-air50.2.4.1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK/releases/download/flex4.16.1-air50.2.4.1/flex4.16.1-air50.2.4.1.7z
