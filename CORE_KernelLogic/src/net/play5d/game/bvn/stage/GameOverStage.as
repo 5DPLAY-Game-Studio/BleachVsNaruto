@@ -41,7 +41,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.kyo.stage.Istage;
 	import net.play5d.kyo.utils.KyoTimeout;
 
-	public class GameOverState implements Istage
+	public class GameOverStage implements Istage
 	{
 		private var _ui:stg_gameover_mc;
 		private var _arrow:select_arrow_mc;
@@ -51,7 +51,7 @@ package net.play5d.game.bvn.stage
 		private var _char:FighterMain;
 		private var _btns:Array = [];
 
-		public function GameOverState()
+		public function GameOverStage()
 		{
 			StateCtrl.I.clearTrans();
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.gameover , ResUtils.GAME_OVER);

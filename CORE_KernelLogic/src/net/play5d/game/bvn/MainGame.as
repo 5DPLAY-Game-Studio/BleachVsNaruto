@@ -41,7 +41,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.stage.CongratulateStage;
 	import net.play5d.game.bvn.stage.CreditsStage;
 	import net.play5d.game.bvn.stage.GameLoadingStage;
-	import net.play5d.game.bvn.stage.GameOverState;
+	import net.play5d.game.bvn.stage.GameOverStage;
 	import net.play5d.game.bvn.stage.GameState;
 	import net.play5d.game.bvn.stage.HowToPlayState;
 import net.play5d.game.bvn.stage.LanguageStage;
@@ -290,24 +290,24 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * CONTINUE界面
 		 */
 		public function goContinue():void{
-			var stg:GameOverState = new GameOverState();
+			var stg:GameOverStage = new GameOverStage();
 			stg.showContinue();
 			stageCtrl.goStage(stg);
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverStage);
 		}
 
 		/**
 		 * GAME OVER界面
 		 */
 		public function goGameOver():void{
-			var stg:GameOverState = new GameOverState();
+			var stg:GameOverStage = new GameOverStage();
 			stg.showGameOver();
 			stageCtrl.goStage(stg);
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverStage);
 		}
 
 		/**
