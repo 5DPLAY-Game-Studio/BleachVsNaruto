@@ -45,7 +45,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.stage.HowToPlayStage;
 import net.play5d.game.bvn.stage.LanguageStage;
-import net.play5d.game.bvn.stage.LoadingMosouState;
+import net.play5d.game.bvn.stage.LoadingMosouStage;
 import net.play5d.game.bvn.stage.LoadingState;
 	import net.play5d.game.bvn.stage.LogoState;
 	import net.play5d.game.bvn.stage.MenuState;
@@ -240,8 +240,8 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 */
 		public function loadGame():void{
 			if(GameMode.currentMode == GameMode.MOSOU_ACRADE){
-				stageCtrl.goStage(new LoadingMosouState(), true);
-				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouState);
+				stageCtrl.goStage(new LoadingMosouStage(), true);
+				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouStage);
 			}else{
 				stageCtrl.goStage(new LoadingState(), true);
 				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingState);

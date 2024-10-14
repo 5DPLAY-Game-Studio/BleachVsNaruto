@@ -43,14 +43,14 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.stage.Istage;
 
-	public class LoadingMosouState implements Istage
+	public class LoadingMosouStage implements Istage
 	{
 
 		private var _ui:loading_fight_mc;
 		private var _destoryed:Boolean;
 		private var _sltUI:loading_select_ui_mc;
 
-		public function LoadingMosouState()
+		public function LoadingMosouStage()
 		{
 		}
 
