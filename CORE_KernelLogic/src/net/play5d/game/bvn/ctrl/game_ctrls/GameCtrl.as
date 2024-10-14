@@ -56,7 +56,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.game.bvn.map.MapMain;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.utils.KeyBoarder;
 	import net.play5d.game.bvn.utils.MCUtils;
@@ -72,7 +72,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 			return _i;
 		}
 
-		public var gameState:GameState; //游戏主场景
+		public var gameState:GameStage; //游戏主场景
 
 		public const gameRunData:GameRunDataVO = new GameRunDataVO();
 
@@ -141,7 +141,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 		/**
 		 * 初始化
 		 */
-		public function initlize(gameState:GameState):void{
+		public function initlize(gameState:GameStage):void{
 			this.gameState = gameState;
 
 			_isPauseGame = false;

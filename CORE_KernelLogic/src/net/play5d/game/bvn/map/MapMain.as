@@ -26,7 +26,7 @@ package net.play5d.game.bvn.map
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.data.MapVO;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 
 	public class MapMain
 	{
@@ -47,7 +47,7 @@ package net.play5d.game.bvn.map
 
 		public var data:MapVO;
 
-		public var gameState:GameState;
+		public var gameState:GameStage;
 
 		private var _defaultFrontPos:Point;
 

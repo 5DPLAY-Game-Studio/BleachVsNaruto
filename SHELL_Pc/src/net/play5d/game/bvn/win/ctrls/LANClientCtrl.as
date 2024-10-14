@@ -30,7 +30,7 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.events.GameEvent;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.interfaces.GameInterface;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.stage.LoadingState;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.ui.GameUI;
@@ -385,7 +385,7 @@ package net.play5d.game.bvn.win.ctrls
 
 		public function renderGame():Boolean{
 
-			if(MainGame.stageCtrl.currentStage is GameState){
+			if(MainGame.stageCtrl.currentStage is GameStage){
 				return _connGameLogic.render();
 			}
 

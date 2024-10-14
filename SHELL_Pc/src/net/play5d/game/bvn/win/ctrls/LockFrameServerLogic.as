@@ -24,7 +24,7 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.GameRunDataVO;
 	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.win.input.InputManager;
 	import net.play5d.game.bvn.win.utils.LANUtils;
 	import net.play5d.game.bvn.win.utils.MsgType;
@@ -158,7 +158,7 @@ package net.play5d.game.bvn.win.ctrls
 
 			var curStg:Istage = MainGame.stageCtrl.currentStage;
 
-			if(curStg is GameState){
+			if(curStg is GameStage){
 				if(GameCtrl.I.actionEnable){
 					var runData:GameRunDataVO = GameCtrl.I.gameRunData;
 					var p1:FighterMain = runData.p1FighterGroup.currentFighter;

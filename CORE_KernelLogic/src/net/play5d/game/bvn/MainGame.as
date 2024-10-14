@@ -42,7 +42,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.stage.CreditsStage;
 	import net.play5d.game.bvn.stage.GameLoadingStage;
 	import net.play5d.game.bvn.stage.GameOverStage;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.stage.HowToPlayState;
 import net.play5d.game.bvn.stage.LanguageStage;
 import net.play5d.game.bvn.stage.LoadingMosouState;
@@ -256,24 +256,24 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * 游戏界面
 		 */
 		public function goGame():void{
-			var gs:GameState = new GameState();
+			var gs:GameStage = new GameStage();
 			stageCtrl.goStage(gs);
 			GameCtrl.I.startGame();
 			setFPS(GameConfig.FPS_GAME);
 			setQuality(GameConfig.QUALITY_GAME);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);
 		}
 
 		/**
 		 * 无双模式游戏界面
 		 */
 		public function goMosouGame():void{
-			var gs:GameState = new GameState();
+			var gs:GameStage = new GameStage();
 			stageCtrl.goStage(gs);
 			GameCtrl.I.startMosouGame();
 			setFPS(GameConfig.FPS_GAME);
 			setQuality(GameConfig.QUALITY_GAME);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);
 		}
 
 		/**

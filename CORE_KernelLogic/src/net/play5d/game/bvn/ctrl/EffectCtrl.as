@@ -41,7 +41,7 @@ package net.play5d.game.bvn.ctrl
 	import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
 	import net.play5d.game.bvn.interfaces.BaseGameSprite;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.utils.EffectManager;
 	import net.play5d.game.bvn.views.effects.BitmapFilterView;
 	import net.play5d.game.bvn.views.effects.BlackBackView;
@@ -72,7 +72,7 @@ package net.play5d.game.bvn.ctrl
 
 		public var shineMaxCount:int = 3;
 
-		private var _gameStage:GameState;
+		private var _gameStage:GameStage;
 		private var _effectLayer:Sprite;
 		private var _manager:EffectManager;
 
@@ -143,7 +143,7 @@ package net.play5d.game.bvn.ctrl
 
 		}
 
-		public function initlize(gameStage:GameState , effectLayer:Sprite):void{
+		public function initlize(gameStage:GameStage , effectLayer:Sprite):void{
 			_manager = new EffectManager();
 
 			_gameStage = gameStage;
