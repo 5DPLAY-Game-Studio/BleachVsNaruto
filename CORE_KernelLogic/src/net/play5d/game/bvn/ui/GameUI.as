@@ -28,9 +28,11 @@ package net.play5d.game.bvn.ui
 	import net.play5d.game.bvn.data.GameRunFighterGroup;
 	import net.play5d.game.bvn.events.GameEvent;
 	import net.play5d.game.bvn.ui.dialog.AlertUI;
+import net.play5d.game.bvn.ui.dialog.BaseDialog;
 	import net.play5d.game.bvn.ui.dialog.ConfrimUI;
 	import net.play5d.game.bvn.ui.dialog.DialogManager;
-	import net.play5d.game.bvn.ui.fight.FightUI;
+import net.play5d.game.bvn.ui.dialog.MusouConfrimUI;
+import net.play5d.game.bvn.ui.fight.FightUI;
 	import net.play5d.game.bvn.ui.mosou.MosouUI;
 
 	public class GameUI
@@ -47,7 +49,8 @@ package net.play5d.game.bvn.ui
 
 		private var _ui:IGameUI;
 
-		private static var _confrimUI:ConfrimUI;
+		private static var _confrimUI:BaseDialog;
+		private static var _confrimUICls:Class;
 		private static var _alertUI:AlertUI;
 
 		private var _renderAnimateGap:int;
@@ -158,10 +161,12 @@ package net.play5d.game.bvn.ui
 			return _alertUI != null;
 		}
 
-		public static function confrim(enMsg:String = null , cnMsg:String = null , yes:Function = null , no:Function = null):void{
+		public static function confrim(enMsg:String = null , cnMsg:String = null , yes:Function = null , no:Function = null, isMusou:Boolean = false):void{
 			closeConfrim();
 
-			_confrimUI = new ConfrimUI();
+			_confrimUICls = isMusou ? MusouConfrimUI : ConfrimUI;
+
+			_confrimUI = new _confrimUICls();
 			_confrimUI.setMsg(enMsg,cnMsg);
 			_confrimUI.yesBack = yesClose;
 			_confrimUI.noBack = noClose;

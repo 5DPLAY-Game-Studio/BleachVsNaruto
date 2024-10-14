@@ -19,10 +19,12 @@
 package net.play5d.game.bvn.ui.dialog
 {
 	import flash.display.DisplayObject;
-	import flash.display.SimpleButton;
+import flash.display.MovieClip;
+import flash.display.SimpleButton;
 	import flash.display.Sprite;
 
 	import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.ui.Text;
 	import net.play5d.game.bvn.utils.BtnUtils;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
 
@@ -38,6 +40,15 @@ package net.play5d.game.bvn.ui.dialog
 
 		public var width:Number = 0;
 		public var height:Number = 0;
+
+		protected var _cnTxt:Text;
+//		protected var _ui:Sprite;
+
+		public var yesBack:Function;
+		public var noBack:Function;
+
+		protected var _noBtn:SimpleButton;
+		protected var _yesBtn:SimpleButton;
 
 		public function BaseDialog()
 		{
@@ -122,6 +133,9 @@ package net.play5d.game.bvn.ui.dialog
 
 		protected function onDestory():void{
 
+		}
+
+		public function setMsg(en:String = null, cn:String = null):void {
 		}
 
 	}
