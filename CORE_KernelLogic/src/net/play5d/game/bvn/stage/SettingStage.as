@@ -45,7 +45,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.stage.Istage;
 
-	public class SettingState implements Istage
+	public class SettingStage implements Istage
 	{
 		private var _ui:stg_set_ui;
 		private var _btnGroup:SetBtnGroup;
@@ -57,7 +57,7 @@ package net.play5d.game.bvn.stage
 
 		private var _backMenuBtn:Sprite;
 
-		public function SettingState()
+		public function SettingStage()
 		{
 		}
 

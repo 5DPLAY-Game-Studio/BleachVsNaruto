@@ -50,7 +50,7 @@ import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.LogoStage;
 	import net.play5d.game.bvn.stage.MenuStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
-	import net.play5d.game.bvn.stage.SettingState;
+	import net.play5d.game.bvn.stage.SettingStage;
 	import net.play5d.game.bvn.stage.WinnerState;
 	import net.play5d.game.bvn.stage.WorldMapState;
 	import net.play5d.game.bvn.ui.GameUI;
@@ -280,10 +280,10 @@ import net.play5d.game.bvn.stage.LoadingStage;
 		 * 设置界面
 		 */
 		public function goOption():void{
-			stageCtrl.goStage(new SettingState());
+			stageCtrl.goStage(new SettingStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, SettingState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, SettingStage);
 		}
 
 		/**
