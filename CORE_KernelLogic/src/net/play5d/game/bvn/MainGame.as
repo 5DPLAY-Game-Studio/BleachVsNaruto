@@ -47,7 +47,7 @@ package net.play5d.game.bvn
 import net.play5d.game.bvn.stage.LanguageStage;
 import net.play5d.game.bvn.stage.LoadingMosouStage;
 import net.play5d.game.bvn.stage.LoadingStage;
-	import net.play5d.game.bvn.stage.LogoState;
+	import net.play5d.game.bvn.stage.LogoStage;
 	import net.play5d.game.bvn.stage.MenuState;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.stage.SettingState;
@@ -193,11 +193,11 @@ import net.play5d.game.bvn.stage.LoadingStage;
 		 * LOGO界面
 		 */
 		public function goLogo():void{
-			stageCtrl.goStage(new LogoState());
+			stageCtrl.goStage(new LogoStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LogoState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LogoStage);
 		}
 
 		/**

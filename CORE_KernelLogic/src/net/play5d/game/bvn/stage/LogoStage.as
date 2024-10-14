@@ -25,11 +25,11 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.stage.Istage;
 
-	public class LogoState implements Istage
+	public class LogoStage implements Istage
 	{
 		private var _ui:logo_movie;
 
-		public function LogoState()
+		public function LogoStage()
 		{
 		}
 
