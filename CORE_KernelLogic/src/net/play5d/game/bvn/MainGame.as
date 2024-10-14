@@ -48,7 +48,7 @@ import net.play5d.game.bvn.stage.LanguageStage;
 import net.play5d.game.bvn.stage.LoadingMosouStage;
 import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.LogoStage;
-	import net.play5d.game.bvn.stage.MenuState;
+	import net.play5d.game.bvn.stage.MenuStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.stage.SettingState;
 	import net.play5d.game.bvn.stage.WinnerState;
@@ -205,11 +205,11 @@ import net.play5d.game.bvn.stage.LoadingStage;
 		 */
 		public function goMenu():void{
 			resetDefault();
-			stageCtrl.goStage(new MenuState());
+			stageCtrl.goStage(new MenuStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, MenuState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, MenuStage);
 
 //			GameUI.alert('TEST', '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试');
 //			GameUI.confrim('TEST TEST TEST', '测试测试');
