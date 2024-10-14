@@ -43,7 +43,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.stage.GameLoadingStage;
 	import net.play5d.game.bvn.stage.GameOverStage;
 	import net.play5d.game.bvn.stage.GameStage;
-	import net.play5d.game.bvn.stage.HowToPlayState;
+	import net.play5d.game.bvn.stage.HowToPlayStage;
 import net.play5d.game.bvn.stage.LanguageStage;
 import net.play5d.game.bvn.stage.LoadingMosouState;
 import net.play5d.game.bvn.stage.LoadingState;
@@ -219,10 +219,10 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * HOW TO PLAY
 		 */
 		public function goHowToPlay():void{
-			stageCtrl.goStage(new HowToPlayState());
+			stageCtrl.goStage(new HowToPlayStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, HowToPlayState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, HowToPlayStage);
 		}
 
 		/**
