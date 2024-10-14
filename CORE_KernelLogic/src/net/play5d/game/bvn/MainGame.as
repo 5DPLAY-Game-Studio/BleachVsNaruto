@@ -46,7 +46,7 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.stage.HowToPlayStage;
 import net.play5d.game.bvn.stage.LanguageStage;
 import net.play5d.game.bvn.stage.LoadingMosouStage;
-import net.play5d.game.bvn.stage.LoadingState;
+import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.LogoState;
 	import net.play5d.game.bvn.stage.MenuState;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
@@ -167,7 +167,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 			GameCtrl.I.autoEndRoundAble = true;
 			GameCtrl.I.autoStartAble = true;
 			SelectFighterStage.AUTO_FINISH = true;
-			LoadingState.AUTO_START_GAME = true;
+			LoadingStage.AUTO_START_GAME   = true;
 		}
 
 		private var _fps:Number = 60;
@@ -243,8 +243,8 @@ import net.play5d.game.bvn.stage.LoadingState;
 				stageCtrl.goStage(new LoadingMosouStage(), true);
 				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouStage);
 			}else{
-				stageCtrl.goStage(new LoadingState(), true);
-				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingState);
+				stageCtrl.goStage(new LoadingStage(), true);
+				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingStage);
 			}
 
 			setFPS(GameConfig.FPS_UI);

@@ -31,7 +31,7 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.stage.GameStage;
-	import net.play5d.game.bvn.stage.LoadingState;
+	import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.win.data.HostVO;
@@ -330,7 +330,7 @@ package net.play5d.game.bvn.win.ctrls
 			GameCtrl.I.autoEndRoundAble = false;
 			GameCtrl.I.autoStartAble = false;
 			SelectFighterStage.AUTO_FINISH = false;
-			LoadingState.AUTO_START_GAME = false;
+			LoadingStage.AUTO_START_GAME   = false;
 
 			GameInterface.instance.updateInputConfig();
 
@@ -370,7 +370,7 @@ package net.play5d.game.bvn.win.ctrls
 			GameCtrl.I.autoEndRoundAble = true;
 			GameCtrl.I.autoStartAble = true;
 			SelectFighterStage.AUTO_FINISH = true;
-			LoadingState.AUTO_START_GAME = true;
+			LoadingStage.AUTO_START_GAME   = true;
 
 			GameInterface.instance.updateInputConfig();
 
