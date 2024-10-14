@@ -52,7 +52,7 @@ import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.stage.SettingStage;
 	import net.play5d.game.bvn.stage.WinnerStage;
-	import net.play5d.game.bvn.stage.WorldMapState;
+	import net.play5d.game.bvn.stage.WorldMapStage;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.utils.GameLoger;
 	import net.play5d.game.bvn.utils.ResUtils;
@@ -367,11 +367,11 @@ import net.play5d.game.bvn.stage.LoadingStage;
 		 * 大地图
 		 */
 		public function goWorldMap():void{
-			stageCtrl.goStage(new WorldMapState());
+			stageCtrl.goStage(new WorldMapStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WorldMapState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WorldMapStage);
 		}
 
 		/**

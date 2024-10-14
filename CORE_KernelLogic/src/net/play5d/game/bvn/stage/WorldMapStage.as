@@ -47,7 +47,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.TouchUtils;
 	import net.play5d.kyo.stage.Istage;
 
-	public class WorldMapState implements Istage
+	public class WorldMapStage implements Istage
 	{
 		private var _ui:Sprite;
 		private var _mapUI:Sprite;
@@ -70,7 +70,7 @@ package net.play5d.game.bvn.stage
 
 		private var _backBtn:DisplayObject;
 
-		public function WorldMapState()
+		public function WorldMapStage()
 		{
 		}
 
