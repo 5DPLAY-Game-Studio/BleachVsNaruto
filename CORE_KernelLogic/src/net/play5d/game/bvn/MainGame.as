@@ -51,7 +51,7 @@ import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.MenuStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.stage.SettingStage;
-	import net.play5d.game.bvn.stage.WinnerState;
+	import net.play5d.game.bvn.stage.WinnerStage;
 	import net.play5d.game.bvn.stage.WorldMapState;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.utils.GameLoger;
@@ -314,11 +314,11 @@ import net.play5d.game.bvn.stage.LoadingStage;
 		 * WINNER界面
 		 */
 		public function goWinner():void{
-			var stg:WinnerState = new WinnerState();
+			var stg:WinnerStage = new WinnerStage();
 			stageCtrl.goStage(stg);
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WinnerState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WinnerStage);
 		}
 
 		/**
