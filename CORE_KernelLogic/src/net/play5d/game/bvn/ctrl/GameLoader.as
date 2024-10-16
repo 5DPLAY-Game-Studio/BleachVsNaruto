@@ -55,8 +55,8 @@ package net.play5d.game.bvn.ctrl
 
 			var fv:FighterVO = FighterModel.I.getFighter(fighterId,true);
 			if(!fv){
-				trace("GameLoader.loadFighter :: ID不存在:",fighterId);
-				if(fail != null) fail("角色ID错误");
+				trace(GetLangText('debug.package.ctrl.GameLoader.loadAndCacheFighter.fighter_id_error.txt'),fighterId);
+				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadAndCacheFighter.fighter_id_error.txt'));
 				return;
 			}
 
@@ -74,7 +74,7 @@ package net.play5d.game.bvn.ctrl
 					var mainMcClass:Object = domain.getDefinition("main_mc");
 					cachevo.MainClass = mainMcClass as Class;
 				}catch(e:Error){
-					trace("loadFighter", e);
+					trace(GetLangText('debug.package.ctrl.GameLoader.loadAndCacheFighter.loadComplete.fighter_id_error.txt'), e);
 				}
 
 				if(back != null) back();
@@ -131,8 +131,8 @@ package net.play5d.game.bvn.ctrl
 		public static function loadAssister(fighterId:String , back:Function , fail:Function = null , process:Function = null ,  customBackParam:Object = null):void{
 			var fv:FighterVO = AssisterModel.I.getAssister(fighterId,true);
 			if(!fv){
-				trace("GameLoader.loadAssister :: ID不存在:",fighterId);
-				if(fail != null) fail("角色ID错误");
+				trace(GetLangText('debug.package.ctrl.GameLoader.loadAssister.assister_id_error.txt'),fighterId);
+				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadAssister.assister_id_error.txt'));
 				return;
 			}
 
@@ -157,8 +157,8 @@ package net.play5d.game.bvn.ctrl
 		public static function loadMap(mapId:String , back:Function , fail:Function = null , process:Function = null , customBackParam:Object = null):void{
 			var mv:MapVO = MapModel.I.getMap(mapId);
 			if(!mv){
-				trace("GameLoader.loadMap :: ID不存在:",mapId);
-				if(fail != null) fail("场景ID错误");
+				trace(GetLangText('debug.package.ctrl.GameLoader.loadMap.map_id_error.txt'),mapId);
+				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadMap.map_id_error.txt'));
 				return;
 			}
 
@@ -192,7 +192,7 @@ package net.play5d.game.bvn.ctrl
 				try{
 					l.unloadAndStop(true);
 				}catch(e:Error){
-					trace("GameLoader ::",e);
+					trace(GetLangText('debug.package.ctrl.GameLoader.dispose.unload_cache_error.txt'),e);
 					l.unload();
 				}
 			}
@@ -212,8 +212,8 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadIOError():void{
-				Debugger.log("GameLoader.loadSWF :: 找不到文件:",url);
-				if(fail != null) fail("加载场景文件错误");
+				Debugger.log(GetLangText('debug.package.ctrl.GameLoader.loadSWF.loadIOError.load_swf_error.txt'),url);
+				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadSWF.loadIOError.load_swf_error.txt'));
 			}
 
 		}
