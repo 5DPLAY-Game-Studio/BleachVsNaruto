@@ -67,7 +67,7 @@ package net.play5d.game.bvn.ctrl
 		private static var _floorContact:Dictionary = new Dictionary();
 		public static function isInAir(target:BaseGameSprite):Boolean{
 			if(!_map){
-				trace('error:map is null!');
+				trace(GetLangText('debug.package.ctrl.GameLogic.isInAir.map_null.txt'));
 				return false;
 			}
 
@@ -120,7 +120,7 @@ package net.play5d.game.bvn.ctrl
 
 		public static function isTouchBottomFloor(target:IGameSprite):Boolean{
 			if(!_map){
-				trace('error:map is null!');
+				trace(GetLangText('debug.package.ctrl.GameLogic.isTouchBottomFloor.map_null.txt'));
 				return false;
 			}
 
@@ -129,7 +129,7 @@ package net.play5d.game.bvn.ctrl
 
 		public static function isOutRange(target:IGameSprite):Boolean{
 			if(!_map){
-				trace('error:map is null!');
+				trace(GetLangText('debug.package.ctrl.GameLogic.isOutRange.map_null.txt'));
 				return false;
 			}
 
@@ -190,8 +190,12 @@ package net.play5d.game.bvn.ctrl
 
 		public static function hitTarget(hitvo:HitVO , attacker:IGameSprite , target:IGameSprite):void{
 			if(!attacker || !target) return;
-			if(attacker is FighterMain == false) return;
-			if(target is FighterMain == false) return;
+			if(!(
+					attacker is FighterMain
+			)) return;
+			if(!(
+					target is FighterMain
+			)) return;
 
 			if((target as FighterMain).actionState != FighterActionState.HURT_ING &&
 				(target as FighterMain).actionState != FighterActionState.HURT_FLYING
@@ -278,7 +282,7 @@ package net.play5d.game.bvn.ctrl
 		 * 防止游戏元件超出地图、当前显示区域
 		 */
 		public static function fixGameSpritePosition(sp:IGameSprite):void{
-			if(sp.allowCrossMapXY() == false){
+			if(!sp.allowCrossMapXY()){
 				var left:Number = _map.left + GameConfig.X_SIDE_OFFSET;;
 				var right:Number = _map.right - GameConfig.X_SIDE_OFFSET;;
 				var offsetX:Number = GameConfig.X_SIDE_OFFSET;
@@ -313,7 +317,7 @@ package net.play5d.game.bvn.ctrl
 				sp.setIsTouchSide(isTouchSide);
 			}
 
-			if(sp.allowCrossMapBottom() == false){
+			if(!sp.allowCrossMapBottom()){
 				if(sp.y > _map.bottom) sp.y = _map.bottom;
 			}
 		}
@@ -362,7 +366,7 @@ package net.play5d.game.bvn.ctrl
 		}
 
 		public static function setGameMode(v:int):void{
-			trace("setGameMode", v);
+			trace(GetLangText('debug.package.ctrl.GameLogic.setGameMode.set_game_mode.txt'), v);
 			switch(v){
 				case 1:
 					GameData.I.loadSelect("config/salect.xml");
