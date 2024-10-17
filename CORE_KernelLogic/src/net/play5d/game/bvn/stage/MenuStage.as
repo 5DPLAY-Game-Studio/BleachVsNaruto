@@ -42,7 +42,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.kyo.display.shapes.Box;
 	import net.play5d.kyo.stage.Istage;
 
-	public class MenuState extends Sprite implements Istage
+	public class MenuStage extends Sprite implements Istage
 	{
 		private var _ui:stg_title;
 		private var _btnGroup:MenuBtnGroup;
@@ -51,7 +51,7 @@ package net.play5d.game.bvn.stage
 		public static var MenuPosition:Point = new Point(470, 100);
 		public static var MenuGap:Point = new Point(-40, 5);
 
-		public function MenuState()
+		public function MenuStage()
 		{
 		}
 

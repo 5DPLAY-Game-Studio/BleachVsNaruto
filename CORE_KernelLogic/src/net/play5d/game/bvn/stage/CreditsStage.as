@@ -36,7 +36,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.stage.Istage;
 
-	public class CreditsState implements Istage
+	public class CreditsStage implements Istage
 	{
 
 		private var _ui:Sprite;
@@ -45,7 +45,7 @@ package net.play5d.game.bvn.stage
 
 		private var _createsSp:DisplayObject;
 
-		public function CreditsState()
+		public function CreditsStage()
 		{
 		}
 

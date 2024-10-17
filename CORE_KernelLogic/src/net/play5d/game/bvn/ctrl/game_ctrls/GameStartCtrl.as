@@ -23,7 +23,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.ctrl.StateCtrl;
 	import net.play5d.game.bvn.fighter.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.ui.mosou.MosouUI;
 
@@ -32,7 +32,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	 */
 	public class GameStartCtrl
 	{
-		private var _state:GameState;
+		private var _state:GameStage;
 		private var _p1:FighterMain;
 		private var _p2:FighterMain;
 		private var _isStart1v1:Boolean;
@@ -45,7 +45,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 		private var _mousouFinish:Boolean = false;
 
-		public function GameStartCtrl(state:GameState)
+		public function GameStartCtrl(state:GameStage)
 		{
 			_state = state;
 		}

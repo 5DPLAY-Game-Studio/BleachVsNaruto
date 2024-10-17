@@ -52,7 +52,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
 	import net.play5d.kyo.stage.Istage;
 
-	public class WinnerState implements Istage
+	public class WinnerStage implements Istage
 	{
 		private var _ui:MovieClip;
 		private var _scoreText:BitmapFontText;
@@ -60,7 +60,7 @@ package net.play5d.game.bvn.stage
 		private var _winSay:String;
 		private var _bgmDelay:int;
 
-		public function WinnerState()
+		public function WinnerStage()
 		{
 		}
 

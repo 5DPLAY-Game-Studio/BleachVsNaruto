@@ -21,7 +21,7 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.events.GameEvent;
-	import net.play5d.game.bvn.stage.LoadingState;
+	import net.play5d.game.bvn.stage.LoadingStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
 	import net.play5d.game.bvn.win.utils.SelectFighterDataType;
 
@@ -33,7 +33,7 @@ package net.play5d.game.bvn.win.ctrls
 
 		public function init():void{
 			SelectFighterStage.AUTO_FINISH = false;
-			LoadingState.AUTO_START_GAME = false;
+			LoadingStage.AUTO_START_GAME   = false;
 			GameEvent.addEventListener(GameEvent.SELECT_FIGHTER_STEP , onSelectStep);
 			GameEvent.addEventListener(GameEvent.SELECT_FIGHTER_INDEX , onSelectIndex);
 		}
@@ -107,15 +107,15 @@ package net.play5d.game.bvn.win.ctrls
 		}
 
 		private function receiveSelectIndex(arr:Array):void{
-			var stg:LoadingState = MainGame.stageCtrl.currentStage as LoadingState;
+			var stg:LoadingStage = MainGame.stageCtrl.currentStage as LoadingStage;
 			if(stg){
 				stg.setOrder(1 , arr[2]);
 			}
 		}
 
 		private function onSelectFighterIndexFinish(arr:Array):void{
-			if(MainGame.stageCtrl.currentStage is LoadingState){
-				(MainGame.stageCtrl.currentStage as LoadingState).gotoGame(arr[2],arr[3]);
+			if(MainGame.stageCtrl.currentStage is LoadingStage){
+				(MainGame.stageCtrl.currentStage as LoadingStage).gotoGame(arr[2], arr[3]);
 			}
 		}
 

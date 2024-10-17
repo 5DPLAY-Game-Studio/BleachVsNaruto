@@ -44,7 +44,7 @@ package
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.KyoSharedObject;
 	import net.play5d.kyo.display.ui.KyoSimpButton;
-	import net.play5d.game.bvn.stage.LoadingState;
+	import net.play5d.game.bvn.stage.LoadingStage;
 
 	[SWF(width="1000", height="600", frameRate="30", backgroundColor="#000000")]
 	public class FighterTester extends Sprite
@@ -292,7 +292,7 @@ package
 
 		private function loadGame():void
 		{
-			var ls:LoadingState = new LoadingState();
+			var ls:LoadingStage = new LoadingStage();
 //			var ls:TestLoadingStage = new TestLoadingStage();
 			MainGame.stageCtrl.goStage(ls,true);
 		}

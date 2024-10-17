@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.win.views
 {
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.stage.SettingState;
+	import net.play5d.game.bvn.stage.SettingStage;
 	import net.play5d.game.bvn.win.GameInterfaceManager;
 	import net.play5d.game.bvn.win.data.ExtendConfig;
 	import net.play5d.game.bvn.win.input.JoyStickConfigVO;
@@ -47,8 +47,8 @@ package net.play5d.game.bvn.win.views
 
 		private function goJoyStickSet(player:int , config:JoyStickConfigVO):void{
 			var curStg:Istage = MainGame.stageCtrl.currentStage;
-			if(!curStg is SettingState) return;
-			var setStg:SettingState = curStg as SettingState;
+			if(!curStg is SettingStage) return;
+			var setStg:SettingStage         = curStg as SettingStage;
 			var joyStickSetUI:JoyStickSetUI = new JoyStickSetUI();
 			joyStickSetUI.setConfig(player , config);
 			setStg.goInnerSetPage(joyStickSetUI);

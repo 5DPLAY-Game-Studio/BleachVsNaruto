@@ -41,7 +41,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.kyo.stage.Istage;
 
-	public class GameState extends Sprite implements Istage
+	public class GameStage extends Sprite implements Istage
 	{
 		private var _gameLayer:Sprite = new Sprite(); //主游戏层
 		private var _playerLayer:Sprite = new Sprite(); //游戏角色层
@@ -81,7 +81,7 @@ package net.play5d.game.bvn.stage
 //		private var _renderAnimateGap:int = 0; //刷新动画间隔
 //		private var _renderAnimateFrame:int = 0;
 
-		public function GameState()
+		public function GameStage()
 		{
 			super();
 //			this.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x , GameConfig.GAME_SIZE.y);

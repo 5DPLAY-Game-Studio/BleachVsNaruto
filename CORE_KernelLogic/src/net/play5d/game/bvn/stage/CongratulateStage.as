@@ -38,7 +38,7 @@ package net.play5d.game.bvn.stage
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
 	import net.play5d.kyo.stage.Istage;
 
-	public class CongratulateState implements Istage
+	public class CongratulateStage implements Istage
 	{
 		private var _mainUI:Sprite;
 		private var _ui:Sprite;
@@ -47,7 +47,7 @@ package net.play5d.game.bvn.stage
 		private var _bg:Bitmap;
 
 
-		public function CongratulateState()
+		public function CongratulateStage()
 		{
 		}
 

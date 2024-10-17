@@ -38,21 +38,21 @@ package net.play5d.game.bvn
 	import net.play5d.game.bvn.input.GameInputType;
 	import net.play5d.game.bvn.input.GameInputer;
 	import net.play5d.game.bvn.interfaces.GameInterface;
-	import net.play5d.game.bvn.stage.CongratulateState;
-	import net.play5d.game.bvn.stage.CreditsState;
-	import net.play5d.game.bvn.stage.GameLoadingState;
-	import net.play5d.game.bvn.stage.GameOverState;
-	import net.play5d.game.bvn.stage.GameState;
-	import net.play5d.game.bvn.stage.HowToPlayState;
+	import net.play5d.game.bvn.stage.CongratulateStage;
+	import net.play5d.game.bvn.stage.CreditsStage;
+	import net.play5d.game.bvn.stage.GameLoadingStage;
+	import net.play5d.game.bvn.stage.GameOverStage;
+	import net.play5d.game.bvn.stage.GameStage;
+	import net.play5d.game.bvn.stage.HowToPlayStage;
 import net.play5d.game.bvn.stage.LanguageStage;
-import net.play5d.game.bvn.stage.LoadingMosouState;
-import net.play5d.game.bvn.stage.LoadingState;
-	import net.play5d.game.bvn.stage.LogoState;
-	import net.play5d.game.bvn.stage.MenuState;
+import net.play5d.game.bvn.stage.LoadingMosouStage;
+import net.play5d.game.bvn.stage.LoadingStage;
+	import net.play5d.game.bvn.stage.LogoStage;
+	import net.play5d.game.bvn.stage.MenuStage;
 	import net.play5d.game.bvn.stage.SelectFighterStage;
-	import net.play5d.game.bvn.stage.SettingState;
-	import net.play5d.game.bvn.stage.WinnerState;
-	import net.play5d.game.bvn.stage.WorldMapState;
+	import net.play5d.game.bvn.stage.SettingStage;
+	import net.play5d.game.bvn.stage.WinnerStage;
+	import net.play5d.game.bvn.stage.WorldMapStage;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.utils.GameLoger;
 	import net.play5d.game.bvn.utils.ResUtils;
@@ -136,7 +136,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 		public function initalizeLoad(initBack:Function = null , initFail:Function = null):void{
 			GameLoger.log("Initializing game loading...");
 
-			var loadingState:GameLoadingState = new GameLoadingState();
+			var loadingState:GameLoadingStage = new GameLoadingStage();
 			stageCtrl.goStage(loadingState);
 			loadingState.loadGame(loadGameBack , initFail);
 
@@ -167,7 +167,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 			GameCtrl.I.autoEndRoundAble = true;
 			GameCtrl.I.autoStartAble = true;
 			SelectFighterStage.AUTO_FINISH = true;
-			LoadingState.AUTO_START_GAME = true;
+			LoadingStage.AUTO_START_GAME   = true;
 		}
 
 		private var _fps:Number = 60;
@@ -193,11 +193,11 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * LOGO界面
 		 */
 		public function goLogo():void{
-			stageCtrl.goStage(new LogoState());
+			stageCtrl.goStage(new LogoStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LogoState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LogoStage);
 		}
 
 		/**
@@ -205,21 +205,21 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 */
 		public function goMenu():void{
 			resetDefault();
-			stageCtrl.goStage(new MenuState());
+			stageCtrl.goStage(new MenuStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, MenuState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, MenuStage);
 		}
 
 		/**
 		 * HOW TO PLAY
 		 */
 		public function goHowToPlay():void{
-			stageCtrl.goStage(new HowToPlayState());
+			stageCtrl.goStage(new HowToPlayStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, HowToPlayState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, HowToPlayStage);
 		}
 
 		/**
@@ -237,11 +237,11 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 */
 		public function loadGame():void{
 			if(GameMode.currentMode == GameMode.MOSOU_ACRADE){
-				stageCtrl.goStage(new LoadingMosouState(), true);
-				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouState);
+				stageCtrl.goStage(new LoadingMosouStage(), true);
+				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouStage);
 			}else{
-				stageCtrl.goStage(new LoadingState(), true);
-				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingState);
+				stageCtrl.goStage(new LoadingStage(), true);
+				GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingStage);
 			}
 
 			setFPS(GameConfig.FPS_UI);
@@ -253,79 +253,79 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * 游戏界面
 		 */
 		public function goGame():void{
-			var gs:GameState = new GameState();
+			var gs:GameStage = new GameStage();
 			stageCtrl.goStage(gs);
 			GameCtrl.I.startGame();
 			setFPS(GameConfig.FPS_GAME);
 			setQuality(GameConfig.QUALITY_GAME);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);
 		}
 
 		/**
 		 * 无双模式游戏界面
 		 */
 		public function goMosouGame():void{
-			var gs:GameState = new GameState();
+			var gs:GameStage = new GameStage();
 			stageCtrl.goStage(gs);
 			GameCtrl.I.startMosouGame();
 			setFPS(GameConfig.FPS_GAME);
 			setQuality(GameConfig.QUALITY_GAME);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);
 		}
 
 		/**
 		 * 设置界面
 		 */
 		public function goOption():void{
-			stageCtrl.goStage(new SettingState());
+			stageCtrl.goStage(new SettingStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, SettingState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, SettingStage);
 		}
 
 		/**
 		 * CONTINUE界面
 		 */
 		public function goContinue():void{
-			var stg:GameOverState = new GameOverState();
+			var stg:GameOverStage = new GameOverStage();
 			stg.showContinue();
 			stageCtrl.goStage(stg);
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverStage);
 		}
 
 		/**
 		 * GAME OVER界面
 		 */
 		public function goGameOver():void{
-			var stg:GameOverState = new GameOverState();
+			var stg:GameOverStage = new GameOverStage();
 			stg.showGameOver();
 			stageCtrl.goStage(stg);
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameOverStage);
 		}
 
 		/**
 		 * WINNER界面
 		 */
 		public function goWinner():void{
-			var stg:WinnerState = new WinnerState();
+			var stg:WinnerStage = new WinnerStage();
 			stageCtrl.goStage(stg);
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WinnerState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WinnerStage);
 		}
 
 		/**
 		 * 制作组界面
 		 */
 		public function goCredits():void{
-			stageCtrl.goStage(new CreditsState());
+			stageCtrl.goStage(new CreditsStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, CreditsState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, CreditsStage);
 		}
 
 		/**
@@ -340,7 +340,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * 通关
 		 */
 		public function goCongratulations():void{
-			stageCtrl.goStage(new CongratulateState());
+			stageCtrl.goStage(new CongratulateStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 		}
@@ -364,11 +364,11 @@ import net.play5d.game.bvn.stage.LoadingState;
 		 * 大地图
 		 */
 		public function goWorldMap():void{
-			stageCtrl.goStage(new WorldMapState());
+			stageCtrl.goStage(new WorldMapStage());
 			setFPS(GameConfig.FPS_UI);
 			setQuality(GameConfig.QUALITY_UI);
 
-			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WorldMapState);
+			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, WorldMapStage);
 		}
 
 		/**

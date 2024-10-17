@@ -29,7 +29,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	import net.play5d.game.bvn.interfaces.BaseGameSprite;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.game.bvn.map.MapMain;
-	import net.play5d.game.bvn.stage.GameState;
+	import net.play5d.game.bvn.stage.GameStage;
 
 	/**
 	 * 游戏主逻辑控制类
@@ -38,7 +38,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	{
 		public var renderHit:Boolean = true;
 
-		private var _gameState:GameState;
+		private var _gameState:GameStage;
 
 		private var _leftSide:Number = 0;
 		private var _rightSide:Number = 0;
@@ -51,7 +51,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 		{
 		}
 
-		public function initlize(gameState:GameState , teamMap:TeamMap):void{
+		public function initlize(gameState:GameStage , teamMap:TeamMap):void{
 			_gameState = gameState;
 			_teamMap = teamMap;
 
