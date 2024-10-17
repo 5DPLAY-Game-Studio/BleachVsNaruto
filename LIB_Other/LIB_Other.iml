@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="LIB_PclLib">
+  <component name="FlexBuildConfigurationManager" active="LIB_Other">
     <configurations>
-      <configuration name="LIB_PclLib" output-type="Library" output-file="LIB_PclLib.swc" output-folder="$MODULE_DIR$/../out/production/LIB_PclLib">
+      <configuration name="LIB_Other" output-type="Library" output-file="LIB_Other.swc" output-folder="$MODULE_DIR$/../out/production/LIB_Other">
         <dependencies target-player="50.2">
           <sdk name="flex4.16.1-air50.2.4.1" />
         </dependencies>
