@@ -18,89 +18,134 @@
 
 package net.play5d.game.bvn.ui.dialog
 {
+import com.greensock.TweenLite;
 
-	import flash.display.SimpleButton;
-	import flash.text.TextFormatAlign;
+import flash.display.DisplayObject;
+import flash.display.MovieClip;
+import flash.display.Sprite;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import flash.text.TextFormatAlign;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.debug.DebugUtil;
-	import net.play5d.game.bvn.ui.Text;
-	import net.play5d.game.bvn.utils.BtnUtils;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.bitmap.BitmapFontText;
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.events.SetBtnEvent;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.ui.SetBtnGroup;
+import net.play5d.game.bvn.ui.UIUtils;
+import net.play5d.game.bvn.utils.BtnUtils;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.bitmap.BitmapFontText;
+import net.play5d.kyo.display.shapes.Box;
 
-	public class ConfrimUI extends BaseDialog
+public class ConfrimUI extends BaseDialog
+{
+	private var _enTxt:BitmapFontText;
+	private var _old_cnTxt:TextField;
+	private var _btnGroup:SetBtnGroup;
+
+	private var _ui:Sprite;
+
+//		public var yesBack:Function;
+//		public var noBack:Function;
+
+	public function ConfrimUI()
 	{
-		private var _cnTxt:Text;
+		super();
+//			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dialog_confrim');
+//			_dialogUI= _ui;
 
-		public var yesBack:Function;
-		public var noBack:Function;
-
-		private var _ui:dialog_confrim;
-
-		protected var _noBtn:SimpleButton;
-		protected var _yesBtn:SimpleButton;
-
-		public function ConfrimUI()
-		{
-			super();
-
-			width = 495;
-			height = 240;
-
-			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dialog_confrim');
-			_dialogUI= _ui;
-
-			build();
-		}
-
-		protected override function onDestory():void{
-			super.onDestory();
-			if(_cnTxt){
-				_cnTxt.destory();
-				_cnTxt = null;
-			}
-			BtnUtils.destoryBtn(_noBtn);
-			BtnUtils.destoryBtn(_yesBtn);
-		}
-
-		protected function build():void{
-			_cnTxt = new Text();
-			_cnTxt.leading = 12;
-			_cnTxt.x = 15;
-			_cnTxt.y = 35;
-			_cnTxt.width = 460;
-			_cnTxt.height = 140;
-			_cnTxt.multiLine(true);
-			_cnTxt.align = TextFormatAlign.CENTER;
-			_ui.addChild(_cnTxt);
-
-			_noBtn = _ui.getChildByName('no') as SimpleButton;
-			_yesBtn = _ui.getChildByName('yes') as SimpleButton;
-
-			BtnUtils.initBtn(_noBtn, okHandler);
-			BtnUtils.initBtn(_yesBtn, okHandler);
-		}
-
-		private function okHandler(e:SimpleButton):void{
-			switch(e){
-				case _yesBtn:
-					if(yesBack != null) yesBack();
-					break;
-				case _noBtn:
-					if(noBack != null) noBack();
-					break;
-			}
-		}
-
-		public function setMsg(en:String = null , cn:String = null):void{
-			setTitle(en);
-
-			if(!cn) return;
-
-			_cnTxt.text = cn;
-			_cnTxt.visible = true;
-		}
-
+		build();
 	}
+
+	override protected function onDestory():void{
+		super.onDestory();
+
+		if(_old_cnTxt){
+			_old_cnTxt = null;
+		}
+		if(_cnTxt){
+			_cnTxt.destory();
+			_cnTxt = null;
+		}
+		if(_enTxt){
+			_enTxt.dispose();
+			_enTxt = null;
+		}
+		if(_btnGroup){
+			_btnGroup.removeEventListener(SetBtnEvent.SELECT,selectHandler);
+			_btnGroup.destory();
+			_btnGroup = null;
+		}
+
+		BtnUtils.destoryBtn(_noBtn);
+		BtnUtils.destoryBtn(_yesBtn);
+	}
+
+	private function build():void{
+		_ui = new Sprite();
+		_dialogUI = _ui;
+
+//			var bg:Sprite = new Sprite();
+//			bg.graphics.beginFill(0x000000,0.3);
+//			bg.graphics.drawRect(0,0,GameConfig.GAME_SIZE.x,GameConfig.GAME_SIZE.y);
+//			bg.graphics.endFill();
+//			addChild(bg);
+
+		var box:Box = new Box(GameConfig.GAME_SIZE.x,300,0,0.8);
+		box.y = (GameConfig.GAME_SIZE.y - box.height) / 2;
+		_ui.addChild(box);
+
+		_enTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
+		_enTxt.y = 18;
+		box.addChild(_enTxt);
+
+		if(GameUI.SHOW_CN_TEXT){
+			_old_cnTxt = new TextField();
+			UIUtils.formatText(_old_cnTxt , {color:0xffffff , size:20 , align:TextFormatAlign.CENTER});
+			_old_cnTxt.y = _enTxt.y + _enTxt.height + 80;
+			_old_cnTxt.width = GameConfig.GAME_SIZE.x;
+			_old_cnTxt.height = 100;
+			_old_cnTxt.mouseEnabled = false;
+			box.addChild(_old_cnTxt);
+		}
+
+
+		_btnGroup = new SetBtnGroup();
+		_btnGroup.startX = _btnGroup.startY = 0;
+		_btnGroup.direct = 0;
+		_btnGroup.gap = 200;
+		_btnGroup.setBtnData([{label:'YES',cn:'是'},{label:'NO',cn:'否'}],1);
+		_btnGroup.addEventListener(SetBtnEvent.SELECT,selectHandler);
+		_btnGroup.x = (GameConfig.GAME_SIZE.x - _btnGroup.width) / 2 + 30;
+		_btnGroup.y = box.height - 80;
+		box.addChild(_btnGroup);
+
+		var boxy:Number = box.y;
+		box.y = GameConfig.GAME_SIZE.y;
+		TweenLite.to(box,0.2,{y:boxy});
+	}
+
+	private function selectHandler(e:SetBtnEvent):void{
+		switch(e.selectedLabel){
+		case 'YES':
+			if(yesBack != null) yesBack();
+			break;
+		case 'NO':
+			if(noBack != null) noBack();
+			break;
+		}
+	}
+
+	override public function setMsg(en:String = null , cn:String = null):void{
+		_enTxt.text = en ? en : "";
+		_enTxt.x = (GameConfig.GAME_SIZE.x - _enTxt.width) / 2;
+
+//			if(!cn) return;
+
+		if(_old_cnTxt) _old_cnTxt.text = cn ? cn : "";
+		if(_cnTxt) _cnTxt.text =  cn ? cn : "";
+	}
+
+}
 }
