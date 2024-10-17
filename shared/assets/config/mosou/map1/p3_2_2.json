@@ -1,0 +1,147 @@
+{
+    "id":"p3_2_2",
+    "name":"p3_2_2_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"woods",
+            "time":500,
+            "enemyLevel": 16,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"kenpachi", "amount":1, "isBoss":true,"hp":6000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_pig1", "amount":1, "isBoss":false },
+                            { "id":"xb_bear1", "amount":1, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"ikkaku", "amount":1, "isBoss":true,"hp":5500 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_bird1", "amount":1, "isBoss":false },
+                            { "id":"xb_pig1", "amount":1, "isBoss":false },
+                            { "id":"xb_bear1", "amount":1, "isBoss":false }
+                        ]
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"liuhunjie",
+            "time":600,
+            "enemyLevel": 18,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"gin", "amount":1, "isBoss":true,"hp":6500 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_pig1", "amount":1, "isBoss":false },
+                            { "id":"xb_bear1", "amount":1, "isBoss":false },
+                            { "id":"xb_dog1", "amount":1, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"ikkaku", "amount":1, "isBoss":true,"hp":6000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_bird1", "amount":1, "isBoss":false },
+                            { "id":"xb_pig1", "amount":1, "isBoss":false },
+                            { "id":"xb_bear1", "amount":1, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"kenpachi", "amount":1, "isBoss":true,"hp":8000 }
+                    ],
+                    "repeat": null
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"liuhunjie",
+            "time": 600,
+            "enemyLevel": 25,
+            "waves":[
+                {
+                    "hold":5,
+                    "enemies":[
+                        {
+                            "id":"uryuu",
+							"hp":7000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":5,
+                    "enemies":[
+                        {
+                            "id":"gin",
+							"hp":8000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        {
+                            "id":"ikkaku",
+							"hp":8000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        {
+                            "id":"kenpachi",
+							"hp":10000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        }
+    ]
+}

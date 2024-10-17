@@ -1,0 +1,154 @@
+{
+    "id":"p2_1",
+    "name":"p2_1_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"wuyingcun",
+            "time":315,
+            "enemyLevel": 4,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":4, "isBoss":false },
+                        { "id":"xb_ninja_2", "amount":2, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        { "id":"xb_ninja_2", "amount":2, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        { "id":"xb_ninja_2", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":6, "isBoss":false },
+                        { "id":"xb_ninja_2", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":40,
+                    "enemies":[
+                        {
+                            "id":"konan",
+							"hp":3000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"wuyingcun",
+            "time":315,
+            "enemyLevel": 4,
+            "waves":[
+                {
+                    "hold":20,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":6, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":25,
+                    "enemies":[
+                        { "id":"xb_ninja_2", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":6, "isBoss":false },
+                        { "id":"xb_ninja_2", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":40,
+                    "enemies":[
+                        {
+                            "id":"pain",
+							"hp":4000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"wuyingcun",
+            "time": 315,
+            "enemyLevel": 7,
+            "waves":[
+                {
+                    "hold":5,
+                    "enemies":[
+                        {
+                            "id":"konan",
+                            "hp":2500,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 10,
+                        "enemies":[
+                            { "id":"xb_ninja_1", "amount":2, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        {
+                            "id":"pain",
+                            "hp":2500,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 10,
+                        "enemies":[
+                            { "id":"xb_ninja_1", "amount":2, "isBoss":false },
+                            { "id":"xb_ninja_2", "amount":1, "isBoss":false }
+                        ]
+                    }
+                }
+                
+            ]
+        }
+    ]
+}

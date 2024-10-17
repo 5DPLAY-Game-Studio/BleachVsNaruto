@@ -1,0 +1,81 @@
+{
+    "id":"p3_2_6",
+    "name":"p3_2_6_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"shihunjietongdao",
+            "time":180,
+            "enemyLevel": 26,
+            "waves":[
+                {
+                    "hold":30,
+                    "enemies":[
+                        { "id":"xb_bear1", "amount":10, "isBoss":false },
+                        { "id":"xb_bird1", "amount":15, "isBoss":false },
+                        { "id":"xb_dog1", "amount":20, "isBoss":false },
+                        { "id":"xb_pig1", "amount":10, "isBoss":false }
+                    ]
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"madara", "amount":1, "isBoss":true,"hp":20000 }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"shihunjietongdao",
+            "time":180,
+            "enemyLevel": 28,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"obito", "amount":1, "isBoss":true,"hp":20000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"madara", "amount":1, "isBoss":true,"hp":24000 }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"shihunjietongdao",
+            "time": 180,
+            "enemyLevel": 35,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"obito_trueColors", "amount":1, "isBoss":true,"hp":28000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"madara", "amount":1, "isBoss":true,"hp":35000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 10,
+                        "enemies":[
+                            { "id":"xb_ninja_1", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_2", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_fire1", "amount":2, "isBoss":false }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

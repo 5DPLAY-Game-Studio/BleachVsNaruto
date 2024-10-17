@@ -1,0 +1,121 @@
+{
+    "id":"p3_2_4",
+    "name":"p3_2_4_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"woods",
+            "time":400,
+            "enemyLevel": 19,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"suigetsu", "amount":1, "isBoss":true,"hp":8000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_pig1", "amount":3, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"hinata", "amount":1, "isBoss":true,"hp":7000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_bird1", "amount":5, "isBoss":false }
+                        ]
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"mountain",
+            "time":400,
+            "enemyLevel": 20,
+            "waves":[
+                {
+                    "hold":30,
+                    "enemies":[
+                        { "id":"killerbee", "amount":1, "isBoss":true,"hp":9000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_ninja_thunder1", "amount":3, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"gaara", "amount":1, "isBoss":true,"hp":10000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_ninja_sand1", "amount":4, "isBoss":false }
+                        ]
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"mountain",
+            "time": 400,
+            "enemyLevel": 30,
+            "waves":[
+                {
+                    "hold":5,
+                    "enemies":[
+                        {
+                            "id":"suigetsu",
+							"hp":9000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        {
+                            "id":"killerbee",
+							"hp":10000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        {
+                            "id":"gaara",
+							"hp":12000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        }
+    ]
+}

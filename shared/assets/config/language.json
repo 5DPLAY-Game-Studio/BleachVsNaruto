@@ -1,0 +1,16 @@
+{
+    "font_dir": "font/",
+    "languages": [{
+		"zh-CN": "microsoft_yahei.swf"
+    }, {
+		"zh-TW": "microsoft_jhenghei.swf"
+    }, {
+		"en"   : "microsoft_yahei.swf"
+    }, {
+		"ja"   : "meiryo.swf"
+    }, {
+		"ko"   : "malgun_gothic.swf"
+    }, {
+		"vi"   : "calibri.swf"
+    }]
+}

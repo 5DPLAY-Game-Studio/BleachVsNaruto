@@ -1,0 +1,149 @@
+{
+    "id":"p3_2",
+    "name":"p3_2_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"muyecun",
+            "time":300,
+            "enemyLevel": 12,
+            "waves":[
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":6, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":4, "isBoss":false },
+                        { "id":"xb_ninja_2", "amount":2, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"neji", "amount":1, "isBoss":true,"hp":4500 }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":8, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        { "id":"xb_ninja_2", "amount":6, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":40,
+                    "enemies":[
+                        { "id":"xb_ninja_1", "amount":6, "isBoss":false },
+                        { "id":"xb_ninja_2", "amount":6, "isBoss":false }
+                    ],
+                    "repeat":null
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"muyecun",
+            "time":300,
+            "enemyLevel": 12,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        {
+                            "id":"naruto",
+							"hp":4000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        {
+                            "id":"kakashi",
+							"hp":5000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"muyecun",
+            "time": 300,
+            "enemyLevel": 15,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        {
+                            "id":"sakura",
+							"hp":3500,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        {
+                            "id":"naruto",
+							"hp":4000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        {
+                            "id":"sasuke",
+							"hp":4000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        {
+                            "id":"kakashi",
+							"hp":5000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        }
+    ]
+}

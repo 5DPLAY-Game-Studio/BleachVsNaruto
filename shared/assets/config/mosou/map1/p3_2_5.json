@@ -1,0 +1,93 @@
+{
+    "id":"p3_2_5",
+    "name":"p3_2_5_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"xianshi",
+            "time":180,
+            "enemyLevel": 22,
+            "waves":[
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"gin", "amount":1, "isBoss":true,"hp":12000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"toushirou", "amount":1, "isBoss":true,"hp":13000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"byakuya", "amount":1, "isBoss":true,"hp":12000 }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"jingyantin",
+            "time":180,
+            "enemyLevel": 24,
+            "waves":[
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"mayuri", "amount":1, "isBoss":true,"hp":12000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"toushirou_bankai", "amount":1, "isBoss":true,"hp":14000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"byakuya_bankai", "amount":1, "isBoss":true,"hp":15000 }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"jingyantin",
+            "time": 180,
+            "enemyLevel": 30,
+            "waves":[
+                {
+                    "hold":5,
+                    "enemies":[
+                        { "id":"gin", "amount":1, "isBoss":true,"hp":15000 }
+                    ]
+                },
+                {
+                    "hold":5,
+                    "enemies":[
+                        { "id":"mayuri", "amount":1, "isBoss":true,"hp":15000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"toushirou_bankai", "amount":1, "isBoss":true,"hp":18000 }
+                    ]
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"byakuya_bankai", "amount":1, "isBoss":true,"hp":18000 }
+                    ]
+                }
+            ]
+        }
+    ]
+}

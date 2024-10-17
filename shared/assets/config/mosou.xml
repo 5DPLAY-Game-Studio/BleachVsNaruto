@@ -1,0 +1,101 @@
+<!--
+  ~ Copyright (C) 2021-2024, 5DPLAY Game Studio
+  ~ All rights reserved.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<mosou>
+	<!-- 死神关卡 -->
+	<design comicType="0">
+		<stage map="muyecun" time="120">
+			<wave hold="10">
+				<enemy id="xb_ninja_1" hp="100" amount="20" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="xb_ninja_1" hp="100" amount="20" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="xb_ninja_1" hp="100" amount="50" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="xb_ninja_1" hp="100" amount="50" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="ichigo" hp="1000" amount="1" isBoss="true" />
+				<repeat type="1" hold="2">
+					<enemy id="xb_ninja_1" hp="100" amount="2" isBoss="false" />
+				</repeat>
+			</wave>
+		</stage>
+
+		<stage map="muyecun" time="120">
+			<wave hold="10">
+				<enemy id="naruto" hp="100" amount="30" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="naruto" hp="100" amount="20" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="naruto" hp="100" amount="20" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="naruto" hp="100" amount="20" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="ichigo" hp="1000" amount="10" isBoss="true" />
+			</wave>
+		</stage>
+	</design>
+
+	<!-- 火影关卡 -->
+	<design comicType="1">
+		<stage map="xianshi" time="120">
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="1" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="3" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="5" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="5" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="ichigo" hp="1000" amount="1" isBoss="true" />
+			</wave>
+		</stage>
+
+		<stage map="xianshi" time="120">
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="1" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="1" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="1" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="rukia" hp="100" amount="1" isBoss="false" />
+			</wave>
+			<wave hold="10">
+				<enemy id="ichigo" hp="1000" amount="1" isBoss="true" />
+			</wave>
+		</stage>
+	</design>
+
+</mosou>

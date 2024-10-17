@@ -1,0 +1,221 @@
+{
+  "//": "------------------ Global ------------------",
+  "package": {
+    "//": "------------------ Package ------------------",
+    "interfaces": {
+      "//": "------------------ Class ------------------",
+      "GameInterface": {
+        "getDefaultMenu": {
+          "team_play": {
+            "txt": "小队模式",
+            "child": {
+              "team_acrade": {
+                "txt": "闯关模式"
+              },
+              "team_vs_people": {
+                "txt": "2P对战"
+              },
+              "team_vs_cpu": {
+                "txt": "对战电脑"
+              }
+            }
+          },
+          "single_play": {
+            "txt": "单人模式",
+            "child": {
+              "single_acrade": {
+                "txt": "闯关模式"
+              },
+              "single_vs_people": {
+                "txt": "2P对战"
+              },
+              "single_vs_cpu": {
+                "txt": "对战电脑"
+              }
+            }
+          },
+          "musou_play": {
+            "txt": "无双模式",
+            "child": {
+              "musou_acrade": {
+                "txt": "无双模式"
+              }
+            }
+          },
+          "option": {
+            "txt": "游戏设置"
+          },
+          "training": {
+            "txt": "练习模式"
+          },
+          "credits": {
+            "txt": "制作组"
+          },
+          "more_games": {
+            "txt": "更多游戏"
+          }
+        }
+      },
+      "//": "------------------ Class ------------------"
+    },
+    "//": "------------------ Package ------------------",
+    "ctrl": {
+      "//": "------------------ Class ------------------",
+      "AssetManager": {
+        "loadBasic": {
+          "loadNext": {
+            "load_step_0": {
+              "txt": "声音"
+            },
+            "load_step_1": {
+              "txt": "效果"
+            },
+            "load_step_2": {
+              "txt": "字体"
+            },
+            "load_step_3": {
+              "txt": "图片"
+            }
+          }
+        }
+      },
+      "//": "------------------ Class ------------------",
+      "GameLoader": {
+        "loadAndCacheFighter": {
+          "fighter_id_error": {
+            "txt": "角色 id 发生错误！"
+          }
+        },
+        "loadAssister": {
+          "assister_id_error": {
+            "txt": "辅助 id 发生错误！"
+          }
+        },
+        "loadMap": {
+          "map_id_error": {
+            "txt": "地图 id 发生错误！"
+          }
+        },
+        "loadSWF": {
+          "loadIOError": {
+            "load_swf_error": {
+              "txt": "加载 SWF 文件发生错误！"
+            }
+          }
+        }
+      },
+      "//": "------------------ Class ------------------"
+    },
+    "//": "------------------ Package ------------------"
+  },
+  "//": "------------------ Global ------------------",
+  "debug": {
+    "//": "------------------ Global Debug ------------------",
+    "package": {
+      "//": "------------------ Package ------------------",
+      "ctrl": {
+        "//": "------------------ Class ------------------",
+        "AssetManager": {
+          "loadSnds": {
+            "loadErr": {
+              "load_sound_fail": {
+                "txt": "加载声音失败："
+              }
+            }
+          },
+          "loadGraphics": {
+            "loadFail": {
+              "load_swf_fail": {
+                "txt": "加载 SWF 失败："
+              }
+            }
+          },
+          "loadFonts": {
+            "bitmapFail": {
+              "load_font_bitmap_fail": {
+                "txt": "加载字体图片失败："
+              }
+            },
+            "loadXMLFail": {
+              "load_font_xml_fail": {
+                "txt": "加载字体 XML 失败："
+              }
+            }
+          }
+        },
+        "//": "------------------ Class ------------------",
+        "GameLoader": {
+          "loadAndCacheFighter": {
+            "fighter_id_error": {
+              "txt": "GameLoader.loadAndCacheFighter:: 角色 id 不存在："
+            },
+            "loadComplete": {
+              "fighter_id_error": {
+                "txt": "加载角色错误："
+              }
+            }
+          },
+          "loadAssister": {
+            "assister_id_error": {
+              "txt": "GameLoader.loadAssister:: 辅助 id 不存在："
+            }
+          },
+          "loadMap": {
+            "map_id_error": {
+              "txt": "GameLoader.loadMap:: 地图 id 不存在："
+            }
+          },
+          "dispose": {
+            "unload_cache_error": {
+              "txt": "GameLoader.dispose:: 卸装缓存发生错误："
+            }
+          },
+          "loadSWF": {
+            "loadIOError": {
+              "load_swf_error": {
+                "txt": "GameLoader.loadSWF:: 加载 SWF 文件错误："
+              }
+            }
+          }
+        },
+        "//": "------------------ Class ------------------",
+        "GameLogic": {
+          "isInAir": {
+            "map_null": {
+              "txt": "地图为空！"
+            }
+          },
+          "isTouchBottomFloor": {
+            "map_null": {
+              "txt": "地图为空！"
+            }
+          },
+          "isOutRange": {
+            "map_null": {
+              "txt": "地图为空！"
+            }
+          },
+          "setGameMode": {
+            "set_game_mode": {
+              "txt": "设置游戏模式："
+            }
+          }
+        },
+        "//": "------------------ Class ------------------",
+        "SoundCtrl": {
+          "loadFightBGM": {
+            "loadFail": {
+              "load_fight_bgm": {
+                "txt": "SoundCtrl.loadFightBGM:: 加载声音失败："
+              }
+            }
+          }
+        },
+        "//": "------------------ Class ------------------"
+      },
+      "//": "------------------ Package ------------------"
+    },
+    "//": "------------------ Global Debug ------------------"
+  },
+  "//": "------------------ Global ------------------"
+}

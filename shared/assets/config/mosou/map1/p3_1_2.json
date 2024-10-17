@@ -1,0 +1,147 @@
+{
+    "id":"p3_1_2",
+    "name":"p3_1_2_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"jianchang",
+            "time":500,
+            "enemyLevel": 18,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"obito", "amount":1, "isBoss":true,"hp":6000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_ninja_fire1", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_fire2", "amount":1, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"kakashi_kamui", "amount":1, "isBoss":true,"hp":7000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_ninja_fire1", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_fire2", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_2", "amount":1, "isBoss":false }
+                        ]
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"shihunjietongdao",
+            "time":600,
+            "enemyLevel": 20,
+            "waves":[
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"sasuke_susanoo", "amount":1, "isBoss":true,"hp":7000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_ninja_fire1", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_fire2", "amount":1, "isBoss":false },
+                            { "id":"xb_bird1", "amount":1, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"naruto_hermit", "amount":1, "isBoss":true,"hp":7000 }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 20,
+                        "enemies":[
+                            { "id":"xb_ninja_fire1", "amount":1, "isBoss":false },
+                            { "id":"xb_ninja_fire2", "amount":1, "isBoss":false },
+                            { "id":"xb_dog1", "amount":1, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"obito", "amount":1, "isBoss":true,"hp":9000 }
+                    ],
+                    "repeat": null
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"shihunjietongdao",
+            "time": 600,
+            "enemyLevel": 30,
+            "waves":[
+                {
+                    "hold":5,
+                    "enemies":[
+                        {
+                            "id":"kimimaro",
+							"hp":7500,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":5,
+                    "enemies":[
+                        {
+                            "id":"pain",
+							"hp":8000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        {
+                            "id":"killerbee",
+							"hp":8000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        {
+                            "id":"obito_trueColors",
+							"hp":10000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":null
+                }
+            ]
+        }
+    ]
+}

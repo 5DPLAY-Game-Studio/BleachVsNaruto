@@ -1,0 +1,151 @@
+{
+    "id":"p3",
+    "name":"p3_ms",
+    
+    "missions":[
+        {
+            "id": "1",
+            "map":"woods",
+            "time":300,
+            "enemyLevel": 10,
+            "waves":[
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"xb_ninja_fire1", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"xb_ninja_fire1", "amount":4, "isBoss":false },
+                        { "id":"xb_ninja_fire2", "amount":2, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":15,
+                    "enemies":[
+                        { "id":"xb_ninja_fire2", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":20,
+                    "enemies":[
+                        { "id":"xb_ninja_fire2", "amount":4, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":30,
+                    "enemies":[
+                        { "id":"xb_ninja_fire1", "amount":10, "isBoss":false },
+                        { "id":"xb_ninja_fire2", "amount":2, "isBoss":false }
+                    ],
+                    "repeat":null
+                },
+                {
+                    "hold":40,
+                    "enemies":[
+                        {
+                            "id":"naruto_oneTail",
+							"hp":4000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 10,
+                        "enemies":[
+                            { "id":"xb_ninja_fire1", "amount":2, "isBoss":false }
+                        ]
+                    }
+                }
+            ]
+        },
+
+        {
+            "id": "2",
+            "map":"woods",
+            "time":300,
+            "enemyLevel": 10,
+            "waves":[
+                {
+                    "hold":60,
+                    "enemies":[
+                        {
+                            "id":"sasuke_mantra",
+                            "hp":4000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 10,
+                        "enemies":[
+                            { "id":"xb_ninja_fire2", "amount":2, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":10,
+                    "enemies":[
+                        { "id":"xb_ninja_fire1", "amount":10, "isBoss":false },
+                        { "id":"xb_ninja_fire2", "amount":5, "isBoss":false }
+                    ],
+                    "repeat":null
+                }
+            ]
+        },
+
+        {
+            "id": "3",
+            "map":"shihunjietongdao",
+            "time": 300,
+            "enemyLevel": 12,
+            "waves":[
+                {
+                    "hold":10,
+                    "enemies":[
+                        {
+                            "id":"naruto_oneTail",
+							"hp":5000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 5,
+                        "enemies":[
+                            { "id":"xb_ninja_fire1", "amount":2, "isBoss":false }
+                        ]
+                    }
+                },
+                {
+                    "hold":45,
+                    "enemies":[
+                        {
+                            "id":"sasuke_mantra",
+							"hp":5000,
+                            "amount":1,
+                            "isBoss":true
+                        }
+                    ],
+                    "repeat":{
+                        "type": 1,
+                        "hold": 5,
+                        "enemies":[
+                            { "id":"xb_ninja_fire2", "amount":1, "isBoss":false }
+                        ]
+                    }
+                }
+                
+            ]
+        }
+    ]
+}

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (C) 2021-2024, 5DPLAY Game Studio
+  ~ All rights reserved.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<select_config>
+	<stage_setting>
+		<layout x="0" y="0" width="800" height="600" left="15" right="15" top="50" bottom="0"/>
+	</stage_setting>
+
+	<char_list>
+		<row>
+			<item moreFighter="ichigo_bankai,ichigo_vizored_half,ichigo_vizored">ichigo</item>
+			<item moreFighter="rukia_shikai" offset="-10,0">rukia</item>
+			<item offset="-20,0">renji</item>
+			<item offset="-5,40">ichigo_zero</item>
+			<item offset="-15,40" moreFighter="ogihci_bankai">ogihci</item>
+			<item offset="15,40" moreFighter="naruto_hermit">naruto_kurama</item>
+			<item offset="5,40" moreFighter="sasuke_susanoo">sasuke_mantra</item>
+			<item moreFighter="gaara_old" offset="20,0">gaara</item>
+			<item offset="10,0">sakura</item>
+			<item moreFighter="naruto_oneTail,naruto_fourTail">naruto</item>
+		</row>
+
+		<row>
+			<item>kenpachi</item>
+			<item offset="-10,0">ikkaku</item>
+			<item offset="-20,0">gin</item>
+			<item offset="-5,-25"></item>
+			<item offset="40,-25"></item>
+			<item offset="0,-25"></item>
+			<item offset="5,-25"></item>
+			<item offset="20,0">juggo</item>
+			<item offset="10,0">karin</item>
+			<item moreFighter="sasuke_susanoo_old">sasuke</item>
+		</row>
+
+		<row>
+			<item moreFighter="toushirou_bankai">toushirou</item>
+			<item moreFighter="byakuya_bankai" offset="-10,0">byakuya</item>
+			<item offset="-20,0">mayuri</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item offset="20,0">neji</item>
+			<item moreFighter="lee_domen" offset="10,0">lee</item>
+			<item moreFighter="kakashi_kamui">kakashi</item>
+		</row>
+
+		<row>
+			<item>chad</item>
+			<item offset="-10,0">orihime</item>
+			<item moreFighter="uryuu_ginreigojiaku" offset="-20,0">uryuu</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item offset="20,0">kimimaro</item>
+			<item offset="10,0">orochimaru</item>
+			<item>jiraiya</item>
+		</row>
+
+		<row>
+			<item>grimmjow</item>
+			<item moreFighter="ulquiorra_resurreccion" offset="-10,0">ulquiorra</item>
+			<item offset="-20,0">starrk</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item moreFighter="obito_trueColors" offset="20,0">obito</item>
+			<item offset="10,0">killerbee</item>
+			<item moreFighter="pain_old">pain</item>
+		</row>
+
+		<row>
+			<item>soifon</item>
+			<item offset="-10,0">yoruichi</item>
+			<item offset="-20,0" moreFighter="kenshin_slash">kenshin</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item moreFighter="deidara_old" offset="20,0">deidara</item>
+			<item offset="10,0" moreFighter="itachi_old">itachi</item>
+			<item>konan</item>
+		</row>
+
+		<row offset="40,-20">
+			<item/>
+			<item/>
+			<item offset="20,0">aizen</item>
+			<item offset="10,0">random_bleach</item>
+			<item>random</item>
+			<item offset="-10,0">random_naruto</item>
+			<item offset="-20,0">madara</item>
+			<item/>
+			<item/>
+			<item/>
+		</row>
+
+		<row>
+		</row>
+
+	</char_list>
+
+	<!-- 辅助选择界面 -->
+
+	<assist_list>
+
+		<row>
+			<item>kon</item>
+			<item offset="-10,0">orihime</item>
+			<item offset="-20,0">yoruichi</item>
+			<item offset="-5,0">halibel</item>
+			<item offset="-15,0">grimmjow</item>
+			<item offset="15,0">itachi</item>
+			<item offset="5,0">shikamaru</item>
+			<item offset="20,0">ino</item>
+			<item offset="10,0">temari</item>
+			<item>gaara</item>
+		</row>
+
+		<row>
+			<item>ichigo_hollow</item>
+			<item offset="-10,0">yachiru</item>
+			<item offset="-20,0">starrk</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item offset="20,0">tsuchikage</item>
+			<item offset="10,0">tsunate</item>
+			<item>hinata</item>
+		</row>
+
+		<row>
+			<item>soifon</item>
+			<item offset="-10,0">nemu</item>
+			<item offset="-20,0">ichigo_padipata</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item offset="20,0">kimimaro</item>
+			<item offset="10,0">sai</item>
+			<item>suigetsu</item>
+		</row>
+
+		<row>
+			<item>uryuu</item>
+			<item offset="-10,0">kenpachi</item>
+			<item offset="-20,0">gin</item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item offset="20,0">minato</item>
+			<item offset="10,0">jiraiya</item>
+			<item>tenten</item>
+		</row>
+
+		<row>
+			<item>random_bleach</item>
+			<item offset="-10,0">byakuya</item>
+			<item offset="-20,0"></item>
+			<item offset="-5,0">yamamoto</item>
+			<item offset="-15,0">shishio</item>
+			<item offset="15,0">madara</item>
+			<item offset="5,0">obito_trueColors</item>
+			<item offset="20,0">sakura</item>
+			<item offset="10,0">hiruko</item>
+			<item>random_naruto</item>
+		</row>
+
+		<row>
+			<item></item>
+			<item offset="-10,0"></item>
+			<item offset="-20,0"></item>
+			<item offset="-5,20"></item>
+			<item offset="-15,20"></item>
+			<item offset="15,20"></item>
+			<item offset="5,20"></item>
+			<item offset="20,0"></item>
+			<item offset="10,0"></item>
+			<item></item>
+		</row>
+
+	</assist_list>
+</select_config>
