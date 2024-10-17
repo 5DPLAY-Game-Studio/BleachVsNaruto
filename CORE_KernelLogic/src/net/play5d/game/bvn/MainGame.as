@@ -102,27 +102,27 @@ import net.play5d.game.bvn.stage.LoadingState;
 			function resInitBack():void{
 				AssetManager.I.init();
 
-				GameLoger.log("res init ok");
+				GameLoger.log("Initializing resources completed!");
 
 				_rootSprite = root;
 				_stage = stage;
 
-				GameLoger.log("init game render");
+				GameLoger.log("Initializing game rendering...");
 				GameRender.initlize(stage);
 
-				GameLoger.log("init game inputer");
+				GameLoger.log("Initializing game inputter...");
 				GameInputer.initlize(_stage);
 
-				GameLoger.log("init scroll");
+				GameLoger.log("Initializing game scroll rectangle...");
 				root.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x,GameConfig.GAME_SIZE.y);
 
-				GameLoger.log("init stagectrl");
+				GameLoger.log("Initializing scene controller...");
 				stageCtrl = new KyoStageCtrl(_rootSprite);
 
-				GameLoger.log("init config");
+				GameLoger.log("Initializing game configuration...");
 				GameData.I.config.applyConfig();
 
-				GameLoger.log("init inputer config");
+				GameLoger.log("Initializing game inputter configuration...");
 				GameInputer.updateConfig();
 
 				GameData.I.loadSaveData();
@@ -134,7 +134,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 		}
 
 		public function initalizeLoad(initBack:Function = null , initFail:Function = null):void{
-			GameLoger.log("init loading");
+			GameLoger.log("Initializing game loading...");
 
 			var loadingState:GameLoadingState = new GameLoadingState();
 			stageCtrl.goStage(loadingState);
@@ -143,13 +143,13 @@ import net.play5d.game.bvn.stage.LoadingState;
 			GameEvent.dispatchEvent(GameEvent.LOAD_GAME_START);
 
 			function loadGameBack():void{
-				GameLoger.log("init game data");
+				GameLoger.log("Initializing game data...");
 				GameData.I.initData();
 
-				GameLoger.log("init config");
+				GameLoger.log("Initializing game configuration...");
 				GameData.I.config.applyConfig();
 
-				GameLoger.log("init inputer config");
+				GameLoger.log("Initializing game inputter configuration...");
 				GameInputer.updateConfig();
 
 				EffectModel.I.initlize();
@@ -179,14 +179,14 @@ import net.play5d.game.bvn.stage.LoadingState;
 		public function setFPS(v:Number):void{
 			_fps = v;
 			_stage.frameRate = v;
-			trace('setFPS :: ', v);
+			trace('Setting FPS:: ' + v);
 		}
 
 		public function setQuality(v:String):void{
 			if(_quality == v) return;
 			_quality = v;
 			_stage.quality = v;
-			trace('setQuality :: ', v);
+			trace('Setting Quality:: ' +  v);
 		}
 
 		/**
@@ -210,9 +210,6 @@ import net.play5d.game.bvn.stage.LoadingState;
 			setQuality(GameConfig.QUALITY_UI);
 
 			GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, MenuState);
-
-//			GameUI.alert('TEST', '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试');
-//			GameUI.confrim('TEST TEST TEST', '测试测试');
 		}
 
 		/**
@@ -376,6 +373,7 @@ import net.play5d.game.bvn.stage.LoadingState;
 
 		/**
 		 * 前往【语言选择】场景
+		 * @param clickCallBack 点击回调事件
 		 */
 		public function goLanguage(clickCallBack:Function = null):void {
 			var languageStage:LanguageStage = new LanguageStage();

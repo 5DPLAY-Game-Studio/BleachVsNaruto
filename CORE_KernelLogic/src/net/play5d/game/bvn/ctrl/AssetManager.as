@@ -95,22 +95,22 @@ package net.play5d.game.bvn.ctrl
 				switch(loadStep){
 					case 0:
 						loadPreLoadSounds(loadNext , loadProcess);
-						type = "声音";
+						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_0.txt');
 						loadProcess(0);
 						break;
 					case 1:
 						loadGraphics([_effectSwfPath] , loadNext , loadProcess);
-						type = "特效";
+						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_1.txt');
 						loadProcess(0);
 						break;
 					case 2:
 						loadFonts(loadNext , loadProcess);
-						type = "字体";
+						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_2.txt');
 						loadProcess(0);
 						break;
 					case 3:
 						loadBitmaps(loadNext , loadProcess);
-						type = "图片";
+						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_3.txt');
 						loadProcess(0);
 						break;
 					case 4:
@@ -165,7 +165,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadErr():void{
-				trace('加载声音失败 : '+curUrl);
+				trace(GetLangText('debug.package.ctrl.AssetManager.loadSnds.loadErr.load_sound_fail.txt')+curUrl);
 				loadNext();
 			}
 
@@ -319,7 +319,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadFail():void{
-				trace("Error :: "+curUrl+" load fail!");
+				trace(GetLangText('debug.package.ctrl.AssetManager.loadGraphics.loadFail.load_swf_fail.txt')+curUrl);
 				loadNext();
 			}
 
@@ -363,11 +363,11 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function bitmapFail():void{
-				trace("字体图片加载失败" , url);
+				trace(GetLangText('debug.package.ctrl.AssetManager.loadFonts.bitmapFail.load_font_bitmap_fail.txt') , url);
 			}
 
 			function loadXMLFail():void{
-				trace("字体XML加载失败" , url);
+				trace(GetLangText('debug.package.ctrl.AssetManager.loadFonts.loadXMLFail.load_font_xml_fail.txt')  , url);
 			}
 		}
 
