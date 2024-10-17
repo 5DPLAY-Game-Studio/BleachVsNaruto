@@ -43,9 +43,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.SetBtnGroup;
 	import net.play5d.game.bvn.ui.SetCtrlBtnUI;
 	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class SettingStage implements IStage1
+	public class SettingStage implements IStage
 	{
 		private var _ui:stg_set_ui;
 		private var _btnGroup:SetBtnGroup;

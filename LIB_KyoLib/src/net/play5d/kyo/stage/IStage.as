@@ -19,7 +19,7 @@
 package net.play5d.kyo.stage {
 import flash.display.DisplayObject;
 
-public interface IStage1 {
+public interface IStage {
     function get display():DisplayObject;
 
     function build():void;

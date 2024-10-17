@@ -50,9 +50,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.UIUtils;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class WinnerStage implements IStage1
+	public class WinnerStage implements IStage
 	{
 		private var _ui:MovieClip;
 		private var _scoreText:BitmapFontText;

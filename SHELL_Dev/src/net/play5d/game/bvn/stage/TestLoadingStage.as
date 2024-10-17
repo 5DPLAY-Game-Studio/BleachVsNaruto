@@ -40,9 +40,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.input.GameInputer;
 	import net.play5d.game.bvn.map.MapMain;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class TestLoadingStage implements IStage1
+	public class TestLoadingStage implements IStage
 	{
 		private var _ui:Sprite = new Sprite();
 		private var _loadQueue:Array;

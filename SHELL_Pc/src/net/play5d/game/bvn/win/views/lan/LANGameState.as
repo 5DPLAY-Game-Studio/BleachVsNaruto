@@ -27,9 +27,9 @@ package net.play5d.game.bvn.win.views.lan
 	import net.play5d.game.bvn.events.SetBtnEvent;
 	import net.play5d.game.bvn.ui.SetBtnGroup;
 	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class LANGameState implements IStage1
+	public class LANGameState implements IStage
 	{
 		private var _ui:Sprite;
 		private var _btnGroup:SetBtnGroup;

@@ -34,9 +34,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.ui.SetBtnGroup;
 	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class CreditsStage implements IStage1
+	public class CreditsStage implements IStage
 	{
 
 		private var _ui:Sprite;

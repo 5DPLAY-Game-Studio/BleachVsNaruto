@@ -23,9 +23,9 @@ package net.play5d.game.bvn.stage
 
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class LogoStage implements IStage1
+	public class LogoStage implements IStage
 	{
 		private var _ui:logo_movie;
 

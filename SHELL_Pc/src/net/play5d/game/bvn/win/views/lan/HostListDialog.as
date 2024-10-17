@@ -33,10 +33,10 @@ package net.play5d.game.bvn.win.views.lan
 	//import net.play5d.game.bvn.win.ctrls.LANUDPCtrler;
 	import net.play5d.game.bvn.win.data.HostVO;
 	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 	import net.play5d.kyo.utils.KyoBtnUtils;
 
-	public class HostListDialog implements IStage1
+	public class HostListDialog implements IStage
 	{
 
 		public var onClose:Function;

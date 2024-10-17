@@ -23,7 +23,7 @@ package net.play5d.game.bvn.win.views
 	import net.play5d.game.bvn.win.GameInterfaceManager;
 	import net.play5d.game.bvn.win.data.ExtendConfig;
 	import net.play5d.game.bvn.win.input.JoyStickConfigVO;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
 	public class ViewManager
 	{
@@ -46,7 +46,7 @@ package net.play5d.game.bvn.win.views
 		}
 
 		private function goJoyStickSet(player:int , config:JoyStickConfigVO):void{
-			var curStg:IStage1 = MainGame.stageCtrl.currentStage;
+			var curStg:IStage = MainGame.stageCtrl.currentStage;
 			if(!curStg is SettingStage) return;
 			var setStg:SettingStage         = curStg as SettingStage;
 			var joyStickSetUI:JoyStickSetUI = new JoyStickSetUI();

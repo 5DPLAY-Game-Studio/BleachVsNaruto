@@ -36,9 +36,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.SetBtnGroup;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class CongratulateStage implements IStage1
+	public class CongratulateStage implements IStage
 	{
 		private var _mainUI:Sprite;
 		private var _ui:Sprite;

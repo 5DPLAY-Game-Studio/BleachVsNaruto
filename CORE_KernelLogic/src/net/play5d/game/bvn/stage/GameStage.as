@@ -39,9 +39,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.game.bvn.map.MapMain;
 	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 
-	public class GameStage extends Sprite implements IStage1
+	public class GameStage extends Sprite implements IStage
 	{
 		private var _gameLayer:Sprite = new Sprite(); //主游戏层
 		private var _playerLayer:Sprite = new Sprite(); //游戏角色层

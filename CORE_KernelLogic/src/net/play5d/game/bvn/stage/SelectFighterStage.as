@@ -62,11 +62,11 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.select.SelecterItemUI;
 	import net.play5d.game.bvn.utils.KeyBoarder;
 	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.IStage1;
+	import net.play5d.kyo.stage.IStage;
 	import net.play5d.kyo.utils.ArrayMap;
 	import net.play5d.kyo.utils.KyoRandom;
 
-	public class SelectFighterStage implements IStage1
+	public class SelectFighterStage implements IStage
 	{
 
 		public static var AUTO_FINISH:Boolean = true;
