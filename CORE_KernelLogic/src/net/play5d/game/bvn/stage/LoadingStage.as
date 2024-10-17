@@ -45,9 +45,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.ui.select.SelectIndexUI;
 	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage1;
 
-	public class LoadingStage implements Istage
+	public class LoadingStage implements IStage1
 	{
 
 		public static var AUTO_START_GAME:Boolean = true;

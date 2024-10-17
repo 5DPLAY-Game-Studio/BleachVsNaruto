@@ -23,7 +23,7 @@ import com.greensock.easing.Back;
 import flash.display.DisplayObject;
 import flash.geom.Point;
 
-import net.play5d.kyo.stage.Istage;
+import net.play5d.kyo.stage.IStage1;
 
 public class ZoomEffect implements IStageFadEffect {
     public function ZoomEffect(duration:Number = 0.3, back:Boolean = true) {
@@ -34,7 +34,7 @@ public class ZoomEffect implements IStageFadEffect {
     private var _back:Boolean;
     private var _fixPosition:Boolean;
 
-    public function fadIn(stage:Istage, complete:Function = null):void {
+    public function fadIn(stage:IStage1, complete:Function = null):void {
         var z:Number        = 0.5;
         var p:Point         = new Point();
         var d:DisplayObject = stage.display;
@@ -48,7 +48,7 @@ public class ZoomEffect implements IStageFadEffect {
         TweenLite.from(stage.display, _duration, to);
     }
 
-    public function fadOut(stage:Istage, complete:Function = null):void {
+    public function fadOut(stage:IStage1, complete:Function = null):void {
         var z:Number        = 0.1;
         var p:Point         = new Point();
         var d:DisplayObject = stage.display;

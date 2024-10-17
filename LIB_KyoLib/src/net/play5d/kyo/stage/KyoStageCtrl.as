@@ -34,10 +34,10 @@ public class KyoStageCtrl extends EventDispatcher {
      */
     public var changeStateMouseGap:int = 0;
     private var _mainStage:Sprite;
-    private var _curStage:Istage;
+    private var _curStage:IStage1;
     private var _layers:Array = [];
 
-    public function get currentStage():Istage {
+    public function get currentStage():IStage1 {
         return _curStage;
     }
 
@@ -57,7 +57,7 @@ public class KyoStageCtrl extends EventDispatcher {
      * @param sameChange 在切换到的场景与当前场景相同时，是否也要切换
      * @param buildAfterDestory 在当前场景卸载后加载新场景
      */
-    public function goStage(stg:Istage, sameChange:Boolean = false, buildAfterDestory:Boolean = false):Boolean {
+    public function goStage(stg:IStage1, sameChange:Boolean = false, buildAfterDestory:Boolean = false):Boolean {
         function detoryComplete():void {
             try {
                 _mainStage.removeChild(_curStage.display);
@@ -118,8 +118,8 @@ public class KyoStageCtrl extends EventDispatcher {
      * @param effect 弹出时效果
      */
     public function addLayer(
-            layer:Istage, x:Number = 0, y:Number = 0, removeElse:Boolean = false, effect:IStageFadEffect = null,
-            addBack:Function                                                                             = null
+            layer:IStage1, x:Number = 0, y:Number = 0, removeElse:Boolean = false, effect:IStageFadEffect = null,
+            addBack:Function                                                                              = null
     ):void {
         if (removeElse) {
             removeAllLayer();
@@ -167,8 +167,8 @@ public class KyoStageCtrl extends EventDispatcher {
     }
 
     public function hasLayer(layer:Object):Boolean {
-        for each(var i:Istage in _layers) {
-            if (layer is Istage) {
+        for each(var i:IStage1 in _layers) {
+            if (layer is IStage1) {
                 if (i == layer) {
                     return true;
                 }
@@ -183,7 +183,7 @@ public class KyoStageCtrl extends EventDispatcher {
         return false;
     }
 
-    public function removeLayer(layer:Istage, effect:IStageFadEffect = null, removeBack:Function = null):void {
+    public function removeLayer(layer:IStage1, effect:IStageFadEffect = null, removeBack:Function = null):void {
 
         if (effect) {
             effect.fadOut(layer, effectFin);
@@ -213,7 +213,7 @@ public class KyoStageCtrl extends EventDispatcher {
     }
 
     public function removeAllLayer():void {
-        for each(var i:Istage in _layers) {
+        for each(var i:IStage1 in _layers) {
             removeLayer(i);
         }
         _layers = [];

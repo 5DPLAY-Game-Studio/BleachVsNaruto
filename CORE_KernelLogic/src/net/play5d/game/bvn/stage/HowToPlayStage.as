@@ -39,9 +39,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.input.GameInputer;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.input.KyoKeyCode;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage1;
 
-	public class HowToPlayStage implements Istage
+	public class HowToPlayStage implements IStage1
 	{
 		private var _ui:movie_howtoplay;
 		public function HowToPlayStage()

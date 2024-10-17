@@ -17,11 +17,11 @@
  */
 
 package net.play5d.kyo.stage.effect {
-import net.play5d.kyo.stage.Istage;
+import net.play5d.kyo.stage.IStage1;
 
 public interface IStageFadEffect {
-    function fadIn(stage:Istage, complete:Function = null):void;
+    function fadIn(stage:IStage1, complete:Function = null):void;
 
-    function fadOut(stage:Istage, complete:Function = null):void;
+    function fadOut(stage:IStage1, complete:Function = null):void;
 }
 }

@@ -20,7 +20,7 @@ package net.play5d.kyo.stage.effect {
 import com.greensock.TweenLite;
 import com.greensock.easing.Elastic;
 
-import net.play5d.kyo.stage.Istage;
+import net.play5d.kyo.stage.IStage1;
 
 public class ElastEffect implements IStageFadEffect {
     public function ElastEffect(duration:Number = 1) {
@@ -28,11 +28,11 @@ public class ElastEffect implements IStageFadEffect {
     }
     private var _duration:Number;
 
-    public function fadIn(stage:Istage, complete:Function = null):void {
+    public function fadIn(stage:IStage1, complete:Function = null):void {
         TweenLite.from(stage.display, _duration, {y: -stage.display.height, ease: Elastic.easeOut});
     }
 
-    public function fadOut(stage:Istage, complete:Function = null):void {
+    public function fadOut(stage:IStage1, complete:Function = null):void {
         TweenLite.to(stage.display, _duration, {y: -stage.display.height, ease: Elastic.easeOut});
     }
 }
