@@ -33,7 +33,7 @@
 - `CORE_Shared` - 游戏对外公共接口
 - `CORE_Utils` - 游戏部分共用实用程序集
 - `LIB_KyoLib` - 游戏作者 **剑jian** 所写的个人类库
-- `LIB_PclLib` - 游戏制作组成员 **5DPLAY@lsmm** 所写的个人类库
+- `LIB_Other` - 其他类库
 - `SHELL_Dev` - 针对于开发人员的功能外壳
 - `SHELL_Pc` - 运行于 PC 的功能外壳
 - `shared` - 游戏共享资源库
