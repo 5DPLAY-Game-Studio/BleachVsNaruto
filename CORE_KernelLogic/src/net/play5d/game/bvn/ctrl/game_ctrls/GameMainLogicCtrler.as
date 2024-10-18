@@ -191,8 +191,12 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 			}
 
-			if(A is BaseGameSprite == false) return;
-			if(B is BaseGameSprite == false) return;
+			if(!(
+					A is BaseGameSprite
+			)) return;
+			if(!(
+					B is BaseGameSprite
+			)) return;
 
 			var ba:BaseGameSprite = A as BaseGameSprite;
 			var bb:BaseGameSprite = B as BaseGameSprite;
@@ -262,7 +266,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 				sp.render();
 				if(_renderAnimate && !sp.isDestoryed()) sp.renderAnimate();
 			}catch(e:Error){
-				Debugger.log('GameMainLogicCtrler.renderGameSprite',e);
+				Debugger.log(GetLangText('debug.log.data.render_game_sprite'),e);
 			}
 
 		}
@@ -349,7 +353,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 				if(Debugger.DRAW_AREA) _gameState.drawGameRect(hitArea);
 
 				hitRect = hitArea.intersection(body);
-				if(hitRect && hitRect.isEmpty() == false) return {hitVO:hitvo,hitRect:hitRect};  //返回{hitVO , hitRect}
+				if(hitRect && !hitRect.isEmpty()) return {hitVO:hitvo,hitRect:hitRect};  //返回{hitVO , hitRect}
 			}
 
 			return null;

@@ -95,22 +95,22 @@ package net.play5d.game.bvn.ctrl
 				switch(loadStep){
 					case 0:
 						loadPreLoadSounds(loadNext , loadProcess);
-						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_0.txt');
+						type = GetLangText('txt.load_step.sound');
 						loadProcess(0);
 						break;
 					case 1:
 						loadGraphics([_effectSwfPath] , loadNext , loadProcess);
-						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_1.txt');
+						type = GetLangText('txt.load_step.effect');
 						loadProcess(0);
 						break;
 					case 2:
 						loadFonts(loadNext , loadProcess);
-						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_2.txt');
+						type = GetLangText('txt.load_step.font');
 						loadProcess(0);
 						break;
 					case 3:
 						loadBitmaps(loadNext , loadProcess);
-						type = GetLangText('package.ctrl.AssetManager.loadBasic.loadNext.load_step_3.txt');
+						type = GetLangText('txt.load_step.bitmap');
 						loadProcess(0);
 						break;
 					case 4:
