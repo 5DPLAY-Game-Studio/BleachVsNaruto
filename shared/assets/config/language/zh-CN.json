@@ -1,4 +1,12 @@
 {
+  "txt": {
+    "load_step": {
+      "sound": "声音",
+      "effect": "效果",
+      "font": "字体",
+      "bitmap": "位图"
+    }
+  },
   "//": "------------------ Global ------------------",
   "package": {
     "//": "------------------ Package ------------------",
@@ -61,25 +69,6 @@
     "//": "------------------ Package ------------------",
     "ctrl": {
       "//": "------------------ Class ------------------",
-      "AssetManager": {
-        "loadBasic": {
-          "loadNext": {
-            "load_step_0": {
-              "txt": "声音"
-            },
-            "load_step_1": {
-              "txt": "效果"
-            },
-            "load_step_2": {
-              "txt": "字体"
-            },
-            "load_step_3": {
-              "txt": "图片"
-            }
-          }
-        }
-      },
-      "//": "------------------ Class ------------------",
       "GameLoader": {
         "loadAndCacheFighter": {
           "fighter_id_error": {
@@ -110,7 +99,6 @@
   },
   "//": "------------------ Global ------------------",
   "debug": {
-    "//": "------------------ Global Debug ------------------",
     "package": {
       "//": "------------------ Package ------------------",
       "ctrl": {
@@ -211,11 +199,60 @@
             }
           }
         },
-        "//": "------------------ Class ------------------"
+        "//": "------------------ Class ------------------",
+        "//": "------------------ Package 'game_ctrls' ------------------",
+        "game_ctrls": {
+          "GameCtrl": {
+            "addGameSprite": {
+              "log_team_is_null": {
+                "txt": "GameCtrl.addGameSprite:: 变量 'team' 为空！"
+              }
+            },
+            "buildGame": {
+              "error_build_game_fail": {
+                "txt": "错误：构建游戏失败！"
+              }
+            },
+            "fightFinish": {
+              "trace_cleared": {
+                "txt": "已通关！"
+              },
+              "trace_next": {
+                "txt": "下一关卡……"
+              },
+              "trace_continue": {
+                "txt": "是否继续？"
+              },
+              "trace_back_select": {
+                "txt": "返回选人页面……"
+              }
+            },
+            "fightTimeover": {
+              "trace_time_over": {
+                "txt": "时间结束！"
+              }
+            },
+            "runNext": {
+              "trace_current_mode": {
+                "txt": "当前模式："
+              }
+            }
+          }
+        }
       },
       "//": "------------------ Package ------------------"
     },
-    "//": "------------------ Global Debug ------------------"
+    "//": "------------------ Global Debug ------------------",
+    "trace": {
+      "prefix": "* 跟踪 : ",
+      "data": {}
+    },
+    "log": {
+      "prefix": "* 日志 : ",
+      "data": {
+        "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: "
+      }
+    }
   },
   "//": "------------------ Global ------------------"
 }
