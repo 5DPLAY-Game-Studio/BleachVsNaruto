@@ -29,6 +29,7 @@ package {
 public var _ALL_GLOBALS_:Object = [
     FONT,
     Format,
+    GetLang,
     GetLangText,
     Printf
 ];
