@@ -426,8 +426,8 @@ package net.play5d.game.bvn.ctrl
 
 			// 性能优化，每一帧只能同时存在N个同样的特效
 			if(!_frameEffectCount[effect]) _frameEffectCount[effect] = 0;
-			var v = _frameEffectCount[effect];
-			if(++ v > 3) return;
+			var v:int = _frameEffectCount[effect];
+			if((_frameEffectCount[effect] = (++ v)) > 3) return;
 
 			var effectView:EffectView = addEffect(effect , ex ,ey , direct, playSnd);
 
