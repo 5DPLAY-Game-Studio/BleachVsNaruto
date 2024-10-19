@@ -197,6 +197,9 @@ package net.play5d.game.bvn.win.views.lan
 			}
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void{
 			ui = UIAssetUtil.I.createDisplayObject("game_list_ui");
 
@@ -262,15 +265,25 @@ package net.play5d.game.bvn.win.views.lan
 			if(onClose != null) onClose();
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void{
 
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject{
 			return ui;
 		}
 
-		public function destory(back:Function = null):void{
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function = null):void{
 			GameRender.remove(render,this);
 			LANClientCtrl.I.cancelFindHost();
 			if(_btns){

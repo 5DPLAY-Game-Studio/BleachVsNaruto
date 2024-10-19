@@ -89,6 +89,9 @@ package net.play5d.game.bvn.stage
 			_gameLayer.mouseChildren = _gameLayer.mouseEnabled = false;
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return this;
@@ -139,6 +142,9 @@ package net.play5d.game.bvn.stage
 			}catch(e:Error){}
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			GameCtrl.I.initlize(this);
@@ -311,11 +317,18 @@ package net.play5d.game.bvn.stage
 			_gameLayer.graphics.clear();
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			this.removeChildren();
 

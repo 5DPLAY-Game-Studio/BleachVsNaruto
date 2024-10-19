@@ -39,11 +39,17 @@ package net.play5d.game.bvn.stage
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.loading , 'loading_cover_mc');
@@ -108,11 +114,18 @@ package net.play5d.game.bvn.stage
 			_initFail = null;
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 
 		}

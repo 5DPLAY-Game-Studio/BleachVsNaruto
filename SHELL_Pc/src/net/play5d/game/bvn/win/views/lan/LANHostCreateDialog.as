@@ -46,6 +46,9 @@ package net.play5d.game.bvn.win.views.lan
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
@@ -56,6 +59,9 @@ package net.play5d.game.bvn.win.views.lan
 			MainGame.stageCtrl.removeLayer(this);
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			_ui = UIAssetUtil.I.createDisplayObject("build_win_mc");
@@ -106,11 +112,18 @@ package net.play5d.game.bvn.win.views.lan
 			_ui.txt_pass.visible = _ui.check_pass.selected;
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			_ui.btn_ok.removeEventListener(MouseEvent.CLICK , btnHandler);
 			_ui.check_pass.removeEventListener(Event.CHANGE , checkHandler);

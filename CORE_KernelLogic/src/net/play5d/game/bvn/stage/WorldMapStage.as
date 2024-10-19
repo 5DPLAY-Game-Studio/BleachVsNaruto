@@ -74,11 +74,17 @@ package net.play5d.game.bvn.stage
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			_ui = new Sprite();
@@ -220,6 +226,9 @@ package net.play5d.game.bvn.stage
 			renderPosAndSize();
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 			initDrag();
@@ -325,7 +334,11 @@ package net.play5d.game.bvn.stage
 			GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			GameRender.remove(render, this);
 

@@ -54,11 +54,17 @@ package net.play5d.game.bvn.stage
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			var p1selt:SelectVO = GameData.I.p1Select;
@@ -224,11 +230,18 @@ package net.play5d.game.bvn.stage
 //			loadNext();
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			SoundCtrl.I.BGM(null);
 			GameInputer.clearInput();

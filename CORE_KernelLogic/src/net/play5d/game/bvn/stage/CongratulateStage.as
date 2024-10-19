@@ -51,6 +51,9 @@ package net.play5d.game.bvn.stage
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _mainUI;
@@ -60,6 +63,9 @@ package net.play5d.game.bvn.stage
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			_mainUI = new Sprite();
@@ -137,11 +143,18 @@ package net.play5d.game.bvn.stage
 			MainGame.I.goLogo();
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			GameRender.remove(render);
 

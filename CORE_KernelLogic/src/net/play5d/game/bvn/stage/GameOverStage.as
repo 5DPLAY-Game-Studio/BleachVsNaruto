@@ -250,21 +250,34 @@ package net.play5d.game.bvn.stage
 			initArrow('btn_back');
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 			GameEvent.dispatchEvent(GameEvent.GAME_OVER_CONTINUE);
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			GameRender.remove(render);
 
