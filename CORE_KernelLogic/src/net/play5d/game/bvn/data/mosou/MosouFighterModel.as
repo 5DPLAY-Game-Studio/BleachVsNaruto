@@ -129,7 +129,7 @@ package net.play5d.game.bvn.data.mosou
 			fighters.push(new MosouFighterSellVO(id, price));
 		}
 
-		private function containsFighter(id):Boolean{
+		private function containsFighter(id:String):Boolean{
 			for each(var f:MosouFighterSellVO in fighters){
 				if(f.id == id) return true;
 			}
