@@ -33,7 +33,7 @@
             <entry key="metadata.publisher" value="5DPLAY Game Studio" />
             <entry key="metadata.title" value="FighterTester" />
           </map>
-          <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true" />
+          <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
@@ -70,7 +70,7 @@
             <entry key="metadata.publisher" value="5DPLAY Game Studio" />
             <entry key="metadata.title" value="FighterTester" />
           </map>
-          <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true" />
+          <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
