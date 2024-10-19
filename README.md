@@ -16,8 +16,20 @@
   - [许可](#许可)
   - [贡献](#贡献)
   - [翻译](#翻译)
+  - [关注我们](#关注我们)
 
 ## 工程状态
+
+![Star:Latest](https://img.shields.io/github/stars/5DPLAY-Game-Studio/BleachVsNaruto)
+![Fork:Latest](https://img.shields.io/github/forks/5DPLAY-Game-Studio/BleachVsNaruto)
+![Follower:Latest](https://img.shields.io/github/followers/5DPLAY-Game-Studio)
+
+![Contributors:Latest](https://img.shields.io/github/contributors/5DPLAY-Game-Studio/BleachVsNaruto)
+![Created:Latest](https://img.shields.io/github/created-at/5DPLAY-Game-Studio/BleachVsNaruto)
+![License:Latest](https://img.shields.io/github/license/5DPLAY-Game-Studio/BleachVsNaruto)
+
+![TopLanguage:Latest](https://img.shields.io/github/languages/top/5DPLAY-Game-Studio/BleachVsNaruto)
+![Tag:Latest](https://img.shields.io/github/v/tag/5DPLAY-Game-Studio/BleachVsNaruto)
 
 **死神vs火影** 使用 ***ActionScript 3.0*** 脚本语言编写，主要支持平台包括 **Windows, MacOS, Android** 。
 
@@ -70,5 +82,9 @@
 
 - `简体中文` - 5DPLAY
 - `English` - MeleeWaluigi, Waffles.7z
+
+## 关注我们
+
+![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)
 
 [GPL-3.0]: https://www.gnu.org/licenses/gpl-3.0.html
