@@ -20,9 +20,9 @@ package {
 import net.play5d.game.bvn.utils.MultiLangUtils;
 
 /**
- * 全局函数，得到基于树形路径的格式化后的当前语言
+ * 全局函数，得到基于树形路径的当前语言
  * <p/>
- * 下列代码演示如何使用全局方法 <code>GetLangText()</code> 输出格式化后的当前语言：
+ * 下列代码演示如何使用全局方法 <code>GetLangText()</code> 输出当前语言：
  * <listing version="3.0">
  var tree:String = "debug.trace.prefix";
 
@@ -33,7 +33,7 @@ import net.play5d.game.bvn.utils.MultiLangUtils;
  * @param         tree 文本的树形路径
  *
  * @see           String
- * @return        基于树形路径的格式化后的当前语言
+ * @return        基于树形路径的当前语言
  *
  * @langversion   3.0
  * @playerversion Flash 9, Lite 4
