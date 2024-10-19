@@ -19,7 +19,7 @@
 package net.play5d.kyo.stage.effect {
 import com.greensock.TweenLite;
 
-import net.play5d.kyo.stage.Istage;
+import net.play5d.kyo.stage.IStage;
 
 public class StageFadEffectOrg implements IStageFadEffect {
     public function StageFadEffectOrg(time:Number = 0.5, x:Boolean = false, y:Boolean = false,
@@ -35,7 +35,7 @@ public class StageFadEffectOrg implements IStageFadEffect {
     private var _obj:Object;
     private var _time:Number;
 
-    public function fadIn(stage:Istage, complete:Function = null):void {
+    public function fadIn(stage:IStage, complete:Function = null):void {
         var to:Object = {};
         if (_obj.x) {
             to.x            = stage.display.x;
@@ -58,7 +58,7 @@ public class StageFadEffectOrg implements IStageFadEffect {
         TweenLite.to(stage.display, _time, to);
     }
 
-    public function fadOut(stage:Istage, complete:Function = null):void {
+    public function fadOut(stage:IStage, complete:Function = null):void {
     }
 }
 }

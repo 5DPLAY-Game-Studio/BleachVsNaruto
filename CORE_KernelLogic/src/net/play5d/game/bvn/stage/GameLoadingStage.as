@@ -26,9 +26,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.debug.Debugger;
 	import net.play5d.game.bvn.events.GameEvent;
 	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage;
 
-	public class GameLoadingStage implements Istage
+	public class GameLoadingStage implements IStage
 	{
 		private var _ui:loading_cover_mc;
 

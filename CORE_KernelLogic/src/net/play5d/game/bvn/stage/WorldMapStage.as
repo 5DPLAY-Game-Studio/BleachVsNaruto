@@ -45,9 +45,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.game.bvn.utils.TouchMoveEvent;
 	import net.play5d.game.bvn.utils.TouchUtils;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage;
 
-	public class WorldMapStage implements Istage
+	public class WorldMapStage implements IStage
 	{
 		private var _ui:Sprite;
 		private var _mapUI:Sprite;

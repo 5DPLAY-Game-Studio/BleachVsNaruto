@@ -31,9 +31,9 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.LanguageType;
 import net.play5d.game.bvn.utils.MultiLangUtils;
 import net.play5d.game.bvn.utils.ResUtils;
-import net.play5d.kyo.stage.Istage;
+import net.play5d.kyo.stage.IStage;
 
-public class LanguageStage implements Istage {
+public class LanguageStage implements IStage {
 
     // 加载进度条
     private var _loadingBar:language_mc_loadingbar;

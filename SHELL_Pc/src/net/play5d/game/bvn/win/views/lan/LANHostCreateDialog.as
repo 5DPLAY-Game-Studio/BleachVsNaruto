@@ -32,10 +32,10 @@ package net.play5d.game.bvn.win.views.lan
 	import net.play5d.game.bvn.win.data.HostVO;
 	import net.play5d.game.bvn.win.data.LanGameModel;
 	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage;
 	import net.play5d.kyo.utils.KyoBtnUtils;
 
-	public class LANHostCreateDialog implements Istage
+	public class LANHostCreateDialog implements IStage
 	{
 		private var _ui:MovieClip;
 

@@ -40,9 +40,9 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.UIUtils;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.display.shapes.Box;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage;
 
-	public class MenuStage extends Sprite implements Istage
+	public class MenuStage extends Sprite implements IStage
 	{
 		private var _ui:stg_title;
 		private var _btnGroup:MenuBtnGroup;

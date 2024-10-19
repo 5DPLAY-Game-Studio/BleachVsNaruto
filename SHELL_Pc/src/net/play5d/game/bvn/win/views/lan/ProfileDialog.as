@@ -27,10 +27,10 @@ package net.play5d.game.bvn.win.views.lan
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.game.bvn.win.data.LanGameModel;
 	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage;
 	import net.play5d.kyo.utils.KyoBtnUtils;
 
-	public class ProfileDialog implements Istage
+	public class ProfileDialog implements IStage
 	{
 		private var _ui:MovieClip;
 

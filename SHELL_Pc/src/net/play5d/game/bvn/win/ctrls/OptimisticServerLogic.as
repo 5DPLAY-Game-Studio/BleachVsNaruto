@@ -25,7 +25,7 @@ package net.play5d.game.bvn.win.ctrls
 	import net.play5d.game.bvn.stage.GameStage;
 	import net.play5d.game.bvn.win.input.InputManager;
 	import net.play5d.game.bvn.win.utils.LANUtils;
-	import net.play5d.kyo.stage.Istage;
+	import net.play5d.kyo.stage.IStage;
 
 	/**
 	 * 乐观锁帧算法，服务端
@@ -144,7 +144,7 @@ package net.play5d.game.bvn.win.ctrls
 
 			//frame,round,time,p1hp,p1x,p1y,p2hp,p2x,p2y
 
-			var curStg:Istage = MainGame.stageCtrl.currentStage;
+			var curStg:IStage = MainGame.stageCtrl.currentStage;
 
 			if(curStg is GameStage){
 				if(GameCtrl.I.actionEnable){
