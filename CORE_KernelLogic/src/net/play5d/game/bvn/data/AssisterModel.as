@@ -41,7 +41,7 @@ package net.play5d.game.bvn.data
 		public function getAssisters(comicType:int = -1, condition:Function = null):Vector.<FighterVO>{
 			var vec:Vector.<FighterVO> = new Vector.<FighterVO>();
 			for each(var i:FighterVO in _assisterObj){
-				if(condition && !condition(i)) continue;
+				if(condition != null && !condition(i)) continue;
 				if(comicType == -1 || i.comicType == comicType){
 					vec.push(i);
 				}
