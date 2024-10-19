@@ -5,6 +5,14 @@
       "effect": "效果",
       "font": "字体",
       "bitmap": "位图"
+    },
+    "load_process": {
+      "map": "地图",
+      "fighter": "角色",
+      "assistant": "辅助",
+      "bgm": "背景乐",
+      "loading_no_name": "正在加载 [{}] ({}/{})",
+      "loading_has_name": "正在加载 [{}] : {} ({}/{})"
     }
   },
   "//": "------------------ Global ------------------",
@@ -63,8 +71,7 @@
             "txt": "更多游戏"
           }
         }
-      },
-      "//": "------------------ Class ------------------"
+      }
     },
     "//": "------------------ Package ------------------",
     "ctrl": {
@@ -104,20 +111,6 @@
       "ctrl": {
         "//": "------------------ Class ------------------",
         "AssetManager": {
-          "loadSnds": {
-            "loadErr": {
-              "load_sound_fail": {
-                "txt": "加载声音失败："
-              }
-            }
-          },
-          "loadGraphics": {
-            "loadFail": {
-              "load_swf_fail": {
-                "txt": "加载 SWF 失败："
-              }
-            }
-          },
           "loadFonts": {
             "bitmapFail": {
               "load_font_bitmap_fail": {
@@ -245,12 +238,25 @@
     "//": "------------------ Global Debug ------------------",
     "trace": {
       "prefix": "* 跟踪 : ",
-      "data": {}
+      "data": {
+        "load_sound_fail": "加载声音 [{}] 失败！",
+        "load_swf_fail": "加载 SWF [{}] 失败！",
+        "load_all_finish": "全部资源加载完成！"
+      }
     },
     "log": {
       "prefix": "* 日志 : ",
       "data": {
         "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: "
+      }
+    },
+    "error": {
+      "prefix": "* 错误 : ",
+      "data": {
+        "not_find_main_mc": "在 [{}] 中未找到名为 {} 的元件！",
+        "get_map_data_fail": "获取 地图 数据失败！",
+        "get_fighter_data_fail": "获取 角色 数据失败！",
+        "get_assistant_data_fail": "获取 辅助 数据失败！"
       }
     }
   },

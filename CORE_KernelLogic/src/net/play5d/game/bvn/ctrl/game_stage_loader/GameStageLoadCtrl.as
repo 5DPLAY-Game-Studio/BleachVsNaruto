@@ -105,7 +105,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 					return obj.mcSlave;
 				}
 
-				throw new Error("["+fileUrl+"] 中未找到 main_mc 元件.");
+				throw new Error(Format(GetLangText('debug.error.data.not_find_main_mc'), fileUrl, 'main_mc'));
 			}
 
 			return null;
@@ -128,7 +128,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 					return obj.mcSlave;
 				}
 
-				throw new Error("["+fileUrl+"] 中未找到 main_mc 元件.");
+				throw new Error(Format(GetLangText('debug.error.data.not_find_main_mc'), fileUrl, 'main_mc'));
 			}
 
 			return null;
@@ -166,7 +166,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 				for each(id in maps){
 					var mv:MapVO = MapModel.I.getMap(id);
 					if(!mv){
-						throw new Error("获取地图数据失败！");
+						throw new Error(Format(GetLangText('debug.error.data.get_map_data_fail')));
 					}
 					mapDatas.push(mv);
 				}
@@ -181,7 +181,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 				for each(id in fighters){
 					var fv:FighterVO = FighterModel.I.getFighter(id);
 					if(!fv){
-						throw new Error("获取角色数据失败！");
+						throw new Error(Format(GetLangText('debug.error.data.get_fighter_data_fail')));
 					}
 					fighterDatas.push(fv);
 				}
@@ -195,7 +195,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 				for each(id in assisters){
 					var av:FighterVO = AssisterModel.I.getAssister(id);
 					if(!av){
-						throw new Error("获取辅助角色数据失败！");
+						throw new Error(Format(GetLangText('debug.error.data.get_assistant_data_fail')));
 					}
 					assisterDatas.push(av);
 				}
@@ -270,7 +270,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 
 		private function startloadBGM():void{
 			loadBgms(_loadBgmDatas, function():void{
-				trace("All Finish");
+				Trace('debug.trace.data.load_all_finish');
 				if(_loadFinishBack != null){
 					_loadFinishBack();
 					_loadFinishBack = null;
@@ -392,23 +392,31 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 			var itemName:String;
 			switch(_loadingType){
 				case GameStageLoadDefine.TYPE_MAP:
-					itemName = "场景地图";
+					itemName = GetLangText('txt.load_process.map');
 					break;
 				case GameStageLoadDefine.TYPE_FIGHTER:
-					itemName = "人物角色";
+					itemName = GetLangText('txt.load_process.fighter');
 					break;
 				case GameStageLoadDefine.TYPE_ASSISTER:
-					itemName = "辅助人物";
+					itemName = GetLangText('txt.load_process.assistant');
 					break;
 				case GameStageLoadDefine.TYPE_BGM:
-					itemName = "BGM";
+					itemName = GetLangText('txt.load_process.bgm');
 					break;
 			}
 
-			var msg:String = "正在加载" + itemName;
-			if(_curLoadName) msg += " : " + _curLoadName;
+//			var msg:String = "正在加载" + itemName;
+//			if(_curLoadName) msg += " : " + _curLoadName;
+//
+//			msg += " (" + _loadStep + "/" + _loadStepLength + ")";
+			var msg:String;
+			if (_curLoadName) {
+				msg = Format(GetLangText('txt.load_process.loading_has_name'), itemName, _curLoadName, _loadStep, _loadStepLength);
+			}
+			else {
+				msg = Format(GetLangText('txt.load_process.loading_no_name'), itemName, _loadStep, _loadStepLength);
+			}
 
-			msg += " (" + _loadStep + "/" + _loadStepLength + ")";
 			var val:Number = (_curLoadStep + v) / _curLoadStepLength;
 
 			_processCallBack(msg, val);
