@@ -19,20 +19,27 @@
 package {
 
 /**
- * 所有的 全局函数/变量
- * <br/>
- * 该变量仅作为中间变量，
- * 用于引入所有其他 全局函数/变量 的引用。
- * <br/>
- * <b>不允许<b/>在实际工程中使用此变量
- */
-public var _ALL_GLOBALS_:Object = [
-    FONT,
-    Format,
-    GetLangText,
-    Printf
-];
+ * 全局函数，输出格式化字符串，使用 “<b>{}</b>” 符号作为占位符
+ * <p/>
+ * 下列代码演示如何使用全局方法 <code>Printf()</code> 输出格式化字符串：
+ * <listing version="3.0">
+ var source:String = "今天是星期{}，天气：{}";
 
-// 不允许使用此变量
-throw new Error('This variable is not allowed to be used!');
+ // 输出结果：“今天是星期1，天气：晴”
+ Printf(source, 1, "晴");
+ * </listing>
+ *
+ * @param         format 源字符串
+ * @param         args   打印的参数列表
+ *
+ * @see           String
+ * @see           Array
+ * @throws        ArgumentError
+ *
+ * @langversion   3.0
+ * @playerversion Flash 9, Lite 4
+ */
+public function Printf(format:String, ...args):void {
+    trace(Format(format, args));
+}
 }
