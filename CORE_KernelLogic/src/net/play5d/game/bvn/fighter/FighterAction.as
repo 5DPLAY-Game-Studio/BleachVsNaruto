@@ -169,8 +169,8 @@ package net.play5d.game.bvn.fighter
 
 		public function render():void{
 			for(var i:String in _cdObj){
-				var v = _cdObj[i];
-				if(--v <= 0) delete _cdObj[i];
+				var v:int = _cdObj[i];
+				if((_cdObj[i] = --v) <= 0) delete _cdObj[i];
 			}
 		}
 
