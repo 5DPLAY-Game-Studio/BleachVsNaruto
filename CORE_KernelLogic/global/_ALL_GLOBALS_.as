@@ -31,7 +31,9 @@ public var _ALL_GLOBALS_:Object = [
     Format,
     GetLang,
     GetLangText,
-    Printf
+    Printf,
+    Trace,
+    TraceLang
 ];
 
 // 不允许使用此变量
