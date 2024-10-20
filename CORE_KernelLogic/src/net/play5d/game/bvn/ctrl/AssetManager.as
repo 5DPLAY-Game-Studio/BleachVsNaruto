@@ -124,20 +124,35 @@ package net.play5d.game.bvn.ctrl
 		}
 
 		private function loadPreLoadSounds(back:Function , process:Function):void{
-			_assetLoader.loadXML("config/preload.xml",function(xml:XML):void{
+//			_assetLoader.loadXML("config/preload.xml",function(xml:XML):void{
+//				var sounds:Array = [];
+//				var bgmPath:String = xml.bgm.@path;
+//				var soundPath:String = xml.sound.@path;
+//				for each(var i:XML in xml.bgm.item){
+//					sounds.push(bgmPath+'/'+i.toString());
+//				}
+//				for each(var j:XML in xml.sound.item){
+//					sounds.push(soundPath+'/'+j.toString());
+//				}
+////				_soundLoader.loadSounds(sounds , back , process);
+//				loadSnds(sounds , back , process);
+//			});
+
+			_assetLoader.loadJSON('config/preload.json', function (obj:Object):void {
 				var sounds:Array = [];
-				var bgmPath:String = xml.bgm.@path;
-				var soundPath:String = xml.sound.@path;
-				for each(var i:XML in xml.bgm.item){
-					sounds.push(bgmPath+'/'+i.toString());
+
+				var bgmObj:Object = obj['bgm'];
+				var soundObj:Object = obj['sound'];
+
+				for each(var bgm:String in bgmObj['item']){
+					sounds.push(bgmObj['path'] + bgm);
 				}
-				for each(var j:XML in xml.sound.item){
-					sounds.push(soundPath+'/'+j.toString());
+				for each(var sound:String in soundObj['item']){
+					sounds.push(soundObj['path'] + sound);
 				}
-//				_soundLoader.loadSounds(sounds , back , process);
+
 				loadSnds(sounds , back , process);
 			});
-
 		}
 
 		private function loadSnds(sounds:Array , back:Function , process:Function):void{

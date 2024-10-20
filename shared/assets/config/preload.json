@@ -1,0 +1,23 @@
+{
+  "bgm": {
+    "path": "bgm/",
+    "item": [
+      "loading.mp3",
+      "op.mp3",
+      "select.mp3",
+      "continue.mp3",
+      "back.mp3",
+      "congratulation.mp3",
+      "win.mp3",
+      "winloop.mp3"
+    ]
+  },
+  "sound": {
+    "path": "sounds/",
+    "item": [
+      "step1.mp3",
+      "step2.mp3",
+      "step3.mp3"
+    ]
+  }
+}
