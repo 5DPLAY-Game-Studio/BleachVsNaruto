@@ -85,11 +85,12 @@ package net.play5d.game.bvn.data
 
 			function loadMapBack(data:Object):void{
 				MapModel.I.initByObject(data);
-				AssetManager.I.loadXML("config/mission.xml",loadMissionBack , loadMissionFail);
+//				AssetManager.I.loadXML("config/mission.xml",loadMissionBack , loadMissionFail);
+				AssetManager.I.loadJSON('config/mission.json', loadMissionBack, loadMissionFail);
 			}
 
-			function loadMissionBack(data:String):void{
-				MessionModel.I.initByXML(new XML(data));
+			function loadMissionBack(data:Object):void{
+				MessionModel.I.initByObject(data);
 //				AssetManager.I.loadXML("config/mosou.xml",loadMosouMission , loadMosouMission);
 
 				MosouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);

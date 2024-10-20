@@ -34,6 +34,8 @@ package net.play5d.game.bvn.data
 		private var _curMession:MessionVO;  //当前关卡
 		private var _curStageId:int;  //当前关卡ID
 		private var _curStage:MessionStageVO;  //当前关卡
+
+		[ArrayElementType ('net.play5d.game.bvn.data.MessionVO')]
 		private var _messions:Array;
 
 		public function MessionModel()
@@ -44,13 +46,25 @@ package net.play5d.game.bvn.data
 			return _messions;
 		}
 
-		public function initByXML(xml:XML):void{
+//		public function initByXML(xml:XML):void{
+//			_messions = [];
+//
+//			for each(var i:XML in xml.design){
+//				var mv:MessionVO = new MessionVO();
+//				mv.initByXML(i);
+//				_messions.push(mv);
+//			}
+//		}
+
+		public function initByObject(obj:Object):void {
 			_messions = [];
 
-			for each(var i:XML in xml.design){
-				var mv:MessionVO = new MessionVO();
-				mv.initByXML(i);
-				_messions.push(mv);
+			var levelArr:Array = obj['level'];
+			for each(var level:Object in levelArr) {
+				var messionVO:MessionVO = new MessionVO();
+				messionVO.initByObject(level);
+
+				_messions.push(messionVO);
 			}
 		}
 

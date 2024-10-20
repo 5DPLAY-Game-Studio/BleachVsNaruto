@@ -29,25 +29,60 @@ package net.play5d.game.bvn.data
 		{
 		}
 
-		public function initByXML(xml:XML):void{
-			comicType = xml.@comicType;
-			gameMode = xml.@gameMode;
+//		public function initByXML(xml:XML):void{
+//			comicType = xml.@comicType;
+//			gameMode = xml.@gameMode;
+//
+//			stageList = new Vector.<MessionStageVO>();
+//
+//			for(var i:int ; i < xml.stage.length() ; i++){
+//				var msv:MessionStageVO = new MessionStageVO();
+//				var sx:Object = xml.stage[i];
+//				var fighter:String = sx.@fighter;
+//				msv.mession = this;
+//				msv.assister = sx.@assister;
+//				msv.fighters = fighter.split(",");
+//				msv.map = sx.@map;
+//				msv.hpRate = Number(sx.@hpRate) > 0 ? Number(sx.@hpRate) : 1;
+//				msv.attackRate = Number(sx.@attackRate) > 0 ? Number(sx.@attackRate) : 1;
+//				stageList.push(msv);
+//			}
+//
+//		}
+
+		public function initByObject(obj:Object):void {
+			comicType = obj['comic_type'];
+			gameMode = obj['game_mode'];
 
 			stageList = new Vector.<MessionStageVO>();
 
-			for(var i:int ; i < xml.stage.length() ; i++){
+			var stageArr:Array = obj['stage'];
+			for each (var stageObj:Object in stageArr) {
 				var msv:MessionStageVO = new MessionStageVO();
-				var sx:Object = xml.stage[i];
-				var fighter:String = sx.@fighter;
+
 				msv.mession = this;
-				msv.assister = sx.@assister;
-				msv.fighters = fighter.split(",");
-				msv.map = sx.@map;
-				msv.hpRate = Number(sx.@hpRate) > 0 ? Number(sx.@hpRate) : 1;
-				msv.attackRate = Number(sx.@attackRate) > 0 ? Number(sx.@attackRate) : 1;
+				msv.fighters = stageObj['fighter'];
+				msv.assister = stageObj['assistant'];
+				msv.map = stageObj['map'];
+
+				var propertiesObj:Object = stageObj['properties'];
+				if (propertiesObj) {
+					if (propertiesObj['attack_rate']) {
+						msv.attackRate =
+								propertiesObj['attack_rate'] > 0
+								? propertiesObj['attack_rate']
+								: 1;
+					}
+					if (propertiesObj['hp_rate']) {
+						msv.hpRate =
+								propertiesObj['hp_rate'] > 0
+								? propertiesObj['hp_rate']
+								: 1;
+					}
+				}
+
 				stageList.push(msv);
 			}
-
 		}
 
 	}

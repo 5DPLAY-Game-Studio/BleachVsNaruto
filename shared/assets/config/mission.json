@@ -1,0 +1,426 @@
+{
+  "level": [{
+      "comic_type": 0,
+      "game_mode" : 0,
+      
+      "stage": [{
+          "fighter": [
+            "naruto",
+            "sakura",
+            "sasuke"
+          ],
+          "assistant": "sai",
+          "map"      : "muyecun",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "kakashi",
+            "lee",
+            "neji"
+          ],
+          "assistant": "tenten",
+          "map"      : "senlin",
+          "properties": {
+            
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "gaara",
+            "temari",
+            "kimimaro"
+          ],
+          "assistant": "shikamaru",
+          "map"      : "louding",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "sasuke_susanoo",
+            "karin",
+            "juggo"
+          ],
+          "assistant": "suigetsu",
+          "map"      : "pubu",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "itachi"
+          ],
+          "assistant": "itachi",
+          "map"      : "yuzhibocun",
+          
+          "properties": {
+            "attack_rate": 2,
+            "hp_rate"    : 2.5
+          }
+        }, {
+          "fighter": [
+            "deidara",
+            "jiraiya",
+            "orochimaru"
+          ],
+          "assistant": "tsunate",
+          "map"      : "wenquan",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "pain",
+            "konan"
+          ],
+          "assistant": "obito_trueColors",
+          "map"      : "wuyingcun",
+          
+          "properties": {
+            "attack_rate": 1.2,
+            "hp_rate"    : 1.5
+          }
+        }, {
+          "fighter": [
+            "madara"
+          ],
+          "assistant": "obito_trueColors",
+          "map"      : "senlin",
+          
+          "properties": {
+            "attack_rate": 1.5,
+            "hp_rate"    : 2
+          }
+        }
+      ]
+    }, {
+      "comic_type": 0,
+      "game_mode" : 1,
+      
+      "stage": [{
+          "fighter": [
+            "naruto",
+            "sakura",
+            "sasuke"
+          ],
+          "assistant": "sai",
+          "map"      : "muyecun",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "kakashi",
+            "lee",
+            "neji"
+          ],
+          "assistant": "tenten",
+          "map"      : "senlin",
+          "properties": {
+            
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "gaara",
+            "temari",
+            "killerbee"
+          ],
+          "assistant": "shikamaru",
+          "map"      : "louding",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "sasuke_susanoo",
+            "karin",
+            "juggo"
+          ],
+          "assistant": "suigetsu",
+          "map"      : "pubu",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "itachi"
+          ],
+          "assistant": "itachi",
+          "map"      : "yuzhibocun",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1.5
+          }
+        }, {
+          "fighter": [
+            "deidara",
+            "jiraiya",
+            "orochimaru"
+          ],
+          "assistant": "tsunate",
+          "map"      : "wenquan",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "pain",
+            "konan"
+          ],
+          "assistant": "obito_trueColors",
+          "map"      : "wuyingcun",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "madara"
+          ],
+          "assistant": "obito_trueColors",
+          "map"      : "senlin",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1.2
+          }
+        }
+      ]
+    }, {
+      "comic_type": 1,
+      "game_mode" : 0,
+      
+      "stage": [{
+          "fighter": [
+            "uryuu",
+            "chad",
+            "orihime"
+          ],
+          "assistant": "kon",
+          "map"      : "jianchang",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ichigo",
+            "rukia",
+            "renji"
+          ],
+          "assistant": "orihime",
+          "map"      : "xianshi",
+          "properties": {
+            
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ichigo_bankai",
+            "rukia_shikai",
+            "byakuya"
+          ],
+          "assistant": "uryuu",
+          "map"      : "liuhunjie",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "kenpachi",
+            "ikkaku",
+            "toushirou"
+          ],
+          "assistant": "yachiru",
+          "map"      : "zoulang",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ogihci"
+          ],
+          "assistant": "orihime",
+          "map"      : "neixin",
+          
+          "properties": {
+            "attack_rate": 1.5,
+            "hp_rate"    : 2.5
+          }
+        }, {
+          "fighter": [
+            "soifon",
+            "byakuya_bankai",
+            "mayuri"
+          ],
+          "assistant": "kenpachi",
+          "map"      : "shuangji",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ulquiorra",
+            "grimmjow",
+            "starrk"
+          ],
+          "assistant": "gin",
+          "map"      : "jingyantin",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "aizen"
+          ],
+          "assistant": "gin",
+          "map"      : "shuangji",
+          
+          "properties": {
+            "attack_rate": 1.5,
+            "hp_rate"    : 2
+          }
+        }
+      ]
+    }, {
+      "comic_type": 1,
+      "game_mode" : 1,
+      
+      "stage": [{
+          "fighter": [
+            "uryuu",
+            "chad",
+            "orihime"
+          ],
+          "assistant": "kon",
+          "map"      : "jianchang",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ichigo",
+            "rukia",
+            "renji"
+          ],
+          "assistant": "orihime",
+          "map"      : "xianshi",
+          "properties": {
+            
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ichigo_bankai",
+            "rukia_shikai",
+            "byakuya"
+          ],
+          "assistant": "uryuu",
+          "map"      : "liuhunjie",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "kenpachi",
+            "ikkaku",
+            "toushirou"
+          ],
+          "assistant": "yachiru",
+          "map"      : "zoulang",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ogihci"
+          ],
+          "assistant": "orihime",
+          "map"      : "neixin",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1.5
+          }
+        }, {
+          "fighter": [
+            "soifon",
+            "byakuya_bankai",
+            "mayuri"
+          ],
+          "assistant": "kenpachi",
+          "map"      : "shuangji",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "ulquiorra",
+            "grimmjow",
+            "starrk"
+          ],
+          "assistant": "gin",
+          "map"      : "jingyantin",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1
+          }
+        }, {
+          "fighter": [
+            "aizen"
+          ],
+          "assistant": "gin",
+          "map"      : "shuangji",
+          
+          "properties": {
+            "attack_rate": 1,
+            "hp_rate"    : 1.5
+          }
+        }
+      ]
+    }
+  ]
+}
