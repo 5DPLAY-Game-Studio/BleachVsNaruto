@@ -30,13 +30,36 @@ package net.play5d.game.bvn.data
 		{
 		}
 
-		public function initByXML(xml:XML):void{
-			id = xml.@id;
-			name = xml.@name;
+//		public function initByXML(xml:XML):void{
+//			id = xml.@id;
+//			name = xml.@name;
+//
+//			fileUrl = xml.file.@url;
+//			picUrl = xml.img.@url;
+//			bgm = xml.bgm.@url;
+//		}
 
-			fileUrl = xml.file.@url;
-			picUrl = xml.img.@url;
-			bgm = xml.bgm.@url;
+		public function initByObject(obj:Object):void {
+			var pathObj:Object = obj['path'];
+
+			id = obj['id'];
+			name = obj['name'];
+
+			if (obj['file']) {
+				fileUrl = pathObj['map'] + obj['file'];
+			}
+			else {
+				fileUrl = pathObj['map'] + obj['id'] + '.swf';
+			}
+
+			if (obj['img']) {
+				picUrl = pathObj['map'] + obj['img'];
+			}
+			else {
+				picUrl = pathObj['map'] + obj['id'] + '.png';
+			}
+
+			bgm = pathObj['bgm'] + obj['bgm']
 		}
 
 	}

@@ -79,11 +79,12 @@ package net.play5d.game.bvn.data
 
 			function loadSelectBack(data:XML):void{
 				config.select_config.setByXML(data);
-				AssetManager.I.loadXML("config/map.xml",loadMapBack , loadMapFail);
+//				AssetManager.I.loadXML("config/map.xml",loadMapBack , loadMapFail);
+				AssetManager.I.loadJSON('config/map.json', loadMapBack, loadMapFail);
 			}
 
-			function loadMapBack(data:XML):void{
-				MapModel.I.initByXML(data);
+			function loadMapBack(data:Object):void{
+				MapModel.I.initByObject(data);
 				AssetManager.I.loadXML("config/mission.xml",loadMissionBack , loadMissionFail);
 			}
 

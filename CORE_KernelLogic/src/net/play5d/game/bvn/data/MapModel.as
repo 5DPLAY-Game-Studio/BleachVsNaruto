@@ -18,7 +18,9 @@
 
 package net.play5d.game.bvn.data
 {
-	public class MapModel
+import net.play5d.kyo.utils.KyoUtils;
+
+public class MapModel
 	{
 		private static var _i:MapModel;
 		public static function get I():MapModel{
@@ -27,6 +29,7 @@ package net.play5d.game.bvn.data
 		}
 
 		private var _mapObj:Object;
+		[ArrayElementType('net.play5d.game.bvn.data.MapVO')]
 		private var _mapArray:Array;
 
 		public function MapModel()
@@ -52,17 +55,34 @@ package net.play5d.game.bvn.data
 			return _mapArray;
 		}
 
-		public function initByXML(xml:XML):void{
+//		public function initByXML(xml:XML):void{
+//			_mapObj = {};
+//			_mapArray = [];
+//
+//			for each(var i:XML in xml.map){
+//				var mv:MapVO = new MapVO();
+//				mv.initByXML(i);
+//				_mapObj[mv.id] = mv;
+//				_mapArray.push(mv);
+//			}
+//
+//		}
+
+		public function initByObject(obj:Object):void {
 			_mapObj = {};
 			_mapArray = [];
 
-			for each(var i:XML in xml.map){
-				var mv:MapVO = new MapVO();
-				mv.initByXML(i);
-				_mapObj[mv.id] = mv;
-				_mapArray.push(mv);
-			}
+			var mapObj:Object = obj['map'];
+			for each(var i:Object in mapObj['data']) {
+				var mapVOObj:Object = KyoUtils.cloneObject(i);
+				mapVOObj['path'] = mapObj['path'];
 
+				var mapVO:MapVO = new MapVO();
+				mapVO.initByObject(mapVOObj);
+
+				_mapObj[mapVO.id] = mapVO;
+				_mapArray.push(mapVO);
+			}
 		}
 
 	}
