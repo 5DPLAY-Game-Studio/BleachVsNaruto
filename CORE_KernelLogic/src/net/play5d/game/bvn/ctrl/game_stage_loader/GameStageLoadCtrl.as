@@ -270,7 +270,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 
 		private function startloadBGM():void{
 			loadBgms(_loadBgmDatas, function():void{
-				Trace('debug.trace.data.load_all_finish');
+				TraceLang('debug.trace.data.load_all_finish');
 				if(_loadFinishBack != null){
 					_loadFinishBack();
 					_loadFinishBack = null;

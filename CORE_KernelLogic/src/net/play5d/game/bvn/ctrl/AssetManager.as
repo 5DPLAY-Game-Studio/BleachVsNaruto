@@ -165,7 +165,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadErr():void{
-				Trace(GetLangText('debug.trace.data.load_sound_fail'), curUrl);
+				TraceLang(GetLangText('debug.trace.data.load_sound_fail'), curUrl);
 				loadNext();
 			}
 
@@ -319,7 +319,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadFail():void{
-				Trace(GetLangText('debug.trace.data.load_swf_fail'), curUrl);
+				TraceLang('debug.trace.data.load_swf_fail', curUrl);
 				loadNext();
 			}
 

@@ -19,18 +19,18 @@
 package {
 
 /**
- * 全局函数，输出格式化字符串，使用 “<b>{}</b>” 符号作为占位符，用于替代 trace 函数
+ * 全局函数，输出带前缀的基于树形路径的格式化后的当前语言
  * <p/>
- * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出格式化字符串：
+ * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出带前缀的格式化后的当前语言：
  * <listing version="3.0">
- var source:String = "今天是星期{}，天气：{}";
+ var tree:String = "debug.trace.prefix";
 
- // 输出结果：“* 跟踪 : 今天是星期1，天气：晴”
- Trace(source, 1, "晴");
+ // 输出结果：“* 跟踪 : * 跟踪 : ”
+ Trace(tree);
  * </listing>
  *
- * @param         format 源字符串
- * @param         args   打印的参数列表
+ * @param         tree 文本的树形路径
+ * @param         args 打印的参数列表
  *
  * @see           String
  * @see           Array
@@ -39,10 +39,10 @@ package {
  * @langversion   3.0
  * @playerversion Flash 9, Lite 4
  */
-public function Trace(format:String, ...args):void {
-    format            = Format(GetLangText(format), args);
-    var prefix:String = GetLangText('debug.trace.prefix');
+public function TraceLang(tree:String, ...args):void {
+    // 输出内容
+    var format:String = GetLang(tree, args);
 
-    trace(prefix + format);
+    Trace(format);
 }
 }
