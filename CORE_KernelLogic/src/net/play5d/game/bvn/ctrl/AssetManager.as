@@ -95,22 +95,22 @@ package net.play5d.game.bvn.ctrl
 				switch(loadStep){
 					case 0:
 						loadPreLoadSounds(loadNext , loadProcess);
-						type = GetLangText('txt.load_step.sound');
+						type = GetLang('txt.load_step.sound');
 						loadProcess(0);
 						break;
 					case 1:
 						loadGraphics([_effectSwfPath] , loadNext , loadProcess);
-						type = GetLangText('txt.load_step.effect');
+						type = GetLang('txt.load_step.effect');
 						loadProcess(0);
 						break;
 					case 2:
 						loadFonts(loadNext , loadProcess);
-						type = GetLangText('txt.load_step.font');
+						type = GetLang('txt.load_step.font');
 						loadProcess(0);
 						break;
 					case 3:
 						loadBitmaps(loadNext , loadProcess);
-						type = GetLangText('txt.load_step.bitmap');
+						type = GetLang('txt.load_step.bitmap');
 						loadProcess(0);
 						break;
 					case 4:
@@ -180,7 +180,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadErr():void{
-				trace(GetLangText('debug.package.ctrl.AssetManager.loadSnds.loadErr.load_sound_fail.txt')+curUrl);
+				TraceLang('debug.trace.data.load_sound_fail', curUrl);
 				loadNext();
 			}
 
@@ -334,7 +334,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadFail():void{
-				trace(GetLangText('debug.package.ctrl.AssetManager.loadGraphics.loadFail.load_swf_fail.txt')+curUrl);
+				TraceLang('debug.trace.data.load_swf_fail', curUrl);
 				loadNext();
 			}
 
@@ -378,11 +378,11 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function bitmapFail():void{
-				trace(GetLangText('debug.package.ctrl.AssetManager.loadFonts.bitmapFail.load_font_bitmap_fail.txt') , url);
+				TraceLang('debug.trace.data.load_font_bitmap_fail', url);
 			}
 
 			function loadXMLFail():void{
-				trace(GetLangText('debug.package.ctrl.AssetManager.loadFonts.loadXMLFail.load_font_xml_fail.txt')  , url);
+				TraceLang('debug.trace.data.load_font_xml_fail', url);
 			}
 		}
 

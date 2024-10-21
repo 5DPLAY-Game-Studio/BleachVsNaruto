@@ -158,7 +158,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 			var map:MapMain = GameRunFactory.createMapByData(GameCtrl.I.gameRunData.map);
 
 			if(!p1 || !map){
-				throw new Error("创建游戏失败");
+				throw new Error(GetLang('debug.error.data.build_game_fail'));
 				return;
 			}
 
@@ -338,11 +338,11 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 		private function nextWave():void{
 			if(_runningWaves.length < 1){
-				trace('wave finish!');
+				TraceLang('debug.trace.data.musou_wave_end');
 				return;
 			}
 
-			trace('nextWave');
+			TraceLang('debug.trace.data.musou_wave_next');
 
 			var wave:MosouWaveVO = _runningWaves.shift();
 			_runningWave = wave;
@@ -435,19 +435,19 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 		}
 
 		private function onTimeOver():void{
-			trace('Mousou Time Over !!');
+			TraceLang('debug.trace.data.musou_time_over');
 			GameCtrl.I.actionEnable = false;
 
 			GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
 
 			(GameUI.I.getUI() as MosouUI).showLose(function():void{
-				trace('Mousou Time Over complete!');
+				TraceLang('debug.trace.data.musou_time_over_complete');
 				backToWorldMap();
 			});
 		}
 
 		public function onSelfDie(f:FighterMain):void{
-			trace('self die!');
+			TraceLang('debug.trace.data.musou_self_die');
 			GameCtrl.I.actionEnable = false;
 
 			EffectCtrl.I.doEffectById('hit_end',f.x, f.y);
@@ -463,7 +463,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 			GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
 
 			(GameUI.I.getUI() as MosouUI).showLose(function():void{
-				trace('self die complete!');
+				TraceLang('debug.trace.data.musou_self_die_complete');
 				backToWorldMap();
 			});
 		}
@@ -479,7 +479,8 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 			_gameFinish = true;
 			_missionComplete = true;
 			_runningWave = null;
-			trace('missionComplete!');
+
+			TraceLang('debug.trace.data.mission_complete');
 
 			SoundCtrl.I.BGM(AssetManager.I.getSound('win'), false);
 
@@ -487,7 +488,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 			GameCtrl.I.actionEnable = false;
 			(GameUI.I.getUI() as MosouUI).showWin(function():void{
-				trace('missionComplete complete!');
+				TraceLang('debug.trace.data.mission_complete_complete');
 
 				MosouLogic.I.passMission(_mission);
 				backToWorldMap();
@@ -554,7 +555,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 			to.fzqi = to.fzqiMax;
 			to.direct = from.direct;
 
-			trace('FZQI ======================= ', to.fzqi, to.fzqiMax);
+			TraceLang('debug.trace.data.musou_show_fzqi', to.fzqi, to.fzqiMax);
 
 			if(to.initlized()){
 				GameCtrl.I.addGameSprite(to.team.id, to);
@@ -645,7 +646,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 		}
 
 		public function onBossDie(f:FighterMain):void{
-			trace('boss die!');
+			TraceLang('debug.trace.data.musou_boss_die');
 			(GameUI.I.getUI() as MosouUI).showBossKO(f, function():void{
 
 			});

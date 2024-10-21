@@ -17,36 +17,32 @@
  */
 
 package {
-import net.play5d.game.bvn.utils.MultiLangUtils;
 
 /**
- * 全局函数，得到基于树形路径的当前语言
+ * 全局函数，输出带前缀的基于树形路径的格式化后的当前语言
  * <p/>
- * 下列代码演示如何使用全局方法 <code>GetLangText()</code> 输出当前语言：
+ * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出带前缀的格式化后的当前语言：
  * <listing version="3.0">
  var tree:String = "debug.trace.prefix";
 
- // 输出结果：“* 跟踪 : ”
- trace(GetLangText(tree));
+ // 输出结果：“* 跟踪 : * 跟踪 : ”
+ Trace(tree);
  * </listing>
  *
  * @param         tree 文本的树形路径
+ * @param         args 打印的参数列表
  *
  * @see           String
- * @return        基于树形路径的当前语言
+ * @see           Array
+ * @throws        ArgumentError
  *
  * @langversion   3.0
  * @playerversion Flash 9, Lite 4
  */
-public function GetLangText(tree:String):String {
-    // 当前语言文本
-    var langText:String = MultiLangUtils.I.getLangText(tree);
+public function TraceLang(tree:String, ...args):void {
+    // 输出内容
+    var format:String = GetLang(tree, args);
 
-    // 如果当前语言文本为 null，设置默认值 [N/A]
-    if (langText == null) {
-        langText = '[N/A]';
-    }
-
-    return langText;
+    Trace(format);
 }
 }
