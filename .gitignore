@@ -1,2 +1,7 @@
 # 输出文件目录
 /out/
+
+# FlashBuilder
+.metadata/
+.settings/
+bin/
