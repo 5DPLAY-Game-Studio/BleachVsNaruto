@@ -1,11 +1,3 @@
-<!--
- * @Author: Liushui liushui_miaomiao@163.com
- * @Date: 2024-10-21 08:57:06
- * @LastEditors: Liushui liushui_miaomiao@163.com
- * @LastEditTime: 2024-10-21 09:11:04
- * @FilePath: \undefinedd:\源代码\_工作空间\1212321工作空间\README_en.md
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 # Bleach vs Naruto <!-- omit in toc -->
 
 [中文版](README.md) | [English](README_en.md)
