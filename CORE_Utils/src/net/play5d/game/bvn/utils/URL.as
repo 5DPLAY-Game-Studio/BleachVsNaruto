@@ -24,7 +24,7 @@ public class URL {
     public static const BBS:String              = 'http://bbs.1212321.com/';
     public static const DOWNLOAD:String         = 'http://www.1212321.com/index/';
     public static const DOWNLOAD_ANDROID:String = 'http://1212321.com/index/game/phone/a48b52f9-6b6a-4448-91d2-d666ff93edd7';
-    public static var MARK:String = 'bvn';
+    public static var MARK:String               = 'bvn';
 
     public static function go(url:String, isAddMark:Boolean = true):void {
         if (isAddMark) {
