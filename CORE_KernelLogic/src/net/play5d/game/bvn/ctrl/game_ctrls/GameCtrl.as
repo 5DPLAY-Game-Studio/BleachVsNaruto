@@ -407,9 +407,19 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 			switch(team){
 				case 1:
-					ctrl = new FighterKeyCtrl();
-					(ctrl as FighterKeyCtrl).inputType = GameInputType.P1;
-					(ctrl as FighterKeyCtrl).classicMode = GameData.I.config.keyInputMode == 1;
+					if(GameMode.isWatch()){
+						ctrl = new FighterAICtrl();
+						(ctrl as FighterAICtrl).AILevel = MessionModel.I.AI_LEVEL;
+						(ctrl as FighterAICtrl).fighter = fighter;
+					}else {
+						ctrl          = new FighterKeyCtrl();
+						(
+								ctrl as FighterKeyCtrl
+						).inputType   = GameInputType.P1;
+						(
+								ctrl as FighterKeyCtrl
+						).classicMode = GameData.I.config.keyInputMode == 1;
+					}
 					break;
 				case 2:
 					if(GameMode.isVsCPU(false) || GameMode.isAcrade()){

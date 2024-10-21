@@ -133,6 +133,7 @@ package net.play5d.game.bvn.ui.select
 					initP2Group(GameInputType.P2,false);
 					break;
 				case GameMode.TEAM_VS_CPU:
+				case GameMode.TEAM_WATCH:
 					initP1Group(function():void{
 						initP2Group(GameInputType.P1,false);
 					});

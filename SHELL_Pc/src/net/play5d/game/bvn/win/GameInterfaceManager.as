@@ -126,13 +126,15 @@ package net.play5d.game.bvn.win
 				{txt:'TEAM PLAY',cn:'小队模式',children:[
 					{txt:'TEAM ACRADE',cn:'闯关模式'},
 					{txt:'TEAM VS PEOPLE',cn:'2P对战'},
-					{txt:'TEAM VS CPU',cn:'对战电脑'}
+					{txt:'TEAM VS CPU',cn:'对战电脑'},
+						{txt:'TEAM WATCH',cn:'观战电脑'}
 				]},
 
 				{txt:'SINGLE PLAY',cn:'单人模式',children:[
 					{txt:'SINGLE ACRADE',cn:'闯关模式'},
 					{txt:'SINGLE VS PEOPLE',cn:'2P对战'},
-					{txt:'SINGLE VS CPU',cn:'对战电脑'}
+					{txt:'SINGLE VS CPU',cn:'对战电脑'},
+						{txt:'SINGLE WATCH',cn:'观战电脑'}
 				]},
 
 				{txt:'LAN PLAY',cn:'局域网对战',func:function():void{

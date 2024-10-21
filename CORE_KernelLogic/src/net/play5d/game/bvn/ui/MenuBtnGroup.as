@@ -319,6 +319,14 @@ package net.play5d.game.bvn.ui
 						GameEvent.dispatchEvent(GameEvent.ENTER_TEAM_STAGE);
 					}
 					break;
+				case 'TEAM WATCH':
+					func = function():void {
+						GameMode.currentMode = GameMode.TEAM_WATCH;
+						MainGame.I.goSelect();
+
+						GameEvent.dispatchEvent(GameEvent.ENTER_TEAM_STAGE);
+					};
+					break;
 				case 'SINGLE ACRADE':
 					func = function():void{
 						GameMode.currentMode = GameMode.SINGLE_ACRADE;
@@ -347,6 +355,14 @@ package net.play5d.game.bvn.ui
 
 						GameEvent.dispatchEvent(GameEvent.ENTER_SINGLE_STAGE);
 					}
+					break;
+				case 'SINGLE WATCH':
+					func = function():void {
+						GameMode.currentMode = GameMode.SINGLE_WATCH;
+						MainGame.I.goSelect();
+
+						GameEvent.dispatchEvent(GameEvent.ENTER_SINGLE_STAGE);
+					};
 					break;
 				case 'SURVIVOR':
 					func = function():void{

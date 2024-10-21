@@ -26,10 +26,12 @@ package net.play5d.game.bvn.data
 		public static const TEAM_ACRADE:int = 10;
 		public static const TEAM_VS_PEOPLE:int = 11;
 		public static const TEAM_VS_CPU:int = 12;
+		public static const TEAM_WATCH:int = 13;
 
 		public static const SINGLE_ACRADE:int = 20;
 		public static const SINGLE_VS_PEOPLE:int = 21;
 		public static const SINGLE_VS_CPU:int = 22;
+		public static const SINGLE_WATCH:int = 23;
 
 		public static const SURVIVOR:int = 30;
 
@@ -52,14 +54,21 @@ package net.play5d.game.bvn.data
 		 * 组队模式
 		 */
 		public static function isTeamMode():Boolean{
-			return currentMode == TEAM_ACRADE || currentMode == TEAM_VS_CPU || currentMode == TEAM_VS_PEOPLE || currentMode == MOSOU_ACRADE;
+			return currentMode == TEAM_ACRADE ||
+				   currentMode == TEAM_VS_CPU ||
+				   currentMode == TEAM_VS_PEOPLE ||
+				   currentMode == MOSOU_ACRADE ||
+				   currentMode == TEAM_WATCH;
 		}
 
 		/**
 		 * 一人模式（经典）
 		 */
 		public static function isSingleMode():Boolean{
-			return currentMode == SINGLE_ACRADE || currentMode == SINGLE_VS_CPU || currentMode == SINGLE_VS_PEOPLE;
+			return currentMode == SINGLE_ACRADE ||
+				   currentMode == SINGLE_VS_CPU ||
+				   currentMode == SINGLE_VS_PEOPLE ||
+				   currentMode == SINGLE_WATCH;
 		}
 
 		public static function isVsPeople():Boolean{
@@ -67,7 +76,15 @@ package net.play5d.game.bvn.data
 		}
 
 		public static function isVsCPU(includeTraining:Boolean = true):Boolean{
-			return currentMode == TEAM_VS_CPU || currentMode == SINGLE_VS_CPU || (includeTraining && currentMode == TRAINING);
+			return currentMode == TEAM_VS_CPU ||
+				   currentMode == SINGLE_VS_CPU ||
+				   (includeTraining && currentMode == TRAINING) ||
+				   currentMode == TEAM_WATCH ||
+				   currentMode == SINGLE_WATCH;
+		}
+
+		public static function isWatch():Boolean{
+			return currentMode == TEAM_WATCH || currentMode == SINGLE_WATCH;
 		}
 
 		/**
@@ -79,8 +96,5 @@ package net.play5d.game.bvn.data
 
 		public static var currentMode:int;
 
-		public function GameMode()
-		{
-		}
 	}
 }
