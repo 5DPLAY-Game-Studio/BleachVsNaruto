@@ -111,7 +111,9 @@ public class LanguageStage implements IStage {
         }
 
         if (_loadingBar) {
-            _ui.removeChild(_loadingBar);
+            if (_ui.contains(_loadingBar)) {
+                _ui.removeChild(_loadingBar);
+            }
 
             _loadingBar = null;
         }
