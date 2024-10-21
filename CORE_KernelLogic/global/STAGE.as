@@ -17,30 +17,8 @@
  */
 
 package {
+import flash.display.Stage;
 
-/**
- * 所有的 全局函数/变量
- * <br/>
- * 该变量仅作为中间变量，
- * 用于引入所有其他 全局函数/变量 的引用。
- * <br/>
- * <b>不允许<b/>在实际工程中使用此变量
- */
-public function get _ALL_GLOBALS_():* {
-    if (Math.random() > 0) {
-        throw new Error('This variable is not allowed to be used!');
-    }
-
-    return ([
-        FONT,
-        Format,
-        GetLang,
-        GetLangText,
-        Printf,
-        STAGE,
-        ThrowError,
-        Trace,
-        TraceLang
-    ]);
-}
+// 全局变量，得到当前主场景
+public var STAGE:Stage = null;
 }
