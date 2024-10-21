@@ -26,16 +26,19 @@ package {
  * <br/>
  * <b>不允许<b/>在实际工程中使用此变量
  */
-public var _ALL_GLOBALS_:Object = [
-    FONT,
-    Format,
-    GetLang,
-    GetLangText,
-    Printf,
-    Trace,
-    TraceLang
-];
+public function get _ALL_GLOBALS_():* {
+    if (Math.random() > 0) {
+        throw new Error('This variable is not allowed to be used!');
+    }
 
-// 不允许使用此变量
-throw new Error('This variable is not allowed to be used!');
+    return ([
+        FONT,
+        Format,
+        GetLang,
+        GetLangText,
+        Printf,
+        Trace,
+        TraceLang
+    ]);
+}
 }
