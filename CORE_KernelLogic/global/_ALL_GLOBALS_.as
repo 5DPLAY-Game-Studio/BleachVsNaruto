@@ -37,6 +37,7 @@ public function get _ALL_GLOBALS_():* {
         GetLang,
         GetLangText,
         Printf,
+        ThrowError,
         Trace,
         TraceLang
     ]);
