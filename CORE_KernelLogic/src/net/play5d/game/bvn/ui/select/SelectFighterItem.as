@@ -87,10 +87,11 @@ package net.play5d.game.bvn.ui.select
 			if(ui.more_bg){
 				ui.more_bg.visible = isMore;
 				ui.more_bg.mouseEnabled = ui.more_bg.mouseChildren = false;
-				var cr:ColorTransform = new ColorTransform();
-				cr.greenOffset = 255;
-				cr.blueOffset = -255;
-				ui.more_bg.transform.colorTransform = cr;
+				var ct:ColorTransform = new ColorTransform();
+				ct.redOffset = 255;
+	//			ct.greenOffset = 255;
+				ct.blueOffset = -255;
+				ui.more_bg.transform.colorTransform = ct;
 			}
 		}
 
