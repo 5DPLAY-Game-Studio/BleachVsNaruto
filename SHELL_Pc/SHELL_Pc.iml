@@ -37,7 +37,7 @@
         </compiler-options>
         <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/launch-app.xml" package-file-name="launch">
           <files-to-package>
-            <FilePathAndPathInPackage file-path="$MODULE_DIR$/../shared/assets" path-in-package="assets" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/../shared/assets/assets" path-in-package="assets" />
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/lib/icon" path-in-package="icon" />
           </files-to-package>
         </packaging-air-desktop>
