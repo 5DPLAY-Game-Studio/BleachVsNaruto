@@ -48,11 +48,17 @@ package net.play5d.game.bvn.stage
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.howtoplay , 'movie_howtoplay');
@@ -120,11 +126,18 @@ package net.play5d.game.bvn.stage
 			if(name) text.text = name;
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			SoundCtrl.I.BGM(null);
 			GameRender.remove(render);

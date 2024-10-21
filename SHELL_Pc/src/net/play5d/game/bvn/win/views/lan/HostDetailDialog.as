@@ -40,11 +40,17 @@ package net.play5d.game.bvn.win.views.lan
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			_ui = UIAssetUtil.I.createDisplayObject("detail_win_mc");
@@ -112,11 +118,18 @@ package net.play5d.game.bvn.win.views.lan
 			MainGame.stageCtrl.removeLayer(this);
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			try{
 				_ui.btn_join.removeEventListener(MouseEvent.CLICK , joinHandler);

@@ -93,10 +93,10 @@ public class KyoStageCtrl extends EventDispatcher {
         }
         if (_curStage) {
             if (buildAfterDestory) {
-                _curStage.destory(detoryComplete);
+                _curStage.destroy(detoryComplete);
             }
             else {
-                _curStage.destory();
+                _curStage.destroy();
                 detoryComplete();
             }
         }
@@ -195,7 +195,7 @@ public class KyoStageCtrl extends EventDispatcher {
         function effectFin():void {
             try {
                 _mainStage.removeChild(layer.display);
-                layer.destory();
+                layer.destroy();
             }
             catch (e:Error) {
                 trace('KyoStageCtrl: removeLayer:', e);
@@ -224,7 +224,7 @@ public class KyoStageCtrl extends EventDispatcher {
             removeAllLayer();
         }
         if (_curStage) {
-            _curStage.destory();
+            _curStage.destroy();
             _mainStage.removeChild(_curStage.display);
             _curStage = null;
         }

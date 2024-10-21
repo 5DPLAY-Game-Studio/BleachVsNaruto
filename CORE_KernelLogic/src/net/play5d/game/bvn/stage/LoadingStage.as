@@ -63,6 +63,9 @@ package net.play5d.game.bvn.stage
 		{
 		}
 
+		/**
+		 * 显示对象
+		 */
 		public function get display():DisplayObject
 		{
 			return _ui;
@@ -93,6 +96,9 @@ package net.play5d.game.bvn.stage
 			}
 		}
 
+		/**
+		 * 构建
+		 */
 		public function build():void
 		{
 			GameEvent.dispatchEvent(GameEvent.FIGHT_LOADING_START);
@@ -185,6 +191,9 @@ package net.play5d.game.bvn.stage
 
 		}
 
+		/**
+		 * 稍后构建
+		 */
 		public function afterBuild():void
 		{
 			StateCtrl.I.transOut(startLoad);
@@ -214,7 +223,11 @@ package net.play5d.game.bvn.stage
 			GameEvent.dispatchEvent(GameEvent.FIGHT_LOADING);
 		}
 
-		public function destory(back:Function=null):void
+		/**
+		 * 销毁
+		 * @param back 回调函数
+		 */
+		public function destroy(back:Function =null):void
 		{
 			_destoryed = true;
 

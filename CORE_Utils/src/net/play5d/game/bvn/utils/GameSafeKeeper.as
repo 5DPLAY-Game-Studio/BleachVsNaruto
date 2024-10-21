@@ -16,98 +16,104 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils
-{
-	import flash.utils.ByteArray;
+package net.play5d.game.bvn.utils {
+import flash.utils.ByteArray;
 
-	import net.play5d.kyo.loader.KyoLoaderLite;
+import net.play5d.kyo.loader.KyoLoaderLite;
 
-	public class GameSafeKeeper
-	{
-		private static var _i:GameSafeKeeper;
-		public static function get I():GameSafeKeeper{
-			_i ||= new GameSafeKeeper();
-			return _i;
-		}
-		public function GameSafeKeeper()
-		{
-		}
+public class GameSafeKeeper {
+    private const KEY:String = 'Wo&Ye@bu!Neng(889^Yang%a!Po!xO!bB)_(';
+    private const IV:String  = '#$@!#%^cscscsDDW*><1998AZSfdxx##(x_x)###2';
+    private static var _i:GameSafeKeeper;
 
-		private var _fileSaveMap:Object;
-		private var _configFailed:Boolean;
+    public static function get I():GameSafeKeeper {
+        _i ||= new GameSafeKeeper();
+        return _i;
+    }
 
-		private var _failFileMap:Object = {};
-		private var _fileFailed:Boolean;
+    public function GameSafeKeeper() {
+    }
 
-		private const KEY:String = "Wo&Ye@bu!Neng(889^Yang%a!Po!xO!bB)_(";
-		private const IV:String = "#$@!#%^cscscsDDW*><1998AZSfdxx##(x_x)###2";
+    private var _fileSaveMap:Object;
+    private var _configFailed:Boolean;
+    private var _failFileMap:Object = {};
+    private var _fileFailed:Boolean;
 
-		public function loadConfigure(succ:Function, fail:Function = null):void{
+    public function loadConfigure(succ:Function, fail:Function = null):void {
 
-			function succBack(data:ByteArray):void{
-				try{
-					var json:String = GameEncriptUtils.decryptAES(data, KEY, IV);
-					var jsonObj:Object = JSON.parse(json);
-					_fileSaveMap = jsonObj;
-					if(succ != null) succ();
-				}catch(e:Error){
-					if(fail != null) fail(e);
-				}
-			}
+        function succBack(data:ByteArray):void {
+            try {
+                var json:String    = GameEncriptUtils.decryptAES(data, KEY, IV);
+                var jsonObj:Object = JSON.parse(json);
+                _fileSaveMap       = jsonObj;
+                if (succ != null) {
+                    succ();
+                }
+            }
+            catch (e:Error) {
+                if (fail != null) {
+                    fail(e);
+                }
+            }
+        }
 
-			function failBack(e:* = null):void{
-				trace('loadSafeFile fail:', e);
-				_configFailed = true;
-				if(fail != null) fail();
-			}
+        function failBack(e:* = null):void {
+            trace('loadSafeFile fail:', e);
+            _configFailed = true;
+            if (fail != null) {
+                fail();
+            }
+        }
 
-			KyoLoaderLite.loadBytes('assets/.md5', succBack, failBack);
-		}
+        KyoLoaderLite.loadBytes('assets/.md5', succBack, failBack);
+    }
 
-		public function getConfigFailed():Boolean{
-			return _configFailed;
-		}
+    public function getConfigFailed():Boolean {
+        return _configFailed;
+    }
 
-		public function getFailed():Boolean{
-			return _fileFailed;
-		}
+    public function getFailed():Boolean {
+        return _fileFailed;
+    }
 
-		public function getConfigOrFileFailed():Boolean{
-			return _configFailed || _fileFailed;
-		}
+    public function getConfigOrFileFailed():Boolean {
+        return _configFailed || _fileFailed;
+    }
 
-		public function checkFile(url:String, fileBytes:ByteArray):Boolean{
-			if(_configFailed || !_fileSaveMap) return false;
+    public function checkFile(url:String, fileBytes:ByteArray):Boolean {
+        if (_configFailed || !_fileSaveMap) {
+            return false;
+        }
 
 //			trace('checkFile', url);
 
-			if(_failFileMap[url]){
-				trace('checkFile Error :: not match! ', url);
-				return false;
-			}
+        if (_failFileMap[url]) {
+            trace('checkFile Error :: not match! ', url);
+            return false;
+        }
 
-			if(url.indexOf('assets') == 0){
-				url = url.substr(7);
-			}
+        if (url.indexOf('assets') == 0) {
+            url = url.substr(7);
+        }
 
-			var md5:String = _fileSaveMap[url];
-			if(!md5){
-				trace('checkFile Error :: md5 not found! ', url);
-				return false;
-			}
+        var md5:String = _fileSaveMap[url];
+        if (!md5) {
+            trace('checkFile Error :: md5 not found! ', url);
+            return false;
+        }
 
-			var fileMd5:String = GameEncriptUtils.getFileMD5(fileBytes);
+        var fileMd5:String = GameEncriptUtils.getFileMD5(fileBytes);
 
-			if(md5 == fileMd5){
-				return true;
-			}
+        if (md5 == fileMd5) {
+            return true;
+        }
 
-			trace('checkFile Error :: md5 not match! ', url);
+        trace('checkFile Error :: md5 not match! ', url);
 
-			_failFileMap[url] = 1;
-			_fileFailed = true;
-			return false;
-		}
+        _failFileMap[url] = 1;
+        _fileFailed       = true;
+        return false;
+    }
 
-	}
+}
 }

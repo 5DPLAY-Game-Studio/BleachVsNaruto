@@ -39,6 +39,8 @@ public class LanguageStage implements IStage {
     private var _loadingBar:language_mc_loadingbar;
     // 显示对象
     private var _ui:Sprite = new Sprite();
+    // 背景位图
+    private var _backGround:Bitmap;
 
     // 国家集合
     [ArrayElementType('InsCountry')]
@@ -74,9 +76,8 @@ public class LanguageStage implements IStage {
                             GameConfig.GAME_SIZE.x,
                             GameConfig.GAME_SIZE.y
                     );
-        // 背景位图
-        var backGround:Bitmap         = new Bitmap(backGroundData);
-        _ui.addChild(backGround);
+        _backGround                   = new Bitmap(backGroundData)
+        _ui.addChild(_backGround);
 
         // 初始化加载进度条
         _loadingBar   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_loadingbar');
@@ -102,8 +103,16 @@ public class LanguageStage implements IStage {
      * 销毁
      * @param back 回调函数
      */
-    public function destory(back:Function = null):void {
+    public function destroy(back:Function = null):void {
+        if (_backGround) {
+            _ui.removeChild(_backGround);
+
+            _backGround = null;
+        }
+
         if (_loadingBar) {
+            _ui.removeChild(_loadingBar);
+
             _loadingBar = null;
         }
 
@@ -112,13 +121,15 @@ public class LanguageStage implements IStage {
                 country.removeEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
                 country.removeEventListener(MouseEvent.CLICK, clickHandler);
                 country.destroy();
+
+                _ui.removeChild(country);
             }
 
             _insCountries = null;
         }
 
         _clickCallBack = null;
-        _ui            = null;
+//        _ui            = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////

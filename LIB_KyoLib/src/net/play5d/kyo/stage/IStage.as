@@ -19,13 +19,30 @@
 package net.play5d.kyo.stage {
 import flash.display.DisplayObject;
 
+/**
+ * 场景接口
+ */
 public interface IStage {
+
+    /**
+     * 显示对象
+     */
     function get display():DisplayObject;
 
+    /**
+     * 构建
+     */
     function build():void;
 
+    /**
+     * 稍后构建
+     */
     function afterBuild():void;
 
-    function destory(back:Function = null):void;
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    function destroy(back:Function = null):void;
 }
 }
