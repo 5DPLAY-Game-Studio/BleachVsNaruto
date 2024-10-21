@@ -487,8 +487,8 @@ package net.play5d.game.bvn.fighter
 
 					}else{
 						goFrame("击飞_弹",false);
-						var yDiff:Number = _fighter.y - _hurtYMin;
-						var vecy:Number = yDiff / 25;
+						yDiff = _fighter.y - _hurtYMin;
+						vecy = yDiff / 25;
 
 						if(vecy < GameConfig.HIT_FLOOR_TAN_Y_MIN) vecy = GameConfig.HIT_FLOOR_TAN_Y_MIN;
 						if(vecy > GameConfig.HIT_FLOOR_TAN_Y_MAX) vecy = GameConfig.HIT_FLOOR_TAN_Y_MAX;
