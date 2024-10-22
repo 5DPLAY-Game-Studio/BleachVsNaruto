@@ -17,32 +17,21 @@
  */
 
 package {
+import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.data.GameRunDataVO;
+import net.play5d.game.bvn.fighter.FighterMain;
 
 /**
- * 所有的 全局函数/变量
- * <br/>
- * 该变量仅作为中间变量，
- * 用于引入所有其他 全局函数/变量 的引用。
- * <br/>
- * <b>不允许<b/>在实际工程中使用此变量
+ * 获取 P2 引用
+ * @return P2 引用
  */
-public function get _ALL_GLOBALS_():* {
-    if (Math.random() > 0) {
-        throw new Error('This variable is not allowed to be used!');
+public function get P2():FighterMain {
+    var runData:GameRunDataVO = GameCtrl.I.gameRunData;
+    if (!runData) {
+        return null;
     }
 
-    return ([
-        FONT,
-        Format,
-        GetLang,
-        GetLangText,
-        P1,
-        P2,
-        Printf,
-        STAGE,
-        ThrowError,
-        Trace,
-        TraceLang
-    ]);
+    var p2:FighterMain = runData.p2FighterGroup.currentFighter;
+    return p2;
 }
 }
