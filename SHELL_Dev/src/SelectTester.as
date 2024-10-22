@@ -46,26 +46,6 @@ import net.play5d.kyo.display.ui.KyoSimpButton;
 
 [SWF(width='1000', height='600', frameRate='30', backgroundColor='#000000')]
 public class SelectTester extends Sprite {
-    private var _mainGame:MainGame;
-    private var _testUI:Sprite;
-    private var _modeText:TextField;
-    private var _p2InputId:TextField;
-    private var _p1FzInputId:TextField;
-    private var _p2FzInputId:TextField;
-    private var _autoReceiveHp:TextField;
-    private var _mapInputId:TextField;
-    private var _fpsInput:TextField;
-    private var _debugText:TextField;
-    private var _gameSprite:Sprite;
-
-//		[Embed(source="/assets/font/font1.png")]
-//		private var _font1:Class;
-//
-//		[Embed(source="/assets/font/font1.xml", mimeType="application/octet-stream"))]
-//		private var _font1XML:Class;
-
-    private var _assetLoader:AssetLoader = new AssetLoader();
-
     public function SelectTester() {
         GameStageLoadCtrl.IGORE_OLD_FIGHTER = true;
 
@@ -76,45 +56,25 @@ public class SelectTester extends Sprite {
             addEventListener(Event.ADDED_TO_STAGE, initlize);
         }
     }
+    private var _mainGame:MainGame;
+    private var _testUI:Sprite;
+    private var _modeText:TextField;
+    private var _p2InputId:TextField;
+    private var _p1FzInputId:TextField;
+    private var _p2FzInputId:TextField;
+    private var _autoReceiveHp:TextField;
+    private var _mapInputId:TextField;
+    private var _fpsInput:TextField;
+    private var _debugText:TextField;
 
-    private function initlize(e:Event = null):void {
-        removeEventListener(Event.ADDED_TO_STAGE, initlize);
-
-//			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
-
-        initMosouFighters();
-
-        _gameSprite = new Sprite();
-        addChild(_gameSprite);
-        _gameSprite.scrollRect = new Rectangle(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
-
-        ResUtils.swfLib = new SwfLib();
-        AssetManager.I.setAssetLoader(_assetLoader);
-        GameInterface.instance = new GameInterfaceManager();
-
-        trace('AssetManager.I.setAssetLoader');
-
-        GameData.I.config.AI_level     = 1;
-        GameData.I.config.quality      = GameQuailty.LOW;
-        GameData.I.config.keyInputMode = 1;
-
-        _mainGame = new MainGame();
-        _mainGame.initlize(_gameSprite, stage, function ():void {
-            _mainGame.goLanguage(function ():void {
-                trace('字体名称：' + FONT.fontName);
-                UIUtils.LOCK_FONT = FONT.fontName;
-
-                GameData.I.saveData();
-                _mainGame.initalizeLoad(initBackHandler, initFailHandler);
-            });
-
-        }, initFailHandler);
-
-        StateCtrl.I.transEnabled = false;
-
-        Debugger.initDebug(stage);
-        Debugger.onErrorMsgCall = onDebugLog;
-    }
+//		[Embed(source="/assets/font/font1.png")]
+//		private var _font1:Class;
+//
+//		[Embed(source="/assets/font/font1.xml", mimeType="application/octet-stream"))]
+//		private var _font1XML:Class;
+    private var _gameSprite:Sprite;
+    private var _assetLoader:AssetLoader = new AssetLoader();
+    private var _box:Sprite;
 
     private function initBackHandler():void {
         buildTestUI();
@@ -219,8 +179,6 @@ public class SelectTester extends Sprite {
 
     }
 
-    private var _box:Sprite;
-
     private function toogleBox(...params):void {
         if (!_box) {
             _box = new Sprite();
@@ -248,6 +206,45 @@ public class SelectTester extends Sprite {
             _box.visible = false;
         }
 
+    }
+
+    private function initlize(e:Event = null):void {
+        removeEventListener(Event.ADDED_TO_STAGE, initlize);
+
+//			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
+
+        initMosouFighters();
+
+        _gameSprite = new Sprite();
+        addChild(_gameSprite);
+        _gameSprite.scrollRect = new Rectangle(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
+
+        ResUtils.swfLib = new SwfLib();
+        AssetManager.I.setAssetLoader(_assetLoader);
+        GameInterface.instance = new GameInterfaceManager();
+
+        trace('AssetManager.I.setAssetLoader');
+
+        GameData.I.config.AI_level     = 1;
+        GameData.I.config.quality      = GameQuailty.LOW;
+        GameData.I.config.keyInputMode = 1;
+
+        _mainGame = new MainGame();
+        _mainGame.initlize(_gameSprite, stage, function ():void {
+            _mainGame.goLanguage(function ():void {
+                trace('字体名称：' + FONT.fontName);
+                UIUtils.LOCK_FONT = FONT.fontName;
+
+                GameData.I.saveData();
+                _mainGame.initalizeLoad(initBackHandler, initFailHandler);
+            });
+
+        }, initFailHandler);
+
+        StateCtrl.I.transEnabled = false;
+
+        Debugger.initDebug(stage);
+        Debugger.onErrorMsgCall = onDebugLog;
     }
 
     private function boxMouseHandler(e:MouseEvent):void {
