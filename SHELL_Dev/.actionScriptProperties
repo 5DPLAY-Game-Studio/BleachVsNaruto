@@ -34,6 +34,7 @@
       <libraryPathEntry kind="3" linkType="1" path="/CORE_KernelLogic/bin/CORE_KernelLogic.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/CORE_Shared/bin/CORE_Shared.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/CORE_Utils/bin/CORE_Utils.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="1" linkType="1" path="lib/swc"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

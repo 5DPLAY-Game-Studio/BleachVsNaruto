@@ -18,12 +18,31 @@
 
 package
 {
+import feathers.controls.Button;
+import feathers.controls.Label;
+import feathers.controls.PopUpListView;
+import feathers.controls.PopUpListView;
+import feathers.data.ArrayCollection;
+import feathers.style.Theme;
+import feathers.text.TextFormat;
+import feathers.themes.steel.SteelTheme;
+import feathers.themes.steel.SteelTheme;
+
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.geom.Rectangle;
+import flash.events.MouseEvent;
+import flash.geom.Rectangle;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
-	import flash.text.TextFormat;
+
+import net.play5d.game.bvn.data.AssisterModel;
+
+import net.play5d.game.bvn.data.FighterModel;
+import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.MapModel;
+import net.play5d.kyo.utils.KyoUtils;
+
+//	import flash.text.TextFormat;
 
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.GameQuailty;
@@ -45,20 +64,24 @@ package
 	import net.play5d.kyo.KyoSharedObject;
 	import net.play5d.kyo.display.ui.KyoSimpButton;
 	import net.play5d.game.bvn.stage.LoadingStage;
+	import net.play5d.game.bvn.data.MapVO;
 
 	[SWF(width="1000", height="600", frameRate="30", backgroundColor="#000000")]
 	public class FighterTester extends Sprite
 	{
+		private var _theme:SteelTheme;
+		private const KEY:String = 'text';
+
 		private var _mainGame:MainGame;
 		private var _testUI:Sprite;
-		private var _p1InputId:TextField;
-		private var _p2InputId:TextField;
-		private var _p1FzInputId:TextField;
-		private var _p2FzInputId:TextField;
-		private var _autoReceiveHp:TextField;
-		private var _mapInputId:TextField;
-		private var _fpsInput:TextField;
-		private var _debugText:TextField;
+		private var _p1InputId:PopUpListView
+		private var _p2InputId:PopUpListView;
+		private var _p1FzInputId:PopUpListView;
+		private var _p2FzInputId:PopUpListView;
+		private var _autoReceiveHp:PopUpListView;
+		private var _mapInputId:PopUpListView;
+		private var _fpsInput:PopUpListView;
+		private var _debugText:Label;
 		private var _gameSprite:Sprite;
 
 //		[Embed(source="/assets/font/font1.png")]
@@ -84,6 +107,10 @@ package
 		private function initlize(e:Event = null):void{
 			removeEventListener(Event.ADDED_TO_STAGE,initlize);
 
+			stage.stageFocusRect = false;
+
+			//Theme.setTheme(new SteelPopUpListViewStyles());
+
 //			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
 
 			initMosouFighters();
@@ -106,7 +133,10 @@ package
 			_mainGame = new MainGame();
 			_mainGame.initlize(_gameSprite,stage,function ():void {
 				_mainGame.goLanguage(function ():void {
-					trace('字体名称：'+FONT.fontName);
+					_theme = new SteelTheme();
+					_theme.fontName = FONT.fontName;
+					Theme.setTheme(_theme);
+
 					UIUtils.LOCK_FONT = FONT.fontName;
 
 					GameData.I.saveData();
@@ -137,112 +167,279 @@ package
 			_testUI.graphics.endFill();
 			addChild(_testUI);
 
-			var yy:Number = 20;
+			var xx:Number = 0;
+			var yy:Number = 0;
 
-			addLabel("P1",yy);
-			yy += 40;
+			var fighterData:Array = (function():Array {
+				var data:Array = [];
 
-			addLabel("角色ID:",yy);
-			_p1InputId = addInput("ichigo",yy,60);
-			yy += 40;
+				var fightersObj:Object = FighterModel.I.getAllFighters();
+				for each (var fighter:FighterVO in fightersObj) {
+					data.push({text: fighter.id});
+				}
 
-			addLabel("辅助ID:",yy);
-			_p1FzInputId = addInput("kon",yy,60);
-			yy += 80;
+				data.sort(function (a:Object, b:Object):int {
+					if (a[KEY] > b[KEY]) {
+						return 1;
+					}
+					else if (a[KEY] < b[KEY]) {
+						return -1;
+					}
 
-			addLabel("P2",yy);
-			yy += 40;
+					return 0;
+				});
 
-			addLabel("角色ID:",yy);
-			_p2InputId = addInput("ichigo",yy,60);
-			yy += 40;
+				return data;
+			})();
+			addLabel("玩家 1 角色 id",yy,xx);
+			yy += 30;
+			_p1InputId = addInput(fighterData,yy,xx);
+			yy += 30;
 
-			addLabel("辅助ID:",yy);
-			_p2FzInputId = addInput("kon",yy,60);
-			yy += 40;
+			var assistantData:Array = (function():Array {
+				var data:Array = [];
 
-			addLabel("地图ID:",yy);
-			_mapInputId = addInput("xianshi",yy,60);
-			yy += 60;
+				var assistantObj:Object = AssisterModel.I.getAllAssisters();
+				for each (var assistant:FighterVO in assistantObj) {
+					data.push({text: assistant.id});
+				}
 
-			addLabel("游戏FPS:",yy);
-			_fpsInput = addInput(GameConfig.FPS_GAME.toString(),yy,60);
-			yy += 60;
+				data.sort(function (a:Object, b:Object):int {
+					if (a[KEY] > b[KEY]) {
+						return 1;
+					}
+					else if (a[KEY] < b[KEY]) {
+						return -1;
+					}
 
-			addLabel("回血:",yy);
-			_autoReceiveHp = addInput("1",yy,60);
-			yy += 40;
+					return 0;
+				});
 
-			_debugText = addLabel("",yy,0);
+				return data;
+			})();
+			addLabel("玩家 1 辅助 id",yy,xx);
+			yy += 30;
+			_p1FzInputId = addInput(assistantData,yy,xx);
+			yy += 30;
+
+			addLabel("玩家 2 角色 id",yy);
+			yy += 30;
+			_p2InputId = addInput(fighterData,yy,xx);
+			yy += 30;
+
+			addLabel("玩家 2 辅助 id",yy);
+			yy += 30;
+			_p2FzInputId = addInput(assistantData,yy,xx);
+			yy += 30;
+
+			var mapData:Array = (function():Array {
+				var data:Array = [];
+
+				var mapObj:Object = MapModel.I.getAllMaps();
+				for each (var map:MapVO in mapObj) {
+					data.push({text: map.id});
+				}
+
+				data.sort(function (a:Object, b:Object):int {
+					if (a[KEY] > b[KEY]) {
+						return 1;
+					}
+					else if (a[KEY] < b[KEY]) {
+						return -1;
+					}
+
+					return 0;
+				});
+
+				return data;
+			})();
+			addLabel("地图 id",yy,xx);
+			yy += 30;
+			_mapInputId = addInput(mapData,yy,xx);
+			yy += 45;
+
+			var fpsData:Array = [{
+				text: "30"
+			}, {
+				text: '60'
+			}]
+			addLabel("游戏帧率",yy,xx);
+			yy += 30;
+		//	_fpsInput = addInput(GameConfig.FPS_GAME.toString(),yy,60);
+			_fpsInput = addInput(fpsData,yy,xx);
+			yy += 30;
+
+			var recoverData:Array = [{
+				text: "启用"
+			}, {
+				text: '禁用'
+			}]
+			addLabel("练习模式回复效果",yy,xx);
+			yy += 30;
+			_autoReceiveHp = addInput(recoverData,yy,xx);
+			yy += 30;
+
+			_debugText = addLabel("错误信息提示……",yy,xx);
 			_debugText.width = 190;
 			_debugText.height = 200;
-			_debugText.textColor = 0xff0000;
-			_debugText.multiline = true;
+			_debugText.textFormat.color = 0xff0000;
+			_debugText.wordWrap = true;
 
 //			addButton("改变FPS",400,50,100,30,changeFPS);
-			addButton("测试",500,50,100,50,testGame);
+			addButton("测试",560,3,175,30,testGame);
 
 			var saveObj:Object = KyoSharedObject.load("fighter_test_config");
 			if(saveObj && saveObj.p1){
-				_p1InputId.text = saveObj.p1.id;
-				_p2InputId.text = saveObj.p2.id;
+//				_p1InputId.text = saveObj.p1.id;
+//				_p2InputId.text = saveObj.p2.id;
+//
+//				if(saveObj.p1.fz) _p1FzInputId.text = saveObj.p1.fz;
+//				if(saveObj.p2.fz) _p2FzInputId.text = saveObj.p2.fz;
+//				if(saveObj.map) _mapInputId.text = saveObj.map;
 
-				if(saveObj.p1.fz) _p1FzInputId.text = saveObj.p1.fz;
-				if(saveObj.p2.fz) _p2FzInputId.text = saveObj.p2.fz;
-				if(saveObj.map) _mapInputId.text = saveObj.map;
+	//			trace(saveObj.p1.id, saveObj.p2.id, saveObj.p1.fz, saveObj.p2.fz, saveObj.map)
+
+
+				function setCurrentItem(listView:PopUpListView, id:String):void {
+					var index:int = -1;
+
+					for (var i:int = 0; i < listView.dataProvider.length; ++i) {
+						var o:Object = listView.dataProvider.get(i);
+						if (o[KEY] == id) {
+							index = i;
+							break;
+						}
+					}
+
+					listView.selectedItem = listView.dataProvider.get(index);
+				}
+
+
+				setCurrentItem(_p1InputId, saveObj.p1.id);
+
+				setCurrentItem(_p2InputId, saveObj.p2.id);
+
+				if(saveObj.p1.fz) {
+					setCurrentItem(_p1FzInputId, saveObj.p1.fz);
+				}
+
+				if(saveObj.p2.fz){
+					setCurrentItem(_p2FzInputId, saveObj.p1.fz);
+				}
+
+				if(saveObj.map) {
+					setCurrentItem(_mapInputId, saveObj.map);
+				}
+
 			}
 		}
 
-		private function addLabel(txt:String, y:Number = 0, x:Number = 0):TextField
+		private function addLabel(txt:String, y:Number = 0, x:Number = 0):Label
 		{
-			var label:TextField = new TextField();
-			var tf:TextFormat = new TextFormat();
+//			var label:TextField = new TextField();
+//			var tf:TextFormat = new TextFormat();
+//
+//			tf.size = 14;
+//			tf.color = 0xffffff;
+//
+//			label.defaultTextFormat = tf;
+//			label.text = txt;
+//			label.x = x;
+//			label.y = y;
+//			label.mouseEnabled = false;
+//			_testUI.addChild(label);
+//
+//			return label;
+
+			Theme.setTheme(_theme);
+			var label:Label = new Label(txt);
+
+			var tf:feathers.text.TextFormat = new feathers.text.TextFormat();
 
 			tf.size = 14;
 			tf.color = 0xffffff;
+			tf.font = FONT.fontName;
 
-			label.defaultTextFormat = tf;
-			label.text = txt;
+			label.textFormat = tf;
 			label.x = x;
 			label.y = y;
 			label.mouseEnabled = false;
-			_testUI.addChild(label);
 
+			_testUI.addChild(label);
 			return label;
 		}
 
-		private function addInput(txt:String, y:Number = 0, x:Number = 0):TextField
+		private function addInput(data:Array = null, y:Number = 0, x:Number = 0 ):PopUpListView
 		{
-			var label:TextField = new TextField();
-			var tf:TextFormat = new TextFormat();
+//			var label:TextField = new TextField();
+//			var tf:TextFormat = new TextFormat();
+//
+//			tf.size = 14;
+//			tf.color = 0x000000;
+//
+//			label.defaultTextFormat = tf;
+//			label.text = txt;
+//			label.x = x;
+//			label.y = y;
+//			label.width = 100;
+//			label.height = 20;
+//			label.backgroundColor = 0xffffff;
+//			label.background = true;
+//			label.type = TextFieldType.INPUT;
+//			label.condenseWhite = true;
+//			_testUI.addChild(label);
 
-			tf.size = 14;
-			tf.color = 0x000000;
 
-			label.defaultTextFormat = tf;
-			label.text = txt;
-			label.x = x;
-			label.y = y;
-			label.width = 100;
-			label.height = 20;
-			label.backgroundColor = 0xffffff;
-			label.background = true;
-			label.type = TextFieldType.INPUT;
-			label.condenseWhite = true;
-			_testUI.addChild(label);
+			var listView:PopUpListView = new PopUpListView();
 
-			return label;
+			if (data) {
+				listView.dataProvider = new ArrayCollection(data);
+			}
+			listView.itemToText = function(item:*):String {
+				return item[KEY];
+			};
+
+//			listView.buttonFactory = DisplayObjectFactory.withFunction(function ():Button {
+//				var button:Button = new Button();
+//				var format:TextFormat = new TextFormat();
+//				format.font = FONT.fontName;
+//				button.textFormat = format;
+//
+//				return button;
+//
+//			});
+
+			listView.x = x;
+			listView.y = y;
+			listView.width = 182;
+			listView.height = 27;
+
+			_testUI.addChild(listView);
+			return listView;
 		}
 
 		private function addButton(label:String, y:Number=0, x:Number=0, width:Number=100, height:Number=50, click:Function=null):Sprite
 		{
-			var btn:KyoSimpButton = new KyoSimpButton(label,width,height);
+//			var btn:KyoSimpButton = new KyoSimpButton(label,width,height);
+//			btn.x = x;
+//			btn.y = y;
+//
+//			if(click != null) btn.onClick(click);
+//			_testUI.addChild(btn);
+//
+//			return btn;
+
+			var btn:Button = new Button(label);
 			btn.x = x;
 			btn.y = y;
+			btn.width = width;
+			btn.height = height;
 
-			if(click != null) btn.onClick(click);
+			if (click != null) {
+				btn.addEventListener(MouseEvent.CLICK, click);
+			}
+
 			_testUI.addChild(btn);
-
 			return btn;
 		}
 
@@ -252,7 +449,7 @@ package
 
 		private function changeFPS(... params):void
 		{
-			var fps:int = int(_fpsInput.text);
+			var fps:int = int(_fpsInput.selectedItem[KEY]);
 
 			GameConfig.setGameFps(fps);
 			stage.frameRate = fps;
@@ -265,11 +462,28 @@ package
 		{
 			_debugText.text = "";
 
-			KyoSharedObject.save('fighter_test_config',{
-				p1:{id:_p1InputId.text,fz:_p1FzInputId.text},
-				p2:{id:_p2InputId.text,fz:_p2FzInputId.text},
+//			trace(_p1InputId.selectedItem[KEY])
+//			//trace(_p1InputId.selectedItem[KEY])
+//			trace(_p1InputId.dataProvider.get(0)[KEY])
 
-				map:_mapInputId.text
+
+			var p1FighterId:String, p2FighterId:String;
+			var p1AssistantId:String, p2AssistantId:String;
+			var mapId:String;
+
+			p1FighterId = _p1InputId.selectedItem[KEY];
+			p2FighterId = _p2InputId.selectedItem[KEY];
+
+			p1AssistantId = _p1FzInputId.selectedItem[KEY]
+			p2AssistantId = _p2FzInputId.selectedItem[KEY]
+
+			mapId = _mapInputId.selectedItem[KEY];
+
+			KyoSharedObject.save('fighter_test_config',{
+				p1:{id:p1FighterId,fz:p1AssistantId},
+				p2:{id:p2FighterId,fz:p2AssistantId},
+
+				map:mapId
 			});
 
 			changeFPS();
@@ -277,16 +491,17 @@ package
 			GameMode.currentMode = GameMode.TRAINING;
 //			GameMode.currentMode = GameMode.SINGLE_VS_CPU;
 
-			TrainingCtrler.RECOVER_HP = _autoReceiveHp.text != "0";
+			TrainingCtrler.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == "启用";
 
 			GameData.I.p1Select = new SelectVO();
 			GameData.I.p2Select = new SelectVO();
-			GameData.I.p1Select.fighter1 = _p1InputId.text;
-			GameData.I.p2Select.fighter1 = _p2InputId.text;
-			GameData.I.p1Select.fuzhu = _p1FzInputId.text;
-			GameData.I.p2Select.fuzhu = _p2FzInputId.text;
-			GameData.I.selectMap = _mapInputId.text;
+			GameData.I.p1Select.fighter1 = p1FighterId;
+			GameData.I.p2Select.fighter1 = p2FighterId;
+			GameData.I.p1Select.fuzhu = p1AssistantId;
+			GameData.I.p2Select.fuzhu = p2AssistantId;
+			GameData.I.selectMap = mapId;
 
+			Trace(p1FighterId, p1FighterId, p1AssistantId, p1AssistantId, mapId)
 			loadGame();
 		}
 

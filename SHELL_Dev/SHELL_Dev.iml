@@ -20,6 +20,9 @@
             <entry library-id="a4f07e4f-cc8c-4f6b-a35a-75584191119f">
               <dependency linkage="External" />
             </entry>
+            <entry library-id="735f8296-a9f5-4757-8b5a-12af6adfeb93">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="flex4.16.1-air50.2.4.1" />
         </dependencies>
@@ -161,6 +164,17 @@
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="735f8296-a9f5-4757-8b5a-12af6adfeb93" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/swc" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/lib/swc" recursive="false" />
       </library>
     </orderEntry>
   </component>
