@@ -29,6 +29,7 @@ public class KyoStageEvent extends Event {
         super(type, bubbles, cancelable);
         this.stage = stage;
     }
+
     public var stage:IStage;
 }
 }
