@@ -112,6 +112,7 @@ public dynamic class JSEnv extends Proxy {
     public function JSEnv(id:int) {
         obj_id = id;
     }
+
     private var obj_id:int;
 
     override flash_proxy function hasProperty(name:*):Boolean {
