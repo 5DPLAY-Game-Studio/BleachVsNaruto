@@ -39,6 +39,8 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="SelectTester.as"/>
+    <application path="OtherTester.as"/>
     <application path="FighterTester.as"/>
   </applications>
   <modules/>
