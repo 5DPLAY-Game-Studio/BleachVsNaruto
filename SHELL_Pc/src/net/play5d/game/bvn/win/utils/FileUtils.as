@@ -23,7 +23,7 @@ package net.play5d.game.bvn.win.utils
 	import flash.filesystem.FileStream;
 	import flash.utils.ByteArray;
 
-	import net.play5d.game.bvn.utils.GameLoger;
+	import net.play5d.game.bvn.utils.GameLogger;
 
 	public class FileUtils
 	{
@@ -54,7 +54,7 @@ package net.play5d.game.bvn.win.utils
 
 				fs.close();
 			}catch(e:Error){
-				GameLoger.log('FileUtils.writeFile'+e);
+				GameLogger.log('FileUtils.writeFile' + e);
 			}
 		}
 
@@ -84,7 +84,7 @@ package net.play5d.game.bvn.win.utils
 				var dir:File = new File(url);
 				dir.createDirectory();
 			}catch(e:Error){
-				GameLoger.log('FileUtils.createFloder'+e);
+				GameLogger.log('FileUtils.createFloder' + e);
 			}
 		}
 
@@ -97,7 +97,7 @@ package net.play5d.game.bvn.win.utils
 				text = fs.readUTFBytes(fs.bytesAvailable);
 				fs.close();
 			}catch(e:Error){
-				GameLoger.log('FileUtils.readTextFile , '+e);
+				GameLogger.log('FileUtils.readTextFile , ' + e);
 			}
 			return text;
 		}
@@ -107,7 +107,7 @@ package net.play5d.game.bvn.win.utils
 			try{
 				file.deleteFile();
 			}catch(e:Error){
-				GameLoger.log('FileUtils.del'+e);
+				GameLogger.log('FileUtils.del' + e);
 			}
 
 		}

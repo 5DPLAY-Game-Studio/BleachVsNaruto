@@ -32,7 +32,7 @@ package
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.UIUtils;
-import net.play5d.game.bvn.utils.GameLoger;
+import net.play5d.game.bvn.utils.GameLogger;
 	import net.play5d.game.bvn.utils.GameSafeKeeper;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.game.bvn.utils.URL;
@@ -59,9 +59,9 @@ import net.play5d.game.bvn.utils.GameLoger;
 
 		private function initlize(e:Event = null):void{
 
-			GameLoger.setLoger(new Loger());
+			GameLogger.setLoger(new Loger());
 
-			GameLoger.log("init...");
+			GameLogger.log("init...");
 
 			removeEventListener(Event.ADDED_TO_STAGE,initlize);
 
@@ -94,7 +94,7 @@ import net.play5d.game.bvn.utils.GameLoger;
 
 		private function buildGame():void{
 
-			GameLoger.log("buildGame");
+			GameLogger.log("buildGame");
 
 			_mainGame = new MainGame();
 			//_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
@@ -116,7 +116,7 @@ import net.play5d.game.bvn.utils.GameLoger;
 
 		private function initBackHandler():void{
 
-			GameLoger.log("init ok");
+			GameLogger.log("init ok");
 
 			UIAssetUtil.I.initalize(_mainGame.goLogo);
 			//			_mainGame.goMenu();
@@ -124,7 +124,7 @@ import net.play5d.game.bvn.utils.GameLoger;
 		}
 
 		private function initFailHandler(msg:String):void{
-			GameLoger.log("init fail");
+			GameLogger.log("init fail");
 		}
 
 		private function keyDownHandler(e:KeyboardEvent):void{
