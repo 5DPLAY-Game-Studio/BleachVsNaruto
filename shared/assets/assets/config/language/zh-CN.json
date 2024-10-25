@@ -229,10 +229,16 @@
     "trace": {
       "prefix": "* 跟踪 : ",
       "data": {
-        "load_sound_fail": "加载声音 [{}] 失败！",
-        "load_swf_fail": "加载 SWF [{}] 失败！",
-        "load_font_bitmap_fail": "加载字体位图 [{}] 失败！",
-        "load_font_xml_fail": "加载字体 XML [{}] 失败！",
+        "fail": {
+          "load_sound": "加载声音 [{}] 失败！",
+          "load_swf": "加载 SWF [{}] 失败！",
+          "load_font_bitmap": "加载字体位图 [{}] 失败！",
+          "load_font_xml": "加载字体 XML [{}] 失败！"
+        },
+        
+        
+        
+        
         "load_all_finish": "全部资源加载完成！",
         "musou_wave_end": "波次结束！",
         "musou_wave_next": "下一波……",
@@ -262,6 +268,5 @@
         "build_game_fail": "构建游戏失败！"
       }
     }
-  },
-  "//": "------------------ Global ------------------"
+  }
 }

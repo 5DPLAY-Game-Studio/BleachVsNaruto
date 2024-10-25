@@ -180,7 +180,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadErr():void{
-				TraceLang('debug.trace.data.load_sound_fail', curUrl);
+				TraceLang('debug.trace.data.fail.load_sound', curUrl);
 				loadNext();
 			}
 
@@ -334,7 +334,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadFail():void{
-				TraceLang('debug.trace.data.load_swf_fail', curUrl);
+				TraceLang('debug.trace.data.fail.load_swf', curUrl);
 				loadNext();
 			}
 
@@ -378,11 +378,11 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function bitmapFail():void{
-				TraceLang('debug.trace.data.load_font_bitmap_fail', url);
+				TraceLang('debug.trace.data.fail.load_font_bitmap', url);
 			}
 
 			function loadXMLFail():void{
-				TraceLang('debug.trace.data.load_font_xml_fail', url);
+				TraceLang('debug.trace.data.fail.load_font_xml', url);
 			}
 		}
 
