@@ -30,6 +30,7 @@ public class ZoomEffect implements IStageFadEffect {
         _duration = duration;
         _back     = back;
     }
+
     private var _duration:Number;
     private var _back:Boolean;
     private var _fixPosition:Boolean;

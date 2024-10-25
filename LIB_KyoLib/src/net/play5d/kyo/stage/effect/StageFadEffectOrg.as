@@ -22,8 +22,9 @@ import com.greensock.TweenLite;
 import net.play5d.kyo.stage.IStage;
 
 public class StageFadEffectOrg implements IStageFadEffect {
-    public function StageFadEffectOrg(time:Number = 0.5, x:Boolean = false, y:Boolean = false,
-                                      alpha:Boolean = false, easefun:Function = null
+    public function StageFadEffectOrg(
+            time:Number = 0.5, x:Boolean = false, y:Boolean = false,
+            alpha:Boolean                                   = false, easefun:Function = null
     ) {
         _time        = time;
         _obj         = {};
@@ -32,6 +33,7 @@ public class StageFadEffectOrg implements IStageFadEffect {
         _obj.alpha   = alpha;
         _obj.easefun = easefun;
     }
+
     private var _obj:Object;
     private var _time:Number;
 

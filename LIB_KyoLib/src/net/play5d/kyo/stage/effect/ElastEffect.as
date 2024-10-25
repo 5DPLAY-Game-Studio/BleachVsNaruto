@@ -26,6 +26,7 @@ public class ElastEffect implements IStageFadEffect {
     public function ElastEffect(duration:Number = 1) {
         _duration = duration;
     }
+
     private var _duration:Number;
 
     public function fadIn(stage:IStage, complete:Function = null):void {
