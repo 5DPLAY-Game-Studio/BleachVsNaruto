@@ -90,9 +90,6 @@
         },
         "loadSWF": {
           "loadIOError": {
-            "load_swf_error": {
-              "txt": "加载 SWF 文件发生错误！"
-            }
           }
         }
       },
@@ -148,37 +145,23 @@
           "loadFightBGM": {
             "loadFail": {
               "load_fight_bgm": {
-                "txt": "SoundCtrl.loadFightBGM:: 加载声音失败："
               }
             }
           }
         },
-        "//": "------------------ Class ------------------",
         "game_ctrls": {
           "GameCtrl": {
             "addGameSprite": {
               "log_team_is_null": {
-                "txt": "GameCtrl.addGameSprite:: 变量 'team' 为空！"
               }
             },
             "buildGame": {
               "error_build_game_fail": {
-                "txt": "错误：构建游戏失败！"
+                "txt": ""
               }
             },
             "fightFinish": {
-              "trace_cleared": {
-                "txt": "已通关！"
-              },
-              "trace_next": {
-                "txt": "下一关卡……"
-              },
-              "trace_continue": {
-                "txt": "是否继续？"
-              },
-              "trace_back_select": {
-                "txt": "返回选人页面……"
-              }
+              
             },
             "fightTimeover": {
               "trace_time_over": {
@@ -187,7 +170,7 @@
             },
             "runNext": {
               "trace_current_mode": {
-                "txt": "当前模式："
+                "txt": ""
               }
             }
           }
@@ -215,6 +198,14 @@
           "map_null"     : "地图为空！",
           "set_game_mode": "设置游戏模式为： {}"
         },
+        "game_ctrl": {
+          "cleared"     : "已通关！",
+          "next"        : "下一关卡……",
+          "continue"    : "是否继续？",
+          "back_select" : "返回选人页面……",
+          "time_over"   : "时间结束！",
+          "current_mode": "当前模式： {}"
+        },
         
         "load_all_finish": "全部资源加载完成！",
         "musou_wave_end": "波次结束！",
@@ -235,6 +226,9 @@
         "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: ",
         "game_loader": {
           "load_swf_error": "GameLoader.loadSWF:: 加载 SWF 文件错误： {}"
+        },
+        "game_ctrl": {
+          "team_null": "GameCtrl.addGameSprite:: 变量 '{}' 为空！"
         }
       }
     },
@@ -245,6 +239,8 @@
         "get_map_data_fail": "获取 地图 数据失败！",
         "get_fighter_data_fail": "获取 角色 数据失败！",
         "get_assistant_data_fail": "获取 辅助 数据失败！",
+        
+        
         "build_game_fail": "构建游戏失败！"
       }
     }

@@ -189,7 +189,6 @@ import net.play5d.kyo.loader.KyoSoundLoader;
 			}
 
 			function loadFail():void{
-				trace(GetLangText('debug.package.ctrl.SoundCtrl.loadFightBGM.loadFail.load_fight_bgm.txt'), curUrl);
 				TraceLang('debug.trace.data.fail.load_fight_bgm');
 				loadNext();
 			}
