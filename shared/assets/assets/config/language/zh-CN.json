@@ -13,8 +13,8 @@
       "load_swf_error"   : "加载 SWF 文件发生错误！"
     },
     "load_process": {
-      "map": "地图",
-      "fighter": "角色",
+      "map"      : "地图",
+      "fighter"  : "角色",
       "assistant": "辅助",
       "bgm": "背景乐",
       "loading_no_name": "正在加载 [{}] ({}/{})",
@@ -109,8 +109,6 @@
         
         "//": "------------------ Class ------------------",
         "GameLoader": {
-          "loadAndCacheFighter": {
-          },
           "loadAssister": {
           },
           "loadMap": {
@@ -156,7 +154,6 @@
           }
         },
         "//": "------------------ Class ------------------",
-        "//": "------------------ Package 'game_ctrls' ------------------",
         "game_ctrls": {
           "GameCtrl": {
             "addGameSprite": {
@@ -204,7 +201,8 @@
           "load_sound"      : "加载声音 [{}] 失败！",
           "load_swf"        : "加载 SWF [{}] 失败！",
           "load_font_bitmap": "加载字体位图 [{}] 失败！",
-          "load_font_xml"   : "加载字体 XML [{}] 失败！"
+          "load_font_xml"   : "加载字体 XML [{}] 失败！",
+          "load_fight_bgm"  : "SoundCtrl.loadFightBGM:: 加载声音 [{}] 失败!"
         },
         "game_loader": {
           "fighter_id_error"  : "GameLoader.loadAndCacheFighter:: 角色 [{}] 不存在！",
@@ -217,8 +215,6 @@
           "map_null"     : "地图为空！",
           "set_game_mode": "设置游戏模式为： {}"
         },
-        
-        
         
         "load_all_finish": "全部资源加载完成！",
         "musou_wave_end": "波次结束！",
