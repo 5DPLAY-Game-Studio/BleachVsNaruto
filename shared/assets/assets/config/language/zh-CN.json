@@ -106,11 +106,7 @@
       "//": "------------------ Package ------------------",
       "ctrl": {
         "//": "------------------ Class ------------------",
-        "AssetManager": {
-          "loadFonts": {
-            
-          }
-        },
+        
         "//": "------------------ Class ------------------",
         "GameLoader": {
           "loadAndCacheFighter": {
@@ -123,9 +119,6 @@
           },
           "loadSWF": {
             "loadIOError": {
-              "load_swf_error": {
-                "txt": "GameLoader.loadSWF:: 加载 SWF 文件错误："
-              }
             }
           }
         },
@@ -202,8 +195,7 @@
             }
           }
         }
-      },
-      "//": "------------------ Package ------------------"
+      }
     },
     "trace": {
       "prefix": "* 跟踪 : ",
@@ -220,6 +212,10 @@
           "assister_id_error" : "GameLoader.loadAssister:: 辅助 [{}] 不存在！",
           "map_id_error"      : "GameLoader.loadMap::  地图 [{}] 不存在！",
           "unload_cache_error": "GameLoader.dispose:: 卸装缓存发生错误： {}"
+        },
+        "game_logic":{
+          "map_null"     : "地图为空！",
+          "set_game_mode": "设置游戏模式为： {}"
         },
         
         

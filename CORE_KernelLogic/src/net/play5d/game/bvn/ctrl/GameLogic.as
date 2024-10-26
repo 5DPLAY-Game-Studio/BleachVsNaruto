@@ -67,7 +67,7 @@ package net.play5d.game.bvn.ctrl
 		private static var _floorContact:Dictionary = new Dictionary();
 		public static function isInAir(target:BaseGameSprite):Boolean{
 			if(!_map){
-				trace(GetLangText('debug.package.ctrl.GameLogic.isInAir.map_null.txt'));
+				TraceLang('debug.trace.data.game_logic.map_null');
 				return false;
 			}
 
@@ -120,7 +120,7 @@ package net.play5d.game.bvn.ctrl
 
 		public static function isTouchBottomFloor(target:IGameSprite):Boolean{
 			if(!_map){
-				trace(GetLangText('debug.package.ctrl.GameLogic.isTouchBottomFloor.map_null.txt'));
+				TraceLang('debug.trace.data.game_logic.map_null');
 				return false;
 			}
 
@@ -129,7 +129,7 @@ package net.play5d.game.bvn.ctrl
 
 		public static function isOutRange(target:IGameSprite):Boolean{
 			if(!_map){
-				trace(GetLangText('debug.package.ctrl.GameLogic.isOutRange.map_null.txt'));
+				TraceLang('debug.trace.data.game_logic.map_null');
 				return false;
 			}
 
@@ -366,7 +366,7 @@ package net.play5d.game.bvn.ctrl
 		}
 
 		public static function setGameMode(v:int):void{
-			trace(GetLangText('debug.package.ctrl.GameLogic.setGameMode.set_game_mode.txt'), v);
+			TraceLang('debug.trace.data.game_logic.set_game_mode', v);
 			switch(v){
 				case 1:
 					GameData.I.loadSelect("config/salect.xml");
