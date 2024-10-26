@@ -1,10 +1,16 @@
 {
   "txt": {
     "load_step": {
-      "sound": "声音",
+      "sound" : "声音",
       "effect": "效果",
-      "font": "字体",
+      "font"  : "字体",
       "bitmap": "位图"
+    },
+    "game_loader": {
+      "fighter_id_error" : "角色 id 发生错误！",
+      "assister_id_error": "辅助 id 发生错误！",
+      "map_id_error"     : "地图 id 发生错误！",
+      "load_swf_error"   : "加载 SWF 文件发生错误！"
     },
     "load_process": {
       "map": "地图",
@@ -15,7 +21,6 @@
       "loading_has_name": "正在加载 [{}] : {} ({}/{})"
     }
   },
-  "//": "------------------ Global ------------------",
   "package": {
     "//": "------------------ Package ------------------",
     "interfaces": {
@@ -78,19 +83,10 @@
       "//": "------------------ Class ------------------",
       "GameLoader": {
         "loadAndCacheFighter": {
-          "fighter_id_error": {
-            "txt": "角色 id 发生错误！"
-          }
         },
         "loadAssister": {
-          "assister_id_error": {
-            "txt": "辅助 id 发生错误！"
-          }
         },
         "loadMap": {
-          "map_id_error": {
-            "txt": "地图 id 发生错误！"
-          }
         },
         "loadSWF": {
           "loadIOError": {
@@ -118,29 +114,12 @@
         "//": "------------------ Class ------------------",
         "GameLoader": {
           "loadAndCacheFighter": {
-            "fighter_id_error": {
-              "txt": "GameLoader.loadAndCacheFighter:: 角色 id 不存在："
-            },
-            "loadComplete": {
-              "fighter_id_error": {
-                "txt": "加载角色错误："
-              }
-            }
           },
           "loadAssister": {
-            "assister_id_error": {
-              "txt": "GameLoader.loadAssister:: 辅助 id 不存在："
-            }
           },
           "loadMap": {
-            "map_id_error": {
-              "txt": "GameLoader.loadMap:: 地图 id 不存在："
-            }
           },
           "dispose": {
-            "unload_cache_error": {
-              "txt": "GameLoader.dispose:: 卸装缓存发生错误："
-            }
           },
           "loadSWF": {
             "loadIOError": {
@@ -230,12 +209,18 @@
       "prefix": "* 跟踪 : ",
       "data": {
         "fail": {
-          "load_sound": "加载声音 [{}] 失败！",
-          "load_swf": "加载 SWF [{}] 失败！",
+          "load_sound"      : "加载声音 [{}] 失败！",
+          "load_swf"        : "加载 SWF [{}] 失败！",
           "load_font_bitmap": "加载字体位图 [{}] 失败！",
-          "load_font_xml": "加载字体 XML [{}] 失败！"
+          "load_font_xml"   : "加载字体 XML [{}] 失败！"
         },
-        
+        "game_loader": {
+          "fighter_id_error"  : "GameLoader.loadAndCacheFighter:: 角色 [{}] 不存在！",
+          "fighter_load_error": "加载角色时发生错误： {}",
+          "assister_id_error" : "GameLoader.loadAssister:: 辅助 [{}] 不存在！",
+          "map_id_error"      : "GameLoader.loadMap::  地图 [{}] 不存在！",
+          "unload_cache_error": "GameLoader.dispose:: 卸装缓存发生错误： {}"
+        },
         
         
         
@@ -255,7 +240,10 @@
     "log": {
       "prefix": "* 日志 : ",
       "data": {
-        "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: "
+        "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: ",
+        "game_loader": {
+          "load_swf_error": "GameLoader.loadSWF:: 加载 SWF 文件错误： {}"
+        }
       }
     },
     "error": {
