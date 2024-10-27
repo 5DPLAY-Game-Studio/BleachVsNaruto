@@ -111,11 +111,8 @@
           "dispose": {
           },
           "loadSWF": {
-            "loadIOError": {
-            }
           }
         },
-        "//": "------------------ Class ------------------",
         "GameLogic": {
           "isInAir": {
             "map_null": {
@@ -162,7 +159,6 @@
             },
             "fightTimeover": {
               "trace_time_over": {
-                "txt": "时间结束！"
               }
             },
             "runNext": {
@@ -208,18 +204,18 @@
         "game_stage_load_ctrl": {
           "load_all_finish": "全部资源加载完成！"
         },
-        
-        
-        "musou_wave_end": "波次结束！",
-        "musou_wave_next": "下一波……",
-        "musou_time_over": "无双模式的时间结束！",
-        "musou_time_over_complete": "无双模式的 onTimeOver 事件完成！",
-        "musou_self_die": "无双模式的角色死亡！",
-        "musou_self_die_complete": "无双模式的 onSelfDead 事件完成！",
-        "musou_mission_complete": "无双模式的任务完成！",
-        "musou_mission_complete_complete": "无双模式的 missionComplete 事件完成！",
-        "musou_show_fzqi": "辅助能量 (FZQI) ======================= fzqi: {}, fzqiMax: {}",
-        "musou_boss_die": "无双模式的 BOSS 死亡！"
+        "musou_ctrl": {
+          "wave_end"                 : "波次结束！",
+          "wave_next"                : "下一波……",
+          "time_over"                : "无双模式的时间结束！",
+          "time_over_complete"       : "无双模式的 onTimeOver 事件完成！",
+          "self_die"                 : "无双模式的角色死亡！",
+          "self_die_complete"        : "无双模式的 onSelfDead 事件完成！",
+          "mission_complete"         : "无双模式的任务完成！",
+          "mission_complete_complete": "无双模式的 missionComplete 事件完成！",
+          "show_fzqi"                : "辅助能量 (FZQI) ======================= fzqi: {}, fzqiMax: {}",
+          "boss_die"                 : "无双模式的 BOSS 死亡！"
+        }
       }
     },
     "log": {
@@ -247,6 +243,9 @@
           "get_map_data_fail": "获取 地图 数据失败！",
           "get_fighter_data_fail": "获取 角色 数据失败！",
           "get_assistant_data_fail": "获取 辅助 数据失败！"
+        },
+        "musou_ctrl": {
+          "build_game_fail": "构建游戏失败！"
         }
       }
     }
