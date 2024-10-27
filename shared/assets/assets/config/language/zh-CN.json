@@ -87,8 +87,6 @@
         "loadAssister": {
         },
         "loadMap": {
-        },
-        "loadSWF": {
         }
       },
       "//": "------------------ Class ------------------"
@@ -100,8 +98,6 @@
     "package": {
       "//": "------------------ Package ------------------",
       "ctrl": {
-        "//": "------------------ Class ------------------",
-        
         "//": "------------------ Class ------------------",
         "GameLoader": {
           "loadAssister": {
@@ -163,7 +159,6 @@
             },
             "runNext": {
               "trace_current_mode": {
-                "txt": ""
               }
             }
           }
@@ -215,6 +210,9 @@
           "mission_complete_complete": "无双模式的 missionComplete 事件完成！",
           "show_fzqi"                : "辅助能量 (FZQI) ======================= fzqi: {}, fzqiMax: {}",
           "boss_die"                 : "无双模式的 BOSS 死亡！"
+        },
+        "musou_enemy_bar_ctrl": {
+          "remove_bar_error": "移除 敌人横条 出错！"
         }
       }
     },

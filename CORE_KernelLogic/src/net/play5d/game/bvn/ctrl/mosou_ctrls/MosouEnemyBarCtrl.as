@@ -66,7 +66,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 					try{
 						_gameLayer.removeChild(b.getUI());
 					}catch(e:Error){
-						trace('remove bar error');
+						TraceLang('debug.trace.data.musou_enemy_bar_ctrl.remove_bar_error')
 					}
 					b.destory();
 					delete _barMap[i];
