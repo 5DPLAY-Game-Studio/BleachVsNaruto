@@ -21,8 +21,17 @@
       "loading_has_name": "正在加载 [{}] : {} ({}/{})"
     }
   },
+  "alert": {
+    "musou_ctrl": {
+      "need_more_money": "当前金币不足，还需要 {} 枚金币！"
+    }
+  },
+  "confirm": {
+    "musou_ctrl": {
+      "unlock_fighter": "确定使用 {} 枚金币解锁人物？"
+    }
+  },
   "package": {
-    "//": "------------------ Package ------------------",
     "interfaces": {
       "//": "------------------ Class ------------------",
       "GameInterface": {
@@ -127,7 +136,6 @@
           },
           "setGameMode": {
             "set_game_mode": {
-              "txt": "设置游戏模式："
             }
           }
         },
@@ -158,8 +166,6 @@
               }
             },
             "runNext": {
-              "trace_current_mode": {
-              }
             }
           }
         }
@@ -213,6 +219,9 @@
         },
         "musou_enemy_bar_ctrl": {
           "remove_bar_error": "移除 敌人横条 出错！"
+        },
+        "musou_logic": {
+          "open_map_area": "开放地图探索区域： {}"
         }
       }
     },
@@ -237,9 +246,9 @@
           "build_game_fail": "构建游戏失败！"
         },
         "game_stage_load_ctrl": {
-          "not_find_main_mc": "在 [{}] 中未找到名为 {} 的元件！",
-          "get_map_data_fail": "获取 地图 数据失败！",
-          "get_fighter_data_fail": "获取 角色 数据失败！",
+          "not_find_main_mc"       : "在 [{}] 中未找到名为 {} 的元件！",
+          "get_map_data_fail"      : "获取 地图 数据失败！",
+          "get_fighter_data_fail"  : "获取 角色 数据失败！",
           "get_assistant_data_fail": "获取 辅助 数据失败！"
         },
         "musou_ctrl": {

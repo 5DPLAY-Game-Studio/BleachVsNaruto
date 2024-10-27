@@ -94,7 +94,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 		}
 
 		public function openMapArea(mapId:String, areaId:String):void{
-			trace("openMapArea", areaId);
+			TraceLang('debug.trace.data.musou_logic.open_map_area', areaId);
 
 			var md:MosouPlayerData = GameData.I.mosouData;
 			var map:MosouWorldMapPlayerVO = GameData.I.mosouData.getMapById(mapId);
@@ -149,11 +149,11 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 		public function buyFighter(data:MosouFighterSellVO, succback:Function = null):void{
 			var mosouData:MosouPlayerData = GameData.I.mosouData;
 			if(mosouData.getMoney() < data.getPrice()){
-				GameUI.alert('NEED MORE MONEY', "金币不足，需要" + data.getPrice() + "金币！");
+				GameUI.alert('NEED MORE MONEY', GetLang('alert.musou_ctrl.need_more_money', data.getPrice()));
 				return;
 			}
 
-			GameUI.confrim('CONFRIM', "确认使用"+data.getPrice()+"金币解锁人物？", function():void{
+			GameUI.confrim('CONFRIM', GetLang('confirm.musou_ctrl.unlock_fighter', data.getPrice()), function():void{
 				mosouData.loseMoney(data.getPrice());
 				mosouData.addFighter(data.id);
 				GameData.I.saveData();
