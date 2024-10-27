@@ -1,6 +1,6 @@
 {
   "txt": {
-    "load_step": {
+    "asset_manager": {
       "sound" : "声音",
       "effect": "效果",
       "font"  : "字体",
@@ -12,12 +12,12 @@
       "map_id_error"     : "地图 id 发生错误！",
       "load_swf_error"   : "加载 SWF 文件发生错误！"
     },
-    "load_process": {
-      "map"      : "地图",
-      "fighter"  : "角色",
-      "assistant": "辅助",
-      "bgm": "背景乐",
-      "loading_no_name": "正在加载 [{}] ({}/{})",
+    "game_stage_load_ctrl": {
+      "map"             : "地图",
+      "fighter"         : "角色",
+      "assistant"       : "辅助",
+      "bgm"             : "背景乐",
+      "loading_no_name" : "正在加载 [{}] ({}/{})",
       "loading_has_name": "正在加载 [{}] : {} ({}/{})"
     }
   },
@@ -89,8 +89,6 @@
         "loadMap": {
         },
         "loadSWF": {
-          "loadIOError": {
-          }
         }
       },
       "//": "------------------ Class ------------------"
@@ -140,7 +138,6 @@
             }
           }
         },
-        "//": "------------------ Class ------------------",
         "SoundCtrl": {
           "loadFightBGM": {
             "loadFail": {
@@ -180,12 +177,11 @@
     "trace": {
       "prefix": "* 跟踪 : ",
       "data": {
-        "fail": {
-          "load_sound"      : "加载声音 [{}] 失败！",
-          "load_swf"        : "加载 SWF [{}] 失败！",
-          "load_font_bitmap": "加载字体位图 [{}] 失败！",
-          "load_font_xml"   : "加载字体 XML [{}] 失败！",
-          "load_fight_bgm"  : "SoundCtrl.loadFightBGM:: 加载声音 [{}] 失败!"
+        "asset_manager": {
+          "load_sound_fail"      : "加载声音 [{}] 失败！",
+          "load_swf_fail"        : "加载 SWF [{}] 失败！",
+          "load_font_bitmap_fail": "加载字体位图 [{}] 失败！",
+          "load_font_xml_fail"   : "加载字体 XML [{}] 失败！"
         },
         "game_loader": {
           "fighter_id_error"  : "GameLoader.loadAndCacheFighter:: 角色 [{}] 不存在！",
@@ -198,6 +194,9 @@
           "map_null"     : "地图为空！",
           "set_game_mode": "设置游戏模式为： {}"
         },
+        "sound_ctrl": {
+          "load_fight_bgm_fail": "SoundCtrl.loadFightBGM:: 加载声音 [{}] 失败!"
+        },
         "game_ctrl": {
           "cleared"     : "已通关！",
           "next"        : "下一关卡……",
@@ -206,8 +205,11 @@
           "time_over"   : "时间结束！",
           "current_mode": "当前模式： {}"
         },
+        "game_stage_load_ctrl": {
+          "load_all_finish": "全部资源加载完成！"
+        },
         
-        "load_all_finish": "全部资源加载完成！",
+        
         "musou_wave_end": "波次结束！",
         "musou_wave_next": "下一波……",
         "musou_time_over": "无双模式的时间结束！",
@@ -223,25 +225,29 @@
     "log": {
       "prefix": "* 日志 : ",
       "data": {
-        "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: ",
         "game_loader": {
           "load_swf_error": "GameLoader.loadSWF:: 加载 SWF 文件错误： {}"
         },
         "game_ctrl": {
           "team_null": "GameCtrl.addGameSprite:: 变量 '{}' 为空！"
+        },
+        "game_main_logic_ctrler": {
+          "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: {}"
         }
       }
     },
     "error": {
       "prefix": "* 错误 : ",
       "data": {
-        "not_find_main_mc": "在 [{}] 中未找到名为 {} 的元件！",
-        "get_map_data_fail": "获取 地图 数据失败！",
-        "get_fighter_data_fail": "获取 角色 数据失败！",
-        "get_assistant_data_fail": "获取 辅助 数据失败！",
-        
-        
-        "build_game_fail": "构建游戏失败！"
+        "game_ctrl": {
+          "build_game_fail": "构建游戏失败！"
+        },
+        "game_stage_load_ctrl": {
+          "not_find_main_mc": "在 [{}] 中未找到名为 {} 的元件！",
+          "get_map_data_fail": "获取 地图 数据失败！",
+          "get_fighter_data_fail": "获取 角色 数据失败！",
+          "get_assistant_data_fail": "获取 辅助 数据失败！"
+        }
       }
     }
   }

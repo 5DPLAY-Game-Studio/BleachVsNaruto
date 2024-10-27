@@ -266,7 +266,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 				sp.render();
 				if(_renderAnimate && !sp.isDestoryed()) sp.renderAnimate();
 			}catch(e:Error){
-				Debugger.log(GetLangText('debug.log.data.render_game_sprite'),e);
+				Debugger.log(GetLang('debug.log.data.game_main_logic_ctrler.render_game_sprite'),e);
 			}
 
 		}

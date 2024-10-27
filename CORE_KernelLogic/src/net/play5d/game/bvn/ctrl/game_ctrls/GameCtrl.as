@@ -360,7 +360,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 			var map:MapMain = GameRunFactory.createMapByData(gameRunData.map);
 
 			if(!p1 || !p2 || !map){
-				throw new Error(GetLang('debug.error.data.build_game_fail'));
+				throw new Error(GetLang('debug.error.data.game_ctrl.build_game_fail'));
 			}
 
 			if(p1.data.id == p2.data.id){
@@ -733,7 +733,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 		 * 下一场战斗
 		 */
 		private function runNext():void{
-			TraceLang('debug.trace.data.game_ctrl.time_over',  GameMode.currentMode);
+			TraceLang('debug.trace.data.game_ctrl.current_mode',  GameMode.currentMode);
 
 			gameRunData.nextRound();
 

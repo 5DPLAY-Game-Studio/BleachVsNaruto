@@ -95,22 +95,22 @@ package net.play5d.game.bvn.ctrl
 				switch(loadStep){
 					case 0:
 						loadPreLoadSounds(loadNext , loadProcess);
-						type = GetLang('txt.load_step.sound');
+						type = GetLang('txt.asset_manager.sound');
 						loadProcess(0);
 						break;
 					case 1:
 						loadGraphics([_effectSwfPath] , loadNext , loadProcess);
-						type = GetLang('txt.load_step.effect');
+						type = GetLang('txt.asset_manager.effect');
 						loadProcess(0);
 						break;
 					case 2:
 						loadFonts(loadNext , loadProcess);
-						type = GetLang('txt.load_step.font');
+						type = GetLang('txt.asset_manager.font');
 						loadProcess(0);
 						break;
 					case 3:
 						loadBitmaps(loadNext , loadProcess);
-						type = GetLang('txt.load_step.bitmap');
+						type = GetLang('txt.asset_manager.bitmap');
 						loadProcess(0);
 						break;
 					case 4:
@@ -180,7 +180,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadErr():void{
-				TraceLang('debug.trace.data.fail.load_sound', curUrl);
+				TraceLang('debug.trace.data.asset_manager.load_sound_fail', curUrl);
 				loadNext();
 			}
 
@@ -334,7 +334,7 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadFail():void{
-				TraceLang('debug.trace.data.fail.load_swf', curUrl);
+				TraceLang('debug.trace.data.asset_manager.load_swf_fail', curUrl);
 				loadNext();
 			}
 
@@ -378,11 +378,11 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function bitmapFail():void{
-				TraceLang('debug.trace.data.fail.load_font_bitmap', url);
+				TraceLang('debug.trace.data.asset_manager.load_font_bitmap_fail', url);
 			}
 
 			function loadXMLFail():void{
-				TraceLang('debug.trace.data.fail.load_font_xml', url);
+				TraceLang('debug.trace.data.asset_manager.load_font_xml_fail', url);
 			}
 		}
 
