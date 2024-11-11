@@ -29,13 +29,14 @@ public class KyoStageCtrl extends EventDispatcher {
     public function KyoStageCtrl(mainStage:Sprite) {
         _mainStage = mainStage;
     }
+
     /**
      * 切换场景时，暂时停止场景的点击事件
      */
     public var changeStateMouseGap:int = 0;
     private var _mainStage:Sprite;
     private var _curStage:IStage;
-    private var _layers:Array = [];
+    private var _layers:Array          = [];
 
     public function get currentStage():IStage {
         return _curStage;
