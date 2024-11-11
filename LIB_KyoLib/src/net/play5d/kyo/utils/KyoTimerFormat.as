@@ -63,7 +63,7 @@ public class KyoTimerFormat {
     }
 
     public static function getDateTime(date:Date, sign_date:String = '/', sign_time:String = ' : ',
-                                       second:Boolean                                      = true, type24:Boolean               = true
+                                       second:Boolean                                      = true, type24:Boolean = true
     ):String {
         return getDate(date, sign_date) + ' ' + getTime(date, sign_time, second, type24);
     }

@@ -22,6 +22,7 @@ import flash.display.BitmapData;
 public class BitmapMCFrameVO {
     public function BitmapMCFrameVO() {
     }
+
     public var x:Number = 0;
     public var y:Number = 0;
     public var bd:BitmapData;

@@ -71,8 +71,8 @@ public class DisplayEffect {
      *
      */
     public static function zoomShadow(d:DisplayObject, scaleAdd:Number = .1, alphaLose:Number = 0.05,
-                                      startAlpha:Number                                       = 1, colorTransFrom:ColorTransform = null,
-                                      parent:DisplayObjectContainer                           = null, size:Point        = null
+                                      startAlpha:Number                                       = 1, colorTransFrom:ColorTransform    = null,
+                                      parent:DisplayObjectContainer                           = null, size:Point = null
     ):DisplayObject {
         parent ||= d.parent;
         if (!parent) {

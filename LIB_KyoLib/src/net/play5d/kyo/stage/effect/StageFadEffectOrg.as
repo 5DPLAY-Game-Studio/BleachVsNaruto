@@ -24,7 +24,7 @@ import net.play5d.kyo.stage.IStage;
 public class StageFadEffectOrg implements IStageFadEffect {
     public function StageFadEffectOrg(
             time:Number = 0.5, x:Boolean = false, y:Boolean = false,
-            alpha:Boolean                                   = false, easefun:Function = null
+            alpha:Boolean                                   = false, easefun:Function         = null
     ) {
         _time        = time;
         _obj         = {};

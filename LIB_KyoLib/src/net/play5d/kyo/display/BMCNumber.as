@@ -31,6 +31,7 @@ public class BMCNumber extends MCNumber {
         }
         super(mcc, number, startFrame, mcWidth);
     }
+
     private var _insArray:Array;
 
     protected override function createNum(i:int):DisplayObject {

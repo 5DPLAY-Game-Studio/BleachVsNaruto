@@ -43,7 +43,8 @@ public class JPGEncoder {
         initCategoryNumber();
         initQuantTables(sf);
     }
-    private var ZigZag:Array = [
+
+    private var ZigZag:Array                     = [
         0, 1, 5, 6, 14, 15, 27, 28,
         2, 4, 7, 13, 16, 26, 29, 42,
         3, 8, 12, 17, 25, 30, 41, 43,
@@ -53,18 +54,18 @@ public class JPGEncoder {
         21, 34, 37, 47, 50, 56, 59, 61,
         35, 36, 48, 49, 57, 58, 62, 63
     ];
-    private var YTable:Array   = new Array(64);
-    private var UVTable:Array  = new Array(64);
-    private var fdtbl_Y:Array  = new Array(64);
-    private var fdtbl_UV:Array = new Array(64);
+    private var YTable:Array                     = new Array(64);
+    private var UVTable:Array                    = new Array(64);
+    private var fdtbl_Y:Array                    = new Array(64);
+    private var fdtbl_UV:Array                   = new Array(64);
     private var YDC_HT:Array;
     private var UVDC_HT:Array;
     private var YAC_HT:Array;
     private var UVAC_HT:Array;
-    private var std_dc_luminance_nrcodes:Array = [0, 0, 1, 5, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0];
-    private var std_dc_luminance_values:Array  = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    private var std_ac_luminance_nrcodes:Array = [0, 0, 2, 1, 3, 3, 2, 4, 3, 5, 5, 4, 4, 0, 0, 1, 0x7d];
-    private var std_ac_luminance_values:Array  = [
+    private var std_dc_luminance_nrcodes:Array   = [0, 0, 1, 5, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0];
+    private var std_dc_luminance_values:Array    = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    private var std_ac_luminance_nrcodes:Array   = [0, 0, 2, 1, 3, 3, 2, 4, 3, 5, 5, 4, 4, 0, 0, 1, 0x7d];
+    private var std_ac_luminance_values:Array    = [
         0x01, 0x02, 0x03, 0x00, 0x04, 0x11, 0x05, 0x12,
         0x21, 0x31, 0x41, 0x06, 0x13, 0x51, 0x61, 0x07,
         0x22, 0x71, 0x14, 0x32, 0x81, 0x91, 0xa1, 0x08,
@@ -113,15 +114,15 @@ public class JPGEncoder {
         0xea, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8,
         0xf9, 0xfa
     ];
-    private var bitcode:Array  = new Array(65535);
-    private var category:Array = new Array(65535);
+    private var bitcode:Array                    = new Array(65535);
+    private var category:Array                   = new Array(65535);
     private var byteout:ByteArray;
-    private var bytenew:int = 0;
-    private var bytepos:int = 7;
+    private var bytenew:int                      = 0;
+    private var bytepos:int                      = 7;
 
     // IO functions
     // Core processing
-    private var DU:Array = new Array(64);
+    private var DU:Array  = new Array(64);
     private var YDU:Array = new Array(64);
     private var UDU:Array = new Array(64);
     private var VDU:Array = new Array(64);
@@ -162,8 +163,8 @@ public class JPGEncoder {
             fillbits.len           = bytepos + 1;
             fillbits.val           = (
                                              1 << (
-                                                       bytepos + 1
-                                               )
+                                                     bytepos + 1
+                                             )
                                      ) - 1;
             writeBits(fillbits);
         }
@@ -228,13 +229,13 @@ public class JPGEncoder {
             for (var col:int = 0; col < 8; col++) {
                 fdtbl_Y[i]  = (
                         1.0 / (
-                                    YTable [ZigZag[i]] * aasf[row] * aasf[col] * 8.0
-                            )
+                                YTable [ZigZag[i]] * aasf[row] * aasf[col] * 8.0
+                        )
                 );
                 fdtbl_UV[i] = (
                         1.0 / (
-                                    UVTable[ZigZag[i]] * aasf[row] * aasf[col] * 8.0
-                            )
+                                UVTable[ZigZag[i]] * aasf[row] * aasf[col] * 8.0
+                        )
                 );
                 i++;
             }

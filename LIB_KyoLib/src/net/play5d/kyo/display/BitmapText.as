@@ -35,12 +35,13 @@ public class BitmapText extends Bitmap {
 
         this.color = color;
     }
+
     public var autoUpdate:Boolean;
     protected var _tf:TextField;
     private var _format:TextFormat = new TextFormat();
     private var _filers:Array;
 
-    private var _width:Number  = 0;
+    private var _width:Number = 0;
 
     public override function set width(value:Number):void {
         _width    = value;
