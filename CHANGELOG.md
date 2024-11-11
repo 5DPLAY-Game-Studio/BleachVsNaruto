@@ -2,6 +2,13 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.11112024_alpha] - 2024-11-11
+
+### 修复
+
+- [#3] 修复BUG: 创建AI时，AI等级引用不正确的问题
+- [#4] 修复BUG: 小队模式下，1p选择顺序选择完之前去选2p顺序报空指针异常的问题
+
 ## [3.7.0.0.10222024_alpha] - 2024-10-22
 
 ### 新增
@@ -73,6 +80,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.11112024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10222024_alpha...3.7.0.0.11112024_alpha
 [3.7.0.0.10222024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10192024_alpha...3.7.0.0.10222024_alpha
 [3.7.0.0.10192024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10132024_alpha...3.7.0.0.10192024_alpha
 [3.7.0.0.10132024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10062024_alpha...3.7.0.0.10132024_alpha
@@ -81,3 +89,5 @@
 
 [#1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/1
 [#2]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/2
+[#3]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/3
+[#4]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/4
