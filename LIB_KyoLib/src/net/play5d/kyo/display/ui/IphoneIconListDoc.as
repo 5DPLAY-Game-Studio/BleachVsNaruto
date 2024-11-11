@@ -32,6 +32,7 @@ public class IphoneIconListDoc extends Sprite {
         _iplist.addEventListener(IphoneIconListEvent.PAGE_CHANGE, update);
         update();
     }
+
     public var gap:Point = new Point(20, 0);
     private var _iplist:IphoneIconList;
     private var _docClass:Class;

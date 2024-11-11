@@ -35,8 +35,9 @@ public class KyoDragList extends KyoTileList {
         this.dragType = dragType;
         addEventListener(MouseEvent.MOUSE_DOWN, beginDrag);
     }
+
     public var dragType:int;
-    public var dragPixel:int = 5;
+    public var dragPixel:int     = 5;
     protected var _downPoint:Point;
     protected var _downListPoint:Point;
     protected var _haveToDrag:Boolean;

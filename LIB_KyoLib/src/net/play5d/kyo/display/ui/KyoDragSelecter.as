@@ -33,6 +33,7 @@ public class KyoDragSelecter extends KyoDragList {
         mouseChildren = false;
         _haveToDrag   = true;
     }
+
     public var changeEffectObj:Object;
     private var _selectPos:Point = new Point();
     private var _seltid:int;

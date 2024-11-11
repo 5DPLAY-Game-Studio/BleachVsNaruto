@@ -25,15 +25,16 @@ public class KyoMouseOverEffect {
     public static const EFFECT_TYPE_HILIGHT:int = 0;
 
     public static function addEffect(display:DisplayObject, effectType:int = 0,
-                                     targetDisplay:DisplayObject = null):void {
+                                     targetDisplay:DisplayObject           = null
+    ):void {
         targetDisplay ||= display;
 
         function doEffect(over:Boolean):void {
             switch (effectType) {
             case EFFECT_TYPE_HILIGHT:
                 if (over) {
-                    var ct:ColorTransform                  = new ColorTransform();
-                    ct.redOffset                           = ct.greenOffset = ct.blueOffset = 128;
+                    var ct:ColorTransform = new ColorTransform();
+                    ct.redOffset = ct.greenOffset = ct.blueOffset = 128;
                     targetDisplay.transform.colorTransform = ct;
                 }
                 else {

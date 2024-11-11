@@ -21,6 +21,7 @@ public class KyoBtnGroup {
     public function KyoBtnGroup(btns:Object) {
         _btns = btns;
     }
+
     private var _btns:Object;
 
     public function focus(btn:IKyoButton):void {
