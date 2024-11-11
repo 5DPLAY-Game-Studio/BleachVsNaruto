@@ -28,6 +28,7 @@ public class LoaderBar extends Sprite {
 
         initlize();
     }
+
     public var color:uint     = 0xff0000;
     public var lineColor:uint = 0x426F00;
     public var thinkness:uint = 2;

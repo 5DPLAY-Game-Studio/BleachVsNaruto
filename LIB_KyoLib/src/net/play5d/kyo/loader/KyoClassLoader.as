@@ -30,6 +30,7 @@ import flash.utils.Dictionary;
 public class KyoClassLoader extends EventDispatcher {
     public function KyoClassLoader() {
     }
+
     private var _classes:Object       = {};
     private var _urls:Array;
     private var _defaultId:String;

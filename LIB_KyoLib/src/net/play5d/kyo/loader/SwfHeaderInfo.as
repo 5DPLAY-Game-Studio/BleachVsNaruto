@@ -28,6 +28,7 @@ public class SwfHeaderInfo {
         setWHruleList();
         parseByteArray(BA);
     }
+
     protected var w_h_ruleList:Array;
 
     protected var _type:String;//标识

@@ -27,6 +27,7 @@ import flash.net.URLRequest;
 public class KyoSoundLoader {
     public function KyoSoundLoader() {
     }
+
     private var _urls:Array;
     private var _curUrl:String;
     private var _soundObj:Object = {};
