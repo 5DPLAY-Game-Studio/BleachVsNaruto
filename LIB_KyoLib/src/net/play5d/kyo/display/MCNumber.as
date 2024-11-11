@@ -37,10 +37,11 @@ public class MCNumber extends Sprite {
         this.mcWidth    = mcWidth;
         this.number     = number;
     }
+
     public var mcWidth:Number = -1;
     public var startFrame:int;
     protected var _mc:Class;
-    protected var _mcs:Array = [];
+    protected var _mcs:Array  = [];
     protected var _bits:uint;
 
     protected var _number:uint;
