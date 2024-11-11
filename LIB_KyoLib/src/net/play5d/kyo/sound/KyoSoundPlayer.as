@@ -33,6 +33,7 @@ public class KyoSoundPlayer {
 
     public function KyoSoundPlayer() {
     }
+
     private var _sounds:Object       = {};
     private var _defaultValue:Number = 1;
     private var _lastPlay:int;
@@ -47,7 +48,7 @@ public class KyoSoundPlayer {
      * @param merge 是否覆盖声道中的声音
      */
     public function playSound(s:Object, channelId:int = -1, gap:int = 100, loops:int = 0, volume:Number = -1,
-                              merge:Boolean                                                             = false, onComplete:Function                                = null
+                              merge:Boolean                                                             = false, onComplete:Function = null
     ):void {
         var snd:Sound = getSound(s);
         if (!snd) {
@@ -162,6 +163,7 @@ internal class InsSound {
     public function InsSound(sound:Sound):void {
         _sound = sound;
     }
+
     public var playing:Boolean;
     public var onComplete:Function;
     private var _channel:SoundChannel;

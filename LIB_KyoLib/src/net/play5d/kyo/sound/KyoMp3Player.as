@@ -34,6 +34,7 @@ public class KyoMp3Player {
 
     public function KyoMp3Player() {
     }
+
     public var playMode:String;
     public var list:Array = [];
     private var _sound:Sound;
