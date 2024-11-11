@@ -38,6 +38,8 @@ package net.play5d.game.bvn.fighter.ctrler
 	 */
 	public class FighterCtrler
 	{
+		include "_INCLUDE_.as";
+
 		public var hitModel:FighterHitModel;
 
 		private var _effectCtrl:FighterEffectCtrl;

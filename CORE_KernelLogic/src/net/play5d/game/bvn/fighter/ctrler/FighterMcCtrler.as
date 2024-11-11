@@ -44,6 +44,8 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterMcCtrler
 	{
+		include "_INCLUDE_.as";
+
 		public var effectCtrler:FighterEffectCtrl;
 
 		private var _actionCtrler:IFighterActionCtrl; //角色操作控制

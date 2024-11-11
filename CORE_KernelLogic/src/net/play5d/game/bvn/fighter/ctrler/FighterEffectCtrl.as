@@ -35,6 +35,8 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterEffectCtrl
 	{
+		include "_INCLUDE_.as";
+
 		private var _target:BaseGameSprite;
 		private var _targetDisplay:DisplayObject;
 
