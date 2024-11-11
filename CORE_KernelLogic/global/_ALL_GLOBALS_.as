@@ -36,6 +36,7 @@ public function get _ALL_GLOBALS_():* {
         Format,
         GetLang,
         GetLangText,
+        IsMobile,
         P1,
         P2,
         Printf,
