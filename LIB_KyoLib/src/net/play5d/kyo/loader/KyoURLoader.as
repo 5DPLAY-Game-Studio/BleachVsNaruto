@@ -31,7 +31,7 @@ public class KyoURLoader {
     public static const TYPE_UNICODE_BIG_ENDIAN:String = 'Unicode big endian';
     public static const TYPE_UTF8:String               = 'UTF-8';
     public static const TYPE_ANSI:String               = 'ANSI';
-    public static var showDebug:Boolean = true;
+    public static var showDebug:Boolean                = true;
     public static var errorStr:String;
 
     /**

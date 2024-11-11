@@ -26,6 +26,7 @@ import flash.net.URLRequest;
 public class BitmapLoader {
     public function BitmapLoader() {
     }
+
     public var bitmap:Bitmap;
     public var url:String;
 

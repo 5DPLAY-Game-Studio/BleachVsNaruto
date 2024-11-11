@@ -32,6 +32,7 @@ public class WaterWaveEffect extends Sprite {
 
         buildwave();
     }
+
     public var strongth:Number    = 1;
     private var mouseDown:Boolean = false;
     private var result:BitmapData, result2:BitmapData, source:BitmapData, buffer:BitmapData, output:BitmapData,

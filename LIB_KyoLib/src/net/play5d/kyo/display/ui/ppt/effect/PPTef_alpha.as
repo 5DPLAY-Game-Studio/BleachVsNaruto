@@ -23,6 +23,7 @@ public class PPTef_alpha extends BasePPTEffect {
     public function PPTef_alpha() {
         super();
     }
+
     private var _tween:TweenLite;
 
     protected override function initStart():void {

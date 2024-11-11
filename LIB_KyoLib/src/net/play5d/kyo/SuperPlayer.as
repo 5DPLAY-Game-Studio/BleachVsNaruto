@@ -46,6 +46,7 @@ public class SuperPlayer extends Sprite {
         _size = new Point(width, height);
         super();
     }
+
 //		public var content:DisplayObject;
     public var type:String;
     public var autoPlay:Boolean  = true;
@@ -53,9 +54,9 @@ public class SuperPlayer extends Sprite {
      * 锁定宽高比
      */
     public var lockRatio:Boolean = false;
-    public var video_pfxs:Array = ['flv', 'mp4'];
-    public var flash_pfxs:Array = ['swf'];
-    public var pic_pfxs:Array   = ['jpg', 'jpeg', 'gif', 'png', 'bmp'];
+    public var video_pfxs:Array  = ['flv', 'mp4'];
+    public var flash_pfxs:Array  = ['swf'];
+    public var pic_pfxs:Array    = ['jpg', 'jpeg', 'gif', 'png', 'bmp'];
     private var _url:String;
     private var _size:Point;
     private var _img:Loader;
@@ -350,6 +351,7 @@ internal class InsVideo extends Sprite {
 
         addChild(flvVideo);
     }
+
     public var loopPlay:Boolean;
     public var playing:Boolean;
     public var metadata:Object;

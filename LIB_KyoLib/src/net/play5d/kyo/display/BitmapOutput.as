@@ -25,7 +25,8 @@ import flash.geom.Matrix;
 public class BitmapOutput extends Bitmap {
     public function BitmapOutput(
             source:DisplayObject, width:int, height:int, transparent:Boolean = false, fillColor:int = 0,
-            pixelSnapping:String = 'auto', smoothing:Boolean = false) {
+            pixelSnapping:String                                                                    = 'auto', smoothing:Boolean                                        = false
+    ) {
         super(null, pixelSnapping, smoothing);
         _source      = source;
         _width       = width;
@@ -33,6 +34,7 @@ public class BitmapOutput extends Bitmap {
         _transparent = transparent;
         _fillColor   = fillColor;
     }
+
     private var _source:DisplayObject;
     private var _width:int;
     private var _height:int;

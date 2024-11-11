@@ -26,6 +26,7 @@ public class KyoUIEvent extends Event {
         super(type, false, false);
         this.params = params;
     }
+
     public var params:Object;
 }
 }

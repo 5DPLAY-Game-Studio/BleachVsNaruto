@@ -30,6 +30,7 @@ public class BitmapFontText extends Bitmap {
         super(null, 'auto', true);
         _font = font;
     }
+
     private var _font:BitmapFont;
     private var _orgBitmapData:BitmapData;
 

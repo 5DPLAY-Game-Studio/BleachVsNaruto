@@ -163,11 +163,11 @@ public class WebUtils {
     }
 
     public static function refresh():void {
-        getURL('javascript:location.reload();', "_self");
+        getURL('javascript:location.reload();', '_self');
     }
 
     public static function alert(v:String):void {
-        getURL('javascript:alert("' + v + '");', "_self");
+        getURL('javascript:alert("' + v + '");', '_self');
     }
 
     private static function checkURL(url:String):Boolean {

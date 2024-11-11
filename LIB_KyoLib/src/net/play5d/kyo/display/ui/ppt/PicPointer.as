@@ -48,6 +48,7 @@ public class PicPointer extends Sprite {
         _picSprite.graphics.drawRect(0, 0, size.x, size.y);
         _picSprite.graphics.endFill();
     }
+
     public var size:Point;
     public var delay:Number;
     private var _datas:Array;
@@ -67,7 +68,7 @@ public class PicPointer extends Sprite {
     /**
      * 移动方向（1：左右滚动，2：上下滚动）
      */
-               //		public var direct:int = 2;
+                //		public var direct:int = 2;
     private var _dragAble:Boolean;
 
     /**

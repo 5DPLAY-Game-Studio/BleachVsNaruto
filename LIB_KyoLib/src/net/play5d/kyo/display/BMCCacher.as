@@ -21,6 +21,7 @@ public class BMCCacher {
     public function BMCCacher(totalAmount:int = -1) {
         _total = totalAmount;
     }
+
     private var _total:int;
     private var _amount:int;
     private var _cacheObj:Object = {};

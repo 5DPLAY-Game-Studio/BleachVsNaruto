@@ -26,6 +26,7 @@ public class DynamicRegistration {
         this._target   = target;
         this._regpoint = regpoint;
     }
+
     //需更改的注册点位置
     private var _regpoint:Point;
     //更改注册的显示对象

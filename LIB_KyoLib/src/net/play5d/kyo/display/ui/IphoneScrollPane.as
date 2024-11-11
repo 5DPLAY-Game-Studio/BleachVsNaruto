@@ -32,10 +32,11 @@ public class IphoneScrollPane extends Sprite {
     public function IphoneScrollPane(size:Point) {
         _size = size;
     }
+
     public var dragPixel:int    = 5;
-    public var H_enab:Boolean = true;
-    public var V_enab:Boolean = true;
-    public var enabled:Boolean = true;
+    public var H_enab:Boolean   = true;
+    public var V_enab:Boolean   = true;
+    public var enabled:Boolean  = true;
     private var _size:Point;
     private var _downPoint:Point;
     private var _release:Boolean;

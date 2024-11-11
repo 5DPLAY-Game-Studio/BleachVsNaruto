@@ -28,6 +28,7 @@ import net.play5d.kyo.display.ui.ppt.PicPointer;
 public class BasePPTEffect {
     public function BasePPTEffect() {
     }
+
     public var drag:Boolean;
     public var draging:Boolean;
     public var duration:Number = 1;//动画播放间隔时间

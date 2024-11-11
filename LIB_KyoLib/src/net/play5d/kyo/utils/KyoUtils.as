@@ -752,7 +752,7 @@ public class KyoUtils {
     }
 
     public static function setText(txt:TextField, text:Object = '', mouseEnabled:Boolean = false,
-                                   nulltxt:String                                        = 'null', autoSize:Boolean = false
+                                   nulltxt:String                                        = 'null', autoSize:Boolean             = false
     ):void {
         var t:String = String(text);
         if (t == null) {

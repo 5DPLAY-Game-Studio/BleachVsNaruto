@@ -40,29 +40,30 @@ public class KyoTileList extends Sprite {
         _vrow = vrow;
         setDisplays(displays);
     }
+
     /**
      * 元件与元件间的间隔
      */
-    public var gap:Point        = new Point(5, 5);
-    public var unitySize:Point  = new Point();
+    public var gap:Point          = new Point(5, 5);
+    public var unitySize:Point    = new Point();
     public var HLine:Class;
     public var VLine:Class;
-    public var showNum:int      = -1;
+    public var showNum:int        = -1;
     public var displays:Array;
-    public var startPos:Point   = new Point();
+    public var startPos:Point     = new Point();
     public var scrollBar:IKyoScrollBar;
     /**
      * 大小位置保持一致
      */
-    public var lockSize:Boolean = false;
+    public var lockSize:Boolean   = false;
     public var scrollHadd:Boolean = true;
     public var rowV:int;
-    protected var _width:Number  = 0;
-    protected var _height:Number = 0;
+    protected var _width:Number   = 0;
+    protected var _height:Number  = 0;
     private var _hrow:int;
     private var _vrow:int;
 
-    private var _page:int      = 1;
+    private var _page:int = 1;
 
     public function get page():int {
         return _page;

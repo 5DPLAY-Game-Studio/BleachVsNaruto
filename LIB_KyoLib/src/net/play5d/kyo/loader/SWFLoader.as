@@ -27,6 +27,7 @@ public class SWFLoader extends Loader {
     public function SWFLoader(url:String, back:Function = null) {
         loadSwf(url, back);
     }
+
     public var headInfo:SwfHeaderInfo;
 
     public function loadSwf(url:String, back:Function, fail:Function = null):void {

@@ -56,6 +56,7 @@ public class KyoSimpButton extends Sprite {
         addEventListener(MouseEvent.MOUSE_OVER, overHandler);
         addEventListener(MouseEvent.MOUSE_OUT, overHandler);
     }
+
     public var btnWidth:Number;
     public var btnHeight:Number;
 

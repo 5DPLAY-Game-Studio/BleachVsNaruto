@@ -33,6 +33,7 @@ public class RunJS extends Sprite {
         JSLine('AJAX Demo:');
         JSDemo4();
     }
+
     // import DOM Interface
     private var window:JSEnv = JSEnv.$;
 

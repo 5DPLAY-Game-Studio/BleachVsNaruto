@@ -34,6 +34,7 @@ public class KyoScroller {
 
         updateSC();
     }
+
     public var speed:Number = 2;
     private var _d:DisplayObject;
     private var _size:Point;

@@ -28,6 +28,7 @@ public class PicScrollEvent extends Event {
         super(type, false, false);
         this.data = data;
     }
+
     public var data:Object;
 }
 }

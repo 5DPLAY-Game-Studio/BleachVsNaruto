@@ -38,10 +38,11 @@ public class ImageLoader extends Loader {
             loadImage(url, back, fail, process);
         }
     }
+
     /**
      * 忽略错误
      */
-    public var mergeError:Boolean        = true;
+    public var mergeError:Boolean = true;
     public var loadFail:Boolean;
     private var _size:Point;
     private var _back:Function;

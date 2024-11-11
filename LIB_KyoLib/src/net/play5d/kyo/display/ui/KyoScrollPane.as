@@ -34,6 +34,7 @@ public class KyoScrollPane extends Sprite {
 
         this.addEventListener(MouseEvent.MOUSE_DOWN, beginDrag);
     }
+
     public var dragType:int;
     public var maskSize:Point;
     public var scrollBar:IKyoScrollBar;

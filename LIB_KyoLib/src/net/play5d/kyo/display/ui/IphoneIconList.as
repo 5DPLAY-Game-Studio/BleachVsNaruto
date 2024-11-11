@@ -34,32 +34,33 @@ public class IphoneIconList extends Sprite {
         this.perpage   = perpage;
         this.hrow      = hrow;
     }
+
     public var curPage:int;
     public var totalPage:int;
     public var perpage:int;
-    public var _thisX:Number   = 0;
-    public var hrow:int        = 4;
+    public var _thisX:Number        = 0;
+    public var hrow:int             = 4;
     public var touchSize:Point;
-    public var enalbed:Boolean = true;
+    public var enalbed:Boolean      = true;
     /**
      * 翻页的滑动速度
      */
-    public var touchPow:Number = 30;
+    public var touchPow:Number      = 30;
     /**
      * 翻页的滑动距离(比例)
      */
-    public var touchDis:Number = 0.3;
+    public var touchDis:Number      = 0.3;
     public var gap:Point;
     public var listPos:Point;
     private var _unitSize:Point;
-    private var _oldthisX:Number = 0;
-    private var _tweenX:Number   = 0;
+    private var _oldthisX:Number    = 0;
+    private var _tweenX:Number      = 0;
     private var _lists:Array;
-    private var _gap:Point       = new Point();
+    private var _gap:Point          = new Point();
     private var _listEnable:Boolean = true;
     private var _oldX:Number;
-    private var _mouseSpd:Number  = 0;
-    private var _curMouseX:Number = -1;
+    private var _mouseSpd:Number    = 0;
+    private var _curMouseX:Number   = -1;
     private var _tween:TweenLite;
 
     public function get gapx():Number {

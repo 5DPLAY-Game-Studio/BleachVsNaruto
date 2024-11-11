@@ -29,6 +29,7 @@ public class KyoTouchInput extends EventDispatcher {
 
         enbaled = true;
     }
+
     public var slidePos:int = 20;
     public var enableArea:Rectangle;
     private var _stage:Stage;

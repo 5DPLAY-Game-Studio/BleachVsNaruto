@@ -32,6 +32,7 @@ public class KyoScrollList extends KyoTileList {
 
         super(displays, hrow, vrow);
     }
+
     private var _scrollType:int;
     private var _size:Point;
     private var _rollSpeed:Number;

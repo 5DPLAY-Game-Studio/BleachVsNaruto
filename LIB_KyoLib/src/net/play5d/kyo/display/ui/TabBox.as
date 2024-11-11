@@ -26,6 +26,7 @@ public class TabBox extends BaseBox {
         this.gapX = gapX;
         this.gapY = gapY;
     }
+
     public var selectedTab:ITab;
     private var _lx:Number;
     private var _ly:Number;

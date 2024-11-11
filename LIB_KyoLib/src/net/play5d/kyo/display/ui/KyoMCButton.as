@@ -24,7 +24,7 @@ import flash.events.MouseEvent;
 
 public class KyoMCButton extends EventDispatcher implements IKyoButton {
     public function KyoMCButton(mc:MovieClip, nornalFrame:Object = 1, selectFrame:Object = null,
-                                overFrame:Object                                         = null, unenabledFrame:Object = null
+                                overFrame:Object                                         = null, unenabledFrame:Object           = null
     ) {
         this.mc = mc;
         mc.addEventListener(MouseEvent.CLICK, handler);
@@ -37,6 +37,7 @@ public class KyoMCButton extends EventDispatcher implements IKyoButton {
 
         goFrame(_nornalFrame);
     }
+
     public var mc:MovieClip;
     private var _selectFrame:Object;
     private var _nornalFrame:Object;

@@ -20,6 +20,7 @@ package net.play5d.kyo.utils.vo {
 public class KyoWeaterVO {
     public function KyoWeaterVO() {
     }
+
     public var high:int;
     public var low:int;
     public var code:int;

@@ -20,6 +20,7 @@ package net.play5d.kyo.display.ui {
 public class KyoRepeater {
     public function KyoRepeater() {
     }
+
     public var dataProvider:Array;
     public var bindClass:Class;
     public var bindProperty:Object;

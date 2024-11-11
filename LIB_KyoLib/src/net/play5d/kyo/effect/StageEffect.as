@@ -39,6 +39,7 @@ public class StageEffect {
 
     public function StageEffect() {
     }
+
     public var stage:DisplayObject;
     private var _tweening:Boolean;
     private var _shakeBack:Function;

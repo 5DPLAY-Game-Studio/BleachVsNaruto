@@ -23,6 +23,7 @@ import flash.events.Event;
 public class BaseBox extends Sprite {
     public function BaseBox() {
     }
+
     public var gapX:Number;
     public var gapY:Number;
 

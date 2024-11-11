@@ -29,6 +29,7 @@ public class PreLoader extends MovieClip {
 
         stop();
     }
+
     public var showLoadbar:Boolean = true;
     protected var _mainClass:String;
     protected var _loadbar:LoaderBar;

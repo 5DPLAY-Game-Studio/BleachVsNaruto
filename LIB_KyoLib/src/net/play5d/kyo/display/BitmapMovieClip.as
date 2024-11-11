@@ -41,6 +41,7 @@ public class BitmapMovieClip extends Sprite {
         this.lockSize = lockSize;
         _maxFrames    = drawFrames;
     }
+
     public var currentFrame:int;
     public var currentFrameLabel:String;
     public var totalFrames:int;
@@ -48,9 +49,9 @@ public class BitmapMovieClip extends Sprite {
     public var loopGapFrame:int;
     public var lockSize:Boolean;
     public var autoPlay:Boolean;
-    public var fixRegPoint:Boolean = true;
+    public var fixRegPoint:Boolean   = true;
     public var fixSize:Point;
-    public var loopPlay:Boolean    = true;
+    public var loopPlay:Boolean      = true;
     public var playComplete:Boolean;
     public var fixPoint:Point;
     public var onPlayComplete:Function;
@@ -107,7 +108,7 @@ public class BitmapMovieClip extends Sprite {
      */
     public function draw(
             source:DisplayObject, matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null,
-            clipRect:Rectangle                                                                                 = null, smoothing:Boolean = false
+            clipRect:Rectangle                                                                                 = null, smoothing:Boolean                                                       = false
     ):void {
         beforeDraw(matrix, colorTransform, blendMode, clipRect, smoothing);
         var drawVar:DrawVar = new DrawVar(source, matrix, colorTransform, blendMode, clipRect, smoothing);
@@ -139,7 +140,7 @@ public class BitmapMovieClip extends Sprite {
      */
     public function drawMulti(
             source:Array, matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null,
-            clipRect:Rectangle                                                                         = null, smoothing:Boolean = false, baseFrameMc:MovieClip                = null,
+            clipRect:Rectangle                                                                         = null, smoothing:Boolean                                               = false, baseFrameMc:MovieClip                = null,
             hideFrameout:Boolean                                                                       = true
     ):void {
         beforeDraw(matrix, colorTransform, blendMode, clipRect, smoothing);
@@ -401,7 +402,7 @@ public class BitmapMovieClip extends Sprite {
 
     private function beforeDraw(
             matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null,
-            clipRect:Rectangle                                                           = null, smoothing:Boolean                                 = false
+            clipRect:Rectangle                                                           = null, smoothing:Boolean = false
     ):void {
         _insArray = [];
         if (lockSize && matrix) {
@@ -471,8 +472,9 @@ internal class DrawVar {
         this.smoothing      = smoothing;
         initlize();
     }
+
     public var source:DisplayObject, matrix:Matrix = null, colorTransform:ColorTransform = null,
-               blendMode:String                                                          = null, clipRect:Rectangle                               = null, smoothing:Boolean     = false;
+               blendMode:String                                                          = null, clipRect:Rectangle                               = null, smoothing:Boolean = false;
 
     public function destory():void {
         if (source is MovieClip) {
@@ -527,6 +529,7 @@ internal class McGroup extends Sprite {
             }
         }
     }
+
     public var totalFrames:int;
     public var hideFrameout:Boolean;
     private var _ins:Array = [];
@@ -598,6 +601,7 @@ internal class InsFunction {
         _fun    = fun;
         _params = params;
     }
+
     private var _fun:Function;
     private var _params:Array;
 

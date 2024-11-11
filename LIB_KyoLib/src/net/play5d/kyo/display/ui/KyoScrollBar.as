@@ -38,6 +38,7 @@ public class KyoScrollBar extends EventDispatcher implements IKyoScrollBar {
         ui.mouseChildren = false;
         ui.addEventListener(MouseEvent.MOUSE_DOWN, startDrag);
     }
+
     public var ui:Sprite;
     private var _dragRange:Point;
     private var _type:int;

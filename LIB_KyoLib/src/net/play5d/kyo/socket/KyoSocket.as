@@ -28,6 +28,7 @@ import flash.utils.setTimeout;
 public class KyoSocket {
     public function KyoSocket() {
     }
+
     /**
      * 字符串编码格式
      */

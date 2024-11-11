@@ -31,6 +31,7 @@ public class PicPointerEvent extends Event {
         super(type, false, false);
         this.data = data;
     }
+
     public var data:Object;
 }
 }

@@ -43,6 +43,7 @@ public class PicScroller extends Sprite {
         _sp = new Sprite();
         addChild(_sp);
     }
+
     public var size:Point;
     public var speed:Number;
     public var delay:Number;
@@ -56,7 +57,7 @@ public class PicScroller extends Sprite {
      * 是否允许在移动中拖动
      */
     public var movingTouch:Boolean = false;
-    public var showNear:Boolean = true;
+    public var showNear:Boolean    = true;
     private var _datas:Array;
     private var _loader:Loader;
     private var _direct:int;

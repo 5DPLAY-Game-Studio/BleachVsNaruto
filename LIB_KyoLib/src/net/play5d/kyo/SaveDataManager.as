@@ -26,6 +26,7 @@ public class SaveDataManager {
         _so = SharedObject.getLocal(soname, localpath, secure);
         _autosave = autosave;
     }
+
     private var _so:SharedObject;
     private var _autosave:Boolean;
 

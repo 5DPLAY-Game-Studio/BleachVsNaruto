@@ -71,7 +71,7 @@ public class DisplayEffect {
      *
      */
     public static function zoomShadow(d:DisplayObject, scaleAdd:Number = .1, alphaLose:Number = 0.05,
-                                      startAlpha:Number                                       = 1, colorTransFrom:ColorTransform = null,
+                                      startAlpha:Number                                       = 1, colorTransFrom:ColorTransform    = null,
                                       parent:DisplayObjectContainer                           = null, size:Point = null
     ):DisplayObject {
         parent ||= d.parent;
@@ -190,6 +190,7 @@ import flash.geom.Point;
 internal class InsShadow {
     public function InsShadow() {
     }
+
     public var bitmap:Bitmap;
     public var alphaLose:Number = 0.1;
     public var parent:DisplayObjectContainer;

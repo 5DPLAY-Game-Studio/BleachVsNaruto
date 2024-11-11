@@ -27,6 +27,7 @@ public class PicLoader extends Sprite {
         this._size = size;
         this.url   = url;
     }
+
     public var id:int;
     private var _size:Point;
     private var url:String;
