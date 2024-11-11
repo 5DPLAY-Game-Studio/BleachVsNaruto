@@ -81,7 +81,7 @@ package net.play5d.game.bvn.data
 			}
 
 			if(startFrame != 0 && !bgm){
-				trace(id+'没有定义bgm!');
+				TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
 			}
 
 		}

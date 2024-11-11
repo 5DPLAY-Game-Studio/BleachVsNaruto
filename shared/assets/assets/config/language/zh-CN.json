@@ -33,7 +33,6 @@
   },
   "package": {
     "interfaces": {
-      "//": "------------------ Class ------------------",
       "GameInterface": {
         "getDefaultMenu": {
           "team_play": {
@@ -131,7 +130,6 @@
           },
           "isOutRange": {
             "map_null": {
-              "txt": "地图为空！"
             }
           },
           "setGameMode": {
@@ -164,8 +162,6 @@
             "fightTimeover": {
               "trace_time_over": {
               }
-            },
-            "runNext": {
             }
           }
         }
@@ -222,6 +218,9 @@
         },
         "musou_logic": {
           "open_map_area": "开放地图探索区域： {}"
+        },
+        "fighter_vo": {
+          "undefined_bgm": "FighterVO.initByXML :: ID  为 {} 的角色值对象未定义背景音乐！"
         }
       }
     },
