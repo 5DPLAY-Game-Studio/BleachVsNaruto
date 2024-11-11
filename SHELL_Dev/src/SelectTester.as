@@ -27,7 +27,7 @@ import flash.text.TextFormat;
 import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.GameQuailty;
+import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrl.AssetManager;
 import net.play5d.game.bvn.ctrl.GameLogic;
@@ -226,7 +226,7 @@ public class SelectTester extends Sprite {
         trace('AssetManager.I.setAssetLoader');
 
         GameData.I.config.AI_level     = 1;
-        GameData.I.config.quality      = GameQuailty.LOW;
+        GameData.I.config.quality      = GameQuality.LOW;
         GameData.I.config.keyInputMode = 1;
 
         _mainGame = new MainGame();

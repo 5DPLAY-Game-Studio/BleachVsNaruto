@@ -26,7 +26,7 @@ package net.play5d.game.bvn.ui
 	import flash.geom.Rectangle;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.GameQuailty;
+	import net.play5d.game.bvn.GameQuality;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.ctrl.GameRender;
 	import net.play5d.game.bvn.ctrl.SoundCtrl;
@@ -240,10 +240,10 @@ package net.play5d.game.bvn.ui
 				},
 				{txt:"QUALITY",cn:"画质等级",
 					options:[
-						{label:'LOW',cn:'低',value:GameQuailty.LOW},
-						{label:'MEDIUM',cn:'中',value:GameQuailty.MEDIUM},
-						{label:'HIGH',cn:'高',value:GameQuailty.HIGH},
-						{label:'BEST',cn:'最高',value:GameQuailty.BEST}
+						{label:'LOW',cn:'低',value:GameQuality.LOW},
+						{label:'MEDIUM',cn:'中',value:GameQuality.MEDIUM},
+						{label:'HIGH',cn:'高',value:GameQuality.HIGH},
+						{label:'BEST',cn:'最高',value:GameQuality.BEST}
 					],
 					optoinKey:'quality'
 				},

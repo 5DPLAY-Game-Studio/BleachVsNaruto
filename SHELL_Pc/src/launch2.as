@@ -25,7 +25,7 @@ package
 	import flash.ui.Keyboard;
 
 	import net.play5d.game.bvn.debug.Debugger;
-	import net.play5d.game.bvn.GameQuailty;
+	import net.play5d.game.bvn.GameQuality;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.interfaces.GameInterface;
@@ -67,7 +67,7 @@ package
 			GameUI.BITMAP_UI = true;
 
 			GameData.I.config.AI_level = 1;
-			GameData.I.config.quality = GameQuailty.MEDIUM;
+			GameData.I.config.quality = GameQuality.MEDIUM;
 			GameData.I.config.keyInputMode = 0;
 
 			URL.MARK = 'bvn_win'+MainGame.VERSION;
