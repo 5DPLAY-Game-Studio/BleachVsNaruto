@@ -34,6 +34,7 @@ public function get _ALL_GLOBALS_():* {
     return ([
         FONT,
         Format,
+        GetElement,
         GetLang,
         GetLangText,
         P1,
