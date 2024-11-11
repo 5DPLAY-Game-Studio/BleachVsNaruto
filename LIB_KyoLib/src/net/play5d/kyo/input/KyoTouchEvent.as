@@ -33,6 +33,7 @@ public class KyoTouchEvent extends Event {
         }
         super(type, false, false);
     }
+
     public var direct:int;
 }
 }

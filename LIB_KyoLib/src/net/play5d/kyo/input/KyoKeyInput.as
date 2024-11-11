@@ -29,9 +29,10 @@ public class KyoKeyInput {
     public function KyoKeyInput(stage:Stage) {
         this.stage = stage;
     }
+
 //		}
     public var stage:Stage;
-    public var orderKeyAble:Boolean = true;
+    public var orderKeyAble:Boolean  = true;
     /**
      * 连续按键队列的最大值
      */
@@ -40,10 +41,10 @@ public class KyoKeyInput {
      * 连续按键时间限定(毫秒)
      */
     public var orderKeyDuration:int  = 200;
-    private var _orderKeys:Array  = [];
+    private var _orderKeys:Array     = [];
     private var _lastDownTime:int;
-    private var _downCodes:Object = {};
-    private var _keys:Object = {};
+    private var _downCodes:Object    = {};
+    private var _keys:Object         = {};
     private var _map:Object;
     private var _isOn:Boolean;
     private var _downF:Function;
