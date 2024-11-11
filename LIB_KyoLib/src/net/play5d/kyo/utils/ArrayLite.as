@@ -22,6 +22,7 @@ public class ArrayLite {
         super();
         _o = {};
     }
+
     public var length:int;
     private var _o:Object;
 

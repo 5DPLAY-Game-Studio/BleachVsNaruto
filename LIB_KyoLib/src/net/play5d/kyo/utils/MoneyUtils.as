@@ -193,5 +193,5 @@ class ThousandNode {
 
     public var beforeZero:Boolean;
     public var afterZero:Boolean;
-    public var desc:String = "";
+    public var desc:String = '';
 }

@@ -50,7 +50,7 @@ public class KyoDrawUtils {
 
     public static function drawSector(
             graphics:Graphics, x:Number = 200, y:Number = 200, r:Number = 100, angle:Number = 60, startFrom:Number = 0,
-            color:Object                                                                                           = 0xFFFFFF, alpha:Number                                                                  = 1
+            color:Object                                                                                           = 0xFFFFFF, alpha:Number = 1
     ):void {
         graphics.clear();
         if (color is Array) {

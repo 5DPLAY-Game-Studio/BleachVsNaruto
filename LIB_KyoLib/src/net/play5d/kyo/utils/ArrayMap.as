@@ -23,6 +23,7 @@ public class ArrayMap {
         _o   = {};
         _arr = [];
     }
+
     private var _o:Object;
     private var _arr:Array;
 

@@ -27,12 +27,13 @@ import flash.utils.Timer;
 public class KyoClock {
     public function KyoClock() {
     }
+
     /**
      * 获取当前时间
      * 如果需要对时间进行格式化，请参考 net.play5d.kyo.utils.KyoTimerFormat
      * @return
      */
-    public var now:Date = new Date();
+    public var now:Date          = new Date();
     private var _timer:Timer;
     private var _functions:Array = [];
     private var _td:String;
