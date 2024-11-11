@@ -27,6 +27,7 @@ import net.play5d.kyo.loader.KyoURLoader;
 public class BitmapFontLoader {
     public function BitmapFontLoader() {
     }
+
     private var _urls:Array;
     private var _fontObj:Object = {};
     private var _loadAmount:int;

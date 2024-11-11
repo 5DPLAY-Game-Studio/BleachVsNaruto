@@ -40,27 +40,28 @@ public class BitmapFont {
             _fontCache[char.id] = char;
         }
     }
+
     /**
      * 字与字之间的间距
      */
-    public var charGap:Number  = 0;
+    public var charGap:Number     = 0;
     /**
      * 空格的间距
      */
-    public var spaceGap:Number = 0;
+    public var spaceGap:Number    = 0;
     /**
      * X偏移量
      */
-    public var offsetX:Number = 0;
+    public var offsetX:Number     = 0;
     /**
      * Y偏移量
      */
-    public var offsetY:Number = 0;
+    public var offsetY:Number     = 0;
     private var _source:BitmapData; //源位图数据
     private var _fontCache:Object = {};
     private var _charWidth:int; //单字宽度
     private var _charHeight:int; //单字高度（取最大）
-    private var _yOffsetMin:int = 999; //最小偏移Y
+    private var _yOffsetMin:int   = 999; //最小偏移Y
 
     public function translate(str:String):BitmapData {
 
@@ -146,6 +147,7 @@ internal class InsCharVO {
             xadvance = xml.@xadvance;
         }
     }
+
     public var x:Number = 0;
     public var y:Number = 0;
     public var id:String;
