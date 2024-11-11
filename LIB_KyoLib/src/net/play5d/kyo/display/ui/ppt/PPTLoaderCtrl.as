@@ -22,6 +22,7 @@ import flash.events.EventDispatcher;
 public class PPTLoaderCtrl extends EventDispatcher {
     public function PPTLoaderCtrl() {
     }
+
     public var curIndex:int;
     public var totalIndex:int;
     private var _loaders:Array;

@@ -27,6 +27,7 @@ public class PicLoaderSp extends Sprite {
     public function PicLoaderSp(size:Point) {
         this._size = size;
     }
+
     public var onFinish:Function;
     public var isBitmap:Boolean;
     private var _player:SuperPlayer;

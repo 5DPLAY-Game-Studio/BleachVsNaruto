@@ -49,6 +49,7 @@ public class SwfLoader extends Sprite {
             loadSwf(url, back, fail, process);
         }
     }
+
     private var _size:Point;
     private var _swfWidth:Number  = 0;
     private var _swfHeight:Number = 0;
