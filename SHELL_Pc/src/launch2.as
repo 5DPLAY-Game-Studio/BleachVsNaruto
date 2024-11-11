@@ -25,12 +25,12 @@ package
 	import flash.ui.Keyboard;
 
 	import net.play5d.game.bvn.debug.Debugger;
-	import net.play5d.game.bvn.GameQuailty;
+	import net.play5d.game.bvn.GameQuality;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.utils.GameLoger;
+	import net.play5d.game.bvn.utils.GameLogger;
 	import net.play5d.game.bvn.utils.URL;
 	import net.play5d.game.bvn.win.GameInterfaceManager;
 	import net.play5d.game.bvn.win.utils.Loger;
@@ -52,9 +52,9 @@ package
 
 		private function initlize(e:Event = null):void{
 
-			GameLoger.setLoger(new Loger());
+			GameLogger.setLoger(new Loger());
 
-			GameLoger.log("init...");
+			GameLogger.log("init...");
 
 			removeEventListener(Event.ADDED_TO_STAGE,initlize);
 
@@ -67,7 +67,7 @@ package
 			GameUI.BITMAP_UI = true;
 
 			GameData.I.config.AI_level = 1;
-			GameData.I.config.quality = GameQuailty.MEDIUM;
+			GameData.I.config.quality = GameQuality.MEDIUM;
 			GameData.I.config.keyInputMode = 0;
 
 			URL.MARK = 'bvn_win'+MainGame.VERSION;
@@ -80,7 +80,7 @@ package
 
 		private function buildGame():void{
 
-			GameLoger.log("buildGame");
+			GameLogger.log("buildGame");
 
 			_mainGame = new MainGame();
 			_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
@@ -90,7 +90,7 @@ package
 
 		private function initBackHandler():void{
 
-			GameLoger.log("init ok");
+			GameLogger.log("init ok");
 
 			UIAssetUtil.I.initalize(_mainGame.goLogo);
 			//			_mainGame.goMenu();
@@ -98,7 +98,7 @@ package
 		}
 
 		private function initFailHandler(msg:String):void{
-			GameLoger.log("init fail");
+			GameLogger.log("init fail");
 		}
 
 		private function keyDownHandler(e:KeyboardEvent):void{

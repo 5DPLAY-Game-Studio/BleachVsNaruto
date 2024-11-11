@@ -22,7 +22,7 @@ package net.play5d.game.bvn.data
 	import flash.ui.Keyboard;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.GameQuailty;
+	import net.play5d.game.bvn.GameQuality;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.ctrl.EffectCtrl;
 	import net.play5d.game.bvn.ctrl.SoundCtrl;
@@ -178,31 +178,31 @@ package net.play5d.game.bvn.data
 		public function applyConfig():void{
 			switch(quality)
 			{
-				case GameQuailty.LOW:
+				case GameQuality.LOW:
 					GameConfig.QUALITY_GAME = StageQuality.LOW;
 					GameConfig.setGameFps(30);
 					GameConfig.FPS_SHINE_EFFECT = 15;
 					EffectCtrl.EFFECT_SMOOTHING = false;
 					break;
-				case GameQuailty.MEDIUM:
+				case GameQuality.MEDIUM:
 					GameConfig.QUALITY_GAME = StageQuality.LOW;
 					GameConfig.setGameFps(60);
 					GameConfig.FPS_SHINE_EFFECT = 30;
 					EffectCtrl.EFFECT_SMOOTHING = false;
 					break;
-				case GameQuailty.HIGH:
+				case GameQuality.HIGH:
 					GameConfig.QUALITY_GAME = StageQuality.MEDIUM;
 					GameConfig.setGameFps(60);
 					GameConfig.FPS_SHINE_EFFECT = 30;
 					EffectCtrl.EFFECT_SMOOTHING = false;
 					break;
-				case GameQuailty.HIGHER:
+				case GameQuality.HIGHER:
 					GameConfig.QUALITY_GAME = StageQuality.HIGH;
 					GameConfig.setGameFps(60);
 					GameConfig.FPS_SHINE_EFFECT = 30;
 					EffectCtrl.EFFECT_SMOOTHING = true;
 					break;
-				case GameQuailty.BEST:
+				case GameQuality.BEST:
 					GameConfig.QUALITY_GAME = StageQuality.HIGH;
 					GameConfig.setGameFps(60);
 					GameConfig.FPS_SHINE_EFFECT = 60;

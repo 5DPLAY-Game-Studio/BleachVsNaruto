@@ -16,110 +16,89 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.test
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.utils.ByteArray;
+package net.play5d.game.bvn.test {
+import flash.display.DisplayObject;
+import flash.display.Sprite;
+import flash.utils.ByteArray;
 
-	import net.play5d.game.bvn.data.ConfigVO;
-	import net.play5d.game.bvn.input.GameKeyInput;
-	import net.play5d.game.bvn.input.IGameInput;
-	import net.play5d.game.bvn.interfaces.IExtendConfig;
-	import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
-	import net.play5d.game.bvn.interfaces.IGameInterface;
-	import net.play5d.kyo.KyoSharedObject;
-	import net.play5d.kyo.utils.WebUtils;
+import net.play5d.game.bvn.data.ConfigVO;
+import net.play5d.game.bvn.input.GameKeyInput;
+import net.play5d.game.bvn.input.IGameInput;
+import net.play5d.game.bvn.interfaces.IExtendConfig;
+import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
+import net.play5d.game.bvn.interfaces.IGameInterface;
+import net.play5d.kyo.utils.WebUtils;
 
-	public class GameInterfaceManager implements IGameInterface
-	{
-		public function GameInterfaceManager()
-		{
-		}
+public class GameInterfaceManager implements IGameInterface {
+    public function GameInterfaceManager() {
+    }
 
-		public function initTitleUI(ui:DisplayObject):void
-		{
-		}
+    public function initTitleUI(ui:DisplayObject):void {
+    }
 
-		public function moreGames():void
-		{
-			WebUtils.getURL("http://www.1212321.com");
-		}
+    public function moreGames():void {
+        WebUtils.getURL('http://www.1212321.com');
+    }
 
-		public function submitScore(score:int):void
-		{
-		}
+    public function submitScore(score:int):void {
+    }
 
-		public function showRank():void
-		{
-		}
+    public function showRank():void {
+    }
 
-		public function saveGame(data:Object):void
-		{
-		}
+    public function saveGame(data:Object):void {
+    }
 
-		public function loadGame():Object
-		{
-			return null;
-		}
+    public function loadGame():Object {
+        return null;
+    }
 
-		public function getFighterCtrl(player:int):IFighterActionCtrl
-		{
-			return null;
-		}
+    public function getFighterCtrl(player:int):IFighterActionCtrl {
+        return null;
+    }
 
-		public function getGameMenu():Array
-		{
-			return null;
-		}
+    public function getGameMenu():Array {
+        return null;
+    }
 
-		public function getSettingMenu():Array
-		{
-			return null;
-		}
+    public function getSettingMenu():Array {
+        return null;
+    }
 
-		public function getGameInput(type:String):Vector.<IGameInput>
-		{
-			var vec:Vector.<IGameInput> = new Vector.<IGameInput>();
-			vec.push(new GameKeyInput());
+    public function getGameInput(type:String):Vector.<IGameInput> {
+        var vec:Vector.<IGameInput> = new Vector.<IGameInput>();
+        vec.push(new GameKeyInput());
 
-			return vec;
-		}
+        return vec;
+    }
 
-		public function getConfigExtend():IExtendConfig
-		{
-			return null;
-		}
+    public function getConfigExtend():IExtendConfig {
+        return null;
+    }
 
-		public function afterBuildGame():void
-		{
-		}
+    public function afterBuildGame():void {
+    }
 
-		/**
-		 * 更新输入设置
-		 */
-		public function updateInputConfig():Boolean
-		{
-			return false;
-		}
+    /**
+     * 更新输入设置
+     */
+    public function updateInputConfig():Boolean {
+        return false;
+    }
 
-		public function applyConfig(config:ConfigVO):void
-		{
-		}
+    public function applyConfig(config:ConfigVO):void {
+    }
 
-		public function getCreadits(creditsInfo:String):Sprite
-		{
-			return null;
-		}
+    public function getCreadits(creditsInfo:String):Sprite {
+        return null;
+    }
 
-		public function checkFile(url:String, file:ByteArray):Boolean
-		{
-			return true;
-		}
+    public function checkFile(url:String, file:ByteArray):Boolean {
+        return true;
+    }
 
-		public function addMosouMoney(back:Function):void
-		{
-			back(100 + Math.random() * 200);
-		}
-	}
+    public function addMosouMoney(back:Function):void {
+        back(100 + Math.random() * 200);
+    }
+}
 }

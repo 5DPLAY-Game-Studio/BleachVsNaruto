@@ -45,7 +45,7 @@ import net.play5d.game.bvn.stage.SelectFighterStage;
 import net.play5d.game.bvn.stage.SettingStage;
 import net.play5d.game.bvn.stage.WinnerStage;
 import net.play5d.game.bvn.stage.WorldMapStage;
-import net.play5d.game.bvn.utils.GameLoger;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.TouchUtils;
 import net.play5d.kyo.stage.KyoStageCtrl;
@@ -93,27 +93,27 @@ public class MainGame {
         function resInitBack():void {
             AssetManager.I.init();
 
-            GameLoger.log('Initializing resources completed!');
+            GameLogger.log('Initializing resources completed!');
 
             _rootSprite = root;
             _stage      = stage;
 
-            GameLoger.log('Initializing game rendering...');
+            GameLogger.log('Initializing game rendering...');
             GameRender.initlize(stage);
 
-            GameLoger.log('Initializing game inputter...');
+            GameLogger.log('Initializing game inputter...');
             GameInputer.initlize(_stage);
 
-            GameLoger.log('Initializing game scroll rectangle...');
+            GameLogger.log('Initializing game scroll rectangle...');
             root.scrollRect = new Rectangle(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
 
-            GameLoger.log('Initializing scene controller...');
+            GameLogger.log('Initializing scene controller...');
             stageCtrl = new KyoStageCtrl(_rootSprite);
 
-            GameLoger.log('Initializing game configuration...');
+            GameLogger.log('Initializing game configuration...');
             GameData.I.config.applyConfig();
 
-            GameLoger.log('Initializing game inputter configuration...');
+            GameLogger.log('Initializing game inputter configuration...');
             GameInputer.updateConfig();
 
             GameData.I.loadSaveData();
@@ -125,7 +125,7 @@ public class MainGame {
     }
 
     public function initalizeLoad(initBack:Function = null, initFail:Function = null):void {
-        GameLoger.log('Initializing game loading...');
+        GameLogger.log('Initializing game loading...');
 
         var loadingState:GameLoadingStage = new GameLoadingStage();
         stageCtrl.goStage(loadingState);
@@ -134,13 +134,13 @@ public class MainGame {
         GameEvent.dispatchEvent(GameEvent.LOAD_GAME_START);
 
         function loadGameBack():void {
-            GameLoger.log('Initializing game data...');
+            GameLogger.log('Initializing game data...');
             GameData.I.initData();
 
-            GameLoger.log('Initializing game configuration...');
+            GameLogger.log('Initializing game configuration...');
             GameData.I.config.applyConfig();
 
-            GameLoger.log('Initializing game inputter configuration...');
+            GameLogger.log('Initializing game inputter configuration...');
             GameInputer.updateConfig();
 
             EffectModel.I.initlize();

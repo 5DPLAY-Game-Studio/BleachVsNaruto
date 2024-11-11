@@ -29,7 +29,7 @@ package net.play5d.game.bvn.map
 	import flash.geom.Rectangle;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.GameQuailty;
+	import net.play5d.game.bvn.GameQuality;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.kyo.utils.KyoUtils;
@@ -83,7 +83,7 @@ package net.play5d.game.bvn.map
 			if(!_view) return;
 
 			if(_view is Bitmap){
-				(_view as Bitmap).smoothing = GameData.I.config.quality == GameQuailty.BEST;
+				(_view as Bitmap).smoothing = GameData.I.config.quality == GameQuality.BEST;
 			}
 
 			if(_view is Sprite){
@@ -91,7 +91,7 @@ package net.play5d.game.bvn.map
 				for(var i:int ; i < sp.numChildren ; i++){
 					var d:DisplayObject = sp.getChildAt(i);
 					if(d is Bitmap){
-						(d as Bitmap).smoothing = GameData.I.config.quality == GameQuailty.BEST;
+						(d as Bitmap).smoothing = GameData.I.config.quality == GameQuality.BEST;
 					}
 				}
 

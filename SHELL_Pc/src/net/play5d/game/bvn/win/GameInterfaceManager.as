@@ -32,7 +32,7 @@ package net.play5d.game.bvn.win
 	import flash.utils.ByteArray;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.GameQuailty;
+	import net.play5d.game.bvn.GameQuality;
 	import net.play5d.game.bvn.MainGame;
 	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.ConfigVO;
@@ -221,10 +221,10 @@ package net.play5d.game.bvn.win
 				},
 				{txt:"QUALITY",cn:"画质等级",
 					options:[
-						{label:'LOW',cn:'低',value:GameQuailty.LOW},
-						{label:'MEDIUM',cn:'中',value:GameQuailty.MEDIUM},
-						{label:'HIGH',cn:'高',value:GameQuailty.HIGH},
-						{label:'BEST',cn:'最高',value:GameQuailty.BEST}
+						{label:'LOW',cn:'低',value:GameQuality.LOW},
+						{label:'MEDIUM',cn:'中',value:GameQuality.MEDIUM},
+						{label:'HIGH',cn:'高',value:GameQuality.HIGH},
+						{label:'BEST',cn:'最高',value:GameQuality.BEST}
 					],
 					optoinKey:'quality'
 				},
@@ -333,27 +333,27 @@ package net.play5d.game.bvn.win
 
 		public function applyConfig(config:ConfigVO):void{
 			switch(config.quality){
-				case GameQuailty.BEST:
+				case GameQuality.BEST:
 					MainGame.I.stage.quality = StageQuality.HIGH_16X16;
 					MainGame.I.setFPS(60);
 					GameConfig.FPS_SHINE_EFFECT = 60;
 					break;
-				case GameQuailty.HIGHER:
+				case GameQuality.HIGHER:
 					MainGame.I.stage.quality = StageQuality.HIGH_8X8;
 					MainGame.I.setFPS(60);
 					GameConfig.FPS_SHINE_EFFECT = 30;
 					break;
-				case GameQuailty.HIGH:
+				case GameQuality.HIGH:
 					MainGame.I.stage.quality = StageQuality.HIGH;
 					MainGame.I.setFPS(60);
 					GameConfig.FPS_SHINE_EFFECT = 30;
 					break;
-				case GameQuailty.MEDIUM:
+				case GameQuality.MEDIUM:
 					MainGame.I.stage.quality = StageQuality.HIGH;
 					MainGame.I.setFPS(45);
 					GameConfig.FPS_SHINE_EFFECT = 15;
 					break;
-				case GameQuailty.LOW:
+				case GameQuality.LOW:
 					MainGame.I.stage.quality = StageQuality.HIGH;
 					MainGame.I.setFPS(30);
 					GameConfig.FPS_SHINE_EFFECT = 10;
