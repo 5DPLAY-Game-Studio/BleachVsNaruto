@@ -28,7 +28,8 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 	import net.play5d.game.bvn.ctrl.SoundCtrl;
 	import net.play5d.game.bvn.data.AssisterModel;
 	import net.play5d.game.bvn.data.BgmVO;
-	import net.play5d.game.bvn.data.FighterModel;
+import net.play5d.game.bvn.data.DefinedClass;
+import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.MapModel;
 	import net.play5d.game.bvn.data.MapVO;
@@ -95,7 +96,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 			if(!domain) return null;
 
 			try{
-				var cls:Class = domain.getDefinition("main_mc") as Class;
+				var cls:Class = domain.getDefinition(DefinedClass.MC_MAIN) as Class;
 				return new cls();
 			}catch(e:Error){
 
@@ -105,7 +106,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 					return obj.mcSlave;
 				}
 
-				throw new Error(Format(GetLangText('debug.error.data.not_find_main_mc'), fileUrl, 'main_mc'));
+				throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', fileUrl, DefinedClass.MC_MAIN));
 			}
 
 			return null;
@@ -118,7 +119,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 			if(!domain) return null;
 
 			try{
-				var cls:Class = domain.getDefinition("main_mc") as Class;
+				var cls:Class = domain.getDefinition(DefinedClass.MC_MAIN) as Class;
 				return new cls();
 			}catch(e:Error){
 
@@ -128,7 +129,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 					return obj.mcSlave;
 				}
 
-				throw new Error(Format(GetLangText('debug.error.data.not_find_main_mc'), fileUrl, 'main_mc'));
+				throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', fileUrl, DefinedClass.MC_MAIN));
 			}
 
 			return null;
@@ -166,7 +167,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 				for each(id in maps){
 					var mv:MapVO = MapModel.I.getMap(id);
 					if(!mv){
-						throw new Error(Format(GetLangText('debug.error.data.get_map_data_fail')));
+						throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.get_map_data_fail'));
 					}
 					mapDatas.push(mv);
 				}
@@ -181,7 +182,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 				for each(id in fighters){
 					var fv:FighterVO = FighterModel.I.getFighter(id);
 					if(!fv){
-						throw new Error(Format(GetLangText('debug.error.data.get_fighter_data_fail')));
+						throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.get_fighter_data_fail'));
 					}
 					fighterDatas.push(fv);
 				}
@@ -195,7 +196,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 				for each(id in assisters){
 					var av:FighterVO = AssisterModel.I.getAssister(id);
 					if(!av){
-						throw new Error(Format(GetLangText('debug.error.data.get_assistant_data_fail')));
+						throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.get_assistant_data_fail'));
 					}
 					assisterDatas.push(av);
 				}
@@ -270,7 +271,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 
 		private function startloadBGM():void{
 			loadBgms(_loadBgmDatas, function():void{
-				TraceLang('debug.trace.data.load_all_finish');
+				TraceLang('debug.trace.data.game_stage_load_ctrl.load_all_finish');
 				if(_loadFinishBack != null){
 					_loadFinishBack();
 					_loadFinishBack = null;
@@ -392,16 +393,16 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 			var itemName:String;
 			switch(_loadingType){
 				case GameStageLoadDefine.TYPE_MAP:
-					itemName = GetLangText('txt.load_process.map');
+					itemName = GetLangText('txt.game_stage_load_ctrl.map');
 					break;
 				case GameStageLoadDefine.TYPE_FIGHTER:
-					itemName = GetLangText('txt.load_process.fighter');
+					itemName = GetLangText('txt.game_stage_load_ctrl.fighter');
 					break;
 				case GameStageLoadDefine.TYPE_ASSISTER:
-					itemName = GetLangText('txt.load_process.assistant');
+					itemName = GetLangText('txt.game_stage_load_ctrl.assistant');
 					break;
 				case GameStageLoadDefine.TYPE_BGM:
-					itemName = GetLangText('txt.load_process.bgm');
+					itemName = GetLangText('txt.game_stage_load_ctrl.bgm');
 					break;
 			}
 
@@ -411,10 +412,10 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 //			msg += " (" + _loadStep + "/" + _loadStepLength + ")";
 			var msg:String;
 			if (_curLoadName) {
-				msg = Format(GetLangText('txt.load_process.loading_has_name'), itemName, _curLoadName, _loadStep, _loadStepLength);
+				msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_has_name'), itemName, _curLoadName, _loadStep, _loadStepLength);
 			}
 			else {
-				msg = Format(GetLangText('txt.load_process.loading_no_name'), itemName, _loadStep, _loadStepLength);
+				msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_no_name'), itemName, _loadStep, _loadStepLength);
 			}
 
 			var val:Number = (_curLoadStep + v) / _curLoadStepLength;

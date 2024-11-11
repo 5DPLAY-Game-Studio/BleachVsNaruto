@@ -277,7 +277,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 				}
 
 			}else{
-				Debugger.log(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.addGameSprite.log_team_is_null.txt'));
+				Debugger.log(GetLang('debug.log.data.game_ctrl.team_null', 'team'));
 			}
 		}
 
@@ -360,7 +360,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 			var map:MapMain = GameRunFactory.createMapByData(gameRunData.map);
 
 			if(!p1 || !p2 || !map){
-				throw new Error(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.buildGame.error_build_game_fail.txt'));
+				throw new Error(GetLang('debug.error.data.game_ctrl.build_game_fail'));
 			}
 
 			if(p1.data.id == p2.data.id){
@@ -491,10 +491,10 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 			if(GameMode.isAcrade()){
 				if(gameRunData.lastWinnerTeam.id == 1){
 					if(MessionModel.I.missionAllComplete()){
-						trace(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.fightFinish.trace_cleared.txt'));
+						TraceLang('debug.trace.data.game_ctrl.cleared');
 						MainGame.I.goCongratulations();
 					}else{
-						trace(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.fightFinish.trace_next.txt'));
+						TraceLang('debug.trace.data.game_ctrl.next');
 						GameData.I.winnerId = gameRunData.p1FighterGroup.currentFighter.data.id;
 						MainGame.I.goWinner();
 					}
@@ -502,7 +502,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 				}else{
 					//跳转是否继续
-					trace(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.fightFinish.trace_continue.txt'));
+					TraceLang('debug.trace.data.game_ctrl.continue');
 					gameRunData.continueLoser = gameRunData.p1FighterGroup.currentFighter;
 					MainGame.I.goContinue();
 				}
@@ -510,7 +510,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 			if(GameMode.isVsCPU() || GameMode.isVsPeople()){
 				//返回选人
-				trace(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.fightFinish.trace_back_select.txt'));
+				TraceLang('debug.trace.data.game_ctrl.back_select');
 				GameEvent.dispatchEvent(GameEvent.GAME_END);
 				MainGame.I.goSelect();
 			}
@@ -693,7 +693,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 		}
 
 		private function fightTimeover():void{
-			trace(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.fightTimeover.trace_time_over.txt'));
+			TraceLang('debug.trace.data.game_ctrl.time_over');
 
 			actionEnable = false;
 
@@ -733,7 +733,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 		 * 下一场战斗
 		 */
 		private function runNext():void{
-			trace(GetLangText('debug.package.ctrl.game_ctrls.GameCtrl.runNext.trace_time_over.txt') + GameMode.currentMode);
+			TraceLang('debug.trace.data.game_ctrl.current_mode',  GameMode.currentMode);
 
 			gameRunData.nextRound();
 

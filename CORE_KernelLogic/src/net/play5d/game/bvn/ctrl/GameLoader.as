@@ -55,8 +55,8 @@ package net.play5d.game.bvn.ctrl
 
 			var fv:FighterVO = FighterModel.I.getFighter(fighterId,true);
 			if(!fv){
-				trace(GetLangText('debug.package.ctrl.GameLoader.loadAndCacheFighter.fighter_id_error.txt'),fighterId);
-				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadAndCacheFighter.fighter_id_error.txt'));
+				TraceLang('debug.trace.data.game_loader.fighter_id_error', fighterId);
+				if(fail != null) fail(GetLang('txt.game_loader.fighter_id_error'));
 				return;
 			}
 
@@ -74,7 +74,7 @@ package net.play5d.game.bvn.ctrl
 					var mainMcClass:Object = domain.getDefinition("main_mc");
 					cachevo.MainClass = mainMcClass as Class;
 				}catch(e:Error){
-					trace(GetLangText('debug.package.ctrl.GameLoader.loadAndCacheFighter.loadComplete.fighter_id_error.txt'), e);
+					TraceLang('debug.trace.data.game_loader.fighter_load_error', e);
 				}
 
 				if(back != null) back();
@@ -131,8 +131,8 @@ package net.play5d.game.bvn.ctrl
 		public static function loadAssister(fighterId:String , back:Function , fail:Function = null , process:Function = null ,  customBackParam:Object = null):void{
 			var fv:FighterVO = AssisterModel.I.getAssister(fighterId,true);
 			if(!fv){
-				trace(GetLangText('debug.package.ctrl.GameLoader.loadAssister.assister_id_error.txt'),fighterId);
-				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadAssister.assister_id_error.txt'));
+				TraceLang('debug.trace.data.game_loader.assister_id_error', fighterId);
+				if(fail != null) fail(GetLang('txt.game_loader.assister_id_error'));
 				return;
 			}
 
@@ -141,7 +141,6 @@ package net.play5d.game.bvn.ctrl
 			function loadComplete(loader:Loader):void{
 				var fighter:Assister = new Assister(loader.content as MovieClip);
 				fighter.data = fv;
-//				fighter.setSwfVolume(GameData.I.config.soundVolume);
 				if(back != null){
 					if(customBackParam){
 						back(fighter,customBackParam);
@@ -157,8 +156,8 @@ package net.play5d.game.bvn.ctrl
 		public static function loadMap(mapId:String , back:Function , fail:Function = null , process:Function = null , customBackParam:Object = null):void{
 			var mv:MapVO = MapModel.I.getMap(mapId);
 			if(!mv){
-				trace(GetLangText('debug.package.ctrl.GameLoader.loadMap.map_id_error.txt'),mapId);
-				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadMap.map_id_error.txt'));
+				TraceLang('debug.trace.data.game_loader.map_id_error', mapId);
+				if(fail != null) fail(GetLang('txt.game_loader.map_id_error'));
 				return;
 			}
 
@@ -192,7 +191,7 @@ package net.play5d.game.bvn.ctrl
 				try{
 					l.unloadAndStop(true);
 				}catch(e:Error){
-					trace(GetLangText('debug.package.ctrl.GameLoader.dispose.unload_cache_error.txt'),e);
+					TraceLang('debug.trace.data.game_loader.unload_cache_error', e);
 					l.unload();
 				}
 			}
@@ -212,8 +211,8 @@ package net.play5d.game.bvn.ctrl
 			}
 
 			function loadIOError():void{
-				Debugger.log(GetLangText('debug.package.ctrl.GameLoader.loadSWF.loadIOError.load_swf_error.txt'),url);
-				if(fail != null) fail(GetLangText('package.ctrl.GameLoader.loadSWF.loadIOError.load_swf_error.txt'));
+				Debugger.log(GetLang('debug.log.data.game_loader.load_swf_error'), url);
+				if(fail != null) fail(GetLang('txt.game_loader.load_swf_error'));
 			}
 
 		}
