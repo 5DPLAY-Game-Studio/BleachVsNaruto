@@ -28,7 +28,8 @@ public class Box extends Sprite {
                 orgin ? -orgin.x : 0,
                 orgin ? -orgin.y : 0,
                 width,
-                height);
+                height
+        );
         graphics.endFill();
     }
 }
