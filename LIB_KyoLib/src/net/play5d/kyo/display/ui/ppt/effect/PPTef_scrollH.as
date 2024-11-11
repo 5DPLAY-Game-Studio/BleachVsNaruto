@@ -24,6 +24,7 @@ public class PPTef_scrollH extends BasePPTEffect {
         super();
         this.direct = direct;
     }
+
     public var direct:int = 1;
     private var _tween:TweenLite;
 
