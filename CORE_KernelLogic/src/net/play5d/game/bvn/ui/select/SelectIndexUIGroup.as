@@ -180,6 +180,10 @@ package net.play5d.game.bvn.ui.select
 		}
 
 		private function selectFighterTouchHandler(e:TouchEvent):void{
+			if (!_arrow) {
+				return;
+			}
+
 			var target:SelectedFighterUI = e.currentTarget as SelectedFighterUI;
 			var index:int = _fighters.indexOf(target);
 			if(index == -1) return;
@@ -189,6 +193,10 @@ package net.play5d.game.bvn.ui.select
 		}
 
 		private function selectFighterMouseHandler(e:MouseEvent):void{
+			if (!_arrow) {
+				return;
+			}
+
 			var target:SelectedFighterUI = e.currentTarget as SelectedFighterUI;
 			var index:int = _fighters.indexOf(target);
 			if(index == -1) return;
@@ -226,6 +234,10 @@ package net.play5d.game.bvn.ui.select
 
 			_selectIndex = index;
 			_selectItem = _fighters[index];
+
+			if (!_arrow) {
+				return;
+			}
 			_arrow.y = _selectItem.trueY + _arrowOffset.y;
 		}
 
