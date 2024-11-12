@@ -29,6 +29,8 @@ package net.play5d.game.bvn.fighter.ctrler.ai
 
 	public class FighterAILogicBase
 	{
+		include "_INCLUDE_.as";
+
 		protected var AILevel:int;
 		protected var _fighter:FighterMain;
 		protected var _fighterAction:FighterAction;
