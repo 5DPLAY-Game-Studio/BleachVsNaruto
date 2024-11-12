@@ -31,6 +31,8 @@ package net.play5d.game.bvn.data.mosou.player
 
 	public class MosouPlayerData implements ISaveData
 	{
+		include "_INCLUDE_.as";
+
 		public var userId:String;
 		public var userName:String;
 

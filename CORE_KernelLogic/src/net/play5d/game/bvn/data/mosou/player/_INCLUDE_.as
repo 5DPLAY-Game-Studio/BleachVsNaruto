@@ -16,36 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player
-{
-	import net.play5d.game.bvn.data.ISaveData;
-
-	public class MosouMissionPlayerVO implements ISaveData
-	{
-		include "_INCLUDE_.as";
-
-		public var id:String;
-//		public var isPassed:Boolean = false;
-		public var stars:int = 0;
-
-		public function MosouMissionPlayerVO()
-		{
-		}
-
-		public function toSaveObj():Object
-		{
-			var o:Object = {};
-			o.id = id;
-//			o.isPassed = isPassed;
-			o.stars = stars;
-			return o;
-		}
-
-		public function readSaveObj(o:Object):void
-		{
-			id = o.id;
-//			isPassed = o.isPassed;
-			stars = o.stars;
-		}
-	}
-}
+include "../../../../../../../../../shared/as/_Include_.as"

@@ -25,6 +25,7 @@ package net.play5d.game.bvn.data.mosou.player
 
 	public class MosouFighterVO implements ISaveData
 	{
+		include "_INCLUDE_.as";
 
 		public static var LEVEL_MAX:WrapInteger = new WrapInteger(80);
 
