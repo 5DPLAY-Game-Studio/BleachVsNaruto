@@ -372,19 +372,23 @@ package net.play5d.game.bvn.win
 			var sp:Sprite = new Sprite();
 
 //			creditsInfo += '安卓手机版 : <a href="' + URL.markURL('https://www.3839.com/a/103303.htm') + '" target="_blank">安卓手机版本下载</a>'+"<br/>";
-			creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') + '" target="_blank">www.1212321.com</a>'+"&nbsp;&nbsp; ";
-			creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.5dplay.net/') + '" target="_blank">bbs.5dplay.net</a>'+"<br/>";
-
-			creditsInfo += '5dplay.net 已转向 1212321.com，并以新的面孔出现，请知晓。' + "<br/>";
-			creditsInfo += '游戏做到今天非常不易，期待您的捐赠（金额不限），谢谢！' + "<br/>";
+//			creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') + '" target="_blank">www.1212321.com</a>'+"&nbsp;&nbsp; ";
+//			creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.5dplay.net/') + '" target="_blank">bbs.5dplay.net</a>'+"<br/>";
+//
+//			creditsInfo += '5dplay.net 已转向 1212321.com，并以新的面孔出现，请知晓。' + "<br/>";
+//			creditsInfo += '游戏做到今天非常不易，期待您的捐赠（金额不限），谢谢！' + "<br/>";
+			creditsInfo += "<br/>" +
+						   "官网：<a href=\"http://www.1212321.com/\" target=\"_blank\">www.1212321.com</a>    " +
+						   "论坛：<a href=\"http://bbs.1212321.com/\" target=\"_blank\">bbs.1212321.com</a><br/>" +
+						   "邮箱：5dplay@qun.mail.163.com （人才招募中）<br/>";
 
 			var txt:TextField = new TextField();
 
 			var tf:TextFormat = new TextFormat();
 			tf.font = "微软雅黑";
-			tf.size = 20;
+			tf.size = 17;
 			tf.color = 0xffff00;
-			tf.leading = 15;
+			tf.leading = 10;
 
 			txt.defaultTextFormat = tf;
 
@@ -392,8 +396,8 @@ package net.play5d.game.bvn.win
 			txt.htmlText = creditsInfo;
 			txt.autoSize = TextFieldAutoSize.LEFT;
 
-			txt.x = 50;
-			txt.y = 30;
+			txt.x = 30;
+			txt.y = 25;
 
 			sp.addChild(txt);
 
@@ -419,6 +423,7 @@ package net.play5d.game.bvn.win
 			weixin.x = alipay.x + 170;
 			weixin.width = 150;
 			weixin.height = 194;
+			weixin.alpha = 0.2;
 			weixin.addEventListener(MouseEvent.MOUSE_OVER , payOverHandler);
 			sp.addChild(weixin);
 

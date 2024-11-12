@@ -114,11 +114,23 @@ package net.play5d.game.bvn.stage
 
 		private function getCreditsText():String{
 
-			var msg:String = "设计、美术、程序：剑jian" + "<br/>" +
-				"人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +
-				"         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
-				"策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
-				"卓越贡献：社长、渺渺" + "<br/>";
+//			var msg:String = "设计、美术、程序：剑jian" + "<br/>" +
+//				"人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +
+//				"         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
+//				"策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
+//				"卓越贡献：社长、渺渺" + "<br/>";
+			var msg:String =
+						"原作：<a href='event:myEvent'>剑jian</a><br>" +
+						"企划：数字化流天、L、社长、Diazynez<br>" +
+						"程序：Nagisa、Diazynez、BearBrine、パチュリー<br>" +
+						"美术：数字化流天、L、V.临界幻想、小数、Azreal、影、赤炎、小海、主流、曦城子、酸菜鱼、<br>          " +
+						"卡布托、Future、Nagisa、惊鸿、杯梓、星空幻梦、花里、Just...<br>" +
+						"测试：ゞ影孞&僮畵ヾ、成环、cat232181、无宇逆风、叽咕村夫、默默、小皮、山之叟、欲上天、<br>          " +
+						"LOTTU、肥宅正品、ppx、七米、星空幻梦、逝时_流光...<br>" +
+						"贡献：灰原·银<br>" +
+						"对接：Lemon_kenbai、黑羽、诺斯给给...<br>" +
+						"运营：多情丶回忆、FZCL石头门、纯白暮弦、风之旅人、寒窗听雨、黑猫、老秦、凌辰夜风、<br>          " +
+						"萌新、某个热爱理科的死宅、天双、御礼...<br>";
 			return msg;
 		}
 
@@ -129,9 +141,9 @@ package net.play5d.game.bvn.stage
 
 			var tf:TextFormat = new TextFormat();
 			tf.font = "黑体";
-			tf.size = 20;
+			tf.size = 17;
 			tf.color = 0xffff00;
-			tf.leading = 15;
+			tf.leading = 10;
 
 			txt.defaultTextFormat = tf;
 
@@ -139,8 +151,8 @@ package net.play5d.game.bvn.stage
 			txt.htmlText = msg;
 			txt.autoSize = TextFieldAutoSize.LEFT;
 
-			txt.x = 50;
-			txt.y = 30;
+			txt.x = 30;
+			txt.y = 25;
 
 //			txt.mouseEnabled = false;
 
