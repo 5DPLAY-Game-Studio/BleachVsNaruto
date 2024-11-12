@@ -16,15 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn {
-public class GameQuality {
-    include "_INCLUDE_.as";
+/**
+ * 获取属性
+ *
+ * @param propName 属性名
+ * @return 属性值
+ */
+override public function getProperties(propName:String):* {
+    var prop:* = this[propName];
+    if (prop != null) {
+        return prop;
+    }
 
-    public static const LOW:String    = 'low';
-    public static const MEDIUM:String = 'medium';
-    public static const HIGH:String   = 'high';
-    public static const HIGHER:String = 'higher';
-    public static const BEST:String   = 'best';
-
-}
+    return null;
 }

@@ -16,15 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn {
-public class GameQuality {
-    include "_INCLUDE_.as";
-
-    public static const LOW:String    = 'low';
-    public static const MEDIUM:String = 'medium';
-    public static const HIGH:String   = 'high';
-    public static const HIGHER:String = 'higher';
-    public static const BEST:String   = 'best';
-
-}
-}
+include "../../../../../../shared/as/_Include_Override_.as"
