@@ -112,33 +112,33 @@ package net.play5d.game.bvn.data
 //			}
 
 			function loadFighterFail():void{
-				Debugger.log("读取人物数据出错");
-				if(fail != null) fail("读取人物数据出错");
+				Debugger.log(GetLang('debug.log.data.game_data.load_fighter_fail'));
+				if(fail != null) fail(GetLang('debug.log.data.game_data.load_fighter_fail'));
 			}
 
 			function loadAssisterFail():void{
-				Debugger.log("读取辅助角色数据出错");
-				if(fail != null) fail("读取辅助角色数据出错");
+				Debugger.log(GetLang('debug.log.data.game_data.load_assistant_fail'));
+				if(fail != null) fail(GetLang('debug.log.data.game_data.load_assistant_fail'));
 			}
 
 			function loadSelectFail():void{
-				Debugger.log("读取选人场景数据出错");
-				if(fail != null) fail("读取选人场景数据出错");
+				Debugger.log(GetLang('debug.log.data.game_data.load_select_fail'));
+				if(fail != null) fail(GetLang('debug.log.data.game_data.load_select_fail'));
 			}
 
 			function loadMapFail():void{
-				Debugger.log("读取地图场景数据出错");
-				if(fail != null) fail("读取地图场景数据出错");
+				Debugger.log(GetLang('debug.log.data.game_data.load_map_fail'));
+				if(fail != null) fail(GetLang('debug.log.data.game_data.load_map_fail'));
 			}
 
 			function loadMissionFail():void{
-				Debugger.log("读取关卡数据出错");
-				if(fail != null) fail("读取关卡数据出错");
+				Debugger.log(GetLang('debug.log.data.game_data.load_mission_fail'));
+				if(fail != null) fail(GetLang('debug.log.data.game_data.load_mission_fail'));
 			}
 
 			function loadMosouFail():void{
-				Debugger.log("读取无双数据出错");
-				if(fail != null) fail("读取无双数据出错");
+				Debugger.log(GetLang('debug.log.data.game_data.load_musou_fail'));
+				if(fail != null) fail(GetLang('debug.log.data.game_data.load_musou_fail'));
 			}
 
 		}
@@ -163,7 +163,7 @@ package net.play5d.game.bvn.data
 			var o:Object = GameInterface.instance.loadGame();
 			if(!o || o.id != SAVE_ID) return;
 
-			trace('loadSaveData', JSON.stringify(o));
+//			trace('loadSaveData', JSON.stringify(o));
 
 			if(o.config) config.readSaveObj(o.config);
 
@@ -176,7 +176,7 @@ package net.play5d.game.bvn.data
 			AssetManager.I.loadXML(url, function(data:XML):void{
 				setSelectData(data);
 			}, function():void{
-				trace('loadSelect error!');
+				TraceLang('debug.trace.data.game_data.load_select_error');
 			});
 		}
 
@@ -185,7 +185,7 @@ package net.play5d.game.bvn.data
 				var data:XML = new XML(v);
 				setSelectData(data);
 			}, function():void{
-				trace('loadSelect error!');
+				TraceLang('debug.trace.data.game_data.load_select_error');
 			});
 		}
 
@@ -221,7 +221,7 @@ package net.play5d.game.bvn.data
 				var msg:String = "";
 				if(missFighters.length > 0) msg += "fighter : " + missFighters.join(" , ") + " ; ";
 				if(missAssisters.length > 0) msg += "assister : " + missAssisters.join(" , ") + " ; ";
-				throw new Error("select.xml验证失败！ [" + msg + "]");
+				throw new Error(GetLang('debug.error.data.game_data.verify_select_fail', 'select.xml', msg));
 			}
 		}
 
@@ -262,7 +262,7 @@ package net.play5d.game.bvn.data
 				if(missFighters.length > 0) msg += "fighter : " + missFighters.join(" , ") + " ; ";
 				if(missAssisters.length > 0) msg += "assister : " + missAssisters.join(" , ") + " ; ";
 				if(missMaps.length > 0) msg += "map : " + missMaps.join(" , ") + " ; ";
-				throw new Error("mission.xml验证失败！ [" + msg + "]");
+				throw new Error(GetLang('debug.error.data.game_data.verify_mission_fail', 'mission.xml', msg));
 			}
 		}
 
@@ -282,14 +282,14 @@ package net.play5d.game.bvn.data
 
 						var map:MapVO = MapModel.I.getMap(mv.map);
 						if(map == null){
-							throw new Error("mosou[" + mosouId + "]验证失败！未找到map: " + mv.map);
+							throw new Error(GetLang('debug.error.data.game_data.verify_musou_fail', mosouId, 'map', mv.map));
 						}
 
 						var ememies:Array = mv.getAllEnemieIds();
 						for each(var f:String in ememies){
 							var fighter:FighterVO = FighterModel.I.getFighter(f);
 							if(fighter == null){
-								throw new Error("mosou[" + mosouId + "]验证失败！未找到fighter: " + f);
+								throw new Error(GetLang('debug.error.data.game_data.verify_musou_fail', mosouId, 'fighter', f));
 							}
 						}
 
@@ -310,7 +310,7 @@ package net.play5d.game.bvn.data
 			if(missFighters.length > 0){
 				var msg:String = "";
 				if(missFighters.length > 0) msg += "fighter : " + missFighters.join(" , ") + " ; ";
-				throw new Error("FighterModel 验证失败！ [" + msg + "]");
+				throw new Error(GetLang('debug.error.data.game_data.verify_fighter_model_fail', msg));
 			}
 
 		}

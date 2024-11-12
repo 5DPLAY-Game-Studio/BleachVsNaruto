@@ -86,15 +86,12 @@
         }
       }
     },
-    "//": "------------------ Package ------------------",
     "ctrl": {
       "//": "------------------ Class ------------------",
       "GameLoader": {
         "loadAndCacheFighter": {
         },
         "loadAssister": {
-        },
-        "loadMap": {
         }
       },
       "//": "------------------ Class ------------------"
@@ -153,15 +150,12 @@
             },
             "buildGame": {
               "error_build_game_fail": {
-                "txt": ""
               }
             },
             "fightFinish": {
               
             },
             "fightTimeover": {
-              "trace_time_over": {
-              }
             }
           }
         }
@@ -221,6 +215,9 @@
         },
         "fighter_vo": {
           "undefined_bgm": "FighterVO.initByXML :: ID  为 {} 的角色值对象未定义背景音乐！"
+        },
+        "game_data": {
+          "load_select_error": "加载 选择数据 出错！"
         }
       }
     },
@@ -235,6 +232,14 @@
         },
         "game_main_logic_ctrler": {
           "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: {}"
+        },
+        "game_data": {
+          "load_fighter_fail"  : "加载 角色数据 失败！",
+          "load_assistant_fail": "加载 辅助数据 失败！",
+          "load_select_fail"   : "加载 选择数据 失败！",
+          "load_map_fail"      : "加载 地图数据 失败！",
+          "load_mission_fail"  : "加载 关卡数据 失败！",
+          "load_musou_fail"    : "加载 无双数据 失败！"
         }
       }
     },
@@ -252,6 +257,12 @@
         },
         "musou_ctrl": {
           "build_game_fail": "构建游戏失败！"
+        },
+        "game_data": {
+          "verify_select_fail"       : "校验 {} 失败！ 失败信息：[{}]",
+          "verify_mission_fail"      : "校验 {} 失败！ 失败信息：[{}]",
+          "verify_musou_fail"        : "无双数据 [{}] 校验失败！ 未找到相关 {} 数据：[{}]",
+          "verify_fighter_model_fail": "FighterModel 数据校验失败！ 失败信息：[{}]"
         }
       }
     }
