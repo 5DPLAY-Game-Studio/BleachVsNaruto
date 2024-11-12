@@ -88,10 +88,7 @@
     },
     "ctrl": {
       "GameLoader": {
-        "loadAndCacheFighter": {
-        }
-      },
-      "//": "------------------ Class ------------------"
+      }
     },
     "//": "------------------ Package ------------------"
   },
@@ -114,7 +111,6 @@
         "GameLogic": {
           "isInAir": {
             "map_null": {
-              "txt": "地图为空！"
             }
           },
           "isTouchBottomFloor": {
@@ -219,6 +215,9 @@
           "p1_data"         : "玩家1 数据： {}",
           "p2_data"         : "玩家2 数据： {}",
           "mission_all_over": "所有关卡已完成！"
+        },
+        "musou_fighter_model": {
+          "repeat_add": "MusouFighterModel.addFighter:: 角色重复添加： {}"
         }
       }
     },

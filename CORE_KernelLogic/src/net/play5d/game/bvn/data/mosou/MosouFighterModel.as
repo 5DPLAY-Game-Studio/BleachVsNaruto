@@ -123,7 +123,7 @@ package net.play5d.game.bvn.data.mosou
 
 		public function addFighter(id:String, price:int):void{
 			if(containsFighter(id)){
-				trace("MosouFighterModel.addFighter 重复：" + id);
+				TraceLang('debug.trace.data.musou_fighter_model.repeat_add', id);
 				return;
 			}
 			fighters.push(new MosouFighterSellVO(id, price));
