@@ -16,5 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include 'GetProperties.as';
-include 'SetProperties.as';
+/**
+ * 设置属性
+ *
+ * @param propName 属性名
+ * @param value 属性值
+ */
+override public function setProperties(propName:String, value:*):void {
+    try {
+        if (this[propName]) {
+            this[propName] = value;
+        }
+    }
+    catch (e:Error) {
+        ThrowError(e, 'Invalid property value!')
+    }
+}

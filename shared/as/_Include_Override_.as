@@ -17,3 +17,4 @@
  */
 
 include 'GetProperties_Override.as';
+include 'SetProperties_Override.as';
