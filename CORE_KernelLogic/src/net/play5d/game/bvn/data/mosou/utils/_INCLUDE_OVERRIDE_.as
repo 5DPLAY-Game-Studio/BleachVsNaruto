@@ -16,20 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.utils
-{
-	import net.play5d.game.bvn.data.FighterModel;
-	import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
-
-	public class MosouFighterFactory
-	{
-		include "_INCLUDE_.as";
-
-		public static function create(id:String):MosouFighterVO{
-			var mv:MosouFighterVO = new MosouFighterVO();
-			mv.id = id;
-			return mv;
-		}
-
-	}
-}
+include "../../../../../../../../../shared/as/_Include_Override_.as"
