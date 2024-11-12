@@ -22,6 +22,8 @@ package net.play5d.game.bvn.events
 
 	public class SetBtnEvent extends Event
 	{
+		include "_INCLUDE_.as";
+
 		public static const SELECT:String = 'SELECT';
 		public static const OPTION_CHANGE:String = 'OPTION_CHANGE';
 		public static const APPLY_SET:String = 'APPLY_SET';

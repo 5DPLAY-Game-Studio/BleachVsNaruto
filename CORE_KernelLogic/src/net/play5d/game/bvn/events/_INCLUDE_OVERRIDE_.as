@@ -16,19 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.events
-{
-	import flash.events.Event;
-
-	public class ParamEvent extends Event
-	{
-		include "_INCLUDE_.as";
-
-		public var param:*;
-		public function ParamEvent(type:String,param, bubbles:Boolean=false, cancelable:Boolean=false)
-		{
-			this.param = param;
-			super(type, bubbles, cancelable);
-		}
-	}
-}
+include "../../../../../../../shared/as/_Include_Override_.as"

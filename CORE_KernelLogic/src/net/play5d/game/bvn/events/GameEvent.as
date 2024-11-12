@@ -23,6 +23,8 @@ package net.play5d.game.bvn.events
 
 	public class GameEvent extends Event
 	{
+		include "_INCLUDE_.as";
+
 		public static const SCORE_UPDATE:String = 'SCORE_UPDATE';
 
 		public static const PAUSE_GAME:String = 'PAUSE_GAME';
