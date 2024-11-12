@@ -36,6 +36,8 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	 */
 	public class GameMainLogicCtrler
 	{
+		include "_INCLUDE_.as";
+
 		public var renderHit:Boolean = true;
 
 		private var _gameState:GameStage;

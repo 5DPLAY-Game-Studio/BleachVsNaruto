@@ -32,9 +32,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 	public class FighterEventCtrl extends BaseFighterEventCtrl
 	{
-		public function FighterEventCtrl()
-		{
-		}
+		include "_INCLUDE_OVERRIDE_.as";
 
 		public override function initlize():void{
 			super.initlize();
