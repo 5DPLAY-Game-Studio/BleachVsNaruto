@@ -23,6 +23,8 @@ package net.play5d.game.bvn.fighter.events
 
 	public class FighterEvent extends Event
 	{
+		include "_INCLUDE_.as";
+
 		public static const BIRTH:String = "BIRTH"; //出生
 
 		public static const FIRE_BULLET:String = "FIRE_BULLET"; //发射子弹
