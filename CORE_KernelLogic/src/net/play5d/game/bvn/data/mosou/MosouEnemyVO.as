@@ -22,6 +22,7 @@ package net.play5d.game.bvn.data.mosou
 
 	public class MosouEnemyVO
 	{
+		include "_INCLUDE_.as";
 
 		public var fighterID:String;
 		public var maxHp:int = 0;

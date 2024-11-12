@@ -20,6 +20,7 @@ package net.play5d.game.bvn.data.mosou
 {
 	public class MosouWaveRepeatVO
 	{
+		include "_INCLUDE_.as";
 
 		/**
 		 * 类型：
