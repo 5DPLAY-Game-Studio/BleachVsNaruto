@@ -34,7 +34,7 @@ package net.play5d.game.bvn.fighter
 
 	public class FighterAttacker extends BaseGameSprite
 	{
-		include "_INCLUDE_.as";
+		include "_INCLUDE_OVERRIDE_.as";
 
 		public var onRemove:Function;
 		public var isAttacking:Boolean;

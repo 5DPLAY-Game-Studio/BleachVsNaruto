@@ -16,14 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter
-{
-	public class FighterDefenseType
-	{
-		include "_INCLUDE_.as";
-
-		public static const SWOARD:int = 0;
-		public static const HAND:int = 1;
-
-	}
-}
+include "../../../../../../../shared/as/_Include_Override_.as"
