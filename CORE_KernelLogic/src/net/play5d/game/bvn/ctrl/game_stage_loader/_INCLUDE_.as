@@ -16,15 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.game_stage_loader
-{
-	public class GameStageLoadDefine
-	{
-		include "_INCLUDE_.as";
-
-		public static const TYPE_MAP:int = 0;
-		public static const TYPE_FIGHTER:int = 1;
-		public static const TYPE_ASSISTER:int = 2;
-		public static const TYPE_BGM:int = 3;
-	}
-}
+include "../../../../../../../../shared/as/_Include_.as"
