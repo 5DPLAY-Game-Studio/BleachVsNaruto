@@ -87,11 +87,8 @@
       }
     },
     "ctrl": {
-      "//": "------------------ Class ------------------",
       "GameLoader": {
         "loadAndCacheFighter": {
-        },
-        "loadAssister": {
         }
       },
       "//": "------------------ Class ------------------"
@@ -122,7 +119,6 @@
           },
           "isTouchBottomFloor": {
             "map_null": {
-              "txt": "地图为空！"
             }
           },
           "isOutRange": {
@@ -218,6 +214,11 @@
         },
         "game_data": {
           "load_select_error": "加载 选择数据 出错！"
+        },
+        "mission_model": {
+          "p1_data"         : "玩家1 数据： {}",
+          "p2_data"         : "玩家2 数据： {}",
+          "mission_all_over": "所有关卡已完成！"
         }
       }
     },
