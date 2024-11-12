@@ -34,6 +34,8 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 	public class MosouLogic
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:MosouLogic;
 
 		public static function get I():MosouLogic{
