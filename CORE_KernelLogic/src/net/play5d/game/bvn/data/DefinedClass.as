@@ -22,6 +22,7 @@ package net.play5d.game.bvn.data {
  * 已定义的类链接名称
  */
 public class DefinedClass {
+    include "_INCLUDE_.as";
 
     public static const MC_MAIN:String = 'main_mc';
 

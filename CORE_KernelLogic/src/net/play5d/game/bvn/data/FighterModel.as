@@ -20,6 +20,7 @@ package net.play5d.game.bvn.data
 {
 	public class FighterModel
 	{
+		include "_INCLUDE_.as";
 
 		private static var _i:FighterModel;
 

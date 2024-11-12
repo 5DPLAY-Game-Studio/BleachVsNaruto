@@ -33,6 +33,8 @@ package net.play5d.game.bvn.data
 
 	public class ConfigVO implements ISaveData
 	{
+		include "_INCLUDE_.as";
+
 		public const key_menu:KeyConfigVO = new KeyConfigVO(0);
 		public const key_p1:KeyConfigVO = new KeyConfigVO(1);
 		public const key_p2:KeyConfigVO = new KeyConfigVO(2);

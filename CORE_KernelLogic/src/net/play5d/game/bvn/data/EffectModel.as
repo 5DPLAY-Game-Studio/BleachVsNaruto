@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data
 
 	public class EffectModel
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:EffectModel;
 
 		public static function get I():EffectModel{

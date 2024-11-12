@@ -33,6 +33,8 @@ package net.play5d.game.bvn.data
 
 	public class EffectVO
 	{
+		include "_INCLUDE_.as";
+
 		public var className:String;
 		public var shine:Object;//闪光{color,alpha}
 		public var shake:Object;//震动{x,y|pow,time[毫秒，可选]} , 当设置pow时，x,y无效，根据hitvo.hitx,hity进行震动

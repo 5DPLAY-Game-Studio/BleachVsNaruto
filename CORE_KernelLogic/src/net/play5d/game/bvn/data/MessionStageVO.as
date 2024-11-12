@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data
 
 	public class MessionStageVO
 	{
+		include "_INCLUDE_.as";
+
 		public var fighters:Array;
 		public var assister:String;
 		public var map:String;

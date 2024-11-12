@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data
 
 	public class SelectStageConfigVO
 	{
+		include "_INCLUDE_.as";
+
 		public var x:Number = 0;
 		public var y:Number = 0;
 		public var width:Number = 800;

@@ -21,9 +21,8 @@ package net.play5d.game.bvn.data
 	//攻击类型 只能添加，不能修改对应的数字
 	public class HitType
 	{
-		public function HitType()
-		{
-		}
+		include "_INCLUDE_.as";
+
 		public static const KAN:int = 1;
 		public static const KAN_HEAVY:int = 6;
 

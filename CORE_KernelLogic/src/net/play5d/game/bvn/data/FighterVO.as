@@ -23,6 +23,7 @@ package net.play5d.game.bvn.data
 
 	public class FighterVO
 	{
+		include "_INCLUDE_.as";
 
 		public var id:String;
 		public var name:String;
