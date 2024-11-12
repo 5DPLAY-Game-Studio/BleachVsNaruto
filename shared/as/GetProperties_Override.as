@@ -23,9 +23,13 @@
  * @return 属性值
  */
 override public function getProperties(propName:String):* {
-    var prop:* = this[propName];
-    if (prop != null) {
-        return prop;
+    try {
+        if (this[propName]) {
+            return this[propName];
+        }
+    }
+    catch (e:Error) {
+        ThrowError(e, 'Invalid property value!')
     }
 
     return null;
