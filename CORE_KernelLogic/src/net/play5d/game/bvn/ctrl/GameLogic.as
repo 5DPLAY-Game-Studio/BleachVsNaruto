@@ -48,9 +48,7 @@ package net.play5d.game.bvn.ctrl
 
 	public class GameLogic
 	{
-		public function GameLogic()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		private static var _map:MapMain;
 		private static var _camera:GameCamera;

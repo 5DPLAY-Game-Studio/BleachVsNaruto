@@ -30,6 +30,8 @@ import net.play5d.kyo.loader.KyoSoundLoader;
 
 	public class SoundCtrl
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:SoundCtrl;
 
 		public static function get I():SoundCtrl{

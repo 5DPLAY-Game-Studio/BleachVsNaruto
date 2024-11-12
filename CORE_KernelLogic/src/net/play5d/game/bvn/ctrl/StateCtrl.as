@@ -26,6 +26,7 @@ package net.play5d.game.bvn.ctrl
 
 	public class StateCtrl
 	{
+		include "_INCLUDE_.as";
 
 		private static var _i:StateCtrl;
 

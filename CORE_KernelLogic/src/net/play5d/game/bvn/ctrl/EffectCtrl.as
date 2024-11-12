@@ -54,6 +54,7 @@ package net.play5d.game.bvn.ctrl
 
 	public class EffectCtrl
 	{
+		include "_INCLUDE_.as";
 
 		public static var EFFECT_SMOOTHING:Boolean = true; //特效抗锯齿
 		public static var SHADOW_ENABLED:Boolean = true; //残影开关
