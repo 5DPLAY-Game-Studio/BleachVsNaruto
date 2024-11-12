@@ -87,10 +87,7 @@
       }
     },
     "ctrl": {
-      "GameLoader": {
-      }
-    },
-    "//": "------------------ Package ------------------"
+    }
   },
   "//": "------------------ Global ------------------",
   "debug": {
@@ -146,8 +143,6 @@
             },
             "fightFinish": {
               
-            },
-            "fightTimeover": {
             }
           }
         }
@@ -263,6 +258,9 @@
           "verify_mission_fail"      : "校验 {} 失败！ 失败信息：[{}]",
           "verify_musou_fail"        : "无双数据 [{}] 校验失败！ 未找到相关 {} 数据：[{}]",
           "verify_fighter_model_fail": "FighterModel 数据校验失败！ 失败信息：[{}]"
+        },
+        "musou_mission_vo": {
+          "init_musou_stage_fail": "初始化 无双场景 失败！"
         }
       }
     }

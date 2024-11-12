@@ -78,7 +78,7 @@ package net.play5d.game.bvn.data.mosou
 			if(enemyLevel < 1) enemyLevel = 1;
 
 			if(!map || time < 1){
-				throw new Error("init mousou stage error!");
+				throw new Error(GetLang('debug.error.data.musou_mission_vo.init_musou_stage_fail'));
 			}
 
 			var wvs:Array = o.waves;
