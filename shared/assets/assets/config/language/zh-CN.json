@@ -85,11 +85,8 @@
           }
         }
       }
-    },
-    "ctrl": {
     }
   },
-  "//": "------------------ Global ------------------",
   "debug": {
     "package": {
       "//": "------------------ Package ------------------",
@@ -140,9 +137,6 @@
             "buildGame": {
               "error_build_game_fail": {
               }
-            },
-            "fightFinish": {
-              
             }
           }
         }
@@ -213,6 +207,10 @@
         },
         "musou_fighter_model": {
           "repeat_add": "MusouFighterModel.addFighter:: 角色重复添加： {}"
+        },
+        "musou_model": {
+          "load_area"    : "正在加载区域： {}",
+          "init_map_area": "初始化地图区域： {}"
         }
       }
     },
