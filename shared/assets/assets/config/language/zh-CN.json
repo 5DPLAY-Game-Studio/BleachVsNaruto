@@ -89,7 +89,6 @@
   },
   "debug": {
     "package": {
-      "//": "------------------ Package ------------------",
       "ctrl": {
         "//": "------------------ Class ------------------",
         "GameLoader": {
@@ -98,8 +97,6 @@
           "loadMap": {
           },
           "dispose": {
-          },
-          "loadSWF": {
           }
         },
         "GameLogic": {
@@ -135,8 +132,6 @@
               }
             },
             "buildGame": {
-              "error_build_game_fail": {
-              }
             }
           }
         }
@@ -211,6 +206,9 @@
         "musou_model": {
           "load_area"    : "正在加载区域： {}",
           "init_map_area": "初始化地图区域： {}"
+        },
+        "musou_game_run_data_vo": {
+          "main": "创建了新的 MusouGameRunDataVO 对象"
         }
       }
     },

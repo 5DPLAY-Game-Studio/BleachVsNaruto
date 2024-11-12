@@ -30,7 +30,7 @@ package net.play5d.game.bvn.data.mosou
 
 		public function MousouGameRunDataVO()
 		{
-			trace("new MousouGameRunDataVO");
+			TraceLang('debug.trace.data.musou_game_run_data_vo.main');
 		}
 
 //		public function reset():void{
