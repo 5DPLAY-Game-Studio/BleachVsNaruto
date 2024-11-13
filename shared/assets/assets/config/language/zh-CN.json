@@ -94,14 +94,10 @@
           "loadAssister": {
           },
           "loadMap": {
-          },
-          "dispose": {
           }
         },
         "GameLogic": {
           "isInAir": {
-            "map_null": {
-            }
           },
           "isTouchBottomFloor": {
             "map_null": {
@@ -120,8 +116,6 @@
         },
         "game_ctrls": {
           "GameCtrl": {
-            "addGameSprite": {
-            }
           }
         }
       }
@@ -204,6 +198,9 @@
         },
         "musou_player_data": {
           "init_map": "初始化地图..."
+        },
+        "debugger": {
+          "error_msg": "Debugger.errorMsg:: 输出信息: {}"
         }
       }
     },

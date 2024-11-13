@@ -49,7 +49,7 @@ package net.play5d.game.bvn.debug
 		}
 
 		public static function errorMsg(msg:String):void{
-			trace('Debugger.errorMsg:',msg);
+			TraceLang('debug.trace.data.debugger.error_msg', '\n' + msg)
 			if(onErrorMsgCall != null) onErrorMsgCall(msg);
 		}
 
