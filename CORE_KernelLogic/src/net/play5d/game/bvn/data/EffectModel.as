@@ -92,7 +92,7 @@ package net.play5d.game.bvn.data
 			initSteelHitEffect();
 
 			initMosouEnemyHitEffect();
-			initMosouEnemyDefenseEffect
+			initMosouEnemyDefenseEffect();
 		}
 
 		private function cacheEffects():void{
