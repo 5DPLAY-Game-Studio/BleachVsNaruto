@@ -47,6 +47,8 @@ package net.play5d.game.bvn.stage
 
 	public class SettingStage implements IStage
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:stg_set_ui;
 		private var _btnGroup:SetBtnGroup;
 		private var _innerSetUI:IInnerSetUI;

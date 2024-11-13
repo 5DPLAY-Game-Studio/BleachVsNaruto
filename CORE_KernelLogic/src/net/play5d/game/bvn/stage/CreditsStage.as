@@ -38,6 +38,7 @@ package net.play5d.game.bvn.stage
 
 	public class CreditsStage implements IStage
 	{
+		include "_INCLUDE_.as";
 
 		private var _ui:Sprite;
 

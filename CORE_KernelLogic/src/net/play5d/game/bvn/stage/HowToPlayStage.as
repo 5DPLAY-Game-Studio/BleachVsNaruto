@@ -43,6 +43,8 @@ package net.play5d.game.bvn.stage
 
 	public class HowToPlayStage implements IStage
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:movie_howtoplay;
 		public function HowToPlayStage()
 		{
