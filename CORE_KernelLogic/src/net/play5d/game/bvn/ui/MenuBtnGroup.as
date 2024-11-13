@@ -225,12 +225,24 @@ package net.play5d.game.bvn.ui
 
 			if(H2 < H) return;
 
-			var H3:Number = H - _startPoint.y; //相对高度
-			var step:Number = H3 / _btns.length; //高度与按钮数据的比例
-			var itemHeight:Number = _btnHeight + _yadd; //每个按钮的高度+GAP
-			var offsetY:Number = _btnIndex * (step - itemHeight) + _startPoint.y;
+			var W:Number = GameConfig.GAME_SIZE.x - 20;//最左端
+			var W2:Number	= _startPoint.x + this.width;//组件的左端
 
-			TweenLite.to(this,0.2,{y:offsetY});
+			if(W2 < W) return;
+
+			var H3:Number = H - _startPoint.y; //相对高度
+			var W3:Number = W - _startPoint.x; //相对宽度
+
+			var stepX:Number = W3 / _btns.length; //宽度与按钮数据的比例
+			var stepY:Number = H3 / _btns.length; //高度与按钮数据的比例
+
+			var itemWidth:Number = _xadd; //每个按钮的宽度
+			var itemHeight:Number = _btnHeight + _yadd; //每个按钮的高度+GAP
+
+			var offsetX:Number = _btnIndex * (stepX - itemWidth) * 0.1 + _startPoint.x;
+			var offsetY:Number = _btnIndex * (stepY - itemHeight) + _startPoint.y;
+
+			TweenLite.to(this,0.2,{x:offsetX,y:offsetY});
 
 		}
 
