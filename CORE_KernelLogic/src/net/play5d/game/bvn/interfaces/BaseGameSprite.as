@@ -37,6 +37,8 @@ package net.play5d.game.bvn.interfaces
 
 	public class BaseGameSprite extends EventDispatcher implements IGameSprite
 	{
+		include "_INCLUDE_.as";
+
 		public var isInAir:Boolean; //是否在空中
 		public var isTouchBottom:Boolean; //是否在底层地面上
 		public var isAllowBeHit:Boolean = true; //是否可以被打
