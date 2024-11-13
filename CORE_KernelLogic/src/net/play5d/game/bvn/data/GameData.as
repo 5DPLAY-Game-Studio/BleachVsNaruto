@@ -200,19 +200,22 @@ package net.play5d.game.bvn.data
 			var missFighters:Array = [];
 			var missAssisters:Array = [];
 
-			for each(var s:SelectCharListItemVO in config.select_config.charList.list){
-				for each(var f:String in s.getAllFighterIDs()){
-					var fighter:FighterVO = FighterModel.I.getFighter(f);
+			var s:SelectCharListItemVO;
+			var f:String;
+			var fighter:FighterVO;
+			for each(s in config.select_config.charList.list){
+				for each(f in s.getAllFighterIDs()){
+					fighter = FighterModel.I.getFighter(f);
 					if(fighter == null){
 						if(missFighters.indexOf(f) == -1) missFighters.push(f);
 					}
 				}
 			}
 
-			for each(var s:SelectCharListItemVO in config.select_config.assistList.list){
+			for each(s in config.select_config.assistList.list){
 
-				for each(var f:String in s.getAllFighterIDs()){
-					var fighter:FighterVO = AssisterModel.I.getAssister(f);
+				for each(f in s.getAllFighterIDs()){
+					fighter = AssisterModel.I.getAssister(f);
 					if(fighter == null){
 						if(missAssisters.indexOf(f) == -1) missAssisters.push(f);
 					}
