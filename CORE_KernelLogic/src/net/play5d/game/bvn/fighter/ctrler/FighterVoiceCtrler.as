@@ -27,6 +27,8 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterVoiceCtrler
 	{
+		include "_INCLUDE_.as";
+
 		public function FighterVoiceCtrler()
 		{
 			_soundTransform = new SoundTransform();

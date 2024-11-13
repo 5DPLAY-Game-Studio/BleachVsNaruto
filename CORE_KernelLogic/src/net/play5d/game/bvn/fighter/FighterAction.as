@@ -25,6 +25,8 @@ package net.play5d.game.bvn.fighter
 	 */
 	public class FighterAction
 	{
+		include "_INCLUDE_.as";
+
 		public var isMoving:Boolean;
 		public var isJumping:Boolean;
 		public var isDefensing:Boolean;

@@ -22,6 +22,8 @@ package net.play5d.game.bvn.ctrl
 
 	public class KeyEvent extends Event
 	{
+		include "_INCLUDE_.as";
+
 		public static const KEY_DOWN:String = 'KEY_DOWN';
 		public static const KEY_UP:String = 'KEY_UP';
 

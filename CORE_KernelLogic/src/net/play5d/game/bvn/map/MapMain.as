@@ -30,6 +30,8 @@ package net.play5d.game.bvn.map
 
 	public class MapMain
 	{
+		include "_INCLUDE_.as";
+
 		public var mapLayer:MapLayer;
 		public var frontLayer:MapLayer;
 		public var frontFixLayer:MapLayer;

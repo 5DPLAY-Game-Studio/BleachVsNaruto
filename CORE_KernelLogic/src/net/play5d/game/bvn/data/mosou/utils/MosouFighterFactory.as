@@ -23,9 +23,7 @@ package net.play5d.game.bvn.data.mosou.utils
 
 	public class MosouFighterFactory
 	{
-		public function MosouFighterFactory()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		public static function create(id:String):MosouFighterVO{
 			var mv:MosouFighterVO = new MosouFighterVO();

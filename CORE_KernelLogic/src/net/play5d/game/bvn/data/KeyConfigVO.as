@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data
 
 	public class KeyConfigVO
 	{
+		include "_INCLUDE_.as";
+
 		public var id:int;
 
 		public var up:uint;

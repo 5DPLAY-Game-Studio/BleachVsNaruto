@@ -44,6 +44,8 @@ package net.play5d.game.bvn.stage
 
 	public class MenuStage extends Sprite implements IStage
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:stg_title;
 		private var _btnGroup:MenuBtnGroup;
 		private var _versionTxt:TextField;

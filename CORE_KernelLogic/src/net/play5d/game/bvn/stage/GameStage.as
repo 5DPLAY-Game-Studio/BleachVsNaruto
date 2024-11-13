@@ -43,6 +43,8 @@ package net.play5d.game.bvn.stage
 
 	public class GameStage extends Sprite implements IStage
 	{
+		include "_INCLUDE_.as";
+
 		private var _gameLayer:Sprite = new Sprite(); //主游戏层
 		private var _playerLayer:Sprite = new Sprite(); //游戏角色层
 

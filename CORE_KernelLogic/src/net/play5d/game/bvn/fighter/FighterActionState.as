@@ -20,6 +20,8 @@ package net.play5d.game.bvn.fighter
 {
 	public class FighterActionState
 	{
+		include "_INCLUDE_.as";
+
 		public static const NORMAL:int = 0;
 
 		public static const FREEZE:int = 40; //硬直

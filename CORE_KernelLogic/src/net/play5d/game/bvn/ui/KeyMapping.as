@@ -28,6 +28,8 @@ package net.play5d.game.bvn.ui
 	import net.play5d.kyo.input.KyoKeyCode;
 
 	public class KeyMapping{
+		include "_INCLUDE_.as";
+
 		public var name:String;
 		public var mc:Sprite;
 		public var keyId:String;

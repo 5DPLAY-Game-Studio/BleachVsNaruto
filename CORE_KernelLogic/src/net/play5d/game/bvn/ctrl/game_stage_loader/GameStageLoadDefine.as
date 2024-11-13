@@ -20,6 +20,7 @@ package net.play5d.game.bvn.ctrl.game_stage_loader
 {
 	public class GameStageLoadDefine
 	{
+		include "_INCLUDE_.as";
 
 		public static const TYPE_MAP:int = 0;
 		public static const TYPE_FIGHTER:int = 1;

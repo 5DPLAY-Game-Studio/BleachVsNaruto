@@ -20,6 +20,8 @@ package net.play5d.game.bvn.data
 {
 	public class MessionVO
 	{
+		include "_INCLUDE_.as";
+
 		public var comicType:int;
 		public var gameMode:int;
 

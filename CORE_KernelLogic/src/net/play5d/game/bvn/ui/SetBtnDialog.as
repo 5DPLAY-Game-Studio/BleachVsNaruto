@@ -27,6 +27,8 @@ package net.play5d.game.bvn.ui
 
 	public class SetBtnDialog
 	{
+		include "_INCLUDE_.as";
+
 		public var ui:key_set_dialog_mc;
 		public var isShow:Boolean = true;
 

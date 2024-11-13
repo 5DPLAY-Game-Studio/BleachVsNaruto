@@ -34,6 +34,8 @@ package net.play5d.game.bvn.fighter.ctrler
 	 */
 	public class EnemyFighterAICtrl implements IFighterActionCtrl
 	{
+		include "_INCLUDE_.as";
+
 		public var fighter:FighterMain;
 
 		private var _target:IGameSprite;

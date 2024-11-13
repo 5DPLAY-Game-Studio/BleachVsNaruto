@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data
 
 	public class BitmapDataCacheVO
 	{
+		include "_INCLUDE_.as";
+
 		public var bitmapData:BitmapData;
 		public var offsetX:Number = 0;
 		public var offsetY:Number = 0;

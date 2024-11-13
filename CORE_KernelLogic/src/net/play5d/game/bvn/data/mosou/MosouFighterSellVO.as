@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data.mosou
 
 	public class MosouFighterSellVO
 	{
+		include "_INCLUDE_.as";
+
 		public var id:String;
 
 //		public var sold:Boolean = false;

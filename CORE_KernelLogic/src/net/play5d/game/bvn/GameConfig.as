@@ -23,6 +23,8 @@ package net.play5d.game.bvn
 
 	public class GameConfig
 	{
+		include "_INCLUDE_.as";
+
 		public static var TOUCH_MODE:Boolean = false;
 
 

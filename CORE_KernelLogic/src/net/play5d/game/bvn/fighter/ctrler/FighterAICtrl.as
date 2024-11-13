@@ -29,6 +29,8 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterAICtrl implements IFighterActionCtrl
 	{
+		include "_INCLUDE_.as";
+
 		public var AILevel:int; //1-6  very easy,easy,normal,hrad,very hard,hell
 		public var fighter:FighterMain;
 

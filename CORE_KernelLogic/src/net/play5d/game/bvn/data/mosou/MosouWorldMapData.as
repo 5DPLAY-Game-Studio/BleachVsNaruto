@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data.mosou
 
 	public class MosouWorldMapData implements ISaveData
 	{
+		include "_INCLUDE_.as";
+
 		private var _mapAreaList:Vector.<MosouWorldMapAreaVO>;
 
 		public function MosouWorldMapData()

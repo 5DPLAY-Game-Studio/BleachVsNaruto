@@ -32,6 +32,8 @@ package net.play5d.game.bvn.data
 
 	public class GameData
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:GameData;
 
 		public static function get I():GameData{

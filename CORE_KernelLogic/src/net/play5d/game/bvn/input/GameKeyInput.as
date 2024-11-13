@@ -28,6 +28,8 @@ package net.play5d.game.bvn.input
 
 	public class GameKeyInput implements IGameInput
 	{
+		include "_INCLUDE_.as";
+
 		private var _config:KeyConfigVO;
 		private var _downKeys:Object = {};
 		private var _enabled:Boolean = true;

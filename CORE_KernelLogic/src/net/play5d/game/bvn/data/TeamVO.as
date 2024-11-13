@@ -23,6 +23,8 @@ package net.play5d.game.bvn.data
 
 	public class TeamVO
 	{
+		include "_INCLUDE_.as";
+
 		public var id:int;
 		public var name:String;
 		public var children:Vector.<IGameSprite> = new Vector.<IGameSprite>();

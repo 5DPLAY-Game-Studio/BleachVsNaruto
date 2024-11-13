@@ -25,6 +25,8 @@ package net.play5d.game.bvn.ui
 
 	public class WinUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:winmc;
 		private var _team:int;
 

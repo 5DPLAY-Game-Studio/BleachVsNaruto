@@ -20,6 +20,7 @@ package net.play5d.game.bvn.data
 {
 	public class BgmVO
 	{
+		include "_INCLUDE_.as";
 
 		public var id:String;
 		public var rate:Number;

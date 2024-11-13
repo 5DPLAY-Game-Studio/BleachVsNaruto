@@ -24,6 +24,8 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterBuffCtrler
 	{
+		include "_INCLUDE_.as";
+
 		private var _fighter:FighterMain;
 
 		private var _speed:Number = 0;

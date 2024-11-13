@@ -27,6 +27,8 @@ package net.play5d.game.bvn.ctrl
 	 */
 	public class GameRender
 	{
+		include "_INCLUDE_.as";
+
 		private static var _fucs:Dictionary = new Dictionary();
 
 		public static var isRender:Boolean = true;

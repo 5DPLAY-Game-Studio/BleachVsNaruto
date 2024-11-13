@@ -28,6 +28,8 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	 */
 	public class TrainingCtrler
 	{
+		include "_INCLUDE_.as";
+
 		public static var RECOVER_HP:Boolean = true;
 		public static var RECOVER_QI:Boolean = true;
 		public static var RECOVER_FZ_QI:Boolean = true;

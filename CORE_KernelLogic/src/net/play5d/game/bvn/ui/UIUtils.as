@@ -25,6 +25,8 @@ package net.play5d.game.bvn.ui
 
 	public class UIUtils
 	{
+		include "_INCLUDE_.as";
+
 		public static var formatTextFunction:Function;
 		public static var DEFAULT_FONT:String = "黑体";
 		public static var LOCK_FONT:String = null;

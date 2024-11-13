@@ -30,6 +30,8 @@ package net.play5d.game.bvn.stage
 
 	public class GameLoadingStage implements IStage
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:loading_cover_mc;
 
 		private var _initBack:Function;

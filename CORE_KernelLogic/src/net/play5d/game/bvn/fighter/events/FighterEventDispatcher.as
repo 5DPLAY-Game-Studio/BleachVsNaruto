@@ -24,6 +24,8 @@ package net.play5d.game.bvn.fighter.events
 
 	public class FighterEventDispatcher
 	{
+		include "_INCLUDE_.as";
+
 		private static var _dispatcher:EventDispatcher = new EventDispatcher();
 
 		private static var _addedEvents:Object = {};

@@ -33,6 +33,8 @@ package net.play5d.game.bvn.fighter
 
 	public class FighterMC
 	{
+		include "_INCLUDE_.as";
+
 		private var _mcCtrler:FighterMcCtrler;
 
 		private var _fighter:FighterMain;

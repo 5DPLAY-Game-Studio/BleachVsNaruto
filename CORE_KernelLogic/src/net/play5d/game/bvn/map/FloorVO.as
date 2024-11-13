@@ -20,12 +20,12 @@ package net.play5d.game.bvn.map
 {
 	public class FloorVO
 	{
+		include "_INCLUDE_.as";
+
 		public var y:Number = 0;
 		public var xFrom:Number = 0;
 		public var xTo:Number = 0;
-		public function FloorVO()
-		{
-		}
+
 
 		public function toString():String{
 			return "FloorVO::{xFrom:"+xFrom+",xTo:"+xTo+",y:"+y+"}";

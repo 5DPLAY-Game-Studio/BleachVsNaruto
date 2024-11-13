@@ -29,6 +29,8 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 	public class BaseFighterEventCtrl
 	{
+		include "_INCLUDE_.as";
+
 		private var _attackers:Array = [];
 
 		public function BaseFighterEventCtrl()

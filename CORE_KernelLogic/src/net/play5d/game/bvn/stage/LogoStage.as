@@ -27,11 +27,10 @@ package net.play5d.game.bvn.stage
 
 	public class LogoStage implements IStage
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:logo_movie;
 
-		public function LogoStage()
-		{
-		}
 
 		/**
 		 * 显示对象

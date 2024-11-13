@@ -23,6 +23,8 @@ package net.play5d.game.bvn.data.mosou
 
 	public class MosouFighterLogic
 	{
+		include "_INCLUDE_.as";
+
 		private var _fightData:MosouFighterVO;
 
 		public static const LV_DASH_AIR:int = 0;

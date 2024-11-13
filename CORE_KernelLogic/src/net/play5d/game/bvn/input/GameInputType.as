@@ -20,9 +20,7 @@ package net.play5d.game.bvn.input
 {
 	public class GameInputType
 	{
-		public function GameInputType()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		public static const MENU:String = 'MENU';
 		public static const P1:String = 'P1';

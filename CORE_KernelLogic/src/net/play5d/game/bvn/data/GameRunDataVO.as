@@ -28,6 +28,7 @@ package net.play5d.game.bvn.data
 	 */
 	public class GameRunDataVO
 	{
+		include "_INCLUDE_.as";
 
 		public const p1FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();
 		public const p2FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();

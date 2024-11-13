@@ -43,6 +43,8 @@ package net.play5d.game.bvn.ctrl
 
 	public class AssetManager
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:AssetManager;
 		public static function get I():AssetManager{
 			_i ||= new AssetManager();

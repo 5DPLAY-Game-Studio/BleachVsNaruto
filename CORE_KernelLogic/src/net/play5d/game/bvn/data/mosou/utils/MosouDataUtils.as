@@ -20,9 +20,7 @@ package net.play5d.game.bvn.data.mosou.utils
 {
 	public class MosouDataUtils
 	{
-		public function MosouDataUtils()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		public static function getMapData():Object{
 			var o:Object = {

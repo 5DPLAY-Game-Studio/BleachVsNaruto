@@ -44,6 +44,8 @@ package net.play5d.game.bvn.fighter
 	 */
 	public class FighterMain extends BaseGameSprite
 	{
+		include "_INCLUDE_OVERRIDE_.as";
+
 		public var qi:Number = 0;
 		public var qiMax:Number = 300;
 

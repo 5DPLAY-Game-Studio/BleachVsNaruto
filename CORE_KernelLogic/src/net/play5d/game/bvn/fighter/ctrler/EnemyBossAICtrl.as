@@ -20,6 +20,8 @@ package net.play5d.game.bvn.fighter.ctrler
 {
 	public class EnemyBossAICtrl extends FighterAICtrl
 	{
+		include "_INCLUDE_OVERRIDE_.as";
+
 		public function EnemyBossAICtrl()
 		{
 			super();

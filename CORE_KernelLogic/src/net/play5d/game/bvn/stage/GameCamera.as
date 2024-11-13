@@ -29,6 +29,8 @@ package net.play5d.game.bvn.stage
 	 */
 	public class GameCamera
 	{
+		include "_INCLUDE_.as";
+
 		/**
 		 * 大于1时，缓动开始生效，值越大，缓动越慢
 		 */

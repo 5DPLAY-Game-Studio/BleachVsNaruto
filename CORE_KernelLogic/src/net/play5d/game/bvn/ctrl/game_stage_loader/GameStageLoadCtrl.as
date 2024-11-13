@@ -36,6 +36,8 @@ import net.play5d.game.bvn.data.FighterModel;
 
 	public class GameStageLoadCtrl extends EventDispatcher
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:GameStageLoadCtrl;
 		public static function get I():GameStageLoadCtrl{
 			_i ||= new GameStageLoadCtrl();

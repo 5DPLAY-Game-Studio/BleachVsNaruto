@@ -22,6 +22,8 @@ package net.play5d.game.bvn.data.mosou.player
 
 	public class MosouMissionPlayerVO implements ISaveData
 	{
+		include "_INCLUDE_.as";
+
 		public var id:String;
 //		public var isPassed:Boolean = false;
 		public var stars:int = 0;

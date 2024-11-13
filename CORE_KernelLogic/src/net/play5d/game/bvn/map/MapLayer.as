@@ -36,6 +36,8 @@ package net.play5d.game.bvn.map
 
 	public class MapLayer extends Sprite
 	{
+		include "_INCLUDE_.as";
+
 		public var enabled:Boolean = false;
 		private var _view:DisplayObject;
 		private var _blurBitmaps:Object = {};

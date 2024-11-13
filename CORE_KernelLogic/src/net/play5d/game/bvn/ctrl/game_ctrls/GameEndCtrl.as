@@ -30,6 +30,7 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 
 	public class GameEndCtrl
 	{
+		include "_INCLUDE_.as";
 
 		public static var SHOW_CONTINUE:Boolean = false;
 

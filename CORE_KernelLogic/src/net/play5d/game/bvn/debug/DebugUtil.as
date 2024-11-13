@@ -28,12 +28,9 @@ package net.play5d.game.bvn.debug
 
 	public class DebugUtil
 	{
+		include "_INCLUDE_.as";
+
 		private static const map:Dictionary = new Dictionary();
-
-		public function DebugUtil()
-		{
-		}
-
 
 		public static const enabled:Boolean = true;
 

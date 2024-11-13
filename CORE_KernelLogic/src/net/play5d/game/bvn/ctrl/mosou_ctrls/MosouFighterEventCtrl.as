@@ -32,10 +32,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 	public class MosouFighterEventCtrl extends BaseFighterEventCtrl
 	{
-
-		public function MosouFighterEventCtrl()
-		{
-		}
+		include "_INCLUDE_OVERRIDE_.as";
 
 		public override function initlize():void{
 			super.initlize();

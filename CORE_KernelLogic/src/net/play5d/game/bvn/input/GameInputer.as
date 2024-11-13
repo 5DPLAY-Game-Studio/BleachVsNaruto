@@ -31,6 +31,8 @@ package net.play5d.game.bvn.input
 	 */
 	public class GameInputer
 	{
+		include "_INCLUDE_.as";
+
 		//按键持续延时，秒
 		private static const JUST_DOWN_DELAY:Number = 0.1;
 

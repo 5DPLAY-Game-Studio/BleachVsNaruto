@@ -32,6 +32,8 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	 */
 	public class GameStartCtrl
 	{
+		include "_INCLUDE_.as";
+
 		private var _state:GameStage;
 		private var _p1:FighterMain;
 		private var _p2:FighterMain;

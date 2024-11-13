@@ -66,6 +66,8 @@ package net.play5d.game.bvn.ctrl.game_ctrls
 	 */
 	public class GameCtrl
 	{
+		include "_INCLUDE_.as";
+
 		private static var _i:GameCtrl;
 		public static function get I():GameCtrl{
 			_i ||= new GameCtrl();

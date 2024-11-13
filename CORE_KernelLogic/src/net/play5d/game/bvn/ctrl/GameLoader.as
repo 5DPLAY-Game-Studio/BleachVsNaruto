@@ -36,6 +36,8 @@ package net.play5d.game.bvn.ctrl
 
 	public class GameLoader
 	{
+		include "_INCLUDE_.as";
+
 		// 角色缓存{ String: <FighterCacheVO> }
 		private static var _fighterCache:Object = {};
 

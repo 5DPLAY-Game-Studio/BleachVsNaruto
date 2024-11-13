@@ -45,6 +45,7 @@ package net.play5d.game.bvn.stage
 
 	public class LoadingMosouStage implements IStage
 	{
+		include "_INCLUDE_.as";
 
 		private var _ui:loading_fight_mc;
 		private var _destoryed:Boolean;

@@ -33,6 +33,8 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class AssisiterCtrler
 	{
+		include "_INCLUDE_.as";
+
 		public var hitModel:FighterHitModel;
 
 		public function get effect():FighterEffectCtrl{

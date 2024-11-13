@@ -21,6 +21,8 @@ package net.play5d.game.bvn.data.mosou
 
 	public class MosouWorldMapVO
 	{
+		include "_INCLUDE_.as";
+
 		public var id:String;
 		public var name:String;
 
