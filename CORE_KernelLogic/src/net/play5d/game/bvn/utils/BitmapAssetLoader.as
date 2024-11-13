@@ -36,7 +36,7 @@ package net.play5d.game.bvn.utils
 		private var _successBack:Function;
 		private var _processBack:Function;
 
-		public function getBitmap(id):Bitmap{
+		public function getBitmap(id:String):Bitmap{
 //			var r:DisplayObject = _cacheObj[id];
 //
 //			if(r == null) return null;
