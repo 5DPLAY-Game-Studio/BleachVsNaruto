@@ -60,7 +60,7 @@ package net.play5d.game.bvn.factory
 			return fighter;
 		}
 
-		public static function createFighterByMosouData(data:FighterVO, mosouData:MosouFighterVO, playerId):FighterMain{
+		public static function createFighterByMosouData(data:FighterVO, mosouData:MosouFighterVO, playerId:String):FighterMain{
 			var fighter:FighterMain = createFighterByData(data, playerId);
 			if(!fighter) return null;
 
