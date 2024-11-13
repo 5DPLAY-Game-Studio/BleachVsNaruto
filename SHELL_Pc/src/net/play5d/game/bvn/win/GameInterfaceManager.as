@@ -137,6 +137,10 @@ package net.play5d.game.bvn.win
 						{txt:'SINGLE WATCH',cn:'观战电脑'}
 				]},
 
+				{txt:'MUSOU PLAY',cn:'无双模式',children:[
+						{txt:'MUSOU ACRADE',cn:'无双模式'}
+					]},
+
 				{txt:'LAN PLAY',cn:'局域网对战',func:function():void{
 					LANGameCtrl.I.goLANGameState();
 				}},
