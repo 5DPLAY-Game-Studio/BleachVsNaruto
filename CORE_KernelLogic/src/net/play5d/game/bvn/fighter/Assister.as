@@ -68,7 +68,8 @@ package net.play5d.game.bvn.fighter
 		{
 			super(mainmc);
 
-			isAlive = false;
+			// TODO
+//			isAlive = false;
 
 			if(_mainMc.setAssistCtrler){
 				_ctrler = new AssisiterCtrler();
@@ -80,9 +81,10 @@ package net.play5d.game.bvn.fighter
 		}
 
 		public function goFight():void{
-			gotoAndPlay(2);
+
 			isAttacking = true;
 //			isAlive = true;  //暂时辅助不能被打，被打时放开
+			gotoAndPlay(2);
 		}
 
 //		public function moveToTarget(offsetX:Number = NaN , offsetY:Number = NaN):void{
