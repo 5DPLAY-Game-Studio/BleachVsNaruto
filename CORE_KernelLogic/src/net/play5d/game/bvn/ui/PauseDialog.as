@@ -29,6 +29,8 @@ package net.play5d.game.bvn.ui
 
 	public class PauseDialog extends Sprite
 	{
+		include "_INCLUDE_.as";
+
 		private var _bg:Sprite;
 		private var _btnGroup:SetBtnGroup;
 		private var _moveList:MoveListSp;

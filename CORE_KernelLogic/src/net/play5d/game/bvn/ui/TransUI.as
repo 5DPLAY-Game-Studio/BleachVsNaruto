@@ -27,6 +27,7 @@ package net.play5d.game.bvn.ui
 
 	public class TransUI
 	{
+		include "_INCLUDE_.as";
 
 		public var ui:trans_mc;
 

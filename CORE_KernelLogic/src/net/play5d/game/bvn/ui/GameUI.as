@@ -37,6 +37,8 @@ import net.play5d.game.bvn.ui.fight.FightUI;
 
 	public class GameUI
 	{
+		include "_INCLUDE_.as";
+
 		public static var I:GameUI;
 
 		/**
