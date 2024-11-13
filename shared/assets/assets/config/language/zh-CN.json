@@ -112,21 +112,15 @@
             }
           },
           "setGameMode": {
-            "set_game_mode": {
-            }
           }
         },
         "SoundCtrl": {
           "loadFightBGM": {
-            "loadFail": {
-            }
           }
         },
         "game_ctrls": {
           "GameCtrl": {
             "addGameSprite": {
-            },
-            "buildGame": {
             }
           }
         }
@@ -207,6 +201,9 @@
         },
         "musou_fighter_vo": {
           "level_up": "=============== 等级提升！ ==============="
+        },
+        "musou_player_data": {
+          "init_map": "初始化地图..."
         }
       }
     },
