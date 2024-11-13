@@ -93,7 +93,7 @@ package net.play5d.game.bvn.data.mosou.player
 			if(val >= nextExp){
 				var isLimit:Boolean = updateLevel(lv + 1);
 				if(!isLimit){
-					trace('==== Level Up ! ================================================');
+					TraceLang('debug.trace.data.musou_fighter_vo.level_up');
 					GameEvent.dispatchEvent(GameEvent.LEVEL_UP, this);
 					_exp.setValue(val - nextExp);
 				}else{

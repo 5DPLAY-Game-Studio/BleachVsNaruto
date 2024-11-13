@@ -108,11 +108,11 @@ package net.play5d.game.bvn.data
 
 			AI_LEVEL = GameData.I.config.AI_level;
 
-			trace('p1::',GameData.I.p1Select.toString());
-			trace('p2::',GameData.I.p2Select.toString());
+//			trace('p1::',GameData.I.p1Select.toString());
+//			trace('p2::',GameData.I.p2Select.toString());
 
-
-
+			TraceLang('debug.trace.data.mission_model.p1_data', GameData.I.p1Select);
+			TraceLang('debug.trace.data.mission_model.p2_data', GameData.I.p2Select);
 		}
 
 		public function reset():void{
@@ -124,7 +124,7 @@ package net.play5d.game.bvn.data
 
 		public function messionComplete():void{
 			if(missionAllComplete()){
-				trace('mission all over!!!');
+				TraceLang('debug.trace.data.mission_model.mission_all_over');
 				return;
 			}
 

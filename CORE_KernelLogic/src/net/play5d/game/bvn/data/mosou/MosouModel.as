@@ -95,7 +95,7 @@ package net.play5d.game.bvn.data.mosou
 				var id:String = mapIds.shift();
 
 				var partUrl:String = "config/mosou/"+map.id+"/"+id+".json";
-				trace("load: ", partUrl);
+				TraceLang('debug.trace.data.musou_model.load_area', partUrl);
 				AssetManager.I.loadJSON(partUrl, loadNext, fail);
 			}
 
@@ -103,7 +103,7 @@ package net.play5d.game.bvn.data.mosou
 		}
 
 		private function initMapArea(area:MosouWorldMapAreaVO, d:Object):void{
-			trace("initMapArea: ", d.id);
+			TraceLang('debug.trace.data.musou_model.init_map_area', d.id);
 
 			area.id = d.id;
 			area.name = d.name;

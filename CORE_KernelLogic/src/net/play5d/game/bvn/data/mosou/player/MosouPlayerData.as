@@ -63,7 +63,8 @@ package net.play5d.game.bvn.data.mosou.player
 		}
 
 		private function initMap():void{
-			trace("========== initMap ===================");
+			TraceLang('debug.trace.data.musou_player_data.init_map');
+
 			var map:MosouWorldMapPlayerVO = new MosouWorldMapPlayerVO();
 			map.id = _currentMapId;
 			_mapData.push(map);
