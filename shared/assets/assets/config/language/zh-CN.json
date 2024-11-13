@@ -90,7 +90,6 @@
   "debug": {
     "package": {
       "ctrl": {
-        "//": "------------------ Class ------------------",
         "GameLoader": {
           "loadAssister": {
           },
@@ -120,16 +119,12 @@
         "SoundCtrl": {
           "loadFightBGM": {
             "loadFail": {
-              "load_fight_bgm": {
-              }
             }
           }
         },
         "game_ctrls": {
           "GameCtrl": {
             "addGameSprite": {
-              "log_team_is_null": {
-              }
             },
             "buildGame": {
             }
@@ -209,6 +204,9 @@
         },
         "musou_game_run_data_vo": {
           "main": "创建了新的 MusouGameRunDataVO 对象"
+        },
+        "musou_fighter_vo": {
+          "level_up": "=============== 等级提升！ ==============="
         }
       }
     },
