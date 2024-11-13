@@ -16,25 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.map
-{
-	public class FloorVO
-	{
-		include "_INCLUDE_.as";
-
-		public var y:Number = 0;
-		public var xFrom:Number = 0;
-		public var xTo:Number = 0;
-
-
-		public function toString():String{
-			return "FloorVO::{xFrom:"+xFrom+",xTo:"+xTo+",y:"+y+"}";
-		}
-
-		public function hitTest(X:Number , Y:Number , SPEED:Number):Boolean{
-			//SPEED = 5
-			return Y > y - SPEED && Y < y + SPEED && X > xFrom && X < xTo;
-		}
-
-	}
-}
+include "../../../../../../../shared/as/_Include_Override_.as"
