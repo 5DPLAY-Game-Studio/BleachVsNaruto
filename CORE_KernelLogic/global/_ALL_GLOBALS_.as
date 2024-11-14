@@ -37,6 +37,7 @@ public function get _ALL_GLOBALS_():* {
         GetElement,
         GetLang,
         GetLangText,
+        GetRuntimeType,
         IsMobile,
         P1,
         P2,
