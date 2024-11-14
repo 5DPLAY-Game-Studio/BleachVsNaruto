@@ -42,7 +42,7 @@ package net.play5d.game.bvn.utils
 					globalPoint.x = container.stage.stageWidth / 2;
 					globalPoint.y = container.stage.stageHeight / 2;
 				}
-				catch(err)
+				catch(e:Error)
 				{
 				}
 			}
