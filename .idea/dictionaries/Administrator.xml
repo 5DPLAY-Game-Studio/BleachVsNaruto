@@ -2,6 +2,8 @@
   <dictionary name="Administrator">
     <words>
       <w>dplay</w>
+      <w>langversion</w>
+      <w>playerversion</w>
     </words>
   </dictionary>
 </component>
