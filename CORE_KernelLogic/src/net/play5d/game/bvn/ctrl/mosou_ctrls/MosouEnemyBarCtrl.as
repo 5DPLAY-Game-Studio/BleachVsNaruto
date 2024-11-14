@@ -62,8 +62,13 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 		public function render():void{
 			if(!_barMap) return;
 
-			for each(var i:FighterMain in _barMap){
-				var b:EnemyHpFollowUI = _barMap[i];
+			for (var i:* in _barMap){
+				var f:FighterMain = i is FighterMain ? i as FighterMain : null;
+				if (!f) {
+					continue;
+				}
+
+				var b:EnemyHpFollowUI = _barMap[f];
 				if(!b.render()){
 					try{
 						_gameLayer.removeChild(b.getUI());
@@ -71,7 +76,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 						TraceLang('debug.trace.data.musou_enemy_bar_ctrl.remove_bar_error')
 					}
 					b.destory();
-					delete _barMap[i];
+					delete _barMap[f];
 				}
 			}
 		}
