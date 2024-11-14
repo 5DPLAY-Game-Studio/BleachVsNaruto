@@ -77,7 +77,7 @@ import net.play5d.game.bvn.utils.GameLogger;
 			GameUI.BITMAP_UI = true;
 
 			GameData.I.config.AI_level = 1;
-			GameData.I.config.quality = GameQuality.MEDIUM;
+			GameData.I.config.quality = GameQuality.LOW;
 			GameData.I.config.keyInputMode = 1;
 
 			URL.MARK = 'bvn_win'+MainGame.VERSION;
