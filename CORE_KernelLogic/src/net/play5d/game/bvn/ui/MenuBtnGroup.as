@@ -285,8 +285,8 @@ package net.play5d.game.bvn.ui
 
 			var func:Function;
 
-			if(target.func){
-				func = target.func;
+			if(target.func != null){
+				func = target.func as Function;
 			}else{
 				func = getFucByLabel(target.label);
 			}
