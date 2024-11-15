@@ -31,11 +31,10 @@ package net.play5d.game.bvn.utils
 
 	public class BtnUtils
 	{
+		include "_INCLUDE_.as";
+
 		private static var _btnMap:Dictionary = new Dictionary();
 
-		public function BtnUtils()
-		{
-		}
 
 		public static function btnMode(btn:Sprite, buttonMode:Boolean = true, mouseChildren:Boolean = false):void{
 			if(!btn) return;

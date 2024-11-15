@@ -22,6 +22,8 @@ package net.play5d.game.bvn.utils
 
 	public class TouchMoveEvent extends Event
 	{
+		include "_INCLUDE_.as";
+
 		public static const TOUCH_BEGIN:String = "EVENT_TOUCH_BEGIN";
 		public static const TOUCH_MOVE:String = "EVENT_TOUCH_MOVE";
 		public static const TOUCH_END:String = "EVENT_TOUCH_END";

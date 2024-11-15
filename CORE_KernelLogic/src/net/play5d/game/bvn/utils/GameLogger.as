@@ -22,6 +22,8 @@ package net.play5d.game.bvn.utils
 
 	public class GameLogger
 	{
+		include "_INCLUDE_.as";
+
 
 //		private static var _loger:ILoger;
 

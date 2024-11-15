@@ -26,9 +26,7 @@ package net.play5d.game.bvn.utils
 
 	public class BitmapAssetLoader
 	{
-		public function BitmapAssetLoader()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		private var _queueLength:int;
 		private var _urls:Array;
