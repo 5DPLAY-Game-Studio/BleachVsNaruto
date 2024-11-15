@@ -16,16 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.data
-{
-	public class LANGameMode
-	{
+package net.play5d.game.bvn.win.data {
+public class LANGameMode {
 
-		public static const SINGLE_VS:int = 1;
-		public static const TEAM_VS:int = 2;
+    public static const SINGLE_VS:int = 1;
+    public static const TEAM_VS:int   = 2;
 
-		public function LANGameMode()
-		{
-		}
-	}
+    public function LANGameMode() {
+    }
+}
 }

@@ -16,20 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.data
-{
-	public class LanGameModel
-	{
-		private static var _i:LanGameModel;
-		public static function get I():LanGameModel{
-			_i ||= new LanGameModel();
-			return _i;
-		}
+package net.play5d.game.bvn.win.data {
+public class LanGameModel {
+    private static var _i:LanGameModel;
 
-		public var playerName:String = "someone";
+    public static function get I():LanGameModel {
+        _i ||= new LanGameModel();
+        return _i;
+    }
 
-		public function LanGameModel()
-		{
-		}
-	}
+    public function LanGameModel() {
+    }
+    public var playerName:String = 'someone';
+}
 }

@@ -16,45 +16,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.data
-{
+package net.play5d.game.bvn.win.data {
 
-	public class SocketInputData
-	{
+public class SocketInputData {
 
-		public var up:Boolean;
-		public var down:Boolean;
-		public var left:Boolean;
-		public var right:Boolean;
-
-		public var attack:Boolean;
-		public var jump:Boolean;
-		public var dash:Boolean;
-		public var skill:Boolean;
-		public var superSkill:Boolean;
-		public var special:Boolean;
-
-		public function SocketInputData()
-		{
-		}
+    public function SocketInputData() {
+    }
+    public var up:Boolean;
+    public var down:Boolean;
+    public var left:Boolean;
+    public var right:Boolean;
+    public var attack:Boolean;
+    public var jump:Boolean;
+    public var dash:Boolean;
+    public var skill:Boolean;
+    public var superSkill:Boolean;
+    public var special:Boolean;
 
 //		public static function isInputMsg(msg:String):Boolean{
 //			return msg.substr(0,6) == "INPUT|";
 //		}
 
-		public function clear():void{
-			up = false;
-			down = false;
-			left = false;
-			right = false;
+    public function clear():void {
+        up    = false;
+        down  = false;
+        left  = false;
+        right = false;
 
-			attack = false;
-			jump = false;
-			dash = false;
-			skill = false;
-			superSkill = false;
-			special = false;
-		}
+        attack     = false;
+        jump       = false;
+        dash       = false;
+        skill      = false;
+        superSkill = false;
+        special    = false;
+    }
 
 //		public static function getMSG():String{
 //			var vs:Array = [
@@ -64,5 +59,5 @@ package net.play5d.game.bvn.win.data
 //			return vs.join(",");
 //		}
 
-	}
+}
 }
