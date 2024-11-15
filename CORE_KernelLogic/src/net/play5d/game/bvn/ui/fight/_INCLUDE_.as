@@ -16,16 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.fight
-{
-	public class FightQiBarMode
-	{
-		include "_INCLUDE_.as";
-
-
-		public static const AUTO:int = 0;
-		public static const TOP:int = 1;
-		public static const BOTTOM:int = 2;
-
-	}
-}
+include "../../../../../../../../shared/as/_Include_.as"

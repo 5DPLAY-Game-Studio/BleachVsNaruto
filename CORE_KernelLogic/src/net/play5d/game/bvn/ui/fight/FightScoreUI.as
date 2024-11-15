@@ -23,6 +23,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class FightScoreUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:score_mc;
 		private var _nummc:MCNumber;
 		public function FightScoreUI(ui:score_mc)

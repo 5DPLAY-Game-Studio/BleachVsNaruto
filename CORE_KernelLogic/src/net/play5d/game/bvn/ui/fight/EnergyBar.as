@@ -25,6 +25,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class EnergyBar
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:energy_bar;
 		private var _fighter:FighterMain;
 

@@ -47,6 +47,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class FightUI implements IGameUI
 	{
+		include "_INCLUDE_.as";
+
 		public static var QI_BAR_MODE:int;
 
 		public var ui:ui_fight;
