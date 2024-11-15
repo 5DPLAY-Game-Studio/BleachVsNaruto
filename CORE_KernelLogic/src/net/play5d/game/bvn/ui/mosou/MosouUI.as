@@ -45,6 +45,8 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MosouUI implements IGameUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:ui_mosou;
 
 		private var _hpbar:MosouFightBarUI;

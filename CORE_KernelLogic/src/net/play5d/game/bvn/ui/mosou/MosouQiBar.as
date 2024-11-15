@@ -34,6 +34,8 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MosouQiBar
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:Sprite;
 		private var _fighter:FighterMain;
 
