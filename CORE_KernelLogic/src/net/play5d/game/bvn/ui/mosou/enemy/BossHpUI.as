@@ -29,6 +29,8 @@ package net.play5d.game.bvn.ui.mosou.enemy
 
 	public class BossHpUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:Sprite;
 
 		private var _bar:DisplayObject;

@@ -24,6 +24,8 @@ package net.play5d.game.bvn.ui.mosou.enemy
 
 	public class EnemyHpUIGroup
 	{
+		include "_INCLUDE_.as";
+
 		private var _uis:Vector.<EnemyHpUI>;
 		private var _ct:Sprite;
 		public function EnemyHpUIGroup(ct:Sprite)
