@@ -16,44 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.sockets.udp
-{
-	import flash.utils.ByteArray;
+package net.play5d.game.bvn.win.sockets.udp {
+import flash.utils.ByteArray;
 
 //	import flash.utils.ByteArray;
 
-	public class UDPDataVO
-	{
+public class UDPDataVO {
 
 //		public var byte:ByteArray;
 
-		private var _data:Object;
-		public var dataType:int;
+    public function UDPDataVO() {
+    }
+    public var dataType:int;
 
-		public var fromIP:String;
-		public var fromPort:int;
+    public var fromIP:String;
+    public var fromPort:int;
+    private var _data:Object;
+    private var _jsonData:Object;
 
-		private var _jsonData:Object;
+    public function getDataByteArray():ByteArray {
+        return dataType == UdpDataType.BYTEARRAY ? _data as ByteArray : null;
+    }
 
-		public function UDPDataVO()
-		{
-		}
+    public function getDataString():String {
+        return dataType == UdpDataType.STRING ? _data as String : null;
+    }
 
-		public function getDataByteArray():ByteArray{
-			return dataType == UdpDataType.BYTEARRAY ? _data as ByteArray : null;
-		}
+    public function getDataObject():Object {
+        return dataType == UdpDataType.OBJECT ? _data : null;
+    }
 
-		public function getDataString():String{
-			return dataType == UdpDataType.STRING ? _data as String : null;
-		}
-
-		public function getDataObject():Object{
-			return dataType == UdpDataType.OBJECT ? _data : null;
-		}
-
-		public function setData(v:Object):void{
-			_data = v;
-		}
+    public function setData(v:Object):void {
+        _data = v;
+    }
 
 //		public function get data():String{
 //			if(!byte) return null;
@@ -69,5 +64,5 @@ package net.play5d.game.bvn.win.sockets.udp
 //			return _jsonData;
 //		}
 
-	}
+}
 }

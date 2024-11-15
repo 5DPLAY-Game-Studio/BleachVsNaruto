@@ -16,17 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.sockets.udp
-{
-	public class UdpDataType
-	{
+package net.play5d.game.bvn.win.sockets.udp {
+public class UdpDataType {
 
-		public static const BYTEARRAY:int = 1;
-		public static const STRING:int = 2;
-		public static const OBJECT:int = 3;
+    public static const BYTEARRAY:int = 1;
+    public static const STRING:int    = 2;
+    public static const OBJECT:int    = 3;
 
-		public function UdpDataType()
-		{
-		}
-	}
+    public function UdpDataType() {
+    }
+}
 }
