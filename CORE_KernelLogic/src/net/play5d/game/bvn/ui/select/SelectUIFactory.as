@@ -25,9 +25,8 @@ package net.play5d.game.bvn.ui.select
 
 	public class SelectUIFactory
 	{
-		public function SelectUIFactory()
-		{
-		}
+		include "_INCLUDE_.as";
+		
 
 		public static function createSelecter(playerType:int = 1):SelecterItemUI{
 			var ui:SelecterItemUI = new SelecterItemUI(playerType);
