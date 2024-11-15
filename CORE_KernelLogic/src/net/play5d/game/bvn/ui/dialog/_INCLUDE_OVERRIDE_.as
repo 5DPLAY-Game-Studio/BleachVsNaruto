@@ -16,27 +16,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.dialog
-{
-	public class AlertUI extends MusouConfrimUI
-	{
-		include "_INCLUDE_OVERRIDE_.as";
-
-		public function AlertUI()
-		{
-			super();
-			build();
-		}
-
-		protected override function build():void{
-			super.build();
-
-			_noBtn.visible = false;
-
-			_yesBtn.x = 253;
-		}
-
-
-
-	}
-}
+include "../../../../../../../../shared/as/_Include_Override_.as"
