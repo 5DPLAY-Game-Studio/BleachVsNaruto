@@ -30,6 +30,8 @@ package net.play5d.game.bvn.views.effects
 	 */
 	public class SpecialEffectView extends EffectView
 	{
+		include "_INCLUDE_OVERRIDE_.as";
+
 		private var _fighter:FighterMain;
 		private var _finished:Boolean;
 

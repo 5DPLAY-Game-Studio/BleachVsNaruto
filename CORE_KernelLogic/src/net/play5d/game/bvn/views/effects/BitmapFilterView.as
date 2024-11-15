@@ -33,6 +33,8 @@ package net.play5d.game.bvn.views.effects
 
 	public class BitmapFilterView implements IGameSprite
 	{
+		include "_INCLUDE_.as";
+
 		private var _bitmap:Bitmap;
 		public var target:BaseGameSprite;
 		private var _filter:BitmapFilter;

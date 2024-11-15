@@ -28,6 +28,8 @@ package net.play5d.game.bvn.views.effects
 
 	public class ShadowEffectView
 	{
+		include "_INCLUDE_.as";
+
 		public var target:DisplayObject;
 		public var r:int = 0;
 		public var g:int = 0;
