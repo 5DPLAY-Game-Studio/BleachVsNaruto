@@ -28,13 +28,11 @@ package net.play5d.game.bvn.ui.dialog.select
 
 	public class DotsGroupUI extends Sprite
 	{
+		include "_INCLUDE_.as";
+
 		private var _dotArr:Array;
 		public var onDotClick:Function;
 
-		public function DotsGroupUI()
-		{
-			super();
-		}
 
 		public function update(total:int):void{
 			_dotArr = [];
