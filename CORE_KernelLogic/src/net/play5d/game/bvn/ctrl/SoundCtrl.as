@@ -16,246 +16,276 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl
-{
-	import flash.media.Sound;
-	import flash.media.SoundTransform;
-	import flash.utils.getTimer;
+package net.play5d.game.bvn.ctrl {
+import flash.media.Sound;
+import flash.media.SoundTransform;
+import flash.utils.getTimer;
 
-	import net.play5d.game.bvn.data.BgmVO;
+import net.play5d.game.bvn.data.BgmVO;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.kyo.loader.KyoSoundLoader;
-	import net.play5d.kyo.sound.KyoBGSounder;
-	import net.play5d.kyo.utils.KyoRandom;
+import net.play5d.kyo.sound.KyoBGSounder;
+import net.play5d.kyo.utils.KyoRandom;
 
-	public class SoundCtrl
-	{
-		include "_INCLUDE_.as";
+public class SoundCtrl {
+    include '_INCLUDE_.as';
 
-		private static var _i:SoundCtrl;
+    private static var _i:SoundCtrl;
 
-		public static function get I():SoundCtrl{
-			_i ||= new SoundCtrl();
-			return _i;
-		}
+    public static function get I():SoundCtrl {
+        _i ||= new SoundCtrl();
+        return _i;
+    }
 
-		private var _bgSound:KyoBGSounder;
-		private var _soundLoader:KyoSoundLoader;
-		private var _bgmObj:Object;
+    public function SoundCtrl() {
+    }
+    private var _bgSound:KyoBGSounder;
+    private var _soundLoader:KyoSoundLoader;
+    private var _bgmObj:Object;
+    private var _bgmPaused:Boolean           = false;
+    private var _waitingSound:Object;
+    private var _sndTransform:SoundTransform = new SoundTransform();
+    private var _lastSndTime:int;
 
-		private var _bgmPaused:Boolean = false;
-		private var _waitingSound:Object;
-		private var _sndTransform:SoundTransform = new SoundTransform();
+    public function setSoundVolumn(v:Number):void {
+        _sndTransform.volume = v;
+    }
 
-		private var _lastSndTime:int;
+    public function setBgmVolumn(v:Number):void {
+        if (!_bgSound) {
+            _bgSound = new KyoBGSounder();
+        }
+        _bgSound.volume = v;
+    }
 
-		public function SoundCtrl()
-		{
-		}
+    public function playAssetSound(name:String, vol:Number = 1):void {
 
-		public function setSoundVolumn(v:Number):void{
-			_sndTransform.volume = v;
-		}
+        if (name == null) {
+            return;
+        }
 
-		public function setBgmVolumn(v:Number):void{
-			if(!_bgSound){
-				_bgSound = new KyoBGSounder();
-			}
-			_bgSound.volume = v;
-		}
+        var sound:Sound = AssetManager.I.getSound(name);
+        if (sound) {
+            var st:SoundTransform = _sndTransform;
+            if (vol != 1) {
+                st = new SoundTransform(vol * _sndTransform.volume);
+            }
 
-		public function playAssetSound(name:String , vol:Number = 1):void{
+            sound.play(0, 0, st);
+            _lastSndTime = getTimer();
+        }
+    }
 
-			if(name == null) return;
+    public function playEffectSound(name:String, vol:Number = 1):void {
+        if (name == null) {
+            return;
+        }
+        if (keepSoundNoise()) {
+            return;
+        }
 
-			var sound:Sound = AssetManager.I.getSound(name);
-			if(sound){
-				var st:SoundTransform = _sndTransform;
-				if(vol != 1){
-					st = new SoundTransform(vol * _sndTransform.volume);
-				}
+        var sound:Sound = AssetManager.I.getEffect(name);
+        if (sound) {
+            var st:SoundTransform = _sndTransform;
+            if (vol != 1) {
+                st = new SoundTransform(vol * _sndTransform.volume);
+            }
+            sound.play(0, 0, st);
+            _lastSndTime = getTimer();
+        }
+    }
 
-				sound.play(0,0,st);
-				_lastSndTime = getTimer();
-			}
-		}
+    public function playAssetSoundRandom(...params):void {
+        if (keepSoundNoise()) {
+            return;
+        }
+        var name:String = KyoRandom.getRandomInArray(params);
+        playAssetSound(name);
+    }
 
-		public function playEffectSound(name:String , vol:Number = 1):void{
-			if(name == null) return;
-			if(keepSoundNoise()) return;
+    public function playSwcSound(sc:Class):void {
+        if (keepSoundNoise()) {
+            return;
+        }
+        var snd:Sound = new sc();
+        snd.play(0, 0, _sndTransform);
+        _lastSndTime = getTimer();
+    }
 
-			var sound:Sound = AssetManager.I.getEffect(name);
-			if(sound){
-				var st:SoundTransform = _sndTransform;
-				if(vol != 1){
-					st = new SoundTransform(vol * _sndTransform.volume);
-				}
-				sound.play(0,0,st);
-				_lastSndTime = getTimer();
-			}
-		}
+    public function BGM(sound:Object, loop:Boolean = true):void {
 
-		public function playAssetSoundRandom(...params):void{
-			if(keepSoundNoise()) return;
-			var name:String = KyoRandom.getRandomInArray(params);
-			playAssetSound(name);
-		}
+        if (_bgmPaused) {
+            _waitingSound = sound;
+            return;
+        }
 
-		public function playSwcSound(sc:Class):void{
-			if(keepSoundNoise()) return;
-			var snd:Sound = new sc();
-			snd.play(0, 0, _sndTransform);
-			_lastSndTime = getTimer();
-		}
+        if (!_bgSound) {
+            _bgSound = new KyoBGSounder();
+        }
 
-		/**
-		 * 保持声音噪音
-		 * @return 是否保持声音噪音
-		 */
-		private function keepSoundNoise():Boolean {
-			if (GameMode.currentMode != GameMode.MOSOU_ACRADE) {
-				return false;
-			}
+        if (_bgSound.sound == sound) {
+            return;
+        }
+        if (_bgSound.playing) {
+            _bgSound.stop();
+        }
 
-			return getTimer() - _lastSndTime < 20;
-		}
+        if (sound) {
+            _bgSound.play(sound, loop);
+        }
+    }
 
-		public function BGM(sound:Object, loop:Boolean = true):void{
+    public function pauseBGM():void {
+        if (_bgmPaused) {
+            return;
+        }
+        _bgmPaused = true;
+        if (_bgSound) {
+            _bgSound.pause();
+        }
+    }
 
-			if(_bgmPaused){
-				_waitingSound = sound;
-				return;
-			}
+    public function resumeBGM():void {
+        if (!_bgmPaused) {
+            return;
+        }
+        _bgmPaused = false;
 
-			if(!_bgSound) _bgSound = new KyoBGSounder();
+        if (_waitingSound) {
+            BGM(_waitingSound);
+            _waitingSound = null;
+            return;
+        }
 
-			if(_bgSound.sound == sound) return;
-			if(_bgSound.playing) _bgSound.stop();
+        if (_bgSound) {
+            _bgSound.resume();
+        }
+    }
 
-			if(sound) _bgSound.play(sound, loop);
-		}
+    /**
+     * 加载战斗BGM
+     * @param arr {id:Object,url:String,rate:Number(0-1)} , 如果是场景ID，ID值为'map'
+     * @param success
+     * @param fail
+     * @param process
+     *
+     */
+    public function loadFightBGM(arr:Vector.<BgmVO>, success:Function, fail:Function = null,
+                                 process:Function                                    = null
+    ):void {
+        _bgmObj        = {};
+        var urls:Array = [];
+        for each(var o:Object in arr) {
+            _bgmObj[o.id] = o;
+            urls.push(o.url);
+        }
 
-		public function pauseBGM():void{
-			if(_bgmPaused) return;
-			_bgmPaused = true;
-			if(_bgSound) _bgSound.pause();
-		}
+        _soundLoader   = new KyoSoundLoader();
+        var curUrl:String;
+        var sndLen:int = urls.length;
 
-		public function resumeBGM():void{
-			if(!_bgmPaused) return;
-			_bgmPaused = false;
+        loadNext();
 
-			if(_waitingSound){
-				BGM(_waitingSound);
-				_waitingSound = null;
-				return;
-			}
+        function loadNext():void {
+            if (urls.length < 1) {
+                if (success != null) {
+                    success();
+                }
+                return;
+            }
+            curUrl = urls.shift();
+            AssetManager.I.loadSound(curUrl, loadBack, loadFail, loadProcess);
+        }
 
-			if(_bgSound) _bgSound.resume();
-		}
+        function loadBack(snd:Sound):void {
+            _soundLoader.addSound(curUrl, snd);
+            loadNext();
+        }
 
-		/**
-		 * 加载战斗BGM
-		 * @param arr {id:Object,url:String,rate:Number(0-1)} , 如果是场景ID，ID值为'map'
-		 * @param success
-		 * @param fail
-		 * @param process
-		 *
-		 */
-		public function loadFightBGM(arr:Vector.<BgmVO> , success:Function , fail:Function = null , process:Function = null):void{
-			_bgmObj = {};
-			var urls:Array = [];
-			for each(var o:Object in arr){
-				_bgmObj[o.id] = o;
-				urls.push(o.url);
-			}
+        function loadFail():void {
+            TraceLang('debug.trace.data.sound_ctrl.load_fight_bgm_fail', curUrl);
+            loadNext();
+        }
 
-			_soundLoader = new KyoSoundLoader();
-			var curUrl:String;
-			var sndLen:int = urls.length;
+        function loadProcess(v:Number):void {
+            if (process != null) {
+                var cur:Number = sndLen - urls.length - 1 + v;
+                var p:Number   = cur / sndLen;
+                process(v);
+            }
+        }
 
-			loadNext();
+    }
 
-			function loadNext():void{
-				if(urls.length < 1){
-					if(success != null) success();
-					return;
-				}
-				curUrl = urls.shift();
-				AssetManager.I.loadSound(curUrl , loadBack , loadFail , loadProcess);
-			}
+    public function playBossBGM(isNaruto:Boolean):void {
+        playFighterBGM(isNaruto ? 'boss_naruto' : 'boss_bleach');
+    }
 
-			function loadBack(snd:Sound):void{
-				_soundLoader.addSound(curUrl , snd);
-				loadNext();
-			}
+    public function playFighterBGM(id:String):Boolean {
+        var o:Object = _bgmObj[id];
+        if (!o) {
+            return true;
+        }
 
-			function loadFail():void{
-				TraceLang('debug.trace.data.sound_ctrl.load_fight_bgm_fail', curUrl);
-				loadNext();
-			}
+        var sound:Sound = _soundLoader.getSound(o.url);
+        BGM(sound);
 
-			function loadProcess(v:Number):void{
-				if(process != null){
-					var cur:Number = sndLen - urls.length-1 + v;
-					var p:Number = cur / sndLen;
-					process(v);
-				}
-			}
+        return false;
+    }
 
-		}
+    public function smartPlayGameBGM(id:String):void {
 
-		public function playBossBGM(isNaruto:Boolean):void{
-			playFighterBGM(isNaruto ? 'boss_naruto' : 'boss_bleach');
-		}
+        var o:Object = _bgmObj[id];
 
-		public function playFighterBGM(id:String):Boolean{
-			var o:Object = _bgmObj[id];
-			if(!o) return true;
+        if (id == 'map') {
+            if (o == null) {
+                return;
+            }
+        }
+        else {
+            if (o == null) {
+                smartPlayGameBGM('map');
+                return;
+            }
+            if (Math.random() > Number(o.rate)) {
+                smartPlayGameBGM('map');
+                return;
+            }
+        }
 
-			var sound:Sound = _soundLoader.getSound(o.url);
-			BGM(sound);
+        var sound:Sound = _soundLoader.getSound(o.url);
+        BGM(sound);
+    }
 
-			return false;
-		}
+    public function unloadFightBGM():void {
+        BGM(null);
+        if (_soundLoader) {
+            _soundLoader.unload();
+            _soundLoader = null;
+        }
+    }
 
-		public function smartPlayGameBGM(id:String):void{
+    //选择音效
+    public function sndSelect():void {
+        playSwcSound(snd_menu1);
+    }
 
-			var o:Object = _bgmObj[id];
+    //确定音效
+    public function sndConfrim():void {
+        playSwcSound(snd_menu2);
+    }
 
-			if(id == 'map'){
-				if(o == null) return;
-			}else{
-				if(o == null){
-					smartPlayGameBGM('map');
-					return;
-				}
-				if(Math.random() > Number(o.rate)){
-					smartPlayGameBGM('map');
-					return;
-				}
-			}
+    /**
+     * 保持声音噪音
+     * @return 是否保持声音噪音
+     */
+    private function keepSoundNoise():Boolean {
+        if (GameMode.currentMode != GameMode.MOSOU_ACRADE) {
+            return false;
+        }
 
-			var sound:Sound = _soundLoader.getSound(o.url);
-			BGM(sound);
-		}
+        return getTimer() - _lastSndTime < 20;
+    }
 
-		public function unloadFightBGM():void{
-			BGM(null);
-			if(_soundLoader){
-				_soundLoader.unload();
-				_soundLoader = null;
-			}
-		}
-
-		//选择音效
-		public function sndSelect():void{
-			playSwcSound(snd_menu1);
-		}
-		//确定音效
-		public function sndConfrim():void{
-			playSwcSound(snd_menu2);
-		}
-
-	}
+}
 }

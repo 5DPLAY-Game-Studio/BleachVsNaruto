@@ -16,117 +16,127 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl
-{
-	import flash.display.Sprite;
+package net.play5d.game.bvn.ctrl {
+import flash.display.Sprite;
 
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ui.QuickTransUI;
-	import net.play5d.game.bvn.ui.TransUI;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.ui.QuickTransUI;
+import net.play5d.game.bvn.ui.TransUI;
 
-	public class StateCtrl
-	{
-		include "_INCLUDE_.as";
+public class StateCtrl {
+    include '_INCLUDE_.as';
 
-		private static var _i:StateCtrl;
+    private static var _i:StateCtrl;
 
-		public static function get I():StateCtrl{
-			_i ||= new StateCtrl();
-			return _i;
-		}
+    public static function get I():StateCtrl {
+        _i ||= new StateCtrl();
+        return _i;
+    }
 
-		public var transEnabled:Boolean = true;
+    public function StateCtrl() {
+        _transContainer = MainGame.I.root;
+    }
+    public var transEnabled:Boolean = true;
+    private var _transUI:TransUI;
+    private var _quickTransUI:QuickTransUI;
+    private var _transContainer:Sprite;
 
-		private var _transUI:TransUI;
+    public function transIn(back:Function = null, removeAfterComplete:Boolean = false):void {
 
-		private var _quickTransUI:QuickTransUI;
+        if (!transEnabled) {
+            if (back != null) {
+                back();
+            }
+            return;
+        }
 
+        addTransUI();
 
-		private var _transContainer:Sprite;
+        if (removeAfterComplete) {
+            _transUI.fadIn(removeSelf);
+        }
+        else {
+            _transUI.fadIn(back);
+        }
 
-		public function StateCtrl()
-		{
-			_transContainer = MainGame.I.root;
-		}
+        function removeSelf():void {
+            if (back != null) {
+                back();
+            }
+            removeTrainsUI();
+        }
 
-		private function addTransUI():void{
-			if(!_transUI){
-				_transUI = new TransUI();
-			}
+    }
 
-			_transContainer.addChild(_transUI.ui);
-		}
+    public function transOut(back:Function = null, removeAfterComplete:Boolean = true):void {
 
-		private function removeTrainsUI():void{
-			try{
-				_transContainer.removeChild(_transUI.ui);
-			}catch(e:Error){}
-		}
+        if (!transEnabled) {
+            if (back != null) {
+                back();
+            }
+            return;
+        }
 
-		public function transIn(back:Function = null , removeAfterComplete:Boolean = false):void{
+        addTransUI();
 
-			if(!transEnabled){
-				if(back != null) back();
-				return;
-			}
+        if (removeAfterComplete) {
+            _transUI.fadOut(removeSelf);
+        }
+        else {
+            _transUI.fadOut(back);
+        }
 
-			addTransUI();
+        function removeSelf():void {
+            if (back != null) {
+                back();
+            }
+            removeTrainsUI();
+        }
 
-			if(removeAfterComplete){
-				_transUI.fadIn(removeSelf);
-			}else{
-				_transUI.fadIn(back);
-			}
+    }
 
-			function removeSelf():void{
-				if(back != null) back();
-				removeTrainsUI();
-			}
+    public function quickTrans(back:Function = null):void {
+        if (!_transContainer) {
+            if (back != null) {
+                back();
+            }
+            return;
+        }
+        _quickTransUI ||= new QuickTransUI();
+        _transContainer.addChild(_quickTransUI);
+        _quickTransUI.fadInAndOut(transCom);
 
-		}
+        function transCom():void {
+            try {
+                _transContainer.removeChild(_quickTransUI);
+            }
+            catch (e:Error) {
+            }
+            if (back != null) {
+                back();
+            }
+        }
+    }
 
-		public function transOut(back:Function = null , removeAfterComplete:Boolean = true):void{
+    public function clearTrans():void {
+        removeTrainsUI();
+    }
 
-			if(!transEnabled){
-				if(back != null) back();
-				return;
-			}
+    private function addTransUI():void {
+        if (!_transUI) {
+            _transUI = new TransUI();
+        }
 
-			addTransUI();
+        _transContainer.addChild(_transUI.ui);
+    }
 
-			if(removeAfterComplete){
-				_transUI.fadOut(removeSelf);
-			}else{
-				_transUI.fadOut(back);
-			}
+    private function removeTrainsUI():void {
+        try {
+            _transContainer.removeChild(_transUI.ui);
+        }
+        catch (e:Error) {
+        }
+    }
 
-			function removeSelf():void{
-				if(back != null) back();
-				removeTrainsUI();
-			}
-
-		}
-
-		public function quickTrans(back:Function = null):void{
-			if(!_transContainer){
-				if(back != null) back();
-				return;
-			}
-			_quickTransUI ||= new QuickTransUI();
-			_transContainer.addChild(_quickTransUI);
-			_quickTransUI.fadInAndOut(transCom);
-
-			function transCom():void{
-				try{
-					_transContainer.removeChild(_quickTransUI);
-				}catch(e:Error){}
-				if(back != null) back();
-			}
-		}
-
-		public function clearTrans():void{
-			removeTrainsUI();
-		}
-
-	}
+}
 }
