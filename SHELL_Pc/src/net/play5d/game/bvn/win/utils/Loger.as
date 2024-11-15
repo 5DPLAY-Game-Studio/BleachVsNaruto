@@ -16,36 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.utils
-{
-	import flash.filesystem.File;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
+package net.play5d.game.bvn.win.utils {
+import flash.filesystem.File;
+import flash.filesystem.FileMode;
+import flash.filesystem.FileStream;
 
-	import net.play5d.game.bvn.interfaces.ILogger;
+import net.play5d.game.bvn.interfaces.ILogger;
 
-	public class Loger implements ILogger
-	{
-		private static var _file:File;
-		private static var _fileStream:FileStream;
+public class Loger implements ILogger {
+    private static var _file:File;
+    private static var _fileStream:FileStream;
 
-		public function Loger()
-		{
-		}
+    public function Loger() {
+    }
 
-		public function log(v:String):void{
+    public function log(v:String):void {
 
-			trace(v);
+        trace(v);
 
-			if(!_file){
-				_file = new File(File.applicationDirectory.nativePath+"/log.log");
-			}
-			_fileStream = new FileStream();
-			_fileStream.open(_file,FileMode.APPEND);
-			_fileStream.writeUTFBytes(v+"\r\n");
-			_fileStream.close();
-			_fileStream = null;
-		}
+        if (!_file) {
+            _file = new File(File.applicationDirectory.nativePath + '/log.log');
+        }
+        _fileStream = new FileStream();
+        _fileStream.open(_file, FileMode.APPEND);
+        _fileStream.writeUTFBytes(v + '\r\n');
+        _fileStream.close();
+        _fileStream = null;
+    }
 
-	}
+}
 }

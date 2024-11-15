@@ -16,22 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.utils
-{
-	public class SelectFighterDataType
-	{
+package net.play5d.game.bvn.win.utils {
+public class SelectFighterDataType {
 
-		public static const KEY:String = "SELECT";
+    public static const KEY:String = 'SELECT';
 
-		public static const SELECT:int = 1;
-		public static const NEXT_STEP:int = 2;
-		public static const FIGHTER_FINISH:int = 3;
-		public static const INDEX:int = 4;
-		public static const INDEX_FINISH:int = 5;
+    public static const SELECT:int         = 1;
+    public static const NEXT_STEP:int      = 2;
+    public static const FIGHTER_FINISH:int = 3;
+    public static const INDEX:int          = 4;
+    public static const INDEX_FINISH:int   = 5;
 
 
-		public function SelectFighterDataType()
-		{
-		}
-	}
+    public function SelectFighterDataType() {
+    }
+}
 }
