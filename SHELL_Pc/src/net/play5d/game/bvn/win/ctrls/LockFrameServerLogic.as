@@ -16,195 +16,203 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.ctrls
-{
-	import flash.utils.ByteArray;
+package net.play5d.game.bvn.win.ctrls {
+import flash.utils.ByteArray;
 
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
-	import net.play5d.game.bvn.data.GameRunDataVO;
-	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.stage.GameStage;
-	import net.play5d.game.bvn.win.input.InputManager;
-	import net.play5d.game.bvn.win.utils.LANUtils;
-	import net.play5d.game.bvn.win.utils.MsgType;
-	import net.play5d.kyo.stage.IStage;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.data.GameRunDataVO;
+import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.stage.GameStage;
+import net.play5d.game.bvn.win.input.InputManager;
+import net.play5d.game.bvn.win.utils.LANUtils;
+import net.play5d.game.bvn.win.utils.MsgType;
+import net.play5d.kyo.stage.IStage;
 
-	/**
-	 * 锁帧算法，服务端
-	 */
-	public class LockFrameServerLogic
-	{
-		public var enabled:Boolean = true;
+/**
+ * 锁帧算法，服务端
+ */
+public class LockFrameServerLogic {
+    public function LockFrameServerLogic() {
+    }
+    public var enabled:Boolean = true;
+    private var _clientFrame:int;
+    private var _renderFrame:int;
+    private var _renderNextFrame:int;
+    private var _renderSyncFrame:int;
+    private var _clientK:int = -1;
+    private var _serverK:int = 0;
+    private var _syncUpdateArr:ByteArray;
+    private var _sendUpdateFrame:int;
+    private var _sendUpdateSyncFrame:int;
+    private var _updateCache:Object = {};
 
-		private var _clientFrame:int;
-		private var _renderFrame:int;
-		private var _renderNextFrame:int;
-		private var _renderSyncFrame:int;
+    public function reset():void {
+        _renderFrame     = 0;
+        _renderNextFrame = 0;
+        _clientK         = -1;
+        _serverK         = 0;
+        _syncUpdateArr   = null;
+        _sendUpdateFrame = 0;
+    }
 
-		private var _clientK:int = -1;
-		private var _serverK:int = 0;
+    public function dispose():void {
 
-		private var _syncUpdateArr:ByteArray;
+    }
 
-		private var _sendUpdateFrame:int;
-		private var _sendUpdateSyncFrame:int;
+    public function render():Boolean {
 
+        if (!enabled) {
+            return true;
+        }
+        if (_clientK == -1) {
+            return false;
+        } //等待客户端
 
-		public function LockFrameServerLogic()
-		{
-		}
+        //客户端与服务器相差时间较大，等待客户端
+        if (_renderFrame > _clientFrame + LANUtils.LOCK_KEYFRAME) {
+            if (_sendUpdateFrame == 0) {
+                sendUpdate();
+            }
+            if (_sendUpdateSyncFrame == 0) {
+                sendSyncUpdate();
+            }
 
-		public function reset():void{
-			_renderFrame = 0;
-			_renderNextFrame = 0;
-			_clientK = -1;
-			_serverK = 0;
-			_syncUpdateArr = null;
-			_sendUpdateFrame = 0;
-		}
+            if (++_sendUpdateFrame > 5) {
+                _sendUpdateFrame = 0;
+            }
+            if (++_sendUpdateSyncFrame > 60) {
+                _sendUpdateSyncFrame = 0;
+            }
+            return false;
+        }
 
-		public function dispose():void{
+        InputManager.I.socket_input_p1.renderInput();
 
-		}
+        if (_renderFrame % LANUtils.LOCK_KEYFRAME == 0) {
 
-		public function render():Boolean{
+            if (_renderSyncFrame > LANUtils.SYNC_GAP) {
+                sendSyncUpdate();
+                _renderSyncFrame = 0;
+            }
 
-			if(!enabled) return true;
-			if(_clientK == -1) return false; //等待客户端
+            sendUpdate();
+        }
 
-			//客户端与服务器相差时间较大，等待客户端
-			if(_renderFrame > _clientFrame + LANUtils.LOCK_KEYFRAME){
-				if(_sendUpdateFrame == 0) sendUpdate();
-				if(_sendUpdateSyncFrame == 0) sendSyncUpdate();
+        _renderFrame++;
+        _renderSyncFrame++;
 
-				if(++_sendUpdateFrame > 5) _sendUpdateFrame = 0;
-				if(++_sendUpdateSyncFrame > 60) _sendUpdateSyncFrame = 0;
-				return false;
-			}
+        renderUpdate();
 
-			InputManager.I.socket_input_p1.renderInput();
+        if (_renderSyncFrame > LANUtils.SYNC_GAP) {
+            _syncUpdateArr = getSyncUpdate();
+        }
 
-			if(_renderFrame % LANUtils.LOCK_KEYFRAME == 0){
+        return true;
+    }
 
-				if(_renderSyncFrame > LANUtils.SYNC_GAP){
-					sendSyncUpdate();
-					_renderSyncFrame = 0;
-				}
+    public function receiveInput(kb:ByteArray):Boolean {
+        if (!kb) {
+            return false;
+        }
 
-				sendUpdate();
-			}
+        kb.position  = 0;
+        var type:int = kb.readByte();
 
-			_renderFrame++;
-			_renderSyncFrame++;
+        if (type != MsgType.INPUT_SEND) {
+            return false;
+        }
 
-			renderUpdate();
-
-			if(_renderSyncFrame > LANUtils.SYNC_GAP){
-				_syncUpdateArr = getSyncUpdate();
-			}
-
-			return true;
-		}
-
-		private function sendStart():void{
-			var updateArr:Array = [_serverK , 0];
-			LANServerCtrl.I.sendTCP(updateArr);
-		}
-
-		public function receiveInput(kb:ByteArray):Boolean{
-			if(!kb) return false;
-
-			kb.position = 0;
-			var type:int = kb.readByte();
-
-			if(type != MsgType.INPUT_SEND) return false;
-
-			_clientFrame = kb.readShort();
-			_clientK = kb.readShort();
+        _clientFrame = kb.readShort();
+        _clientK     = kb.readShort();
 
 //			_clientFrame = k[0];
 //			_clientK = k[1];
-			return true;
-		}
+        return true;
+    }
 
-		private function sendUpdate():void{
-			_renderNextFrame = _renderFrame + LANUtils.LOCK_KEYFRAME;
+    private function sendStart():void {
+        var updateArr:Array = [_serverK, 0];
+        LANServerCtrl.I.sendTCP(updateArr);
+    }
 
-			_serverK = InputManager.I.socket_input_p1.getSocketData();
+    private function sendUpdate():void {
+        _renderNextFrame = _renderFrame + LANUtils.LOCK_KEYFRAME;
 
-			InputManager.I.socket_input_p1.resetInput();
+        _serverK = InputManager.I.socket_input_p1.getSocketData();
 
-			var updateByte:ByteArray = new ByteArray();
-			updateByte.writeByte(MsgType.INPUT_UPDATE);
-			updateByte.writeShort(_renderFrame);
-			updateByte.writeShort(_serverK);
-			updateByte.writeShort(_clientK);
+        InputManager.I.socket_input_p1.resetInput();
 
-			LANServerCtrl.I.sendUDP(updateByte);
+        var updateByte:ByteArray = new ByteArray();
+        updateByte.writeByte(MsgType.INPUT_UPDATE);
+        updateByte.writeShort(_renderFrame);
+        updateByte.writeShort(_serverK);
+        updateByte.writeShort(_clientK);
 
-			cacheUpdate();
-		}
+        LANServerCtrl.I.sendUDP(updateByte);
 
-		private function sendSyncUpdate():void{
-			if(!_syncUpdateArr) return;
-			_updateCache = {};
-			LANServerCtrl.I.sendUDP(_syncUpdateArr);
-		}
+        cacheUpdate();
+    }
 
-		private function getSyncUpdate():ByteArray{
+    private function sendSyncUpdate():void {
+        if (!_syncUpdateArr) {
+            return;
+        }
+        _updateCache = {};
+        LANServerCtrl.I.sendUDP(_syncUpdateArr);
+    }
 
-			//frame,round,time,p1hp,p1x,p1y,p2hp,p2x,p2y
+    //伪客户端逻辑 ***************************************************************************************
 
-			var curStg:IStage = MainGame.stageCtrl.currentStage;
+    private function getSyncUpdate():ByteArray {
 
-			if(curStg is GameStage){
-				if(GameCtrl.I.actionEnable){
-					var runData:GameRunDataVO = GameCtrl.I.gameRunData;
-					var p1:FighterMain = runData.p1FighterGroup.currentFighter;
-					var p2:FighterMain = runData.p2FighterGroup.currentFighter;
+        //frame,round,time,p1hp,p1x,p1y,p2hp,p2x,p2y
 
-					var byte:ByteArray = new ByteArray();
-					byte.writeByte(MsgType.INPUT_SYNC);
-					byte.writeShort(_renderFrame);
-					byte.writeByte(runData.round);
-					byte.writeByte(runData.gameTime);
+        var curStg:IStage = MainGame.stageCtrl.currentStage;
 
-					byte.writeShort(p1.hp << 0);
-					byte.writeShort(p1.qi << 0);
-					byte.writeShort(p1.x << 0);
-					byte.writeShort(p1.y << 0);
+        if (curStg is GameStage) {
+            if (GameCtrl.I.actionEnable) {
+                var runData:GameRunDataVO = GameCtrl.I.gameRunData;
+                var p1:FighterMain        = runData.p1FighterGroup.currentFighter;
+                var p2:FighterMain        = runData.p2FighterGroup.currentFighter;
 
-					byte.writeShort(p2.hp << 0);
-					byte.writeShort(p2.qi << 0);
-					byte.writeShort(p2.x << 0);
-					byte.writeShort(p2.y << 0);
+                var byte:ByteArray = new ByteArray();
+                byte.writeByte(MsgType.INPUT_SYNC);
+                byte.writeShort(_renderFrame);
+                byte.writeByte(runData.round);
+                byte.writeByte(runData.gameTime);
 
-					return byte;
-				}
-			}
+                byte.writeShort(p1.hp << 0);
+                byte.writeShort(p1.qi << 0);
+                byte.writeShort(p1.x << 0);
+                byte.writeShort(p1.y << 0);
 
-			return null;
-		}
+                byte.writeShort(p2.hp << 0);
+                byte.writeShort(p2.qi << 0);
+                byte.writeShort(p2.x << 0);
+                byte.writeShort(p2.y << 0);
 
-		//伪客户端逻辑 ***************************************************************************************
+                return byte;
+            }
+        }
 
-		private var _updateCache:Object = {};
+        return null;
+    }
 
-		private function cacheUpdate():void{
-			for(var i:int = _renderFrame ; i < _renderNextFrame ; i++){
-				_updateCache[i] = [_serverK , _clientK];
-			}
-		}
+    private function cacheUpdate():void {
+        for (var i:int = _renderFrame; i < _renderNextFrame; i++) {
+            _updateCache[i] = [_serverK, _clientK];
+        }
+    }
 
-		private function renderUpdate():void{
-			var cacheKeys:Array = _updateCache[_renderFrame];
-			if(cacheKeys){
-				InputManager.I.socket_input_p1.setSocketData(cacheKeys[0]);
-				InputManager.I.socket_input_p2.setSocketData(cacheKeys[1]);
-			}
-		}
+    private function renderUpdate():void {
+        var cacheKeys:Array = _updateCache[_renderFrame];
+        if (cacheKeys) {
+            InputManager.I.socket_input_p1.setSocketData(cacheKeys[0]);
+            InputManager.I.socket_input_p2.setSocketData(cacheKeys[1]);
+        }
+    }
 
 
-	}
+}
 }

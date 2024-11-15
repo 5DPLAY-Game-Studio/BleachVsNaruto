@@ -16,82 +16,81 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.ctrls
-{
-	import flash.display.Sprite;
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
+package net.play5d.game.bvn.win.ctrls {
+import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
 
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.utils.KeyBoarder;
-	import net.play5d.game.bvn.win.views.lan.LANExitDialog;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.utils.KeyBoarder;
+import net.play5d.game.bvn.win.views.lan.LANExitDialog;
 
-	public class LanGameMenuCtrl
-	{
+public class LanGameMenuCtrl {
 
-		private static var _i:LanGameMenuCtrl;
+    private static var _i:LanGameMenuCtrl;
 
-		public static function get I():LanGameMenuCtrl{
-			_i ||= new LanGameMenuCtrl();
-			return _i;
-		}
+    public static function get I():LanGameMenuCtrl {
+        _i ||= new LanGameMenuCtrl();
+        return _i;
+    }
 
-		private var _isKeyDown:Boolean;
+    public function LanGameMenuCtrl() {
+    }
+    private var _isKeyDown:Boolean;
+    private var _exitDialog:LANExitDialog;
 
-		private var _exitDialog:LANExitDialog;
+    public function init():void {
 
-		public function LanGameMenuCtrl()
-		{
-		}
+        _exitDialog = new LANExitDialog();
+        _exitDialog.hide();
+        KeyBoarder.listen(keyHandler);
+    }
 
-		public function init():void{
+    public function dispose():void {
+        if (_exitDialog) {
+            try {
+                MainGame.I.root.removeChild(_exitDialog);
+            }
+            catch (e:Error) {
+                trace(e);
+            }
+            _exitDialog.destory();
+            _exitDialog = null;
+        }
 
-			_exitDialog = new LANExitDialog();
-			_exitDialog.hide();
-			KeyBoarder.listen(keyHandler);
-		}
+        KeyBoarder.unListen(keyHandler);
 
-		public function dispose():void{
-			if(_exitDialog){
-				try{
-					MainGame.I.root.removeChild(_exitDialog);
-				}catch(e:Error){
-					trace(e);
-				}
-				_exitDialog.destory();
-				_exitDialog = null;
-			}
+        _isKeyDown = false;
 
-			KeyBoarder.unListen(keyHandler);
+    }
 
-			_isKeyDown = false;
+    private function keyHandler(e:KeyboardEvent):void {
 
-		}
+        if (e.type == KeyboardEvent.KEY_DOWN) {
+            if (_isKeyDown) {
+                return;
+            }
+            if (!_exitDialog) {
+                return;
+            }
+            if (e.keyCode == Keyboard.ESCAPE) {
+                _isKeyDown = true;
+                if (_exitDialog.isShowing()) {
+                    _exitDialog.hide();
+                }
+                else {
+                    MainGame.I.root.addChild(_exitDialog);
+                    _exitDialog.show();
+                }
+            }
+        }
 
-		private function keyHandler(e:KeyboardEvent):void{
+        if (e.type == KeyboardEvent.KEY_UP) {
+            if (e.keyCode == Keyboard.ESCAPE) {
+                _isKeyDown = false;
+            }
+        }
 
-			if(e.type == KeyboardEvent.KEY_DOWN){
-				if(_isKeyDown) return;
-				if(!_exitDialog) return;
-				if(e.keyCode == Keyboard.ESCAPE){
-					_isKeyDown = true;
-					if(_exitDialog.isShowing()){
-						_exitDialog.hide();
-					}else{
-						MainGame.I.root.addChild(_exitDialog);
-						_exitDialog.show();
-					}
-				}
-			}
+    }
 
-			if(e.type == KeyboardEvent.KEY_UP){
-				if(e.keyCode == Keyboard.ESCAPE){
-					_isKeyDown = false;
-				}
-			}
-
-		}
-
-	}
+}
 }
