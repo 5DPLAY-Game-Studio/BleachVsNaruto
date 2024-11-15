@@ -25,7 +25,7 @@ package net.play5d.game.bvn.events
 		include "_INCLUDE_.as";
 
 		public var param:*;
-		public function ParamEvent(type:String,param, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function ParamEvent(type:String,param:*, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			this.param = param;
 			super(type, bubbles, cancelable);
