@@ -16,121 +16,116 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.views.lan
-{
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
+package net.play5d.game.bvn.win.views.lan {
+import flash.display.DisplayObject;
+import flash.display.MovieClip;
+import flash.events.Event;
+import flash.events.MouseEvent;
 
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.win.ctrls.LANGameCtrl;
-	import net.play5d.game.bvn.win.ctrls.LANServerCtrl;
-	//import net.play5d.game.bvn.win.ctrls.UDPHostCtrl;
-	import net.play5d.game.bvn.win.data.HostVO;
-	import net.play5d.game.bvn.win.data.LanGameModel;
-	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.IStage;
-	import net.play5d.kyo.utils.KyoBtnUtils;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.win.ctrls.LANGameCtrl;
+import net.play5d.game.bvn.win.ctrls.LANServerCtrl;
+import net.play5d.game.bvn.win.data.HostVO;
+import net.play5d.game.bvn.win.data.LanGameModel;
+import net.play5d.game.bvn.win.utils.UIAssetUtil;
+import net.play5d.kyo.stage.IStage;
+import net.play5d.kyo.utils.KyoBtnUtils;
 
-	public class LANHostCreateDialog implements IStage
-	{
-		private var _ui:MovieClip;
+//import net.play5d.game.bvn.win.ctrls.UDPHostCtrl;
+public class LANHostCreateDialog implements IStage {
+    public function LANHostCreateDialog() {
+    }
+    public var onCreate:Function;
+    public var onClose:Function;
+    private var _ui:MovieClip;
 
-		public var onCreate:Function;
-		public var onClose:Function;
+    /**
+     * 显示对象
+     */
+    public function get display():DisplayObject {
+        return _ui;
+    }
 
-		public function LANHostCreateDialog()
-		{
-		}
+    public function close():void {
+        if (onClose != null) {
+            onClose();
+        }
+        MainGame.stageCtrl.removeLayer(this);
+    }
 
-		/**
-		 * 显示对象
-		 */
-		public function get display():DisplayObject
-		{
-			return _ui;
-		}
+    /**
+     * 构建
+     */
+    public function build():void {
+        _ui = UIAssetUtil.I.createDisplayObject('build_win_mc');
+        _ui.check_pass.addEventListener(Event.CHANGE, checkHandler);
 
-		public function close():void{
-			if(onClose != null) onClose();
-			MainGame.stageCtrl.removeLayer(this);
-		}
+        KyoBtnUtils.initBtn(_ui.btn_ok, btnHandler);
+        KyoBtnUtils.initBtn(_ui.btn_close, close);
 
-		/**
-		 * 构建
-		 */
-		public function build():void
-		{
-			_ui = UIAssetUtil.I.createDisplayObject("build_win_mc");
-			_ui.check_pass.addEventListener(Event.CHANGE , checkHandler);
+        _ui.txt_pass.visible = false;
 
-			KyoBtnUtils.initBtn(_ui.btn_ok , btnHandler);
-			KyoBtnUtils.initBtn(_ui.btn_close , close);
-
-			_ui.txt_pass.visible = false;
-
-			_ui.comb_mode.addItem( { label: "TEAM VS - 小队模式", data:1 } );
+        _ui.comb_mode.addItem({label: 'TEAM VS - 小队模式', data: 1});
 //			_ui.comb_mode.addItem( { label: "SINGLE VS - 单人模式", data:2 } );
-		}
+    }
 
-		private function btnHandler():void{
+    /**
+     * 稍后构建
+     */
+    public function afterBuild():void {
+    }
 
-			SoundCtrl.I.sndConfrim();
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    public function destroy(back:Function = null):void {
+        _ui.btn_ok.removeEventListener(MouseEvent.CLICK, btnHandler);
+        _ui.check_pass.removeEventListener(Event.CHANGE, checkHandler);
 
-			var name:String = _ui.txt_hostname.text;
-			var pass:String = "";
-			var mode:int = _ui.comb_mode.selectedItem.data;
+        KyoBtnUtils.disposeBtn(_ui.btn_ok);
+        KyoBtnUtils.disposeBtn(_ui.btn_close);
 
-			if(name == ""){
-				GameUI.alert("ERROR","请输入主机名称");
-				return;
-			}
+    }
 
-			if(_ui.check_pass.selected){
-				pass = _ui.txt_pass.text;
-			}
+    private function btnHandler():void {
 
-			var hv:HostVO = new HostVO();
-			hv.name = name;
-			hv.gameMode = mode;
-			hv.password = pass;
-			hv.ownerName = LanGameModel.I.playerName;
-			hv.tcpPort = LANGameCtrl.PORT_TCP;
-			hv.udpPort = LANGameCtrl.PORT_UDP_SERVER;
+        SoundCtrl.I.sndConfrim();
 
-			LANServerCtrl.I.startServer(hv);
+        var name:String = _ui.txt_hostname.text;
+        var pass:String = '';
+        var mode:int    = _ui.comb_mode.selectedItem.data;
 
-			if(onCreate != null) onCreate();
+        if (name == '') {
+            GameUI.alert('ERROR', '请输入主机名称');
+            return;
+        }
 
-			close();
-		}
+        if (_ui.check_pass.selected) {
+            pass = _ui.txt_pass.text;
+        }
 
-		private function checkHandler(e:Event):void{
-			_ui.txt_pass.visible = _ui.check_pass.selected;
-		}
+        var hv:HostVO = new HostVO();
+        hv.name       = name;
+        hv.gameMode   = mode;
+        hv.password   = pass;
+        hv.ownerName  = LanGameModel.I.playerName;
+        hv.tcpPort    = LANGameCtrl.PORT_TCP;
+        hv.udpPort    = LANGameCtrl.PORT_UDP_SERVER;
 
-		/**
-		 * 稍后构建
-		 */
-		public function afterBuild():void
-		{
-		}
+        LANServerCtrl.I.startServer(hv);
 
-		/**
-		 * 销毁
-		 * @param back 回调函数
-		 */
-		public function destroy(back:Function =null):void
-		{
-			_ui.btn_ok.removeEventListener(MouseEvent.CLICK , btnHandler);
-			_ui.check_pass.removeEventListener(Event.CHANGE , checkHandler);
+        if (onCreate != null) {
+            onCreate();
+        }
 
-			KyoBtnUtils.disposeBtn(_ui.btn_ok);
-			KyoBtnUtils.disposeBtn(_ui.btn_close);
+        close();
+    }
 
-		}
-	}
+    private function checkHandler(e:Event):void {
+        _ui.txt_pass.visible = _ui.check_pass.selected;
+    }
+}
 }

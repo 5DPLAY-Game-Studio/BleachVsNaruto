@@ -16,85 +16,77 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.views.lan
-{
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.events.MouseEvent;
+package net.play5d.game.bvn.win.views.lan {
+import flash.display.DisplayObject;
+import flash.display.MovieClip;
 
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.data.GameData;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.win.data.LanGameModel;
-	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.IStage;
-	import net.play5d.kyo.utils.KyoBtnUtils;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.win.data.LanGameModel;
+import net.play5d.game.bvn.win.utils.UIAssetUtil;
+import net.play5d.kyo.stage.IStage;
+import net.play5d.kyo.utils.KyoBtnUtils;
 
-	public class ProfileDialog implements IStage
-	{
-		private var _ui:MovieClip;
+public class ProfileDialog implements IStage {
+    public function ProfileDialog() {
+    }
+    public var onClose:Function;
+    private var _ui:MovieClip;
 
-		public var onClose:Function;
+    /**
+     * 显示对象
+     */
+    public function get display():DisplayObject {
+        return _ui;
+    }
 
-		public function ProfileDialog()
-		{
-		}
+    /**
+     * 构建
+     */
+    public function build():void {
+        _ui = UIAssetUtil.I.createDisplayObject('profile_win_mc');
 
-		/**
-		 * 显示对象
-		 */
-		public function get display():DisplayObject
-		{
-			return _ui;
-		}
+        KyoBtnUtils.initBtn(_ui.btn_ok, okHandler);
+        KyoBtnUtils.initBtn(_ui.btn_close, close);
 
-		/**
-		 * 构建
-		 */
-		public function build():void
-		{
-			_ui = UIAssetUtil.I.createDisplayObject("profile_win_mc");
+        _ui.txt.text = LanGameModel.I.playerName;
+    }
 
-			KyoBtnUtils.initBtn(_ui.btn_ok , okHandler);
-			KyoBtnUtils.initBtn(_ui.btn_close , close);
+    public function close():void {
+        MainGame.stageCtrl.removeLayer(this);
+        if (onClose != null) {
+            onClose();
+        }
+    }
 
-			_ui.txt.text = LanGameModel.I.playerName;
-		}
+    /**
+     * 稍后构建
+     */
+    public function afterBuild():void {
+    }
 
-		private function okHandler():void{
-			var newName:String = _ui.txt.text;
-			if(newName == ""){
-				GameUI.alert("请输入名字");
-				return;
-			}
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    public function destroy(back:Function = null):void {
+        KyoBtnUtils.disposeBtn(_ui.btn_ok);
+        KyoBtnUtils.disposeBtn(_ui.btn_close);
+    }
 
-			LanGameModel.I.playerName = newName;
+    private function okHandler():void {
+        var newName:String = _ui.txt.text;
+        if (newName == '') {
+            GameUI.alert('请输入名字');
+            return;
+        }
 
-			GameData.I.saveData();
+        LanGameModel.I.playerName = newName;
 
-			close();
-		}
+        GameData.I.saveData();
 
-		public function close():void{
-			MainGame.stageCtrl.removeLayer(this);
-			if(onClose != null) onClose();
-		}
-
-		/**
-		 * 稍后构建
-		 */
-		public function afterBuild():void
-		{
-		}
-
-		/**
-		 * 销毁
-		 * @param back 回调函数
-		 */
-		public function destroy(back:Function =null):void
-		{
-			KyoBtnUtils.disposeBtn(_ui.btn_ok);
-			KyoBtnUtils.disposeBtn(_ui.btn_close);
-		}
-	}
+        close();
+    }
+}
 }

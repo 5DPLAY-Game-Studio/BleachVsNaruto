@@ -16,280 +16,286 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.views.lan
-{
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.display.SimpleButton;
-	import flash.display.Sprite;
-	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
+package net.play5d.game.bvn.win.views.lan {
+import flash.display.DisplayObject;
+import flash.display.MovieClip;
+import flash.display.SimpleButton;
+import flash.display.Sprite;
+import flash.events.TimerEvent;
+import flash.utils.Timer;
 
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
-	import net.play5d.game.bvn.data.GameMode;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
-	import net.play5d.game.bvn.win.ctrls.LANServerCtrl;
-	//import net.play5d.game.bvn.win.ctrls.LANUDPCtrler;
-	import net.play5d.game.bvn.win.data.HostVO;
-	import net.play5d.game.bvn.win.data.LanGameModel;
-	import net.play5d.game.bvn.win.utils.LockFrameLogic;
-	import net.play5d.game.bvn.win.utils.UIAssetUtil;
-	import net.play5d.kyo.stage.IStage;
-	import net.play5d.kyo.utils.KyoBtnUtils;
-	import net.play5d.kyo.utils.KyoUtils;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.data.GameMode;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
+import net.play5d.game.bvn.win.ctrls.LANServerCtrl;
+import net.play5d.game.bvn.win.data.HostVO;
+import net.play5d.game.bvn.win.data.LanGameModel;
+import net.play5d.game.bvn.win.utils.UIAssetUtil;
+import net.play5d.kyo.stage.IStage;
+import net.play5d.kyo.utils.KyoBtnUtils;
+import net.play5d.kyo.utils.KyoUtils;
 
-	public class LANRoomState implements IStage
-	{
-		private var _ui:MovieClip;
-		private var _txtChart:*;
-		private var _host:HostVO;
+//import net.play5d.game.bvn.win.ctrls.LANUDPCtrler;
+public class LANRoomState implements IStage {
+    public function LANRoomState() {
+    }
+    private var _ui:MovieClip;
+    private var _txtChart:*;
+    private var _host:HostVO;
+    private var _isOwner:Boolean;
+    private var _playerMap:Object = {};
+    private var _startTimer:Timer;
 
-		private var _isOwner:Boolean;
+    /**
+     * 显示对象
+     */
+    public function get display():DisplayObject {
+        return _ui;
+    }
 
-		private var _playerMap:Object = {};
+    /**
+     * 构建
+     */
+    public function build():void {
+        _ui = UIAssetUtil.I.createDisplayObject('room_mc');
+        _ui.input_chart.addEventListener('enter', submitChart);
 
-		private var _startTimer:Timer;
+        KyoBtnUtils.initBtn(_ui.btn_chart, submitChart);
+        KyoBtnUtils.initBtn(_ui.btn_start, startGame);
+        KyoBtnUtils.initBtn(_ui.btn_exit, exit);
 
-		public function LANRoomState()
-		{
-		}
+        SoundCtrl.I.BGM(AssetManager.I.getSound('continue'));
+    }
 
-		/**
-		 * 显示对象
-		 */
-		public function get display():DisplayObject
-		{
-			return _ui;
-		}
+    public function setStartAble(v:Boolean):void {
+        if (_ui.btn_start && _ui.btn_start.visible) {
+            (
+                    _ui.btn_start as SimpleButton
+            ).mouseEnabled = v;
+            KyoUtils.grayMC(_ui.btn_start, v);
+        }
+    }
 
-		/**
-		 * 构建
-		 */
-		public function build():void
-		{
-			_ui = UIAssetUtil.I.createDisplayObject("room_mc");
-			_ui.input_chart.addEventListener("enter" , submitChart);
+    public function hostMode():void {
+        _isOwner = true;
+        _host    = LANServerCtrl.I.host;
+        LANServerCtrl.I.setRoom(this);
+        initUI();
+    }
 
-			KyoBtnUtils.initBtn(_ui.btn_chart,submitChart);
-			KyoBtnUtils.initBtn(_ui.btn_start,startGame);
-			KyoBtnUtils.initBtn(_ui.btn_exit,exit);
+    public function clientMode(host:HostVO):void {
+        LANClientCtrl.I.setRoom(this);
+        addPlayer('self', LanGameModel.I.playerName);
+        _isOwner = false;
+        _host    = host;
+        initUI();
+    }
 
-			SoundCtrl.I.BGM(AssetManager.I.getSound('continue'));
-		}
+    /**
+     * 稍后构建
+     */
+    public function afterBuild():void {
+    }
 
-		public function setStartAble(v:Boolean):void{
-			if(_ui.btn_start && _ui.btn_start.visible){
-				(_ui.btn_start as SimpleButton).mouseEnabled = v;
-				KyoUtils.grayMC(_ui.btn_start , v);
-			}
-		}
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    public function destroy(back:Function = null):void {
 
-		public function hostMode():void{
-			_isOwner = true;
-			_host = LANServerCtrl.I.host;
-			LANServerCtrl.I.setRoom(this);
-			initUI();
-		}
+        if (_startTimer) {
+            _startTimer.removeEventListener(TimerEvent.TIMER, startTimerHandler);
+            _startTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, startTimerHandler);
+            _startTimer.stop();
+            _startTimer = null;
+        }
 
-		public function clientMode(host:HostVO):void{
-			LANClientCtrl.I.setRoom(this);
-			addPlayer("self",LanGameModel.I.playerName);
-			_isOwner = false;
-			_host = host;
-			initUI();
-		}
+        if (_isOwner) {
+            if (!LANServerCtrl.I.active) {
+                LANServerCtrl.I.stopServer();
+            }
+        }
+        else {
+            if (!LANClientCtrl.I.active) {
+                LANClientCtrl.I.dispose();
+            }
 
-		private function initUI():void{
-			_ui.txt_name.text = _host.name;
-			_ui.txt_mode.text = _host.getGameModeStr();
-			_ui.txt_pass.text = _host.password ? "密码："+_host.password : "";
-			_ui.btn_start.visible = _isOwner;
-			_ui.txt_start.visible = _isOwner;
-			_txtChart = _ui.txt_chart;
-			addOwner();
-		}
+        }
 
-		/**
-		 * 稍后构建
-		 */
-		public function afterBuild():void
-		{
-		}
+        try {
+            _ui.input_chart.removeEventListener('enter', submitChart);
+            KyoBtnUtils.disposeBtn(_ui.btn_chart);
+            KyoBtnUtils.disposeBtn(_ui.btn_start);
+            KyoBtnUtils.disposeBtn(_ui.btn_exit);
+        }
+        catch (e:Error) {
+        }
+    }
 
-		/**
-		 * 销毁
-		 * @param back 回调函数
-		 */
-		public function destroy(back:Function =null):void
-		{
+    public function startGameTimer():void {
+        if (_startTimer) {
+            return;
+        }
+        _startTimer = new Timer(1000, 5);
+        _startTimer.addEventListener(TimerEvent.TIMER, startTimerHandler);
+        _startTimer.addEventListener(TimerEvent.TIMER_COMPLETE, startTimerHandler);
 
-			if(_startTimer){
-				_startTimer.removeEventListener(TimerEvent.TIMER , startTimerHandler);
-				_startTimer.removeEventListener(TimerEvent.TIMER_COMPLETE , startTimerHandler);
-				_startTimer.stop();
-				_startTimer = null;
-			}
+        _startTimer.start();
+    }
 
-			if(_isOwner){
-				if(!LANServerCtrl.I.active){
-					LANServerCtrl.I.stopServer();
-				}
-			}else{
-				if(!LANClientCtrl.I.active){
-					LANClientCtrl.I.dispose();
-				}
+    public function addPlayer(id:String, name:String):void {
 
-			}
+        if (_playerMap[id]) {
+            trace('player:' + id + '已存在！');
+            return;
+        }
 
-			try{
-				_ui.input_chart.removeEventListener("enter" , submitChart);
-				KyoBtnUtils.disposeBtn(_ui.btn_chart);
-				KyoBtnUtils.disposeBtn(_ui.btn_start);
-				KyoBtnUtils.disposeBtn(_ui.btn_exit);
-			}catch(e:Error){}
-		}
+        var item:LANRoomPlayerItem = new LANRoomPlayerItem(id, name);
+        item.enableOut();
 
-		private function submitChart(...params):void{
-			var chart:String = _ui.input_chart.text;
-			if(chart == "") return;
+        _playerMap[id] = item;
 
-			_ui.input_chart.text = "";
+        var ct_player:Sprite = _ui.ct_player;
+        item.ui.y            = 60;
+        ct_player.addChild(item.ui);
+    }
 
-			if(_isOwner){
-				LANServerCtrl.I.sendChart(chart , LanGameModel.I.playerName);
-			}else{
-				LANClientCtrl.I.sendChart(chart);
-			}
+    public function removePlayer(id:String):void {
+        var item:LANRoomPlayerItem = _playerMap[id];
+        if (item) {
+            try {
+                _ui.ct_player.removeChild(item.ui);
+            }
+            catch (e:Error) {
+            }
+            item.destory();
+        }
 
-		}
+        delete _playerMap[id];
+    }
 
-		private function startGame():void{
-			if(_isOwner){
-				SoundCtrl.I.sndConfrim();
-				LANServerCtrl.I.sendStart();
-			}
-		}
+    public function pushChart(str:String, name:String = null):void {
+        var chartStr:String = name ? name + ' : ' + str : str;
+        _txtChart.appendText(chartStr + '\n');
+    }
 
-		public function startGameTimer():void{
-			if(_startTimer) return;
-			_startTimer = new Timer(1000,5);
-			_startTimer.addEventListener(TimerEvent.TIMER , startTimerHandler);
-			_startTimer.addEventListener(TimerEvent.TIMER_COMPLETE , startTimerHandler);
+    public function exitRoom(msg:String = null):void {
+        exit();
+        if (msg) {
+            GameUI.alert('EXIT', msg);
+        }
+    }
 
-			_startTimer.start();
-		}
+    /**
+     * 开始前的操作锁定
+     */
+    public function lockStart():void {
+        if (_ui.btn_start && _ui.btn_start.visible) {
+            (
+                    _ui.btn_start as SimpleButton
+            ).mouseEnabled = false;
+            KyoUtils.grayMC(_ui.btn_start);
+        }
+        if (_ui.btn_exit && _ui.btn_exit.visible) {
+            (
+                    _ui.btn_exit as SimpleButton
+            ).mouseEnabled = false;
+            KyoUtils.grayMC(_ui.btn_exit);
+        }
+    }
 
-		private function startTimerHandler(e:TimerEvent):void{
-			if(e.type == TimerEvent.TIMER){
+    private function initUI():void {
+        _ui.txt_name.text     = _host.name;
+        _ui.txt_mode.text     = _host.getGameModeStr();
+        _ui.txt_pass.text     = _host.password ? '密码：' + _host.password : '';
+        _ui.btn_start.visible = _isOwner;
+        _ui.txt_start.visible = _isOwner;
+        _txtChart             = _ui.txt_chart;
+        addOwner();
+    }
 
-//				if(_startTimer.currentCount == 2){
-//					lockStart();
-//				}
+    private function submitChart(...params):void {
+        var chart:String = _ui.input_chart.text;
+        if (chart == '') {
+            return;
+        }
 
-				pushChart((_startTimer.repeatCount - _startTimer.currentCount + 1) + "秒后开始游戏" , null);
-			}
+        _ui.input_chart.text = '';
 
-			if(e.type == TimerEvent.TIMER_COMPLETE){
-				if(_isOwner){
-					LANServerCtrl.I.gameStart();
-				}else{
-					LANClientCtrl.I.gameStart();
-				}
+        if (_isOwner) {
+            LANServerCtrl.I.sendChart(chart, LanGameModel.I.playerName);
+        }
+        else {
+            LANClientCtrl.I.sendChart(chart);
+        }
 
-				switch(_host.gameMode){
-					case 1:
-						GameMode.currentMode = GameMode.TEAM_VS_PEOPLE;
-						break;
-					case 2:
-						GameMode.currentMode = GameMode.SINGLE_VS_PEOPLE;
-						break;
-				}
-				MainGame.I.goSelect();
-			}
-		}
+    }
 
-		private function exit():void{
-			var ls:LANGameState = new LANGameState();
-			MainGame.stageCtrl.goStage(ls);
+    private function startGame():void {
+        if (_isOwner) {
+            SoundCtrl.I.sndConfrim();
+            LANServerCtrl.I.sendStart();
+        }
+    }
 
-			if(!_isOwner){
-				ls.showHostList();
-			}
+    private function exit():void {
+        var ls:LANGameState = new LANGameState();
+        MainGame.stageCtrl.goStage(ls);
 
-		}
+        if (!_isOwner) {
+            ls.showHostList();
+        }
 
-		private function addOwner():void{
-			var item:MovieClip = UIAssetUtil.I.createDisplayObject("player_item_mc");
-			item.txt.text = _host.ownerName;
-			item.type.gotoAndStop(1);
-			item.btn_out.visible = false;
-
-			var ct_player:Sprite = _ui.ct_player;
-			ct_player.addChild(item);
-		}
-
-		public function addPlayer(id:String , name:String):void{
-
-			if(_playerMap[id]){
-				trace("player:"+id+"已存在！");
-				return;
-			}
-
-			var item:LANRoomPlayerItem = new LANRoomPlayerItem(id,name);
-			item.enableOut();
-
-			_playerMap[id] = item;
-
-			var ct_player:Sprite = _ui.ct_player;
-			item.ui.y = 60;
-			ct_player.addChild(item.ui);
-		}
-
-		public function removePlayer(id:String):void{
-			var item:LANRoomPlayerItem = _playerMap[id];
-			if(item){
-				try{
-					_ui.ct_player.removeChild(item.ui);
-				}catch(e:Error){}
-				item.destory();
-			}
-
-			delete _playerMap[id];
-		}
-
-		public function pushChart(str:String , name:String = null):void{
-			var chartStr:String = name ? name+" : "+str : str;
-			_txtChart.appendText(chartStr+"\n");
-		}
+    }
 
 //		public function pushMsg(msg:String):void{
 //			_txtChart.appendText(msg+"\n");
 //		}
 
-		public function exitRoom(msg:String = null):void{
-			exit();
-			if(msg){
-				GameUI.alert("EXIT",msg);
-			}
-		}
+    private function addOwner():void {
+        var item:MovieClip = UIAssetUtil.I.createDisplayObject('player_item_mc');
+        item.txt.text      = _host.ownerName;
+        item.type.gotoAndStop(1);
+        item.btn_out.visible = false;
 
-		/**
-		 * 开始前的操作锁定
-		 */
-		public function lockStart():void{
-			if(_ui.btn_start && _ui.btn_start.visible){
-				(_ui.btn_start as SimpleButton).mouseEnabled = false;
-				KyoUtils.grayMC(_ui.btn_start);
-			}
-			if(_ui.btn_exit && _ui.btn_exit.visible){
-				(_ui.btn_exit as SimpleButton).mouseEnabled = false;
-				KyoUtils.grayMC(_ui.btn_exit);
-			}
-		}
+        var ct_player:Sprite = _ui.ct_player;
+        ct_player.addChild(item);
+    }
 
-	}
+    private function startTimerHandler(e:TimerEvent):void {
+        if (e.type == TimerEvent.TIMER) {
+
+//				if(_startTimer.currentCount == 2){
+//					lockStart();
+//				}
+
+            pushChart((
+                      _startTimer.repeatCount - _startTimer.currentCount + 1
+                      ) + '秒后开始游戏', null);
+        }
+
+        if (e.type == TimerEvent.TIMER_COMPLETE) {
+            if (_isOwner) {
+                LANServerCtrl.I.gameStart();
+            }
+            else {
+                LANClientCtrl.I.gameStart();
+            }
+
+            switch (_host.gameMode) {
+            case 1:
+                GameMode.currentMode = GameMode.TEAM_VS_PEOPLE;
+                break;
+            case 2:
+                GameMode.currentMode = GameMode.SINGLE_VS_PEOPLE;
+                break;
+            }
+            MainGame.I.goSelect();
+        }
+    }
+
+}
 }
