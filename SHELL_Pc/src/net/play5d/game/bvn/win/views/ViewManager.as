@@ -16,43 +16,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.views
-{
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.stage.SettingStage;
-	import net.play5d.game.bvn.win.GameInterfaceManager;
-	import net.play5d.game.bvn.win.data.ExtendConfig;
-	import net.play5d.game.bvn.win.input.JoyStickConfigVO;
-	import net.play5d.kyo.stage.IStage;
+package net.play5d.game.bvn.win.views {
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.stage.SettingStage;
+import net.play5d.game.bvn.win.GameInterfaceManager;
+import net.play5d.game.bvn.win.input.JoyStickConfigVO;
+import net.play5d.kyo.stage.IStage;
 
-	public class ViewManager
-	{
-		private static var _i:ViewManager;
-		public static function get I():ViewManager{
-			_i ||= new ViewManager();
-			return _i;
-		}
+public class ViewManager {
+    private static var _i:ViewManager;
 
-		public function ViewManager()
-		{
-		}
+    public static function get I():ViewManager {
+        _i ||= new ViewManager();
+        return _i;
+    }
 
-		public function goP1JoyStickSet():void{
-			goJoyStickSet(1 , GameInterfaceManager.config.joy1Config);
-		}
+    public function ViewManager() {
+    }
 
-		public function goP2JoyStickSet():void{
-			goJoyStickSet(2 , GameInterfaceManager.config.joy2Config);
-		}
+    public function goP1JoyStickSet():void {
+        goJoyStickSet(1, GameInterfaceManager.config.joy1Config);
+    }
 
-		private function goJoyStickSet(player:int , config:JoyStickConfigVO):void{
-			var curStg:IStage = MainGame.stageCtrl.currentStage;
-			if(!curStg is SettingStage) return;
-			var setStg:SettingStage         = curStg as SettingStage;
-			var joyStickSetUI:JoyStickSetUI = new JoyStickSetUI();
-			joyStickSetUI.setConfig(player , config);
-			setStg.goInnerSetPage(joyStickSetUI);
-		}
+    public function goP2JoyStickSet():void {
+        goJoyStickSet(2, GameInterfaceManager.config.joy2Config);
+    }
 
-	}
+    private function goJoyStickSet(player:int, config:JoyStickConfigVO):void {
+        var curStg:IStage = MainGame.stageCtrl.currentStage;
+        if (!curStg is SettingStage) {
+            return;
+        }
+        var setStg:SettingStage         = curStg as SettingStage;
+        var joyStickSetUI:JoyStickSetUI = new JoyStickSetUI();
+        joyStickSetUI.setConfig(player, config);
+        setStg.goInnerSetPage(joyStickSetUI);
+    }
+
+}
 }
