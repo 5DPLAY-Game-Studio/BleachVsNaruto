@@ -90,21 +90,15 @@
   "debug": {
     "package": {
       "ctrl": {
-        "GameLoader": {
-        },
         "GameLogic": {
           "isInAir": {
           },
           "isTouchBottomFloor": {
           },
           "isOutRange": {
-          },
-          "setGameMode": {
           }
         },
         "SoundCtrl": {
-          "loadFightBGM": {
-          }
         }
       }
     },
@@ -243,6 +237,9 @@
         },
         "assister": {
           "init_fail": "初始化失败！未定义函数 {}"
+        },
+        "bullet": {
+          "do_hit": "跳转 [{}] 帧失败！"
         }
       }
     }
