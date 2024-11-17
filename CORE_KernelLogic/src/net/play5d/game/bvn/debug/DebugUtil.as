@@ -42,7 +42,7 @@ package net.play5d.game.bvn.debug
 			}
 
 			if(!d.parent && !container){
-				trace("debugPosition 失败");
+				TraceLang('debug.trace.data.debug_util.debug_position');
 				return;
 			}
 

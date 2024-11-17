@@ -92,8 +92,6 @@
       "ctrl": {
         "GameLoader": {
           "loadAssister": {
-          },
-          "loadMap": {
           }
         },
         "GameLogic": {
@@ -104,8 +102,6 @@
             }
           },
           "isOutRange": {
-            "map_null": {
-            }
           },
           "setGameMode": {
           }
@@ -115,8 +111,6 @@
           }
         },
         "game_ctrls": {
-          "GameCtrl": {
-          }
         }
       }
     },
@@ -201,6 +195,9 @@
         },
         "debugger": {
           "error_msg": "Debugger.errorMsg:: 输出信息: {}"
+        },
+        "debug_util": {
+          "debug_position": "DebugUtil.debugPosition:: 调试位置失败！"
         }
       }
     },
