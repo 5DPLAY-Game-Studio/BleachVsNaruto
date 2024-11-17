@@ -80,7 +80,8 @@ public class SettingStage implements IStage
 		 */
 		public function build():void
 		{
-			_oldConfig = ObjectUtils.cloneObject(GameData.I.config);
+//			_oldConfig = ObjectUtils.cloneObject(GameData.I.config);
+			_oldConfig = GameData.I.config.clone();
 
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting , ResUtils.SETTING);
 			_btnGroup = new SetBtnGroup();
