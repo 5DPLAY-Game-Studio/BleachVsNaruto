@@ -92,13 +92,7 @@
       "ctrl": {
         "GameLogic": {
           "isInAir": {
-          },
-          "isTouchBottomFloor": {
-          },
-          "isOutRange": {
           }
-        },
-        "SoundCtrl": {
         }
       }
     },
@@ -240,6 +234,9 @@
         },
         "bullet": {
           "do_hit": "跳转 [{}] 帧失败！"
+        },
+        "fighter_attacker": {
+          "unsupported_type": "不支持的类型！"
         }
       }
     }
