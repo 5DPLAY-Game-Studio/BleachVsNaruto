@@ -91,15 +91,11 @@
     "package": {
       "ctrl": {
         "GameLoader": {
-          "loadAssister": {
-          }
         },
         "GameLogic": {
           "isInAir": {
           },
           "isTouchBottomFloor": {
-            "map_null": {
-            }
           },
           "isOutRange": {
           },
@@ -109,8 +105,6 @@
         "SoundCtrl": {
           "loadFightBGM": {
           }
-        },
-        "game_ctrls": {
         }
       }
     },
@@ -246,6 +240,9 @@
         },
         "musou_mission_vo": {
           "init_musou_stage_fail": "初始化 无双场景 失败！"
+        },
+        "assister": {
+          "init_fail": "初始化失败！未定义函数 {}"
         }
       }
     }

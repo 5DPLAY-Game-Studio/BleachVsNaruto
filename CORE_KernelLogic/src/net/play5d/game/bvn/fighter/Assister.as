@@ -77,7 +77,7 @@ package net.play5d.game.bvn.fighter
 				_ctrler.initAssister(this);
 				_mainMc.setAssistCtrler(_ctrler);
 			}else{
-				throw new Error("初始化失败，SWF未定义setAssistCtrler()");
+				throw new Error(GetLang('debug.error.data.assister.init_fail', 'setAssistCtrler()'));
 			}
 		}
 
