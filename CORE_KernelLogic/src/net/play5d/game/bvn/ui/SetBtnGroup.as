@@ -262,6 +262,7 @@ package net.play5d.game.bvn.ui
 				if(btn.optionKey) btn.setOptionByValue(config.getValueByKey(btn.optionKey));
 			}
 
+			addBtn("CANCEL","取消");
 			addBtn("APPLY","应用");
 
 			this.graphics.beginFill(0,0);

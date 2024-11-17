@@ -44,8 +44,10 @@ package net.play5d.game.bvn.stage
 	import net.play5d.game.bvn.ui.SetCtrlBtnUI;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.stage.IStage;
+import net.play5d.kyo.utils.KyoUtils;
+import net.play5d.pcl.utils.ObjectUtils;
 
-	public class SettingStage implements IStage
+public class SettingStage implements IStage
 	{
 		include "_INCLUDE_.as";
 
@@ -58,6 +60,8 @@ package net.play5d.game.bvn.stage
 		private var _backMenuPicClass:Class;
 
 		private var _backMenuBtn:Sprite;
+
+		private var _oldConfig:ConfigVO;
 
 		public function SettingStage()
 		{
@@ -76,6 +80,8 @@ package net.play5d.game.bvn.stage
 		 */
 		public function build():void
 		{
+			_oldConfig = ObjectUtils.cloneObject(GameData.I.config);
+
 			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting , ResUtils.SETTING);
 			_btnGroup = new SetBtnGroup();
 			_btnGroup.startY = 30;
@@ -133,6 +139,10 @@ package net.play5d.game.bvn.stage
 				case 'P2 KEY SET':
 					goKeyConfig(2,GameData.I.config.key_p2);
 					break;
+				case 'CANCEL':
+					GameData.I.config = _oldConfig;
+					MainGame.I.goMenu();
+					break;
 				case 'APPLY':
 					GameData.I.saveData();
 					GameData.I.config.applyConfig();
@@ -182,6 +192,8 @@ package net.play5d.game.bvn.stage
 				_innerSetUI.destory();
 				_innerSetUI = null;
 			}
+
+			_oldConfig = null;
 		}
 
 		private function goMainSetting():void{
