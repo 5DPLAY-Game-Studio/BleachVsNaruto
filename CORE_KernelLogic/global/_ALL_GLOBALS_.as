@@ -43,6 +43,7 @@ public function get _ALL_GLOBALS_():* {
         P1,
         P2,
         Printf,
+        RunCheatCode,
         SetElement,
         STAGE,
         ThrowError,
