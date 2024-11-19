@@ -104,7 +104,7 @@ package net.play5d.game.bvn.fighter.ctrler
 
 			_followFrame = GameConfig.FPS_ANIMATE * 2;
 
-			_following = Math.random() * 0.5;
+			_following = Math.random() < 0.5;
 
 			if(_following) _followDis = Math.random() > 0.6 ? (10 + Math.random() * 20) : (50 + Math.random() * 100);
 		}
@@ -145,8 +145,8 @@ package net.play5d.game.bvn.fighter.ctrler
 			}
 			_attackFrame = 0;
 
-			_attack = Math.random() * 0.2;
-			_zhao = Math.random() * 0.1;
+			_attack = Math.random() < 0.2;
+			_zhao = Math.random() < 0.1;
 		}
 
 		private function targetInRange(id:String):Boolean{
@@ -154,7 +154,7 @@ package net.play5d.game.bvn.fighter.ctrler
 			if(!area) return false;
 			var hr:Rectangle = fighter.getHitRange(id);
 			if(!hr) return false;
-			return area.intersection(hr).isEmpty() == false;
+			return !area.intersection(hr).isEmpty();
 		}
 
 

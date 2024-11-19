@@ -65,7 +65,7 @@ package net.play5d.game.bvn.stage
 			return _map;
 		}
 
-		public function setVisibleByClass(cls:Class, visible):void{
+		public function setVisibleByClass(cls:Class, visible:Boolean):void{
 			for each(var d:IGameSprite in _gameSprites){
 				var className:String = getQualifiedClassName(d);
 				var ds:Class = getDefinitionByName(className) as Class;

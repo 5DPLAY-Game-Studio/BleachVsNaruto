@@ -77,7 +77,7 @@ package net.play5d.game.bvn.fighter.ctrler
 			addBuff('defense', -downVal, hold);
 		}
 
-		private function addBuff(param:String, value, hold:Number):FighterBuffVO{
+		private function addBuff(param:String, value:Number, hold:Number):FighterBuffVO{
 			try{
 				var buff:FighterBuffVO = _buffObj[param];
 				if(!buff){

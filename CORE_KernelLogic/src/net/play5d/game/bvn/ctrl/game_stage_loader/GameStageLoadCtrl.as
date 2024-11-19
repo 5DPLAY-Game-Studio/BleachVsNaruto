@@ -444,7 +444,7 @@ import net.play5d.game.bvn.data.FighterModel;
 
 
 		// 数组去重
-		private function unique(arr):Array{
+		private function unique(arr:Array):Array{
 			var hash:Array = [];
 			for (var i:int = 0; i < arr.length; i++) {
 				if(arr[i] === null || arr[i] === undefined) continue;
