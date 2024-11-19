@@ -2,6 +2,21 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.11192024_alpha] - 2024-11-19
+
+### 新增
+
+- 新增 取消保存当前设置 功能
+
+### 更改
+
+- 更改 SHELL_Pc 默认画质为低画质
+
+### 修复
+
+- 修复遍历字典算法错误导致的类型转换失败问题
+- 修复 ui/fight 文件的变量声明问题
+
 ## [3.7.0.0.11132024_alpha] - 2024-11-13
 
 ### 更改
@@ -92,6 +107,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.11192024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.11132024_alpha...3.7.0.0.11192024_alpha
 [3.7.0.0.11132024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.11112024_alpha...3.7.0.0.11132024_alpha
 [3.7.0.0.11112024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10222024_alpha...3.7.0.0.11112024_alpha
 [3.7.0.0.10222024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.10192024_alpha...3.7.0.0.10222024_alpha
