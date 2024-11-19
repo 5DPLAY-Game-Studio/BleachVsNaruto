@@ -52,7 +52,7 @@ import net.play5d.kyo.stage.KyoStageCtrl;
 import net.play5d.kyo.utils.KyoTimeout;
 
 public class MainGame {
-    include "_INCLUDE_.as";
+    include '_INCLUDE_.as';
 
 //		public static const PUBLISH_VERSION_TYPE:int = PublishVersion.COM_4399;
     public static const VERSION:String     = 'V3.7';
@@ -68,8 +68,9 @@ public class MainGame {
     public function MainGame() {
         I = this;
     }
+
     private var _rootSprite:Sprite;
-    private var _fps:Number = 60;
+    private var _fps:Number     = 60;
     private var _quality:String = null;
 
     private var _stage:Stage;
