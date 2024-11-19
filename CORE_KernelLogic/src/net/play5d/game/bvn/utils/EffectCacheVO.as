@@ -22,6 +22,7 @@ package net.play5d.game.bvn.utils
 
 	public class EffectCacheVO
 	{
+		include "_INCLUDE_.as";
 
 		public var normal:EffectVO;
 		public var mosouEnemy:EffectVO;

@@ -24,9 +24,7 @@ package net.play5d.game.bvn.utils
 
 	public class GameUtils
 	{
-		public function GameUtils()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		public static function isInTop(child:DisplayObject,container:DisplayObjectContainer = null,globalPoint:Point = null):Boolean
 		{

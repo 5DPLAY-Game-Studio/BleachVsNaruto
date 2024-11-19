@@ -26,6 +26,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class FightTimeUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:time_mc;
 		private var _numMc:MCNumber;
 		private var _renderTime:Boolean;

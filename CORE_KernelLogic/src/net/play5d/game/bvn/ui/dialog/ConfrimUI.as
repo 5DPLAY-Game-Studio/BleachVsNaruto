@@ -40,6 +40,8 @@ import net.play5d.kyo.display.shapes.Box;
 
 public class ConfrimUI extends BaseDialog
 {
+	include "_INCLUDE_OVERRIDE_.as";
+
 	private var _enTxt:BitmapFontText;
 	private var _old_cnTxt:TextField;
 	private var _btnGroup:SetBtnGroup;

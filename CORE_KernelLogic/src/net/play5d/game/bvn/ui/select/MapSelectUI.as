@@ -40,6 +40,8 @@ package net.play5d.game.bvn.ui.select
 
 	public class MapSelectUI extends Sprite
 	{
+		include "_INCLUDE_.as";
+
 		public var enabled:Boolean = false;
 		public var inputType:String;
 

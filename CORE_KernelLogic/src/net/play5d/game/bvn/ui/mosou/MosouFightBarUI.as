@@ -30,6 +30,8 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MosouFightBarUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:mosou_hpbar_mc;
 		private var _face:mosou_hpbar_facemc;
 

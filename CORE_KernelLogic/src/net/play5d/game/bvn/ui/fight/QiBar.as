@@ -33,6 +33,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class QiBar
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:qbar_mc;
 		private var _fighter:FighterMain;
 		private var _bar:InsBar;

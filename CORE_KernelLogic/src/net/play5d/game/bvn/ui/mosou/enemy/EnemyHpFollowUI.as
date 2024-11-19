@@ -25,6 +25,8 @@ package net.play5d.game.bvn.ui.mosou.enemy
 
 	public class EnemyHpFollowUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:mosou_enemyhpbarmc2;
 		private var _fighter:FighterMain;
 		private var _bar:DisplayObject;

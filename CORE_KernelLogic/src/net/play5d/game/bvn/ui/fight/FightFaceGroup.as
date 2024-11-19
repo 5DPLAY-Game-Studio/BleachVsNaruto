@@ -24,6 +24,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class FightFaceGroup
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:hpbar_facegroup;
 
 		private var _face1:FightFaceUI;

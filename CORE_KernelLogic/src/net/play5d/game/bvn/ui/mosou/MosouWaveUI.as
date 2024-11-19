@@ -30,6 +30,8 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MosouWaveUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:Sprite;
 		private var _txtCur:TextField;
 		private var _txtMax:TextField;

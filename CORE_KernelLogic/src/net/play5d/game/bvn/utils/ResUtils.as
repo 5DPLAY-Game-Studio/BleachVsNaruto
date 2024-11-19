@@ -36,6 +36,7 @@ package net.play5d.game.bvn.utils
 
 	public class ResUtils
 	{
+		include "_INCLUDE_.as";
 
 		private static var _i:ResUtils;
 		public static function get I():ResUtils{

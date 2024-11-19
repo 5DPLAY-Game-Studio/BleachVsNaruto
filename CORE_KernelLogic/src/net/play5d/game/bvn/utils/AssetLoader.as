@@ -30,10 +30,7 @@ package net.play5d.game.bvn.utils
 
 	public class AssetLoader implements IAssetLoader
 	{
-
-		public function AssetLoader()
-		{
-		}
+		include "_INCLUDE_.as";
 
 		public function loadXML(url:String, back:Function, fail:Function = null):void
 		{

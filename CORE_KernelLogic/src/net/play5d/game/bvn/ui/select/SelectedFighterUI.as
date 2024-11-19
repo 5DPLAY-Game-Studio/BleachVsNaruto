@@ -43,6 +43,8 @@ package net.play5d.game.bvn.ui.select
 	 */
 	public class SelectedFighterUI extends EventDispatcher
 	{
+		include "_INCLUDE_.as";
+
 		public var ui:Sprite;
 		public var trueY:Number = 0;
 

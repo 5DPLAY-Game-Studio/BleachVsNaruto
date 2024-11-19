@@ -20,6 +20,8 @@ package net.play5d.game.bvn.ui.dialog
 {
 	public class AlertUI extends MusouConfrimUI
 	{
+		include "_INCLUDE_OVERRIDE_.as";
+
 		public function AlertUI()
 		{
 			super();

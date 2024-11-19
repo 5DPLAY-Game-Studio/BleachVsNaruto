@@ -26,6 +26,8 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MousouKOsUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ct:Sprite;
 		private var _text:BitmapFontText;
 		public function MousouKOsUI(ui:Sprite)

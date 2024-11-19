@@ -24,6 +24,8 @@ package net.play5d.game.bvn.ui.dialog.select
 
 	public class DotItemUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _ui:MovieClip;
 
 		public var page:int = 0;

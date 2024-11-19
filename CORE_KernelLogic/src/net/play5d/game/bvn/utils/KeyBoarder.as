@@ -23,6 +23,8 @@ package net.play5d.game.bvn.utils
 
 	public class KeyBoarder
 	{
+		include "_INCLUDE_.as";
+
 		private static var _inited:Boolean;
 
 		private static var _stage:Stage;

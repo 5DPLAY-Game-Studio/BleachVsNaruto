@@ -26,6 +26,8 @@ package net.play5d.game.bvn.ui.fight
 
 	public class HitsUI
 	{
+		include "_INCLUDE_.as";
+
 		private var _mc:MovieClip;
 		private var _txtmc:MCNumber;
 		private var _isShow:Boolean;
