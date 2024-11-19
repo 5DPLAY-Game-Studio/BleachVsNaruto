@@ -379,7 +379,7 @@ package net.play5d.game.bvn.fighter
 			if(_owner is Assister){
 				return (_owner as Assister).getCtrler().hitModel;
 			}
-			throw new Error("不支持的owner类型!");
+			ThrowError(Error, GetLang('debug.error.data.fighter_attacker.unsupported_type'));
 			return null;
 		}
 

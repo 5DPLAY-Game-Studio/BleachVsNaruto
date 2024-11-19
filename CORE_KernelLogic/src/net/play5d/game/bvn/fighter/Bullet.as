@@ -341,7 +341,7 @@ package net.play5d.game.bvn.fighter
 				try{
 					mc.gotoAndStop("hit");
 				}catch(e:Error){
-					trace('Bullet',e);
+					ThrowError(e, GetLang('debug.error.data.bullet.do_hit', 'hit'));
 				}
 			}
 			_isHit = true;

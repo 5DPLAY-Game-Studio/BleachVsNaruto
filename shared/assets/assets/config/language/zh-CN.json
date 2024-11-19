@@ -90,32 +90,8 @@
   "debug": {
     "package": {
       "ctrl": {
-        "GameLoader": {
-          "loadAssister": {
-          },
-          "loadMap": {
-          }
-        },
         "GameLogic": {
           "isInAir": {
-          },
-          "isTouchBottomFloor": {
-            "map_null": {
-            }
-          },
-          "isOutRange": {
-            "map_null": {
-            }
-          },
-          "setGameMode": {
-          }
-        },
-        "SoundCtrl": {
-          "loadFightBGM": {
-          }
-        },
-        "game_ctrls": {
-          "GameCtrl": {
           }
         }
       }
@@ -201,6 +177,9 @@
         },
         "debugger": {
           "error_msg": "Debugger.errorMsg:: 输出信息: {}"
+        },
+        "debug_util": {
+          "debug_position": "DebugUtil.debugPosition:: 调试位置失败！"
         }
       }
     },
@@ -249,6 +228,15 @@
         },
         "musou_mission_vo": {
           "init_musou_stage_fail": "初始化 无双场景 失败！"
+        },
+        "assister": {
+          "init_fail": "初始化失败！未定义函数 {}"
+        },
+        "bullet": {
+          "do_hit": "跳转 [{}] 帧失败！"
+        },
+        "fighter_attacker": {
+          "unsupported_type": "不支持的类型！"
         }
       }
     }
