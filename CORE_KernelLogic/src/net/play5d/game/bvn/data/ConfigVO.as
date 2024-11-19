@@ -30,8 +30,9 @@ package net.play5d.game.bvn.data
 	import net.play5d.game.bvn.interfaces.IExtendConfig;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.kyo.utils.KyoUtils;
+import net.play5d.pcl.utils.ClassUtils;
 
-	public class ConfigVO implements ISaveData
+public class ConfigVO implements ISaveData
 	{
 		include "_INCLUDE_.as";
 
@@ -58,6 +59,17 @@ package net.play5d.game.bvn.data
 		 * 扩展设置
 		 */
 		public var extendConfig:IExtendConfig;
+
+		private var _cloneKeys:Array = ClassUtils.getClassProperty(ConfigVO);
+		public function clone():ConfigVO {
+			var cv:ConfigVO = new ConfigVO();
+
+			for each(var property:String in _cloneKeys) {
+				cv[property] = this[property];
+			}
+
+			return cv;
+		}
 
 		public function ConfigVO()
 		{
