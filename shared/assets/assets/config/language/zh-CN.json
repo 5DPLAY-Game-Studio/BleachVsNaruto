@@ -39,10 +39,10 @@
       "musou_play"  : "无双模式",
       "musou_acrade": "无双模式",
       
-      "option": "游戏设置",
-      "training": "练习模式",
-      "credits": "制作组"
-          
+      "option"    : "游戏设置",
+      "training"  : "练习模式",
+      "credits"   : "制作组",
+      "more_games": "更多游戏"
     }
   },
   "alert": {
@@ -53,38 +53,6 @@
   "confirm": {
     "musou_ctrl": {
       "unlock_fighter": "确定使用 {} 枚金币解锁人物？"
-    }
-  },
-  "package": {
-    "interfaces": {
-      "GameInterface": {
-        "getDefaultMenu": {
-          },
-          "single_play": {
-            "child": {
-              "single_acrade": {
-              }
-            }
-          },
-          "musou_play": {
-            "child": {
-              "musou_acrade": {
-              }
-            }
-          },
-          "option": {
-          },
-          "training": {
-            "txt": "练习模式"
-          },
-          "credits": {
-            "txt": "制作组"
-          },
-          "more_games": {
-            "txt": "更多游戏"
-          }
-        }
-      }
     }
   },
   "debug": {
