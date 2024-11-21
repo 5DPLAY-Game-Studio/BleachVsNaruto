@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package {
+package net.play5d.game.bvn.win {
 import net.play5d.game.bvn.interfaces.ISwfLib;
 
 public class SwfLib implements ISwfLib {
