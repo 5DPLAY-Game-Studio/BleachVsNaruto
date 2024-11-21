@@ -47,6 +47,7 @@ package net.play5d.game.bvn.ui
 				KyoUtils.setValueByObject(tf,textFormatParam);
 				if(LOCK_FONT) tf.font = LOCK_FONT;
 				text.defaultTextFormat = tf;
+				text.embedFonts = true;
 
 //				var tf:TextFormat = new TextFormat();
 //				if(textFormatParam.font != null) textFormatParam.font = undefined;
