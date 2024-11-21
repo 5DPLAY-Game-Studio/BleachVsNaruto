@@ -27,7 +27,7 @@ import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.fight.FightUI;
 
 public class GameEndCtrl {
-    include '_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     public static var SHOW_CONTINUE:Boolean = false;
 

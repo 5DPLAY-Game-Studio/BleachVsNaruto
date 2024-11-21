@@ -30,7 +30,7 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 
 public class FighterEventCtrl extends BaseFighterEventCtrl {
-    include '_INCLUDE_OVERRIDE_.as';
+    include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
     public override function initlize():void {
         super.initlize();

@@ -26,7 +26,7 @@ import net.play5d.game.bvn.fighter.FighterMain;
  * 练习模式控制类
  */
 public class TrainingCtrler {
-    include '_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     public static var RECOVER_HP:Boolean    = true;
     public static var RECOVER_QI:Boolean    = true;

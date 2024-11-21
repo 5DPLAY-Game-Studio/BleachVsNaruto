@@ -34,7 +34,7 @@ import net.play5d.game.bvn.stage.GameStage;
  * 游戏主逻辑控制类
  */
 public class GameMainLogicCtrler {
-    include '_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     public function GameMainLogicCtrler() {
     }

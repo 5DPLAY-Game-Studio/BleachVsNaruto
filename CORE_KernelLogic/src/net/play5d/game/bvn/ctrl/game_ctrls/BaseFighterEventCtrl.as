@@ -23,7 +23,7 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 
 public class BaseFighterEventCtrl {
-    include '_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     public function BaseFighterEventCtrl() {
     }

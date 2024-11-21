@@ -29,7 +29,7 @@ import net.play5d.game.bvn.ui.GameUI;
  * 游戏开场控制
  */
 public class GameStartCtrl {
-    include '_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     public function GameStartCtrl(state:GameStage) {
         _state = state;
