@@ -39,28 +39,28 @@ package net.play5d.game.bvn.interfaces
 		public static function getDefaultMenu():Array{
 			var a:Array = [
 
-				{txt:'TEAM PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.txt'),children:[
-					{txt:'TEAM ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_acrade.txt')},
-					{txt:'TEAM VS PEOPLE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_vs_people.txt')},
-					{txt:'TEAM VS CPU',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_vs_cpu.txt')},
-						{txt:'TEAM WATCH',cn:'观战电脑'}
+				{txt:'TEAM PLAY',cn:GetLang('txt.game_interface.team_play'),children:[
+					{txt:'TEAM ACRADE',cn:GetLang('txt.game_interface.team_play_acrade')},
+					{txt:'TEAM VS PEOPLE',cn:GetLang('txt.game_interface.team_play_vs_people')},
+					{txt:'TEAM VS CPU',cn:GetLang('txt.game_interface.team_play_vs_CPU')},
+						{txt:'TEAM WATCH',cn:GetLang('txt.game_interface.team_play_watch')}
 				]},
 
-				{txt:'SINGLE PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.txt'),children:[
-					{txt:'SINGLE ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_acrade.txt')},
-					{txt:'SINGLE VS PEOPLE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_vs_people.txt')},
-					{txt:'SINGLE VS CPU',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_vs_cpu.txt')},
-						{txt:'SINGLE WATCH',cn:'观战电脑'}
+				{txt:'SINGLE PLAY',cn:GetLang('txt.game_interface.single_play'),children:[
+					{txt:'SINGLE ACRADE',cn:GetLang('txt.game_interface.single_play_acrade')},
+					{txt:'SINGLE VS PEOPLE',cn:GetLang('txt.game_interface.single_play_vs_people')},
+					{txt:'SINGLE VS CPU',cn:GetLang('txt.game_interface.single_play_vs_CPU')},
+						{txt:'SINGLE WATCH',cn:GetLang('txt.game_interface.single_play_watch')}
 				]},
 
-				{txt:'MUSOU PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.txt'),children:[
-					{txt:'MUSOU ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.child.musou_acrade.txt')}
+				{txt:'MUSOU PLAY',cn:GetLang('txt.game_interface.musou_play'),children:[
+					{txt:'MUSOU ACRADE',cn:GetLang('txt.game_interface.musou_acrade')}
 				]},
 
-				{txt:'OPTION',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.option.txt')},
-				{txt:'TRAINING',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.training.txt')},
-				{txt:'CREDITS',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.credits.txt')},
-				{txt:'MORE GAMES',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.more_games.txt')}
+				{txt:'OPTION',cn:GetLang('txt.game_interface.option')},
+				{txt:'TRAINING',cn:GetLang('txt.game_interface.training')},
+				{txt:'CREDITS',cn:GetLang('txt.game_interface.credits')},
+				{txt:'MORE GAMES',cn:GetLang('txt.game_interface.more_games')}
 			];
 			return a;
 		}

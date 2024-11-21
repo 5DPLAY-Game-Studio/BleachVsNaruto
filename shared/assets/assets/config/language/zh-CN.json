@@ -19,6 +19,30 @@
       "bgm"             : "背景乐",
       "loading_no_name" : "正在加载 [{}] ({}/{})",
       "loading_has_name": "正在加载 [{}] : {} ({}/{})"
+    },
+
+
+
+    "game_interface": {
+      "team_play"          : "小队模式",
+      "team_play_acrade"   : "闯关模式",
+      "team_play_vs_people": "2P对战",
+      "team_play_vs_CPU"   : "对战电脑",
+      "team_play_watch"    : "观战电脑",
+
+      "single_play"          : "小队模式",
+      "single_play_acrade"   : "闯关模式",
+      "single_play_vs_people": "2P对战",
+      "single_play_vs_CPU"   : "对战电脑",
+      "single_play_watch"    : "观战电脑",
+
+      "musou_play"  : "无双模式",
+      "musou_acrade": "无双模式",
+      
+      "option"    : "游戏设置",
+      "training"  : "练习模式",
+      "credits"   : "制作组",
+      "more_games": "更多游戏"
     }
   },
   "alert": {
@@ -31,71 +55,7 @@
       "unlock_fighter": "确定使用 {} 枚金币解锁人物？"
     }
   },
-  "package": {
-    "interfaces": {
-      "GameInterface": {
-        "getDefaultMenu": {
-          "team_play": {
-            "txt": "小队模式",
-            "child": {
-              "team_acrade": {
-                "txt": "闯关模式"
-              },
-              "team_vs_people": {
-                "txt": "2P对战"
-              },
-              "team_vs_cpu": {
-                "txt": "对战电脑"
-              }
-            }
-          },
-          "single_play": {
-            "txt": "单人模式",
-            "child": {
-              "single_acrade": {
-                "txt": "闯关模式"
-              },
-              "single_vs_people": {
-                "txt": "2P对战"
-              },
-              "single_vs_cpu": {
-                "txt": "对战电脑"
-              }
-            }
-          },
-          "musou_play": {
-            "txt": "无双模式",
-            "child": {
-              "musou_acrade": {
-                "txt": "无双模式"
-              }
-            }
-          },
-          "option": {
-            "txt": "游戏设置"
-          },
-          "training": {
-            "txt": "练习模式"
-          },
-          "credits": {
-            "txt": "制作组"
-          },
-          "more_games": {
-            "txt": "更多游戏"
-          }
-        }
-      }
-    }
-  },
   "debug": {
-    "package": {
-      "ctrl": {
-        "GameLogic": {
-          "isInAir": {
-          }
-        }
-      }
-    },
     "trace": {
       "prefix": "* 跟踪 : ",
       "data": {
@@ -237,6 +197,10 @@
         },
         "fighter_attacker": {
           "unsupported_type": "不支持的类型！"
+        },
+        "fighter_main": {
+          "main_mc_is_null"           : "创建人物失败！mainMc 为空！",
+          "fighter_ctrler_initialized": "fighter 已完成初始化！"
         }
       }
     }
