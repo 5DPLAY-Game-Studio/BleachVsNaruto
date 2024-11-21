@@ -88,14 +88,6 @@
     }
   },
   "debug": {
-    "package": {
-      "ctrl": {
-        "GameLogic": {
-          "isInAir": {
-          }
-        }
-      }
-    },
     "trace": {
       "prefix": "* 跟踪 : ",
       "data": {
@@ -237,6 +229,10 @@
         },
         "fighter_attacker": {
           "unsupported_type": "不支持的类型！"
+        },
+        "fighter_main": {
+          "main_mc_is_null"           : "创建人物失败！mainMc 为空！",
+          "fighter_ctrler_initialized": "fighter 已完成初始化！"
         }
       }
     }

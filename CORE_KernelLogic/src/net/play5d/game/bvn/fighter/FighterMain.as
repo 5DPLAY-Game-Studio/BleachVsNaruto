@@ -275,7 +275,7 @@ package net.play5d.game.bvn.fighter
 			_area = null;
 
 			if(!mainMc){
-				throw new Error("人物创建失败, mainMc is null !");
+				ThrowError(Error, GetLang('debug.error.data.fighter_main.main_mc_is_null'));
 			}
 		}
 
@@ -318,6 +318,7 @@ package net.play5d.game.bvn.fighter
 
 			if(_fighterCtrl){
 				throw new Error('fighter 已完成化！');
+				ThrowError(Error, GetLang('debug.error.data.fighter_main.fighter_ctrler_initialized'));
 				return;
 			}
 
