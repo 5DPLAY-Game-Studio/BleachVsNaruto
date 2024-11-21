@@ -24,7 +24,7 @@ import net.play5d.game.bvn.ui.QuickTransUI;
 import net.play5d.game.bvn.ui.TransUI;
 
 public class StateCtrl {
-    include '_INCLUDE_.as';
+    include '../../../../../../include/_INCLUDE_.as';
 
     private static var _i:StateCtrl;
 

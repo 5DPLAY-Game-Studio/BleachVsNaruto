@@ -28,7 +28,7 @@ import net.play5d.kyo.sound.KyoBGSounder;
 import net.play5d.kyo.utils.KyoRandom;
 
 public class SoundCtrl {
-    include '_INCLUDE_.as';
+    include '../../../../../../include/_INCLUDE_.as';
 
     private static var _i:SoundCtrl;
 

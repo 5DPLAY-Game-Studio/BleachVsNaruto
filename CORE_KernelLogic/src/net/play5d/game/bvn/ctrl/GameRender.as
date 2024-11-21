@@ -25,7 +25,7 @@ import flash.utils.Dictionary;
  * 全局渲染器
  */
 public class GameRender {
-    include '_INCLUDE_.as';
+    include '../../../../../../include/_INCLUDE_.as';
 
     public static var isRender:Boolean = true;
     private static var _fucs:Dictionary = new Dictionary();

@@ -38,7 +38,7 @@ import net.play5d.kyo.utils.KyoUtils;
 
 //import net.play5d.utils;
 public class AssetManager {
-    include '_INCLUDE_.as';
+    include '../../../../../../include/_INCLUDE_.as';
 
     private const _effectSwfPath:String = 'effect.swf';
     private static var _i:AssetManager;
