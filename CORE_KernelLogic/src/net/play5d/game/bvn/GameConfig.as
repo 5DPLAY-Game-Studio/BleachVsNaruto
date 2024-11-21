@@ -21,7 +21,7 @@ import flash.display.StageQuality;
 import flash.geom.Point;
 
 public class GameConfig {
-    include '_INCLUDE_.as';
+    include '../../../../../include/_INCLUDE_.as';
 
     public static const G:Number          = 12; //重力
     public static const G_ADD:Number      = 1.2; //重力加速度
