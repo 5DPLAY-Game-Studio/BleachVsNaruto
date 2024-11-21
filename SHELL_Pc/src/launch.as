@@ -34,6 +34,7 @@ import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.URL;
+import net.play5d.game.bvn.win.AssetLoader;
 import net.play5d.game.bvn.win.GameInterfaceManager;
 import net.play5d.game.bvn.win.MosouDebugger;
 import net.play5d.game.bvn.win.utils.Loger;
