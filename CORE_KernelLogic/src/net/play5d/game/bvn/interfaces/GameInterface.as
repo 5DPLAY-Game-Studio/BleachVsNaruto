@@ -59,7 +59,7 @@ package net.play5d.game.bvn.interfaces
 
 				{txt:'OPTION',cn:GetLang('txt.game_interface.option')},
 				{txt:'TRAINING',cn:GetLang('txt.game_interface.training')},
-				{txt:'CREDITS',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.credits.txt')},
+				{txt:'CREDITS',cn:GetLang('txt.game_interface.credits')},
 				{txt:'MORE GAMES',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.more_games.txt')}
 			];
 			return a;

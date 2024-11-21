@@ -40,8 +40,9 @@
       "musou_acrade": "无双模式",
       
       "option": "游戏设置",
-
-      "training": "练习模式"
+      "training": "练习模式",
+      "credits": "制作组"
+          
     }
   },
   "alert": {
@@ -58,14 +59,10 @@
     "interfaces": {
       "GameInterface": {
         "getDefaultMenu": {
-          "team_play": {
-            }
           },
           "single_play": {
             "child": {
               "single_acrade": {
-              },
-              "single_vs_people": {
               }
             }
           },
@@ -76,7 +73,6 @@
             }
           },
           "option": {
-            "txt": "游戏设置"
           },
           "training": {
             "txt": "练习模式"
