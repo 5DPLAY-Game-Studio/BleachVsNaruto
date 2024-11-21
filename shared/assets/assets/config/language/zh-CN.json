@@ -19,6 +19,16 @@
       "bgm"             : "背景乐",
       "loading_no_name" : "正在加载 [{}] ({}/{})",
       "loading_has_name": "正在加载 [{}] : {} ({}/{})"
+    },
+
+
+
+    "game_interface": {
+      "team_play"          : "小队模式",
+      "team_play_acrade"   : "闯关模式",
+      "team_play_vs_people": "2P对战",
+      "team_play_vs_CPU"   : "对战电脑",
+      "team_play_watch"    : "观战电脑"
     }
   },
   "alert": {
@@ -36,13 +46,10 @@
       "GameInterface": {
         "getDefaultMenu": {
           "team_play": {
-            "txt": "小队模式",
             "child": {
               "team_acrade": {
-                "txt": "闯关模式"
               },
               "team_vs_people": {
-                "txt": "2P对战"
               },
               "team_vs_cpu": {
                 "txt": "对战电脑"

@@ -39,11 +39,11 @@ package net.play5d.game.bvn.interfaces
 		public static function getDefaultMenu():Array{
 			var a:Array = [
 
-				{txt:'TEAM PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.txt'),children:[
-					{txt:'TEAM ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_acrade.txt')},
-					{txt:'TEAM VS PEOPLE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_vs_people.txt')},
-					{txt:'TEAM VS CPU',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.team_play.child.team_vs_cpu.txt')},
-						{txt:'TEAM WATCH',cn:'观战电脑'}
+				{txt:'TEAM PLAY',cn:GetLang('txt.game_interface.team_play'),children:[
+					{txt:'TEAM ACRADE',cn:GetLang('txt.game_interface.team_play_acrade')},
+					{txt:'TEAM VS PEOPLE',cn:GetLang('txt.game_interface.team_play_vs_people')},
+					{txt:'TEAM VS CPU',cn:GetLang('txt.game_interface.team_play_vs_CPU')},
+						{txt:'TEAM WATCH',cn:GetLang('txt.game_interface.team_play_watch')}
 				]},
 
 				{txt:'SINGLE PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.txt'),children:[
