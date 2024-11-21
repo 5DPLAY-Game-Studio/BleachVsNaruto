@@ -57,7 +57,7 @@ package net.play5d.game.bvn.interfaces
 					{txt:'MUSOU ACRADE',cn:GetLang('txt.game_interface.musou_acrade')}
 				]},
 
-				{txt:'OPTION',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.option.txt')},
+				{txt:'OPTION',cn:GetLang('txt.game_interface.option')},
 				{txt:'TRAINING',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.training.txt')},
 				{txt:'CREDITS',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.credits.txt')},
 				{txt:'MORE GAMES',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.more_games.txt')}

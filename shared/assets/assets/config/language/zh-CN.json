@@ -37,9 +37,9 @@
       "single_play_watch"    : "观战电脑",
 
       "musou_play"  : "无双模式",
-      "musou_acrade": "无双模式"
+      "musou_acrade": "无双模式",
       
-
+      "option": "游戏设置"
     }
   },
   "alert": {
@@ -58,8 +58,6 @@
         "getDefaultMenu": {
           "team_play": {
             "child": {
-              "team_vs_cpu": {
-              }
             }
           },
           "single_play": {
@@ -69,7 +67,6 @@
               "single_vs_people": {
               },
               "single_vs_cpu": {
-                "txt": "对战电脑"
               }
             }
           },
@@ -77,7 +74,6 @@
             "txt": "无双模式",
             "child": {
               "musou_acrade": {
-                "txt": "无双模式"
               }
             }
           },
