@@ -46,11 +46,11 @@ package net.play5d.game.bvn.interfaces
 						{txt:'TEAM WATCH',cn:GetLang('txt.game_interface.team_play_watch')}
 				]},
 
-				{txt:'SINGLE PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.txt'),children:[
-					{txt:'SINGLE ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_acrade.txt')},
-					{txt:'SINGLE VS PEOPLE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_vs_people.txt')},
-					{txt:'SINGLE VS CPU',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.single_play.child.single_vs_cpu.txt')},
-						{txt:'SINGLE WATCH',cn:'观战电脑'}
+				{txt:'SINGLE PLAY',cn:GetLang('txt.game_interface.single_play'),children:[
+					{txt:'SINGLE ACRADE',cn:GetLang('txt.game_interface.single_play_acrade')},
+					{txt:'SINGLE VS PEOPLE',cn:GetLang('txt.game_interface.single_play_vs_people')},
+					{txt:'SINGLE VS CPU',cn:GetLang('txt.game_interface.single_play_vs_CPU')},
+						{txt:'SINGLE WATCH',cn:GetLang('txt.game_interface.single_play_watch')}
 				]},
 
 				{txt:'MUSOU PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.txt'),children:[

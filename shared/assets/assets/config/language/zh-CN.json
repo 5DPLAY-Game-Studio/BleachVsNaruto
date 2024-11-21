@@ -28,7 +28,13 @@
       "team_play_acrade"   : "闯关模式",
       "team_play_vs_people": "2P对战",
       "team_play_vs_CPU"   : "对战电脑",
-      "team_play_watch"    : "观战电脑"
+      "team_play_watch"    : "观战电脑",
+
+      "single_play"          : "小队模式",
+      "single_play_acrade"   : "闯关模式",
+      "single_play_vs_people": "2P对战",
+      "single_play_vs_CPU"   : "对战电脑",
+      "single_play_watch"    : "观战电脑"
     }
   },
   "alert": {
@@ -47,17 +53,12 @@
         "getDefaultMenu": {
           "team_play": {
             "child": {
-              "team_acrade": {
-              },
-              "team_vs_people": {
-              },
               "team_vs_cpu": {
                 "txt": "对战电脑"
               }
             }
           },
           "single_play": {
-            "txt": "单人模式",
             "child": {
               "single_acrade": {
                 "txt": "闯关模式"
