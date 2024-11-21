@@ -16,176 +16,181 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.game_ctrls
-{
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.ctrl.StateCtrl;
-	import net.play5d.game.bvn.data.GameMode;
-	import net.play5d.game.bvn.data.GameRunDataVO;
-	import net.play5d.game.bvn.fighter.FighterActionState;
-	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.ui.SetBtn;
-	import net.play5d.game.bvn.ui.fight.FightUI;
+package net.play5d.game.bvn.ctrl.game_ctrls {
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.ctrl.StateCtrl;
+import net.play5d.game.bvn.data.GameMode;
+import net.play5d.game.bvn.data.GameRunDataVO;
+import net.play5d.game.bvn.fighter.FighterActionState;
+import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.ui.fight.FightUI;
 
-	public class GameEndCtrl
-	{
-		include "_INCLUDE_.as";
+public class GameEndCtrl {
+    include '_INCLUDE_.as';
 
-		public static var SHOW_CONTINUE:Boolean = false;
+    public static var SHOW_CONTINUE:Boolean = false;
 
-		private var _winner:FighterMain;
-		private var _loser:FighterMain;
+    public function GameEndCtrl() {
+    }
+    private var _winner:FighterMain;
+    private var _loser:FighterMain;
+    private var _step:int;
+    private var _isRender:Boolean;
+    private var _holdFrame:int;
+    private var _drawGame:Boolean;
 
-		private var _step:int;
-		private var _isRender:Boolean;
-		private var _holdFrame:int;
+    public function initlize(winner:FighterMain, loser:FighterMain):void {
+        GameCtrl.I.gameRunData.setAllowLoseHP(false);
 
-		private var _drawGame:Boolean;
+        _winner   = winner;
+        _loser    = loser;
+        _step     = 0;
+        _isRender = true;
+    }
 
-		public function GameEndCtrl()
-		{
-		}
+    public function drawGame():void {
 
+        GameCtrl.I.gameRunData.setAllowLoseHP(false);
 
-		public function initlize(winner:FighterMain , loser:FighterMain):void{
-			GameCtrl.I.gameRunData.setAllowLoseHP(false);
+        _drawGame = true;
+        _step     = 0;
+        _isRender = true;
+    }
 
-			_winner = winner;
-			_loser = loser;
-			_step = 0;
-			_isRender = true;
-		}
+    public function destory():void {
+        _winner = null;
+        _loser  = null;
+    }
 
-		public function drawGame():void{
+    public function render():Boolean {
 
-			GameCtrl.I.gameRunData.setAllowLoseHP(false);
+        if (!_isRender) {
+            return false;
+        }
 
-			_drawGame = true;
-			_step = 0;
-			_isRender = true;
-		}
+        if (_holdFrame-- > 0) {
+            return false;
+        }
 
-		public function destory():void{
-			_winner = null;
-			_loser = null;
-		}
+        if (_drawGame) {
+            return renderDrawGame();
+        }
+        return renderEND();
 
-		public function render():Boolean{
+    }
 
-			if(!_isRender) return false;
+    public function skip():void {
+        if (SHOW_CONTINUE) {
+            return;
+        }
 
-			if(_holdFrame-- > 0) return false;
+        if (_step == 2) {
+            _holdFrame = 0;
+        }
+    }
 
-			if(_drawGame){
-				return renderDrawGame();
-			}
-			return renderEND();
+    private function renderDrawGame():Boolean {
+        switch (_step) {
+        case 0:
+            GameUI.I.getUI().showEnd(function ():void {
+                _holdFrame = 0;
+            }, {drawGame: true});
 
-		}
+            _step      = 1;
+            _holdFrame = 10 * GameConfig.FPS_GAME;
+            break;
+        case 1:
+            _step      = 2;
+            _holdFrame = 1 * GameConfig.FPS_GAME;
 
-		private function renderDrawGame():Boolean{
-			switch(_step){
-				case 0:
-					GameUI.I.getUI().showEnd(function():void{
-						_holdFrame = 0;
-					},{drawGame:true});
+            if (SHOW_CONTINUE) {
+                _holdFrame = 10 * 60 * GameConfig.FPS_GAME;
+                (
+                        GameUI.I.getUI() as FightUI
+                ).showContinue(function ():void {
+                    _holdFrame = 0;
+                });
+            }
+            break;
+        case 2:
+            //战斗结束
+            _isRender = false;
+            GameUI.I.getUI().clearStartAndEnd();
+            return true;
+            break;
+        }
 
-					_step = 1;
-					_holdFrame = 10 * GameConfig.FPS_GAME;
-					break;
-				case 1:
-					_step = 2;
-					_holdFrame = 1 * GameConfig.FPS_GAME;
+        return false;
+    }
 
-					if(SHOW_CONTINUE){
-						_holdFrame = 10 * 60 * GameConfig.FPS_GAME;
-						(GameUI.I.getUI() as FightUI).showContinue(function():void{
-							_holdFrame = 0;
-						});
-					}
-					break;
-				case 2:
-					//战斗结束
-					_isRender = false;
-					GameUI.I.getUI().clearStartAndEnd();
-					return true;
-					break;
-			}
+    private function renderEND():Boolean {
+        switch (_step) {
+        case 0:
+            GameUI.I.getUI().showEnd(function ():void {
+                _holdFrame = 0;
+            }, {winner: _winner, loser: _loser});
+            _step      = 1;
+            _holdFrame = 10 * GameConfig.FPS_GAME;
+            break;
+        case 1:
 
-			return false;
-		}
+            if (!FighterActionState.isAllowWinState(_winner.actionState)) {
+                return false;
+            }
 
+            _winner.win();
+            _holdFrame = 3 * GameConfig.FPS_GAME;
+            _step      = 2;
 
-		private function renderEND():Boolean{
-			switch(_step){
-				case 0:
-					GameUI.I.getUI().showEnd(function():void{
-						_holdFrame = 0;
-					},{winner:_winner,loser:_loser});
-					_step = 1;
-					_holdFrame = 10 * GameConfig.FPS_GAME;
-					break;
-				case 1:
+            var rundata:GameRunDataVO = GameCtrl.I.gameRunData;
+            var winner:FighterMain    = rundata.lastWinner;
 
-					if(!FighterActionState.isAllowWinState(_winner.actionState)) return false;
+            if (GameMode.isTeamMode() || GameMode.currentMode == GameMode.SURVIVOR) {
+                var timeRate:Number = rundata.gameTime == -1 ? 1 : rundata.gameTime / rundata.gameTimeMax;
+                var addHPMax:int    = winner.hpMax * 0.2;
+                var addHP:int       = addHPMax * timeRate;
+                if (addHP < winner.hpMax * 0.05) {
+                    addHP = winner.hpMax * 0.05;
+                }
+                winner.hp += addHP;
+            }
 
-					_winner.win();
-					_holdFrame = 3 * GameConfig.FPS_GAME;
-					_step = 2;
-
-					var rundata:GameRunDataVO = GameCtrl.I.gameRunData;
-					var winner:FighterMain = rundata.lastWinner;
-
-					if(GameMode.isTeamMode() || GameMode.currentMode == GameMode.SURVIVOR){
-						var timeRate:Number = rundata.gameTime == -1 ? 1 : rundata.gameTime / rundata.gameTimeMax;
-						var addHPMax:int = winner.hpMax * 0.2;
-						var addHP:int = addHPMax * timeRate;
-						if(addHP < winner.hpMax * 0.05) addHP = winner.hpMax * 0.05;
-						winner.hp += addHP;
-					}
-
-					rundata.lastWinnerHp = winner.hp;
-
-
-					if(SHOW_CONTINUE){
-						_holdFrame = 10 * 60 * GameConfig.FPS_GAME;
-						(GameUI.I.getUI() as FightUI).showContinue(function():void{
-							_holdFrame = 0;
-						});
-					}
-
-					break;
-				case 2:
-					//战斗结束
-					_step = 22;
-
-					_winner = null;
-					_loser = null;
-
-					StateCtrl.I.transIn(function():void{
-						_step = 3;
-					},false);
-
-					break;
-				case 3:
-					_isRender = false;
-					GameUI.I.getUI().clearStartAndEnd();
-					GameUI.I.getUI().fadOut(false);
-					return true;
-					break;
-			}
-			return false;
-		}
-
-		public function skip():void{
-			if(SHOW_CONTINUE) return;
-
-			if(_step == 2){
-				_holdFrame = 0;
-			}
-		}
+            rundata.lastWinnerHp = winner.hp;
 
 
-	}
+            if (SHOW_CONTINUE) {
+                _holdFrame = 10 * 60 * GameConfig.FPS_GAME;
+                (
+                        GameUI.I.getUI() as FightUI
+                ).showContinue(function ():void {
+                    _holdFrame = 0;
+                });
+            }
+
+            break;
+        case 2:
+            //战斗结束
+            _step = 22;
+
+            _winner = null;
+            _loser  = null;
+
+            StateCtrl.I.transIn(function ():void {
+                _step = 3;
+            }, false);
+
+            break;
+        case 3:
+            _isRender = false;
+            GameUI.I.getUI().clearStartAndEnd();
+            GameUI.I.getUI().fadOut(false);
+            return true;
+            break;
+        }
+        return false;
+    }
+
+
+}
 }
