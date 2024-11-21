@@ -34,7 +34,12 @@
       "single_play_acrade"   : "闯关模式",
       "single_play_vs_people": "2P对战",
       "single_play_vs_CPU"   : "对战电脑",
-      "single_play_watch"    : "观战电脑"
+      "single_play_watch"    : "观战电脑",
+
+      "musou_play"  : "无双模式",
+      "musou_acrade": "无双模式"
+      
+
     }
   },
   "alert": {
@@ -54,17 +59,14 @@
           "team_play": {
             "child": {
               "team_vs_cpu": {
-                "txt": "对战电脑"
               }
             }
           },
           "single_play": {
             "child": {
               "single_acrade": {
-                "txt": "闯关模式"
               },
               "single_vs_people": {
-                "txt": "2P对战"
               },
               "single_vs_cpu": {
                 "txt": "对战电脑"

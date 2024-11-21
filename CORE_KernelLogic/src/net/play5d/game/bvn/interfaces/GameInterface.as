@@ -53,8 +53,8 @@ package net.play5d.game.bvn.interfaces
 						{txt:'SINGLE WATCH',cn:GetLang('txt.game_interface.single_play_watch')}
 				]},
 
-				{txt:'MUSOU PLAY',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.txt'),children:[
-					{txt:'MUSOU ACRADE',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.musou_play.child.musou_acrade.txt')}
+				{txt:'MUSOU PLAY',cn:GetLang('txt.game_interface.musou_play'),children:[
+					{txt:'MUSOU ACRADE',cn:GetLang('txt.game_interface.musou_acrade')}
 				]},
 
 				{txt:'OPTION',cn:GetLangText('package.interfaces.GameInterface.getDefaultMenu.option.txt')},
