@@ -22,7 +22,7 @@ package net.play5d.game.bvn.data.mosou.player
 
 	public class MosouMissionPlayerVO implements ISaveData
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../../include/_INCLUDE_.as';
 
 		public var id:String;
 //		public var isPassed:Boolean = false;
