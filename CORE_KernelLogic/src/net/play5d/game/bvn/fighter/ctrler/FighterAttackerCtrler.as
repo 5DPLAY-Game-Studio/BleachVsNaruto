@@ -31,7 +31,7 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterAttackerCtrler
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var effect:FighterEffectCtrl;
 		public var ownerMc:FighterMcCtrler;

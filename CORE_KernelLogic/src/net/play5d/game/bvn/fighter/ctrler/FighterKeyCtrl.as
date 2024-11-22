@@ -24,7 +24,7 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterKeyCtrl implements IFighterActionCtrl
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var inputType:String;
 		public var classicMode:Boolean = false;

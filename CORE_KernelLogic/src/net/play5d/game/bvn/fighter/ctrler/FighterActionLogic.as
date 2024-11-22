@@ -26,7 +26,7 @@ package net.play5d.game.bvn.fighter.ctrler
 
 	public class FighterActionLogic
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _fighter:FighterMain;
 		private var _action:FighterAction;
