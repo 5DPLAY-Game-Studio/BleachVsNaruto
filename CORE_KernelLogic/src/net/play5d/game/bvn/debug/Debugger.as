@@ -31,7 +31,7 @@ package net.play5d.game.bvn.debug
 
 	public class Debugger
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static var onErrorMsgCall:Function;
 		public static const DRAW_AREA:Boolean = false;

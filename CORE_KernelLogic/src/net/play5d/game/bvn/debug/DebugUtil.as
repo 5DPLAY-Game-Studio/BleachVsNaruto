@@ -28,7 +28,7 @@ package net.play5d.game.bvn.debug
 
 	public class DebugUtil
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private static const map:Dictionary = new Dictionary();
 
