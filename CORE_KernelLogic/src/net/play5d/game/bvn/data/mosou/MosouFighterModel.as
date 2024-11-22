@@ -23,7 +23,7 @@ package net.play5d.game.bvn.data.mosou
 
 	public class MosouFighterModel
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private static var _i:MosouFighterModel;
 		public static function get I():MosouFighterModel{

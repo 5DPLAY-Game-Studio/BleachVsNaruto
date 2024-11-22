@@ -20,7 +20,7 @@ package net.play5d.game.bvn.data.mosou
 {
 	public class MosouWaveVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 //		public static function createByXML(xml:XML):MosouWaveVO{
 //			var wave:MosouWaveVO = new MosouWaveVO();

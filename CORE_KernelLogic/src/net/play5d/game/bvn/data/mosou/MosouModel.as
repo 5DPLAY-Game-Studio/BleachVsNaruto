@@ -27,7 +27,7 @@ package net.play5d.game.bvn.data.mosou
 	 */
 	public class MosouModel
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private static var _i:MosouModel;
 
