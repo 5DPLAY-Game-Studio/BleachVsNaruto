@@ -34,7 +34,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 	public class MosouLogic
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private static var _i:MosouLogic;
 

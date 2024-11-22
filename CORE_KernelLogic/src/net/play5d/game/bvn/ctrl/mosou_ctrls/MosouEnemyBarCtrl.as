@@ -27,7 +27,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 	public class MosouEnemyBarCtrl
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _barMap:Dictionary = new Dictionary();
 		private var _gameLayer:Sprite;

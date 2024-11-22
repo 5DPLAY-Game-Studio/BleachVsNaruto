@@ -55,7 +55,7 @@ package net.play5d.game.bvn.ctrl.mosou_ctrls
 
 	public class MosouCtrl
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public const gameRunData:MousouGameRunDataVO = new MousouGameRunDataVO();
 
