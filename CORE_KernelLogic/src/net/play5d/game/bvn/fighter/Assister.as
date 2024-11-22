@@ -36,7 +36,7 @@ package net.play5d.game.bvn.fighter
 
 	public class Assister extends BaseGameSprite
 	{
-		include "_INCLUDE_OVERRIDE_.as";
+		include '../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
 		public var onRemove:Function;
 		public var data:FighterVO;

@@ -22,7 +22,7 @@ package net.play5d.game.bvn.fighter
 
 	public class FighterHitRange
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static const JUMP_ATTACK:String = 'tkanmian';
 		public static const JUMP_SKILL:String = 'tzmian';

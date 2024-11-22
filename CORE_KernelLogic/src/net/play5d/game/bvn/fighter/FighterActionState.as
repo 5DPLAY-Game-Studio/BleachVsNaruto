@@ -20,7 +20,7 @@ package net.play5d.game.bvn.fighter
 {
 	public class FighterActionState
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static const NORMAL:int = 0;
 

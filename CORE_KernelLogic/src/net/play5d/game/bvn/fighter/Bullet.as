@@ -35,7 +35,7 @@ package net.play5d.game.bvn.fighter
 
 	public class Bullet implements IGameSprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var speed:Point = new Point(5,0);
 
