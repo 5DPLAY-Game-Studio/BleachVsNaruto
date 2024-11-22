@@ -34,7 +34,7 @@ import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.MapVO;
 
 public class GameStageLoadCtrl extends EventDispatcher {
-    include '_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     public static var IGORE_OLD_FIGHTER:Boolean = false;
     private static var _i:GameStageLoadCtrl;
