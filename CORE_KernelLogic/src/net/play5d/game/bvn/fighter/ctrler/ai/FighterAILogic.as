@@ -31,7 +31,7 @@ package net.play5d.game.bvn.fighter.ctrler.ai
 
 	public class FighterAILogic extends FighterAILogicBase
 	{
-		include "_INCLUDE_OVERRIDE_.as";
+		include '../../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
 		public var moveLeft:Boolean;
 		public var moveRight:Boolean;
