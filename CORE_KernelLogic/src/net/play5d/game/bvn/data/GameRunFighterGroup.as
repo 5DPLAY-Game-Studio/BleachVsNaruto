@@ -25,7 +25,7 @@ package net.play5d.game.bvn.data
 
 	public class GameRunFighterGroup
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var fighter1:FighterVO;
 		public var fighter2:FighterVO;

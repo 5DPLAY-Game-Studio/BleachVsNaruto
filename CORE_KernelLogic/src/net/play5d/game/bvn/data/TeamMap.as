@@ -20,7 +20,7 @@ package net.play5d.game.bvn.data
 {
 	public class TeamMap
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var teams:Vector.<TeamVO> = new Vector.<TeamVO>();
 		private var _teamObj:Object = {};

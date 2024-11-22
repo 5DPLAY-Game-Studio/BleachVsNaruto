@@ -23,7 +23,7 @@ package net.play5d.game.bvn.data
 	 */
 	public class GameMode
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static const TEAM_ACRADE:int = 10;
 		public static const TEAM_VS_PEOPLE:int = 11;

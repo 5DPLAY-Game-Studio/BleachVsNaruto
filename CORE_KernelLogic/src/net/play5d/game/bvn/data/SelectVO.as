@@ -20,7 +20,7 @@ package net.play5d.game.bvn.data
 {
 	public class SelectVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 //		选中的人物ID
 		public var fighter1:String;

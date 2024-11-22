@@ -23,7 +23,7 @@ package net.play5d.game.bvn.data
 
 	public class TeamVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var id:int;
 		public var name:String;

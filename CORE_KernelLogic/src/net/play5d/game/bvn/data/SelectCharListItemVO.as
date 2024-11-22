@@ -22,7 +22,7 @@ package net.play5d.game.bvn.data
 
 	public class SelectCharListItemVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var x:int;
 		public var y:int;

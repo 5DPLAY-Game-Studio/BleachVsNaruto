@@ -22,7 +22,7 @@ import net.play5d.kyo.utils.KyoUtils;
 
 public class MapModel
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private static var _i:MapModel;
 		public static function get I():MapModel{

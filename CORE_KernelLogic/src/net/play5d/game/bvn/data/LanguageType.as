@@ -22,7 +22,7 @@ package net.play5d.game.bvn.data {
  * 语言类型
  */
 public class LanguageType {
-    include "_INCLUDE_.as";
+    include '../../../../../../include/_INCLUDE_.as';
 
     // 简体中文
     public static const CHINESE_SIMPLIFIED:String  = 'zh-CN';

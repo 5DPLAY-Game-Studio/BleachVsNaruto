@@ -34,7 +34,7 @@ import net.play5d.pcl.utils.ClassUtils;
 
 public class ConfigVO implements ISaveData
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public const key_menu:KeyConfigVO = new KeyConfigVO(0);
 		public const key_p1:KeyConfigVO = new KeyConfigVO(1);
