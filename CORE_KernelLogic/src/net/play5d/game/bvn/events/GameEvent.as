@@ -23,7 +23,7 @@ package net.play5d.game.bvn.events
 
 	public class GameEvent extends Event
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static const SCORE_UPDATE:String = 'SCORE_UPDATE';
 
