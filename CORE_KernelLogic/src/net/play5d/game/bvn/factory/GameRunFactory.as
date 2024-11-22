@@ -33,7 +33,7 @@ package net.play5d.game.bvn.factory
 
 	public class GameRunFactory
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private static var _fighterCache:Dictionary = new Dictionary();
 
