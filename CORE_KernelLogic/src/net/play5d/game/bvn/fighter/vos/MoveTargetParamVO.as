@@ -26,7 +26,7 @@ package net.play5d.game.bvn.fighter.vos
 
 	public class MoveTargetParamVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var x:Number;
 		public var y:Number;
