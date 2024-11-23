@@ -25,7 +25,7 @@ package net.play5d.game.bvn.fighter.utils
 
 	public class McAreaCacher
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _idCache:Object = {};
 		private var _frameCache:Object = {};
