@@ -23,7 +23,7 @@ package net.play5d.game.bvn.fighter.events
 
 	public class FighterEvent extends Event
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public static const BIRTH:String = "BIRTH"; //出生
 
