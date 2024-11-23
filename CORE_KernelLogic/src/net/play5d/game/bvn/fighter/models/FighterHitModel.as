@@ -22,7 +22,7 @@ package net.play5d.game.bvn.fighter.models
 
 	public class FighterHitModel
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _hitObj:Object = {};  //攻击定义
 		private var _fighter:IGameSprite;

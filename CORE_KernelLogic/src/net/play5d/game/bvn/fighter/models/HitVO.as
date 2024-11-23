@@ -28,7 +28,7 @@ package net.play5d.game.bvn.fighter.models
 
 	public class HitVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var id:String;
 
