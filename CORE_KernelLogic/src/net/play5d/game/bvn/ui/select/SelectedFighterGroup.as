@@ -27,7 +27,7 @@ package net.play5d.game.bvn.ui.select
 
 	public class SelectedFighterGroup extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _uiClass:Class;
 		private var _uis:Array = [];

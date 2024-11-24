@@ -43,7 +43,7 @@ package net.play5d.game.bvn.ui.select
 	 */
 	public class SelectFighterItem extends EventDispatcher
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 
 		public static function getIdByPoint(X:int, Y:int):String{

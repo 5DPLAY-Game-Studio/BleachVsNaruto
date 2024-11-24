@@ -39,7 +39,7 @@ package net.play5d.game.bvn.ui.select
 
 	public class SelectIndexUIGroup extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var isFinish:Boolean;
 		public var fzx:Number = 0;

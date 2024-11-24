@@ -30,7 +30,7 @@ package net.play5d.game.bvn.ui.select
 
 	public class SelectIndexUI extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var onFinish:Function;
 		public static var SHOW_MODE:int = 0;
