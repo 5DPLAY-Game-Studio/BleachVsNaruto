@@ -54,7 +54,7 @@ public class FighterModel {
         if (!fv) {
             return null;
         }
-        return clone ? fv.clone() : fv;
+        return clone ? fv.clone() as FighterVO : fv;
     }
 
     public function getFighterName(id:String):String {

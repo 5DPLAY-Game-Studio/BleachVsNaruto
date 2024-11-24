@@ -83,7 +83,7 @@ package net.play5d.game.bvn.utils
 				return null;
 			}
 
-			effect = effect.clone();
+			effect = effect.clone(effect.className) as EffectVO;
 
 			if(effect.shake){
 				if(effect.shake.pow != undefined && effect.shake.pow != 0){
@@ -128,7 +128,7 @@ package net.play5d.game.bvn.utils
 				return null;
 			}
 
-			effect = effect.clone();
+			effect = effect.clone(effect.className) as EffectVO;
 
 			cacheVO = new EffectCacheVO();
 			if(isMosouEnemy){

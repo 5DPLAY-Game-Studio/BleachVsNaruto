@@ -23,14 +23,38 @@ import net.play5d.pcl.utils.ClassUtils;
 
 /**
  * 克隆自身
+ * @param arg 参数
  * @return 返回自身实例的克隆对象
  */
-public function clone():IInstanceVO {
+public function clone(...arg):IInstanceVO {
     var clsName:String = getQualifiedClassName(this);
     var cls:Class      = getDefinitionByName(clsName) as Class;
-    var vo:IInstanceVO = new cls();
-    var keys:Array     = ClassUtils.getClassProperty(cls);
 
+    var vo:IInstanceVO;
+    switch (arg.length) {
+    case 1:
+        vo = new cls(arg[0]);
+        break;
+    case 2:
+        vo = new cls(arg[0], arg[1]);
+        break;
+    case 3:
+        vo = new cls(arg[0], arg[1], arg[2]);
+        break;
+    case 4:
+        vo = new cls(arg[0], arg[1], arg[2], arg[3]);
+        break;
+    case 5:
+        vo = new cls(arg[0], arg[1], arg[2], arg[3], arg[4]);
+        break;
+    case 6:
+        vo = new cls(arg[0], arg[1], arg[2], arg[3], arg[4], arg[5]);
+        break;
+    default:
+        vo = new cls();
+    }
+
+    var keys:Array = ClassUtils.getClassProperty(cls);
     for each (var prop:String in keys) {
         vo[prop] = this[prop];
     }

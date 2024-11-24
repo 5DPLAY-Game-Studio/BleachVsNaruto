@@ -27,6 +27,9 @@ import net.play5d.game.bvn.ctrl.AssetManager;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
+/**
+ * 效果值对象
+ */
 public class EffectVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
     include '../../../../../../include/Clone.as';
@@ -54,12 +57,12 @@ public class EffectVO implements IInstanceVO {
     public var isBuff:Boolean = false;
     public var isSteelHit:Boolean = false;
 
-    public function clone():EffectVO {
-        var o:Object = KyoUtils.itemToObject(this);
-        delete o['className'];
-        var ev:EffectVO = new EffectVO(className, o);
-        return ev;
-    }
+//    public function clone():EffectVO {
+//        var o:Object = KyoUtils.itemToObject(this);
+//        delete o['className'];
+//        var ev:EffectVO = new EffectVO(className, o);
+//        return ev;
+//    }
 
     public function cacheBitmapData():void {
 

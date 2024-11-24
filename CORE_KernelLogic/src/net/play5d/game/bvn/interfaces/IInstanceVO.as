@@ -21,8 +21,9 @@ public interface IInstanceVO {
 
     /**
      * 克隆自身
+     * @param arg 参数
      * @return 返回自身实例的克隆对象
      */
-    function clone():IInstanceVO;
+    function clone(...arg):IInstanceVO;
 }
 }

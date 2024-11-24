@@ -29,6 +29,9 @@ import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
+/**
+ * 配置值对象
+ */
 public class ConfigVO implements ISaveData, IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
     include '../../../../../../include/Clone.as';

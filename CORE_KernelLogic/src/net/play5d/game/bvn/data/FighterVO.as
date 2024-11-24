@@ -17,13 +17,13 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoRandom;
 
-public class FighterVO {
+public class FighterVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
-    public function FighterVO() {
-    }
     public var id:String;
     public var name:String;
     public var comicType:int; //0=死神,1=火影
@@ -41,13 +41,12 @@ public class FighterVO {
 
 //		public var fighter:FighterMain;
     public var isAlive:Boolean;
-    private var _cloneKey:Array = [
-        'id', 'name', 'comicType', 'fileUrl', 'startFrame', 'faceUrl', 'contactFriends', 'contactEnemys', 'says',
-        'faceBigUrl', 'faceBarUrl', 'bgm', 'bgmRate'
-    ];
+//    private var _cloneKey:Array = [
+//        'id', 'name', 'comicType', 'fileUrl', 'startFrame', 'faceUrl', 'contactFriends', 'contactEnemys', 'says',
+//        'faceBigUrl', 'faceBarUrl', 'bgm', 'bgmRate'
+//    ];
 
     public function initByXML(xml:XML):void {
-
         id        = xml.@id;
         name      = xml.@name;
         comicType = int(xml.@comic_type);
@@ -61,8 +60,7 @@ public class FighterVO {
         faceWinUrl = xml.face.@win_url;
 
         contactFriends = xml.contact.friend.toString().split(',');
-
-        contactEnemys = xml.contact.enemy.toString().split(',');
+        contactEnemys  = xml.contact.enemy.toString().split(',');
 
         bgm     = xml.bgm.@url;
         bgmRate = Number(xml.bgm.@rate) / 100;
@@ -82,13 +80,13 @@ public class FighterVO {
         return KyoRandom.getRandomInArray(says);
     }
 
-    public function clone():FighterVO {
-        var fv:FighterVO = new FighterVO();
-        for each(var i:String in _cloneKey) {
-            fv[i] = this[i];
-        }
-        return fv;
-    }
+//    public function clone():FighterVO {
+//        var fv:FighterVO = new FighterVO();
+//        for each(var i:String in _cloneKey) {
+//            fv[i] = this[i];
+//        }
+//        return fv;
+//    }
 
 }
 }
