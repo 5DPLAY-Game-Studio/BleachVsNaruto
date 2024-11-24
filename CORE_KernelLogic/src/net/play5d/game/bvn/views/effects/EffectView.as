@@ -30,7 +30,7 @@ package net.play5d.game.bvn.views.effects
 
 	public class EffectView
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var display:Bitmap;
 		public var autoRemove:Boolean = true;

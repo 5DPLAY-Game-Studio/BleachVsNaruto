@@ -28,7 +28,7 @@ package net.play5d.game.bvn.views.effects
 
 	public class BlackBackView extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _bishaFace:BishaFaceEffectView;
 		private var isRenderFadIn:Boolean;

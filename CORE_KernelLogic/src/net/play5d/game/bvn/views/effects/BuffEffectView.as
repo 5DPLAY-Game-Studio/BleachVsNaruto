@@ -27,7 +27,7 @@ package net.play5d.game.bvn.views.effects
 
 	public class BuffEffectView extends EffectView
 	{
-		include "_INCLUDE_OVERRIDE_.as";
+		include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
 		private var _fighter:FighterMain;
 		private var _buff:FighterBuffVO;

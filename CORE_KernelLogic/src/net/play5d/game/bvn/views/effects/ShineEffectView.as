@@ -28,7 +28,7 @@ package net.play5d.game.bvn.views.effects
 
 	public class ShineEffectView extends Bitmap
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 //		private static var _source:BitmapData = new BitmapData(GameConfig.GAME_SIZE.x / 10 , GameConfig.GAME_SIZE.y / 10,false,0xffffff);
 

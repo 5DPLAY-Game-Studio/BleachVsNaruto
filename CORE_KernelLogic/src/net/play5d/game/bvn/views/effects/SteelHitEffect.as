@@ -27,7 +27,7 @@ package net.play5d.game.bvn.views.effects
 
 	public class SteelHitEffect extends EffectView
 	{
-		include "_INCLUDE_OVERRIDE_.as";
+		include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
 		private var _fighter:FighterMain;
 
