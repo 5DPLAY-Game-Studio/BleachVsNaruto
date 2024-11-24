@@ -24,7 +24,7 @@ import net.play5d.pcl.utils.ClassUtils;
  * 多语言工具集
  */
 public class MultiLangUtils {
-    include "_INCLUDE_.as";
+    include '../../../../../../include/_INCLUDE_.as';
 
     // 分隔符
     private const SEPARATOR:String = '.';

@@ -25,7 +25,7 @@ package net.play5d.game.bvn.utils
 
 	public class MCUtils
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static function hasFrameLabel(mc:MovieClip , label:String):Boolean{
 			var labels:Array = mc.currentLabels;

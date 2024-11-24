@@ -35,7 +35,7 @@ package net.play5d.game.bvn.utils
 
 	public class EffectManager
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _viewCache:Dictionary = new Dictionary();
 		private var _hitCache:Dictionary = new Dictionary();

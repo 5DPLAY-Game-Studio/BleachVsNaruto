@@ -31,7 +31,7 @@ package net.play5d.game.bvn.utils
 
 	public class BtnUtils
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private static var _btnMap:Dictionary = new Dictionary();
 

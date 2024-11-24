@@ -22,7 +22,7 @@ package net.play5d.game.bvn.utils
 	import flash.display.Sprite;
 
 	public class DebugSprite extends Sprite{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 
 		public var target:DisplayObject;

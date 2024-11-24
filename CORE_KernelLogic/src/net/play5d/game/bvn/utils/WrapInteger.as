@@ -20,7 +20,7 @@ package net.play5d.game.bvn.utils
 {
 	public class WrapInteger
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _w:int
 		private var _offset:int;
