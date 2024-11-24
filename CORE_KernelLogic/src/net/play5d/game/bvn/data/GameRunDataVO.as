@@ -30,7 +30,7 @@ public class GameRunDataVO implements IInstanceVO {
 
     public const p1FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();
     public const p2FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();
-    
+
     public var map:MapVO;
     public var p1Wins:int = 0;
     public var p2Wins:int = 0;

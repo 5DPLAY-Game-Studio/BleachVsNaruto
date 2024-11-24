@@ -17,10 +17,12 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
-public class KeyConfigVO {
+public class KeyConfigVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
     public function KeyConfigVO(id:int) {
         this.id = id;
@@ -75,12 +77,12 @@ public class KeyConfigVO {
         KyoUtils.setValueByObject(this, o);
     }
 
-    public function clone():KeyConfigVO {
-        var o:Object           = toSaveObj();
-        var newKey:KeyConfigVO = new KeyConfigVO(id);
-        newKey.readSaveObj(o);
-        return newKey;
-    }
+//    public function clone():KeyConfigVO {
+//        var o:Object           = toSaveObj();
+//        var newKey:KeyConfigVO = new KeyConfigVO(id);
+//        newKey.readSaveObj(o);
+//        return newKey;
+//    }
 
 }
 }

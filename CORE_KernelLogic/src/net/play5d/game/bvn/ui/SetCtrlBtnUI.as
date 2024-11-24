@@ -85,7 +85,7 @@ package net.play5d.game.bvn.ui
 
 		public function setKey(v:KeyConfigVO):void{
 			_keyConfig = v;
-			_tmpKeyConfig = v.clone();
+			_tmpKeyConfig = v.clone(v.id) as KeyConfigVO;
 			updateKeyMapping();
 		}
 
