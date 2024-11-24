@@ -16,21 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	public class MapVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data {
+public class MapVO {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var id:String;
-		public var name:String;
-		public var fileUrl:String;
-		public var picUrl:String;
-		public var bgm:String;
-
-		public function MapVO()
-		{
-		}
+    public function MapVO() {
+    }
+    public var id:String;
+    public var name:String;
+    public var fileUrl:String;
+    public var picUrl:String;
+    public var bgm:String;
 
 //		public function initByXML(xml:XML):void{
 //			id = xml.@id;
@@ -41,28 +37,28 @@ package net.play5d.game.bvn.data
 //			bgm = xml.bgm.@url;
 //		}
 
-		public function initByObject(obj:Object):void {
-			var pathObj:Object = obj['path'];
+    public function initByObject(obj:Object):void {
+        var pathObj:Object = obj['path'];
 
-			id = obj['id'];
-			name = obj['name'];
+        id   = obj['id'];
+        name = obj['name'];
 
-			if (obj['file']) {
-				fileUrl = pathObj['map'] + obj['file'];
-			}
-			else {
-				fileUrl = pathObj['map'] + obj['id'] + '.swf';
-			}
+        if (obj['file']) {
+            fileUrl = pathObj['map'] + obj['file'];
+        }
+        else {
+            fileUrl = pathObj['map'] + obj['id'] + '.swf';
+        }
 
-			if (obj['img']) {
-				picUrl = pathObj['map'] + obj['img'];
-			}
-			else {
-				picUrl = pathObj['map'] + obj['id'] + '.png';
-			}
+        if (obj['img']) {
+            picUrl = pathObj['map'] + obj['img'];
+        }
+        else {
+            picUrl = pathObj['map'] + obj['id'] + '.png';
+        }
 
-			bgm = pathObj['bgm'] + obj['bgm']
-		}
+        bgm = pathObj['bgm'] + obj['bgm'];
+    }
 
-	}
+}
 }

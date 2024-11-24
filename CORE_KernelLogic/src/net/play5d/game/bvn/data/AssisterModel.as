@@ -16,55 +16,53 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	public class AssisterModel
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data {
+public class AssisterModel {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private static var _i:AssisterModel;
+    private static var _i:AssisterModel;
 
-		public static function get I():AssisterModel{
-			_i ||= new AssisterModel();
-			return _i;
-		}
+    public static function get I():AssisterModel {
+        _i ||= new AssisterModel();
+        return _i;
+    }
 
-		private var _assisterObj:Object;
+    public function AssisterModel() {
+    }
+    private var _assisterObj:Object;
 
-		public function AssisterModel()
-		{
-		}
+    public function getAllAssisters():Object {
+        return _assisterObj;
+    }
 
-		public function getAllAssisters():Object{
-			return _assisterObj;
-		}
+    public function getAssisters(comicType:int = -1, condition:Function = null):Vector.<FighterVO> {
+        var vec:Vector.<FighterVO> = new Vector.<FighterVO>();
+        for each(var i:FighterVO in _assisterObj) {
+            if (condition != null && !condition(i)) {
+                continue;
+            }
+            if (comicType == -1 || i.comicType == comicType) {
+                vec.push(i);
+            }
+        }
+        return vec;
+    }
 
-		public function getAssisters(comicType:int = -1, condition:Function = null):Vector.<FighterVO>{
-			var vec:Vector.<FighterVO> = new Vector.<FighterVO>();
-			for each(var i:FighterVO in _assisterObj){
-				if(condition != null && !condition(i)) continue;
-				if(comicType == -1 || i.comicType == comicType){
-					vec.push(i);
-				}
-			}
-			return vec;
-		}
+    public function getAssister(id:String, clone:Boolean = false):FighterVO {
+        return _assisterObj[id];
+    }
 
-		public function getAssister(id:String , clone:Boolean = false):FighterVO{
-			return _assisterObj[id];
-		}
+    public function initByXML(xml:XML):void {
+        _assisterObj = {};
 
-		public function initByXML(xml:XML):void{
-			_assisterObj = {};
+        for each(var i:XML in xml.fighter) {
+            var fv:FighterVO = new FighterVO();
+            fv.initByXML(i);
+            _assisterObj[fv.id] = fv;
+        }
 
-			for each(var i:XML in xml.fighter){
-				var fv:FighterVO = new FighterVO();
-				fv.initByXML(i);
-				_assisterObj[fv.id] = fv;
-			}
-
-		}
+    }
 
 
-	}
+}
 }

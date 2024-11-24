@@ -16,88 +16,79 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.kyo.utils.KyoRandom;
+package net.play5d.game.bvn.data {
+import net.play5d.kyo.utils.KyoRandom;
 
-	public class FighterVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class FighterVO {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var id:String;
-		public var name:String;
-		public var comicType:int; //0=死神,1=火影
-
-		public var fileUrl:String;
-		public var startFrame:int;
-
-		public var faceUrl:String;
-		public var faceBigUrl:String;
-		public var faceBarUrl:String;
-		public var faceWinUrl:String;
-
-		public var contactFriends:Array;
-		public var contactEnemys:Array;
-
-		public var says:Array;
-
-		public var bgm:String;
-		public var bgmRate:Number = 1;
-
-		public var isAlive:Boolean;
+    public function FighterVO() {
+    }
+    public var id:String;
+    public var name:String;
+    public var comicType:int; //0=死神,1=火影
+    public var fileUrl:String;
+    public var startFrame:int;
+    public var faceUrl:String;
+    public var faceBigUrl:String;
+    public var faceBarUrl:String;
+    public var faceWinUrl:String;
+    public var contactFriends:Array;
+    public var contactEnemys:Array;
+    public var says:Array;
+    public var bgm:String;
+    public var bgmRate:Number = 1;
 
 //		public var fighter:FighterMain;
+    public var isAlive:Boolean;
+    private var _cloneKey:Array = [
+        'id', 'name', 'comicType', 'fileUrl', 'startFrame', 'faceUrl', 'contactFriends', 'contactEnemys', 'says',
+        'faceBigUrl', 'faceBarUrl', 'bgm', 'bgmRate'
+    ];
 
-		private var _cloneKey:Array = ['id','name','comicType','fileUrl','startFrame','faceUrl','contactFriends','contactEnemys','says','faceBigUrl','faceBarUrl','bgm','bgmRate'];
+    public function initByXML(xml:XML):void {
 
-		public function FighterVO()
-		{
-		}
+        id        = xml.@id;
+        name      = xml.@name;
+        comicType = int(xml.@comic_type);
 
-		public function initByXML(xml:XML):void{
+        fileUrl    = xml.file.@url;
+        startFrame = int(xml.file.@startFrame);
 
-			id = xml.@id;
-			name = xml.@name;
-			comicType = int(xml.@comic_type);
+        faceUrl    = xml.face.@url;
+        faceBigUrl = xml.face.@big_url;
+        faceBarUrl = xml.face.@bar_url;
+        faceWinUrl = xml.face.@win_url;
 
-			fileUrl = xml.file.@url;
-			startFrame = int(xml.file.@startFrame);
+        contactFriends = xml.contact.friend.toString().split(',');
 
-			faceUrl = xml.face.@url;
-			faceBigUrl = xml.face.@big_url;
-			faceBarUrl = xml.face.@bar_url;
-			faceWinUrl = xml.face.@win_url;
+        contactEnemys = xml.contact.enemy.toString().split(',');
 
-			contactFriends = xml.contact.friend.toString().split(",");
+        bgm     = xml.bgm.@url;
+        bgmRate = Number(xml.bgm.@rate) / 100;
 
-			contactEnemys = xml.contact.enemy.toString().split(",");
+        says = [];
+        for each(var i:XML in xml.says.say_item) {
+            says.push(i.children().toString());
+        }
 
-			bgm = xml.bgm.@url;
-			bgmRate = Number(xml.bgm.@rate) / 100;
+        if (startFrame != 0 && !bgm) {
+            TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
+        }
 
-			says = [];
-			for each(var i:XML in xml.says.say_item){
-				says.push(i.children().toString());
-			}
+    }
 
-			if(startFrame != 0 && !bgm){
-				TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
-			}
+    public function getRandSay():String {
+        return KyoRandom.getRandomInArray(says);
+    }
 
-		}
+    public function clone():FighterVO {
+        var fv:FighterVO = new FighterVO();
+        for each(var i:String in _cloneKey) {
+            fv[i] = this[i];
+        }
+        return fv;
+    }
 
-		public function getRandSay():String{
-			return KyoRandom.getRandomInArray(says);
-		}
-
-		public function clone():FighterVO{
-			var fv:FighterVO = new FighterVO();
-			for each(var i:String in _cloneKey){
-				fv[i] = this[i];
-			}
-			return fv;
-		}
-
-	}
+}
 }

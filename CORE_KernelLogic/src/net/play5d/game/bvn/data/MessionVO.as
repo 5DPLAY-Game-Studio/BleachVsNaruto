@@ -16,20 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	public class MessionVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data {
+public class MessionVO {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var comicType:int;
-		public var gameMode:int;
-
-		public var stageList:Vector.<MessionStageVO>;
-
-		public function MessionVO()
-		{
-		}
+    public function MessionVO() {
+    }
+    public var comicType:int;
+    public var gameMode:int;
+    public var stageList:Vector.<MessionStageVO>;
 
 //		public function initByXML(xml:XML):void{
 //			comicType = xml.@comicType;
@@ -52,40 +47,40 @@ package net.play5d.game.bvn.data
 //
 //		}
 
-		public function initByObject(obj:Object):void {
-			comicType = obj['comic_type'];
-			gameMode = obj['game_mode'];
+    public function initByObject(obj:Object):void {
+        comicType = obj['comic_type'];
+        gameMode  = obj['game_mode'];
 
-			stageList = new Vector.<MessionStageVO>();
+        stageList = new Vector.<MessionStageVO>();
 
-			var stageArr:Array = obj['stage'];
-			for each (var stageObj:Object in stageArr) {
-				var msv:MessionStageVO = new MessionStageVO();
+        var stageArr:Array = obj['stage'];
+        for each (var stageObj:Object in stageArr) {
+            var msv:MessionStageVO = new MessionStageVO();
 
-				msv.mession = this;
-				msv.fighters = stageObj['fighter'];
-				msv.assister = stageObj['assistant'];
-				msv.map = stageObj['map'];
+            msv.mession  = this;
+            msv.fighters = stageObj['fighter'];
+            msv.assister = stageObj['assistant'];
+            msv.map      = stageObj['map'];
 
-				var propertiesObj:Object = stageObj['properties'];
-				if (propertiesObj) {
-					if (propertiesObj['attack_rate']) {
-						msv.attackRate =
-								propertiesObj['attack_rate'] > 0
-								? propertiesObj['attack_rate']
-								: 1;
-					}
-					if (propertiesObj['hp_rate']) {
-						msv.hpRate =
-								propertiesObj['hp_rate'] > 0
-								? propertiesObj['hp_rate']
-								: 1;
-					}
-				}
+            var propertiesObj:Object = stageObj['properties'];
+            if (propertiesObj) {
+                if (propertiesObj['attack_rate']) {
+                    msv.attackRate =
+                            propertiesObj['attack_rate'] > 0
+                            ? propertiesObj['attack_rate']
+                            : 1;
+                }
+                if (propertiesObj['hp_rate']) {
+                    msv.hpRate =
+                            propertiesObj['hp_rate'] > 0
+                            ? propertiesObj['hp_rate']
+                            : 1;
+                }
+            }
 
-				stageList.push(msv);
-			}
-		}
+            stageList.push(msv);
+        }
+    }
 
-	}
+}
 }

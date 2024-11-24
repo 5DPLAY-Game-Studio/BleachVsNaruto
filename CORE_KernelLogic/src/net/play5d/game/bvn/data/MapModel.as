@@ -16,46 +16,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
+package net.play5d.game.bvn.data {
 import net.play5d.kyo.utils.KyoUtils;
 
-public class MapModel
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class MapModel {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private static var _i:MapModel;
-		public static function get I():MapModel{
-			_i ||= new MapModel();
-			return _i;
-		}
+    private static var _i:MapModel;
 
-		private var _mapObj:Object;
-		[ArrayElementType('net.play5d.game.bvn.data.MapVO')]
-		private var _mapArray:Array;
+    public static function get I():MapModel {
+        _i ||= new MapModel();
+        return _i;
+    }
 
-		public function MapModel()
-		{
-		}
+    public function MapModel() {
+    }
+    private var _mapObj:Object;
+    [ArrayElementType('net.play5d.game.bvn.data.MapVO')]
+    private var _mapArray:Array;
 
-		public function getMap(id:String):MapVO{
-			return _mapObj[id];
-		}
+    public function getMap(id:String):MapVO {
+        return _mapObj[id];
+    }
 
-		public function getMapBGM(id:String):BgmVO{
-			var mv:MapVO = getMap(id);
-			if(!mv || !mv.bgm) return null;
+    public function getMapBGM(id:String):BgmVO {
+        var mv:MapVO = getMap(id);
+        if (!mv || !mv.bgm) {
+            return null;
+        }
 
-			var bv:BgmVO = new BgmVO();
-			bv.id = 'map';
-			bv.url = mv.bgm;
-			bv.rate = 1;
-			return bv;
-		}
+        var bv:BgmVO = new BgmVO();
+        bv.id        = 'map';
+        bv.url       = mv.bgm;
+        bv.rate      = 1;
+        return bv;
+    }
 
-		public function getAllMaps():Array{
-			return _mapArray;
-		}
+    public function getAllMaps():Array {
+        return _mapArray;
+    }
 
 //		public function initByXML(xml:XML):void{
 //			_mapObj = {};
@@ -70,22 +69,22 @@ public class MapModel
 //
 //		}
 
-		public function initByObject(obj:Object):void {
-			_mapObj = {};
-			_mapArray = [];
+    public function initByObject(obj:Object):void {
+        _mapObj   = {};
+        _mapArray = [];
 
-			var mapObj:Object = obj['map'];
-			for each(var i:Object in mapObj['data']) {
-				var mapVOObj:Object = KyoUtils.cloneObject(i);
-				mapVOObj['path'] = mapObj['path'];
+        var mapObj:Object = obj['map'];
+        for each(var i:Object in mapObj['data']) {
+            var mapVOObj:Object = KyoUtils.cloneObject(i);
+            mapVOObj['path']    = mapObj['path'];
 
-				var mapVO:MapVO = new MapVO();
-				mapVO.initByObject(mapVOObj);
+            var mapVO:MapVO = new MapVO();
+            mapVO.initByObject(mapVOObj);
 
-				_mapObj[mapVO.id] = mapVO;
-				_mapArray.push(mapVO);
-			}
-		}
+            _mapObj[mapVO.id] = mapVO;
+            _mapArray.push(mapVO);
+        }
+    }
 
-	}
+}
 }

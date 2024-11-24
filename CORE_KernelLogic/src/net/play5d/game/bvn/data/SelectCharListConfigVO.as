@@ -16,18 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	public class SelectCharListConfigVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data {
+public class SelectCharListConfigVO {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var list:Array = [];
-		public var HCount:int; //列数
-		public var VCount:int; //行数
+    public function SelectCharListConfigVO() {
 
-		public function SelectCharListConfigVO(){
-
-		}
-	}
+    }
+    public var list:Array = [];
+    public var HCount:int; //列数
+    public var VCount:int; //行数
+}
 }

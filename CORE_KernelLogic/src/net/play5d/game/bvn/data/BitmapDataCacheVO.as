@@ -16,19 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	import flash.display.BitmapData;
+package net.play5d.game.bvn.data {
+import flash.display.BitmapData;
 
-	public class BitmapDataCacheVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class BitmapDataCacheVO {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var bitmapData:BitmapData;
-		public var offsetX:Number = 0;
-		public var offsetY:Number = 0;
-		public function BitmapDataCacheVO()
-		{
-		}
-	}
+    public function BitmapDataCacheVO() {
+    }
+    public var bitmapData:BitmapData;
+    public var offsetX:Number = 0;
+    public var offsetY:Number = 0;
+}
 }

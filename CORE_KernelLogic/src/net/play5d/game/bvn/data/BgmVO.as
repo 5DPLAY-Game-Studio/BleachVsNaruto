@@ -16,18 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	public class BgmVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data {
+public class BgmVO {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var id:String;
-		public var rate:Number;
-		public var url:String;
-
-		public function BgmVO()
-		{
-		}
-	}
+    public function BgmVO() {
+    }
+    public var id:String;
+    public var rate:Number;
+    public var url:String;
+}
 }

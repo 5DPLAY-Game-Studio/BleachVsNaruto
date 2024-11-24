@@ -16,50 +16,51 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data
-{
-	public class TeamMap
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data {
+public class TeamMap {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var teams:Vector.<TeamVO> = new Vector.<TeamVO>();
-		private var _teamObj:Object = {};
-		public function TeamMap()
-		{
-		}
+    public function TeamMap() {
+    }
+    public var teams:Vector.<TeamVO> = new Vector.<TeamVO>();
+    private var _teamObj:Object      = {};
 
-		public function clear():void{
-			_teamObj = {};
-		}
+    public function clear():void {
+        _teamObj = {};
+    }
 
-		public function getTeam(id:int):TeamVO{
-			return _teamObj[id];
-		}
+    public function getTeam(id:int):TeamVO {
+        return _teamObj[id];
+    }
 
-		public function getOtherTeams(id:int):Vector.<TeamVO>{
-			var teams:Vector.<TeamVO> = new Vector.<TeamVO>();
-			for each(var i:TeamVO in _teamObj){
-				if(i.id != id) teams.push(i);
-			}
-			return teams;
-		}
+    public function getOtherTeams(id:int):Vector.<TeamVO> {
+        var teams:Vector.<TeamVO> = new Vector.<TeamVO>();
+        for each(var i:TeamVO in _teamObj) {
+            if (i.id != id) {
+                teams.push(i);
+            }
+        }
+        return teams;
+    }
 
-		public function add(v:TeamVO):void{
-			_teamObj[v.id] = v;
-			refreshTeams();
-		}
+    public function add(v:TeamVO):void {
+        _teamObj[v.id] = v;
+        refreshTeams();
+    }
 
-		public function remove(v:TeamVO):void{
-			delete _teamObj[v.id];
-			refreshTeams();
-		}
+    public function remove(v:TeamVO):void {
+        delete _teamObj[v.id];
+        refreshTeams();
+    }
 
-		private function refreshTeams():void{
-			teams = new Vector.<TeamVO>();
-			for each(var i:TeamVO in _teamObj){
-				if(i) teams.push(i);
-			}
-		}
+    private function refreshTeams():void {
+        teams = new Vector.<TeamVO>();
+        for each(var i:TeamVO in _teamObj) {
+            if (i) {
+                teams.push(i);
+            }
+        }
+    }
 
-	}
+}
 }
