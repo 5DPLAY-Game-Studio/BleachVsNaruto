@@ -49,7 +49,7 @@ import net.play5d.pcl.utils.ObjectUtils;
 
 public class SettingStage implements IStage
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:stg_set_ui;
 		private var _btnGroup:SetBtnGroup;

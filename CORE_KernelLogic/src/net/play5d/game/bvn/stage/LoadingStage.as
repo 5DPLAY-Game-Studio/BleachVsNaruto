@@ -49,7 +49,7 @@ package net.play5d.game.bvn.stage
 
 	public class LoadingStage implements IStage
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public static var AUTO_START_GAME:Boolean = true;
 

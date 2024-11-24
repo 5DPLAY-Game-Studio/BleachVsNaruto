@@ -43,7 +43,7 @@ package net.play5d.game.bvn.stage
 
 	public class GameOverStage implements IStage
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:stg_gameover_mc;
 		private var _arrow:select_arrow_mc;

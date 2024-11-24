@@ -27,7 +27,7 @@ package net.play5d.game.bvn.stage
 
 	public class LogoStage implements IStage
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:logo_movie;
 
