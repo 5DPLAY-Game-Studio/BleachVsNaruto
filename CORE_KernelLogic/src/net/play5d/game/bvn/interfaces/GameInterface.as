@@ -22,7 +22,7 @@ package net.play5d.game.bvn.interfaces
 
 	public class GameInterface
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 //		private static var _i:GameInterface;
 //		public static function get I():GameInterface{
