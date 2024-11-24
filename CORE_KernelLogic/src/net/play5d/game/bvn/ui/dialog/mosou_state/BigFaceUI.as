@@ -34,7 +34,7 @@ package net.play5d.game.bvn.ui.dialog.mosou_state
 
 	public class BigFaceUI
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:Sprite;
 		private var _data:MosouFighterVO;
