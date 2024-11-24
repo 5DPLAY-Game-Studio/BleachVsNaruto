@@ -16,108 +16,111 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou
-{
-	import net.play5d.game.bvn.ctrl.AssetManager;
+package net.play5d.game.bvn.data.mosou {
+import net.play5d.game.bvn.ctrl.AssetManager;
 
-	/**
-	 * 无双数据（运行数据）
-	 * @author K
-	 *
-	 */
-	public class MosouModel
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+/**
+ * 无双数据（运行数据）
+ * @author K
+ *
+ */
+public class MosouModel {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private static var _i:MosouModel;
+    private static var _i:MosouModel;
 
-		public static function get I():MosouModel{
-			_i ||= new MosouModel();
-			return _i;
-		}
+    public static function get I():MosouModel {
+        _i ||= new MosouModel();
+        return _i;
+    }
 
-		private var _mapObj:Object = {};
+    public function MosouModel() {
+    }
+    public var currentArea:MosouWorldMapAreaVO;
+    public var currentMission:MosouMissionVO;
+    private var _mapObj:Object = {};
 
-		public var currentArea:MosouWorldMapAreaVO;
-		public var currentMission:MosouMissionVO;
+    public function getAllMap():Object {
+        return _mapObj;
+    }
 
-		public function MosouModel()
-		{
-		}
+    public function getMap(id:String):MosouWorldMapVO {
+        return _mapObj[id];
+    }
 
-		public function getAllMap():Object{
-			return _mapObj;
-		}
+    public function getMapArea(mapId:String, areaId:String):MosouWorldMapAreaVO {
+        var map:MosouWorldMapVO = _mapObj[mapId];
+        if (!map) {
+            return null;
+        }
+        return map.getArea(areaId);
+    }
 
-		public function getMap(id:String):MosouWorldMapVO{
-			return _mapObj[id];
-		}
+    public function loadMapData(back:Function, fail:Function):void {
+        var mapId:String = 'map1';
+        var url:String   = 'config/mosou/' + mapId + '/' + mapId + '.json';
+        AssetManager.I.loadJSON(url, function (o:Object):void {
+            var map:MosouWorldMapVO = new MosouWorldMapVO();
+            map.id                  = o.id;
+            map.name                = o.name;
+            map.initWay(o.way);
+            _mapObj[map.id] = map;
+            loadAreas(map, o.parts, back, fail);
 
-		public function getMapArea(mapId:String, areaId:String):MosouWorldMapAreaVO{
-			var map:MosouWorldMapVO = _mapObj[mapId];
-			if(!map) return null;
-			return map.getArea(areaId);
-		}
+        }, fail);
+    }
 
-		public function loadMapData(back:Function, fail:Function):void{
-			var mapId:String = "map1";
-			var url:String = "config/mosou/" + mapId + "/" + mapId + ".json";
-			AssetManager.I.loadJSON(url, function(o:Object):void{
-				var map:MosouWorldMapVO = new MosouWorldMapVO();
-				map.id = o.id;
-				map.name = o.name;
-				map.initWay(o.way);
-				_mapObj[map.id] = map;
-				loadAreas(map, o.parts, back, fail);
+    private function loadAreas(map:MosouWorldMapVO, parts:Array, back:Function, fail:Function):void {
+        var mapIds:Array = parts.concat();
 
-			}, fail);
-		}
+        function loadNext(o:Object = null):void {
+            if (!o) {
+                (
+                        fail != null
+                ) && fail();
+                return;
+            }
 
-		private function loadAreas(map:MosouWorldMapVO, parts:Array, back:Function, fail:Function):void{
-			var mapIds:Array = parts.concat();
+            if (o && o.id) {
+                var mv:MosouWorldMapAreaVO = map.getArea(o.id);
+                if (mv) {
+                    initMapArea(mv, o);
+                }
+            }
 
-			function loadNext(o:Object = null):void{
-				if(!o){
-					(fail != null) && fail();
-					return;
-				}
+            if (mapIds.length < 1) {
+                (
+                        back != null
+                ) && back();
+                return;
+            }
 
-				if(o && o.id){
-					var mv:MosouWorldMapAreaVO = map.getArea(o.id);
-					if(mv) initMapArea(mv, o);
-				}
+            var id:String = mapIds.shift();
 
-				if(mapIds.length < 1){
-					(back != null) && back();
-					return;
-				}
+            var partUrl:String = 'config/mosou/' + map.id + '/' + id + '.json';
+            TraceLang('debug.trace.data.musou_model.load_area', partUrl);
+            AssetManager.I.loadJSON(partUrl, loadNext, fail);
+        }
 
-				var id:String = mapIds.shift();
+        loadNext({remark: 'first time!'});
+    }
 
-				var partUrl:String = "config/mosou/"+map.id+"/"+id+".json";
-				TraceLang('debug.trace.data.musou_model.load_area', partUrl);
-				AssetManager.I.loadJSON(partUrl, loadNext, fail);
-			}
+    private function initMapArea(area:MosouWorldMapAreaVO, d:Object):void {
+        TraceLang('debug.trace.data.musou_model.init_map_area', d.id);
 
-			loadNext({remark: "first time!"});
-		}
+        area.id   = d.id;
+        area.name = d.name;
 
-		private function initMapArea(area:MosouWorldMapAreaVO, d:Object):void{
-			TraceLang('debug.trace.data.musou_model.init_map_area', d.id);
+        area.missions = new Vector.<MosouMissionVO>();
 
-			area.id = d.id;
-			area.name = d.name;
+        var miss:Array = d.missions;
+        for (var j:int = 0; j < miss.length; j++) {
+            var mv:MosouMissionVO = new MosouMissionVO();
+            mv.initByJsonObject(miss[j]);
+            area.missions.push(mv);
+        }
 
-			area.missions = new Vector.<MosouMissionVO>();
+    }
 
-			var miss:Array = d.missions;
-			for(var j:int=0; j < miss.length; j++){
-				var mv:MosouMissionVO = new MosouMissionVO();
-				mv.initByJsonObject(miss[j]);
-				area.missions.push(mv);
-			}
-
-		}
-
-	}
+}
 }

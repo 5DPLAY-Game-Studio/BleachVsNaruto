@@ -16,31 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou
-{
-	import net.play5d.game.bvn.utils.WrapInteger;
+package net.play5d.game.bvn.data.mosou {
+import net.play5d.game.bvn.utils.WrapInteger;
 
-	public class MosouFighterSellVO
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class MosouFighterSellVO {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		public var id:String;
+    public function MosouFighterSellVO(fighterId:String, price:int) {
+        this.id = fighterId;
+//			this.allowSell = allowSell;
+        _price.setValue(price);
+    }
 
 //		public var sold:Boolean = false;
 //		public var allowSell:Boolean = false;
+    public var id:String;
+    private var _price:WrapInteger = new WrapInteger(0);
 
-		private var _price:WrapInteger = new WrapInteger(0);
+    public function getPrice():int {
+        return _price.getValue();
+    }
 
-		public function MosouFighterSellVO(fighterId:String, price:int)
-		{
-			this.id = fighterId;
-//			this.allowSell = allowSell;
-			_price.setValue(price);
-		}
-
-		public function getPrice():int{
-			return _price.getValue();
-		}
-
-	}
+}
 }

@@ -16,11 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou
-{
-	public class MosouWaveVO
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data.mosou {
+public class MosouWaveVO {
+    include '../../../../../../../include/_INCLUDE_.as';
 
 //		public static function createByXML(xml:XML):MosouWaveVO{
 //			var wave:MosouWaveVO = new MosouWaveVO();
@@ -48,118 +46,119 @@ package net.play5d.game.bvn.data.mosou
 //			return wave;
 //		}
 
-		public static function createByJSON(json:Object):MosouWaveVO{
-			var wave:MosouWaveVO = new MosouWaveVO();
-			wave.hold = int(json.hold);
+    public static function createByJSON(json:Object):MosouWaveVO {
+        var wave:MosouWaveVO = new MosouWaveVO();
+        wave.hold            = int(json.hold);
 
-			var enemies:Array = json.enemies;
-			for(var j:int = 0; j < enemies.length; j++){
-				wave.addEnemy(MosouEnemyVO.createByJSON(enemies[j]));
-			}
+        var enemies:Array = json.enemies;
+        for (var j:int = 0; j < enemies.length; j++) {
+            wave.addEnemy(MosouEnemyVO.createByJSON(enemies[j]));
+        }
 
-			if(json.repeat){
-				wave.repeats = new Vector.<MosouWaveRepeatVO>();
+        if (json.repeat) {
+            wave.repeats = new Vector.<MosouWaveRepeatVO>();
 
-				var waveRepeat:MosouWaveRepeatVO = new MosouWaveRepeatVO();
-				waveRepeat.type = json.repeat.type;
-				waveRepeat.hold = json.repeat.hold;
+            var waveRepeat:MosouWaveRepeatVO = new MosouWaveRepeatVO();
+            waveRepeat.type                  = json.repeat.type;
+            waveRepeat.hold                  = json.repeat.hold;
 
-				var repeatEnemies:Array = json.repeat.enemies;
-				for(var k:int = 0; k < repeatEnemies.length; k++){
-					waveRepeat.addEnemy(MosouEnemyVO.createByJSON(repeatEnemies[k]));
-				}
+            var repeatEnemies:Array = json.repeat.enemies;
+            for (var k:int = 0; k < repeatEnemies.length; k++) {
+                waveRepeat.addEnemy(MosouEnemyVO.createByJSON(repeatEnemies[k]));
+            }
 
-				wave.repeats.push(waveRepeat);
-			}
+            wave.repeats.push(waveRepeat);
+        }
 
-			return wave;
-		}
+        return wave;
+    }
 
+    public function MosouWaveVO() {
+    }
+    public var id:int;
+    /**
+     * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）
+     */
+    public var enemies:Vector.<MosouEnemyVO>;
+    /**
+     * 重复定义
+     */
+    public var repeats:Vector.<MosouWaveRepeatVO>;
+    /**
+     * 持续时间（秒）
+     */
+    public var hold:int;
 
-		public var id:int;
-		/**
-		 * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）
-		 */
-		public var enemies:Vector.<MosouEnemyVO>;
+    public function getAllEnemies():Vector.<MosouEnemyVO> {
+        if (!repeats) {
+            return enemies;
+        }
 
-		/**
-		 * 重复定义
-		 */
-		public var repeats:Vector.<MosouWaveRepeatVO>;
+        var result:Vector.<MosouEnemyVO> = enemies.concat();
+        for each(var i:MosouWaveRepeatVO in repeats) {
+            if (i.enemies) {
+                result = result.concat(i.enemies);
+            }
+        }
 
-		/**
-		 * 持续时间（秒）
-		 */
-		public var hold:int;
+        return result;
+    }
 
-		public function MosouWaveVO()
-		{
-		}
+    public function getAllEnemieIds():Array {
+        var result:Array                     = [];
+        var allEnemies:Vector.<MosouEnemyVO> = getAllEnemies();
 
-		public function getAllEnemies():Vector.<MosouEnemyVO>{
-			if(!repeats){
-				return enemies;
-			}
+        for each(var e:MosouEnemyVO in allEnemies) {
+            if (result.indexOf(e.fighterID) == -1) {
+                result.push(e.fighterID);
+            }
+        }
 
-			var result:Vector.<MosouEnemyVO> = enemies.concat();
-			for each(var i:MosouWaveRepeatVO in repeats){
-				if(i.enemies) result = result.concat(i.enemies);
-			}
+        return result;
+    }
 
-			return result;
-		}
+    public function getBosses():Vector.<MosouEnemyVO> {
+        var result:Vector.<MosouEnemyVO>     = new Vector.<MosouEnemyVO>();
+        var allEnemies:Vector.<MosouEnemyVO> = getAllEnemies();
 
-		public function getAllEnemieIds():Array{
-			var result:Array = [];
-			var allEnemies:Vector.<MosouEnemyVO> = getAllEnemies();
+        for each(var e:MosouEnemyVO in allEnemies) {
+            if (!e.isBoss) {
+                continue;
+            }
 
-			for each(var e:MosouEnemyVO in allEnemies){
-				if(result.indexOf(e.fighterID) == -1){
-					result.push(e.fighterID);
-				}
-			}
+            if (result.indexOf(e) == -1) {
+                result.push(e);
+            }
+        }
 
-			return result;
-		}
+        return result;
+    }
 
-		public function getBosses():Vector.<MosouEnemyVO>{
-			var result:Vector.<MosouEnemyVO> = new Vector.<MosouEnemyVO>();
-			var allEnemies:Vector.<MosouEnemyVO> = getAllEnemies();
+    public function addEnemy(enemyAdd:Vector.<MosouEnemyVO>):void {
+        enemies ||= new Vector.<MosouEnemyVO>();
 
-			for each(var e:MosouEnemyVO in allEnemies){
-				if(!e.isBoss) continue;
+        for each(var e:MosouEnemyVO in enemyAdd) {
+            e.wave = this;
+            enemies.push(e);
+        }
+    }
 
-				if(result.indexOf(e) == -1){
-					result.push(e);
-				}
-			}
+    public function addRepeat(repeat:MosouWaveRepeatVO):void {
+        repeats ||= new Vector.<MosouWaveRepeatVO>();
 
-			return result;
-		}
+        repeat.wave = this;
+        repeats.push(repeat);
+    }
 
-		public function addEnemy(enemyAdd:Vector.<MosouEnemyVO>):void{
-			enemies ||= new Vector.<MosouEnemyVO>();
+    public function bossCount():int {
+        var count:int;
+        for each(var i:MosouEnemyVO in enemies) {
+            if (i.isBoss) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-			for each(var e:MosouEnemyVO in enemyAdd){
-				e.wave = this;
-				enemies.push(e);
-			}
-		}
-
-		public function addRepeat(repeat:MosouWaveRepeatVO):void{
-			repeats ||= new Vector.<MosouWaveRepeatVO>();
-
-			repeat.wave = this;
-			repeats.push(repeat);
-		}
-
-		public function bossCount():int{
-			var count:int;
-			for each(var i:MosouEnemyVO in enemies){
-				if(i.isBoss) count ++;
-			}
-			return count;
-		}
-
-	}
+}
 }

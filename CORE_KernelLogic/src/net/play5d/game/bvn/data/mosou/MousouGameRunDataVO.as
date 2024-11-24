@@ -16,23 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou
-{
-	public class MousouGameRunDataVO
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.data.mosou {
+public class MousouGameRunDataVO {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		public var koNum:int = 0;
+    public function MousouGameRunDataVO() {
+        TraceLang('debug.trace.data.musou_game_run_data_vo.main');
+    }
 
 //		private var _runningWaves:Vector.<MosouWaveRunVO>;
-
-		public var gameTime:int;
-		public var gameTimeMax:int;
-
-		public function MousouGameRunDataVO()
-		{
-			TraceLang('debug.trace.data.musou_game_run_data_vo.main');
-		}
+    public var koNum:int = 0;
+    public var gameTime:int;
+    public var gameTimeMax:int;
 
 //		public function reset():void{
 //			gameTime = 0;
@@ -41,5 +36,5 @@ package net.play5d.game.bvn.data.mosou
 //			waves = null;
 //			koNum = 0;
 //		}
-	}
+}
 }

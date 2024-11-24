@@ -16,30 +16,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou
-{
-	import net.play5d.game.bvn.data.ISaveData;
+package net.play5d.game.bvn.data.mosou {
+import net.play5d.game.bvn.data.ISaveData;
 
-	public class MosouWorldMapData implements ISaveData
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class MosouWorldMapData implements ISaveData {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _mapAreaList:Vector.<MosouWorldMapAreaVO>;
+    public function MosouWorldMapData() {
+    }
+    private var _mapAreaList:Vector.<MosouWorldMapAreaVO>;
 
-		public function MosouWorldMapData()
-		{
-		}
+    public function toSaveObj():Object {
+        return null;
+    }
 
-		private function initMapAreas():void{
-		}
+    public function readSaveObj(o:Object):void {
+    }
 
-		public function toSaveObj():Object
-		{
-			return null;
-		}
-
-		public function readSaveObj(o:Object):void
-		{
-		}
-	}
+    private function initMapAreas():void {
+    }
+}
 }
