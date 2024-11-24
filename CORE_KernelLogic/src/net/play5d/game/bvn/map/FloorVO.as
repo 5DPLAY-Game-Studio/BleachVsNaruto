@@ -20,7 +20,7 @@ package net.play5d.game.bvn.map
 {
 	public class FloorVO
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var y:Number = 0;
 		public var xFrom:Number = 0;
