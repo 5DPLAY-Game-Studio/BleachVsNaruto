@@ -31,7 +31,7 @@ package net.play5d.game.bvn.ui.fight
 
 	public class FighterHpBar
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:hpbar_barmc;
 		private var _bar:DisplayObject;
