@@ -16,33 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
-import net.play5d.game.bvn.interfaces.IInstanceVO;
-import net.play5d.pcl.utils.ClassUtils;
-
-/**
- * BGM 值对象
- */
-public class BgmVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-
-    public var id:String;
-    public var rate:Number;
-    public var url:String;
+package net.play5d.game.bvn.interfaces {
+public interface IInstanceVO {
 
     /**
      * 克隆自身
      * @return 返回自身实例的克隆对象
      */
-    public function clone():IInstanceVO {
-        var bVO:BgmVO  = new BgmVO();
-        var keys:Array = ClassUtils.getClassProperty(BgmVO);
-
-        for each (var prop:String in keys) {
-            bVO[prop] = this[prop];
-        }
-
-        return bVO;
-    }
+    function clone():IInstanceVO;
 }
 }
