@@ -42,7 +42,7 @@ package net.play5d.game.bvn.ui.dialog
 
 	public class MosouSelectDialog extends BaseDialog
 	{
-		include "_INCLUDE_OVERRIDE_.as";
+		include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
 		private var _ui:dialog_select_fighter;
 		private var _chooseBtn:SimpleButton;

@@ -30,7 +30,7 @@ import net.play5d.game.bvn.ui.Text;
 
 	public class BaseDialog
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		protected var _backBtn:SimpleButton;
 		protected var _dialogUI:Sprite;

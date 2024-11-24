@@ -38,7 +38,7 @@ package net.play5d.game.bvn.ui.dialog
 
 	public class MosouStateDialog extends BaseDialog
 	{
-		include "_INCLUDE_OVERRIDE_.as";
+		include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
 		private var _ui:dialog_mosou_status;
 		private var _bigFaces:Vector.<BigFaceUI>;
