@@ -16,74 +16,77 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.mosou_ctrls
-{
-	import flash.display.Sprite;
-	import flash.utils.Dictionary;
+package net.play5d.game.bvn.ctrl.mosou_ctrls {
+import flash.display.Sprite;
+import flash.utils.Dictionary;
 
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
-	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpFollowUI;
+import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpFollowUI;
 
-	public class MosouEnemyBarCtrl
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class MosouEnemyBarCtrl {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _barMap:Dictionary = new Dictionary();
-		private var _gameLayer:Sprite;
+    public function MosouEnemyBarCtrl() {
+    }
+    private var _barMap:Dictionary = new Dictionary();
+    private var _gameLayer:Sprite;
 
-		public function MosouEnemyBarCtrl()
-		{
-		}
+    public function destory():void {
+        _barMap = null;
+    }
 
-		private function initalize():void{
-		}
+    public function updateEnemyBar(f:FighterMain):void {
+        if (f.mosouEnemyData.isBoss) {
+            return;
+        }
 
-		public function destory():void{
-			_barMap = null;
-		}
+        if (_barMap[f]) {
+            (
+                    _barMap[f] as EnemyHpFollowUI
+            ).active();
+            return;
+        }
 
-		public function updateEnemyBar(f:FighterMain):void{
-			if(f.mosouEnemyData.isBoss) return;
+        _gameLayer ||= GameCtrl.I.gameState.gameLayer;
 
-			if(_barMap[f]){
-				(_barMap[f] as EnemyHpFollowUI).active();
-				return;
-			}
+        var bar:EnemyHpFollowUI = new EnemyHpFollowUI(f);
+        _barMap[f]              = bar;
 
-			_gameLayer ||= GameCtrl.I.gameState.gameLayer;
+        _gameLayer.addChild(bar.getUI());
+    }
 
-			var bar:EnemyHpFollowUI = new EnemyHpFollowUI(f);
-			_barMap[f] = bar;
+    public function render():void {
+        if (!_barMap) {
+            return;
+        }
 
-			_gameLayer.addChild(bar.getUI());
-		}
+        for (var i:* in _barMap) {
+            var f:FighterMain = i is FighterMain ? i as FighterMain : null;
+            if (!f) {
+                continue;
+            }
 
-		public function render():void{
-			if(!_barMap) return;
+            var b:EnemyHpFollowUI = _barMap[f];
+            if (!b.render()) {
+                try {
+                    _gameLayer.removeChild(b.getUI());
+                }
+                catch (e:Error) {
+                    TraceLang('debug.trace.data.musou_enemy_bar_ctrl.remove_bar_error');
+                }
+                b.destory();
+                delete _barMap[f];
+            }
+        }
+    }
 
-			for (var i:* in _barMap){
-				var f:FighterMain = i is FighterMain ? i as FighterMain : null;
-				if (!f) {
-					continue;
-				}
+    public function renderAnimate():void {
 
-				var b:EnemyHpFollowUI = _barMap[f];
-				if(!b.render()){
-					try{
-						_gameLayer.removeChild(b.getUI());
-					}catch(e:Error){
-						TraceLang('debug.trace.data.musou_enemy_bar_ctrl.remove_bar_error')
-					}
-					b.destory();
-					delete _barMap[f];
-				}
-			}
-		}
+    }
 
-		public function renderAnimate():void{
+    private function initalize():void {
+    }
 
-		}
-
-	}
+}
 }
