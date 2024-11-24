@@ -24,10 +24,12 @@ import flash.geom.Matrix;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
-public class EffectVO {
+public class EffectVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
     public function EffectVO(className:String, param:Object = null) {
         this.className = className;

@@ -28,7 +28,6 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
-import net.play5d.pcl.utils.ClassUtils;
 
 public class ConfigVO implements ISaveData, IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';

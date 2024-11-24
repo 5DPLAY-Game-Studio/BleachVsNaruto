@@ -19,8 +19,6 @@
 import flash.utils.getDefinitionByName;
 import flash.utils.getQualifiedClassName;
 
-import net.play5d.game.bvn.interfaces.IInstanceVO;
-
 import net.play5d.pcl.utils.ClassUtils;
 
 /**
