@@ -26,11 +26,13 @@ import net.play5d.game.bvn.ctrl.EffectCtrl;
 import net.play5d.game.bvn.ctrl.SoundCtrl;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 import net.play5d.pcl.utils.ClassUtils;
 
-public class ConfigVO implements ISaveData {
+public class ConfigVO implements ISaveData, IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
     public const key_menu:KeyConfigVO = new KeyConfigVO(0);
     public const key_p1:KeyConfigVO   = new KeyConfigVO(1);
@@ -60,16 +62,6 @@ public class ConfigVO implements ISaveData {
      */
     public var extendConfig:IExtendConfig;
     private var _cloneKeys:Array = ClassUtils.getClassProperty(ConfigVO);
-
-    public function clone():ConfigVO {
-        var cv:ConfigVO = new ConfigVO();
-
-        for each(var property:String in _cloneKeys) {
-            cv[property] = this[property];
-        }
-
-        return cv;
-    }
 
     public function setDefaultConfig(keyConfig:KeyConfigVO):void {
         switch (keyConfig.id) {

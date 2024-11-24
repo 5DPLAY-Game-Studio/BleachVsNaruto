@@ -16,25 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
-import flash.display.BitmapData;
+import flash.utils.getDefinitionByName;
+import flash.utils.getQualifiedClassName;
 
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+import net.play5d.pcl.utils.ClassUtils;
+
 /**
- * 位图数据缓存值对象
+ * 克隆自身
+ * @return 返回自身实例的克隆对象
  */
-public class BitmapDataCacheVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+public function clone():IInstanceVO {
+    var clsName:String = getQualifiedClassName(this);
+    var cls:Class      = getDefinitionByName(clsName) as Class;
+    var vo:IInstanceVO = new cls();
+    var keys:Array     = ClassUtils.getClassProperty(cls);
 
-    // 位图数据
-    public var bitmapData:BitmapData;
+    for each (var prop:String in keys) {
+        vo[prop] = this[prop];
+    }
 
-    // X 偏移
-    public var offsetX:Number = 0;
-    // Y 偏移
-    public var offsetY:Number = 0;
-
-}
+    return vo;
 }
