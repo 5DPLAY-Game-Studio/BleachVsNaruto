@@ -44,7 +44,7 @@ package net.play5d.game.bvn.ui.bigmap
 
 	public class WorldMapPointUI extends EventDispatcher
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public static const EVENT_SELECT:String = "EVENT_SELECT";
 

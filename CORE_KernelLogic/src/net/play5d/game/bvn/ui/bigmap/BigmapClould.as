@@ -25,7 +25,7 @@ package net.play5d.game.bvn.ui.bigmap
 
 	public class BigmapClould extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _clouds:Vector.<CloudView> = new Vector.<CloudView>();
 		private var _createFrame:int;

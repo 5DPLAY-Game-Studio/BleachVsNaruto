@@ -25,7 +25,7 @@ package net.play5d.game.bvn.ui.bigmap
 
 	public class CloudView
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public var speed:Number = 0;
 		public var mc:MovieClip;
