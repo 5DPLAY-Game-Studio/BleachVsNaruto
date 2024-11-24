@@ -28,7 +28,7 @@ package net.play5d.game.bvn.ui.dialog.select
 
 	public class DotsGroupUI extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../../include/_INCLUDE_.as';
 
 		private var _dotArr:Array;
 		public var onDotClick:Function;

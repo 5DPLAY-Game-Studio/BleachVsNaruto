@@ -34,7 +34,7 @@ package net.play5d.game.bvn.ui.dialog.select
 
 	public class SelectFighterUI
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../../include/_INCLUDE_.as';
 
 		public var sellData:MosouFighterSellVO;
 		private var _playerData:MosouFighterVO;
