@@ -27,7 +27,7 @@ package net.play5d.game.bvn.ui
 
 	public class QuickTransUI extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _up:Box;
 		private var _down:Box;

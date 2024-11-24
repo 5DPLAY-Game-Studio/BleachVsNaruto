@@ -29,7 +29,7 @@ package net.play5d.game.bvn.ui
 
 	public class SetBtn extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var optionKey:String;
 		public var onSelect:Function;

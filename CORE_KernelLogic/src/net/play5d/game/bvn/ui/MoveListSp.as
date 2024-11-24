@@ -28,7 +28,7 @@ package net.play5d.game.bvn.ui
 
 	public class MoveListSp extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		[Embed(source="/../assets/movelist.jpg")]
 		private var _picClass:Class;

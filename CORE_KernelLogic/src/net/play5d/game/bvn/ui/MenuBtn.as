@@ -40,7 +40,7 @@ package net.play5d.game.bvn.ui
 
 	public class MenuBtn extends EventDispatcher
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var ui:mc_wzbtn;
 		public var cn:String;

@@ -37,7 +37,7 @@ package net.play5d.game.bvn.ui
 
 	public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var ui:keyset_mc;
 

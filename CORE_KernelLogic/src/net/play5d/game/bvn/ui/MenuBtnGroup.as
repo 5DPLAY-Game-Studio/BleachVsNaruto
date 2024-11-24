@@ -42,7 +42,7 @@ package net.play5d.game.bvn.ui
 
 	public class MenuBtnGroup extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		public var enabled:Boolean = true;
 		protected var _btnConfig:Array;

@@ -24,7 +24,7 @@ package net.play5d.game.bvn.ui
 
 	public class ContinueBtn extends Sprite
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../include/_INCLUDE_.as';
 
 		private var _btnGroup:SetBtnGroup;
 		private var _onClick:Function;
