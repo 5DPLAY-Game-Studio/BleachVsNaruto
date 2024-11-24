@@ -26,8 +26,11 @@ import net.play5d.pcl.utils.ClassUtils;
 public class BgmVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
 
+    // 音乐 ID
     public var id:String;
+    // 播放概率
     public var rate:Number;
+    // 资源路径
     public var url:String;
 
     /**

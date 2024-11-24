@@ -19,13 +19,36 @@
 package net.play5d.game.bvn.data {
 import flash.display.BitmapData;
 
-public class BitmapDataCacheVO {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+import net.play5d.pcl.utils.ClassUtils;
+
+/**
+ * 位图数据缓存值对象
+ */
+public class BitmapDataCacheVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
 
-    public function BitmapDataCacheVO() {
-    }
+    // 位图数据
     public var bitmapData:BitmapData;
+
+    // X 偏移
     public var offsetX:Number = 0;
+    // Y 偏移
     public var offsetY:Number = 0;
+
+    /**
+     * 克隆自身
+     * @return 返回自身实例的克隆对象
+     */
+    public function clone():IInstanceVO {
+        var bdcVO:BitmapDataCacheVO  = new BitmapDataCacheVO();
+        var keys:Array = ClassUtils.getClassProperty(BitmapDataCacheVO);
+
+        for each (var prop:String in keys) {
+            bdcVO[prop] = this[prop];
+        }
+
+        return bdcVO;
+    }
 }
 }
