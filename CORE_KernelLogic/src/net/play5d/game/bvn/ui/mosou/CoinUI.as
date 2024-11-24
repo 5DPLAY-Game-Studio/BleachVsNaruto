@@ -32,7 +32,7 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class CoinUI
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		public static var ADD_ABLE:Boolean = true;
 		private var _ui:MovieClip;

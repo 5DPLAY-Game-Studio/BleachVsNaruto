@@ -30,7 +30,7 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MosouWaveUI
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:Sprite;
 		private var _txtCur:TextField;

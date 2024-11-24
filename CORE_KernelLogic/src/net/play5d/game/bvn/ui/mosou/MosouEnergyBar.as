@@ -25,7 +25,7 @@ package net.play5d.game.bvn.ui.mosou
 
 	public class MosouEnergyBar
 	{
-		include "_INCLUDE_.as";
+		include '../../../../../../../include/_INCLUDE_.as';
 
 		private var _ui:mosou_energy_bar;
 		private var _fighter:FighterMain;
