@@ -16,188 +16,197 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.ctrler
-{
-	import flash.display.MovieClip;
-	import flash.geom.Rectangle;
+package net.play5d.game.bvn.fighter.ctrler {
+import flash.display.MovieClip;
+import flash.geom.Rectangle;
 
-	import net.play5d.game.bvn.fighter.Assister;
-	import net.play5d.game.bvn.fighter.FighterAttacker;
-	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.fighter.events.FighterEvent;
-	import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
-	import net.play5d.game.bvn.fighter.models.HitVO;
-	import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.fighter.Assister;
+import net.play5d.game.bvn.fighter.FighterAttacker;
+import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.events.FighterEvent;
+import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
+import net.play5d.game.bvn.fighter.models.HitVO;
+import net.play5d.game.bvn.interfaces.IGameSprite;
 
-	public class FighterAttackerCtrler
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class FighterAttackerCtrler {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		public var effect:FighterEffectCtrl;
-		public var ownerMc:FighterMcCtrler;
+    public function FighterAttackerCtrler(attacker:FighterAttacker) {
+        _attacker = attacker;
+    }
+    public var effect:FighterEffectCtrl;
+    public var ownerMc:FighterMcCtrler;
+    private var _attacker:FighterAttacker;
+    private var _touchFloor:Boolean;
+    private var _touchFloorFrame:String;
+    private var hitTargetAction:String;
+    private var hitTargetChecker:String;
 
-		private var _attacker:FighterAttacker;
+    public function get owner_mc_ctrler():FighterMcCtrler {
+        var fighter:FighterMain = _attacker.getOwner() as FighterMain;
+        if (fighter) {
+            return fighter.getCtrler().getMcCtrl();
+        }
+        return null;
+    }
 
-		private var _touchFloor:Boolean;
-		private var _touchFloorFrame:String;
+    public function get owner_fighter_ctrler():FighterCtrler {
+        var fighter:FighterMain = _attacker.getOwner() as FighterMain;
+        if (fighter) {
+            return fighter.getCtrler();
+        }
+        return null;
+    }
 
-		private var hitTargetAction:String;
-		private var hitTargetChecker:String;
+    public function destory():void {
+        _attacker = null;
+        effect    = null;
+        ownerMc   = null;
+    }
 
-		public function get owner_mc_ctrler():FighterMcCtrler{
-			var fighter:FighterMain = _attacker.getOwner() as FighterMain;
-			if(fighter) return fighter.getCtrler().getMcCtrl();
-			return null;
-		}
+    public function endAct():void {
+        _attacker.isAttacking = false;
+    }
 
-		public function get owner_fighter_ctrler():FighterCtrler{
-			var fighter:FighterMain = _attacker.getOwner() as FighterMain;
-			if(fighter) return fighter.getCtrler();
-			return null;
-		}
+    public function render():void {
 
-		public function FighterAttackerCtrler(attacker:FighterAttacker)
-		{
-			_attacker = attacker;
-		}
+        renderCheckTargetHit();
 
-		public function destory():void{
-			_attacker = null;
-			effect = null;
-			ownerMc = null;
-		}
+        if (_attacker.isInAir) {
+            _touchFloor = false;
+            return;
+        }
 
-		public function endAct():void{
-			_attacker.isAttacking = false;
-		}
+        if (!_touchFloor) {
+            _touchFloor = true;
+            if (_touchFloorFrame) {
+                _attacker.gotoAndPlay(_touchFloorFrame);
+                _touchFloorFrame = null;
+            }
+        }
 
-		public function render():void{
+    }
 
-			renderCheckTargetHit();
+    public function stopFollowTarget():void {
+        _attacker.stopFollowTarget();
+    }
 
-			if(_attacker.isInAir){
-				_touchFloor = false;
-				return;
-			}
+    public function moveToTarget(offsetX:Number = NaN, offsetY:Number = NaN):void {
+        _attacker.moveToTarget(offsetX, offsetY);
+    }
 
-			if(!_touchFloor){
-				_touchFloor = true;
-				if(_touchFloorFrame){
-					_attacker.gotoAndPlay(_touchFloorFrame);
-					_touchFloorFrame = null;
-				}
-			}
+    public function move(x:Number = 0, y:Number = 0):void {
+        _attacker.setVelocity(x * _attacker.direct, y);
+    }
 
-		}
+    public function damping(x:Number = 0, y:Number = 0):void {
+        _attacker.setDamping(x, y);
+    }
 
+    public function stop():void {
+        _attacker.stop();
+    }
 
-		private function renderCheckTargetHit():void{
-			if(!hitTargetChecker) return;
+    public function gotoAndPlay(frame:String):void {
+        _attacker.gotoAndPlay(frame);
+    }
 
-			var rect:Rectangle = _attacker.getHitCheckRect(hitTargetChecker);
-			if(!rect) return;
+    public function gotoAndStop(frame:String):void {
+        _attacker.gotoAndStop(frame);
+    }
 
-			var targets:Vector.<IGameSprite> = _attacker.getTargets();
-			if(!targets) return;
+    public function setTouchFloor(frame:String):void {
+        _touchFloorFrame = frame;
+    }
 
-			for(var i:int ; i < targets.length ; i++){
-				var body:Rectangle = targets[i].getBodyArea();
-				if(body && rect.intersects(body)){
-					gotoAndPlay(hitTargetAction);
-				}
-			}
+    public function justHit(hitId:String):Boolean {
+        var owner:IGameSprite = _attacker.getOwner();
+        if (owner is FighterMain) {
+            return (
+                    _attacker.getOwner() as FighterMain
+            ).getCtrler().justHit(hitId);
+            ;
+        }
+        if (owner is Assister) {
+            return (
+                    _attacker.getOwner() as Assister
+            ).getCtrler().justHit(hitId);
+            ;
+        }
+        return false;
+    }
 
-		}
+    //设定检测碰撞后攻击,checker:检测对象名称，action碰撞后执行的动作
+    public function setHitTarget(checker:String, action:String):void {
+        hitTargetAction  = action;
+        hitTargetChecker = checker;
+    }
 
-		public function stopFollowTarget():void{
-			_attacker.stopFollowTarget();
-		}
+    public function setCrossMap(v:Boolean):void {
+        _attacker.isAllowCrossX = _attacker.isAllowCrossBottom = v;
+    }
 
-		public function moveToTarget(offsetX:Number = NaN , offsetY:Number = NaN):void{
-			_attacker.moveToTarget(offsetX,offsetY);
-		}
+    public function removeSelf():void {
+        _attacker.removeSelf();
+    }
 
-		public function move(x:Number = 0 , y:Number = 0):void{
-			_attacker.setVelocity(x*_attacker.direct,y);
-		}
+    //放波，子弹
+    public function fire(mcName:String, params:Object = null):void {
 
-		public function damping(x:Number = 0 , y:Number = 0):void{
-			_attacker.setDamping(x,y);
-		}
+        if (!owner_fighter_ctrler || !owner_fighter_ctrler.hitModel) {
+            trace('hitModel error!');
+            return;
+        }
 
-		public function stop():void{
-			_attacker.stop();
-		}
+        var mc:MovieClip = _attacker.mc.getChildByName(mcName) as MovieClip;
+        if (mc) {
+            params ||= {};
+            params.mc = mc;
 
-		public function gotoAndPlay(frame:String):void{
-			_attacker.gotoAndPlay(frame);
-		}
+            var hv:HitVO = owner_fighter_ctrler.hitModel.getHitVOByDisplayName(mcName);
+            if (!hv) {
+                trace('hitVO error!');
+                return;
+            }
 
-		public function gotoAndStop(frame:String):void{
-			_attacker.gotoAndStop(frame);
-		}
+            hv       = hv.clone();
+            hv.owner = _attacker;
 
-		public function setTouchFloor(frame:String):void{
-			_touchFloorFrame = frame;
-		}
+            params.hitVO = hv;
 
-		public function justHit(hitId:String):Boolean{
-			var owner:IGameSprite = _attacker.getOwner();
-			if(owner is FighterMain){
-				return (_attacker.getOwner() as FighterMain).getCtrler().justHit(hitId);;
-			}
-			if(owner is Assister){
-				return (_attacker.getOwner() as Assister).getCtrler().justHit(hitId);;
-			}
-			return false;
-		}
+            FighterEventDispatcher.dispatchEvent(_attacker, FighterEvent.FIRE_BULLET, params);
+        }
+        else {
+            _attacker.setAnimateFrameOut(function ():void {
+                fire(mcName, params);
+            }, 1);
+        }
 
-		//设定检测碰撞后攻击,checker:检测对象名称，action碰撞后执行的动作
-		public function setHitTarget(checker:String , action:String):void{
-			hitTargetAction = action;
-			hitTargetChecker = checker;
-		}
+    }
 
-		public function setCrossMap(v:Boolean):void{
-			_attacker.isAllowCrossX = _attacker.isAllowCrossBottom = v;
-		}
+    private function renderCheckTargetHit():void {
+        if (!hitTargetChecker) {
+            return;
+        }
 
-		public function removeSelf():void{
-			_attacker.removeSelf();
-		}
+        var rect:Rectangle = _attacker.getHitCheckRect(hitTargetChecker);
+        if (!rect) {
+            return;
+        }
 
-		//放波，子弹
-		public function fire(mcName:String , params:Object = null):void{
+        var targets:Vector.<IGameSprite> = _attacker.getTargets();
+        if (!targets) {
+            return;
+        }
 
-			if(!owner_fighter_ctrler || !owner_fighter_ctrler.hitModel){
-				trace('hitModel error!');
-				return;
-			}
+        for (var i:int; i < targets.length; i++) {
+            var body:Rectangle = targets[i].getBodyArea();
+            if (body && rect.intersects(body)) {
+                gotoAndPlay(hitTargetAction);
+            }
+        }
 
-			var mc:MovieClip = _attacker.mc.getChildByName(mcName) as MovieClip;
-			if(mc){
-				params ||= {};
-				params.mc = mc;
+    }
 
-				var hv:HitVO = owner_fighter_ctrler.hitModel.getHitVOByDisplayName(mcName);
-				if(!hv){
-					trace('hitVO error!');
-					return;
-				}
-
-				hv = hv.clone();
-				hv.owner = _attacker;
-
-				params.hitVO = hv;
-
-				FighterEventDispatcher.dispatchEvent(_attacker,FighterEvent.FIRE_BULLET,params);
-			}else{
-				_attacker.setAnimateFrameOut(function():void{
-					fire(mcName,params);
-				},1);
-			}
-
-		}
-
-	}
+}
 }
