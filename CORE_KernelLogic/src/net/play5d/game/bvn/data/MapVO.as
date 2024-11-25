@@ -17,11 +17,12 @@
  */
 
 package net.play5d.game.bvn.data {
-public class MapVO {
-    include '../../../../../../include/_INCLUDE_.as';
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-    public function MapVO() {
-    }
+public class MapVO implements IInstanceVO {
+    include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
+
     public var id:String;
     public var name:String;
     public var fileUrl:String;
