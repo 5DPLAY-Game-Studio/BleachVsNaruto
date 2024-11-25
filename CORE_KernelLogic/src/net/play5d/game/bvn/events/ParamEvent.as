@@ -16,19 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.events
-{
-	import flash.events.Event;
+package net.play5d.game.bvn.events {
+import flash.events.Event;
 
-	public class ParamEvent extends Event
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class ParamEvent extends Event {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var param:*;
-		public function ParamEvent(type:String,param:*, bubbles:Boolean=false, cancelable:Boolean=false)
-		{
-			this.param = param;
-			super(type, bubbles, cancelable);
-		}
-	}
+    public function ParamEvent(type:String, param:*, bubbles:Boolean = false, cancelable:Boolean = false) {
+        this.param = param;
+        super(type, bubbles, cancelable);
+    }
+    public var param:*;
+}
 }
