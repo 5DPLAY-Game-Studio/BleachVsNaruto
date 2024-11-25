@@ -16,66 +16,69 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.debug
-{
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.display.Sprite;
-	import flash.events.MouseEvent;
-	import flash.utils.Dictionary;
+package net.play5d.game.bvn.debug {
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.events.MouseEvent;
+import flash.utils.Dictionary;
 
-	import net.play5d.game.bvn.utils.DebugSprite;
+import net.play5d.game.bvn.utils.DebugSprite;
 
-	public class DebugUtil
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class DebugUtil {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private static const map:Dictionary = new Dictionary();
+    private static const map:Dictionary = new Dictionary();
 
-		public static const enabled:Boolean = true;
+    public static const enabled:Boolean = true;
 
-		public static function debugPosition(d:DisplayObject, container:DisplayObjectContainer = null):void{
-			if(!enabled) return;
+    public static function debugPosition(d:DisplayObject, container:DisplayObjectContainer = null):void {
+        if (!enabled) {
+            return;
+        }
 
-			if(map[d]){
-				(map[d] as DebugSprite).destory();
-			}
+        if (map[d]) {
+            (
+                    map[d] as DebugSprite
+            ).destory();
+        }
 
-			if(!d.parent && !container){
-				TraceLang('debug.trace.data.debug_util.debug_position');
-				return;
-			}
+        if (!d.parent && !container) {
+            TraceLang('debug.trace.data.debug_util.debug_position');
+            return;
+        }
 
-			container ||= d.parent;
+        container ||= d.parent;
 
-			var box:DebugSprite = new DebugSprite(0xffff00, d);
-			box.alpha = 0.3;
-			container.addChild(box);
+        var box:DebugSprite = new DebugSprite(0xffff00, d);
+        box.alpha           = 0.3;
+        container.addChild(box);
 
-			box.addEventListener(MouseEvent.MOUSE_DOWN, startDrag);
+        box.addEventListener(MouseEvent.MOUSE_DOWN, startDrag);
 
-			map[d] = box;
+        map[d] = box;
 
-			function startDrag(e:MouseEvent):void{
-				var t:DebugSprite = e.currentTarget as DebugSprite;
-				if(t.parent) t.parent.addChild(t);
+        function startDrag(e:MouseEvent):void {
+            var t:DebugSprite = e.currentTarget as DebugSprite;
+            if (t.parent) {
+                t.parent.addChild(t);
+            }
 
-				t.alpha = 0.7;
-				t.startDrag(false);
-				t.addEventListener(MouseEvent.MOUSE_UP, stopDrag);
-			}
+            t.alpha = 0.7;
+            t.startDrag(false);
+            t.addEventListener(MouseEvent.MOUSE_UP, stopDrag);
+        }
 
-			function stopDrag(e:MouseEvent):void{
-				var t:DebugSprite = e.currentTarget as DebugSprite;
-				t.alpha = 0.1;
+        function stopDrag(e:MouseEvent):void {
+            var t:DebugSprite = e.currentTarget as DebugSprite;
+            t.alpha           = 0.1;
 
-				t.removeEventListener(MouseEvent.MOUSE_UP, stopDrag);
+            t.removeEventListener(MouseEvent.MOUSE_UP, stopDrag);
 
-				t.stopDrag();
-				t.applySet();
-			}
+            t.stopDrag();
+            t.applySet();
+        }
 
-		}
+    }
 
-	}
+}
 }
