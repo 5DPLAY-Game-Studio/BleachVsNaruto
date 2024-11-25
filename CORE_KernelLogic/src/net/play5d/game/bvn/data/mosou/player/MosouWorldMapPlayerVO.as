@@ -16,65 +16,63 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player
-{
-	import net.play5d.game.bvn.data.ISaveData;
+package net.play5d.game.bvn.data.mosou.player {
+import net.play5d.game.bvn.data.ISaveData;
 
-	public class MosouWorldMapPlayerVO implements ISaveData
-	{
-		include '../../../../../../../../include/_INCLUDE_.as';
+public class MosouWorldMapPlayerVO implements ISaveData {
+    include '../../../../../../../../include/_INCLUDE_.as';
 
-		public var id:String;
+    public function MosouWorldMapPlayerVO() {
+    }
+    public var id:String;
 //		public var areas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
-		private var _openAreas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
+    private var _openAreas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
 
-		public function MosouWorldMapPlayerVO()
-		{
-		}
+    public function getOpenArea(id:String):MosouWorldMapAreaPlayerVO {
+        for (var i:int; i < _openAreas.length; i++) {
+            if (_openAreas[i].id == id) {
+                return _openAreas[i];
+            }
+        }
+        return null;
+    }
 
-		public function getOpenArea(id:String):MosouWorldMapAreaPlayerVO{
-			for(var i:int; i < _openAreas.length; i++){
-				if(_openAreas[i].id == id) return _openAreas[i];
-			}
-			return null;
-		}
+    public function openArea(id:String):void {
+        if (!getOpenArea(id)) {
+            var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
+            av.id                            = id;
+            _openAreas.push(av);
+        }
+    }
 
-		public function openArea(id:String):void{
-			if(!getOpenArea(id)){
-				var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
-				av.id = id;
-				_openAreas.push(av);
-			}
-		}
+    public function toSaveObj():Object {
+        var o:Object = {};
+        o.id         = id;
 
-		public function toSaveObj():Object
-		{
-			var o:Object = {};
-			o.id = id;
+        o.areas = [];
+        for (var i:int; i < _openAreas.length; i++) {
+            var ad:Object = _openAreas[i].toSaveObj();
+            o.areas.push(ad);
+        }
 
-			o.areas = [];
-			for(var i:int; i < _openAreas.length; i++){
-				var ad:Object = _openAreas[i].toSaveObj();
-				o.areas.push(ad);
-			}
+        return o;
+    }
 
-			return o;
-		}
+    public function readSaveObj(o:Object):void {
+        if (o.id) {
+            id = o.id;
+        }
 
-		public function readSaveObj(o:Object):void
-		{
-			if(o.id) id = o.id;
+        if (o.areas) {
+            _openAreas = new Vector.<MosouWorldMapAreaPlayerVO>();
+            for (var i:int; i < o.areas.length; i++) {
+                var ad:Object                    = o.areas[i];
+                var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
+                av.readSaveObj(ad);
+                _openAreas.push(av);
+            }
+        }
+    }
 
-			if(o.areas){
-				_openAreas = new Vector.<MosouWorldMapAreaPlayerVO>();
-				for(var i:int; i < o.areas.length; i++){
-					var ad:Object = o.areas[i];
-					var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
-					av.readSaveObj(ad);
-					_openAreas.push(av);
-				}
-			}
-		}
-
-	}
+}
 }
