@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/LIB_KyoLib/LIB_KyoLib.iml" filepath="$PROJECT_DIR$/LIB_KyoLib/LIB_KyoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/LIB_Other/LIB_Other.iml" filepath="$PROJECT_DIR$/LIB_Other/LIB_Other.iml" />
       <module fileurl="file://$PROJECT_DIR$/SHELL_Dev/SHELL_Dev.iml" filepath="$PROJECT_DIR$/SHELL_Dev/SHELL_Dev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SHELL_Mob/SHELL_Mob.iml" filepath="$PROJECT_DIR$/SHELL_Mob/SHELL_Mob.iml" />
       <module fileurl="file://$PROJECT_DIR$/SHELL_Pc/SHELL_Pc.iml" filepath="$PROJECT_DIR$/SHELL_Pc/SHELL_Pc.iml" />
     </modules>
   </component>

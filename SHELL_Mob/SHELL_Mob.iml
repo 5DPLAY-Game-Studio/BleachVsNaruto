@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="SHELL_Mob">
+    <configurations>
+      <configuration name="SHELL_Mob" target-platform="Mobile" pure-as="true" main-class="launch" output-file="launch.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Mob">
+        <dependencies target-player="50.2">
+          <entries>
+            <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="LIB_KyoLib" build-configuration-name="LIB_KyoLib">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="CORE_Utils" build-configuration-name="CORE_Utils">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="CORE_Shared" build-configuration-name="CORE_Shared">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="d8ebdfae-4296-468c-befd-c26426d6d3ce">
+              <dependency linkage="External" />
+            </entry>
+          </entries>
+          <sdk name="flex4.16.1-air50.2.4.1" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalOptions" value="-swf-version 37 -optimize=true -use-network=true -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/launch-app.xml" package-file-name="launch">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/drawable" path-in-package="." />
+          </files-to-package>
+        </packaging-android>
+        <packaging-ios package-file-name="launch" />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/assets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/drawable" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../shared/_tmp/mob">
+      <sourceFolder url="file://$MODULE_DIR$/../shared/_tmp/mob" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="d8ebdfae-4296-468c-befd-c26426d6d3ce" />
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../shared/lib/swc" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="CORE_Utils" exported="" />
+    <orderEntry type="module" module-name="CORE_Shared" exported="" />
+    <orderEntry type="module" module-name="CORE_KernelLogic" exported="" />
+    <orderEntry type="module" module-name="LIB_KyoLib" exported="" />
+  </component>
+</module>

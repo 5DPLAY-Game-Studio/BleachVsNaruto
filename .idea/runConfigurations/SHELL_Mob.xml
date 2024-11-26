@@ -1,0 +1,42 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SHELL_Mob" type="FlashRunConfigurationType">
+    <option name="BCName" value="SHELL_Mob" />
+    <option name="IOSSimulatorDevice" value="" />
+    <option name="IOSSimulatorSdkPath" value="" />
+    <option name="adlOptions" value="" />
+    <option name="airProgramParameters" value="" />
+    <option name="appDescriptorForEmulator" value="Android" />
+    <option name="clearAppDataOnEachLaunch" value="true" />
+    <option name="debugTransport" value="USB" />
+    <option name="debuggerSdkRaw" value="BC SDK" />
+    <option name="emulator" value="NexusOne" />
+    <option name="emulatorAdlOptions" value="" />
+    <option name="fastPackaging" value="true" />
+    <option name="fullScreenHeight" value="0" />
+    <option name="fullScreenWidth" value="0" />
+    <option name="launchUrl" value="false" />
+    <option name="launcherParameters">
+      <LauncherParameters>
+        <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+        <option name="launcherType" value="OSDefault" />
+        <option name="newPlayerInstance" value="false" />
+        <option name="playerPath" value="FlashPlayerDebugger.exe" />
+      </LauncherParameters>
+    </option>
+    <option name="mobileRunTarget" value="Emulator" />
+    <option name="moduleName" value="SHELL_Mob" />
+    <option name="overriddenMainClass" value="" />
+    <option name="overriddenOutputFileName" value="" />
+    <option name="overrideMainClass" value="false" />
+    <option name="runTrusted" value="true" />
+    <option name="screenDpi" value="0" />
+    <option name="screenHeight" value="0" />
+    <option name="screenWidth" value="0" />
+    <option name="url" value="http://" />
+    <option name="usbDebugPort" value="7936" />
+    <method v="2">
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_5DPLAY_TOOLS_SyncAssets" />
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
