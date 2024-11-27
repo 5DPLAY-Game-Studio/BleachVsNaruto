@@ -19,9 +19,11 @@
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class TeamVO {
+public class TeamVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
     public function TeamVO(id:int, name:String = null) {
         this.id   = id;
