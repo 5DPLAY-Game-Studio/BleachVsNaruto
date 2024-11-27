@@ -300,11 +300,11 @@ public class FighterMcCtrler {
     }
 
     public function setMoveLeft():void {
-        _action.moveLeft = '走';
+        _action.moveLeft = FighterSpecialFrame.MOVE;
     }
 
     public function setMoveRight():void {
-        _action.moveRight = '走';
+        _action.moveRight = FighterSpecialFrame.MOVE;
     }
 
     //设定防御
@@ -1003,7 +1003,7 @@ public class FighterMcCtrler {
         }
 
         if (_actionLogic == null || !_actionLogic.enabled()) {
-            if (_mc.currentFrameName == '走' || _mc.currentFrameName == '防御') {
+            if (_mc.currentFrameName == FighterSpecialFrame.MOVE || _mc.currentFrameName == '防御') {
                 idle();
             }
             return;
@@ -2284,7 +2284,7 @@ public class FighterMcCtrler {
     private function doGhostStep():void {
         if (startGhostStep()) {
             move(8, 0);
-            _mc.goFrame("走", true);
+            _mc.goFrame(FighterSpecialFrame.MOVE, true);
             _ghostType = 0;
         }
     }
