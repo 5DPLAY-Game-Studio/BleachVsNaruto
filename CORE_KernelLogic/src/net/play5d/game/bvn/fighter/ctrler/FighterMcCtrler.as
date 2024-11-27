@@ -337,7 +337,7 @@ public class FighterMcCtrler {
     }
 
     //设定冲刺
-    public function setDash(action:String = '瞬步'):void {
+    public function setDash(action:String = FighterSpecialFrame.DASH):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
