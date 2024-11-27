@@ -19,8 +19,11 @@
 package net.play5d.game.bvn.data {
 import flash.geom.Point;
 
-public class SelectStageConfigVO {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+
+public class SelectStageConfigVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
     public function SelectStageConfigVO() {
     }
