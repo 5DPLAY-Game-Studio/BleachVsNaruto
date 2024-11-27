@@ -1581,7 +1581,7 @@ public class FighterMcCtrler {
         _doingAction    = null;
         _doingAirAction = null;
 
-        _mc.goFrame('起跳', false);
+        _mc.goFrame(FighterSpecialFrame.JUMP_START, false);
         _jumpDelayFrame      = GameConfig.JUMP_DELAY_FRAME;
         _action.isJumping    = true;
         _fighter.actionState = FighterActionState.JUMP_ING;
