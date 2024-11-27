@@ -32,6 +32,7 @@ import net.play5d.game.bvn.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.HitVO;
@@ -161,7 +162,7 @@ public class FighterMcCtrler {
     }
 
     //恢复状态
-    public function idle(frame:String = '站立'):void {
+    public function idle(frame:String = FighterSpecialFrame.IDLE):void {
 
         if (!_fighter.isAlive) {
             trace('not alive!!!');
@@ -208,7 +209,7 @@ public class FighterMcCtrler {
         else {
             var isPlay:Boolean = true;
             _fighter.setVelocity(0, 0);
-            if (frame == '站立') {
+            if (frame == FighterSpecialFrame.IDLE) {
                 isPlay              = false;
                 _action.jumpTimes   = _fighter.jumpTimes;
                 _action.airHitTimes = _fighter.airHitTimes;
@@ -779,7 +780,7 @@ public class FighterMcCtrler {
             }
         }
 
-        if (_mc && _mc.currentFrameName == '站立') {
+        if (_mc && _mc.currentFrameName == FighterSpecialFrame.IDLE) {
             if (++_autoDirectFrame > 5) {
                 _fighter.getCtrler().setDirectToTarget();
                 _autoDirectFrame = 0;
