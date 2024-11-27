@@ -17,8 +17,11 @@
  */
 
 package net.play5d.game.bvn.data {
-public class SelectCharListConfigVO {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+
+public class SelectCharListConfigVO implements IInstanceVO {
     include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
     public function SelectCharListConfigVO() {
 
