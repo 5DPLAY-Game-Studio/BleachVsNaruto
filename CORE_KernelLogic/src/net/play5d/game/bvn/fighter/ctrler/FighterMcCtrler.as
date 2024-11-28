@@ -434,7 +434,7 @@ public class FighterMcCtrler {
     }
 
     //设定空中普通攻击J
-    public function setAttackAIR(action:String = '跳砍'):void {
+    public function setAttackAIR(action:String = FighterSpecialFrame.ATTACK_AIR):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
