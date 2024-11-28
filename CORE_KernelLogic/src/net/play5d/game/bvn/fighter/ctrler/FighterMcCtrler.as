@@ -329,7 +329,7 @@ public class FighterMcCtrler {
     }
 
     //设定从空中的板中跳下
-    public function setJumpDown(action:String = '落'):void {
+    public function setJumpDown(action:String = FighterSpecialFrame.JUMP_DOWN):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -1329,7 +1329,7 @@ public class FighterMcCtrler {
 
         setTouchFloor(FighterSpecialFrame.JUMP_TOUCH_FLOOR, true);
 
-        _mc.goFrame('落', false);
+        _mc.goFrame(FighterSpecialFrame.JUMP_DOWN, false);
     }
 
     /**
@@ -2302,7 +2302,7 @@ public class FighterMcCtrler {
     private function doGhostJumpDown():void {
         if (startGhostStep()) {
             move(0, 15);
-            _mc.goFrame("落", false);
+            _mc.goFrame(FighterSpecialFrame.JUMP_DOWN, false);
             _ghostType = 2;
         }
     }
