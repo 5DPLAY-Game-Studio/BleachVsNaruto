@@ -1712,7 +1712,7 @@ public class FighterMcCtrler {
         if (_action.isJumping) {
             var act:String = null;
             if (_actionCtrler.zhao3()) {
-                act = '跳招-上';
+                act = FighterSpecialFrame.SKILL_AIR_W;
             }
             if (_actionCtrler.zhao2()) {
                 act = '跳招-下';
