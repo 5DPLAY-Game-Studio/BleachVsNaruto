@@ -28,7 +28,7 @@ import net.play5d.game.bvn.ctrl.GameLogic;
 import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.HitType;
 import net.play5d.game.bvn.fighter.FighterAction;
-import net.play5d.game.bvn.fighter.FighterActionState;
+import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;

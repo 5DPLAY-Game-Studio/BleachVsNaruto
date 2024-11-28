@@ -23,7 +23,7 @@ package net.play5d.game.bvn.fighter.ctrler.ai
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.fighter.Assister;
 	import net.play5d.game.bvn.fighter.Bullet;
-	import net.play5d.game.bvn.fighter.FighterActionState;
+	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterAttacker;
 	import net.play5d.game.bvn.fighter.data.FighterHitRange;
 	import net.play5d.game.bvn.fighter.FighterMain;
