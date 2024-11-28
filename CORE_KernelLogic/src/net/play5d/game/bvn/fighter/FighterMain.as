@@ -31,6 +31,7 @@ import net.play5d.game.bvn.data.mosou.MosouFighterLogic;
 import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
 import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
+import net.play5d.game.bvn.fighter.data.FighterDefenseType;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
