@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter {
+package net.play5d.game.bvn.fighter.data {
 /**
  * 角色特殊帧
  */
 public class FighterSpecialFrame {
-    include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/_INCLUDE_.as';
 
     // 站立
     public static const IDLE:String             = '站立';

@@ -32,7 +32,7 @@ import net.play5d.game.bvn.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.fighter.FighterSpecialFrame;
+import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.HitVO;
