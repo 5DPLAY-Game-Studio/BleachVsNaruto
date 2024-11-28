@@ -837,7 +837,7 @@ public class FighterMcCtrler {
             if (_jumpDelayFrame == 0) {
                 _isFalling = false;
                 _action.jumpTimes--;
-                _mc.goFrame('跳', false);
+                _mc.goFrame(FighterSpecialFrame.JUMP, false);
                 _fighter.jump();
                 setAirAllAct();
                 if (_fighter.isInAir) {
@@ -856,8 +856,8 @@ public class FighterMcCtrler {
         }
 
         var vecy:Number = _fighter.getVecY();
-        if (_mc.currentFrameName != '跳中' && vecy > -_fighter.jumpPower * 0.35) {
-            _mc.goFrame('跳中', false);
+        if (_mc.currentFrameName != FighterSpecialFrame.JUMP_ING && vecy > -_fighter.jumpPower * 0.35) {
+            _mc.goFrame(FighterSpecialFrame.JUMP_ING, false);
 //				setJump();
             _fighter.setAnimateFrameOut(setJump, 5);
         }
