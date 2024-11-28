@@ -313,7 +313,7 @@ public class FighterMcCtrler {
     }
 
     //设定跳
-    public function setJump(action:String = '跳'):void {
+    public function setJump(action:String = FighterSpecialFrame.JUMP):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -321,7 +321,7 @@ public class FighterMcCtrler {
     }
 
     //设定跳2
-    public function setJumpQuick(action:String = '跳'):void {
+    public function setJumpQuick(action:String = FighterSpecialFrame.JUMP):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -2293,7 +2293,7 @@ public class FighterMcCtrler {
         if (startGhostStep()) {
             move(0, -12);
             damping(0, 0.1);
-            _mc.goFrame("跳", false);
+            _mc.goFrame(FighterSpecialFrame.JUMP, false);
             _action.jumpTimes--;
             _ghostType = 1;
         }
