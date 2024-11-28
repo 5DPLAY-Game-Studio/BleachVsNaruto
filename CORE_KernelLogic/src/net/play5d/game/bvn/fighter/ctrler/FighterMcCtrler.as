@@ -1715,7 +1715,7 @@ public class FighterMcCtrler {
                 act = FighterSpecialFrame.SKILL_AIR_W;
             }
             if (_actionCtrler.zhao2()) {
-                act = '跳招-下';
+                act = FighterSpecialFrame.SKILL_AIR_S;
             }
             if (act && _mc.checkFrame(act)) {
                 action = act;
