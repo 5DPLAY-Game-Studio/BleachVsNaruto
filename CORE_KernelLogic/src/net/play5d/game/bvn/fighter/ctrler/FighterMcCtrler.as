@@ -459,7 +459,7 @@ public class FighterMcCtrler {
     }
 
     //设定落地的动作,breakAct:接触到地面时是否中断当前动作
-    public function setTouchFloor(action:String = '落地', breakAct:Boolean = true):void {
+    public function setTouchFloor(action:String = FighterSpecialFrame.JUMP_TOUCH_FLOOR, breakAct:Boolean = true):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -802,7 +802,7 @@ public class FighterMcCtrler {
         var act:String = _action.touchFloor;
 
         if (_isFalling) {
-            act ||= '落地';
+            act ||= FighterSpecialFrame.JUMP_TOUCH_FLOOR;
         }
 
         if (act == null) {
@@ -811,7 +811,7 @@ public class FighterMcCtrler {
 
 //			_action.clearAction();
 
-        var delayParam:Object = act == '落地' ? {call: setAttack, delay: 1} : null;
+        var delayParam:Object = act == FighterSpecialFrame.JUMP_TOUCH_FLOOR ? {call: setAttack, delay: 1} : null;
         doAction(act, false, delayParam);
         effectCtrler.touchFloor();
 
@@ -1327,7 +1327,7 @@ public class FighterMcCtrler {
 
         _fighter.setVecX(0);
 
-        setTouchFloor('落地', true);
+        setTouchFloor(FighterSpecialFrame.JUMP_TOUCH_FLOOR, true);
 
         _mc.goFrame('落', false);
     }
