@@ -44,6 +44,10 @@ public class FighterSpecialFrame {
     public static const ATTACK_AIR:String = '跳砍';
     // 跳招 KU
     public static const SKILL_AIR:String  = '跳招';
+    // 跳招 WKU
+    public static const SKILL_AIR_W:String  = '跳招-上';
+    // 跳招 SKU
+    public static const SKILL_AIR_S:String  = '跳招-下';
 
     // 砍1 J
     public static const ATTACK:String = '砍1';

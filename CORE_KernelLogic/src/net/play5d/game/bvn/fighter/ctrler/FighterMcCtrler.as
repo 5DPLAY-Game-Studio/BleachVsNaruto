@@ -442,7 +442,7 @@ public class FighterMcCtrler {
     }
 
     //设定空中技能U
-    public function setSkillAIR(action:String = '跳招'):void {
+    public function setSkillAIR(action:String = FighterSpecialFrame.SKILL_AIR):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
