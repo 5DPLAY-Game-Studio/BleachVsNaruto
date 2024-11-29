@@ -27,7 +27,8 @@ package net.play5d.game.bvn.fighter.ctrler.ai
 	import net.play5d.game.bvn.fighter.FighterAttacker;
 	import net.play5d.game.bvn.fighter.data.FighterHitRange;
 	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
+import net.play5d.game.bvn.interfaces.IGameSprite;
 
 	public class FighterAILogic extends FighterAILogicBase
 	{
@@ -368,7 +369,7 @@ package net.play5d.game.bvn.fighter.ctrler.ai
 
 				var curAction:String = _fighter.getCtrler().getMcCtrl().getCurAction();
 
-				if(curAction == '砍1'){
+				if(curAction == FighterSpecialFrame.ATTACK){
 					order = 200;
 				}
 

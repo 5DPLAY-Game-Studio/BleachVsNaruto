@@ -345,7 +345,7 @@ public class FighterMcCtrler {
     }
 
     //设定普通攻击J  parent.$mc_ctrler.setAttack("砍1");
-    public function setAttack(action:String = '砍1'):void {
+    public function setAttack(action:String = FighterSpecialFrame.ATTACK):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -1125,7 +1125,7 @@ public class FighterMcCtrler {
             return true;
         }
 
-        if (_doingAction == '砍1') {
+        if (_doingAction == FighterSpecialFrame.ATTACK) {
             if (_doActionFrame < 2) {
                 doWaiKaiAction(attackingAct);
                 return true;
