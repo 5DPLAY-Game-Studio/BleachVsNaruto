@@ -1909,10 +1909,10 @@ public class FighterMcCtrler {
             }
 
             if (hitvo.hitType == HitType.CATCH) {
-                _mc.goFrame('被打', false);
+                _mc.goFrame(FighterSpecialFrame.HURT, false);
             }
             else {
-                _mc.goFrame('被打', true, 7);
+                _mc.goFrame(FighterSpecialFrame.HURT, true, 7);
             }
 
             _fighter.actionState = FighterActionState.HURT_ING;
@@ -2154,7 +2154,7 @@ public class FighterMcCtrler {
         _action.isHurting = true;
         _hurtHoldFrame    = GameConfig.BREAK_DEF_HOLD_FRAME;
 
-        _mc.goFrame('被打', true, 7);
+        _mc.goFrame(FighterSpecialFrame.HURT, true, 7);
 
         _fighter.actionState = FighterActionState.HURT_ING;
 

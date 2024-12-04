@@ -25,6 +25,7 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.data.FighterHitRange;
+import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
@@ -310,7 +311,7 @@ public class FighterMC {
         }
 
         if (showBeHit) {
-            goFrame('被打', false, 0, {name: '击飞', delay: 1, isPlay: false});
+            goFrame(FighterSpecialFrame.HURT, false, 0, {name: '击飞', delay: 1, isPlay: false});
         }
         else {
             goFrame('击飞', false);
