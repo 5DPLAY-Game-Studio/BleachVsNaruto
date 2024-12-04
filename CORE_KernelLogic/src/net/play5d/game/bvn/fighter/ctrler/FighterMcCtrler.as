@@ -407,7 +407,7 @@ public class FighterMcCtrler {
     }
 
     //设定必杀I  parent.$mc_ctrler.setBisha();
-    public function setBisha(action:String = '必杀', qi:int = 100):void {
+    public function setBisha(action:String = FighterSpecialFrame.BISHA, qi:int = 100):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
