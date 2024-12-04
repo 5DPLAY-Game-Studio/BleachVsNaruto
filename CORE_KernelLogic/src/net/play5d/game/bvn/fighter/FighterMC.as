@@ -311,10 +311,10 @@ public class FighterMC {
         }
 
         if (showBeHit) {
-            goFrame(FighterSpecialFrame.HURT, false, 0, {name: '击飞', delay: 1, isPlay: false});
+            goFrame(FighterSpecialFrame.HURT, false, 0, {name: FighterSpecialFrame.HURT_FLY, delay: 1, isPlay: false});
         }
         else {
-            goFrame('击飞', false);
+            goFrame(FighterSpecialFrame.HURT_FLY, false);
         }
 
         if (hity > GameConfig.HIT_DOWN_BY_HITY) {
