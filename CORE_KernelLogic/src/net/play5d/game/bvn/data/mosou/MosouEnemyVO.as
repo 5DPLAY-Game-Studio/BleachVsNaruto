@@ -17,8 +17,11 @@
  */
 
 package net.play5d.game.bvn.data.mosou {
-public class MosouEnemyVO {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+
+public class MosouEnemyVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public static function create(
             fighterID:String, maxHp:int = 200, atk:int = 0, isBoss:Boolean = false, exp:int = 10,
