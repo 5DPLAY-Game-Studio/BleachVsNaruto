@@ -416,7 +416,7 @@ public class FighterMcCtrler {
     }
 
     //设定必杀W+I
-    public function setBishaUP(action:String = '上必杀', qi:int = 100):void {
+    public function setBishaUP(action:String = FighterSpecialFrame.BISHA_UP, qi:int = 100):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
