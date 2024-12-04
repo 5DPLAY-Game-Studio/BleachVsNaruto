@@ -30,11 +30,12 @@ import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
 
 /**
  * 角色控制类，提供共同方法给FLASH IDE调用
  */
-public class FighterCtrler {
+public class FighterCtrler implements IGameSpriteCntlr {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public function FighterCtrler() {
@@ -48,6 +49,47 @@ public class FighterCtrler {
 //		private var _initAction:String = "开场";
     private var _rectCache:Object = {};
     private var _doingWankai:Boolean;
+
+    /**
+     * 获取目标
+     * @return 目标游戏精灵
+     */
+    public function getTarget():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取所有目标的 IGameSprite
+     * @param isOnlyAlive 是否仅获取存活的目标
+     * @return 目标全部游戏精灵
+     */
+    public function getTargetAll(isOnlyAlive:Boolean = true):Vector.<IGameSprite> {
+        return null;
+    }
+
+    /**
+     * 获取主人
+     * @return 游戏精灵的上层
+     */
+    public function getOwner():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取最上层主人
+     * @return 游戏精灵的最上层
+     */
+    public function getOwnerTop():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取自身
+     * @return 游戏精灵自身
+     */
+    public function getSelf():IGameSprite {
+        return _fighter;
+    }
 
     //由FLASH IDE调用，定义血量
     public function get hp():Number {
