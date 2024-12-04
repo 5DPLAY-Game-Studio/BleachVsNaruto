@@ -425,7 +425,7 @@ public class FighterMcCtrler {
     }
 
     //设定必杀S+I
-    public function setBishaSUPER(action:String = '超必杀', qi:int = 300):void {
+    public function setBishaSUPER(action:String = FighterSpecialFrame.BISHA_SUPER, qi:int = 300):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
