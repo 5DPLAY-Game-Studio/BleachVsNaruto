@@ -399,7 +399,7 @@ public class FighterMcCtrler {
         _action.catch1 = action;
     }
 
-    public function setCatch2(action:String = '摔2'):void {
+    public function setCatch2(action:String = FighterSpecialFrame.CATCH_2):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
