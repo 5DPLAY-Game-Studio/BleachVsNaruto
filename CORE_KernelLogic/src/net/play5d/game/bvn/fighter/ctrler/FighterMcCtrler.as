@@ -392,7 +392,7 @@ public class FighterMcCtrler {
         _action.zhao3 = action;
     }
 
-    public function setCatch1(action:String = '摔1'):void {
+    public function setCatch1(action:String = FighterSpecialFrame.CATCH_1):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
