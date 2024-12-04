@@ -369,7 +369,7 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击U  parent.$mc_ctrler.setZhao1();
-    public function setZhao1(action:String = '招1'):void {
+    public function setZhao1(action:String = FighterSpecialFrame.ZHAO_1):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
