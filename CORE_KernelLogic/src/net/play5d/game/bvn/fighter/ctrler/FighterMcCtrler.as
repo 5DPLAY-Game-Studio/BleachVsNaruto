@@ -450,7 +450,7 @@ public class FighterMcCtrler {
     }
 
     //设定空中必杀I
-    public function setBishaAIR(action:String = '空中必杀', qi:int = 100):void {
+    public function setBishaAIR(action:String = FighterSpecialFrame.BISHA_AIR, qi:int = 100):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
