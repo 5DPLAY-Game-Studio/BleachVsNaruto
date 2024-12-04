@@ -17,8 +17,11 @@
  */
 
 package net.play5d.game.bvn.data.mosou {
-public class MosouMissionVO {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+
+public class MosouMissionVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public function MosouMissionVO() {
     }
