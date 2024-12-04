@@ -17,8 +17,11 @@
  */
 
 package net.play5d.game.bvn.data.mosou {
-public class MosouWaveVO {
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+
+public class MosouWaveVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
 //		public static function createByXML(xml:XML):MosouWaveVO{
 //			var wave:MosouWaveVO = new MosouWaveVO();
