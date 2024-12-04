@@ -309,7 +309,7 @@ public class FighterMcCtrler {
 
     //设定防御
     public function setDefense():void {
-        _action.defense = '防御';
+        _action.defense = FighterSpecialFrame.DEFENSE;
     }
 
     //设定跳
@@ -1003,7 +1003,7 @@ public class FighterMcCtrler {
         }
 
         if (_actionLogic == null || !_actionLogic.enabled()) {
-            if (_mc.currentFrameName == FighterSpecialFrame.MOVE || _mc.currentFrameName == '防御') {
+            if (_mc.currentFrameName == FighterSpecialFrame.MOVE || _mc.currentFrameName == FighterSpecialFrame.DEFENSE) {
                 idle();
             }
             return;
@@ -1512,7 +1512,7 @@ public class FighterMcCtrler {
 
         _defenseFrameDelay = 1;
 
-        _mc.goFrame('防御', true, 3);
+        _mc.goFrame(FighterSpecialFrame.DEFENSE, true, 3);
 
         FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DEFENSE);
     }
