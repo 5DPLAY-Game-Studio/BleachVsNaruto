@@ -1482,7 +1482,7 @@ public class FighterMcCtrler {
                 return;
             }
             _action.isDefensing = false;
-            _mc.goFrame('防御恢复', false, 0, {call: idle, delay: 1});
+            _mc.goFrame(FighterSpecialFrame.DEFENSE_RESUME, false, 0, {call: idle, delay: 1});
         }
     }
 
