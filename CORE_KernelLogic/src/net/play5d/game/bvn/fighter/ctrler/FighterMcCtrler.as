@@ -353,7 +353,7 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击S+J
-    public function setSkill1(action:String = '砍技1'):void {
+    public function setSkill1(action:String = FighterSpecialFrame.SKILL_1):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
