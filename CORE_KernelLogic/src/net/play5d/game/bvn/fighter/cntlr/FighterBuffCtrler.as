@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.ctrler {
+package net.play5d.game.bvn.fighter.cntlr {
 import net.play5d.game.bvn.cntlr.EffectCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
