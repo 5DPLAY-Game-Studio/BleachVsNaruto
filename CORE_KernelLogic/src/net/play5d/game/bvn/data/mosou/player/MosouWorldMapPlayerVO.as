@@ -18,9 +18,11 @@
 
 package net.play5d.game.bvn.data.mosou.player {
 import net.play5d.game.bvn.data.ISaveData;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapPlayerVO implements ISaveData {
+public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../../include/Clone.as';
 
     public function MosouWorldMapPlayerVO() {
     }
