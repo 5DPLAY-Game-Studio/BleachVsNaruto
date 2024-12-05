@@ -23,6 +23,9 @@ import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
+import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.fighter.data.FighterHitRange;
+import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
@@ -308,10 +311,10 @@ public class FighterMC {
         }
 
         if (showBeHit) {
-            goFrame('被打', false, 0, {name: '击飞', delay: 1, isPlay: false});
+            goFrame(FighterSpecialFrame.HURT, false, 0, {name: FighterSpecialFrame.HURT_FLY, delay: 1, isPlay: false});
         }
         else {
-            goFrame('击飞', false);
+            goFrame(FighterSpecialFrame.HURT_FLY, false);
         }
 
         if (hity > GameConfig.HIT_DOWN_BY_HITY) {
@@ -339,7 +342,7 @@ public class FighterMC {
      */
     public function playHurtDown():void {
 
-        goFrame('击飞_弹', false, 0, {call: playHurtDown2, delay: 2});
+        goFrame(FighterSpecialFrame.HURT_TAN, false, 0, {call: playHurtDown2, delay: 2});
 
         _mcCtrler.effectCtrler.hitFloor(1, 2);
 
@@ -484,7 +487,7 @@ public class FighterMC {
     }
 
     private function playHurtDown2():void {
-        goFrame('击飞_倒', false);
+        goFrame(FighterSpecialFrame.HURT_DOWN, false);
 
         _hurtDownFrame = GameConfig.HIT_DOWN_FRAME;
         _hurtFlyState  = 4;
@@ -499,7 +502,7 @@ public class FighterMC {
         switch (_hurtFlyState) {
         case 1: //击飞
             if (--_hurtFlyFrame <= 0 && !_fighter.isInAir) {
-                goFrame('击飞_落');
+                goFrame(FighterSpecialFrame.HURT_FALL);
                 _hurtFlyState = 2;
             }
             if (_hurtYMin > _fighter.y) {
@@ -513,7 +516,7 @@ public class FighterMC {
             if (_isHeavyDownAttack) {
                 //被打击到地面
                 _hurtDownFrame = GameConfig.HIT_DOWN_FRAME_HEAVY;
-                goFrame('击飞_倒', false);
+                goFrame(FighterSpecialFrame.HURT_DOWN, false);
                 _fighter.actionState = FighterActionState.HURT_DOWN;
                 FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_DOWN);
 //						_fighter.setVelocity(0,0);
@@ -536,7 +539,7 @@ public class FighterMC {
 
             }
             else {
-                goFrame('击飞_弹', false);
+                goFrame(FighterSpecialFrame.HURT_TAN, false);
                 yDiff = _fighter.y - _hurtYMin;
                 vecy  = yDiff / 25;
 
@@ -572,7 +575,7 @@ public class FighterMC {
                 return;
             }
 
-            goFrame('击飞_倒', false);
+            goFrame(FighterSpecialFrame.HURT_DOWN, false);
             _fighter.setDamping(GameConfig.HIT_FLOOR_DAMPING_X);
             _hurtDownFrame = GameConfig.HIT_DOWN_FRAME;
             _hurtFlyState  = 4;
@@ -592,7 +595,7 @@ public class FighterMC {
             }
 
             if (--_hurtDownFrame <= 0) {
-                goFrame("击飞_起", true);
+                goFrame(FighterSpecialFrame.HURT_DOWN_RESUME, true);
                 _hurtFlyState = 0;
             }
             break;

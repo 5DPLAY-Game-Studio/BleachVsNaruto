@@ -21,7 +21,7 @@ package net.play5d.game.bvn.ui.mosou
 	import flash.display.DisplayObject;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.fighter.FighterActionState;
+	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
 
 	public class MosouHpBar

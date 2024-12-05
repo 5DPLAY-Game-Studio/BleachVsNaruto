@@ -24,7 +24,7 @@ package net.play5d.game.bvn.ui.fight
 	import flash.text.TextFormatAlign;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.fighter.FighterActionState;
+	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.ui.GameUI;
 	import net.play5d.kyo.display.BitmapText;

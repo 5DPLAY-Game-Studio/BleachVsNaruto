@@ -31,6 +31,9 @@ import net.play5d.game.bvn.data.mosou.MosouFighterLogic;
 import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
 import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
+import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.fighter.data.FighterDefenseType;
+import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
@@ -643,7 +646,7 @@ public class FighterMain extends BaseGameSprite {
     }
 
     public function hasWankai():Boolean {
-        return _fighterCtrl.getMcCtrl().getFighterMc().checkFrame('万解');
+        return _fighterCtrl.getMcCtrl().getFighterMc().checkFrame(FighterSpecialFrame.BANKAI);
     }
 
 //		public function onChangeMC():void{

@@ -36,7 +36,7 @@ package net.play5d.game.bvn.ui.fight
 	import net.play5d.game.bvn.data.GameMode;
 	import net.play5d.game.bvn.data.GameRunFighterGroup;
 	import net.play5d.game.bvn.events.GameEvent;
-	import net.play5d.game.bvn.fighter.FighterActionState;
+	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
 	import net.play5d.game.bvn.ui.ContinueBtn;

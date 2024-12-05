@@ -30,7 +30,7 @@ package net.play5d.game.bvn.ui.mosou
 	import net.play5d.game.bvn.ctrl.SoundCtrl;
 	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.GameRunFighterGroup;
-	import net.play5d.game.bvn.fighter.FighterActionState;
+	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.ui.ContinueBtn;
 	import net.play5d.game.bvn.ui.IGameUI;

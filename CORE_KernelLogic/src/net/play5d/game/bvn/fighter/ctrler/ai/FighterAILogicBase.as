@@ -22,7 +22,7 @@ package net.play5d.game.bvn.fighter.ctrler.ai
 	import flash.geom.Rectangle;
 
 	import net.play5d.game.bvn.fighter.FighterAction;
-	import net.play5d.game.bvn.fighter.FighterActionState;
+	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.fighter.models.HitVO;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
