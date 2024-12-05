@@ -25,6 +25,7 @@ import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
@@ -420,7 +421,7 @@ public class FighterCtrler {
             var fighterMc:FighterMC = _fighterMcCtrl.initMc(mc);
             if (_doingWankai) {
                 _fighter.actionState = FighterActionState.WAN_KAI_ING;
-                fighterMc.goFrame('开场');
+                fighterMc.goFrame(FighterSpecialFrame.SAY_INTRO);
                 _doingWankai = false;
             }
             else {

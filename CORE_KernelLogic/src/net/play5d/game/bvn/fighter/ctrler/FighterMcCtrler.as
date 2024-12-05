@@ -928,7 +928,7 @@ public class FighterMcCtrler {
      */
     public function sayIntro():void {
         _fighter.actionState = FighterActionState.KAI_CHANG;
-        _mc.goFrame("开场");
+        _mc.goFrame(FighterSpecialFrame.SAY_INTRO);
     }
 
     /**
