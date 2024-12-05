@@ -28,8 +28,9 @@ import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
 
-public class AssisiterCtrler {
+public class AssisiterCtrler implements IGameSpriteCntlr {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public function AssisiterCtrler() {
@@ -74,19 +75,49 @@ public class AssisiterCtrler {
         _assister = null;
     }
 
+    /**
+     * 获取目标
+     * @return 目标游戏精灵
+     */
     public function getTarget():IGameSprite {
         var owner:FighterMain = _assister.getOwner() as FighterMain;
         if (owner) {
             return owner.getCurrentTarget();
         }
+
         return null;
     }
 
+    /**
+     * 获取所有目标的 IGameSprite
+     * @param isOnlyAlive 是否仅获取存活的目标
+     * @return 目标全部游戏精灵
+     */
+    public function getTargetAll(isOnlyAlive:Boolean = true):Vector.<IGameSprite> {
+        return null;
+    }
+
+    /**
+     * 获取主人
+     * @return 游戏精灵的上层
+     */
     public function getOwner():IGameSprite {
         return _assister.getOwner();
     }
 
-    public function getSelf():Assister {
+    /**
+     * 获取最上层主人
+     * @return 游戏精灵的最上层
+     */
+    public function getOwnerTop():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取自身
+     * @return 游戏精灵自身
+     */
+    public function getSelf():IGameSprite {
         return _assister;
     }
 

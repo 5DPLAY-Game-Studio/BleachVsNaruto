@@ -27,8 +27,9 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
 
-public class FighterAttackerCtrler {
+public class FighterAttackerCtrler implements IGameSpriteCntlr {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public function FighterAttackerCtrler(attacker:FighterAttacker) {
@@ -41,6 +42,47 @@ public class FighterAttackerCtrler {
     private var _touchFloorFrame:String;
     private var hitTargetAction:String;
     private var hitTargetChecker:String;
+
+    /**
+     * 获取目标
+     * @return 目标游戏精灵
+     */
+    public function getTarget():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取所有目标的 IGameSprite
+     * @param isOnlyAlive 是否仅获取存活的目标
+     * @return 目标全部游戏精灵
+     */
+    public function getTargetAll(isOnlyAlive:Boolean = true):Vector.<IGameSprite> {
+        return null;
+    }
+
+    /**
+     * 获取主人
+     * @return 游戏精灵的上层
+     */
+    public function getOwner():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取最上层主人
+     * @return 游戏精灵的最上层
+     */
+    public function getOwnerTop():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取自身
+     * @return 游戏精灵自身
+     */
+    public function getSelf():IGameSprite {
+        return _attacker;
+    }
 
     public function get owner_mc_ctrler():FighterMcCtrler {
         var fighter:FighterMain = _attacker.getOwner() as FighterMain;
