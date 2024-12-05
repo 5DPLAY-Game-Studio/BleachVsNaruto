@@ -56,6 +56,7 @@
 - `LIB_KyoLib` - 游戏作者 **剑jian** 所写的个人类库
 - `LIB_Other` - 其他类库
 - `SHELL_Dev` - 针对于开发人员的功能外壳
+- `SHELL_Mob` - 运行于 移动设备 的功能外壳
 - `SHELL_Pc` - 运行于 PC 的功能外壳
 - `shared` - 游戏共享资源库
 - `tools` - 工程所用工具集

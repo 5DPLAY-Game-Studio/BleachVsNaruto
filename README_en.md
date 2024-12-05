@@ -56,6 +56,7 @@ To build this program from source, you should read the [HOW2BUILD.md](HOW2BUILD.
 - `LIB_KyoLib` - Personal library written by game author **剑jian**
 - `LIB_Other` - Other libraries
 - `SHELL_Dev` - Functional shell for developers
+- `SHELL_Pc` - Functional shell running on mobile devices
 - `SHELL_Pc` - Functional shell running on PC
 - `shared` - Game Shared Resource Library
 - `tools` - Engineering toolset
