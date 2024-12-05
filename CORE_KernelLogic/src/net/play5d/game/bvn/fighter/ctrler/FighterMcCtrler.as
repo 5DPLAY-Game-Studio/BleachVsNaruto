@@ -476,8 +476,8 @@ public class FighterMcCtrler {
         if (_mc.checkFrame(FighterSpecialFrame.BANKAI_W)) {
             _action.waiKaiW = FighterSpecialFrame.BANKAI_W;
         }
-        if (_mc.checkFrame('万解S')) {
-            _action.waiKaiS = '万解S';
+        if (_mc.checkFrame(FighterSpecialFrame.BANKAI_S)) {
+            _action.waiKaiS = FighterSpecialFrame.BANKAI_S;
         }
     }
 
@@ -1113,7 +1113,7 @@ public class FighterMcCtrler {
             return checkDoWankai(_action.waiKaiW, FighterSpecialFrame.BANKAI_W);
         }
         if (_actionLogic.waiKaiS()) {
-            return checkDoWankai(_action.waiKaiS, '万解S');
+            return checkDoWankai(_action.waiKaiS, FighterSpecialFrame.BANKAI_S);
         }
 
         return false;
