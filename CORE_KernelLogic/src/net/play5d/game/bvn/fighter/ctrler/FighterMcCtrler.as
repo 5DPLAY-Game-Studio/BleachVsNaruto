@@ -936,7 +936,7 @@ public class FighterMcCtrler {
      */
     public function doWin():void {
         _fighter.actionState = FighterActionState.WIN;
-        _mc.goFrame("胜利");
+        _mc.goFrame(FighterSpecialFrame.WIN);
     }
 
     /**
