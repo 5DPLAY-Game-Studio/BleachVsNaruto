@@ -2258,7 +2258,7 @@ public class FighterMcCtrler {
      * 倒地起身
      */
     private function doHurtDownJump():void {
-        if (_doingAction == '起身') {
+        if (_doingAction == FighterSpecialFrame.HURT_DOWN_JUMP) {
             return;
         }
         if (_fighter.currentHurtDamage() > 240) {
@@ -2274,7 +2274,7 @@ public class FighterMcCtrler {
 
         var vecx:Number = _fighter.getVecX();
 
-        doAction("起身");
+        doAction(FighterSpecialFrame.HURT_DOWN_JUMP);
         _fighter.isAllowBeHit = false;
         _fighter.setVelocity(vecx);
         _fighter.setDamping(vecx * 0.1);
