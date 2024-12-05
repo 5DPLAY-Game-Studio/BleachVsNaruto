@@ -595,7 +595,7 @@ public class FighterMC {
             }
 
             if (--_hurtDownFrame <= 0) {
-                goFrame("击飞_起", true);
+                goFrame(FighterSpecialFrame.HURT_DOWN_RESUME, true);
                 _hurtFlyState = 0;
             }
             break;
