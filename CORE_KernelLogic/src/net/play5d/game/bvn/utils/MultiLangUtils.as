@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.utils {
-import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.cntlr.AssetManager;
 import net.play5d.pcl.utils.ClassUtils;
 
 /**

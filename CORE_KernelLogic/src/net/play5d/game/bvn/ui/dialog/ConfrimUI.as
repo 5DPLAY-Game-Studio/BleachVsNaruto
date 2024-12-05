@@ -28,7 +28,7 @@ import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.cntlr.AssetManager;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.SetBtnGroup;

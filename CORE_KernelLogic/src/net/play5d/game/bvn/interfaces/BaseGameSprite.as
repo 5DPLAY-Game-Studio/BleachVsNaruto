@@ -27,7 +27,7 @@ package net.play5d.game.bvn.interfaces
 	import flash.media.SoundTransform;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.ctrl.GameRender;
+	import net.play5d.game.bvn.cntlr.GameRender;
 	import net.play5d.game.bvn.data.TeamVO;
 	import net.play5d.game.bvn.debug.Debugger;
 	import net.play5d.game.bvn.fighter.models.HitVO;

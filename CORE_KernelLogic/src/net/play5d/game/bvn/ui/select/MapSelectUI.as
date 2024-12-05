@@ -27,8 +27,8 @@ package net.play5d.game.bvn.ui.select
 	import flash.text.TextFormatAlign;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.data.MapModel;
 	import net.play5d.game.bvn.data.MapVO;

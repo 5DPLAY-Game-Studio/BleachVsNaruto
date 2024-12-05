@@ -20,7 +20,7 @@ package net.play5d.game.bvn.fighter.ctrler {
 import flash.display.MovieClip;
 import flash.geom.Rectangle;
 
-import net.play5d.game.bvn.ctrl.EffectCtrl;
+import net.play5d.game.bvn.cntlr.EffectCtrl;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;

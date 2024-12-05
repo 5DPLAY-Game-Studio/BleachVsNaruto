@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.mosou_ctrls {
+package net.play5d.game.bvn.cntlr.mosou_ctrls {
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
 import net.play5d.game.bvn.data.mosou.MosouMissionVO;

@@ -27,11 +27,11 @@ package net.play5d.game.bvn.stage
 
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.GameRender;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
-	import net.play5d.game.bvn.ctrl.StateCtrl;
-	import net.play5d.game.bvn.ctrl.mosou_ctrls.MosouLogic;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.GameRender;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.StateCtrl;
+	import net.play5d.game.bvn.cntlr.mosou_ctrls.MosouLogic;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.data.mosou.MosouModel;
 	import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;

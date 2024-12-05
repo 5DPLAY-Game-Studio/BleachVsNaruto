@@ -20,7 +20,7 @@ package net.play5d.game.bvn.win.ctrls {
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameRunDataVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.stage.GameStage;

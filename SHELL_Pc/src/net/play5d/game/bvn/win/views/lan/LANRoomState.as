@@ -25,8 +25,8 @@ import flash.events.TimerEvent;
 import flash.utils.Timer;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrl.AssetManager;
-import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.cntlr.AssetManager;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;

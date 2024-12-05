@@ -25,7 +25,7 @@ import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.EffectVO;
 import net.play5d.game.bvn.debug.Debugger;

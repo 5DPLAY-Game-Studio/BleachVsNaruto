@@ -25,12 +25,12 @@ package net.play5d.game.bvn.stage
 	import flash.events.MouseEvent;
 
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.GameLogic;
-	import net.play5d.game.bvn.ctrl.GameRender;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
-	import net.play5d.game.bvn.ctrl.StateCtrl;
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.GameLogic;
+	import net.play5d.game.bvn.cntlr.GameRender;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.StateCtrl;
+	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.events.GameEvent;
 	import net.play5d.game.bvn.fighter.FighterMain;

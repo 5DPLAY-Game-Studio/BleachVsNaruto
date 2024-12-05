@@ -32,8 +32,8 @@ package net.play5d.game.bvn.ui
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.display.BitmapText;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;

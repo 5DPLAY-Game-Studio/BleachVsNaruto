@@ -35,11 +35,11 @@ package net.play5d.game.bvn.stage
 
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.GameLogic;
-	import net.play5d.game.bvn.ctrl.GameRender;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
-	import net.play5d.game.bvn.ctrl.StateCtrl;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.GameLogic;
+	import net.play5d.game.bvn.cntlr.GameRender;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.StateCtrl;
 	import net.play5d.game.bvn.data.AssisterModel;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.FighterVO;

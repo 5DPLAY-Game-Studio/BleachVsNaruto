@@ -23,7 +23,7 @@ package net.play5d.game.bvn.ui
 
 	import fl.motion.ColorMatrix;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
+	import net.play5d.game.bvn.cntlr.AssetManager;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
 	import net.play5d.kyo.input.KyoKeyCode;
 

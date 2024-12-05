@@ -21,8 +21,8 @@ import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.ctrl.game_ctrls.GameEndCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameEndCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MessionModel;

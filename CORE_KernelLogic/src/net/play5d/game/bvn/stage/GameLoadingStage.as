@@ -21,7 +21,7 @@ package net.play5d.game.bvn.stage
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
+	import net.play5d.game.bvn.cntlr.AssetManager;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.debug.Debugger;
 	import net.play5d.game.bvn.events.GameEvent;

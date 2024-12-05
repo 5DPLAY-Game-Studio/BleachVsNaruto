@@ -24,7 +24,7 @@ package net.play5d.game.bvn.views.effects
 	import flash.display.Sprite;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 
 	public class BlackBackView extends Sprite
 	{

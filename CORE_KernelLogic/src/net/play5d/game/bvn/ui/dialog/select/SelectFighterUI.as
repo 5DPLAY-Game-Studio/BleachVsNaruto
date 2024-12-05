@@ -22,7 +22,7 @@ package net.play5d.game.bvn.ui.dialog.select
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
+	import net.play5d.game.bvn.cntlr.AssetManager;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.GameData;

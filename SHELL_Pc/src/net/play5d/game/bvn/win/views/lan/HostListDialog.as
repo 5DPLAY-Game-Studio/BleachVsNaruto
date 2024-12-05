@@ -24,8 +24,8 @@ import flash.events.MouseEvent;
 import flash.text.TextField;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrl.GameRender;
-import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.cntlr.GameRender;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;

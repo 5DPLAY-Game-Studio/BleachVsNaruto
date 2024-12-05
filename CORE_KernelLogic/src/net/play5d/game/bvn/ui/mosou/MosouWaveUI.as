@@ -24,8 +24,8 @@ package net.play5d.game.bvn.ui.mosou
 	import flash.text.TextField;
 
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
-	import net.play5d.game.bvn.ctrl.mosou_ctrls.MosouCtrl;
+	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.cntlr.mosou_ctrls.MosouCtrl;
 	import net.play5d.kyo.utils.KyoDrawUtils;
 
 	public class MosouWaveUI

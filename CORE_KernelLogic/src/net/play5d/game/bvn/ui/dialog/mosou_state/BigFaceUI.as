@@ -25,7 +25,7 @@ package net.play5d.game.bvn.ui.dialog.mosou_state
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextFormatAlign;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
+	import net.play5d.game.bvn.cntlr.AssetManager;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;

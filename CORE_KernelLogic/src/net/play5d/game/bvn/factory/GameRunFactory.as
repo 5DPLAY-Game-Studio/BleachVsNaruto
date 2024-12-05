@@ -20,7 +20,7 @@ package net.play5d.game.bvn.factory {
 import flash.display.MovieClip;
 import flash.utils.Dictionary;
 
-import net.play5d.game.bvn.ctrl.game_stage_loader.GameStageLoadCtrl;
+import net.play5d.game.bvn.cntlr.game_stage_loader.GameStageLoadCtrl;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.FighterVO;
 import net.play5d.game.bvn.data.MapVO;

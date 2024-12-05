@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.mosou_ctrls {
+package net.play5d.game.bvn.cntlr.mosou_ctrls {
 import flash.display.Sprite;
 import flash.utils.Dictionary;
 
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpFollowUI;
 

@@ -23,8 +23,8 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrl.EffectCtrl;
-import net.play5d.game.bvn.ctrl.GameLogic;
+import net.play5d.game.bvn.cntlr.EffectCtrl;
+import net.play5d.game.bvn.cntlr.GameLogic;
 import net.play5d.game.bvn.data.TeamVO;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;

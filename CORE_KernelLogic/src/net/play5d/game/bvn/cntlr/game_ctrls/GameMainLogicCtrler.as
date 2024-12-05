@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.game_ctrls {
+package net.play5d.game.bvn.cntlr.game_ctrls {
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrl.GameLogic;
+import net.play5d.game.bvn.cntlr.GameLogic;
 import net.play5d.game.bvn.data.TeamMap;
 import net.play5d.game.bvn.data.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;

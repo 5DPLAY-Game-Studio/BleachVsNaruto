@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl.game_ctrls {
+package net.play5d.game.bvn.cntlr.game_ctrls {
 import net.play5d.game.bvn.fighter.Bullet;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.events.FighterEvent;

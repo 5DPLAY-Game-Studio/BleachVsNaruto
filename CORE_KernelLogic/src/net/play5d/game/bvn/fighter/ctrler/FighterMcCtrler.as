@@ -23,9 +23,9 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrl.EffectCtrl;
-import net.play5d.game.bvn.ctrl.GameLogic;
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.EffectCtrl;
+import net.play5d.game.bvn.cntlr.GameLogic;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.HitType;
 import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.fighter.data.FighterActionState;

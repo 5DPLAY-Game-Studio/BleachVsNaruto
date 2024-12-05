@@ -7,8 +7,8 @@ import flash.display.MovieClip;
 import flash.events.Event;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrl.AssetManager;
-import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.cntlr.AssetManager;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
 import net.play5d.game.bvn.mob.ctrls.LANClientCtrl;
 import net.play5d.game.bvn.mob.ctrls.LANServerCtrl;
 import net.play5d.game.bvn.mob.data.HostVO;

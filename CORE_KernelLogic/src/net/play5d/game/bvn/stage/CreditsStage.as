@@ -28,8 +28,8 @@ package net.play5d.game.bvn.stage
 
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
 	import net.play5d.game.bvn.events.SetBtnEvent;
 	import net.play5d.game.bvn.interfaces.GameInterface;
 	import net.play5d.game.bvn.ui.SetBtnGroup;

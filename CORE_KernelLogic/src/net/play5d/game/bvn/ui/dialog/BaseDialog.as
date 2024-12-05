@@ -23,7 +23,7 @@ import flash.display.MovieClip;
 import flash.display.SimpleButton;
 	import flash.display.Sprite;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
+	import net.play5d.game.bvn.cntlr.AssetManager;
 import net.play5d.game.bvn.ui.Text;
 	import net.play5d.game.bvn.utils.BtnUtils;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;

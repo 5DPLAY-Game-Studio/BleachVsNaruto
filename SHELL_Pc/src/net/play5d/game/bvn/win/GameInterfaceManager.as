@@ -32,7 +32,7 @@ import flash.utils.ByteArray;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.input.GameInputType;

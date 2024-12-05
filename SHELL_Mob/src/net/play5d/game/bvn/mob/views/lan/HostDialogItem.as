@@ -63,7 +63,7 @@ import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
 
-import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 

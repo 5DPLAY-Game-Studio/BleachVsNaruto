@@ -17,7 +17,7 @@
  */
 
 package {
-import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameRunDataVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 

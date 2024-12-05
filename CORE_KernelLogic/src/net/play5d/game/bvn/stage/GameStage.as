@@ -26,9 +26,9 @@ package net.play5d.game.bvn.stage
 	import flash.utils.getQualifiedClassName;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.ctrl.EffectCtrl;
-	import net.play5d.game.bvn.ctrl.GameLogic;
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.cntlr.EffectCtrl;
+	import net.play5d.game.bvn.cntlr.GameLogic;
+	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.data.GameMode;

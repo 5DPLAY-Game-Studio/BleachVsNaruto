@@ -20,8 +20,8 @@ package net.play5d.game.bvn.ui.mosou
 {
 	import flash.display.Sprite;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;
 
 	public class MousouKOsUI

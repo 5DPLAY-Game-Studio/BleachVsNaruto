@@ -30,7 +30,7 @@ package net.play5d.game.bvn.ui.select
 	import flash.geom.Point;
 	import flash.text.TextFormatAlign;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
+	import net.play5d.game.bvn.cntlr.AssetManager;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.SelectCharListItemVO;
 	import net.play5d.game.bvn.utils.ResUtils;

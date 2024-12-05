@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.mosou {
-import net.play5d.game.bvn.ctrl.AssetManager;
+import net.play5d.game.bvn.cntlr.AssetManager;
 
 /**
  * 无双数据（运行数据）

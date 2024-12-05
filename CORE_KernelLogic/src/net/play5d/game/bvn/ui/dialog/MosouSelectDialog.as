@@ -26,8 +26,8 @@ package net.play5d.game.bvn.ui.dialog
 	import flash.geom.Point;
 	import flash.text.TextFormatAlign;
 
-	import net.play5d.game.bvn.ctrl.AssetManager;
-	import net.play5d.game.bvn.ctrl.mosou_ctrls.MosouLogic;
+	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.cntlr.mosou_ctrls.MosouLogic;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.GameData;

@@ -23,8 +23,8 @@ import flash.display.DisplayObject;
 import flash.filters.GlowFilter;
 import flash.geom.Point;
 
-import net.play5d.game.bvn.ctrl.EffectCtrl;
-import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.cntlr.EffectCtrl;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;

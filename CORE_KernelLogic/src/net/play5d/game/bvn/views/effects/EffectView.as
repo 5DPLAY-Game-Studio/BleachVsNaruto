@@ -21,8 +21,8 @@ package net.play5d.game.bvn.views.effects
 	import flash.display.Bitmap;
 	import flash.geom.Point;
 
-	import net.play5d.game.bvn.ctrl.EffectCtrl;
-	import net.play5d.game.bvn.ctrl.SoundCtrl;
+	import net.play5d.game.bvn.cntlr.EffectCtrl;
+	import net.play5d.game.bvn.cntlr.SoundCtrl;
 	import net.play5d.game.bvn.data.BitmapDataCacheVO;
 	import net.play5d.game.bvn.data.EffectVO;
 	import net.play5d.game.bvn.interfaces.IGameSprite;

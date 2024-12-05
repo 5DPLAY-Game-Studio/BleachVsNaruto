@@ -22,8 +22,8 @@ import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.GameQuality;
-import net.play5d.game.bvn.ctrl.EffectCtrl;
-import net.play5d.game.bvn.ctrl.SoundCtrl;
+import net.play5d.game.bvn.cntlr.EffectCtrl;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
