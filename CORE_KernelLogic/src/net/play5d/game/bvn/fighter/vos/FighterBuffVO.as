@@ -19,10 +19,11 @@
 package net.play5d.game.bvn.fighter.vos
 {
 	import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-	public class FighterBuffVO
-	{
+public class FighterBuffVO implements IInstanceVO {
 		include '../../../../../../../include/_INCLUDE_.as';
+		include '../../../../../../../include/Clone.as';
 
 		public var param:String;
 		public var resumeValue:Number = 0;
