@@ -169,7 +169,7 @@ public class FighterAttackerCtrler {
                 return;
             }
 
-            hv       = hv.clone();
+            hv       = hv.clone() as HitVO;
             hv.owner = _attacker;
 
             params.hitVO = hv;

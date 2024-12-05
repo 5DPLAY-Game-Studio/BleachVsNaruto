@@ -210,7 +210,7 @@ public class Bullet implements IGameSprite {
     public function setHitVO(v:HitVO):void {
         owner = v.owner;
 
-        _hitVO       = v.clone();
+        _hitVO       = v.clone() as HitVO;
         _hitVO.owner = this;
 
         var mainDisplay:DisplayObject  = mc.getChildByName('main');

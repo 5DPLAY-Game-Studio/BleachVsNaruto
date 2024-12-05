@@ -24,11 +24,12 @@ package net.play5d.game.bvn.fighter.models
 	import net.play5d.game.bvn.fighter.FighterAttacker;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.interfaces.IGameSprite;
-	import net.play5d.kyo.utils.KyoUtils;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
+import net.play5d.kyo.utils.KyoUtils;
 
-	public class HitVO
-	{
+	public class HitVO implements IInstanceVO {
 		include '../../../../../../../include/_INCLUDE_.as';
+		include '../../../../../../../include/Clone.as';
 
 		public var id:String;
 
@@ -101,11 +102,11 @@ package net.play5d.game.bvn.fighter.models
 			}
 		}
 
-		public function clone():HitVO{
-			var hv:HitVO = new HitVO();
-			KyoUtils.cloneValue(hv,this,_cloneKey);
-			return hv;
-		}
+//		public function clone():HitVO{
+//			var hv:HitVO = new HitVO();
+//			KyoUtils.cloneValue(hv,this,_cloneKey);
+//			return hv;
+//		}
 
 		public function isBisha():Boolean{
 			if(id == null) return false;
