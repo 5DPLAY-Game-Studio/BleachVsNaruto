@@ -502,7 +502,7 @@ public class FighterMC {
         switch (_hurtFlyState) {
         case 1: //击飞
             if (--_hurtFlyFrame <= 0 && !_fighter.isInAir) {
-                goFrame('击飞_落');
+                goFrame(FighterSpecialFrame.HURT_FALL);
                 _hurtFlyState = 2;
             }
             if (_hurtYMin > _fighter.y) {
