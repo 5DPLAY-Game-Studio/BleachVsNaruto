@@ -20,10 +20,12 @@ package net.play5d.game.bvn.data.mosou.player {
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.data.mosou.LevelModel;
 import net.play5d.game.bvn.events.GameEvent;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.game.bvn.utils.WrapInteger;
 
-public class MosouFighterVO implements ISaveData {
+public class MosouFighterVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../../include/Clone.as';
 
     public static var LEVEL_MAX:WrapInteger = new WrapInteger(80);
 
