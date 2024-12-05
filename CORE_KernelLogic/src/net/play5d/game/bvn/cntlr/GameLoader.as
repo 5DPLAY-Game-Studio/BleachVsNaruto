@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl {
+package net.play5d.game.bvn.cntlr {
 import flash.display.Loader;
 import flash.display.MovieClip;
 import flash.display.Sprite;

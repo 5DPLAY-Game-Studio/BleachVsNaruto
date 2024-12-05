@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrl {
+package net.play5d.game.bvn.cntlr {
 import flash.media.Sound;
 import flash.media.SoundTransform;
 import flash.utils.getTimer;
