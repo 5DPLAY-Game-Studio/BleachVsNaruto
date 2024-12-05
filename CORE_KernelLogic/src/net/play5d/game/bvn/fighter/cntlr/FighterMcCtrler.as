@@ -162,7 +162,8 @@ public class FighterMcCtrler {
     }
 
     //恢复状态
-    public function idle(frame:String = FighterSpecialFrame.IDLE):void {
+    public function idle(frame:String = null):void {
+        frame ||= FighterSpecialFrame.IDLE;
 
         if (!_fighter.isAlive) {
             trace('not alive!!!');
@@ -313,7 +314,9 @@ public class FighterMcCtrler {
     }
 
     //设定跳
-    public function setJump(action:String = FighterSpecialFrame.JUMP):void {
+    public function setJump(action:String = null):void {
+        action ||= FighterSpecialFrame.JUMP;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -321,7 +324,9 @@ public class FighterMcCtrler {
     }
 
     //设定跳2
-    public function setJumpQuick(action:String = FighterSpecialFrame.JUMP):void {
+    public function setJumpQuick(action:String = null):void {
+        action ||= FighterSpecialFrame.JUMP;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -329,7 +334,9 @@ public class FighterMcCtrler {
     }
 
     //设定从空中的板中跳下
-    public function setJumpDown(action:String = FighterSpecialFrame.JUMP_DOWN):void {
+    public function setJumpDown(action:String = null):void {
+        action ||= FighterSpecialFrame.JUMP_DOWN;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -337,7 +344,9 @@ public class FighterMcCtrler {
     }
 
     //设定冲刺
-    public function setDash(action:String = FighterSpecialFrame.DASH):void {
+    public function setDash(action:String = null):void {
+        action ||= FighterSpecialFrame.DASH;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -345,7 +354,9 @@ public class FighterMcCtrler {
     }
 
     //设定普通攻击J  parent.$mc_ctrler.setAttack("砍1");
-    public function setAttack(action:String = FighterSpecialFrame.ATTACK):void {
+    public function setAttack(action:String = null):void {
+        action ||= FighterSpecialFrame.ATTACK;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -353,7 +364,9 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击S+J
-    public function setSkill1(action:String = FighterSpecialFrame.SKILL_1):void {
+    public function setSkill1(action:String = null):void {
+        action ||= FighterSpecialFrame.SKILL_1;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -361,7 +374,9 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击W+J
-    public function setSkill2(action:String = FighterSpecialFrame.SKILL_2):void {
+    public function setSkill2(action:String = null):void {
+        action ||= FighterSpecialFrame.SKILL_2;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -369,7 +384,9 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击U  parent.$mc_ctrler.setZhao1();
-    public function setZhao1(action:String = FighterSpecialFrame.ZHAO_1):void {
+    public function setZhao1(action:String = null):void {
+        action ||= FighterSpecialFrame.ZHAO_1;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -377,7 +394,9 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击S+U  parent.$mc_ctrler.setZhao2();
-    public function setZhao2(action:String = FighterSpecialFrame.ZHAO_2):void {
+    public function setZhao2(action:String = null):void {
+        action ||= FighterSpecialFrame.ZHAO_2;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -385,21 +404,27 @@ public class FighterMcCtrler {
     }
 
     //设定技能攻击W+U  parent.$mc_ctrler.setZhao3();
-    public function setZhao3(action:String = FighterSpecialFrame.ZHAO_3):void {
+    public function setZhao3(action:String = null):void {
+        action ||= FighterSpecialFrame.ZHAO_3;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
         _action.zhao3 = action;
     }
 
-    public function setCatch1(action:String = FighterSpecialFrame.CATCH_1):void {
+    public function setCatch1(action:String = null):void {
+        action ||= FighterSpecialFrame.CATCH_1;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
         _action.catch1 = action;
     }
 
-    public function setCatch2(action:String = FighterSpecialFrame.CATCH_2):void {
+    public function setCatch2(action:String = null):void {
+        action ||= FighterSpecialFrame.CATCH_2;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -407,7 +432,9 @@ public class FighterMcCtrler {
     }
 
     //设定必杀I  parent.$mc_ctrler.setBisha();
-    public function setBisha(action:String = FighterSpecialFrame.BISHA, qi:int = 100):void {
+    public function setBisha(action:String = null, qi:int = 100):void {
+        action ||= FighterSpecialFrame.BISHA;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -416,7 +443,9 @@ public class FighterMcCtrler {
     }
 
     //设定必杀W+I
-    public function setBishaUP(action:String = FighterSpecialFrame.BISHA_UP, qi:int = 100):void {
+    public function setBishaUP(action:String = null, qi:int = 100):void {
+        action ||= FighterSpecialFrame.BISHA_UP;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -425,7 +454,9 @@ public class FighterMcCtrler {
     }
 
     //设定必杀S+I
-    public function setBishaSUPER(action:String = FighterSpecialFrame.BISHA_SUPER, qi:int = 300):void {
+    public function setBishaSUPER(action:String = null, qi:int = 300):void {
+        action ||= FighterSpecialFrame.BISHA_SUPER;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -434,7 +465,9 @@ public class FighterMcCtrler {
     }
 
     //设定空中普通攻击J
-    public function setAttackAIR(action:String = FighterSpecialFrame.ATTACK_AIR):void {
+    public function setAttackAIR(action:String = null):void {
+        action ||= FighterSpecialFrame.ATTACK_AIR;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -442,7 +475,9 @@ public class FighterMcCtrler {
     }
 
     //设定空中技能U
-    public function setSkillAIR(action:String = FighterSpecialFrame.SKILL_AIR):void {
+    public function setSkillAIR(action:String = null):void {
+        action ||= FighterSpecialFrame.SKILL_AIR;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -450,7 +485,9 @@ public class FighterMcCtrler {
     }
 
     //设定空中必杀I
-    public function setBishaAIR(action:String = FighterSpecialFrame.BISHA_AIR, qi:int = 100):void {
+    public function setBishaAIR(action:String = null, qi:int = 100):void {
+        action ||= FighterSpecialFrame.BISHA_AIR;
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -459,7 +496,9 @@ public class FighterMcCtrler {
     }
 
     //设定落地的动作,breakAct:接触到地面时是否中断当前动作
-    public function setTouchFloor(action:String = FighterSpecialFrame.JUMP_TOUCH_FLOOR, breakAct:Boolean = true):void {
+    public function setTouchFloor(action:String = null, breakAct:Boolean = true):void {
+        action ||= FighterSpecialFrame.JUMP_TOUCH_FLOOR;
+        
         if (!_mc.checkFrame(action)) {
             return;
         }
