@@ -487,7 +487,7 @@ public class FighterMC {
     }
 
     private function playHurtDown2():void {
-        goFrame('击飞_倒', false);
+        goFrame(FighterSpecialFrame.HURT_DOWN, false);
 
         _hurtDownFrame = GameConfig.HIT_DOWN_FRAME;
         _hurtFlyState  = 4;
@@ -516,7 +516,7 @@ public class FighterMC {
             if (_isHeavyDownAttack) {
                 //被打击到地面
                 _hurtDownFrame = GameConfig.HIT_DOWN_FRAME_HEAVY;
-                goFrame('击飞_倒', false);
+                goFrame(FighterSpecialFrame.HURT_DOWN, false);
                 _fighter.actionState = FighterActionState.HURT_DOWN;
                 FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_DOWN);
 //						_fighter.setVelocity(0,0);
@@ -575,7 +575,7 @@ public class FighterMC {
                 return;
             }
 
-            goFrame('击飞_倒', false);
+            goFrame(FighterSpecialFrame.HURT_DOWN, false);
             _fighter.setDamping(GameConfig.HIT_FLOOR_DAMPING_X);
             _hurtDownFrame = GameConfig.HIT_DOWN_FRAME;
             _hurtFlyState  = 4;
