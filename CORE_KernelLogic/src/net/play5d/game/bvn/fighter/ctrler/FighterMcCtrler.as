@@ -470,8 +470,8 @@ public class FighterMcCtrler {
 
     //设定万解
     public function setWankai():void {
-        if (_mc.checkFrame('万解')) {
-            _action.waiKai = '万解';
+        if (_mc.checkFrame(FighterSpecialFrame.BANKAI)) {
+            _action.waiKai = FighterSpecialFrame.BANKAI;
         }
         if (_mc.checkFrame('万解W')) {
             _action.waiKaiW = '万解W';
