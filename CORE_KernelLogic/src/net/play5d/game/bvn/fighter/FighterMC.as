@@ -342,7 +342,7 @@ public class FighterMC {
      */
     public function playHurtDown():void {
 
-        goFrame('击飞_弹', false, 0, {call: playHurtDown2, delay: 2});
+        goFrame(FighterSpecialFrame.HURT_TAN, false, 0, {call: playHurtDown2, delay: 2});
 
         _mcCtrler.effectCtrler.hitFloor(1, 2);
 
@@ -539,7 +539,7 @@ public class FighterMC {
 
             }
             else {
-                goFrame('击飞_弹', false);
+                goFrame(FighterSpecialFrame.HURT_TAN, false);
                 yDiff = _fighter.y - _hurtYMin;
                 vecy  = yDiff / 25;
 
