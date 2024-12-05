@@ -944,7 +944,7 @@ public class FighterMcCtrler {
      */
     public function doLose():void {
         _fighter.actionState = FighterActionState.LOSE;
-        _mc.goFrame("失败");
+        _mc.goFrame(FighterSpecialFrame.LOSE);
     }
 
     //正在被击飞
