@@ -498,7 +498,7 @@ public class FighterMcCtrler {
     //设定落地的动作,breakAct:接触到地面时是否中断当前动作
     public function setTouchFloor(action:String = null, breakAct:Boolean = true):void {
         action ||= FighterSpecialFrame.JUMP_TOUCH_FLOOR;
-        
+
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -2098,7 +2098,7 @@ public class FighterMcCtrler {
 
         var defEnergy:int = 0;
         if (hitvo.isBreakDef) {
-            defEnergy = 90;
+            defEnergy = _fighter.energyMax * GameConfig.ENERGY_LOSE_DEFENSE_BREAK_RATE;
         }
         else {
             defEnergy = hitvo.getDamage() / 5;

@@ -726,7 +726,7 @@ public class FighterMain extends BaseGameSprite {
 
     private function renderFzQi():void {
         if (fzqi < fzqiMax) {
-            fzqi += GameConfig.FUZHU_QU_ADD_PERFRAME;
+            fzqi += GameConfig.FUZHU_QI_ADD_PERFRAME;
         }
     }
 
