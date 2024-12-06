@@ -16,45 +16,54 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.input
-{
-	import flash.display.Stage;
+package net.play5d.game.bvn.input {
+import flash.display.Stage;
 
-	public interface IGameInput
-	{
-		function initlize(stage:Stage):void;
-		function setConfig(config:Object):void;
+public interface IGameInput {
+    function get enabled():Boolean;
 
-		function get enabled():Boolean;
-		function set enabled(v:Boolean):void;
+    function set enabled(v:Boolean):void;
 
-		function focus():void;
+    function initlize(stage:Stage):void;
 
-		function anyKey():Boolean;
+    function setConfig(config:Object):void;
 
-		function back():Boolean;
-		function select():Boolean;
+    function focus():void;
 
-		function up():Boolean;
-		function down():Boolean;
-		function left():Boolean;
-		function right():Boolean;
+    function anyKey():Boolean;
 
-		function attack():Boolean;
-		function jump():Boolean;
-		function dash():Boolean;
-		function skill():Boolean;
-		function superSkill():Boolean;
-		function special():Boolean;
+    function back():Boolean;
 
-		function wankai():Boolean;
+    function select():Boolean;
+
+    function up():Boolean;
+
+    function down():Boolean;
+
+    function left():Boolean;
+
+    function right():Boolean;
+
+    function attack():Boolean;
+
+    function jump():Boolean;
+
+    function dash():Boolean;
+
+    function skill():Boolean;
+
+    function superSkill():Boolean;
+
+    function special():Boolean;
+
+    function wankai():Boolean;
 
 //		function isDown(code:Object):Boolean;
 //		function isJustDown(code:Object):Boolean;
 
-		function clear():void;
+    function clear():void;
 
 //		function listen(func:Function):void;
 //		function unListen(func:Function):void;
-	}
+}
 }

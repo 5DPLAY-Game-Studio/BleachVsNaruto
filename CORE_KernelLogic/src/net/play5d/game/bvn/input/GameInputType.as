@@ -16,15 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.input
-{
-	public class GameInputType
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.input {
+public class GameInputType {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public static const MENU:String = 'MENU';
-		public static const P1:String = 'P1';
-		public static const P2:String = 'P2';
+    public static const MENU:String = 'MENU';
+    public static const P1:String   = 'P1';
+    public static const P2:String   = 'P2';
 
-	}
+}
 }
