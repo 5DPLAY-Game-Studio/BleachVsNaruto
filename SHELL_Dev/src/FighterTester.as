@@ -135,7 +135,7 @@ public class FighterTester extends Sprite {
                     return data;
                 }
         )();
-        addLabel('玩家 1 角色 id', yy, xx);
+        addLabel(GetLang('dev.txt.fighter_tester.p1_fighter_id'), yy, xx);
         yy += 30;
         _p1InputId = addInput(fighterData, yy, xx);
         yy += 30;
@@ -163,17 +163,17 @@ public class FighterTester extends Sprite {
                     return data;
                 }
         )();
-        addLabel('玩家 1 辅助 id', yy, xx);
+        addLabel(GetLang('dev.txt.fighter_tester.p1_assistant_id'), yy, xx);
         yy += 30;
         _p1FzInputId = addInput(assistantData, yy, xx);
         yy += 30;
 
-        addLabel('玩家 2 角色 id', yy);
+        addLabel(GetLang('dev.txt.fighter_tester.p2_fighter_id'), yy);
         yy += 30;
         _p2InputId = addInput(fighterData, yy, xx);
         yy += 30;
 
-        addLabel('玩家 2 辅助 id', yy);
+        addLabel(GetLang('dev.txt.fighter_tester.p2_assistant_id'), yy);
         yy += 30;
         _p2FzInputId = addInput(assistantData, yy, xx);
         yy += 30;
@@ -201,7 +201,7 @@ public class FighterTester extends Sprite {
                     return data;
                 }
         )();
-        addLabel('地图 id', yy, xx);
+        addLabel(GetLang('dev.txt.fighter_tester.map_id'), yy, xx);
         yy += 30;
         _mapInputId = addInput(mapData, yy, xx);
         yy += 45;
@@ -213,7 +213,7 @@ public class FighterTester extends Sprite {
                 text: '60'
             }
         ];
-        addLabel('游戏帧率', yy, xx);
+        addLabel(GetLang('dev.txt.fighter_tester.game_fps'), yy, xx);
         yy += 30;
         //	_fpsInput = addInput(GameConfig.FPS_GAME.toString(),yy,60);
         _fpsInput = addInput(fpsData, yy, xx);
@@ -221,24 +221,24 @@ public class FighterTester extends Sprite {
 
         var recoverData:Array = [
             {
-                text: '启用'
+                text: GetLang('txt.options.enable')
             }, {
-                text: '禁用'
+                text: GetLang('txt.options.disable')
             }
         ];
-        addLabel('练习模式回复效果', yy, xx);
+        addLabel(GetLang('dev.txt.fighter_tester.training_recover'), yy, xx);
         yy += 30;
         _autoReceiveHp = addInput(recoverData, yy, xx);
         yy += 30;
 
-        _debugText                  = addLabel('错误信息提示……', yy, xx);
+        _debugText                  = addLabel(GetLang('dev.txt.fighter_tester.error_message_prompt'), yy, xx);
         _debugText.width            = 190;
         _debugText.height           = 200;
         _debugText.textFormat.color = 0xff0000;
         _debugText.wordWrap         = true;
 
 //			addButton("改变FPS",400,50,100,30,changeFPS);
-        addButton('测试', 560, 3, 175, 30, testGame);
+        addButton(GetLang('dev.txt.fighter_tester.btn_test'), 560, 3, 175, 30, testGame);
 
         var saveObj:Object = KyoSharedObject.load('fighter_test_config');
         if (saveObj && saveObj.p1) {
