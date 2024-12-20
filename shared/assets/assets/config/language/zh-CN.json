@@ -1,5 +1,10 @@
 {
   "txt": {
+    "options": {
+      "enable" : "启用",
+      "disable": "禁用"
+    },
+
     "asset_manager": {
       "sound" : "声音",
       "effect": "效果",
@@ -202,6 +207,25 @@
           "main_mc_is_null"           : "创建人物失败！mainMc 为空！",
           "fighter_ctrler_initialized": "fighter 已完成初始化！"
         }
+      }
+    }
+  },
+
+
+  "dev": {
+    "txt": {
+      "fighter_tester": {
+        "p1_fighter_id"  : "玩家 1 角色 id",
+        "p1_assistant_id": "玩家 1 辅助 id",
+        "p2_fighter_id"  : "玩家 2 角色 id",
+        "p2_assistant_id": "玩家 2 辅助 id",
+
+        "map_id"              : "地图 id",
+        "game_fps"            : "游戏帧率",
+        "training_recover"    : "练习模式回复效果",
+        "error_message_prompt": "错误信息提示……",
+
+        "btn_test": "测试"
       }
     }
   }
