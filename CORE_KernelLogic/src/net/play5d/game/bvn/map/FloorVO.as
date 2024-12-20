@@ -16,28 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.map
-{
+package net.play5d.game.bvn.map {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class FloorVO implements IInstanceVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
-		include '../../../../../../include/Clone.as';
+public class FloorVO implements IInstanceVO {
+    include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
-		public var y:Number = 0;
-		public var xFrom:Number = 0;
-		public var xTo:Number = 0;
+    public var y:Number     = 0;
+    public var xFrom:Number = 0;
+    public var xTo:Number   = 0;
 
 
-		public function toString():String{
-			return "FloorVO::{xFrom:"+xFrom+",xTo:"+xTo+",y:"+y+"}";
-		}
+    public function toString():String {
+        return 'FloorVO::{xFrom:' + xFrom + ',xTo:' + xTo + ',y:' + y + '}';
+    }
 
-		public function hitTest(X:Number , Y:Number , SPEED:Number):Boolean{
-			//SPEED = 5
-			return Y > y - SPEED && Y < y + SPEED && X > xFrom && X < xTo;
-		}
+    public function hitTest(X:Number, Y:Number, SPEED:Number):Boolean {
+        //SPEED = 5
+        return Y > y - SPEED && Y < y + SPEED && X > xFrom && X < xTo;
+    }
 
-	}
+}
 }
