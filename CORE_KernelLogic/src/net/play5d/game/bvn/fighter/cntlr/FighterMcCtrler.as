@@ -914,23 +914,29 @@ public class FighterMcCtrler {
             return;
         }
 
-        if (_fighter.getIsTouchSide()) {
-            if (hitvo.owner && hitvo.owner is BaseGameSprite) {
-                var ownersp:BaseGameSprite = hitvo.owner as BaseGameSprite;
-                if (Math.abs(_fighter.x - hitvo.owner.x) < 100) {
+        var target:IGameSprite       = hitvo.owner;
+        var targetBGS:BaseGameSprite =
+                    (target && (target is BaseGameSprite)) ?
+                    target as BaseGameSprite :
+                    null;
+        if (_fighter.getIsTouchSide() &&
+            target &&
+            targetBGS &&
+            targetBGS.isAllowReversePush
+        ) {
+            if (Math.abs(_fighter.x - target.x) < 100) {
 //						var dampingX:Number = _isDefense ?
 //							GameConfig.DEFENSE_DAMPING_X :
 //							(hitvo.hurtType == 1 ? 0.2 : GameConfig.HURT_DAMPING_X);
-                    var dampingX:Number = 0.3;
-                    var vecx:Number     = -hitvo.hitx * ownersp.direct * 1.4;
-                    if (vecx > 20) {
-                        vecx = 20;
-                    }
-                    if (vecx < -20) {
-                        vecx = -20;
-                    }
-                    ownersp.setVec2(vecx, 0, dampingX, 0);
+                var dampingX:Number = 0.3;
+                var vecx:Number     = -hitvo.hitx * targetBGS.direct * 1.4;
+                if (vecx > 20) {
+                    vecx = 20;
                 }
+                if (vecx < -20) {
+                    vecx = -20;
+                }
+                targetBGS.setVec2(vecx, 0, dampingX, 0);
             }
         }
 

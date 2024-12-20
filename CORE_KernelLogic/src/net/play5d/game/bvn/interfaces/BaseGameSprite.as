@@ -43,6 +43,8 @@ package net.play5d.game.bvn.interfaces
 		public var isTouchBottom:Boolean; //是否在底层地面上
 		public var isAllowBeHit:Boolean = true; //是否可以被打
 		public var isCross:Boolean = false; //是否穿过其他角色
+		// 是否允许受到因版边攻击造成的反向推动
+		public var isAllowReversePush:Boolean = true;
 		public var isAlive:Boolean = true;//是否活着
 		public var isAllowLoseHP:Boolean = true;//是否伤血
 
