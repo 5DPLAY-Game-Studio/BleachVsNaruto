@@ -16,16 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.interfaces
-{
-	import flash.display.DisplayObject;
-	import flash.events.IEventDispatcher;
+package net.play5d.game.bvn.interfaces {
+import flash.display.DisplayObject;
+import flash.events.IEventDispatcher;
 
-	public interface IInnerSetUI extends IEventDispatcher
-	{
-		function fadIn():void;
-		function fadOut():void;
-		function getUI():DisplayObject;
-		function destory():void;
-	}
+public interface IInnerSetUI extends IEventDispatcher {
+    function fadIn():void;
+
+    function fadOut():void;
+
+    function getUI():DisplayObject;
+
+    function destory():void;
+}
 }

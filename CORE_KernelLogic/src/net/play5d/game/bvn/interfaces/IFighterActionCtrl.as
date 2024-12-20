@@ -16,60 +16,77 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.interfaces
-{
-	public interface IFighterActionCtrl
-	{
-		function initlize():void;
+package net.play5d.game.bvn.interfaces {
+public interface IFighterActionCtrl {
+    function initlize():void;
 
-		function render():void;
-		function renderAnimate():void;
+    function render():void;
 
-		function destory():void;
+    function renderAnimate():void;
 
-		function enabled():Boolean;
+    function destory():void;
+
+    function enabled():Boolean;
+
 //		function setEnabled(v:Boolean):void;
 
-		function moveLEFT():Boolean;
-		function moveRIGHT():Boolean;
+    function moveLEFT():Boolean;
 
-		function defense():Boolean;
+    function moveRIGHT():Boolean;
 
-		function attack():Boolean;
-		function jump():Boolean;
-		function jumpQuick():Boolean;
-		function jumpDown():Boolean; //从空中的板下来
-		function dash():Boolean;
+    function defense():Boolean;
 
-		function dashJump():Boolean; //倒地起身
+    function attack():Boolean;
 
-		function skill1():Boolean;
-		function skill2():Boolean;
+    function jump():Boolean;
 
-		function zhao1():Boolean;
-		function zhao2():Boolean;
-		function zhao3():Boolean;
+    function jumpQuick():Boolean;
 
-		function catch1():Boolean;
-		function catch2():Boolean;
+    function jumpDown():Boolean; //从空中的板下来
+    function dash():Boolean;
 
-		function bisha():Boolean;
-		function bishaUP():Boolean;
-		function bishaSUPER():Boolean;
+    function dashJump():Boolean; //倒地起身
 
-		function assist():Boolean;
-		function specailSkill():Boolean;
+    function skill1():Boolean;
 
-		function attackAIR():Boolean;
-		function skillAIR():Boolean;
-		function bishaAIR():Boolean;
+    function skill2():Boolean;
 
-		function waiKai():Boolean;
-		function waiKaiW():Boolean;
-		function waiKaiS():Boolean;
+    function zhao1():Boolean;
 
-		function ghostStep():Boolean;
-		function ghostJump():Boolean;
-		function ghostJumpDown():Boolean;
-	}
+    function zhao2():Boolean;
+
+    function zhao3():Boolean;
+
+    function catch1():Boolean;
+
+    function catch2():Boolean;
+
+    function bisha():Boolean;
+
+    function bishaUP():Boolean;
+
+    function bishaSUPER():Boolean;
+
+    function assist():Boolean;
+
+    function specailSkill():Boolean;
+
+    function attackAIR():Boolean;
+
+    function skillAIR():Boolean;
+
+    function bishaAIR():Boolean;
+
+    function waiKai():Boolean;
+
+    function waiKaiW():Boolean;
+
+    function waiKaiS():Boolean;
+
+    function ghostStep():Boolean;
+
+    function ghostJump():Boolean;
+
+    function ghostJumpDown():Boolean;
+}
 }
