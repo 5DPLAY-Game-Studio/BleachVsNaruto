@@ -77,7 +77,7 @@ public class LanguageStage implements IStage {
                             GameConfig.GAME_SIZE.x,
                             GameConfig.GAME_SIZE.y
                     );
-        _backGround                   = new Bitmap(backGroundData)
+        _backGround                   = new Bitmap(backGroundData);
         _ui.addChild(_backGround);
 
         // 初始化加载进度条

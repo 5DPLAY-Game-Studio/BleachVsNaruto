@@ -16,173 +16,170 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.stage
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.MouseEvent;
-	import flash.events.TouchEvent;
-	import flash.geom.Point;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.utils.setTimeout;
+package net.play5d.game.bvn.stage {
+import flash.display.DisplayObject;
+import flash.display.Sprite;
+import flash.events.MouseEvent;
+import flash.events.TouchEvent;
+import flash.geom.Point;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
+import flash.utils.setTimeout;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.cntlr.AssetManager;
-	import net.play5d.game.bvn.cntlr.GameRender;
-	import net.play5d.game.bvn.cntlr.SoundCtrl;
-	import net.play5d.game.bvn.data.GameData;
-	import net.play5d.game.bvn.input.GameInputer;
-	import net.play5d.game.bvn.interfaces.GameInterface;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.ui.MenuBtnGroup;
-	import net.play5d.game.bvn.ui.UIUtils;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.shapes.Box;
-	import net.play5d.kyo.stage.IStage;
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.cntlr.AssetManager;
+import net.play5d.game.bvn.cntlr.GameRender;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.interfaces.GameInterface;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.ui.MenuBtnGroup;
+import net.play5d.game.bvn.ui.UIUtils;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.shapes.Box;
+import net.play5d.kyo.stage.IStage;
 
-	public class MenuStage extends Sprite implements IStage
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class MenuStage extends Sprite implements IStage {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:stg_title;
-		private var _btnGroup:MenuBtnGroup;
-		private var _versionTxt:TextField;
+    public static var MenuPosition:Point = new Point(470, 100);
+    public static var MenuGap:Point      = new Point(-40, 5);
 
-		public static var MenuPosition:Point = new Point(470, 100);
-		public static var MenuGap:Point = new Point(-40, 5);
+    public function MenuStage() {
+    }
+    private var _ui:stg_title;
+    private var _btnGroup:MenuBtnGroup;
+    private var _versionTxt:TextField;
 
-		public function MenuStage()
-		{
-		}
+    /**
+     * 显示对象
+     */
+    public function get display():DisplayObject {
+        return _ui;
+    }
 
-		/**
-		 * 显示对象
-		 */
-		public function get display():DisplayObject
-		{
-			return _ui;
-		}
+    /**
+     * 构建
+     */
+    public function build():void {
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.title, ResUtils.TITLE);
+        _ui.gotoAndStop(1);
+        GameInterface.instance.initTitleUI(_ui);
+        GameInputer.enabled = false;
 
-		/**
-		 * 构建
-		 */
-		public function build():void
-		{
-			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.title , ResUtils.TITLE);
-			_ui.gotoAndStop(1);
-			GameInterface.instance.initTitleUI(_ui);
-			GameInputer.enabled = false;
+        SoundCtrl.I.BGM(AssetManager.I.getSound('op'));
+    }
 
-			SoundCtrl.I.BGM(AssetManager.I.getSound('op'));
-		}
+    /**
+     * 稍后构建
+     */
+    public function afterBuild():void {
+        _ui.gotoAndPlay(2);
 
-		/**
-		 * 稍后构建
-		 */
-		public function afterBuild():void
-		{
-			_ui.gotoAndPlay(2);
+        setTimeout(function ():void {
+            _ui.buttonMode    = true;
+            _ui.useHandCursor = true;
+            if (GameConfig.TOUCH_MODE) {
+                _ui.addEventListener(TouchEvent.TOUCH_TAP, showBtns);
+            }
+            else {
+                _ui.addEventListener(MouseEvent.CLICK, showBtns);
+            }
 
-			setTimeout(function():void{
-				_ui.buttonMode = true;
-				_ui.useHandCursor = true;
-				if(GameConfig.TOUCH_MODE){
-					_ui.addEventListener(TouchEvent.TOUCH_TAP,showBtns);
-				}else{
-					_ui.addEventListener(MouseEvent.CLICK,showBtns);
-				}
+            GameRender.add(render);
+            GameInputer.focus();
+            GameInputer.enabled = true;
 
-				GameRender.add(render);
-				GameInputer.focus();
-				GameInputer.enabled = true;
+        }, 500);
 
-			},500);
+        _versionTxt = new TextField();
+        UIUtils.formatText(_versionTxt, {color: 0, size: 18});
 
-			_versionTxt = new TextField();
-			UIUtils.formatText(_versionTxt , {color:0,size:18});
+        _versionTxt.text     = MainGame.VERSION_LABEL;
+        _versionTxt.autoSize = TextFieldAutoSize.LEFT;
+        _versionTxt.x        = GameConfig.GAME_SIZE.x - _versionTxt.width - 15;
+        _versionTxt.y        = GameConfig.GAME_SIZE.y - _versionTxt.height - 10;
+        _ui.addChild(_versionTxt);
 
-			_versionTxt.text = MainGame.VERSION_LABEL;
-			_versionTxt.autoSize = TextFieldAutoSize.LEFT;
-			_versionTxt.x = GameConfig.GAME_SIZE.x - _versionTxt.width - 15;
-			_versionTxt.y = GameConfig.GAME_SIZE.y - _versionTxt.height - 10;
-			_ui.addChild(_versionTxt);
-
-			var b:Box = new Box(_versionTxt.width + 10, _versionTxt.height + 10, 0xffffff, 0);
-			b.x = _versionTxt.x - 5;
-			b.y = _versionTxt.y - 5;
-			b.buttonMode = true;
-			b.addEventListener(MouseEvent.CLICK, versionClickHandler);
-			_ui.addChild(b);
+        var b:Box    = new Box(_versionTxt.width + 10, _versionTxt.height + 10, 0xffffff, 0);
+        b.x          = _versionTxt.x - 5;
+        b.y          = _versionTxt.y - 5;
+        b.buttonMode = true;
+        b.addEventListener(MouseEvent.CLICK, versionClickHandler);
+        _ui.addChild(b);
 
 //			if(GameData.I.isFristRun && MainGame.UPDATE_INFO){
 //				GameData.I.isFristRun = false;
 //				GameUI.alert('UPDATE',MainGame.UPDATE_INFO);
 //			}
-		}
+    }
 
-		private function versionClickHandler(e:MouseEvent):void{
-			if(MainGame.UPDATE_INFO) GameUI.alert('UPDATE', MainGame.UPDATE_INFO);
-		}
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    public function destroy(back:Function = null):void {
+        if (_btnGroup) {
+            try {
+                _btnGroup.parent.removeChild(_btnGroup);
+            }
+            catch (e:Error) {
+            }
+            _btnGroup.destory();
+            _btnGroup = null;
+        }
+        GameInputer.enabled = false;
+    }
 
-		private function render():void{
-			if(GameInputer.anyKey(1)){
-				showBtns();
-			}
-		}
+    private function render():void {
+        if (GameInputer.anyKey(1)) {
+            showBtns();
+        }
+    }
 
-		private function showBtns(...params):void{
-			_ui.removeEventListener(MouseEvent.CLICK, showBtns);
-			_ui.removeEventListener(TouchEvent.TOUCH_TAP, showBtns);
+    private function showBtns(...params):void {
+        _ui.removeEventListener(MouseEvent.CLICK, showBtns);
+        _ui.removeEventListener(TouchEvent.TOUCH_TAP, showBtns);
 
-			GameRender.remove(render);
+        GameRender.remove(render);
 
-			_ui.buttonMode = false;
-			_ui.useHandCursor = false;
+        _ui.buttonMode    = false;
+        _ui.useHandCursor = false;
 
-			_ui.gotoAndPlay("menu");
+        _ui.gotoAndPlay('menu');
 
-			SoundCtrl.I.playSwcSound(snd_menu5);
+        SoundCtrl.I.playSwcSound(snd_menu5);
 
-			_btnGroup = new MenuBtnGroup();
-			_btnGroup.enabled = false;
-			_btnGroup.x = MenuPosition.x;
-			_btnGroup.y = MenuPosition.y;
-			_btnGroup.setGap(MenuGap.x, MenuGap.y);
-			var ct:Sprite = _ui.getChildByName('btnct') as Sprite;
-			if(ct){
-				ct.addChild(_btnGroup);
-			}else{
-				_ui.addChild(_btnGroup);
-			}
+        _btnGroup         = new MenuBtnGroup();
+        _btnGroup.enabled = false;
+        _btnGroup.x       = MenuPosition.x;
+        _btnGroup.y       = MenuPosition.y;
+        _btnGroup.setGap(MenuGap.x, MenuGap.y);
+        var ct:Sprite = _ui.getChildByName('btnct') as Sprite;
+        if (ct) {
+            ct.addChild(_btnGroup);
+        }
+        else {
+            _ui.addChild(_btnGroup);
+        }
 
-			_btnGroup.build();
-			_btnGroup.fadIn(0.2,0.04);
-			setTimeout(function():void{
-				_btnGroup.enabled = true;
-			},400);
-		}
+        _btnGroup.build();
+        _btnGroup.fadIn(0.2, 0.04);
+        setTimeout(function ():void {
+            _btnGroup.enabled = true;
+        }, 400);
+    }
 
 //		private function btnCom(e:Event):void{
 //			_ui.removeEventListener(Event.COMPLETE,btnCom);
 //
 //		}
 
-		/**
-		 * 销毁
-		 * @param back 回调函数
-		 */
-		public function destroy(back:Function =null):void
-		{
-			if(_btnGroup){
-				try{
-					_btnGroup.parent.removeChild(_btnGroup);
-				}catch(e:Error){}
-				_btnGroup.destory();
-				_btnGroup = null;
-			}
-			GameInputer.enabled = false;
-		}
-	}
+    private function versionClickHandler(e:MouseEvent):void {
+        if (MainGame.UPDATE_INFO) {
+            GameUI.alert('UPDATE', MainGame.UPDATE_INFO);
+        }
+    }
+}
 }

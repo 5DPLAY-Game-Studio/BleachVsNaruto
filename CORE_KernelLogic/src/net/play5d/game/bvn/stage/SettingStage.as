@@ -16,231 +16,224 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.stage
-{
-	import com.greensock.TweenLite;
+package net.play5d.game.bvn.stage {
+import com.greensock.TweenLite;
 
-	import flash.display.Bitmap;
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.events.TouchEvent;
+import flash.display.Bitmap;
+import flash.display.DisplayObject;
+import flash.display.MovieClip;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+import flash.events.TouchEvent;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.cntlr.AssetManager;
-	import net.play5d.game.bvn.cntlr.SoundCtrl;
-	import net.play5d.game.bvn.data.ConfigVO;
-	import net.play5d.game.bvn.data.GameData;
-	import net.play5d.game.bvn.data.KeyConfigVO;
-	import net.play5d.game.bvn.events.GameEvent;
-	import net.play5d.game.bvn.events.SetBtnEvent;
-	import net.play5d.game.bvn.input.GameInputer;
-	import net.play5d.game.bvn.interfaces.IInnerSetUI;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.ui.SetBtnGroup;
-	import net.play5d.game.bvn.ui.SetCtrlBtnUI;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.stage.IStage;
-import net.play5d.kyo.utils.KyoUtils;
-import net.play5d.pcl.utils.ObjectUtils;
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.cntlr.AssetManager;
+import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.data.ConfigVO;
+import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.events.SetBtnEvent;
+import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.interfaces.IInnerSetUI;
+import net.play5d.game.bvn.ui.SetBtnGroup;
+import net.play5d.game.bvn.ui.SetCtrlBtnUI;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.stage.IStage;
 
-public class SettingStage implements IStage
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class SettingStage implements IStage {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:stg_set_ui;
-		private var _btnGroup:SetBtnGroup;
-		private var _innerSetUI:IInnerSetUI;
-		private var _man:MovieClip;
+    public function SettingStage() {
+    }
+    private var _ui:stg_set_ui;
+    private var _btnGroup:SetBtnGroup;
+    private var _innerSetUI:IInnerSetUI;
+    private var _man:MovieClip;
+    [Embed(source='/../assets/cancel.png')]
+    private var _backMenuPicClass:Class;
+    private var _backMenuBtn:Sprite;
+    private var _oldConfig:ConfigVO;
 
-		[Embed(source="/../assets/cancel.png")]
-		private var _backMenuPicClass:Class;
+    /**
+     * 显示对象
+     */
+    public function get display():DisplayObject {
+        return _ui;
+    }
 
-		private var _backMenuBtn:Sprite;
-
-		private var _oldConfig:ConfigVO;
-
-		public function SettingStage()
-		{
-		}
-
-		/**
-		 * 显示对象
-		 */
-		public function get display():DisplayObject
-		{
-			return _ui;
-		}
-
-		/**
-		 * 构建
-		 */
-		public function build():void
-		{
+    /**
+     * 构建
+     */
+    public function build():void {
 //			_oldConfig = ObjectUtils.cloneObject(GameData.I.config);
-			_oldConfig = GameData.I.config.clone() as ConfigVO;
+        _oldConfig = GameData.I.config.clone() as ConfigVO;
 
-			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting , ResUtils.SETTING);
-			_btnGroup = new SetBtnGroup();
-			_btnGroup.startY = 30;
-			_btnGroup.endY = 550;
-			_btnGroup.gap = 70;
-			_btnGroup.initMainSet();
-			_btnGroup.initScroll(GameConfig.GAME_SIZE.x , 600);
-			_btnGroup.addEventListener(SetBtnEvent.SELECT,onBtnSelect);
-			_btnGroup.addEventListener(SetBtnEvent.OPTION_CHANGE,onOptionChange);
+        _ui              = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, ResUtils.SETTING);
+        _btnGroup        = new SetBtnGroup();
+        _btnGroup.startY = 30;
+        _btnGroup.endY   = 550;
+        _btnGroup.gap    = 70;
+        _btnGroup.initMainSet();
+        _btnGroup.initScroll(GameConfig.GAME_SIZE.x, 600);
+        _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnSelect);
+        _btnGroup.addEventListener(SetBtnEvent.OPTION_CHANGE, onOptionChange);
 
-			_ui.addChild(_btnGroup);
+        _ui.addChild(_btnGroup);
 
-			if(GameConfig.TOUCH_MODE)  initBackBtn();
+        if (GameConfig.TOUCH_MODE) {
+            initBackBtn();
+        }
 
-			_man = _ui.ichigo;
+        _man = _ui.ichigo;
 
-			SoundCtrl.I.BGM(AssetManager.I.getSound('back'));
-		}
+        SoundCtrl.I.BGM(AssetManager.I.getSound('back'));
+    }
 
-		private function initBackBtn():void{
-			if(!_backMenuBtn){
-				_backMenuBtn = new Sprite();
-				var btnBitmap:Bitmap = new _backMenuPicClass();
-				btnBitmap.width = 100;
-				btnBitmap.smoothing = true;
-				btnBitmap.scaleY = btnBitmap.scaleX;
-				_backMenuBtn.addChild(btnBitmap);
+    public function goInnerSetPage(innerUI:IInnerSetUI):void {
+        function tweenComplete():void {
+            _btnGroup.visible = false;
+        }
 
-				if(GameConfig.TOUCH_MODE){
-					_backMenuBtn.addEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
-				}else{
-					_backMenuBtn.addEventListener(MouseEvent.CLICK, backMenuHandler);
-				}
-			}
-			_ui.addChild(_backMenuBtn);
-		}
+        destoryInnerSetUI();
 
-		private function backMenuHandler(e:Event):void{
-			GameData.I.saveData();
-			GameData.I.config.applyConfig();
-			GameInputer.updateConfig();
-			MainGame.I.goMenu();
-		}
+        _innerSetUI = innerUI;
 
-		private function onOptionChange(e:SetBtnEvent):void{
-			var config:ConfigVO = GameData.I.config;
-			config.setValueByKey(e.optionKey,e.optionValue);
-		}
+        innerUI.addEventListener(SetBtnEvent.APPLY_SET, innerSetHandler);
+        innerUI.addEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
 
-		private function onBtnSelect(e:SetBtnEvent):void{
-			switch(e.selectedLabel){
-				case 'P1 KEY SET':
-					goKeyConfig(1,GameData.I.config.key_p1);
-					break;
-				case 'P2 KEY SET':
-					goKeyConfig(2,GameData.I.config.key_p2);
-					break;
-				case 'CANCEL':
-					GameData.I.config = _oldConfig;
-					MainGame.I.goMenu();
-					break;
-				case 'APPLY':
-					GameData.I.saveData();
-					GameData.I.config.applyConfig();
-					GameInputer.updateConfig();
-					MainGame.I.goMenu();
-					break;
-			}
-		}
+        _ui.addChild(innerUI.getUI());
+        innerUI.fadIn();
 
-		private function goKeyConfig(player:int , key:KeyConfigVO):void{
+        TweenLite.to(_btnGroup, 0.2, {y: -GameConfig.GAME_SIZE.y, onComplete: tweenComplete});
 
-			var setBtnUI:SetCtrlBtnUI = new SetCtrlBtnUI();
-			setBtnUI.setKey(key);
+        _btnGroup.keyEnable = false;
 
-			goInnerSetPage(setBtnUI);
-		}
+        _man.gotoAndPlay('key_fadin');
+    }
 
-		public function goInnerSetPage(innerUI:IInnerSetUI):void{
-			function tweenComplete():void{
-				_btnGroup.visible = false;
-			}
+    /**
+     * 稍后构建
+     */
+    public function afterBuild():void {
+    }
 
-			destoryInnerSetUI();
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    public function destroy(back:Function = null):void {
+        if (_btnGroup) {
+            try {
+                _ui.removeChild(_btnGroup);
+            }
+            catch (e:Error) {
+            }
+            _btnGroup.removeEventListener(SetBtnEvent.SELECT, onBtnSelect);
+            _btnGroup.removeEventListener(SetBtnEvent.OPTION_CHANGE, onOptionChange);
+            _btnGroup.destory();
+            _btnGroup = null;
+        }
+        destoryInnerSetUI();
+    }
 
-			_innerSetUI = innerUI;
+    private function initBackBtn():void {
+        if (!_backMenuBtn) {
+            _backMenuBtn         = new Sprite();
+            var btnBitmap:Bitmap = new _backMenuPicClass();
+            btnBitmap.width      = 100;
+            btnBitmap.smoothing  = true;
+            btnBitmap.scaleY     = btnBitmap.scaleX;
+            _backMenuBtn.addChild(btnBitmap);
 
-			innerUI.addEventListener(SetBtnEvent.APPLY_SET,innerSetHandler);
-			innerUI.addEventListener(SetBtnEvent.CANCEL_SET,innerSetHandler);
+            if (GameConfig.TOUCH_MODE) {
+                _backMenuBtn.addEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
+            }
+            else {
+                _backMenuBtn.addEventListener(MouseEvent.CLICK, backMenuHandler);
+            }
+        }
+        _ui.addChild(_backMenuBtn);
+    }
 
-			_ui.addChild(innerUI.getUI());
-			innerUI.fadIn();
+    private function goKeyConfig(player:int, key:KeyConfigVO):void {
 
-			TweenLite.to(_btnGroup,0.2,{y:-GameConfig.GAME_SIZE.y,onComplete:tweenComplete});
+        var setBtnUI:SetCtrlBtnUI = new SetCtrlBtnUI();
+        setBtnUI.setKey(key);
 
-			_btnGroup.keyEnable = false;
+        goInnerSetPage(setBtnUI);
+    }
 
-			_man.gotoAndPlay("key_fadin");
-		}
+    private function destoryInnerSetUI():void {
+        if (_innerSetUI) {
+            try {
+                _ui.removeChild(_innerSetUI.getUI());
+            }
+            catch (e:Error) {
+            }
+            _innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET, innerSetHandler);
+            _innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
+            _innerSetUI.destory();
+            _innerSetUI = null;
+        }
 
-		private function destoryInnerSetUI():void{
-			if(_innerSetUI){
-				try{
-					_ui.removeChild(_innerSetUI.getUI());
-				}catch(e:Error){}
-				_innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET,innerSetHandler);
-				_innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET,innerSetHandler);
-				_innerSetUI.destory();
-				_innerSetUI = null;
-			}
+        _oldConfig = null;
+    }
 
-			_oldConfig = null;
-		}
+    private function goMainSetting():void {
+        function tweenComplete():void {
+            _btnGroup.keyEnable = true;
+        }
 
-		private function goMainSetting():void{
-			function tweenComplete():void{
-				_btnGroup.keyEnable = true;
-			}
-			TweenLite.to(_btnGroup,0.2,{y:0,onComplete:tweenComplete,delay:0.1});
+        TweenLite.to(_btnGroup, 0.2, {y: 0, onComplete: tweenComplete, delay: 0.1});
 
-			_btnGroup.visible = true;
+        _btnGroup.visible = true;
 
-			if(_innerSetUI){
-				_innerSetUI.fadOut();
-				_innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET,innerSetHandler);
-				_innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET,innerSetHandler);
-			}
-			_man.gotoAndPlay("key_fadout");
+        if (_innerSetUI) {
+            _innerSetUI.fadOut();
+            _innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET, innerSetHandler);
+            _innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
+        }
+        _man.gotoAndPlay('key_fadout');
 
-		}
+    }
 
-		private function innerSetHandler(v:String):void{
-			goMainSetting();
-		}
+    private function innerSetHandler(v:String):void {
+        goMainSetting();
+    }
 
-		/**
-		 * 稍后构建
-		 */
-		public function afterBuild():void
-		{
-		}
+    private function backMenuHandler(e:Event):void {
+        GameData.I.saveData();
+        GameData.I.config.applyConfig();
+        GameInputer.updateConfig();
+        MainGame.I.goMenu();
+    }
 
-		/**
-		 * 销毁
-		 * @param back 回调函数
-		 */
-		public function destroy(back:Function =null):void
-		{
-			if(_btnGroup){
-				try{
-					_ui.removeChild(_btnGroup);
-				}catch(e:Error){}
-				_btnGroup.removeEventListener(SetBtnEvent.SELECT,onBtnSelect);
-				_btnGroup.removeEventListener(SetBtnEvent.OPTION_CHANGE,onOptionChange);
-				_btnGroup.destory();
-				_btnGroup = null;
-			}
-			destoryInnerSetUI();
-		}
-	}
+    private function onOptionChange(e:SetBtnEvent):void {
+        var config:ConfigVO = GameData.I.config;
+        config.setValueByKey(e.optionKey, e.optionValue);
+    }
+
+    private function onBtnSelect(e:SetBtnEvent):void {
+        switch (e.selectedLabel) {
+        case 'P1 KEY SET':
+            goKeyConfig(1, GameData.I.config.key_p1);
+            break;
+        case 'P2 KEY SET':
+            goKeyConfig(2, GameData.I.config.key_p2);
+            break;
+        case 'CANCEL':
+            GameData.I.config = _oldConfig;
+            MainGame.I.goMenu();
+            break;
+        case 'APPLY':
+            GameData.I.saveData();
+            GameData.I.config.applyConfig();
+            GameInputer.updateConfig();
+            MainGame.I.goMenu();
+            break;
+        }
+    }
+}
 }
