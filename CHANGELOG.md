@@ -2,6 +2,16 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.12212024_alpha] - 2024-12-21
+
+### 更改
+
+- 重构功能：当防御时受到破防伤害后，削减耐力从固定 90 点改为 90%
+
+### 修复
+
+- 修复当处于刚身状态防御时，仍会被攻击破防的问题
+
 ## [3.7.0.0.12052024_alpha] - 2024-12-05
 
 ### 新增
@@ -123,6 +133,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.12212024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.12052024_alpha...3.7.0.0.12052024_alpha
 [3.7.0.0.12052024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.11252024_alpha...3.7.0.0.12052024_alpha
 [3.7.0.0.11252024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.11192024_alpha...3.7.0.0.11252024_alpha
 [3.7.0.0.11192024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.11132024_alpha...3.7.0.0.11192024_alpha
