@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data {
-import net.play5d.game.bvn.cntlr.AssetManager;
+import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.mosou.MosouFighterModel;
 import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
 import net.play5d.game.bvn.data.mosou.MosouMissionVO;

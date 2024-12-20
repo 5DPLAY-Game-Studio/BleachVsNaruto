@@ -10,8 +10,8 @@ import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.GameQuality;
-import net.play5d.game.bvn.cntlr.EffectCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.EffectCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.ConfigVO;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.IGameInput;

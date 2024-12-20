@@ -21,7 +21,7 @@ package net.play5d.game.bvn.ui.mosou.enemy
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 	import net.play5d.game.bvn.fighter.FighterMain;
 
 	public class EnemyHpUI

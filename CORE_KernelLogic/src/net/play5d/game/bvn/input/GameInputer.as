@@ -21,7 +21,7 @@ import flash.display.Stage;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.GameRender;
+import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.interfaces.GameInterface;
 

@@ -25,11 +25,11 @@ import flash.geom.Point;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.AssetManager;
-import net.play5d.game.bvn.cntlr.GameRender;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
-import net.play5d.game.bvn.cntlr.StateCtrl;
-import net.play5d.game.bvn.cntlr.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.GameRender;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.StateCtrl;
+import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouModel;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;

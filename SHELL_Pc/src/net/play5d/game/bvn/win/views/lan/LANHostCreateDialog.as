@@ -23,7 +23,7 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.win.ctrls.LANGameCtrl;
 import net.play5d.game.bvn.win.ctrls.LANServerCtrl;

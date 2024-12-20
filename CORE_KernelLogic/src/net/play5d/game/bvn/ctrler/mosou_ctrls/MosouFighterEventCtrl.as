@@ -16,10 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.mosou_ctrls {
-import net.play5d.game.bvn.cntlr.EffectCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.BaseFighterEventCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+package net.play5d.game.bvn.ctrler.mosou_ctrls {
+import net.play5d.game.bvn.ctrler.EffectCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.BaseFighterEventCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.fighter.FighterMain;

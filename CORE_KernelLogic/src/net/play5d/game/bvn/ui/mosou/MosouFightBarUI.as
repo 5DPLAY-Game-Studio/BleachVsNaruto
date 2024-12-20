@@ -22,8 +22,8 @@ package net.play5d.game.bvn.ui.mosou
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
-	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.ctrler.AssetManager;
+	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.GameRunFighterGroup;
 	import net.play5d.game.bvn.fighter.FighterMain;

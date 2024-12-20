@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.game_ctrls {
+package net.play5d.game.bvn.ctrler.game_ctrls {
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.cntlr.StateCtrl;
+import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunDataVO;
 import net.play5d.game.bvn.fighter.data.FighterActionState;

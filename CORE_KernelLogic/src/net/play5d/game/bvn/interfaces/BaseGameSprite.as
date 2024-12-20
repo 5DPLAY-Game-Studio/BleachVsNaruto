@@ -26,7 +26,7 @@ import flash.geom.Rectangle;
 import flash.media.SoundTransform;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.cntlr.GameRender;
+import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.data.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.models.HitVO;

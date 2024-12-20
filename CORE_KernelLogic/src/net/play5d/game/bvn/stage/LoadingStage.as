@@ -23,12 +23,12 @@ import flash.display.DisplayObject;
 import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.AssetManager;
-import net.play5d.game.bvn.cntlr.GameRender;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
-import net.play5d.game.bvn.cntlr.StateCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.cntlr.game_stage_loader.GameStageLoadCtrl;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.GameRender;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.StateCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;

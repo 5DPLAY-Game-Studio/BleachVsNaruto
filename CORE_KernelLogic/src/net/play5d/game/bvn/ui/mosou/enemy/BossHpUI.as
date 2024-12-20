@@ -23,7 +23,7 @@ package net.play5d.game.bvn.ui.mosou.enemy
 	import flash.geom.Point;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;
 

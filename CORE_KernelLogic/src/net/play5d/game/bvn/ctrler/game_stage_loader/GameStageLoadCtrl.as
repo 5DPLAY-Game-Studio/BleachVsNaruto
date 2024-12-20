@@ -16,15 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.game_stage_loader {
+package net.play5d.game.bvn.ctrler.game_stage_loader {
 import flash.display.Loader;
 import flash.display.MovieClip;
 import flash.events.EventDispatcher;
 import flash.system.ApplicationDomain;
 import flash.utils.setTimeout;
 
-import net.play5d.game.bvn.cntlr.GameLoader;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.GameLoader;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.BgmVO;
 import net.play5d.game.bvn.data.DefinedClass;

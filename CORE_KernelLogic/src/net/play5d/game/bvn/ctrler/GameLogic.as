@@ -16,13 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr {
+package net.play5d.game.bvn.ctrler {
 import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameEndCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameEndCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MessionModel;

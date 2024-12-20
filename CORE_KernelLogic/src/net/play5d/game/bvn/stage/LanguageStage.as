@@ -25,8 +25,8 @@ import flash.events.MouseEvent;
 import flash.text.Font;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.cntlr.AssetManager;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.LanguageType;
 import net.play5d.game.bvn.utils.MultiLangUtils;

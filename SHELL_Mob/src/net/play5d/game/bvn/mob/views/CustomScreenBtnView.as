@@ -7,7 +7,7 @@ import flash.events.TouchEvent;
 import flash.geom.Point;
 import flash.utils.Dictionary;
 
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.mob.events.ScreenPadEvent;

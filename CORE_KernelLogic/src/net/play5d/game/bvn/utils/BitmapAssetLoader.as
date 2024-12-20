@@ -22,7 +22,7 @@ package net.play5d.game.bvn.utils
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 
 	public class BitmapAssetLoader
 	{

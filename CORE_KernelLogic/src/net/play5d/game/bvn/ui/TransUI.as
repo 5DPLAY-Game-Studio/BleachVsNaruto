@@ -22,7 +22,7 @@ package net.play5d.game.bvn.ui
 
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.cntlr.GameRender;
+	import net.play5d.game.bvn.ctrler.GameRender;
 	import net.play5d.game.bvn.utils.ResUtils;
 
 	public class TransUI

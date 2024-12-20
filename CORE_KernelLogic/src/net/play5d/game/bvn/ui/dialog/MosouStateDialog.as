@@ -23,7 +23,7 @@ package net.play5d.game.bvn.ui.dialog
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.FighterVO;
 	import net.play5d.game.bvn.data.GameData;

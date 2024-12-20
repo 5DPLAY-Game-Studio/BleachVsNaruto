@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.win.ctrls {
 import flash.utils.getTimer;
 
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.win.input.InputManager;
 import net.play5d.game.bvn.win.utils.LANUtils;

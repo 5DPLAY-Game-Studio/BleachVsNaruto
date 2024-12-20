@@ -26,7 +26,7 @@ package net.play5d.game.bvn.ui.mosou
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 	import net.play5d.game.bvn.fighter.Assister;
 	import net.play5d.game.bvn.fighter.FighterMain;
 	import net.play5d.game.bvn.ui.GameUI;

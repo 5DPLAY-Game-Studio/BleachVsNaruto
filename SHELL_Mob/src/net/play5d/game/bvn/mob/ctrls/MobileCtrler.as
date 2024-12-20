@@ -1,8 +1,8 @@
 package net.play5d.game.bvn.mob.ctrls {
 import flash.system.System;
 
-import net.play5d.game.bvn.cntlr.SoundCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.mob.ads.AdManager;
 
 //	import net.play5d.game.bvn.mob.utils.UMengAneManager;

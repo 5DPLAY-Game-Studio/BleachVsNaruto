@@ -21,7 +21,7 @@ package net.play5d.game.bvn.fighter.ctrler {
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.data.FighterHitRange;
 import net.play5d.game.bvn.fighter.FighterMain;

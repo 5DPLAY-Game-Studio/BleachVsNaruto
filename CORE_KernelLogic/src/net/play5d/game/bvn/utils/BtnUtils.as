@@ -26,7 +26,7 @@ package net.play5d.game.bvn.utils
 	import flash.utils.Dictionary;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.cntlr.SoundCtrl;
+	import net.play5d.game.bvn.ctrler.SoundCtrl;
 	import net.play5d.kyo.utils.KyoUtils;
 
 	public class BtnUtils

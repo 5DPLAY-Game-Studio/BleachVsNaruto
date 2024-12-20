@@ -23,7 +23,7 @@ package net.play5d.game.bvn.ui
 
 	import net.play5d.game.bvn.GameConfig;
 	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.events.GameEvent;
 	import net.play5d.game.bvn.events.SetBtnEvent;
 

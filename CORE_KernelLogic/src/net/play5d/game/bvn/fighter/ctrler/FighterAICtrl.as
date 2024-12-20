@@ -18,7 +18,7 @@
 
 package net.play5d.game.bvn.fighter.ctrler {
 
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.ctrler.ai.FighterAILogic;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;

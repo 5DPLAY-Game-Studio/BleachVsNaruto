@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.game_ctrls {
-import net.play5d.game.bvn.cntlr.EffectCtrl;
-import net.play5d.game.bvn.cntlr.GameLogic;
+package net.play5d.game.bvn.ctrler.game_ctrls {
+import net.play5d.game.bvn.ctrler.EffectCtrl;
+import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.fighter.Assister;

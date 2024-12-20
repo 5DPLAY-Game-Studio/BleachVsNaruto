@@ -22,7 +22,7 @@ package net.play5d.game.bvn.ui.mosou
 	import flash.text.TextField;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 	import net.play5d.kyo.utils.KyoTimerFormat;
 
 	public class MosouTimeUI

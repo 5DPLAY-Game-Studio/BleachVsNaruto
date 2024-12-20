@@ -26,9 +26,9 @@ package net.play5d.game.bvn.ui.mosou
 	import flash.utils.setTimeout;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.cntlr.EffectCtrl;
-	import net.play5d.game.bvn.cntlr.SoundCtrl;
-	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.ctrler.EffectCtrl;
+	import net.play5d.game.bvn.ctrler.SoundCtrl;
+	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.GameRunFighterGroup;
 	import net.play5d.game.bvn.fighter.data.FighterActionState;
 	import net.play5d.game.bvn.fighter.FighterMain;

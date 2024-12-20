@@ -16,10 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.game_ctrls {
+package net.play5d.game.bvn.ctrler.game_ctrls {
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
-import net.play5d.game.bvn.cntlr.StateCtrl;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.stage.GameStage;

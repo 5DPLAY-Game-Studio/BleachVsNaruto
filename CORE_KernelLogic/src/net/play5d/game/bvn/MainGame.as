@@ -21,9 +21,9 @@ import flash.display.Sprite;
 import flash.display.Stage;
 import flash.geom.Rectangle;
 
-import net.play5d.game.bvn.cntlr.AssetManager;
-import net.play5d.game.bvn.cntlr.GameRender;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.GameRender;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;

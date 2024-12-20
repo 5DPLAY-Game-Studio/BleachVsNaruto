@@ -29,8 +29,8 @@ import flash.events.TouchEvent;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.AssetManager;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.KeyConfigVO;

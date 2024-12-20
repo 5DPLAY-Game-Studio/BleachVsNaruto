@@ -23,7 +23,7 @@ import flash.display.MovieClip;
 import flash.geom.Matrix;
 import flash.geom.Rectangle;
 
-import net.play5d.game.bvn.cntlr.AssetManager;
+import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 

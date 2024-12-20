@@ -29,9 +29,9 @@ package net.play5d.game.bvn.ui.fight
 	import flash.utils.setTimeout;
 
 	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.cntlr.EffectCtrl;
-	import net.play5d.game.bvn.cntlr.SoundCtrl;
-	import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+	import net.play5d.game.bvn.ctrler.EffectCtrl;
+	import net.play5d.game.bvn.ctrler.SoundCtrl;
+	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.data.GameMode;
 	import net.play5d.game.bvn.data.GameRunFighterGroup;

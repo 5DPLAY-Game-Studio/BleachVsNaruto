@@ -21,8 +21,8 @@ package net.play5d.game.bvn.ui
 	import flash.display.Sprite;
 	import flash.events.Event;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
-	import net.play5d.game.bvn.cntlr.SoundCtrl;
+	import net.play5d.game.bvn.ctrler.AssetManager;
+	import net.play5d.game.bvn.ctrler.SoundCtrl;
 	import net.play5d.game.bvn.events.SetBtnEvent;
 	import net.play5d.game.bvn.utils.ResUtils;
 	import net.play5d.kyo.display.bitmap.BitmapFontText;

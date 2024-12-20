@@ -16,17 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.game_ctrls {
+package net.play5d.game.bvn.ctrler.game_ctrls {
 import flash.geom.ColorTransform;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.EffectCtrl;
-import net.play5d.game.bvn.cntlr.GameLoader;
-import net.play5d.game.bvn.cntlr.GameLogic;
-import net.play5d.game.bvn.cntlr.GameRender;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
-import net.play5d.game.bvn.cntlr.mosou_ctrls.MosouCtrl;
+import net.play5d.game.bvn.ctrler.EffectCtrl;
+import net.play5d.game.bvn.ctrler.GameLoader;
+import net.play5d.game.bvn.ctrler.GameLogic;
+import net.play5d.game.bvn.ctrler.GameRender;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouCtrl;
 import net.play5d.game.bvn.data.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;

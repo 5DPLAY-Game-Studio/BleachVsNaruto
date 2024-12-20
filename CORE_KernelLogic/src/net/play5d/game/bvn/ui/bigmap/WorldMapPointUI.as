@@ -29,8 +29,8 @@ package net.play5d.game.bvn.ui.bigmap
 	import flash.geom.Point;
 	import flash.text.TextFieldAutoSize;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
-	import net.play5d.game.bvn.cntlr.mosou_ctrls.MosouLogic;
+	import net.play5d.game.bvn.ctrler.AssetManager;
+	import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
 	import net.play5d.game.bvn.data.FighterModel;
 	import net.play5d.game.bvn.data.GameData;
 	import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;

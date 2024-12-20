@@ -28,9 +28,9 @@ import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.AssetManager;
-import net.play5d.game.bvn.cntlr.GameRender;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.GameRender;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;

@@ -4,7 +4,7 @@ import flash.display.MovieClip;
 import flash.events.Event;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.kyo.stage.effect.ZoomEffect;

@@ -2,7 +2,7 @@ package net.play5d.game.bvn.mob.ctrls {
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.mob.input.InputManager;
 import net.play5d.game.bvn.mob.utils.LANUtils;

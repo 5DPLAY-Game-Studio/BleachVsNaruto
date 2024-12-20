@@ -21,9 +21,9 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.GameLoader;
-import net.play5d.game.bvn.cntlr.SoundCtrl;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.GameLoader;
+import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.FighterVO;
 import net.play5d.game.bvn.data.GameData;

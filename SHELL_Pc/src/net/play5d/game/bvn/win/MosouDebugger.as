@@ -20,7 +20,7 @@ package net.play5d.game.bvn.win {
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
 
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 
 public class MosouDebugger {

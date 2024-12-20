@@ -24,7 +24,7 @@ package net.play5d.game.bvn.views.effects
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 
 	public class BishaFaceEffectView
 	{

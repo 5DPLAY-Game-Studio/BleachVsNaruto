@@ -7,7 +7,7 @@ import flash.display.Sprite;
 import flash.events.EventDispatcher;
 import flash.ui.GameInputDevice;
 
-import net.play5d.game.bvn.cntlr.GameRender;
+import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
 import net.play5d.game.bvn.mob.GameInterfaceManager;

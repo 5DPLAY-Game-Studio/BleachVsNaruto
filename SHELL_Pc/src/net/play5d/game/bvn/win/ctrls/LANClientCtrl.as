@@ -25,7 +25,7 @@ import flash.utils.clearTimeout;
 import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.GameInterface;

@@ -21,7 +21,7 @@ package net.play5d.game.bvn.utils
 	import flash.display.MovieClip;
 	import flash.utils.Dictionary;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 	import net.play5d.game.bvn.data.EffectModel;
 	import net.play5d.game.bvn.data.EffectVO;
 	import net.play5d.game.bvn.fighter.FighterMain;

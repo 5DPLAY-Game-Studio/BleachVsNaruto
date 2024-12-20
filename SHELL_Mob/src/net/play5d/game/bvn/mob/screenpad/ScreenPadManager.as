@@ -9,7 +9,7 @@ import flash.ui.MultitouchInputMode;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.cntlr.GameRender;
+import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.input.InputManager;

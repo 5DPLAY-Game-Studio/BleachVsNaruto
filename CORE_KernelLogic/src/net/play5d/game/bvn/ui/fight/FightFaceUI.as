@@ -21,7 +21,7 @@ package net.play5d.game.bvn.ui.fight
 	import flash.display.DisplayObject;
 	import flash.geom.Point;
 
-	import net.play5d.game.bvn.cntlr.AssetManager;
+	import net.play5d.game.bvn.ctrler.AssetManager;
 	import net.play5d.game.bvn.data.FighterVO;
 
 	public class FightFaceUI

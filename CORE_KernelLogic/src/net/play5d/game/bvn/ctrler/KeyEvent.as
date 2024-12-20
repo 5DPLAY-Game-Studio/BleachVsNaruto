@@ -16,13 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.cntlr.game_stage_loader {
-public class GameStageLoadDefine {
-    include '../../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.ctrler {
+import flash.events.Event;
 
-    public static const TYPE_MAP:int      = 0;
-    public static const TYPE_FIGHTER:int  = 1;
-    public static const TYPE_ASSISTER:int = 2;
-    public static const TYPE_BGM:int      = 3;
+public class KeyEvent extends Event {
+    include '../../../../../../include/_INCLUDE_.as';
+
+    public static const KEY_DOWN:String = 'KEY_DOWN';
+    public static const KEY_UP:String   = 'KEY_UP';
+
+    public function KeyEvent(
+            type:String, keyCode:uint, justDown:Boolean = false, bubbles:Boolean = false, cancelable:Boolean = false) {
+        this.keyCode = keyCode;
+        this.justDown = justDown;
+        super(type, bubbles, cancelable);
+    }
+    public var keyCode:uint;
+    public var justDown:Boolean;
 }
 }
