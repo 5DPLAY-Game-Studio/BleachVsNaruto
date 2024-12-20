@@ -25,7 +25,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.cntlr.GameLogic;
 import net.play5d.game.bvn.data.FighterVO;
-import net.play5d.game.bvn.fighter.cntlr.AssisiterCtrler;
+import net.play5d.game.bvn.fighter.ctrler.AssisiterCtrler;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.utils.McAreaCacher;

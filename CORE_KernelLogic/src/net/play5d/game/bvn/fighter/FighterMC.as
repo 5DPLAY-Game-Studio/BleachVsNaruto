@@ -22,7 +22,7 @@ import flash.display.MovieClip;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.fighter.cntlr.FighterMcCtrler;
+import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.data.FighterHitRange;
 import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;

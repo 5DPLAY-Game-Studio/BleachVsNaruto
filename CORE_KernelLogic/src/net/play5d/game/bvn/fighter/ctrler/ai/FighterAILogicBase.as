@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.cntlr.ai {
+package net.play5d.game.bvn.fighter.ctrler.ai {
 import flash.geom.Point;
 import flash.geom.Rectangle;
 

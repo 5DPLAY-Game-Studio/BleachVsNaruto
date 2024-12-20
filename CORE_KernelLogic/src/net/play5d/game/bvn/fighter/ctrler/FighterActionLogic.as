@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.cntlr {
+package net.play5d.game.bvn.fighter.ctrler {
 import net.play5d.game.bvn.data.mosou.MosouFighterLogic;
 import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.fighter.data.FighterActionState;

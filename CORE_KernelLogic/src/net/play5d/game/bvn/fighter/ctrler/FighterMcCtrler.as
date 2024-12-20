@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.cntlr {
+package net.play5d.game.bvn.fighter.ctrler {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
 import flash.geom.Point;
