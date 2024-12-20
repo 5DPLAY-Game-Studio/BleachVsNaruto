@@ -940,9 +940,38 @@ public class FighterMcCtrler {
             }
         }
 
-        if (_isDefense) {
+//        if (_isDefense) {
+//
+////				if(hitvo.isBreakDef && hitvo.hitType == HitType.CATCH){
+//            if (hitvo.isBreakDef && hitvo.hitType == HitType.CATCH) {
+//                doHurt(hitvo, hitRect);
+//                return;
+//            }
+//
+//            if (hitvo.checkDirect && hitvo.owner) {
+//                if (checkDefDirect(hitvo.owner)) {
+//                    doHurt(hitvo, hitRect);
+//                    return;
+//                }
+//            }
+//
+//            doDefenseHit(hitvo, hitRect);
+//        }
+//        else {
+//            if (_fighter.isSteelBody && _fighter.isAlive) {
+//                doSteelHurt(hitvo, hitRect);
+//            }
+//            else {
+//                doHurt(hitvo, hitRect);
+//            }
+//        }
 
-//				if(hitvo.isBreakDef && hitvo.hitType == HitType.CATCH){
+        if (_fighter.isSteelBody) {
+            if (_fighter.isAlive) {
+                doSteelHurt(hitvo, hitRect);
+            }
+        }
+        else if (_isDefense) {
             if (hitvo.isBreakDef && hitvo.hitType == HitType.CATCH) {
                 doHurt(hitvo, hitRect);
                 return;
@@ -958,12 +987,7 @@ public class FighterMcCtrler {
             doDefenseHit(hitvo, hitRect);
         }
         else {
-            if (_fighter.isSteelBody && _fighter.isAlive) {
-                doSteelHurt(hitvo, hitRect);
-            }
-            else {
-                doHurt(hitvo, hitRect);
-            }
+            doHurt(hitvo, hitRect);
         }
 
     }
