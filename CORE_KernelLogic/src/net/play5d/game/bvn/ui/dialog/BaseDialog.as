@@ -16,129 +16,122 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.dialog
-{
-	import flash.display.DisplayObject;
-import flash.display.MovieClip;
+package net.play5d.game.bvn.ui.dialog {
+import flash.display.DisplayObject;
 import flash.display.SimpleButton;
-	import flash.display.Sprite;
+import flash.display.Sprite;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ui.Text;
-	import net.play5d.game.bvn.utils.BtnUtils;
-	import net.play5d.kyo.display.bitmap.BitmapFontText;
+import net.play5d.game.bvn.utils.BtnUtils;
+import net.play5d.kyo.display.bitmap.BitmapFontText;
 
-	public class BaseDialog
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class BaseDialog {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		protected var _backBtn:SimpleButton;
-		protected var _dialogUI:Sprite;
-
-		private var _titleTxt:BitmapFontText;
-
-		public var offsetX:Number = 0;
-		public var offsetY:Number = 0;
-
-		public var width:Number = 0;
-		public var height:Number = 0;
-
-		protected var _cnTxt:Text;
+    public function BaseDialog() {
+        super();
+    }
+    public var offsetX:Number = 0;
+    public var offsetY:Number = 0;
+    public var width:Number  = 0;
+    public var height:Number = 0;
+    public var yesBack:Function;
+    public var noBack:Function;
+    protected var _backBtn:SimpleButton;
 //		protected var _ui:Sprite;
+    protected var _dialogUI:Sprite;
+    protected var _cnTxt:Text;
+    protected var _noBtn:SimpleButton;
+    protected var _yesBtn:SimpleButton;
+    private var _titleTxt:BitmapFontText;
 
-		public var yesBack:Function;
-		public var noBack:Function;
+    public function getDisplay():DisplayObject {
+        return _dialogUI;
+    }
 
-		protected var _noBtn:SimpleButton;
-		protected var _yesBtn:SimpleButton;
+    public final function init():void {
+        _backBtn = _dialogUI.getChildByName('back') as SimpleButton;
 
-		public function BaseDialog()
-		{
-			super();
-		}
+        BtnUtils.initBtn(_backBtn, closeSelf);
+    }
 
-		public function getDisplay():DisplayObject{
-			return _dialogUI;
-		}
+    public final function show(X:Number, Y:Number):void {
+        _dialogUI.x = X + offsetX;
+        _dialogUI.y = Y + offsetY;
+        onShow();
+    }
 
-		public final function init():void{
-			_backBtn = _dialogUI.getChildByName("back") as SimpleButton;
+    public function setTitle(v:String):void {
+        if (!v) {
+            return;
+        }
 
-			BtnUtils.initBtn(_backBtn, closeSelf);
-		}
+        if (!_titleTxt) {
+            _titleTxt   = new BitmapFontText(AssetManager.I.getFont('font1'));
+            _titleTxt.y = -10;
+            _dialogUI.addChild(_titleTxt);
+        }
 
-		public final function show(X:Number, Y:Number):void{
-			_dialogUI.x = X + offsetX;
-			_dialogUI.y = Y + offsetY;
-			onShow();
-		}
+        _titleTxt.text = v;
+        _titleTxt.x    = (
+                                 width - _titleTxt.width
+                         ) / 2;
+    }
 
-		public function setTitle(v:String):void{
-			if(!v) return;
+    public final function close():void {
+        onClose();
+    }
 
-			if(!_titleTxt){
-				_titleTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
-				_titleTxt.y = -10;
-				_dialogUI.addChild(_titleTxt);
-			}
+    public final function closeSelf(...params):void {
+        DialogManager.closeDialog(this);
+    }
 
-			_titleTxt.text = v;
-			_titleTxt.x = (width - _titleTxt.width) / 2;
-		}
+    public final function destory():void {
+        if (_titleTxt) {
+            _titleTxt.dispose();
+            _titleTxt = null;
+        }
 
-		public final function close():void{
-			onClose();
-		}
+        onDestory();
+    }
 
-		public final function closeSelf(...params):void{
-			DialogManager.closeDialog(this);
-		}
+    public final function hide():void {
+        _dialogUI.visible = false;
+        onHide();
+    }
 
-		public final function destory():void{
-			if(_titleTxt){
-				_titleTxt.dispose();
-				_titleTxt = null;
-			}
+    public final function hiding():Boolean {
+        return !_dialogUI.visible;
+    }
 
-			onDestory();
-		}
+    public final function resume():void {
+        _dialogUI.visible = true;
+        onResume();
+    }
 
-		public final function hide():void{
-			_dialogUI.visible = false;
-			onHide();
-		}
+    public function setMsg(en:String = null, cn:String = null):void {
+    }
 
-		public final function hiding():Boolean{
-			return !_dialogUI.visible;
-		}
+    protected function onShow():void {
 
-		public final function resume():void{
-			_dialogUI.visible = true;
-			onResume();
-		}
+    }
 
-		protected function onShow():void{
+    protected function onHide():void {
 
-		}
+    }
 
-		protected function onHide():void{
+    protected function onResume():void {
 
-		}
+    }
 
-		protected function onResume():void{
+    protected function onClose():void {
 
-		}
+    }
 
-		protected function onClose():void{
+    protected function onDestory():void {
 
-		}
+    }
 
-		protected function onDestory():void{
-
-		}
-
-		public function setMsg(en:String = null, cn:String = null):void {
-		}
-
-	}
+}
 }

@@ -33,11 +33,6 @@ public class MusouConfrimUI extends BaseDialog {
 //		public var yesBack:Function;
 //		public var noBack:Function;
 
-		private var _ui:dialog_confrim;
-
-//		protected var _noBtn:SimpleButton;
-//		protected var _yesBtn:SimpleButton;
-
     public function MusouConfrimUI() {
         super();
 
@@ -49,6 +44,10 @@ public class MusouConfrimUI extends BaseDialog {
 
         build();
     }
+
+//		protected var _noBtn:SimpleButton;
+//		protected var _yesBtn:SimpleButton;
+    private var _ui:dialog_confrim;
 
     protected override function onDestory():void {
         super.onDestory();
