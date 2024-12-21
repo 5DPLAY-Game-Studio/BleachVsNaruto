@@ -16,60 +16,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import flash.text.TextField;
-	import flash.text.TextFormat;
+package net.play5d.game.bvn.ui {
+import flash.text.TextField;
+import flash.text.TextFormat;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.bitmap.BitmapFontText;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.bitmap.BitmapFontText;
 
-	public class SetBtnDialog
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class SetBtnDialog {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var ui:key_set_dialog_mc;
-		public var isShow:Boolean = true;
+    public function SetBtnDialog() {
+        ui         = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, 'key_set_dialog_mc');
+        ui.visible = false;
 
-		private var _pushTxt:BitmapFontText;
-		private var _keyNameTxt:BitmapFontText;
-		private var _cntxt:TextField;
+        _pushTxt    = new BitmapFontText(AssetManager.I.getFont('font1'));
+        _keyNameTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
 
-		public function SetBtnDialog()
-		{
-			ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting , 'key_set_dialog_mc');
-			ui.visible = false;
+        _pushTxt.y = _keyNameTxt.y = -30;
 
-			_pushTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
-			_keyNameTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
+        _pushTxt.text = 'PUSH A KEY FOR';
+        _pushTxt.x    = -_pushTxt.width / 2;
+        ui.ct_msg.addChild(_pushTxt);
 
-			_pushTxt.y = _keyNameTxt.y = -30;
+        ui.ct_keyname.addChild(_keyNameTxt);
 
-			_pushTxt.text = 'PUSH A KEY FOR'
-			_pushTxt.x = -_pushTxt.width/2;
-			ui.ct_msg.addChild(_pushTxt);
+        _cntxt                   = ui.txt;
+        _cntxt.defaultTextFormat = new TextFormat('楷体', 20);
+    }
+    public var ui:key_set_dialog_mc;
+    public var isShow:Boolean = true;
+    private var _pushTxt:BitmapFontText;
+    private var _keyNameTxt:BitmapFontText;
+    private var _cntxt:TextField;
 
-			ui.ct_keyname.addChild(_keyNameTxt);
+    public function show(name:String, cn:String):void {
+        ui.visible = true;
 
-			_cntxt = ui.txt;
-			_cntxt.defaultTextFormat = new TextFormat('楷体',20);
-		}
+        _keyNameTxt.text = name;
+        _keyNameTxt.x    = -_keyNameTxt.width / 2;
+        _cntxt.text      = '请按下一个键设置【' + cn + '】';
 
-		public function show(name:String , cn:String):void{
-			ui.visible = true;
+        isShow = true;
+    }
 
-			_keyNameTxt.text = name;
-			_keyNameTxt.x = -_keyNameTxt.width/2;
-			_cntxt.text = '请按下一个键设置【'+cn+'】';
+    public function hide():void {
+        ui.visible = false;
+        isShow     = false;
+    }
 
-			isShow = true;
-		}
-
-		public function hide():void{
-			ui.visible = false;
-			isShow = false;
-		}
-
-	}
+}
 }

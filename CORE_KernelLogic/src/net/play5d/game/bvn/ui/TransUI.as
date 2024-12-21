@@ -16,112 +16,106 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import flash.events.Event;
+package net.play5d.game.bvn.ui {
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.ctrler.GameRender;
+import net.play5d.game.bvn.utils.ResUtils;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.MainGame;
-	import net.play5d.game.bvn.ctrler.GameRender;
-	import net.play5d.game.bvn.utils.ResUtils;
+public class TransUI {
+    include '../../../../../../include/_INCLUDE_.as';
 
-	public class TransUI
-	{
-		include '../../../../../../include/_INCLUDE_.as';
-
-		public var ui:trans_mc;
-
-		private var _renderAnimateGap:int = 0; //刷新动画间隔
-		private var _renderAnimateFrame:int = 0;
-
-		private var _fadInBack:Function;
-		private var _fadOutBack:Function;
+    public function TransUI() {
+        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui, 'trans_mc');
+    }
+    public var ui:trans_mc;
+    private var _renderAnimateGap:int   = 0; //刷新动画间隔
+    private var _renderAnimateFrame:int = 0;
+    private var _fadInBack:Function;
 
 //		private var _justRender:Boolean;
+    private var _fadOutBack:Function;
+    private var _rendering:Boolean = true;
 
-		private var _rendering:Boolean = true;
+    public function destory():void {
+        GameRender.remove(render);
+    }
 
-		public function TransUI()
-		{
-			ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui , 'trans_mc');
-		}
+    public function fadIn(back:Function = null):void {
+//			trace('fadIn');
+        _fadOutBack = null;
 
-		public function destory():void{
-			GameRender.remove(render);
-		}
+        _fadInBack = back;
+        ui.gotoAndStop('fadin');
+        startRender();
+    }
 
-		private function startRender():void{
-			_renderAnimateGap = Math.ceil(MainGame.I.getFPS() / GameConfig.FPS_UI) - 1;
-			_renderAnimateFrame = 0;
+    public function fadOut(back:Function = null):void {
+        _fadInBack = null;
 
-			_rendering = true;
+//			trace('fadOut');
+        _fadOutBack = back;
+        ui.gotoAndStop('fadout');
+        startRender();
+    }
 
-			GameRender.add(render);
+    private function startRender():void {
+        _renderAnimateGap   = Math.ceil(MainGame.I.getFPS() / GameConfig.FPS_UI) - 1;
+        _renderAnimateFrame = 0;
 
-		}
-		private function stopRender():void{
-			_rendering = false;
-			GameRender.remove(render);
-		}
+        _rendering = true;
 
-		private function render():void{
+        GameRender.add(render);
 
-			if(!_rendering) return;
+    }
 
-			if(_renderAnimateGap > 0){
-				if(_renderAnimateFrame++ >= _renderAnimateGap){
-					_renderAnimateFrame = 0;
-					renderAnimate();
-				}
-			}else{
-				renderAnimate();
-			}
-		}
+    private function stopRender():void {
+        _rendering = false;
+        GameRender.remove(render);
+    }
 
-		private function renderAnimate():void{
+    private function render():void {
+
+        if (!_rendering) {
+            return;
+        }
+
+        if (_renderAnimateGap > 0) {
+            if (_renderAnimateFrame++ >= _renderAnimateGap) {
+                _renderAnimateFrame = 0;
+                renderAnimate();
+            }
+        }
+        else {
+            renderAnimate();
+        }
+    }
+
+    private function renderAnimate():void {
 
 //			trace('TrainsUI.renderAnimate',ui.currentFrame,ui.currentFrameLabel);
 
-			if(ui.currentFrameLabel == 'stop'){
+        if (ui.currentFrameLabel == 'stop') {
 
-				//这里要处理在fadinback中定义了fadoutback的情况，所以只能这样写
+            //这里要处理在fadinback中定义了fadoutback的情况，所以只能这样写
 
-				if(_fadInBack != null){
-					_fadInBack();
-					_fadInBack = null;
-					return;
-				}
-				if(_fadOutBack != null){
-					_fadOutBack();
-					_fadOutBack = null;
-					return;
-				}
+            if (_fadInBack != null) {
+                _fadInBack();
+                _fadInBack = null;
+                return;
+            }
+            if (_fadOutBack != null) {
+                _fadOutBack();
+                _fadOutBack = null;
+                return;
+            }
 
-				stopRender();
+            stopRender();
 
-				return;
-			}
-			ui.nextFrame();
-		}
+            return;
+        }
+        ui.nextFrame();
+    }
 
-
-		public function fadIn(back:Function = null):void{
-//			trace('fadIn');
-			_fadOutBack = null;
-
-			_fadInBack = back;
-			ui.gotoAndStop('fadin');
-			startRender();
-		}
-
-		public function fadOut(back:Function = null):void{
-			_fadInBack = null;
-
-//			trace('fadOut');
-			_fadOutBack = back;
-			ui.gotoAndStop('fadout');
-			startRender();
-		}
-
-	}
+}
 }

@@ -16,56 +16,57 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
+package net.play5d.game.bvn.ui {
+import flash.display.DisplayObject;
+import flash.display.MovieClip;
 
-	import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.FighterVO;
 
-	public class WinUI
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class WinUI {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:winmc;
-		private var _team:int;
+    public function WinUI(ui:winmc, team:int) {
+        _ui   = ui;
+        _team = team;
+    }
+    private var _team:int;
 
-		public function get ui():DisplayObject{
-			return _ui;
-		}
+    private var _ui:winmc;
 
-		public function WinUI(ui:winmc , team:int)
-		{
-			_ui = ui;
-			_team = team;
-		}
+    public function get ui():DisplayObject {
+        return _ui;
+    }
 
-		public function show(fighter:FighterVO , wins:int):void{
-			if(!fighter) return;
+    public function show(fighter:FighterVO, wins:int):void {
+        if (!fighter) {
+            return;
+        }
 
-			var playmc:MovieClip;
+        var playmc:MovieClip;
 
-			switch(wins){
-				case 1:
-					playmc = _team == 1 ? _ui.w1 : _ui.w2;
-					break;
-				case 2:
-					playmc = _team == 1 ? _ui.w2 : _ui.w1;
-					break;
-			}
+        switch (wins) {
+        case 1:
+            playmc = _team == 1 ? _ui.w1 : _ui.w2;
+            break;
+        case 2:
+            playmc = _team == 1 ? _ui.w2 : _ui.w1;
+            break;
+        }
 
-			if(!playmc) return;
+        if (!playmc) {
+            return;
+        }
 
-			switch(fighter.comicType){
-				case 0:
-					playmc.gotoAndPlay('in_bleach');
-					break;
-				case 1:
-					playmc.gotoAndPlay('in_naruto');
-					break;
-			}
+        switch (fighter.comicType) {
+        case 0:
+            playmc.gotoAndPlay('in_bleach');
+            break;
+        case 1:
+            playmc.gotoAndPlay('in_naruto');
+            break;
+        }
 
-		}
+    }
 
-	}
+}
 }

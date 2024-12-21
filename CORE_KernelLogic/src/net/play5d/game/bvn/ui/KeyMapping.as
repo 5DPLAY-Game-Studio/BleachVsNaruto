@@ -16,69 +16,68 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import flash.display.Sprite;
-	import flash.filters.ColorMatrixFilter;
+package net.play5d.game.bvn.ui {
+import fl.motion.ColorMatrix;
 
-	import fl.motion.ColorMatrix;
+import flash.display.Sprite;
+import flash.filters.ColorMatrixFilter;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.kyo.display.bitmap.BitmapFontText;
-	import net.play5d.kyo.input.KyoKeyCode;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.kyo.display.bitmap.BitmapFontText;
+import net.play5d.kyo.input.KyoKeyCode;
 
-	public class KeyMapping{
-		include '../../../../../../include/_INCLUDE_.as';
+public class KeyMapping {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		public var name:String;
-		public var mc:Sprite;
-		public var keyId:String;
-		public var cn:String;
+    public function KeyMapping(mc:Sprite, keyId:String, name:String, cn:String) {
+        this.mc    = mc;
+        this.keyId = keyId;
+        this.name  = name;
+        this.cn    = cn;
 
-		private var _keyTxt:BitmapFontText;
+        _keyTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
 
-		public function KeyMapping(mc:Sprite , keyId:String , name:String , cn:String){
-			this.mc = mc;
-			this.keyId = keyId;
-			this.name = name;
-			this.cn = cn;
+        var matrix:ColorMatrix = new ColorMatrix();
+        matrix.SetBrightnessMatrix(-100);
+        matrix.SetSaturationMatrix(0);
+        _keyTxt.filters = [new ColorMatrixFilter(matrix.GetFlatArray())];
 
-			_keyTxt = new BitmapFontText(AssetManager.I.getFont('font1'));
+        mc.addChild(_keyTxt);
+    }
+    public var name:String;
+    public var mc:Sprite;
+    public var keyId:String;
+    public var cn:String;
+    private var _keyTxt:BitmapFontText;
 
-			var matrix:ColorMatrix = new ColorMatrix();
-			matrix.SetBrightnessMatrix(-100);
-			matrix.SetSaturationMatrix(0);
-			_keyTxt.filters = [new ColorMatrixFilter(matrix.GetFlatArray())];
+    public function setKey(code:int, keyName:String = null):void {
+        keyName ||= KyoKeyCode.code2name(code);
+        _keyTxt.text = keyName.toUpperCase();
 
-			mc.addChild(_keyTxt);
-		}
+        var _maxWidth:Number = 0;
+        var _scale:Number    = 1;
+        var offsetY:Number   = 0;
 
-		public function setKey(code:int , keyName:String = null):void{
-			keyName ||= KyoKeyCode.code2name(code);
-			_keyTxt.text = keyName.toUpperCase();
+        if (keyId == 'up' || keyId == 'down' || keyId == 'left' || keyId == 'right') {
+            _scale    = 0.8;
+            _maxWidth = 40;
+            offsetY   = 5;
+        }
+        else {
+            _maxWidth = 60;
+        }
 
-			var _maxWidth:Number = 0;
-			var _scale:Number = 1;
-			var offsetY:Number = 0;
+        if (_keyTxt.width > _maxWidth) {
+            _keyTxt.width  = _maxWidth;
+            _keyTxt.scaleY = _keyTxt.scaleX;
+        }
+        else {
+            _keyTxt.scaleX = _keyTxt.scaleY = _scale;
+        }
 
-			if(keyId == 'up' || keyId == 'down' || keyId == 'left' || keyId == 'right'){
-				_scale = 0.8;
-				_maxWidth = 40;
-				offsetY = 5;
-			}else{
-				_maxWidth = 60;
-			}
+        _keyTxt.x = -_keyTxt.width / 2;
+        _keyTxt.y = -_keyTxt.height / 2 + offsetY;
+    }
 
-			if(_keyTxt.width > _maxWidth){
-				_keyTxt.width = _maxWidth;
-				_keyTxt.scaleY = _keyTxt.scaleX;
-			}else{
-				_keyTxt.scaleX = _keyTxt.scaleY = _scale;
-			}
-
-			_keyTxt.x = -_keyTxt.width/2;
-			_keyTxt.y = -_keyTxt.height/2 + offsetY;
-		}
-
-	}
+}
 }

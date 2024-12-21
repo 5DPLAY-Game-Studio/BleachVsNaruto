@@ -16,54 +16,51 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import com.greensock.TweenLite;
+package net.play5d.game.bvn.ui {
+import com.greensock.TweenLite;
 
-	import flash.display.Sprite;
+import flash.display.Sprite;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.kyo.display.shapes.Box;
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.kyo.display.shapes.Box;
 
-	public class QuickTransUI extends Sprite
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class QuickTransUI extends Sprite {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private var _up:Box;
-		private var _down:Box;
-		private var _center:Number = 0;
-		public function QuickTransUI()
-		{
-			super();
+    public function QuickTransUI() {
+        super();
 
-			_center = GameConfig.GAME_SIZE.y/2;
+        _center = GameConfig.GAME_SIZE.y / 2;
 
-			_up = new Box(GameConfig.GAME_SIZE.x , _center);
-			_down = new Box(GameConfig.GAME_SIZE.x , _center);
+        _up   = new Box(GameConfig.GAME_SIZE.x, _center);
+        _down = new Box(GameConfig.GAME_SIZE.x, _center);
 
-			addChild(_up);
-			addChild(_down);
-		}
+        addChild(_up);
+        addChild(_down);
+    }
+    private var _up:Box;
+    private var _down:Box;
+    private var _center:Number = 0;
 
-		public function fadInAndOut(back:Function = null):void{
-			fadIn(function():void{
-				fadOut(back);
-			});
-		}
+    public function fadInAndOut(back:Function = null):void {
+        fadIn(function ():void {
+            fadOut(back);
+        });
+    }
 
-		public function fadIn(back:Function = null):void{
-			_up.y = -_center;
-			_down.y = GameConfig.GAME_SIZE.y;
+    public function fadIn(back:Function = null):void {
+        _up.y   = -_center;
+        _down.y = GameConfig.GAME_SIZE.y;
 
-			TweenLite.to(_up,0.1,{y:0});
-			TweenLite.to(_down,0.1,{y:_center,onComplete:back});
-		}
+        TweenLite.to(_up, 0.1, {y: 0});
+        TweenLite.to(_down, 0.1, {y: _center, onComplete: back});
+    }
 
-		public function fadOut(back:Function = null):void{
-			TweenLite.to(_up,0.1,{y:-_center});
-			TweenLite.to(_down,0.1,{y:GameConfig.GAME_SIZE.y,onComplete:back});
-		}
+    public function fadOut(back:Function = null):void {
+        TweenLite.to(_up, 0.1, {y: -_center});
+        TweenLite.to(_down, 0.1, {y: GameConfig.GAME_SIZE.y, onComplete: back});
+    }
 
 
-	}
+}
 }

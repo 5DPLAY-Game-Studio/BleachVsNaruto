@@ -16,73 +16,69 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import flash.display.Bitmap;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.utils.setTimeout;
+package net.play5d.game.bvn.ui {
+import flash.display.Bitmap;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.utils.setTimeout;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.events.SetBtnEvent;
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.events.SetBtnEvent;
 
-	public class MoveListSp extends Sprite
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class MoveListSp extends Sprite {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		[Embed(source="/../assets/movelist.jpg")]
-		private var _picClass:Class;
+    public function MoveListSp() {
+        super();
 
-		private var _pic:Bitmap;
-		private var _btns:SetBtnGroup;
+        _pic        = new _picClass();
+        _pic.width  = GameConfig.GAME_SIZE.x;
+        _pic.height = GameConfig.GAME_SIZE.y;
 
-		public var onBackSelect:Function;
+        addChild(_pic);
 
-		public function MoveListSp()
-		{
-			super();
+        _btns = new SetBtnGroup();
+        _btns.setBtnData([{label: 'BACK', cn: '返回'}]);
+        _btns.addEventListener(SetBtnEvent.SELECT, onSelect);
+        _btns.x = 250;
+        _btns.y = GameConfig.GAME_SIZE.y - 130;
+        addChild(_btns);
+    }
+    public var onBackSelect:Function;
+    [Embed(source='/../assets/movelist.jpg')]
+    private var _picClass:Class;
+    private var _pic:Bitmap;
+    private var _btns:SetBtnGroup;
 
-			_pic = new _picClass();
-			_pic.width = GameConfig.GAME_SIZE.x;
-			_pic.height = GameConfig.GAME_SIZE.y;
+    public function destory():void {
+        if (_btns) {
+            _btns.removeEventListener(SetBtnEvent.SELECT, onSelect);
+            _btns.destory();
+            _btns = null;
+        }
+    }
 
-			addChild(_pic);
+    public function isShowing():Boolean {
+        return this.visible;
+    }
 
-			_btns = new SetBtnGroup();
-			_btns.setBtnData([{label:'BACK',cn:'返回'}]);
-			_btns.addEventListener(SetBtnEvent.SELECT,onSelect);
-			_btns.x = 250;
-			_btns.y = GameConfig.GAME_SIZE.y - 130;
-			addChild(_btns);
-		}
+    public function show():void {
 
-		public function destory():void{
-			if(_btns){
-				_btns.removeEventListener(SetBtnEvent.SELECT,onSelect);
-				_btns.destory();
-				_btns = null;
-			}
-		}
+        this.visible = true;
+        setTimeout(function ():void {
+            _btns.keyEnable = true;
+        }, 100);
+    }
 
-		public function isShowing():Boolean{
-			return this.visible;
-		}
+    public function hide():void {
+        _btns.keyEnable = false;
+        this.visible    = false;
+    }
 
-		public function show():void{
-
-			this.visible = true;
-			setTimeout(function():void{
-				_btns.keyEnable = true;
-			},100);
-		}
-
-		public function hide():void{
-			_btns.keyEnable = false;
-			this.visible = false;
-		}
-
-		private function onSelect(e:Event):void{
-			if(onBackSelect != null) onBackSelect();
-		}
-	}
+    private function onSelect(e:Event):void {
+        if (onBackSelect != null) {
+            onBackSelect();
+        }
+    }
+}
 }

@@ -16,48 +16,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui
-{
-	import flash.display.Sprite;
+package net.play5d.game.bvn.ui {
+import flash.display.Sprite;
 
-	import net.play5d.game.bvn.events.SetBtnEvent;
+import net.play5d.game.bvn.events.SetBtnEvent;
 
-	public class ContinueBtn extends Sprite
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class ContinueBtn extends Sprite {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private var _btnGroup:SetBtnGroup;
-		private var _onClick:Function;
+    public function ContinueBtn() {
+        super();
 
-		public function ContinueBtn()
-		{
-			super();
+        _btnGroup        = new SetBtnGroup();
+        _btnGroup.startX = 0;
+        _btnGroup.startY = 0;
+        _btnGroup.setBtnData([
+                                 {label: 'CONTINUE', cn: '继续游戏'}
+                             ], 2);
+        addChild(_btnGroup);
+    }
+    private var _btnGroup:SetBtnGroup;
+    private var _onClick:Function;
 
-			_btnGroup = new SetBtnGroup();
-			_btnGroup.startX = 0;
-			_btnGroup.startY = 0;
-			_btnGroup.setBtnData([
-				{label: "CONTINUE", cn: "继续游戏"}
-			], 2);
-			addChild(_btnGroup);
-		}
+    public function onClick(callBack:Function):void {
+        _onClick = callBack;
+        if (_btnGroup.hasEventListener(SetBtnEvent.SELECT)) {
+            return;
+        }
+        _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnClick);
+    }
 
-		public function onClick(callBack:Function):void{
-			_onClick = callBack;
-			if(_btnGroup.hasEventListener(SetBtnEvent.SELECT)){
-				return;
-			}
-			_btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnClick);
-		}
+    public function destory():void {
+        if (_btnGroup) {
+            _btnGroup.destory();
+        }
+    }
 
-		private function onBtnClick(e:SetBtnEvent):void{
-			if(_onClick != null) _onClick(this);
-		}
-
-		public function destory():void{
-			if(_btnGroup){
-				_btnGroup.destory();
-			}
-		}
-	}
+    private function onBtnClick(e:SetBtnEvent):void {
+        if (_onClick != null) {
+            _onClick(this);
+        }
+    }
+}
 }
