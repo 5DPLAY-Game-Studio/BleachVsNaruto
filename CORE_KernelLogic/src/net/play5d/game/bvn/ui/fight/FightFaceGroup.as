@@ -16,67 +16,65 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.fight
-{
-	import flash.display.DisplayObject;
+package net.play5d.game.bvn.ui.fight {
+import flash.display.DisplayObject;
 
-	import net.play5d.game.bvn.data.GameRunFighterGroup;
+import net.play5d.game.bvn.data.GameRunFighterGroup;
 
-	public class FightFaceGroup
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class FightFaceGroup {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:hpbar_facegroup;
+    public function FightFaceGroup(ui:hpbar_facegroup) {
+        _ui = ui;
 
-		private var _face1:FightFaceUI;
-		private var _face2:FightFaceUI;
-		private var _face3:FightFaceUI;
+        _ui.cacheAsBitmap = true;
 
-		public function get ui():DisplayObject{
-			return _ui;
-		}
+        _face1 = new FightFaceUI(_ui.face);
+        _face2 = new FightFaceUI(_ui.face2);
+        _face3 = new FightFaceUI(_ui.face3);
+    }
+    private var _face1:FightFaceUI;
+    private var _face2:FightFaceUI;
+    private var _face3:FightFaceUI;
 
-		public function FightFaceGroup(ui:hpbar_facegroup)
-		{
-			_ui = ui;
+    private var _ui:hpbar_facegroup;
 
-			_ui.cacheAsBitmap = true;
+    public function get ui():DisplayObject {
+        return _ui;
+    }
 
-			_face1 = new FightFaceUI(_ui.face);
-			_face2 = new FightFaceUI(_ui.face2);
-			_face3 = new FightFaceUI(_ui.face3);
-		}
+    public function setFighter(fighterGroup:GameRunFighterGroup = null):void {
 
-		public function setFighter(fighterGroup:GameRunFighterGroup = null):void{
+        _ui.cacheAsBitmap = false;
 
-			_ui.cacheAsBitmap = false;
+        if (!fighterGroup.currentFighter) {
+            return;
+        }
 
-			if(!fighterGroup.currentFighter) return;
+        _face1.setData(fighterGroup.currentFighter.data);
+        switch (fighterGroup.currentFighter.data) {
+        case fighterGroup.fighter1:
+            _face2.setData(fighterGroup.fighter2);
+            _face3.setData(fighterGroup.fighter3);
+            break;
+        case fighterGroup.fighter2:
+            _face2.setData(fighterGroup.fighter3);
+            _face3.setData(null);
+            break;
+        case fighterGroup.fighter3:
+            _face2.setData(null);
+            _face3.setData(null);
+            break;
+        }
 
-			_face1.setData(fighterGroup.currentFighter.data);
-			switch(fighterGroup.currentFighter.data){
-				case fighterGroup.fighter1:
-					_face2.setData(fighterGroup.fighter2);
-					_face3.setData(fighterGroup.fighter3);
-					break;
-				case fighterGroup.fighter2:
-					_face2.setData(fighterGroup.fighter3);
-					_face3.setData(null);
-					break;
-				case fighterGroup.fighter3:
-					_face2.setData(null);
-					_face3.setData(null);
-					break;
-			}
+        _ui.cacheAsBitmap = true;
+    }
 
-			_ui.cacheAsBitmap = true;
-		}
+    public function setDirect(v:int):void {
+        _face1.setDirect(v);
+        _face2.setDirect(v);
+        _face3.setDirect(v);
+    }
 
-		public function setDirect(v:int):void{
-			_face1.setDirect(v);
-			_face2.setDirect(v);
-			_face3.setDirect(v);
-		}
-
-	}
+}
 }

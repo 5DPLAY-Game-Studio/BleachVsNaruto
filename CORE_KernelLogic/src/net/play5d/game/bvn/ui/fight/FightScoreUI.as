@@ -16,30 +16,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.fight
-{
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.MCNumber;
+package net.play5d.game.bvn.ui.fight {
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.MCNumber;
 
-	public class FightScoreUI
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class FightScoreUI {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:score_mc;
-		private var _nummc:MCNumber;
-		public function FightScoreUI(ui:score_mc)
-		{
-			_ui = ui;
+    public function FightScoreUI(ui:score_mc) {
+        _ui = ui;
 
-			var txtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight , 'txtmc_score');
+        var txtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'txtmc_score');
 
-			_nummc = new MCNumber(txtCls,0,1,10,10);
-			_ui.ct.addChild(_nummc);
-		}
+        _nummc = new MCNumber(txtCls, 0, 1, 10, 10);
+        _ui.ct.addChild(_nummc);
+    }
+    private var _ui:score_mc;
+    private var _nummc:MCNumber;
 
-		public function setScore(v:int):void{
-			_nummc.number = v;
-		}
+    public function setScore(v:int):void {
+        _nummc.number = v;
+    }
 
-	}
+}
 }

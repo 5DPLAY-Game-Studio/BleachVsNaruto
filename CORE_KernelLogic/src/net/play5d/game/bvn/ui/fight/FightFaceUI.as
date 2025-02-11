@@ -16,38 +16,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.fight
-{
-	import flash.display.DisplayObject;
-	import flash.geom.Point;
+package net.play5d.game.bvn.ui.fight {
+import flash.display.DisplayObject;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.data.FighterVO;
 
-	public class FightFaceUI
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class FightFaceUI {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:hpbar_facemc;
-		public function FightFaceUI(ui:hpbar_facemc)
-		{
-			_ui = ui;
-		}
+    public function FightFaceUI(ui:hpbar_facemc) {
+        _ui = ui;
+    }
+    private var _ui:hpbar_facemc;
 
-		public function setData(v:FighterVO):void{
-			if(!v){
-				_ui.visible = false;
-				return;
-			}
+    public function setData(v:FighterVO):void {
+        if (!v) {
+            _ui.visible = false;
+            return;
+        }
 
-			_ui.visible = true;
+        _ui.visible = true;
 
-			var faceImg:DisplayObject = AssetManager.I.getFighterFaceBar(v);
-			if(faceImg) _ui.ct.addChild(faceImg);
-		}
+        var faceImg:DisplayObject = AssetManager.I.getFighterFaceBar(v);
+        if (faceImg) {
+            _ui.ct.addChild(faceImg);
+        }
+    }
 
-		public function setDirect(v:int):void{
-		}
+    public function setDirect(v:int):void {
+    }
 
-	}
+}
 }

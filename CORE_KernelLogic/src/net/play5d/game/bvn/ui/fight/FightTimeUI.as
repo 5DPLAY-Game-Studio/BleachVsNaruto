@@ -16,56 +16,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.fight
-{
-	import flash.display.DisplayObject;
+package net.play5d.game.bvn.ui.fight {
+import flash.display.DisplayObject;
 
-	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.MCNumber;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.MCNumber;
 
-	public class FightTimeUI
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class FightTimeUI {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _ui:time_mc;
-		private var _numMc:MCNumber;
-		private var _renderTime:Boolean;
+    public function FightTimeUI(ui:time_mc) {
+        _ui = ui;
 
-		public function get timeUI():DisplayObject{
-			return _numMc;
-		}
+        var time:int = GameCtrl.I.gameRunData.gameTimeMax;
+        if (time == -1) {
+            _renderTime        = false;
+            _ui.wuxian.visible = true;
+        }
+        else {
 
-		public function FightTimeUI(ui:time_mc)
-		{
-			_ui = ui;
+            _renderTime = true;
 
-			var time:int = GameCtrl.I.gameRunData.gameTimeMax;
-			if(time == -1){
-				_renderTime = false;
-				_ui.wuxian.visible = true;
-			}else{
+            var timeTxtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'time_txtmc');
 
-				_renderTime = true;
+            _numMc   = new MCNumber(timeTxtCls, 0, 1, 20, 2);
+            _numMc.x = -22;
+            _numMc.y = -15;
+            _ui.addChild(_numMc);
 
-				var timeTxtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight , 'time_txtmc');
+            _ui.wuxian.visible = false;
+            _numMc.number      = time;
+        }
 
-				_numMc = new MCNumber(timeTxtCls,0,1,20,2);
-				_numMc.x = -22;
-				_numMc.y = -15;
-				_ui.addChild(_numMc);
+    }
+    private var _ui:time_mc;
+    private var _numMc:MCNumber;
+    private var _renderTime:Boolean;
 
-				_ui.wuxian.visible = false;
-				_numMc.number = time;
-			}
+    public function get timeUI():DisplayObject {
+        return _numMc;
+    }
 
-		}
+    public function render():void {
+        if (!_renderTime) {
+            return;
+        }
+        var time:int  = GameCtrl.I.gameRunData.gameTime;
+        _numMc.number = time;
+    }
 
-		public function render():void{
-			if(!_renderTime) return;
-			var time:int = GameCtrl.I.gameRunData.gameTime;
-			_numMc.number = time;
-		}
-
-	}
+}
 }
