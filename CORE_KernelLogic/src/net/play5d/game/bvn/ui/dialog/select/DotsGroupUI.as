@@ -16,81 +16,80 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.dialog.select
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.DataEvent;
-	import flash.events.MouseEvent;
-	import flash.events.TouchEvent;
+package net.play5d.game.bvn.ui.dialog.select {
+import flash.display.DisplayObject;
+import flash.display.Sprite;
+import flash.events.MouseEvent;
+import flash.events.TouchEvent;
 
-	import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.GameConfig;
 
-	public class DotsGroupUI extends Sprite
-	{
-		include '../../../../../../../../include/_INCLUDE_.as';
+public class DotsGroupUI extends Sprite {
+    include '../../../../../../../../include/_INCLUDE_.as';
 
-		private var _dotArr:Array;
-		public var onDotClick:Function;
+    public var onDotClick:Function;
+    private var _dotArr:Array;
 
+    public function update(total:int):void {
+        _dotArr = [];
 
-		public function update(total:int):void{
-			_dotArr = [];
+        for (var i:int; i < total; i++) {
+            var dot:DotItemUI = new DotItemUI();
+            dot.page          = i + 1;
 
-			for(var i:int; i < total; i++){
-				var dot:DotItemUI = new DotItemUI();
-				dot.page = i + 1;
+            addChild(dot.getUI());
 
-				addChild(dot.getUI());
+            _dotArr.push(dot);
 
-				_dotArr.push(dot);
+            dot.getUI().x = i * 40;
 
-				dot.getUI().x = i * 40;
-
-				if(GameConfig.TOUCH_MODE){
-					dot.getUI().addEventListener(TouchEvent.TOUCH_TAP, touchHandler);
-				}else{
-					dot.getUI().addEventListener(MouseEvent.CLICK, mouseHandler);
-				}
+            if (GameConfig.TOUCH_MODE) {
+                dot.getUI().addEventListener(TouchEvent.TOUCH_TAP, touchHandler);
+            }
+            else {
+                dot.getUI().addEventListener(MouseEvent.CLICK, mouseHandler);
+            }
 
 
-				if(i == 0){
-					dot.focus(true);
-				}
-			}
-		}
+            if (i == 0) {
+                dot.focus(true);
+            }
+        }
+    }
 
-		public function updateByPage(v:int):void{
-			for each(var d:DotItemUI in _dotArr){
-				d.focus(d.page == v);
-			}
-		}
+    public function updateByPage(v:int):void {
+        for each(var d:DotItemUI in _dotArr) {
+            d.focus(d.page == v);
+        }
+    }
 
-		public function destory():void{
-			for each(var d:DotItemUI in _dotArr){
-				d.getUI().removeEventListener(TouchEvent.TOUCH_TAP, touchHandler);
-				d.getUI().removeEventListener(MouseEvent.CLICK, mouseHandler);
-			}
-		}
+    public function destory():void {
+        for each(var d:DotItemUI in _dotArr) {
+            d.getUI().removeEventListener(TouchEvent.TOUCH_TAP, touchHandler);
+            d.getUI().removeEventListener(MouseEvent.CLICK, mouseHandler);
+        }
+    }
 
-		private function mouseHandler(e:MouseEvent):void{
-			doClick(e.currentTarget);
-		}
+    private function doClick(target:Object):void {
+        if (onDotClick == null) {
+            return;
+        }
 
-		private function touchHandler(e:TouchEvent):void{
-			doClick(e.currentTarget);
-		}
+        var curUI:DisplayObject = target as DisplayObject;
 
-		private function doClick(target:Object):void{
-			if(onDotClick == null) return;
+        for each(var d:DotItemUI in _dotArr) {
+            if (d.getUI() == curUI) {
+                onDotClick(d.page);
+            }
+        }
+    }
 
-			var curUI:DisplayObject = target as DisplayObject;
+    private function mouseHandler(e:MouseEvent):void {
+        doClick(e.currentTarget);
+    }
 
-			for each(var d:DotItemUI in _dotArr){
-				if(d.getUI() == curUI){
-					onDotClick(d.page);
-				}
-			}
-		}
-	}
+    private function touchHandler(e:TouchEvent):void {
+        doClick(e.currentTarget);
+    }
+}
 }
