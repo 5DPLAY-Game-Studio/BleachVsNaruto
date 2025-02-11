@@ -16,166 +16,166 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.select
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.MouseEvent;
-	import flash.events.TouchEvent;
-	import flash.filters.GlowFilter;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormatAlign;
+package net.play5d.game.bvn.ui.select {
+import flash.display.DisplayObject;
+import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.EventDispatcher;
+import flash.events.MouseEvent;
+import flash.events.TouchEvent;
+import flash.filters.GlowFilter;
+import flash.text.TextFormatAlign;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.game.bvn.data.FighterVO;
-	import net.play5d.game.bvn.ui.GameUI;
-	import net.play5d.game.bvn.ui.UIUtils;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.BitmapText;
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.ui.UIUtils;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.BitmapText;
 
-	/**
-	 * 大头像
-	 * @author weijian
-	 */
-	public class SelectedFighterUI extends EventDispatcher
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+/**
+ * 大头像
+ * @author weijian
+ */
+public class SelectedFighterUI extends EventDispatcher {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		public var ui:Sprite;
-		public var trueY:Number = 0;
+    public function SelectedFighterUI(ui:Sprite) {
+        this.ui = ui;
 
-		private var _fighterIndex:int = -1;
+        ui.mouseChildren = false;
 
-		private var _face:DisplayObject;
-		private var _fighter:FighterVO;
-		private var _text:BitmapText;
+        if (GameUI.SHOW_CN_TEXT) {
+            _text = new BitmapText(true, 0xffffff, [new GlowFilter(0, 1, 3, 3, 3)]);
 
-		private var _uiWidth:Number;
+            if (ui is selected_item_p1_mc) {
+                UIUtils.formatText(_text.textfield, {color: 0xffffff, size: 14, align: TextFormatAlign.RIGHT});
+                _text.width = ui.width - 10;
+            }
+            else {
+                UIUtils.formatText(_text.textfield, {color: 0xffffff, size: 14, align: TextFormatAlign.LEFT});
+                _text.x     = 10;
+                _text.width = ui.width - 10;
+            }
 
-		public function SelectedFighterUI(ui:Sprite)
-		{
-			this.ui = ui;
+            _text.y = ui.height - 30;
+            ui.addChild(_text);
+        }
+    }
+    public var ui:Sprite;
+    public var trueY:Number = 0;
+    private var _fighterIndex:int = -1;
+    private var _face:DisplayObject;
+    private var _fighter:FighterVO;
+    private var _text:BitmapText;
+    private var _uiWidth:Number;
 
-			ui.mouseChildren = false;
+    public function mouseEnabled(v:Boolean):void {
+        if (v) {
+            if (GameConfig.TOUCH_MODE) {
+                ui.addEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
+            }
+            else {
+                ui.buttonMode = true;
+                ui.addEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+                ui.addEventListener(MouseEvent.CLICK, mouseHandler);
+            }
+        }
+        else {
+            ui.buttonMode = false;
+            ui.removeEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
+            ui.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+            ui.removeEventListener(MouseEvent.CLICK, mouseHandler);
+        }
 
-			if(GameUI.SHOW_CN_TEXT){
-				_text = new BitmapText(true,0xffffff,[new GlowFilter(0,1,3,3,3)]);
+    }
 
-				if(ui is selected_item_p1_mc){
-					UIUtils.formatText(_text.textfield , {color:0xffffff , size:14 , align:TextFormatAlign.RIGHT});
-					_text.width = ui.width - 10;
-				}else{
-					UIUtils.formatText(_text.textfield , {color:0xffffff , size:14 , align:TextFormatAlign.LEFT});
-					_text.x = 10;
-					_text.width = ui.width - 10;
-				}
+    public function destory():void {
+        if (ui) {
+            ui.removeEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
+            ui.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
+            ui.removeEventListener(MouseEvent.CLICK, mouseHandler);
+        }
+        if (_text) {
+            _text.destory();
+            _text = null;
+        }
+    }
 
-				_text.y = ui.height - 30;
-				ui.addChild(_text);
-			}
-		}
+    public function setFighter(vo:FighterVO):void {
 
-		public function mouseEnabled(v:Boolean):void{
-			if(v){
-				if(GameConfig.TOUCH_MODE){
-					ui.addEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
-				}else{
-					ui.buttonMode = true;
-					ui.addEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
-					ui.addEventListener(MouseEvent.CLICK, mouseHandler);
-				}
-			}else{
-				ui.buttonMode = false;
-				ui.removeEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
-				ui.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
-				ui.removeEventListener(MouseEvent.CLICK, mouseHandler);
-			}
+        if (!vo) {
+            return;
+        }
 
-		}
+        _fighter = vo;
 
-		private function mouseHandler(e:Event):void{
-			dispatchEvent(e);
-		}
+        if (_text) {
+            _text.text = vo.name;
+        }
 
-		public function destory():void{
-			if(ui){
-				ui.removeEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
-				ui.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
-				ui.removeEventListener(MouseEvent.CLICK, mouseHandler);
-			}
-			if(_text){
-				_text.destory();
-				_text = null;
-			}
-		}
+        var ctm:ctmc  = ui.getChildByName('ct') as ctmc;
+        var ct:Sprite = ctm ? ctm.getChildByName('ct') as Sprite : null;
+        if (ct) {
 
-		public function setFighter(vo:FighterVO):void{
+            if (_face) {
+                try {
+                    ct.removeChild(_face);
+                }
+                catch (e:Error) {
+                }
+            }
 
-			if(!vo) return;
+            var face:DisplayObject = AssetManager.I.getFighterFaceBig(vo);
+            if (face) {
+                _face = face;
+                ct.addChild(face);
+            }
+        }
+    }
 
-			_fighter = vo;
+    public function getFighter():FighterVO {
+        return _fighter;
+    }
 
-			if(_text){
-				_text.text = vo.name;
-			}
+    public function getFighterIndex():int {
+        return _fighterIndex;
+    }
 
-			var ctm:ctmc = ui.getChildByName('ct') as ctmc;
-			var ct:Sprite = ctm ? ctm.getChildByName('ct') as Sprite : null;
-			if(ct){
+    public function setFighterIndex(index:int):void {
+        _fighterIndex = index;
 
-				if(_face){
-					try{
-						ct.removeChild(_face);
-					}catch(e:Error){}
-				}
+        var au:seltwzmc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'seltwzmc');
+        au.gotoAndStop(index);
+        ui.addChild(au);
+        if (ui is selected_item_p1_mc) {
+            au.x = -8;
+        }
+        else {
+            au.x = 252 - au.width;
+        }
+        au.y = -5;
 
-				var face:DisplayObject = AssetManager.I.getFighterFaceBig(vo);
-				if(face){
-					_face = face;
-					ct.addChild(face);
-				}
-			}
-		}
+        mouseEnabled(false);
+    }
 
-		public function getFighter():FighterVO{
-			return _fighter;
-		}
+    public function setAssister():void {
+        var au:seltwzmc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'seltwzmc');
+        au.gotoAndStop(4);
+        ui.addChild(au);
+        if (ui is selected_item_p1_mc) {
+            au.x = -8;
+        }
+        else {
+            au.x = 176;
+        }
+        au.y = -5;
+    }
 
-		public function getFighterIndex():int{
-			return _fighterIndex;
-		}
+    private function mouseHandler(e:Event):void {
+        dispatchEvent(e);
+    }
 
-		public function setFighterIndex(index:int):void{
-			_fighterIndex = index;
-
-			var au:seltwzmc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select , 'seltwzmc');
-			au.gotoAndStop(index);
-			ui.addChild(au);
-			if(ui is selected_item_p1_mc){
-				au.x = -8;
-			}else{
-				au.x = 252 - au.width;
-			}
-			au.y = -5;
-
-			mouseEnabled(false);
-		}
-
-		public function setAssister():void{
-			var au:seltwzmc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select , 'seltwzmc');
-			au.gotoAndStop(4);
-			ui.addChild(au);
-			if(ui is selected_item_p1_mc){
-				au.x = -8;
-			}else{
-				au.x = 176;
-			}
-			au.y = -5;
-		}
-
-	}
+}
 }

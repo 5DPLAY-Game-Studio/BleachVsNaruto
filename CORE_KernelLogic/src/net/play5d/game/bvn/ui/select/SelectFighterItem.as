@@ -16,158 +16,171 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.select
-{
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Back;
+package net.play5d.game.bvn.ui.select {
+import com.greensock.TweenLite;
+import com.greensock.easing.Back;
 
-	import flash.display.DisplayObject;
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
-	import flash.geom.ColorTransform;
-	import flash.geom.Point;
-	import flash.text.TextFormatAlign;
+import flash.display.DisplayObject;
+import flash.events.Event;
+import flash.events.EventDispatcher;
+import flash.filters.GlowFilter;
+import flash.geom.ColorTransform;
+import flash.geom.Point;
+import flash.text.TextFormatAlign;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.game.bvn.data.FighterVO;
-	import net.play5d.game.bvn.data.SelectCharListItemVO;
-	import net.play5d.game.bvn.utils.ResUtils;
-	import net.play5d.kyo.display.BitmapText;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.SelectCharListItemVO;
+import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.display.BitmapText;
 
-	/**
-	 * 小头像
-	 * @author weijian
-	 *
-	 */
-	public class SelectFighterItem extends EventDispatcher
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+/**
+ * 小头像
+ * @author weijian
+ *
+ */
+public class SelectFighterItem extends EventDispatcher {
+    include '../../../../../../../include/_INCLUDE_.as';
 
 
-		public static function getIdByPoint(X:int, Y:int):String{
-			return X + ',' + Y;
-		}
+    public static function getIdByPoint(X:int, Y:int):String {
+        return X + ',' + Y;
+    }
 
-		public function get positionId():String{
-			return getIdByPoint(position.x, position.y);
-		}
+    public function SelectFighterItem(fighterData:FighterVO, selectData:SelectCharListItemVO, isMore:Boolean = false) {
+        super();
 
-		public var selectData:SelectCharListItemVO;
-		public var fighterData:FighterVO;
+        this.isMore = isMore;
 
-		public var ui:slt_item_mc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select , 'slt_item_mc');
+        this.selectData  = selectData;
+        this.fighterData = fighterData;
 
-		public var position:Point = new Point();
+        var face:DisplayObject = AssetManager.I.getFighterFace(fighterData);
+        if (face) {
+            ui.ct.addChild(face);
+        }
 
-		public var isMore:Boolean = false;
+        ui.mouseChildren = false;
+        ui.buttonMode    = true;
 
-		private var faceSize:Point = new Point(50,50);
+        if (selectData && selectData.moreFighterIDs) {
+            initMoreUI();
+        }
 
-		private var _moreText:BitmapText;
+        if (ui.more_bg) {
+            ui.more_bg.visible                  = isMore;
+            ui.more_bg.mouseEnabled             = ui.more_bg.mouseChildren = false;
+            var ct:ColorTransform               = new ColorTransform();
+            ct.redOffset                        = 255;
+            //			ct.greenOffset = 255;
+            ct.blueOffset                       = -255;
+            ui.more_bg.transform.colorTransform = ct;
+        }
+    }
+    public var selectData:SelectCharListItemVO;
+    public var fighterData:FighterVO;
 
-		public function SelectFighterItem(fighterData:FighterVO , selectData:SelectCharListItemVO, isMore:Boolean = false)
-		{
-			super();
+    public var ui:slt_item_mc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'slt_item_mc');
 
-			this.isMore = isMore;
+    public var position:Point = new Point();
 
-			this.selectData = selectData;
-			this.fighterData = fighterData;
+    public var isMore:Boolean = false;
 
-			var face:DisplayObject = AssetManager.I.getFighterFace(fighterData);
-			if(face) ui.ct.addChild(face);
+    private var faceSize:Point = new Point(50, 50);
 
-			ui.mouseChildren = false;
-			ui.buttonMode = true;
+    private var _moreText:BitmapText;
+    private var _listeners:Object = {};
+    private var _tweenFrom:Point;
+    private var _tweenTo:Point;
 
-			if(selectData && selectData.moreFighterIDs){
-				initMoreUI();
-			}
+    public function get positionId():String {
+        return getIdByPoint(position.x, position.y);
+    }
 
-			if(ui.more_bg){
-				ui.more_bg.visible = isMore;
-				ui.more_bg.mouseEnabled = ui.more_bg.mouseChildren = false;
-				var ct:ColorTransform = new ColorTransform();
-				ct.redOffset = 255;
-	//			ct.greenOffset = 255;
-				ct.blueOffset = -255;
-				ui.more_bg.transform.colorTransform = ct;
-			}
-		}
+    public override function addEventListener(
+            type:String, listener:Function, useCapture:Boolean = false, priority:int = 0,
+            useWeakReference:Boolean                                                 = false
+    ):void {
+        if (ui.hasEventListener(type)) {
+            return;
+        }
+        ui.addEventListener(type, selfHandler, useCapture, priority, useWeakReference);
+        _listeners[type] = listener;
+    }
 
-		private function initMoreUI():void{
-			var txt:BitmapText = new BitmapText(false, 0xffff00, [new GlowFilter(0,1,5,5,3)]);
-			txt.width = 50;
-			txt.defaultTextFormat.bold = true;
-			txt.defaultTextFormat.color = 0xffff00;
-			txt.defaultTextFormat.size = 16;
-			txt.align = TextFormatAlign.RIGHT;
-			txt.y = -3;
-			txt.text = selectData.moreFighterIDs.length + "+";
-			txt.update();
-			ui.addChild(txt);
+    public function setMoreNumberVisible(v:Boolean):void {
+        if (_moreText) {
+            _moreText.visible = v;
+        }
+    }
 
-			_moreText = txt;
-		}
+    public function removeAllEventListener():void {
+        for (var i:String in _listeners) {
+            ui.removeEventListener(i, _listeners[i]);
+        }
+        _listeners = {};
+    }
 
-		public function setMoreNumberVisible(v:Boolean):void{
-			if(_moreText) _moreText.visible = v;
-		}
+    public function initMoreTween(fromP:Point, toP:Point):void {
+        _tweenFrom = fromP;
+        _tweenTo   = toP;
+    }
 
-		private var _listeners:Object = {};
-		public override function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void{
-			if(ui.hasEventListener(type)) return;
-			ui.addEventListener(type,selfHandler,useCapture,priority,useWeakReference);
-			_listeners[type] = listener;
-		}
-		public function removeAllEventListener():void{
-			for(var i:String in _listeners){
-				ui.removeEventListener(i,_listeners[i]);
-			}
-			_listeners = {};
-		}
-		private function selfHandler(e:Event):void{
-			_listeners[e.type](e.type , this);
-		}
+    public function showMore(delay:Number = 0.1):void {
+        ui.x            = _tweenFrom.x;
+        ui.y            = _tweenFrom.y;
+        ui.mouseEnabled = false;
+        TweenLite.to(ui, 0.2, {
+            x: _tweenTo.x, y: _tweenTo.y, ease: Back.easeOut, delay: delay, onComplete: function ():void {
+                ui.mouseEnabled = true;
+            }
+        });
+    }
 
+    public function hideMore():void {
+        TweenLite.to(ui, 0.1, {
+            x: _tweenFrom.x, y: _tweenFrom.y, onComplete: function ():void {
+                try {
+                    ui.parent.removeChild(ui);
+                }
+                catch (e:Error) {
+                }
+            }
+        });
+    }
 
-		private var _tweenFrom:Point;
-		private var _tweenTo:Point;
-		public function initMoreTween(fromP:Point, toP:Point):void{
-			_tweenFrom = fromP;
-			_tweenTo = toP;
-		}
+    public function destory():void {
+        if (ui) {
+            removeAllEventListener();
+        }
+        if (ui && ui.parent) {
+            try {
+                ui.parent.removeChild(ui);
+            }
+            catch (e:Error) {
+            }
+            ui = null;
+        }
+    }
 
-		public function showMore(delay:Number = 0.1):void{
-			ui.x = _tweenFrom.x;
-			ui.y = _tweenFrom.y;
-			ui.mouseEnabled = false;
-			TweenLite.to(ui, 0.2, {x: _tweenTo.x, y: _tweenTo.y, ease: Back.easeOut, delay: delay, onComplete: function():void{
-				ui.mouseEnabled = true;
-			}});
-		}
-		public function hideMore():void{
-			TweenLite.to(ui, 0.1, {x: _tweenFrom.x, y: _tweenFrom.y, onComplete: function():void{
-				try{
-					ui.parent.removeChild(ui);
-				}catch(e:Error){}
-			}});
-		}
+    private function initMoreUI():void {
+        var txt:BitmapText          = new BitmapText(false, 0xffff00, [new GlowFilter(0, 1, 5, 5, 3)]);
+        txt.width                   = 50;
+        txt.defaultTextFormat.bold  = true;
+        txt.defaultTextFormat.color = 0xffff00;
+        txt.defaultTextFormat.size  = 16;
+        txt.align                   = TextFormatAlign.RIGHT;
+        txt.y                       = -3;
+        txt.text                    = selectData.moreFighterIDs.length + '+';
+        txt.update();
+        ui.addChild(txt);
 
+        _moreText = txt;
+    }
 
-		public function destory():void{
-			if(ui){
-				removeAllEventListener();
-			}
-			if(ui && ui.parent){
-				try{
-					ui.parent.removeChild(ui);
-				}catch(e:Error){}
-				ui = null;
-			}
-		}
+    private function selfHandler(e:Event):void {
+        _listeners[e.type](e.type, this);
+    }
 
-	}
+}
 }
