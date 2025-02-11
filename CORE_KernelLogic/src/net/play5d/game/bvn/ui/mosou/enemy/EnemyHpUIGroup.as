@@ -16,99 +16,100 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou.enemy
-{
-	import flash.display.Sprite;
+package net.play5d.game.bvn.ui.mosou.enemy {
+import flash.display.Sprite;
 
-	import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.FighterMain;
 
-	public class EnemyHpUIGroup
-	{
-		include '../../../../../../../../include/_INCLUDE_.as';
+public class EnemyHpUIGroup {
+    include '../../../../../../../../include/_INCLUDE_.as';
 
-		private var _uis:Vector.<EnemyHpUI>;
-		private var _ct:Sprite;
-		public function EnemyHpUIGroup(ct:Sprite)
-		{
-			_ct = ct;
-			_uis = new Vector.<EnemyHpUI>();
-		}
+    public function EnemyHpUIGroup(ct:Sprite) {
+        _ct  = ct;
+        _uis = new Vector.<EnemyHpUI>();
+    }
+    private var _uis:Vector.<EnemyHpUI>;
+    private var _ct:Sprite;
 
-		public function updateFighter(f:FighterMain):void{
-			var i:int;
-			for(i = 0; i < _uis.length; i++){
-				if(_uis[i].getFighter() == f) return;
-			}
+    public function updateFighter(f:FighterMain):void {
+        var i:int;
+        for (i = 0; i < _uis.length; i++) {
+            if (_uis[i].getFighter() == f) {
+                return;
+            }
+        }
 
-			addUI(f);
-		}
+        addUI(f);
+    }
 
-		public function removeByFighter(f:FighterMain):void{
-			var i:int;
+    public function removeByFighter(f:FighterMain):void {
+        var i:int;
 
-			for(i = 0; i < _uis.length; i++){
-				if(_uis[i] && _uis[i].getFighter() == f){
-					removeUI(_uis[i])
-				}
-			}
+        for (i = 0; i < _uis.length; i++) {
+            if (_uis[i] && _uis[i].getFighter() == f) {
+                removeUI(_uis[i]);
+            }
+        }
 
-			sortUI();
-		}
+        sortUI();
+    }
 
-		public function render():void{
-			var i:int;
+    public function render():void {
+        var i:int;
 
-			var removes:Vector.<EnemyHpUI> = new Vector.<EnemyHpUI>();
-			for(i = 0; i < _uis.length; i++){
-				if(!_uis[i].render()){
-					removes.push(_uis[i]);
-				}
-			}
+        var removes:Vector.<EnemyHpUI> = new Vector.<EnemyHpUI>();
+        for (i = 0; i < _uis.length; i++) {
+            if (!_uis[i].render()) {
+                removes.push(_uis[i]);
+            }
+        }
 
-			if(removes.length > 0){
-				while(removes.length > 0){
-					var e:EnemyHpUI = removes.shift();
-					removeUI(e);
-				}
-				sortUI();
-			}
+        if (removes.length > 0) {
+            while (removes.length > 0) {
+                var e:EnemyHpUI = removes.shift();
+                removeUI(e);
+            }
+            sortUI();
+        }
 
-		}
+    }
 
 
-		private function addUI(f:FighterMain):void{
-			var ui:EnemyHpUI = new EnemyHpUI(f);
-			_uis.push(ui);
-			sortUI();
-		}
+    private function addUI(f:FighterMain):void {
+        var ui:EnemyHpUI = new EnemyHpUI(f);
+        _uis.push(ui);
+        sortUI();
+    }
 
-		private function removeUI(ui:EnemyHpUI):void{
-			var index:int = _uis.indexOf(ui);
-			if(index != -1){
-				_uis.splice(index, 1);
-			}
+    private function removeUI(ui:EnemyHpUI):void {
+        var index:int = _uis.indexOf(ui);
+        if (index != -1) {
+            _uis.splice(index, 1);
+        }
 //			_ct.removeChild(ui.getUI());
-		}
+    }
 
-		private function sortUI():void{
-			var i:int,x:int,y:int;
-			var len:int = Math.min(_uis.length, 12);
+    private function sortUI():void {
+        var i:int, x:int, y:int;
+        var len:int = Math.min(_uis.length, 12);
 
-			_ct.removeChildren();
+        _ct.removeChildren();
 
-			for(i = 0; i < len; i++){
-				_uis[i].getUI().x = x;
-				_uis[i].getUI().y = y;
+        for (i = 0; i < len; i++) {
+            _uis[i].getUI().x = x;
+            _uis[i].getUI().y = y;
 
-				x -= 110;
-				if((i+1) % 4 == 0){
-					x = 0;
-					y += 30;
-				}
+            x -= 110;
+            if ((
+                        i + 1
+                ) % 4 == 0) {
+                x = 0;
+                y += 30;
+            }
 
-				_ct.addChild(_uis[i].getUI());
-			}
-		}
+            _ct.addChild(_uis[i].getUI());
+        }
+    }
 
-	}
+}
 }
