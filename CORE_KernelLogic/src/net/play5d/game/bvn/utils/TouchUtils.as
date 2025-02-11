@@ -16,239 +16,246 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils
-{
-	import flash.display.DisplayObject;
-	import flash.display.Stage;
-	import flash.events.TouchEvent;
-	import flash.system.Capabilities;
-	import flash.utils.Dictionary;
-	import flash.utils.setTimeout;
+package net.play5d.game.bvn.utils {
+import flash.display.DisplayObject;
+import flash.display.Stage;
+import flash.events.TouchEvent;
+import flash.system.Capabilities;
+import flash.utils.Dictionary;
+import flash.utils.setTimeout;
+
+import net.play5d.game.bvn.GameConfig;
+import net.play5d.kyo.utils.ArrayMap;
 
-	import net.play5d.game.bvn.GameConfig;
-	import net.play5d.kyo.utils.ArrayMap;
+public class TouchUtils {
+    include '../../../../../../include/_INCLUDE_.as';
+
+    private static var _i:TouchUtils;
 
-	public class TouchUtils
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+    public static function get I():TouchUtils {
+        _i ||= new TouchUtils();
+        return _i;
+    }
 
-		private static var _i:TouchUtils;
+    public function TouchUtils() {
+    }
+    private var _oneFingerPoint:TouchPoint;
+    private var _oneFingerDraging:Boolean;
+    private var _callBackMap:Dictionary = new Dictionary();
+    private var _stage:Stage;
+    private var _checkDragDis:Number = 0;
+    private var _callTwoBackMap:Dictionary = new Dictionary();
+    private var _twoFingerMap:ArrayMap     = new ArrayMap();
+    private var _twoFingerDraging:Boolean;
+    private var _twoFingerDelta:Number     = 0;
 
-		public static function get I():TouchUtils{
-			_i ||= new TouchUtils();
-			return _i;
-		}
+    public function init(stage:Stage):void {
+        _stage        = stage;
+        _checkDragDis = cm2pixel(0.1);
+    }
 
-		private var _oneFingerPoint:TouchPoint;
-		private var _oneFingerDraging:Boolean;
+    public function isDraging():Boolean {
+        return _oneFingerDraging || _twoFingerDraging;
+    }
 
-		private var _callBackMap:Dictionary = new Dictionary();
+    // 单点触摸
+    // =======================================================================================================================
 
-		private var _stage:Stage;
+    public function listenOneFinger(d:DisplayObject, back:Function, dragX:Boolean = true, dragY:Boolean = true):void {
+        _callBackMap[d] = new TouchCallBack(back, dragX, dragY);
 
-		private var _checkDragDis:Number = 0;
+        d.removeEventListener(TouchEvent.TOUCH_BEGIN, oneFingerHandler);
+        d.addEventListener(TouchEvent.TOUCH_BEGIN, oneFingerHandler);
+    }
 
+    public function unlistenOneFinger(d:DisplayObject):void {
+        delete _callBackMap[d];
+        d.removeEventListener(TouchEvent.TOUCH_BEGIN, oneFingerHandler);
+    }
 
-		private var _callTwoBackMap:Dictionary = new Dictionary();
-		private var _twoFingerMap:ArrayMap = new ArrayMap();
-		private var _twoFingerDraging:Boolean;
-		private var _twoFingerDelta:Number = 0;
+    public function listenTwoFinger(d:DisplayObject, back:Function):void {
+        _callTwoBackMap[d] = new TouchTwoCallBack(back);
 
-		public function TouchUtils()
-		{
-		}
+        d.removeEventListener(TouchEvent.TOUCH_BEGIN, twoFingerHandler);
+        d.addEventListener(TouchEvent.TOUCH_BEGIN, twoFingerHandler);
+    }
 
-		public function init(stage:Stage):void{
-			_stage = stage;
-			_checkDragDis = cm2pixel(0.1);
-		}
+    public function unlistenTwoFinger(d:DisplayObject):void {
+        delete _callTwoBackMap[d];
+        d.removeEventListener(TouchEvent.TOUCH_BEGIN, twoFingerHandler);
+    }
 
-		public function isDraging():Boolean{
-			return _oneFingerDraging || _twoFingerDraging;
-		}
 
-		// 单点触摸 =======================================================================================================================
+    // 两点触摸
+    // =======================================================================================================================
 
-		public function listenOneFinger(d:DisplayObject, back:Function, dragX:Boolean = true, dragY:Boolean = true):void{
-			_callBackMap[d] = new TouchCallBack(back, dragX, dragY);
+    private function cm2pixel(cm:Number):Number {
+        var dpi:Number = Capabilities.screenDPI;
+        return (
+                       cm * dpi
+               ) / 2.54;
+    }
 
-			d.removeEventListener(TouchEvent.TOUCH_BEGIN, oneFingerHandler);
-			d.addEventListener(TouchEvent.TOUCH_BEGIN, oneFingerHandler);
-		}
+    private function oneFingerHandler(e:TouchEvent):void {
+        if (_oneFingerPoint) {
+            return;
+        }
 
-		public function unlistenOneFinger(d:DisplayObject):void{
-			delete _callBackMap[d];
-			d.removeEventListener(TouchEvent.TOUCH_BEGIN, oneFingerHandler);
-		}
+        var d:DisplayObject = e.currentTarget as DisplayObject;
 
-		private function oneFingerHandler(e:TouchEvent):void{
-			if(_oneFingerPoint) return;
+        if (_callBackMap[d]) {
+            (
+                    _callBackMap[d] as TouchCallBack
+            ).callBegin(e.stageX, e.stageY);
+        }
 
-			var d:DisplayObject = e.currentTarget as DisplayObject;
+        _oneFingerPoint = new TouchPoint(e.touchPointID);
 
-			if(_callBackMap[d]) (_callBackMap[d] as TouchCallBack).callBegin(e.stageX, e.stageY);
+        _oneFingerPoint.stageX = e.stageX;
+        _oneFingerPoint.stageY = e.stageY;
 
-			_oneFingerPoint = new TouchPoint(e.touchPointID);
+        _oneFingerPoint.target = d;
 
-			_oneFingerPoint.stageX = e.stageX;
-			_oneFingerPoint.stageY = e.stageY;
+        _oneFingerDraging = false;
 
-			_oneFingerPoint.target = d;
+        _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
+        _stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
 
-			_oneFingerDraging = false;
+        _stage.addEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
+        _stage.addEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
 
-			_stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
-			_stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
+    }
 
-			_stage.addEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
-			_stage.addEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
+    private function stageOneFingerHandler(e:TouchEvent):void {
+        if (e.touchPointID != _oneFingerPoint.touchId) {
+            return;
+        }
 
-		}
+        if (!_oneFingerPoint.target || !_callBackMap[_oneFingerPoint.target]) {
+            _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
+            _stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
 
-		private function stageOneFingerHandler(e:TouchEvent):void{
-			if(e.touchPointID != _oneFingerPoint.touchId) return;
+            _oneFingerPoint   = null;
+            _oneFingerDraging = false;
+            return;
+        }
 
-			if(!_oneFingerPoint.target || !_callBackMap[_oneFingerPoint.target]){
-				_stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
-				_stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
+        var tc:TouchCallBack = _callBackMap[_oneFingerPoint.target];
 
-				_oneFingerPoint = null;
-				_oneFingerDraging = false;
-				return;
-			}
+        if (e.type == TouchEvent.TOUCH_END) {
+            _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
+            _stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
 
-			var tc:TouchCallBack = _callBackMap[_oneFingerPoint.target];
+            tc.callEnd(e.stageX, e.stageY);
 
-			if(e.type == TouchEvent.TOUCH_END){
-				_stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
-				_stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
+            setTimeout(function ():void {
+                _oneFingerPoint   = null;
+                _oneFingerDraging = false;
+            }, 300);
 
-				tc.callEnd(e.stageX, e.stageY);
+            return;
+        }
 
-				setTimeout(function():void{
-					_oneFingerPoint = null;
-					_oneFingerDraging = false;
-				}, 300);
+        var deltaX:Number = e.stageX - _oneFingerPoint.stageX;
+        var deltaY:Number = e.stageY - _oneFingerPoint.stageY;
 
-				return;
-			}
+        if (!_oneFingerDraging) {
+            _oneFingerDraging = tc.getDragDistance(deltaX, deltaY) > _checkDragDis;
+            return;
+        }
 
-			var deltaX:Number = e.stageX - _oneFingerPoint.stageX;
-			var deltaY:Number = e.stageY - _oneFingerPoint.stageY;
+        _oneFingerPoint.stageX = e.stageX;
+        _oneFingerPoint.stageY = e.stageY;
 
-			if(!_oneFingerDraging){
-				_oneFingerDraging = tc.getDragDistance(deltaX, deltaY) > _checkDragDis;
-				return;
-			}
+        tc.callMoving(deltaX / GameConfig.GAME_SCALE.x, deltaY / GameConfig.GAME_SCALE.y);
 
-			_oneFingerPoint.stageX = e.stageX;
-			_oneFingerPoint.stageY = e.stageY;
+    }
 
-			tc.callMoving(deltaX / GameConfig.GAME_SCALE.x, deltaY / GameConfig.GAME_SCALE.y);
+    private function twoFingerHandler(e:TouchEvent):void {
+        if (_twoFingerMap.length > 2) {
+            return;
+        }
 
-		}
+        var d:DisplayObject = e.currentTarget as DisplayObject;
+        var tp:TouchPoint   = new TouchPoint(e.touchPointID);
 
+        tp.stageX = e.stageX;
+        tp.stageY = e.stageY;
+        tp.target = d;
 
-		// 两点触摸 =======================================================================================================================
+        _twoFingerMap.push(tp.touchId, tp);
 
-		public function listenTwoFinger(d:DisplayObject, back:Function):void{
-			_callTwoBackMap[d] = new TouchTwoCallBack(back);
+        if (_twoFingerMap.length == 2) {
+            _twoFingerDraging = false;
+            _twoFingerDelta   = 0;
 
-			d.removeEventListener(TouchEvent.TOUCH_BEGIN, twoFingerHandler);
-			d.addEventListener(TouchEvent.TOUCH_BEGIN, twoFingerHandler);
-		}
+            _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
+            _stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
 
-		public function unlistenTwoFinger(d:DisplayObject):void{
-			delete _callTwoBackMap[d];
-			d.removeEventListener(TouchEvent.TOUCH_BEGIN, twoFingerHandler);
-		}
+            _stage.addEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
+            _stage.addEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
 
-		private function twoFingerHandler(e:TouchEvent):void{
-			if(_twoFingerMap.length > 2) return;
+            if (_callTwoBackMap[d]) {
+                (
+                        _callTwoBackMap[d] as TouchTwoCallBack
+                ).callBegin();
+            }
+        }
 
-			var d:DisplayObject = e.currentTarget as DisplayObject;
-			var tp:TouchPoint = new TouchPoint(e.touchPointID);
+    }
 
-			tp.stageX = e.stageX;
-			tp.stageY = e.stageY;
-			tp.target = d;
 
-			_twoFingerMap.push(tp.touchId, tp);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			if(_twoFingerMap.length == 2){
-				_twoFingerDraging = false;
-				_twoFingerDelta = 0;
+    private function stageTwoFingerHandler(e:TouchEvent):void {
+        if (_twoFingerMap.length != 2) {
+            return;
+        }
 
-				_stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
-				_stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
+        var p1:TouchPoint = _twoFingerMap.getItemByIndex(0);
+        var p2:TouchPoint = _twoFingerMap.getItemByIndex(1);
 
-				_stage.addEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
-				_stage.addEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
+        if (!p1.target || !_callTwoBackMap[p1]) {
+            _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
+            _stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
 
-				if(_callTwoBackMap[d]) (_callTwoBackMap[d] as TouchTwoCallBack).callBegin();
-			}
+            _twoFingerMap = new ArrayMap();
 
-		}
+            return;
+        }
 
-		private function stageTwoFingerHandler(e:TouchEvent):void{
-			if(_twoFingerMap.length != 2) return;
+        var tc:TouchTwoCallBack = _twoFingerMap[p1.target];
 
-			var p1:TouchPoint = _twoFingerMap.getItemByIndex(0);
-			var p2:TouchPoint = _twoFingerMap.getItemByIndex(1);
+        if (e.type == TouchEvent.TOUCH_END) {
+            _twoFingerMap.removeItemById(e.touchPointID);
 
-			if(!p1.target || !_callTwoBackMap[p1]){
-				_stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
-				_stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
+            if (_twoFingerMap.length < 1) {
+                _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
+                _stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
 
-				_twoFingerMap = new ArrayMap();
+                tc.callEnd();
 
-				return;
-			}
+                setTimeout(function ():void {
+                    _twoFingerMap     = new ArrayMap();
+                    _twoFingerDraging = false;
+                    _twoFingerDelta   = 0;
+                }, 300);
+            }
 
-			var tc:TouchTwoCallBack = _twoFingerMap[p1.target];
+            return;
+        }
 
-			if(e.type == TouchEvent.TOUCH_END){
-				_twoFingerMap.removeItemById(e.touchPointID);
+        var delta:Number = Math.abs(p1.stageX - p2.stageX) + Math.abs(p1.stageY - p2.stageY);
+        if (!_twoFingerDraging) {
+            _twoFingerDraging = delta > _checkDragDis;
+        }
 
-				if(_twoFingerMap.length < 1){
-					_stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
-					_stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
+        _twoFingerDelta = delta - _twoFingerDelta;
+        tc.callMoving(_twoFingerDelta);
+    }
 
-					tc.callEnd();
-
-					setTimeout(function():void{
-						_twoFingerMap = new ArrayMap();
-						_twoFingerDraging = false;
-						_twoFingerDelta = 0;
-					}, 300);
-				}
-
-				return;
-			}
-
-			var delta:Number = Math.abs(p1.stageX - p2.stageX) + Math.abs(p1.stageY - p2.stageY);
-			if(!_twoFingerDraging){
-				_twoFingerDraging = delta > _checkDragDis;
-			}
-
-			_twoFingerDelta = delta - _twoFingerDelta;
-			tc.callMoving(_twoFingerDelta);
-		}
-
-
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		private function cm2pixel(cm:Number):Number{
-			var dpi:Number = Capabilities.screenDPI;
-			return (cm * dpi) / 2.54;
-		}
-
-	}
 }
-
-
-
-
+}
 
 
 /******************************************************************************************************
@@ -264,130 +271,134 @@ import flash.geom.Point;
 
 import net.play5d.game.bvn.utils.TouchMoveEvent;
 
-internal class TouchPoint{
-	public var touchId:int;
-
-	public var stageX:Number = 0;
-	public var stageY:Number = 0;
-
-	public var target:DisplayObject = null;
-
-	public function TouchPoint(touchId:int){
-		this.touchId = touchId;
-	}
+internal class TouchPoint {
+    public function TouchPoint(touchId:int) {
+        this.touchId = touchId;
+    }
+    public var touchId:int;
+    public var stageX:Number = 0;
+    public var stageY:Number = 0;
+    public var target:DisplayObject = null;
 
 }
 
-internal class TouchCallBack{
-	private var callback:Function;
+internal class TouchCallBack {
+    public function TouchCallBack(back:Function, dragX:Boolean = true, dragY:Boolean = true) {
+        this.callback = back;
+        this.dragX    = dragX;
+        this.dragY    = dragY;
+    }
+    private var callback:Function;
+    private var dragX:Boolean;
+    private var dragY:Boolean;
+    private var _startX:Number;
+    private var _startY:Number;
 
-	private var dragX:Boolean;
-	private var dragY:Boolean;
+    public function callBegin(startX:Number, startY:Number):void {
+        _startX = startX;
+        _startY = startY;
 
-	private var _startX:Number;
-	private var _startY:Number;
+        if (callback == null) {
+            return;
+        }
 
-	public function TouchCallBack(back:Function, dragX:Boolean = true, dragY:Boolean = true){
-		this.callback = back;
-		this.dragX = dragX;
-		this.dragY = dragY;
-	}
+        var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_BEGIN);
+        event.startX             = startX;
+        event.startY             = startY;
 
-	public function callBegin(startX:Number, startY:Number):void{
-		_startX = startX;
-		_startY = startY;
+        callback(event);
+    }
 
-		if(callback == null) return;
+    public function callEnd(endX:Number, endY:Number):void {
+        if (callback == null) {
+            return;
+        }
 
-		var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_BEGIN);
-		event.startX = startX;
-		event.startY = startY;
+        var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_END);
+        event.startX             = _startX;
+        event.startY             = _startY;
+        event.endX               = endX;
+        event.endY               = endY;
 
-		callback(event);
-	}
+        event.distanceX = event.endX - event.startX;
+        event.distanceY = event.endY - event.startY;
 
-	public function callEnd(endX:Number, endY:Number):void{
-		if(callback == null) return;
+        callback(event);
+    }
 
-		var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_END);
-		event.startX = _startX;
-		event.startY = _startY;
-		event.endX = endX;
-		event.endY = endY;
+    public function callMoving(deltaX:Number, deltaY:Number):void {
+        if (callback == null) {
+            return;
+        }
 
-		event.distanceX = event.endX - event.startX;
-		event.distanceY = event.endY - event.startY;
+        var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_MOVE);
+        event.startX             = _startX;
+        event.startY             = _startY;
 
-		callback(event);
-	}
+        event.deltaX = deltaX;
+        event.deltaY = deltaY;
 
-	public function callMoving(deltaX:Number, deltaY:Number):void{
-		if(callback == null) return;
+        callback(event);
+    }
 
-		var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_MOVE);
-		event.startX = _startX;
-		event.startY = _startY;
+    public function getDragDistance(deltaX:Number, deltaY:Number):Number {
 
-		event.deltaX = deltaX;
-		event.deltaY = deltaY;
+        if (dragX && dragY) {
+            return Math.abs(deltaX) + Math.abs(deltaY);
+        }
 
-		callback(event);
-	}
+        if (dragX) {
+            return Math.abs(deltaX);
+        }
 
-	public function getDragDistance(deltaX:Number, deltaY:Number):Number{
+        if (deltaY) {
+            return Math.abs(deltaY);
+        }
 
-		if(dragX && dragY){
-			return Math.abs(deltaX) + Math.abs(deltaY);
-		}
-
-		if(dragX){
-			return Math.abs(deltaX);
-		}
-
-		if(deltaY){
-			return Math.abs(deltaY);
-		}
-
-		return 0;
-	}
+        return 0;
+    }
 
 }
 
 
-internal class TouchTwoCallBack{
-	private var callback:Function;
+internal class TouchTwoCallBack {
+    public function TouchTwoCallBack(back:Function) {
+        this.callback = back;
+    }
+    private var callback:Function;
 
+    public function callBegin():void {
 
-	public function TouchTwoCallBack(back:Function){
-		this.callback = back;
-	}
+        if (callback == null) {
+            return;
+        }
 
-	public function callBegin():void{
+        var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_BEGIN);
+        callback(event);
+    }
 
-		if(callback == null) return;
+    public function callEnd():void {
+        if (callback == null) {
+            return;
+        }
 
-		var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_BEGIN);
-		callback(event);
-	}
+        var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_END);
+        callback(event);
+    }
 
-	public function callEnd():void{
-		if(callback == null) return;
+    public function callMoving(delta:Number):void {
+        if (callback == null) {
+            return;
+        }
 
-		var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_END);
-		callback(event);
-	}
+        var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_MOVE);
+        event.delta              = delta;
+        callback(event);
+    }
 
-	public function callMoving(delta:Number):void{
-		if(callback == null) return;
+    public function getDragDistance(pointA:Point, pointB:Point):Number {
 
-		var event:TouchMoveEvent = new TouchMoveEvent(TouchMoveEvent.TOUCH_MOVE);
-		event.delta = delta;
-		callback(event);
-	}
-
-	public function getDragDistance(pointA:Point, pointB:Point):Number{
-
-		return 0;
-	}
+        return 0;
+    }
 
 }

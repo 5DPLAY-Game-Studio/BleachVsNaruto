@@ -16,47 +16,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils
-{
-	import flash.display.DisplayObject;
-	import flash.display.Sprite;
+package net.play5d.game.bvn.utils {
+import flash.display.DisplayObject;
+import flash.display.Sprite;
 
-	public class DebugSprite extends Sprite{
-		include '../../../../../../include/_INCLUDE_.as';
-
-
-		public var target:DisplayObject;
+public class DebugSprite extends Sprite {
+    include '../../../../../../include/_INCLUDE_.as';
 
 
-		public function DebugSprite(color:uint, target:DisplayObject = null){
+    public function DebugSprite(color:uint, target:DisplayObject = null) {
 
-			var w:Number = target.width < 30 ? 30 : target.width;
-			var h:Number = target.height < 30 ? 30 : target.height;
+        var w:Number = target.width < 30 ? 30 : target.width;
+        var h:Number = target.height < 30 ? 30 : target.height;
 
-			this.x = target.x;
-			this.y = target.y;
-			this.graphics.beginFill(color, 1);
-			this.graphics.drawRect(0, 0, w, h);
+        this.x = target.x;
+        this.y = target.y;
+        this.graphics.beginFill(color, 1);
+        this.graphics.drawRect(0, 0, w, h);
 
-			this.target = target;
-		}
+        this.target = target;
+    }
+    public var target:DisplayObject;
 
-		public function applySet():void{
-			target.x = x;
-			target.y = y;
+    public function applySet():void {
+        target.x = x;
+        target.y = y;
 
-			trace("================== debug apply set ========================");
-			trace("x:", target.x, "y:", target.y, "width:", target.width, "height:", target.height);
-			trace("-----------------------------------------------------------");
-		}
+        trace('================== debug apply set ========================');
+        trace('x:', target.x, 'y:', target.y, 'width:', target.width, 'height:', target.height);
+        trace('-----------------------------------------------------------');
+    }
 
-		public function destory():void{
-			target = null;
-			try{
-				this.parent.removeChild(this);
-			}catch(e:Error){}
-		}
+    public function destory():void {
+        target = null;
+        try {
+            this.parent.removeChild(this);
+        }
+        catch (e:Error) {
+        }
+    }
 
-	}
+}
 
 }

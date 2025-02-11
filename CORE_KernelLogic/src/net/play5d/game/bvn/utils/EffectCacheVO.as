@@ -16,21 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils
-{
-	import net.play5d.game.bvn.data.EffectVO;
+package net.play5d.game.bvn.utils {
+import net.play5d.game.bvn.data.EffectVO;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class EffectCacheVO implements IInstanceVO
-	{
-		include '../../../../../../include/_INCLUDE_.as';
-		include '../../../../../../include/Clone.as';
+public class EffectCacheVO implements IInstanceVO {
+    include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/Clone.as';
 
-		public var normal:EffectVO;
-		public var mosouEnemy:EffectVO;
-
-		public function EffectCacheVO()
-		{
-		}
-	}
+    public function EffectCacheVO() {
+    }
+    public var normal:EffectVO;
+    public var mosouEnemy:EffectVO;
+}
 }

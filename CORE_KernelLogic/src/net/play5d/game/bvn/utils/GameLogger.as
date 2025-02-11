@@ -16,33 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils
-{
-	import net.play5d.game.bvn.interfaces.ILogger;
-
-	public class GameLogger
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+package net.play5d.game.bvn.utils {
+public class GameLogger {
+    include '../../../../../../include/_INCLUDE_.as';
 
 
 //		private static var _loger:ILoger;
 
-		public function GameLogger()
-		{
-		}
-
-		public static function setLoger(v:Object):void{
+    public static function setLoger(v:Object):void {
 //			_loger = v;
-		}
+    }
 
-		public static function log(v:String):void{
+    public static function log(v:String):void {
 //			if(_loger){
 //				_loger.log(v);
 //			}else{
 //				trace(v);
 //			}
-			trace(v);
-		}
+        trace(v);
+    }
 
-	}
+    public function GameLogger() {
+    }
+
+}
 }

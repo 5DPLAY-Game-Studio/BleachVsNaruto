@@ -16,176 +16,194 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils
-{
-	import flash.display.MovieClip;
-	import flash.utils.Dictionary;
+package net.play5d.game.bvn.utils {
+import flash.utils.Dictionary;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.game.bvn.data.EffectModel;
-	import net.play5d.game.bvn.data.EffectVO;
-	import net.play5d.game.bvn.fighter.FighterMain;
-	import net.play5d.game.bvn.fighter.models.HitVO;
-	import net.play5d.game.bvn.interfaces.IGameSprite;
-	import net.play5d.game.bvn.views.effects.BuffEffectView;
-	import net.play5d.game.bvn.views.effects.EffectView;
-	import net.play5d.game.bvn.views.effects.ShineEffectView;
-	import net.play5d.game.bvn.views.effects.SpecialEffectView;
-	import net.play5d.game.bvn.views.effects.SteelHitEffect;
+import net.play5d.game.bvn.data.EffectModel;
+import net.play5d.game.bvn.data.EffectVO;
+import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.models.HitVO;
+import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.views.effects.BuffEffectView;
+import net.play5d.game.bvn.views.effects.EffectView;
+import net.play5d.game.bvn.views.effects.ShineEffectView;
+import net.play5d.game.bvn.views.effects.SpecialEffectView;
+import net.play5d.game.bvn.views.effects.SteelHitEffect;
 
-	public class EffectManager
-	{
-		include '../../../../../../include/_INCLUDE_.as';
+public class EffectManager {
+    include '../../../../../../include/_INCLUDE_.as';
 
-		private var _viewCache:Dictionary = new Dictionary();
-		private var _hitCache:Dictionary = new Dictionary();
-		private var _defCache:Dictionary = new Dictionary();
-		private var _shineCache:Vector.<ShineEffectView> = new Vector.<ShineEffectView>();
-		public function EffectManager()
-		{
-		}
+    public function EffectManager() {
+    }
+    private var _viewCache:Dictionary                = new Dictionary();
+    private var _hitCache:Dictionary                 = new Dictionary();
+    private var _defCache:Dictionary                 = new Dictionary();
+    private var _shineCache:Vector.<ShineEffectView> = new Vector.<ShineEffectView>();
 
-		public function destory():void{
-			for each(var i:Vector.<EffectView> in _viewCache){
-				for each(var j:EffectView in i){
-					j.destory();
-				}
-			}
-			for each(var k:ShineEffectView in _shineCache){
-				k.destory();
-			}
+    public function destory():void {
+        for each(var i:Vector.<EffectView> in _viewCache) {
+            for each(var j:EffectView in i) {
+                j.destory();
+            }
+        }
+        for each(var k:ShineEffectView in _shineCache) {
+            k.destory();
+        }
 
-			_viewCache = null;
-			_hitCache = null;
-			_defCache = null;
-			_shineCache = null;
-		}
+        _viewCache  = null;
+        _hitCache   = null;
+        _defCache   = null;
+        _shineCache = null;
+    }
 
-		public function getHitEffectVOByHitVO(hitvo:HitVO, target:IGameSprite = null):EffectVO{
-			var cacheVO:EffectCacheVO = _hitCache[hitvo];
+    public function getHitEffectVOByHitVO(hitvo:HitVO, target:IGameSprite = null):EffectVO {
+        var cacheVO:EffectCacheVO = _hitCache[hitvo];
 
-			// 增加小兵的打击效果判断
-			var isMosouEnemy:Boolean = false;
-			if(target && target is FighterMain){
-				var f:FighterMain = (target as FighterMain)
-				isMosouEnemy = f.isMosouEnemy();
-			}
+        // 增加小兵的打击效果判断
+        var isMosouEnemy:Boolean = false;
+        if (target && target is FighterMain) {
+            var f:FighterMain = (
+                    target as FighterMain
+            );
+            isMosouEnemy      = f.isMosouEnemy();
+        }
 
-			if(cacheVO){
-				if(isMosouEnemy && cacheVO.mosouEnemy) return cacheVO.mosouEnemy;
-				if(!isMosouEnemy && cacheVO.normal) return cacheVO.normal;
-			}
-
-
-			var effect:EffectVO = isMosouEnemy ? EffectModel.I.getMosouEnemyHitEffect(hitvo.hitType) : EffectModel.I.getHitEffect(hitvo.hitType);
-			if(!effect){
-				_hitCache[hitvo] = null;
-				return null;
-			}
-
-			effect = effect.clone(effect.className) as EffectVO;
-
-			if(effect.shake){
-				if(effect.shake.pow != undefined && effect.shake.pow != 0){
-					effect.shake.y = effect.shake.pow;
-				}
-				if(effect.shake.x == 0 && effect.shake.y == 0) effect.shake.x = 3;
-
-			}
-
-			cacheVO = new EffectCacheVO();
-			if(isMosouEnemy){
-				cacheVO.mosouEnemy = effect;
-			}else{
-				cacheVO.normal = effect;
-			}
-
-			_hitCache[hitvo] = cacheVO;
+        if (cacheVO) {
+            if (isMosouEnemy && cacheVO.mosouEnemy) {
+                return cacheVO.mosouEnemy;
+            }
+            if (!isMosouEnemy && cacheVO.normal) {
+                return cacheVO.normal;
+            }
+        }
 
 
-			return effect;
-		}
+        var effect:EffectVO = isMosouEnemy ? EffectModel.I.getMosouEnemyHitEffect(hitvo.hitType) :
+                              EffectModel.I.getHitEffect(hitvo.hitType);
+        if (!effect) {
+            _hitCache[hitvo] = null;
+            return null;
+        }
 
-		public function getDefenseEffectVOByHitVO(hitvo:HitVO, defenseType:int, target:IGameSprite = null):EffectVO{
-			var cacheVO:EffectCacheVO = _defCache[hitvo];
+        effect = effect.clone(effect.className) as EffectVO;
 
-			// 增加小兵的打击效果判断
-			var isMosouEnemy:Boolean = false;
-			if(target && target is FighterMain){
-				var f:FighterMain = (target as FighterMain)
-				isMosouEnemy = f.isMosouEnemy();
-			}
+        if (effect.shake) {
+            if (effect.shake.pow != undefined && effect.shake.pow != 0) {
+                effect.shake.y = effect.shake.pow;
+            }
+            if (effect.shake.x == 0 && effect.shake.y == 0) {
+                effect.shake.x = 3;
+            }
 
-			if(cacheVO){
-				if(isMosouEnemy && cacheVO.mosouEnemy) return cacheVO.mosouEnemy;
-				if(!isMosouEnemy && cacheVO.normal) return cacheVO.normal;
-			}
+        }
 
+        cacheVO = new EffectCacheVO();
+        if (isMosouEnemy) {
+            cacheVO.mosouEnemy = effect;
+        }
+        else {
+            cacheVO.normal = effect;
+        }
 
-			var effect:EffectVO = isMosouEnemy ? EffectModel.I.getMosouEnemyDefenseEffect(hitvo.hitType, defenseType) : EffectModel.I.getDefenseEffect(hitvo.hitType, defenseType);
-			if(!effect){
-				_defCache[hitvo] = null;
-				return null;
-			}
-
-			effect = effect.clone(effect.className) as EffectVO;
-
-			cacheVO = new EffectCacheVO();
-			if(isMosouEnemy){
-				cacheVO.mosouEnemy = effect;
-			}else{
-				cacheVO.normal = effect;
-			}
-
-			_defCache[hitvo] = cacheVO;
-
-			return effect;
-		}
+        _hitCache[hitvo] = cacheVO;
 
 
+        return effect;
+    }
 
-		public function getEffectView(data:EffectVO):EffectView{
-			var evs:Vector.<EffectView> = _viewCache[data];
-			if(evs){
-				var l:int = evs.length;
-				for(var i:int ; i < l ; i++){
-					if(!evs[i].isActive){
-						return evs[i];
-					}
-				}
-			}else{
-				evs = new Vector.<EffectView>();
-				_viewCache[data] = evs;
-			}
+    public function getDefenseEffectVOByHitVO(hitvo:HitVO, defenseType:int, target:IGameSprite = null):EffectVO {
+        var cacheVO:EffectCacheVO = _defCache[hitvo];
 
-			var effectView:EffectView;
+        // 增加小兵的打击效果判断
+        var isMosouEnemy:Boolean = false;
+        if (target && target is FighterMain) {
+            var f:FighterMain = (
+                    target as FighterMain
+            );
+            isMosouEnemy      = f.isMosouEnemy();
+        }
 
-			if(data.isSpecial){
-				effectView = new SpecialEffectView(data);
-			}else if(data.isBuff){
-				effectView = new BuffEffectView(data);
-			}else if(data.isSteelHit){
-				effectView = new SteelHitEffect(data);
-			}else{
-				effectView = new EffectView(data);
-			}
+        if (cacheVO) {
+            if (isMosouEnemy && cacheVO.mosouEnemy) {
+                return cacheVO.mosouEnemy;
+            }
+            if (!isMosouEnemy && cacheVO.normal) {
+                return cacheVO.normal;
+            }
+        }
 
-			evs.push(effectView);
 
-			return effectView;
-		}
+        var effect:EffectVO = isMosouEnemy ? EffectModel.I.getMosouEnemyDefenseEffect(hitvo.hitType, defenseType) :
+                              EffectModel.I.getDefenseEffect(hitvo.hitType, defenseType);
+        if (!effect) {
+            _defCache[hitvo] = null;
+            return null;
+        }
 
-		public function getShine():ShineEffectView{
-			var l:int = _shineCache.length;
-			for(var i:int ; i < l ; i++){
-				if(!_shineCache[i].isActive) return _shineCache[i];
-			}
+        effect = effect.clone(effect.className) as EffectVO;
 
-			var se:ShineEffectView = new ShineEffectView();
-			_shineCache.push(se);
+        cacheVO = new EffectCacheVO();
+        if (isMosouEnemy) {
+            cacheVO.mosouEnemy = effect;
+        }
+        else {
+            cacheVO.normal = effect;
+        }
 
-			return se;
-		}
+        _defCache[hitvo] = cacheVO;
 
-	}
+        return effect;
+    }
+
+
+    public function getEffectView(data:EffectVO):EffectView {
+        var evs:Vector.<EffectView> = _viewCache[data];
+        if (evs) {
+            var l:int = evs.length;
+            for (var i:int; i < l; i++) {
+                if (!evs[i].isActive) {
+                    return evs[i];
+                }
+            }
+        }
+        else {
+            evs              = new Vector.<EffectView>();
+            _viewCache[data] = evs;
+        }
+
+        var effectView:EffectView;
+
+        if (data.isSpecial) {
+            effectView = new SpecialEffectView(data);
+        }
+        else if (data.isBuff) {
+            effectView = new BuffEffectView(data);
+        }
+        else if (data.isSteelHit) {
+            effectView = new SteelHitEffect(data);
+        }
+        else {
+            effectView = new EffectView(data);
+        }
+
+        evs.push(effectView);
+
+        return effectView;
+    }
+
+    public function getShine():ShineEffectView {
+        var l:int = _shineCache.length;
+        for (var i:int; i < l; i++) {
+            if (!_shineCache[i].isActive) {
+                return _shineCache[i];
+            }
+        }
+
+        var se:ShineEffectView = new ShineEffectView();
+        _shineCache.push(se);
+
+        return se;
+    }
+
+}
 }

@@ -32,11 +32,6 @@ public class MultiLangUtils {
     // 单例
     private static var _instance:MultiLangUtils;
 
-    // 解析的语言对象
-    private var _languageObj:Object;
-    // 多语言缓存池
-    private var _cacheObj:Object = {};
-
     /**
      * 单例
      */
@@ -44,6 +39,10 @@ public class MultiLangUtils {
         _instance ||= new MultiLangUtils();
         return _instance;
     }
+    // 解析的语言对象
+    private var _languageObj:Object;
+    // 多语言缓存池
+    private var _cacheObj:Object = {};
 
     /**
      * 初始化
@@ -92,7 +91,7 @@ public class MultiLangUtils {
             return _cacheObj[tree];
         }
 
-        var text:String     = ClassUtils.continuousAccess(_languageObj, tree.split(SEPARATOR));
+        var text:String = ClassUtils.continuousAccess(_languageObj, tree.split(SEPARATOR));
         if (!text) {
             return null;
         }
