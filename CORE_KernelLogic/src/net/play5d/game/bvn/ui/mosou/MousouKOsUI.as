@@ -16,29 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou
-{
-	import flash.display.Sprite;
+package net.play5d.game.bvn.ui.mosou {
+import flash.display.Sprite;
 
-	import net.play5d.game.bvn.ctrler.AssetManager;
-	import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-	import net.play5d.kyo.display.bitmap.BitmapFontText;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.kyo.display.bitmap.BitmapFontText;
 
-	public class MousouKOsUI
-	{
-		include '../../../../../../../include/_INCLUDE_.as';
+public class MousouKOsUI {
+    include '../../../../../../../include/_INCLUDE_.as';
 
-		private var _ct:Sprite;
-		private var _text:BitmapFontText;
-		public function MousouKOsUI(ui:Sprite)
-		{
-			_text = new BitmapFontText(AssetManager.I.getFont('font1'));
-			ui.addChild(_text);
-		}
+    public function MousouKOsUI(ui:Sprite) {
+        _text = new BitmapFontText(AssetManager.I.getFont('font1'));
+        ui.addChild(_text);
+    }
+    private var _ct:Sprite;
+    private var _text:BitmapFontText;
 
-		public function update():void{
-			_text.text = GameCtrl.I.getMosouCtrl().gameRunData.koNum.toString();
-		}
+    public function update():void {
+        _text.text = GameCtrl.I.getMosouCtrl().gameRunData.koNum.toString();
+    }
 
-	}
+}
 }
