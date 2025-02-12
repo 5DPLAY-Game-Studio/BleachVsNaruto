@@ -50,6 +50,7 @@
 ## 工程结构
 
 - `BleachVsNaruto_FlashSrc` - 所需部分二进制文件（扩展名：swf）的源文件（扩展名：fla 或 xfl）
+- `CORE_Components` - 游戏可交互组件
 - `CORE_KernelLogic` - 游戏核心逻辑
 - `CORE_Shared` - 游戏对外公共接口
 - `CORE_Utils` - 游戏部分共用实用程序集

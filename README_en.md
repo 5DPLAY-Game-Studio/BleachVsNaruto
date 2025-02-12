@@ -50,6 +50,7 @@ To build this program from source, you should read the [HOW2BUILD.md](HOW2BUILD.
 ## Engineering Structure
 
 - `BleachVsNaruto_FlashSrc` - Source files (extension: fla or xfl) of the required binary files (extension: swf)
+- `CORE_Components` - Game interactive components
 - `CORE_KernelLogic` - Game core logic
 - `CORE_Shared` - Game external public interface
 - `CORE_Utils` - A collection of common utilities for some games
