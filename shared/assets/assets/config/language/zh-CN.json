@@ -114,7 +114,7 @@
           "open_map_area": "开放地图探索区域： {}"
         },
         "fighter_vo": {
-          "undefined_bgm": "FighterVO.initByXML :: ID  为 {} 的角色值对象未定义背景音乐！"
+          "undefined_bgm": "FighterVO.initByXML:: ID  为 {} 的角色值对象未定义背景音乐！"
         },
         "game_data": {
           "load_select_error": "加载 选择数据 出错！"
@@ -145,6 +145,9 @@
         },
         "debug_util": {
           "debug_position": "DebugUtil.debugPosition:: 调试位置失败！"
+        },
+        "fighter_mc": {
+          "keyframe_not_exist": "关键帧不存在： {}"
         }
       }
     },
@@ -206,6 +209,11 @@
         "fighter_main": {
           "main_mc_is_null"           : "创建人物失败！mainMc 为空！",
           "fighter_ctrler_initialized": "fighter 已完成初始化！"
+        },
+        "fighter_mc": {
+          "render_animate" : "FighterMC.renderAnimate:: 渲染出错： {}",
+          "go_frame"       : "FighterMC.goFrame:: 渲染出错： {}",
+          "render_children": "FighterMC.renderChildren:: 渲染出错： {}"
         }
       }
     }

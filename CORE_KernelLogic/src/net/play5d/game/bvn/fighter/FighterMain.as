@@ -488,7 +488,6 @@ public class FighterMain extends BaseGameSprite {
     public function initlize():void {
 
         if (_fighterCtrl) {
-            throw new Error('fighter 已完成化！');
             ThrowError(Error, GetLang('debug.error.data.fighter_main.fighter_ctrler_initialized'));
             return;
         }

@@ -153,7 +153,7 @@ public class FighterMC {
                 _mc.nextFrame();
             }
             catch (e:Error) {
-                trace('FighterMC.renderAnimate', e);
+                throw new Error(GetLang('debug.error.data.fighter_mc.render_animate', e.getStackTrace()));
             }
         }
         renderChildren();
@@ -214,10 +214,10 @@ public class FighterMC {
             _mc.gotoAndStop(name);
         }
         catch (e:Error) {
-            trace('FighterMC.goFrame', e);
+            throw new Error(GetLang('debug.error.data.fighter_mc.go_frame', e.getStackTrace()))
         }
-        renderChildren();
 
+        renderChildren();
     }
 
     /**
@@ -251,7 +251,8 @@ public class FighterMC {
 //				if(i.name == name) return true;
 //			}
         _undefinedFrames.push(name);
-        trace('未找到帧：' + name);
+
+        TraceLang('debug.trace.data.fighter_mc.keyframe_not_exist', name);
         return false;
     }
 
@@ -400,7 +401,7 @@ public class FighterMC {
                 }
             }
             catch (e:Error) {
-                trace('FighterMC.renderChildren', e);
+                throw new Error(GetLang('debug.error.data.fighter_mc.render_children', e.getStackTrace()))
             }
 
         }
