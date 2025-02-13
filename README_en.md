@@ -1,5 +1,7 @@
 # Bleach vs Naruto <!-- omit in toc -->
 
+![bvn](title.png "bvn")
+
 [中文版](README.md) | [English](README_en.md)
 
 **Bleach vs Naruto** is a new concept strategy fighting game developed by **剑jian** and its production team **5DPLAY Game Studio**.
