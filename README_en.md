@@ -1,3 +1,27 @@
+<p align = "center">
+<a href  = "https://bvn-sports.com/"><img src = "title.png" /></a>
+</p>
+
+<p align = "center">
+<img src = "https://img.shields.io/github/stars/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/forks/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/followers/5DPLAY-Game-Studio" />
+<br />
+<img src = "https://img.shields.io/github/contributors/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/created-at/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/license/5DPLAY-Game-Studio/BleachVsNaruto" />
+<br />
+<img src = "https://img.shields.io/github/languages/top/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/v/tag/5DPLAY-Game-Studio/BleachVsNaruto" />
+<br />
+<strong>
+<a href = "https://bvn-sports.com/">Website</a> |
+<a href = "https://space.bilibili.com/1340107883">BiliBili</a> |
+<a href = "https://www.douyin.com/user/MS4wLjABAAAAJ2UeSAz7T6qx7XSSL70IgfuMsZZaxOIvPIL3Zdvmk8rSAoBfNfngGx7Zy2jFSnYj">TikTok</a> |
+<a href = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg4ODE1MjgyNw==">WeChat Official Account</a>
+</strong>
+</p>
+
 # Bleach vs Naruto <!-- omit in toc -->
 
 ![bvn](title.png "bvn")
@@ -21,17 +45,6 @@ Here, you can challenge the limits of your own operation and reaction, or you ca
 - [Follow us](#follow-us)
 
 ## Project Status
-
-![Star:Latest](https://img.shields.io/github/stars/5DPLAY-Game-Studio/BleachVsNaruto)
-![Fork:Latest](https://img.shields.io/github/forks/5DPLAY-Game-Studio/BleachVsNaruto)
-![Follower:Latest](https://img.shields.io/github/followers/5DPLAY-Game-Studio)
-
-![Contributors:Latest](https://img.shields.io/github/contributors/5DPLAY-Game-Studio/BleachVsNaruto)
-![Created:Latest](https://img.shields.io/github/created-at/5DPLAY-Game-Studio/BleachVsNaruto)
-![License:Latest](https://img.shields.io/github/license/5DPLAY-Game-Studio/BleachVsNaruto)
-
-![TopLanguage:Latest](https://img.shields.io/github/languages/top/5DPLAY-Game-Studio/BleachVsNaruto)
-![Tag:Latest](https://img.shields.io/github/v/tag/5DPLAY-Game-Studio/BleachVsNaruto)
 
 **Bleach vs Naruto** is written in ***ActionScript 3.0*** scripting language and its main supported platforms include **Windows, MacOS, Android** .
 

@@ -1,6 +1,28 @@
-# 死神vs火影 <!-- omit in toc -->
+<p align = "center">
+<a href  = "https://bvn-sports.com/"><img src = "title.png" /></a>
+</p>
 
-![bvn](title.png "bvn")
+<p align = "center">
+<img src = "https://img.shields.io/github/stars/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/forks/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/followers/5DPLAY-Game-Studio" />
+<br />
+<img src = "https://img.shields.io/github/contributors/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/created-at/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/license/5DPLAY-Game-Studio/BleachVsNaruto" />
+<br />
+<img src = "https://img.shields.io/github/languages/top/5DPLAY-Game-Studio/BleachVsNaruto" />
+<img src = "https://img.shields.io/github/v/tag/5DPLAY-Game-Studio/BleachVsNaruto" />
+<br />
+<strong>
+<a href = "https://bvn-sports.com/">官网</a> |
+<a href = "https://space.bilibili.com/1340107883">哔哩哔哩</a> |
+<a href = "https://www.douyin.com/user/MS4wLjABAAAAJ2UeSAz7T6qx7XSSL70IgfuMsZZaxOIvPIL3Zdvmk8rSAoBfNfngGx7Zy2jFSnYj">抖音</a> |
+<a href = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg4ODE1MjgyNw==">微信公众号</a>
+</strong>
+</p>
+
+# 死神vs火影 <!-- omit in toc -->
 
 [中文版](README.md) | [English](README_en.md)
 
@@ -21,17 +43,6 @@
 - [关注我们](#关注我们)
 
 ## 工程状态
-
-![Star:Latest](https://img.shields.io/github/stars/5DPLAY-Game-Studio/BleachVsNaruto)
-![Fork:Latest](https://img.shields.io/github/forks/5DPLAY-Game-Studio/BleachVsNaruto)
-![Follower:Latest](https://img.shields.io/github/followers/5DPLAY-Game-Studio)
-
-![Contributors:Latest](https://img.shields.io/github/contributors/5DPLAY-Game-Studio/BleachVsNaruto)
-![Created:Latest](https://img.shields.io/github/created-at/5DPLAY-Game-Studio/BleachVsNaruto)
-![License:Latest](https://img.shields.io/github/license/5DPLAY-Game-Studio/BleachVsNaruto)
-
-![TopLanguage:Latest](https://img.shields.io/github/languages/top/5DPLAY-Game-Studio/BleachVsNaruto)
-![Tag:Latest](https://img.shields.io/github/v/tag/5DPLAY-Game-Studio/BleachVsNaruto)
 
 **死神vs火影** 使用 ***ActionScript 3.0*** 脚本语言编写，主要支持平台包括 **Windows, MacOS, Android** 。
 
