@@ -47,7 +47,7 @@ import net.play5d.kyo.display.ui.KyoSimpButton;
 [SWF(width='1000', height='600', frameRate='30', backgroundColor='#000000')]
 public class SelectTester extends Sprite {
     public function SelectTester() {
-        GameStageLoadCtrl.IGORE_OLD_FIGHTER = true;
+        GameStageLoadCtrl.IGNORE_OLD_FIGHTER = true;
 
         if (stage) {
             initlize();
@@ -210,6 +210,9 @@ public class SelectTester extends Sprite {
 
     private function initlize(e:Event = null):void {
         removeEventListener(Event.ADDED_TO_STAGE, initlize);
+
+        // 开启调试模式
+        GameConfig.DEBUG_MODE = true;
 
 //			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
 

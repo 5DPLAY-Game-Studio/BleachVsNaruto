@@ -39,6 +39,7 @@ public function get _ALL_GLOBALS_():* {
         GetLangText,
         GetRuntimeType,
         IsAIR,
+        IsDebugger,
         IsHarmanRuntime,
         IsMobile,
         P1,

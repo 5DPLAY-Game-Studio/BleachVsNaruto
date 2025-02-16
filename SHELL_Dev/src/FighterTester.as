@@ -62,9 +62,8 @@ public class FighterTester extends Sprite {
     private const KEY:String = 'text';
 
     public function FighterTester() {
-//			trace("98098098098");
-
-        GameStageLoadCtrl.IGORE_OLD_FIGHTER = true;
+        // 忽略旧版角色
+        GameStageLoadCtrl.IGNORE_OLD_FIGHTER = true;
 
         if (stage) {
             initlize();
@@ -85,11 +84,6 @@ public class FighterTester extends Sprite {
     private var _fpsInput:PopUpListView;
     private var _debugText:Label;
 
-//		[Embed(source="/assets/font/font1.png")]
-//		private var _font1:Class;
-//
-//		[Embed(source="/assets/font/font1.xml", mimeType="application/octet-stream"))]
-//		private var _font1XML:Class;
     private var _gameSprite:Sprite;
     private var _assetLoader:AssetLoader = new AssetLoader();
 
@@ -439,7 +433,6 @@ public class FighterTester extends Sprite {
         changeFPS();
 
         GameMode.currentMode = GameMode.TRAINING;
-//			GameMode.currentMode = GameMode.SINGLE_VS_CPU;
 
         TrainingCtrler.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == '启用';
 
@@ -457,7 +450,6 @@ public class FighterTester extends Sprite {
 
     private function loadGame():void {
         var ls:LoadingStage = new LoadingStage();
-//			var ls:TestLoadingStage = new TestLoadingStage();
         MainGame.stageCtrl.goStage(ls, true);
     }
 
@@ -468,9 +460,10 @@ public class FighterTester extends Sprite {
     private function initlize(e:Event = null):void {
         removeEventListener(Event.ADDED_TO_STAGE, initlize);
 
-        stage.stageFocusRect = false;
+        // 开启调试模式
+        GameConfig.DEBUG_MODE = true;
 
-        //Theme.setTheme(new SteelPopUpListViewStyles());
+        stage.stageFocusRect = false;
 
 //			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
 
@@ -506,7 +499,8 @@ public class FighterTester extends Sprite {
 
         }, initFailHandler);
 
-        StateCtrl.I.transEnabled = false;//跳过黑屏遮盖
+        // 跳过黑屏遮盖
+        StateCtrl.I.transEnabled = false;
 
         Debugger.initDebug(stage);
         Debugger.onErrorMsgCall = onDebugLog;

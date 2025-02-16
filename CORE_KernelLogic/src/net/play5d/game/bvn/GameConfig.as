@@ -23,12 +23,40 @@ import flash.geom.Point;
 public class GameConfig {
     include '../../../../../include/_INCLUDE_.as';
 
-    public static const G:Number                           = 12; //重力
-    public static const G_ADD:Number                       = 1.2; //重力加速度
-    public static const G_ON_FLOOR:Number                  = 4; //在地面上的重力
-    public static const GAME_SIZE:Point                    = new Point(800, 600); //游戏尺寸
-    public static const FPS_UI:int                         = 30;  //UI界面帧率
-    public static const FPS_ANIMATE:int                    = 30; //动画帧率
+    // 调试模式
+    public static var DEBUG_MODE:Boolean = false;
+    // 触屏模式
+    public static var TOUCH_MODE:Boolean = false;
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    // 重力
+    public static const G:Number          = 12;
+    // 重力加速度
+    public static const G_ADD:Number      = 1.2;
+    // 在地面上的重力
+    public static const G_ON_FLOOR:Number = 4;
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    // 游戏尺寸
+    public static const GAME_SIZE:Point = new Point(800, 600);
+    // 游戏与场景之间的比例
+    public static var GAME_SCALE:Point  = new Point(1, 1);
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    // 游戏帧率
+    public static var FPS_GAME:int         = 60;
+    // UI界面帧率
+    public static const FPS_UI:int         = 30;
+    // 动画帧率
+    public static const FPS_ANIMATE:int    = 30;
+    // 闪光效果的FPS
+    public static var FPS_SHINE_EFFECT:int = 15;
+
+    ///////////////////////////////////////////////////////////////////////////
+
     public static const BULLET_HOLD_FRAME_PLUS:Number      = 2; //发射的波，子弹的持续时间比率
     public static const JUMP_DELAY_FRAME:int               = 2; //跳时，停留在起跳时的帧数，延时(动画FPS)
     public static const JUMP_DELAY_FRAME_AIR:int           = 1; //跳时，停留在起跳时的帧数，延时(动画FPS)
@@ -67,6 +95,7 @@ public class GameConfig {
     public static const HURT_DOWN_JUMP_FRAME:int           = 20; //倒地起身的帧数
     public static const HURT_DOWN_JUMP_DAMPING:int         = 1; //倒地起身的速度减值
 
+    ///////////////////////////////////////////////////////////////////////////
 
     // 使用能量后，等待一定时间后自动加能量（秒）
     public static const USE_ENERGY_CD:Number                  = 0.8;
@@ -83,6 +112,7 @@ public class GameConfig {
     // 受到破防攻击时候，耐力减少的比例
     public static const ENERGY_LOSE_DEFENSE_BREAK_RATE:Number = 0.9;
 
+    ///////////////////////////////////////////////////////////////////////////
 
     // 0.02 必杀攻击到对方的气增量
     public static const QI_ADD_HIT_BISHA_RATE:Number    = 0;
@@ -103,13 +133,11 @@ public class GameConfig {
     // 每一帧增加的辅助气量
     public static const FUZHU_QI_ADD_PERFRAME:Number    = 0.2;
 
+    ///////////////////////////////////////////////////////////////////////////
 
     public static const CAMERA_TWEEN_SPD:Number  = 2.5;
     public static const FIGHTER_HP_MAX:int       = 1000;
-    public static var TOUCH_MODE:Boolean         = false;
-    public static var GAME_SCALE:Point           = new Point(1, 1); //游戏与场景之间的比例
-    public static var FPS_GAME:int               = 60;  //游戏帧率
-    public static var FPS_SHINE_EFFECT:int       = 15; //闪光效果的FPS
+
     public static var QUALITY_UI:String          = StageQuality.HIGH; //UI界面画质
     public static var QUALITY_GAME:String        = StageQuality.MEDIUM; //游戏界面画质
     public static var SHOW_HOW_TO_PLAY:Boolean   = true;

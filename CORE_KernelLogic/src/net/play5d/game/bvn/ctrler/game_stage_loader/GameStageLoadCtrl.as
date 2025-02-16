@@ -36,7 +36,8 @@ import net.play5d.game.bvn.data.MapVO;
 public class GameStageLoadCtrl extends EventDispatcher {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public static var IGORE_OLD_FIGHTER:Boolean = false;
+    // 是否忽略旧版角色
+    public static var IGNORE_OLD_FIGHTER:Boolean = false;
     private static var _i:GameStageLoadCtrl;
 
     public static function get I():GameStageLoadCtrl {
@@ -326,7 +327,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             }
 
 
-            if (IGORE_OLD_FIGHTER) {
+            if (IGNORE_OLD_FIGHTER) {
                 GameLoader.loadSWF(lv.url, loadSucc2, onLoadError, onLoadProcess);
             }
             else {
@@ -347,7 +348,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
                 _assisterCache[lv.url] = {
                     domain: l.contentLoaderInfo.applicationDomain,
                     mc    : (
-                            IGORE_OLD_FIGHTER ? l.content : null
+                            IGNORE_OLD_FIGHTER ? l.content : null
                     )
                 };
                 disposeLoader(l);
@@ -369,7 +370,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
                 succBack();
             }
 
-            if (IGORE_OLD_FIGHTER) {
+            if (IGNORE_OLD_FIGHTER) {
                 GameLoader.loadSWF(lv.url, loadSucc2, onLoadError, onLoadProcess);
             }
             else {
