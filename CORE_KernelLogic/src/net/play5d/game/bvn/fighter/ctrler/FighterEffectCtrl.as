@@ -20,6 +20,7 @@ package net.play5d.game.bvn.fighter.ctrler {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
+import flash.display.MovieClip;
 import flash.filters.GlowFilter;
 import flash.geom.Point;
 
@@ -28,6 +29,8 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.events.FighterEvent;
+import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 
 public class FighterEffectCtrl {
@@ -243,6 +246,33 @@ public class FighterEffectCtrl {
         endGhostStep();
         endGlow();
         endShadow();
+    }
+
+    /**
+     * 添加一个跟随特效视图
+     * @param mcName 特效 mc 名称
+     * @param isUnderBody 是否在角色身体图层下方
+     */
+    public function addFollowEffect(mcName:String, isUnderBody:Boolean = false):void {
+        var fighter:FighterMain = _target is FighterMain ? _target as FighterMain : null;
+        if (!fighter) {
+            return;
+        }
+
+        var mc:MovieClip = fighter.getMC().getChildByName(mcName) as MovieClip;
+        if (!mc) {
+            fighter.setAnimateFrameOut(function():void {
+                addFollowEffect(mcName);
+            }, 1);
+
+            return;
+        }
+
+        var params:Object = {};
+        params.mc = mc;
+        params.isUnderBody = isUnderBody;
+
+        FighterEventDispatcher.dispatchEvent(fighter, FighterEvent.ADD_EFFECT, params);
     }
 
     private function getFace(id:String):DisplayObject {

@@ -23,59 +23,182 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.data.TeamVO;
 import net.play5d.game.bvn.fighter.models.HitVO;
 
+/**
+ * 游戏元件接口
+ */
 public interface IGameSprite {
-    function get direct():int;
 
+    /**
+     * 方向
+     */
+    function get direct():int;
     function set direct(value:int):void;
 
+    /**
+     * 坐标 x
+     */
     function get x():Number;
-
     function set x(v:Number):void;
 
+    /**
+     * 坐标 y
+     */
     function get y():Number;
-
     function set y(v:Number):void;
 
-    function get team():TeamVO;  //队伍，同一队伍不可攻击，不能队伍可攻击
+//    /**
+//     * 宽度
+//     */
+//    function get width():Number;
+//
+//    /**
+//     * 高度
+//     */
+//    function get height():Number;
 
+    /**
+     * 队伍，同一队伍不可攻击
+     */
+    function get team():TeamVO;
     function set team(v:TeamVO):void;
 
+    ////////////////////////////////////////////////////////////
+
+    /**
+     * 销毁
+     * @param dispose 处理
+     */
     function destory(dispose:Boolean = true):void;
 
-    function isDestoryed():Boolean; //是否已销毁
+    /**
+     * 是否已销毁
+     * @return 是否已销毁
+     */
+    function isDestoryed():Boolean;
 
-    function render():void;  //处理逻辑使用，按GameConfig.FPS_MAIN帧率调用
+    ////////////////////////////////////////////////////////////
 
-//		function get width():Number;
-//		function get height():Number;
+    /**
+     * 处理逻辑使用，按 GameConfig.FPS_MAIN 帧率调用
+     */
+    function render():void;
 
-    function renderAnimate():void; //处理动画渲染，按GameConfig.FPS_ANIMATE帧率调用
+    /**
+     * 处理动画渲染，按GameConfig.FPS_ANIMATE帧率调用
+     */
+    function renderAnimate():void;
 
-    function getDisplay():DisplayObject;  //返回显示对象
 
-//		function applayG(g:Number):void;
-//		function setInAir(v:Boolean):void;
 
-    function hit(hitvo:HitVO, target:IGameSprite):void; //攻击到其他人
-    function beHit(hitvo:HitVO, hitRect:Rectangle = null):void; //被攻击
+    /**
+     * 返回显示对象
+     * @return 显示对象
+     */
+    function getDisplay():DisplayObject;
 
-    function getArea():Rectangle; //返回自身的区域
-    function getBodyArea():Rectangle; //返回被打的区域
-    function getCurrentHits():Array; //返回当前攻击的区域,[FighterHitVO]
+//    /**
+//     * 应用重力
+//     * @param g 重力大小
+//     */
+//    function applyG(g:Number):void;
+//
+//    /**
+//     * 置是否在空中
+//     * @param v 是否在空中
+//     */
+//    function setInAir(v:Boolean):void;
 
-    function allowCrossMapXY():Boolean; //是否可穿越地图的XY
-    function allowCrossMapBottom():Boolean; //是否可穿越地图的底
+    ////////////////////////////////////////////////////////////
 
+    /**
+     * 攻击到其他人
+     * @param hitVO 攻击值对象
+     * @param target 目标游戏元件
+     */
+    function hit(hitVO:HitVO, target:IGameSprite):void;
+
+    /**
+     * 被攻击
+     * @param hitVO 攻击值对象
+     * @param hitRect 攻击矩形
+     */
+    function beHit(hitVO:HitVO, hitRect:Rectangle = null):void;
+
+    ////////////////////////////////////////////////////////////
+
+    /**
+     * 返回自身的区域
+     * @return 自身的区域
+     */
+    function getArea():Rectangle;
+
+    /**
+     * 返回被打的区域
+     * @return 被打的区域
+     */
+    function getBodyArea():Rectangle;
+
+    /**
+     * 返回当前攻击的区域
+     * @return 当前攻击的区域 [FighterHitVO]
+     */
+    function getCurrentHits():Array;
+
+    ////////////////////////////////////////////////////////////
+
+    /**
+     * 是否可穿越地图的 XY
+     * @return 是否可穿越地图的 XY
+     */
+    function allowCrossMapXY():Boolean;
+
+    /**
+     * 是否可穿越地图的底线
+     * @return 是否可穿越地图的底线
+     */
+    function allowCrossMapBottom():Boolean;
+
+
+
+    /**
+     * 取是否触碰版边
+     * @return 是否触碰版边
+     */
     function getIsTouchSide():Boolean;
 
+    /**
+     * 置是否触碰版边
+     * @param v 是否触碰版边
+     */
     function setIsTouchSide(v:Boolean):void;
 
-    function setSpeedRate(v:Number):void; //速度比例
 
-    function setVolume(v:Number):void; //设置音量
 
-    function getActive():Boolean; // 是否在场景中
-    function setActive(v:Boolean):void; //设置是否在场景中
+    /**
+     * 置速度比例
+     * @param v 速度比例
+     */
+    function setSpeedRate(v:Number):void;
+
+    /**
+     * 置音量
+     * @param v 音量 0-1
+     */
+    function setVolume(v:Number):void;
+
+
+
+    /**
+     * 取是否在场景中
+     * @return 是否在场景中
+     */
+    function getActive():Boolean;
+
+    /**
+     * 置是否在场景中
+     * @param v 是否在场景中
+     */
+    function setActive(v:Boolean):void;
 
 }
 }

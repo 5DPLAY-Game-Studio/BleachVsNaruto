@@ -21,6 +21,7 @@ import net.play5d.game.bvn.fighter.Bullet;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
+import net.play5d.game.bvn.views.effects.FollowEffectView;
 
 public class BaseFighterEventCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
@@ -34,7 +35,7 @@ public class BaseFighterEventCtrl {
 
         FighterEventDispatcher.addEventListener(FighterEvent.FIRE_BULLET, fireBullet);
         FighterEventDispatcher.addEventListener(FighterEvent.ADD_ATTACKER, addAttacker);
-
+        FighterEventDispatcher.addEventListener(FighterEvent.ADD_EFFECT, addFollowEffect);
     }
 
     public function getAttacker(name:String, team:int):FighterAttacker {
@@ -63,6 +64,14 @@ public class BaseFighterEventCtrl {
         if (id != -1) {
             _attackers.splice(id, 1);
         }
+    }
+
+    /**
+     * 移除效果
+     * @param effect 角色特效元件
+     */
+    private function removeEffect(effect:FollowEffectView):void {
+        GameCtrl.I.removeGameSprite(effect);
     }
 
     /**
@@ -97,6 +106,23 @@ public class BaseFighterEventCtrl {
         GameCtrl.I.addGameSprite(event.fighter.team.id, attacker);
     }
 
+    /**
+     * 增加跟随效果视图
+     * @param event 事件
+     */
+    private function addFollowEffect(event:FighterEvent):void {
+        var params:Object = event.params;
+        if (!params || !params.mc) {
+            return;
+        }
+
+        var effect:FollowEffectView = new FollowEffectView(params.mc);
+        effect.onRemove   = removeEffect;
+        effect.setTarget(event.fighter);
+
+        var isUnderBody:Boolean = params.isUnderBody;
+        GameCtrl.I.addGameSprite(event.fighter.team.id, effect, isUnderBody ? 0 : -1);
+    }
 
 }
 }
