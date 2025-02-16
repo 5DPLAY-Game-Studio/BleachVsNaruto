@@ -18,13 +18,11 @@
 <a href = "https://bvn-sports.com/">Website</a> |
 <a href = "https://space.bilibili.com/1340107883">BiliBili</a> |
 <a href = "https://www.douyin.com/user/MS4wLjABAAAAJ2UeSAz7T6qx7XSSL70IgfuMsZZaxOIvPIL3Zdvmk8rSAoBfNfngGx7Zy2jFSnYj">TikTok</a> |
-<a href = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg4ODE1MjgyNw==">WeChat Official Account</a>
+<a href = "https://x.com/5Dplay">X (Twitter)</a>
 </strong>
 </p>
 
 # Bleach vs Naruto <!-- omit in toc -->
-
-![bvn](title.png "bvn")
 
 [中文版](README.md) | [English](README_en.md)
 
