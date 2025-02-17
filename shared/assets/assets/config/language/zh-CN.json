@@ -148,6 +148,9 @@
         },
         "fighter_mc": {
           "keyframe_not_exist": "关键帧不存在： {}"
+        },
+        "fighter_action_logic": {
+          "enabled_failed": "FighterActionLogic.enabled:: 启用失败：{}"
         }
       }
     },
