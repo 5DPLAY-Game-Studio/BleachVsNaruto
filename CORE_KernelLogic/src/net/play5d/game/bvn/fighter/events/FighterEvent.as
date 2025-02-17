@@ -21,34 +21,59 @@ import flash.events.Event;
 
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 
+/**
+ * 角色事件
+ */
 public class FighterEvent extends Event {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public static const BIRTH:String = 'BIRTH'; //出生
+    // 角色创建
+    public static const BIRTH:String = 'BIRTH';
 
-    public static const FIRE_BULLET:String  = 'FIRE_BULLET'; //发射子弹
-    public static const ADD_ATTACKER:String = 'ADD_ATTACKER'; //加入攻击元件
-//		public static const ADD_ASSISTER:String = "ADD_ASSISTER"; //加入辅助
-    public static const HIT_TARGET:String = 'HIT_TARGET'; //攻击到目标
+    // 发射子弹
+    public static const FIRE_BULLET:String  = 'FIRE_BULLET';
+    // 加入攻击对象
+    public static const ADD_ATTACKER:String = 'ADD_ATTACKER';
+    // 加入特效对象
+    public static const ADD_EFFECT:String   = 'ADD_EFFECT';
 
-    public static const HURT:String        = 'HURT'; //被打
-    public static const HURT_RESUME:String = 'HURT_RESUME'; //从被打状态恢复
-    public static const HURT_DOWN:String   = 'HURT_DOWN'; //被击倒
+    // 攻击到目标
+    public static const HIT_TARGET:String  = 'HIT_TARGET';
+    // 被打
+    public static const HURT:String        = 'HURT';
+    // 从被打状态恢复
+    public static const HURT_RESUME:String = 'HURT_RESUME';
+    // 被击倒
+    public static const HURT_DOWN:String   = 'HURT_DOWN';
 
-    public static const DEFENSE:String = 'DEFENSE'; //防御
+    // 防御
+    public static const DEFENSE:String = 'DEFENSE';
+    // 恢复站立
+    public static const IDLE:String    = 'IDLE';
 
-    public static const IDLE:String = 'IDLE'; //恢复正常
+    // 死亡
+    public static const DIE:String  = 'DIE';
+    // 死透（死亡&击倒）
+    public static const DEAD:String = 'DEAD';
 
-    public static const DIE:String  = 'DIE'; //死亡
-    public static const DEAD:String = 'DEAD'; //死透（死亡&击倒）
-
+    // 执行动作
     public static const DO_ACTION:String  = 'DO_ACTION';
+    // 执行特殊
     public static const DO_SPECIAL:String = 'DO_SPECIAL';
 
+    /**
+     * 构造方法
+     * @param type 事件的类型
+     * @param bubbles 事件是否为冒泡事件
+     * @param cancelable 是否可以阻止与事件相关联的行为
+     */
     public function FighterEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false) {
         super(type, bubbles, cancelable);
     }
-    public var params:*;
+
+    // 传递参数
+    public var params:Object;
+    // 目标对象
     public var fighter:BaseGameSprite;
 }
 }
