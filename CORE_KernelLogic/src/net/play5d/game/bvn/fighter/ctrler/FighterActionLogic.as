@@ -48,7 +48,7 @@ public class FighterActionLogic {
             }
         }
         catch (e:Error) {
-            trace('FighterActionLogic.enabled', e);
+            TraceLang('debug.trace.data.fighter_action_logic.enabled_failed', e);
             return false;
         }
 
