@@ -35,6 +35,7 @@ import net.play5d.kyo.utils.KyoUtils;
  * 跟随效果视图
  */
 public class FollowEffectView implements IGameSprite {
+    include '../../../../../../../include/_INCLUDE_.as';
 
     // 跟随的目标
     public var target:BaseGameSprite;
