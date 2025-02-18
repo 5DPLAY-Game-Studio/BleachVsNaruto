@@ -25,7 +25,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.FighterVO;
-import net.play5d.game.bvn.fighter.ctrler.AssisiterCtrler;
+import net.play5d.game.bvn.fighter.ctrler.AssisterCtrler;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.utils.McAreaCacher;
@@ -42,7 +42,7 @@ public class Assister extends BaseGameSprite {
 //			isAlive = false;
 
         if (_mainMc.setAssistCtrler) {
-            _ctrler = new AssisiterCtrler();
+            _ctrler = new AssisterCtrler();
             _ctrler.initAssister(this);
             _mainMc.setAssistCtrler(_ctrler);
         }
@@ -59,7 +59,7 @@ public class Assister extends BaseGameSprite {
     private var _mcOrgPoint:Point;
     private var _owner:IGameSprite;
     private var _isRenderMainAnimate:Boolean    = true;
-    private var _ctrler:AssisiterCtrler;
+    private var _ctrler:AssisterCtrler;
 
     public function get name():String {
         return _mainMc.name;
@@ -179,7 +179,7 @@ public class Assister extends BaseGameSprite {
         _owner = v;
     }
 
-    public function getCtrler():AssisiterCtrler {
+    public function getCtrler():AssisterCtrler {
         return _ctrler;
     }
 

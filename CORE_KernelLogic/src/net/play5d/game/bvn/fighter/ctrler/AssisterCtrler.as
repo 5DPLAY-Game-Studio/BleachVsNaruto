@@ -30,10 +30,10 @@ import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
 
-public class AssisiterCtrler implements IGameSpriteCntlr {
+public class AssisterCtrler implements IGameSpriteCntlr {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function AssisiterCtrler() {
+    public function AssisterCtrler() {
     }
     public var hitModel:FighterHitModel;
     private var _effectCtrl:FighterEffectCtrl;
