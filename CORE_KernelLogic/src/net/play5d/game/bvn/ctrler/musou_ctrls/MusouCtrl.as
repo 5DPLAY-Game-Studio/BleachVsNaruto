@@ -65,7 +65,7 @@ public class MusouCtrl {
     private var _bossCount:int;
     private var _renderTimer:int;
     private var _renderTimerMax:int;
-    private var _fighterEventCtrl:MosouFighterEventCtrl;
+    private var _fighterEventCtrl:MusouFighterEventCtrl;
     private var _enemyBarCtrl:MusouEnemyBarCtrl;
     private var _changeFighterGap:int;
     private var _resumeGap:int;
@@ -76,7 +76,7 @@ public class MusouCtrl {
     private var _introBoss:FighterMain;
     private var _bossInAnimate:Boolean;
 
-    public function getFighterEventCtrl():MosouFighterEventCtrl {
+    public function getFighterEventCtrl():MusouFighterEventCtrl {
         return _fighterEventCtrl;
     }
 
@@ -94,7 +94,7 @@ public class MusouCtrl {
 
         _stageEnemies = new Vector.<FighterMain>();
 
-        _fighterEventCtrl = new MosouFighterEventCtrl();
+        _fighterEventCtrl = new MusouFighterEventCtrl();
         _fighterEventCtrl.initlize();
 
         waveCount   = _mission.waves.length;

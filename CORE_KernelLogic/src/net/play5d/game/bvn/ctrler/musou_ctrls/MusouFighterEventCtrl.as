@@ -29,7 +29,7 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.mosou.MosouUI;
 
-public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
+public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
     public override function initlize():void {
