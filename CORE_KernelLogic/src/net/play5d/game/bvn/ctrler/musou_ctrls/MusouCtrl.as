@@ -66,7 +66,7 @@ public class MusouCtrl {
     private var _renderTimer:int;
     private var _renderTimerMax:int;
     private var _fighterEventCtrl:MosouFighterEventCtrl;
-    private var _enemyBarCtrl:MosouEnemyBarCtrl;
+    private var _enemyBarCtrl:MusouEnemyBarCtrl;
     private var _changeFighterGap:int;
     private var _resumeGap:int;
     private var _enemyCreators:Vector.<EnemyCreator> = new Vector.<EnemyCreator>();
@@ -90,7 +90,7 @@ public class MusouCtrl {
 
         _bossCount = _mission.bossCount();
 
-        _enemyBarCtrl = new MosouEnemyBarCtrl();
+        _enemyBarCtrl = new MusouEnemyBarCtrl();
 
         _stageEnemies = new Vector.<FighterMain>();
 

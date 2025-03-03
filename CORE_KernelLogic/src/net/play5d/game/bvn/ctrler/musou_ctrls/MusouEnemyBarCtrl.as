@@ -24,10 +24,10 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpFollowUI;
 
-public class MosouEnemyBarCtrl {
+public class MusouEnemyBarCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouEnemyBarCtrl() {
+    public function MusouEnemyBarCtrl() {
     }
     private var _barMap:Dictionary = new Dictionary();
     private var _gameLayer:Sprite;
