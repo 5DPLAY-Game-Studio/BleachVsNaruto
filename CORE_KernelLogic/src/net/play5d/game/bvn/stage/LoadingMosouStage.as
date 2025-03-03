@@ -27,7 +27,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MosouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MapModel;

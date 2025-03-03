@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.mosou_ctrls {
+package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.BaseFighterEventCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;

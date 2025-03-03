@@ -24,7 +24,7 @@ import flash.display.Sprite;
 import flash.text.TextFormatAlign;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MosouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.FighterVO;
 import net.play5d.game.bvn.data.GameData;

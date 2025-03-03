@@ -26,7 +26,7 @@ import net.play5d.game.bvn.ctrler.GameLoader;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouCtrl;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MosouCtrl;
 import net.play5d.game.bvn.data.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;

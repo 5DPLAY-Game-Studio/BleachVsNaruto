@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.mosou_ctrls {
+package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;

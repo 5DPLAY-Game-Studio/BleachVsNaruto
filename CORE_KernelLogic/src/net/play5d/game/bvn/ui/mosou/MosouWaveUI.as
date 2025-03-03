@@ -22,7 +22,7 @@ import flash.display.Sprite;
 import flash.text.TextField;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouCtrl;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MosouCtrl;
 import net.play5d.kyo.utils.KyoDrawUtils;
 
 public class MosouWaveUI {

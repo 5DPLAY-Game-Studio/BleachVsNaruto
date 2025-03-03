@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.mosou.player {
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MosouLogic;
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.data.mosou.MosouModel;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;

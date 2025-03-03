@@ -29,7 +29,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MosouLogic;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouModel;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
