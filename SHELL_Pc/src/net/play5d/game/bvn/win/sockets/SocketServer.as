@@ -161,7 +161,7 @@ public class SocketServer extends EventDispatcher {
         client.flush();
     }
 
-    public function sendJson(client, data:Object):void {
+    public function sendJson(client:Socket, data:Object):void {
         var json:String = JSON.stringify(data);
         send(client, json);
     }
