@@ -49,12 +49,12 @@ import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.mosou.MosouUI;
 
-public class MosouCtrl {
+public class MusouCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public const gameRunData:MousouGameRunDataVO = new MousouGameRunDataVO();
 
-    public function MosouCtrl() {
+    public function MusouCtrl() {
     }
     public var waveCount:int;
     public var currentWave:int;

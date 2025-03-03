@@ -26,7 +26,7 @@ import net.play5d.game.bvn.ctrler.GameLoader;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
-import net.play5d.game.bvn.ctrler.musou_ctrls.MosouCtrl;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.game.bvn.data.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
@@ -86,7 +86,7 @@ public class GameCtrl {
     private var _trainingCtrl:TrainingCtrler; //练习模式控制
     private var _mainLogicCtrl:GameMainLogicCtrler; //游戏主逻辑控制
     private var _endCtrl:GameEndCtrl; //KO，结束游戏控制
-    private var _mosouCtrl:MosouCtrl; // 无双游戏控制
+    private var _mosouCtrl:MusouCtrl; // 无双游戏控制
     private var _isRenderGame:Boolean = true;
     private var _isPauseGame:Boolean; //暂停
     private var _gameRunning:Boolean;
@@ -108,7 +108,7 @@ public class GameCtrl {
         }
     }
 
-    public function getMosouCtrl():MosouCtrl {
+    public function getMosouCtrl():MusouCtrl {
         return _mosouCtrl;
     }
 
@@ -545,7 +545,7 @@ public class GameCtrl {
 
     /************************************************************************************************************************************************************/
     public function initMosouGame():void {
-        _mosouCtrl = new MosouCtrl();
+        _mosouCtrl = new MusouCtrl();
         _mosouCtrl.initalize();
     }
 
