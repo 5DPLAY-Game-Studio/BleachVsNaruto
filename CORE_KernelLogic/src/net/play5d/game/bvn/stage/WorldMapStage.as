@@ -29,7 +29,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
-import net.play5d.game.bvn.ctrler.musou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouModel;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
@@ -97,7 +97,7 @@ public class WorldMapStage implements IStage {
         _viewMc.cacheAsBitmap = true;
         _maskMc.cacheAsBitmap = true;
 
-        MosouLogic.I.updateMapAreas();
+        MusouLogic.I.updateMapAreas();
 
         initPointUIs();
 
@@ -214,10 +214,10 @@ public class WorldMapStage implements IStage {
     }
 
     private function gotoMission(data:MosouWorldMapAreaVO):void {
-        var allFinish:Boolean = MosouLogic.I.getAreaPercent(data.id) >= 1;
+        var allFinish:Boolean = MusouLogic.I.getAreaPercent(data.id) >= 1;
         var txt:String        = allFinish ? '已通过全部关卡，是否进入最后一关？' : '进入下一关？';
         GameUI.confrim('CONFRIM', txt, function ():void {
-            MosouModel.I.currentMission = MosouLogic.I.getNextMission(data);
+            MosouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
 //				MainGame.I.loadGame();
         });
@@ -228,7 +228,7 @@ public class WorldMapStage implements IStage {
     private function focusCurrentPoint():void {
         var current:WorldMapPointUI;
         for each(var i:WorldMapPointUI in _pointUIs) {
-            if (MosouLogic.I.checkCurrentArea(i.data.id)) {
+            if (MusouLogic.I.checkCurrentArea(i.data.id)) {
                 current = i;
                 break;
             }
@@ -331,7 +331,7 @@ public class WorldMapStage implements IStage {
 
         GameEvent.dispatchEvent(GameEvent.MOSOU_MAP);
 
-        if (MosouLogic.I.checkCurrentArea(data.id)) {
+        if (MusouLogic.I.checkCurrentArea(data.id)) {
             gotoMission(data);
         }
         else {

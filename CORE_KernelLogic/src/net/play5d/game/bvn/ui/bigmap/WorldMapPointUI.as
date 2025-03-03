@@ -29,7 +29,7 @@ import flash.geom.Point;
 import flash.text.TextFieldAutoSize;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.ctrler.musou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
@@ -83,7 +83,7 @@ public class WorldMapPointUI extends EventDispatcher {
 
 
     public function update():void {
-        var isOpen:Boolean = MosouLogic.I.checkAreaIsOpen(data.id);
+        var isOpen:Boolean = MusouLogic.I.checkAreaIsOpen(data.id);
         try {
             if (isOpen) {
                 _pointMc.visible = true;
@@ -123,7 +123,7 @@ public class WorldMapPointUI extends EventDispatcher {
     }
 
     private function updateCurrent():void {
-        var isCurrent:Boolean = MosouLogic.I.checkCurrentArea(data.id);
+        var isCurrent:Boolean = MusouLogic.I.checkCurrentArea(data.id);
 
         if (!isCurrent) {
             if (_facemc && _facemc.visible) {
@@ -192,7 +192,7 @@ public class WorldMapPointUI extends EventDispatcher {
             _pointMc.addChild(_perTxt);
         }
 
-        var per:Number = MosouLogic.I.getAreaPercent(data.id);
+        var per:Number = MusouLogic.I.getAreaPercent(data.id);
 
         _perTxt.text = int(per * 100) + '%';
         _perTxt.x    = -_perTxt.getTextWidth() / 2 + 12;
@@ -208,7 +208,7 @@ public class WorldMapPointUI extends EventDispatcher {
             return;
         }
 
-        var per:Number = MosouLogic.I.getAreaPercent(data.id);
+        var per:Number = MusouLogic.I.getAreaPercent(data.id);
         if (per < 0.6) {
             _ppmc.gotoAndStop(3);
             return;

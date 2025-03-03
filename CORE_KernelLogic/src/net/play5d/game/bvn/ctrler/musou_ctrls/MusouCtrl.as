@@ -627,7 +627,7 @@ public class MusouCtrl {
         ).showWin(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.mission_complete_complete');
 
-            MosouLogic.I.passMission(_mission);
+            MusouLogic.I.passMission(_mission);
             backToWorldMap();
         });
     }

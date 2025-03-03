@@ -30,17 +30,17 @@ import net.play5d.game.bvn.data.mosou.player.MosouWorldMapPlayerVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 
-public class MosouLogic {
+public class MusouLogic {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    private static var _i:MosouLogic;
+    private static var _i:MusouLogic;
 
-    public static function get I():MosouLogic {
-        _i ||= new MosouLogic;
+    public static function get I():MusouLogic {
+        _i ||= new MusouLogic;
         return _i;
     }
 
-    public function MosouLogic() {
+    public function MusouLogic() {
     }
 
 

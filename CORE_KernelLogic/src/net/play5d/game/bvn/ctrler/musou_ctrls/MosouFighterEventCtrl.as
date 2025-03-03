@@ -113,7 +113,7 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
             return;
         }
 
-        MosouLogic.I.addHits(target as FighterMain);
+        MusouLogic.I.addHits(target as FighterMain);
     }
 
     private function onEnemyEvent(event:FighterEvent):void {
@@ -131,13 +131,13 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
             onEnemyBeHit(f);
             break;
 //				case FighterEvent.DEAD:
-//					MosouLogic.I.removeHitTarget(f);
+//					MusouLogic.I.removeHitTarget(f);
 //					onEnemyDead(f);
 //					break;
         case FighterEvent.IDLE:
         case FighterEvent.HURT_RESUME:
         case FighterEvent.HURT_DOWN:
-            MosouLogic.I.removeHitTarget(f);
+            MusouLogic.I.removeHitTarget(f);
             break;
         }
     }
@@ -161,7 +161,7 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
             GameCtrl.I.getMosouCtrl().onSelfDie(f);
         }
         if (f.team.id == 2) {
-            MosouLogic.I.removeHitTarget(f);
+            MusouLogic.I.removeHitTarget(f);
 
             var isBoss:Boolean = f.mosouEnemyData && f.mosouEnemyData.isBoss;
             if (isBoss) {
@@ -176,7 +176,7 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
             GameCtrl.I.getMosouCtrl().onSelfDead(f);
         }
         if (f.team.id == 2) {
-//				MosouLogic.I.removeHitTarget(f);
+//				MusouLogic.I.removeHitTarget(f);
             onEnemyDead(f);
         }
     }
