@@ -30,7 +30,7 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
-import net.play5d.game.bvn.data.GameRunDataVO;
+import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.data.TeamMap;
