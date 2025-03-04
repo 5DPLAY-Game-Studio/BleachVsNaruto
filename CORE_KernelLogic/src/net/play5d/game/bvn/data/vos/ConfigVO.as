@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.data.vos {
+
 import flash.display.StageQuality;
 import flash.ui.Keyboard;
 
@@ -24,6 +25,9 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.data.ISaveData;
+import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.data.SelectStageConfigVO;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
@@ -33,8 +37,8 @@ import net.play5d.kyo.utils.KyoUtils;
  * 配置值对象
  */
 public class ConfigVO implements ISaveData, IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public const key_menu:KeyConfigVO = new KeyConfigVO(0);
     public const key_p1:KeyConfigVO   = new KeyConfigVO(1);
