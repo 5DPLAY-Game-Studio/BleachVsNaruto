@@ -20,7 +20,7 @@ package net.play5d.game.bvn.interfaces {
 import flash.display.DisplayObject;
 import flash.geom.Rectangle;
 
-import net.play5d.game.bvn.data.TeamVO;
+import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.fighter.models.HitVO;
 
 /**

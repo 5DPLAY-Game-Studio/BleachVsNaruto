@@ -23,7 +23,7 @@ import flash.filters.BitmapFilter;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import net.play5d.game.bvn.data.TeamVO;
+import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;

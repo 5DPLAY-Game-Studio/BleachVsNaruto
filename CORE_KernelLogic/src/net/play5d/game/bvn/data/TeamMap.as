@@ -17,6 +17,8 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.data.vos.TeamVO;
+
 public class TeamMap {
     include '../../../../../../include/_INCLUDE_.as';
 

@@ -34,7 +34,7 @@ import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.data.TeamMap;
-import net.play5d.game.bvn.data.TeamVO;
+import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.factory.GameRunFactory;
