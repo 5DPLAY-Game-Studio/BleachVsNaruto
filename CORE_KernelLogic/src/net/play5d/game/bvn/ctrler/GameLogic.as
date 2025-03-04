@@ -28,7 +28,7 @@ import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
-import net.play5d.game.bvn.data.SelectCharListItemVO;
+import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;

@@ -20,6 +20,7 @@ package net.play5d.game.bvn.data {
 import flash.geom.Point;
 
 import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
+import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
