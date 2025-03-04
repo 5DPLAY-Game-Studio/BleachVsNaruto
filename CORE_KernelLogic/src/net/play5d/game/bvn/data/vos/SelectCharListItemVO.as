@@ -31,6 +31,7 @@ public class SelectCharListItemVO implements IInstanceVO {
         this.fighterID = fighterID;
         this.offset    = offset;
     }
+
     public var x:int;
     public var y:int;
     public var fighterID:String;

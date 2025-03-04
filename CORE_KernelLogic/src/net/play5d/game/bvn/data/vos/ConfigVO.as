@@ -51,21 +51,22 @@ public class ConfigVO implements ISaveData, IInstanceVO {
         setDefaultConfig(key_p1);
         setDefaultConfig(key_p2);
     }
+
     public var select_config:SelectStageConfigVO = new SelectStageConfigVO();
     // 显示语言
-    public var language:String = null;
-    public var AI_level:int     = 1;
-    public var fighterHP:Number = 1; //HP比例
-    public var fightTime:int    = 60;
-    public var quality:String   = StageQuality.LOW;
-    public var soundVolume:Number = 0.7; // SOUND音量
-    public var bgmVolume:Number   = 0.7; // BGM音量
-    public var keyInputMode:int = 1; //0标准, 1经典（长按式）
+    public var language:String                   = null;
+    public var AI_level:int                      = 1;
+    public var fighterHP:Number                  = 1; //HP比例
+    public var fightTime:int                     = 60;
+    public var quality:String                    = StageQuality.LOW;
+    public var soundVolume:Number                = 0.7; // SOUND音量
+    public var bgmVolume:Number                  = 0.7; // BGM音量
+    public var keyInputMode:int                  = 1; //0标准, 1经典（长按式）
     /**
      * 扩展设置
      */
     public var extendConfig:IExtendConfig;
-    private var _cloneKeys:Array = ClassUtils.getClassProperty(ConfigVO);
+    private var _cloneKeys:Array                 = ClassUtils.getClassProperty(ConfigVO);
 
     public function setDefaultConfig(keyConfig:KeyConfigVO):void {
         switch (keyConfig.id) {

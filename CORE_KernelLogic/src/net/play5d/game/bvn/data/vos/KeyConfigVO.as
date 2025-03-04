@@ -27,6 +27,7 @@ public class KeyConfigVO implements IInstanceVO {
     public function KeyConfigVO(id:int) {
         this.id = id;
     }
+
     public var id:int;
     public var up:uint;
     public var down:uint;

@@ -17,7 +17,6 @@
  */
 
 package net.play5d.game.bvn.data.vos {
-import net.play5d.game.bvn.data.*;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoRandom;
 

@@ -25,6 +25,7 @@ public class SelectVO implements IInstanceVO {
 
     public function SelectVO() {
     }
+
 //		选中的人物ID
     public var fighter1:String;
     public var fighter2:String;

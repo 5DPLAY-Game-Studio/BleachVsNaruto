@@ -29,6 +29,7 @@ public class TeamVO implements IInstanceVO {
         this.id   = id;
         this.name = name;
     }
+
     public var id:int;
     public var name:String;
     public var children:Vector.<IGameSprite> = new Vector.<IGameSprite>();

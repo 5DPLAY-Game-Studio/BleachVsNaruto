@@ -19,9 +19,6 @@
 package net.play5d.game.bvn.data.vos {
 import flash.geom.Point;
 
-import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
-import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
-
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 public class SelectStageConfigVO implements IInstanceVO {
@@ -30,6 +27,7 @@ public class SelectStageConfigVO implements IInstanceVO {
 
     public function SelectStageConfigVO() {
     }
+
     public var x:Number      = 0;
     public var y:Number      = 0;
     public var width:Number  = 800;
@@ -39,7 +37,7 @@ public class SelectStageConfigVO implements IInstanceVO {
     public var left:Number   = 0;
 
 //		public var itemGap:Point = new Point(10,10);
-    public var right:Number  = 0;
+    public var right:Number = 0;
     public var charList:SelectCharListConfigVO;
     public var assistList:SelectCharListConfigVO;
 

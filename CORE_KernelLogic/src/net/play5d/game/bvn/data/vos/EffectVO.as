@@ -24,7 +24,6 @@ import flash.geom.Matrix;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.vos.BitmapDataCacheVO;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
@@ -41,6 +40,7 @@ public class EffectVO implements IInstanceVO {
             KyoUtils.setValueByObject(this, param);
         }
     }
+
     public var className:String;
     public var shine:Object;//闪光{color,alpha}
     public var shake:Object;//震动{x,y|pow,time[毫秒，可选]} , 当设置pow时，x,y无效，根据hitvo.hitx,hity进行震动
@@ -49,13 +49,13 @@ public class EffectVO implements IInstanceVO {
     public var randRotate:Boolean; //随机角度旋转
     public var followDirect:Boolean; //跟随角色朝向
     public var slowDown:Object; //慢放效果{rate[慢放倍数],time[慢放时间（毫秒）]}
-    public var blendMode:String = BlendMode.NORMAL;
+    public var blendMode:String   = BlendMode.NORMAL;
     public var bitmapDataCache:Vector.<BitmapDataCacheVO>;
     public var frameLabelCache:Object;
     public var specialEffectId:String;
     public var targetColorOffset:Array;
-    public var isSpecial:Boolean = false;
-    public var isBuff:Boolean = false;
+    public var isSpecial:Boolean  = false;
+    public var isBuff:Boolean     = false;
     public var isSteelHit:Boolean = false;
 
 //    public function clone():EffectVO {

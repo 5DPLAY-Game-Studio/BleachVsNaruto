@@ -26,6 +26,7 @@ public class SelectCharListConfigVO implements IInstanceVO {
     public function SelectCharListConfigVO() {
 
     }
+
     public var list:Array = [];
     public var HCount:int; //列数
     public var VCount:int; //行数
