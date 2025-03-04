@@ -17,6 +17,8 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.data.vos.BgmVO;
+
 public class FighterModel {
     include '../../../../../../include/_INCLUDE_.as';
 

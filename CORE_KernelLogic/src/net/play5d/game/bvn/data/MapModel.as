@@ -17,6 +17,7 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.data.vos.BgmVO;
 import net.play5d.kyo.utils.KyoUtils;
 
 public class MapModel {

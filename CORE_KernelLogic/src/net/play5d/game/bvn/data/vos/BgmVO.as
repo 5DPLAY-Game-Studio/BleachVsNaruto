@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,15 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 /**
  * BGM 值对象
  */
 public class BgmVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     // 音乐 ID
     public var id:String;
