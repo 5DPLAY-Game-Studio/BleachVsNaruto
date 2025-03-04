@@ -20,6 +20,7 @@ package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MessionStageVO;
+import net.play5d.game.bvn.data.vos.MessionVO;
 
 public class MessionModel {
     include '../../../../../../include/_INCLUDE_.as';
@@ -37,7 +38,7 @@ public class MessionModel {
     private var _curMession:MessionVO;  //当前关卡
     private var _curStageId:int;  //当前关卡ID
     private var _curStage:MessionStageVO;  //当前关卡
-    [ArrayElementType('net.play5d.game.bvn.data.MessionVO')]
+    [ArrayElementType('net.play5d.game.bvn.data.vos.MessionVO')]
     private var _messions:Array;
 
     public function getAllMissions():Array {
