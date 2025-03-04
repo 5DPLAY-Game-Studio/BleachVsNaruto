@@ -25,7 +25,7 @@ import net.play5d.game.bvn.ctrler.GameLoader;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunDataVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;

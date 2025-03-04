@@ -21,7 +21,7 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.fighter.FighterMain;
 

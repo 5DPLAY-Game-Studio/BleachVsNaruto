@@ -23,7 +23,7 @@ import flash.display.Sprite;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
 import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;

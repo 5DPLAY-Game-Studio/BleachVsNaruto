@@ -26,6 +26,7 @@ import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapVO;
 import net.play5d.game.bvn.data.mosou.player.MosouPlayerData;
 import net.play5d.game.bvn.data.vos.ConfigVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.kyo.loader.KyoURLoader;

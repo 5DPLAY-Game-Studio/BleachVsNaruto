@@ -24,7 +24,7 @@ import flash.system.ApplicationDomain;
 
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.MapVO;
 import net.play5d.game.bvn.debug.Debugger;
@@ -250,7 +250,7 @@ public class GameLoader {
 
 import flash.display.Loader;
 
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 
 internal class FighterCacheVO {
     public var loader:Loader;

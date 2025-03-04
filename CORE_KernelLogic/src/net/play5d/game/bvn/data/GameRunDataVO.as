@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.data {
 //import net.play5d.game.bvn.data.mosou.MosouWaveRunVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 

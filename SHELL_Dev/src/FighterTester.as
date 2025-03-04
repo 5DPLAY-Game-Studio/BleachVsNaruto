@@ -39,7 +39,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.TrainingCtrler;
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MapModel;

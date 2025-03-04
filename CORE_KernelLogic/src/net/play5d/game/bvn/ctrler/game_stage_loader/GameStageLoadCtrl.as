@@ -29,7 +29,7 @@ import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.vos.BgmVO;
 import net.play5d.game.bvn.data.DefinedClass;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.MapVO;
 

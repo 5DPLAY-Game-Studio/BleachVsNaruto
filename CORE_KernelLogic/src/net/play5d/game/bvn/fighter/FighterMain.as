@@ -24,7 +24,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.TeamVO;
 import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
 import net.play5d.game.bvn.data.mosou.MosouFighterLogic;

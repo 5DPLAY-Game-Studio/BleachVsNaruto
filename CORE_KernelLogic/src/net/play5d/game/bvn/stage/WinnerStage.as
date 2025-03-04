@@ -35,7 +35,7 @@ import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.events.GameEvent;
