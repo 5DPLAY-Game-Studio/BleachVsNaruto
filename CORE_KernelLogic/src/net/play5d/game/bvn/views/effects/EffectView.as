@@ -22,7 +22,7 @@ import flash.geom.Point;
 
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
-import net.play5d.game.bvn.data.BitmapDataCacheVO;
+import net.play5d.game.bvn.data.vos.BitmapDataCacheVO;
 import net.play5d.game.bvn.data.EffectVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.kyo.utils.KyoMath;
