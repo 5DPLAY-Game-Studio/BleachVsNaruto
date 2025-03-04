@@ -17,6 +17,7 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 public class MessionVO implements IInstanceVO {

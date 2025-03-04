@@ -26,7 +26,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameEndCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MessionModel;
-import net.play5d.game.bvn.data.MessionStageVO;
+import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.SelectCharListConfigVO;
 import net.play5d.game.bvn.data.SelectCharListItemVO;
 import net.play5d.game.bvn.events.GameEvent;
