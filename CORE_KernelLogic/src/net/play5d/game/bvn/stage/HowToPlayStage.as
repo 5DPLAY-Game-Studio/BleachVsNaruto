@@ -29,7 +29,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.utils.ResUtils;

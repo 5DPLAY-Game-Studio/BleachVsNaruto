@@ -26,7 +26,7 @@ import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.ISaveData;
-import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.data.SelectStageConfigVO;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;

@@ -21,7 +21,7 @@ import flash.display.Stage;
 import flash.events.KeyboardEvent;
 import flash.ui.Keyboard;
 
-import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.utils.KeyBoarder;
 
 public class GameKeyInput implements IGameInput {

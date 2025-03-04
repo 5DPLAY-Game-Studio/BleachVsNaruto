@@ -28,7 +28,7 @@ import flash.events.KeyboardEvent;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
 import net.play5d.game.bvn.utils.ResUtils;

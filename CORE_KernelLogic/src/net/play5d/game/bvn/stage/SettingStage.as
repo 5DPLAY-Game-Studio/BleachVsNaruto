@@ -33,7 +33,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.KeyConfigVO;
+import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
