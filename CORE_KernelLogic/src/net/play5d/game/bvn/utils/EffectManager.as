@@ -20,7 +20,7 @@ package net.play5d.game.bvn.utils {
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.data.EffectModel;
-import net.play5d.game.bvn.data.EffectVO;
+import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;

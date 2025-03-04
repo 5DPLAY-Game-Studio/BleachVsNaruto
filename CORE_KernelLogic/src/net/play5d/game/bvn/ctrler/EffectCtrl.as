@@ -27,7 +27,7 @@ import flash.utils.Dictionary;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
-import net.play5d.game.bvn.data.EffectVO;
+import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;

@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.utils {
-import net.play5d.game.bvn.data.EffectVO;
+import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 public class EffectCacheVO implements IInstanceVO {

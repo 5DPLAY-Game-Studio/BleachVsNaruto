@@ -19,6 +19,8 @@
 package net.play5d.game.bvn.data {
 import flash.display.BlendMode;
 
+import net.play5d.game.bvn.data.vos.EffectVO;
+
 import net.play5d.game.bvn.fighter.data.FighterDefenseType;
 
 public class EffectModel {
