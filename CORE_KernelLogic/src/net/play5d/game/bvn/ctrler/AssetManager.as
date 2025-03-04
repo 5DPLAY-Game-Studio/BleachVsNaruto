@@ -27,7 +27,7 @@ import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.MapVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.interfaces.IAssetLoader;
 import net.play5d.game.bvn.utils.BitmapAssetLoader;
 import net.play5d.kyo.display.bitmap.BitmapFont;

@@ -22,7 +22,7 @@ import flash.display.Sprite;
 import flash.geom.Point;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.data.MapVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;

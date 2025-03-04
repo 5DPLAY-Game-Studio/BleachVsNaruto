@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.data.vos.BgmVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.kyo.utils.KyoUtils;
 
 public class MapModel {
@@ -33,7 +34,7 @@ public class MapModel {
     public function MapModel() {
     }
     private var _mapObj:Object;
-    [ArrayElementType('net.play5d.game.bvn.data.MapVO')]
+    [ArrayElementType('net.play5d.game.bvn.data.vos.MapVO')]
     private var _mapArray:Array;
 
     public function getMap(id:String):MapVO {
