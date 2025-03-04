@@ -30,7 +30,7 @@ import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.SelectVO;
+import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.ui.GameUI;

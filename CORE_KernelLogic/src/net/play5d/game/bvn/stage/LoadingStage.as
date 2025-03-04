@@ -34,7 +34,7 @@ import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.SelectVO;
+import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputer;

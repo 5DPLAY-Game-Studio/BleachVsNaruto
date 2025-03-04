@@ -44,7 +44,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
-import net.play5d.game.bvn.data.SelectVO;
+import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.LoadingStage;

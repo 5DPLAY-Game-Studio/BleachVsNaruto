@@ -31,6 +31,7 @@ import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.vos.MessionVO;
 import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
+import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.kyo.loader.KyoURLoader;
