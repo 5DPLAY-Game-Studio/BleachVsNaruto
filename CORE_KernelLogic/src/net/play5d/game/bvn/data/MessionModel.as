@@ -21,6 +21,7 @@ import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.vos.MessionVO;
+import net.play5d.game.bvn.data.vos.SelectVO;
 
 public class MessionModel {
     include '../../../../../../include/_INCLUDE_.as';
