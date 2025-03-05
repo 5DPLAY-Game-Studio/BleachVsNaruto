@@ -104,7 +104,8 @@
           "self_die_complete"        : "无双模式的 onSelfDead 事件完成！",
           "mission_complete"         : "无双模式的任务完成！",
           "mission_complete_complete": "无双模式的 missionComplete 事件完成！",
-          "show_fzqi"                : "辅助能量 (FZQI) ======================= fzqi: {}, fzqiMax: {}",
+          "show_fzqi"                : "辅助能量 : fzqi: {}",
+          "show_fzqi_max"             : "最大辅助能量 : fzqiMax: {}",
           "boss_die"                 : "无双模式的 BOSS 死亡！"
         },
         "musou_enemy_bar_ctrl": {

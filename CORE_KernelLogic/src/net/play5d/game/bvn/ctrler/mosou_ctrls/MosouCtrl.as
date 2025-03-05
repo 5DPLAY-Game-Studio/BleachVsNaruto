@@ -325,8 +325,6 @@ public class MosouCtrl {
         to.fzqi   = to.fzqiMax;
         to.direct = from.direct;
 
-        TraceLang('debug.trace.data.musou_ctrl.show_fzqi', to.fzqi, to.fzqiMax);
-
         if (to.initlized()) {
             GameCtrl.I.addGameSprite(to.team.id, to);
         }
@@ -346,6 +344,10 @@ public class MosouCtrl {
         to.updatePosition();
 
         updateCamera();
+
+
+        TraceLang('debug.trace.data.musou_ctrl.show_fzqi',to.fzqi);
+        TraceLang('debug.trace.data.musou_ctrl.show_fzqi_max',to.fzqiMax);
     }
 
     public function updateEnemy(v:FighterMain):void {
