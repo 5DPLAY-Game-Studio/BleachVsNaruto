@@ -43,9 +43,19 @@ package {
 public function GetLang(tree:String, ...args):String {
     // 当前语言文本
     var langText:String = GetLangText(tree);
-    // 格式化后的当前语言
-    var format:String   = Format(langText, args);
 
-    return format;
-}
+    // 确保替换占位符数量匹配
+    var placeholderCount:int = (langText.match(/{}/g) || []).length;
+
+    if (placeholderCount != args.length) {
+        throw new Error("GetLang:: The variadic length does not match the formatted string length!");
+    }
+
+    // 替换占位符
+    for (var i:int = 0; i < args.length; i++) {
+        langText = langText.replace("{}", args[i].toString());
+    }
+
+    return langText;
+  }
 }

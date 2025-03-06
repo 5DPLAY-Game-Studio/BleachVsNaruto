@@ -41,7 +41,7 @@ package {
  */
 public function TraceLang(tree:String, ...args):void {
     // 输出内容
-    var format:String = GetLang(tree, args);
+    var format:String = GetLang.apply(null, [tree].concat(args));
 
     Trace(format);
 }
