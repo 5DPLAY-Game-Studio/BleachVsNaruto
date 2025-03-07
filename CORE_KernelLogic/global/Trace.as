@@ -41,7 +41,7 @@ package {
  */
 public function Trace(format:String, ...args):void {
     // 输出内容
-    format = Format(format, args);
+    format = Format.apply(null, [format].concat(args.toString().split(",")));
     // 输出前缀
     var prefix:String = GetLangText('debug.trace.prefix');
 

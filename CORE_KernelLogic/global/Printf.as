@@ -40,6 +40,6 @@ package {
  * @playerversion Flash 9, Lite 4
  */
 public function Printf(format:String, ...args):void {
-    trace(Format(format, args));
+    trace(Format.apply(null, [format].concat(args.toString().split(","))));
 }
 }
