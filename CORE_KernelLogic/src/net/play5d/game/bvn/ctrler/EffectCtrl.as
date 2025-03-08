@@ -28,6 +28,7 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.EffectVO;
+import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
@@ -1072,18 +1073,27 @@ public class EffectCtrl {
         delete _shadowEffects[s.target];
     }
 
+    /**
+     * 显示必杀特写
+     * @param target 特写目标
+     * @param face 特写显示对象
+     */
     private function showFace(target:FighterMain, face:DisplayObject):void {
-        var faceId:int            = 1;
+        var faceId:int            = TeamID.TEAM_1;
         var curTarget:IGameSprite = target.getCurrentTarget();
         if (curTarget) {
             var display:DisplayObject = curTarget.getDisplay();
             if (display) {
-                faceId = target.getDisplay().x > display.x ? 2 : 1;
+                faceId = target.getDisplay().x > display.x ?
+                         TeamID.TEAM_2 :
+                         TeamID.TEAM_1;
             }
         }
-        //			if(target.team){
-        //				if(target.team.id == 2) faceId = 2;
-        //			}
+
+//        if(TeamID.isTeam2(target)) {
+//            faceId = TeamID.TEAM_2;
+//        }
+
         _blackBack.showBishaFace(faceId, face);
     }
 

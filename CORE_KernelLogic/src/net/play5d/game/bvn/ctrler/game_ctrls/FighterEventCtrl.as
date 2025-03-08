@@ -21,6 +21,7 @@ import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
+import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
@@ -48,30 +49,40 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
         GameCtrl.I.removeGameSprite(assister);
     }
 
-    //显示连击数字
+    /**
+     * 增加显示连击数字
+     * @param fighter 角色
+     * @param target 目标
+     */
     private function addHits(fighter:FighterMain, target:IGameSprite):void {
-        var targetId:String = target && target is BaseGameSprite ? (
-                target as BaseGameSprite
-        ).id : null;
-        //			var hitsObj:Object = GameLogic.getHitsObj(fighter.id);
-        //			var uiId:int = 1;
-        //			if(hitsObj && hitsObj.uiID){
-        //				uiId = hitsObj.uiID;
-        //			}else{
-        //				if(fighter.getDisplay() && target.getDisplay()){
-        //					uiId = fighter.getDisplay().x > target.getDisplay().x ? 2 : 1;
-        //				}
-        //			}
+        var targetId:String = target && target is BaseGameSprite ?
+                              (target as BaseGameSprite).id :
+                              null;
 
-        var uiId:int = 1;
-        switch (fighter.team.id) {
-        case 1:
-            uiId = 1;
-            break;
-        case 2:
-            uiId = 2;
-            break;
-        }
+//        var hitsObj:Object = GameLogic.getHitsObj(fighter.id);
+//        var uiId:int       = TeamID.TEAM_1;
+//        if (hitsObj && hitsObj.uiID) {
+//            uiId = hitsObj.uiID;
+//        }
+//        else {
+//            if (fighter.getDisplay() && target.getDisplay()) {
+//                uiId = fighter.getDisplay().x > target.getDisplay().x ?
+//                       TeamID.TEAM_2 :
+//                       TeamID.TEAM_1;
+//            }
+//        }
+
+//        var uiId:int;
+//        switch (fighter.team.id) {
+//        case TeamID.TEAM_1:
+//            uiId = TeamID.TEAM_1;
+//            break;
+//        case TeamID.TEAM_2:
+//            uiId = TeamID.TEAM_2;
+//            break;
+//        }
+
+        var uiId:int = fighter.team.id;
 
         var hits:int = GameLogic.addHits(fighter.id, targetId, uiId);
         if (hits > 1) {
@@ -89,10 +100,16 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
         GameLogic.clearHitsByTargetId(targetId);
     }
 
-    private function addAssister(event:FighterEvent):void {
-        var fighter:FighterMain = event.fighter as FighterMain;
-        if (fighter.actionState != FighterActionState.NORMAL && fighter.actionState !=
-            FighterActionState.DEFENCE_ING) {
+    /**
+     * 添加辅助
+     * @param e 角色事件
+     */
+    private function addAssister(e:FighterEvent):void {
+        var fighter:FighterMain = e.fighter as FighterMain;
+
+        if (fighter.actionState != FighterActionState.NORMAL &&
+            fighter.actionState != FighterActionState.DEFENCE_ING)
+        {
             return;
         }
         if (fighter.fzqi < fighter.fzqiMax) {
@@ -101,24 +118,31 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
 
         fighter.fzqi = 0;
 
-        var group:GameRunFighterGroup = fighter.team.id == 1 ? GameCtrl.I.gameRunData.p1FighterGroup :
+        var group:GameRunFighterGroup = TeamID.isTeam1(fighter) ?
+                                        GameCtrl.I.gameRunData.p1FighterGroup :
                                         GameCtrl.I.gameRunData.p2FighterGroup;
-        var fz:Assister               = group.currentAssister;
-        fz.setOwner(fighter);
-        fz.direct   = fighter.direct;
-        fz.x        = fighter.x - 30 * fz.direct;
-        fz.y        = fighter.y;
-        fz.onRemove = removeAssister;
-        GameCtrl.I.addGameSprite(event.fighter.team.id, fz);
-        EffectCtrl.I.assisterEffect(fz);
-        fz.goFight();
+        var assister:Assister         = group.currentAssister;
+        assister.setOwner(fighter);
+        assister.direct   = fighter.direct;
+        assister.x        = fighter.x - 30 * assister.direct;
+        assister.y        = fighter.y;
+        assister.onRemove = removeAssister;
+
+        GameCtrl.I.addGameSprite(e.fighter.team.id, assister);
+        EffectCtrl.I.assisterEffect(assister);
+        assister.goFight();
     }
 
-    //攻击到目标事件
+    /**
+     * 攻击到目标事件
+     * @param e 角色事件
+     */
     private function onHitTarget(e:FighterEvent):void {
-//			trace("onHitTarget");
+//        trace("onHitTarget");
+
         addHits(e.fighter as FighterMain, e.params.target);
-        if (GameMode.isAcrade() && e.fighter.team.id == 1) {
+
+        if (GameMode.isAcrade() && TeamID.isTeam1(e.fighter)) {
             GameLogic.addScoreByHitTarget(e.params.hitvo);
         }
     }

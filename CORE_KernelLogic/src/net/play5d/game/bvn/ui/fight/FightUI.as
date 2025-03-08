@@ -32,6 +32,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
+import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
@@ -468,10 +469,10 @@ public class FightUI implements IGameUI {
         if (GameConfig.SHOW_UI_STATUS == 1) {
             ui.startKOmc.$winnerScale = 0.8;
             switch (teamid) {
-            case 1:
+            case TeamID.TEAM_1:
                 ui.startKOmc.$winnerX = 30;
                 break;
-            case 2:
+            case TeamID.TEAM_2:
                 ui.startKOmc.$winnerX = 586;
                 break;
             }

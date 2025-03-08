@@ -21,6 +21,7 @@ import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
 import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.TeamID;
 
 public class WinUI {
     include '../../../../../../include/_INCLUDE_.as';
@@ -46,10 +47,10 @@ public class WinUI {
 
         switch (wins) {
         case 1:
-            playmc = _team == 1 ? _ui.w1 : _ui.w2;
+            playmc = _team == TeamID.TEAM_1 ? _ui.w1 : _ui.w2;
             break;
         case 2:
-            playmc = _team == 1 ? _ui.w2 : _ui.w1;
+            playmc = _team == TeamID.TEAM_1 ? _ui.w2 : _ui.w1;
             break;
         }
 

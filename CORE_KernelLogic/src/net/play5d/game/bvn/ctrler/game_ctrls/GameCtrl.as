@@ -33,6 +33,7 @@ import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunDataVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.MessionModel;
+import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.data.TeamMap;
 import net.play5d.game.bvn.data.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;
@@ -191,15 +192,17 @@ public class GameCtrl {
     }
 
     /**
-     * 获取敌对队伍
+     * 获得敌方队伍
+     * @param sp 游戏元件
+     * @return 敌方队伍
      */
     public function getEnemyTeam(sp:IGameSprite):TeamVO {
         if (sp.team) {
             switch (sp.team.id) {
-            case 1:
-                return _teamMap.getTeam(2);
-            case 2:
-                return _teamMap.getTeam(1);
+            case TeamID.TEAM_1:
+                return _teamMap.getTeam(TeamID.TEAM_2);
+            case TeamID.TEAM_2:
+                return _teamMap.getTeam(TeamID.TEAM_1);
             }
         }
 
@@ -371,20 +374,21 @@ public class GameCtrl {
     }
 
     /**
-     * 运行下一关
+     * 战斗结束，进行下一关
      */
     public function fightFinish():void {
-
         fightFinished = true;
 
         if (GameMode.isAcrade()) {
-            if (gameRunData.lastWinnerTeam.id == 1) {
+            if (TeamID.isTeam1(gameRunData.lastWinnerTeam)) {
                 if (MessionModel.I.missionAllComplete()) {
                     TraceLang('debug.trace.data.game_ctrl.cleared');
+
                     MainGame.I.goCongratulations();
                 }
                 else {
                     TraceLang('debug.trace.data.game_ctrl.next');
+
                     GameData.I.winnerId = gameRunData.p1FighterGroup.currentFighter.data.id;
                     MainGame.I.goWinner();
                 }
@@ -392,20 +396,21 @@ public class GameCtrl {
 
             }
             else {
-                //跳转是否继续
+                // 跳转是否继续
                 TraceLang('debug.trace.data.game_ctrl.continue');
+
                 gameRunData.continueLoser = gameRunData.p1FighterGroup.currentFighter;
                 MainGame.I.goContinue();
             }
         }
 
         if (GameMode.isVsCPU() || GameMode.isVsPeople()) {
-            //返回选人
+            // 返回选人
             TraceLang('debug.trace.data.game_ctrl.back_select');
+
             GameEvent.dispatchEvent(GameEvent.GAME_END);
             MainGame.I.goSelect();
         }
-
     }
 
     public function initStart():GameStartCtrl {
@@ -478,14 +483,16 @@ public class GameCtrl {
         gameRunData.lastLoserQi   = loser.qi;
 
         switch (winner.team.id) {
-        case 1:
+        case TeamID.TEAM_1:
             gameRunData.p1Wins++;
             if (loser.hp <= 0 && GameMode.isAcrade()) {
                 GameLogic.addScoreByKO();
             }
+
             break;
-        case 2:
+        case TeamID.TEAM_2:
             gameRunData.p2Wins++;
+
             break;
         }
 
@@ -657,6 +664,10 @@ public class GameCtrl {
         doBuildNextRound(isTeamMode);
     }
 
+    /**
+     * 执行构建下一回合
+     * @param isTeamMode 是否为小队模式
+     */
     private function doBuildNextRound(isTeamMode:Boolean):void {
         gameState.resetFight(gameRunData.p1FighterGroup, gameRunData.p2FighterGroup);
 
@@ -666,12 +677,18 @@ public class GameCtrl {
             if (gameRunData.lastWinner) {
                 gameRunData.lastWinner.hp = gameRunData.lastWinnerHp;
             }
-            var loseTeam:int = -1;
+
+            var loseTeam:int = TeamID.UNKNOWN;
             if (gameRunData.lastWinnerTeam) {
-                loseTeam = gameRunData.lastWinnerTeam.id == 1 ? 2 : 1;
+                loseTeam = TeamID.isTeam1(gameRunData.lastWinnerTeam) ?
+                           TeamID.TEAM_2 :
+                           TeamID.TEAM_1;
             }
-            _startCtrl.start1v1(gameRunData.p1FighterGroup.currentFighter, gameRunData.p2FighterGroup.currentFighter,
-                                loseTeam
+
+            _startCtrl.start1v1(
+                    gameRunData.p1FighterGroup.currentFighter,
+                    gameRunData.p2FighterGroup.currentFighter,
+                    loseTeam
             );
         }
         else {
@@ -878,9 +895,9 @@ public class GameCtrl {
         }
 
         switch (gameRunData.lastWinnerTeam.id) {
-        case 1:
+        case TeamID.TEAM_1:
             return nextFighter(gameRunData.p2FighterGroup);
-        case 2:
+        case TeamID.TEAM_2:
             return nextFighter(gameRunData.p1FighterGroup);
         }
 

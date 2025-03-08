@@ -22,6 +22,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.BaseFighterEventCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
+import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
@@ -102,14 +103,16 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
         return true;
     }
 
-    //显示连击数字
+    /**
+     * 增加显示连击数字
+     * @param fighter 角色
+     * @param target 目标
+     */
     private function addHits(fighter:FighterMain, target:IGameSprite):void {
-        if (!(
-                target is FighterMain
-        )) {
+        if (!(target is FighterMain)) {
             return;
         }
-        if (fighter.team.id != 1) {
+        if (!TeamID.isTeam1(fighter)) {
             return;
         }
 
@@ -146,38 +149,52 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
         addHits(e.fighter as FighterMain, e.params.target);
     }
 
-    private function changeFighter(event:FighterEvent):void {
-        var f:FighterMain = event.fighter as FighterMain;
-        if (f.team && f.team.id != 1) {
+    /**
+     * 改变角色事件
+     * @param e 角色事件
+     */
+    private function changeFighter(e:FighterEvent):void {
+        var fighter:FighterMain = e.fighter as FighterMain;
+        if (!TeamID.isTeam1(fighter)) {
             return;
         }
 
         changeNextFighter();
     }
 
-    private function onDie(event:FighterEvent):void {
-        var f:FighterMain = event.fighter as FighterMain;
-        if (f.team.id == 1) {
-            GameCtrl.I.getMosouCtrl().onSelfDie(f);
-        }
-        if (f.team.id == 2) {
-            MosouLogic.I.removeHitTarget(f);
+    /**
+     * 角色死亡事件
+     * @param e 角色事件
+     */
+    private function onDie(e:FighterEvent):void {
+        var fighter:FighterMain = e.fighter as FighterMain;
 
-            var isBoss:Boolean = f.mosouEnemyData && f.mosouEnemyData.isBoss;
+        if (TeamID.isTeam1(fighter)) {
+            GameCtrl.I.getMosouCtrl().onSelfDie(fighter);
+        }
+        if (TeamID.isTeam2(fighter)) {
+            MosouLogic.I.removeHitTarget(fighter);
+
+            var isBoss:Boolean = fighter.mosouEnemyData && fighter.mosouEnemyData.isBoss;
             if (isBoss) {
-                GameCtrl.I.getMosouCtrl().onBossDie(f);
+                GameCtrl.I.getMosouCtrl().onBossDie(fighter);
             }
         }
     }
 
-    private function onDead(event:FighterEvent):void {
-        var f:FighterMain = event.fighter as FighterMain;
-        if (f.team.id == 1) {
-            GameCtrl.I.getMosouCtrl().onSelfDead(f);
+    /**
+     * 角色死透状态
+     * @param e 角色事件
+     */
+    private function onDead(e:FighterEvent):void {
+        var fighter:FighterMain = e.fighter as FighterMain;
+
+        if (TeamID.isTeam1(fighter)) {
+            GameCtrl.I.getMosouCtrl().onSelfDead(fighter);
         }
-        if (f.team.id == 2) {
-//				MosouLogic.I.removeHitTarget(f);
-            onEnemyDead(f);
+        if (TeamID.isTeam2(fighter)) {
+//            MosouLogic.I.removeHitTarget(fighter);
+            onEnemyDead(fighter);
         }
     }
 

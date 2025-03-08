@@ -49,15 +49,19 @@ public class GameRunDataVO implements IInstanceVO {
 //		public var loser:FighterMain;
     public var isDrawGame:Boolean;
 
-    public function getWins(f:FighterMain):int {
-        switch (f.team.id) {
-        case 1:
+    /**
+     * 获取角色已胜利局数
+     * @param fighter 角色
+     * @return 角色已胜利局数
+     */
+    public function getWins(fighter:FighterMain):int {
+        switch (fighter.team.id) {
+        case TeamID.TEAM_1:
             return p1Wins;
-            break;
-        case 2:
+        case TeamID.TEAM_2:
             return p2Wins;
-            break;
         }
+
         return 0;
     }
 

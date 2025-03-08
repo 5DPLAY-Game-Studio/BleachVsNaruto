@@ -27,6 +27,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.data.GameRunFighterGroup;
+import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.WinUI;
@@ -49,8 +50,8 @@ public class FightBar {
         _energyBar2 = new EnergyBar(_ui.energy2);
         _energyBar2.setDirect(-1);
 
-        _winUI1 = new WinUI(_ui.win_p1, 1);
-        _winUI2 = new WinUI(_ui.win_p2, 2);
+        _winUI1 = new WinUI(_ui.win_p1, TeamID.TEAM_1);
+        _winUI2 = new WinUI(_ui.win_p2, TeamID.TEAM_2);
 
         _timerMc = new FightTimeUI(_ui.timemc);
 
