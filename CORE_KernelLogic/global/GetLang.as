@@ -44,7 +44,7 @@ public function GetLang(tree:String, ...args):String {
     // 当前语言文本
     var langText:String = GetLangText(tree);
     // 格式化后的当前语言
-    var format:String   = Format(langText, args);
+    var format:String   = Format.apply(null, [langText].concat(args.toString().split(",")));
 
     return format;
 }

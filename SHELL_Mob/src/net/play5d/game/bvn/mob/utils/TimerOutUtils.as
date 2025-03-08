@@ -103,7 +103,7 @@ internal class InsTimer extends EventDispatcher {
     }
 
     private function timerHandler(e:TimerEvent):void {
-        if (_func) {
+        if (_func != null) {
             if (_params) {
                 _func.apply(null, _params);
             }

@@ -334,36 +334,40 @@ public class GameInterfaceManager implements IGameInterface {
     public function getCreadits(creditsInfo:String):Sprite {
         var sp:Sprite = new Sprite();
 
-        creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') +
-                       '" target="_blank">www.1212321.com</a>' + '<br/>';
-        creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.1212321.com/') +
-                       '" target="_blank">bbs.1212321.com</a>' + '<br/>';
+//        creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') +
+//                       '" target="_blank">www.1212321.com</a>' + '<br/>';
+//        creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.1212321.com/') +
+//                       '" target="_blank">bbs.1212321.com</a>' + '<br/>';
+        creditsInfo += '<br/>' +
+                       '官网：<a href="http://www.1212321.com/" target="_blank">www.1212321.com</a>    ' +
+                       '论坛：<a href="http://bbs.1212321.com/" target="_blank">bbs.1212321.com</a><br/>' +
+                       '邮箱：5dplay@qun.mail.163.com （人才招募中）<br/>';
 
         var txt:TextField = new TextField();
 
         var tf:TextFormat = new TextFormat();
         tf.font           = '微软雅黑';
-        tf.size           = 20;
+        tf.size           = 17;
         tf.color          = 0xffff00;
-        tf.leading        = 15;
+        tf.leading        = 10;
 
         txt.defaultTextFormat = tf;
 
         txt.multiline = true;
 
-        if (ENGLISH_VERSION) {
-            txt.htmlText = 'website : <a href="' + URL.markURL('http://www.1212321.com/') +
-                           '" target="_blank">www.1212321.com</a>' + '<br/>' +
-                           'bbs : <a href="' + URL.markURL('http://bbs.1212321.com/') +
-                           '" target="_blank">bbs.1212321.com</a>' + '<br/>';
-        }
-        else {
+//        if (ENGLISH_VERSION) {
+//            txt.htmlText = 'website : <a href="' + URL.markURL('http://www.1212321.com/') +
+//                           '" target="_blank">www.1212321.com</a>' + '<br/>' +
+//                           'bbs : <a href="' + URL.markURL('http://bbs.1212321.com/') +
+//                           '" target="_blank">bbs.1212321.com</a>' + '<br/>';
+//        }
+//        else {
             txt.htmlText = creditsInfo;
-        }
+//        }
         txt.autoSize = TextFieldAutoSize.LEFT;
 
-        txt.x = 50;
-        txt.y = 30;
+        txt.x = 30;
+        txt.y = 25;
 
         sp.addChild(txt);
 
