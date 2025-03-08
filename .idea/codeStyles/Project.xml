@@ -28,8 +28,6 @@
       <option name="METHOD_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
       <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
       <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
-      <option name="PARENTHESES_EXPRESSION_LPAREN_WRAP" value="true" />
-      <option name="PARENTHESES_EXPRESSION_RPAREN_WRAP" value="true" />
       <option name="BINARY_OPERATION_WRAP" value="1" />
       <option name="TERNARY_OPERATION_WRAP" value="1" />
       <option name="FOR_STATEMENT_WRAP" value="1" />
