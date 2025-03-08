@@ -2,7 +2,14 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
-## [3.7.0.0.03032025_alpha] - 2025-02-12
+## [3.7.0.0.03082025_alpha] - 2025-03-08
+
+### 修复
+
+- 修复手机版制作组页面文字排版问题
+- 修复携带有 ...args 参数的全局函数在互相引用时产生的引用错误
+
+## [3.7.0.0.03032025_alpha] - 2025-03-03
 
 ### 新增
 
@@ -145,6 +152,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.03082025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.03032025_alpha...3.7.0.0.03082025_alpha
 [3.7.0.0.03032025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.02122025_alpha...3.7.0.0.03032025_alpha
 [3.7.0.0.02122025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.12212024_alpha...3.7.0.0.02122025_alpha
 [3.7.0.0.12212024_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.12052024_alpha...3.7.0.0.12212024_alpha
