@@ -21,7 +21,7 @@ import flash.media.Sound;
 import flash.media.SoundTransform;
 import flash.utils.getTimer;
 
-import net.play5d.game.bvn.data.BgmVO;
+import net.play5d.game.bvn.data.vos.BgmVO;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.kyo.loader.KyoSoundLoader;
 import net.play5d.kyo.sound.KyoBGSounder;

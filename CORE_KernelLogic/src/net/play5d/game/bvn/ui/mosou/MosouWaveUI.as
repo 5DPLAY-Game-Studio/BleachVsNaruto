@@ -22,7 +22,7 @@ import flash.display.Sprite;
 import flash.text.TextField;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouCtrl;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.kyo.utils.KyoDrawUtils;
 
 public class MosouWaveUI {
@@ -48,14 +48,14 @@ public class MosouWaveUI {
     private var _circleBp:Bitmap;
 
     public function renderAnimate():void {
-        var mosouCtrl:MosouCtrl = GameCtrl.I.getMosouCtrl();
+        var mosouCtrl:MusouCtrl = GameCtrl.I.getMosouCtrl();
         _txtCur.text            = mosouCtrl.currentWave.toString();
         _txtMax.text            = mosouCtrl.waveCount.toString();
         renderCircle();
     }
 
     private function renderCircle():void {
-        var mosouCtrl:MosouCtrl = GameCtrl.I.getMosouCtrl();
+        var mosouCtrl:MusouCtrl = GameCtrl.I.getMosouCtrl();
         var angle:int           = (
                                           mosouCtrl.getWavePercent() * 360
                                   ) << 0;

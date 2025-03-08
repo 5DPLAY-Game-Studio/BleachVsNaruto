@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.mosou_ctrls {
+package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
 import net.play5d.game.bvn.data.mosou.MosouMissionVO;
@@ -30,17 +30,17 @@ import net.play5d.game.bvn.data.mosou.player.MosouWorldMapPlayerVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 
-public class MosouLogic {
+public class MusouLogic {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    private static var _i:MosouLogic;
+    private static var _i:MusouLogic;
 
-    public static function get I():MosouLogic {
-        _i ||= new MosouLogic;
+    public static function get I():MusouLogic {
+        _i ||= new MusouLogic;
         return _i;
     }
 
-    public function MosouLogic() {
+    public function MusouLogic() {
     }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.data.vos {
 import flash.display.BitmapData;
 import flash.display.BlendMode;
 import flash.display.MovieClip;
@@ -31,8 +31,8 @@ import net.play5d.kyo.utils.KyoUtils;
  * 效果值对象
  */
 public class EffectVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public function EffectVO(className:String, param:Object = null) {
         this.className = className;
@@ -40,6 +40,7 @@ public class EffectVO implements IInstanceVO {
             KyoUtils.setValueByObject(this, param);
         }
     }
+
     public var className:String;
     public var shine:Object;//闪光{color,alpha}
     public var shake:Object;//震动{x,y|pow,time[毫秒，可选]} , 当设置pow时，x,y无效，根据hitvo.hitx,hity进行震动
@@ -48,13 +49,13 @@ public class EffectVO implements IInstanceVO {
     public var randRotate:Boolean; //随机角度旋转
     public var followDirect:Boolean; //跟随角色朝向
     public var slowDown:Object; //慢放效果{rate[慢放倍数],time[慢放时间（毫秒）]}
-    public var blendMode:String = BlendMode.NORMAL;
+    public var blendMode:String   = BlendMode.NORMAL;
     public var bitmapDataCache:Vector.<BitmapDataCacheVO>;
     public var frameLabelCache:Object;
     public var specialEffectId:String;
     public var targetColorOffset:Array;
-    public var isSpecial:Boolean = false;
-    public var isBuff:Boolean = false;
+    public var isSpecial:Boolean  = false;
+    public var isBuff:Boolean     = false;
     public var isSteelHit:Boolean = false;
 
 //    public function clone():EffectVO {

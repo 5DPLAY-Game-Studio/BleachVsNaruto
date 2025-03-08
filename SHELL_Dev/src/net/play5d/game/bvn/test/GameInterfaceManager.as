@@ -21,7 +21,7 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.utils.ByteArray;
 
-import net.play5d.game.bvn.data.ConfigVO;
+import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.input.GameKeyInput;
 import net.play5d.game.bvn.input.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;

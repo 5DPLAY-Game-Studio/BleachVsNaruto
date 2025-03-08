@@ -29,8 +29,8 @@ import flash.geom.Point;
 import flash.text.TextFormatAlign;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.FighterVO;
-import net.play5d.game.bvn.data.SelectCharListItemVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.BitmapText;
 

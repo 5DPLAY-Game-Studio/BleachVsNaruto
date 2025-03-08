@@ -22,7 +22,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.TeamMap;
-import net.play5d.game.bvn.data.TeamVO;
+import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;

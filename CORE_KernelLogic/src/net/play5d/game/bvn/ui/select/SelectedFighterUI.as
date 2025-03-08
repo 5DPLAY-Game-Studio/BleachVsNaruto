@@ -28,7 +28,7 @@ import flash.text.TextFormatAlign;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.ResUtils;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.data.vos {
 import flash.geom.Point;
 
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 public class SelectStageConfigVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public function SelectStageConfigVO() {
     }
+
     public var x:Number      = 0;
     public var y:Number      = 0;
     public var width:Number  = 800;
@@ -36,7 +37,7 @@ public class SelectStageConfigVO implements IInstanceVO {
     public var left:Number   = 0;
 
 //		public var itemGap:Point = new Point(10,10);
-    public var right:Number  = 0;
+    public var right:Number = 0;
     public var charList:SelectCharListConfigVO;
     public var assistList:SelectCharListConfigVO;
 

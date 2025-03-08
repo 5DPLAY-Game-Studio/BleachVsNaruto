@@ -26,12 +26,12 @@ import flash.utils.setTimeout;
 import net.play5d.game.bvn.ctrler.GameLoader;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
-import net.play5d.game.bvn.data.BgmVO;
+import net.play5d.game.bvn.data.vos.BgmVO;
 import net.play5d.game.bvn.data.DefinedClass;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.MapVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 
 public class GameStageLoadCtrl extends EventDispatcher {
     include '../../../../../../../include/_INCLUDE_.as';

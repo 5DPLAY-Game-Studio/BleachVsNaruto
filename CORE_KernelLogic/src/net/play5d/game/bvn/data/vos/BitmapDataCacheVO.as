@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,18 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.data.vos {
+import flash.display.BitmapData;
+
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class SelectCharListConfigVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+/**
+ * 位图数据缓存值对象
+ */
+public class BitmapDataCacheVO implements IInstanceVO {
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
-    public function SelectCharListConfigVO() {
+    // 位图数据
+    public var bitmapData:BitmapData;
 
-    }
-    public var list:Array = [];
-    public var HCount:int; //列数
-    public var VCount:int; //行数
+    // X 偏移
+    public var offsetX:Number = 0;
+    // Y 偏移
+    public var offsetY:Number = 0;
+
 }
 }

@@ -27,7 +27,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MapModel;
@@ -163,7 +163,7 @@ public class LoadingMosouStage implements IStage {
         GameCtrl.I.initMosouGame();
 
         GameCtrl.I.getMosouCtrl().gameRunData.koNum = 0;
-        MosouLogic.I.clearHits();
+        MusouLogic.I.clearHits();
         GameCtrl.I.getMosouCtrl().gameRunData.gameTimeMax = mission.time * GameConfig.FPS_ANIMATE;
         GameCtrl.I.getMosouCtrl().gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
 //			GameCtrl.I.getMosouCtrl().gameRunData.gameTime = 30 * GameConfig.FPS_ANIMATE;

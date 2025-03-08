@@ -29,7 +29,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.MapVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.ResUtils;

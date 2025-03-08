@@ -22,8 +22,8 @@ import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
-import net.play5d.game.bvn.data.MapVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
 import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
 import net.play5d.game.bvn.fighter.Assister;

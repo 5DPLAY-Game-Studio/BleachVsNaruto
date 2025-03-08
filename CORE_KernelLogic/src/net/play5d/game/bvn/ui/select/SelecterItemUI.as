@@ -19,8 +19,8 @@
 package net.play5d.game.bvn.ui.select {
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
-import net.play5d.game.bvn.data.FighterVO;
-import net.play5d.game.bvn.data.SelectVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoUtils;
 

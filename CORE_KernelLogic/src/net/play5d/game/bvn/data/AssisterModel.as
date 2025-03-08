@@ -17,6 +17,8 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.data.vos.FighterVO;
+
 public class AssisterModel {
     include '../../../../../../include/_INCLUDE_.as';
 

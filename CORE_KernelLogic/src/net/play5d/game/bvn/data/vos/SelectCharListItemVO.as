@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,14 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.data.vos {
 import flash.geom.Point;
 
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 public class SelectCharListItemVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public function SelectCharListItemVO(x:int, y:int, fighterID:String, offset:Point = null) {
         this.x         = x;
@@ -31,6 +31,7 @@ public class SelectCharListItemVO implements IInstanceVO {
         this.fighterID = fighterID;
         this.offset    = offset;
     }
+
     public var x:int;
     public var y:int;
     public var fighterID:String;

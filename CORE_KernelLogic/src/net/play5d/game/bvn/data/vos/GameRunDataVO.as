@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2025, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
-//import net.play5d.game.bvn.data.mosou.MosouWaveRunVO;
+package net.play5d.game.bvn.data.vos {
+import net.play5d.game.bvn.data.*;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+//import net.play5d.game.bvn.data.mosou.MosouWaveRunVO;
 /**
  * 记录运行游戏时需要的相关数据
  */
 public class GameRunDataVO implements IInstanceVO {
-    include '../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../include/Clone.as';
+    include '../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../include/Clone.as';
 
     public const p1FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();
     public const p2FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();

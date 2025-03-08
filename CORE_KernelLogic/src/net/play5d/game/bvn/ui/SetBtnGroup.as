@@ -28,7 +28,7 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
-import net.play5d.game.bvn.data.ConfigVO;
+import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputType;

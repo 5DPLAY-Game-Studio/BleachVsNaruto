@@ -24,7 +24,7 @@ import flash.display.MovieClip;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import net.play5d.game.bvn.data.TeamVO;
+import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;

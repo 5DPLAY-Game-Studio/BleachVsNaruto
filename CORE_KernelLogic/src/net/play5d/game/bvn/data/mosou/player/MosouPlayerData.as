@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.mosou.player {
-import net.play5d.game.bvn.ctrler.mosou_ctrls.MosouLogic;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.data.mosou.MosouModel;
 import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
@@ -309,7 +309,7 @@ public class MosouPlayerData implements ISaveData {
 
         for each(var m:MosouWorldMapAreaVO in map2.areas) {
             if (!m.preOpens || m.preOpens.length < 1) {
-                MosouLogic.I.openMapArea(map.id, m.id);
+                MusouLogic.I.openMapArea(map.id, m.id);
             }
         }
 

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.mosou_ctrls {
+package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
@@ -49,12 +49,12 @@ import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.mosou.MosouUI;
 
-public class MosouCtrl {
+public class MusouCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public const gameRunData:MousouGameRunDataVO = new MousouGameRunDataVO();
 
-    public function MosouCtrl() {
+    public function MusouCtrl() {
     }
     public var waveCount:int;
     public var currentWave:int;
@@ -65,8 +65,8 @@ public class MosouCtrl {
     private var _bossCount:int;
     private var _renderTimer:int;
     private var _renderTimerMax:int;
-    private var _fighterEventCtrl:MosouFighterEventCtrl;
-    private var _enemyBarCtrl:MosouEnemyBarCtrl;
+    private var _fighterEventCtrl:MusouFighterEventCtrl;
+    private var _enemyBarCtrl:MusouEnemyBarCtrl;
     private var _changeFighterGap:int;
     private var _resumeGap:int;
     private var _enemyCreators:Vector.<EnemyCreator> = new Vector.<EnemyCreator>();
@@ -76,7 +76,7 @@ public class MosouCtrl {
     private var _introBoss:FighterMain;
     private var _bossInAnimate:Boolean;
 
-    public function getFighterEventCtrl():MosouFighterEventCtrl {
+    public function getFighterEventCtrl():MusouFighterEventCtrl {
         return _fighterEventCtrl;
     }
 
@@ -90,11 +90,11 @@ public class MosouCtrl {
 
         _bossCount = _mission.bossCount();
 
-        _enemyBarCtrl = new MosouEnemyBarCtrl();
+        _enemyBarCtrl = new MusouEnemyBarCtrl();
 
         _stageEnemies = new Vector.<FighterMain>();
 
-        _fighterEventCtrl = new MosouFighterEventCtrl();
+        _fighterEventCtrl = new MusouFighterEventCtrl();
         _fighterEventCtrl.initlize();
 
         waveCount   = _mission.waves.length;
@@ -627,7 +627,7 @@ public class MosouCtrl {
         ).showWin(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.mission_complete_complete');
 
-            MosouLogic.I.passMission(_mission);
+            MusouLogic.I.passMission(_mission);
             backToWorldMap();
         });
     }

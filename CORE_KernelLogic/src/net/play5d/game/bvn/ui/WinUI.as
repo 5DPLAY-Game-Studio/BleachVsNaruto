@@ -20,7 +20,7 @@ package net.play5d.game.bvn.ui {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
 
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.TeamID;
 
 public class WinUI {

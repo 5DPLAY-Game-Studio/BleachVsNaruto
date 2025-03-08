@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.win.ctrls {
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.data.GameRunDataVO;
+import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.win.input.InputManager;

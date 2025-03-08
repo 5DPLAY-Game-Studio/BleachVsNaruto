@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.mosou_ctrls {
+package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.BaseFighterEventCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
@@ -30,7 +30,7 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.mosou.MosouUI;
 
-public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
+public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
     public override function initlize():void {
@@ -116,7 +116,7 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
             return;
         }
 
-        MosouLogic.I.addHits(target as FighterMain);
+        MusouLogic.I.addHits(target as FighterMain);
     }
 
     private function onEnemyEvent(event:FighterEvent):void {
@@ -134,13 +134,13 @@ public class MosouFighterEventCtrl extends BaseFighterEventCtrl {
             onEnemyBeHit(f);
             break;
 //				case FighterEvent.DEAD:
-//					MosouLogic.I.removeHitTarget(f);
+//					MusouLogic.I.removeHitTarget(f);
 //					onEnemyDead(f);
 //					break;
         case FighterEvent.IDLE:
         case FighterEvent.HURT_RESUME:
         case FighterEvent.HURT_DOWN:
-            MosouLogic.I.removeHitTarget(f);
+            MusouLogic.I.removeHitTarget(f);
             break;
         }
     }

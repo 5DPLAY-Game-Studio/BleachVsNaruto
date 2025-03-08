@@ -20,7 +20,7 @@ package net.play5d.game.bvn.ui.fight {
 import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.FighterVO;
+import net.play5d.game.bvn.data.vos.FighterVO;
 
 public class FightFaceUI {
     include '../../../../../../../include/_INCLUDE_.as';
