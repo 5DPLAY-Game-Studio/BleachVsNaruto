@@ -173,7 +173,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
             GameCtrl.I.getMosouCtrl().onSelfDie(fighter);
         }
         if (TeamID.isTeam2(fighter)) {
-            MosouLogic.I.removeHitTarget(fighter);
+            MusouLogic.I.removeHitTarget(fighter);
 
             var isBoss:Boolean = fighter.mosouEnemyData && fighter.mosouEnemyData.isBoss;
             if (isBoss) {

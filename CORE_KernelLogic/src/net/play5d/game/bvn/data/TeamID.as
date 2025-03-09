@@ -17,6 +17,7 @@
  */
 
 package net.play5d.game.bvn.data {
+import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 
 /**
