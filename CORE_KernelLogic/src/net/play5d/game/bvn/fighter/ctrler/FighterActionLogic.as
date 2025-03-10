@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.fighter.ctrler {
-import net.play5d.game.bvn.data.musou.MosouFighterLogic;
+import net.play5d.game.bvn.data.musou.MusouFighterLogic;
 import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
@@ -32,7 +32,7 @@ public class FighterActionLogic {
     private var _fighter:FighterMain;
     private var _action:FighterAction;
     private var _actionCtrler:IFighterActionCtrl;
-    private var _mosouLogic:MosouFighterLogic;
+    private var _mosouLogic:MusouFighterLogic;
 
     public function enabled():Boolean {
 

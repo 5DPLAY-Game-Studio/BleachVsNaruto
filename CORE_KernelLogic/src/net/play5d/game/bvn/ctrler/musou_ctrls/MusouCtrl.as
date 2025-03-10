@@ -28,7 +28,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
-import net.play5d.game.bvn.data.musou.MosouFighterLogic;
+import net.play5d.game.bvn.data.musou.MusouFighterLogic;
 import net.play5d.game.bvn.data.musou.MosouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
 import net.play5d.game.bvn.data.musou.MosouWaveRepeatVO;
@@ -718,7 +718,7 @@ public class MusouCtrl {
         if (p1 && p1.mosouPlayerData == data) {
             p1.updateProperties();
 
-            var index:int = MosouFighterLogic.ALL_ACTION_LEVELS.indexOf(data.getLevel());
+            var index:int = MusouFighterLogic.ALL_ACTION_LEVELS.indexOf(data.getLevel());
             if (index != -1) {
                 EffectCtrl.I.doEffectById('level_up_new_act', p1.x, p1.y);
             }

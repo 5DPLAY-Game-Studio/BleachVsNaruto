@@ -20,7 +20,7 @@ package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouFighterLogic {
+public class MusouFighterLogic {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public static const LV_DASH_AIR:int   = 0;
@@ -69,7 +69,7 @@ public class MosouFighterLogic {
 //
 //		public static const LV_BANKAI:int = 10;
 
-    public function MosouFighterLogic(v:MosouFighterVO) {
+    public function MusouFighterLogic(v:MosouFighterVO) {
         _fightData = v;
     }
     private var _fightData:MosouFighterVO;
