@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
+package net.play5d.game.bvn.data.musou {
 public class MosouFighterModel {
     include '../../../../../../../include/_INCLUDE_.as';
 
