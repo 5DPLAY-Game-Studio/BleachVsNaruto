@@ -19,15 +19,15 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouEnemyVO implements IInstanceVO {
+public class MusouEnemyVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
     public static function create(
             fighterID:String, maxHp:int = 200, atk:int = 0, isBoss:Boolean = false, exp:int = 10,
             money:int                                                                       = 10
-    ):MosouEnemyVO {
-        var ev:MosouEnemyVO = new MosouEnemyVO();
+    ):MusouEnemyVO {
+        var ev:MusouEnemyVO = new MusouEnemyVO();
 
         ev.fighterID = fighterID;
         ev.isBoss    = isBoss;
@@ -57,7 +57,7 @@ public class MosouEnemyVO implements IInstanceVO {
         return ev;
     }
 
-    public static function createByJSON(json:Object):Vector.<MosouEnemyVO> {
+    public static function createByJSON(json:Object):Vector.<MusouEnemyVO> {
         var id:String      = json.id;
         var hp:int         = json.hp;
         var atk:int        = json.atk;
@@ -66,15 +66,15 @@ public class MosouEnemyVO implements IInstanceVO {
         var exp:int        = json.exp;
         var money:int      = json.money;
 
-        var result:Vector.<MosouEnemyVO> = new Vector.<MosouEnemyVO>();
+        var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
         for (var i:int; i < amount; i++) {
-            var mv:MosouEnemyVO = create(id, hp, atk, isBoss, exp, money);
+            var mv:MusouEnemyVO = create(id, hp, atk, isBoss, exp, money);
             result.push(mv);
         }
         return result;
     }
 
-    public function MosouEnemyVO() {
+    public function MusouEnemyVO() {
     }
     public var fighterID:String;
     public var maxHp:int = 0;
@@ -86,14 +86,14 @@ public class MosouEnemyVO implements IInstanceVO {
     private var exp:int   = 10;
     private var money:int = 10;
 
-//		public static function createByXML(xml:XML):Vector.<MosouEnemyVO>{
+//		public static function createByXML(xml:XML):Vector.<MusouEnemyVO>{
 //			var id:String = xml.@id.toString();
 //			var hp:int = xml.@hp;
 //			var amount:int = xml.@amount;
 //			var isBoss:Boolean = xml.@isBoss == "true";
-//			var result:Vector.<MosouEnemyVO> = new Vector.<MosouEnemyVO>();
+//			var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
 //			for(var i:int; i < amount; i++){
-//				var mv:MosouEnemyVO = create(id, hp, isBoss);
+//				var mv:MusouEnemyVO = create(id, hp, isBoss);
 //				result.push(mv);
 //			}
 //			return result;

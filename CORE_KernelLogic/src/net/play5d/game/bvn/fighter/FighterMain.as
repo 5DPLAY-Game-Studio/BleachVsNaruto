@@ -26,7 +26,7 @@ import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.TeamVO;
-import net.play5d.game.bvn.data.musou.MosouEnemyVO;
+import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 import net.play5d.game.bvn.data.musou.MosouFighterLogic;
 import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
@@ -72,7 +72,7 @@ public class FighterMain extends BaseGameSprite {
 
     public var data:FighterVO; //角色数据
     public var mosouPlayerData:MosouFighterVO; //无双模式时有效
-    public var mosouEnemyData:MosouEnemyVO; //无双模式时有效
+    public var mosouEnemyData:MusouEnemyVO; //无双模式时有效
 
     public var airHitTimes:int = 1; //允许空中打几次
     public var jumpTimes:int   = 2; //允许跳几次
@@ -391,7 +391,7 @@ public class FighterMain extends BaseGameSprite {
                 if (i is FighterMain && (
                         i as FighterMain
                 ).isAlive && i.getActive()) {
-                    var msd:MosouEnemyVO = (
+                    var msd:MusouEnemyVO = (
                             i as FighterMain
                     ).mosouEnemyData;
                     if (msd) {
@@ -450,7 +450,7 @@ public class FighterMain extends BaseGameSprite {
         updateProperties();
     }
 
-    public function initMosouEnemy(v:MosouEnemyVO):void {
+    public function initMosouEnemy(v:MusouEnemyVO):void {
         mosouEnemyData = v;
     }
 

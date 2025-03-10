@@ -87,11 +87,11 @@ public class MosouMissionVO implements IInstanceVO {
         }
     }
 
-    public function getAllEnemies():Vector.<MosouEnemyVO> {
-        var result:Vector.<MosouEnemyVO> = new Vector.<MosouEnemyVO>();
+    public function getAllEnemies():Vector.<MusouEnemyVO> {
+        var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
         for (var i:int; i < waves.length; i++) {
             var w:MosouWaveVO                 = waves[i];
-            var enemies:Vector.<MosouEnemyVO> = w.getAllEnemies();
+            var enemies:Vector.<MusouEnemyVO> = w.getAllEnemies();
             if (enemies) {
                 result = result.concat(enemies);
             }
@@ -116,9 +116,9 @@ public class MosouMissionVO implements IInstanceVO {
     }
 
     public function getBossIds():Array {
-        var bosses:Vector.<MosouEnemyVO> = getBosses();
+        var bosses:Vector.<MusouEnemyVO> = getBosses();
         var result:Array                 = [];
-        for each(var i:MosouEnemyVO in bosses) {
+        for each(var i:MusouEnemyVO in bosses) {
             if (result.indexOf(i.fighterID) == -1) {
                 result.push(i.fighterID);
             }
@@ -126,13 +126,13 @@ public class MosouMissionVO implements IInstanceVO {
         return result;
     }
 
-    public function getBosses():Vector.<MosouEnemyVO> {
-        var result:Vector.<MosouEnemyVO> = new Vector.<MosouEnemyVO>();
+    public function getBosses():Vector.<MusouEnemyVO> {
+        var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
         for (var i:int; i < waves.length; i++) {
             var w:MosouWaveVO                = waves[i];
-            var bosses:Vector.<MosouEnemyVO> = w.getBosses();
+            var bosses:Vector.<MusouEnemyVO> = w.getBosses();
             if (bosses) {
-                for each(var e:MosouEnemyVO in bosses) {
+                for each(var e:MusouEnemyVO in bosses) {
                     if (result.indexOf(e) == -1) {
                         result.push(e);
                     }

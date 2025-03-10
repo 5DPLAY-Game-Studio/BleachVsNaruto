@@ -36,13 +36,13 @@ public class MosouWaveRepeatVO implements IInstanceVO {
     /**
      * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）
      */
-    public var enemies:Vector.<MosouEnemyVO>;
+    public var enemies:Vector.<MusouEnemyVO>;
     public var _holdFrame:int;
 
-    public function addEnemy(enemyAdds:Vector.<MosouEnemyVO>):void {
-        enemies ||= new Vector.<MosouEnemyVO>();
+    public function addEnemy(enemyAdds:Vector.<MusouEnemyVO>):void {
+        enemies ||= new Vector.<MusouEnemyVO>();
 
-        for each(var e:MosouEnemyVO in enemyAdds) {
+        for each(var e:MusouEnemyVO in enemyAdds) {
             e.wave   = wave;
             e.repeat = this;
             enemies.push(e);

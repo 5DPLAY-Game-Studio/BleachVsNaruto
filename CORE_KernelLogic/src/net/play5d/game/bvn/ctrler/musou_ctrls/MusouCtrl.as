@@ -27,7 +27,7 @@ import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
-import net.play5d.game.bvn.data.musou.MosouEnemyVO;
+import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 import net.play5d.game.bvn.data.musou.MosouFighterLogic;
 import net.play5d.game.bvn.data.musou.MosouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
@@ -472,7 +472,7 @@ public class MusouCtrl {
 
 //			if(_addEnemyGap++ < 15) return;
 
-        var ev:MosouEnemyVO = _enemyCreators[0].getNextEnemy();
+        var ev:MusouEnemyVO = _enemyCreators[0].getNextEnemy();
         if (ev) {
             addEmeny(ev);
         }
@@ -503,7 +503,7 @@ public class MusouCtrl {
             return;
         }
 
-        var result:Vector.<MosouEnemyVO> = null;
+        var result:Vector.<MusouEnemyVO> = null;
 
         if (data._holdFrame > 0) {
             data._holdFrame--;
@@ -513,9 +513,9 @@ public class MusouCtrl {
         data._holdFrame = GameConfig.FPS_ANIMATE * data.hold;
 
         if (data.type == 1) {
-            result = new Vector.<MosouEnemyVO>();
+            result = new Vector.<MusouEnemyVO>();
 
-            for each(var i:MosouEnemyVO in data.enemies) {
+            for each(var i:MusouEnemyVO in data.enemies) {
                 var f:FighterMain = getEnemyByData(i);
                 if (!f || !f.isAlive || !f.getActive()) {
                     result.push(i);
@@ -564,7 +564,7 @@ public class MusouCtrl {
 
     }
 
-    private function addEmeny(data:MosouEnemyVO):void {
+    private function addEmeny(data:MusouEnemyVO):void {
         var enemy:FighterMain = GameRunFactory.createEnemyByData(data);
         _stageEnemies.push(enemy);
         addEnemyFighter(enemy);
@@ -579,7 +579,7 @@ public class MusouCtrl {
         });
     }
 
-    private function getEnemyByData(mosouData:MosouEnemyVO):FighterMain {
+    private function getEnemyByData(mosouData:MusouEnemyVO):FighterMain {
         var filtered:Vector.<FighterMain> = _stageEnemies.filter(
                 function (f:FighterMain, i:int, a:Vector.<FighterMain>):Boolean {
                     return f.mosouEnemyData == mosouData;
@@ -733,15 +733,15 @@ public class MusouCtrl {
 }
 }
 
-import net.play5d.game.bvn.data.musou.MosouEnemyVO;
+import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 
 internal class EnemyCreator {
-    public function EnemyCreator(enemies:Vector.<MosouEnemyVO>) {
+    public function EnemyCreator(enemies:Vector.<MusouEnemyVO>) {
         _addEnemies = enemies.concat();
     }
-    private var _addEnemies:Vector.<MosouEnemyVO>;
+    private var _addEnemies:Vector.<MusouEnemyVO>;
 
-    public function getNextEnemy():MosouEnemyVO {
+    public function getNextEnemy():MusouEnemyVO {
         if (_addEnemies.length < 1) {
             return null;
         }
