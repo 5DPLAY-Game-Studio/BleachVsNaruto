@@ -58,7 +58,7 @@ public class MosouModel {
 
     public function loadMapData(back:Function, fail:Function):void {
         var mapId:String = 'map1';
-        var url:String   = 'config/mosou/' + mapId + '/' + mapId + '.json';
+        var url:String   = 'config/musou/' + mapId + '/' + mapId + '.json';
         AssetManager.I.loadJSON(url, function (o:Object):void {
             var map:MosouWorldMapVO = new MosouWorldMapVO();
             map.id                  = o.id;
@@ -97,7 +97,7 @@ public class MosouModel {
 
             var id:String = mapIds.shift();
 
-            var partUrl:String = 'config/mosou/' + map.id + '/' + id + '.json';
+            var partUrl:String = 'config/musou/' + map.id + '/' + id + '.json';
             TraceLang('debug.trace.data.musou_model.load_area', partUrl);
             AssetManager.I.loadJSON(partUrl, loadNext, fail);
         }

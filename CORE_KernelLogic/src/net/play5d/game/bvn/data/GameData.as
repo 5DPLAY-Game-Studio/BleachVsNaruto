@@ -18,13 +18,13 @@
 
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.mosou.MosouFighterModel;
-import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
-import net.play5d.game.bvn.data.mosou.MosouMissionVO;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapVO;
-import net.play5d.game.bvn.data.mosou.player.MosouPlayerData;
+import net.play5d.game.bvn.data.musou.MosouFighterModel;
+import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MosouMissionVO;
+import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MapVO;
@@ -91,7 +91,7 @@ public class GameData {
 
         function loadMissionBack(data:Object):void {
             MessionModel.I.initByObject(data);
-//				AssetManager.I.loadXML("config/mosou.xml",loadMosouMission , loadMosouMission);
+//				AssetManager.I.loadXML("config/musou.xml",loadMosouMission , loadMosouMission);
 
             MosouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);
         }

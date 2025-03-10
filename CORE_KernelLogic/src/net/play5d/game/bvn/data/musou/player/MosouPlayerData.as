@@ -16,13 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player {
+package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.ISaveData;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapVO;
-import net.play5d.game.bvn.data.mosou.utils.MosouFighterFactory;
+import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.utils.MosouFighterFactory;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.utils.WrapInteger;
 

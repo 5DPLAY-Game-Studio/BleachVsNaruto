@@ -16,17 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.utils {
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+package net.play5d.game.bvn.data.musou.player {
+import net.play5d.game.bvn.data.ISaveData;
+import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouFighterFactory {
+public class MosouMissionPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../../include/Clone.as';
 
-    public static function create(id:String):MosouFighterVO {
-        var mv:MosouFighterVO = new MosouFighterVO();
-        mv.id                 = id;
-        return mv;
+    public function MosouMissionPlayerVO() {
+    }
+    public var id:String;
+//		public var isPassed:Boolean = false;
+    public var stars:int = 0;
+
+    public function toSaveObj():Object {
+        var o:Object = {};
+        o.id         = id;
+//			o.isPassed = isPassed;
+        o.stars      = stars;
+        return o;
     }
 
+    public function readSaveObj(o:Object):void {
+        id    = o.id;
+//			isPassed = o.isPassed;
+        stars = o.stars;
+    }
 }
 }

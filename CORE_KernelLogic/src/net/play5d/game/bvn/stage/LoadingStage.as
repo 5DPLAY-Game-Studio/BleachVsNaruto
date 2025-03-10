@@ -43,7 +43,7 @@ import net.play5d.game.bvn.ui.select.SelectIndexUI;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
-//import net.play5d.game.bvn.data.mosou.MosouMissionModel;
+//import net.play5d.game.bvn.data.musou.MosouMissionModel;
 public class LoadingStage implements IStage {
     include '../../../../../../include/_INCLUDE_.as';
 

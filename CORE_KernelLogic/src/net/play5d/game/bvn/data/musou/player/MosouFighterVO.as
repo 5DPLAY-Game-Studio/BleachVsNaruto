@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player {
+package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.data.ISaveData;
-import net.play5d.game.bvn.data.mosou.LevelModel;
+import net.play5d.game.bvn.data.musou.LevelModel;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.game.bvn.utils.WrapInteger;

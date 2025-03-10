@@ -25,8 +25,8 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.utils.ResUtils;
 

@@ -26,8 +26,8 @@ import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.mosou.MosouFighterModel;
-import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MosouFighterModel;
+import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
 import net.play5d.game.bvn.utils.TouchUtils;

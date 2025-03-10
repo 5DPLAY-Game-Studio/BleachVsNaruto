@@ -18,15 +18,15 @@
 
 package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
-import net.play5d.game.bvn.data.mosou.MosouMissionVO;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapVO;
-import net.play5d.game.bvn.data.mosou.player.MosouMissionPlayerVO;
-import net.play5d.game.bvn.data.mosou.player.MosouPlayerData;
-import net.play5d.game.bvn.data.mosou.player.MosouWorldMapAreaPlayerVO;
-import net.play5d.game.bvn.data.mosou.player.MosouWorldMapPlayerVO;
+import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MosouMissionVO;
+import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.player.MosouMissionPlayerVO;
+import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
+import net.play5d.game.bvn.data.musou.player.MosouWorldMapAreaPlayerVO;
+import net.play5d.game.bvn.data.musou.player.MosouWorldMapPlayerVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 

@@ -27,14 +27,14 @@ import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
-import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
-import net.play5d.game.bvn.data.mosou.MosouFighterLogic;
-import net.play5d.game.bvn.data.mosou.MosouMissionVO;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWaveRepeatVO;
-import net.play5d.game.bvn.data.mosou.MosouWaveVO;
-import net.play5d.game.bvn.data.mosou.MousouGameRunDataVO;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.MosouEnemyVO;
+import net.play5d.game.bvn.data.musou.MosouFighterLogic;
+import net.play5d.game.bvn.data.musou.MosouMissionVO;
+import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MosouWaveRepeatVO;
+import net.play5d.game.bvn.data.musou.MosouWaveVO;
+import net.play5d.game.bvn.data.musou.MousouGameRunDataVO;
+import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.factory.GameRunFactory;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
@@ -733,7 +733,7 @@ public class MusouCtrl {
 }
 }
 
-import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
+import net.play5d.game.bvn.data.musou.MosouEnemyVO;
 
 internal class EnemyCreator {
     public function EnemyCreator(enemies:Vector.<MosouEnemyVO>) {

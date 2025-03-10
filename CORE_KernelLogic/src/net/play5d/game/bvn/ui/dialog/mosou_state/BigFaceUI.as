@@ -26,7 +26,7 @@ import flash.text.TextFormatAlign;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.ui.Text;
 
 public class BigFaceUI {
