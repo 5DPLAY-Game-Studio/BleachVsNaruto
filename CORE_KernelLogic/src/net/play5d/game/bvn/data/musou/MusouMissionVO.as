@@ -46,7 +46,7 @@ public class MusouMissionVO implements IInstanceVO {
      * 波次
      */
     public var waves:Vector.<MusouWaveVO>;
-    public var area:MosouWorldMapAreaVO;
+    public var area:MusouWorldMapAreaVO;
 
 //		public function initByXML(xml:XML):void{
 //

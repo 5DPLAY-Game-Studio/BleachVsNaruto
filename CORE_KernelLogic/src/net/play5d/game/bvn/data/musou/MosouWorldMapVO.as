@@ -27,18 +27,18 @@ public class MosouWorldMapVO implements IInstanceVO {
     }
     public var id:String;
     public var name:String;
-    public var areas:Vector.<MosouWorldMapAreaVO>;
+    public var areas:Vector.<MusouWorldMapAreaVO>;
     private var _areaMap:Object;
 
     public function initWay(way:Array):void {
-        areas    = new Vector.<MosouWorldMapAreaVO>();
+        areas    = new Vector.<MusouWorldMapAreaVO>();
         _areaMap = {};
 
-        var i:int, w:Object, mv:MosouWorldMapAreaVO;
+        var i:int, w:Object, mv:MusouWorldMapAreaVO;
 
         for (i = 0; i < way.length; i++) {
             w     = way[i];
-            mv    = new MosouWorldMapAreaVO();
+            mv    = new MusouWorldMapAreaVO();
             mv.id = w.P;
 
             areas.push(mv);
@@ -53,7 +53,7 @@ public class MosouWorldMapVO implements IInstanceVO {
                 continue;
             }
 
-            mv.preOpens = new Vector.<MosouWorldMapAreaVO>();
+            mv.preOpens = new Vector.<MusouWorldMapAreaVO>();
 
             if (w.N is Array) {
                 for each(var id:String in w.N) {
@@ -71,7 +71,7 @@ public class MosouWorldMapVO implements IInstanceVO {
         }
     }
 
-    public function getArea(aid:String):MosouWorldMapAreaVO {
+    public function getArea(aid:String):MusouWorldMapAreaVO {
         return _areaMap[aid];
     }
 

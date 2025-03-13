@@ -36,7 +36,7 @@ public class MusouModel {
 
     public function MusouModel() {
     }
-    public var currentArea:MosouWorldMapAreaVO;
+    public var currentArea:MusouWorldMapAreaVO;
     public var currentMission:MusouMissionVO;
     private var _mapObj:Object = {};
 
@@ -48,7 +48,7 @@ public class MusouModel {
         return _mapObj[id];
     }
 
-    public function getMapArea(mapId:String, areaId:String):MosouWorldMapAreaVO {
+    public function getMapArea(mapId:String, areaId:String):MusouWorldMapAreaVO {
         var map:MosouWorldMapVO = _mapObj[mapId];
         if (!map) {
             return null;
@@ -82,7 +82,7 @@ public class MusouModel {
             }
 
             if (o && o.id) {
-                var mv:MosouWorldMapAreaVO = map.getArea(o.id);
+                var mv:MusouWorldMapAreaVO = map.getArea(o.id);
                 if (mv) {
                     initMapArea(mv, o);
                 }
@@ -105,7 +105,7 @@ public class MusouModel {
         loadNext({remark: 'first time!'});
     }
 
-    private function initMapArea(area:MosouWorldMapAreaVO, d:Object):void {
+    private function initMapArea(area:MusouWorldMapAreaVO, d:Object):void {
         TraceLang('debug.trace.data.musou_model.init_map_area', d.id);
 
         area.id   = d.id;

@@ -20,7 +20,7 @@ package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.data.musou.MusouModel;
-import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
 import net.play5d.game.bvn.data.musou.utils.MosouFighterFactory;
 import net.play5d.game.bvn.events.GameEvent;
@@ -307,7 +307,7 @@ public class MosouPlayerData implements ISaveData {
 
         var map2:MosouWorldMapVO = MusouModel.I.getMap(map.id);
 
-        for each(var m:MosouWorldMapAreaVO in map2.areas) {
+        for each(var m:MusouWorldMapAreaVO in map2.areas) {
             if (!m.preOpens || m.preOpens.length < 1) {
                 MusouLogic.I.openMapArea(map.id, m.id);
             }

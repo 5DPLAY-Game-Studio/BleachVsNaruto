@@ -19,16 +19,16 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapAreaVO implements IInstanceVO {
+public class MusouWorldMapAreaVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouWorldMapAreaVO() {
+    public function MusouWorldMapAreaVO() {
     }
     public var id:String;
     public var name:String;
     public var missions:Vector.<MusouMissionVO>;
-    public var preOpens:Vector.<MosouWorldMapAreaVO>;
+    public var preOpens:Vector.<MusouWorldMapAreaVO>;
 
     // 如果为true，表示当前版本未开放
     public function building():Boolean {

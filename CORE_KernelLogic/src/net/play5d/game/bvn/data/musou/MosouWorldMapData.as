@@ -24,7 +24,7 @@ public class MosouWorldMapData implements ISaveData {
 
     public function MosouWorldMapData() {
     }
-    private var _mapAreaList:Vector.<MosouWorldMapAreaVO>;
+    private var _mapAreaList:Vector.<MusouWorldMapAreaVO>;
 
     public function toSaveObj():Object {
         return null;

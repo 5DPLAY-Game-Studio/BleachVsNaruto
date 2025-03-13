@@ -32,7 +32,7 @@ import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.musou.MusouModel;
-import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.GameUI;
@@ -200,8 +200,8 @@ public class WorldMapStage implements IStage {
         _pointUIs = new Vector.<WorldMapPointUI>();
 
         var map:MosouWorldMapVO                = MusouModel.I.getMap(GameData.I.mosouData.getCurrentMap().id);
-        var datas:Vector.<MosouWorldMapAreaVO> = map.areas;
-        for each(var m:MosouWorldMapAreaVO in datas) {
+        var datas:Vector.<MusouWorldMapAreaVO> = map.areas;
+        for each(var m:MusouWorldMapAreaVO in datas) {
             if (!pointMap[m.id]) {
                 continue;
             }
@@ -213,7 +213,7 @@ public class WorldMapStage implements IStage {
 
     }
 
-    private function gotoMission(data:MosouWorldMapAreaVO):void {
+    private function gotoMission(data:MusouWorldMapAreaVO):void {
         var allFinish:Boolean = MusouLogic.I.getAreaPercent(data.id) >= 1;
         var txt:String        = allFinish ? '已通过全部关卡，是否进入最后一关？' : '进入下一关？';
         GameUI.confrim('CONFRIM', txt, function ():void {
@@ -322,7 +322,7 @@ public class WorldMapStage implements IStage {
 
     private function onSelectPoint(e:Event):void {
         var p:WorldMapPointUI        = e.currentTarget as WorldMapPointUI;
-        var data:MosouWorldMapAreaVO = p.data;
+        var data:MusouWorldMapAreaVO = p.data;
 
         if (data.building()) {
             GameUI.alert('NOT OPEN', '暂未开放');

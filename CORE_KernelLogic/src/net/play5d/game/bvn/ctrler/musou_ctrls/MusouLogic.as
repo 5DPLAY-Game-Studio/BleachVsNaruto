@@ -21,7 +21,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
-import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
 import net.play5d.game.bvn.data.musou.player.MosouMissionPlayerVO;
 import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
@@ -62,7 +62,7 @@ public class MusouLogic {
         return map.getOpenArea(areaId) != null;
     }
 
-    public function getNextMission(area2:MosouWorldMapAreaVO):MusouMissionVO {
+    public function getNextMission(area2:MusouWorldMapAreaVO):MusouMissionVO {
         var md:MosouPlayerData             = GameData.I.mosouData;
         var map:MosouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
         var area:MosouWorldMapAreaPlayerVO = map.getOpenArea(area2.id);
@@ -92,7 +92,7 @@ public class MusouLogic {
             return 0;
         }
 
-        var area2:MosouWorldMapAreaVO = MusouModel.I.getMapArea(map.id, area.id);
+        var area2:MusouWorldMapAreaVO = MusouModel.I.getMapArea(map.id, area.id);
         if (!area2 || !area2.missions) {
             return 0;
         }
@@ -132,12 +132,12 @@ public class MusouLogic {
         var pmap:MosouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
 
         var map:MosouWorldMapVO = MusouModel.I.getMap(pmap.id);
-        for each(var i:MosouWorldMapAreaVO in map.areas) {
+        for each(var i:MusouWorldMapAreaVO in map.areas) {
             if (i.preOpens && i.preOpens.length > 0) {
 
                 var isOpenArea:Boolean = true;
 
-                for each(var p:MosouWorldMapAreaVO in i.preOpens) {
+                for each(var p:MusouWorldMapAreaVO in i.preOpens) {
                     if (!canPassNextArea(p.id)) {
                         isOpenArea = false;
                         break;
