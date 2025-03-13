@@ -25,7 +25,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.utils.ResUtils;
@@ -33,7 +33,7 @@ import net.play5d.game.bvn.utils.ResUtils;
 public class SelectFighterUI {
     include '../../../../../../../../include/_INCLUDE_.as';
 
-    public function SelectFighterUI(sellData:MosouFighterSellVO) {
+    public function SelectFighterUI(sellData:MusouFighterSellVO) {
         ui            = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'face_ui_mc');
         this.sellData = sellData;
 
@@ -46,7 +46,7 @@ public class SelectFighterUI {
         initFace();
         updateUI();
     }
-    public var sellData:MosouFighterSellVO;
+    public var sellData:MusouFighterSellVO;
     public var ui:Sprite;
     private var _playerData:MosouFighterVO;
     private var _lvTxt:Text;

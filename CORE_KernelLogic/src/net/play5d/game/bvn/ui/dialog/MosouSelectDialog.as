@@ -28,7 +28,7 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.ui.dialog.select.DotsGroupUI;
 import net.play5d.game.bvn.ui.dialog.select.SelectFighterList;
@@ -126,7 +126,7 @@ public class MosouSelectDialog extends BaseDialog {
         _dotGroup.updateByPage(_selectFighterList.getPage());
     }
 
-    private function updateSelectFace(data:MosouFighterSellVO):void {
+    private function updateSelectFace(data:MusouFighterSellVO):void {
         if (_selectFace) {
             try {
                 _ui.ct_face.removeChild(_selectFace);

@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.musou.MusouFighterModel;
-import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.MosouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
 import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
@@ -344,8 +344,8 @@ public class GameData {
 
         var missFighters:Array = [];
 
-        var fighters:Vector.<MosouFighterSellVO> = MusouFighterModel.I.fighters;
-        for each(var s:MosouFighterSellVO in fighters) {
+        var fighters:Vector.<MusouFighterSellVO> = MusouFighterModel.I.fighters;
+        for each(var s:MusouFighterSellVO in fighters) {
             var fv:FighterVO = FighterModel.I.getFighter(s.id);
             if (!fv && missFighters.indexOf(s.id) == -1) {
                 missFighters.push(s.id);

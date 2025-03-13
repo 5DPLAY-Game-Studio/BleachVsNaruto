@@ -18,7 +18,7 @@
 
 package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.MosouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
 import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
@@ -152,7 +152,7 @@ public class MusouLogic {
         }
     }
 
-    public function buyFighter(data:MosouFighterSellVO, succback:Function = null):void {
+    public function buyFighter(data:MusouFighterSellVO, succback:Function = null):void {
         var mosouData:MosouPlayerData = GameData.I.mosouData;
         if (mosouData.getMoney() < data.getPrice()) {
             GameUI.alert('NEED MORE MONEY', GetLang('alert.musou_ctrl.need_more_money', data.getPrice()));

@@ -27,7 +27,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.musou.MusouFighterModel;
-import net.play5d.game.bvn.data.musou.MosouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
 import net.play5d.game.bvn.utils.TouchUtils;
@@ -104,14 +104,14 @@ public class SelectFighterList extends Sprite {
     }
 
     private function build():void {
-        var fighters:Vector.<MosouFighterSellVO> = MusouFighterModel.I.fighters;
+        var fighters:Vector.<MusouFighterSellVO> = MusouFighterModel.I.fighters;
 
         var currentFighterIds:Array = GameData.I.mosouData.getFighterTeamIds();
 
         _fighterItems = new Vector.<SelectFighterUI>();
 
         for (var i:int; i < fighters.length; i++) {
-            var sv:MosouFighterSellVO = fighters[i];
+            var sv:MusouFighterSellVO = fighters[i];
             var isInTeam:Boolean      = false;
 
             if (currentFighterIds.indexOf(sv.id) != -1) {

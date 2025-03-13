@@ -20,11 +20,11 @@ package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.game.bvn.utils.WrapInteger;
 
-public class MosouFighterSellVO implements IInstanceVO {
+public class MusouFighterSellVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouFighterSellVO(fighterId:String, price:int) {
+    public function MusouFighterSellVO(fighterId:String, price:int) {
         this.id = fighterId;
 //			this.allowSell = allowSell;
         _price.setValue(price);

@@ -30,7 +30,7 @@ public class MusouFighterModel {
     public function MusouFighterModel() {
     }
 
-    public var fighters:Vector.<MosouFighterSellVO>;
+    public var fighters:Vector.<MusouFighterSellVO>;
     private var _inited:Boolean = false;
 
     public function init():void {
@@ -41,7 +41,7 @@ public class MusouFighterModel {
     }
 
     public function allCustom():void {
-        fighters = new Vector.<MosouFighterSellVO>();
+        fighters = new Vector.<MusouFighterSellVO>();
         _inited  = true;
     }
 
@@ -50,76 +50,76 @@ public class MusouFighterModel {
             TraceLang('debug.trace.data.musou_fighter_model.repeat_add', id);
             return;
         }
-        fighters.push(new MosouFighterSellVO(id, price));
+        fighters.push(new MusouFighterSellVO(id, price));
     }
 
     private function initFighters():void {
-        fighters = new Vector.<MosouFighterSellVO>();
-        fighters.push(new MosouFighterSellVO('ichigo', 5000));
-        fighters.push(new MosouFighterSellVO('ichigo_zero', 5000));
+        fighters = new Vector.<MusouFighterSellVO>();
+        fighters.push(new MusouFighterSellVO('ichigo', 5000));
+        fighters.push(new MusouFighterSellVO('ichigo_zero', 5000));
 
-        fighters.push(new MosouFighterSellVO('rukia', 5000));
-        fighters.push(new MosouFighterSellVO('renji', 5000));
-        fighters.push(new MosouFighterSellVO('naruto', 5000));
-        fighters.push(new MosouFighterSellVO('sakura', 5000));
-        fighters.push(new MosouFighterSellVO('uryuu', 5000));
-        fighters.push(new MosouFighterSellVO('lee', 5000));
-        fighters.push(new MosouFighterSellVO('neji', 5000));
-        fighters.push(new MosouFighterSellVO('temari', 5000));
+        fighters.push(new MusouFighterSellVO('rukia', 5000));
+        fighters.push(new MusouFighterSellVO('renji', 5000));
+        fighters.push(new MusouFighterSellVO('naruto', 5000));
+        fighters.push(new MusouFighterSellVO('sakura', 5000));
+        fighters.push(new MusouFighterSellVO('uryuu', 5000));
+        fighters.push(new MusouFighterSellVO('lee', 5000));
+        fighters.push(new MusouFighterSellVO('neji', 5000));
+        fighters.push(new MusouFighterSellVO('temari', 5000));
 
-        fighters.push(new MosouFighterSellVO('chad', 7000));
-        fighters.push(new MosouFighterSellVO('karin', 7000));
-        fighters.push(new MosouFighterSellVO('gaara', 7000));
-        fighters.push(new MosouFighterSellVO('sasuke', 8000));
-        fighters.push(new MosouFighterSellVO('orihime', 8000));
-        fighters.push(new MosouFighterSellVO('ikkaku', 8000));
-        fighters.push(new MosouFighterSellVO('gin', 8000));
-        fighters.push(new MosouFighterSellVO('juggo', 8000));
-        fighters.push(new MosouFighterSellVO('suigetsu', 8000));
-        fighters.push(new MosouFighterSellVO('kakashi', 8000));
-        fighters.push(new MosouFighterSellVO('sakura_sr', 8000));
+        fighters.push(new MusouFighterSellVO('chad', 7000));
+        fighters.push(new MusouFighterSellVO('karin', 7000));
+        fighters.push(new MusouFighterSellVO('gaara', 7000));
+        fighters.push(new MusouFighterSellVO('sasuke', 8000));
+        fighters.push(new MusouFighterSellVO('orihime', 8000));
+        fighters.push(new MusouFighterSellVO('ikkaku', 8000));
+        fighters.push(new MusouFighterSellVO('gin', 8000));
+        fighters.push(new MusouFighterSellVO('juggo', 8000));
+        fighters.push(new MusouFighterSellVO('suigetsu', 8000));
+        fighters.push(new MusouFighterSellVO('kakashi', 8000));
+        fighters.push(new MusouFighterSellVO('sakura_sr', 8000));
 
-        fighters.push(new MosouFighterSellVO('hinata', 8000));
+        fighters.push(new MusouFighterSellVO('hinata', 8000));
 
-        fighters.push(new MosouFighterSellVO('kimimaro', 9000));
-        fighters.push(new MosouFighterSellVO('killerbee', 9000));
+        fighters.push(new MusouFighterSellVO('kimimaro', 9000));
+        fighters.push(new MusouFighterSellVO('killerbee', 9000));
 
-        fighters.push(new MosouFighterSellVO('toushirou', 10000));
-        fighters.push(new MosouFighterSellVO('byakuya', 10000));
-        fighters.push(new MosouFighterSellVO('jiraiya', 10000));
-        fighters.push(new MosouFighterSellVO('orochimaru', 10000));
-        fighters.push(new MosouFighterSellVO('deidara', 10000));
+        fighters.push(new MusouFighterSellVO('toushirou', 10000));
+        fighters.push(new MusouFighterSellVO('byakuya', 10000));
+        fighters.push(new MusouFighterSellVO('jiraiya', 10000));
+        fighters.push(new MusouFighterSellVO('orochimaru', 10000));
+        fighters.push(new MusouFighterSellVO('deidara', 10000));
 
-        fighters.push(new MosouFighterSellVO('soifon', 10000));
-        fighters.push(new MosouFighterSellVO('konan', 10000));
-        fighters.push(new MosouFighterSellVO('grimmjow', 10000));
-        fighters.push(new MosouFighterSellVO('mayuri', 12000));
+        fighters.push(new MusouFighterSellVO('soifon', 10000));
+        fighters.push(new MusouFighterSellVO('konan', 10000));
+        fighters.push(new MusouFighterSellVO('grimmjow', 10000));
+        fighters.push(new MusouFighterSellVO('mayuri', 12000));
 
-        fighters.push(new MosouFighterSellVO('yoruichi', 15000));
-        fighters.push(new MosouFighterSellVO('kenpachi', 15000));
-        fighters.push(new MosouFighterSellVO('itachi', 15000));
-        fighters.push(new MosouFighterSellVO('pain', 15000));
-        fighters.push(new MosouFighterSellVO('ichigo_bankai', 15000));
-        fighters.push(new MosouFighterSellVO('naruto_oneTail', 15000));
-        fighters.push(new MosouFighterSellVO('sasuke_susanoo', 15000));
+        fighters.push(new MusouFighterSellVO('yoruichi', 15000));
+        fighters.push(new MusouFighterSellVO('kenpachi', 15000));
+        fighters.push(new MusouFighterSellVO('itachi', 15000));
+        fighters.push(new MusouFighterSellVO('pain', 15000));
+        fighters.push(new MusouFighterSellVO('ichigo_bankai', 15000));
+        fighters.push(new MusouFighterSellVO('naruto_oneTail', 15000));
+        fighters.push(new MusouFighterSellVO('sasuke_susanoo', 15000));
 
-        fighters.push(new MosouFighterSellVO('ichigo_vizored_half', 18000));
-        fighters.push(new MosouFighterSellVO('naruto_hermit', 18000));
+        fighters.push(new MusouFighterSellVO('ichigo_vizored_half', 18000));
+        fighters.push(new MusouFighterSellVO('naruto_hermit', 18000));
 
-        fighters.push(new MosouFighterSellVO('starrk', 20000));
-        fighters.push(new MosouFighterSellVO('ulquiorra', 23000));
+        fighters.push(new MusouFighterSellVO('starrk', 20000));
+        fighters.push(new MusouFighterSellVO('ulquiorra', 23000));
 
-        fighters.push(new MosouFighterSellVO('obito', 25000));
+        fighters.push(new MusouFighterSellVO('obito', 25000));
 
-        fighters.push(new MosouFighterSellVO('aizen', 40000));
-        fighters.push(new MosouFighterSellVO('madara', 42000));
+        fighters.push(new MusouFighterSellVO('aizen', 40000));
+        fighters.push(new MusouFighterSellVO('madara', 42000));
 
-        fighters.push(new MosouFighterSellVO('kenshin', 45000));
+        fighters.push(new MusouFighterSellVO('kenshin', 45000));
 
 //			var userFighters:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterData();
 
 //			for each(var i:MosouFighterVO in userFighters){
-//				for each(var j:MosouFighterSellVO in fighters){
+//				for each(var j:MusouFighterSellVO in fighters){
 //					if(j.id == i.id) j.sold = true;
 //				}
 //			}
@@ -127,7 +127,7 @@ public class MusouFighterModel {
     }
 
     private function containsFighter(id:String):Boolean {
-        for each(var f:MosouFighterSellVO in fighters) {
+        for each(var f:MusouFighterSellVO in fighters) {
             if (f.id == id) {
                 return true;
             }
