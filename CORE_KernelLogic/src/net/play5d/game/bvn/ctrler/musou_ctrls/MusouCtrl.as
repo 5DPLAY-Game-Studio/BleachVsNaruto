@@ -30,7 +30,7 @@ import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 import net.play5d.game.bvn.data.musou.MusouFighterLogic;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
-import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MosouWaveRepeatVO;
 import net.play5d.game.bvn.data.musou.MosouWaveVO;
 import net.play5d.game.bvn.data.musou.MousouGameRunDataVO;
@@ -85,7 +85,7 @@ public class MusouCtrl {
     }
 
     public function initalize():void {
-        _mission         = MosouModel.I.currentMission;
+        _mission         = MusouModel.I.currentMission;
         _missionComplete = false;
 
         _bossCount = _mission.bossCount();

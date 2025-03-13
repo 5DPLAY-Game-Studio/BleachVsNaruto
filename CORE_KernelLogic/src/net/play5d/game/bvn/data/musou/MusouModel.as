@@ -24,17 +24,17 @@ import net.play5d.game.bvn.ctrler.AssetManager;
  * @author K
  *
  */
-public class MosouModel {
+public class MusouModel {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    private static var _i:MosouModel;
+    private static var _i:MusouModel;
 
-    public static function get I():MosouModel {
-        _i ||= new MosouModel();
+    public static function get I():MusouModel {
+        _i ||= new MusouModel();
         return _i;
     }
 
-    public function MosouModel() {
+    public function MusouModel() {
     }
     public var currentArea:MosouWorldMapAreaVO;
     public var currentMission:MusouMissionVO;

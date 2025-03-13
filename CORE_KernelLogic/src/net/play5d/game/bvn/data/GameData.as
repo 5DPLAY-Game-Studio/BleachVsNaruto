@@ -21,7 +21,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.musou.MusouFighterModel;
 import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
-import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
 import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
@@ -93,7 +93,7 @@ public class GameData {
             MessionModel.I.initByObject(data);
 //				AssetManager.I.loadXML("config/musou.xml",loadMosouMission , loadMosouMission);
 
-            MosouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);
+            MusouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);
         }
 
         function loadMosouDataBack():void {
@@ -309,7 +309,7 @@ public class GameData {
 
     // 验证无双关卡
     private function validateMosouData():void {
-        var mapObj:Object = MosouModel.I.getAllMap();
+        var mapObj:Object = MusouModel.I.getAllMap();
 
         for (var i:String in mapObj) {
 

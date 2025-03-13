@@ -31,7 +31,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.musou.MosouModel;
+import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
 import net.play5d.game.bvn.events.GameEvent;
@@ -199,7 +199,7 @@ public class WorldMapStage implements IStage {
 
         _pointUIs = new Vector.<WorldMapPointUI>();
 
-        var map:MosouWorldMapVO                = MosouModel.I.getMap(GameData.I.mosouData.getCurrentMap().id);
+        var map:MosouWorldMapVO                = MusouModel.I.getMap(GameData.I.mosouData.getCurrentMap().id);
         var datas:Vector.<MosouWorldMapAreaVO> = map.areas;
         for each(var m:MosouWorldMapAreaVO in datas) {
             if (!pointMap[m.id]) {
@@ -217,7 +217,7 @@ public class WorldMapStage implements IStage {
         var allFinish:Boolean = MusouLogic.I.getAreaPercent(data.id) >= 1;
         var txt:String        = allFinish ? '已通过全部关卡，是否进入最后一关？' : '进入下一关？';
         GameUI.confrim('CONFRIM', txt, function ():void {
-            MosouModel.I.currentMission = MusouLogic.I.getNextMission(data);
+            MusouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
 //				MainGame.I.loadGame();
         });
