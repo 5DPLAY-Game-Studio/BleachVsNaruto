@@ -44,12 +44,12 @@ public class MusouModel {
         return _mapObj;
     }
 
-    public function getMap(id:String):MosouWorldMapVO {
+    public function getMap(id:String):MusouWorldMapVO {
         return _mapObj[id];
     }
 
     public function getMapArea(mapId:String, areaId:String):MusouWorldMapAreaVO {
-        var map:MosouWorldMapVO = _mapObj[mapId];
+        var map:MusouWorldMapVO = _mapObj[mapId];
         if (!map) {
             return null;
         }
@@ -60,7 +60,7 @@ public class MusouModel {
         var mapId:String = 'map1';
         var url:String   = 'config/musou/' + mapId + '/' + mapId + '.json';
         AssetManager.I.loadJSON(url, function (o:Object):void {
-            var map:MosouWorldMapVO = new MosouWorldMapVO();
+            var map:MusouWorldMapVO = new MusouWorldMapVO();
             map.id                  = o.id;
             map.name                = o.name;
             map.initWay(o.way);
@@ -70,7 +70,7 @@ public class MusouModel {
         }, fail);
     }
 
-    private function loadAreas(map:MosouWorldMapVO, parts:Array, back:Function, fail:Function):void {
+    private function loadAreas(map:MusouWorldMapVO, parts:Array, back:Function, fail:Function):void {
         var mapIds:Array = parts.concat();
 
         function loadNext(o:Object = null):void {

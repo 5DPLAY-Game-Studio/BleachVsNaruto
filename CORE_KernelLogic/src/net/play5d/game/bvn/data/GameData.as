@@ -23,7 +23,7 @@ import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
-import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
 import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.vos.FighterVO;
@@ -313,7 +313,7 @@ public class GameData {
 
         for (var i:String in mapObj) {
 
-            var mwv:MosouWorldMapVO = mapObj[i];
+            var mwv:MusouWorldMapVO = mapObj[i];
 
             for each(var a:MusouWorldMapAreaVO in mwv.areas) {
                 for each(var mv:MusouMissionVO in a.missions) {

@@ -22,7 +22,7 @@ import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
-import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
 import net.play5d.game.bvn.data.musou.player.MosouMissionPlayerVO;
 import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
 import net.play5d.game.bvn.data.musou.player.MosouWorldMapAreaPlayerVO;
@@ -131,7 +131,7 @@ public class MusouLogic {
     public function updateMapAreas():void {
         var pmap:MosouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
 
-        var map:MosouWorldMapVO = MusouModel.I.getMap(pmap.id);
+        var map:MusouWorldMapVO = MusouModel.I.getMap(pmap.id);
         for each(var i:MusouWorldMapAreaVO in map.areas) {
             if (i.preOpens && i.preOpens.length > 0) {
 

@@ -21,7 +21,7 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
-import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
 import net.play5d.game.bvn.data.musou.utils.MosouFighterFactory;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.utils.WrapInteger;
@@ -305,7 +305,7 @@ public class MosouPlayerData implements ISaveData {
         map.id                        = _currentMapId;
         _mapData.push(map);
 
-        var map2:MosouWorldMapVO = MusouModel.I.getMap(map.id);
+        var map2:MusouWorldMapVO = MusouModel.I.getMap(map.id);
 
         for each(var m:MusouWorldMapAreaVO in map2.areas) {
             if (!m.preOpens || m.preOpens.length < 1) {

@@ -33,7 +33,7 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
-import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.bigmap.BigmapClould;
@@ -199,7 +199,7 @@ public class WorldMapStage implements IStage {
 
         _pointUIs = new Vector.<WorldMapPointUI>();
 
-        var map:MosouWorldMapVO                = MusouModel.I.getMap(GameData.I.mosouData.getCurrentMap().id);
+        var map:MusouWorldMapVO                = MusouModel.I.getMap(GameData.I.mosouData.getCurrentMap().id);
         var datas:Vector.<MusouWorldMapAreaVO> = map.areas;
         for each(var m:MusouWorldMapAreaVO in datas) {
             if (!pointMap[m.id]) {
