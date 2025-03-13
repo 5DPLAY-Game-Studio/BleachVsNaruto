@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.ctrler.musou_ctrls {
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
-import net.play5d.game.bvn.data.musou.MosouMissionVO;
+import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
 import net.play5d.game.bvn.data.musou.MosouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MosouWorldMapVO;
@@ -62,7 +62,7 @@ public class MusouLogic {
         return map.getOpenArea(areaId) != null;
     }
 
-    public function getNextMission(area2:MosouWorldMapAreaVO):MosouMissionVO {
+    public function getNextMission(area2:MosouWorldMapAreaVO):MusouMissionVO {
         var md:MosouPlayerData             = GameData.I.mosouData;
         var map:MosouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
         var area:MosouWorldMapAreaPlayerVO = map.getOpenArea(area2.id);
@@ -77,7 +77,7 @@ public class MusouLogic {
             return area2.missions[0];
         }
 
-        var m2:MosouMissionVO = area2.getNextMission(m1.id);
+        var m2:MusouMissionVO = area2.getNextMission(m1.id);
         if (m2) {
             return m2;
         }
@@ -109,7 +109,7 @@ public class MusouLogic {
         map.openArea(areaId);
     }
 
-    public function passMission(mission:MosouMissionVO):void {
+    public function passMission(mission:MusouMissionVO):void {
 //			var md:MosouPlayerData = GameData.I.mosouData;
 //			var map:MosouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
 
@@ -179,7 +179,7 @@ public class MusouLogic {
         }
 
 
-        var mv:MosouMissionVO = MosouModel.I.currentMission;
+        var mv:MusouMissionVO = MosouModel.I.currentMission;
         var lv:int            = mv.enemyLevel;
 
         f.mosouEnemyData.level = lv;

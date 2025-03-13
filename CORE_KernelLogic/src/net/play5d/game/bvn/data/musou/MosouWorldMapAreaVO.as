@@ -27,7 +27,7 @@ public class MosouWorldMapAreaVO implements IInstanceVO {
     }
     public var id:String;
     public var name:String;
-    public var missions:Vector.<MosouMissionVO>;
+    public var missions:Vector.<MusouMissionVO>;
     public var preOpens:Vector.<MosouWorldMapAreaVO>;
 
     // 如果为true，表示当前版本未开放
@@ -35,7 +35,7 @@ public class MosouWorldMapAreaVO implements IInstanceVO {
         return !missions || missions.length < 1;
     }
 
-    public function getMission(id:String):MosouMissionVO {
+    public function getMission(id:String):MusouMissionVO {
         for (var i:int; i < missions.length; i++) {
             if (missions[i].id == id) {
                 return missions[i];
@@ -44,8 +44,8 @@ public class MosouWorldMapAreaVO implements IInstanceVO {
         return null;
     }
 
-    public function getNextMission(id:String):MosouMissionVO {
-        var m:MosouMissionVO = getMission(id);
+    public function getNextMission(id:String):MusouMissionVO {
+        var m:MusouMissionVO = getMission(id);
         if (!m) {
             return null;
         }

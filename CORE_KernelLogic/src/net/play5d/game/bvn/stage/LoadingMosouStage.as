@@ -31,7 +31,7 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.musou.MosouMissionVO;
+import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
 import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.debug.Debugger;
@@ -103,7 +103,7 @@ public class LoadingMosouStage implements IStage {
         var assisters:Array = null;
         var bgms:Array      = [];
 
-        var mission:MosouMissionVO = MosouModel.I.currentMission;
+        var mission:MusouMissionVO = MosouModel.I.currentMission;
 
         maps.push(mission.map);
 
@@ -158,7 +158,7 @@ public class LoadingMosouStage implements IStage {
     }
 
     private function initGameRunData():void {
-        var mission:MosouMissionVO = MosouModel.I.currentMission;
+        var mission:MusouMissionVO = MosouModel.I.currentMission;
 
         GameCtrl.I.initMosouGame();
 

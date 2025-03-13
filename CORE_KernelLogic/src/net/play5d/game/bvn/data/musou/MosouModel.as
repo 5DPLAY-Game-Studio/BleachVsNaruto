@@ -37,7 +37,7 @@ public class MosouModel {
     public function MosouModel() {
     }
     public var currentArea:MosouWorldMapAreaVO;
-    public var currentMission:MosouMissionVO;
+    public var currentMission:MusouMissionVO;
     private var _mapObj:Object = {};
 
     public function getAllMap():Object {
@@ -111,11 +111,11 @@ public class MosouModel {
         area.id   = d.id;
         area.name = d.name;
 
-        area.missions = new Vector.<MosouMissionVO>();
+        area.missions = new Vector.<MusouMissionVO>();
 
         var miss:Array = d.missions;
         for (var j:int = 0; j < miss.length; j++) {
-            var mv:MosouMissionVO = new MosouMissionVO();
+            var mv:MusouMissionVO = new MusouMissionVO();
             mv.initByJsonObject(miss[j]);
             area.missions.push(mv);
         }

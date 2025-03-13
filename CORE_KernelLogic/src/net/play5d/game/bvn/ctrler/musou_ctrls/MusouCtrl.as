@@ -29,7 +29,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 import net.play5d.game.bvn.data.musou.MusouFighterLogic;
-import net.play5d.game.bvn.data.musou.MosouMissionVO;
+import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MosouModel;
 import net.play5d.game.bvn.data.musou.MosouWaveRepeatVO;
 import net.play5d.game.bvn.data.musou.MosouWaveVO;
@@ -58,7 +58,7 @@ public class MusouCtrl {
     }
     public var waveCount:int;
     public var currentWave:int;
-    private var _mission:MosouMissionVO;
+    private var _mission:MusouMissionVO;
     private var _runningWaves:Vector.<MosouWaveVO>;
     private var _runningWave:MosouWaveVO;
     private var _stageEnemies:Vector.<FighterMain>;

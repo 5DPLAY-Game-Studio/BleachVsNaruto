@@ -19,11 +19,11 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouMissionVO implements IInstanceVO {
+public class MusouMissionVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouMissionVO() {
+    public function MusouMissionVO() {
     }
     public var id:String;
     /**
