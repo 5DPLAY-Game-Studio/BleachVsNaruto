@@ -19,10 +19,10 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.data.ISaveData;
 
-public class MosouWorldMapData implements ISaveData {
+public class MusouWorldMapData implements ISaveData {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouWorldMapData() {
+    public function MusouWorldMapData() {
     }
     private var _mapAreaList:Vector.<MusouWorldMapAreaVO>;
 
