@@ -33,7 +33,7 @@ public class MosouWaveVO implements IInstanceVO {
 //			if(xml.repeat.length() > 0){
 //				for each(var r:XML in xml.repeat){
 //					if(r.enemy.length() > 0){
-//						var waveRepeat:MosouWaveRepeatVO = new MosouWaveRepeatVO();
+//						var waveRepeat:MusouWaveRepeatVO = new MusouWaveRepeatVO();
 //						wave.addRepeat(waveRepeat);
 //
 //						waveRepeat.type = int(r.@type);
@@ -59,9 +59,9 @@ public class MosouWaveVO implements IInstanceVO {
         }
 
         if (json.repeat) {
-            wave.repeats = new Vector.<MosouWaveRepeatVO>();
+            wave.repeats = new Vector.<MusouWaveRepeatVO>();
 
-            var waveRepeat:MosouWaveRepeatVO = new MosouWaveRepeatVO();
+            var waveRepeat:MusouWaveRepeatVO = new MusouWaveRepeatVO();
             waveRepeat.type                  = json.repeat.type;
             waveRepeat.hold                  = json.repeat.hold;
 
@@ -86,7 +86,7 @@ public class MosouWaveVO implements IInstanceVO {
     /**
      * 重复定义
      */
-    public var repeats:Vector.<MosouWaveRepeatVO>;
+    public var repeats:Vector.<MusouWaveRepeatVO>;
     /**
      * 持续时间（秒）
      */
@@ -98,7 +98,7 @@ public class MosouWaveVO implements IInstanceVO {
         }
 
         var result:Vector.<MusouEnemyVO> = enemies.concat();
-        for each(var i:MosouWaveRepeatVO in repeats) {
+        for each(var i:MusouWaveRepeatVO in repeats) {
             if (i.enemies) {
                 result = result.concat(i.enemies);
             }
@@ -146,8 +146,8 @@ public class MosouWaveVO implements IInstanceVO {
         }
     }
 
-    public function addRepeat(repeat:MosouWaveRepeatVO):void {
-        repeats ||= new Vector.<MosouWaveRepeatVO>();
+    public function addRepeat(repeat:MusouWaveRepeatVO):void {
+        repeats ||= new Vector.<MusouWaveRepeatVO>();
 
         repeat.wave = this;
         repeats.push(repeat);

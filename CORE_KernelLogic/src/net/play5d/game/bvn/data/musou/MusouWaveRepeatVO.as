@@ -19,11 +19,11 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWaveRepeatVO implements IInstanceVO {
+public class MusouWaveRepeatVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouWaveRepeatVO() {
+    public function MusouWaveRepeatVO() {
     }
     /**
      * 类型：

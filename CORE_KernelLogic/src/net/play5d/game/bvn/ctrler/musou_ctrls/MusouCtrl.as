@@ -31,7 +31,7 @@ import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 import net.play5d.game.bvn.data.musou.MusouFighterLogic;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
-import net.play5d.game.bvn.data.musou.MosouWaveRepeatVO;
+import net.play5d.game.bvn.data.musou.MusouWaveRepeatVO;
 import net.play5d.game.bvn.data.musou.MosouWaveVO;
 import net.play5d.game.bvn.data.musou.MousouGameRunDataVO;
 import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
@@ -487,7 +487,7 @@ public class MusouCtrl {
         if (!_runningWave) {
             return;
         }
-        var repeats:Vector.<MosouWaveRepeatVO> = _runningWave.repeats;
+        var repeats:Vector.<MusouWaveRepeatVO> = _runningWave.repeats;
         if (!repeats || repeats.length < 1) {
             return;
         }
@@ -498,7 +498,7 @@ public class MusouCtrl {
 
     }
 
-    private function renderRepeat(data:MosouWaveRepeatVO):void {
+    private function renderRepeat(data:MusouWaveRepeatVO):void {
         if (!data.enemies || data.enemies.length < 1) {
             return;
         }

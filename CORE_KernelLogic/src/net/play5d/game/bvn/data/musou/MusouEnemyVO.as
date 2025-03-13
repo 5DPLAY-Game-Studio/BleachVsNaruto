@@ -81,7 +81,7 @@ public class MusouEnemyVO implements IInstanceVO {
     public var atk:int   = 0;
     public var isBoss:Boolean;
     public var wave:MosouWaveVO;
-    public var repeat:MosouWaveRepeatVO;
+    public var repeat:MusouWaveRepeatVO;
     public var level:int = 1;
     private var exp:int   = 10;
     private var money:int = 10;
