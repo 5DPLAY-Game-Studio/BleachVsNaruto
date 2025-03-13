@@ -17,17 +17,17 @@
  */
 
 package net.play5d.game.bvn.data.musou {
-public class MosouFighterModel {
+public class MusouFighterModel {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    private static var _i:MosouFighterModel;
+    private static var _i:MusouFighterModel;
 
-    public static function get I():MosouFighterModel {
-        _i ||= new MosouFighterModel();
+    public static function get I():MusouFighterModel {
+        _i ||= new MusouFighterModel();
         return _i;
     }
 
-    public function MosouFighterModel() {
+    public function MusouFighterModel() {
     }
 
     public var fighters:Vector.<MosouFighterSellVO>;

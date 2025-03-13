@@ -102,7 +102,7 @@ public class MusouCtrl {
 
         _gameFinish = false;
 
-//			MosouFighterModel.I.init();
+//			MusouFighterModel.I.init();
 
 
 //			gameRunData.reset();
