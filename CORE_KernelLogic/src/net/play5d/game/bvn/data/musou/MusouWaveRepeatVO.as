@@ -32,7 +32,7 @@ public class MusouWaveRepeatVO implements IInstanceVO {
      */
     public var type:int;
     public var hold:int;
-    public var wave:MosouWaveVO;
+    public var wave:MusouWaveVO;
     /**
      * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）
      */

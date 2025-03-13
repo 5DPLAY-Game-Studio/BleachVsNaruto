@@ -19,12 +19,12 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWaveVO implements IInstanceVO {
+public class MusouWaveVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-//		public static function createByXML(xml:XML):MosouWaveVO{
-//			var wave:MosouWaveVO = new MosouWaveVO();
+//		public static function createByXML(xml:XML):MusouWaveVO{
+//			var wave:MusouWaveVO = new MusouWaveVO();
 //			wave.hold = int(xml.@hold);
 //			for each(var j:XML in xml.enemy){
 //				wave.addEnemy(MusouEnemyVO.createByXML(j));
@@ -49,8 +49,8 @@ public class MosouWaveVO implements IInstanceVO {
 //			return wave;
 //		}
 
-    public static function createByJSON(json:Object):MosouWaveVO {
-        var wave:MosouWaveVO = new MosouWaveVO();
+    public static function createByJSON(json:Object):MusouWaveVO {
+        var wave:MusouWaveVO = new MusouWaveVO();
         wave.hold            = int(json.hold);
 
         var enemies:Array = json.enemies;
@@ -76,7 +76,7 @@ public class MosouWaveVO implements IInstanceVO {
         return wave;
     }
 
-    public function MosouWaveVO() {
+    public function MusouWaveVO() {
     }
     public var id:int;
     /**

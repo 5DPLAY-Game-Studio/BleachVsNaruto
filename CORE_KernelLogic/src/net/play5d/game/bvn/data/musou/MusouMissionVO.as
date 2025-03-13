@@ -45,7 +45,7 @@ public class MusouMissionVO implements IInstanceVO {
     /**
      * 波次
      */
-    public var waves:Vector.<MosouWaveVO>;
+    public var waves:Vector.<MusouWaveVO>;
     public var area:MosouWorldMapAreaVO;
 
 //		public function initByXML(xml:XML):void{
@@ -55,10 +55,10 @@ public class MusouMissionVO implements IInstanceVO {
 //			if(time < 1){
 //				throw new Error("init mousou stage error!");
 //			}
-//			waves = new Vector.<MosouWaveVO>();
+//			waves = new Vector.<MusouWaveVO>();
 //
 //			for each(var i:XML in xml.wave){
-//				var wave:MosouWaveVO = MosouWaveVO.createByXML(i);
+//				var wave:MusouWaveVO = MusouWaveVO.createByXML(i);
 //				addWave(wave);
 //			}
 //		}
@@ -79,10 +79,10 @@ public class MusouMissionVO implements IInstanceVO {
 
         var wvs:Array = o.waves;
 
-        waves = new Vector.<MosouWaveVO>();
+        waves = new Vector.<MusouWaveVO>();
 
         for (var i:int; i < wvs.length; i++) {
-            var wave:MosouWaveVO = MosouWaveVO.createByJSON(wvs[i]);
+            var wave:MusouWaveVO = MusouWaveVO.createByJSON(wvs[i]);
             addWave(wave);
         }
     }
@@ -90,7 +90,7 @@ public class MusouMissionVO implements IInstanceVO {
     public function getAllEnemies():Vector.<MusouEnemyVO> {
         var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
         for (var i:int; i < waves.length; i++) {
-            var w:MosouWaveVO                 = waves[i];
+            var w:MusouWaveVO                 = waves[i];
             var enemies:Vector.<MusouEnemyVO> = w.getAllEnemies();
             if (enemies) {
                 result = result.concat(enemies);
@@ -102,7 +102,7 @@ public class MusouMissionVO implements IInstanceVO {
     public function getAllEnemieIds():Array {
         var result:Array = [];
         for (var i:int; i < waves.length; i++) {
-            var w:MosouWaveVO   = waves[i];
+            var w:MusouWaveVO   = waves[i];
             var enemieIds:Array = w.getAllEnemieIds();
             if (enemieIds) {
                 for each(var e:String in enemieIds) {
@@ -129,7 +129,7 @@ public class MusouMissionVO implements IInstanceVO {
     public function getBosses():Vector.<MusouEnemyVO> {
         var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
         for (var i:int; i < waves.length; i++) {
-            var w:MosouWaveVO                = waves[i];
+            var w:MusouWaveVO                = waves[i];
             var bosses:Vector.<MusouEnemyVO> = w.getBosses();
             if (bosses) {
                 for each(var e:MusouEnemyVO in bosses) {
@@ -142,8 +142,8 @@ public class MusouMissionVO implements IInstanceVO {
         return result;
     }
 
-    public function addWave(wave:MosouWaveVO):void {
-        waves ||= new Vector.<MosouWaveVO>();
+    public function addWave(wave:MusouWaveVO):void {
+        waves ||= new Vector.<MusouWaveVO>();
         wave.id = waves.length + 1;
         waves.push(wave);
     }
@@ -151,7 +151,7 @@ public class MusouMissionVO implements IInstanceVO {
     public function bossCount():int {
         var count:int;
         for (var i:int; i < waves.length; i++) {
-            var w:MosouWaveVO = waves[i];
+            var w:MusouWaveVO = waves[i];
             count += w.bossCount();
         }
         return count;
