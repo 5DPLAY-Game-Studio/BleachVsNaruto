@@ -19,11 +19,11 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MousouGameRunDataVO implements IInstanceVO {
+public class MusouGameRunDataVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MousouGameRunDataVO() {
+    public function MusouGameRunDataVO() {
         TraceLang('debug.trace.data.musou_game_run_data_vo.main');
     }
 

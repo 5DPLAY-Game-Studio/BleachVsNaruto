@@ -33,7 +33,7 @@ import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWaveRepeatVO;
 import net.play5d.game.bvn.data.musou.MusouWaveVO;
-import net.play5d.game.bvn.data.musou.MousouGameRunDataVO;
+import net.play5d.game.bvn.data.musou.MusouGameRunDataVO;
 import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.factory.GameRunFactory;
@@ -52,7 +52,7 @@ import net.play5d.game.bvn.ui.mosou.MosouUI;
 public class MusouCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public const gameRunData:MousouGameRunDataVO = new MousouGameRunDataVO();
+    public const gameRunData:MusouGameRunDataVO = new MusouGameRunDataVO();
 
     public function MusouCtrl() {
     }
