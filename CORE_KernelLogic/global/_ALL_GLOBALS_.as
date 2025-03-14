@@ -35,6 +35,7 @@ public function get _ALL_GLOBALS_():* {
         FONT,
         Format,
         GetElement,
+        GetGameSprites,
         GetLang,
         GetLangText,
         GetRuntimeType,
