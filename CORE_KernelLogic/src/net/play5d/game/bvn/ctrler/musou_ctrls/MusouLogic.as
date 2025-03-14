@@ -26,7 +26,7 @@ import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
 import net.play5d.game.bvn.data.musou.player.MusouMissionPlayerVO;
 import net.play5d.game.bvn.data.musou.player.MusouPlayerData;
 import net.play5d.game.bvn.data.musou.player.MusouWorldMapAreaPlayerVO;
-import net.play5d.game.bvn.data.musou.player.MosouWorldMapPlayerVO;
+import net.play5d.game.bvn.data.musou.player.MusouWorldMapPlayerVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 
@@ -58,13 +58,13 @@ public class MusouLogic {
 
     public function checkAreaIsOpen(areaId:String):Boolean {
         var md:MusouPlayerData        = GameData.I.mosouData;
-        var map:MosouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
+        var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
         return map.getOpenArea(areaId) != null;
     }
 
     public function getNextMission(area2:MusouWorldMapAreaVO):MusouMissionVO {
-        var md:MusouPlayerData        = GameData.I.mosouData;
-        var map:MosouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
+        var md:MusouPlayerData             = GameData.I.mosouData;
+        var map:MusouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
         var area:MusouWorldMapAreaPlayerVO = map.getOpenArea(area2.id);
 
         if (!area) {
@@ -85,8 +85,8 @@ public class MusouLogic {
     }
 
     public function getAreaPercent(areaId:String):Number {
-        var md:MusouPlayerData        = GameData.I.mosouData;
-        var map:MosouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
+        var md:MusouPlayerData             = GameData.I.mosouData;
+        var map:MusouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
         var area:MusouWorldMapAreaPlayerVO = map.getOpenArea(areaId);
         if (!area) {
             return 0;
@@ -105,13 +105,13 @@ public class MusouLogic {
         TraceLang('debug.trace.data.musou_logic.open_map_area', areaId);
 
         var md:MusouPlayerData        = GameData.I.mosouData;
-        var map:MosouWorldMapPlayerVO = GameData.I.mosouData.getMapById(mapId);
+        var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getMapById(mapId);
         map.openArea(areaId);
     }
 
     public function passMission(mission:MusouMissionVO):void {
 //			var md:MusouPlayerData = GameData.I.mosouData;
-//			var map:MosouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
+//			var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
 
 
         var area:MusouWorldMapAreaPlayerVO = GameData.I.mosouData.getCurrentArea();
@@ -129,7 +129,7 @@ public class MusouLogic {
     }
 
     public function updateMapAreas():void {
-        var pmap:MosouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
+        var pmap:MusouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
 
         var map:MusouWorldMapVO = MusouModel.I.getMap(pmap.id);
         for each(var i:MusouWorldMapAreaVO in map.areas) {

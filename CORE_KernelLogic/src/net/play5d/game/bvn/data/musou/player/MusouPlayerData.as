@@ -35,7 +35,7 @@ public class MusouPlayerData implements ISaveData {
     public var userId:String;
     public var userName:String;
     private var _money:WrapInteger                      = new WrapInteger(0);
-    private var _mapData:Vector.<MosouWorldMapPlayerVO> = new Vector.<MosouWorldMapPlayerVO>();
+    private var _mapData:Vector.<MusouWorldMapPlayerVO> = new Vector.<MusouWorldMapPlayerVO>();
     private var _fighterData:Vector.<MusouFighterVO>    = new Vector.<MusouFighterVO>(); //拥有的角色
     private var _fighterTeam:Vector.<MusouFighterVO>    = new Vector.<MusouFighterVO>(); //参战的角色
     private var _lastLogin:WrapInteger                  = new WrapInteger(0);
@@ -133,12 +133,12 @@ public class MusouPlayerData implements ISaveData {
         return null;
     }
 
-    public function getCurrentMap():MosouWorldMapPlayerVO {
+    public function getCurrentMap():MusouWorldMapPlayerVO {
         return getMapById(_currentMapId);
     }
 
     public function getCurrentArea():MusouWorldMapAreaPlayerVO {
-        var map:MosouWorldMapPlayerVO = getCurrentMap();
+        var map:MusouWorldMapPlayerVO = getCurrentMap();
         if (!map) {
             return null;
         }
@@ -151,15 +151,15 @@ public class MusouPlayerData implements ISaveData {
     }
 
     public function getCurrentMapAreaById(id:String):MusouWorldMapAreaPlayerVO {
-        var map:MosouWorldMapPlayerVO = getCurrentMap();
+        var map:MusouWorldMapPlayerVO = getCurrentMap();
         if (!map) {
             return null;
         }
         return map.getOpenArea(id);
     }
 
-    public function getMapById(id:String):MosouWorldMapPlayerVO {
-        for each(var i:MosouWorldMapPlayerVO in _mapData) {
+    public function getMapById(id:String):MusouWorldMapPlayerVO {
+        for each(var i:MusouWorldMapPlayerVO in _mapData) {
             if (i.id == id) {
                 return i;
             }
@@ -242,7 +242,7 @@ public class MusouPlayerData implements ISaveData {
 
     public function readSaveObj(o:Object):void {
         var i:int, d:Object;
-        var mv:MosouWorldMapPlayerVO;
+        var mv:MusouWorldMapPlayerVO;
         var fv:MusouFighterVO;
 
         userId   = o.userId;
@@ -257,11 +257,11 @@ public class MusouPlayerData implements ISaveData {
         }
 
         if (o.mapData) {
-            _mapData = new Vector.<MosouWorldMapPlayerVO>();
+            _mapData = new Vector.<MusouWorldMapPlayerVO>();
 
             for (i = 0; i < o.mapData.length; i++) {
                 d  = o.mapData[i];
-                mv = new MosouWorldMapPlayerVO();
+                mv = new MusouWorldMapPlayerVO();
                 mv.readSaveObj(d);
                 _mapData.push(mv);
             }
@@ -301,7 +301,7 @@ public class MusouPlayerData implements ISaveData {
     private function initMap():void {
         TraceLang('debug.trace.data.musou_player_data.init_map');
 
-        var map:MosouWorldMapPlayerVO = new MosouWorldMapPlayerVO();
+        var map:MusouWorldMapPlayerVO = new MusouWorldMapPlayerVO();
         map.id                        = _currentMapId;
         _mapData.push(map);
 

@@ -20,11 +20,11 @@ package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
+public class MusouWorldMapPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../../include/Clone.as';
 
-    public function MosouWorldMapPlayerVO() {
+    public function MusouWorldMapPlayerVO() {
     }
     public var id:String;
 //		public var areas:Vector.<MusouWorldMapAreaPlayerVO> = new Vector.<MusouWorldMapAreaPlayerVO>();
