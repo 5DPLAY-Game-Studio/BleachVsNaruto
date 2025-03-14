@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.musou.utils {
-public class MosouDataUtils {
+public class MusouDataUtils {
     include '../../../../../../../../include/_INCLUDE_.as';
 
     public static function getMapData():Object {
