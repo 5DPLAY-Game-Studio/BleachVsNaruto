@@ -26,10 +26,10 @@ import net.play5d.game.bvn.data.musou.utils.MosouFighterFactory;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.utils.WrapInteger;
 
-public class MosouPlayerData implements ISaveData {
+public class MusouPlayerData implements ISaveData {
     include '../../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouPlayerData() {
+    public function MusouPlayerData() {
 
     }
     public var userId:String;

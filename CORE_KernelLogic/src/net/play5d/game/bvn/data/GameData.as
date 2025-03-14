@@ -24,7 +24,7 @@ import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
-import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
+import net.play5d.game.bvn.data.musou.player.MusouPlayerData;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MapVO;
@@ -53,7 +53,7 @@ public class GameData {
 
     }
     public var config:ConfigVO           = new ConfigVO();
-    public var mosouData:MosouPlayerData = new MosouPlayerData();
+    public var mosouData:MusouPlayerData = new MusouPlayerData();
     public var p1Select:SelectVO;
     public var p2Select:SelectVO;
     public var selectMap:String;
