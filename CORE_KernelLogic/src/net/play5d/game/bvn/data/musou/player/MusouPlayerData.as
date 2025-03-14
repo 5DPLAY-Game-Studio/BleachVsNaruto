@@ -137,7 +137,7 @@ public class MusouPlayerData implements ISaveData {
         return getMapById(_currentMapId);
     }
 
-    public function getCurrentArea():MosouWorldMapAreaPlayerVO {
+    public function getCurrentArea():MusouWorldMapAreaPlayerVO {
         var map:MosouWorldMapPlayerVO = getCurrentMap();
         if (!map) {
             return null;
@@ -150,7 +150,7 @@ public class MusouPlayerData implements ISaveData {
         _currentAreaId = areaId;
     }
 
-    public function getCurrentMapAreaById(id:String):MosouWorldMapAreaPlayerVO {
+    public function getCurrentMapAreaById(id:String):MusouWorldMapAreaPlayerVO {
         var map:MosouWorldMapPlayerVO = getCurrentMap();
         if (!map) {
             return null;

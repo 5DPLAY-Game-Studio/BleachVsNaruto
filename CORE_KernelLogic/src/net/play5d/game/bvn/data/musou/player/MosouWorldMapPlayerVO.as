@@ -27,10 +27,10 @@ public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
     public function MosouWorldMapPlayerVO() {
     }
     public var id:String;
-//		public var areas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
-    private var _openAreas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
+//		public var areas:Vector.<MusouWorldMapAreaPlayerVO> = new Vector.<MusouWorldMapAreaPlayerVO>();
+    private var _openAreas:Vector.<MusouWorldMapAreaPlayerVO> = new Vector.<MusouWorldMapAreaPlayerVO>();
 
-    public function getOpenArea(id:String):MosouWorldMapAreaPlayerVO {
+    public function getOpenArea(id:String):MusouWorldMapAreaPlayerVO {
         for (var i:int; i < _openAreas.length; i++) {
             if (_openAreas[i].id == id) {
                 return _openAreas[i];
@@ -41,7 +41,7 @@ public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
 
     public function openArea(id:String):void {
         if (!getOpenArea(id)) {
-            var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
+            var av:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
             av.id                            = id;
             _openAreas.push(av);
         }
@@ -66,10 +66,10 @@ public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
         }
 
         if (o.areas) {
-            _openAreas = new Vector.<MosouWorldMapAreaPlayerVO>();
+            _openAreas = new Vector.<MusouWorldMapAreaPlayerVO>();
             for (var i:int; i < o.areas.length; i++) {
                 var ad:Object                    = o.areas[i];
-                var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
+                var av:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
                 av.readSaveObj(ad);
                 _openAreas.push(av);
             }
