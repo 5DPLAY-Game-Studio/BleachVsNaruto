@@ -23,7 +23,7 @@ import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
-import net.play5d.game.bvn.data.musou.player.MosouMissionPlayerVO;
+import net.play5d.game.bvn.data.musou.player.MusouMissionPlayerVO;
 import net.play5d.game.bvn.data.musou.player.MosouPlayerData;
 import net.play5d.game.bvn.data.musou.player.MosouWorldMapAreaPlayerVO;
 import net.play5d.game.bvn.data.musou.player.MosouWorldMapPlayerVO;
@@ -71,7 +71,7 @@ public class MusouLogic {
             return null;
         }
 //
-        var m1:MosouMissionPlayerVO = area.getLastPassedMission();
+        var m1:MusouMissionPlayerVO = area.getLastPassedMission();
 
         if (!m1) {
             return area2.missions[0];

@@ -20,11 +20,11 @@ package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouMissionPlayerVO implements ISaveData, IInstanceVO {
+public class MusouMissionPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../../include/Clone.as';
 
-    public function MosouMissionPlayerVO() {
+    public function MusouMissionPlayerVO() {
     }
     public var id:String;
 //		public var isPassed:Boolean = false;
