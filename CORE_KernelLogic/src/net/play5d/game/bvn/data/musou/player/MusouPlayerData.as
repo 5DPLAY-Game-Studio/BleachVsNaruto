@@ -22,7 +22,7 @@ import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
-import net.play5d.game.bvn.data.musou.utils.MosouFighterFactory;
+import net.play5d.game.bvn.data.musou.utils.MusouFighterFactory;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.utils.WrapInteger;
 
@@ -47,9 +47,9 @@ public class MusouPlayerData implements ISaveData {
 
         _money.setValue(3000);
 
-        _fighterData.push(MosouFighterFactory.create('ichigo'));
-        _fighterData.push(MosouFighterFactory.create('naruto'));
-        _fighterData.push(MosouFighterFactory.create('sakura'));
+        _fighterData.push(MusouFighterFactory.create('ichigo'));
+        _fighterData.push(MusouFighterFactory.create('naruto'));
+        _fighterData.push(MusouFighterFactory.create('sakura'));
 
         _fighterTeam = _fighterData.concat();
     }
@@ -65,7 +65,7 @@ public class MusouPlayerData implements ISaveData {
             return fv;
         }
 
-        fv = MosouFighterFactory.create(id);
+        fv = MusouFighterFactory.create(id);
         _fighterData.push(fv);
 
         return fv;
