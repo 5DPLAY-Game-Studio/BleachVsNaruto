@@ -17,13 +17,13 @@
  */
 
 package net.play5d.game.bvn.data.musou.utils {
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 
 public class MosouFighterFactory {
     include '../../../../../../../../include/_INCLUDE_.as';
 
-    public static function create(id:String):MosouFighterVO {
-        var mv:MosouFighterVO = new MosouFighterVO();
+    public static function create(id:String):MusouFighterVO {
+        var mv:MusouFighterVO = new MusouFighterVO();
         mv.id                 = id;
         return mv;
     }

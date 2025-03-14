@@ -116,9 +116,9 @@ public class MusouFighterModel {
 
         fighters.push(new MusouFighterSellVO('kenshin', 45000));
 
-//			var userFighters:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterData();
+//			var userFighters:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterData();
 
-//			for each(var i:MosouFighterVO in userFighters){
+//			for each(var i:MusouFighterVO in userFighters){
 //				for each(var j:MusouFighterSellVO in fighters){
 //					if(j.id == i.id) j.sold = true;
 //				}

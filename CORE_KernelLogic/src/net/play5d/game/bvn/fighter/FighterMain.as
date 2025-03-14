@@ -28,7 +28,7 @@ import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 import net.play5d.game.bvn.data.musou.MusouFighterLogic;
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
@@ -71,7 +71,7 @@ public class FighterMain extends BaseGameSprite {
     public var isSuperSteelBody:Boolean = false; //超级刚身状态
 
     public var data:FighterVO; //角色数据
-    public var mosouPlayerData:MosouFighterVO; //无双模式时有效
+    public var mosouPlayerData:MusouFighterVO; //无双模式时有效
     public var mosouEnemyData:MusouEnemyVO; //无双模式时有效
 
     public var airHitTimes:int = 1; //允许空中打几次
@@ -444,7 +444,7 @@ public class FighterMain extends BaseGameSprite {
         return _fighterCtrl.getMcCtrl().getFighterMc();
     }
 
-    public function initMosouFighter(v:MosouFighterVO):void {
+    public function initMosouFighter(v:MusouFighterVO):void {
         mosouPlayerData   = v;
         _mosouPlayerLogic = new MusouFighterLogic(v);
         updateProperties();

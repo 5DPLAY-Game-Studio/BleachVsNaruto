@@ -23,13 +23,13 @@ import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.game.bvn.utils.WrapInteger;
 
-public class MosouFighterVO implements ISaveData, IInstanceVO {
+public class MusouFighterVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../../include/Clone.as';
 
     public static var LEVEL_MAX:WrapInteger = new WrapInteger(80);
 
-    public function MosouFighterVO() {
+    public function MusouFighterVO() {
         _level.setValue(1);
         updateLevel(_level.getValue());
     }

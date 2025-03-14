@@ -26,7 +26,7 @@ import flash.text.TextFormatAlign;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.ui.Text;
 
 public class BigFaceUI {
@@ -36,7 +36,7 @@ public class BigFaceUI {
         _ui = ui;
     }
     private var _ui:Sprite;
-    private var _data:MosouFighterVO;
+    private var _data:MusouFighterVO;
     private var _nametxt:Text;
     private var _leveltxt:Text;
 
@@ -44,11 +44,11 @@ public class BigFaceUI {
         return _ui;
     }
 
-    public function getFighter():MosouFighterVO {
+    public function getFighter():MusouFighterVO {
         return _data;
     }
 
-    public function setFighter(data:MosouFighterVO):void {
+    public function setFighter(data:MusouFighterVO):void {
         _data = data;
         updateTexts();
         updateFace();

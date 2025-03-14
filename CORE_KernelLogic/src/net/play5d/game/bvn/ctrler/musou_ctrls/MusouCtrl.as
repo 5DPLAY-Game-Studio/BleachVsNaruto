@@ -34,7 +34,7 @@ import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWaveRepeatVO;
 import net.play5d.game.bvn.data.musou.MusouWaveVO;
 import net.play5d.game.bvn.data.musou.MusouGameRunDataVO;
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.factory.GameRunFactory;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
@@ -132,7 +132,7 @@ public class MusouCtrl {
 
         var p1Group:GameRunFighterGroup = GameCtrl.I.gameRunData.p1FighterGroup;
 
-        var datas:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var datas:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
 
         p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter1, datas[0], '1'));
         p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter2, datas[1], '1'));
@@ -712,7 +712,7 @@ public class MusouCtrl {
             return;
         }
 
-        var data:MosouFighterVO = e.param;
+        var data:MusouFighterVO = e.param;
 
         var p1:FighterMain = p1Group.currentFighter;
         if (p1 && p1.mosouPlayerData == data) {

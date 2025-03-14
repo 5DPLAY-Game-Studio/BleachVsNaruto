@@ -33,7 +33,7 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
@@ -157,7 +157,7 @@ public class WorldMapPointUI extends EventDispatcher {
             return;
         }
 
-        var leader:MosouFighterVO = GameData.I.mosouData.getLeader();
+        var leader:MusouFighterVO = GameData.I.mosouData.getLeader();
         if (!leader) {
             return;
         }

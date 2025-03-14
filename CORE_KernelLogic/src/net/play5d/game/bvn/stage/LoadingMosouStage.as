@@ -33,7 +33,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputer;
@@ -107,7 +107,7 @@ public class LoadingMosouStage implements IStage {
 
         maps.push(mission.map);
 
-        var fvos:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fvos:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
         for (var i:int; i < fvos.length; i++) {
             fighters.push(fvos[i].id);
         }
@@ -168,7 +168,7 @@ public class LoadingMosouStage implements IStage {
         GameCtrl.I.getMosouCtrl().gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
 //			GameCtrl.I.getMosouCtrl().gameRunData.gameTime = 30 * GameConfig.FPS_ANIMATE;
 
-        var fighterTeam:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fighterTeam:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
 
         GameCtrl.I.gameRunData.p1FighterGroup.fighter1 = FighterModel.I.getFighter(fighterTeam[0].id);
         GameCtrl.I.gameRunData.p1FighterGroup.fighter2 = FighterModel.I.getFighter(fighterTeam[1].id);

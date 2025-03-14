@@ -25,7 +25,7 @@ import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.map.MapMain;
@@ -59,7 +59,7 @@ public class GameRunFactory {
     }
 
     public static function createFighterByMosouData(
-            data:FighterVO, mosouData:MosouFighterVO, playerId:String):FighterMain {
+            data:FighterVO, mosouData:MusouFighterVO, playerId:String):FighterMain {
         var fighter:FighterMain = createFighterByData(data, playerId);
         if (!fighter) {
             return null;

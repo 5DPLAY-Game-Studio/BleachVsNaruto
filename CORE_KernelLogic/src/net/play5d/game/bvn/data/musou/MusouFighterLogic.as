@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.musou {
-import net.play5d.game.bvn.data.musou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 
 public class MusouFighterLogic {
@@ -69,10 +69,10 @@ public class MusouFighterLogic {
 //
 //		public static const LV_BANKAI:int = 10;
 
-    public function MusouFighterLogic(v:MosouFighterVO) {
+    public function MusouFighterLogic(v:MusouFighterVO) {
         _fightData = v;
     }
-    private var _fightData:MosouFighterVO;
+    private var _fightData:MusouFighterVO;
 
     public function getHP():int {
         return _fightData.getHP();
