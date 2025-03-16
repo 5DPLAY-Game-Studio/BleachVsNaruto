@@ -26,9 +26,9 @@ import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.TeamVO;
-import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
-import net.play5d.game.bvn.data.mosou.MosouFighterLogic;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.MusouEnemyVO;
+import net.play5d.game.bvn.data.musou.MusouFighterLogic;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
@@ -71,8 +71,8 @@ public class FighterMain extends BaseGameSprite {
     public var isSuperSteelBody:Boolean = false; //超级刚身状态
 
     public var data:FighterVO; //角色数据
-    public var mosouPlayerData:MosouFighterVO; //无双模式时有效
-    public var mosouEnemyData:MosouEnemyVO; //无双模式时有效
+    public var mosouPlayerData:MusouFighterVO; //无双模式时有效
+    public var mosouEnemyData:MusouEnemyVO; //无双模式时有效
 
     public var airHitTimes:int = 1; //允许空中打几次
     public var jumpTimes:int   = 2; //允许跳几次
@@ -85,7 +85,7 @@ public class FighterMain extends BaseGameSprite {
 
     public var introSaid:Boolean = false; //是否播放过开场
 
-    public var mosouLogic:MosouFighterLogic;
+    public var mosouLogic:MusouFighterLogic;
     //当前被攻击的数据
     public var hurtHit:HitVO;
     public var defenseHit:HitVO;
@@ -93,7 +93,7 @@ public class FighterMain extends BaseGameSprite {
     private var _speed:Number   = 6;
     private var _buffCtrler:FighterBuffCtrler;
     private var _currentHurts:Vector.<HitVO>;
-    private var _mosouPlayerLogic:MosouFighterLogic;
+    private var _mosouPlayerLogic:MusouFighterLogic;
     private var _currentTarget:IGameSprite;
     private var _fighterCtrl:FighterCtrler;
     private var _energyAddGap:int;
@@ -320,7 +320,7 @@ public class FighterMain extends BaseGameSprite {
         _mainMc.transform.colorTransform = _colorTransform ? _colorTransform : new ColorTransform();
     }
 
-    public function getMosouLogic():MosouFighterLogic {
+    public function getMosouLogic():MusouFighterLogic {
         return _mosouPlayerLogic;
     }
 
@@ -391,7 +391,7 @@ public class FighterMain extends BaseGameSprite {
                 if (i is FighterMain && (
                         i as FighterMain
                 ).isAlive && i.getActive()) {
-                    var msd:MosouEnemyVO = (
+                    var msd:MusouEnemyVO = (
                             i as FighterMain
                     ).mosouEnemyData;
                     if (msd) {
@@ -444,13 +444,13 @@ public class FighterMain extends BaseGameSprite {
         return _fighterCtrl.getMcCtrl().getFighterMc();
     }
 
-    public function initMosouFighter(v:MosouFighterVO):void {
+    public function initMosouFighter(v:MusouFighterVO):void {
         mosouPlayerData   = v;
-        _mosouPlayerLogic = new MosouFighterLogic(v);
+        _mosouPlayerLogic = new MusouFighterLogic(v);
         updateProperties();
     }
 
-    public function initMosouEnemy(v:MosouEnemyVO):void {
+    public function initMosouEnemy(v:MusouEnemyVO):void {
         mosouEnemyData = v;
     }
 

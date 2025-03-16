@@ -32,8 +32,8 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
@@ -45,7 +45,7 @@ public class WorldMapPointUI extends EventDispatcher {
 
     public static const EVENT_SELECT:String = 'EVENT_SELECT';
 
-    public function WorldMapPointUI(pointMc:Sprite, maskMc:MovieClip, data:MosouWorldMapAreaVO) {
+    public function WorldMapPointUI(pointMc:Sprite, maskMc:MovieClip, data:MusouWorldMapAreaVO) {
         _pointMc = pointMc;
         _maskMc  = maskMc;
 
@@ -60,7 +60,7 @@ public class WorldMapPointUI extends EventDispatcher {
         update();
         initEvents();
     }
-    public var data:MosouWorldMapAreaVO;
+    public var data:MusouWorldMapAreaVO;
     private var _pointMc:Sprite;
     private var _ppmc:MovieClip;
     private var _facemc:Sprite;
@@ -157,7 +157,7 @@ public class WorldMapPointUI extends EventDispatcher {
             return;
         }
 
-        var leader:MosouFighterVO = GameData.I.mosouData.getLeader();
+        var leader:MusouFighterVO = GameData.I.mosouData.getLeader();
         if (!leader) {
             return;
         }

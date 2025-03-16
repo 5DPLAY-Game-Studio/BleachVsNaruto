@@ -16,24 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
-import net.play5d.game.bvn.data.ISaveData;
+package net.play5d.game.bvn.data.musou.utils {
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 
-public class MosouWorldMapData implements ISaveData {
-    include '../../../../../../../include/_INCLUDE_.as';
+public class MusouFighterFactory {
+    include '../../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouWorldMapData() {
-    }
-    private var _mapAreaList:Vector.<MosouWorldMapAreaVO>;
-
-    public function toSaveObj():Object {
-        return null;
+    public static function create(id:String):MusouFighterVO {
+        var mv:MusouFighterVO = new MusouFighterVO();
+        mv.id                 = id;
+        return mv;
     }
 
-    public function readSaveObj(o:Object):void {
-    }
-
-    private function initMapAreas():void {
-    }
 }
 }

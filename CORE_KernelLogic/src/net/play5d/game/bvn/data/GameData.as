@@ -18,13 +18,13 @@
 
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.game.bvn.data.mosou.MosouFighterModel;
-import net.play5d.game.bvn.data.mosou.MosouFighterSellVO;
-import net.play5d.game.bvn.data.mosou.MosouMissionVO;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapVO;
-import net.play5d.game.bvn.data.mosou.player.MosouPlayerData;
+import net.play5d.game.bvn.data.musou.MusouFighterModel;
+import net.play5d.game.bvn.data.musou.MusouFighterSellVO;
+import net.play5d.game.bvn.data.musou.MusouMissionVO;
+import net.play5d.game.bvn.data.musou.MusouModel;
+import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
+import net.play5d.game.bvn.data.musou.player.MusouPlayerData;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MapVO;
@@ -53,7 +53,7 @@ public class GameData {
 
     }
     public var config:ConfigVO           = new ConfigVO();
-    public var mosouData:MosouPlayerData = new MosouPlayerData();
+    public var mosouData:MusouPlayerData = new MusouPlayerData();
     public var p1Select:SelectVO;
     public var p2Select:SelectVO;
     public var selectMap:String;
@@ -91,13 +91,13 @@ public class GameData {
 
         function loadMissionBack(data:Object):void {
             MessionModel.I.initByObject(data);
-//				AssetManager.I.loadXML("config/mosou.xml",loadMosouMission , loadMosouMission);
+//				AssetManager.I.loadXML("config/musou.xml",loadMosouMission , loadMosouMission);
 
-            MosouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);
+            MusouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);
         }
 
         function loadMosouDataBack():void {
-            MosouFighterModel.I.init();
+            MusouFighterModel.I.init();
 
             validateSelect();
             validateMissionData();
@@ -309,14 +309,14 @@ public class GameData {
 
     // 验证无双关卡
     private function validateMosouData():void {
-        var mapObj:Object = MosouModel.I.getAllMap();
+        var mapObj:Object = MusouModel.I.getAllMap();
 
         for (var i:String in mapObj) {
 
-            var mwv:MosouWorldMapVO = mapObj[i];
+            var mwv:MusouWorldMapVO = mapObj[i];
 
-            for each(var a:MosouWorldMapAreaVO in mwv.areas) {
-                for each(var mv:MosouMissionVO in a.missions) {
+            for each(var a:MusouWorldMapAreaVO in mwv.areas) {
+                for each(var mv:MusouMissionVO in a.missions) {
 
                     var mosouId:String = mwv.id + ' - ' + a.id + ' - ' + mv.id;
 
@@ -344,8 +344,8 @@ public class GameData {
 
         var missFighters:Array = [];
 
-        var fighters:Vector.<MosouFighterSellVO> = MosouFighterModel.I.fighters;
-        for each(var s:MosouFighterSellVO in fighters) {
+        var fighters:Vector.<MusouFighterSellVO> = MusouFighterModel.I.fighters;
+        for each(var s:MusouFighterSellVO in fighters) {
             var fv:FighterVO = FighterModel.I.getFighter(s.id);
             if (!fv && missFighters.indexOf(s.id) == -1) {
                 missFighters.push(s.id);

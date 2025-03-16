@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+package net.play5d.game.bvn.data.musou {
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouFighterLogic {
+public class MusouFighterLogic {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public static const LV_DASH_AIR:int   = 0;
@@ -69,10 +69,10 @@ public class MosouFighterLogic {
 //
 //		public static const LV_BANKAI:int = 10;
 
-    public function MosouFighterLogic(v:MosouFighterVO) {
+    public function MusouFighterLogic(v:MusouFighterVO) {
         _fightData = v;
     }
-    private var _fightData:MosouFighterVO;
+    private var _fightData:MusouFighterVO;
 
     public function getHP():int {
         return _fightData.getHP();

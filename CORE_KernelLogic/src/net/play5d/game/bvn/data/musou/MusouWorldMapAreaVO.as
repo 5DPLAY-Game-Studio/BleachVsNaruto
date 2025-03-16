@@ -16,26 +16,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
+package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapAreaVO implements IInstanceVO {
+public class MusouWorldMapAreaVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouWorldMapAreaVO() {
+    public function MusouWorldMapAreaVO() {
     }
     public var id:String;
     public var name:String;
-    public var missions:Vector.<MosouMissionVO>;
-    public var preOpens:Vector.<MosouWorldMapAreaVO>;
+    public var missions:Vector.<MusouMissionVO>;
+    public var preOpens:Vector.<MusouWorldMapAreaVO>;
 
     // 如果为true，表示当前版本未开放
     public function building():Boolean {
         return !missions || missions.length < 1;
     }
 
-    public function getMission(id:String):MosouMissionVO {
+    public function getMission(id:String):MusouMissionVO {
         for (var i:int; i < missions.length; i++) {
             if (missions[i].id == id) {
                 return missions[i];
@@ -44,8 +44,8 @@ public class MosouWorldMapAreaVO implements IInstanceVO {
         return null;
     }
 
-    public function getNextMission(id:String):MosouMissionVO {
-        var m:MosouMissionVO = getMission(id);
+    public function getNextMission(id:String):MusouMissionVO {
+        var m:MusouMissionVO = getMission(id);
         if (!m) {
             return null;
         }

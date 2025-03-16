@@ -16,27 +16,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
+package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
-import net.play5d.game.bvn.utils.WrapInteger;
 
-public class MosouFighterSellVO implements IInstanceVO {
+public class MusouWaveRepeatVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouFighterSellVO(fighterId:String, price:int) {
-        this.id = fighterId;
-//			this.allowSell = allowSell;
-        _price.setValue(price);
+    public function MusouWaveRepeatVO() {
     }
+    /**
+     * 类型：
+     * 0=按时间重复
+     * 1=当该节点中的敌人DEAD后，在等待时间之后进行重复
+     */
+    public var type:int;
+    public var hold:int;
+    public var wave:MusouWaveVO;
+    /**
+     * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）
+     */
+    public var enemies:Vector.<MusouEnemyVO>;
+    public var _holdFrame:int;
 
-//		public var sold:Boolean = false;
-//		public var allowSell:Boolean = false;
-    public var id:String;
-    private var _price:WrapInteger = new WrapInteger(0);
+    public function addEnemy(enemyAdds:Vector.<MusouEnemyVO>):void {
+        enemies ||= new Vector.<MusouEnemyVO>();
 
-    public function getPrice():int {
-        return _price.getValue();
+        for each(var e:MusouEnemyVO in enemyAdds) {
+            e.wave   = wave;
+            e.repeat = this;
+            enemies.push(e);
+        }
+
     }
 
 }

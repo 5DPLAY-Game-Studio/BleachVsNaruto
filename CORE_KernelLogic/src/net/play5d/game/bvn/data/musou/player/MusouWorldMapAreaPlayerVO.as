@@ -16,31 +16,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player {
+package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
+public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../../include/Clone.as';
 
-    public function MosouWorldMapAreaPlayerVO() {
+    public function MusouWorldMapAreaPlayerVO() {
     }
     public var id:String;
 
-//		public var missions:Vector.<MosouMissionPlayerVO> = new Vector.<MosouMissionPlayerVO>();
+//		public var missions:Vector.<MusouMissionPlayerVO> = new Vector.<MusouMissionPlayerVO>();
     public var name:String;
 
 //		public var isOpen:Boolean;
-    private var _passedMissions:Vector.<MosouMissionPlayerVO> = new Vector.<MosouMissionPlayerVO>();
+    private var _passedMissions:Vector.<MusouMissionPlayerVO> = new Vector.<MusouMissionPlayerVO>();
 
     public function passMission(missionId:String, starts:int = 1):Boolean {
         var isNewPassed:Boolean = false;
 
-        var mv:MosouMissionPlayerVO = getPassedMission(missionId);
+        var mv:MusouMissionPlayerVO = getPassedMission(missionId);
         if (!mv) {
             isNewPassed = true;
-            mv          = new MosouMissionPlayerVO();
+            mv          = new MusouMissionPlayerVO();
             mv.id       = missionId;
             _passedMissions.push(mv);
         }
@@ -51,7 +51,7 @@ public class MosouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
     }
 
 
-    public function getPassedMission(id:String):MosouMissionPlayerVO {
+    public function getPassedMission(id:String):MusouMissionPlayerVO {
         for (var i:int; i < _passedMissions.length; i++) {
             if (_passedMissions[i].id == id) {
                 return _passedMissions[i];
@@ -60,7 +60,7 @@ public class MosouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
         return null;
     }
 
-    public function getLastPassedMission():MosouMissionPlayerVO {
+    public function getLastPassedMission():MusouMissionPlayerVO {
         if (_passedMissions.length < 1) {
             return null;
         }
@@ -87,10 +87,10 @@ public class MosouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
         id   = o.id;
         name = o.name;
 
-        _passedMissions = new Vector.<MosouMissionPlayerVO>();
+        _passedMissions = new Vector.<MusouMissionPlayerVO>();
         if (o.missions) {
             for (var i:int; i < o.missions.length; i++) {
-                var mv:MosouMissionPlayerVO = new MosouMissionPlayerVO();
+                var mv:MusouMissionPlayerVO = new MusouMissionPlayerVO();
                 mv.readSaveObj(o.missions[i]);
                 _passedMissions.push(mv);
             }

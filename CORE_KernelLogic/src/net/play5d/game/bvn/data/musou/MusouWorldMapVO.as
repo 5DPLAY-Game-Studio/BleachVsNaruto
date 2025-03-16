@@ -16,29 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
+package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapVO implements IInstanceVO {
+public class MusouWorldMapVO implements IInstanceVO {
     include '../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../include/Clone.as';
 
-    public function MosouWorldMapVO() {
+    public function MusouWorldMapVO() {
     }
     public var id:String;
     public var name:String;
-    public var areas:Vector.<MosouWorldMapAreaVO>;
+    public var areas:Vector.<MusouWorldMapAreaVO>;
     private var _areaMap:Object;
 
     public function initWay(way:Array):void {
-        areas    = new Vector.<MosouWorldMapAreaVO>();
+        areas    = new Vector.<MusouWorldMapAreaVO>();
         _areaMap = {};
 
-        var i:int, w:Object, mv:MosouWorldMapAreaVO;
+        var i:int, w:Object, mv:MusouWorldMapAreaVO;
 
         for (i = 0; i < way.length; i++) {
             w     = way[i];
-            mv    = new MosouWorldMapAreaVO();
+            mv    = new MusouWorldMapAreaVO();
             mv.id = w.P;
 
             areas.push(mv);
@@ -53,7 +53,7 @@ public class MosouWorldMapVO implements IInstanceVO {
                 continue;
             }
 
-            mv.preOpens = new Vector.<MosouWorldMapAreaVO>();
+            mv.preOpens = new Vector.<MusouWorldMapAreaVO>();
 
             if (w.N is Array) {
                 for each(var id:String in w.N) {
@@ -71,7 +71,7 @@ public class MosouWorldMapVO implements IInstanceVO {
         }
     }
 
-    public function getArea(aid:String):MosouWorldMapAreaVO {
+    public function getArea(aid:String):MusouWorldMapAreaVO {
         return _areaMap[aid];
     }
 

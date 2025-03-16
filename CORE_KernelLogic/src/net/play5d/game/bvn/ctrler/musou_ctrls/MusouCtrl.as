@@ -27,14 +27,14 @@ import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
-import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
-import net.play5d.game.bvn.data.mosou.MosouFighterLogic;
-import net.play5d.game.bvn.data.mosou.MosouMissionVO;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWaveRepeatVO;
-import net.play5d.game.bvn.data.mosou.MosouWaveVO;
-import net.play5d.game.bvn.data.mosou.MousouGameRunDataVO;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.MusouEnemyVO;
+import net.play5d.game.bvn.data.musou.MusouFighterLogic;
+import net.play5d.game.bvn.data.musou.MusouMissionVO;
+import net.play5d.game.bvn.data.musou.MusouModel;
+import net.play5d.game.bvn.data.musou.MusouWaveRepeatVO;
+import net.play5d.game.bvn.data.musou.MusouWaveVO;
+import net.play5d.game.bvn.data.musou.MusouGameRunDataVO;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.factory.GameRunFactory;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
@@ -52,15 +52,15 @@ import net.play5d.game.bvn.ui.mosou.MosouUI;
 public class MusouCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public const gameRunData:MousouGameRunDataVO = new MousouGameRunDataVO();
+    public const gameRunData:MusouGameRunDataVO = new MusouGameRunDataVO();
 
     public function MusouCtrl() {
     }
     public var waveCount:int;
     public var currentWave:int;
-    private var _mission:MosouMissionVO;
-    private var _runningWaves:Vector.<MosouWaveVO>;
-    private var _runningWave:MosouWaveVO;
+    private var _mission:MusouMissionVO;
+    private var _runningWaves:Vector.<MusouWaveVO>;
+    private var _runningWave:MusouWaveVO;
     private var _stageEnemies:Vector.<FighterMain>;
     private var _bossCount:int;
     private var _renderTimer:int;
@@ -85,7 +85,7 @@ public class MusouCtrl {
     }
 
     public function initalize():void {
-        _mission         = MosouModel.I.currentMission;
+        _mission         = MusouModel.I.currentMission;
         _missionComplete = false;
 
         _bossCount = _mission.bossCount();
@@ -102,7 +102,7 @@ public class MusouCtrl {
 
         _gameFinish = false;
 
-//			MosouFighterModel.I.init();
+//			MusouFighterModel.I.init();
 
 
 //			gameRunData.reset();
@@ -132,7 +132,7 @@ public class MusouCtrl {
 
         var p1Group:GameRunFighterGroup = GameCtrl.I.gameRunData.p1FighterGroup;
 
-        var datas:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var datas:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
 
         p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter1, datas[0], '1'));
         p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter2, datas[1], '1'));
@@ -472,7 +472,7 @@ public class MusouCtrl {
 
 //			if(_addEnemyGap++ < 15) return;
 
-        var ev:MosouEnemyVO = _enemyCreators[0].getNextEnemy();
+        var ev:MusouEnemyVO = _enemyCreators[0].getNextEnemy();
         if (ev) {
             addEmeny(ev);
         }
@@ -487,7 +487,7 @@ public class MusouCtrl {
         if (!_runningWave) {
             return;
         }
-        var repeats:Vector.<MosouWaveRepeatVO> = _runningWave.repeats;
+        var repeats:Vector.<MusouWaveRepeatVO> = _runningWave.repeats;
         if (!repeats || repeats.length < 1) {
             return;
         }
@@ -498,12 +498,12 @@ public class MusouCtrl {
 
     }
 
-    private function renderRepeat(data:MosouWaveRepeatVO):void {
+    private function renderRepeat(data:MusouWaveRepeatVO):void {
         if (!data.enemies || data.enemies.length < 1) {
             return;
         }
 
-        var result:Vector.<MosouEnemyVO> = null;
+        var result:Vector.<MusouEnemyVO> = null;
 
         if (data._holdFrame > 0) {
             data._holdFrame--;
@@ -513,9 +513,9 @@ public class MusouCtrl {
         data._holdFrame = GameConfig.FPS_ANIMATE * data.hold;
 
         if (data.type == 1) {
-            result = new Vector.<MosouEnemyVO>();
+            result = new Vector.<MusouEnemyVO>();
 
-            for each(var i:MosouEnemyVO in data.enemies) {
+            for each(var i:MusouEnemyVO in data.enemies) {
                 var f:FighterMain = getEnemyByData(i);
                 if (!f || !f.isAlive || !f.getActive()) {
                     result.push(i);
@@ -550,7 +550,7 @@ public class MusouCtrl {
 
         TraceLang('debug.trace.data.musou_ctrl.wave_next');
 
-        var wave:MosouWaveVO = _runningWaves.shift();
+        var wave:MusouWaveVO = _runningWaves.shift();
         _runningWave         = wave;
 
         currentWave++;
@@ -564,7 +564,7 @@ public class MusouCtrl {
 
     }
 
-    private function addEmeny(data:MosouEnemyVO):void {
+    private function addEmeny(data:MusouEnemyVO):void {
         var enemy:FighterMain = GameRunFactory.createEnemyByData(data);
         _stageEnemies.push(enemy);
         addEnemyFighter(enemy);
@@ -579,7 +579,7 @@ public class MusouCtrl {
         });
     }
 
-    private function getEnemyByData(mosouData:MosouEnemyVO):FighterMain {
+    private function getEnemyByData(mosouData:MusouEnemyVO):FighterMain {
         var filtered:Vector.<FighterMain> = _stageEnemies.filter(
                 function (f:FighterMain, i:int, a:Vector.<FighterMain>):Boolean {
                     return f.mosouEnemyData == mosouData;
@@ -712,13 +712,13 @@ public class MusouCtrl {
             return;
         }
 
-        var data:MosouFighterVO = e.param;
+        var data:MusouFighterVO = e.param;
 
         var p1:FighterMain = p1Group.currentFighter;
         if (p1 && p1.mosouPlayerData == data) {
             p1.updateProperties();
 
-            var index:int = MosouFighterLogic.ALL_ACTION_LEVELS.indexOf(data.getLevel());
+            var index:int = MusouFighterLogic.ALL_ACTION_LEVELS.indexOf(data.getLevel());
             if (index != -1) {
                 EffectCtrl.I.doEffectById('level_up_new_act', p1.x, p1.y);
             }
@@ -733,15 +733,15 @@ public class MusouCtrl {
 }
 }
 
-import net.play5d.game.bvn.data.mosou.MosouEnemyVO;
+import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 
 internal class EnemyCreator {
-    public function EnemyCreator(enemies:Vector.<MosouEnemyVO>) {
+    public function EnemyCreator(enemies:Vector.<MusouEnemyVO>) {
         _addEnemies = enemies.concat();
     }
-    private var _addEnemies:Vector.<MosouEnemyVO>;
+    private var _addEnemies:Vector.<MusouEnemyVO>;
 
-    public function getNextEnemy():MosouEnemyVO {
+    public function getNextEnemy():MusouEnemyVO {
         if (_addEnemies.length < 1) {
             return null;
         }

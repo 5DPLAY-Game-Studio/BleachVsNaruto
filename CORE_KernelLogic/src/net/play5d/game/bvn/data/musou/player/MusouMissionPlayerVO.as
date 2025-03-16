@@ -16,28 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou {
+package net.play5d.game.bvn.data.musou.player {
+import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MousouGameRunDataVO implements IInstanceVO {
-    include '../../../../../../../include/_INCLUDE_.as';
-    include '../../../../../../../include/Clone.as';
+public class MusouMissionPlayerVO implements ISaveData, IInstanceVO {
+    include '../../../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../../../include/Clone.as';
 
-    public function MousouGameRunDataVO() {
-        TraceLang('debug.trace.data.musou_game_run_data_vo.main');
+    public function MusouMissionPlayerVO() {
+    }
+    public var id:String;
+//		public var isPassed:Boolean = false;
+    public var stars:int = 0;
+
+    public function toSaveObj():Object {
+        var o:Object = {};
+        o.id         = id;
+//			o.isPassed = isPassed;
+        o.stars      = stars;
+        return o;
     }
 
-//		private var _runningWaves:Vector.<MosouWaveRunVO>;
-    public var koNum:int = 0;
-    public var gameTime:int;
-    public var gameTimeMax:int;
-
-//		public function reset():void{
-//			gameTime = 0;
-//			gameTimeMax = 0;
-//			_runningWaves = null;
-//			waves = null;
-//			koNum = 0;
-//		}
+    public function readSaveObj(o:Object):void {
+        id    = o.id;
+//			isPassed = o.isPassed;
+        stars = o.stars;
+    }
 }
 }

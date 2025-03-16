@@ -16,21 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player {
+package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.data.ISaveData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
+public class MusouWorldMapPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/_INCLUDE_.as';
     include '../../../../../../../../include/Clone.as';
 
-    public function MosouWorldMapPlayerVO() {
+    public function MusouWorldMapPlayerVO() {
     }
     public var id:String;
-//		public var areas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
-    private var _openAreas:Vector.<MosouWorldMapAreaPlayerVO> = new Vector.<MosouWorldMapAreaPlayerVO>();
+//		public var areas:Vector.<MusouWorldMapAreaPlayerVO> = new Vector.<MusouWorldMapAreaPlayerVO>();
+    private var _openAreas:Vector.<MusouWorldMapAreaPlayerVO> = new Vector.<MusouWorldMapAreaPlayerVO>();
 
-    public function getOpenArea(id:String):MosouWorldMapAreaPlayerVO {
+    public function getOpenArea(id:String):MusouWorldMapAreaPlayerVO {
         for (var i:int; i < _openAreas.length; i++) {
             if (_openAreas[i].id == id) {
                 return _openAreas[i];
@@ -41,7 +41,7 @@ public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
 
     public function openArea(id:String):void {
         if (!getOpenArea(id)) {
-            var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
+            var av:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
             av.id                            = id;
             _openAreas.push(av);
         }
@@ -66,10 +66,10 @@ public class MosouWorldMapPlayerVO implements ISaveData, IInstanceVO {
         }
 
         if (o.areas) {
-            _openAreas = new Vector.<MosouWorldMapAreaPlayerVO>();
+            _openAreas = new Vector.<MusouWorldMapAreaPlayerVO>();
             for (var i:int; i < o.areas.length; i++) {
                 var ad:Object                    = o.areas[i];
-                var av:MosouWorldMapAreaPlayerVO = new MosouWorldMapAreaPlayerVO();
+                var av:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
                 av.readSaveObj(ad);
                 _openAreas.push(av);
             }

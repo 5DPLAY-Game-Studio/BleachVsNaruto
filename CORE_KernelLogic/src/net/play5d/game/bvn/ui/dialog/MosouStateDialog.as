@@ -26,8 +26,8 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.mosou.LevelModel;
-import net.play5d.game.bvn.data.mosou.player.MosouFighterVO;
+import net.play5d.game.bvn.data.musou.LevelModel;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.ui.dialog.mosou_state.BigFaceUI;
@@ -103,7 +103,7 @@ public class MosouStateDialog extends BaseDialog {
     private var _bigFaces:Vector.<BigFaceUI>;
     private var _leaderBtn:SimpleButton;
     private var _changeBtn:SimpleButton;
-    private var _currentFighter:MosouFighterVO;
+    private var _currentFighter:MusouFighterVO;
     private var _coinUI:CoinUI;
     private var _nameText:Text;
     private var _lvText:Text;
@@ -217,7 +217,7 @@ public class MosouStateDialog extends BaseDialog {
     }
 
     private function initBigFaces():void {
-        var fighters:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fighters:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
         for (var i:int; i < fighters.length; i++) {
             if (_bigFaces[i]) {
                 _bigFaces[i].setFighter(fighters[i]);
@@ -230,7 +230,7 @@ public class MosouStateDialog extends BaseDialog {
     }
 
     private function updateBigFaces():void {
-        var fighters:Vector.<MosouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fighters:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
         for (var i:int; i < fighters.length; i++) {
             if (_bigFaces[i]) {
                 _bigFaces[i].setFighter(fighters[i]);

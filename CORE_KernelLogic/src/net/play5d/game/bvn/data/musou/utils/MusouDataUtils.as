@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.utils {
-public class MosouDataUtils {
+package net.play5d.game.bvn.data.musou.utils {
+public class MusouDataUtils {
     include '../../../../../../../../include/_INCLUDE_.as';
 
     public static function getMapData():Object {

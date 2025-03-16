@@ -16,28 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data.mosou.player {
+package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.ISaveData;
-import net.play5d.game.bvn.data.mosou.MosouModel;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapAreaVO;
-import net.play5d.game.bvn.data.mosou.MosouWorldMapVO;
-import net.play5d.game.bvn.data.mosou.utils.MosouFighterFactory;
+import net.play5d.game.bvn.data.musou.MusouModel;
+import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
+import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
+import net.play5d.game.bvn.data.musou.utils.MusouFighterFactory;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.utils.WrapInteger;
 
-public class MosouPlayerData implements ISaveData {
+public class MusouPlayerData implements ISaveData {
     include '../../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouPlayerData() {
+    public function MusouPlayerData() {
 
     }
     public var userId:String;
     public var userName:String;
-    private var _money:WrapInteger = new WrapInteger(0);
-    private var _mapData:Vector.<MosouWorldMapPlayerVO> = new Vector.<MosouWorldMapPlayerVO>();
-    private var _fighterData:Vector.<MosouFighterVO>    = new Vector.<MosouFighterVO>(); //拥有的角色
-    private var _fighterTeam:Vector.<MosouFighterVO>    = new Vector.<MosouFighterVO>(); //参战的角色
+    private var _money:WrapInteger                      = new WrapInteger(0);
+    private var _mapData:Vector.<MusouWorldMapPlayerVO> = new Vector.<MusouWorldMapPlayerVO>();
+    private var _fighterData:Vector.<MusouFighterVO>    = new Vector.<MusouFighterVO>(); //拥有的角色
+    private var _fighterTeam:Vector.<MusouFighterVO>    = new Vector.<MusouFighterVO>(); //参战的角色
     private var _lastLogin:WrapInteger                  = new WrapInteger(0);
     private var _currentMapId:String                    = 'map1';
     private var _currentAreaId:String                   = 'p1';
@@ -47,31 +47,31 @@ public class MosouPlayerData implements ISaveData {
 
         _money.setValue(3000);
 
-        _fighterData.push(MosouFighterFactory.create('ichigo'));
-        _fighterData.push(MosouFighterFactory.create('naruto'));
-        _fighterData.push(MosouFighterFactory.create('sakura'));
+        _fighterData.push(MusouFighterFactory.create('ichigo'));
+        _fighterData.push(MusouFighterFactory.create('naruto'));
+        _fighterData.push(MusouFighterFactory.create('sakura'));
 
         _fighterTeam = _fighterData.concat();
     }
 
-    public function getFighterData():Vector.<MosouFighterVO> {
+    public function getFighterData():Vector.<MusouFighterVO> {
         return _fighterData;
     }
 
-    public function addFighter(id:String):MosouFighterVO {
-        var fv:MosouFighterVO = getFighterDataById(id);
+    public function addFighter(id:String):MusouFighterVO {
+        var fv:MusouFighterVO = getFighterDataById(id);
 
         if (fv) {
             return fv;
         }
 
-        fv = MosouFighterFactory.create(id);
+        fv = MusouFighterFactory.create(id);
         _fighterData.push(fv);
 
         return fv;
     }
 
-    public function getFighterTeam():Vector.<MosouFighterVO> {
+    public function getFighterTeam():Vector.<MusouFighterVO> {
         return _fighterTeam;
     }
 
@@ -84,7 +84,7 @@ public class MosouPlayerData implements ISaveData {
     }
 
     public function setFighterTeam(index:int, id:String):void {
-        var mv:MosouFighterVO = getFighterDataById(id);
+        var mv:MusouFighterVO = getFighterDataById(id);
         if (!mv) {
             return;
         }
@@ -93,7 +93,7 @@ public class MosouPlayerData implements ISaveData {
         GameEvent.dispatchEvent(GameEvent.MOSOU_FIGHTER_UPDATE);
     }
 
-    public function setLeader(v:MosouFighterVO):void {
+    public function setLeader(v:MusouFighterVO):void {
         var index:int = _fighterTeam.indexOf(v);
         if (index == -1) {
             return;
@@ -102,7 +102,7 @@ public class MosouPlayerData implements ISaveData {
             return;
         }
 
-        var tmp:Vector.<MosouFighterVO> = _fighterTeam.concat();
+        var tmp:Vector.<MusouFighterVO> = _fighterTeam.concat();
 
         switch (index) {
         case 1:
@@ -120,12 +120,12 @@ public class MosouPlayerData implements ISaveData {
         GameEvent.dispatchEvent(GameEvent.MOSOU_FIGHTER_UPDATE);
     }
 
-    public function getLeader():MosouFighterVO {
+    public function getLeader():MusouFighterVO {
         return _fighterTeam[0];
     }
 
-    public function getFighterDataById(id:String):MosouFighterVO {
-        for each(var i:MosouFighterVO in _fighterData) {
+    public function getFighterDataById(id:String):MusouFighterVO {
+        for each(var i:MusouFighterVO in _fighterData) {
             if (i.id == id) {
                 return i;
             }
@@ -133,12 +133,12 @@ public class MosouPlayerData implements ISaveData {
         return null;
     }
 
-    public function getCurrentMap():MosouWorldMapPlayerVO {
+    public function getCurrentMap():MusouWorldMapPlayerVO {
         return getMapById(_currentMapId);
     }
 
-    public function getCurrentArea():MosouWorldMapAreaPlayerVO {
-        var map:MosouWorldMapPlayerVO = getCurrentMap();
+    public function getCurrentArea():MusouWorldMapAreaPlayerVO {
+        var map:MusouWorldMapPlayerVO = getCurrentMap();
         if (!map) {
             return null;
         }
@@ -150,16 +150,16 @@ public class MosouPlayerData implements ISaveData {
         _currentAreaId = areaId;
     }
 
-    public function getCurrentMapAreaById(id:String):MosouWorldMapAreaPlayerVO {
-        var map:MosouWorldMapPlayerVO = getCurrentMap();
+    public function getCurrentMapAreaById(id:String):MusouWorldMapAreaPlayerVO {
+        var map:MusouWorldMapPlayerVO = getCurrentMap();
         if (!map) {
             return null;
         }
         return map.getOpenArea(id);
     }
 
-    public function getMapById(id:String):MosouWorldMapPlayerVO {
-        for each(var i:MosouWorldMapPlayerVO in _mapData) {
+    public function getMapById(id:String):MusouWorldMapPlayerVO {
+        for each(var i:MusouWorldMapPlayerVO in _mapData) {
             if (i.id == id) {
                 return i;
             }
@@ -242,8 +242,8 @@ public class MosouPlayerData implements ISaveData {
 
     public function readSaveObj(o:Object):void {
         var i:int, d:Object;
-        var mv:MosouWorldMapPlayerVO;
-        var fv:MosouFighterVO;
+        var mv:MusouWorldMapPlayerVO;
+        var fv:MusouFighterVO;
 
         userId   = o.userId;
         userName = o.userName;
@@ -257,21 +257,21 @@ public class MosouPlayerData implements ISaveData {
         }
 
         if (o.mapData) {
-            _mapData = new Vector.<MosouWorldMapPlayerVO>();
+            _mapData = new Vector.<MusouWorldMapPlayerVO>();
 
             for (i = 0; i < o.mapData.length; i++) {
                 d  = o.mapData[i];
-                mv = new MosouWorldMapPlayerVO();
+                mv = new MusouWorldMapPlayerVO();
                 mv.readSaveObj(d);
                 _mapData.push(mv);
             }
         }
 
         if (o.fighterData) {
-            _fighterData = new Vector.<MosouFighterVO>();
+            _fighterData = new Vector.<MusouFighterVO>();
             for (i = 0; i < o.fighterData.length; i++) {
                 d  = o.fighterData[i];
-                fv = new MosouFighterVO();
+                fv = new MusouFighterVO();
                 fv.readSaveObj(d);
                 _fighterData.push(fv);
             }
@@ -285,7 +285,7 @@ public class MosouPlayerData implements ISaveData {
         }
 
         if (o.fighterTeam) {
-            _fighterTeam = new Vector.<MosouFighterVO>();
+            _fighterTeam = new Vector.<MusouFighterVO>();
 
             for (i = 0; i < o.fighterTeam.length; i++) {
                 var id:String = o.fighterTeam[i];
@@ -301,13 +301,13 @@ public class MosouPlayerData implements ISaveData {
     private function initMap():void {
         TraceLang('debug.trace.data.musou_player_data.init_map');
 
-        var map:MosouWorldMapPlayerVO = new MosouWorldMapPlayerVO();
+        var map:MusouWorldMapPlayerVO = new MusouWorldMapPlayerVO();
         map.id                        = _currentMapId;
         _mapData.push(map);
 
-        var map2:MosouWorldMapVO = MosouModel.I.getMap(map.id);
+        var map2:MusouWorldMapVO = MusouModel.I.getMap(map.id);
 
-        for each(var m:MosouWorldMapAreaVO in map2.areas) {
+        for each(var m:MusouWorldMapAreaVO in map2.areas) {
             if (!m.preOpens || m.preOpens.length < 1) {
                 MusouLogic.I.openMapArea(map.id, m.id);
             }
