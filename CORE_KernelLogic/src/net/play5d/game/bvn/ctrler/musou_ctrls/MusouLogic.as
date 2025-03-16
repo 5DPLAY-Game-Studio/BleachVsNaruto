@@ -166,7 +166,7 @@ public class MusouLogic {
             if (succback != null) {
                 succback();
             }
-        });
+        }, null ,true);
 
     }
 

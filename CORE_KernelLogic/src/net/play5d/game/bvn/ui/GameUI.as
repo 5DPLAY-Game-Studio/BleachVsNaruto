@@ -62,11 +62,11 @@ public class GameUI {
 
     public static function confrim(
             enMsg:String = null, cnMsg:String = null, yes:Function = null, no:Function = null,
-            isMusou:Boolean                                                            = false
+            isMusouStyle:Boolean                                                            = false
     ):void {
         closeConfrim();
 
-        _confrimUICls = isMusou ? MusouConfrimUI : ConfrimUI;
+        _confrimUICls = isMusouStyle ? MusouConfrimUI : ConfrimUI;
 
         _confrimUI = new _confrimUICls();
         _confrimUI.setMsg(enMsg, cnMsg);

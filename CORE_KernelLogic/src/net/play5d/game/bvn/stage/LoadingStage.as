@@ -166,7 +166,7 @@ public class LoadingStage implements IStage {
                 GameUI.cancelConfrim();
             }
             else {
-                GameUI.confrim('BACK TITLE?', '返回到主菜单？', MainGame.I.goMenu);
+                GameUI.confrim('BACK TITLE?', '返回到主菜单？', MainGame.I.goMenu, null, IsMobile());
                 GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
             }
         }

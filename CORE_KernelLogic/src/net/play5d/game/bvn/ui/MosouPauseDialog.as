@@ -115,7 +115,7 @@ public class MosouPauseDialog extends Sprite {
                 GameEvent.dispatchEvent(GameEvent.MOSOU_BACK_MAP);
             }, function ():void {
                 _btnGroup.keyEnable = true;
-            });
+            }, IsMobile());
             break;
         case 'MOVE LIST':
             showMoveList();

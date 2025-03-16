@@ -113,7 +113,7 @@ public class PauseDialog extends Sprite {
                 MainGame.I.goMenu();
             }, function ():void {
                 _btnGroup.keyEnable = true;
-            });
+            }, IsMobile());
             break;
         case 'MOVE LIST':
             showMoveList();
