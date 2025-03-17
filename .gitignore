@@ -1,7 +1,7 @@
-# 输出文件目录
+# IDEA 输出目录
 /out/
 
-# FlashBuilder
+# FlashBuilder 忽略文件
 .metadata/
 .settings/
 bin/
