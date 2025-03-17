@@ -60,9 +60,19 @@ public class GameUI {
         return _alertUI != null;
     }
 
+    /**
+     * 弹出【确认】对话框
+     *
+     * @param enMsg 英文标题
+     * @param cnMsg 中文信息
+     * @param yes 点击【确定】执行的回调
+     * @param no 点击【取消】执行的回调
+     * @param isMusouStyle 是否为无双样式
+     */
     public static function confrim(
-            enMsg:String = null, cnMsg:String = null, yes:Function = null, no:Function = null,
-            isMusouStyle:Boolean                                                            = false
+            enMsg:String = null, cnMsg:String = null,
+            yes:Function = null, no:Function = null,
+            isMusouStyle:Boolean = false
     ):void {
         closeConfrim();
 

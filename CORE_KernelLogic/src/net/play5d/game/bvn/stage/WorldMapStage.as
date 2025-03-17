@@ -220,7 +220,7 @@ public class WorldMapStage implements IStage {
             MusouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
 //				MainGame.I.loadGame();
-        }, null, IsMobile());
+        }, null, true);
 
         GameEvent.dispatchEvent(GameEvent.CONFRIM_MOSOU_NEXT_MISSION);
     }
