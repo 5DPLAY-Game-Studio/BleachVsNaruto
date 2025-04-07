@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
 import flash.events.Event;
@@ -33,8 +33,8 @@ import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
 import net.play5d.game.bvn.ui.MosouPauseDialog;
 import net.play5d.game.bvn.ui.fight.HitsUI;
-import net.play5d.game.bvn.ui.mosou.enemy.BossHpUI;
-import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpUIGroup;
+import net.play5d.game.bvn.ui.musou.enemy.BossHpUI;
+import net.play5d.game.bvn.ui.musou.enemy.EnemyHpUIGroup;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoTimeout;
 

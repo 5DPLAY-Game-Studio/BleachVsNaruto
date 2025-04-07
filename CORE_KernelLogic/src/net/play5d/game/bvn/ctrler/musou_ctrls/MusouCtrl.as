@@ -47,7 +47,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.mosou.MosouUI;
+import net.play5d.game.bvn.ui.musou.MosouUI;
 
 public class MusouCtrl {
     include '../../../../../../../include/_INCLUDE_.as';

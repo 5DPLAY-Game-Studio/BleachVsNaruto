@@ -28,7 +28,7 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.mosou.MosouUI;
+import net.play5d.game.bvn.ui.musou.MosouUI;
 
 public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';

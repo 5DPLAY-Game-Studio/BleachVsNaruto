@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou.enemy {
+package net.play5d.game.bvn.ui.musou.enemy {
 import flash.display.Sprite;
 
 import net.play5d.game.bvn.fighter.FighterMain;

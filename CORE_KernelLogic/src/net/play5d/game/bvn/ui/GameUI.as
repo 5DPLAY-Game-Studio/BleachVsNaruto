@@ -30,7 +30,7 @@ import net.play5d.game.bvn.ui.dialog.ConfrimUI;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
 import net.play5d.game.bvn.ui.dialog.MusouConfrimUI;
 import net.play5d.game.bvn.ui.fight.FightUI;
-import net.play5d.game.bvn.ui.mosou.MosouUI;
+import net.play5d.game.bvn.ui.musou.MosouUI;
 
 public class GameUI {
     include '../../../../../../include/_INCLUDE_.as';
