@@ -22,82 +22,106 @@ import flash.display.FrameLabel;
 import flash.display.MovieClip;
 import flash.filters.ColorMatrixFilter;
 
+/**
+ * 影片剪辑实用工具
+ */
 public class MCUtils {
     include '../../../../../../include/_INCLUDE_.as';
 
+    /**
+     * 影片剪辑是否具有指定名称帧
+     *
+     * @param mc 指定影片剪辑
+     * @param label 帧名称
+     *
+     * @return 影片剪辑是否具有某个帧
+     */
     public static function hasFrameLabel(mc:MovieClip, label:String):Boolean {
         var labels:Array = mc.currentLabels;
+
         for each(var i:FrameLabel in labels) {
             if (i.name == label) {
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * 设置MC色相（-180 - 180）
-     * @param d
-     * @param hue
+     * 设置显示对象色相滤镜（-180 - 180）
+     *
+     * @param display
+     * @param hue 色相值（-180 - 180）
      *
      */
-    public static function setHUE(d:DisplayObject, hue:Number = 0):void {
+    public static function setHue(display:DisplayObject, hue:Number = 0):void {
         if (hue == 0) {
-            d.filters = null;
+            display.filters = null;
+
+            return;
         }
-        else {
-            var filter:ColorMatrixFilter = createHueFilter(hue);
-            d.filters                    = [filter];
-        }
+
+        var filter:ColorMatrixFilter = createHueFilter(hue);
+        display.filters              = [filter];
     }
 
-//		public static function stopMovieclips(mc:MovieClip):void{
-//			try{
-//				mc.stopAllMovieClips();
-//			}catch(e:Error){
-//				trace(e);
-//				mc.stop();
-//			}
-//		}
-
+    /**
+     * 创建一个色相滤镜
+     *
+     * @param n 色相值（-180 - 180）
+     *
+     * @return 创建完成一个色相滤镜
+     */
     private static function createHueFilter(n:Number):ColorMatrixFilter {
         const p1:Number = Math.cos(n * Math.PI / 180);
         const p2:Number = Math.sin(n * Math.PI / 180);
         const p4:Number = 0.213;
         const p5:Number = 0.715;
         const p6:Number = 0.072;
-        return new ColorMatrixFilter([
-                                         p4 + p1 * (
-                                                 1 - p4
-                                         ) + p2 * (
-                                                 0 - p4
-                                         ), p5 + p1 * (
-                    0 - p5
-            ) + p2 * (
-                                                    0 - p5
-                                            ), p6 + p1 * (
-                    0 - p6
-            ) + p2 * (
-                                                       1 - p6
-                                               ), 0, 0, p4 + p1 * (
-                    0 - p4
-            ) + p2 * 0.143, p5 + p1 * (
-                    1 - p5
-            ) + p2 * 0.14, p6 + p1 * (
-                    0 - p6
-            ) + p2 * -0.283, 0, 0, p4 + p1 * (
-                    0 - p4
-            ) + p2 * (
-                                           0 - (
-                                           1 - p4
-                                           )
-                                   ), p5 + p1 * (
-                    0 - p5
-            ) + p2 * p5, p6 + p1 * (
-                    1 - p6
-            ) + p2 * p6, 0, 0, 0, 0, 0, 1, 0
-                                     ]);
+
+        const matrix:Array = [
+            p4 + p1 * (1 - p4) + p2 * (0 - p4),
+            p5 + p1 * (0 - p5) + p2 * (0 - p5),
+            p6 + p1 * (0 - p6) + p2 * (1 - p6),
+            0,
+            0,
+            p4 + p1 * (0 - p4) + p2 * 0.143,
+            p5 + p1 * (1 - p5) + p2 * 0.14,
+            p6 + p1 * (0 - p6) + p2 * -0.283,
+            0,
+            0,
+            p4 + p1 * (0 - p4) + p2 * (0 - (1 - p4)),
+            p5 + p1 * (0 - p5) + p2 * p5,
+            p6 + p1 * (1 - p6) + p2 * p6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+        ];
+
+        return new ColorMatrixFilter(matrix);
     }
 
+    /**
+     * 停止指定影片剪辑以及其子影片剪辑的播放
+     *
+     * @param mc 指定影片剪辑
+     */
+    public static function stopAllMovieClips(mc:MovieClip):void {
+        for(var i:int = 0; i < mc.numChildren; i++) {
+            var d:DisplayObject = mc.getChildAt(i);
+
+            if (d && d is MovieClip){
+                var m:MovieClip = d as MovieClip;
+
+                m.stop();
+                stopAllMovieClips(m);
+            }
+        }
+    }
 }
 }
