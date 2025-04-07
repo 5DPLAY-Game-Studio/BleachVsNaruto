@@ -30,7 +30,7 @@ import net.play5d.game.bvn.ui.dialog.ConfrimUI;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
 import net.play5d.game.bvn.ui.dialog.MusouConfrimUI;
 import net.play5d.game.bvn.ui.fight.FightUI;
-import net.play5d.game.bvn.ui.musou.MosouUI;
+import net.play5d.game.bvn.ui.musou.MusouUI;
 
 public class GameUI {
     include '../../../../../../include/_INCLUDE_.as';
@@ -199,12 +199,12 @@ public class GameUI {
             }
         }
         else {
-            _ui = new MosouUI();
+            _ui = new MusouUI();
             _ui.setVolume(volume);
         }
 
         (
-                _ui as MosouUI
+                _ui as MusouUI
         ).initlize(p1);
     }
 

@@ -28,7 +28,7 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.musou.MosouUI;
+import net.play5d.game.bvn.ui.musou.MusouUI;
 
 public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
@@ -53,7 +53,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     }
 
     private function onEnemyBeHit(f:FighterMain):void {
-//			var ui:MosouUI = GameUI.I.getUI() as MosouUI;
+//			var ui:MusouUI = GameUI.I.getUI() as MusouUI;
 //			if(ui) ui.updateEnemyHp(f);
 
         GameCtrl.I.getMosouCtrl().updateEnemy(f);
@@ -69,7 +69,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     private function onEnemyDead(f:FighterMain):void {
         GameCtrl.I.getMosouCtrl().gameRunData.koNum++;
         (
-                GameUI.I.getUI() as MosouUI
+                GameUI.I.getUI() as MusouUI
         ).updateKONum();
 
         GameData.I.mosouData.addMoney(f.mosouEnemyData.getMoney());
@@ -78,7 +78,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         if (f.mosouEnemyData.isBoss) {
             GameCtrl.I.getMosouCtrl().onBossDead(f);
 
-            var ui:MosouUI = GameUI.I.getUI() as MosouUI;
+            var ui:MusouUI = GameUI.I.getUI() as MusouUI;
             if (ui) {
                 ui.updateBossHp();
             }
