@@ -1093,7 +1093,7 @@ public class KyoUtils {
         }
     }
 
-    public static function cloneColorTransform(ct:ColorTransform) {
+    public static function cloneColorTransform(ct:ColorTransform):ColorTransform {
         var newCt:ColorTransform = new ColorTransform();
 
         newCt.alphaMultiplier = ct.alphaMultiplier;
