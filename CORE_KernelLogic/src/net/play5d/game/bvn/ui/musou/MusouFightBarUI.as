@@ -25,10 +25,10 @@ import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouFightBarUI {
+public class MusouFightBarUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouFightBarUI(ui:mosou_hpbar_mc) {
+    public function MusouFightBarUI(ui:mosou_hpbar_mc) {
         _ui = ui;
 
         _hpbar = new MosouHpBar(ui.hpbar, ui.hpbar2);

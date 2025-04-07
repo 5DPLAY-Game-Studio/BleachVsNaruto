@@ -43,7 +43,7 @@ public class MosouUI implements IGameUI {
 
     public function MosouUI() {
         _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.mosou, 'ui_mosou');
-        _hpbar = new MosouFightBarUI(_ui.hpbarmc);
+        _hpbar = new MusouFightBarUI(_ui.hpbarmc);
 
         _bossHpBar = new BossHpUI(_ui.bosshp_mc);
         _bossHpBar.enabled(false);
@@ -61,7 +61,7 @@ public class MosouUI implements IGameUI {
         _enemyHpBarGroup = new EnemyHpUIGroup(_ui.ct_enemybar);
     }
     private var _ui:ui_mosou;
-    private var _hpbar:MosouFightBarUI;
+    private var _hpbar:MusouFightBarUI;
     private var _bossHpBar:BossHpUI;
     private var _enemyHpBarGroup:EnemyHpUIGroup;
     private var _timeUI:MosouTimeUI;
