@@ -107,7 +107,7 @@ public class GameInterfaceManager implements IGameInterface {
             {txt: 'OPTION', cn: '游戏设置'},
             {txt: 'TRAINING', cn: '练习模式'},
             {txt: 'CREDITS', cn: '制作组'},
-            {txt: 'MORE GAMES', cn: '更多游戏'}
+//            {txt: 'MORE GAMES', cn: '更多游戏'}
 //				{txt:'EXIT',cn:'退出游戏',func:function():void{
 //					GameUI.confrim('EXIT GAME','退出游戏？',NativeApplication.nativeApplication.exit);
 ////					AdManager.I.showFullScreenAD();
