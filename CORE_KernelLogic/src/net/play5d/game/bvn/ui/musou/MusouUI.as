@@ -42,7 +42,7 @@ public class MusouUI implements IGameUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public function MusouUI() {
-        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.mosou, 'ui_mosou');
+        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.musou, 'ui_mosou');
         _hpbar = new MusouFightBarUI(_ui.hpbarmc);
 
         _bossHpBar = new BossHpUI(_ui.bosshp_mc);

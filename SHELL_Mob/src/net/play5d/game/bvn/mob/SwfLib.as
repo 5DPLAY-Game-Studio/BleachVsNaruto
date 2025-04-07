@@ -65,7 +65,7 @@ public class SwfLib implements ISwfLib {
     [Embed(source='/../../shared/lib/swf/mosou.swf')]
     private var _mosou:Class;
 
-    public function get mosou():Class {
+    public function get musou():Class {
         return _mosou;
     }
 
