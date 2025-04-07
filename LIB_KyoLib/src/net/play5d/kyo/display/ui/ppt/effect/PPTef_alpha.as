@@ -52,7 +52,7 @@ public class PPTef_alpha extends BasePPTEffect {
     }
 
     public override function tweening():Boolean {
-        return _tween && _tween.active;
+        return _tween && _tween._active;
     }
 
     public override function tweenStop():void {

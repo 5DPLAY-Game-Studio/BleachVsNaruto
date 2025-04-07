@@ -1,84 +1,83 @@
 /**
- * VERSION: 1.61
- * DATE: 2010-09-18
- * ACTIONSCRIPT VERSION: 3.0 
- * UPDATES AND DOCUMENTATION AT: http://www.TweenMax.com
+ * VERSION: 12.0
+ * DATE: 2012-01-12
+ * AS3
+ * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 package com.greensock.plugins {
-	import com.greensock.*;
-	
+	import com.greensock.TweenLite;
 /**
- * Tweens numbers in an Array. <br /><br />
+ * [AS3/AS2 only] Tweens numbers in an Array.
  * 
- * <b>USAGE:</b><br /><br />
- * <code>
- * 		import com.greensock.TweenLite; <br />
- * 		import com.greensock.plugins.TweenPlugin; <br />
- * 		import com.greensock.plugins.EndArrayPlugin; <br />
- * 		TweenPlugin.activate([EndArrayPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.<br /><br />
+ * <p><b>USAGE:</b></p>
+ * <listing version="3.0">
+import com.greensock.TweenLite; 
+import com.greensock.plugins.TweenPlugin;
+import com.greensock.plugins.EndArrayPlugin;
+TweenPlugin.activate([EndArrayPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
+
+var myArray:Array = [1,2,3,4];
+TweenLite.to(myArray, 1.5, {endArray:[10,20,30,40]});
+</listing>
  * 
- * 		var myArray:Array = [1,2,3,4];<br />
- * 		TweenLite.to(myArray, 1.5, {endArray:[10,20,30,40]}); <br /><br />
- * </code>
- * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2008-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
 	public class EndArrayPlugin extends TweenPlugin {
 		/** @private **/
-		public static const API:Number = 1.0; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
+		public static const API:Number = 2; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
 		
 		/** @private **/
 		protected var _a:Array;
+		/** @private If the values should be rounded to the nearest integer, <code>_round</code> will be set to <code>true</code>. **/
+		protected var _round:Boolean;
 		/** @private **/
 		protected var _info:Array = [];
 		
 		/** @private **/
 		public function EndArrayPlugin() {
-			super();
-			this.propName = "endArray"; //name of the special property that the plugin should intercept/manage
-			this.overwriteProps = ["endArray"];
+			super("endArray");
 		}
 		
 		/** @private **/
-		override public function onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
+		override public function _onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
 			if (!(target is Array) || !(value is Array)) {
 				return false;
 			}
-			init(target as Array, value);
+			_init(target as Array, value);
 			return true;
 		}
 		
 		/** @private **/
-		public function init(start:Array, end:Array):void {
+		public function _init(start:Array, end:Array):void {
 			_a = start;
-			var i:int = end.length;
-			while (i--) {
+			var i:int = end.length, cnt:int = 0;
+			while (--i > -1) {
 				if (start[i] != end[i] && start[i] != null) {
-					_info[_info.length] = new ArrayTweenInfo(i, _a[i], end[i] - _a[i]);
+					_info[cnt++] = new ArrayTweenInfo(i, _a[i], end[i] - _a[i]);
 				}
 			}
 		}
 		
+		override public function _roundProps(lookup:Object, value:Boolean=true):void {
+			if ("endArray" in lookup) {
+				_round = value;
+			}
+		}
+		
 		/** @private **/
-		override public function set changeFactor(n:Number):void {
-			var i:int = _info.length, ti:ArrayTweenInfo;
-			if (this.round) {
-				var val:Number;
-				while (i--) {
+		override public function setRatio(v:Number):void {
+			var i:int = _info.length, ti:ArrayTweenInfo, val:Number;
+			if (_round) {
+				while (--i > -1) {
 					ti = _info[i];
-					val = ti.start + (ti.change * n);
-					if (val > 0) {
-						_a[ti.index] = (val + 0.5) >> 0; //4 times as fast as Math.round()
-					} else {
-						_a[ti.index] = (val - 0.5) >> 0;
-					}
+					_a[ti.i] = ((val = ti.c * v + ti.s) > 0) ? (val + 0.5) >> 0 : (val - 0.5) >> 0;
 				}
 			} else {
-				while (i--) {
+				while (--i > -1) {
 					ti = _info[i];
-					_a[ti.index] = ti.start + (ti.change * n);
+					_a[ti.i] = ti.c * v + ti.s;
 				}
 			}
 		}
@@ -87,13 +86,13 @@ package com.greensock.plugins {
 }
 
 internal class ArrayTweenInfo {
-	public var index:uint;
-	public var start:Number;
-	public var change:Number;
+	public var i:uint;
+	public var s:Number;
+	public var c:Number;
 	
 	public function ArrayTweenInfo(index:uint, start:Number, change:Number) {
-		this.index = index;
-		this.start = start;
-		this.change = change;
+		this.i = index;
+		this.s = start;
+		this.c = change;
 	}
 }

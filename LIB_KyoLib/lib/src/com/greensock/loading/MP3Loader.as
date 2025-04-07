@@ -1,6 +1,6 @@
-/**
- * VERSION: 1.881
- * DATE: 2011-08-15
+﻿/**
+ * VERSION: 1.931
+ * DATE: 2012-09-09
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com/loadermax/
  **/
@@ -22,11 +22,11 @@ package com.greensock.loading {
  * soundPaused, duration, </code> and <code>soundTime</code>. An MP3Loader will dispatch useful events
  * like <code>SOUND_COMPLETE, SOUND_PAUSE, SOUND_PLAY</code>, and <code>PLAY_PROGRESS</code> in addition
  * to the typical loader events, making it easy to hook up your own control interface. It packs a 
- * surprising amount of functionality into a very small amount of kb. <br /><br />
+ * surprising amount of functionality into a very small amount of kb. 
  * 
- * <strong>OPTIONAL VARS PROPERTIES</strong><br />
- * The following special properties can be passed into the MP3Loader constructor via its <code>vars</code> 
- * parameter which can be either a generic object or an <code><a href="data/MP3LoaderVars.html">MP3LoaderVars</a></code> object:<br />
+ * <p><strong>OPTIONAL VARS PROPERTIES</strong></p>
+ * <p>The following special properties can be passed into the MP3Loader constructor via its <code>vars</code> 
+ * parameter which can be either a generic object or an <code><a href="data/MP3LoaderVars.html">MP3LoaderVars</a></code> object:</p>
  * <ul>
  * 		<li><strong> name : String</strong> - A name that is used to identify the MP3Loader instance. This name can be fed to the <code>find()</code> method or traced at any time. Each loader's name should be unique. If you don't define one, a unique name will be created automatically, like "loader21".</li>
  * 		<li><strong> autoPlay : Boolean</strong> - By default the MP3 will begin playing immediately when enough of the file has buffered, but to prevent it from autoPlaying, set <code>autoPlay</code> to <code>false</code>.</li>
@@ -41,7 +41,7 @@ package com.greensock.loading {
  * 		<li><strong> allowMalformedURL : Boolean</strong> - Normally, the URL will be parsed and any variables in the query string (like "?name=test&amp;state=il&amp;gender=m") will be placed into a URLVariables object which is added to the URLRequest. This avoids a few bugs in Flash, but if you need to keep the entire URL intact (no parsing into URLVariables), set <code>allowMalformedURL:true</code>. For example, if your URL has duplicate variables in the query string like <code>http://www.greensock.com/?c=S&amp;c=SE&amp;c=SW</code>, it is technically considered a malformed URL and a URLVariables object can't properly contain all the duplicates, so in this case you'd want to set <code>allowMalformedURL</code> to <code>true</code>.</li>
  * 		<li><strong> autoDispose : Boolean</strong> - When <code>autoDispose</code> is <code>true</code>, the loader will be disposed immediately after it completes (it calls the <code>dispose()</code> method internally after dispatching its <code>COMPLETE</code> event). This will remove any listeners that were defined in the vars object (like onComplete, onProgress, onError, onInit). Once a loader is disposed, it can no longer be found with <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> - it is essentially destroyed but its content is not unloaded (you must call <code>unload()</code> or <code>dispose(true)</code> to unload its content). The default <code>autoDispose</code> value is <code>false</code>.
  * 		
- * 		<br /><br />----EVENT HANDLER SHORTCUTS----</li>
+ * 		<p>----EVENT HANDLER SHORTCUTS----</p></li>
  * 		<li><strong> onOpen : Function</strong> - A handler function for <code>LoaderEvent.OPEN</code> events which are dispatched when the loader begins loading. Make sure your onOpen function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onInit : Function</strong> - A handler function for <code>Event.INIT</code> events which will be dispatched when the <code>bytesLoaded</code> exceeds the <code>initThreshold</code> (100k by default) and the MP3 has streamed enough of its content to identify the ID3 meta data. Make sure your onInit function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onProgress : Function</strong> - A handler function for <code>LoaderEvent.PROGRESS</code> events which are dispatched whenever the <code>bytesLoaded</code> changes. Make sure your onProgress function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can use the LoaderEvent's <code>target.progress</code> to get the loader's progress value or use its <code>target.bytesLoaded</code> and <code>target.bytesTotal</code>.</li>
@@ -50,22 +50,22 @@ package com.greensock.loading {
  * 		<li><strong> onError : Function</strong> - A handler function for <code>LoaderEvent.ERROR</code> events which are dispatched whenever the loader experiences an error (typically an IO_ERROR or SECURITY_ERROR). An error doesn't necessarily mean the loader failed, however - to listen for when a loader fails, use the <code>onFail</code> special property. Make sure your onError function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onFail : Function</strong> - A handler function for <code>LoaderEvent.FAIL</code> events which are dispatched whenever the loader fails and its <code>status</code> changes to <code>LoaderStatus.FAILED</code>. Make sure your onFail function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onIOError : Function</strong> - A handler function for <code>LoaderEvent.IO_ERROR</code> events which will also call the onError handler, so you can use that as more of a catch-all whereas <code>onIOError</code> is specifically for LoaderEvent.IO_ERROR events. Make sure your onIOError function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
- * </ul><br />
+ * </ul>
  * 
- * <strong>Note:</strong> Using a <code><a href="data/MP3LoaderVars.html">MP3LoaderVars</a></code> instance 
+ * <p><strong>Note:</strong> Using a <code><a href="data/MP3LoaderVars.html">MP3LoaderVars</a></code> instance 
  * instead of a generic object to define your <code>vars</code> is a bit more verbose but provides 
- * code hinting and improved debugging because it enforces strict data typing. Use whichever one you prefer.<br /><br />
+ * code hinting and improved debugging because it enforces strict data typing. Use whichever one you prefer.</p>
  * 
- * <code>content</code> data type: <strong><code>flash.media.Sound</code></strong><br /><br />
+ * <p><code>content</code> data type: <strong><code>flash.media.Sound</code></strong></p>
  * 
- * <strong>NOTE:</strong> To avoid garbage collection issues in the Flash player, the <code>Sound</code> 
+ * <p><strong>NOTE:</strong> To avoid garbage collection issues in the Flash player, the <code>Sound</code> 
  * object that MP3Loader employs must get recreated internally anytime the MP3Loader is unloaded or its loading 
  * is cancelled, so it is best to access the <code>content</code> after the <code>COMPLETE</code>
  * event has been dispatched. Otherwise, if you store a reference to the MP3Loader's <code>content</code>
  * before or during a load and it gets cancelled or unloaded for some reason, the <code>Sound</code> object 
- * won't be the one into which the MP3 is eventually loaded.<br /><br />
+ * won't be the one into which the MP3 is eventually loaded.</p>
  * 
- * @example Example AS3 code:<listing version="3.0">
+ * Example AS3 code:<listing version="3.0">
  import com.greensock.~~;
  import com.greensock.loading.~~;
  import com.greensock.events.LoaderEvent;
@@ -106,7 +106,7 @@ package com.greensock.loading {
  }
  </listing>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @see com.greensock.loading.data.MP3LoaderVars
  * 
@@ -157,10 +157,10 @@ package com.greensock.loading {
 		 * Constructor.
 		 * 
 		 * @param urlOrRequest The url (<code>String</code>) or <code>URLRequest</code> from which the loader should get its content
-		 * @param vars An object containing optional configuration details. For example: <code>new MP3Loader("mp3/audio.mp3", {name:"audio", autoPlay:true, onComplete:completeHandler, onProgress:progressHandler})</code>.<br /><br />
+		 * @param vars An object containing optional configuration details. For example: <code>new MP3Loader("mp3/audio.mp3", {name:"audio", autoPlay:true, onComplete:completeHandler, onProgress:progressHandler})</code>.
 		 * 
-		 * The following special properties can be passed into the constructor via the <code>vars</code> parameter
-		 * which can be either a generic object or an <code><a href="data/MP3LoaderVars.html">MP3LoaderVars</a></code> object:<br />
+		 * <p>The following special properties can be passed into the constructor via the <code>vars</code> parameter
+		 * which can be either a generic object or an <code><a href="data/MP3LoaderVars.html">MP3LoaderVars</a></code> object:</p>
 		 * <ul>
 		 * 		<li><strong> name : String</strong> - A name that is used to identify the MP3Loader instance. This name can be fed to the <code>find()</code> method or traced at any time. Each loader's name should be unique. If you don't define one, a unique name will be created automatically, like "loader21".</li>
 		 * 		<li><strong> autoPlay : Boolean</strong> - By default the MP3 will begin playing immediately when enough of the file has buffered, but to prevent it from autoPlaying, set <code>autoPlay</code> to <code>false</code>.</li>
@@ -175,7 +175,7 @@ package com.greensock.loading {
 		 * 		<li><strong> allowMalformedURL : Boolean</strong> - Normally, the URL will be parsed and any variables in the query string (like "?name=test&amp;state=il&amp;gender=m") will be placed into a URLVariables object which is added to the URLRequest. This avoids a few bugs in Flash, but if you need to keep the entire URL intact (no parsing into URLVariables), set <code>allowMalformedURL:true</code>. For example, if your URL has duplicate variables in the query string like <code>http://www.greensock.com/?c=S&amp;c=SE&amp;c=SW</code>, it is technically considered a malformed URL and a URLVariables object can't properly contain all the duplicates, so in this case you'd want to set <code>allowMalformedURL</code> to <code>true</code>.</li>
 		 * 		<li><strong> autoDispose : Boolean</strong> - When <code>autoDispose</code> is <code>true</code>, the loader will be disposed immediately after it completes (it calls the <code>dispose()</code> method internally after dispatching its <code>COMPLETE</code> event). This will remove any listeners that were defined in the vars object (like onComplete, onProgress, onError, onInit). Once a loader is disposed, it can no longer be found with <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> - it is essentially destroyed but its content is not unloaded (you must call <code>unload()</code> or <code>dispose(true)</code> to unload its content). The default <code>autoDispose</code> value is <code>false</code>.
 		 * 		
-		 * 		<br /><br />----EVENT HANDLER SHORTCUTS----</li>
+		 * 		<p>----EVENT HANDLER SHORTCUTS----</p></li>
 		 * 		<li><strong> onOpen : Function</strong> - A handler function for <code>LoaderEvent.OPEN</code> events which are dispatched when the loader begins loading. Make sure your onOpen function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
 		 * 		<li><strong> onInit : Function</strong> - A handler function for <code>Event.INIT</code> events which will be dispatched when the <code>bytesLoaded</code> exceeds the <code>initThreshold</code> (100k by default) and the MP3 has streamed enough of its content to identify the ID3 meta data. Make sure your onInit function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
 		 * 		<li><strong> onProgress : Function</strong> - A handler function for <code>LoaderEvent.PROGRESS</code> events which are dispatched whenever the <code>bytesLoaded</code> changes. Make sure your onProgress function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can use the LoaderEvent's <code>target.progress</code> to get the loader's progress value or use its <code>target.bytesLoaded</code> and <code>target.bytesTotal</code>.</li>
@@ -284,9 +284,9 @@ package com.greensock.loading {
 		/** 
 		 * Attempts to jump to a certain time in the sound. If the sound hasn't downloaded enough to get to
 		 * the new time, it will get as close as possible.
-		 * For example, to jump to exactly 3-seconds into the sound and play from there:<br /><br /><code>
+		 * For example, to jump to exactly 3-seconds into the sound and play from there:<p><code>
 		 * 
-		 * loader.gotoSoundTime(3, true);<br /><br /></code>
+		 * loader.gotoSoundTime(3, true);</code></p>
 		 * 
 		 * @param time The time (in seconds, offset from the very beginning) at which to place the virtual playhead in the sound.
 		 * @param forcePlay If <code>true</code>, the sound will resume playback immediately after seeking to the new position.
@@ -315,13 +315,14 @@ package com.greensock.loading {
 			}
 		}
 		
+		/** @private **/
 		protected function _playSound(position:Number):void {
 			if (this.channel != null) {
 				this.channel.removeEventListener(Event.SOUND_COMPLETE, _soundCompleteHandler);
 				this.channel.stop(); 
 			}
 			_position = position;
-			this.channel = _sound.play(_position, 1, _soundTransform);
+			this.channel = _sound.play(_position, 1, this.soundTransform);
 			if (this.channel != null) { //if the device doesn't have a sound card or sound capabilities, this.channel will be null!
 				this.channel.addEventListener(Event.SOUND_COMPLETE, _soundCompleteHandler);
 				_shape.addEventListener(Event.ENTER_FRAME, _enterFrameHandler, false, 0, true);
@@ -430,9 +431,10 @@ package com.greensock.loading {
 		
 		/** The volume of the sound (a value between 0 and 1). **/
 		public function get volume():Number {
-			return _soundTransform.volume;
+			return this.soundTransform.volume;
 		}
 		public function set volume(value:Number):void {
+			_soundTransform = this.soundTransform;
 			_soundTransform.volume = value;
 			if (this.channel != null) {
 				this.channel.soundTransform = _soundTransform;
@@ -453,6 +455,17 @@ package com.greensock.loading {
 				_duration = (_sound.length / 1000) / (_sound.bytesLoaded / _sound.bytesTotal);
 			}
 			return _duration;
+		}
+		
+		/** The SoundTransform of the channel **/
+		public function get soundTransform():SoundTransform {
+			return (this.channel != null) ? this.channel.soundTransform : _soundTransform;
+		}
+		public function set soundTransform(value:SoundTransform):void {
+			_soundTransform = value;
+			if (this.channel != null) {
+				this.channel.soundTransform = value;
+			}
 		}
 		
 	}

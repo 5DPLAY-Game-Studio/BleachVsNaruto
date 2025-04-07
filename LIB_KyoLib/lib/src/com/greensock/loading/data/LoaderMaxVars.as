@@ -7,35 +7,35 @@
 package com.greensock.loading.data {
 	import flash.display.DisplayObject;
 /**
- * Can be used instead of a generic Object to define the <code>vars</code> parameter of a LoaderMax's constructor. <br /><br />	
+ * Can be used instead of a generic Object to define the <code>vars</code> parameter of a LoaderMax's constructor. 
  * 
- * There are 2 primary benefits of using a LoaderMaxVars instance to define your LoaderMax variables:
+ * <p>There are 2 primary benefits of using a LoaderMaxVars instance to define your LoaderMax variables:</p>
  *  <ol>
  *		<li> In most code editors, code hinting will be activated which helps remind you which special properties are available in LoaderMax</li>
  *		<li> It enables strict data typing for improved debugging (ensuring, for example, that you don't define a Boolean value for <code>onComplete</code> where a Function is expected).</li>
- *  </ol><br />
+ *  </ol>
  * 
- * The down side, of course, is that the code is more verbose and the LoaderMaxVars class adds slightly more kb to your swf.
+ * <p>The down side, of course, is that the code is more verbose and the LoaderMaxVars class adds slightly more kb to your swf.</p>
  *
- * <b>USAGE:</b><br /><br />
- * Note that each method returns the LoaderMaxVars instance, so you can reduce the lines of code by method chaining (see example below).<br /><br />
+ * <p><strong>USAGE</strong></p>
+ * <p>Note that each method returns the LoaderMaxVars instance, so you can reduce the lines of code by method chaining (see example below).</p>
  *	
- * <b>Without LoaderMaxVars:</b><br /><code>
- * new LoaderMax({name:"queue", maxConnections:1, onComplete:completeHandler, onProgress:progressHandler});</code><br /><br />
+ * <p><strong>Without LoaderMaxVars:</strong></p><p><code>
+ * new LoaderMax({name:"queue", maxConnections:1, onComplete:completeHandler, onProgress:progressHandler});</code></p>
  * 
- * <b>With LoaderMaxVars</b><br /><code>
- * new LoaderMax(new LoaderMaxVars().name("queue").maxConnections(1).onComplete(completeHandler).onProgress(progressHandler));</code><br /><br />
+ * <p><strong>With LoaderMaxVars</strong></p><p><code>
+ * new LoaderMax(new LoaderMaxVars().name("queue").maxConnections(1).onComplete(completeHandler).onProgress(progressHandler));</code></p>
  * 
- * <b>NOTES:</b><br />
+ * <p><strong>NOTES:</strong></p>
  * <ul>
  *	<li> To get the generic vars object that LoaderMaxVars builds internally, simply access its "vars" property.
- * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<br /><code>
+ * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<code>
  * 		 new LoaderMax(new LoaderMaxVars().name("queue").maxConnections(1).vars);</code></li>
  *	<li> Using LoaderMaxVars is completely optional. If you prefer the shorter synatax with the generic Object, feel
  * 		 free to use it. The purpose of this class is simply to enable code hinting and to allow for strict data typing.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	 

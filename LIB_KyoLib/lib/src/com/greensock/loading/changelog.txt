@@ -1,10 +1,108 @@
 CHANGE LOG : GREENSOCK LOADERMAX SYSTEM
 ----------------------------------------
+2013-02-21
+----------------------------------------
+XMLLoader			1.932
+LoaderItem			1.932
+LoaderMax			1.932
+	- Added ability for XMLLoader to recognize "allowMalformedURL" in XML nodes
+	- To avoid errors when attempting to load local files, if allowMalformedURL isn't true and there are parameters in the query string, the URLRequest's method will be forced to "POST" (again, ONLY when the swf is running locally, not on the network)
+
+2013-01-08
+----------------------------------------
+XMLLoader			1.931
+LoaderMax			1.931
+	- Fixed issue that could cause redundant childComplete events to get fired from XMLLoader if you defined load="true" inside BOTH a <LoaderMax> node and its child node.
+
+2012-09-05
+----------------------------------------
+VideoLoader			1.93
+	- Worked around issue in Flash Player 11.x that caused a flicker of the video when gotoVideoTime() was called inside a VIDEO_COMPLETE event handler (and when the VideoLoader repeats). This was a bug in the Flash Player itself, and the solution was to wait 1 frame after when the Netstream stops before doing a seek(). VideoLoader automatically handles this internally now. 
+
+2012-08-09
+----------------------------------------
+VideoLoader			1.921
+LoaderItem			1.921
+	- Fixed issue that could prevent the BUFFER_EMPTY event from being dispatched if bufferMode is true
+	- Implemented logic that causes a loader's "auditedSize" property to get reset when its "url" is changed.
+
+2012-04-26
+----------------------------------------
+VideoLoader			1.901
+	- Fixed issue that could cause an error to be thrown if you dispose() a VideoLoader the moment it finishes playing (inside an event handler that is handling the VideoLoader.VIDEO_COMPLETE event).
+
+2012-04-16
+----------------------------------------
+LoaderMax			1.9
+VideoLoader			1.9
+	- Added "stageVideo" special property to VideoLoader to accommodate StageVideo
+
+2012-02-24
+----------------------------------------
+LoaderMax			1.8993
+LoaderCore			1.8993
+VideoLoader			1.8993
+	- Fixed issue that caused loaders to incorrectly report their bytesLoaded as non-zero after unload() was called (after having loaded of course)
+	- Fixed issue that could cause a VideoLoader not to dispatch its VIDEO_BUFFER_FULL event if the video is seeked to a time that is closer to the end of the video than the bufferTime.
+
+2012-02-23
+----------------------------------------
+LoaderMax			1.8992
+VideoLoader			1.8992
+	- Fixed issue in VideoLoader that could cause cuePoints to be triggered when gotoVideoTime() was called even though the skipCuePoints parameter was set to true.
+
+2012-02-15
+----------------------------------------
+LoaderMax			1.8991
+VideoLoader			1.8991
+LoaderItem			1.8991
+	- Previously, VideoLoader would only dispatch one INIT event (the first time it received metaData from the NetStream). However, due to an inconsistency in Flash/NetStream, metaData is sometimes received more than once, and subsequent times carry more data. For example, the metaData may not contain cuePoints the first time, but it does the second time (this is often the case for F4V files). Therefore, VideoLoader now dispatches an INIT event every time it receives metaData. If you're looking for cuePoints, you can check the VideoLoader's metaData.cuePoints array.
+	- Fixed issue that could cause a loader to throw an error if it has an alternateURL defined and it fails and its dispose() method is called directly inside an onError handler (VERY uncommon) :)
+
+2012-01-25
+----------------------------------------
+LoaderMax			1.899
+VideoLoader			1.899
+	- Fixed issue in VideoLoader that could cause an error during its auditing process (if estimatedBytes isn't defined and auditSize in the parent LoaderMax isn't set to false). 
+
+2012-01-19
+----------------------------------------
+LoaderMax			1.898
+DisplayObjectLoader	1.898
+	- Fixed issue that could cause an ImageLoader or SWFLoader to fail during the auditing process inside a LoaderMax if the URL is from another domain and there is no crossdomain.xml policy file in place. Now it simply tries again with a higher security threshold (script access will be denied of course due to Flash's security policies).
+
+2012-01-14
+----------------------------------------
+LoaderMax			1.897
+ImageLoader			1.897
+	- Fixed issue that could cause an error if an ImageLoader with an identical url is loaded after the other has finished loading which encountered a security error (thus its rawContent was a Loader instead of a Bitmap, making it impossible to copy the BitmapData). Only happens if noCache is false.
+
+2012-01-10
+----------------------------------------
+LoaderMax			1.896
+	- Fixed issue that could cause a null object reference and/or a loader to be skipped in a LoaderMax queue in a very rare scenario where an ImageLoader is loaded after another ImageLoader with an identical URL has finished loading (and noCache is false). 
+
+2011-11-27
+----------------------------------------
+LoaderMax			1.895
+ContentDisplay		1.895
+FlexContentDisplay	1.895
+	- Fixed issue introduced in version 1.892 that caused videos not to scale correctly when using a scaleMode other than "none" or "stretch"
+
+2011-11-26
+----------------------------------------
+LoaderMax			1.894
+VideoLoader			1.894
+DisplayObjectLoader	1.894
+	- Fixed issue that could cause VideoLoader not to dispatch PLAY_PROGRESS events if you called gotoVideoTime() on every frame
+	- SWFLoaders and ImageLoaders now do not force garbage collection when dispose(false) is called (or autoDispose is set to true). 
+	- Added a DisplayObjectLoader.defaultAutoForceGC static property that you can set to false to prevent it from forcing GC whenever a SWFLoader or ImageLoader is unloaded (or dispose(true)). 
+	- Added "autoForceGC" special property recognition for SWFLoader and ImageLoader (default is true). 
 
 2011-11-17
 ----------------------------------------
-LoaderMax			1.892
-VideoLoader			1.892
+LoaderMax			1.893
+VideoLoader			1.893
 ContentDisplay		1.892
 FlexContentDisplay	1.892
 	- Fixed issue that could cause a VIDEO_BUFFER_FULL event to be dispatched from VideoLoader after the video finishes playing

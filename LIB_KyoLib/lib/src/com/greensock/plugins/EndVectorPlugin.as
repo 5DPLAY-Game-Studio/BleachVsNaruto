@@ -1,95 +1,96 @@
 /**
- * VERSION: 1.0
- * DATE: 2010-09-18
- * ACTIONSCRIPT VERSION: 3.0 
- * UPDATES AND DOCUMENTATION AT: http://blog.greensock.com
+ * VERSION: 12.0
+ * DATE: 2012-01-12
+ * AS3 
+ * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 package com.greensock.plugins {
-	import com.greensock.*;
+	import com.greensock.TweenLite;
 	
 	import __AS3__.vec.Vector; //due to a bug in Flex Builder, this must be included in order to correctly compile a swc
 /**
- * Tweens numbers in an Vector.&lt;Number&gt;. Remember, Vectors require that you publish to <strong>Flash Player 10</strong> or later.<br /><br />
+ * [AS3 only] Tweens numbers in a Vector.&lt;Number&gt;. Remember, Vectors require that you publish to <strong>Flash Player 10</strong> or later.
  * 
- * <b>USAGE:</b><br /><br />
- * <code>
- * 		import com.greensock.TweenLite; <br />
- * 		import com.greensock.plugins.TweenPlugin; <br />
- * 		import com.greensock.plugins.EndVectorPlugin; <br />
- * 		TweenPlugin.activate([EndVectorPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.<br /><br />
+ * <p><b>USAGE:</b></p>
+ * <listing version="3.0">
+import com.greensock.TweenLite; 
+import com.greensock.plugins.TweenPlugin; 
+import com.greensock.plugins.EndVectorPlugin; 
+TweenPlugin.activate([EndVectorPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
+
+var v:Vector.&lt;Number&gt; = new Vector.&lt;Number&gt;();
+	v[0] = 0;
+	v[1] = 1;
+	v[2] = 2;
+var end:Vector.&lt;Number&gt; = new Vector.&lt;Number&gt;();
+	end[0] = 100;
+	end[1] = 250;
+	end[2] = 500;
+TweenLite.to(v, 3, {endVector:end, onUpdate:report}); 
+function report():void {
+	trace(v);
+}
+</listing>
  * 
- * 		var v:Vector.&lt;Number&gt; = new Vector.&lt;Number&gt;();<br />
- * 		v[0] = 0;<br />
- * 		v[1] = 1;<br />
- * 		v[2] = 2;<br />
- * 		var end:Vector.&lt;Number&gt; = new Vector.&lt;Number&gt;();<br />
- * 		end[0] = 100;<br />
- * 		end[1] = 250;<br />
- * 		end[2] = 500;<br />
- * 		TweenLite.to(v, 3, {endVector:end, onUpdate:report}); <br />
- * 		function report():void {<br />
- * 			trace(v);<br />
- * 		}<br /><br />
- * </code>
- * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2008-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
 	public class EndVectorPlugin extends TweenPlugin {
 		/** @private **/
-		public static const API:Number = 1.0; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
+		public static const API:Number = 2; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
 		
 		/** @private **/
 		protected var _v:Vector.<Number>;
 		/** @private **/
 		protected var _info:Vector.<VectorInfo> = new Vector.<VectorInfo>();
+		/** @private If the values should be rounded to the nearest integer, <code>_round</code> will be set to <code>true</code>. **/
+		public var _round:Boolean;
 		
 		/** @private **/
 		public function EndVectorPlugin() {
-			super();
-			this.propName = "endVector"; //name of the special property that the plugin should intercept/manage
-			this.overwriteProps = ["endVector"];
+			super("endVector");
 		}
 		
 		/** @private **/
-		override public function onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
+		override public function _onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
 			if (!(target is Vector.<Number>) || !(value is Vector.<Number>)) {
 				return false;
 			}
-			init(target as Vector.<Number>, value as Vector.<Number>);
+			_init(target as Vector.<Number>, value as Vector.<Number>);
 			return true;
 		}
 		
 		/** @private **/
-		public function init(start:Vector.<Number>, end:Vector.<Number>):void {
+		public function _init(start:Vector.<Number>, end:Vector.<Number>):void {
 			_v = start;
 			var i:int = end.length, cnt:uint = 0;
-			while (i--) {
+			while (--i > -1) {
 				if (_v[i] != end[i]) {
 					_info[cnt++] = new VectorInfo(i, _v[i], end[i] - _v[i]);
 				}
 			}
 		}
 		
+		override public function _roundProps(lookup:Object, value:Boolean=true):void {
+			if ("endVector" in lookup) {
+				_round = value;
+			}
+		}
+		
+		
 		/** @private **/
-		override public function set changeFactor(n:Number):void {
-			var i:int = _info.length, vi:VectorInfo;
-			if (this.round) {
-				var val:Number;
-				while (i--) {
+		override public function setRatio(v:Number):void {
+			var i:int = _info.length, vi:VectorInfo, val:Number;
+			if (_round) {
+				while (--i > -1) {
 					vi = _info[i];
-					val = vi.start + (vi.change * n);
-					if (val > 0) {
-						_v[vi.index] = (val + 0.5) >> 0; //4 times as fast as Math.round()
-					} else {
-						_v[vi.index] = (val - 0.5) >> 0;
-					}
+					_v[vi.i] = ((val = vi.c * v + vi.s) > 0) ? (val + 0.5) >> 0 : (val - 0.5) >> 0;
 				}
 			} else {
-				while (i--) {
+				while (--i > -1) {
 					vi = _info[i];
-					_v[vi.index] = vi.start + (vi.change * n);
+					_v[vi.i] = vi.c * v + vi.s;
 				}
 			}
 		}
@@ -98,13 +99,13 @@ package com.greensock.plugins {
 }
 
 internal class VectorInfo {
-	public var index:uint;
-	public var start:Number;
-	public var change:Number;
+	public var i:uint;
+	public var s:Number;
+	public var c:Number;
 	
 	public function VectorInfo(index:uint, start:Number, change:Number) {
-		this.index = index;
-		this.start = start;
-		this.change = change;
+		this.i = index;
+		this.s = start;
+		this.c = change;
 	}
 }

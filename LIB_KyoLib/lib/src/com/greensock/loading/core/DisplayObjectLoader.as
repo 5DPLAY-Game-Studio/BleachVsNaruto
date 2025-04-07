@@ -1,6 +1,6 @@
 /**
- * VERSION: 1.87
- * DATE: 2011-07-30
+ * VERSION: 1.935
+ * DATE: 2013-03-18
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com/loadermax/
  **/
@@ -17,21 +17,24 @@ package com.greensock.loading.core {
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.net.LocalConnection;
+	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.Capabilities;
 	import flash.system.LoaderContext;
 	import flash.system.Security;
 	import flash.system.SecurityDomain;
+
 /**
  * Serves as the base class for SWFLoader and ImageLoader. There is no reason to use this class on its own. 
  * Please refer to the documentation for the other classes.
- * <br /><br />
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
 	public class DisplayObjectLoader extends LoaderItem {
+		/** By default, LoaderMax will automatically attempt to force garbage collection when a SWFLoader or ImageLoader is unloaded or cancelled but if you prefer to skip this measure, set defaultAutoForceGC to <code>false</code>. If garbage collection isn't forced, sometimes Flash doesn't completely unload swfs/images properly, particularly if there is audio embedded in the root timeline. **/
+		public static var defaultAutoForceGC:Boolean = true;
 		/** @private the Sprite to which the EVENT_LISTENER was attached for forcing garbage collection after 1 frame (improves performance especially when multiple loaders are disposed at one time). **/
 		protected static var _gcDispatcher:Sprite;
 		/** @private **/
@@ -46,6 +49,8 @@ package com.greensock.loading.core {
 		protected var _initted:Boolean;
 		/** @private used by SWFLoader when the loader is canceled before the SWF ever had a chance to init which causes garbage collection issues. We slip into stealthMode at that point, wait for it to init, and then cancel the _loader's loading.**/
 		protected var _stealthMode:Boolean;
+		/** @private allows us to apply a LoaderContext to the file size audit (only if necessary - URLStream is better/faster/smaller and works great unless we run into security errors because of a missing crossdomain.xml file) **/
+		protected var _fallbackAudit:Loader;
 		
 		/**
 		 * Constructor
@@ -74,7 +79,6 @@ package com.greensock.loading.core {
 		/** @private **/
 		override protected function _load():void {
 			_prepRequest();
-			
 			if (this.vars.context is LoaderContext) {
 				_context = this.vars.context;
 			} else if (_context == null) {
@@ -90,8 +94,65 @@ package com.greensock.loading.core {
 			if (Capabilities.playerType != "Desktop") { //AIR apps will choke on Security.allowDomain()
 				Security.allowDomain(_url); 
 			}
-			
 			_loader.load(_request, _context);
+		}
+		
+		/** @inheritDoc **/
+		override public function auditSize():void {
+			if (Capabilities.playerType != "Desktop") { //AIR apps will choke on Security.allowDomain()
+				Security.allowDomain(_url); 
+			}
+			super.auditSize();
+		}
+		
+		override protected function _closeStream():void {
+			_closeFallbackAudit();
+			super._closeStream();
+		}
+		
+		protected function _closeFallbackAudit():void {
+			if (_fallbackAudit != null) {
+				_fallbackAudit.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, _auditStreamHandler, false, 0, true);
+				_fallbackAudit.contentLoaderInfo.addEventListener(Event.COMPLETE, _auditStreamHandler, false, 0, true);
+				_fallbackAudit.contentLoaderInfo.addEventListener("ioError", _auditStreamHandler, false, 0, true);
+				_fallbackAudit.contentLoaderInfo.addEventListener("securityError", _auditStreamHandler, false, 0, true);
+				try {
+					_fallbackAudit.close();
+				} catch (error:Error) {
+					
+				}
+				_fallbackAudit = null;
+			}
+		}
+		
+		/** @private **/
+		override protected function _auditStreamHandler(event:Event):void {
+			//If a security error is thrown because of a missing crossdomain.xml file for example and the user didn't define a specific LoaderContext, we'll try again without checking the policy file, accepting the restrictions that come along with it because typically people would rather have the content show up on the screen rather than just error out (and they can always check the scriptAccessDenied property if they need to figure out whether it's safe to do BitmapData stuff on it, etc.)
+			if (event.type == "securityError") {
+				if (_fallbackAudit == null) {
+					_context = new LoaderContext(false);
+					_scriptAccessDenied = true;
+					dispatchEvent(new LoaderEvent(LoaderEvent.SCRIPT_ACCESS_DENIED, this, ErrorEvent(event).text));
+					_errorHandler(event);
+					_fallbackAudit = new Loader(); //so that we can apply a LoaderContext. We don't want to use a Loader initially because they are more memory-intensive than URLStream and they can tend to have more problems with garbage collection.
+					_fallbackAudit.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, _auditStreamHandler, false, 0, true);
+					_fallbackAudit.contentLoaderInfo.addEventListener(Event.COMPLETE, _auditStreamHandler, false, 0, true);
+					_fallbackAudit.contentLoaderInfo.addEventListener("ioError", _auditStreamHandler, false, 0, true);
+					_fallbackAudit.contentLoaderInfo.addEventListener("securityError", _auditStreamHandler, false, 0, true);
+					var request:URLRequest = new URLRequest();
+					request.data = _request.data;
+					request.method = _request.method;
+					_setRequestURL(request, _url, (!_isLocal || _url.substr(0, 4) == "http") ? "gsCacheBusterID=" + (_cacheID++) + "&purpose=audit" : "");
+					if (Capabilities.playerType != "Desktop") { //AIR apps will choke on Security.allowDomain()
+						Security.allowDomain(_url); 
+					}
+					_fallbackAudit.load(request, _context);
+					return;
+				} else {
+					_closeFallbackAudit();
+				}
+			}
+			super._auditStreamHandler(event);
 		}
 		
 		/** @private **/
@@ -110,6 +171,7 @@ package com.greensock.loading.core {
 				_loader.contentLoaderInfo.removeEventListener("ioError", _failHandler);
 				_loader.contentLoaderInfo.removeEventListener("securityError", _securityErrorHandler);
 				_loader.contentLoaderInfo.removeEventListener("httpStatus", _httpStatusHandler);
+				_loader.contentLoaderInfo.removeEventListener("httpResponseStatus", _httpStatusHandler);
 				_loader.contentLoaderInfo.removeEventListener(Event.INIT, _initHandler);
 				if (_loader.hasOwnProperty("uncaughtErrorEvents")) { //not available when published to FP9, so we reference things this way to avoid compiler errors
 					Object(_loader).uncaughtErrorEvents.removeEventListener("uncaughtError", _errorHandler);
@@ -131,8 +193,10 @@ package com.greensock.loading.core {
 					if (_loader.parent) {
 						_loader.parent.removeChild(_loader);
 					}
+					if (("autoForceGC" in this.vars) ? this.vars.autoForceGC : defaultAutoForceGC) {
+						forceGC((this.hasOwnProperty("getClass")) ? 3 : 1);
+					}
 				}
-				forceGC((this.hasOwnProperty("getClass")) ? 3 : 1);
 			}
 			_initted = false;
 			_loader = new Loader();
@@ -141,6 +205,7 @@ package com.greensock.loading.core {
 			_loader.contentLoaderInfo.addEventListener("ioError", _failHandler, false, 0, true);
 			_loader.contentLoaderInfo.addEventListener("securityError", _securityErrorHandler, false, 0, true);
 			_loader.contentLoaderInfo.addEventListener("httpStatus", _httpStatusHandler, false, 0, true);
+			_loader.contentLoaderInfo.addEventListener("httpResponseStatus", _httpStatusHandler, false, 0, true);
 			_loader.contentLoaderInfo.addEventListener(Event.INIT, _initHandler, false, 0, true);
 			if (_loader.hasOwnProperty("uncaughtErrorEvents")) { //not available when published to FP9, so we reference things this way to avoid compiler errors
 				Object(_loader).uncaughtErrorEvents.addEventListener("uncaughtError", _errorHandler, false, 0, true);
@@ -160,11 +225,9 @@ package com.greensock.loading.core {
 		
 		/** @private **/
 		protected static function _forceGCHandler(event:Event):void {
-			if (_gcCycles == 0) {
+			if (--_gcCycles <= 0) {
 				_gcDispatcher.removeEventListener(Event.ENTER_FRAME, _forceGCHandler);
 				_gcDispatcher = null;
-			} else {
-				_gcCycles--;
 			}
 			try {
 				new LocalConnection().connect("FORCE_GC");

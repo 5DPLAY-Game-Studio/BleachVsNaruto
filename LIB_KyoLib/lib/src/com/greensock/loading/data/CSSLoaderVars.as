@@ -7,26 +7,26 @@
 package com.greensock.loading.data {
 	import flash.display.DisplayObject;
 /**
- * Can be used instead of a generic Object to define the <code>vars</code> parameter of a CSSLoader's constructor. <br /><br />	
+ * Can be used instead of a generic Object to define the <code>vars</code> parameter of a CSSLoader's constructor. 
  * 
- * There are 2 primary benefits of using a CSSLoaderVars instance to define your CSSLoader variables:
+ * <p>There are 2 primary benefits of using a CSSLoaderVars instance to define your CSSLoader variables:</p>
  *  <ol>
  *		<li> In most code editors, code hinting will be activated which helps remind you which special properties are available in CSSLoader</li>
  *		<li> It enables strict data typing for improved debugging (ensuring, for example, that you don't define a Boolean value for <code>onComplete</code> where a Function is expected).</li>
- *  </ol><br />
+ *  </ol>
  * 
- * The down side, of course, is that the code is more verbose and the CSSLoaderVars class adds slightly more kb to your swf.
+ * <p>The down side, of course, is that the code is more verbose and the CSSLoaderVars class adds slightly more kb to your swf.</p>
  *
- * <b>USAGE:</b><br /><br />
- * Note that each method returns the CSSLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).<br /><br />
+ * <p><strong>USAGE:</strong></p>
+ * <p>Note that each method returns the CSSLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).</p>
  *	
- * <b>Without CSSLoaderVars:</b><br /><code>
- * new CSSLoader("styles.css", {name:"css", estimatedBytes:1500, onComplete:completeHandler, onProgress:progressHandler})</code><br /><br />
+ * <p><strong>Without CSSLoaderVars:</strong></p><p><code>
+ * new CSSLoader("styles.css", {name:"css", estimatedBytes:1500, onComplete:completeHandler, onProgress:progressHandler})</code></p>
  * 
- * <b>With CSSLoaderVars</b><br /><code>
- * new CSSLoader("styles.css", new CSSLoaderVars().name("css").estimatedBytes(1500).onComplete(completeHandler).onProgress(progressHandler))</code><br /><br />
+ * <p><strong>With CSSLoaderVars</strong></p><p><code>
+ * new CSSLoader("styles.css", new CSSLoaderVars().name("css").estimatedBytes(1500).onComplete(completeHandler).onProgress(progressHandler))</code></p>
  * 
- * <b>NOTES:</b><br />
+ * <p><strong>NOTES:</strong></p>
  * <ul>
  *	<li> To get the generic vars object that CSSLoaderVars builds internally, simply access its "vars" property.
  * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<br /><code>
@@ -35,7 +35,7 @@ package com.greensock.loading.data {
  * 		 free to use it. The purpose of this class is simply to enable code hinting and to allow for strict data typing.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	 

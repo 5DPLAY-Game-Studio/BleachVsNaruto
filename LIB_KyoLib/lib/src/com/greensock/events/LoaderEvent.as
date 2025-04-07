@@ -11,7 +11,7 @@ package com.greensock.events {
  * An Event dispatched by one of the loaders in the LoaderMax system.
  * <br /><br />
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <b>Copyright 2014, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.
  * 
  * @author Jack Doyle, jack@greensock.com
  */
@@ -40,6 +40,8 @@ package com.greensock.events {
 		public static const COMPLETE:String="complete";
 		/** Dispatched when the loader (or one of its children) receives an HTTP_STATUS event (see Adobe docs for specifics). **/
 		public static const HTTP_STATUS:String="httpStatus";
+		/** Dispatched when the loader (or one of its children) receives an HTTP_RESPONSE_STATUS event (see Adobe docs for specifics). **/
+		public static const HTTP_RESPONSE_STATUS:String="httpResponseStatus";
 		/** When script access is denied for a particular loader (like if an ImageLoader or SWFLoader tries loading from another domain and the crossdomain.xml file is missing or doesn't grant permission properly), a SCRIPT_ACCESS_DENIED LoaderEvent will be dispatched. **/
 		public static const SCRIPT_ACCESS_DENIED:String="scriptAccessDenied";
 		/** Dispatched when the loader (or one of its children) throws any error, like an IO_ERROR or SECURITY_ERROR. **/
@@ -54,18 +56,19 @@ package com.greensock.events {
 		 * Dispatched when the loader unloads (which happens when either <code>unload()</code> or <code>dispose(true)</code> is called
 		 * or if a loader is canceled while in the process of loading). This can be particularly useful to listen for in a swf that was
 		 * subloaded by a SWFLoader so that it can get notified when the parent has requested an unload. For example, in the subloaded swf, 
-		 * you could do:<br /><br /><code>
-		 * 
-		 * var curParent:DisplayObjectContainer = this.parent;<br />
-		 * while (curParent) { <br />
-		 *     if (curParent.hasOwnProperty("rawContent") &amp;&amp; curParent.hasOwnProperty("loader")) { <br />
-		 *         Object(curParent).loader.addEventListener("unload", dispose, false, 0, true); <br />
-		 *     }<br />
-		 *     curParent = curParent.parent;<br />
-		 * }<br />
-		 * function dispose(event:Event):void { <br />
-		 *     //do cleanup stuff here like removing event listeners, stopping sounds, closing NetStreams, etc...<br />
-		 * } </code>
+		 * you could do:
+		 * <listing version="3.0">
+var curParent:DisplayObjectContainer = this.parent;
+while (curParent) { 
+    if (curParent.hasOwnProperty("rawContent") &amp;&amp; curParent.hasOwnProperty("loader")) { 
+        Object(curParent).loader.addEventListener("unload", dispose, false, 0, true); 
+    }
+    curParent = curParent.parent;
+}
+function dispose(event:Event):void { 
+     //do cleanup stuff here like removing event listeners, stopping sounds, closing NetStreams, etc...
+}
+</listing>
 		 **/
 		public static const UNLOAD:String="unload";
 		

@@ -1,14 +1,14 @@
 /**
- * VERSION: 2.0
- * DATE: 8/18/2009
- * ACTIONSCRIPT VERSION: 3.0 
- * UPDATES AND DOCUMENTATION AT: http://www.TweenMax.com
+ * VERSION: 12.0
+ * DATE: 2012-01-12
+ * AS3 
+ * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 package com.greensock.plugins {
+	import com.greensock.TweenLite;
 	import flash.filters.GlowFilter;
-	import com.greensock.*;
 /**
- * Tweens a GlowFilter. The following properties are available (you only need to define the ones you want to tween):
+ * [AS3/AS2 only] Tweens a GlowFilter. The following properties are available (you only need to define the ones you want to tween):
  * <code>
  * <ul>
  * 		<li> color : uint [0x000000]</li>
@@ -25,41 +25,36 @@ package com.greensock.plugins {
  * </ul>
  * </code>
  * 
- * Set <code>remove</code> to true if you want the filter to be removed when the tween completes. <br /><br />
+ * <p>Set <code>remove</code> to true if you want the filter to be removed when the tween completes. </p>
  * 
- * <b>USAGE:</b><br /><br />
- * <code>
- * 		import com.greensock.TweenLite; <br />
- * 		import com.greensock.plugins.TweenPlugin; <br />
- * 		import com.greensock.plugins.GlowFilterPlugin; <br />
- * 		TweenPlugin.activate([GlowFilterPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.<br /><br />
+ * <p><b>USAGE:</b></p>
+ * <listing version="3.0">
+import com.greensock.TweenLite;
+import com.greensock.plugins.TweenPlugin;
+import com.greensock.plugins.GlowFilterPlugin; 
+TweenPlugin.activate([GlowFilterPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
+
+TweenLite.to(mc, 1, {glowFilter:{color:0x00FF00, blurX:10, blurY:10, strength:1, alpha:1}});
+</listing>
  * 
- * 		TweenLite.to(mc, 1, {glowFilter:{color:0x00FF00, blurX:10, blurY:10, strength:1, alpha:1}});<br /><br />
- * </code>
- * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2008-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */
 	public class GlowFilterPlugin extends FilterPlugin {
 		/** @private **/	
-		public static const API:Number = 1.0; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
+		public static const API:Number = 2; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
 		/** @private **/
 		private static var _propNames:Array = ["color","alpha","blurX","blurY","strength","quality","inner","knockout"];
 		
 		/** @private **/	
 		public function GlowFilterPlugin() {
-			super();
-			this.propName = "glowFilter";
-			this.overwriteProps = ["glowFilter"];
+			super("glowFilter");
 		}
 		
 		/** @private **/	
-		override public function onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
-			_target = target;
-			_type = GlowFilter;
-			initFilter(value, new GlowFilter(0xFFFFFF, 0, 0, 0, value.strength || 1, value.quality || 2, value.inner, value.knockout), _propNames);
-			return true;
+		override public function _onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
+			return _initFilter(target, value, tween, GlowFilter, new GlowFilter(0xFFFFFF, 0, 0, 0, value.strength || 1, value.quality || 2, value.inner, value.knockout), _propNames);
 		}
 		
 	}

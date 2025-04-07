@@ -1,17 +1,17 @@
 /**
- * VERSION: 0.41 (beta)
- * DATE: 2010-12-24
+ * VERSION: 0.5
+ * DATE: 2012-02-16
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 package com.greensock.motionPaths {
 	import flash.display.Graphics;
+	import flash.events.Event;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import flash.events.Event;
 
 /**
- * A LinePath2D defines a path (using as many Points as you want) on which a PathFollower can be 
+ * [AS3 only] A LinePath2D defines a path (using as many Points as you want) on which a PathFollower can be 
  * placed and animated. A PathFollower's position along the path is described using the PathFollower's 
  * <code>progress</code> property, a value between 0 and 1 where 0 is at the beginning of the path, 
  * 0.5 is in the middle, and 1 is at the very end. To tween a PathFollower along the path, simply tween its
@@ -20,17 +20,17 @@ package com.greensock.motionPaths {
  * <code>progress</code> property individually. PathFollowers automatically wrap so that if the 
  * <code>progress</code> value exceeds 1 it continues at the beginning of the path, meaning that tweening
  * its <code>progress</code> from 0 to 2 would have the same effect as tweening it from 0 to 1 twice 
- * (it would appear to loop).<br /><br />
+ * (it would appear to loop).
  *  
- * Since LinePath2D extends the Shape class, you can add an instance to the display list to see a line representation
+ * <p>Since LinePath2D extends the Shape class, you can add an instance to the display list to see a line representation
  * of the path drawn which can be particularly helpful during the production phase. Use <code>lineStyle()</code> 
  * to adjust the color, thickness, and other attributes of the line that is drawn (or set the LinePath2D's 
  * <code>visible</code> property to false or don't add it to the display list if you don't want to see the line 
  * at all). You can also adjust all of its properties like <code>scaleX, scaleY, rotation, width, height, x,</code> 
  * and <code>y</code>. That means you can tween those values as well to achieve very dynamic, complex effects 
- * with ease.<br /><br />
+ * with ease.</p>
  * 
- * @example Example AS3 code:<listing version="3.0">
+ * <listing version="3.0">
 import com.greensock.~~;
 import com.greensock.easing.~~;
 import com.greensock.motionPaths.~~;
@@ -75,14 +75,14 @@ function createSquare(size:Number, color:uint=0xFF0000):Shape {
 }
 </listing>
  * 
- * <b>NOTES</b><br />
+ * <p><strong>NOTES</strong></p>
  * <ul>
  * 		<li>All followers' positions are automatically updated when you alter the MotionPath that they're following.</li>
  * 		<li>To tween all followers along the path at once, simply tween the MotionPath's <code>progress</code> 
  * 			property which will provide better performance than tweening each follower independently.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
@@ -133,12 +133,13 @@ function createSquare(size:Number, color:uint=0xFF0000):Shape {
 		/** 
 		 * Inserts a Point at a particular index value in the <code>points</code> array, similar to splice() in an array.
 		 * For example, if a LinePath2D instance has 3 Points already and you want to insert a new Point right after the
-		 * first one, you would do:<br /><br /><code>
-		 * 
-		 * var path:LinePath2D = new LinePath2D([new Point(0, 0), <br />
-		 * 										 new Point(100, 50), <br />
-		 * 										 new Point(200, 300)]); <br />
-		 * path.insertPoint(new Point(50, 50), 1); <br /><br /></code>
+		 * first one, you would do:
+		 * <listing version="3.0">
+var path:LinePath2D = new LinePath2D([new Point(0, 0), 
+								 new Point(100, 50), 
+								 new Point(200, 300)]); 
+path.insertPoint(new Point(50, 50), 1); 
+</listing>
 		 * 
 		 * @param point A Point describing the local coordinates through which the line should be drawn.
 		 * @param index The index value in the <code>points</code> array at which the Point should be inserted.
@@ -361,11 +362,11 @@ function createSquare(size:Number, color:uint=0xFF0000):Shape {
 		/**
 		 * Translates the progress along a particular segment of the LinePath2D to an overall <code>progress</code>
 		 * value, making it easy to position an object like "halfway along the 2nd segment of the line". For example:
-		 * <br /><br /><code>
+		 * <p><code>
 		 * 
 		 * path.addFollower(mc, path.getSegmentProgress(2, 0.5));
 		 * 
-		 * </code>
+		 * </code></p>
 		 * 
 		 * @param segment The segment number of the line. For example, a line defined by 3 Points would have two segments.
 		 * @param progress The <code>progress</code> along the segment. For example, the midpoint of the second segment would be <code>getSegmentProgress(2, 0.5);</code>.
@@ -379,6 +380,40 @@ function createSquare(size:Number, color:uint=0xFF0000):Shape {
 			}
 			var pp:PathPoint = _points[segment - 1];
 			return pp.progress + ((progress * pp.length) / _totalLength);
+		}
+		
+		/**
+		 * Finds the segment associated with a particular a progress value along the entire LinePath2D.
+		 * For example, to find which segment is halfway along the LinePath2D:
+		 * 
+		 * <p><code>
+		 * path.getSegment(0.5);
+		 * </code></p>
+		 * 
+		 * <p>To find the segment associated with the LinePath2D's current <code>progress</code>, simply omit the 
+		 * <code>progress</code> parameter:</p>
+		 * 
+		 * <p><code>
+		 * var curSegment = path.getSegment();
+		 * </code></p>
+		 * 
+		 * @param progress The <code>progress</code> along the entire LinePath2D (a value between 0 and 1). For example, the midpoint would be <code>getSegment(0.5);</code>.
+		 * @return An integer describing the segment number where the first is 1, second is 2, etc.
+		 */
+		public function getSegment(progress:Number=NaN):uint {
+			if (!(progress || progress == 0)) {
+				progress = _progress;
+			}
+			if (_points.length < 2) {
+				return 0;
+			}
+			var l:int = _points.length;
+			for (var i:int = 1; i < l; i++) {
+				if (progress < (_points[i] as PathPoint).progress) {
+					return i;
+				}
+			}
+			return _points.length - 1;
 		}
 		
 		/**
@@ -399,11 +434,11 @@ function createSquare(size:Number, color:uint=0xFF0000):Shape {
 		 * Finds the closest overall <code>progress</code> value on the LinePath2D based on the 
 		 * target object's current position (<code>x</code> and <code>y</code> properties). For example,
 		 * to position the mc object on the LinePath2D at the spot that's closest to the Point x:100, y:50, 
-		 * you could do:<br /><br /><code>
+		 * you could do:<p><code>
 		 * 
 		 * path.addFollower(mc, path.getClosestProgress(new Point(100, 50)));
 		 * 
-		 * </code>
+		 * </code></p>
 		 * 
 		 * @param target The target object whose position (x/y property values) are analyzed for proximity to the LinePath2D.
 		 * @return The overall <code>progress</code> value describing the position on the LinePath2D that is closest to the target's current position.
@@ -478,7 +513,7 @@ function createSquare(size:Number, color:uint=0xFF0000):Shape {
 			return _totalLength;
 		}
 		
-		/** The array of Points through which the LinePath2D is drawn. IMPORTANT: Changes to the array are NOT automatically applied or reflected in the LinePath2D - just like the <code>filters</code> property of a DisplayObject, you must set the <code>points</code> property of a LinePath2D directly to ensure that any changes are applied internally. **/
+		/** The array of Points through which the LinePath2D is drawn. <strong>IMPORTANT:</strong> Changes to the array are NOT automatically applied or reflected in the LinePath2D - just like the <code>filters</code> property of a DisplayObject, you must set the <code>points</code> property of a LinePath2D directly to ensure that any changes are applied internally. **/
 		public function get points():Array {
 			var a:Array = [];
 			var l:int = _points.length;
