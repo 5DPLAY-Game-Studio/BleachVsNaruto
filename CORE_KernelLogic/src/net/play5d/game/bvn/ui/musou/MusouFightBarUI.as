@@ -31,7 +31,7 @@ public class MusouFightBarUI {
     public function MusouFightBarUI(ui:mosou_hpbar_mc) {
         _ui = ui;
 
-        _hpbar = new MosouHpBar(ui.hpbar, ui.hpbar2);
+        _hpbar = new MusouHpBar(ui.hpbar, ui.hpbar2);
         _qibar = new MosouQiBar(ui.qibar);
 
         _energybar = new MusouEnergyBar(ui.energybar);
@@ -43,7 +43,7 @@ public class MusouFightBarUI {
     }
     private var _ui:mosou_hpbar_mc;
     private var _face:mosou_hpbar_facemc;
-    private var _hpbar:MosouHpBar;
+    private var _hpbar:MusouHpBar;
     private var _qibar:MosouQiBar;
     private var _energybar:MusouEnergyBar;
     private var _littleHpBar1:LittleHpBar;

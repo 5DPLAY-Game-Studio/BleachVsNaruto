@@ -23,10 +23,10 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.data.FighterActionState;
 
-public class MosouHpBar {
+public class MusouHpBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouHpBar(bar:DisplayObject, bar2:DisplayObject) {
+    public function MusouHpBar(bar:DisplayObject, bar2:DisplayObject) {
         _bar  = bar;
         _bar2 = bar2;
     }
