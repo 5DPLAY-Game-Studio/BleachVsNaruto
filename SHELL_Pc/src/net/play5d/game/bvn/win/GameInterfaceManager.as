@@ -372,12 +372,12 @@ public class GameInterfaceManager implements IGameInterface {
             GameConfig.FPS_SHINE_EFFECT = 30;
             break;
         case GameQuality.MEDIUM:
-            MainGame.I.stage.quality = StageQuality.HIGH;
-            MainGame.I.setFPS(45);
+            MainGame.I.stage.quality = StageQuality.MEDIUM;
+            MainGame.I.setFPS(60);
             GameConfig.FPS_SHINE_EFFECT = 15;
             break;
         case GameQuality.LOW:
-            MainGame.I.stage.quality = StageQuality.HIGH;
+            MainGame.I.stage.quality = StageQuality.LOW;
             MainGame.I.setFPS(30);
             GameConfig.FPS_SHINE_EFFECT = 10;
             break;
