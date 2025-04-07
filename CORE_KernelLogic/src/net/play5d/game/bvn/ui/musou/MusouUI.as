@@ -51,7 +51,7 @@ public class MusouUI implements IGameUI {
         _timeUI = new MusouTimeUI(_ui.time_mc);
         _waveUI = new MusouWaveUI(_ui.wave_mc);
 
-        _KOUI = new MousouKOsUI(_ui.kos_mc);
+        _KOUI = new MusouKOsUI(_ui.kos_mc);
 
         _hitsUI = new HitsUI(_ui.hitsmc);
 
@@ -66,7 +66,7 @@ public class MusouUI implements IGameUI {
     private var _enemyHpBarGroup:EnemyHpUIGroup;
     private var _timeUI:MusouTimeUI;
     private var _waveUI:MusouWaveUI;
-    private var _KOUI:MousouKOsUI;
+    private var _KOUI:MusouKOsUI;
     private var _startAndKoMc:MovieClip;
     private var _startAndKoPos:Point;
     private var _hitsUI:HitsUI;
