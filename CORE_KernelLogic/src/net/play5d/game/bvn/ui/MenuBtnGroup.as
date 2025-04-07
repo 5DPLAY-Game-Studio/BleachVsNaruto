@@ -538,33 +538,41 @@ public class MenuBtnGroup extends Sprite {
 
     }
 
-    // 手指滑动
+    /**
+     * 触摸移动事件处理程序
+     *
+     * @param event 触摸移动事件
+     */
     private function touchMoveHandler(event:TouchMoveEvent):void {
-        if (event.type == TouchMoveEvent.TOUCH_MOVE) {
-            this.y += event.deltaY;
-//				this.mouseChildren = false;
-        }
+        var len:int = _btns.length;
 
-        if (event.type == TouchMoveEvent.TOUCH_END) {
+        switch (event.type) {
+        case TouchMoveEvent.TOUCH_MOVE:
+            var deltaY:Number = event.deltaY;
+            var deltaX:Number = -deltaY / len;
+
+            this.y += deltaY;
+            this.x += deltaX;
+
+            break;
+        case TouchMoveEvent.TOUCH_END:
             var toY:Number = -1;
 
-            if (event.endY > event.startY) {
-                if (this.y > _startPoint.y) {
-                    toY = _startPoint.y;
-                }
+            if (event.endY > event.startY && this.y > _startPoint.y) {
+                toY = _startPoint.y;
             }
 
-            if (event.endY < event.startY) {
-                var bottom:Number = GameConfig.GAME_SIZE.y - this.height - 10; //最底端
-                if (this.y < bottom) {
-                    toY = bottom;
-                }
+            // 最底端
+            var bottom:Number = GameConfig.GAME_SIZE.y - this.height - 10;
+            if (event.endY < event.startY && this.y < bottom) {
+                toY = bottom;
             }
 
             if (toY != -1) {
                 TweenLite.to(this, 0.2, {y: toY});
             }
 
+            break;
         }
     }
 
