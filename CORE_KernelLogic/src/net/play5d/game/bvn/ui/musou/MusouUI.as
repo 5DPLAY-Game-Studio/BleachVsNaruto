@@ -49,7 +49,7 @@ public class MusouUI implements IGameUI {
         _bossHpBar.enabled(false);
 
         _timeUI = new MusouTimeUI(_ui.time_mc);
-        _waveUI = new MosouWaveUI(_ui.wave_mc);
+        _waveUI = new MusouWaveUI(_ui.wave_mc);
 
         _KOUI = new MousouKOsUI(_ui.kos_mc);
 
@@ -65,7 +65,7 @@ public class MusouUI implements IGameUI {
     private var _bossHpBar:BossHpUI;
     private var _enemyHpBarGroup:EnemyHpUIGroup;
     private var _timeUI:MusouTimeUI;
-    private var _waveUI:MosouWaveUI;
+    private var _waveUI:MusouWaveUI;
     private var _KOUI:MousouKOsUI;
     private var _startAndKoMc:MovieClip;
     private var _startAndKoPos:Point;

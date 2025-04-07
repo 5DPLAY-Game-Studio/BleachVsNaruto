@@ -25,10 +25,10 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.kyo.utils.KyoDrawUtils;
 
-public class MosouWaveUI {
+public class MusouWaveUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouWaveUI(ui:Sprite) {
+    public function MusouWaveUI(ui:Sprite) {
         _ui = ui;
 
         _txtCur = ui.getChildByName('txt') as TextField;
