@@ -34,7 +34,7 @@ public class MosouFightBarUI {
         _hpbar = new MosouHpBar(ui.hpbar, ui.hpbar2);
         _qibar = new MosouQiBar(ui.qibar);
 
-        _energybar = new MosouEnergyBar(ui.energybar);
+        _energybar = new MusouEnergyBar(ui.energybar);
 
         _littleHpBar1 = new LittleHpBar(ui.little_hp_1);
         _littleHpBar2 = new LittleHpBar(ui.little_hp_2);
@@ -45,7 +45,7 @@ public class MosouFightBarUI {
     private var _face:mosou_hpbar_facemc;
     private var _hpbar:MosouHpBar;
     private var _qibar:MosouQiBar;
-    private var _energybar:MosouEnergyBar;
+    private var _energybar:MusouEnergyBar;
     private var _littleHpBar1:LittleHpBar;
     private var _littleHpBar2:LittleHpBar;
     private var _group:GameRunFighterGroup;

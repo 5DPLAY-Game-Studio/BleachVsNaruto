@@ -21,10 +21,10 @@ import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouEnergyBar {
+public class MusouEnergyBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouEnergyBar(ui:mosou_energy_bar) {
+    public function MusouEnergyBar(ui:mosou_energy_bar) {
         _ui = ui;
 
         _bar = new InsBar(_ui.bar);
