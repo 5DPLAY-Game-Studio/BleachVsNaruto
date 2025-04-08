@@ -152,7 +152,8 @@ public class GameUI {
     public function GameUI() {
         I = this;
 
-        SHOW_HP_TEXT = GameMode.currentMode == GameMode.TRAINING && GameConfig.ALLOW_SHOW_HP_TEXT;
+//        SHOW_HP_TEXT = GameMode.currentMode == GameMode.TRAINING && GameConfig.ALLOW_SHOW_HP_TEXT;
+        SHOW_HP_TEXT = GameData.I.config.isShowHp;
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
     }

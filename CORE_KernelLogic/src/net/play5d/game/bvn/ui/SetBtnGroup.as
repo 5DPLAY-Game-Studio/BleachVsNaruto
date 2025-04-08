@@ -258,6 +258,14 @@ public class SetBtnGroup extends Sprite {
                 ],
                 optoinKey: 'quality'
             },
+            {
+                txt      : 'SHOW HP', cn: '显示血量',
+                options  : [
+                    {label: 'SHOW', cn: '显示', value: true},
+                    {label: 'HIDE', cn: '隐藏', value: false},
+                ],
+                optoinKey: 'isShowHp'
+            }
         ];
 
         var btn:SetBtn;
