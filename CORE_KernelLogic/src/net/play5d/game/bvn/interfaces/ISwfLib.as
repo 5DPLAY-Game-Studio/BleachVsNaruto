@@ -35,7 +35,7 @@ public interface ISwfLib {
 
     function get title():Class;
 
-    function get mosou():Class;
+    function get musou():Class;
 
     function get bigMap():Class;
 

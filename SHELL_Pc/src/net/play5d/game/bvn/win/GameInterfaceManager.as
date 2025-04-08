@@ -488,7 +488,7 @@ public class GameInterfaceManager implements IGameInterface {
         //return GameSafeKeeper.I.checkFile(url, file);
     }
 
-    public function addMosouMoney(back:Function):void {
+    public function addMusouMoney(back:Function):void {
         back(100 + Math.random() * 200);
     }
 

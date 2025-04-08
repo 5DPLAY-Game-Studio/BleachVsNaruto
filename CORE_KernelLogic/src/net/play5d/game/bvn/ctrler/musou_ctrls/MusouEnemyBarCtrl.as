@@ -22,7 +22,7 @@ import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpFollowUI;
+import net.play5d.game.bvn.ui.musou.enemy.EnemyHpFollowUI;
 
 public class MusouEnemyBarCtrl {
     include '../../../../../../../include/_INCLUDE_.as';

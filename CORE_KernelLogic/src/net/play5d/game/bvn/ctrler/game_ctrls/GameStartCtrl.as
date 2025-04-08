@@ -44,7 +44,7 @@ public class GameStartCtrl {
     private var _holdFrame:int;
     private var _uiPlaying:Boolean;
     private var _introTeamId:int = -1; //-1=both
-    private var _mousouFinish:Boolean = false;
+    private var _musouFinish:Boolean = false;
 
     public function destory():void {
         _p1    = null;
@@ -88,9 +88,9 @@ public class GameStartCtrl {
 
     public function startMosou():void {
         _isStartMosou = true;
-        _mousouFinish = false;
+        _musouFinish = false;
         GameUI.I.getUI().showStart(function ():void {
-            _mousouFinish = true;
+            _musouFinish = true;
         });
     }
 
@@ -130,7 +130,7 @@ public class GameStartCtrl {
     }
 
     private function renderStartMosou():Boolean {
-        return _mousouFinish;
+        return _musouFinish;
     }
 
     private function preRenderStart():void {

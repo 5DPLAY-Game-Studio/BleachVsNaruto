@@ -97,7 +97,7 @@ public class GameInterfaceManager implements IGameInterface {
         return true;
     }
 
-    public function addMosouMoney(back:Function):void {
+    public function addMusouMoney(back:Function):void {
         back(100 + Math.random() * 200);
     }
 }

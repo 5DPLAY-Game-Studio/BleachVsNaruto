@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
 import flash.events.Event;
@@ -33,25 +33,25 @@ import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
 import net.play5d.game.bvn.ui.MosouPauseDialog;
 import net.play5d.game.bvn.ui.fight.HitsUI;
-import net.play5d.game.bvn.ui.mosou.enemy.BossHpUI;
-import net.play5d.game.bvn.ui.mosou.enemy.EnemyHpUIGroup;
+import net.play5d.game.bvn.ui.musou.enemy.BossHpUI;
+import net.play5d.game.bvn.ui.musou.enemy.EnemyHpUIGroup;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoTimeout;
 
-public class MosouUI implements IGameUI {
+public class MusouUI implements IGameUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouUI() {
-        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.mosou, 'ui_mosou');
-        _hpbar = new MosouFightBarUI(_ui.hpbarmc);
+    public function MusouUI() {
+        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.musou, 'ui_mosou');
+        _hpbar = new MusouFightBarUI(_ui.hpbarmc);
 
         _bossHpBar = new BossHpUI(_ui.bosshp_mc);
         _bossHpBar.enabled(false);
 
-        _timeUI = new MosouTimeUI(_ui.time_mc);
-        _waveUI = new MosouWaveUI(_ui.wave_mc);
+        _timeUI = new MusouTimeUI(_ui.time_mc);
+        _waveUI = new MusouWaveUI(_ui.wave_mc);
 
-        _KOUI = new MousouKOsUI(_ui.kos_mc);
+        _KOUI = new MusouKOsUI(_ui.kos_mc);
 
         _hitsUI = new HitsUI(_ui.hitsmc);
 
@@ -61,12 +61,12 @@ public class MosouUI implements IGameUI {
         _enemyHpBarGroup = new EnemyHpUIGroup(_ui.ct_enemybar);
     }
     private var _ui:ui_mosou;
-    private var _hpbar:MosouFightBarUI;
+    private var _hpbar:MusouFightBarUI;
     private var _bossHpBar:BossHpUI;
     private var _enemyHpBarGroup:EnemyHpUIGroup;
-    private var _timeUI:MosouTimeUI;
-    private var _waveUI:MosouWaveUI;
-    private var _KOUI:MousouKOsUI;
+    private var _timeUI:MusouTimeUI;
+    private var _waveUI:MusouWaveUI;
+    private var _KOUI:MusouKOsUI;
     private var _startAndKoMc:MovieClip;
     private var _startAndKoPos:Point;
     private var _hitsUI:HitsUI;

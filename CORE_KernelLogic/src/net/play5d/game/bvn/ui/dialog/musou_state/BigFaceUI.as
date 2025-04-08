@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.dialog.mosou_state {
+package net.play5d.game.bvn.ui.dialog.musou_state {
 import com.greensock.TweenLite;
 
 import flash.display.DisplayObject;

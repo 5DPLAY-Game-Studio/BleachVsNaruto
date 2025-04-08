@@ -16,15 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouEnergyBar {
+public class MusouEnergyBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouEnergyBar(ui:mosou_energy_bar) {
+    public function MusouEnergyBar(ui:mosou_energy_bar) {
         _ui = ui;
 
         _bar = new InsBar(_ui.bar);

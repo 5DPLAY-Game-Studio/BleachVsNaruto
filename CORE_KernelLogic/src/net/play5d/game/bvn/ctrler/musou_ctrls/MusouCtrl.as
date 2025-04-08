@@ -47,7 +47,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.mosou.MosouUI;
+import net.play5d.game.bvn.ui.musou.MusouUI;
 
 public class MusouCtrl {
     include '../../../../../../../include/_INCLUDE_.as';
@@ -301,7 +301,7 @@ public class MusouCtrl {
         GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
 
         (
-                GameUI.I.getUI() as MosouUI
+                GameUI.I.getUI() as MusouUI
         ).showLose(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.self_die_complete');
             backToWorldMap();
@@ -338,7 +338,7 @@ public class MusouCtrl {
 
         _changeFighterGap = GameConfig.FPS_ANIMATE;
         (
-                GameUI.I.getUI() as MosouUI
+                GameUI.I.getUI() as MusouUI
         ).updateFighter();
 
         EffectCtrl.I.doEffectById('team_change', to.x, to.y);
@@ -382,7 +382,7 @@ public class MusouCtrl {
 
         _bossInAnimate = false;
 
-        var ui:MosouUI = GameUI.I.getUI() as MosouUI;
+        var ui:MusouUI = GameUI.I.getUI() as MusouUI;
         if (ui) {
             ui.setBossHp(f);
             _bossInAnimate = true;
@@ -408,7 +408,7 @@ public class MusouCtrl {
     public function onBossDie(f:FighterMain):void {
         TraceLang('debug.trace.data.musou_ctrl.boss_die');
         (
-                GameUI.I.getUI() as MosouUI
+                GameUI.I.getUI() as MusouUI
         ).showBossKO(f, function ():void {
 
         });
@@ -599,7 +599,7 @@ public class MusouCtrl {
         GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
 
         (
-                GameUI.I.getUI() as MosouUI
+                GameUI.I.getUI() as MusouUI
         ).showLose(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.time_over_complete');
             backToWorldMap();
@@ -623,7 +623,7 @@ public class MusouCtrl {
 
         GameCtrl.I.actionEnable = false;
         (
-                GameUI.I.getUI() as MosouUI
+                GameUI.I.getUI() as MusouUI
         ).showWin(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.mission_complete_complete');
 

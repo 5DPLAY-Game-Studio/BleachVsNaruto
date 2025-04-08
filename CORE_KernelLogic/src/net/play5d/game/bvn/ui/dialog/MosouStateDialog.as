@@ -30,8 +30,8 @@ import net.play5d.game.bvn.data.musou.LevelModel;
 import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.Text;
-import net.play5d.game.bvn.ui.dialog.mosou_state.BigFaceUI;
-import net.play5d.game.bvn.ui.mosou.CoinUI;
+import net.play5d.game.bvn.ui.dialog.musou_state.BigFaceUI;
+import net.play5d.game.bvn.ui.musou.CoinUI;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 

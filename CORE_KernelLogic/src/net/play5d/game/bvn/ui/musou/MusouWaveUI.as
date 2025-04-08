@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.Bitmap;
 import flash.display.Sprite;
 import flash.text.TextField;
@@ -25,10 +25,10 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.kyo.utils.KyoDrawUtils;
 
-public class MosouWaveUI {
+public class MusouWaveUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouWaveUI(ui:Sprite) {
+    public function MusouWaveUI(ui:Sprite) {
         _ui = ui;
 
         _txtCur = ui.getChildByName('txt') as TextField;

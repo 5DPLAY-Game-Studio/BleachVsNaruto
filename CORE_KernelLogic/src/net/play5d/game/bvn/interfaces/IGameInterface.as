@@ -89,7 +89,7 @@ public interface IGameInterface {
 
     /**
      * 扩展设置项
-     * @return {key:value}
+     * @return {key: value}
      */
     function getConfigExtend():IExtendConfig;
 
@@ -108,9 +108,11 @@ public interface IGameInterface {
     function checkFile(url:String, file:ByteArray):Boolean;
 
     /**
-     * 增加无双的钱
+     * 增加无双金币
+     *
+     * @param back 回调函数
      */
-    function addMosouMoney(back:Function):void;
+    function addMusouMoney(back:Function):void;
 
 }
 }

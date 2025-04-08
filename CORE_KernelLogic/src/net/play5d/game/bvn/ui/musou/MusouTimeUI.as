@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.Sprite;
 import flash.text.TextField;
 
@@ -24,10 +24,10 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.kyo.utils.KyoTimerFormat;
 
-public class MosouTimeUI {
+public class MusouTimeUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouTimeUI(ui:Sprite) {
+    public function MusouTimeUI(ui:Sprite) {
         _ui  = ui;
         _txt = ui.getChildByName('text') as TextField;
     }

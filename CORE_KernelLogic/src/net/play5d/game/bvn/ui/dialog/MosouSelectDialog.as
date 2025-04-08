@@ -33,7 +33,7 @@ import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.ui.dialog.select.DotsGroupUI;
 import net.play5d.game.bvn.ui.dialog.select.SelectFighterList;
 import net.play5d.game.bvn.ui.dialog.select.SelectFighterUI;
-import net.play5d.game.bvn.ui.mosou.CoinUI;
+import net.play5d.game.bvn.ui.musou.CoinUI;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 

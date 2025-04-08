@@ -85,7 +85,7 @@ public class GameInterface {
         }
 
         if (instance) {
-            instance.addMosouMoney(addMoneyBack);
+            instance.addMusouMoney(addMoneyBack);
             return;
         }
         addMoneyBack(100 + Math.random() * 500);

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.Bitmap;
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
@@ -25,10 +25,10 @@ import flash.geom.Point;
 
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouQiBar {
+public class MusouQiBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouQiBar(ui:Sprite) {
+    public function MusouQiBar(ui:Sprite) {
         _ui = ui;
 
         _bar1 = _ui.getChildByName('bar1');

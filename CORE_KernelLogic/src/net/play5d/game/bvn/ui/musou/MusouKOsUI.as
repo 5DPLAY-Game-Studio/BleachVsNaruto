@@ -16,17 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.Sprite;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 
-public class MousouKOsUI {
+public class MusouKOsUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MousouKOsUI(ui:Sprite) {
+    public function MusouKOsUI(ui:Sprite) {
         _text = new BitmapFontText(AssetManager.I.getFont('font1'));
         ui.addChild(_text);
     }

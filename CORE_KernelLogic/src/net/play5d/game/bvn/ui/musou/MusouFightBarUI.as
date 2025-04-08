@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui.mosou {
+package net.play5d.game.bvn.ui.musou {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 
@@ -25,16 +25,16 @@ import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.fighter.FighterMain;
 
-public class MosouFightBarUI {
+public class MusouFightBarUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MosouFightBarUI(ui:mosou_hpbar_mc) {
+    public function MusouFightBarUI(ui:mosou_hpbar_mc) {
         _ui = ui;
 
-        _hpbar = new MosouHpBar(ui.hpbar, ui.hpbar2);
-        _qibar = new MosouQiBar(ui.qibar);
+        _hpbar = new MusouHpBar(ui.hpbar, ui.hpbar2);
+        _qibar = new MusouQiBar(ui.qibar);
 
-        _energybar = new MosouEnergyBar(ui.energybar);
+        _energybar = new MusouEnergyBar(ui.energybar);
 
         _littleHpBar1 = new LittleHpBar(ui.little_hp_1);
         _littleHpBar2 = new LittleHpBar(ui.little_hp_2);
@@ -43,9 +43,9 @@ public class MosouFightBarUI {
     }
     private var _ui:mosou_hpbar_mc;
     private var _face:mosou_hpbar_facemc;
-    private var _hpbar:MosouHpBar;
-    private var _qibar:MosouQiBar;
-    private var _energybar:MosouEnergyBar;
+    private var _hpbar:MusouHpBar;
+    private var _qibar:MusouQiBar;
+    private var _energybar:MusouEnergyBar;
     private var _littleHpBar1:LittleHpBar;
     private var _littleHpBar2:LittleHpBar;
     private var _group:GameRunFighterGroup;
