@@ -1,17 +1,16 @@
 /**
- * VERSION: 0.2 (beta)
- * DATE: 2010-04-16
- * ACTIONSCRIPT VERSION: 3.0 
- * UPDATES AND DOCUMENTATION AT: http://www.GreenSock.com
+ * VERSION: 12.0
+ * DATE: 2012-01-12
+ * AS3 
+ * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 package com.greensock.plugins {
-	import com.greensock.*;
+	import com.greensock.TweenLite;
 	import com.greensock.motionPaths.CirclePath2D;
 	import com.greensock.motionPaths.PathFollower;
-	
 	import flash.geom.Matrix;
 /**
- * Tweens an object along a CirclePath2D motion path in any direction (clockwise, counter-clockwise, or shortest).
+ * [AS3 only] Tweens an object along a CirclePath2D motion path in any direction (clockwise, counter-clockwise, or shortest).
  * The plugin recognizes the following properties:
  * <ul>
  * 		<li><b>path</b> : CirclePath2D -  The CirclePath2D instance to follow (com.greensock.motionPaths.CirclePath2D)</li>
@@ -35,26 +34,26 @@ package com.greensock.plugins {
  * 		<li><b>useRadians</b> : Boolean - If you prefer to define values in radians instead of degrees, set useRadians to true.</li>
  * </ul>
  * 
- * <br /><br />
  * 
- * <b>USAGE:</b><br /><br />
- * <code>
- * 		import com.greensock.~~; <br />
- * 		import com.greensock.plugins.~~; <br />
- * 		import com.greensock.motionPaths.~~<br />
- * 		TweenPlugin.activate([CirclePath2DPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.<br /><br />
  * 
- * 		var circle:CirclePath2D = new CirclePath2D(150, 150, 100);
- * 		TweenLite.to(mc, 2, {circlePath2D:{path:circle, startAngle:90, endAngle:270, direction:Direction.CLOCKWISE, extraRevolutions:2}}); <br /><br />
- * </code>
+ * <p><b>USAGE:</b></p>
+ * <listing version="3.0">
+import com.greensock.~~; 
+import com.greensock.plugins.~~;
+import com.greensock.motionPaths.~~;
+TweenPlugin.activate([CirclePath2DPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
+
+var circle:CirclePath2D = new CirclePath2D(150, 150, 100);
+TweenLite.to(mc, 2, {circlePath2D:{path:circle, startAngle:90, endAngle:270, direction:Direction.CLOCKWISE, extraRevolutions:2}});
+</listing>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2008-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */
 	public class CirclePath2DPlugin extends TweenPlugin {
 		/** @private **/
-		public static const API:Number = 1.0; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
+		public static const API:Number = 2; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
 		/** @private **/
 		private static const _2PI:Number = Math.PI * 2;
 		/** @private **/
@@ -77,13 +76,11 @@ package com.greensock.plugins {
 		
 		/** @private **/
 		public function CirclePath2DPlugin() {
-			super();
-			this.propName = "circlePath2D";
-			this.overwriteProps = ["x","y"];
+			super("circlePath2D,x,y");
 		}
 		
 		/** @private **/
-		override public function onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
+		override public function _onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
 			if (!("path" in value) || !(value.path is CirclePath2D)) {
 				trace("CirclePath2DPlugin error: invalid 'path' property. Please define a CirclePath2D instance.");
 				return false;
@@ -105,20 +102,21 @@ package com.greensock.plugins {
 		}
 		
 		/** @private **/
-		override public function killProps(lookup:Object):void {
-			super.killProps(lookup);
+		override public function _kill(lookup:Object):Boolean {
 			if (("x" in lookup) || ("y" in lookup)) {
-				this.overwriteProps = [];
+				_overwriteProps = [];
 			}
+			return super._kill(lookup);
 		}
 		
 		/** @private **/
-		override public function set changeFactor(n:Number):void {
-			var angle:Number = (_start + (_change * n)) * _2PI;
-			var radius:Number = _circle.radius;
-			var m:Matrix = _circle.transform.matrix;
-			var px:Number = Math.cos(angle) * radius;
-			var py:Number = Math.sin(angle) * radius;
+		override public function setRatio(v:Number):void {
+			var angle:Number = (_start + (_change * v)) * _2PI,
+				radius:Number = _circle.radius,
+				m:Matrix = _circle.transform.matrix,
+				px:Number = Math.cos(angle) * radius,
+				py:Number = Math.sin(angle) * radius;
+			
 			_target.x = px * m.a + py * m.c + m.tx;
 			_target.y = px * m.b + py * m.d + m.ty;
 			

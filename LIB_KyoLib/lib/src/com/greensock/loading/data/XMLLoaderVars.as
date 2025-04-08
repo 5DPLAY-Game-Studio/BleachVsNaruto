@@ -7,35 +7,35 @@
 package com.greensock.loading.data {
 	import flash.display.DisplayObject;
 /**
- * Can be used instead of a generic Object to define the <code>vars</code> parameter of a XMLLoader's constructor. <br /><br />	
+ * Can be used instead of a generic Object to define the <code>vars</code> parameter of a XMLLoader's constructor. 
  * 
- * There are 2 primary benefits of using a XMLLoaderVars instance to define your XMLLoader variables:
+ * <p>There are 2 primary benefits of using a XMLLoaderVars instance to define your XMLLoader variables:</p>
  *  <ol>
  *		<li> In most code editors, code hinting will be activated which helps remind you which special properties are available in XMLLoader</li>
  *		<li> It enables strict data typing for improved debugging (ensuring, for example, that you don't define a Boolean value for <code>onComplete</code> where a Function is expected).</li>
- *  </ol><br />
+ *  </ol>
  * 
- * The down side, of course, is that the code is more verbose and the XMLLoaderVars class adds slightly more kb to your swf.
+ * <p>The down side, of course, is that the code is more verbose and the XMLLoaderVars class adds slightly more kb to your swf.</p>
  *
- * <b>USAGE:</b><br /><br />
- * Note that each method returns the XMLLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).<br /><br />
+ * <p><strong>USAGE</strong></p>
+ * <p>Note that each method returns the XMLLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).</p>
  *	
- * <b>Without XMLLoaderVars:</b><br /><code>
- * new XMLLoader("data.xml", {name:"css", estimatedBytes:1500, onComplete:completeHandler, onProgress:progressHandler})</code><br /><br />
+ * <p><strong>Without XMLLoaderVars:</strong></p><p><code>
+ * new XMLLoader("data.xml", {name:"css", estimatedBytes:1500, onComplete:completeHandler, onProgress:progressHandler})</code></p>
  * 
- * <b>With XMLLoaderVars</b><br /><code>
- * new XMLLoader("data.xml", new XMLLoaderVars().name("data").estimatedBytes(1500).onComplete(completeHandler).onProgress(progressHandler))</code><br /><br />
+ * <p><strong>With XMLLoaderVars</strong></p><p><code>
+ * new XMLLoader("data.xml", new XMLLoaderVars().name("data").estimatedBytes(1500).onComplete(completeHandler).onProgress(progressHandler))</code></p>
  * 
- * <b>NOTES:</b><br />
+ * <p><strong>NOTES:</strong></p>
  * <ul>
  *	<li> To get the generic vars object that XMLLoaderVars builds internally, simply access its "vars" property.
- * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<br /><code>
+ * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<code>
  * 		 new XMLLoader("data.xml", new XMLLoaderVars().name("data").estimatedBytes(1500).onComplete(completeHandler).vars)</code></li>
  *	<li> Using XMLLoaderVars is completely optional. If you prefer the shorter synatax with the generic Object, feel
  * 		 free to use it. The purpose of this class is simply to enable code hinting and to allow for strict data typing.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	 
@@ -75,9 +75,9 @@ package com.greensock.loading.data {
 		 * that the property name is a valid variable name (starts with a letter or underscore, no special characters, etc.)
 		 * and that it doesn't use a reserved property name like "name" or "onComplete", etc. 
 		 * 
-		 * For example, to set an "index" property to 5, do:
+		 * <p>For example, to set an "index" property to 5, do:</p>
 		 * 
-		 * <code>prop("index", 5);</code>
+		 * <p><code>prop("index", 5);</code></p>
 		 * 
 		 * @param property Property name
 		 * @param value Value

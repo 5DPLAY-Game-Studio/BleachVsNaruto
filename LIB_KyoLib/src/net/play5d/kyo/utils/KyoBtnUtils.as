@@ -167,14 +167,14 @@ public class KyoBtnUtils {
         var o:Object        = _btnMap[d];
         switch (e.type) {
         case MouseEvent.MOUSE_DOWN:
-            if (_btnTween && _btnTween.active) {
+            if (_btnTween && _btnTween._active) {
                 _btnTween.kill();
             }
             doBtnEffect(d, o, false);
             break;
         case MouseEvent.MOUSE_UP:
 
-            if (_btnTween && _btnTween.active) {
+            if (_btnTween && _btnTween._active) {
                 _btnTween.kill();
             }
 

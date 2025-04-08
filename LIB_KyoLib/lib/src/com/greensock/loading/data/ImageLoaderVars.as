@@ -9,33 +9,33 @@ package com.greensock.loading.data {
 	import flash.display.DisplayObjectContainer;
 	import flash.system.LoaderContext;
 /**
- * Can be used instead of a generic object to define the <code>vars</code> parameter of an ImageLoader's constructor. <br /><br />	
+ * Can be used instead of a generic object to define the <code>vars</code> parameter of an ImageLoader's constructor. 
  * 
- * There are 2 primary benefits of using a ImageLoaderVars instance to define your ImageLoader variables:
+ * <p>There are 2 primary benefits of using a ImageLoaderVars instance to define your ImageLoader variables:</p>
  *  <ol>
  *		<li> In most code editors, code hinting will be activated which helps remind you which special properties are available in ImageLoader</li>
  *		<li> It enables strict data typing for improved debugging (ensuring, for example, that you don't define a Boolean value for <code>onComplete</code> where a Function is expected).</li>
  *  </ol>
  *
- * <b>USAGE:</b><br />
- * Note that each method returns the ImageLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).<br /><br />
+ * <p><strong>USAGE</strong></p>
+ * <p>Note that each method returns the ImageLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).</p>
  *	
- * <b>Without ImageLoaderVars:</b><br /><code>
- * new ImageLoader("photo1.jpg", {name:"photo1", estimatedBytes:11500, container:this, width:200, height:100, onComplete:completeHandler, onProgress:progressHandler})<br /><br /></code>
+ * <p><strong>Without ImageLoaderVars:</strong></p><p><code>
+ * new ImageLoader("photo1.jpg", {name:"photo1", estimatedBytes:11500, container:this, width:200, height:100, onComplete:completeHandler, onProgress:progressHandler})</code></p>
  * 
- * <b>With ImageLoaderVars</b><br /><code>
- * new ImageLoader("photo1.jpg", new ImageLoaderVars().name("photo1").estimatedBytes(11500).container(this).width(200).height(100).onComplete(completeHandler).onProgress(progressHandler))<br /><br /></code>
+ * <p><strong>With ImageLoaderVars</strong></p><p><code>
+ * new ImageLoader("photo1.jpg", new ImageLoaderVars().name("photo1").estimatedBytes(11500).container(this).width(200).height(100).onComplete(completeHandler).onProgress(progressHandler))</code></p>
  *		
- * <b>NOTES:</b><br />
+ * <p><strong>NOTES:</strong></p>
  * <ul>
  *	<li> To get the generic vars object that ImageLoaderVars builds internally, simply access its "vars" property.
- * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<br /><code>
+ * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<code>
  * 		 new ImageLoader("photo1.jpg", new ImageLoaderVars().name("photo1").estimatedBytes(11500).vars);</code></li>
  *	<li> Using ImageLoaderVars is completely optional. If you prefer the shorter synatax with the generic Object, feel
  * 		 free to use it. The purpose of this class is simply to enable code hinting and to allow for strict data typing.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	 

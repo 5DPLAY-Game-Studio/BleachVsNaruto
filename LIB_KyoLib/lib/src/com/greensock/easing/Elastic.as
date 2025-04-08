@@ -1,28 +1,32 @@
+/**
+ * VERSION: 1.0
+ * DATE: 2012-03-22
+ * AS3 (AS2 and JS versions are also available)
+ * UPDATES AND DOCS AT: http://www.greensock.com
+ **/
 package com.greensock.easing {
-	public class Elastic {
-		private static const _2PI:Number = Math.PI * 2;
+/**
+ * Eases with an elastic effect either at the beginning (easeIn), the end (easeOut), or both (easeInOut). 
+ * <code>Elastic</code> is a convenience class that congregates the 3 types of Elastic eases (ElasticIn, ElasticOut, 
+ * and ElasticInOut) as static properties so that they can be referenced using the standard synatax, like 
+ * <code>Elastic.easeIn</code>, <code>Elastic.easeOut</code>, and <code>Elastic.easeInOut</code>. 
+ * 
+ * <p>You can configure the amplitude and period of the sine wave using the <code>config()</code> method, like
+ * <code>TweenLite.to(obj, 1, {x:100, ease:Elastic.easeOut.config(0.5, 2)});</code></p>
+ * 
+ * <p><strong>Copyright 2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
+ * 
+ * @author Jack Doyle, jack@greensock.com
+ **/
+	final public class Elastic {
 		
-		public static function easeIn (t:Number, b:Number, c:Number, d:Number, a:Number = 0, p:Number = 0):Number {
-			var s:Number;
-			if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
-			if (!a || (c > 0 && a < c) || (c < 0 && a < -c)) { a=c; s = p/4; }
-			else s = p/_2PI * Math.asin (c/a);
-			return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*_2PI/p )) + b;
-		}
-		public static function easeOut (t:Number, b:Number, c:Number, d:Number, a:Number = 0, p:Number = 0):Number {
-			var s:Number;
-			if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
-			if (!a || (c > 0 && a < c) || (c < 0 && a < -c)) { a=c; s = p/4; }
-			else s = p/_2PI * Math.asin (c/a);
-			return (a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*_2PI/p ) + c + b);
-		}
-		public static function easeInOut (t:Number, b:Number, c:Number, d:Number, a:Number = 0, p:Number = 0):Number {
-			var s:Number;
-			if (t==0) return b;  if ((t/=d*0.5)==2) return b+c;  if (!p) p=d*(.3*1.5);
-			if (!a || (c > 0 && a < c) || (c < 0 && a < -c)) { a=c; s = p/4; }
-			else s = p/_2PI * Math.asin (c/a);
-			if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*_2PI/p )) + b;
-			return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*_2PI/p )*.5 + c + b;
-		}
+		/** Eases using a sine wave that starts fast and then decelerates over time. **/
+		public static var easeOut:ElasticOut = new ElasticOut();
+		
+		/** Eases using a sine wave that starts slowly and then accelerates over time **/
+		public static var easeIn:ElasticIn = new ElasticIn();
+		
+		/** Eases using a sine wave that starts slowly, then accelerates and then decelerates over time. **/
+		public static var easeInOut:ElasticInOut = new ElasticInOut();
 	}
 }

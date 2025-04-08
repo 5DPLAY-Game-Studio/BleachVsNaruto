@@ -321,7 +321,7 @@ public class KyoDragList extends KyoTileList {
     }
 
     private function beginDrag(e:MouseEvent):void {
-        if (_tween && _tween.active) {
+        if (_tween && _tween._active) {
             return;
         }
 

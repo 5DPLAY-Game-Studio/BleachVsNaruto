@@ -1,6 +1,6 @@
 /**
- * VERSION: 0.45
- * DATE: 2011-11-11
+ * VERSION: 0.61
+ * DATE: 2012-10-23
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com
  **/
@@ -20,7 +20,7 @@ package com.greensock {
 	
 	import mx.core.UIComponent;
 /**
- * A FlexBlitMask is basically a rectangular UIComponent that acts as a high-performance mask for a DisplayObject
+ * [AS3 only] A FlexBlitMask is basically a rectangular UIComponent that acts as a high-performance mask for a DisplayObject
  * by caching a bitmap version of it and blitting only the pixels that should be visible at any given time,
  * although its <code>bitmapMode</code> can be turned off to restore interactivity in the DisplayObject 
  * whenever you want. It is a Flex-friendly version of BlitMask. When scrolling very large images or text 
@@ -82,13 +82,13 @@ package com.greensock {
  * 			be better off just turning off bitmapMode during that animation sequence.</li>
  * </ul><br /><br />
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <b>Copyright 2014-2014, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.
  * 
  * @author Jack Doyle, jack@greensock.com
  **/
 	public class FlexBlitMask extends UIComponent {
 		/** @private **/
-		public static var version:Number = 0.45;
+		public static var version:Number = 0.6;
 		
 		// In order to conserve memory and improve performance, we create a few instances of Rectangles, Sprites, Points, Matrices, and Arrays and reuse them rather than creating new instances over and over.
 		/** @private **/
@@ -106,7 +106,7 @@ package com.greensock {
 		/** @private **/
 		protected static var _colorTransform:ColorTransform = new ColorTransform();
 		/** @private **/
-		protected static var _mouseEvents:Array = [MouseEvent.CLICK, MouseEvent.DOUBLE_CLICK, MouseEvent.MOUSE_DOWN, MouseEvent.MOUSE_MOVE, MouseEvent.MOUSE_OUT, MouseEvent.MOUSE_OVER, MouseEvent.MOUSE_UP, MouseEvent.MOUSE_WHEEL, MouseEvent.ROLL_OUT, MouseEvent.ROLL_OVER];
+		protected static var _mouseEvents:Array = [MouseEvent.CLICK, MouseEvent.DOUBLE_CLICK, MouseEvent.MOUSE_DOWN, MouseEvent.MOUSE_MOVE, MouseEvent.MOUSE_OUT, MouseEvent.MOUSE_OVER, MouseEvent.MOUSE_UP, MouseEvent.MOUSE_WHEEL, MouseEvent.ROLL_OUT, MouseEvent.ROLL_OVER, "gesturePressAndTap", "gesturePan", "gestureRotate", "gestureSwipe", "gestureZoom", "gestureTwoFingerTap", "touchBegin", "touchEnd", "touchMove", "touchOut", "touchOver", "touchRollOut", "touchRollOver", "touchTap"];
 		
 		/** @private **/
 		protected var _target:DisplayObject;
@@ -306,6 +306,9 @@ package com.greensock {
 					_render();
 				} else if (m.tx != _prevMatrix.tx || m.ty != _prevMatrix.ty) {
 					_render();
+				} else if (_bitmapMode && _target != null) {
+					this.filters = _target.filters;
+					this.transform.colorTransform = _transform.colorTransform;
 				}
 				_prevMatrix = m;
 			}
@@ -337,8 +340,8 @@ package com.greensock {
 			
 			var x:Number = super.x + xOffset;
 			var y:Number = super.y + yOffset;
-			var wrapWidth:int = (_bounds.width + _wrapOffsetX) >> 0;
-			var wrapHeight:int = (_bounds.height + _wrapOffsetY) >> 0;
+			var wrapWidth:int = (_bounds.width + _wrapOffsetX + 0.5) >> 0;
+			var wrapHeight:int = (_bounds.height + _wrapOffsetY + 0.5) >> 0;
 			var g:Graphics = this.graphics;
 			
 			if (_bounds.width == 0 || _bounds.height == 0 || (_wrap && (wrapWidth == 0 || wrapHeight == 0)) || (!_wrap && (x + _width < _bounds.x || y + _height < _bounds.y || x > _bounds.right || y > _bounds.bottom))) {
@@ -506,6 +509,38 @@ package com.greensock {
 			this.bitmapMode = false;
 		}
 		
+		/**
+		 * Repositions the <code>target</code> so that it is visible within the BlitMask, as though <code>wrap</code>
+		 * was enabled (this method is called automatically when <code>bitmapMode</code> is disabled while <code>wrap</code> 
+		 * is <code>true</code>). For example, if you tween the <code>target</code> way off the edge of the BlitMask and
+		 * have <code>wrap</code> enabled, it will appear to come back in from the other side even though the raw coordinates
+		 * of the target would indicate that it is outside the BlitMask. If you want to force the coordinates to normalize 
+		 * so that they reflect that wrapped position, simply call <code>normalizePosition()</code>. It will automatically 
+		 * choose the coordinates that would maximize the visible portion of the target if a seam is currently showing.
+		 **/
+		public function normalizePosition():void {
+			if (_target && _bounds) {
+				var wrapWidth:int = (_bounds.width + _wrapOffsetX + 0.5) >> 0;
+				var wrapHeight:int = (_bounds.height + _wrapOffsetY + 0.5) >> 0;
+				var offsetX:Number = (_bounds.x - this.x) % wrapWidth;
+				var offsetY:Number = (_bounds.y - this.y) % wrapHeight;
+				
+				if (offsetX > (_width + _wrapOffsetX) / 2) {
+					offsetX -= wrapWidth;
+				} else if (offsetX < (_width + _wrapOffsetX) / -2) {
+					offsetX += wrapWidth;
+				}
+				if (offsetY > (_height + _wrapOffsetY) / 2) {
+					offsetY -= wrapHeight;
+				} else if (offsetY < (_height + _wrapOffsetY) / -2) {
+					offsetY += wrapHeight;
+				}
+				
+				_target.x += this.x + offsetX - _bounds.x;
+				_target.y += this.y + offsetY - _bounds.y;
+			}
+		}
+		
 		/** Disposes of the FlexBlitMask and its internal BitmapData instances, releasing them for garbage collection. **/
 		public function dispose():void {
 			if (_bd == null) { //already disposed.
@@ -598,6 +633,9 @@ package com.greensock {
 						this.blendMode = "normal";
 						this.cacheAsBitmap = false; //if cacheAsBitmap is true on both the _target and the FlexBlitMask instance, the transparent areas of the mask will be...well...transparent which isn't what we want when bitmapMode is false (it could hide visible areas unless update(null, true) is called regularly, like if the target has animated children and bitmapMode is false)
 						_target.mask = this;
+						if (_wrap) {
+							normalizePosition();
+						}
 					}
 					if (_bitmapMode && _autoUpdate) {
 						this.addEventListener(Event.ENTER_FRAME, update, false, -10, true);

@@ -7,9 +7,9 @@
 package com.greensock.motionPaths {
 	
 /**
- * Constants for defining the direction in which to travel on a MotionPath (like <code>CLOCKWISE, COUNTER_CLOCKWISE, SHORTEST,</code> etc.). <br /><br />
+ * [AS3 only] Constants for defining the direction in which to travel on a MotionPath (like <code>CLOCKWISE, COUNTER_CLOCKWISE, SHORTEST,</code> etc.). 
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */

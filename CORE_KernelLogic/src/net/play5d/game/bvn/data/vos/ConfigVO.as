@@ -62,6 +62,9 @@ public class ConfigVO implements ISaveData, IInstanceVO {
     public var soundVolume:Number                = 0.7; // SOUND音量
     public var bgmVolume:Number                  = 0.7; // BGM音量
     public var keyInputMode:int                  = 1; //0标准, 1经典（长按式）
+
+    // 是否显示血量
+    public var isShowHp:Boolean = false;
     /**
      * 扩展设置
      */
@@ -108,6 +111,7 @@ public class ConfigVO implements ISaveData, IInstanceVO {
         o.keyInputMode = keyInputMode;
         o.soundVolume  = soundVolume;
         o.bgmVolume    = bgmVolume;
+        o.isShowHp     = isShowHp;
 
         if (extendConfig) {
             o.extend_config = extendConfig.toSaveObj();

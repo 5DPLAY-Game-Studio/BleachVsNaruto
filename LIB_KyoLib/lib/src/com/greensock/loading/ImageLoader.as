@@ -1,6 +1,6 @@
 /**
- * VERSION: 1.89
- * DATE: 2011-10-20
+ * VERSION: 1.897
+ * DATE: 2012-01-14
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com/loadermax/
  **/
@@ -15,15 +15,15 @@ package com.greensock.loading {
 	import flash.events.ProgressEvent;
 
 /**
- * Loads an image file (png, jpg, or gif) and automatically applies smoothing by default. <br /><br />
+ * Loads an image file (png, jpg, or gif) and automatically applies smoothing by default. 
  * 
- * The ImageLoader's <code>content</code> refers to a <code>ContentDisplay</code> (Sprite) that 
+ * <p>The ImageLoader's <code>content</code> refers to a <code>ContentDisplay</code> (Sprite) that 
  * is created immediately so that you can position/scale/rotate it or add ROLL_OVER/ROLL_OUT/CLICK listeners
  * before (or while) the image loads. Use the ImageLoader's <code>content</code> property to get the ContentDisplay 
  * Sprite, or use the <code>rawContent</code> property to get the actual Bitmap. If a <code>container</code>
- * is defined in the <code>vars</code> object, the ContentDisplay will immediately be added to that container). <br /><br />
+ * is defined in the <code>vars</code> object, the ContentDisplay will immediately be added to that container). </p>
  * 
- * If you define a <code>width</code> and <code>height</code>, it will draw a rectangle 
+ * <p>If you define a <code>width</code> and <code>height</code>, it will draw a rectangle 
  * in the ContentDisplay so that interactive events fire appropriately (rollovers, etc.) and width/height/bounds
  * get reported accurately. This rectangle is invisible by default, but you can control its color and alpha
  * with the <code>bgColor</code> and <code>bgAlpha</code> properties. When the image loads, it will be 
@@ -32,19 +32,19 @@ package com.greensock.loading {
  * <code>width</code> or <code>height</code> in which case the image will load at its native size. 
  * See the list below for all the special properties that can be passed through the <code>vars</code> 
  * parameter but don't let the list overwhelm you - these are all optional and they are intended to make
- * your job as a developer much easier.<br /><br />
+ * your job as a developer much easier.</p>
  * 
- * <i>[new in version 1.89:]</i> When you <code>load()</code> an ImageLoader, it will automatically 
+ * <p><i>[new in version 1.89:]</i> When you <code>load()</code> an ImageLoader, it will automatically 
  * check to see if another ImageLoader exists with a matching <code>url</code> that has already finished
  * loading. If it finds one, it will copy that BitmapData to use in its own Bitmap in order to maximize
  * performance and minimize memory usage. After all, why load the file again if you've already loaded it? 
- * (The exception, of course, is when the ImageLoader's <code>noCache</code> is set to <code>true</code>.)<br /><br />
+ * (The exception, of course, is when the ImageLoader's <code>noCache</code> is set to <code>true</code>.)</p>
  * 
- * By default, the ImageLoader will attempt to load the image in a way that allows full script 
+ * <p>By default, the ImageLoader will attempt to load the image in a way that allows full script 
  * access. However, if a security error is thrown because the image is being loaded from another
  * domain and the appropriate crossdomain.xml file isn't in place to grant access, the ImageLoader
  * will automatically adjust the default LoaderContext so that it falls back to the more restricted
- * mode which will have the following effect:
+ * mode which will have the following effect:</p>
  * <ul>
  * 		<li>A <code>LoaderEvent.SCRIPT_ACCESS_DENIED</code> event will be dispatched and the <code>scriptAccessDenied</code> property of the ImageLoader will be set to <code>true</code>. You can check this value before performing any restricted operations on the content like BitmapData.draw().</li>
  * 		<li>The ImageLoader's <code>rawContent</code> property will be a <code>Loader</code> instance instead of a Bitmap.</li>
@@ -52,19 +52,19 @@ package com.greensock.loading {
  * 		<li>BitmapData operations like draw() will not be able to be performed on the image.</li>
  * </ul>
  * 
- * To maximize the likelihood of your image loading without any security problems, consider taking the following steps:
+ * <p>To maximize the likelihood of your image loading without any security problems, consider taking the following steps:</p>
  * <ul>
- * 		<li><strong>Use a crossdomain.xml file </strong> - See Adobe's docs for details, but here is an example that grants full access (put this in a crossdomain.xml file that is at the root of the remote domain):<br />
- * 			&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />
- * 			&lt;cross-domain-policy&gt;<br />
- *     			   &lt;allow-access-from domain="~~" /&gt;<br />
+ * 		<li><strong>Use a crossdomain.xml file </strong> - See Adobe's docs for details, but here is an example that grants full access (put this in a crossdomain.xml file that is at the root of the remote domain):
+ * 			&lt;?xml version="1.0" encoding="utf-8"?&gt;
+ * 			&lt;cross-domain-policy&gt;
+ *     			   &lt;allow-access-from domain="~~" /&gt;
  * 			&lt;/cross-domain-policy&gt;</li>
  * 		<li>In the embed code of any HTML wrapper, set <code>AllowScriptAccess</code> to <code>"always"</code></li>
- * </ul><br />
+ * </ul>
  * 
- * <strong>OPTIONAL VARS PROPERTIES</strong><br />
- * The following special properties can be passed into the ImageLoader constructor via its <code>vars</code> 
- * parameter which can be either a generic object or an <code><a href="data/ImageLoaderVars.html">ImageLoaderVars</a></code> object:<br />
+ * <p><strong>OPTIONAL VARS PROPERTIES</strong></p>
+ * <p>The following special properties can be passed into the ImageLoader constructor via its <code>vars</code> 
+ * parameter which can be either a generic object or an <code><a href="data/ImageLoaderVars.html">ImageLoaderVars</a></code> object:</p>
  * <ul>
  * 		<li><strong> name : String</strong> - A name that is used to identify the ImageLoader instance. This name can be fed to the <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> methods or traced at any time. Each loader's name should be unique. If you don't define one, a unique name will be created automatically, like "loader21".</li>
  * 		<li><strong> container : DisplayObjectContainer</strong> - A DisplayObjectContainer into which the <code>ContentDisplay</code> Sprite should be added immediately.</li>
@@ -112,7 +112,7 @@ package com.greensock.loading {
  * 		<li><strong> allowMalformedURL : Boolean</strong> - Normally, the URL will be parsed and any variables in the query string (like "?name=test&amp;state=il&amp;gender=m") will be placed into a URLVariables object which is added to the URLRequest. This avoids a few bugs in Flash, but if you need to keep the entire URL intact (no parsing into URLVariables), set <code>allowMalformedURL:true</code>. For example, if your URL has duplicate variables in the query string like <code>http://www.greensock.com/?c=S&amp;c=SE&amp;c=SW</code>, it is technically considered a malformed URL and a URLVariables object can't properly contain all the duplicates, so in this case you'd want to set <code>allowMalformedURL</code> to <code>true</code>.</li>
  * 		<li><strong> autoDispose : Boolean</strong> - When <code>autoDispose</code> is <code>true</code>, the loader will be disposed immediately after it completes (it calls the <code>dispose()</code> method internally after dispatching its <code>COMPLETE</code> event). This will remove any listeners that were defined in the vars object (like onComplete, onProgress, onError, onInit). Once a loader is disposed, it can no longer be found with <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> - it is essentially destroyed but its content is not unloaded (you must call <code>unload()</code> or <code>dispose(true)</code> to unload its content). The default <code>autoDispose</code> value is <code>false</code>.
  * 
- * 		<br /><br />----EVENT HANDLER SHORTCUTS----</li>
+ * 		<p>----EVENT HANDLER SHORTCUTS----</p></li>
  * 		<li><strong> onOpen : Function</strong> - A handler function for <code>LoaderEvent.OPEN</code> events which are dispatched when the loader begins loading. Make sure your onOpen function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onInit : Function</strong> - A handler function for <code>LoaderEvent.INIT</code> events which are called when the image has downloaded and has been placed into the ContentDisplay Sprite. Make sure your onInit function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onProgress : Function</strong> - A handler function for <code>LoaderEvent.PROGRESS</code> events which are dispatched whenever the <code>bytesLoaded</code> changes. Make sure your onProgress function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can use the LoaderEvent's <code>target.progress</code> to get the loader's progress value or use its <code>target.bytesLoaded</code> and <code>target.bytesTotal</code>.</li>
@@ -124,23 +124,23 @@ package com.greensock.loading {
  * 		<li><strong> onHTTPStatus : Function</strong> - A handler function for <code>LoaderEvent.HTTP_STATUS</code> events. Make sure your onHTTPStatus function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can determine the httpStatus code using the LoaderEvent's <code>target.httpStatus</code> (LoaderItems keep track of their <code>httpStatus</code> when possible, although certain environments prevent Flash from getting httpStatus information).</li>
  * 		<li><strong> onSecurityError : Function</strong> - A handler function for <code>LoaderEvent.SECURITY_ERROR</code> events which onError handles as well, so you can use that as more of a catch-all whereas onSecurityError is specifically for SECURITY_ERROR events. Make sure your onSecurityError function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
  * 		<li><strong> onScriptAccessDenied : Function</strong> - A handler function for <code>LoaderEvent.SCRIPT_ACCESS_DENIED</code> events which are dispatched when the image is loaded from another domain and no crossdomain.xml is in place to grant full script access for things like smoothing or BitmapData manipulation. You can also check the loader's <code>scriptAccessDenied</code> property after the image has loaded. Make sure your function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
- * </ul><br />
+ * </ul>
  * 
- * <strong>Note:</strong> Using a <code><a href="data/ImageLoaderVars.html">ImageLoaderVars</a></code> instance 
+ * <p><strong>Note:</strong> Using a <code><a href="data/ImageLoaderVars.html">ImageLoaderVars</a></code> instance 
  * instead of a generic object to define your <code>vars</code> is a bit more verbose but provides 
- * code hinting and improved debugging because it enforces strict data typing. Use whichever one you prefer.<br /><br />
+ * code hinting and improved debugging because it enforces strict data typing. Use whichever one you prefer.</p>
  * 
- * <strong>Jerky animation?</strong> If you animate the image after loading it and you notice that the movement 
+ * <p><strong>Jerky animation?</strong> If you animate the image after loading it and you notice that the movement 
  * is rather jerky, try setting the scaleX and/or scaleY to something other than 1, like 1.001 because there is 
  * a bug in Flash that forces Bitmaps to always act like their <code>pixelSnapping</code> is <code>"auto"</code> 
- * when their scaleX/scaleY are 1.<br /><br />
+ * when their scaleX/scaleY are 1.</p>
  * 
- * <code>content</code> data type: <strong><code>com.greensock.loading.display.ContentDisplay</code></strong> (a Sprite). 
+ * <p><code>content</code> data type: <strong><code>com.greensock.loading.display.ContentDisplay</code></strong> (a Sprite). 
  * When the image has finished loading, the <code>rawContent</code> will be added to the <code>ContentDisplay</code> Sprite 
  * at index 0 using <code>addChildAt()</code>. <code>rawContent</code> will be a <code>flash.display.Bitmap</code> unless 
- * unless script access is denied in which case it will be a <code>flash.display.Loader</code> (to avoid security errors).<br /><br />
+ * unless script access is denied in which case it will be a <code>flash.display.Loader</code> (to avoid security errors).</p>
  * 
- * @example Example AS3 code:<listing version="3.0">
+ * Example AS3 code:<listing version="3.0">
  import com.greensock.~~;
  import com.greensock.events.LoaderEvent;
  import com.greensock.loading.~~;
@@ -180,12 +180,12 @@ package com.greensock.loading {
  }
  
  </listing>
- * <strong>NOTES / TIPS:</strong><br />
+ * <p><strong>NOTES / TIPS:</strong></p>
  * <ul>
  * 		<li>You will not see the image unless you either manually add it to the display list in your onComplete handler or simply use the <code>container</code> special property (see above).</li>
- * </ul><br /><br />
+ * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @see com.greensock.loading.data.ImageLoaderVars
  * 
@@ -198,10 +198,10 @@ package com.greensock.loading {
 		 * Constructor
 		 * 
 		 * @param urlOrRequest The url (<code>String</code>) or <code>URLRequest</code> from which the loader should get its content
-		 * @param vars An object containing optional configuration details. For example: <code>new ImageLoader("img/photo1.jpg", {name:"photo1", container:this, x:100, y:50, alpha:0, onComplete:completeHandler, onProgress:progressHandler})</code>.<br /><br />
+		 * @param vars An object containing optional configuration details. For example: <code>new ImageLoader("img/photo1.jpg", {name:"photo1", container:this, x:100, y:50, alpha:0, onComplete:completeHandler, onProgress:progressHandler})</code>.
 		 * 
-		 * The following special properties can be passed into the constructor via the <code>vars</code> parameter
-		 * which can be either a generic object or an <code><a href="data/ImageLoaderVars.html">ImageLoaderVars</a></code> object:<br />
+		 * <p>The following special properties can be passed into the constructor via the <code>vars</code> parameter
+		 * which can be either a generic object or an <code><a href="data/ImageLoaderVars.html">ImageLoaderVars</a></code> object:</p>
 		 * <ul>
 		 * 		<li><strong> name : String</strong> - A name that is used to identify the ImageLoader instance. This name can be fed to the <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> methods or traced at any time. Each loader's name should be unique. If you don't define one, a unique name will be created automatically, like "loader21".</li>
 		 * 		<li><strong> container : DisplayObjectContainer</strong> - A DisplayObjectContainer into which the <code>ContentDisplay</code> Sprite should be added immediately.</li>
@@ -249,7 +249,7 @@ package com.greensock.loading {
 		 * 		<li><strong> allowMalformedURL : Boolean</strong> - Normally, the URL will be parsed and any variables in the query string (like "?name=test&amp;state=il&amp;gender=m") will be placed into a URLVariables object which is added to the URLRequest. This avoids a few bugs in Flash, but if you need to keep the entire URL intact (no parsing into URLVariables), set <code>allowMalformedURL:true</code>. For example, if your URL has duplicate variables in the query string like <code>http://www.greensock.com/?c=S&amp;c=SE&amp;c=SW</code>, it is technically considered a malformed URL and a URLVariables object can't properly contain all the duplicates, so in this case you'd want to set <code>allowMalformedURL</code> to <code>true</code>.</li>
 		 * 		<li><strong> autoDispose : Boolean</strong> - When <code>autoDispose</code> is <code>true</code>, the loader will be disposed immediately after it completes (it calls the <code>dispose()</code> method internally after dispatching its <code>COMPLETE</code> event). This will remove any listeners that were defined in the vars object (like onComplete, onProgress, onError, onInit). Once a loader is disposed, it can no longer be found with <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> - it is essentially destroyed but its content is not unloaded (you must call <code>unload()</code> or <code>dispose(true)</code> to unload its content). The default <code>autoDispose</code> value is <code>false</code>.
 		 * 
-		 * 		<br /><br />----EVENT HANDLER SHORTCUTS----</li>
+		 * 		<p>----EVENT HANDLER SHORTCUTS----</p></li>
 		 * 		<li><strong> onOpen : Function</strong> - A handler function for <code>LoaderEvent.OPEN</code> events which are dispatched when the loader begins loading. Make sure your onOpen function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
 		 * 		<li><strong> onInit : Function</strong> - A handler function for <code>LoaderEvent.INIT</code> events which are called when the image has downloaded and has been placed into the ContentDisplay Sprite. Make sure your onInit function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
 		 * 		<li><strong> onProgress : Function</strong> - A handler function for <code>LoaderEvent.PROGRESS</code> events which are dispatched whenever the <code>bytesLoaded</code> changes. Make sure your onProgress function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can use the LoaderEvent's <code>target.progress</code> to get the loader's progress value or use its <code>target.bytesLoaded</code> and <code>target.bytesTotal</code>.</li>
@@ -277,7 +277,7 @@ package com.greensock.loading {
 				var i:int = loaders.length;
 				while (--i > -1) {
 					loader = loaders[i];
-					if (loader.url == _url && loader != this && loader.status == LoaderStatus.COMPLETED && loader is ImageLoader) {
+					if (loader.url == _url && loader != this && loader.status == LoaderStatus.COMPLETED && loader is ImageLoader && ImageLoader(loader).rawContent is Bitmap) {
 						_closeStream();
 						_content = new Bitmap(ImageLoader(loader).rawContent.bitmapData, "auto", Boolean(this.vars.smoothing != false));
 						Object(_sprite).rawContent = (_content as DisplayObject);

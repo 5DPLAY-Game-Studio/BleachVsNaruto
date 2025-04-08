@@ -1,6 +1,6 @@
 /**
- * VERSION: 1.87
- * DATE: 2011-07-30
+ * VERSION: 1.935
+ * DATE: 2013-03-18
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com/loadermax/
  **/
@@ -35,15 +35,14 @@ package com.greensock.loading.core {
 /**
  * Serves as the base class for GreenSock loading tools like <code>LoaderMax, ImageLoader, XMLLoader, SWFLoader</code>, etc. 
  * There is no reason to use this class on its own. Please see the documentation for the other classes.
- * <br /><br />
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
 	public class LoaderCore extends EventDispatcher {
 		/** @private **/
-		public static const version:Number = 1.87;
+		public static const version:Number = 1.935;
 		
 		/** @private **/
 		protected static var _loaderCount:uint = 0;
@@ -63,6 +62,7 @@ package com.greensock.loading.core {
 													  onError:"error", 
 													  onSecurityError:"securityError", 
 													  onHTTPStatus:"httpStatus", 
+													  onHTTPResponseStatus:"httpResponseStatus",
 													  onIOError:"ioError", 
 													  onScriptAccessDenied:"scriptAccessDenied", 
 													  onChildOpen:"childOpen", 
@@ -235,13 +235,14 @@ package com.greensock.loading.core {
 			if (isLoading) {
 				_time = getTimer() - _time;
 			}
-			if (_dispatchProgress && !suppressEvents && _status < LoaderStatus.FAILED) {
+			_cachedBytesLoaded = 0;
+			if (_status < LoaderStatus.FAILED) {
 				if (this is LoaderMax) {
 					_calculateProgress();
-				} else {
-					_cachedBytesLoaded = 0;
 				}
-				dispatchEvent(new LoaderEvent(LoaderEvent.PROGRESS, this));
+				if (_dispatchProgress && !suppressEvents) {
+					dispatchEvent(new LoaderEvent(LoaderEvent.PROGRESS, this));
+				}
 			}
 			if (!suppressEvents) {
 				if (isLoading) {
@@ -294,23 +295,23 @@ package com.greensock.loading.core {
 		 * Immediately prioritizes the loader inside any LoaderMax instances that contain it,
 		 * forcing it to the top position in their queue and optionally calls <code>load()</code>
 		 * immediately as well. If one of its parent LoaderMax instances is currently loading a 
-		 * different loader, that one will be temporarily cancelled. <br /><br />
+		 * different loader, that one will be temporarily cancelled. 
 		 * 
-		 * By contrast, when <code>load()</code> is called, it doesn't change the loader's position/index 
+		 * <p>By contrast, when <code>load()</code> is called, it doesn't change the loader's position/index 
 		 * in any LoaderMax queues. For example, if a LoaderMax is working on loading the first object in 
 		 * its queue, you can call load() on the 20th item and it will honor your request without 
 		 * changing its index in the queue. <code>prioritize()</code>, however, affects the position 
-		 * in the queue and optionally loads it immediately as well.<br /><br />
+		 * in the queue and optionally loads it immediately as well.</p>
 		 * 
-		 * So even if your LoaderMax hasn't begun loading yet, you could <code>prioritize(false)</code> 
+		 * <p>So even if your LoaderMax hasn't begun loading yet, you could <code>prioritize(false)</code> 
 		 * a loader and it will rise to the top of all LoaderMax instances to which it belongs, but not 
 		 * start loading yet. If the goal is to load something immediately, you can just use the 
-		 * <code>load()</code> method.<br /><br />
+		 * <code>load()</code> method.</p>
 		 * 
-		 * You may use the static <code>LoaderMax.prioritize()</code> method instead and simply pass 
-		 * the name or url of the loader as the first parameter like:<br /><br /><code>
+		 * <p>You may use the static <code>LoaderMax.prioritize()</code> method instead and simply pass 
+		 * the name or url of the loader as the first parameter like:</p><p><code>
 		 * 
-		 * LoaderMax.prioritize("myLoaderName", true);</code><br /><br />
+		 * LoaderMax.prioritize("myLoaderName", true);</code></p>
 		 * 
 		 * @param loadNow If <code>true</code> (the default), the loader will start loading immediately (otherwise it is simply placed at the top the queue in any LoaderMax instances to which it belongs).
 		 * @see #load()
@@ -424,13 +425,14 @@ package com.greensock.loading.core {
 		
 		/** @private **/
 		protected function _failHandler(event:Event, dispatchError:Boolean=true):void {
-			_dump(0, LoaderStatus.FAILED);
+			_dump(0, LoaderStatus.FAILED, true);
 			if (dispatchError) {
 				_errorHandler(event);
 			} else {
 				var target:Object = event.target; //trigger the LoaderEvent's target getter once first in order to ensure that it reports properly - see the notes in LoaderEvent.target for more details.
 			}
 			dispatchEvent(new LoaderEvent(LoaderEvent.FAIL, ((event is LoaderEvent && this.hasOwnProperty("getChildren")) ? event.target : this), this.toString() + " > " + (event as Object).text, event));
+			dispatchEvent(new LoaderEvent(LoaderEvent.CANCEL, this));
 		}
 		
 		/** @private **/

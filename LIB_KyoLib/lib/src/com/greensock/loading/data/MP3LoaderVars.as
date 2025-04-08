@@ -8,35 +8,35 @@ package com.greensock.loading.data {
 	import flash.display.DisplayObject;
 	import flash.media.SoundLoaderContext;
 /**
- * Can be used instead of a generic Object to define the <code>vars</code> parameter of a MP3Loader's constructor. <br /><br />	
+ * Can be used instead of a generic Object to define the <code>vars</code> parameter of a MP3Loader's constructor. 
  * 
- * There are 2 primary benefits of using a MP3LoaderVars instance to define your MP3Loader variables:
+ * <p>There are 2 primary benefits of using a MP3LoaderVars instance to define your MP3Loader variables:</p>
  *  <ol>
  *		<li> In most code editors, code hinting will be activated which helps remind you which special properties are available in MP3Loader</li>
  *		<li> It enables strict data typing for improved debugging (ensuring, for example, that you don't define a Boolean value for <code>onComplete</code> where a Function is expected).</li>
- *  </ol><br />
+ *  </ol>
  * 
- * The down side, of course, is that the code is more verbose and the MP3LoaderVars class adds slightly more kb to your swf.
+ * <p>The down side, of course, is that the code is more verbose and the MP3LoaderVars class adds slightly more kb to your swf.</p>
  *
- * <b>USAGE:</b><br /><br />
- * Note that each method returns the MP3LoaderVars instance, so you can reduce the lines of code by method chaining (see example below).<br /><br />
+ * <p><strong>USAGE</strong></p>
+ * <p>Note that each method returns the MP3LoaderVars instance, so you can reduce the lines of code by method chaining (see example below).</p>
  *	
- * <b>Without MP3LoaderVars:</b><br /><code>
- * new MP3Loader("audio.mp3", {name:"audio", estimatedBytes:11500, autoPlay:false, onComplete:completeHandler, onProgress:progressHandler})</code><br /><br />
+ * <p><strong>Without MP3LoaderVars:</strong></p><p><code>
+ * new MP3Loader("audio.mp3", {name:"audio", estimatedBytes:11500, autoPlay:false, onComplete:completeHandler, onProgress:progressHandler})</code></p>
  * 
- * <b>With MP3LoaderVars</b><br /><code>
- * new MP3Loader("audio.mp3", new MP3LoaderVars().name("audio").estimatedBytes(11500).autoPlay(false).onComplete(completeHandler).onProgress(progressHandler))</code><br /><br />
+ * <p><strong>With MP3LoaderVars</strong></p><p><code>
+ * new MP3Loader("audio.mp3", new MP3LoaderVars().name("audio").estimatedBytes(11500).autoPlay(false).onComplete(completeHandler).onProgress(progressHandler))</code></p>
  * 
- * <b>NOTES:</b><br />
+ * <p><strong>NOTES:</strong></p>
  * <ul>
  *	<li> To get the generic vars object that MP3LoaderVars builds internally, simply access its "vars" property.
- * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<br /><code>
+ * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<code>
  * 		 new MP3Loader("audio.mp3", new MP3LoaderVars().name("mp3").estimatedBytes(11500).autoPlay(false).vars);</code></li>
  *	<li> Using MP3LoaderVars is completely optional. If you prefer the shorter synatax with the generic Object, feel
  * 		 free to use it. The purpose of this class is simply to enable code hinting and to allow for strict data typing.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  **/

@@ -9,33 +9,33 @@ package com.greensock.loading.data {
 	import flash.display.DisplayObjectContainer;
 	import flash.system.LoaderContext;
 /**
- * Can be used instead of a generic object to define the <code>vars</code> parameter of an SWFLoader's constructor. <br /><br />	
+ * Can be used instead of a generic object to define the <code>vars</code> parameter of an SWFLoader's constructor. 
  * 
- * There are 2 primary benefits of using a SWFLoaderVars instance to define your SWFLoader variables:
+ * <p>There are 2 primary benefits of using a SWFLoaderVars instance to define your SWFLoader variables:</p>
  *  <ol>
  *		<li> In most code editors, code hinting will be activated which helps remind you which special properties are available in SWFLoader</li>
  *		<li> It enables strict data typing for improved debugging (ensuring, for example, that you don't define a Boolean value for <code>onComplete</code> where a Function is expected).</li>
  *  </ol>
  *
- * <b>USAGE:</b><br />
- * Note that each method returns the SWFLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).<br /><br />
+ * <p><strong>USAGE</strong></p>
+ * <p>Note that each method returns the SWFLoaderVars instance, so you can reduce the lines of code by method chaining (see example below).</p>
  *	
- * <b>Without SWFLoaderVars:</b><br /><code>
- * new SWFLoader("child.swf", {name:"swf", estimatedBytes:11500, container:this, width:400, height:300, onComplete:completeHandler, onProgress:progressHandler})<br /><br /></code>
+ * <p><strong>Without SWFLoaderVars:</strong></p><p><code>
+ * new SWFLoader("child.swf", {name:"swf", estimatedBytes:11500, container:this, width:400, height:300, onComplete:completeHandler, onProgress:progressHandler})</code></p>
  * 
- * <b>With SWFLoaderVars</b><br /><code>
- * new SWFLoader("photo1.jpg", new SWFLoaderVars().name("swf").estimatedBytes(11500).container(this).width(400).height(300).onComplete(completeHandler).onProgress(progressHandler))<br /><br /></code>
+ * <p><strong>With SWFLoaderVars</strong></p><p><code>
+ * new SWFLoader("photo1.jpg", new SWFLoaderVars().name("swf").estimatedBytes(11500).container(this).width(400).height(300).onComplete(completeHandler).onProgress(progressHandler))</code></p>
  *		
- * <b>NOTES:</b><br />
+ * <p><strong>NOTES:</strong></p>
  * <ul>
  *	<li> To get the generic vars object that SWFLoaderVars builds internally, simply access its "vars" property.
- * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<br /><code>
+ * 		 In fact, if you want maximum backwards compatibility, you can tack ".vars" onto the end of your chain like this:<code>
  * 		 new SWFLoader("child.swf", new SWFLoaderVars().name("swf").estimatedBytes(11500).vars);</code></li>
  *	<li> Using SWFLoaderVars is completely optional. If you prefer the shorter synatax with the generic Object, feel
  * 		 free to use it. The purpose of this class is simply to enable code hinting and to allow for strict data typing.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	 

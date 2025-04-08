@@ -1,6 +1,6 @@
 /**
  * VERSION: 0.4 (beta)
- * DATE: 2010-12-22
+ * DATE: 2011-09-12
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com
  **/
@@ -9,24 +9,24 @@ package com.greensock.motionPaths {
 	import flash.geom.Matrix;
 	import flash.events.Event;
 /**
- * A RectanglePath2D defines a rectangular path on which a PathFollower can be placed, making it simple to tween objects
+ * [AS3 only] A RectanglePath2D defines a rectangular path on which a PathFollower can be placed, making it simple to tween objects
  * along a rectangle's perimeter. A PathFollower's position along the path is described using its <code>progress</code> property, 
  * a value between 0 and 1 where 0 is at the beginning of the path (top left corner), and as the value increases, it
  * moves clockwise along the path so that 0.5 would be at the lower right corner, and 1 is all the way back at the 
  * upper left corner of the path. So to tween a PathFollower along the path, you can simply tween its
  * <code>progress</code> property. To tween ALL of the followers on the path at once, you can tween the 
  * RectanglePath2D's <code>progress</code> property. PathFollowers automatically wrap so that if the <code>progress</code> 
- * value exceeds 1 it continues at the beginning of the path.<br /><br />
+ * value exceeds 1 it continues at the beginning of the path.
  *  
- * Since RectanglePath2D extends the Shape class, you can add an instance to the display list to see a line representation
+ * <p>Since RectanglePath2D extends the Shape class, you can add an instance to the display list to see a line representation
  * of the path drawn which can be helpful especially during the production phase. Use <code>lineStyle()</code> 
  * to adjust the color, thickness, and other attributes of the line that is drawn (or set the RectanglePath2D's 
  * <code>visible</code> property to false or don't add it to the display list if you don't want to see the line 
  * at all). You can also adjust all of its properties like <code>scaleX, scaleY, rotation, width, height, x,</code> 
  * and <code>y</code>. That means you can tween those values as well to achieve very dynamic, complex effects 
- * with ease.<br /><br />
+ * with ease.</p>
  * 
- * @example Example AS3 code:<listing version="3.0">
+ * <listing version="3.0">
 import com.greensock.~~;
 import com.greensock.motionPaths.~~;
 
@@ -43,14 +43,14 @@ TweenLite.to(follower, 2, {progress:1});
 TweenLite.to(follower, 2, {progress:-1});
 </listing>
  * 
- * <b>NOTES</b><br />
+ * <p><strong>NOTES</strong></p>
  * <ul>
  * 		<li>All followers' positions are automatically updated when you alter the MotionPath that they're following.</li>
  * 		<li>To tween all followers along the path at once, simply tween the MotionPath's <code>progress</code> 
  * 			property which will provide better performance than tweening each follower independently.</li>
  * </ul>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
@@ -204,7 +204,7 @@ TweenLite.to(follower, 2, {progress:-1});
 			update();
 		}
 		
-		/** height of the rectangle in its unrotated, unscaled state (does not factor in any transformations like scaleX/scaleY/rotation) **/
+		/** If <code>true</code>, the origin (registration point) of the RectanglePath2D will be in its center rather than its upper left corner. **/
 		public function get centerOrigin():Boolean {
 			return _centerOrigin;
 		}

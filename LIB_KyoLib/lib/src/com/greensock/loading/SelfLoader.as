@@ -15,20 +15,20 @@ package com.greensock.loading {
  * Tracks the loading progress of the swf in which the loader resides (basically a simple tool for tracking
  * the <code>loaderInfo</code>'s progress). SelfLoader is only useful in situations where you want to factor
  * the current swf's loading progress into a LoaderMax queue or maybe display a progress bar for the current
- * swf or fire an event when loading has finished.<br /><br />
+ * swf or fire an event when loading has finished.
  * 
- * <strong>OPTIONAL VARS PROPERTIES</strong><br />
- * The following special properties can be passed into the SelfLoader constructor via its <code>vars</code> parameter:<br />
+ * <p><strong>OPTIONAL VARS PROPERTIES</strong></p>
+ * <p>The following special properties can be passed into the SelfLoader constructor via its <code>vars</code> parameter:</p>
  * <ul>
  * 		<li><strong> name : String</strong> - A name that is used to identify the loader instance. This name can be fed to the <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> methods or traced at any time. Each loader's name should be unique. If you don't define one, a unique name will be created automatically, like "loader21".</li>
  * 		<li><strong> autoDispose : Boolean</strong> - When <code>autoDispose</code> is <code>true</code>, the loader will be disposed immediately after it completes (it calls the <code>dispose()</code> method internally after dispatching its <code>COMPLETE</code> event). This will remove any listeners that were defined in the vars object (like onComplete, onProgress, onError). Once a loader is disposed, it can no longer be found with <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code>. The default <code>autoDispose</code> value is <code>false</code>.
  * 		
- * 		<br /><br />----EVENT HANDLER SHORTCUTS----</li>
+ * 		<p>----EVENT HANDLER SHORTCUTS----</p></li>
  * 		<li><strong> onProgress : Function</strong> - A handler function for <code>LoaderEvent.PROGRESS</code> events which are dispatched whenever the <code>bytesLoaded</code> changes. Make sure your onProgress function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can use the LoaderEvent's <code>target.progress</code> to get the loader's progress value or use its <code>target.bytesLoaded</code> and <code>target.bytesTotal</code>.</li>
  * 		<li><strong> onComplete : Function</strong> - A handler function for <code>LoaderEvent.COMPLETE</code> events which are dispatched when the loader has finished loading successfully. Make sure your onComplete function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
- * </ul><br />
+ * </ul>
  * 
- * @example Example AS3 code:<listing version="3.0">
+ * Example AS3 code:<listing version="3.0">
  import com.greensock.loading.~~;
  import com.greensock.events.LoaderEvent;
  
@@ -59,7 +59,7 @@ function errorHandler(event:LoaderEvent):void {
 }
  </listing>
  * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2010-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
@@ -71,14 +71,14 @@ function errorHandler(event:LoaderEvent):void {
 		 * Constructor
 		 * 
 		 * @param self A DisplayObject from the main swf (it will use this DisplayObject's <code>loaderInfo</code> to track the loading progress).
-		 * @param vars An object containing optional configuration details. For example: <code>new SelfLoader(this, {name:"self", onComplete:completeHandler, onProgress:progressHandler})</code>.<br /><br />
+		 * @param vars An object containing optional configuration details. For example: <code>new SelfLoader(this, {name:"self", onComplete:completeHandler, onProgress:progressHandler})</code>.
 		 * 
-		 * The following special properties can be passed into the constructor via the <code>vars</code> parameter:<br />
+		 * <p>The following special properties can be passed into the constructor via the <code>vars</code> parameter:</p>
 		 * <ul>
 		 * 		<li><strong> name : String</strong> - A name that is used to identify the loader instance. This name can be fed to the <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code> methods or traced at any time. Each loader's name should be unique. If you don't define one, a unique name will be created automatically, like "loader21".</li>
 		 * 		<li><strong> autoDispose : Boolean</strong> - When <code>autoDispose</code> is <code>true</code>, the loader will be disposed immediately after it completes (it calls the <code>dispose()</code> method internally after dispatching its <code>COMPLETE</code> event). This will remove any listeners that were defined in the vars object (like onComplete, onProgress, onError). Once a loader is disposed, it can no longer be found with <code>LoaderMax.getLoader()</code> or <code>LoaderMax.getContent()</code>. The default <code>autoDispose</code> value is <code>false</code>.
 		 * 		
-		 * 		<br /><br />----EVENT HANDLER SHORTCUTS----</li>
+		 * 		<p>----EVENT HANDLER SHORTCUTS----</p></li>
 		 * 		<li><strong> onProgress : Function</strong> - A handler function for <code>LoaderEvent.PROGRESS</code> events which are dispatched whenever the <code>bytesLoaded</code> changes. Make sure your onProgress function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>). You can use the LoaderEvent's <code>target.progress</code> to get the loader's progress value or use its <code>target.bytesLoaded</code> and <code>target.bytesTotal</code>.</li>
 		 * 		<li><strong> onComplete : Function</strong> - A handler function for <code>LoaderEvent.COMPLETE</code> events which are dispatched when the loader has finished loading successfully. Make sure your onComplete function accepts a single parameter of type <code>LoaderEvent</code> (<code>com.greensock.events.LoaderEvent</code>).</li>
 		 * </ul>

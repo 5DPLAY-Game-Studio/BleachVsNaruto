@@ -1,16 +1,15 @@
 /**
- * VERSION: 1.02
- * DATE: 10/2/2009
- * ACTIONSCRIPT VERSION: 3.0 
- * UPDATES AND DOCUMENTATION AT: http://www.TweenMax.com
+ * VERSION: 12.0
+ * DATE: 2012-01-14
+ * AS3 
+ * UPDATES AND DOCS AT: http://www.greensock.com
  **/
 package com.greensock.plugins {
-	import flash.display.*;
+	import flash.display.DisplayObject;
 	import flash.geom.Rectangle;
-	
-	import com.greensock.*;
+	import com.greensock.TweenLite;
 /**
- * Tweens the scrollRect property of a DisplayObject. You can define any (or all) of the following
+ * [AS3/AS2 only] Tweens the scrollRect property of a DisplayObject. You can define any (or all) of the following
  * properties:
  * <code>
  * <ul>
@@ -25,23 +24,23 @@ package com.greensock.plugins {
  * </ul>
  * </code><br />
  * 
- * <b>USAGE:</b><br /><br />
- * <code>
- * 		import com.greensock.TweenLite; <br />
- * 		import com.greensock.plugins.TweenPlugin; <br />
- * 		import com.greensock.plugins.ScrollRectPlugin; <br />
- * 		TweenPlugin.activate([ScrollRectPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.<br /><br />
+ * <p><b>USAGE:</b></p>
+ * <listing version="3.0">
+import com.greensock.TweenLite; 
+import com.greensock.plugins.TweenPlugin; 
+import com.greensock.plugins.ScrollRectPlugin; 
+TweenPlugin.activate([ScrollRectPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
+
+TweenLite.to(mc, 1, {scrollRect:{x:50, y:300, width:100, height:100}});
+</listing>
  * 
- * 		TweenLite.to(mc, 1, {scrollRect:{x:50, y:300, width:100, height:100}}); <br /><br />
- * </code>
- * 
- * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <p><strong>Copyright 2008-2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
  * 
  * @author Jack Doyle, jack@greensock.com
  */
 	public class ScrollRectPlugin extends TweenPlugin {
 		/** @private **/
-		public static const API:Number = 1.0; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
+		public static const API:Number = 2; //If the API/Framework for plugins changes in the future, this number helps determine compatibility
 		
 		/** @private **/
 		protected var _target:DisplayObject;
@@ -50,13 +49,11 @@ package com.greensock.plugins {
 		
 		/** @private **/
 		public function ScrollRectPlugin() {
-			super();
-			this.propName = "scrollRect";
-			this.overwriteProps = ["scrollRect"];
+			super("scrollRect");
 		}
 		
 		/** @private **/
-		override public function onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
+		override public function _onInitTween(target:Object, value:*, tween:TweenLite):Boolean {
 			if (!(target is DisplayObject)) {
 				return false;
 			}
@@ -68,14 +65,14 @@ package com.greensock.plugins {
 				_rect = new Rectangle(0, 0, r.width + r.x, r.height + r.y);
 			}
 			for (var p:String in value) {
-				addTween(_rect, p, _rect[p], value[p], p);
+				_addTween(_rect, p, _rect[p], value[p], "scrollRect");
 			}
 			return true;
 		}
 		
 		/** @private **/
-		override public function set changeFactor(n:Number):void {
-			updateTweens(n);
+		override public function setRatio(v:Number):void {
+			super.setRatio(v);
 			_target.scrollRect = _rect;
 		}
 

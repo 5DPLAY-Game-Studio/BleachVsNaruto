@@ -1,22 +1,29 @@
+/**
+ * VERSION: 1.0
+ * DATE: 2012-03-22
+ * AS3 (AS2 and JS versions are also available)
+ * UPDATES AND DOCS AT: http://www.greensock.com
+ **/
 package com.greensock.easing {
-	public class Bounce {
-		public static function easeOut (t:Number, b:Number, c:Number, d:Number):Number {
-			if ((t/=d) < (1/2.75)) {
-				return c*(7.5625*t*t) + b;
-			} else if (t < (2/2.75)) {
-				return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-			} else if (t < (2.5/2.75)) {
-				return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-			} else {
-				return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
-			}
-		}
-		public static function easeIn (t:Number, b:Number, c:Number, d:Number):Number {
-			return c - easeOut(d-t, 0, c, d) + b;
-		}
-		public static function easeInOut (t:Number, b:Number, c:Number, d:Number):Number {
-			if (t < d*0.5) return easeIn (t*2, 0, c, d) * .5 + b;
-			else return easeOut (t*2-d, 0, c, d) * .5 + c*.5 + b;
-		}
+/**
+ * Eases, bouncing either at the beginning (easeIn), the end (easeOut), or both (easeInOut). 
+ * <code>Bounce</code> is a convenience class that congregates the 3 types of Bounce eases (BounceIn, BounceOut, 
+ * and BounceInOut) as static properties so that they can be referenced using the standard synatax, like 
+ * <code>Bounce.easeIn</code>, <code>Bounce.easeOut</code>, and <code>Bounce.easeInOut</code>. 
+ * 
+ * <p><strong>Copyright 2014, GreenSock. All rights reserved.</strong> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for <a href="http://www.greensock.com/club/">Club GreenSock</a> members, the software agreement that was issued with the membership.</p>
+ * 
+ * @author Jack Doyle, jack@greensock.com
+ **/
+	final public class Bounce {
+		
+		/** Eases out, bouncing at the end. **/
+		public static var easeOut:BounceOut = new BounceOut();
+		
+		/** Bounces slightly at first, then to a greater degree over time, accelerating as the ease progresses. **/
+		public static var easeIn:BounceIn = new BounceIn();
+
+		/** Bounces in increasing degree towards the center of the ease, then eases out, bouncing to the end (decreasing in degree at the end). **/
+		public static var easeInOut:BounceInOut = new BounceInOut();
 	}
 }

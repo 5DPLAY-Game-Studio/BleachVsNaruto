@@ -20,11 +20,20 @@ package net.play5d.game.bvn.utils {
 import net.play5d.kyo.utils.WebUtils;
 
 public class URL {
-    public static const WEBSITE:String          = 'http://www.1212321.com/index/';
-    public static const BBS:String              = 'http://bbs.1212321.com/';
-    public static const DOWNLOAD:String         = 'http://www.1212321.com/index/';
-    public static const DOWNLOAD_ANDROID:String = 'http://1212321.com/index/game/phone/a48b52f9-6b6a-4448-91d2-d666ff93edd7';
-    public static var MARK:String               = 'bvn';
+    // 链接标记
+    public static var MARK:String = "bvn";
+
+    // 游戏官方网站链接
+    public static const WEBSITE:String          = "http://www.1212321.com/index/";
+    // 游戏官方论坛链接
+    public static const BBS:String              = "http://bbs.1212321.com/";
+    // 下载游戏链接
+    public static const DOWNLOAD:String         = "http://www.1212321.com/index/";
+    // 下载安卓端游戏链接
+    public static const DOWNLOAD_ANDROID:String = "http://1212321.com/index/game/phone/a48b52f9-6b6a-4448-91d2-d666ff93edd7";
+    // GitHub发布页面链接
+    public static const GITHUB:String           = "https://github.com/5DPLAY-Game-Studio/BleachVsNaruto";
+
 
     public static function go(url:String, isAddMark:Boolean = true):void {
         if (isAddMark) {
