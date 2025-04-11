@@ -243,6 +243,14 @@ public class GameInterfaceManager implements IGameInterface {
                 optoinKey: 'quality'
             },
             {
+                txt      : 'SHOW HP', cn: '显示血量',
+                options  : [
+                    {label: 'SHOW', cn: '显示', value: true},
+                    {label: 'HIDE', cn: '隐藏', value: false},
+                ],
+                optoinKey: 'isShowHp'
+            },
+            {
                 txt      : 'DISPLAY MODE', cn: '显示模式',
                 options  : [
                     {label: 'FULLSCREEN', cn: '全屏', value: true},
