@@ -100,17 +100,34 @@ public class FighterModel {
         return bv;
     }
 
-    public function initByXML(xml:XML):void {
+//    public function initByXML(xml:XML):void {
+//        _fighterObj = {};
+//
+//        for each(var i:XML in xml.fighter) {
+//            var fv:FighterVO = new FighterVO();
+//            fv.initByXML(i);
+//            _fighterObj[fv.id] = fv;
+//        }
+//
+//    }
+
+    public function initByObject(obj:Object):void {
         _fighterObj = {};
 
-        for each(var i:XML in xml.fighter) {
+        var pathObj:Object = obj['fighter']['path'];
+        var dataArr:Array = obj['fighter']['data'];
+        for each (var data:Object in dataArr) {
+            var newData:Object = {
+                path: pathObj,
+                data: data
+            };
+
             var fv:FighterVO = new FighterVO();
-            fv.initByXML(i);
+            fv.initByObject(newData);
+
             _fighterObj[fv.id] = fv;
         }
-
     }
-
 
 }
 }
