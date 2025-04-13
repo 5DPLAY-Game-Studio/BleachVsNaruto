@@ -25,6 +25,7 @@ import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.game.bvn.mob.utils.FileUtils;
 import net.play5d.game.bvn.mob.views.ViewManager;
 import net.play5d.game.bvn.utils.GameSafeKeeper;
+import net.play5d.game.bvn.utils.GithubUtils;
 import net.play5d.game.bvn.utils.URL;
 
 public class GameInterfaceManager implements IGameInterface {
@@ -338,7 +339,9 @@ public class GameInterfaceManager implements IGameInterface {
 //                       '" target="_blank">www.1212321.com</a>' + '<br/>';
 //        creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.1212321.com/') +
 //                       '" target="_blank">bbs.1212321.com</a>' + '<br/>';
-        creditsInfo += '<br/>' +
+        var commitsHash:String = GithubUtils.getCommitsHash();
+        var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
+        creditsInfo += '提交：<a href="' + commitsUrl + '" target="_blank">' + commitsHash + '</a><br/>' +
                        '官网：<a href="http://www.1212321.com/" target="_blank">www.1212321.com</a>    ' +
                        '论坛：<a href="http://bbs.1212321.com/" target="_blank">bbs.1212321.com</a><br/>' +
                        '邮箱：5dplay@qun.mail.163.com （人才招募中）<br/>';
@@ -346,7 +349,7 @@ public class GameInterfaceManager implements IGameInterface {
         var txt:TextField = new TextField();
 
         var tf:TextFormat = new TextFormat();
-        tf.font           = '微软雅黑';
+        tf.font           = FONT.fontName;
         tf.size           = 17;
         tf.color          = 0xffff00;
         tf.leading        = 10;
