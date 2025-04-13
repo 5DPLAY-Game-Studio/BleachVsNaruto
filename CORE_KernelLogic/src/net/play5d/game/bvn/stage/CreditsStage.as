@@ -127,7 +127,7 @@ public class CreditsStage implements IStage {
         var txt:TextField = new TextField();
 
         var tf:TextFormat = new TextFormat();
-        tf.font           = '黑体';
+        tf.font           = FONT.fontName;
         tf.size           = 17;
         tf.color          = 0xffff00;
         tf.leading        = 10;
