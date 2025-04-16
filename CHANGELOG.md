@@ -2,6 +2,19 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.04162025_alpha] - 2025-04-16
+
+### 新增
+
+- 制作组界面加入对于 GreenHD 的 Grimm 感谢
+- 制作组页面增加当前提交哈希
+- 增加 显示判定面 功能
+
+### 修复
+
+- 修复 是否显示血量开关设置 未在手机版生效的 BUG
+- 修复 是否显示血量开关设置 未在 PC 版生效的 BUG
+
 ## [3.7.0.0.04092025_alpha] - 2025-04-09
 
 ### 新增
@@ -181,6 +194,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.04162025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04072025_alpha...3.7.0.0.04162025_alpha
 [3.7.0.0.04092025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04072025_alpha...3.7.0.0.04092025_alpha
 [3.7.0.0.04072025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.03082025_alpha...3.7.0.0.04072025_alpha
 [3.7.0.0.03082025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.03032025_alpha...3.7.0.0.03082025_alpha
