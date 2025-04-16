@@ -65,15 +65,15 @@ public class GameData {
 
     public function loadConfig(back:Function, fail:Function = null):void {
 
-        AssetManager.I.loadXML('config/fighter.xml', loadFighterBack, loadFighterFail);
+        AssetManager.I.loadJSON('config/fighter.json', loadFighterBack, loadFighterFail);
 
-        function loadFighterBack(data:XML):void {
-            FighterModel.I.initByXML(data);
-            AssetManager.I.loadXML('config/assist.xml', loadAssetsBack, loadAssisterFail);
+        function loadFighterBack(data:Object):void {
+            FighterModel.I.initByObject(data);
+            AssetManager.I.loadJSON('config/assist.json', loadAssetsBack, loadAssisterFail);
         }
 
-        function loadAssetsBack(data:XML):void {
-            AssisterModel.I.initByXML(data);
+        function loadAssetsBack(data:Object):void {
+            AssisterModel.I.initByObject(data);
             AssetManager.I.loadXML('config/select.xml', loadSelectBack, loadSelectFail);
         }
 

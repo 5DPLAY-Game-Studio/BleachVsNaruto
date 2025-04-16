@@ -46,34 +46,82 @@ public class FighterVO implements IInstanceVO {
 //        'faceBigUrl', 'faceBarUrl', 'bgm', 'bgmRate'
 //    ];
 
-    public function initByXML(xml:XML):void {
-        id        = xml.@id;
-        name      = xml.@name;
-        comicType = int(xml.@comic_type);
+//    public function initByXML(xml:XML):void {
+//        id        = xml.@id;
+//        name      = xml.@name;
+//        comicType = int(xml.@comic_type);
+//
+//        fileUrl    = xml.file.@url;
+//        startFrame = int(xml.file.@startFrame);
+//
+//        faceUrl    = xml.face.@url;
+//        faceBigUrl = xml.face.@big_url;
+//        faceBarUrl = xml.face.@bar_url;
+//        faceWinUrl = xml.face.@win_url;
+//
+//        contactFriends = xml.contact.friend.toString().split(',');
+//        contactEnemys  = xml.contact.enemy.toString().split(',');
+//
+//        bgm     = xml.bgm.@url;
+//        bgmRate = Number(xml.bgm.@rate) / 100;
+//
+//        says = [];
+//        for each(var i:XML in xml.says.say_item) {
+//            says.push(i.children().toString());
+//        }
+//
+//        if (startFrame != 0 && !bgm) {
+//            TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
+//        }
+//
+//    }
 
-        fileUrl    = xml.file.@url;
-        startFrame = int(xml.file.@startFrame);
+    public function initByObject(obj:Object):void {
+        var pathObj:Object = obj['path'];
+        var dataObj:Object = obj['data'];
 
-        faceUrl    = xml.face.@url;
-        faceBigUrl = xml.face.@big_url;
-        faceBarUrl = xml.face.@bar_url;
-        faceWinUrl = xml.face.@win_url;
+        var fighterPath:String = pathObj['fighter'];
+        var facePath:String    = pathObj['face'];
+        var bgmPath:String     = pathObj['bgm'];
 
-        contactFriends = xml.contact.friend.toString().split(',');
-        contactEnemys  = xml.contact.enemy.toString().split(',');
+        id         = dataObj['id'];
+        name       = dataObj['name'];
+        comicType  = dataObj['comic_type'];
+        if (dataObj['start_frame'] != null){
+            startFrame = dataObj['start_frame'];
+        }
 
-        bgm     = xml.bgm.@url;
-        bgmRate = Number(xml.bgm.@rate) / 100;
+        if (dataObj['urls']['file']) {
+            fileUrl    = fighterPath + dataObj['urls']['file'];
+        }
+        if (dataObj['urls']['face']) {
+            faceUrl    = facePath + dataObj['urls']['face'];
+        }
+        if (dataObj['urls']['face_big']) {
+            faceBigUrl = facePath + dataObj['urls']['face_big'];
+        }
+        if (dataObj['urls']['face_bar']) {
+            faceBarUrl = facePath + dataObj['urls']['face_bar'];
+        }
+        if (dataObj['urls']['face_win']) {
+            faceWinUrl = facePath + dataObj['urls']['face_win'];
+        }
 
-        says = [];
-        for each(var i:XML in xml.says.say_item) {
-            says.push(i.children().toString());
+        contactFriends = [];
+        contactEnemys  = [];
+
+        if (dataObj['says']) {
+            says = dataObj['says'];
+        }
+
+        if (dataObj['bgm']) {
+            bgm     = bgmPath + dataObj['bgm']['url'];
+            bgmRate = dataObj['bgm']['rate'];
         }
 
         if (startFrame != 0 && !bgm) {
             TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
         }
-
     }
 
     public function getRandSay():String {

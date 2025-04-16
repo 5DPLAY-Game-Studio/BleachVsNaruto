@@ -101,7 +101,7 @@ public class MainGame {
             _stage      = stage;
 
             GameLogger.log('Initializing game rendering...');
-            GameRender.initlize(stage);
+            GameRender.initialize(stage);
 
             GameLogger.log('Initializing game inputter...');
             GameInputer.initlize(_stage);

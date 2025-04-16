@@ -22,6 +22,11 @@ import flash.display.FrameLabel;
 import flash.display.MovieClip;
 import flash.filters.ColorMatrixFilter;
 
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+
+import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.stage.GameStage;
+
 /**
  * 影片剪辑实用工具
  */
@@ -120,6 +125,35 @@ public class MCUtils {
 
                 m.stop();
                 stopAllMovieClips(m);
+            }
+        }
+    }
+
+    /**
+     * 使用回调方式渲染游戏元件
+     *
+     * @param back 回调函数，需要一个参数 sp，类型为 IGameSprite
+     */
+    public static function renderGameSpritesCB(back:Function):void {
+        var gameStage:GameStage = GameCtrl.I.gameState;
+        if (!gameStage) {
+            return;
+        }
+
+        var gameSprites:Vector.<IGameSprite> = gameStage.getGameSprites();
+        if (!gameSprites || gameSprites.length == 0) {
+            return;
+        }
+
+        for (var i:int = 0; i < gameSprites.length; i++) {
+            var sp:IGameSprite = gameSprites[i] as IGameSprite;
+
+            if (back != null) {
+                back(sp);
+            }
+
+            if (!sp || sp.isDestoryed()) {
+                i--;
             }
         }
     }
