@@ -40,8 +40,8 @@ public class FighterAttackerCtrler implements IGameSpriteCntlr {
     private var _attacker:FighterAttacker;
     private var _touchFloor:Boolean;
     private var _touchFloorFrame:String;
-    private var hitTargetAction:String;
-    private var hitTargetChecker:String;
+    public var hitTargetAction:String;
+    public var hitTargetChecker:String;
 
     /**
      * 获取目标

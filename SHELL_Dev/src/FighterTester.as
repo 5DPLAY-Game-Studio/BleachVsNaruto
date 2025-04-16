@@ -45,6 +45,7 @@ import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
+import net.play5d.game.bvn.debug.DebugMain;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.LoadingStage;
@@ -233,6 +234,7 @@ public class FighterTester extends Sprite {
 
 //			addButton("改变FPS",400,50,100,30,changeFPS);
         addButton(GetLang('dev.txt.fighter_tester.btn_test'), 560, 3, 175, 30, testGame);
+        addButton('显示判定面', 520, 3, 175, 30, renderMainClickHandler);
 
         var saveObj:Object = KyoSharedObject.load('fighter_test_config');
         if (saveObj && saveObj.p1) {
@@ -504,6 +506,23 @@ public class FighterTester extends Sprite {
 
         Debugger.initDebug(stage);
         Debugger.onErrorMsgCall = onDebugLog;
+    }
+
+    private function renderMainClickHandler(e:MouseEvent):void {
+        var btn:Button = e.target as Button;
+        if (!btn) {
+            return;
+        }
+
+        if (DebugMain.I.isRender) {
+            btn.text = '显示判定面';
+        }
+        else {
+            DebugMain.I.initialize();
+            btn.text = '隐藏判定面';
+        }
+
+        DebugMain.I.isRender = !DebugMain.I.isRender;
     }
 }
 }
