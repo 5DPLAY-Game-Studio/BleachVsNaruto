@@ -198,6 +198,14 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: 'BEST', cn: '最高', value: GameQuality.BEST}
                 ],
                 optoinKey: 'quality'
+            },
+            {
+                txt      : 'SHOW HP', cn: '显示血量',
+                options  : [
+                    {label: 'SHOW', cn: '显示', value: true},
+                    {label: 'HIDE', cn: '隐藏', value: false},
+                ],
+                optoinKey: 'isShowHp'
             }
         ];
     }
