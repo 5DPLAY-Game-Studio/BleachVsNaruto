@@ -51,16 +51,21 @@ public class SelectVO implements IInstanceVO {
     }
 
     public function toString():String {
-        return JSON.stringify(
-                {
-                    select: {
-                        fighter1: fighter1,
-                        fighter2: fighter2,
-                        fighter3: fighter3,
-                        fuzhu   : fuzhu
-                    }
-                }
-        );
+        return "SelectVO{fighter1=" + String(fighter1) + ",fighter2=" + String(fighter2) + ",fighter3=" +
+               String(fighter3) + ",fuzhu=" + String(fuzhu) + "}";
     }
+
+//    public function toString():String {
+//        return JSON.stringify(
+//                {
+//                    select: {
+//                        fighter1: fighter1,
+//                        fighter2: fighter2,
+//                        fighter3: fighter3,
+//                        fuzhu   : fuzhu
+//                    }
+//                }
+//        );
+//    }
 }
 }

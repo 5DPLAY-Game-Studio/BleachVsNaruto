@@ -111,8 +111,8 @@ public class MessionModel {
 //			trace('p1::',GameData.I.p1Select.toString());
 //			trace('p2::',GameData.I.p2Select.toString());
 
-        TraceLang('debug.trace.data.mission_model.p1_data', GameData.I.p1Select);
-        TraceLang('debug.trace.data.mission_model.p2_data', GameData.I.p2Select);
+//        TraceLang('debug.trace.data.mission_model.p1_data', GameData.I.p1Select);
+//        TraceLang('debug.trace.data.mission_model.p2_data', GameData.I.p2Select);
     }
 
     public function reset():void {
