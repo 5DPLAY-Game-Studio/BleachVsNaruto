@@ -108,6 +108,19 @@ public class GameCamera {
     private var _foffsetY:Number   = 0;
     private var _screenSize:Point;
 
+    public function destroy():void {
+        stageSize = null;
+
+        _noTweenRect = null;
+        _stage = null;
+        _stageBounds = null;
+        _rect = null;
+        _focus = null;
+        _point = null;
+        _fbR = null;
+        _screenSize = null;
+    }
+
     public function getScreenRect(withTween:Boolean = false):Rectangle {
         return withTween ? _rect : _noTweenRect;
     }
@@ -130,7 +143,10 @@ public class GameCamera {
     }
 
     public function setStageSizeFromDisplay(d:DisplayObject):void {
-        stageSize = new Point(d.width / d.scaleX + _stageBounds.x, d.height / d.scaleY + _stageBounds.y);
+        var x:Number = d.width / d.scaleX + _stageBounds.x;
+        var y:Number = d.height / d.scaleY + _stageBounds.y;
+
+        stageSize = new Point(x, y);
     }
 
     public function getZoom(withTween:Boolean = false):Number {
@@ -156,12 +172,12 @@ public class GameCamera {
         }
     }
 
-    public function focus(focusArr:Array, notween:Boolean = false):void {
+    public function focus(focusArr:Array, noTween:Boolean = false):void {
         _focus = focusArr;
 
         _point = _focus.length > 1 ? new Point() : null;
 
-        if (notween) {
+        if (noTween) {
             var tweenBK:int = tweenSpd;
             tweenSpd        = 0;
             render();
@@ -240,9 +256,7 @@ public class GameCamera {
         _noTweenRect.y = v;
 
         if (tweenSpd > 1) {
-            _rect.y += (
-                               v - _rect.y
-                       ) / tweenSpd;
+            _rect.y += (v - _rect.y) / tweenSpd;
         }
         else {
             _rect.y = v;
@@ -339,20 +353,16 @@ public class GameCamera {
         if (_zoom <= 0) {
             throw new Error('zoom 不能 <= 0 !');
         }
+
         if (tweenSpd > 1) {
-            _stageScale += (
-                                   _zoom - _stageScale
-                           ) / tweenSpd;
+            _stageScale += (_zoom - _stageScale) / tweenSpd;
         }
         else {
             _stageScale = _zoom;
         }
-        _rect.width  = (
-                               _screenSize.x / _stageScale + 1
-                       ) >> 0;
-        _rect.height = (
-                               _screenSize.y / _stageScale + 1
-                       ) >> 0;
+
+        _rect.width  = (_screenSize.x / _stageScale + 1) >> 0;
+        _rect.height = (_screenSize.y / _stageScale + 1) >> 0;
     }
 
 }

@@ -295,9 +295,7 @@ public class GameLogic {
     public static function fixGameSpritePosition(sp:IGameSprite):void {
         if (!sp.allowCrossMapXY()) {
             var left:Number = _map.left + GameConfig.X_SIDE_OFFSET;
-            ;
             var right:Number = _map.right - GameConfig.X_SIDE_OFFSET;
-            ;
             var offsetX:Number = GameConfig.X_SIDE_OFFSET;
 
             var camzoom:Number    = _camera.getZoom();

@@ -28,35 +28,38 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
+import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.kyo.stage.IStage;
 
 public class GameStage extends Sprite implements IStage {
     include '../../../../../../include/_INCLUDE_.as';
 
     public function GameStage() {
-        super();
 //			this.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x , GameConfig.GAME_SIZE.y);
 
-        _gameLayer.mouseChildren = _gameLayer.mouseEnabled = false;
+        _gameLayer.mouseChildren = false;
+        _gameLayer.mouseEnabled  = false;
     }
+
     public var camera:GameCamera;
     public var gameUI:GameUI;
-    private var _playerLayer:Sprite = new Sprite(); //游戏角色层
+
+    private var _playerLayer:Sprite               = new Sprite(); //游戏角色层
     private var _gameSprites:Vector.<IGameSprite> = new Vector.<IGameSprite>(); //游戏元件列表
     private var _map:MapMain; //游戏地图
     private var _cameraFocus:Array;
 
-    private var _gameLayer:Sprite   = new Sprite(); //主游戏层
+    private var _gameLayer:Sprite = new Sprite(); //主游戏层
 
     public function get gameLayer():Sprite {
         return _gameLayer;
@@ -77,13 +80,14 @@ public class GameStage extends Sprite implements IStage {
 //		private var _renderAnimateFrame:int = 0;
 
     public function setVisibleByClass(cls:Class, visible:Boolean):void {
-        for each(var d:IGameSprite in _gameSprites) {
-            var className:String = getQualifiedClassName(d);
-            var ds:Class         = getDefinitionByName(className) as Class;
-            if (ds == cls) {
-                d.getDisplay().visible = visible;
+        MCUtils.renderGameSpritesCB(function (sp:IGameSprite):void {
+            var clsName:String = getQualifiedClassName(sp);
+            var defCls:Class   = getDefinitionByName(clsName) as Class;
+
+            if (cls == defCls) {
+                sp.getDisplay().visible = visible;
             }
-        }
+        });
     }
 
     public function getFighterByData(data:FighterVO):FighterMain {
@@ -100,15 +104,12 @@ public class GameStage extends Sprite implements IStage {
     public function getGameSpriteGlobalPosition(sp:IGameSprite, offsetX:Number = 0, offsetY:Number = 0):Point {
         var zoom:Number    = camera.getZoom(true);
         var rect:Rectangle = camera.getScreenRect(true);
-        return new Point(
-                (
-                        -rect.x + sp.x + offsetX
-                ) * zoom,
-                (
-                        -rect.y + sp.y + offsetY
-                ) * zoom
-        );
 
+        var point:Point = new Point();
+        point.x         = (-rect.x + sp.x + offsetX) * zoom;
+        point.y         = (-rect.y + sp.y + offsetY) * zoom;
+
+        return point;
     }
 
     public function getGameSprites():Vector.<IGameSprite> {
@@ -167,7 +168,11 @@ public class GameStage extends Sprite implements IStage {
 
     }
 
-    public function initFight(p1group:GameRunFighterGroup, p2group:GameRunFighterGroup, map:MapMain):void {
+    public function initFight(
+            p1group:GameRunFighterGroup, p2group:GameRunFighterGroup,
+            map:MapMain,
+            initBack:Function = null
+    ):void {
         _map           = map;
         _map.gameState = this;
 
@@ -225,6 +230,10 @@ public class GameStage extends Sprite implements IStage {
         initCamera();
         camera.focus(_cameraFocus);
 
+        if (initBack != null) {
+            initBack();
+        }
+
         gameUI.initFight(p1group, p2group);
         addChild(gameUI.getUIDisplay());
     }
@@ -262,25 +271,31 @@ public class GameStage extends Sprite implements IStage {
     }
 
     public function cameraFocusOne(display:DisplayObject):void {
+        var tweenSpd:int = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+
         camera.focus([display]);
 //			camera.setZoom(camera.autoZoomMax,false);
         camera.setZoom(3.5);
-        camera.tweenSpd = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+        camera.tweenSpd = tweenSpd;
     }
 
     public function updateCameraFocus(displays:Array):void {
+        var tweenSpd:int = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+
         _cameraFocus = displays;
         camera.focus(displays);
         camera.setZoom(2);
-        camera.tweenSpd = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+        camera.tweenSpd = tweenSpd;
     }
 
     public function cameraResume():void {
+        var tweenSpd:int = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+
         camera.focus(_cameraFocus);
         if (_cameraFocus.length < 2) {
             camera.setZoom(2);
         }
-        camera.tweenSpd = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+        camera.tweenSpd = tweenSpd;
     }
 
     public function render():void {
@@ -357,6 +372,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         if (camera) {
+            camera.destroy();
             camera = null;
         }
 
@@ -411,7 +427,7 @@ public class GameStage extends Sprite implements IStage {
             _cameraFocus.push(p1.getDisplay());
         }
 
-        var stageSize:Point
+        var stageSize:Point;
         if (_map.mapLayer) {
             stageSize = new Point(_map.mapLayer.width, GameConfig.GAME_SIZE.y);
         }
@@ -426,37 +442,35 @@ public class GameStage extends Sprite implements IStage {
         addChild(gameUI.getUIDisplay());
     }
 
-    private function initCamera():void {
-
+    public function initCamera():void {
         if (camera) {
-            throw new Error('camera inited!');
+            throw new Error('游戏镜头已初始化！');
             return;
         }
 
         var stageSize:Point = _map.getStageSize();
-        camera              = new GameCamera(_gameLayer, GameConfig.GAME_SIZE, stageSize, true);
-        camera.focusX       = true;
-        camera.focusY       = true;
-        camera.offsetY      = _map.getMapBottomDistance();
-        camera.setStageBounds(new Rectangle(0, -1000, stageSize.x, stageSize.y));
+        var rect:Rectangle  = new Rectangle(0, -1000, stageSize.x, stageSize.y);
+        var tweenSpd:Number = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
 
+        camera = new GameCamera(_gameLayer, GameConfig.GAME_SIZE, stageSize, true);
+        camera.focusX      = true;
+        camera.focusY      = true;
+        camera.offsetY     = _map.getMapBottomDistance();
         camera.autoZoom    = true;
         camera.autoZoomMin = 1;
         camera.autoZoomMax = 2.5;
-        camera.tweenSpd    = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
+        camera.tweenSpd    = tweenSpd;
 
-        //缓动进入场景
+        // 缓动进入场景
         var startZoom:Number = 2;
-        var startX:Number    = (
-                                       stageSize.x / 2
-                               ) * startZoom - 350;
+        var startX:Number    = (stageSize.x / 2) * startZoom - 350;
         var startY:Number    = _map.bottom - 200;
 
+        camera.setStageBounds(rect);
         camera.setZoom(startZoom);
         camera.setX(-startX);
         camera.setY(-startY);
         camera.updateNow();
-
     }
 
 }

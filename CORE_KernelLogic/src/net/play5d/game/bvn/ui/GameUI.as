@@ -173,7 +173,7 @@ public class GameUI {
         var volume:Number = GameData.I.config.soundVolume;
 
         if (_ui) {
-            if (_ui is FightUI == false) {
+            if (!(_ui is FightUI)) {
                 _ui.destory();
                 _ui = new FightUI();
                 _ui.setVolume(volume);
@@ -184,9 +184,7 @@ public class GameUI {
             _ui.setVolume(volume);
         }
 
-        (
-                _ui as FightUI
-        ).initlize(p1, p2);
+        (_ui as FightUI).initlize(p1, p2);
     }
 
     public function initMission(p1:GameRunFighterGroup):void {
