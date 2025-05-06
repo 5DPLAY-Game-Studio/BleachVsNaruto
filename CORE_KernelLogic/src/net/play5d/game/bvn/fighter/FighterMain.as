@@ -90,12 +90,16 @@ public class FighterMain extends BaseGameSprite {
     public var hurtHit:HitVO;
     public var defenseHit:HitVO;
     public var targetTeams:Vector.<TeamVO>;
-    private var _speed:Number   = 6;
+
     private var _buffCtrler:FighterBuffCtrler;
+    private var _fighterCtrl:FighterCtrler;
+
+    private var _speed:Number   = 6;
+
     private var _currentHurts:Vector.<HitVO>;
     private var _mosouPlayerLogic:MusouFighterLogic;
     private var _currentTarget:IGameSprite;
-    private var _fighterCtrl:FighterCtrler;
+
     private var _energyAddGap:int;
     private var _explodeHitVO:HitVO;
     private var _explodeHitFrame:int;

@@ -591,19 +591,19 @@ public class GameCtrl {
     }
 
     private function buildGame():void {
+        var p1Group:GameRunFighterGroup = gameRunData.p1FighterGroup;
+        var p2Group:GameRunFighterGroup = gameRunData.p2FighterGroup;
+        p1Group.currentFighter  = GameRunFactory.createFighterByData(
+                p1Group.fighter1,
+                '1'
+        );
+        p2Group.currentFighter  = GameRunFactory.createFighterByData(
+                p2Group.fighter1,
+                '2'
+        );
 
-        gameRunData.p1FighterGroup.currentFighter  = GameRunFactory.createFighterByData(
-                gameRunData.p1FighterGroup.fighter1, '1');
-        gameRunData.p1FighterGroup.currentAssister = GameRunFactory.createAssisterByData(
-                gameRunData.p1FighterGroup.assister, '1');
-
-        gameRunData.p2FighterGroup.currentFighter  = GameRunFactory.createFighterByData(
-                gameRunData.p2FighterGroup.fighter1, '2');
-        gameRunData.p2FighterGroup.currentAssister = GameRunFactory.createAssisterByData(
-                gameRunData.p2FighterGroup.assister, '2');
-
-        var p1:FighterMain = gameRunData.p1FighterGroup.currentFighter;
-        var p2:FighterMain = gameRunData.p2FighterGroup.currentFighter;
+        var p1:FighterMain = p1Group.currentFighter;
+        var p2:FighterMain = p2Group.currentFighter;
 
         if (GameMode.currentMode == GameMode.TRAINING) {
             _trainingCtrl = new TrainingCtrler();
@@ -626,15 +626,32 @@ public class GameCtrl {
             p2.colorTransform = null;
         }
 
-        addFighter(p1, 1);
-        addFighter(p2, 2);
 
         //temp
 //			p1.id = 'p1';
 
         map.initlize();
 
-        gameState.initFight(gameRunData.p1FighterGroup, gameRunData.p2FighterGroup, map);
+        // initFight 方法中包含镜头初始化的实现
+        gameState.initFight(
+                gameRunData.p1FighterGroup,
+                gameRunData.p2FighterGroup,
+                map,
+                initBack
+        );
+        function initBack():void {
+            p1Group.currentAssister = GameRunFactory.createAssisterByData(
+                    p1Group.assister,
+                    '1'
+            );
+            p2Group.currentAssister = GameRunFactory.createAssisterByData(
+                    p2Group.assister,
+                    '2'
+            );
+        }
+
+        addFighter(p1, 1);
+        addFighter(p2, 2);
 
         GameLogic.initGameLogic(map, gameState.camera);
 

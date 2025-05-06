@@ -21,6 +21,7 @@ import flash.display.MovieClip;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.EffectCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
@@ -29,6 +30,7 @@ import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
+import net.play5d.game.bvn.stage.GameCamera;
 
 public class AssisterCtrler implements IGameSpriteCntlr {
     include '../../../../../../../include/_INCLUDE_.as';
@@ -36,15 +38,21 @@ public class AssisterCtrler implements IGameSpriteCntlr {
     public function AssisterCtrler() {
     }
     public var hitModel:FighterHitModel;
-    private var _effectCtrl:FighterEffectCtrl;
-    private var _assister:Assister;
-    private var _touchFloor:Boolean;
-    private var _touchFloorFrame:String;
     public var hitTargetAction:String;
     public var hitTargetChecker:String;
 
+    private var _effectCtrl:FighterEffectCtrl;
+    private var _cameraCtrler:FighterCameraCtrler;
+    private var _assister:Assister;
+    private var _touchFloor:Boolean;
+    private var _touchFloorFrame:String;
+
     public function get effect():FighterEffectCtrl {
         return _effectCtrl;
+    }
+
+    public function get camera():FighterCameraCtrler {
+        return _cameraCtrler;
     }
 
     public function get owner_mc_ctrler():FighterMcCtrler {
@@ -68,6 +76,11 @@ public class AssisterCtrler implements IGameSpriteCntlr {
             _effectCtrl.destory();
             _effectCtrl = null;
         }
+        if (_cameraCtrler) {
+            _cameraCtrler.destroy();
+            _cameraCtrler = null;
+        }
+
         if (hitModel) {
             hitModel.destory();
             hitModel = null;
@@ -149,6 +162,10 @@ public class AssisterCtrler implements IGameSpriteCntlr {
         hitModel    = new FighterHitModel(assister);
         _assister   = assister;
         _effectCtrl = new FighterEffectCtrl(assister);
+
+        var camera:GameCamera = GameCtrl.I.gameState.camera;
+        _cameraCtrler = new FighterCameraCtrler(camera);
+        _cameraCtrler.setTarget(assister);
     }
 
     public function endAct():void {
