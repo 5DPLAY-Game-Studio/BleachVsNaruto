@@ -68,9 +68,9 @@ public class GameCameraCtrler {
         }
     }
 
-    public function render():void {
-        _camera.render();
-    }
+//    public function render():void {
+//        _camera.render();
+//    }
 
     //////////////////////////////////////////////////////////////////////////////////////////
 

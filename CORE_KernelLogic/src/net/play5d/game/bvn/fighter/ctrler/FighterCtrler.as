@@ -22,9 +22,9 @@ import flash.display.MovieClip;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
@@ -32,6 +32,7 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
+import net.play5d.game.bvn.stage.GameCamera;
 
 /**
  * 角色控制类，提供共同方法给FLASH IDE调用
@@ -41,56 +42,19 @@ public class FighterCtrler implements IGameSpriteCntlr {
 
     public function FighterCtrler() {
     }
+
     public var hitModel:FighterHitModel;
+
     private var _effectCtrl:FighterEffectCtrl;
     private var _fighterMcCtrl:FighterMcCtrler;
     private var _voiceCtrl:FighterVoiceCtrler;
+    private var _cameraCtrler:FighterCameraCtrler;
+
     private var _fighter:FighterMain;
 
 //		private var _initAction:String = "开场";
     private var _rectCache:Object = {};
     private var _doingWankai:Boolean;
-
-    /**
-     * 获取目标
-     * @return 目标游戏精灵
-     */
-    public function getTarget():IGameSprite {
-        return null;
-    }
-
-    /**
-     * 获取所有目标的 IGameSprite
-     * @param isOnlyAlive 是否仅获取存活的目标
-     * @return 目标全部游戏精灵
-     */
-    public function getTargetAll(isOnlyAlive:Boolean = true):Vector.<IGameSprite> {
-        return null;
-    }
-
-    /**
-     * 获取主人
-     * @return 游戏精灵的上层
-     */
-    public function getOwner():IGameSprite {
-        return null;
-    }
-
-    /**
-     * 获取最上层主人
-     * @return 游戏精灵的最上层
-     */
-    public function getOwnerTop():IGameSprite {
-        return null;
-    }
-
-    /**
-     * 获取自身
-     * @return 游戏精灵自身
-     */
-    public function getSelf():IGameSprite {
-        return _fighter;
-    }
 
     //由FLASH IDE调用，定义血量
     public function get hp():Number {
@@ -160,6 +124,47 @@ public class FighterCtrler implements IGameSpriteCntlr {
         return target.getDisplay();
     }
 
+    /**
+     * 获取目标
+     * @return 目标游戏精灵
+     */
+    public function getTarget():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取所有目标的 IGameSprite
+     * @param isOnlyAlive 是否仅获取存活的目标
+     * @return 目标全部游戏精灵
+     */
+    public function getTargetAll(isOnlyAlive:Boolean = true):Vector.<IGameSprite> {
+        return null;
+    }
+
+    /**
+     * 获取主人
+     * @return 游戏精灵的上层
+     */
+    public function getOwner():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取最上层主人
+     * @return 游戏精灵的最上层
+     */
+    public function getOwnerTop():IGameSprite {
+        return null;
+    }
+
+    /**
+     * 获取自身
+     * @return 游戏精灵自身
+     */
+    public function getSelf():IGameSprite {
+        return _fighter;
+    }
+
     public function destory():void {
         if (_effectCtrl) {
             _effectCtrl.destory();
@@ -173,6 +178,11 @@ public class FighterCtrler implements IGameSpriteCntlr {
             _voiceCtrl.destory();
             _voiceCtrl = null;
         }
+        if (_cameraCtrler) {
+            _cameraCtrler.destroy();
+            _cameraCtrler = null;
+        }
+
         if (_rectCache) {
             _rectCache = null;
         }
@@ -321,51 +331,62 @@ public class FighterCtrler implements IGameSpriteCntlr {
         return _fighterMcCtrl;
     }
 
+    public function getCameraCtrler():FighterCameraCtrler {
+        return _cameraCtrler;
+    }
+
     public function initFighter(fighter:FighterMain):void {
         _fighter = fighter;
 
         hitModel = new FighterHitModel(_fighter);
 
-        _voiceCtrl = new FighterVoiceCtrler();
+        var camera:GameCamera = GameCtrl.I.gameState.camera;
 
-        _effectCtrl = new FighterEffectCtrl(fighter);
+        _voiceCtrl     = new FighterVoiceCtrler();
+        _effectCtrl    = new FighterEffectCtrl(fighter);
+        _cameraCtrler  = new FighterCameraCtrler(camera);
+        _fighterMcCtrl = new FighterMcCtrler(fighter);
 
-        _fighterMcCtrl              = new FighterMcCtrler(fighter);
+        _cameraCtrler.setTarget(fighter);
         _fighterMcCtrl.effectCtrler = _effectCtrl;
 
-        if (fighter.mc.initFighter) {
-            var param:Object = {
-                fighter_ctrler: this,
-                mc_ctrler     : _fighterMcCtrl,
-                effect_ctrler : _effectCtrl
-            };
-            fighter.mc.initFighter(param);
-
+        /**
+         * 初始化角色
+         *
+         * @param param 参数
+         */
+        var initFighter:Function = fighter.mc.initFighter;
+        if (initFighter != null) {
+            initFighter({
+                            fighter_ctrler: this,
+                            mc_ctrler     : _fighterMcCtrl,
+                            effect_ctrler : _effectCtrl
+                        });
         }
-        else {
-            // 兼容老版本 ****************************************************************************
-
-            if (fighter.mc.setFighterCtrler) {
-                fighter.mc.setFighterCtrler(this);
-            }
-            else {
-                throw new Error('初始化失败，SWF未定义setFighterCtrler()');
-            }
-
-            if (fighter.mc.setEffectCtrler) {
-                fighter.mc.setEffectCtrler(_effectCtrl);
-            }
-            else {
-                throw new Error('初始化效果接口失败，SWF未定义setEffectCtrler()');
-            }
-
-            if (fighter.mc.setFighterMcCtrler) {
-                fighter.mc.setFighterMcCtrler(_fighterMcCtrl);
-            }
-            else {
-                throw new Error('初始化效果接口失败，SWF未定义setFighterMcCtrler()');
-            }
-        }
+//        else {
+//            // 兼容老版本 ****************************************************************************
+//
+//            if (fighter.mc.setFighterCtrler) {
+//                fighter.mc.setFighterCtrler(this);
+//            }
+//            else {
+//                throw new Error('初始化失败，SWF未定义setFighterCtrler()');
+//            }
+//
+//            if (fighter.mc.setEffectCtrler) {
+//                fighter.mc.setEffectCtrler(_effectCtrl);
+//            }
+//            else {
+//                throw new Error('初始化效果接口失败，SWF未定义setEffectCtrler()');
+//            }
+//
+//            if (fighter.mc.setFighterMcCtrler) {
+//                fighter.mc.setFighterMcCtrler(_fighterMcCtrl);
+//            }
+//            else {
+//                throw new Error('初始化效果接口失败，SWF未定义setFighterMcCtrler()');
+//            }
+//        }
 
 
     }
@@ -659,9 +680,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
         }
 
         if (setDirect) {
-            _fighter.direct = (
-                                      _fighter.x < target.x
-                              ) ? 1 : -1;
+            _fighter.direct = (_fighter.x < target.x) ? 1 : -1;
         }
     }
 
@@ -678,7 +697,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             return null;
         }
         //			//缓存取出后，需要对重新计算位置
-        return getCurrentRect(area, "hitRange_" + id);
+        return getCurrentRect(area, 'hitRange_' + id);
     }
 
 }
