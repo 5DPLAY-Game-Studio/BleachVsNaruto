@@ -52,7 +52,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function addBefore(func:Function):void {
-        if (!func) {
+        if (func == null) {
             return;
         }
 
