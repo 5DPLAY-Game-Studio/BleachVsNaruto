@@ -122,7 +122,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function addAfter(func:Function):void {
-        if (!func) {
+        if (func == null) {
             return;
         }
 
