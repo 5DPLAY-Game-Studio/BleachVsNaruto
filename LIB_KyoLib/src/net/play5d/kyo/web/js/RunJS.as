@@ -37,7 +37,7 @@ public class RunJS extends Sprite {
     // import DOM Interface
     private var window:JSEnv = JSEnv.$;
 
-    internal function JSLine(str):void {
+    internal function JSLine(str:*):void {
         var doc = window.document;
         var div = doc.createElement('div');
 
