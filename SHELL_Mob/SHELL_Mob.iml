@@ -30,6 +30,7 @@
         <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/launch-app.xml" package-file-name="launch">
           <files-to-package>
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/drawable" path-in-package="." />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/../shared/_tmp/mob" path-in-package="." />
           </files-to-package>
         </packaging-android>
         <packaging-ios package-file-name="launch" />
