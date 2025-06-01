@@ -39,7 +39,7 @@ public class RunJS extends Sprite {
 
     internal function JSLine(str:*):void {
         var doc:* = window.document;
-        var div = doc.createElement('div');
+        var div:* = doc.createElement('div');
 
         div.innerHTML = '<p>' + str + '<hr/></p>';
         doc.body.appendChild(div);
