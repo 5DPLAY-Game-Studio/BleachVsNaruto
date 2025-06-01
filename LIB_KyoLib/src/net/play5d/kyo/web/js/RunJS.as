@@ -24,7 +24,7 @@ public class RunJS extends Sprite {
         JSLine('DOM Demo:');
         JSDemo1();
 
-        JSLine('Event Dem\o:');
+        JSLine('Event Demo:');
         JSDemo2();
 
         JSLine('Closure Demo:');
@@ -37,7 +37,7 @@ public class RunJS extends Sprite {
     // import DOM Interface
     private var window:JSEnv = JSEnv.$;
 
-    function JSLine(str) {
+    function JSLine(str):void {
         var doc = window.document;
         var div = doc.createElement('div');
 
