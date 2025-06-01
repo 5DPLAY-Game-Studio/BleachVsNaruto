@@ -70,7 +70,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function removeBefore(func:Function):void {
-        if (!func || !_beforeFuncs) {
+        if (func == null || !_beforeFuncs) {
             return;
         }
 
