@@ -140,7 +140,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function removeAfter(func:Function):void {
-        if (!func || !_afterFuncs) {
+        if (func == null || !_afterFuncs) {
             return;
         }
 
