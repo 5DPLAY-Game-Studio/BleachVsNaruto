@@ -46,7 +46,7 @@ public class RunJS extends Sprite {
     }
 
 
-    function JSDemo1() {
+    function JSDemo1():void {
         var doc = window.document;
         var div = doc.createElement('div');
 
