@@ -48,7 +48,7 @@ public class RunJS extends Sprite {
 
     internal function JSDemo1():void {
         var doc:* = window.document;
-        var div = doc.createElement('div');
+        var div:* = doc.createElement('div');
 
         div.innerHTML = 'Hello! <i>This box is created by ActionScript!</i>';
 
