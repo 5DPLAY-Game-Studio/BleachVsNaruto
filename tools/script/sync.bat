@@ -1,6 +1,6 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
-:: Copyright (C) 2021-2024, 5DPLAY Game Studio
+:: Copyright (C) 2021-2025, 5DPLAY Game Studio
 :: All rights reserved.
 ::
 :: This program is free software: you can redistribute it and/or modify
@@ -20,6 +20,10 @@
 
 @echo off
 setlocal enabledelayedexpansion
+
+:: 当前 BAT 目录
+set BAT_HOME=%~dp0
+echo BAT_HOME: %BAT_HOME%
 
 :: 工作目录
 set WORK_SPACE=%CD%
@@ -73,7 +77,7 @@ call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_MOB%"
 
 :: 结束操作
 echo.
-echo Sync assets successfully.
+call :ECHO_LANG :SYNC_SUCCESS ""
 exit
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -85,7 +89,7 @@ exit -1
 :: 判断文件是否存在，不存在给出提示信息
 :EXIST
 if not exist %1 (
-	echo [%~1] does not exist.
+	call :ECHO_LANG :NOT_EXIST %1
 	goto END
 )
 goto :EOF
@@ -97,9 +101,9 @@ if exist %1 (
 	rd /s /q %1 >nul
 	
 	if !errorlevel!==0 (
-		echo Delete directory [%~1] successfully.
+		call :ECHO_LANG :DEL_DIR_SUCCESS %1
 	) else (
-		echo Failed to delete directory [%~1].
+		call :ECHO_LANG :DEL_DIR_FAIL %1
 		goto END
 	)
 )
@@ -109,9 +113,26 @@ goto :EOF
 :COPY
 echo D|xcopy %1 %2 /E /y >nul
 if !errorlevel!==0 (
-	echo Copy directory [%~2] successfully.
+	call :ECHO_LANG :COPY_DIR_SUCCESS %2
 ) else (
-	echo Failed to copy directory [%~2].
+	call :ECHO_LANG :COPY_DIR_FAIL %2
 	goto END
 )
+goto :EOF
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:ECHO_LANG
+for /f "tokens=2 delims=:" %%a in ('chcp') do (
+	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
+)
+
+set LANG_BAT=%BAT_HOME%lang\sync\%CURRENT_CODEPAGE%.bat
+if not exist "%LANG_BAT%" (
+	echo ECHO_LANG [N/A]
+	goto :EOF
+)
+
+:: echo Code Page: %CURRENT_CODEPAGE%
+call "%LANG_BAT%" %1 %2
 goto :EOF
