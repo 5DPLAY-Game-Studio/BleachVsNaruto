@@ -48,6 +48,8 @@ Here, you can challenge the limits of your own operation and reaction, or you ca
 
 The current major version is 3.7, and we are working on updating it, but it is not yet ideal. If you have any issues, please report them in the issue tracker (or any other contact method that can reach our team).
 
+The project is currently in the **Alpha** state, and the development work will be directly controlled and pushed by the project leader for the time being. When the project development progress reaches the **Beta** stage, the development workflow will be transformed into the **Fork - Brach - Commit - Pull - Pull Request** mode.
+
 ## Download Binary Game
 
 If you only care about the binary files of this project and don't care how the game project is built, you should go to the official social media account of the game to get it. This page is only for developers.
@@ -97,6 +99,7 @@ The following is a list of translators who contributed:
 
 - `简体中文` - 5DPLAY
 - `English` - MeleeWaluigi, Waffles.7z
+- `日本語` - ライオンちゃん
 
 ## Follow us
 
