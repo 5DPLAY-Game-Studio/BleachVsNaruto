@@ -18,37 +18,37 @@
 
 // 语言字典对象
 // zh_CN 简体中文
-// en    英语
-// ja    日语
-// ko    韩语
+// en_US 英语
+// ja_JP 日语
+// ko_KR 韩语
 var langObj = {
 	browse_for_folder_url: {
 		zh_CN: "请选择 BleachVsNaruto_FlashSrc 目录位置",
-		en   : "Please select the BleachVsNaruto_FlashSrc directory location",
-		ja   : "BleachVsNaruto_FlashSrc ディレクトリの場所を選択してください",
-		ko   : "BleachVsNaruto_FlashSrc 디렉토리 위치를 선택하세요"
+		en_US: "Please select the BleachVsNaruto_FlashSrc directory location",
+		ja_JP: "BleachVsNaruto_FlashSrc ディレクトリの場所を選択してください",
+		ko_KR: "BleachVsNaruto_FlashSrc 디렉토리 위치를 선택하세요"
 	},
 	publish_end: {
 		zh_CN: "发布完成：",
-		en   : "Publish completed: ",
-		ja   : "公開終了：",
-		ko   : "릴리스 완료: "
+		en_US: "Publish completed: ",
+		ja_JP: "公開終了：",
+		ko_KR: "릴리스 완료: "
 	},
 	file_count: {
 		zh_CN: "文件计数：",
-		en   : "File Count: ",
-		ja   : "ファイル数：",
-		ko   : "파일 수: "
+		en_US: "File Count: ",
+		ja_JP: "ファイル数：",
+		ko_KR: "파일 수: "
 	},
 	success_count: {
 		zh_CN: "成功计数：",
-		en   : "Success Count: ",
-		ja   : "成功回数：",
-		ko   : "성공 횟수: "
+		en_US: "Success Count: ",
+		ja_JP: "成功回数：",
+		ko_KR: "성공 횟수: "
 	}
 };
 // 默认语言
-var defaultLang = "en";
+var defaultLang = "en_US";
 // 跟踪函数
 var trace = fl.trace;
 
