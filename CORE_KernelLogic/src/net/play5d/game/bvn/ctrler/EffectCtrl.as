@@ -27,6 +27,7 @@ import flash.utils.Dictionary;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
+import net.play5d.game.bvn.data.HitType;
 import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.debug.Debugger;
@@ -303,14 +304,14 @@ public class EffectCtrl {
         var effect:EffectVO;
 
         switch (hitvo.hitType) {
-        case 0:
+        case HitType.NONE:
             return;
-        case 1:
-        case 6:
+        case HitType.KAN:
+        case HitType.KAN_HEAVY:
             effect = EffectModel.I.getEffect('steel_hit_kan');
             break;
-        case 2:
-        case 3:
+        case HitType.DA:
+        case HitType.DA_HEAVY:
             effect = EffectModel.I.getEffect('steel_hit_qdj');
             break;
         default:

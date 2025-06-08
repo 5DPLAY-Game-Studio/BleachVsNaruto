@@ -52,7 +52,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function addBefore(func:Function):void {
-        if (!func) {
+        if (func == null) {
             return;
         }
 
@@ -70,7 +70,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function removeBefore(func:Function):void {
-        if (!func || !_beforeFuncs) {
+        if (func == null || !_beforeFuncs) {
             return;
         }
 
@@ -122,7 +122,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function addAfter(func:Function):void {
-        if (!func) {
+        if (func == null) {
             return;
         }
 
@@ -140,7 +140,7 @@ public class GameRender {
      * @param func 渲染函数
      */
     public static function removeAfter(func:Function):void {
-        if (!func || !_afterFuncs) {
+        if (func == null || !_afterFuncs) {
             return;
         }
 

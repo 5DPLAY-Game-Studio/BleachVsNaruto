@@ -21,6 +21,9 @@ package net.play5d.game.bvn.data {
 public class HitType {
     include '../../../../../../include/_INCLUDE_.as';
 
+    // 没有特效
+    public static const NONE:int = 0;
+
     public static const KAN:int       = 1;
     public static const KAN_HEAVY:int = 6;
 

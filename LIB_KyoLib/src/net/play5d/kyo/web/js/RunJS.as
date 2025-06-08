@@ -24,7 +24,7 @@ public class RunJS extends Sprite {
         JSLine('DOM Demo:');
         JSDemo1();
 
-        JSLine('Event Dem\o:');
+        JSLine('Event Demo:');
         JSDemo2();
 
         JSLine('Closure Demo:');
@@ -37,18 +37,18 @@ public class RunJS extends Sprite {
     // import DOM Interface
     private var window:JSEnv = JSEnv.$;
 
-    function JSLine(str) {
-        var doc = window.document;
-        var div = doc.createElement('div');
+    internal function JSLine(str:*):void {
+        var doc:* = window.document;
+        var div:* = doc.createElement('div');
 
         div.innerHTML = '<p>' + str + '<hr/></p>';
         doc.body.appendChild(div);
     }
 
 
-    function JSDemo1() {
-        var doc = window.document;
-        var div = doc.createElement('div');
+    internal function JSDemo1():void {
+        var doc:* = window.document;
+        var div:* = doc.createElement('div');
 
         div.innerHTML = 'Hello! <i>This box is created by ActionScript!</i>';
 
