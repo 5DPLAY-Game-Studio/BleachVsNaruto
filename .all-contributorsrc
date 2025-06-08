@@ -1,6 +1,8 @@
 {
   "files": [
-    "README.md"
+    "README.md",
+    "README_en.md",
+    "README_jp.md",
   ],
   "imageSize": 100,
   "commit": false,
