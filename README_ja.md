@@ -22,6 +22,10 @@
 </strong>
 </p>
 
+## スターの歴史 <!-- omit in toc -->
+
+[![Star History Chart](https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=Date)](https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&Date)
+
 # ブリーチ vs ナルト <!-- omit in toc -->
 
 [中文版](README.md) | [English](README_en.md) | 日本語
@@ -103,6 +107,6 @@
 
 ## フォローする
 
-[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY)
+[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY) [![BiliBili:死神VS火影吧](https://badgen.net/badge/BiliBili/死神VS火影吧/)](https://space.bilibili.com/1340107883)
 
 [GPL-3.0]: https://www.gnu.org/licenses/gpl-3.0.html

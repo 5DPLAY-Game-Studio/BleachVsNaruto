@@ -22,6 +22,10 @@
 </strong>
 </p>
 
+## 星标历史 <!-- omit in toc -->
+
+[![Star History Chart](https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=Date)](https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&Date)
+
 # 死神vs火影 <!-- omit in toc -->
 
 中文版 | [English](README_en.md) | [日本語](README_ja.md)
@@ -48,7 +52,7 @@
 
 当前主版本 3.7，我们正在努力进行更新，但它目前仍未达到理想目标。如果您有任何问题，请在问题跟踪器（或任何一种可以联系到我们团队的联系方式）中进行报告。
 
-项目目前处于 **Alpha** 状态，开发工作将由项目负责人暂时直接控制推送。当项目开发进度达到 **Beta** 阶段时，开发工作流程将转变为 **Fork - Brach - Commit - Pull - Pull Request** 模式。
+项目目前处于 **Alpha** 状态，开发工作将由项目负责人暂时直接控制推送。当项目开发进度达到 **Beta** 阶段时，开发工作流程将转变为 **Fork - Branch - Commit - Pull - Pull Request** 模式。
 
 ## 下载二进制游戏
 
@@ -103,6 +107,6 @@
 
 ## 关注我们
 
-[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY)
+[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY) [![BiliBili:死神VS火影吧](https://badgen.net/badge/BiliBili/死神VS火影吧/)](https://space.bilibili.com/1340107883)
 
 [GPL-3.0]: https://www.gnu.org/licenses/gpl-3.0.html

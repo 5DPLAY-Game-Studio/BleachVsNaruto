@@ -22,6 +22,10 @@
 </strong>
 </p>
 
+## Star History <!-- omit in toc -->
+
+[![Star History Chart](https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=Date)](https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&Date)
+
 # Bleach vs Naruto <!-- omit in toc -->
 
 [中文版](README.md) | English | [日本語](README_ja.md)
@@ -48,7 +52,7 @@ Here, you can challenge the limits of your own operation and reaction, or you ca
 
 The current major version is 3.7, and we are working on updating it, but it is not yet ideal. If you have any issues, please report them in the issue tracker (or any other contact method that can reach our team).
 
-The project is currently in the **Alpha** state, and the development work will be directly controlled and pushed by the project leader for the time being. When the project development progress reaches the **Beta** stage, the development workflow will be transformed into the **Fork - Brach - Commit - Pull - Pull Request** mode.
+The project is currently in the **Alpha** state, and the development work will be directly controlled and pushed by the project leader for the time being. When the project development progress reaches the **Beta** stage, the development workflow will be transformed into the **Fork - Branch - Commit - Pull - Pull Request** mode.
 
 ## Download Binary Game
 
@@ -103,6 +107,6 @@ The following is a list of translators who contributed:
 
 ## Follow us
 
-[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY)
+[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY) [![BiliBili:死神VS火影吧](https://badgen.net/badge/BiliBili/死神VS火影吧/)](https://space.bilibili.com/1340107883)
 
 [GPL-3.0]: https://www.gnu.org/licenses/gpl-3.0.html
