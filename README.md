@@ -1,7 +1,4 @@
 <p align = "center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href  = "https://bvn-sports.com/"><img src = "title.png" /></a>
 </p>
 
@@ -98,25 +95,7 @@
 
 整个 5DPLAY 社区都应当遵守本项目自身遵循的行为准则。
 
-## 翻译
-
-工程的建立离不开每一位成员的辛勤付出，在推广国际化方面，有相当多的外国玩家在帮助我们进行本地化程序，在此真诚的感谢这些人员的付出。
-
-以下是翻译人员贡献名单：
-
-- `简体中文` - 5DPLAY
-- `English` - MeleeWaluigi, Waffles.7z
-- `日本語` - ライオンちゃん
-
-## 关注我们
-
-[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY) [![BiliBili:死神VS火影吧](https://badgen.net/badge/BiliBili/死神VS火影吧/)](https://space.bilibili.com/1340107883)
-
-[GPL-3.0]: https://www.gnu.org/licenses/gpl-3.0.html
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+感谢这些出色的人 ([emoji key](https://allcontributors.org/docs/en/emoji-key))：
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -134,4 +113,20 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+本项目遵循 [all-contributors](https://github.com/all-contributors/all-contributors) 规范。欢迎任何形式的贡献！
+
+## 翻译
+
+工程的建立离不开每一位成员的辛勤付出，在推广国际化方面，有相当多的外国玩家在帮助我们进行本地化程序，在此真诚的感谢这些人员的付出。
+
+以下是翻译人员贡献名单：
+
+- `简体中文` - 5DPLAY
+- `English` - MeleeWaluigi, Waffles.7z
+- `日本語` - ライオンちゃん
+
+## 关注我们
+
+[![Twitter:5Dplay](https://img.shields.io/twitter/follow/5Dplay)](https://x.com/5DPLAY) [![BiliBili:死神VS火影吧](https://badgen.net/badge/BiliBili/死神VS火影吧/)](https://space.bilibili.com/1340107883)
+
+[GPL-3.0]: https://www.gnu.org/licenses/gpl-3.0.html

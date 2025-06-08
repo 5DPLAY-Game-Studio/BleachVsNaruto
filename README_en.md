@@ -95,6 +95,26 @@ To build this program from source, you should read the [HOW2BUILD.md](HOW2BUILD.
 
 The entire 5DPLAY community should abide by the code of conduct followed by this project itself.
 
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/raionchanqwq"><img src="https://avatars.githubusercontent.com/u/214450127?v=4?s=100" width="100px;" alt="ライオンちゃん"/><br /><sub><b>ライオンちゃん</b></sub></a><br /><a href="https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/commits?author=raionchanqwq" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 ## Translate
 
 The establishment of the project is inseparable from the hard work of every member. In terms of international promotion, there are quite a few foreign players helping us with the localization process. I would like to sincerely thank these people for their efforts.

@@ -95,6 +95,26 @@
 
 5DPLAY コミュニティ全体が、このプロジェクト自体が遵守する行動規範を遵守する必要があります。
 
+これらの素晴らしい人々に感謝します ([絵文字キー](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/raionchanqwq"><img src="https://avatars.githubusercontent.com/u/214450127?v=4?s=100" width="100px;" alt="ライオンちゃん"/><br /><sub><b>ライオンちゃん</b></sub></a><br /><a href="https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/commits?author=raionchanqwq" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+このプロジェクトは[all-contributors](https://github.com/all-contributors/all-contributors)仕様に準拠しています。あらゆる貢献を歓迎します！
+
 ## 翻訳する
 
 プロジェクトの立ち上げは、メンバー全員の努力と切り離せないものです。国際プロモーションにおいては、ローカライズ作業において多くの海外プレイヤーの皆様にご協力をいただいています。皆様のご尽力に心より感謝申し上げます。
