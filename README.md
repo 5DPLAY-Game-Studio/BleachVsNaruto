@@ -28,7 +28,7 @@
 
 # 死神vs火影 <!-- omit in toc -->
 
-简体中文 | [English](README_en.md) | [日本語](README_ja.md)
+简体中文 | [English](README_en.md) | [日本語](README_ja.md) | [한국인](README_ko.md)
 
 **死神vs火影** 是一个由 **剑jian** 及其所属制作组 **5DPLAY Game Studio** 制作的同人新概念策略格斗游戏。
 
