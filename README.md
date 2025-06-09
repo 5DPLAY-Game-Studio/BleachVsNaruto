@@ -22,13 +22,13 @@
 </strong>
 </p>
 
-## 星标历史 <!-- omit in toc -->
+## ⭐ 星标历史 <!-- omit in toc -->
 
 [![Star History Chart](https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=Date)](https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&Date)
 
 # 死神vs火影 <!-- omit in toc -->
 
-中文版 | [English](README_en.md) | [日本語](README_ja.md)
+简体中文 | [English](README_en.md) | [日本語](README_ja.md)
 
 **死神vs火影** 是一个由 **剑jian** 及其所属制作组 **5DPLAY Game Studio** 制作的同人新概念策略格斗游戏。
 
@@ -95,7 +95,7 @@
 
 整个 5DPLAY 社区都应当遵守本项目自身遵循的行为准则。
 
-感谢这些出色的人 ([emoji key](https://allcontributors.org/docs/en/emoji-key))：
+感谢这些出色的人 ([颜文字键值](https://allcontributors.org/docs/en/emoji-key))：
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->

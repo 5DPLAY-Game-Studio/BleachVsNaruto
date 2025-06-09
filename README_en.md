@@ -22,13 +22,13 @@
 </strong>
 </p>
 
-## Star History <!-- omit in toc -->
+## ⭐ Star History <!-- omit in toc -->
 
 [![Star History Chart](https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=Date)](https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&Date)
 
 # Bleach vs Naruto <!-- omit in toc -->
 
-[中文版](README.md) | English | [日本語](README_ja.md)
+[简体中文](README.md) | English | [日本語](README_ja.md)
 
 **Bleach vs Naruto** is a new concept strategy fighting game developed by **剑jian** and its production team **5DPLAY Game Studio**.
 

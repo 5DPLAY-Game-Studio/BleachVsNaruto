@@ -22,13 +22,13 @@
 </strong>
 </p>
 
-## スターの歴史 <!-- omit in toc -->
+## ⭐ スターの歴史 <!-- omit in toc -->
 
 [![Star History Chart](https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=Date)](https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&Date)
 
 # ブリーチ vs ナルト <!-- omit in toc -->
 
-[中文版](README.md) | [English](README_en.md) | 日本語
+[简体中文](README.md) | [English](README_en.md) | 日本語
 
 **ブリーチ vs ナルト** は、**剑jian** とその制作チーム **5DPLAY Game Studio** によって開発された新しいコンセプトの戦略格闘ゲームです。
 
@@ -113,7 +113,7 @@
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-このプロジェクトは[all-contributors](https://github.com/all-contributors/all-contributors)仕様に準拠しています。あらゆる貢献を歓迎します！
+このプロジェクトは [all-contributors](https://github.com/all-contributors/all-contributors) 仕様に準拠しています。あらゆる貢献を歓迎します！
 
 ## 翻訳する
 
