@@ -17,6 +17,10 @@
  */
 
 package net.play5d.game.bvn.interfaces {
+
+/**
+ * 值对象实例接口
+ */
 public interface IInstanceVO {
 
     /**

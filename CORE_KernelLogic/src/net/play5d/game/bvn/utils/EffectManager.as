@@ -77,9 +77,17 @@ public class EffectManager {
             }
         }
 
+        var effect:EffectVO;
+        if (isMosouEnemy) {
+            effect = EffectModel.I.getMosouEnemyHitEffect(hitvo.hitType);
+        }
+        else if (hitvo.customEffectVO) {
+            effect = hitvo.customEffectVO;
+        }
+        else {
+            effect = EffectModel.I.getHitEffect(hitvo.hitType);
+        }
 
-        var effect:EffectVO = isMosouEnemy ? EffectModel.I.getMosouEnemyHitEffect(hitvo.hitType) :
-                              EffectModel.I.getHitEffect(hitvo.hitType);
         if (!effect) {
             _hitCache[hitvo] = null;
             return null;

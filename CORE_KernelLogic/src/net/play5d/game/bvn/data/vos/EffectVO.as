@@ -58,6 +58,11 @@ public class EffectVO implements IInstanceVO {
     public var isBuff:Boolean     = false;
     public var isSteelHit:Boolean = false;
 
+    // 自定义特效元件链接
+    public var customMcCls:Class;
+    // 自定义特效声音链接
+    public var customSndCls:Class;
+
 //    public function clone():EffectVO {
 //        var o:Object = KyoUtils.itemToObject(this);
 //        delete o['className'];
@@ -70,7 +75,14 @@ public class EffectVO implements IInstanceVO {
         bitmapDataCache = new Vector.<BitmapDataCacheVO>();
         frameLabelCache = {};
 
-        var mc:MovieClip = AssetManager.I.getEffect(className);
+        var mc:MovieClip;
+        if (!className && customMcCls) {
+            mc = new customMcCls() as MovieClip;
+        }
+        else {
+            mc = AssetManager.I.getEffect(className);
+        }
+
         mc.gotoAndStop(1);
         var bounds:Rectangle;
         var cache:BitmapDataCacheVO;

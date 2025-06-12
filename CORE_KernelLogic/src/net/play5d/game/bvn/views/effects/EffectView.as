@@ -82,8 +82,14 @@ public class EffectView {
         if (_data.randRotate) {
             randRotate();
         }
-        if (playSound && _data.sound) {
-            SoundCtrl.I.playEffectSound(_data.sound);
+
+        if (playSound) {
+            if (_data.customSndCls) {
+                SoundCtrl.I.playSwcSound(_data.customSndCls);
+            }
+            else if (_data.sound) {
+                SoundCtrl.I.playEffectSound(_data.sound);
+            }
         }
 
         renderDisplay();
