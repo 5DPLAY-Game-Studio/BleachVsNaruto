@@ -2,6 +2,12 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.06122025_alpha] - 2025-06-12
+
+### 新增
+
+- 类 HitVO 增加 customEffect 参数，值：{customMcCls: mc_cls, customSndCls: snd_cls, ...}
+
 ## [3.7.0.0.05072025_alpha] - 2025-05-07
 
 ### 修复
@@ -200,7 +206,8 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
-[3.7.0.0.05072025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04162025...3.7.0.0.05072025_alpha_alpha
+[3.7.0.0.06122025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05072025_alpha...3.7.0.0.06122025_alpha
+[3.7.0.0.05072025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04162025_alpha...3.7.0.0.05072025_alpha
 [3.7.0.0.04162025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04092025_alpha...3.7.0.0.04162025_alpha
 [3.7.0.0.04092025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04072025_alpha...3.7.0.0.04092025_alpha
 [3.7.0.0.04072025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.03082025_alpha...3.7.0.0.04072025_alpha
