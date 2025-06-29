@@ -108,6 +108,9 @@ public class HitVO implements IInstanceVO {
     // 自定义打击效果 EffectVO
     public var customEffectVO:EffectVO = null;
 
+    // 对方受到此次伤害后，是否受到重力效果
+    public var targetApplyG:Boolean = true;
+
 //    // 克隆键值
 //    private var _cloneKey:Array = [
 //        'id', 'owner', 'power', 'powerAdd', 'powerRate', 'hitType', 'isBreakDef', 'hitx', 'hity', 'hurtTime',

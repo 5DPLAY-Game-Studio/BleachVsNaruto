@@ -907,14 +907,19 @@ public class FighterMcCtrler {
         }
     }
 
-    public function beHit(hitvo:HitVO, hitRect:Rectangle = null):void {
-
+    /**
+     * 被打
+     *
+     * @param hitVO 攻击值对象
+     * @param hitRect 攻击范围
+     */
+    public function beHit(hitVO:HitVO, hitRect:Rectangle = null):void {
         if (_action.hurtAction) {
             doAction(_action.hurtAction);
             return;
         }
 
-        var target:IGameSprite       = hitvo.owner;
+        var target:IGameSprite       = hitVO.owner;
         var targetBGS:BaseGameSprite =
                     (target && (target is BaseGameSprite)) ?
                     target as BaseGameSprite :
@@ -925,71 +930,60 @@ public class FighterMcCtrler {
             targetBGS.isAllowReversePush
         ) {
             if (Math.abs(_fighter.x - target.x) < 100) {
-//						var dampingX:Number = _isDefense ?
-//							GameConfig.DEFENSE_DAMPING_X :
-//							(hitvo.hurtType == 1 ? 0.2 : GameConfig.HURT_DAMPING_X);
+//                var dampingX:Number = _isDefense ?
+//                                      GameConfig.DEFENSE_DAMPING_X :
+//                                      (hitVO.hurtType == 1 ? 0.2 : GameConfig.HURT_DAMPING_X);
                 var dampingX:Number = 0.3;
-                var vecx:Number     = -hitvo.hitx * targetBGS.direct * 1.4;
-                if (vecx > 20) {
-                    vecx = 20;
+                var vecX:Number     = -hitVO.hitx * targetBGS.direct * 1.4;
+                if (vecX > 20) {
+                    vecX = 20;
                 }
-                if (vecx < -20) {
-                    vecx = -20;
+                if (vecX < -20) {
+                    vecX = -20;
                 }
-                targetBGS.setVec2(vecx, 0, dampingX, 0);
+
+                targetBGS.setVec2(vecX, 0, dampingX, 0);
             }
         }
 
 //        if (_isDefense) {
-//
-////				if(hitvo.isBreakDef && hitvo.hitType == HitType.CATCH){
-//            if (hitvo.isBreakDef && hitvo.hitType == HitType.CATCH) {
-//                doHurt(hitvo, hitRect);
+//            if (hitVO.isBreakDef && hitVO.hitType == HitType.CATCH) {
+//                doHurt(hitVO, hitRect);
 //                return;
 //            }
 //
-//            if (hitvo.checkDirect && hitvo.owner) {
-//                if (checkDefDirect(hitvo.owner)) {
-//                    doHurt(hitvo, hitRect);
+//            if (hitVO.checkDirect && hitVO.owner) {
+//                if (checkDefDirect(hitVO.owner)) {
+//                    doHurt(hitVO, hitRect);
 //                    return;
 //                }
 //            }
 //
-//            doDefenseHit(hitvo, hitRect);
+//            doDefenseHit(hitVO, hitRect);
 //        }
 //        else {
 //            if (_fighter.isSteelBody && _fighter.isAlive) {
-//                doSteelHurt(hitvo, hitRect);
+//                doSteelHurt(hitVO, hitRect);
 //            }
 //            else {
-//                doHurt(hitvo, hitRect);
+//                doHurt(hitVO, hitRect);
 //            }
 //        }
 
         if (_fighter.isSteelBody) {
             if (_fighter.isAlive) {
-                doSteelHurt(hitvo, hitRect);
+                doSteelHurt(hitVO, hitRect);
             }
         }
-        else if (_isDefense) {
-            if (hitvo.isBreakDef && hitvo.hitType == HitType.CATCH) {
-                doHurt(hitvo, hitRect);
-                return;
-            }
-
-            if (hitvo.checkDirect && hitvo.owner) {
-                if (checkDefDirect(hitvo.owner)) {
-                    doHurt(hitvo, hitRect);
-                    return;
-                }
-            }
-
-            doDefenseHit(hitvo, hitRect);
+        else if (_isDefense &&
+                 !(hitVO.isBreakDef && hitVO.hitType == HitType.CATCH) &&
+                 !(hitVO.checkDirect && hitVO.owner && checkDefDirect(hitVO.owner)))
+        {
+            doDefenseHit(hitVO, hitRect);
         }
         else {
-            doHurt(hitvo, hitRect);
+            doHurt(hitVO, hitRect);
         }
-
     }
 
     /**
@@ -1902,13 +1896,19 @@ public class FighterMcCtrler {
         }
     }
 
-    private function doHurt(hitvo:HitVO, hitRect:Rectangle):void {
-        if (hitvo && hitRect) {
-            EffectCtrl.I.doHitEffect(hitvo, hitRect, _fighter);
+    /**
+     * 执行受伤
+     *
+     * @param hitVO 攻击值对象
+     * @param hitRect 攻击范围
+     */
+    private function doHurt(hitVO:HitVO, hitRect:Rectangle):void {
+        if (hitVO && hitRect) {
+            EffectCtrl.I.doHitEffect(hitVO, hitRect, _fighter);
         }
 
-        _fighter.hurtHit = hitvo;
-        _fighter.loseHp(hitvo.getDamage());
+        _fighter.hurtHit = hitVO;
+        _fighter.loseHp(hitVO.getDamage());
 
         _fighter.isAllowBeHit = false;
         _beHitGap             = GameConfig.HURT_GAP_FRAME;
@@ -1918,8 +1918,14 @@ public class FighterMcCtrler {
             FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DIE);
         }
 
-        if (!_fighter.isAlive || !hitvo.isWeakHit()) {
-            doHurtAnimate(hitvo, hitRect);
+        if (!_fighter.isAlive || !hitVO.isWeakHit()) {
+            doHurtAnimate(hitVO, hitRect);
+        }
+
+        // 受到非击飞类伤害时，根据要求设置自身是否受到重力效果
+        // 当僵直结束时，角色会自动恢复重力（idle 效果）
+        if (_fighter.isAlive && hitVO.hurtType == 0) {
+            _fighter.isApplyG = hitVO.targetApplyG;
         }
     }
 
