@@ -50,7 +50,9 @@ public class SetBtnGroup extends Sprite {
     }
     public var keyEnable:Boolean = true;
     public var startX:Number = 100;
+    // 按钮选项组的开始 Y 坐标
     public var startY:Number = 50;
+    // 按钮选项组的结束 Y 坐标
     public var endY:Number   = 0; //scroll时使用
     public var gap:Number    = 75;
     /**
@@ -135,6 +137,12 @@ public class SetBtnGroup extends Sprite {
         // 用stage有点问题
     }
 
+    /**
+     * 设置箭头（当前选择项）索引
+     * @param id
+     * @param sound
+     * @param isScroll
+     */
     public function setArrowIndex(id:int, sound:Boolean = true, isScroll:Boolean = true):void {
         if (_arrowIndex == id) {
             return;
@@ -176,7 +184,6 @@ public class SetBtnGroup extends Sprite {
     }
 
     private function initMainBtns():void {
-
         _btns = new Vector.<SetBtn>();
 
         var settingMenu:Array = GameInterface.instance.getSettingMenu();
@@ -335,13 +342,17 @@ public class SetBtnGroup extends Sprite {
         setArrowIndex(index);
     }
 
+    /**
+     * 移动滚动卷轴
+     */
     private function moveScroll():void {
         if (!_scrollRect) {
             return;
         }
 
+        // 若排列方向为纵向
         if (direct == 1) {
-
+            // 如果按钮选项数量小于 8 个，无需进行滚动
             if (_btns.length < 8) {
                 return;
             }
@@ -357,14 +368,11 @@ public class SetBtnGroup extends Sprite {
 //				var curY:Number = _arrow.y;
 
             var step:Number    = H3 / _btns.length;
-            var offsetY:Number = -_arrowIndex * (
-                    step - gap
-            );
+            var offsetY:Number = -_arrowIndex * (step - gap);
 
+            // 执行移动
             TweenLite.to(_scrollRect, 0.2, {y: offsetY, onUpdate: updateScroll});
-
         }
-
     }
 
     private function updateScroll():void {
@@ -416,41 +424,57 @@ public class SetBtnGroup extends Sprite {
 
     }
 
-    // 手指滑动
+    /**
+     * 触摸移动事件处理程序
+     *
+     * @param event
+     */
     private function touchMoveHandler(event:TouchMoveEvent):void {
-//			trace('touchMoveHandler', TOUCH_ENABLED);
-
+//        trace('touchMoveHandler', TOUCH_ENABLED);
         if (!_scrollRect) {
             return;
         }
-//			if(!TOUCH_ENABLED) return;
+//        if(!TOUCH_ENABLED) return;
 
-        if (event.type == TouchMoveEvent.TOUCH_MOVE) {
+        switch (event.type) {
+        case TouchMoveEvent.TOUCH_MOVE:
             _scrollRect.y -= event.deltaY;
             updateScroll();
-        }
 
-        if (event.type == TouchMoveEvent.TOUCH_END) {
+            break;
+        case TouchMoveEvent.TOUCH_END:
             var toY:Number = -1;
 
+            // 处理滑动到最顶上时的逻辑
             if (event.endY > event.startY) {
                 if (_scrollRect.y < 0) {
                     toY = 0;
                 }
             }
+            // 处理滑动到最底端时的逻辑
+            else if (event.endY < event.startY) {
+                // baseHeight
+                // 如果定义了滑动到最底端的结束 Y 坐标，则使用该坐标
+                // 否则使用滚动卷轴的最底端（高度决定）
+                var bh:Number     = endY != 0 ? endY : _scrollRect.height;
 
-            if (event.endY < event.startY) {
-                var bh:Number     = endY != 0 ? endY : _scrollRect.height; //最底端
-                var bottom:Number = GameConfig.GAME_SIZE.y - bh + 100; //最底端
+                // 定义可滑动到的最底 Y 坐标
+                // +200 是因为有 CANCEL 和 APPLY 两个选项
+                // 一个就占 100 px，为什么占 100 px？
+                // 请看 SettingStage.build 方法中
+                // 定义的 startY 和 gap 分别为 30 和 70
+                var bottom:Number = GameConfig.GAME_SIZE.y - bh + 200;
                 if (_scrollRect.y > bottom) {
                     toY = bottom;
                 }
             }
 
+            // 执行移动
             if (toY != -1) {
                 TweenLite.to(_scrollRect, 0.2, {y: toY, onUpdate: updateScroll});
             }
 
+            break;
         }
     }
 
