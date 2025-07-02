@@ -21,7 +21,7 @@
               <dependency linkage="External" />
             </entry>
           </entries>
-          <sdk name="flex4.16.1-air50.2.4.1" />
+          <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options>
           <map>
@@ -56,7 +56,7 @@
     <content url="file://$MODULE_DIR$/../shared/_tmp/pc">
       <sourceFolder url="file://$MODULE_DIR$/../shared/_tmp/pc" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="flex4.16.1-air51.0.1.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="LIB_KyoLib" exported="" />
     <orderEntry type="module" module-name="CORE_KernelLogic" exported="" />

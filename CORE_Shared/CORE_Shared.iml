@@ -3,8 +3,8 @@
   <component name="FlexBuildConfigurationManager" active="CORE_Shared">
     <configurations>
       <configuration name="CORE_Shared" pure-as="true" output-type="Library" output-file="CORE_Shared.swc" output-folder="$MODULE_DIR$/../out/production/CORE_Shared">
-        <dependencies target-player="50.2">
-          <sdk name="flex4.16.1-air50.2.4.1" />
+        <dependencies target-player="51.0">
+          <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options />
         <packaging-air-desktop />
@@ -19,7 +19,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="flex4.16.1-air51.0.1.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

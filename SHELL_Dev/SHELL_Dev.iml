@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="FighterTester">
     <configurations>
       <configuration name="FighterTester" pure-as="true" main-class="FighterTester" output-file="FighterTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
-        <dependencies target-player="50.2">
+        <dependencies target-player="51.0">
           <entries>
             <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
               <dependency linkage="Merged" />
@@ -24,7 +24,7 @@
               <dependency linkage="Merged" />
             </entry>
           </entries>
-          <sdk name="flex4.16.1-air50.2.4.1" />
+          <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options>
           <map>
@@ -43,7 +43,7 @@
         <packaging-ios />
       </configuration>
       <configuration name="OtherTester" pure-as="true" main-class="OtherTester" output-file="OtherTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
-        <dependencies target-player="50.2">
+        <dependencies target-player="51.0">
           <entries>
             <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
               <dependency linkage="Merged" />
@@ -61,7 +61,7 @@
               <dependency linkage="External" />
             </entry>
           </entries>
-          <sdk name="flex4.16.1-air50.2.4.1" />
+          <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options>
           <map>
@@ -80,7 +80,7 @@
         <packaging-ios />
       </configuration>
       <configuration name="SelectTester" pure-as="true" main-class="SelectTester" output-file="SelectTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
-        <dependencies target-player="50.2">
+        <dependencies target-player="51.0">
           <entries>
             <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
               <dependency linkage="Merged" />
@@ -98,7 +98,7 @@
               <dependency linkage="External" />
             </entry>
           </entries>
-          <sdk name="flex4.16.1-air50.2.4.1" />
+          <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options>
           <map>
@@ -127,7 +127,7 @@
     <content url="file://$MODULE_DIR$/../shared/_tmp/dev">
       <sourceFolder url="file://$MODULE_DIR$/../shared/_tmp/dev" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="flex4.16.1-air50.2.4.1" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="jdk" jdkName="flex4.16.1-air51.0.1.1" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="CORE_Shared" exported="" />
     <orderEntry type="module" module-name="LIB_KyoLib" exported="" />
