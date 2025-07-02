@@ -20,6 +20,7 @@ package net.play5d.game.bvn.ctrler {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.filters.BitmapFilter;
+import flash.geom.ColorTransform;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.Dictionary;
@@ -33,10 +34,12 @@ import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.data.FighterActionState;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.EffectManager;
 import net.play5d.game.bvn.views.effects.BitmapFilterView;
@@ -196,6 +199,11 @@ public class EffectCtrl {
 
         if (isRenderAnimate()) {
             renderAnimate();
+        }
+
+        // 如果角色调用了 bisha()，那么则会开始渲染黑屏背景函数
+        if (_renderBlackBack) {
+            renderBlackBack();
         }
 
         if (_replaceSkillFrameHold > 0) {
@@ -932,6 +940,66 @@ public class EffectCtrl {
             }
         }
         return true;
+    }
+
+
+    private var _renderBlackBack:Boolean = false; // 是否渲染黑屏背景
+    private var _renderBlackBackOut:Boolean = false; // 是否渲染黑屏结束消失动画
+    /**
+     * 渲染必杀黑屏
+     */
+    private function renderBlackBack():void {
+        const rate:Number = 0.025;
+
+        // 获得地图
+        var mapLayer:MapMain = _gameStage.getMap();
+        if (!P1 || !P2) {
+            return;
+        }
+
+        var p1IsBishaIng:Boolean = FighterActionState.isBishaIng(P1.actionState);
+        var p2IsBishaIng:Boolean = FighterActionState.isBishaIng(P2.actionState);
+
+        // 获得当前地图颜色通道
+        var mapCt:ColorTransform = mapLayer.getColorTransform();
+        // 如果结束渲染开始
+        if (!p1IsBishaIng && !p2IsBishaIng) {
+            // 如果当前通道值加上最小变化速率 rate 的数值 > 1
+            // 那么重置颜色通道
+            if (mapCt.redMultiplier + rate > 1) {
+                mapLayer.resetColorTransform();
+
+                _renderBlackBackOut = false;
+                _renderBlackBack = false;
+
+                return;
+            }
+
+            mapCt.redMultiplier += rate;
+            mapCt.greenMultiplier = mapCt.blueMultiplier = mapCt.redMultiplier;
+            mapLayer.setColorTransform(mapCt);
+
+            return;
+        }
+
+
+        if (mapCt.redMultiplier == 0.3) {
+            return;
+        }
+
+        // 如果没有开始
+        // 将地图背景 RGB 通道值设为 0.5 （半黑）
+        var ct:ColorTransform = new ColorTransform();
+        ct.redMultiplier = ct.greenMultiplier = ct.blueMultiplier = 0.3;
+        mapLayer.setColorTransform(ct);
+    }
+
+    /**
+     * 开始渲染必杀黑屏
+     */
+    public function startRenderBlackBack():void {
+        _renderBlackBack = true;
+        _renderBlackBackOut = false;
     }
 
     private function renderFreeze():void {

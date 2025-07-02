@@ -19,6 +19,7 @@
 package net.play5d.game.bvn.map {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
+import flash.geom.ColorTransform;
 import flash.geom.Point;
 
 import net.play5d.game.bvn.GameConfig;
@@ -34,6 +35,7 @@ public class MapMain {
         super();
         this.mapMc = mapmc;
     }
+
     public var mapLayer:MapLayer;
     public var frontLayer:MapLayer;
     public var frontFixLayer:MapLayer;
@@ -48,8 +50,11 @@ public class MapMain {
     public var data:MapVO;
     public var gameState:GameStage;
     private var _defaultFrontPos:Point;
-    private var _smoothing:Point = new Point();
+    private var _smoothing:Point   = new Point();
     private var _floors:Array;
+
+    // 地图颜色变换
+    private var _colorTransform:ColorTransform = new ColorTransform();
 
     public function destory():void {
         if (mapMc) {
@@ -63,21 +68,62 @@ public class MapMain {
             mapMc = null;
         }
         if (mapLayer) {
-            mapLayer.destory();
+            mapLayer.destroy();
             mapLayer = null;
         }
         if (frontLayer) {
-            frontLayer.destory();
+            frontLayer.destroy();
             frontLayer = null;
         }
         if (frontFixLayer) {
-            frontFixLayer.destory();
+            frontFixLayer.destroy();
             frontFixLayer = null;
         }
         if (bgLayer) {
-            bgLayer.destory();
+            bgLayer.destroy();
             bgLayer = null;
         }
+
+        _colorTransform = null;
+    }
+
+    /**
+     * 设置MapMain颜色通道
+     */
+    public function setColorTransform(ct:ColorTransform):void {
+        _colorTransform = ct;
+
+        if (mapLayer && mapLayer.enabled) {
+            mapLayer.transform.colorTransform = _colorTransform;
+        }
+
+        if (frontLayer && frontLayer.enabled) {
+            frontLayer.transform.colorTransform = _colorTransform;
+        }
+
+        if (frontFixLayer && frontFixLayer.enabled) {
+            frontFixLayer.transform.colorTransform = _colorTransform;
+        }
+
+        if (bgLayer && bgLayer.enabled) {
+            bgLayer.transform.colorTransform = _colorTransform;
+        }
+    }
+
+    /**
+     * 获取MapMain颜色通道
+     */
+    public function getColorTransform():ColorTransform {
+        return _colorTransform;
+    }
+
+    /**
+     * 重置颜色通道
+     */
+    public function resetColorTransform():void {
+        _colorTransform = new ColorTransform();
+
+        setColorTransform(_colorTransform);
     }
 
     public function setVisible(v:Boolean):void {
@@ -201,6 +247,7 @@ public class MapMain {
             setVisible(false);
         }
 
+        resetColorTransform();
     }
 
     public function getStageSize():Point {

@@ -114,6 +114,7 @@ public class FighterEffectCtrl {
     public function bisha(isSuper:Boolean = false, face:String = null):void {
         var faceDisplay:DisplayObject = getFace(face);
         EffectCtrl.I.bisha(_target, isSuper, faceDisplay);
+        EffectCtrl.I.startRenderBlackBack();
     }
 
     //SAMPLE: parent.$effect_ctrler.endBisha();

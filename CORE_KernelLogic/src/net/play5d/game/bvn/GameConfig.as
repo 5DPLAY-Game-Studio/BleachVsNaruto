@@ -20,6 +20,8 @@ package net.play5d.game.bvn {
 import flash.display.StageQuality;
 import flash.geom.Point;
 
+import net.play5d.game.bvn.data.MapLogoState;
+
 public class GameConfig {
     include '../../../../../include/_INCLUDE_.as';
 
@@ -144,7 +146,7 @@ public class GameConfig {
     public static var ALLOW_SHOW_HP_TEXT:Boolean = true;
     public static var SPEED_PLUS:Number          = SPEED_PLUS_DEFAULT; //速度比率
     public static var HURT_FRAME_OFFSET:int      = 3; //受击时间补正，帧数
-    public static var MAP_LOGO_STATE:int         = 0; //是否显示地图中的LOGO 0=不显示，1=显示
+    public static var MAP_LOGO_STATE:int         = MapLogoState.HIDE; //是否显示地图中的LOGO 0=不显示，1=显示
     public static var SHOW_UI_STATUS:int         = 0; //UI显示模式（A   第）
 
     //默认速度比率
