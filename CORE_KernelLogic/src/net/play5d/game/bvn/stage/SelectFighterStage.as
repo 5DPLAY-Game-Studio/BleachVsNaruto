@@ -482,12 +482,8 @@ public class SelectFighterStage implements IStage {
                 continue;
             }
 
-            var tx:Number = startX + (
-                    gapX * sf.selectData.x
-            );
-            var ty:Number = startY + (
-                    gapY * sf.selectData.y
-            );
+            var tx:Number = startX + (gapX * sf.selectData.x);
+            var ty:Number = startY + (gapY * sf.selectData.y);
             if (sf.selectData.offset) {
                 tx += sf.selectData.offset.x;
                 ty += sf.selectData.offset.y;
@@ -498,9 +494,7 @@ public class SelectFighterStage implements IStage {
             sf.ui.x      = initX;
             sf.ui.y      = initY;
 
-            var delay:Number = Math.random() * (
-                    _tweenTime - 300
-            ) / 1000;
+            var delay:Number = Math.random() * (_tweenTime - 300) / 1000;
 
             TweenLite.to(sf.ui, 0.3,
                          {x: tx, y: ty, delay: delay, scaleX: 1, scaleY: 1, ease: Back.easeOut}

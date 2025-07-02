@@ -76,6 +76,11 @@ public class SelectFighterItem extends EventDispatcher {
             ct.blueOffset                       = -255;
             ui.more_bg.transform.colorTransform = ct;
         }
+
+//        ui.warning.visible = fighterData.hasWarning;
+        if (!fighterData.hasWarning) {
+            ui.removeChild(ui.warning);
+        }
     }
     public var selectData:SelectCharListItemVO;
     public var fighterData:FighterVO;

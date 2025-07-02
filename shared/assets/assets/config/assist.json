@@ -13,7 +13,8 @@
         "file": "kon.swf",
         "face": "kon.png",
         "face_big": "kon_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "orihime",
       "name": "井上·织姬",
@@ -22,7 +23,8 @@
         "file": "orihime.swf",
         "face": "orihime.png",
         "face_big": "orihime_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "yoruichi",
       "name": "四枫院·夜一",
@@ -31,7 +33,8 @@
         "file": "yoruichi.swf",
         "face": "yoruichi.png",
         "face_big": "orihime_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "uryuu",
       "name": "石田·雨龙",
@@ -40,7 +43,8 @@
         "file": "uryuu.swf",
         "face": "uryuu.png",
         "face_big": "uryuu_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kenpachi",
       "name": "更木·剑八",
@@ -49,7 +53,8 @@
         "file": "kenpachi.swf",
         "face": "kenpachi.png",
         "face_big": "kenpachi_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ichigo_hollow",
       "name": "黑崎·一护 牛头",
@@ -58,7 +63,8 @@
         "file": "ichigo_hollow.swf",
         "face": "ichigo_hollow.png",
         "face_big": "ichigo_hollow_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "yachiru",
       "name": "草鹿·八千流",
@@ -67,7 +73,8 @@
         "file": "yachiru.swf",
         "face": "yachiru.png",
         "face_big": "yachiru_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "starrk",
       "name": "柯雅泰·史塔克",
@@ -76,7 +83,8 @@
         "file": "starrk.swf",
         "face": "starrk.png",
         "face_big": "starrk_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "halibel",
       "name": "蒂雅·赫丽贝尔",
@@ -85,7 +93,8 @@
         "file": "halibel.swf",
         "face": "halibel.png",
         "face_big": "halibel_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "grimmjow",
       "name": "葛力姆乔·贾卡杰克",
@@ -94,7 +103,8 @@
         "file": "grimmjow.swf",
         "face": "grimmjow.png",
         "face_big": "grimmjow_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "soifon",
       "name": "碎蜂",
@@ -103,7 +113,8 @@
         "file": "soifon.swf",
         "face": "soifon.png",
         "face_big": "soifon_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "nemu",
       "name": "涅·音梦",
@@ -112,7 +123,8 @@
         "file": "nemu.swf",
         "face": "nemu.png",
         "face_big": "nemu_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ichigo_padipata",
       "name": "黑崎·一护 修行",
@@ -121,7 +133,8 @@
         "file": "ichigo_padipata.swf",
         "face": "ichigo_padipata.png",
         "face_big": "ichigo_padipata_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "yamamoto",
       "name": "山本·元柳斎重国",
@@ -130,7 +143,8 @@
         "file": "yamamoto.swf",
         "face": "yamamoto.png",
         "face_big": "yamamoto_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "gin",
       "name": "市丸·银",
@@ -139,7 +153,8 @@
         "file": "gin.swf",
         "face": "gin.png",
         "face_big": "gin_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "rangiku",
       "name": "松本·乱菊",
@@ -148,7 +163,8 @@
         "file": "rangiku.swf",
         "face": "rangiku.png",
         "face_big": "rangiku_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "byakuya",
       "name": "朽木·白哉",
@@ -157,7 +173,8 @@
         "file": "byakuya.swf",
         "face": "byakuya.png",
         "face_big": "byakuya_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ikkaku",
       "name": "斑目·一角",
@@ -166,7 +183,8 @@
         "file": "ikkaku.swf",
         "face": "ikkaku.png",
         "face_big": "ikkaku_b.png"
-      }
+      },
+      "hasWarning": true
     }, 
     
     
@@ -180,7 +198,8 @@
         "file": "gaara.swf",
         "face": "gaara.png",
         "face_big": "gaara_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "temari",
       "name": "手鞠",
@@ -189,7 +208,8 @@
         "file": "temari.swf",
         "face": "temari.png",
         "face_big": "temari_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ino",
       "name": "山中·井野",
@@ -198,7 +218,8 @@
         "file": "ino.swf",
         "face": "ino.png",
         "face_big": "ino_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "tenten",
       "name": "天天",
@@ -207,7 +228,8 @@
         "file": "tenten.swf",
         "face": "tenten.png",
         "face_big": "tenten_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "itachi",
       "name": "宇智波·鼬",
@@ -216,7 +238,8 @@
         "file": "itachi.swf",
         "face": "itachi.png",
         "face_big": "itachi_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "hinata",
       "name": "日向·雏田",
@@ -225,7 +248,8 @@
         "file": "hinata.swf",
         "face": "hinata.png",
         "face_big": "hinata_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "tsunate",
       "name": "纲手",
@@ -234,7 +258,8 @@
         "file": "tsunate.swf",
         "face": "tsunate.png",
         "face_big": "tsunate_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "tsuchikage",
       "name": "大野木",
@@ -243,7 +268,8 @@
         "file": "tsuchikage.swf",
         "face": "tsuchikage.png",
         "face_big": "tsuchikage_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "minato",
       "name": "波风·水门",
@@ -252,7 +278,8 @@
         "file": "minato.swf",
         "face": "minato.png",
         "face_big": "minato_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "jiraiya",
       "name": "自来也",
@@ -261,7 +288,8 @@
         "file": "jiraiya.swf",
         "face": "jiraiya.png",
         "face_big": "jiraiya_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "suigetsu",
       "name": "鬼灯·水月",
@@ -270,7 +298,8 @@
         "file": "suigetsu.swf",
         "face": "suigetsu.png",
         "face_big": "suigetsu_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sai",
       "name": "佐井",
@@ -279,7 +308,8 @@
         "file": "sai.swf",
         "face": "sai.png",
         "face_big": "sai_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "madara",
       "name": "宇智波·斑",
@@ -288,7 +318,8 @@
         "file": "madara.swf",
         "face": "madara.png",
         "face_big": "madara_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kimimaro",
       "name": "君麻吕",
@@ -297,7 +328,8 @@
         "file": "kimimaro.swf",
         "face": "kimimaro.png",
         "face_big": "kimimaro_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "shikamaru",
       "name": "奈良·鹿丸",
@@ -306,7 +338,8 @@
         "file": "shikamaru.swf",
         "face": "shikamaru.png",
         "face_big": "shikamaru_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "obito_trueColors",
       "name": "宇智波·带土 真面目",
@@ -315,7 +348,8 @@
         "file": "obito_trueColors.swf",
         "face": "obito_trueColors.png",
         "face_big": "obito_trueColors_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sakura",
       "name": "春野·樱",
@@ -324,7 +358,8 @@
         "file": "sakura.swf",
         "face": "sakura.png",
         "face_big": "sakura_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "hiruko",
       "name": "蝎",
@@ -333,7 +368,8 @@
         "file": "hiruko.swf",
         "face": "hiruko.png",
         "face_big": "hiruko_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "yls",
       "name": "千手·扉间",
@@ -342,7 +378,8 @@
         "file": "yls.swf",
         "face": "yls.png",
         "face_big": "yls_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kabuto",
       "name": "药师·兜",
@@ -351,7 +388,8 @@
         "file": "kabuto.swf",
         "face": "kabuto.png",
         "face_big": "kabuto_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "naruto",
       "name": "漩涡·鸣人",
@@ -360,7 +398,8 @@
         "file": "naruto.swf",
         "face": "naruto.png",
         "face_big": "naruto_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "renji",
       "name": "阿散井·恋次",
@@ -369,7 +408,8 @@
         "file": "renji.swf",
         "face": "renji.png",
         "face_big": "renji_b.png"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "utakata",
       "name": "泡沫",
@@ -378,7 +418,8 @@
         "file": "utakata.swf",
         "face": "utakata.png",
         "face_big": "utakata_b.png"
-      }
+      },
+      "hasWarning": true
     }, 
     
     
@@ -391,7 +432,8 @@
         "file": "shishio.swf",
         "face": "shishio.png",
         "face_big": "shishio_b.png"
-      }
+      },
+      "hasWarning": true
     }, 
     
     

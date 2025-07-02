@@ -26,7 +26,8 @@
       "bgm": {
         "url": "character/ichigo.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ichigo_bankai",
       "name": "黑崎·一护 卍解",
@@ -47,7 +48,8 @@
       "bgm": {
         "url": "character/ichigo.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ichigo_vizored_half",
       "name": "黑崎·一护 半虚",
@@ -68,7 +70,8 @@
       "bgm": {
         "url": "character/ichigo.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ichigo_vizored",
       "name": "黑崎·一护 虚化",
@@ -89,7 +92,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ichigo_zero",
       "name": "黑崎·一护 零段",
@@ -110,7 +114,8 @@
       "bgm": {
         "url": "character/ichigo.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ogihci",
       "name": "黑崎·一护 内虚",
@@ -131,7 +136,8 @@
       "bgm": {
         "url": "character/ichigo.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ogihci_bankai",
       "name": "黑崎·一护 内虚 卍解",
@@ -152,7 +158,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "rukia",
       "name": "朽木·露琪亚 义骸",
@@ -172,7 +179,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "rukia_shikai",
       "name": "朽木·露琪亚 始解",
@@ -192,7 +200,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "renji",
       "name": "阿散井·恋次",
@@ -214,7 +223,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kenpachi",
       "name": "更木·剑八",
@@ -236,7 +246,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ikkaku",
       "name": "斑目·一角",
@@ -258,7 +269,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "gin",
       "name": "市丸·银",
@@ -281,7 +293,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "chad",
       "name": "茶渡·泰虎",
@@ -302,7 +315,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "uryuu",
       "name": "石田·雨龙",
@@ -323,7 +337,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "uryuu_ginreigojiaku",
       "name": "石田·雨龙 银岭弧雀",
@@ -344,7 +359,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "toushirou",
       "name": "日番谷·东狮郎",
@@ -365,7 +381,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "toushirou_bankai",
       "name": "日番谷·东狮郎 卍解",
@@ -386,7 +403,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "byakuya",
       "name": "朽木·白哉",
@@ -409,7 +427,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "byakuya_bankai",
       "name": "朽木·白哉 卍解",
@@ -432,7 +451,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ulquiorra",
       "name": "乌尔奇奥拉·西法",
@@ -453,7 +473,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ulquiorra_resurreccion",
       "name": "乌尔奇奥拉·西法 归刃",
@@ -474,7 +495,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "aizen",
       "name": "蓝染·惣右介",
@@ -497,7 +519,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 100
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "aizen_gz",
       "name": "蓝染·惣右介 叛变",
@@ -520,7 +543,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 100
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "mayuri",
       "name": "涅·茧利",
@@ -541,7 +565,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "orihime",
       "name": "井上·织姬",
@@ -561,7 +586,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "grimmjow",
       "name": "葛力姆乔·贾卡杰克",
@@ -582,7 +608,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "soifon",
       "name": "碎蜂",
@@ -602,7 +629,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "starrk",
       "name": "柯雅泰·史塔克",
@@ -622,7 +650,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "yoruichi",
       "name": "四枫院·夜一",
@@ -643,7 +672,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "tensa",
       "name": "天锁斩月",
@@ -664,7 +694,8 @@
       "bgm": {
         "url": "character/ichigo.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     },
     
     
@@ -690,7 +721,8 @@
       "bgm": {
         "url": "character/naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "naruto_oneTail",
       "name": "漩涡·鸣人 一尾",
@@ -711,7 +743,8 @@
       "bgm": {
         "url": "character/naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "naruto_fourTail",
       "name": "漩涡·鸣人 四尾",
@@ -732,7 +765,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "naruto_hermit",
       "name": "漩涡·鸣人 仙人",
@@ -753,7 +787,8 @@
       "bgm": {
         "url": "character/naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "naruto_kurama",
       "name": "漩涡·鸣人 九尾",
@@ -774,7 +809,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sakura",
       "name": "春野·樱",
@@ -794,7 +830,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sakura_sr",
       "name": "春野·樱 三忍",
@@ -814,7 +851,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sasuke",
       "name": "宇智波·佐助",
@@ -835,7 +873,8 @@
       "bgm": {
         "url": "character/sasuke.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sasuke_mantra",
       "name": "宇智波·佐助 咒怨",
@@ -856,7 +895,8 @@
       "bgm": {
         "url": "character/sasuke.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sasuke_susanoo",
       "name": "宇智波·佐助 须佐能乎",
@@ -877,7 +917,8 @@
       "bgm": {
         "url": "character/sasuke.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sasuke_susanoo2",
       "name": "宇智波·佐助 须佐能乎2",
@@ -898,7 +939,8 @@
       "bgm": {
         "url": "character/sasuke.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "karin",
       "name": "漩涡·香磷",
@@ -919,7 +961,8 @@
       "bgm": {
         "url": "character/sasuke.mp3",
         "rate": 50
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "juggo",
       "name": "天秤·重吾",
@@ -940,7 +983,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "itachi",
       "name": "宇智波·鼬",
@@ -961,7 +1005,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "deidara",
       "name": "迪达拉",
@@ -982,7 +1027,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kakashi",
       "name": "旗木·卡卡西",
@@ -1003,7 +1049,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kakashi_kamui",
       "name": "旗木·卡卡西 神威",
@@ -1024,7 +1071,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "lee",
       "name": "李·洛克",
@@ -1045,7 +1093,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "lee_domen",
       "name": "李·洛克 杜门",
@@ -1066,7 +1115,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "neji",
       "name": "日向·宁次",
@@ -1087,7 +1137,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "gaara",
       "name": "我爱罗",
@@ -1106,7 +1157,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "temari",
       "name": "手鞠",
@@ -1126,7 +1178,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "jiraiya",
       "name": "自来也",
@@ -1147,7 +1200,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "orochimaru",
       "name": "大蛇丸",
@@ -1168,7 +1222,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "killerbee",
       "name": "奇拉比",
@@ -1189,7 +1244,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "pain",
       "name": "佩恩",
@@ -1208,7 +1264,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "konan",
       "name": "小南",
@@ -1227,7 +1284,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "obito",
       "name": "宇智波·带土",
@@ -1249,7 +1307,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "obito_trueColors",
       "name": "宇智波·带土 真面目",
@@ -1271,7 +1330,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "madara",
       "name": "宇智波·斑",
@@ -1295,7 +1355,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kimimaro",
       "name": "君麻吕",
@@ -1316,7 +1377,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "hinata",
       "name": "日向·雏田",
@@ -1337,7 +1399,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "suigetsu",
       "name": "鬼灯·水月",
@@ -1358,7 +1421,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     },
     
     
@@ -1398,7 +1462,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 100
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "kenshin_slash",
       "name": "绯村·剑心 拔刀斋",
@@ -1427,7 +1492,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 100
-      }
+      },
+      "hasWarning": true
     },
     
     
@@ -1471,7 +1537,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_ninja_2",
       "name": "胖忍者兵",
@@ -1479,7 +1546,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja2.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_ninja_earth1",
       "name": "土影小兵1",
@@ -1487,7 +1555,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja_earth1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_ninja_fire1",
       "name": "火影小兵1",
@@ -1495,7 +1564,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja_fire1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_ninja_fire2",
       "name": "火影小兵2",
@@ -1503,7 +1573,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja_fire2.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_ninja_sand1",
       "name": "风影小兵1",
@@ -1511,7 +1582,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja_sand1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_ninja_thunder1",
       "name": "雷影小兵1",
@@ -1519,7 +1591,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/ninja_thunder1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_bear1",
       "name": "熊1",
@@ -1527,7 +1600,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/bear1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_bird1",
       "name": "鸟1",
@@ -1535,7 +1609,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/bird1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_dog1",
       "name": "狗1",
@@ -1543,7 +1618,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/dog1.swf"
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "xb_pig1",
       "name": "野猪1",
@@ -1551,7 +1627,8 @@
       "start_frame": 1,
       "urls": {
         "file": "xb/pig1.swf"
-      }
+      },
+      "hasWarning": true
     },
     
     
@@ -1577,7 +1654,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "gaara_old",
       "name": "[旧版] 我爱罗",
@@ -1596,7 +1674,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "itachi_old",
       "name": "[旧版] 宇智波·鼬",
@@ -1617,7 +1696,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "pain_old",
       "name": "[旧版] 佩恩",
@@ -1636,7 +1716,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "sasuke_susanoo_old",
       "name": "[旧版] 宇智波·佐助 须佐能乎",
@@ -1657,7 +1738,8 @@
       "bgm": {
         "url": "character/sasuke.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "obito_old",
       "name": "[旧版] 宇智波·带土",
@@ -1679,7 +1761,8 @@
       "bgm": {
         "url": "narutoboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "naruto_hermit_old",
       "name": "[旧版] 漩涡·鸣人 黄金",
@@ -1700,7 +1783,8 @@
       "bgm": {
         "url": "character/naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "juggo_old",
       "name": "[旧版] 天秤·重吾",
@@ -1721,7 +1805,8 @@
       "bgm": {
         "url": "naruto.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "byakuya_bankai_old",
       "name": "[旧版] 朽木·白哉 卍解",
@@ -1744,7 +1829,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 80
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "ulquiorra_old",
       "name": "[旧版] 乌尔奇奥拉·西法",
@@ -1765,7 +1851,8 @@
       "bgm": {
         "url": "bleachboss.mp3",
         "rate": 90
-      }
+      },
+      "hasWarning": true
     }, {
       "id": "soifon_old",
       "name": "[旧版] 碎蜂",
@@ -1785,7 +1872,8 @@
       "bgm": {
         "url": "bleach.mp3",
         "rate": 70
-      }
+      },
+      "hasWarning": true
     }]
   }
 }

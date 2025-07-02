@@ -38,44 +38,16 @@ public class FighterVO implements IInstanceVO {
     public var says:Array;
     public var bgm:String;
     public var bgmRate:Number = 1;
+    // 是否值得注意
+    public var hasWarning:Boolean = false;
 
-//		public var fighter:FighterMain;
     public var isAlive:Boolean;
-//    private var _cloneKey:Array = [
-//        'id', 'name', 'comicType', 'fileUrl', 'startFrame', 'faceUrl', 'contactFriends', 'contactEnemys', 'says',
-//        'faceBigUrl', 'faceBarUrl', 'bgm', 'bgmRate'
-//    ];
 
-//    public function initByXML(xml:XML):void {
-//        id        = xml.@id;
-//        name      = xml.@name;
-//        comicType = int(xml.@comic_type);
-//
-//        fileUrl    = xml.file.@url;
-//        startFrame = int(xml.file.@startFrame);
-//
-//        faceUrl    = xml.face.@url;
-//        faceBigUrl = xml.face.@big_url;
-//        faceBarUrl = xml.face.@bar_url;
-//        faceWinUrl = xml.face.@win_url;
-//
-//        contactFriends = xml.contact.friend.toString().split(',');
-//        contactEnemys  = xml.contact.enemy.toString().split(',');
-//
-//        bgm     = xml.bgm.@url;
-//        bgmRate = Number(xml.bgm.@rate) / 100;
-//
-//        says = [];
-//        for each(var i:XML in xml.says.say_item) {
-//            says.push(i.children().toString());
-//        }
-//
-//        if (startFrame != 0 && !bgm) {
-//            TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
-//        }
-//
-//    }
-
+    /**
+     * 通过对象进行初始化
+     *
+     * @param obj 对象
+     */
     public function initByObject(obj:Object):void {
         var pathObj:Object = obj['path'];
         var dataObj:Object = obj['data'];
@@ -119,22 +91,23 @@ public class FighterVO implements IInstanceVO {
             bgmRate = dataObj['bgm']['rate'];
         }
 
+        if (dataObj['hasWarning']) {
+            hasWarning = dataObj['hasWarning'];
+        }
+
         if (startFrame != 0 && !bgm) {
             TraceLang('debug.trace.data.fighter_vo.undefined_bgm', id);
         }
     }
 
+    /**
+     * 获得随机胜利语言
+     *
+     * @return 随机胜利语言
+     */
     public function getRandSay():String {
         return KyoRandom.getRandomInArray(says);
     }
-
-//    public function clone():FighterVO {
-//        var fv:FighterVO = new FighterVO();
-//        for each(var i:String in _cloneKey) {
-//            fv[i] = this[i];
-//        }
-//        return fv;
-//    }
 
 }
 }
