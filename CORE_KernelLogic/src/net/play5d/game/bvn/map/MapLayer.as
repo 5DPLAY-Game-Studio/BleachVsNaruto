@@ -30,54 +30,73 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.data.MapLogoState;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 
+/**
+ * 地图图层
+ */
 public class MapLayer extends Sprite {
     include '../../../../../../include/_INCLUDE_.as';
 
+    /**
+     * 构造方法
+     *
+     * @param view 视图显示对象
+     */
     public function MapLayer(view:DisplayObject) {
         if (!view) {
             return;
         }
 
         enabled = true;
-
         initView(view);
     }
-    public var enabled:Boolean      = false;
+
+    // 可用性
+    public var enabled:Boolean = false;
+
+    // 视图显示对象
     private var _view:DisplayObject;
+    // 模糊滤镜位图
     private var _blurBitmaps:Object = {};
+    // 是否平滑
     private var _smoothing:Boolean;
+    // 当前显示对象
     private var _currentShow:DisplayObject;
 
-    public function normalize():void {
+    /**
+     * 获取地图显示对象
+     */
+    public function getView():DisplayObject {
+        return _view;
+    }
 
+    /**
+     * 正常化
+     */
+    public function normalize():void {
         if (!_view) {
             return;
         }
 
+        var b:Bitmap;
         if (_view is Bitmap) {
-            (
-                    _view as Bitmap
-            ).smoothing = GameData.I.config.quality == GameQuality.BEST;
+            b           = _view as Bitmap;
+            b.smoothing = GameData.I.config.quality == GameQuality.BEST;
         }
-
-        if (_view is Sprite) {
+        else if (_view is Sprite) {
             var sp:Sprite = _view as Sprite;
-            for (var i:int; i < sp.numChildren; i++) {
+            for (var i:int = 0; i < sp.numChildren; i++) {
                 var d:DisplayObject = sp.getChildAt(i);
                 if (d is Bitmap) {
-                    (
-                            d as Bitmap
-                    ).smoothing = GameData.I.config.quality == GameQuality.BEST;
+                    b           = d as Bitmap;
+                    b.smoothing = GameData.I.config.quality == GameQuality.BEST;
                 }
             }
 
             var logo1:DisplayObject = sp.getChildByName('logo4399');
             var logo2:DisplayObject = sp.getChildByName('logo_mine');
-
-//				trace(sp.name + "======================== 9,M");
-            trace('logos', logo1, logo2);
 
             if (logo1) {
                 logo1.visible = false;
@@ -87,28 +106,27 @@ public class MapLayer extends Sprite {
             }
 
             switch (GameConfig.MAP_LOGO_STATE) {
-            case 1:
+            case MapLogoState.SHOW_4399:
                 if (logo1) {
                     logo1.visible = true;
                 }
                 break;
-            case 2:
+            case MapLogoState.SHOW_MINE:
                 if (logo2) {
                     logo2.visible = true;
                 }
                 break;
             }
-
         }
-
-
     }
 
+    /**
+     * 渲染光学可见性（透明度变化）
+     *
+     * @param gameSps 指定游戏元件
+     */
     public function renderOptical(gameSps:Vector.<IGameSprite>):void {
-        if (!_view) {
-            return;
-        }
-        if (_smoothing) {
+        if (!_view || _smoothing) {
             return;
         }
 
@@ -124,37 +142,44 @@ public class MapLayer extends Sprite {
 
         var r:Rectangle;
         var d:DisplayObject;
-
-        for (var i:int; i < spLength; i++) {
+        for (var i:int = 0; i < spLength; i++) {
             d = sp.getChildAt(i);
-
-            if (d is MovieClip == false) {
+            if (!(d is MovieClip)) {
                 continue;
             }
 
-            r       = d.getBounds(sp);
+            r = d.getBounds(sp);
             r.x += sp.x + this.x;
             r.y += sp.y + this.y;
+
+            // 如果相交，设置半透明
             d.alpha = checkHitGameSprite(r, gameSps) ? 0.5 : 1;
-
         }
     }
 
-    public function destory():void {
+    /**
+     * 销毁
+     */
+    public function destroy():void {
+        var b:Bitmap;
         if (_view is Bitmap) {
-            (
-                    _view as Bitmap
-            ).bitmapData.dispose();
+            b = _view as Bitmap;
+            b.bitmapData.dispose();
         }
     }
 
+    /**
+     * 设置平滑效果
+     *
+     * @param blurX 横向模糊值
+     * @param blurY 纵向模糊值
+     */
     public function setSmoothing(blurX:Number = 0, blurY:Number = 0):void {
         if (!_view) {
             return;
         }
 
         try {
-
             if (blurX <= 0 && blurY <= 0) {
                 show(_view);
                 return;
@@ -162,14 +187,17 @@ public class MapLayer extends Sprite {
 
             var bp:Bitmap = getBlurBitmap(blurX, blurY);
             show(bp);
-
         }
         catch (e:Error) {
             trace('MapLayer.setSmoothing error ::', e);
         }
-
     }
 
+    /**
+     * 初始化视图显示对象
+     *
+     * @param view 视图显示对象
+     */
     private function initView(view:DisplayObject):void {
         _view = view;
         show(_view);
@@ -180,51 +208,70 @@ public class MapLayer extends Sprite {
         view.x = view.y = 0;
     }
 
+    /**
+     * 获取应用模糊滤镜后的位图
+     *
+     * @param blurX 横向模糊值
+     * @param blurY 纵向模糊值
+     * @return 应用模糊滤镜后的位图
+     */
     private function getBlurBitmap(blurX:int = 5, blurY:int = 0):Bitmap {
         var id:String = blurX + '|' + blurY;
+        // 如果有缓存，则使用缓存
         if (_blurBitmaps[id]) {
             return _blurBitmaps[id];
         }
 
-        var bp:Bitmap = drawBitmap(true, 0);
+        var b:Bitmap = drawBitmap(true, 0);
         trace('addBlurBitmap', id);
 
+        // 模糊滤镜
         var filter:BlurFilter = new BlurFilter(blurX, blurY, 1);
-        bp.bitmapData.applyFilter(bp.bitmapData, bp.bitmapData.rect, new Point(), filter);
+        var bd:BitmapData     = b.bitmapData;
+        bd.applyFilter(bd, bd.rect, new Point(), filter);
 
-        _blurBitmaps[id] = bp;
-
-//			bp.visible = false;
-//			addChild(bp);
-
-        return bp;
+        // 缓存
+        _blurBitmaps[id] = b;
+        return b;
     }
 
+    /**
+     * 显示
+     *
+     * @param v 显示对象
+     */
     private function show(v:DisplayObject):void {
-//			for(var i:String in _blurBitmaps){
-//				if(_blurBitmaps[i] == v) continue;
-//				try{
-//					removeChild(_blurBitmaps[i]);
-//				}catch(e:Error){
-//					trace(e);
-//				}
-//			}
+//        for (var i:String in _blurBitmaps) {
+//            if (_blurBitmaps[i] == v) {
+//                continue;
+//            }
+//            try {
+//                removeChild(_blurBitmaps[i]);
+//            }
+//            catch (e:Error) {
+//                trace(e);
+//            }
+//        }
+//
+//        if (_view != v) {
+//            try {
+//                removeChild(_currentShow);
+//            }
+//            catch (e:Error) {
+//                trace(e);
+//            }
+//        }
+//
+//        addChild(v);
 
-//			if(_view != v){
-//				try{
-//					removeChild(_currentShow);
-//				}catch(e:Error){
-//					trace(e);
-//				}
-//			}
-
-//			addChild(v);
-
+        // 如果当前显示的对象就是要显示的对象，返回
         if (_currentShow == v) {
             return;
         }
 
+        // 如果不是，也就是来了新的显示对象
         if (_currentShow) {
+            // 尝试移除旧的对象
             try {
                 removeChild(_currentShow);
             }
@@ -233,48 +280,70 @@ public class MapLayer extends Sprite {
             }
         }
 
+        // 添加新的对象
         addChild(v);
         _currentShow = v;
-
     }
 
-    private function checkHitGameSprite(rect:Rectangle, gameSps:Vector.<IGameSprite>):Boolean {
+    /**
+     * 检查是否碰触游戏元件
+     *
+     * @param rect 范围
+     * @param gameSps 游戏元件
+     * @return 是否碰触游戏元件
+     */
+    private static function checkHitGameSprite(rect:Rectangle, gameSps:Vector.<IGameSprite>):Boolean {
+        var isHit:Boolean  = false;
+        var area:Rectangle = null;
 
-        var isHit:Boolean   = false;
-        var rect2:Rectangle = null;
+        for each (var sp:IGameSprite in gameSps) {
+            if (!sp || sp.isDestoryed()) {
+                continue;
+            }
 
-        for (var j:int; j < gameSps.length; j++) {
-            var gp:IGameSprite = gameSps[j];
-            if (gp) {
-                //					rect2 = gp.getBodyArea();
-                rect2 = gp.getArea();
-                if (rect2) {
-                    isHit = rect.intersects(rect2);
-                    if (isHit) {
-                        return true;
-                    }
-                }
+//            area = sp.getBodyArea();
+            area = sp.getArea();
+            if (!area || area.isEmpty()) {
+                continue;
+            }
+
+            // 检查当前元件是否与给定范围相交
+            isHit = rect.intersects(area);
+            if (isHit) {
+                return true;
             }
         }
 
         return false;
-
     }
 
-    private function drawBitmap(transparent:Boolean = true, fillColor:uint = 0):Bitmap {
-        if (_view) {
-            var bp:Bitmap     = new Bitmap(new BitmapData(_view.width / 2, _view.height / 2, transparent, fillColor));
-            var bds:Rectangle = _view.getBounds(_view);
-            var matrix:Matrix = new Matrix(1, 0, 0, 1, -bds.x, -bds.y);
-            matrix.scale(0.5, 0.5);
-            bp.bitmapData.draw(_view, matrix);
-
-            bp.x      = bds.x;
-            bp.y      = bds.y;
-            bp.scaleX = bp.scaleY = 2;
-            return bp;
+    /**
+     * 绘制位图
+     *
+     * @param transparent 是否透明
+     * @param fillColor 填充颜色
+     * @return 绘制完成的位图
+     */
+    private function drawBitmap(transparent:Boolean = true, fillColor:uint = 0x000000):Bitmap {
+        if (!_view) {
+            return null;
         }
-        return null;
+
+        // 位图
+        var bitmap:Bitmap    = new Bitmap(new BitmapData(_view.width / 2, _view.height / 2, transparent, fillColor));
+        // 边界
+        var bounds:Rectangle = _view.getBounds(_view);
+        // 矩阵
+        var matrix:Matrix    = new Matrix(1, 0, 0, 1, -bounds.x, -bounds.y);
+
+        matrix.scale(0.5, 0.5);
+        bitmap.bitmapData.draw(_view, matrix);
+
+        bitmap.x      = bounds.x;
+        bitmap.y      = bounds.y;
+        bitmap.scaleX = bitmap.scaleY = 2;
+
+        return bitmap;
     }
 }
 }

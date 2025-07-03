@@ -25,6 +25,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameEndCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
+import net.play5d.game.bvn.data.MapLogoState;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
@@ -398,14 +399,14 @@ public class GameLogic {
             SelectIndexUI.SHOW_MODE   = 1;
             GameConfig.SHOW_UI_STATUS = 1;
             GameEndCtrl.SHOW_CONTINUE = true;
-            GameConfig.MAP_LOGO_STATE = 2;
+            GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
             break;
         case 2:
             GameData.I.loadDebugSelect('salect.xml');
 //					ResUtils.WINNER = 'winner_stg_mc2';
             SelectIndexUI.SHOW_MODE   = 1;
             GameConfig.SHOW_UI_STATUS = 1;
-            GameConfig.MAP_LOGO_STATE = 2;
+            GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
             GameEndCtrl.SHOW_CONTINUE = true;
             break;
         default:
@@ -413,7 +414,7 @@ public class GameLogic {
             ResUtils.WINNER           = 'winner_stg_mc';
             SelectIndexUI.SHOW_MODE   = 0;
             GameConfig.SHOW_UI_STATUS = 0;
-            GameConfig.MAP_LOGO_STATE = 1;
+            GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_4399;
             GameEndCtrl.SHOW_CONTINUE = false;
         }
     }
