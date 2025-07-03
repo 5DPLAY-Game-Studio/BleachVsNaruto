@@ -2,6 +2,24 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.07032025_alpha] - 2025-07-03
+
+### 新增
+
+- 类 FighterVO 增加属性 hasWarning，用于控制选人时是否显示警告图标提示需要注意
+- 增加使用必杀时，游戏地图会变暗的效果
+
+### 更改
+
+- HarmanSDK 由 50.2.4.1 升级到 51.0.1.1
+- 更新默认 UI 界面画质和游戏界面画质为 StageQuality.LOW
+
+### 修复
+
+- 修复手机模式下，在语言选择页面缺少触屏操作逻辑的 BUG
+- 修复手机模式下设置页面滑动到最底端时坐标计算错误的 BUG
+- 修复调用 addGameSprite/addGameSpriteAt 后，游戏元件出现慢放的 BUG
+
 ## [3.7.0.0.06302025_alpha] - 2025-06-30
 
 ### 新增
@@ -212,6 +230,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.07032025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.06302025_alpha...3.7.0.0.07032025_alpha
 [3.7.0.0.06302025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.06122025_alpha...3.7.0.0.06302025_alpha
 [3.7.0.0.06122025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05072025_alpha...3.7.0.0.06122025_alpha
 [3.7.0.0.05072025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04162025_alpha...3.7.0.0.05072025_alpha
