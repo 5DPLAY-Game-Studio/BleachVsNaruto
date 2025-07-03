@@ -138,8 +138,8 @@ public class GameConfig {
     public static const CAMERA_TWEEN_SPD:Number  = 2.5;
     public static const FIGHTER_HP_MAX:int       = 1000;
 
-    public static var QUALITY_UI:String          = StageQuality.HIGH; //UI界面画质
-    public static var QUALITY_GAME:String        = StageQuality.MEDIUM; //游戏界面画质
+    public static var QUALITY_UI:String          = StageQuality.LOW; //UI界面画质
+    public static var QUALITY_GAME:String        = StageQuality.LOW; //游戏界面画质
     public static var SHOW_HOW_TO_PLAY:Boolean   = true;
     public static var ALLOW_SHOW_HP_TEXT:Boolean = true;
     public static var SPEED_PLUS:Number          = SPEED_PLUS_DEFAULT; //速度比率
