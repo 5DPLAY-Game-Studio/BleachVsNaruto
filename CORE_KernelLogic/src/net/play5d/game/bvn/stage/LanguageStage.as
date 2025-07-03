@@ -21,7 +21,9 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
 import flash.display.Sprite;
+import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.events.TouchEvent;
 import flash.text.Font;
 
 import net.play5d.game.bvn.GameConfig;
@@ -69,15 +71,16 @@ public class LanguageStage implements IStage {
      * 构建
      */
     public function build():void {
+        // backGroundData
         // 背景位图数据
-        var backGroundData:BitmapData =
+        var bgd:BitmapData =
                     ResUtils.I.createBitmapData(
                             ResUtils.swfLib.common_ui,
                             'cover_bgimg',
                             GameConfig.GAME_SIZE.x,
                             GameConfig.GAME_SIZE.y
                     );
-        _backGround                   = new Bitmap(backGroundData);
+        _backGround        = new Bitmap(bgd);
         _ui.addChild(_backGround);
 
         // 初始化加载进度条
@@ -121,6 +124,7 @@ public class LanguageStage implements IStage {
 
         if (_insCountries) {
             for each (var country:InsCountry in _insCountries) {
+                country.removeEventListener(TouchEvent.TOUCH_TAP, touchTapHandler);
                 country.removeEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
                 country.removeEventListener(MouseEvent.CLICK, clickHandler);
                 country.destroy();
@@ -251,9 +255,15 @@ public class LanguageStage implements IStage {
             country.y          = i * gap - country.height / 2;
             country.x          = GameConfig.GAME_SIZE.x / 2 - country.width / 2;
             country.buttonMode = true;
-            country.addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
-//            country.addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler);
-            country.addEventListener(MouseEvent.CLICK, clickHandler);
+
+            // 进行触摸或者鼠标逻辑处理
+            if (GameConfig.TOUCH_MODE) {
+                country.addEventListener(TouchEvent.TOUCH_TAP, touchTapHandler);
+            }
+            else {
+                country.addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
+                country.addEventListener(MouseEvent.CLICK, clickHandler);
+            }
 
             _ui.addChild(country);
             _insCountries.push(country);
@@ -262,11 +272,29 @@ public class LanguageStage implements IStage {
 
     ////////////////////////////////////////////////////////////////////////////////
 
+    private function touchTapHandler(e:Event):void {
+        var target:InsCountry = e.currentTarget.parent as InsCountry;
+        if (!target) {
+            return;
+        }
+
+        if (target.selected) {
+            // 当前项已被选中
+            // 则执行和鼠标点击时间相同的处理流程
+            clickHandler(e);
+        }
+        else {
+            // 当前项未被选中
+            // 则执行和鼠标移入事件相同的处理流程
+            mouseOverHandler(e);
+        }
+    }
+
     /**
      * 鼠标移入事件
      * @param e 鼠标事件
      */
-    private function mouseOverHandler(e:MouseEvent):void {
+    private function mouseOverHandler(e:Event):void {
         SoundCtrl.I.sndSelect();
 
         var target:InsCountry = e.currentTarget.parent as InsCountry;
@@ -280,20 +308,11 @@ public class LanguageStage implements IStage {
         }
     }
 
-//    /**
-//     * 鼠标移出事件
-//     * @param e 鼠标事件
-//     */
-//    private function mouseOutHandler(e:MouseEvent):void {
-//        var target:InsCountry = e.currentTarget.parent as InsCountry;
-//        target.selected       = false;
-//    }
-
     /**
      * 鼠标点击事件
      * @param e 鼠标事件
      */
-    private function clickHandler(e:MouseEvent):void {
+    private function clickHandler(e:Event):void {
         SoundCtrl.I.sndConfrim();
 
         var target:InsCountry = e.currentTarget.parent as InsCountry;

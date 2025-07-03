@@ -124,6 +124,10 @@ public class GameStage extends Sprite implements IStage {
         _gameSprites.push(sp);
         _playerLayer.addChild(sp.getDisplay());
         sp.setVolume(GameData.I.config.soundVolume);
+
+        // 修复慢放 BUG
+        // 刷新 sp 的 speedPlus
+        sp.setSpeedRate(GameConfig.SPEED_PLUS);
     }
 
     public function addGameSpriteAt(sp:IGameSprite, index:int):void {
@@ -134,6 +138,10 @@ public class GameStage extends Sprite implements IStage {
         _gameSprites.push(sp);
         _playerLayer.addChildAt(sp.getDisplay(), index);
         sp.setVolume(GameData.I.config.soundVolume);
+
+        // 修复慢放 BUG
+        // 刷新 sp 的 speedPlus
+        sp.setSpeedRate(GameConfig.SPEED_PLUS);
     }
 
     public function removeGameSprite(sp:IGameSprite, isDispose:Boolean = false):void {
