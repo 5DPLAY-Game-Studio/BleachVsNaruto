@@ -18,11 +18,14 @@
 
 package net.play5d.game.bvn.debug {
 import flash.display.DisplayObject;
+import flash.display.Sprite;
 import flash.display.Stage;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
+import flash.events.MouseEvent;
 import flash.events.TimerEvent;
 import flash.filters.GlowFilter;
+import flash.system.System;
 import flash.text.TextField;
 import flash.utils.Timer;
 
@@ -84,14 +87,20 @@ public class Debugger {
 
         hashText.font = FONT.fontName;
         hashText.text = hash;
-        hashText.y = GameConfig.GAME_SIZE.y - 20;
 
         UIUtils.formatText(hashText.textfield, {
             color: 0xFFFF00,
             size: 10
         });
 
-        addChild(hashText);
+        var sp:Sprite = new Sprite();
+        sp.y = GameConfig.GAME_SIZE.y - 20;
+        sp.addChild(hashText);
+        sp.addEventListener(MouseEvent.CLICK, function (e:MouseEvent):void {
+            System.setClipboard(hash);
+        });
+
+        addChild(sp);
     }
 
     public static function showFPS():void {
