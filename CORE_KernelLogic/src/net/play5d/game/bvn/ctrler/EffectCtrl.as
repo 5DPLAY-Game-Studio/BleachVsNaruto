@@ -142,6 +142,9 @@ public class EffectCtrl {
     ];
 
     public function destory():void {
+        // 执行销毁时结束震动
+        endShake();
+
         if (_manager) {
             _manager.destory();
             _manager = null;
