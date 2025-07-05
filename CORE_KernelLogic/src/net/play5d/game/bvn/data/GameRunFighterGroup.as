@@ -35,6 +35,18 @@ public class GameRunFighterGroup {
     public var assister:FighterVO;
     public var currentFighter:FighterMain;
     public var currentAssister:Assister;
+
+    /**
+     * 当前正在场上的角色id
+     */
+    public function get currentFighterId():String {
+        if (currentFighter && currentFighter.data) {
+            return currentFighter.data.id;
+        }
+
+        return null;
+    }
+
     private var _fighterMap:Dictionary;
 
     public function destory():void {
