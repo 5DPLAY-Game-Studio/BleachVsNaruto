@@ -253,17 +253,15 @@ public class GameLogic {
         GameEvent.dispatchEvent(GameEvent.SCORE_UPDATE);
     }
 
+    /**
+     * 添加分数 - 结算 KO 事件
+     */
     public static function addScoreByKO():void {
-
-        var addscore:int;
-
-        if (GameCtrl.I.gameRunData.p1FighterGroup.currentFighter.lastHitVO &&
-            GameCtrl.I.gameRunData.p1FighterGroup.currentFighter.lastHitVO.isBisha()) {
+        if (P1.lastHitVO && P1.lastHitVO.isBisha()) {
             addScore(2000);
         }
 
-        if (GameCtrl.I.gameRunData.p1FighterGroup.currentFighter.hp ==
-            GameCtrl.I.gameRunData.p1FighterGroup.currentFighter.hpMax) {
+        if (P1.hp == P1.hpMax) {
             addScore(20000);
         }
         else {
@@ -273,14 +271,18 @@ public class GameLogic {
         GameEvent.dispatchEvent(GameEvent.SCORE_UPDATE);
     }
 
+    /**
+     * 添加分数 - 结算通过一小关事件
+     */
     public static function addScoreByPassMission():void {
-//			if(GameMode.currentMode == GameMode.TEAM_ACRADE &&
-//				GameCtrl.I.gameRunData.p1FighterGroup.currentFighter == GameCtrl.I.gameRunData.p1FighterGroup.fighter1
-//			){
-//				addScore(15000);
-//			}else{
-//				addScore(5000);
-//			}
+        if (GameMode.currentMode == GameMode.TEAM_ACRADE &&
+            P1.data == GameCtrl.I.gameRunData.p1FighterGroup.fighter1
+        ) {
+            addScore(15000);
+        }
+        else {
+            addScore(5000);
+        }
     }
 
     public static function loseScoreByContinue():void {
@@ -419,9 +421,14 @@ public class GameLogic {
         }
     }
 
-    private static function addScore(v:int):void {
+    /**
+     * 添加分数
+     *
+     * @param score 分数
+     */
+    private static function addScore(score:int):void {
         var rate:Number = GameData.I.config.keyInputMode == 0 ? 1 : 0.8;
-        GameData.I.score += v * rate;
+        GameData.I.score += score * rate;
     }
 
     //		public static function startVsMode(p1:FighterMain , p2:FighterMain , map:MapMain):void{
