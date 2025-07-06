@@ -17,6 +17,8 @@
  */
 
 package net.play5d.game.bvn.views.effects {
+import flash.geom.ColorTransform;
+
 import net.play5d.game.bvn.fighter.*;
 
 import flash.display.DisplayObject;
@@ -101,6 +103,20 @@ public class FollowEffectView implements IGameSprite {
         else {
             _lastFrame = target.mc.currentFrame;
         }
+    }
+
+    // 颜色变换通道
+    private var _colorTransform:ColorTransform = new ColorTransform();
+
+    /**
+     * 颜色变换通道
+     */
+    public function get colorTransform():ColorTransform {
+        return _colorTransform;
+    }
+    public function set colorTransform(ct:ColorTransform):void {
+        _colorTransform = ct;
+        mc.transform.colorTransform = ct ? ct : new ColorTransform();
     }
 
     // 方向

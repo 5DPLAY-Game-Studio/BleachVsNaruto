@@ -21,6 +21,7 @@ import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.display.MovieClip;
 import flash.events.EventDispatcher;
+import flash.geom.ColorTransform;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.media.SoundTransform;
@@ -93,6 +94,21 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
 
     public function set defenseRate(value:Number):void {
         _defenseRate = value;
+    }
+
+    // 颜色变换通道
+    protected var _colorTransform:ColorTransform = new ColorTransform();
+
+    /**
+     * 颜色变换通道
+     */
+    public function get colorTransform():ColorTransform {
+        return _colorTransform;
+    }
+
+    public function set colorTransform(ct:ColorTransform):void {
+        _colorTransform = ct;
+        _mainMc.transform.colorTransform = ct ? ct : new ColorTransform();
     }
 
     protected var _x:Number = 0;

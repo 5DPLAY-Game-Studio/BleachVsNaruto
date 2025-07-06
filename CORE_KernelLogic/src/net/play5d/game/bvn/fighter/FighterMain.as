@@ -114,17 +114,6 @@ public class FighterMain extends BaseGameSprite {
         }
     }
 
-    private var _colorTransform:ColorTransform;
-
-    public function get colorTransform():ColorTransform {
-        return _colorTransform;
-    }
-
-    public function set colorTransform(v:ColorTransform):void {
-        _colorTransform                  = v;
-        _mainMc.transform.colorTransform = v ? v : new ColorTransform();
-    }
-
     public override function setActive(v:Boolean):void {
         super.setActive(v);
         if (!v && _fighterCtrl && _fighterCtrl.getEffectCtrl()) {
