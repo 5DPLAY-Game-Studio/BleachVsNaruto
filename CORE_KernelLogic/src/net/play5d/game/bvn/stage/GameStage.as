@@ -224,9 +224,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         // 执行 P2 变色
-        if (GameCtrl.I.gameRunData.isSameFighter) {
-            MCUtils.changeSpColor(P2);
-        }
+        MCUtils.autoChangeSpColor(P2);
 
         var stageSize:Point;
         if (_map.mapLayer) {
@@ -272,9 +270,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         // 执行 P2 变色
-        if (GameCtrl.I.gameRunData.isSameFighter) {
-            MCUtils.changeSpColor(P2);
-        }
+        MCUtils.autoChangeSpColor(P2);
 
         gameUI.initFight(p1group, p2group);
 

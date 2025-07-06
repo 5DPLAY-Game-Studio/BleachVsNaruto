@@ -130,9 +130,7 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
         assister.onRemove = removeAssister;
 
         // P2 相同辅助变色逻辑
-        if (TeamID.isTeam2(fighter) && GameCtrl.I.gameRunData.isSameAssister) {
-            MCUtils.changeSpColor(assister);
-        }
+        MCUtils.autoChangeSpColor(assister, fighter);
 
         GameCtrl.I.addGameSprite(e.fighter.team.id, assister);
         EffectCtrl.I.assisterEffect(assister);

@@ -172,7 +172,7 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
      * @return 游戏精灵的上层
      */
     public function getOwner():IGameSprite {
-        return null;
+        return owner;
     }
 
     /**

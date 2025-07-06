@@ -98,22 +98,7 @@ public class BaseFighterEventCtrl {
         // 若为 FighterMain 或 Assister，直接参考添加 Attacker 实现
         // 若为 Attacker，则必须再次向其上级判断是 FighterMain 还是 Assister
 
-        var owner:IGameSprite = event.fighter;
-        if (TeamID.isTeam2(owner)) {
-            if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
-                owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
-            {
-                MCUtils.changeSpColor(bullet);
-            }
-            else if (owner is FighterAttacker) {
-                owner = (owner as FighterAttacker).getOwner();
-                if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
-                    owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
-                {
-                    MCUtils.changeSpColor(bullet);
-                }
-            }
-        }
+        MCUtils.autoChangeSpColor(bullet, event.fighter);
 
         GameCtrl.I.addGameSprite(event.fighter.team.id, bullet);
     }
@@ -132,14 +117,7 @@ public class BaseFighterEventCtrl {
         // P2 相同角色下召唤的独立道具变色逻辑
         // Attacker 的上级只可能是 FighterMain 或者 Assister
 
-        var owner:BaseGameSprite = event.fighter;
-        if (TeamID.isTeam2(owner)) {
-            if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
-                owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
-            {
-                MCUtils.changeSpColor(attacker);
-            }
-        }
+        MCUtils.autoChangeSpColor(attacker, event.fighter);
 
         _attackers.push(attacker);
 
@@ -165,22 +143,7 @@ public class BaseFighterEventCtrl {
         // 若为 FighterMain 或 Assister，直接参考添加 Attacker 实现
         // 若为 Attacker，则必须再次向其上级判断是 FighterMain 还是 Assister
 
-        var owner:IGameSprite = event.fighter;
-        if (TeamID.isTeam2(owner)) {
-            if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
-                owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
-            {
-                MCUtils.changeSpColor(effect);
-            }
-            else if (owner is FighterAttacker) {
-                owner = (owner as FighterAttacker).getOwner();
-                if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
-                    owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
-                {
-                    MCUtils.changeSpColor(effect);
-                }
-            }
-        }
+        MCUtils.autoChangeSpColor(effect, event.fighter);
 
         var isUnderBody:Boolean = params.isUnderBody;
         GameCtrl.I.addGameSprite(event.fighter.team.id, effect, isUnderBody ? 0 : -1);

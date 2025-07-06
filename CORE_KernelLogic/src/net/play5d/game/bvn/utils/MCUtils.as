@@ -24,9 +24,16 @@ import flash.filters.ColorMatrixFilter;
 import flash.geom.ColorTransform;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.data.TeamID;
+import net.play5d.game.bvn.fighter.Assister;
+import net.play5d.game.bvn.fighter.Bullet;
+import net.play5d.game.bvn.fighter.FighterAttacker;
+import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.interfaces.BaseGameSprite;
 
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
+import net.play5d.game.bvn.views.effects.FollowEffectView;
 
 /**
  * 影片剪辑实用工具
@@ -176,6 +183,76 @@ public class MCUtils {
         );
 
         sp.colorTransform = ct;
+    }
+
+    /**
+     * 自动更改游戏 Sprite 颜色，默认绿色偏移 -85
+     *
+     * @param sp 指定 IGameSprite
+     * @param owner 指定初始所有者
+     * @param ct 颜色变换通道
+     */
+    public static function autoChangeSpColor(
+            sp:IGameSprite,
+            owner:IGameSprite = null,
+            ct:ColorTransform = null):void
+    {
+        if (!sp) {
+            return;
+        }
+
+        if (!owner) {
+            changeSpColor(sp, ct);
+            return;
+        }
+
+        // 检查是否为 P2 所属元件
+        if (!TeamID.isTeam2(owner)) {
+            return;
+        }
+
+        // 当前场景下是否是相同人物
+        var isSameFighter:Boolean = GameCtrl.I.gameRunData.isSameFighter;
+        // 当前场景下是否是相同辅助
+        var isSameAssister:Boolean = GameCtrl.I.gameRunData.isSameAssister;
+
+        /**
+         * 检查是否满足相同角色条件
+         *
+         * @return 是否满足相同角色条件
+         */
+        function chkSameFighter():Boolean {
+            return owner is FighterMain && isSameFighter;
+        }
+
+        /**
+         * 检查是否满足相同辅助条件
+         *
+         * @return 是否满足相同角色条件
+         */
+        function chkSameAssister():Boolean {
+            return owner is Assister && isSameAssister;
+        }
+
+        if (sp is Assister) {
+            if (isSameAssister) {
+                changeSpColor(sp, ct);
+            }
+        }
+        else if (sp is FighterAttacker) {
+            if (chkSameFighter() || chkSameAssister()) {
+                changeSpColor(sp, ct);
+            }
+        }
+        else if (sp is Bullet || sp is FollowEffectView) {
+            if (chkSameFighter() || chkSameAssister()) {
+                changeSpColor(sp, ct);
+            }
+            else if (owner is FighterAttacker) {
+                owner = (owner as FighterAttacker).getOwner();
+                autoChangeSpColor(sp, owner, ct);
+            }
+        }
     }
 }
 }
