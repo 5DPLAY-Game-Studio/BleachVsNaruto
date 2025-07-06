@@ -203,27 +203,31 @@ public class GameStage extends Sprite implements IStage {
 
         _cameraFocus = [];
 
-        var p1:FighterMain = p1group.currentFighter;
-        var p2:FighterMain = p2group.currentFighter;
-
-        if (p1) {
-            GameLogic.resetFighterHP(p1);
-            p1.x      = _map.p1pos.x;
-            p1.y      = _map.p1pos.y;
-            p1.direct = 1;
-            p1.updatePosition();
-            _cameraFocus.push(p1.getDisplay());
+        if (P1) {
+            GameLogic.resetFighterHP(P1);
+            P1.x      = _map.p1pos.x;
+            P1.y      = _map.p1pos.y;
+            P1.direct = 1;
+            P1.updatePosition();
+            _cameraFocus.push(P1.getDisplay());
         }
-        if (p2) {
-            GameLogic.resetFighterHP(p2);
+        if (P2) {
+            GameLogic.resetFighterHP(P2);
             if (GameMode.isAcrade()) {
-                GameLogic.setMessionEnemyAttack(p2);
+                GameLogic.setMessionEnemyAttack(P2);
             }
-            p2.x      = _map.p2pos.x;
-            p2.y      = _map.p2pos.y;
-            p2.direct = -1;
-            p2.updatePosition();
-            _cameraFocus.push(p2.getDisplay());
+            P2.x      = _map.p2pos.x;
+            P2.y      = _map.p2pos.y;
+            P2.direct = -1;
+            P2.updatePosition();
+            _cameraFocus.push(P2.getDisplay());
+        }
+
+        // 执行 P2 变色
+        var p1Id:String = p1group.currentFighterId;
+        var p2Id:String = p2group.currentFighterId;
+        if (p1Id && p2Id && p1Id == p2Id) {
+            MCUtils.changeSpColor(P2);
         }
 
         var stageSize:Point;
@@ -247,30 +251,33 @@ public class GameStage extends Sprite implements IStage {
     }
 
     public function resetFight(p1group:GameRunFighterGroup, p2group:GameRunFighterGroup):void {
-        var p1:FighterMain = p1group.currentFighter;
-        var p2:FighterMain = p2group.currentFighter;
-
         _cameraFocus = [];
 
-
-        if (p1) {
-            GameLogic.resetFighterHP(p1);
-            p1.x      = _map.p1pos.x;
-            p1.y      = _map.p1pos.y;
-            p1.direct = 1;
-            p1.idle();
-            p1.updatePosition();
-            _cameraFocus.push(p1.getDisplay());
+        if (P1) {
+            GameLogic.resetFighterHP(P1);
+            P1.x      = _map.p1pos.x;
+            P1.y      = _map.p1pos.y;
+            P1.direct = 1;
+            P1.idle();
+            P1.updatePosition();
+            _cameraFocus.push(P1.getDisplay());
         }
 
-        if (p2) {
-            GameLogic.resetFighterHP(p2);
-            p2.x      = _map.p2pos.x;
-            p2.y      = _map.p2pos.y;
-            p2.direct = -1;
-            p2.idle();
-            p2.updatePosition();
-            _cameraFocus.push(p2.getDisplay());
+        if (P2) {
+            GameLogic.resetFighterHP(P2);
+            P2.x      = _map.p2pos.x;
+            P2.y      = _map.p2pos.y;
+            P2.direct = -1;
+            P2.idle();
+            P2.updatePosition();
+            _cameraFocus.push(P2.getDisplay());
+        }
+
+        // 执行 P2 变色
+        var p1Id:String = p1group.currentFighterId;
+        var p2Id:String = p2group.currentFighterId;
+        if (p1Id && p2Id && p1Id == p2Id) {
+            MCUtils.changeSpColor(P2);
         }
 
         gameUI.initFight(p1group, p2group);

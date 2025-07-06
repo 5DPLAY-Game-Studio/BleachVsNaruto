@@ -55,7 +55,6 @@ import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.KeyBoarder;
 
-//import net.play5d.game.bvn.data.musou.MosouMissionModel;
 /**
  * 游戏控制类
  */
@@ -313,43 +312,27 @@ public class GameCtrl {
         switch (team) {
         case 1:
             if (GameMode.isWatch()) {
-                ctrl      = new FighterAICtrl();
-                (
-                        ctrl as FighterAICtrl
-                ).AILevel = GameData.I.config.AI_level;
-                (
-                        ctrl as FighterAICtrl
-                ).fighter = fighter;
+                ctrl = new FighterAICtrl();
+                (ctrl as FighterAICtrl).AILevel = GameData.I.config.AI_level;
+                (ctrl as FighterAICtrl).fighter = fighter;
             }
             else {
-                ctrl          = new FighterKeyCtrl();
-                (
-                        ctrl as FighterKeyCtrl
-                ).inputType   = GameInputType.P1;
-                (
-                        ctrl as FighterKeyCtrl
-                ).classicMode = GameData.I.config.keyInputMode == 1;
+                ctrl = new FighterKeyCtrl();
+                (ctrl as FighterKeyCtrl).inputType   = GameInputType.P1;
+                (ctrl as FighterKeyCtrl).classicMode = GameData.I.config.keyInputMode == 1;
             }
             break;
         case 2:
             if (GameMode.isVsCPU(false) || GameMode.isAcrade()) {
                 //AI CTRL
-                ctrl      = new FighterAICtrl();
-                (
-                        ctrl as FighterAICtrl
-                ).AILevel = GameData.I.config.AI_level;
-                (
-                        ctrl as FighterAICtrl
-                ).fighter = fighter;
+                ctrl = new FighterAICtrl();
+                (ctrl as FighterAICtrl).AILevel = GameData.I.config.AI_level;
+                (ctrl as FighterAICtrl).fighter = fighter;
             }
             else {
-                ctrl          = new FighterKeyCtrl();
-                (
-                        ctrl as FighterKeyCtrl
-                ).inputType   = GameInputType.P2;
-                (
-                        ctrl as FighterKeyCtrl
-                ).classicMode = GameData.I.config.keyInputMode == 1;
+                ctrl = new FighterKeyCtrl();
+                (ctrl as FighterKeyCtrl).inputType   = GameInputType.P2;
+                (ctrl as FighterKeyCtrl).classicMode = GameData.I.config.keyInputMode == 1;
             }
             break;
         }
@@ -617,14 +600,14 @@ public class GameCtrl {
             throw new Error(GetLang('debug.error.data.game_ctrl.build_game_fail'));
         }
 
-        if (p1.data.id == p2.data.id) {
-            var ct:ColorTransform = new ColorTransform();
-            ct.greenOffset        = -85;
-            p2.colorTransform     = ct;
-        }
-        else {
-            p2.colorTransform = null;
-        }
+//        if (p1.data.id == p2.data.id) {
+//            var ct:ColorTransform = new ColorTransform();
+//            ct.greenOffset        = -85;
+//            p2.colorTransform     = ct;
+//        }
+//        else {
+//            p2.colorTransform = null;
+//        }
 
 
         //temp
