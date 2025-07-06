@@ -160,6 +160,28 @@ public class BaseFighterEventCtrl {
         effect.onRemove   = removeEffect;
         effect.setTarget(event.fighter);
 
+        // P2 相同角色下召唤的跟随效果变色逻辑
+        // FollowEffectView 的上级可能是 FighterMain 或 Assister 或 Attacker
+        // 若为 FighterMain 或 Assister，直接参考添加 Attacker 实现
+        // 若为 Attacker，则必须再次向其上级判断是 FighterMain 还是 Assister
+
+        var owner:IGameSprite = event.fighter;
+        if (TeamID.isTeam2(owner)) {
+            if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
+                owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
+            {
+                MCUtils.changeSpColor(effect);
+            }
+            else if (owner is FighterAttacker) {
+                owner = (owner as FighterAttacker).getOwner();
+                if (owner is FighterMain && GameCtrl.I.gameRunData.isSameFighter ||
+                    owner is Assister && GameCtrl.I.gameRunData.isSameAssister)
+                {
+                    MCUtils.changeSpColor(effect);
+                }
+            }
+        }
+
         var isUnderBody:Boolean = params.isUnderBody;
         GameCtrl.I.addGameSprite(event.fighter.team.id, effect, isUnderBody ? 0 : -1);
     }
