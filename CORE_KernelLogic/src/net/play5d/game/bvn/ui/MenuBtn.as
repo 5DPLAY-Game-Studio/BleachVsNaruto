@@ -38,7 +38,7 @@ public class MenuBtn extends EventDispatcher {
         this.label = label;
         this.func  = func;
 
-        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui, 'mc_wzbtn');
+        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'mc_wzbtn');
 
         ui.buttonMode    = true;
         ui.mouseChildren = false;

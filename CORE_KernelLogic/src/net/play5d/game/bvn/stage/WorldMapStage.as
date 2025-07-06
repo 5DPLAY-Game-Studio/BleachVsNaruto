@@ -78,7 +78,7 @@ public class WorldMapStage implements IStage {
     public function build():void {
         _ui = new Sprite();
 
-        _mapUI = ResUtils.I.createDisplayObject(ResUtils.swfLib.bigMap, ResUtils.BIG_MAP);
+        _mapUI = ResUtils.I.createDisplayObject(ResUtils.swfLib.big_map, ResUtils.BIG_MAP);
         _ui.addChild(_mapUI);
 
         _viewMc  = _mapUI.getChildByName('view_mc') as Sprite;

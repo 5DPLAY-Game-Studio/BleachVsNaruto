@@ -66,7 +66,7 @@ public class CongratulateStage implements IStage {
         _mainUI = new Sprite();
 
         var bgbd:BitmapData = ResUtils.I.createBitmapData(
-                ResUtils.swfLib.common_ui, 'cover_bgimg', GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
+                ResUtils.swfLib.common, 'cover_bgimg', GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
         _bg                 = new Bitmap(bgbd);
         _mainUI.addChild(_bg);
 
@@ -76,7 +76,7 @@ public class CongratulateStage implements IStage {
         _mainUI.addChild(_ui);
 
         var ctmc:mc_congratulations = ResUtils.I.createDisplayObject(
-                ResUtils.swfLib.common_ui, ResUtils.CONGRATULATIONS);
+                ResUtils.swfLib.common, ResUtils.CONGRATULATIONS);
         _ui.addChild(ctmc);
         ctmc.addEventListener(Event.COMPLETE, playComplete, false, 0, true);
         ctmc.gotoAndPlay(2);
@@ -128,7 +128,7 @@ public class CongratulateStage implements IStage {
     }
 
     private function playComplete(e:Event):void {
-        var winallmc:mc_win_all = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui, 'mc_win_all');
+        var winallmc:mc_win_all = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'mc_win_all');
         winallmc.y              = GameConfig.GAME_SIZE.y;
 
         _ui.addChild(winallmc);

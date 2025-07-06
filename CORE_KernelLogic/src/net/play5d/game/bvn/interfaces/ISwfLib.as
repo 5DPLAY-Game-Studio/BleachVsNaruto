@@ -17,30 +17,70 @@
  */
 
 package net.play5d.game.bvn.interfaces {
+
+/**
+ * SWF 资源库接口
+ */
 public interface ISwfLib {
 
-    function get common_ui():Class;
+    /**
+     * 大地图 UI
+     */
+    function get big_map():Class;
 
-    function get fight():Class;
+    /**
+     * 共享 UI
+     */
+    function get common():Class;
 
-    function get gameover():Class;
-
-    function get howtoplay():Class;
-
-    function get loading():Class;
-
-    function get select():Class;
-
-    function get setting():Class;
-
-    function get title():Class;
-
-    function get musou():Class;
-
-    function get bigMap():Class;
-
+    /**
+     * 对话框 UI
+     */
     function get dialog():Class;
 
+    /**
+     * 战斗 UI
+     */
+    function get fight():Class;
+
+    /**
+     * 游戏结束 UI
+     */
+    function get game_over():Class;
+
+    /**
+     * 如何游戏教程 UI
+     */
+    function get how2play():Class;
+
+    /**
+     * 多语言 UI
+     */
     function get language():Class;
+
+    /**
+     * 加载中界面 UI
+     */
+    function get loading():Class;
+
+    /**
+     * 无双模式 UI
+     */
+    function get musou():Class;
+
+    /**
+     * 选择界面 UI
+     */
+    function get select():Class;
+
+    /**
+     * 设置界面 UI
+     */
+    function get setting():Class;
+
+    /**
+     * 标题（主菜单）界面 UI
+     */
+    function get title():Class;
 }
 }

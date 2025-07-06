@@ -26,7 +26,7 @@ public class TransUI {
     include '../../../../../../include/_INCLUDE_.as';
 
     public function TransUI() {
-        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui, 'trans_mc');
+        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'trans_mc');
     }
     public var ui:trans_mc;
     private var _renderAnimateGap:int   = 0; //刷新动画间隔

@@ -25,7 +25,7 @@ public class CloudView {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public function CloudView(X:Number, Y:Number) {
-        mc       = ResUtils.I.createDisplayObject(ResUtils.swfLib.bigMap, 'cloud_mc');
+        mc       = ResUtils.I.createDisplayObject(ResUtils.swfLib.big_map, 'cloud_mc');
 //			mc.x = (20 - mc.width) + (GameConfig.GAME_SIZE.x - 50) * Math.random();
         mc.x     = X;
         mc.y     = Y;

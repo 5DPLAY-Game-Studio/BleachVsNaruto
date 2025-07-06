@@ -41,7 +41,7 @@ public class LogoStage implements IStage {
      * 构建
      */
     public function build():void {
-        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui, 'logo_movie');
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'logo_movie');
         _ui.addEventListener(Event.COMPLETE, playComplete);
         _ui.gotoAndPlay(2);
     }

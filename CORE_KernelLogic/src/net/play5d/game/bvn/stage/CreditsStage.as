@@ -61,7 +61,7 @@ public class CreditsStage implements IStage {
         _ui = new Sprite();
 
         var bgbd:BitmapData = ResUtils.I.createBitmapData(
-                ResUtils.swfLib.common_ui, 'cover_bgimg', GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
+                ResUtils.swfLib.common, 'cover_bgimg', GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
         var bg:Bitmap       = new Bitmap(bgbd);
         _ui.addChild(bg);
 

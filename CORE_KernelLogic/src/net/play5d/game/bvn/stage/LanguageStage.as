@@ -75,7 +75,7 @@ public class LanguageStage implements IStage {
         // 背景位图数据
         var bgd:BitmapData =
                     ResUtils.I.createBitmapData(
-                            ResUtils.swfLib.common_ui,
+                            ResUtils.swfLib.common,
                             'cover_bgimg',
                             GameConfig.GAME_SIZE.x,
                             GameConfig.GAME_SIZE.y

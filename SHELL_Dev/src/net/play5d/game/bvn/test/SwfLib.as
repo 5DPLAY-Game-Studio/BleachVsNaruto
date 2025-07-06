@@ -19,94 +19,140 @@
 package net.play5d.game.bvn.test {
 import net.play5d.game.bvn.interfaces.ISwfLib;
 
+/**
+ * SHELL_Dev 的 SWF 资源库
+ */
 public class SwfLib implements ISwfLib {
+    // 大地图 UI
+    [Embed(source='/../../shared/lib/swf/big_map.swf')]
+    private var _big_map:Class;
 
-    public function SwfLib() {
-    }
+    // 共享 UI
+    [Embed(source='/../../shared/lib/swf/common.swf')]
+    private var _common:Class;
 
-    [Embed(source='/../../shared/lib/swf/common_ui.swf')]
-    private var _common_ui:Class;
+    // 对话框 UI
+    [Embed(source='/../../shared/lib/swf/dialog.swf')]
+    private var _dialog:Class;
 
-    public function get common_ui():Class {
-        return _common_ui;
-    }
-
+    // 战斗 UI
     [Embed(source='/../../shared/lib/swf/fight.swf')]
     private var _fight:Class;
 
-    public function get fight():Class {
-        return _fight;
-    }
+    // 游戏结束 UI
+    [Embed(source='/../../shared/lib/swf/game_over.swf')]
+    private var _game_over:Class;
 
-    [Embed(source='/../../shared/lib/swf/gameover.swf')]
-    private var _gameover:Class;
+    // 如何游戏教程 UI
+    [Embed(source='/../../shared/lib/swf/how2play.swf')]
+    private var _how2play:Class;
 
-    public function get gameover():Class {
-        return _gameover;
-    }
+    // 多语言 UI
+    [Embed(source='/../../shared/lib/swf/language.swf')]
+    private var _language:Class;
 
-    [Embed(source='/../../shared/lib/swf/howtoplay.swf')]
-    private var _howtoplay:Class;
-
-    public function get howtoplay():Class {
-        return _howtoplay;
-    }
-
+    // 加载中界面 UI
     [Embed(source='/../../shared/lib/swf/loading.swf')]
     private var _loading:Class;
 
-    public function get loading():Class {
-        return _loading;
-    }
+    // 无双模式 UI
+    [Embed(source='/../../shared/lib/swf/musou.swf')]
+    private var _musou:Class;
 
+    // 选择界面 UI
     [Embed(source='/../../shared/lib/swf/select.swf')]
     private var _select:Class;
 
-    public function get select():Class {
-        return _select;
-    }
-
+    // 设置界面 UI
     [Embed(source='/../../shared/lib/swf/setting.swf')]
     private var _setting:Class;
 
-    public function get setting():Class {
-        return _setting;
-    }
-
+    // 标题（主菜单）界面 UI
     [Embed(source='/../../shared/lib/swf/title.swf')]
     private var _title:Class;
 
-    public function get title():Class {
-        return _title;
+    /**
+     * 大地图 UI
+     */
+    public function get big_map():Class {
+        return _big_map;
     }
 
-    [Embed(source='/../../shared/lib/swf/mosou.swf')]
-    private var _mosou:Class;
-
-    public function get musou():Class {
-        return _mosou;
+    /**
+     * 共享 UI
+     */
+    public function get common():Class {
+        return _common;
     }
 
-    [Embed(source='/../../shared/lib/swf/bigmap.swf')]
-    private var _bigMap:Class;
-
-    public function get bigMap():Class {
-        return _bigMap;
-    }
-
-    [Embed(source='/../../shared/lib/swf/dialog_ui.swf')]
-    private var _dialog:Class;
-
+    /**
+     * 对话框 UI
+     */
     public function get dialog():Class {
         return _dialog;
     }
 
-    [Embed(source='/../../shared/lib/swf/language.swf')]
-    private var _language:Class;
+    /**
+     * 战斗 UI
+     */
+    public function get fight():Class {
+        return _fight;
+    }
 
+    /**
+     * 游戏结束 UI
+     */
+    public function get game_over():Class {
+        return _game_over;
+    }
+
+    /**
+     * 如何游戏教程 UI
+     */
+    public function get how2play():Class {
+        return _how2play;
+    }
+
+    /**
+     * 多语言 UI
+     */
     public function get language():Class {
         return _language;
     }
 
+    /**
+     * 加载中界面 UI
+     */
+    public function get loading():Class {
+        return _loading;
+    }
+
+    /**
+     * 无双模式 UI
+     */
+    public function get musou():Class {
+        return _musou;
+    }
+
+    /**
+     * 选择界面 UI
+     */
+    public function get select():Class {
+        return _select;
+    }
+
+    /**
+     * 设置界面 UI
+     */
+    public function get setting():Class {
+        return _setting;
+    }
+
+    /**
+     * 标题（主菜单）界面 UI
+     */
+    public function get title():Class {
+        return _title;
+    }
 }
 }

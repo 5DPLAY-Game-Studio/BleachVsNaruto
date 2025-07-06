@@ -44,7 +44,7 @@ public class GameOverStage implements IStage {
 
     public function GameOverStage() {
         StateCtrl.I.clearTrans();
-        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.gameover, ResUtils.GAME_OVER);
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.game_over, ResUtils.GAME_OVER);
         _ui.gotoAndStop(1);
     }
     private var _ui:stg_gameover_mc;
@@ -166,7 +166,7 @@ public class GameOverStage implements IStage {
 
     private function initArrow(defaultId:String = null):void {
         if (!_arrow) {
-            _arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common_ui, 'select_arrow_mc');
+            _arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'select_arrow_mc');
             _ui.addChild(_arrow);
         }
 

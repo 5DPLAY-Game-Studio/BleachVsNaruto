@@ -53,7 +53,7 @@ public class HowToPlayStage implements IStage {
      * 构建
      */
     public function build():void {
-        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.howtoplay, 'movie_howtoplay');
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.how2play, 'movie_howtoplay');
         _ui.addEventListener(Event.COMPLETE, uiComplete);
         _ui.gotoAndPlay(2);
 
