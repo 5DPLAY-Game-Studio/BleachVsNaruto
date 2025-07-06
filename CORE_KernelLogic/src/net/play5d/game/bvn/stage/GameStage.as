@@ -224,9 +224,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         // 执行 P2 变色
-        var p1Id:String = p1group.currentFighterId;
-        var p2Id:String = p2group.currentFighterId;
-        if (p1Id && p2Id && p1Id == p2Id) {
+        if (GameCtrl.I.gameRunData.isSameFighter) {
             MCUtils.changeSpColor(P2);
         }
 
@@ -274,9 +272,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         // 执行 P2 变色
-        var p1Id:String = p1group.currentFighterId;
-        var p2Id:String = p2group.currentFighterId;
-        if (p1Id && p2Id && p1Id == p2Id) {
+        if (GameCtrl.I.gameRunData.isSameFighter) {
             MCUtils.changeSpColor(P2);
         }
 
