@@ -142,6 +142,11 @@ public class EffectCtrl {
     ];
 
     public function destory():void {
+        // 执行销毁时结束震动
+        endShake();
+        // 灵压爆发与替身术剩余帧数归零
+        _replaceSkillFrame = _explodeSkillFrame = 0;
+
         if (_manager) {
             _manager.destory();
             _manager = null;
