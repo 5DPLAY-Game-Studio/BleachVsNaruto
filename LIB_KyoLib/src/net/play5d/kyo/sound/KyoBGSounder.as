@@ -107,7 +107,9 @@ public class KyoBGSounder {
                 _snd.close();
             }
             catch (e:Error) {
-                trace('KyoBGSounder', e);
+                if (e.errorID != 2029) {
+                    trace('KyoBGSounder', e);
+                }
             }
             _snd = null;
         }
