@@ -19,6 +19,7 @@
 package net.play5d.game.bvn.fighter {
 import flash.display.DisplayObject;
 import flash.display.MovieClip;
+import flash.geom.ColorTransform;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
@@ -146,6 +147,9 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
 
     private var _team:TeamVO;
 
+    // 颜色变换通道
+    private var _colorTransform:ColorTransform = new ColorTransform();
+
     /**
      * 获取目标
      * @return 目标游戏精灵
@@ -185,6 +189,18 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
      */
     public function getSelf():IGameSprite {
         return this;
+    }
+
+    /**
+     * 颜色变换通道
+     */
+    public function get colorTransform():ColorTransform {
+        return _colorTransform;
+    }
+
+    public function set colorTransform(ct:ColorTransform):void {
+        _colorTransform = ct;
+        mc.transform.colorTransform = ct ? ct : new ColorTransform();
     }
 
     public function get team():TeamVO {

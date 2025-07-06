@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.interfaces {
 import flash.display.DisplayObject;
+import flash.geom.ColorTransform;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.data.vos.TeamVO;
@@ -27,6 +28,12 @@ import net.play5d.game.bvn.fighter.models.HitVO;
  * 游戏元件接口
  */
 public interface IGameSprite {
+
+    /**
+     * 颜色变换通道
+     */
+    function get colorTransform():ColorTransform;
+    function set colorTransform(ct:ColorTransform):void;
 
     /**
      * 方向

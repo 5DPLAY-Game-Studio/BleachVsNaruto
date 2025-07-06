@@ -20,6 +20,7 @@ package net.play5d.game.bvn.views.effects {
 import flash.display.Bitmap;
 import flash.display.DisplayObject;
 import flash.filters.BitmapFilter;
+import flash.geom.ColorTransform;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
@@ -55,6 +56,16 @@ public class BitmapFilterView implements IGameSprite {
     private var _targetBounds:Rectangle;
     private var _targetFighter:FighterMain;
     private var _isActive:Boolean;
+
+    /**
+     * 颜色变换通道
+     */
+    public function get colorTransform():ColorTransform {
+        return null;
+    }
+
+    public function set colorTransform(ct:ColorTransform):void {
+    }
 
     public function get direct():int {
         return target.direct;

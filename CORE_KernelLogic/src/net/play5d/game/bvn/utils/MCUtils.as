@@ -21,6 +21,7 @@ import flash.display.DisplayObject;
 import flash.display.FrameLabel;
 import flash.display.MovieClip;
 import flash.filters.ColorMatrixFilter;
+import flash.geom.ColorTransform;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 
@@ -156,6 +157,25 @@ public class MCUtils {
                 i--;
             }
         }
+    }
+
+    /**
+     * 更改游戏 Sprite 颜色，默认绿色偏移 -85
+     *
+     * @param sp 指定 IGameSprite
+     * @param ct 颜色变换通道
+     */
+    public static function changeSpColor(sp:IGameSprite, ct:ColorTransform = null):void {
+        if (!sp) {
+            return;
+        }
+
+        ct ||= new ColorTransform(
+                1, 1, 1, 1,
+                0, -85, 0, 0
+        );
+
+        sp.colorTransform = ct;
     }
 }
 }

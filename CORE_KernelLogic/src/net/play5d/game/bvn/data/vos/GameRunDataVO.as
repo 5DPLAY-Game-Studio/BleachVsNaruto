@@ -45,13 +45,39 @@ public class GameRunDataVO implements IInstanceVO {
     public var gameTime:int;
     public var gameTimeMax:int; //-1时，无限时
     public var isTimerOver:Boolean;
-
-//		public var winner:FighterMain;
-//		public var loser:FighterMain;
     public var isDrawGame:Boolean;
 
     /**
+     * 当前场景下是否是相同人物
+     */
+    public function get isSameFighter():Boolean {
+        if (!p1FighterGroup || !p2FighterGroup) {
+            return false;
+        }
+
+        var p1Id:String = p1FighterGroup.currentFighterId;
+        var p2Id:String = p2FighterGroup.currentFighterId;
+
+        return p1Id && p2Id && p1Id == p2Id;
+    }
+
+    /**
+     * 当前场景下是否是相同辅助
+     */
+    public function get isSameAssister():Boolean {
+        if (!p1FighterGroup || !p2FighterGroup) {
+            return false;
+        }
+
+        var p1Id:String = p1FighterGroup.currentAssisterId;
+        var p2Id:String = p2FighterGroup.currentAssisterId;
+
+        return p1Id && p2Id && p1Id == p2Id;
+    }
+
+    /**
      * 获取角色已胜利局数
+     *
      * @param fighter 角色
      * @return 角色已胜利局数
      */

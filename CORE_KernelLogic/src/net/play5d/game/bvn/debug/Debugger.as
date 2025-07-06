@@ -18,12 +18,22 @@
 
 package net.play5d.game.bvn.debug {
 import flash.display.DisplayObject;
+import flash.display.Sprite;
 import flash.display.Stage;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
+import flash.events.MouseEvent;
 import flash.events.TimerEvent;
+import flash.filters.GlowFilter;
+import flash.system.System;
 import flash.text.TextField;
 import flash.utils.Timer;
+
+import net.play5d.game.bvn.GameConfig;
+
+import net.play5d.game.bvn.ui.UIUtils;
+
+import net.play5d.kyo.display.BitmapText;
 
 import net.play5d.kyo.input.KyoKeyCode;
 
@@ -51,11 +61,46 @@ public class Debugger {
 
     public static function initDebug(stage:Stage):void {
         _stage = stage;
+
         showFPS();
     }
 
     public static function addChild(d:DisplayObject):void {
         _stage.addChild(d);
+    }
+
+    /**
+     * 显示当前提交哈希
+     *
+     * @param hash 提交哈希
+     */
+    public static function showCommitHash(hash:String):void {
+        if (!hash) {
+            return;
+        }
+
+        var hashText:BitmapText = new BitmapText(
+                true,
+                0xFFFF00,
+                [new GlowFilter(0x000000, 1, 2, 2, 3)]
+        );
+
+        hashText.font = FONT.fontName;
+        hashText.text = hash;
+
+        UIUtils.formatText(hashText.textfield, {
+            color: 0xFFFF00,
+            size: 10
+        });
+
+        var sp:Sprite = new Sprite();
+        sp.y = GameConfig.GAME_SIZE.y - 20;
+        sp.addChild(hashText);
+        sp.addEventListener(MouseEvent.CLICK, function (e:MouseEvent):void {
+            System.setClipboard(hash);
+        });
+
+        addChild(sp);
     }
 
     public static function showFPS():void {

@@ -53,6 +53,7 @@ import net.play5d.game.bvn.test.GameInterfaceManager;
 import net.play5d.game.bvn.test.SwfLib;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.AssetLoader;
+import net.play5d.game.bvn.utils.GithubUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.KyoSharedObject;
 
@@ -67,10 +68,10 @@ public class FighterTester extends Sprite {
         GameStageLoadCtrl.IGNORE_OLD_FIGHTER = true;
 
         if (stage) {
-            initlize();
+            initialize();
         }
         else {
-            addEventListener(Event.ADDED_TO_STAGE, initlize);
+            addEventListener(Event.ADDED_TO_STAGE, initialize);
         }
     }
     private var _theme:SteelTheme;
@@ -238,15 +239,6 @@ public class FighterTester extends Sprite {
 
         var saveObj:Object = KyoSharedObject.load('fighter_test_config');
         if (saveObj && saveObj.p1) {
-//				_p1InputId.text = saveObj.p1.id;
-//				_p2InputId.text = saveObj.p2.id;
-//
-//				if(saveObj.p1.fz) _p1FzInputId.text = saveObj.p1.fz;
-//				if(saveObj.p2.fz) _p2FzInputId.text = saveObj.p2.fz;
-//				if(saveObj.map) _mapInputId.text = saveObj.map;
-
-            //			trace(saveObj.p1.id, saveObj.p2.id, saveObj.p1.fz, saveObj.p2.fz, saveObj.map)
-
 
             function setCurrentItem(listView:PopUpListView, id:String):void {
                 var index:int = -1;
@@ -283,21 +275,6 @@ public class FighterTester extends Sprite {
     }
 
     private function addLabel(txt:String, y:Number = 0, x:Number = 0):Label {
-//			var label:TextField = new TextField();
-//			var tf:TextFormat = new TextFormat();
-//
-//			tf.size = 14;
-//			tf.color = 0xffffff;
-//
-//			label.defaultTextFormat = tf;
-//			label.text = txt;
-//			label.x = x;
-//			label.y = y;
-//			label.mouseEnabled = false;
-//			_testUI.addChild(label);
-//
-//			return label;
-
         Theme.setTheme(_theme);
         var label:Label = new Label(txt);
 
@@ -317,25 +294,6 @@ public class FighterTester extends Sprite {
     }
 
     private function addInput(data:Array = null, y:Number = 0, x:Number = 0):PopUpListView {
-//			var label:TextField = new TextField();
-//			var tf:TextFormat = new TextFormat();
-//
-//			tf.size = 14;
-//			tf.color = 0x000000;
-//
-//			label.defaultTextFormat = tf;
-//			label.text = txt;
-//			label.x = x;
-//			label.y = y;
-//			label.width = 100;
-//			label.height = 20;
-//			label.backgroundColor = 0xffffff;
-//			label.background = true;
-//			label.type = TextFieldType.INPUT;
-//			label.condenseWhite = true;
-//			_testUI.addChild(label);
-
-
         var listView:PopUpListView = new PopUpListView();
 
         if (data) {
@@ -344,16 +302,6 @@ public class FighterTester extends Sprite {
         listView.itemToText = function (item:*):String {
             return item[KEY];
         };
-
-//			listView.buttonFactory = DisplayObjectFactory.withFunction(function ():Button {
-//				var button:Button = new Button();
-//				var format:TextFormat = new TextFormat();
-//				format.font = FONT.fontName;
-//				button.textFormat = format;
-//
-//				return button;
-//
-//			});
 
         listView.x      = x;
         listView.y      = y;
@@ -368,15 +316,6 @@ public class FighterTester extends Sprite {
             label:String, y:Number = 0, x:Number = 0, width:Number = 100, height:Number = 50,
             click:Function = null
     ):Sprite {
-//			var btn:KyoSimpButton = new KyoSimpButton(label,width,height);
-//			btn.x = x;
-//			btn.y = y;
-//
-//			if(click != null) btn.onClick(click);
-//			_testUI.addChild(btn);
-//
-//			return btn;
-
         var btn:Button = new Button(label);
         btn.x          = x;
         btn.y          = y;
@@ -407,11 +346,6 @@ public class FighterTester extends Sprite {
      */
     private function testGame(...params):void {
         _debugText.text = '';
-
-//			trace(_p1InputId.selectedItem[KEY])
-//			//trace(_p1InputId.selectedItem[KEY])
-//			trace(_p1InputId.dataProvider.get(0)[KEY])
-
 
         var p1FighterId:String, p2FighterId:String;
         var p1AssistantId:String, p2AssistantId:String;
@@ -459,8 +393,8 @@ public class FighterTester extends Sprite {
 
     }
 
-    private function initlize(e:Event = null):void {
-        removeEventListener(Event.ADDED_TO_STAGE, initlize);
+    private function initialize(e:Event = null):void {
+        removeEventListener(Event.ADDED_TO_STAGE, initialize);
 
         // 开启调试模式
         GameConfig.DEBUG_MODE = true;
@@ -489,6 +423,9 @@ public class FighterTester extends Sprite {
         _mainGame = new MainGame();
         _mainGame.initlize(_gameSprite, stage, function ():void {
             _mainGame.goLanguage(function ():void {
+                var hash:String = GithubUtils.getCommitsHash();
+                Debugger.showCommitHash(hash);
+
                 _theme          = new SteelTheme();
                 _theme.fontName = FONT.fontName;
                 Theme.setTheme(_theme);
@@ -503,6 +440,7 @@ public class FighterTester extends Sprite {
 
         // 跳过黑屏遮盖
         StateCtrl.I.transEnabled = false;
+
 
         Debugger.initDebug(stage);
         Debugger.onErrorMsgCall = onDebugLog;
