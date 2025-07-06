@@ -103,11 +103,33 @@ public class SoundCtrl {
         playAssetSound(name);
     }
 
-    public function playSwcSound(sc:Class):void {
+    /**
+     * 播放声音（类链接）
+     *
+     * @param sndCls 声音类链接
+     */
+    public function playSwcSound(sndCls:Class):void {
+        if (!sndCls) {
+            return;
+        }
+
+        playSound(new sndCls());
+    }
+
+    /**
+     * 播放声音
+     *
+     * @param snd 声音实例
+     */
+    public function playSound(snd:Sound):void {
+        if (!snd) {
+            return;
+        }
+
         if (keepSoundNoise()) {
             return;
         }
-        var snd:Sound = new sc();
+
         snd.play(0, 0, _sndTransform);
         _lastSndTime = getTimer();
     }
