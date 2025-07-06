@@ -2,6 +2,35 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.07062025_alpha] - 2025-07-06
+
+### 新增
+
+- 新增开发调试版左下角新增当前提交哈希
+- 增加哈希文本点击后可复制哈希值功能
+- 类 GameRunFighterGroup 增加 getter currentFighterId，用于获取当前场上角色的 ID
+- 类 GameRunFighterGroup 增加 getter  currentAssisterId，用于获取当前场上辅助的 ID
+- 类 MCUtils 增加方法 changeSpColor，用于更改游戏 Sprite 颜色，默认绿色偏移 -85
+- 类 GameRunDataVO 增加属性 isSameFighter，用于判断当前场景下是否是相同人物
+- 类 GameRunDataVO 增加属性 isSameAssister，用于判断当前场景下是否是相同人物
+- 增加 P2 相同辅助变色逻辑
+- 增加 P2 相同角色下释放独立道具的变色逻辑
+- 增加 P2 相同角色下释放飞行道具的变色逻辑
+- 增加 P2 相同角色下释放跟随效果的变色逻辑
+
+### 更改
+
+- 忽略调用 stop 方法时产生的 2029 错误
+- 将 FighterMain 的 colorTransform 属性提出到所有 IGameSprite 实例
+- 重构 P2 变色逻辑，增加小队模式下的变色支持
+- 重构变色逻辑，将分散在各处的变色逻辑统一整合到类 MCUtils.autoChangeSpColor 方法中
+
+### 修复
+
+- 修复游戏中处于连续震动状态时，强制返回主界面再次开局后，屏幕震动未结束的 BUG
+- 修复死神方角色在释放灵压爆发被动技能的时候，在聚能动画出来后，灵压爆发动画出现前返回主界面，此时再次开局发现灵压爆发动画继续播放的 BUG
+- 修复小队模式闯关胜利后，如果己方第一个人物未被击败，奖励分失效的 BUG
+
 ## [3.7.0.0.07032025_alpha] - 2025-07-03
 
 ### 新增
@@ -230,6 +259,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.07062025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07032025_alpha...3.7.0.0.07062025_alpha
 [3.7.0.0.07032025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.06302025_alpha...3.7.0.0.07032025_alpha
 [3.7.0.0.06302025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.06122025_alpha...3.7.0.0.06302025_alpha
 [3.7.0.0.06122025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05072025_alpha...3.7.0.0.06122025_alpha
