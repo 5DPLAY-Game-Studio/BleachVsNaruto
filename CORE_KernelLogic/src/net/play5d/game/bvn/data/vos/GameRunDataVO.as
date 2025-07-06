@@ -62,6 +62,20 @@ public class GameRunDataVO implements IInstanceVO {
     }
 
     /**
+     * 当前场景下是否是相同辅助
+     */
+    public function get isSameAssister():Boolean {
+        if (!p1FighterGroup || !p2FighterGroup) {
+            return false;
+        }
+
+        var p1Id:String = p1FighterGroup.currentAssisterId;
+        var p2Id:String = p2FighterGroup.currentAssisterId;
+
+        return p1Id && p2Id && p1Id == p2Id;
+    }
+
+    /**
      * 获取角色已胜利局数
      *
      * @param fighter 角色
