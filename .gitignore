@@ -1,10 +1,2 @@
 # IDEA 输出目录
 /out/
-
-# FlashBuilder 忽略文件
-.metadata/
-.settings/
-bin/
-bin-debug/
-bin-release/
-bin-release-temp/
