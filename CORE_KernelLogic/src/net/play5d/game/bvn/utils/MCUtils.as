@@ -216,36 +216,22 @@ public class MCUtils {
         // 当前场景下是否是相同辅助
         var isSameAssister:Boolean = GameCtrl.I.gameRunData.isSameAssister;
 
-        /**
-         * 检查是否满足相同角色条件
-         *
-         * @return 是否满足相同角色条件
-         */
-        function chkSameFighter():Boolean {
-            return owner is FighterMain && isSameFighter;
-        }
-
-        /**
-         * 检查是否满足相同辅助条件
-         *
-         * @return 是否满足相同角色条件
-         */
-        function chkSameAssister():Boolean {
-            return owner is Assister && isSameAssister;
-        }
-
         if (sp is Assister) {
             if (isSameAssister) {
                 changeSpColor(sp, ct);
             }
         }
         else if (sp is FighterAttacker) {
-            if (chkSameFighter() || chkSameAssister()) {
+            if (owner is FighterMain && isSameFighter ||
+                owner is Assister && isSameAssister)
+            {
                 changeSpColor(sp, ct);
             }
         }
         else if (sp is Bullet || sp is FollowEffectView) {
-            if (chkSameFighter() || chkSameAssister()) {
+            if (owner is FighterMain && isSameFighter ||
+                owner is Assister && isSameAssister)
+            {
                 changeSpColor(sp, ct);
             }
             else if (owner is FighterAttacker) {
