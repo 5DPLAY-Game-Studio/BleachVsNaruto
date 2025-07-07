@@ -2,25 +2,25 @@
   Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without
+  Redistribution and use in source and binary forms, with or without 
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+  * Redistributions of source code must retain the above copyright notice, 
     this list of conditions and the following disclaimer.
-
+  
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
+    notice, this list of conditions and the following disclaimer in the 
     documentation and/or other materials provided with the distribution.
-
-  * Neither the name of Adobe Systems Incorporated nor the names of its
-    contributors may be used to endorse or promote products derived from
+  
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -33,37 +33,37 @@
 package com.adobe.protocols.dict.events
 {
 	import com.adobe.protocols.dict.Definition;
-
+	
 	import flash.events.Event;
-
+	
 
 	public class DefinitionEvent extends Event
 	{
-		public static const DEFINITION:String = "definition";
-
+		public static const DEFINITION:String = "definition";		
+		
 		private var _definition:Definition;
-
+		
 		public function DefinitionEvent(type:String, bubbles:Boolean = false,
-                                        cancelable:Boolean = false)
+													cancelable:Boolean = false)
 		{
 			super(type, bubbles, cancelable);
 		}
-
+		
 		public function set definition(definition:Definition):void
 		{
 			this._definition = definition;
 		}
-
+		
 		public function get definition():Definition
 		{
 			return this._definition;
 		}
-
+		
 		public override function clone():Event
 		{
 			var out:DefinitionEvent = new DefinitionEvent(type, bubbles, cancelable);
 			out.definition = _definition;
-
+			
 			return out;
 		}
 	}

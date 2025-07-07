@@ -30,38 +30,41 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package com.adobe.protocols.dict.events
+package com.adobe.air.net.events
 {
 	import flash.events.Event;
+	import flash.filesystem.File;
 
-	public class DatabaseEvent extends Event
+	public class ResourceCacheEvent extends Event
 	{
-		private var _databases:Array;
 		
-		public static const DATABASES:String = "databases";
+		public static const ITEM_READY:String = "onPathReady";
+		public static const ITEM_CACHED:String = "onItemCached";
 		
-		public function DatabaseEvent(type:String, bubbles:Boolean = false,
-													cancelable:Boolean = false)
+		[Bindable]
+		public var key:String;
+		
+		[Bindable]
+		public var file:File;		
+		
+		public function ResourceCacheEvent(type:String, 
+												bubbles:Boolean=false, 
+												cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 		}
 		
-		public function set databases(databases:Array):void
-		{
-			this._databases = databases;
-		}
-		
-		public function get databases():Array
-		{
-			return this._databases;
-		}
-		
 		public override function clone():Event
 		{
-			var out:DatabaseEvent = new DatabaseEvent(type, bubbles, cancelable);
-			out.databases = _databases;
+			var out:ResourceCacheEvent = new ResourceCacheEvent(type,
+																bubbles,
+																cancelable);
+																
+			out.key = key;
+			out.file = file;
 			
 			return out;
 		}
+		
 	}
 }

@@ -2,25 +2,25 @@
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without
+  Redistribution and use in source and binary forms, with or without 
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice,
+  * Redistributions of source code must retain the above copyright notice, 
     this list of conditions and the following disclaimer.
 
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
+    notice, this list of conditions and the following disclaimer in the 
     documentation and/or other materials provided with the distribution.
 
-  * Neither the name of Adobe Systems Incorporated nor the names of its
-    contributors may be used to endorse or promote products derived from
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -32,15 +32,15 @@
 
 package com.adobe.serialization.json
 {
-
+	
 	import flash.utils.describeType;
-
+	
 	public class JSONEncoder
 	{
-
+		
 		/** The string that is going to represent the object we're encoding */
 		private var jsonString:String;
-
+		
 		/**
 		 * Creates a new JSONEncoder.
 		 *
@@ -49,11 +49,11 @@ package com.adobe.serialization.json
 		 * @playerversion Flash 9.0
 		 * @tiptext
 		 */
-		public function JSONEncoder(value:* )
+		public function JSONEncoder( value:* )
 		{
 			jsonString = convertToString( value );
 		}
-
+		
 		/**
 		 * Gets the JSON string from the encoder.
 		 *
@@ -67,7 +67,7 @@ package com.adobe.serialization.json
 		{
 			return jsonString;
 		}
-
+		
 		/**
 		 * Converts a value to it's JSON string equivalent.
 		 *
@@ -105,7 +105,7 @@ package com.adobe.serialization.json
 
 			return "null";
 		}
-
+		
 		/**
 		 * Escapes a string accoding to the JSON specification.
 		 *
@@ -121,7 +121,7 @@ package com.adobe.serialization.json
 			var ch:String;
 			// store the length in a local variable to reduce lookups
 			var len:Number = str.length;
-
+			
 			// loop over all of the characters in the string
 			for ( var i:int = 0; i < len; i++ )
 			{
@@ -132,64 +132,64 @@ package com.adobe.serialization.json
 					case '"': // quotation mark
 						s += "\\\"";
 						break;
-
+					
 					//case '/':	// solidus
 					//	s += "\\/";
 					//	break;
-
+					
 					case '\\': // reverse solidus
 						s += "\\\\";
 						break;
-
+					
 					case '\b': // bell
 						s += "\\b";
 						break;
-
+					
 					case '\f': // form feed
 						s += "\\f";
 						break;
-
+					
 					case '\n': // newline
 						s += "\\n";
 						break;
-
+					
 					case '\r': // carriage return
 						s += "\\r";
 						break;
-
+					
 					case '\t': // horizontal tab
 						s += "\\t";
 						break;
-
+					
 					default: // everything else
-
+						
 						// check for a control character and escape as unicode
 						if ( ch < ' ' )
 						{
 							// get the hex digit(s) of the character (either 1 or 2 digits)
 							var hexCode:String = ch.charCodeAt( 0 ).toString( 16 );
-
+							
 							// ensure that there are 4 digits by adjusting
 							// the # of zeros accordingly.
 							var zeroPad:String = hexCode.length == 2 ? "00" : "000";
-
+							
 							// create the unicode escape sequence with 4 hex digits
 							s += "\\u" + zeroPad + hexCode;
 						}
 						else
 						{
-
+							
 							// no need to do any special encoding, just pass-through
 							s += ch;
-
+							
 						}
 				} // end switch
-
+				
 			} // end for loop
-
+			
 			return "\"" + s + "\"";
 		}
-
+		
 		/**
 		 * Converts an array to it's JSON string equivalent
 		 *
@@ -200,7 +200,7 @@ package com.adobe.serialization.json
 		{
 			// create a string to store the array's jsonstring value
 			var s:String = "";
-
+			
 			// loop over the elements in the array and add their converted
 			// values to the string
 			var length:int = a.length;
@@ -213,11 +213,11 @@ package com.adobe.serialization.json
 					// we've already added an element, so add the comma separator
 					s += ","
 				}
-
+				
 				// convert the value to a string
 				s += convertToString( a[ i ] );
 			}
-
+			
 			// KNOWN ISSUE:  In ActionScript, Arrays can also be associative
 			// objects and you can put anything in them, ie:
 			//		myArray["foo"] = "bar";
@@ -233,11 +233,11 @@ package com.adobe.serialization.json
 			// A possible solution is to instead encode the Array as an Object
 			// but then it won't get decoded correctly (and won't be an
 			// Array instance)
-
+			
 			// close the array and return it's string value
 			return "[" + s + "]";
 		}
-
+		
 		/**
 		 * Converts an object to it's JSON string equivalent
 		 *
@@ -248,30 +248,30 @@ package com.adobe.serialization.json
 		{
 			// create a string to store the object's jsonstring value
 			var s:String = "";
-
+			
 			// determine if o is a class instance or a plain object
 			var classInfo:XML = describeType( o );
 			if ( classInfo.@name.toString() == "Object" )
 			{
-				// the value of o[key] in the loop below - store this
+				// the value of o[key] in the loop below - store this 
 				// as a variable so we don't have to keep looking up o[key]
 				// when testing for valid values to convert
 				var value:Object;
-
+				
 				// loop over the keys in the object and add their converted
 				// values to the string
 				for ( var key:String in o )
 				{
 					// assign value to a variable for quick lookup
 					value = o[ key ];
-
+					
 					// don't add function's to the JSON string
 					if ( value is Function )
 					{
 						// skip this key and try another
 						continue;
 					}
-
+					
 					// when the length is 0 we're adding the first item so
 					// no comma is necessary
 					if ( s.length > 0 )
@@ -279,13 +279,13 @@ package com.adobe.serialization.json
 						// we've already added an item, so add the comma separator
 						s += ","
 					}
-
+					
 					s += escapeString( key ) + ":" + convertToString( value );
 				}
 			}
 			else // o is a class instance
 			{
-				// Loop over all of the variables and accessors in the class and
+				// Loop over all of the variables and accessors in the class and 
 				// serialize them along with their values.
 				for each ( var v:XML in classInfo..*.(
 					name() == "variable"
@@ -301,7 +301,7 @@ package com.adobe.serialization.json
 					{
 						continue;
 					}
-
+					
 					// When the length is 0 we're adding the first item so
 					// no comma is necessary
 					if ( s.length > 0 )
@@ -309,15 +309,15 @@ package com.adobe.serialization.json
 						// We've already added an item, so add the comma separator
 						s += ","
 					}
-
+					
 					s += escapeString( v.@name.toString() ) + ":"
 						+ convertToString( o[ v.@name ] );
 				}
 			}
-
+			
 			return "{" + s + "}";
 		}
-
+	
 	}
 
 }

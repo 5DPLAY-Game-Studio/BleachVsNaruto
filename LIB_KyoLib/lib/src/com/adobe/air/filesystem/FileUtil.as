@@ -30,38 +30,34 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package com.adobe.protocols.dict.events
+package com.adobe.air.filesystem
 {
-	import flash.events.Event;
-
-	public class DatabaseEvent extends Event
+	import flash.system.Capabilities;
+	import flash.filesystem.File;
+	
+	
+	public class FileUtil
 	{
-		private var _databases:Array;
-		
-		public static const DATABASES:String = "databases";
-		
-		public function DatabaseEvent(type:String, bubbles:Boolean = false,
-													cancelable:Boolean = false)
+		/**
+		 *	@return An Array of Files representing the root directories of the
+		 * 			operating system.
+		 */
+		public static function getRootDirectories():Array
 		{
-			super(type, bubbles, cancelable);
-		}
-		
-		public function set databases(databases:Array):void
-		{
-			this._databases = databases;
-		}
-		
-		public function get databases():Array
-		{
-			return this._databases;
-		}
-		
-		public override function clone():Event
-		{
-			var out:DatabaseEvent = new DatabaseEvent(type, bubbles, cancelable);
-			out.databases = _databases;
+			var v:Array = File.getRootDirectories();
+			var os:String = Capabilities.os;
+
+			if(os.indexOf("Mac") > -1)
+			{
+				v = File(v[0]).resolvePath("Volumes").getDirectoryListing();
+			}
+			else if(os.indexOf("Linux") > -1)
+			{
+				//todo: need to impliment Linux
+			}
 			
-			return out;
+			return v;
 		}
+
 	}
 }

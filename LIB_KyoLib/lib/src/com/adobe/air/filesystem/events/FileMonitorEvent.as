@@ -30,36 +30,30 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package com.adobe.protocols.dict.events
+package com.adobe.air.filesystem.events
 {
 	import flash.events.Event;
+	import flash.filesystem.File;
 
-	public class DatabaseEvent extends Event
+	public class FileMonitorEvent extends Event
 	{
-		private var _databases:Array;
+		public static const CHANGE:String = "onFileChange";
+		public static const MOVE:String = "onFileMove";
+		public static const CREATE:String = "onFileCreate";
+		public static const ADD_VOLUME:String = "onVolumeAdd";
+		public static const REMOVE_VOLUME:String = "onVolumeRemove";
 		
-		public static const DATABASES:String = "databases";
-		
-		public function DatabaseEvent(type:String, bubbles:Boolean = false,
-													cancelable:Boolean = false)
+		public var file:File;
+		public function FileMonitorEvent(type:String, bubbles:Boolean=false, 
+				cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 		}
 		
-		public function set databases(databases:Array):void
-		{
-			this._databases = databases;
-		}
-		
-		public function get databases():Array
-		{
-			return this._databases;
-		}
-		
 		public override function clone():Event
 		{
-			var out:DatabaseEvent = new DatabaseEvent(type, bubbles, cancelable);
-			out.databases = _databases;
+			var out:FileMonitorEvent = new FileMonitorEvent(type, bubbles, cancelable);
+			out.file = file;
 			
 			return out;
 		}
