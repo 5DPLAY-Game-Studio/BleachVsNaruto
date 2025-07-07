@@ -42,80 +42,6 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="OtherTester" pure-as="true" main-class="OtherTester" output-file="OtherTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
-        <dependencies target-player="51.0">
-          <entries>
-            <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry module-name="LIB_KyoLib" build-configuration-name="LIB_KyoLib">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry module-name="CORE_Utils" build-configuration-name="CORE_Utils">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry module-name="CORE_Shared" build-configuration-name="CORE_Shared">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry library-id="2794beca-722e-4be4-8f12-ae795bb51da0">
-              <dependency linkage="External" />
-            </entry>
-          </entries>
-          <sdk name="flex4.16.1-air51.0.1.1" />
-        </dependencies>
-        <compiler-options>
-          <map>
-            <entry key="metadata.contributor" value="5dplay.net" />
-            <entry key="metadata.creator" value="5dplay.net" />
-            <entry key="metadata.date" value="10.04.2024" />
-            <entry key="metadata.description" value="BleachVsNaruto" />
-            <entry key="metadata.language" value="zh_CN" />
-            <entry key="metadata.publisher" value="5DPLAY Game Studio" />
-            <entry key="metadata.title" value="FighterTester" />
-          </map>
-          <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
-        </compiler-options>
-        <packaging-air-desktop />
-        <packaging-android />
-        <packaging-ios />
-      </configuration>
-      <configuration name="SelectTester" pure-as="true" main-class="SelectTester" output-file="SelectTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
-        <dependencies target-player="51.0">
-          <entries>
-            <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry module-name="LIB_KyoLib" build-configuration-name="LIB_KyoLib">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry module-name="CORE_Utils" build-configuration-name="CORE_Utils">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry module-name="CORE_Shared" build-configuration-name="CORE_Shared">
-              <dependency linkage="Merged" />
-            </entry>
-            <entry library-id="7f4d0d6f-22fc-4744-be09-069470606b79">
-              <dependency linkage="External" />
-            </entry>
-          </entries>
-          <sdk name="flex4.16.1-air51.0.1.1" />
-        </dependencies>
-        <compiler-options>
-          <map>
-            <entry key="metadata.contributor" value="5dplay.net" />
-            <entry key="metadata.creator" value="5dplay.net" />
-            <entry key="metadata.date" value="10.04.2024" />
-            <entry key="metadata.description" value="BleachVsNaruto" />
-            <entry key="metadata.language" value="zh_CN" />
-            <entry key="metadata.publisher" value="5DPLAY Game Studio" />
-            <entry key="metadata.title" value="FighterTester" />
-          </map>
-          <option name="additionalOptions" value="-swf-version 37 -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
-        </compiler-options>
-        <packaging-air-desktop />
-        <packaging-android />
-        <packaging-ios />
-      </configuration>
     </configurations>
     <compiler-options />
   </component>
@@ -136,28 +62,6 @@
     <orderEntry type="module-library" exported="">
       <library type="flex">
         <properties id="a4f07e4f-cc8c-4f6b-a35a-75584191119f" />
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../shared/lib/swc" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library type="flex">
-        <properties id="2794beca-722e-4be4-8f12-ae795bb51da0" />
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../shared/lib/swc" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../shared/lib/swc" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library type="flex">
-        <properties id="7f4d0d6f-22fc-4744-be09-069470606b79" />
         <CLASSES>
           <root url="file://$MODULE_DIR$/../shared/lib/swc" />
         </CLASSES>
