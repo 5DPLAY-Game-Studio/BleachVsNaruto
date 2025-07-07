@@ -45,6 +45,7 @@ public function get _ALL_GLOBALS_():* {
         IsMobile,
         P1,
         P2,
+        PlaySound,
         Printf,
         RunCheatCode,
         SetElement,
