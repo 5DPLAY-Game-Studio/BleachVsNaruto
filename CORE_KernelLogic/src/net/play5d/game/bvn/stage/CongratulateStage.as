@@ -75,7 +75,7 @@ public class CongratulateStage implements IStage {
         _ui = new Sprite();
         _mainUI.addChild(_ui);
 
-        var ctmc:mc_congratulations = ResUtils.I.createDisplayObject(
+        var ctmc:$common$MC_congratulations = ResUtils.I.createDisplayObject(
                 ResUtils.swfLib.common, ResUtils.CONGRATULATIONS);
         _ui.addChild(ctmc);
         ctmc.addEventListener(Event.COMPLETE, playComplete, false, 0, true);

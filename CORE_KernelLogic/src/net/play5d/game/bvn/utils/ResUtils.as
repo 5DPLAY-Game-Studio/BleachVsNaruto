@@ -30,7 +30,7 @@ public class ResUtils {
     include '../../../../../../include/_INCLUDE_.as';
 
     public static var SETTING:String         = 'stg_set_ui';
-    public static var CONGRATULATIONS:String = 'mc_congratulations';
+    public static var CONGRATULATIONS:String = '$common$MC_congratulations';
     public static var WINNER:String          = 'winner_stg_mc';
     public static var TITLE:String           = 'stg_title';
     public static var GAME_OVER:String       = 'stg_gameover_mc';
