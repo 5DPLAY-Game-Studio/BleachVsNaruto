@@ -36,7 +36,7 @@ public class ResUtils {
     public static var GAME_OVER:String       = 'stg_gameover_mc';
     public static var SELECT:String          = 'stg_select';
     public static var MOSOU:String           = 'stg_mosou';
-    public static var BIG_MAP:String         = '$big_map_MC_big_map';
+    public static var BIG_MAP:String         = '$big_map$MC_big_map';
     public static var swfLib:ISwfLib;
     private static var _i:ResUtils;
 
