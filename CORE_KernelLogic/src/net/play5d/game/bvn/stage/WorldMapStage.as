@@ -86,7 +86,7 @@ public class WorldMapStage implements IStage {
         _maskMc  = _mapUI.getChildByName('mask_mc') as Sprite;
         _bgMc    = _mapUI.getChildByName('bg_mc') as Sprite;
 
-        _backBtn = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'backbtn_btn');
+        _backBtn = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$BTN_back');
         if (_backBtn) {
             _backBtn.x = _backBtn.y = 10;
             BtnUtils.initBtn(_backBtn, backHandler);
