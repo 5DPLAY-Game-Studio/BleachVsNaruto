@@ -34,7 +34,7 @@ public class SelectFighterUI {
     include '../../../../../../../../include/_INCLUDE_.as';
 
     public function SelectFighterUI(sellData:MusouFighterSellVO) {
-        ui            = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'face_ui_mc');
+        ui            = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$SP_faceUI');
         this.sellData = sellData;
 
         _selectUI = ui.getChildByName('seltmc') as MovieClip;
@@ -47,7 +47,7 @@ public class SelectFighterUI {
         updateUI();
     }
     public var sellData:MusouFighterSellVO;
-    public var ui:Sprite;
+    public var ui:$dialog$SP_faceUI;
     private var _playerData:MusouFighterVO;
     private var _lvTxt:Text;
     private var _selectUI:MovieClip;

@@ -111,7 +111,7 @@ public class MosouStateDialog extends BaseDialog {
     private var _introText2:Text;
     private var _expText:Text;
     private var _changeIndex:int;
-    private var _face:Sprite;
+    private var _face:$dialog$SP_faceUI;
 
     protected override function onShow():void {
         initBigFaces();
@@ -177,7 +177,7 @@ public class MosouStateDialog extends BaseDialog {
         var face:DisplayObject = AssetManager.I.getFighterFace(fv);
 
         if (face) {
-            _face   = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'face_ui_mc');
+            _face   = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$SP_faceUI');
             _face.x = 16;
             _face.y = 15;
             face.x  = 1;
