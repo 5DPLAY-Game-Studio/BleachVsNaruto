@@ -58,7 +58,7 @@ public class MosouSelectDialog extends BaseDialog {
         _chooseBtn = _ui.getChildByName('change') as SimpleButton;
         _buyBtn    = _ui.getChildByName('buy') as SimpleButton;
 
-        _coinico = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'coin_icon_mc');
+        _coinico = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$MC_coinIco');
 
         BtnUtils.initBtn(_chooseBtn, btnHandler);
         BtnUtils.initBtn(_buyBtn, btnHandler);
