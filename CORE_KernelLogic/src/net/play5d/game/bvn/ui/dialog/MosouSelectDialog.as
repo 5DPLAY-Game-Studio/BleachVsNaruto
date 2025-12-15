@@ -50,7 +50,7 @@ public class MosouSelectDialog extends BaseDialog {
 
         _fighterIndex = fighterIndex;
 
-        _ui       = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dialog_select_fighter');
+        _ui       = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$MC_selectFighterPanel');
         _dialogUI = _ui;
 
         _coinUI = new CoinUI(_ui.getChildByName('coinmc') as MovieClip);
@@ -86,7 +86,7 @@ public class MosouSelectDialog extends BaseDialog {
 
         _dotGroup.update(_selectFighterList.getTotalPage());
     }
-    private var _ui:dialog_select_fighter;
+    private var _ui:$dialog$MC_selectFighterPanel;
     private var _chooseBtn:SimpleButton;
     private var _buyBtn:SimpleButton;
     private var _selectFighterList:SelectFighterList;
