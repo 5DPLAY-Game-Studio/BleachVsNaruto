@@ -27,7 +27,7 @@ import net.play5d.kyo.stage.IStage;
 public class LogoStage implements IStage {
     include '../../../../../../include/_INCLUDE_.as';
 
-    private var _ui:logo_movie;
+    private var _ui:$common$MC_logo;
 
 
     /**
@@ -41,7 +41,7 @@ public class LogoStage implements IStage {
      * 构建
      */
     public function build():void {
-        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'logo_movie');
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_logo');
         _ui.addEventListener(Event.COMPLETE, playComplete);
         _ui.gotoAndPlay(2);
     }
