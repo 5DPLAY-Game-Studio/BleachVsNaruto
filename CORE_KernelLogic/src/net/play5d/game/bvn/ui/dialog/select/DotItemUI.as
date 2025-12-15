@@ -25,13 +25,13 @@ public class DotItemUI {
     include '../../../../../../../../include/_INCLUDE_.as';
 
     public function DotItemUI() {
-        _ui               = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dot_mc');
+        _ui               = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$MC_dot');
         _ui.mouseChildren = false;
         _ui.buttonMode    = true;
         _ui.gotoAndStop(2);
     }
     public var page:int = 0;
-    private var _ui:MovieClip;
+    private var _ui:$dialog$MC_dot;
 
     public function getUI():MovieClip {
         return _ui;
