@@ -38,7 +38,7 @@ public class MenuBtn extends EventDispatcher {
         this.label = label;
         this.func  = func;
 
-        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'mc_wzbtn');
+        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_menuBtn');
 
         ui.buttonMode    = true;
         ui.mouseChildren = false;
@@ -62,7 +62,7 @@ public class MenuBtn extends EventDispatcher {
         }
 
     }
-    public var ui:mc_wzbtn;
+    public var ui:$common$MC_menuBtn;
     public var cn:String;
     public var label:String;
     public var func:Function;
