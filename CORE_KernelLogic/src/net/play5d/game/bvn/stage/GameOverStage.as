@@ -48,7 +48,7 @@ public class GameOverStage implements IStage {
         _ui.gotoAndStop(1);
     }
     private var _ui:stg_gameover_mc;
-    private var _arrow:select_arrow_mc;
+    private var _arrow:$common$MC_sltArrow;
     private var _arrowSelected:String;
     private var _keyInited:Boolean;
     private var _keyEnabled:Boolean = true;
@@ -166,7 +166,7 @@ public class GameOverStage implements IStage {
 
     private function initArrow(defaultId:String = null):void {
         if (!_arrow) {
-            _arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'select_arrow_mc');
+            _arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_sltArrow');
             _ui.addChild(_arrow);
         }
 

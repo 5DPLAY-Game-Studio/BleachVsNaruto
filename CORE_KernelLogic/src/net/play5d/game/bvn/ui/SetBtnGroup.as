@@ -61,7 +61,7 @@ public class SetBtnGroup extends Sprite {
     public var direct:int           = 1;
     public var gameInputType:String = GameInputType.MENU;
     private var _btns:Vector.<SetBtn>;
-    private var _arrow:select_arrow_mc;
+    private var _arrow:$common$MC_sltArrow;
     private var _arrowIndex:int = -1;
 
 //		public static var TOUCH_ENABLED:Boolean = true;
@@ -337,7 +337,7 @@ public class SetBtnGroup extends Sprite {
     }
 
     private function initArrow(index:int = 0):void {
-        _arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'select_arrow_mc');
+        _arrow = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_sltArrow');
         addChild(_arrow);
         setArrowIndex(index);
     }
