@@ -46,7 +46,7 @@ public class MosouStateDialog extends BaseDialog {
 
         offsetY = 20;
 
-        _ui       = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dialog_mosou_status');
+        _ui       = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$MC_musouTeamPanel');
         _dialogUI = _ui;
 
         _coinUI = new CoinUI(_ui.getChildByName('coinmc') as MovieClip);
@@ -99,7 +99,7 @@ public class MosouStateDialog extends BaseDialog {
         }
 
     }
-    private var _ui:dialog_mosou_status;
+    private var _ui:$dialog$MC_musouTeamPanel;
     private var _bigFaces:Vector.<BigFaceUI>;
     private var _leaderBtn:SimpleButton;
     private var _changeBtn:SimpleButton;
