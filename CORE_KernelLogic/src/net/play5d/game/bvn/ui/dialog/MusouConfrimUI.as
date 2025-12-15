@@ -39,7 +39,7 @@ public class MusouConfrimUI extends BaseDialog {
         width  = 495;
         height = 240;
 
-        _ui       = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dialog_confrim');
+        _ui       = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$MC_confirm');
         _dialogUI = _ui;
 
         build();
@@ -47,7 +47,7 @@ public class MusouConfrimUI extends BaseDialog {
 
 //		protected var _noBtn:SimpleButton;
 //		protected var _yesBtn:SimpleButton;
-    private var _ui:dialog_confrim;
+    private var _ui:$dialog$MC_confirm;
 
     protected override function onDestory():void {
         super.onDestory();
