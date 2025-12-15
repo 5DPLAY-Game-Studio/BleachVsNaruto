@@ -128,8 +128,8 @@ public class CongratulateStage implements IStage {
     }
 
     private function playComplete(e:Event):void {
-        var winallmc:mc_win_all = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, 'mc_win_all');
-        winallmc.y              = GameConfig.GAME_SIZE.y;
+        var winallmc:$common$MC_winText = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_winText');
+        winallmc.y                      = GameConfig.GAME_SIZE.y;
 
         _ui.addChild(winallmc);
 
@@ -137,16 +137,13 @@ public class CongratulateStage implements IStage {
 
         var scoretxt:BitmapFontText = new BitmapFontText(AssetManager.I.getFont('font1'));
         scoretxt.text               = 'FINAL SCORE ' + GameData.I.score;
-        scoretxt.x                  = (
-                                              GameConfig.GAME_SIZE.x - scoretxt.width
-                                      ) / 2;
+        scoretxt.x                  = (GameConfig.GAME_SIZE.x - scoretxt.width) / 2;
         scoretxt.y                  = winallmc.y + winallmc.height + 100;
         _ui.addChild(scoretxt);
 
         _exitHeight = scoretxt.y - 320;
 
         _btngroup   = new SetBtnGroup();
-        //			_btngroup.x = 20;
         _btngroup.x = 230;
         _btngroup.y = scoretxt.y + scoretxt.height + 100;
         _btngroup.setBtnData([{label: 'BACK', cn: '返回'}]);
