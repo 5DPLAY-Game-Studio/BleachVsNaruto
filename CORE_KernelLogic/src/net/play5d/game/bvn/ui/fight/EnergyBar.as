@@ -24,7 +24,7 @@ import net.play5d.game.bvn.fighter.FighterMain;
 public class EnergyBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function EnergyBar(ui:energy_bar) {
+    public function EnergyBar(ui:$fight$MC_energyBar) {
         _ui = ui;
 
         _bar = new InsBar(_ui.barmc.bar);
@@ -41,7 +41,7 @@ public class EnergyBar {
     private var _renderFlash:Boolean;//闪烁效果
     private var _renderFlashInt:int;
 
-    private var _ui:energy_bar;
+    private var _ui:$fight$MC_energyBar;
 
     public function get ui():DisplayObject {
         return _ui;
