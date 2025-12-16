@@ -57,7 +57,7 @@ public class FightUI implements IGameUI {
         _qibar2.setDirect(-1);
 
         _p1PosUI = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, '$fight$SP_playerPos1');
-        _p2PosUI = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, 'player_pos_p2');
+        _p2PosUI = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, '$fight$SP_playerPos2');
 
         _p1PosUI.visible = false;
         _p2PosUI.visible = false;
@@ -86,7 +86,7 @@ public class FightUI implements IGameUI {
     private var _pauseDialog:PauseDialog;
     private var _flyTimer:Number = 0;
     private var _p1PosUI:$fight$SP_playerPos1;
-    private var _p2PosUI:player_pos_p2;
+    private var _p2PosUI:$fight$SP_playerPos2;
 
     public function initlize(p1:GameRunFighterGroup, p2:GameRunFighterGroup):void {
         _fightbar.setFighter(p1, p2);
