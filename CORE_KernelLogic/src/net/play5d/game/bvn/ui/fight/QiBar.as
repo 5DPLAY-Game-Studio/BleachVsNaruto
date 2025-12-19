@@ -323,7 +323,7 @@ internal class InsBar {
 }
 
 internal class InsFzBar {
-    public function InsFzBar(ui:qbar_fzqi_mc) {
+    public function InsFzBar(ui:$fight$MC_qiBarFzQi) {
         _ui                  = ui;
         var bounds:Rectangle = _ui.barmc.getBounds(_ui.barmc);
         _scroll              = new Rectangle(0, 0, _ui.barmc.width, _ui.barmc.height);
@@ -335,7 +335,7 @@ internal class InsFzBar {
     private var _scroll:Rectangle;
     private var _height:Number;
 
-    private var _ui:qbar_fzqi_mc;
+    private var _ui:$fight$MC_qiBarFzQi;
 
     public function get ui():DisplayObject {
         return _ui;
