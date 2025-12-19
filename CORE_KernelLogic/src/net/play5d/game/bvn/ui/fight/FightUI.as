@@ -48,7 +48,7 @@ public class FightUI implements IGameUI {
     public static var QI_BAR_MODE:int;
 
     public function FightUI() {
-        ui        = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, 'ui_fight');
+        ui        = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, '$fight$MC_fightUI');
         _fightbar = new FightBar(ui.hpbarmc);
         _qibar1   = new QiBar(ui.fzqi1);
         _qibar2   = new QiBar(ui.fzqi2);
@@ -71,7 +71,7 @@ public class FightUI implements IGameUI {
             GameEvent.addEventListener(GameEvent.SCORE_UPDATE, updateScore);
         }
     }
-    public var ui:ui_fight;
+    public var ui:$fight$MC_fightUI;
     private var _fightbar:FightBar;
     private var _qibar1:QiBar;
     private var _qibar2:QiBar;
