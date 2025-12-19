@@ -29,7 +29,7 @@ import net.play5d.kyo.display.BitmapText;
 public class FighterHpBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function FighterHpBar(ui:hpbar_barmc) {
+    public function FighterHpBar(ui:$fight$MC_hpBarMc) {
         _ui     = ui;
         _bar    = _ui.bar;
         _redbar = _ui.redbar;
@@ -67,7 +67,7 @@ public class FighterHpBar {
 
     private var _direct:int;
 
-    private var _ui:hpbar_barmc;
+    private var _ui:$fight$MC_hpBarMc;
 
     public function get ui():DisplayObject {
         return _ui;
