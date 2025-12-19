@@ -32,7 +32,7 @@ import net.play5d.kyo.utils.KyoUtils;
 public class QiBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function QiBar(ui:qbar_mc) {
+    public function QiBar(ui:$fight$MC_qiBar) {
         _ui        = ui;
         _bar       = new InsBar(_ui.barmc);
         _fzBar     = new InsFzBar(_ui.fzqibar);
@@ -46,7 +46,7 @@ public class QiBar {
             _ui.visible = false;
         }
     }
-    private var _ui:qbar_mc;
+    private var _ui:$fight$MC_qiBar;
     private var _fighter:FighterMain;
     private var _bar:InsBar;
     private var _fzBar:InsFzBar;
