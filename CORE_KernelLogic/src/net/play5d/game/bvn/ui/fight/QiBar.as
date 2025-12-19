@@ -275,13 +275,13 @@ import flash.display.DisplayObject;
 import flash.geom.Rectangle;
 
 internal class InsBar {
-    public function InsBar(ui:qbar_barmc) {
+    public function InsBar(ui:$fight$MC_qiBarMc) {
         _ui = ui;
         setProcess(0);
     }
     private var _process:Number = 0;
 
-    private var _ui:qbar_barmc;
+    private var _ui:$fight$MC_qiBarMc;
 
     public function get ui():DisplayObject {
         return _ui;
