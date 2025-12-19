@@ -37,8 +37,8 @@ public class FightTimeUI {
         else {
             _renderTime = true;
 
-            var timeTxtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'time_txtmc');
-            _numMc   = new MCNumber(timeTxtCls, 0, 1, 20, 2);
+            var timeNumberCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, '$fight$MC_timeNumber');
+            _numMc   = new MCNumber(timeNumberCls, 0, 1, 20, 2);
             _numMc.x = -22;
             _numMc.y = -15;
             _ui.addChild(_numMc);
