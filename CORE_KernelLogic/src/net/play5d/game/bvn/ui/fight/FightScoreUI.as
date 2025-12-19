@@ -23,7 +23,7 @@ import net.play5d.kyo.display.MCNumber;
 public class FightScoreUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function FightScoreUI(ui:score_mc) {
+    public function FightScoreUI(ui:$fight$MC_score) {
         _ui = ui;
 
         var txtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'txtmc_score');
@@ -31,7 +31,7 @@ public class FightScoreUI {
         _nummc = new MCNumber(txtCls, 0, 1, 10, 10);
         _ui.ct.addChild(_nummc);
     }
-    private var _ui:score_mc;
+    private var _ui:$fight$MC_score;
     private var _nummc:MCNumber;
 
     public function setScore(v:int):void {
