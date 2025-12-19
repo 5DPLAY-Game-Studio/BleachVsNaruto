@@ -26,16 +26,15 @@ public class FightScoreUI {
     public function FightScoreUI(ui:$fight$MC_score) {
         _ui = ui;
 
-        var txtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'txtmc_score');
-
-        _nummc = new MCNumber(txtCls, 0, 1, 10, 10);
-        _ui.ct.addChild(_nummc);
+        var scoreNumberCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, '$fight$MC_scoreNumber');
+        _numberMc = new MCNumber(scoreNumberCls, 0, 1, 10, 10);
+        _ui.ct.addChild(_numberMc);
     }
     private var _ui:$fight$MC_score;
-    private var _nummc:MCNumber;
+    private var _numberMc:MCNumber;
 
     public function setScore(v:int):void {
-        _nummc.number = v;
+        _numberMc.number = v;
     }
 
 }
