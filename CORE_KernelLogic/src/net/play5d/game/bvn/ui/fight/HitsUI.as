@@ -28,7 +28,7 @@ public class HitsUI {
 
     public function HitsUI(mc:MovieClip) {
         _mc           = mc;
-        var cls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'hits_num_mc');
+        var cls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, '$fight$MC_hitsNumer');
         _txtmc        = new MCNumber(cls, 0, 1, 35);
         _orgPos       = new Point(mc.x, mc.y);
         _mc.ct.addChild(_txtmc);
