@@ -24,7 +24,7 @@ import net.play5d.game.bvn.data.GameRunFighterGroup;
 public class FightFaceGroup {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function FightFaceGroup(ui:hpbar_facegroup) {
+    public function FightFaceGroup(ui:$fight$MC_hpBarFaceGroup) {
         _ui = ui;
 
         _ui.cacheAsBitmap = true;
@@ -37,7 +37,7 @@ public class FightFaceGroup {
     private var _face2:FightFaceUI;
     private var _face3:FightFaceUI;
 
-    private var _ui:hpbar_facegroup;
+    private var _ui:$fight$MC_hpBarFaceGroup;
 
     public function get ui():DisplayObject {
         return _ui;
