@@ -26,7 +26,7 @@ import net.play5d.kyo.display.MCNumber;
 public class FightTimeUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function FightTimeUI(ui:time_mc) {
+    public function FightTimeUI(ui:$fight$MC_time) {
         _ui = ui;
 
         var time:int = GameCtrl.I.gameRunData.gameTimeMax;
@@ -35,11 +35,9 @@ public class FightTimeUI {
             _ui.wuxian.visible = true;
         }
         else {
-
             _renderTime = true;
 
             var timeTxtCls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, 'time_txtmc');
-
             _numMc   = new MCNumber(timeTxtCls, 0, 1, 20, 2);
             _numMc.x = -22;
             _numMc.y = -15;
@@ -50,7 +48,7 @@ public class FightTimeUI {
         }
 
     }
-    private var _ui:time_mc;
+    private var _ui:$fight$MC_time;
     private var _numMc:MCNumber;
     private var _renderTime:Boolean;
 
