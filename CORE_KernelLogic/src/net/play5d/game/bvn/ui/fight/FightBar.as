@@ -35,7 +35,7 @@ import net.play5d.game.bvn.ui.WinUI;
 public class FightBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function FightBar(ui:hpbar_mc) {
+    public function FightBar(ui:$fight$MC_hpBar) {
         _ui = ui;
 
         _faceGroup1 = new FightFaceGroup(_ui.face1);
@@ -91,7 +91,7 @@ public class FightBar {
     private var _drawMatrix:Matrix;
     private var _empytBd:BitmapData;
 
-    private var _ui:hpbar_mc;
+    private var _ui:$fight$MC_hpBar;
 
     public function get ui():DisplayObject {
         return _ui;
