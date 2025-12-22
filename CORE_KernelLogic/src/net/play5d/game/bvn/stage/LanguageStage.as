@@ -31,6 +31,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.LanguageType;
+import net.play5d.game.bvn.ui.language.CountryItem;
 import net.play5d.game.bvn.utils.MultiLangUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
@@ -46,7 +47,7 @@ public class LanguageStage implements IStage {
     private var _backGround:Bitmap;
 
     // 国家集合
-    [ArrayElementType('InsCountry')]
+    [ArrayElementType('net.play5d.game.bvn.ui.language.CountryItem')]
     private var _insCountries:Array = [];
 
     // 点击回调事件
@@ -123,7 +124,7 @@ public class LanguageStage implements IStage {
         }
 
         if (_insCountries) {
-            for each (var country:InsCountry in _insCountries) {
+            for each (var country:CountryItem in _insCountries) {
                 country.removeEventListener(TouchEvent.TOUCH_TAP, touchTapHandler);
                 country.removeEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
                 country.removeEventListener(MouseEvent.CLICK, clickHandler);
@@ -244,7 +245,7 @@ public class LanguageStage implements IStage {
             Font.registerFont(fontCls);
 
             // 国家元件
-            var country:InsCountry = new InsCountry();
+            var country:CountryItem = new CountryItem();
 
             // 判断是否和存档的语言一致
             if (GameData.I.config.language == lang) {
@@ -273,7 +274,7 @@ public class LanguageStage implements IStage {
     ////////////////////////////////////////////////////////////////////////////////
 
     private function touchTapHandler(e:Event):void {
-        var target:InsCountry = e.currentTarget.parent as InsCountry;
+        var target:CountryItem = e.currentTarget.parent as CountryItem;
         if (!target) {
             return;
         }
@@ -297,11 +298,11 @@ public class LanguageStage implements IStage {
     private function mouseOverHandler(e:Event):void {
         SoundCtrl.I.sndSelect();
 
-        var target:InsCountry = e.currentTarget.parent as InsCountry;
-        target.selected       = true;
+        var target:CountryItem = e.currentTarget.parent as CountryItem;
+        target.selected        = true;
 
         // 设置其他的 InsCountry 元件 selected 属性为 false
-        for each (var country:InsCountry in _insCountries) {
+        for each (var country:CountryItem in _insCountries) {
             if (country != target) {
                 country.selected = false;
             }
@@ -315,11 +316,11 @@ public class LanguageStage implements IStage {
     private function clickHandler(e:Event):void {
         SoundCtrl.I.sndConfrim();
 
-        var target:InsCountry = e.currentTarget.parent as InsCountry;
+        var target:CountryItem = e.currentTarget.parent as CountryItem;
         // 所选语言
-        var language:String   = target.language;
+        var language:String    = target.language;
         // 所选语言的字体类
-        var fontCls:Class     = target.fontCls;
+        var fontCls:Class      = target.fontCls;
 
         // 如果是不支持的语言，输出不支持
         if (!LanguageType.isSupported(language)) {
@@ -335,210 +336,4 @@ public class LanguageStage implements IStage {
     }
 
 }
-}
-
-import com.greensock.TweenLite;
-
-import flash.display.MovieClip;
-import flash.display.Sprite;
-
-import net.play5d.game.bvn.utils.MCUtils;
-import net.play5d.game.bvn.utils.ResUtils;
-
-/**
- * 内部国家语言类
- */
-class InsCountry extends Sprite {
-    // 国旗与文本的间隔
-    private const GAP:int                   = 25;
-    // 高度系数
-    private const HEIGHT_COEFFICIENT:Number = 1.5;
-    // 宽度系数
-    private const WIDTH_COEFFICIENT:Number  = 2;
-
-    public function InsCountry():void {
-        _top = new Sprite();
-
-        _mc   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_country');
-        _txt  = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_country_text');
-        _base = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_base');
-
-        _top.addChild(_mc);
-        _top.addChild(_txt);
-
-        _pMc = _mc.p;
-        _cMc = _mc.c;
-
-        _cMc.stop();
-        _txt.stop();
-
-        _txt.x = _mc.width + GAP;
-
-        addChild(_base);
-        addChild(_top);
-
-        _base.width  = 0;
-        _base.height = height * HEIGHT_COEFFICIENT;
-        _base.x      = width / 2;
-        _base.y      = height / 2;
-    }
-
-    // 国旗元件
-    private var _mc:language_mc_country;
-    // 对应文本元件
-    private var _txt:language_mc_country_text;
-
-    // 国旗进度元件
-    private var _pMc:MovieClip;
-    // 国旗图案元件
-    private var _cMc:MovieClip;
-
-    // 底部元件
-    private var _base:language_mc_base;
-
-    /**
-     * 宽度（top）
-     */
-    override public function get width():Number {
-        return _top.width;
-    }
-
-    /**
-     * 高度（top）
-     */
-    override public function get height():Number {
-        return _top.height;
-    }
-
-    // 顶部元件
-    private var _top:Sprite;
-
-    /**
-     * 顶部元件
-     */
-    public function get top():Sprite {
-        return _top;
-    }
-
-    // 当前语言
-    private var _language:String;
-
-    /**
-     * 当前语言
-     */
-    public function get language():String {
-        return _language;
-    }
-
-    public function set language(v:String):void {
-        _language = v;
-
-        if (
-                MCUtils.hasFrameLabel(_cMc, v) &&
-                MCUtils.hasFrameLabel(_txt, v)
-        ) {
-            _cMc.gotoAndStop(v);
-            _txt.gotoAndStop(v);
-
-            return;
-        }
-
-        _cMc.gotoAndStop(1);
-    }
-
-    // 字体类
-    private var _fontCls:Class;
-
-    /**
-     * 字体类
-     */
-    public function get fontCls():Class {
-        return _fontCls;
-    }
-
-    public function set fontCls(v:Class):void {
-        _fontCls = v;
-    }
-
-    // 是否被选中
-    private var _selected:Boolean;
-
-    /**
-     * 是否被选中
-     */
-    public function get selected():Boolean {
-        return _selected;
-    }
-
-    public function set selected(b:Boolean):void {
-        // 新状态和旧状态相同，返回
-        if (_selected == b) {
-            return;
-        }
-
-        _selected = b;
-
-        TweenLite.to(_base, 0.2, {
-            width: b ? width * WIDTH_COEFFICIENT : 0
-        });
-    }
-
-    /**
-     * 注册一个事件侦听器
-     * @param type 事件的类型
-     * @param listener 处理事件的侦听器函数
-     * @param useCapture 确定侦听器是运行于捕获阶段还是运行于目标和冒泡阶段
-     * @param priority 事件侦听器的优先级
-     * @param useWeakReference 确定对侦听器的引用是强引用，还是弱引用
-     */
-    override public function addEventListener(
-            type:String, listener:Function,
-            useCapture:Boolean       = false,
-            priority:int             = 0,
-            useWeakReference:Boolean = false
-    ):void {
-        _top.addEventListener(type, listener, useCapture, priority, useWeakReference);
-    }
-
-    /**
-     * 移除一个事件侦听器
-     * @param type 事件的类型
-     * @param listener 处理事件的侦听器函数
-     * @param useCapture 确定侦听器是运行于捕获阶段还是运行于目标和冒泡阶段
-     */
-    override public function removeEventListener(
-            type:String, listener:Function,
-            useCapture:Boolean = false
-    ):void {
-        _top.removeEventListener(type, listener, useCapture);
-    }
-
-    /**
-     * 销毁
-     */
-    public function destroy():void {
-        _pMc = null;
-        _cMc = null;
-
-        _mc  = null;
-        _txt = null;
-
-        _top  = null;
-        _base = null;
-
-        _fontCls = null;
-    }
-
-//    public function setProgress(progress:Number = 0):void {
-//        var difference:Number = 1 - progress;
-//
-//        if (difference < 0) {
-//            difference = 0;
-//        }
-//        if (difference > 1) {
-//            difference = 1;
-//        }
-//
-//        _pMc.scaleY = difference;
-//    }
 }
