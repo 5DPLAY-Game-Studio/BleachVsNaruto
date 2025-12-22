@@ -43,7 +43,7 @@ public class CountryItem extends Sprite {
 
         _mc   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_country');
         _txt  = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_country_text');
-        _base = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_base');
+        _base = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_base');
 
         _top.addChild(_mc);
         _top.addChild(_txt);
@@ -76,7 +76,7 @@ public class CountryItem extends Sprite {
     private var _cMc:MovieClip;
 
     // 底部元件
-    private var _base:language_mc_base;
+    private var _base:$language$MC_base;
 
     /**
      * 宽度（top）
