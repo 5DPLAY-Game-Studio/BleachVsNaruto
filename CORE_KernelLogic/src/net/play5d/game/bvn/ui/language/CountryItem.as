@@ -42,7 +42,7 @@ public class CountryItem extends Sprite {
         _top = new Sprite();
 
         _mc   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_country');
-        _txt  = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_country_text');
+        _txt  = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_text');
         _base = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_base');
 
         _top.addChild(_mc);
@@ -68,7 +68,7 @@ public class CountryItem extends Sprite {
     // 国旗元件
     private var _mc:$language$MC_country;
     // 对应文本元件
-    private var _txt:language_mc_country_text;
+    private var _txt:$language$MC_text;
 
     // 国旗进度元件
     private var _pMc:MovieClip;
