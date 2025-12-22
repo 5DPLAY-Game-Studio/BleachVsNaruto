@@ -40,7 +40,7 @@ import net.play5d.kyo.stage.IStage;
 public class HowToPlayStage implements IStage {
     include '../../../../../../include/_INCLUDE_.as';
 
-    private var _ui:movie_howtoplay;
+    private var _ui:$how2play$MC_movieHow2Play;
 
     /**
      * 显示对象
@@ -53,7 +53,7 @@ public class HowToPlayStage implements IStage {
      * 构建
      */
     public function build():void {
-        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.how2play, 'movie_howtoplay');
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.how2play, '$how2play$MC_movieHow2Play');
         _ui.addEventListener(Event.COMPLETE, uiComplete);
         _ui.gotoAndPlay(2);
 
