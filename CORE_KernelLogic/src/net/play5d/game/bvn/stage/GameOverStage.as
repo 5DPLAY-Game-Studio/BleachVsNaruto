@@ -47,7 +47,7 @@ public class GameOverStage implements IStage {
         _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.game_over, ResUtils.GAME_OVER);
         _ui.gotoAndStop(1);
     }
-    private var _ui:stg_gameover_mc;
+    private var _ui:$game_over$MC_stgGameOver;
     private var _arrow:$common$MC_sltArrow;
     private var _arrowSelected:String;
     private var _keyInited:Boolean;
