@@ -39,7 +39,7 @@ public class LanguageStage implements IStage {
     include '../../../../../../include/_INCLUDE_.as';
 
     // 加载进度条
-    private var _loadingBar:language_mc_loadingbar;
+    private var _loadingBar:$language$MC_loadingBar;
     // 显示对象
     private var _ui:Sprite = new Sprite();
     // 背景位图
@@ -84,7 +84,7 @@ public class LanguageStage implements IStage {
         _ui.addChild(_backGround);
 
         // 初始化加载进度条
-        _loadingBar   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, 'language_mc_loadingbar');
+        _loadingBar   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_loadingBar');
         _loadingBar.x = 17;
         _loadingBar.y = 555;
         _ui.addChild(_loadingBar);
