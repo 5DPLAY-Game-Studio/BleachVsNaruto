@@ -52,7 +52,7 @@ public class LoadingStage implements IStage {
     public function LoadingStage() {
     }
     private var _ui:loading_fight_mc;
-    private var _sltUI:loading_select_ui_mc;
+    private var _sltUI:$loading$MC_loadingFight;
     private var _destoryed:Boolean;
     private var _loadFin:Boolean;
     private var _selectIndexUI:SelectIndexUI;
@@ -102,7 +102,7 @@ public class LoadingStage implements IStage {
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('loading'));
 
-        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, 'loading_fight_mc');
+        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, '$loading$MC_loadingFight');
         _sltUI = _ui.sltui;
 
         _selectIndexUI          = new SelectIndexUI();

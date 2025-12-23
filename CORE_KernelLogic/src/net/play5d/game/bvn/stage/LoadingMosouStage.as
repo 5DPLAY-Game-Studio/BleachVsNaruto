@@ -46,7 +46,7 @@ public class LoadingMosouStage implements IStage {
 
     public function LoadingMosouStage() {
     }
-    private var _ui:loading_fight_mc;
+    private var _ui:$loading$MC_loadingFight;
     private var _destoryed:Boolean;
     private var _sltUI:loading_select_ui_mc;
 
@@ -70,7 +70,7 @@ public class LoadingMosouStage implements IStage {
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('loading'));
 
-        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, 'loading_fight_mc');
+        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.fight, '$loading$MC_loadingFight');
         _sltUI = _ui.sltui;
 
     }
