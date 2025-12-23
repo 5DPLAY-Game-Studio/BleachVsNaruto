@@ -42,7 +42,7 @@ public class MusouUI implements IGameUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
     public function MusouUI() {
-        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.musou, 'ui_mosou');
+        _ui    = ResUtils.I.createDisplayObject(ResUtils.swfLib.musou, '$musou$MC_ui');
         _hpbar = new MusouFightBarUI(_ui.hpbarmc);
 
         _bossHpBar = new BossHpUI(_ui.bosshp_mc);
@@ -60,7 +60,7 @@ public class MusouUI implements IGameUI {
 
         _enemyHpBarGroup = new EnemyHpUIGroup(_ui.ct_enemybar);
     }
-    private var _ui:ui_mosou;
+    private var _ui:$musou$MC_ui;
     private var _hpbar:MusouFightBarUI;
     private var _bossHpBar:BossHpUI;
     private var _enemyHpBarGroup:EnemyHpUIGroup;
