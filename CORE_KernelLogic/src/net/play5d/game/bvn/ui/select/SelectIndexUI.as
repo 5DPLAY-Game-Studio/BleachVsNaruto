@@ -145,11 +145,11 @@ public class SelectIndexUI extends Sprite {
     }
 
     private function initP1Group(finishBack:Function = null):void {
-        var arrow:DisplayObject =
-                    ResUtils.I.createDisplayObject(
-                            ResUtils.swfLib.select,
-                            '$loading$SP_selectArrow1'
-                    );
+        var arrow:DisplayObject = ResUtils.I.createDisplayObject(
+                ResUtils.swfLib.select,
+                '$loading$SP_selectArrow1'
+        );
+
         _p1Group.initArrow(arrow, new Point(-10, 30));
         _p1Group.setKey(GameInputType.P1);
 
@@ -166,15 +166,11 @@ public class SelectIndexUI extends Sprite {
     }
 
     private function initP2Group(type:String, autoSelect:Boolean):void {
-        var arrow:DisplayObject = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'select_arrow_mc_2');
+        var arrow:DisplayObject = ResUtils.I.createDisplayObject(
+                ResUtils.swfLib.select, '$loading$SP_selectArrow2'
+        );
 
-
-        if (SHOW_MODE == 1) {
-            _p2Group.initArrow(arrow, new Point(230, 30));
-        }
-        else {
-            _p2Group.initArrow(arrow, new Point(260, 30));
-        }
+        _p2Group.initArrow(arrow, new Point(SHOW_MODE == 1 ? 230 : 260, 30));
 
         if (autoSelect) {
             _p2Group.autoSelect();
