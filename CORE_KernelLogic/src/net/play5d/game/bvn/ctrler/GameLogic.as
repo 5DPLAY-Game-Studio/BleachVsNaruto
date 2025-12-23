@@ -397,7 +397,7 @@ public class GameLogic {
         switch (v) {
         case 1:
             GameData.I.loadSelect('config/salect.xml');
-//					ResUtils.WINNER = 'winner_stg_mc2';
+//            ResUtils.WINNER = '$loading$MC_stageWinner';
             SelectIndexUI.SHOW_MODE   = 1;
             GameConfig.SHOW_UI_STATUS = 1;
             GameEndCtrl.SHOW_CONTINUE = true;
@@ -405,7 +405,7 @@ public class GameLogic {
             break;
         case 2:
             GameData.I.loadDebugSelect('salect.xml');
-//					ResUtils.WINNER = 'winner_stg_mc2';
+//            ResUtils.WINNER = '$loading$MC_stageWinner2';
             SelectIndexUI.SHOW_MODE   = 1;
             GameConfig.SHOW_UI_STATUS = 1;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
@@ -413,7 +413,7 @@ public class GameLogic {
             break;
         default:
             GameData.I.loadSelect('config/select.xml');
-            ResUtils.WINNER           = 'winner_stg_mc';
+            ResUtils.WINNER           = '$loading$MC_stageWinner';
             SelectIndexUI.SHOW_MODE   = 0;
             GameConfig.SHOW_UI_STATUS = 0;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_4399;
