@@ -146,7 +146,10 @@ public class SelectedFighterUI extends EventDispatcher {
     public function setFighterIndex(index:int):void {
         _fighterIndex = index;
 
-        var au:seltwzmc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'seltwzmc');
+        var au:$loading$MC_selectText = ResUtils.I.createDisplayObject(
+                ResUtils.swfLib.select,
+                '$loading$MC_selectText'
+        );
         au.gotoAndStop(index);
         ui.addChild(au);
         if (ui is selected_item_p1_mc) {
@@ -161,7 +164,10 @@ public class SelectedFighterUI extends EventDispatcher {
     }
 
     public function setAssister():void {
-        var au:seltwzmc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'seltwzmc');
+        var au:$loading$MC_selectText = ResUtils.I.createDisplayObject(
+                ResUtils.swfLib.select,
+                'seltwzmc'
+        );
         au.gotoAndStop(4);
         ui.addChild(au);
         if (ui is selected_item_p1_mc) {
