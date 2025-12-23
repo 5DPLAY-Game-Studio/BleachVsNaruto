@@ -31,7 +31,7 @@ public class GameLoadingStage implements IStage {
 
     public function GameLoadingStage() {
     }
-    private var _ui:loading_cover_mc;
+    private var _ui:$loading$MC_loadingCover;
     private var _initBack:Function;
     private var _initFail:Function;
 
@@ -46,7 +46,7 @@ public class GameLoadingStage implements IStage {
      * 构建
      */
     public function build():void {
-        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.loading, 'loading_cover_mc');
+        _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.loading, '$loading$MC_loadingCover');
     }
 
     public function loadGame(succ:Function, fail:Function):void {
