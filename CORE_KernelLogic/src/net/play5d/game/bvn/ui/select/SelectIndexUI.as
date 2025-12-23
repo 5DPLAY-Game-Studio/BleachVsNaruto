@@ -145,7 +145,11 @@ public class SelectIndexUI extends Sprite {
     }
 
     private function initP1Group(finishBack:Function = null):void {
-        var arrow:DisplayObject = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'select_arrow_mc_1');
+        var arrow:DisplayObject =
+                    ResUtils.I.createDisplayObject(
+                            ResUtils.swfLib.select,
+                            '$loading$SP_selectArrow1'
+                    );
         _p1Group.initArrow(arrow, new Point(-10, 30));
         _p1Group.setKey(GameInputType.P1);
 
