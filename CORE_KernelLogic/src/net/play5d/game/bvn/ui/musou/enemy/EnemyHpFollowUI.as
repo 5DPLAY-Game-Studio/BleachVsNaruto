@@ -26,14 +26,14 @@ public class EnemyHpFollowUI {
     include '../../../../../../../../include/_INCLUDE_.as';
 
     public function EnemyHpFollowUI(fighter:FighterMain) {
-        _ui        = new mosou_enemyhpbarmc2();
+        _ui        = new $musou$MC_enemyHpBarFollow();
         _ui.scaleX = _ui.scaleY = 0.5;
         _bar       = _ui.getChildByName('barmc');
         _fighter   = fighter;
 
         _ui.visible = false;
     }
-    private var _ui:mosou_enemyhpbarmc2;
+    private var _ui:$musou$MC_enemyHpBarFollow;
     private var _fighter:FighterMain;
     private var _bar:DisplayObject;
     private var _showDelay:int;
