@@ -27,7 +27,7 @@ public class EnemyHpUI {
     include '../../../../../../../../include/_INCLUDE_.as';
 
     public function EnemyHpUI(fighter:FighterMain) {
-        _ui      = new mosou_enemyhpbarmc();
+        _ui      = new $musou$MC_enemyHpBar();
         _bar     = _ui.getChildByName('bar');
         _faceCt  = _ui.getChildByName('ct_face') as Sprite;
         _fighter = fighter;
@@ -37,7 +37,7 @@ public class EnemyHpUI {
             _faceCt.addChild(faceImg);
         }
     }
-    private var _ui:mosou_enemyhpbarmc;
+    private var _ui:$musou$MC_enemyHpBar;
     private var _fighter:FighterMain;
     private var _bar:DisplayObject;
     private var _faceCt:Sprite;
