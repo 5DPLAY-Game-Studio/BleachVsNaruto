@@ -24,7 +24,7 @@ import net.play5d.game.bvn.fighter.FighterMain;
 public class MusouEnergyBar {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MusouEnergyBar(ui:mosou_energy_bar) {
+    public function MusouEnergyBar(ui:$musou$MC_energyBar) {
         _ui = ui;
 
         _bar = new InsBar(_ui.bar);
@@ -41,7 +41,7 @@ public class MusouEnergyBar {
     private var _renderFlash:Boolean;//闪烁效果
     private var _renderFlashInt:int;
 
-    private var _ui:mosou_energy_bar;
+    private var _ui:$musou$MC_energyBar;
 
     public function get ui():DisplayObject {
         return _ui;
