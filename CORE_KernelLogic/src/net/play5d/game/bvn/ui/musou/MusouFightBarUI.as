@@ -36,8 +36,8 @@ public class MusouFightBarUI {
 
         _energybar = new MusouEnergyBar(ui.energybar);
 
-        _littleHpBar1 = new LittleHpBar(ui.little_hp_1);
-        _littleHpBar2 = new LittleHpBar(ui.little_hp_2);
+        _littleHpBar1 = new MusouMiniHpBar(ui.little_hp_1);
+        _littleHpBar2 = new MusouMiniHpBar(ui.little_hp_2);
 
         _face = ui.facemc;
     }
@@ -46,8 +46,8 @@ public class MusouFightBarUI {
     private var _hpbar:MusouHpBar;
     private var _qibar:MusouQiBar;
     private var _energybar:MusouEnergyBar;
-    private var _littleHpBar1:LittleHpBar;
-    private var _littleHpBar2:LittleHpBar;
+    private var _littleHpBar1:MusouMiniHpBar;
+    private var _littleHpBar2:MusouMiniHpBar;
     private var _group:GameRunFighterGroup;
 
     public function setFighter(group:GameRunFighterGroup):void {
