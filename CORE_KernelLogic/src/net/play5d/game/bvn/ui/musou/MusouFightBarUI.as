@@ -42,7 +42,7 @@ public class MusouFightBarUI {
         _face = ui.facemc;
     }
     private var _ui:$musou$MC_hpBarGroup;
-    private var _face:mosou_hpbar_facemc;
+    private var _face:$musou$MC_hpBarFace;
     private var _hpbar:MusouHpBar;
     private var _qibar:MusouQiBar;
     private var _energybar:MusouEnergyBar;
