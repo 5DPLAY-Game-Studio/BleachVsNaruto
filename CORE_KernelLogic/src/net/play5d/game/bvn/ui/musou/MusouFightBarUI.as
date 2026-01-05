@@ -28,7 +28,7 @@ import net.play5d.game.bvn.fighter.FighterMain;
 public class MusouFightBarUI {
     include '../../../../../../../include/_INCLUDE_.as';
 
-    public function MusouFightBarUI(ui:mosou_hpbar_mc) {
+    public function MusouFightBarUI(ui:$musou$MC_hpBarGroup) {
         _ui = ui;
 
         _hpbar = new MusouHpBar(ui.hpbar, ui.hpbar2);
@@ -41,7 +41,7 @@ public class MusouFightBarUI {
 
         _face = ui.facemc;
     }
-    private var _ui:mosou_hpbar_mc;
+    private var _ui:$musou$MC_hpBarGroup;
     private var _face:mosou_hpbar_facemc;
     private var _hpbar:MusouHpBar;
     private var _qibar:MusouQiBar;
