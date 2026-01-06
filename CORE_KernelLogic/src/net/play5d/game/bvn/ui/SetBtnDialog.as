@@ -28,7 +28,7 @@ public class SetBtnDialog {
     include '../../../../../../include/_INCLUDE_.as';
 
     public function SetBtnDialog() {
-        ui         = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, 'key_set_dialog_mc');
+        ui         = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, '$setting$SP_keySetDialog');
         ui.visible = false;
 
         _pushTxt    = new BitmapFontText(AssetManager.I.getFont('font1'));
@@ -45,7 +45,7 @@ public class SetBtnDialog {
         _cntxt                   = ui.txt;
         _cntxt.defaultTextFormat = new TextFormat('楷体', 20);
     }
-    public var ui:key_set_dialog_mc;
+    public var ui:$setting$SP_keySetDialog;
     public var isShow:Boolean = true;
     private var _pushTxt:BitmapFontText;
     private var _keyNameTxt:BitmapFontText;
