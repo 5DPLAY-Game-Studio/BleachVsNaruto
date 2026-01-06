@@ -2,6 +2,17 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.01062026_alpha] - 2026-01-06
+
+### 更改
+
+- 重构资源库 SWC 组件的库链接名称
+
+### 修复
+
+- 修复 LIB_KyoLib 库中没有对无声卡驱动设备的处理的 BUG
+- 修复在调试模式下，未启用高级遥测功能造成的测试卡顿，现已启用
+
 ## [3.7.0.0.08242025_alpha] - 2025-08-24
 
 ### 更改
@@ -273,6 +284,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.01062026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.08242025_alpha...3.7.0.0.01062026_alpha
 [3.7.0.0.08242025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07062025_alpha...3.7.0.0.08242025_alpha
 [3.7.0.0.07062025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07032025_alpha...3.7.0.0.07062025_alpha
 [3.7.0.0.07032025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.06302025_alpha...3.7.0.0.07032025_alpha
