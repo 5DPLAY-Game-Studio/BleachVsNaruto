@@ -48,7 +48,7 @@ public class MenuStage extends Sprite implements IStage {
 
     public function MenuStage() {
     }
-    private var _ui:stg_title;
+    private var _ui:$title$MC_stgTitle;
     private var _btnGroup:MenuBtnGroup;
     private var _versionTxt:TextField;
 

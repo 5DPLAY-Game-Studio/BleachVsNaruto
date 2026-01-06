@@ -32,7 +32,7 @@ public class ResUtils {
     public static var SETTING:String         = 'stg_set_ui';
     public static var CONGRATULATIONS:String = '$common$MC_congratulations';
     public static var WINNER:String          = '$loading$MC_stageWinner';
-    public static var TITLE:String           = 'stg_title';
+    public static var TITLE:String           = '$title$MC_stgTitle';
     public static var GAME_OVER:String       = '$game_over$MC_stgGameOver';
     public static var SELECT:String          = '$select$MC_stgSelect';
     public static var MOSOU:String           = 'stg_mosou';
