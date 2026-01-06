@@ -115,7 +115,7 @@ public class SelectedFighterUI extends EventDispatcher {
             _text.text = vo.name;
         }
 
-        var ctm:ctmc  = ui.getChildByName('ct') as ctmc;
+        var ctm:$select$SP_ct  = ui.getChildByName('ct') as $select$SP_ct;
         var ct:Sprite = ctm ? ctm.getChildByName('ct') as Sprite : null;
         if (ct) {
 
