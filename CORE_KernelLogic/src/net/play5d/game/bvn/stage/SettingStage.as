@@ -47,7 +47,7 @@ public class SettingStage implements IStage {
 
     public function SettingStage() {
     }
-    private var _ui:stg_set_ui;
+    private var _ui:$setting$MC_stgSetUI;
     private var _btnGroup:SetBtnGroup;
     private var _innerSetUI:IInnerSetUI;
     private var _man:MovieClip;

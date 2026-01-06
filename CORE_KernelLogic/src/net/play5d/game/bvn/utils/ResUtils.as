@@ -29,13 +29,12 @@ import net.play5d.game.bvn.interfaces.ISwfLib;
 public class ResUtils {
     include '../../../../../../include/_INCLUDE_.as';
 
-    public static var SETTING:String         = 'stg_set_ui';
+    public static var SETTING:String         = '$setting$MC_stgSetUI';
     public static var CONGRATULATIONS:String = '$common$MC_congratulations';
     public static var WINNER:String          = '$loading$MC_stageWinner';
     public static var TITLE:String           = '$title$MC_stgTitle';
     public static var GAME_OVER:String       = '$game_over$MC_stgGameOver';
     public static var SELECT:String          = '$select$MC_stgSelect';
-    public static var MOSOU:String           = 'stg_mosou';
     public static var BIG_MAP:String         = '$big_map$MC_bigMap';
     public static var swfLib:ISwfLib;
     private static var _i:ResUtils;
