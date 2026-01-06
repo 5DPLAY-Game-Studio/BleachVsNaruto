@@ -166,7 +166,7 @@ public class SelectedFighterUI extends EventDispatcher {
     public function setAssister():void {
         var au:$loading$MC_selectText = ResUtils.I.createDisplayObject(
                 ResUtils.swfLib.select,
-                'seltwzmc'
+                '$loading$MC_selectText'
         );
         au.gotoAndStop(4);
         ui.addChild(au);
