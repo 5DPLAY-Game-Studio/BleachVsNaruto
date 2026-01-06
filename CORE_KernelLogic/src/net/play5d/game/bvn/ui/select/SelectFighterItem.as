@@ -85,7 +85,7 @@ public class SelectFighterItem extends EventDispatcher {
     public var selectData:SelectCharListItemVO;
     public var fighterData:FighterVO;
 
-    public var ui:slt_item_mc = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'slt_item_mc');
+    public var ui:$select$SP_selectItem = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, '$select$SP_selectItem');
 
     public var position:Point = new Point();
 
