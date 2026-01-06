@@ -74,13 +74,12 @@ public class LanguageStage implements IStage {
     public function build():void {
         // backGroundData
         // 背景位图数据
-        var bgd:BitmapData =
-                    ResUtils.I.createBitmapData(
-                            ResUtils.swfLib.common,
-                            'cover_bgimg',
-                            GameConfig.GAME_SIZE.x,
-                            GameConfig.GAME_SIZE.y
-                    );
+        var bgd:BitmapData = ResUtils.I.createBitmapData(
+                ResUtils.swfLib.loading,
+                '$loading$BM_coverBackGround',
+                GameConfig.GAME_SIZE.x,
+                GameConfig.GAME_SIZE.y
+        );
         _backGround        = new Bitmap(bgd);
         _ui.addChild(_backGround);
 

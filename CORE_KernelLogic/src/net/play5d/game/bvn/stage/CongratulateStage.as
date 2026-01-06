@@ -66,7 +66,11 @@ public class CongratulateStage implements IStage {
         _mainUI = new Sprite();
 
         var bgbd:BitmapData = ResUtils.I.createBitmapData(
-                ResUtils.swfLib.common, 'cover_bgimg', GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
+                ResUtils.swfLib.loading,
+                '$loading$BM_coverBackGround',
+                GameConfig.GAME_SIZE.x,
+                GameConfig.GAME_SIZE.y
+        );
         _bg                 = new Bitmap(bgbd);
         _mainUI.addChild(_bg);
 
