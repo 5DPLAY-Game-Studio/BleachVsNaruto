@@ -51,8 +51,8 @@ public class LoadingStage implements IStage {
 
     public function LoadingStage() {
     }
-    private var _ui:loading_fight_mc;
-    private var _sltUI:$loading$MC_loadingFight;
+    private var _ui:$loading$MC_loadingFight;
+    private var _sltUI:$loading$MC_selectUI;
     private var _destoryed:Boolean;
     private var _loadFin:Boolean;
     private var _selectIndexUI:SelectIndexUI;
