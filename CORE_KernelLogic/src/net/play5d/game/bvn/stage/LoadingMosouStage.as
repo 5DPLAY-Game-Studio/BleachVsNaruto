@@ -48,7 +48,7 @@ public class LoadingMosouStage implements IStage {
     }
     private var _ui:$loading$MC_loadingFight;
     private var _destoryed:Boolean;
-    private var _sltUI:loading_select_ui_mc;
+    private var _sltUI:$loading$MC_selectUI;
 
     /**
      * 显示对象
