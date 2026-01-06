@@ -49,7 +49,7 @@ public class SelectedFighterUI extends EventDispatcher {
         if (GameUI.SHOW_CN_TEXT) {
             _text = new BitmapText(true, 0xffffff, [new GlowFilter(0, 1, 3, 3, 3)]);
 
-            if (ui is selected_item_p1_mc) {
+            if (ui is $select$SP_selectBarItemP1) {
                 UIUtils.formatText(_text.textfield, {color: 0xffffff, size: 14, align: TextFormatAlign.RIGHT});
                 _text.width = ui.width - 10;
             }
@@ -152,7 +152,7 @@ public class SelectedFighterUI extends EventDispatcher {
         );
         au.gotoAndStop(index);
         ui.addChild(au);
-        if (ui is selected_item_p1_mc) {
+        if (ui is $select$SP_selectBarItemP1) {
             au.x = -8;
         }
         else {
@@ -170,7 +170,7 @@ public class SelectedFighterUI extends EventDispatcher {
         );
         au.gotoAndStop(4);
         ui.addChild(au);
-        if (ui is selected_item_p1_mc) {
+        if (ui is $select$SP_selectBarItemP1) {
             au.x = -8;
         }
         else {

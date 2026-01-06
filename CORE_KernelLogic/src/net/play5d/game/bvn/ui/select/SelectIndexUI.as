@@ -111,7 +111,7 @@ public class SelectIndexUI extends Sprite {
         _p1Group.y = 85;
         _p2Group.y = 85;
 
-        var p1class:Class = selected_item_p1_mc;
+        var p1class:Class = $select$SP_selectBarItemP1;
         var p2class:Class = selected_item_p2_mc;
 
         _p1Group.build(p1class, GameData.I.p1Select);
