@@ -55,8 +55,8 @@ public class SetBtn extends Sprite {
 
     private var _optionTxt:BitmapFontText;
 
-    private var _prevArrow:txt_arrow_mc;
-    private var _nextArrow:txt_arrow_mc;
+    private var _prevArrow:$setting$SP_textArrow;
+    private var _nextArrow:$setting$SP_textArrow;
 
     private var _line:SetBtnLine;
 
@@ -97,8 +97,8 @@ public class SetBtn extends Sprite {
 
     public function setOption(arr:Array):void {
         _options          = arr;
-        _prevArrow        = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, 'txt_arrow_mc');
-        _nextArrow        = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, 'txt_arrow_mc');
+        _prevArrow        = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, '$setting$SP_textArrow');
+        _nextArrow        = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, '$setting$SP_textArrow');
         _prevArrow.name   = 'prevArrow';
         _nextArrow.name   = 'nextArrow';
         _nextArrow.scaleX = -1;
