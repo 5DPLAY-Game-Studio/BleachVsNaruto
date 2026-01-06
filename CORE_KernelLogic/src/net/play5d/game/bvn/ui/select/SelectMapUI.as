@@ -46,7 +46,7 @@ public class SelectMapUI extends Sprite {
     public var enabled:Boolean = false;
     public var inputType:String;
     private var _mapmc:$select$SP_selectMap;
-    private var _txtmc:select_map_txt_mc;
+    private var _txtmc:$select$SP_selectMapText;
     private var _txt:BitmapText;
     private var _maps:Array;
     private var _curId:int;
@@ -158,7 +158,7 @@ public class SelectMapUI extends Sprite {
         addChild(_mapmc);
 
         if (GameUI.SHOW_CN_TEXT) {
-            _txtmc   = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, 'select_map_txt_mc');
+            _txtmc   = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, '$select$SP_selectMapText');
             _txtmc.x = (
                                GameConfig.GAME_SIZE.x - _txtmc.width
                        ) / 2;
