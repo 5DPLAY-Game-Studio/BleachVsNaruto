@@ -74,7 +74,7 @@ public class SelectFighterStage implements IStage {
     public function SelectFighterStage() {
     }
     private var _selectState:int;
-    private var _ui:stg_select;
+    private var _ui:$select$MC_stgSelect;
     private var _fighterListUI:Sprite;
     private var _config:SelectStageConfigVO;
     private var _curListConfig:SelectCharListConfigVO;

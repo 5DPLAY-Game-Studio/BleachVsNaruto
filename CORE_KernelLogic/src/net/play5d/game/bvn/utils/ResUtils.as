@@ -34,7 +34,7 @@ public class ResUtils {
     public static var WINNER:String          = '$loading$MC_stageWinner';
     public static var TITLE:String           = 'stg_title';
     public static var GAME_OVER:String       = '$game_over$MC_stgGameOver';
-    public static var SELECT:String          = 'stg_select';
+    public static var SELECT:String          = '$select$MC_stgSelect';
     public static var MOSOU:String           = 'stg_mosou';
     public static var BIG_MAP:String         = '$big_map$MC_bigMap';
     public static var swfLib:ISwfLib;
