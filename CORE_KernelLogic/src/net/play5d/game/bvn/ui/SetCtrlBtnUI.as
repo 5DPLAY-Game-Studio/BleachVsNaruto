@@ -39,7 +39,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
 
     public function SetCtrlBtnUI() {
 
-        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, 'keyset_mc');
+        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, '$setting$SP_keySet');
 
         _btnGroup        = new SetBtnGroup();
         _btnGroup.startY = 30;
@@ -53,7 +53,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
 
         initKeyMapping();
     }
-    public var ui:keyset_mc;
+    public var ui:$setting$SP_keySet;
     private var _keyMappings:Array;
     private var _keyMap:Object;
     private var _keyConfig:KeyConfigVO;
