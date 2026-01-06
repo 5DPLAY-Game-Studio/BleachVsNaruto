@@ -52,7 +52,7 @@ import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.select.MapSelectUI;
+import net.play5d.game.bvn.ui.select.SelectMapUI;
 import net.play5d.game.bvn.ui.select.SelectFighterItem;
 import net.play5d.game.bvn.ui.select.SelectUIFactory;
 import net.play5d.game.bvn.ui.select.SelectedFighterGroup;
@@ -83,7 +83,7 @@ public class SelectFighterStage implements IStage {
     private var _p2Slt:SelecterItemUI;
     private var _p1SelectedGroup:SelectedFighterGroup;
     private var _p2SelectedGroup:SelectedFighterGroup;
-    private var _mapSelectUI:MapSelectUI;
+    private var _mapSelectUI:SelectMapUI;
     private var _curStep:int = 0;
     private var _tweenTime:int = 500;
     private var _twoPlayerSelectFin:Boolean;  //解决两玩家同时选人
@@ -1264,7 +1264,7 @@ public class SelectFighterStage implements IStage {
 
         GameInputer.enabled = false;
 
-        _mapSelectUI = new MapSelectUI();
+        _mapSelectUI = new SelectMapUI();
         _ui.addChild(_mapSelectUI);
 
 
