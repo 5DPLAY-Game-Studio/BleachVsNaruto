@@ -150,6 +150,11 @@ public class KyoBGSounder {
         }
         _channel = _snd.play(position, 1, _soundTransform);
 
+        // 如没有声卡驱动，_channel 将返回 null
+        if (!_channel) {
+            return;
+        }
+
         _channel.removeEventListener(Event.SOUND_COMPLETE, playCompleteHandler);
 
         if (isLoop) {
