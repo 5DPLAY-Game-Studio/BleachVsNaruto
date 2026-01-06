@@ -29,11 +29,11 @@ public class SelecterItemUI {
 
     public function SelecterItemUI(playerType:int = 1) {
         _playerType     = playerType;
-        ui              = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, '$select$SP_selectItemSp');
+        ui              = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, '$select$MC_selectItemMc');
         ui.mouseEnabled = ui.mouseChildren = false;
         ui.mc.gotoAndStop(playerType == 1 ? 1 : 2);
     }
-    public var ui:$select$SP_selectItemSp;
+    public var ui:$select$MC_selectItemMc;
     public var currentFighter:FighterVO;
     public var selectTimes:int;
     public var selectTimesCount:int = 1;
