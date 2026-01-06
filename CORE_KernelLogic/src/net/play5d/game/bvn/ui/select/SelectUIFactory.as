@@ -32,7 +32,7 @@ public class SelectUIFactory {
         ui.inputType = playerType == 1 ? GameInputType.P1 : GameInputType.P2;
         ui.selectVO  = playerType == 1 ? GameData.I.p1Select : GameData.I.p2Select;
 
-        var groupClassName:String = playerType == 1 ? '$select$SP_selectBarItemP1' : 'selected_item_p2_mc';
+        var groupClassName:String = playerType == 1 ? '$select$SP_selectBarItemP1' : '$select$SP_selectBarItemP2';
 
         var groupClass:Class = ResUtils.I.getItemClass(ResUtils.swfLib.select, groupClassName);
 
