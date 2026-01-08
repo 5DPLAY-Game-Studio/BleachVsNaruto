@@ -327,7 +327,7 @@ public class LanguageStage implements IStage {
         }
 
         GameData.I.config.language = language;
-        LanguageType.currentLang   = language;
+        LANGUAGE                   = language;
         FONT                       = new fontCls() as Font;
 
         // 加载语言 Json 文件
