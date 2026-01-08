@@ -55,8 +55,8 @@ public class MainGame {
     include '../../../../../include/_INCLUDE_.as';
 
 //		public static const PUBLISH_VERSION_TYPE:int = PublishVersion.COM_4399;
-    public static const VERSION:String     = 'V3.7';
-    public static var VERSION_LABEL:String = 'V3.7'; // 显示在右下角，与更新逻辑无关
+    public static const VERSION:String     = GameVersion.VERSION;
+    public static var VERSION_LABEL:String = GameVersion.VERSION; // 显示在右下角，与更新逻辑无关
     public static var VERSION_DATE:String  = '2021.10.14';
 
     public static var UPDATE_INFO:String;
