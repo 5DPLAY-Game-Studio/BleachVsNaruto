@@ -60,8 +60,8 @@ public class LanguageType {
      * 是否为简体中文
      * @return 是否为简体中文
      */
-    public static function isSimplifiedChinese():Boolean {
-        return LANGUAGE && LANGUAGE == CHINESE_SIMPLIFIED;
+    public static function isSimplifiedChinese(language:String):Boolean {
+        return language == CHINESE_SIMPLIFIED;
     }
 }
 }

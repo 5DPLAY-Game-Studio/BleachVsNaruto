@@ -43,6 +43,7 @@ public function get _ALL_GLOBALS_():* {
         IsDebugger,
         IsHarmanRuntime,
         IsMobile,
+        LANGUAGE,
         P1,
         P2,
         PlaySound,
@@ -52,7 +53,11 @@ public function get _ALL_GLOBALS_():* {
         STAGE,
         ThrowError,
         Trace,
-        TraceLang
+        TraceLang,
+
+        //////////////////////////////////////////////////
+
+        CheckVersion
     ]);
 }
 }

@@ -16,14 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn {
+package {
 
-use namespace bvn_internal;
+public function get _SHARED_GLOBALS_():* {
+    if (Math.random() > 0) {
+        throw new Error('This variable is not allowed to be used!');
+    }
 
-public class GameVersion {
-    include '../../../../../include/ImportVersion.as';
-
-    // 游戏版本
-    public static const VERSION:String = bvn_internal::VERSION;
+    return ([
+        CheckVersion
+    ]);
 }
 }

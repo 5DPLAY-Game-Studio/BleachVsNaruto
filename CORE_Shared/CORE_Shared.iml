@@ -6,7 +6,9 @@
         <dependencies target-player="51.0">
           <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
-        <compiler-options />
+        <compiler-options>
+          <option name="additionalOptions" value="-includes _SHARED_GLOBALS_" />
+        </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
