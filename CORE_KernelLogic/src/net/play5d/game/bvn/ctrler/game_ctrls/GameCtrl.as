@@ -363,7 +363,7 @@ public class GameCtrl {
         fightFinished = true;
 
         if (GameMode.isAcrade()) {
-            if (TeamID.isTeam1(gameRunData.lastWinnerTeam)) {
+            if (TeamID.TEAM_1 == gameRunData.lastWinnerTeam.id) {
                 if (MessionModel.I.missionAllComplete()) {
                     TraceLang('debug.trace.data.game_ctrl.cleared');
 
@@ -680,7 +680,7 @@ public class GameCtrl {
 
             var loseTeam:int = TeamID.UNKNOWN;
             if (gameRunData.lastWinnerTeam) {
-                loseTeam = TeamID.isTeam1(gameRunData.lastWinnerTeam) ?
+                loseTeam = TeamID.TEAM_1 == gameRunData.lastWinnerTeam.id ?
                            TeamID.TEAM_2 :
                            TeamID.TEAM_1;
             }

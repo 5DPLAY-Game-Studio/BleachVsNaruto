@@ -112,7 +112,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         if (!(target is FighterMain)) {
             return;
         }
-        if (!TeamID.isTeam1(fighter)) {
+        if (TeamID.TEAM_1 != fighter.team.id) {
             return;
         }
 
@@ -155,7 +155,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
      */
     private function changeFighter(e:FighterEvent):void {
         var fighter:FighterMain = e.fighter as FighterMain;
-        if (!TeamID.isTeam1(fighter)) {
+        if (TeamID.TEAM_1 != fighter.team.id) {
             return;
         }
 
@@ -169,10 +169,10 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     private function onDie(e:FighterEvent):void {
         var fighter:FighterMain = e.fighter as FighterMain;
 
-        if (TeamID.isTeam1(fighter)) {
+        if (TeamID.TEAM_1 == fighter.team.id) {
             GameCtrl.I.getMosouCtrl().onSelfDie(fighter);
         }
-        if (TeamID.isTeam2(fighter)) {
+        if (TeamID.TEAM_2 == fighter.team.id) {
             MusouLogic.I.removeHitTarget(fighter);
 
             var isBoss:Boolean = fighter.mosouEnemyData && fighter.mosouEnemyData.isBoss;
@@ -189,10 +189,10 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
     private function onDead(e:FighterEvent):void {
         var fighter:FighterMain = e.fighter as FighterMain;
 
-        if (TeamID.isTeam1(fighter)) {
+        if (TeamID.TEAM_1 == fighter.team.id) {
             GameCtrl.I.getMosouCtrl().onSelfDead(fighter);
         }
-        if (TeamID.isTeam2(fighter)) {
+        if (TeamID.TEAM_2 == fighter.team.id) {
 //            MosouLogic.I.removeHitTarget(fighter);
             onEnemyDead(fighter);
         }

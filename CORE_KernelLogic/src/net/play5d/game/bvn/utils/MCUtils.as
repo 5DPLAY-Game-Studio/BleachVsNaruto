@@ -207,7 +207,7 @@ public class MCUtils {
         }
 
         // 检查是否为 P2 所属元件
-        if (!TeamID.isTeam2(owner)) {
+        if (TeamID.TEAM_2 != owner.team.id) {
             return;
         }
 

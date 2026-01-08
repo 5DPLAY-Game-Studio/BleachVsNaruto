@@ -119,7 +119,7 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
 
         fighter.fzqi = 0;
 
-        var group:GameRunFighterGroup = TeamID.isTeam1(fighter) ?
+        var group:GameRunFighterGroup = TeamID.TEAM_1 == fighter.team.id ?
                                         GameCtrl.I.gameRunData.p1FighterGroup :
                                         GameCtrl.I.gameRunData.p2FighterGroup;
         var assister:Assister         = group.currentAssister;
@@ -146,7 +146,7 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
 
         addHits(e.fighter as FighterMain, e.params.target);
 
-        if (GameMode.isAcrade() && TeamID.isTeam1(e.fighter)) {
+        if (GameMode.isAcrade() && TeamID.TEAM_1 == e.fighter.team.id) {
             GameLogic.addScoreByHitTarget(e.params.hitvo);
         }
     }
