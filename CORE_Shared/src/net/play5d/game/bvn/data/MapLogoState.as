@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@ package net.play5d.game.bvn.data {
  * 地图 Logo 状态
  */
 public class MapLogoState {
-    include '../../../../../../include/_INCLUDE_.as';
+    include '../../../../../../include/ImportVersion.as';
 
     // 不显示
     public static const HIDE:int = 0;
