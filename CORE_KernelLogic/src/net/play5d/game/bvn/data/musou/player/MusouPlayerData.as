@@ -18,7 +18,7 @@
 
 package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
-import net.play5d.game.bvn.data.ISaveData;
+import net.play5d.game.bvn.interfaces.ISaveData;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MusouWorldMapVO;

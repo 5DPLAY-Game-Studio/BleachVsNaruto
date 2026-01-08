@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,10 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.data {
+package net.play5d.game.bvn.interfaces {
+
+/**
+ * 存档数据接口
+ */
 public interface ISaveData {
+
+    /**
+     * 保存到存档数据对象
+     * @return 存档数据对象
+     */
     function toSaveObj():Object;
 
+    /**
+     * 读存档数据对象
+     * @param o 存档数据对象
+     */
     function readSaveObj(o:Object):void;
 }
 }

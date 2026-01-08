@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.musou {
-import net.play5d.game.bvn.data.ISaveData;
+import net.play5d.game.bvn.interfaces.ISaveData;
 
 public class MusouWorldMapData implements ISaveData {
     include '../../../../../../../include/_INCLUDE_.as';

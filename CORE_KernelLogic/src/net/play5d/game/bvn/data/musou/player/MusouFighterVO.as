@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.data.musou.player {
-import net.play5d.game.bvn.data.ISaveData;
+import net.play5d.game.bvn.interfaces.ISaveData;
 import net.play5d.game.bvn.data.musou.LevelModel;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
