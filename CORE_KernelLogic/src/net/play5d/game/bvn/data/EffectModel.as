@@ -21,7 +21,7 @@ import flash.display.BlendMode;
 
 import net.play5d.game.bvn.data.vos.EffectVO;
 
-import net.play5d.game.bvn.fighter.data.FighterDefenseType;
+import net.play5d.game.bvn.data.fighter.FighterDefenseType;
 
 public class EffectModel {
     include '../../../../../../include/_INCLUDE_.as';
@@ -57,7 +57,7 @@ public class EffectModel {
 
     public function getMosouEnemyDefenseEffect(hitType:int, defenseType:int):EffectVO {
         switch (defenseType) {
-        case FighterDefenseType.SWOARD:
+        case FighterDefenseType.SWORD:
             break;
         case FighterDefenseType.HAND:
             if (hitType == HitType.KAN) {
@@ -74,7 +74,7 @@ public class EffectModel {
 
     public function getDefenseEffect(hitType:int, defenseType:int):EffectVO {
         switch (defenseType) {
-        case FighterDefenseType.SWOARD:
+        case FighterDefenseType.SWORD:
             break;
         case FighterDefenseType.HAND:
             if (hitType == HitType.KAN) {

@@ -32,7 +32,7 @@ import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
-import net.play5d.game.bvn.fighter.data.FighterDefenseType;
+import net.play5d.game.bvn.data.fighter.FighterDefenseType;
 import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
@@ -79,7 +79,7 @@ public class FighterMain extends BaseGameSprite {
 
     public var actionState:int = FighterActionState.NORMAL;  //动作状态
 
-    public var defenseType:int = FighterDefenseType.SWOARD; //防御类型
+    public var defenseType:int = FighterDefenseType.SWORD; //防御类型
 
     public var lastHitVO:HitVO; //上一次攻击到其他角色的动作
 
