@@ -33,7 +33,7 @@ import net.play5d.game.bvn.fighter.ctrler.FighterBuffCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.data.fighter.FighterDefenseType;
-import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
+import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;

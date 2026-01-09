@@ -26,7 +26,7 @@ import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.data.fighter.FighterHitRange;
-import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
+import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 
 public class FighterAILogic extends FighterAILogicBase {
