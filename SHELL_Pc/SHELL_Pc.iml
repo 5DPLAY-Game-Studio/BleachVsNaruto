@@ -25,6 +25,7 @@
         </dependencies>
         <compiler-options>
           <map>
+            <entry key="compiler.debug.swf" value="false" />
             <entry key="metadata.contributor" value="5dplay.net" />
             <entry key="metadata.creator" value="5dplay.net" />
             <entry key="metadata.date" value="10.03.2024" />

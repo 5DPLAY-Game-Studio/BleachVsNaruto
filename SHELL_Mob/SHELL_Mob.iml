@@ -24,6 +24,9 @@
           <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options>
+          <map>
+            <entry key="compiler.debug.swf" value="false" />
+          </map>
           <option name="additionalOptions" value="-swf-version 37 -advanced-telemetry=true -optimize=true -use-network=true -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
         </compiler-options>
         <packaging-air-desktop />
