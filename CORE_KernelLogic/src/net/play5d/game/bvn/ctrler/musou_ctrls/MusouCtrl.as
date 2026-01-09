@@ -37,7 +37,7 @@ import net.play5d.game.bvn.data.musou.MusouGameRunDataVO;
 import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.factory.GameRunFactory;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.ctrler.EnemyBossAICtrl;
 import net.play5d.game.bvn.fighter.ctrler.EnemyFighterAICtrl;

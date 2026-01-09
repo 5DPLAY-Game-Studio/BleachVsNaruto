@@ -8,7 +8,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;

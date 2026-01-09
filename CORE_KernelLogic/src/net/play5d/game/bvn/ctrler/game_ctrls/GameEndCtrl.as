@@ -21,7 +21,7 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.vos.GameRunDataVO;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.fight.FightUI;

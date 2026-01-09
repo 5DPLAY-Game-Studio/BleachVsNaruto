@@ -31,7 +31,7 @@ import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
 import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;

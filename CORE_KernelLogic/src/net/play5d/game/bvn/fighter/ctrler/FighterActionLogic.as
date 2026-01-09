@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.fighter.ctrler {
 import net.play5d.game.bvn.data.musou.MusouFighterLogic;
 import net.play5d.game.bvn.fighter.FighterAction;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 

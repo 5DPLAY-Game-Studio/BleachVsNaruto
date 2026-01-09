@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.ctrler.game_ctrls {
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.StateCtrl;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 
 /**

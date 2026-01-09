@@ -21,7 +21,7 @@ import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 
 public class MusouHpBar {
     include '../../../../../../../include/_INCLUDE_.as';

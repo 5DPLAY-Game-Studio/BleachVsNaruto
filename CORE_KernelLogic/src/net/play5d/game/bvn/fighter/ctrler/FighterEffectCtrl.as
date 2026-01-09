@@ -27,7 +27,7 @@ import flash.geom.Point;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.debug.Debugger;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;

@@ -24,7 +24,7 @@ import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.Bullet;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.data.FighterHitRange;
 import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.interfaces.IGameSprite;

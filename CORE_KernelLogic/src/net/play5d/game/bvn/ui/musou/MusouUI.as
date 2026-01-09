@@ -28,7 +28,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
 import net.play5d.game.bvn.ui.MosouPauseDialog;

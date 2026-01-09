@@ -24,7 +24,7 @@ import flash.geom.Point;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 
 public class BossHpUI {
     include '../../../../../../../../include/_INCLUDE_.as';

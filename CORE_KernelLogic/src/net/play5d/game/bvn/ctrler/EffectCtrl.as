@@ -34,7 +34,7 @@ import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.fighter.data.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
