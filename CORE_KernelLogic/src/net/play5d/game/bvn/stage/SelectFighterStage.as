@@ -272,12 +272,12 @@ public class SelectFighterStage implements IStage {
                 }
                 else {
 
-                    if (GameMode.isAcrade()) {
+                    if (GameMode.isArcade()) {
                         //开始运行过关模式
                         startAcradeGame();
                     }
 
-                    if (GameMode.currentMode == GameMode.MOSOU_ACRADE) {
+                    if (GameMode.currentMode == GameMode.MUSOU_ARCADE) {
                         //开始运行过关模式
                         startMosouGame();
                     }

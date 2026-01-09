@@ -146,7 +146,7 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
 
         addHits(e.fighter as FighterMain, e.params.target);
 
-        if (GameMode.isAcrade() && TeamID.TEAM_1 == e.fighter.team.id) {
+        if (GameMode.isArcade() && TeamID.TEAM_1 == e.fighter.team.id) {
             GameLogic.addScoreByHitTarget(e.params.hitvo);
         }
     }

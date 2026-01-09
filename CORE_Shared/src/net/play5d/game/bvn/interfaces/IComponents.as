@@ -17,6 +17,10 @@
  */
 
 package net.play5d.game.bvn.interfaces {
+
+/**
+ * 组件接口（CORE_Components）
+ */
 public interface IComponents {
 
     /**

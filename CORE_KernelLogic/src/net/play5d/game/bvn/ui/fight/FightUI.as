@@ -65,7 +65,7 @@ public class FightUI implements IGameUI {
         ui.addChild(_p1PosUI);
         ui.addChild(_p2PosUI);
 
-        if (GameMode.isAcrade()) {
+        if (GameMode.isArcade()) {
             trace('fightUI.initlize');
             _fightbar.initScore();
             GameEvent.addEventListener(GameEvent.SCORE_UPDATE, updateScore);

@@ -24,15 +24,16 @@ package net.play5d.game.bvn.interfaces {
 public interface IExtendConfig {
 
     /**
-     * 到保存配置对象
-     * @return 保存配置对象
+     * 保存到存档数据对象
+     * @return 存档数据对象
      */
     function toSaveObj():Object;
 
     /**
-     * 读取保存配置对象
-     * @param o 保存配置对象
+     * 读存档数据对象
+     * @param obj 存档数据对象
      */
-    function readSaveObj(o:Object):void;
+    function readSaveObj(obj:Object):void;
+
 }
 }

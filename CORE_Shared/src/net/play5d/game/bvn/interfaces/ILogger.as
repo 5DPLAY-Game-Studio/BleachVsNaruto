@@ -25,8 +25,8 @@ public interface ILogger {
 
     /**
      * 记录日志
-     * @param v 日志内容
+     * @param msg 日志内容
      */
-    function log(v:String):void;
+    function log(msg:String):void;
 }
 }

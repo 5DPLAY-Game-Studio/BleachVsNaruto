@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data {
 public class MapLogoState {
     include '../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 不显示
     public static const HIDE:int = 0;
 
@@ -31,5 +33,14 @@ public class MapLogoState {
     public static const SHOW_4399:int = 1;
     // 显示 MINE
     public static const SHOW_MINE:int = 2;
+
+    /*----------------------------- 静态私有属性 -----------------------------*/
+
+
+    /*----------------------------- 静态公有方法 -----------------------------*/
+
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
+
 }
 }

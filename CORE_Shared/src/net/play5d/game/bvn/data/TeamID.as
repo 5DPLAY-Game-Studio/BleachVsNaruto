@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data {
 public class TeamID {
     include '../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 未知队伍
     public static const UNKNOWN:int = -1;
 
@@ -31,5 +33,14 @@ public class TeamID {
     public static const TEAM_1:int = 1;
     // 队伍 2
     public static const TEAM_2:int = 2;
+
+    /*----------------------------- 静态私有属性 -----------------------------*/
+
+
+    /*----------------------------- 静态公有方法 -----------------------------*/
+
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
+
 }
 }

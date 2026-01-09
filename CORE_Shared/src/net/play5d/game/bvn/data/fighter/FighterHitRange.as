@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterHitRange {
     include '../../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 跳砍 KJ
     public static const ATTACK_AIR:String = 'tkanmian';
     // 跳招 KU
@@ -66,5 +68,13 @@ public class FighterHitRange {
 
         return allHitRanges;
     })();
+
+    /*----------------------------- 静态私有属性 -----------------------------*/
+
+
+    /*----------------------------- 静态公有方法 -----------------------------*/
+
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
 }
 }

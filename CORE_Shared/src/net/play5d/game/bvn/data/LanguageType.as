@@ -24,28 +24,38 @@ package net.play5d.game.bvn.data {
 public class LanguageType {
     include '../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 简体中文
-    public static const CHINESE_SIMPLIFIED:String  = 'zh-CN';
+    public static const CHINESE_SIMPLIFIED:String = 'zh-CN';
     // 繁体中文
     public static const CHINESE_TRADITIONAL:String = 'zh-TW';
     // 英文
-    public static const ENGLISH:String             = 'en';
+    public static const ENGLISH:String = 'en';
     // 日文
-    public static const JAPANESE:String            = 'ja';
+    public static const JAPANESE:String = 'ja';
     // 韩文
-    public static const KOREAN:String              = 'ko';
+    public static const KOREAN:String = 'ko';
     // 越南语
-    public static const VIETNAMESE:String          = 'vi';
+    public static const VIETNAMESE:String = 'vi';
+
+    /*----------------------------- 静态私有属性 -----------------------------*/
 
     // 所有语言
-    [ArrayElementType('String')]
-    private static const _languages:Array          = [
-        CHINESE_SIMPLIFIED, CHINESE_TRADITIONAL,
-        ENGLISH,
-        JAPANESE,
-        KOREAN,
-        VIETNAMESE
-    ];
+    private static const _allLanguages:Vector.<String> = (function ():Vector.<String> {
+        var allLanguages:Vector.<String> = new Vector.<String>();
+        allLanguages.push(
+                CHINESE_SIMPLIFIED, CHINESE_TRADITIONAL,
+                ENGLISH,
+                JAPANESE,
+                KOREAN,
+                VIETNAMESE
+        );
+
+        return allLanguages;
+    })();
+
+    /*----------------------------- 静态公有方法 -----------------------------*/
 
     /**
      * 是否支持当前语言
@@ -53,7 +63,7 @@ public class LanguageType {
      * @return 是否支持当前语言
      */
     public static function isSupported(language:String):Boolean {
-        return _languages.indexOf(language) != -1;
+        return _allLanguages.indexOf(language) != -1;
     }
 
     /**
@@ -63,5 +73,8 @@ public class LanguageType {
     public static function isSimplifiedChinese(language:String):Boolean {
         return language == CHINESE_SIMPLIFIED;
     }
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
+
 }
 }

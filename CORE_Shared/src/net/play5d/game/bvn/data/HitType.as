@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data {
 public class HitType {
     include '../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 没有特效
     public static const NONE:int = 0;
 
@@ -54,11 +56,20 @@ public class HitType {
     // 摔技
     public static const CATCH:int = 11;
 
-    // 重击类型
-    private static const heavyTypes:Array = [
-        KAN_HEAVY, DA_HEAVY, MAGIC_HEAVY,
-        FIRE, ICE, ELECTRIC
-    ];
+    /*----------------------------- 静态私有属性 -----------------------------*/
+
+    // 属于重击类型的类型【重砍，重打，魔法重击，火焰，冰冻，雷电】
+    private static const _isHeavyTypes:Vector.<int> = (function ():Vector.<int> {
+        var heavyTypes:Vector.<int> = new Vector.<int>();
+        heavyTypes.push(
+                KAN_HEAVY, DA_HEAVY, MAGIC_HEAVY,
+                FIRE, ICE, ELECTRIC
+        );
+
+        return heavyTypes;
+    })();
+
+    /*----------------------------- 静态公有方法 -----------------------------*/
 
     /**
      * 判断是否为重击类型
@@ -66,8 +77,10 @@ public class HitType {
      * @return 是否为重击类型
      */
     public static function isHeavy(type:int):Boolean {
-        return heavyTypes.indexOf(type) != -1;
+        return _isHeavyTypes.indexOf(type) != -1;
     }
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
 
 }
 }

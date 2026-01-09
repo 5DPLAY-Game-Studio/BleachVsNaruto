@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterActionState {
     include '../../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 正常
     public static const NORMAL:int = 0;
     // 硬直（后摇）endAct()
@@ -68,11 +70,13 @@ public class FighterActionState {
     // 正在执行失败
     public static const LOSE:int        = 62;
 
+    /*----------------------------- 静态私有属性 -----------------------------*/
 
     // 不允许进行胜利的动作状态【必杀、超必杀，万解】
     private static const _isNotAllowWinStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(BISHA_ING, BISHA_SUPER_ING, WAN_KAI_ING);
+
         return states;
     })();
 
@@ -80,6 +84,7 @@ public class FighterActionState {
     private static const _isBishaIngStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(BISHA_ING, BISHA_SUPER_ING);
+
         return states;
     })();
 
@@ -87,6 +92,7 @@ public class FighterActionState {
     private static const _isAttackIngStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(ATTACK_ING, SKILL_ING, BISHA_ING, BISHA_SUPER_ING);
+
         return states;
     })();
 
@@ -94,9 +100,11 @@ public class FighterActionState {
     private static const _isHurtIngStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(HURT_ING, HURT_FLYING, HURT_DOWN, HURT_DOWN_TAN);
+
         return states;
     })();
 
+    /*----------------------------- 静态公有方法 -----------------------------*/
 
     /**
      * 判断当前动作是否允许进行胜利（不在【必杀、超必杀，万解】动作状态）
@@ -144,5 +152,8 @@ public class FighterActionState {
     public static function isHurting(actionState:int):Boolean {
         return _isHurtIngStates.indexOf(actionState) != -1;
     }
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
+
 }
 }

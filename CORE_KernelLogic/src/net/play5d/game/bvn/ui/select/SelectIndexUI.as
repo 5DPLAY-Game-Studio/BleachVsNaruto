@@ -124,7 +124,7 @@ public class SelectIndexUI extends Sprite {
 
     private function initSelect():void {
         switch (GameMode.currentMode) {
-        case GameMode.TEAM_ACRADE:
+        case GameMode.TEAM_ARCADE:
             initP1Group();
             initP2Group(null, true);
             break;

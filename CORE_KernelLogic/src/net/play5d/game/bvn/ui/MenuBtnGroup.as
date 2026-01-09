@@ -307,7 +307,7 @@ public class MenuBtnGroup extends Sprite {
         switch (label) {
         case 'TEAM ACRADE':
             func = function ():void {
-                GameMode.currentMode = GameMode.TEAM_ACRADE;
+                GameMode.currentMode = GameMode.TEAM_ARCADE;
                 MessionModel.I.reset();
                 if (GameConfig.SHOW_HOW_TO_PLAY) {
                     MainGame.I.goHowToPlay();
@@ -345,7 +345,7 @@ public class MenuBtnGroup extends Sprite {
             break;
         case 'SINGLE ACRADE':
             func = function ():void {
-                GameMode.currentMode = GameMode.SINGLE_ACRADE;
+                GameMode.currentMode = GameMode.SINGLE_ARCADE;
                 MessionModel.I.reset();
                 if (GameConfig.SHOW_HOW_TO_PLAY) {
                     MainGame.I.goHowToPlay();
@@ -390,7 +390,7 @@ public class MenuBtnGroup extends Sprite {
             break;
         case 'MUSOU ACRADE':
             func = function ():void {
-                GameMode.currentMode = GameMode.MOSOU_ACRADE;
+                GameMode.currentMode = GameMode.MUSOU_ARCADE;
                 MainGame.I.goWorldMap();
 
                 GameEvent.dispatchEvent(GameEvent.ENTER_MOSOU_STAGE);

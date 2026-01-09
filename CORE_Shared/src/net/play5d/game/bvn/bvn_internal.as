@@ -17,6 +17,7 @@
  */
 
 package net.play5d.game.bvn {
+
 // BVN 命名空间
-public namespace bvn_internal = "https://github.com/5DPLAY-Game-Studio/BleachVsNaruto";
+public namespace bvn_internal = 'https://github.com/5DPLAY-Game-Studio/BleachVsNaruto';
 }

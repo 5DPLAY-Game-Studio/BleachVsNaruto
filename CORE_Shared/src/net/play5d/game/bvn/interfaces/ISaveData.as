@@ -31,8 +31,9 @@ public interface ISaveData {
 
     /**
      * 读存档数据对象
-     * @param o 存档数据对象
+     * @param obj 存档数据对象
      */
-    function readSaveObj(o:Object):void;
+    function readSaveObj(obj:Object):void;
+
 }
 }

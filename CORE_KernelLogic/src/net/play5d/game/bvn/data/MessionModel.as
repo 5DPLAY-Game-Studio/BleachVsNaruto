@@ -132,7 +132,7 @@ public class MessionModel {
 
         initMession();
 
-        if (GameMode.isAcrade()) {
+        if (GameMode.isArcade()) {
             GameLogic.addScoreByPassMission();
         }
     }

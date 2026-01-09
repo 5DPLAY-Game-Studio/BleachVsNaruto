@@ -275,7 +275,7 @@ public class GameLogic {
      * 添加分数 - 结算通过一小关事件
      */
     public static function addScoreByPassMission():void {
-        if (GameMode.currentMode == GameMode.TEAM_ACRADE &&
+        if (GameMode.currentMode == GameMode.TEAM_ARCADE &&
             P1.data == GameCtrl.I.gameRunData.p1FighterGroup.fighter1
         ) {
             addScore(15000);
@@ -346,7 +346,7 @@ public class GameLogic {
 
     public static function resetFighterHP(v:FighterMain):void {
         var messionRate:Number = 1;
-        if (GameMode.isAcrade() && MessionModel.I.getCurrentMessionStage()) {
+        if (GameMode.isArcade() && MessionModel.I.getCurrentMessionStage()) {
             messionRate = MessionModel.I.getCurrentMessionStage().hpRate;
         }
 

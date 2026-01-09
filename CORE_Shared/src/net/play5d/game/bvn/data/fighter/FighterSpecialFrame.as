@@ -24,6 +24,8 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterSpecialFrame {
     include '../../../../../../../include/ImportVersion.as';
 
+    /*----------------------------- 静态公有属性 -----------------------------*/
+
     // 站立
     public static const IDLE:String             = '站立';
     // 走 A/D
@@ -114,5 +116,14 @@ public class FighterSpecialFrame {
     public static const WIN:String       = '胜利';
     // 失败
     public static const LOSE:String      = '失败';
+
+    /*----------------------------- 静态私有属性 -----------------------------*/
+
+
+    /*----------------------------- 静态公有方法 -----------------------------*/
+
+
+    /*----------------------------- 静态私有方法 -----------------------------*/
+
 }
 }

@@ -302,7 +302,7 @@ public class SoundCtrl {
      * @return 是否保持声音噪音
      */
     private function keepSoundNoise():Boolean {
-        if (GameMode.currentMode != GameMode.MOSOU_ACRADE) {
+        if (GameMode.currentMode != GameMode.MUSOU_ARCADE) {
             return false;
         }
 

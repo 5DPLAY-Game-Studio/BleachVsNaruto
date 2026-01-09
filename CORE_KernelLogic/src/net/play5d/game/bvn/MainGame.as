@@ -222,7 +222,7 @@ public class MainGame {
      * 加载游戏
      */
     public function loadGame():void {
-        if (GameMode.currentMode == GameMode.MOSOU_ACRADE) {
+        if (GameMode.currentMode == GameMode.MUSOU_ARCADE) {
             stageCtrl.goStage(new LoadingMosouStage(), true);
             GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouStage);
         }

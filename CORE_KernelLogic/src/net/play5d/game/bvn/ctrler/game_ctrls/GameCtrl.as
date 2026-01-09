@@ -323,7 +323,7 @@ public class GameCtrl {
             }
             break;
         case 2:
-            if (GameMode.isVsCPU(false) || GameMode.isAcrade()) {
+            if (GameMode.isVsCPU(false) || GameMode.isArcade()) {
                 //AI CTRL
                 ctrl = new FighterAICtrl();
                 (ctrl as FighterAICtrl).AILevel = GameData.I.config.AI_level;
@@ -362,7 +362,7 @@ public class GameCtrl {
     public function fightFinish():void {
         fightFinished = true;
 
-        if (GameMode.isAcrade()) {
+        if (GameMode.isArcade()) {
             if (TeamID.TEAM_1 == gameRunData.lastWinnerTeam.id) {
                 if (MessionModel.I.missionAllComplete()) {
                     TraceLang('debug.trace.data.game_ctrl.cleared');
@@ -468,7 +468,7 @@ public class GameCtrl {
         switch (winner.team.id) {
         case TeamID.TEAM_1:
             gameRunData.p1Wins++;
-            if (loser.hp <= 0 && GameMode.isAcrade()) {
+            if (loser.hp <= 0 && GameMode.isArcade()) {
                 GameLogic.addScoreByKO();
             }
 
@@ -703,7 +703,7 @@ public class GameCtrl {
     private function initTeam():void {
         _teamMap.clear();
 
-        var teams:Array = GameMode.getTeams();
+        var teams:Array = GameMode.getAllTeams();
 
         for each(var o:Object in teams) {
             _teamMap.add(new TeamVO(o.id, o.name));
