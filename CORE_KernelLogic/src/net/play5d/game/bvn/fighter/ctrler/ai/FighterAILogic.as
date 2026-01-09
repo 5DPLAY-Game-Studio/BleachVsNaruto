@@ -25,7 +25,7 @@ import net.play5d.game.bvn.fighter.Bullet;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
-import net.play5d.game.bvn.fighter.data.FighterHitRange;
+import net.play5d.game.bvn.data.fighter.FighterHitRange;
 import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 
@@ -419,7 +419,7 @@ public class FighterAILogic extends FighterAILogicBase {
         }
         else {
             attack    = targetInRange(FighterHitRange.ATTACK);
-            attackAIR = targetInRange(FighterHitRange.JUMP_ATTACK) && _fighter.y < _target.y;
+            attackAIR = targetInRange(FighterHitRange.ATTACK_AIR) && _fighter.y < _target.y;
             order     = 300;
         }
 
@@ -434,14 +434,14 @@ public class FighterAILogic extends FighterAILogicBase {
 
     private function updateSkill():void {
 
-        skill1 = _fighterAction.skill1 && getSkillAI('skill1', 'kj1', FighterHitRange.SKILL1, 10);
-        skill2 = _fighterAction.skill2 && getSkillAI('skill2', 'kj2', FighterHitRange.SKILL2, 10);
+        skill1 = _fighterAction.skill1 && getSkillAI('skill1', 'kj1', FighterHitRange.SKILL_1, 10);
+        skill2 = _fighterAction.skill2 && getSkillAI('skill2', 'kj2', FighterHitRange.SKILL_2, 10);
 
-        zhao1 = _fighterAction.zhao1 && getSkillAI('zhao1', 'zh1', FighterHitRange.ZHAO1, 10);
-        zhao2 = _fighterAction.zhao2 && getSkillAI('zhao2', 'zh2', FighterHitRange.ZHAO2, 10);
-        zhao3 = _fighterAction.zhao3 && getSkillAI('zhao3', 'zh3', FighterHitRange.ZHAO3, 10);
+        zhao1 = _fighterAction.zhao1 && getSkillAI('zhao1', 'zh1', FighterHitRange.ZHAO_1, 10);
+        zhao2 = _fighterAction.zhao2 && getSkillAI('zhao2', 'zh2', FighterHitRange.ZHAO_2, 10);
+        zhao3 = _fighterAction.zhao3 && getSkillAI('zhao3', 'zh3', FighterHitRange.ZHAO_3, 10);
 
-        skillAIR = _fighterAction.skillAIR && getSkillAI('skillAIR', 'tz', FighterHitRange.JUMP_SKILL, 10);
+        skillAIR = _fighterAction.skillAIR && getSkillAI('skillAIR', 'tz', FighterHitRange.SKILL_AIR, 10);
     }
 
     private function getSkillAI(id:String, hitId:String, range:String, order:int):Boolean {

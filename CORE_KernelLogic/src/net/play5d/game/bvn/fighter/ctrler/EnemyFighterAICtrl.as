@@ -23,7 +23,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
-import net.play5d.game.bvn.fighter.data.FighterHitRange;
+import net.play5d.game.bvn.data.fighter.FighterHitRange;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
@@ -122,23 +122,23 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
     }
 
     public function skill1():Boolean {
-        return _zhao && targetInRange(FighterHitRange.SKILL1);
+        return _zhao && targetInRange(FighterHitRange.SKILL_1);
     }
 
     public function skill2():Boolean {
-        return _zhao && targetInRange(FighterHitRange.SKILL2);
+        return _zhao && targetInRange(FighterHitRange.SKILL_2);
     }
 
     public function zhao1():Boolean {
-        return _zhao && targetInRange(FighterHitRange.ZHAO1);
+        return _zhao && targetInRange(FighterHitRange.ZHAO_1);
     }
 
     public function zhao2():Boolean {
-        return _zhao && targetInRange(FighterHitRange.ZHAO2);
+        return _zhao && targetInRange(FighterHitRange.ZHAO_2);
     }
 
     public function zhao3():Boolean {
-        return _zhao && targetInRange(FighterHitRange.ZHAO3);
+        return _zhao && targetInRange(FighterHitRange.ZHAO_3);
     }
 
     public function catch1():Boolean {
@@ -170,11 +170,11 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
     }
 
     public function attackAIR():Boolean {
-        return _attack && targetInRange(FighterHitRange.JUMP_ATTACK);
+        return _attack && targetInRange(FighterHitRange.ATTACK_AIR);
     }
 
     public function skillAIR():Boolean {
-        return _zhao && targetInRange(FighterHitRange.JUMP_SKILL);
+        return _zhao && targetInRange(FighterHitRange.SKILL_AIR);
     }
 
     public function bishaAIR():Boolean {

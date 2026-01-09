@@ -24,7 +24,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
-import net.play5d.game.bvn.fighter.data.FighterHitRange;
+import net.play5d.game.bvn.data.fighter.FighterHitRange;
 import net.play5d.game.bvn.fighter.data.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
@@ -608,7 +608,7 @@ public class FighterMC {
         hrmc.gotoAndStop(2);
         _hitRangeObj = {};
 
-        for each(var i:String in FighterHitRange.getALL()) {
+        for each(var i:String in FighterHitRange.ALL_HIT_RANGES) {
             var d:DisplayObject = hrmc.getChildByName(i);
             if (d) {
                 _hitRangeObj[i] = d.getBounds(_fighterDisplay);
