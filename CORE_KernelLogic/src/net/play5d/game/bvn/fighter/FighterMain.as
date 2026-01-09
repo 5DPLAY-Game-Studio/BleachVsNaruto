@@ -24,6 +24,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
+import net.play5d.game.bvn.data.fighter.FighterHurtType;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
@@ -617,7 +618,7 @@ public class FighterMain extends BaseGameSprite {
         _explodeHitVO.power       = 50;
         _explodeHitVO.hitx        = 15 * direct;
         _explodeHitVO.hitType     = 5;
-        _explodeHitVO.hurtType    = 1;
+        _explodeHitVO.hurtType    = FighterHurtType.HURT_FLY;
         _explodeHitFrame          = 10;
         _explodeSteelFrame        = 60; //2s
         isAllowBeHit              = false;

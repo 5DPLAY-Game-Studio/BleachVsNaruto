@@ -20,6 +20,7 @@ package net.play5d.game.bvn.fighter.models {
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.data.HitType;
+import net.play5d.game.bvn.data.fighter.FighterHurtType;
 import net.play5d.game.bvn.data.vos.EffectVO;
 
 import net.play5d.game.bvn.fighter.Bullet;
@@ -85,7 +86,7 @@ public class HitVO implements IInstanceVO {
     // 僵直时间（毫秒）
     public var hurtTime:Number = 300;
     // 受击类型（0 被打， 1 击飞）
-    public var hurtType:int    = 0;
+    public var hurtType:int    = FighterHurtType.HURT;
 
     // 受击后的慢放时间（毫秒）
     public var slowDown:Number = 0;
