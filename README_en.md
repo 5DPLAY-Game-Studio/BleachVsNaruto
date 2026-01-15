@@ -48,7 +48,14 @@ Here, you can challenge the limits of your own operation and reaction, or you ca
 
 ## Project Status
 
-**Bleach vs Naruto** is written in ***ActionScript 3.0*** scripting language and its main supported platforms include **Windows, MacOS, Android** .
+**Bleach vs Naruto** is written in ***ActionScript 3.0***. Currently supported platforms are as follows:
+
+- [x] Windows
+- [ ] Mac OS
+- [ ] Linux
+- [ ] Harmony OS
+- [x] Android
+- [ ] iOS
 
 The current major version is 3.7, and we are working on updating it, but it is not yet ideal. If you have any issues, please report them in the issue tracker (or any other contact method that can reach our team).
 
