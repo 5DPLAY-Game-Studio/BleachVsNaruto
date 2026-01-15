@@ -2,6 +2,17 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.01152026_alpha] - 2026-01-15
+
+### 新增
+
+- 新增 VSCode 工程支持
+- 新增游戏版本检查
+
+### 更改
+
+- 重构 CORE_Shared 模块功能
+
 ## [3.7.0.0.01062026_alpha] - 2026-01-06
 
 ### 更改
@@ -284,6 +295,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.01152026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.01062026_alpha...3.7.0.0.01152026_alpha
 [3.7.0.0.01062026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.08242025_alpha...3.7.0.0.01062026_alpha
 [3.7.0.0.08242025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07062025_alpha...3.7.0.0.08242025_alpha
 [3.7.0.0.07062025_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07032025_alpha...3.7.0.0.07062025_alpha
