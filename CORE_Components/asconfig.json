@@ -1,0 +1,65 @@
+/*
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
+ */
+
+{
+    /******************** CORE_Components ********************/
+
+    // 类型：SWC 库（lib） 或 应用程序（app）
+    "type": "lib",
+
+    // 编译器选项
+    "compilerOptions": {
+        // 构建调试版本
+        "debug": true,
+
+        /******************** 源文件路径 ********************/
+
+        // 源代码路径，用于 VSCode 代码支持提示，通常内容是和 include-sources 相同
+        "source-path": [
+            "src"
+        ],
+        // 包含路径，用于编译时即使没有引用到的路径下的库也进行导入
+        "include-sources": [
+            "src"
+        ],
+        // 包含类路径，用于编译时即使没有引用到的相关类也进行导入
+        "include-classes": [
+
+        ],
+
+        /******************** 引用库路径 ********************/
+        // 库文件的三种链接方式：Merged、External 和 Include
+
+        // Merged
+        "library-path": [
+            "../out/production/CORE_Shared/CORE_Shared.swc"
+        ],
+        // External
+        "external-library-path": [
+
+        ],
+        // Include
+        "include-libraries": [
+
+        ],
+
+        /******************** 输出相关 ********************/
+        // 输出路径（默认使用 IDEA 的生成路径）
+        "output": "../out/production/CORE_Components/CORE_Components.swc"
+    }
+}

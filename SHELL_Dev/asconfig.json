@@ -1,0 +1,85 @@
+{
+    /******************** SHELL_Dev ********************/
+
+    // 类型：SWC 库（lib） 或 应用程序（app）
+    "type": "app",
+
+    // 编译器选项
+    "compilerOptions": {
+        // 构建调试版本
+        "debug": true,
+
+        // SWF 版本
+        "swf-version": 37,
+        // 是否开启遥感数据
+        "advanced-telemetry": true,
+        // 是否优化
+        "optimize": false,
+        // 是否使用网络
+        "use-network": false,
+        // 是否使用 direct-blit
+        "use-direct-blit": true,
+        // 是否使用 GPU
+        "use-gpu": true,
+
+        /******************** 源文件路径 ********************/
+
+        // 源代码路径，用于 VSCode 代码支持提示，通常内容是和 include-sources 相同
+        "source-path": [
+            "src",
+            "../CORE_KernelLogic/global",
+
+            // 复制资源路径
+            "../shared/_tmp/dev"
+        ],
+        // // 包含路径，用于编译时即使没有引用到的路径下的库也进行导入
+        // "include-sources": [
+
+        // ],
+        // // 包含类路径，用于编译时即使没有引用到的相关类也进行导入
+        // "include-classes": [
+
+        // ],
+
+        /******************** 引用库路径 ********************/
+        // 库文件的三种链接方式：Merged、External 和 Include
+
+        // Merged
+        "library-path": [
+            "../out/production/CORE_KernelLogic/CORE_KernelLogic.swc",
+            "../out/production/LIB_KyoLib/LIB_KyoLib.swc",
+            "../out/production/CORE_Utils/CORE_Utils.swc",
+            "../out/production/CORE_Shared/CORE_Shared.swc",
+
+            "lib/swc"
+        ],
+        // External
+        "external-library-path": [
+            "../shared/lib/swc"
+        ],
+        // Include
+        "include-libraries": [
+
+        ],
+
+        /******************** 输出相关 ********************/
+        // 输出路径（默认使用 IDEA 的生成路径）
+        "output": "../out/production/SHELL_Dev/FighterTester.swf"
+    },
+
+    // 主类
+    "mainClass": "FighterTester",
+    // 复制源路径资源
+    "copySourcePathAssets": true,
+    // 额外参数
+    "additionalOptions":[
+        // "-swf-version 37",
+        // "-advanced-telemetry=true",
+        // "-optimize=false",
+        // "-use-network=false",
+        // "-use-direct-blit=true",
+        // "-use-gpu=true",
+        // "-source-path+=CORE_KernelLogic/global",
+        "-includes=_ALL_GLOBALS_"
+    ]
+}

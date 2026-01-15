@@ -1,0 +1,144 @@
+/*
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
+ * All rights reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
+ */
+
+{
+    /******************** VSCode 任务组 ********************/
+
+    // 版本
+    "version": "2.0.0",
+
+    // 任务组
+    "tasks": [
+        /******************** 构建程序 ********************/
+
+        // SHELL_Dev
+        {
+            "label"         : "ActionScript: compile debug - SHELL_Dev/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "SHELL_Dev/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
+                "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+                "ActionScript: compile debug - CORE_Utils/asconfig.json",
+                "ActionScript: compile debug - CORE_Shared/asconfig.json",
+
+                "5DPLAY_TOOLS - SyncAssets"
+            ]
+        },
+
+        /******************** 构建组件 ********************/
+        
+        // CORE_Components
+        {
+            "label"         : "ActionScript: compile debug - CORE_Components/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "CORE_Components/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     :[
+                "ActionScript: compile debug - CORE_Shared/asconfig.json"
+            ]
+        },
+        // CORE_KernelLogic
+        {
+            "label"         : "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "CORE_KernelLogic/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     :[
+                "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+                "ActionScript: compile debug - CORE_Shared/asconfig.json"
+            ]
+        },
+        // CORE_Shared
+        {
+            "label"         : "ActionScript: compile debug - CORE_Shared/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "CORE_Shared/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+
+            ]
+        },
+        // CORE_Utils
+        {
+            "label"         : "ActionScript: compile debug - CORE_Utils/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "CORE_Utils/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+                "ActionScript: compile debug - CORE_KernelLogic/asconfig.json"
+            ]
+        },
+        // LIB_KyoLib
+        {
+            "label"         : "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "LIB_KyoLib/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - LIB_Other/asconfig.json"
+            ]
+        },
+        // LIB_Other
+        {
+            "label"         : "ActionScript: compile debug - LIB_Other/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : true,
+            "asconfig"      : "LIB_Other/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+
+            ]
+        },
+
+        /******************** 外部工具 ********************/
+
+        {
+            "label"         : "5DPLAY_TOOLS - SyncAssets",
+            "type"          : "shell",
+            "group"         : "build",
+            "problemMatcher": [],
+            "command"       : "${workspaceFolder}/tools/script/sync.bat",
+            "options"       : {
+                "cwd"       : "${workspaceFolder}/shared"
+            }
+        },
+    ]
+}

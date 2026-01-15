@@ -17,25 +17,20 @@
  */
 
 {
-    /******************** VSCode 设置 ********************/
+    /******************** VSCode 启动配置项 ********************/
 
-    // 拼写检查忽略单词
-    "cSpell.words": [
-        "5dplay",
-        "assister",
-        "bankai",
-        "bili",
-        "bisha",
-        "ctrler",
-        "dplay",
-        "func",
-        "funcs",
-        "hitx",
-        "hity",
-        "langversion",
-        "musou",
-        "naruto",
-        "playerversion",
-        "zako"
+
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type"         : "swf",
+            "request"      : "launch",
+            "name"         : "Launch SWF",
+            "preLaunchTask": "ActionScript: compile debug - SHELL_Dev/asconfig.json",
+            "program"      : "${workspaceFolder}/out/production/SHELL_Dev/FighterTester.swf"
+        }
     ]
 }
