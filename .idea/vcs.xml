@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/BleachVsNaruto_FlashSrc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LIB_KyoLib" vcs="Git" />
   </component>
 </project>
