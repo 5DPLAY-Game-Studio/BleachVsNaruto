@@ -24,7 +24,7 @@
 set BAT_HOME=%~dp0
 :: echo BAT_HOME: %BAT_HOME%
 
-:: ↓ 等同于 title Apache fdb（Flash Player 调试器）
+:: ↓ 等同于 死神vs火影 - 监视器
 call :ECHO_LANG :TITLE ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -36,63 +36,41 @@ if "%FLEX_HOME%"=="" (
 )
 call :EXIST "%FLEX_HOME%"
 
-echo FLEX_HOME: %FLEX_HOME%
-
 set FLEX_BIN=%FLEX_HOME%\bin
 call :EXIST "%FLEX_BIN%"
-echo FLEX_BIN: %FLEX_BIN%
+:: echo FLEX_BIN: %FLEX_BIN%
 
-set SWF_FILE=%~1
-call :EXIST "%SWF_FILE%"
-echo SWF_FILE: %SWF_FILE%
+set RUNTIME=%FLEX_HOME%\runtimes\air\win
+call :EXIST "%RUNTIME%"
+:: echo RUNTIME: %RUNTIME%
+
+set RUN_DIR=%BAT_HOME%..\..\out\production\SHELL_Dev
+call :EXIST "%RUN_DIR%"
+:: echo RUN_DIR: %RUN_DIR%
+
+set APP_XML=%RUN_DIR%\FighterTester-app.xml
+call :EXIST "%APP_XML%"
+:: echo APP_XML: %APP_XML%
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: 调用 fdb 命令行进行调试
 set PATH=%FLEX_BIN%;%PATH%
-call :ECHO_LANG :START_MSG ""
-echo.
+:: 代码页切换为 utf-8 编码
+chcp 65001 >nul
 
-:: 这里为什么要写多个 echo continue：
-:: 此处区域相当于 fdb 自己的命令输入，
-:: 如果只有一个 echo continue，那么程序在抛出错误时候会直接退出，
-:: 此处每一个 echo continue 就都可以承接一次【抛出错误】，
-:: 根据自身合适情况摄制合理的数量
-(
-	echo run %SWF_FILE%
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-)|fdb -unit
+:: 执行 adl 命令以调试测试版
+adl -runtime "%RUNTIME%" "%APP_XML%" "%RUN_DIR%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: 结束操作
 echo.
-call :ECHO_LANG :END_MSG ""
 exit
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
-:: pause >nul
+pause >nul
 exit -1
 
 :: 判断文件是否存在，不存在给出提示信息
@@ -110,7 +88,7 @@ for /f "tokens=2 delims=:" %%a in ('chcp') do (
 	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
 )
 
-set LANG_BAT=%BAT_HOME%lang\fdbg\%CURRENT_CODEPAGE%.bat
+set LANG_BAT=%BAT_HOME%lang\debug\%CURRENT_CODEPAGE%.bat
 if not exist "%LANG_BAT%" (
 	echo ECHO_LANG [N/A]
 	goto :EOF
