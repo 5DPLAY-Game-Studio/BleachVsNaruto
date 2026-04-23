@@ -2,8 +2,8 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="FighterTester">
     <configurations>
-      <configuration name="FighterTester" pure-as="true" main-class="FighterTester" output-file="FighterTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
-        <dependencies target-player="51.0">
+      <configuration name="FighterTester" target-platform="Desktop" pure-as="true" main-class="FighterTester" output-file="FighterTester.swf" output-folder="$MODULE_DIR$/../out/production/SHELL_Dev">
+        <dependencies>
           <entries>
             <entry module-name="CORE_KernelLogic" build-configuration-name="CORE_KernelLogic">
               <dependency linkage="Merged" />
@@ -38,7 +38,12 @@
           </map>
           <option name="additionalOptions" value="-swf-version 37 -advanced-telemetry=true -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
         </compiler-options>
-        <packaging-air-desktop />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/FighterTester-app.xml" package-file-name="FighterTester">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/../shared/assets/assets" path-in-package="assets" />
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/lib/icon" path-in-package="icon" />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
