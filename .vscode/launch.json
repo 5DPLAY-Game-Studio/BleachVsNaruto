@@ -30,7 +30,7 @@
             "request"      : "launch",
             "name"         : "Launch SWF",
             "preLaunchTask": "ActionScript: compile debug - SHELL_Dev/asconfig.json",
-            "program"      : "${workspaceFolder}/out/production/SHELL_Dev/FighterTester.swf"
+            "program"      : "${workspaceFolder}/out/production/SHELL_Dev/FighterTester-app.xml"
         }
     ]
 }

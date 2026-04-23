@@ -3,6 +3,8 @@
 
     // 类型：SWC 库（lib） 或 应用程序（app）
     "type": "app",
+    // 应用配置
+    "config": "air",
 
     // 编译器选项
     "compilerOptions": {
@@ -67,6 +69,8 @@
         "output": "../out/production/SHELL_Dev/FighterTester.swf"
     },
 
+    // 应用配置文件
+    "application": "src/FighterTester-app.xml",
     // 主类
     "mainClass": "FighterTester",
     // 复制源路径资源
