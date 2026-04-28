@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <application xmlns="http://ns.adobe.com/air/application/51.0">
 
     <!-- Adobe AIR Application Descriptor File Template.
@@ -15,20 +15,23 @@
 
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
     Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.jarworld.bleach.bvn</id>
+    <id>net.play5d.game.bvn.mob</id>
 
     <!-- Used as the filename for the application. Required. -->
     <filename>launch</filename>
 
+    <!-- Determines the architecture of the Windows captive app (non-Flash Builder workflows only)-->
+    <!-- <architecture></architecture> -->
+
     <!-- The name that is displayed in the AIR application installer.
     May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>死神VS火影绊</name>
+    <name>死神vs火影</name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
     Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
     An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5 .
     For iOS Apps, this represents build number. -->
-    <versionNumber>1.3.8</versionNumber>
+    <versionNumber>1.3.9</versionNumber>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users.
      For iOS Apps, this represents application version number and format should be (<0-999>.<0-999>.<0-999>).
@@ -41,16 +44,27 @@
     <!-- <description></description> -->
 
     <!-- Copyright information. Optional -->
-    <copyright>www.1212321.com</copyright>
+    <!-- <copyright></copyright> -->
 
     <!-- Publisher ID. Used if you're updating an application created prior to 1.5.3 -->
-    <!-- <publisherID>5dplay</publisherID> -->
+    <!-- <publisherID></publisherID> -->
+
+    <!-- Opt-in to allow multiple instances of an AIR app to run concurrently on desktop platforms. Default false. -->
+    <!-- <allowMultipleInstances></allowMultipleInstances> -->
+
+    <!-- Setting for whether to generate stack traces in release builds and whether to show file names and line numbers if these
+         are available (for example in a debug SWF or one using the Flex -verbose-stacktraces option). 'none' means that no tracking
+         of the stack will occur and no stack traces will be made available. 'standard' behaviour is to generate stack traces but
+         not to include file/line numbers. 'verbose' will generate stack traces including file/line information if available.
+         Omitting the option gives the previous behaviour which depends on the SWF version: versions 18 and above will include
+         basic stack traces, versions 17 and below will not show stack traces. -->
+    <!-- <stacktraces></stacktraces> -->
 
     <!-- Settings for the application's initial window. Required. -->
     <initialWindow>
         <!-- The main SWF or HTML file of the application. Required. -->
         <!-- Note: In Flash Builder, the SWF reference is set automatically. -->
-        <content>[此值将由 Flash Builder 在输出 app.xml 中覆盖]</content>
+        <content>launch.swf</content>
 
         <!-- The title of the main window. Optional. -->
         <!-- <title></title> -->
@@ -62,7 +76,7 @@
         <!-- <transparent></transparent> -->
 
         <!-- Whether the window is initially visible. Optional. Default false. -->
-        <!-- <visible></visible> -->
+        <visible>true</visible>
 
         <!-- Whether the user can minimize the window. Optional. Default true. -->
         <!-- <minimizable></minimizable> -->
@@ -72,6 +86,9 @@
 
         <!-- Whether the user can resize the window. Optional. Default true. -->
         <!-- <resizable></resizable> -->
+
+        <!-- Whether the application can set the stage quality to low/medium on desktops. Optional. Default false. -->
+        <!-- <allowLowQuality></allowLowQuality> -->
 
         <!-- The window's initial width in pixels. Optional. -->
         <!-- <width></width> -->
@@ -92,19 +109,15 @@
         <!-- <maxSize></maxSize> -->
 
         <!-- The aspect ratio of the app ("portrait" or "landscape" or "any"). Optional. Mobile only. Default is the natural orientation of the device -->
-
         <aspectRatio>landscape</aspectRatio>
 
         <!-- Whether the app will begin auto-orienting on launch. Optional. Mobile only. Default false -->
-
         <autoOrients>true</autoOrients>
 
         <!-- Whether the app launches in full screen. Optional. Mobile only. Default false -->
-
         <fullScreen>true</fullScreen>
 
         <!-- The render mode for the app (either auto, cpu, gpu, or direct). Optional. Default auto -->
-
         <renderMode>gpu</renderMode>
 
         <!-- Whether the default direct mode rendering context allocates storage for depth and stencil buffers.  Optional.  Default false. -->
@@ -113,9 +126,8 @@
         <!-- Whether or not to pan when a soft keyboard is raised or lowered (either "pan" or "none").  Optional.  Defaults "pan." -->
         <!-- <softKeyboardBehavior></softKeyboardBehavior> -->
 
-        <!-- Display Resolution for the app (either "standard" or "high"). Optional, OSX-only. Default "standard" -->
+        <!-- Display Resolution for the app (either "standard" or "high"). Optional. Default "standard" -->
         <!-- <requestedDisplayResolution></requestedDisplayResolution> -->
-        <visible>true</visible>
     </initialWindow>
 
     <!-- We recommend omitting the supportedProfiles element, -->
@@ -127,7 +139,9 @@
 
     <!-- Languages supported by application -->
     <!-- Only these languages can be specified -->
-    <!-- <supportedLanguages>en de cs es fr it ja ko nl pl pt ru sv tr zh</supportedLanguages> -->
+    <!-- Android Native uses "in" code for indonesean language, wherein native iOS uses "id" as its language code. -->
+    <!-- We have added support of "id" in "in" code to support iOS with the same tag.-->
+    <!-- <supportedLanguages>cs da de el en es fi fr in it iw ja ko ms nb nl pl pt ru sv th tr vi zh</supportedLanguages> -->
 
     <!-- The subpath of the standard default installation location to use. Optional. -->
     <!-- <installFolder></installFolder> -->
@@ -183,6 +197,9 @@
     <!-- </fileType> -->
     <!-- </fileTypes> -->
 
+    <!-- A preferred GPU type (either "discrete" or "integrated") in case the app utilizes GPU. Desktop only. Optional -->
+    <!-- <gpuPreference></gpuPreference> -->
+
     <!-- iOS specific capabilities -->
     <!-- <iPhone> -->
     <!-- A list of plist key/value pairs to be added to the application Info.plist -->
@@ -217,68 +234,125 @@
     packaged inside the application and corresponding stripped swfs will be output in
     externalStrippedSwfs folder. -->
     <!-- <externalSwfs></externalSwfs> -->
+    <!-- Disable the ability of the application to display a custom keyboard (in case it contains keyloggers) -->
+    <!-- <disableCustomKeyboard></disableCustomKeyboard> -->
+    <!-- Disable the injection of the standard usage requests into the Info.plist file.
+         Any necessary capabilities/descriptions should be added via InfoAdditions. -->
+    <!-- <excludeDefaultUsageDescriptions></excludeDefaultUsageDescriptions> -->
     <!-- </iPhone> -->
 
-    <!-- Specify Android specific tags that get passed to AndroidManifest.xml file. -->
-    <!--<android> -->
-    <!--	<manifestAdditions>
-		<![CDATA[
-			<manifest android:installLocation="auto">
-				<uses-permission android:name="android.permission.INTERNET"/>
-				<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-				<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-				<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
-				<application android:enabled="true">
-					<activity android:excludeFromRecents="false">
-						<intent-filter>
-							<action android:name="android.intent.action.MAIN"/>
-							<category android:name="android.intent.category.LAUNCHER"/>
-						</intent-filter>
-					</activity>
-				</application>
-            </manifest>
-		]]>
-        </manifestAdditions> -->
-    <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
-    <!-- <colorDepth></colorDepth> -->
-    <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
-    <!-- <containsVideo></containsVideo> -->
-    <!-- </android> -->
-    <!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
-
     <android>
-        <manifestAdditions><![CDATA[
-			<manifest android:installLocation="auto">
-			    <!--See the Adobe AIR documentation for more information about setting Google Android permissions-->
-			    <!--删除 android.permission.INTERNET 权限将导致无法调试设备上的应用程序-->
-			    <uses-permission android:name="android.permission.INTERNET"/>
-			    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-			    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-			    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-			    <!--应同时切换 DISABLE_KEYGUARD 和 WAKE_LOCK 权限，才能访问 AIR
-		的 SystemIdleMode API-->
-			    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-			    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-			    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-			    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-			    <!--应同时切换 ACCESS_NETWORK_STATE 和 ACCESS_WIFI_STATE 权限，才能使用 AIR
-		的 NetworkInfo API-->
-			    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-			    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-			</manifest>
+        <!-- Specify Android specific tags that get passed to AndroidManifest.xml file. -->
+        <manifestAdditions>
+            <![CDATA[
+                <manifest android:installLocation="auto">
+                    <uses-permission android:name="android.permission.INTERNET"/>
+                    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+                    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+                    <uses-permission android:name="android.permission.VIBRATE"/>
+                    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+                    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+                    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+                    <uses-permission android:name="android.permission.CAMERA"/>
+                    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+                    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
-		]]></manifestAdditions>
+                    <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
+                    <application android:enabled="true">
+                        <activity android:excludeFromRecents="false">
+                            <intent-filter>
+                                <action android:name="android.intent.action.MAIN"/>
+                                <category android:name="android.intent.category.LAUNCHER"/>
+                            </intent-filter>
+                        </activity>
+                    </application>
+                </manifest>
+            ]]>
+        </manifestAdditions>
+        <!-- End of the schema for adding the android specific tags in AndroidManifest.xml file -->
+        <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
+        <!-- <colorDepth></colorDepth> -->
+        <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
+        <!-- <containsVideo></containsVideo> -->
+        <!-- This app is also for Android TV (either "true" or "false"). Optional. Default is 'false' -->
+        <!-- <supportsAndroidTV></supportsAndroidTV> -->
+        <!-- Path to the image used for banner when the app is shown on TV. The banner should be a .png image of size 320*180.-->
+        <!-- <banner></banner> -->
+        <!-- Indicates if webContents (HTML/CSS/JavaScript) can be inspected in browser. Optional . Default value is 'false' -->
+        <!-- <webContentsDebuggingEnabled></webContentsDebuggingEnabled> -->
+
+        <!-- Indicates if disableMediaCodec is enabled or not. Optional . Default value is 'false' -->
+        <!-- <disableMediaCodec></disableMediaCodec> -->
+        <!-- Build using the legacy mechanism for APK files (default is false) -->
+        <!-- <buildLegacyAPK></buildLegacyAPK> -->
+        <!-- Add the "air." tag at the start of an Android application ID (default is true) -->
+        <!-- <addAirToAppID>true</addAirToAppID> -->
+        <!-- List of build architectures. This can be used to override an IDE by only including a single
+             value e.g. <buildArchitectures>armv8</buildArchitectures> will results in an APK/bundle file
+             that only contains armv8 binaries rather than the default (armv7) or whatever was requested on
+             the command line. -->
+        <!-- <buildArchitectures>armv7,armv8,x86,x64</buildArchitectures> -->
+        <!-- This flag can be used to override the creation of an APK file requested by an IDE, forcing
+             ADT to instead create an Android App Bundle. (Note the output file may still have the 'apk' extension) -->
+        <!-- <createAppBundle>false</createAppBundle> -->
+        <!-- A list of file extensions that should not be compressed when added into the APK/bundle file -->
+        <!-- <uncompressedExtensions></uncompressedExtensions> -->
+        <!-- Switch to the new font rendering mechanism (using JNI/Java) at a specified Android API level.
+             Default is to change at API 31 (Android S) rather than use the old (native skia) mechanism -->
+        <!-- <newFontRenderingFromAPI></newFontRenderingFromAPI> -->
+        <!-- Prevent the runtime from accessing the device model (android.os.Build.MODEL). Default false. -->
+        <!-- <preventDeviceModelAccess></preventDeviceModelAccess> -->
+        <!-- Allow a webview to access local files via WebSettings.setAllowFileAccess(true). Default false. -->
+        <!-- <webViewAllowFileAccess></webViewAllowFileAccess> -->
+        <!-- Version options for specifying the version of multidex, gradle and gradle plug-in to use -->
+        <!-- <multidexVersion></multidexVersion> -->
+        <!-- <androidGradlePluginVersion></androidGradlePluginVersion> -->
+        <!-- <gradleVersion></gradleVersion> -->
+        <!-- Disables sensor access to prevent AIR from requesting input, orientation or telephony services unless
+             access is later granted by adding an override file into the app storage. Default false. -->
+        <!-- <disableSensorAccess></disableSensorAccess> -->
+        <!-- Runs the AIR runtime in a separate, background thread rather than in the main Android UI thread.
+             This should help prevent ANE issues, but may require some updates in other Android Java code
+             (i.e. from AIR Native Extensions that may need some of their code to run on the UI thread).
+             Default is false. -->
+        <!-- <runtimeInBackgroundThread></runtimeInBackgroundThread> -->
+        <!-- Switches File.browseXXX and file-based permissions to use the Storage Access Framework.
+             Default value is (Android API level) 30 which equates to Android 11.0 (R) -->
+        <!-- <storageAccessFrameworkFromAPI></storageAccessFrameworkFromAPI> -->
+
     </android>
-    <iPhone>
-        <InfoAdditions><![CDATA[
-			<key>UIDeviceFamily</key>
-			<array>
-				<string>1</string>
-				<string>2</string>
-			</array>
-		]]></InfoAdditions>
-        <requestedDisplayResolution>high</requestedDisplayResolution>
-    </iPhone>
+    <!-- A folder to include in the search for Android resources. Optional. -->
+    <!-- <resdir></resdir> -->
 
+    <!-- macOS specific capabilities -->
+    <!-- <macOS> -->
+    <!-- A list of plist key/value pairs to be added to the application Info.plist -->
+    <!-- <InfoAdditions>
+        <![CDATA[
+        ]]>
+    </InfoAdditions> -->
+    <!-- A list of plist key/value pairs to be added to the application Entitlements.plist -->
+    <!-- <Entitlements>
+        <![CDATA[
+        ]]>
+    </Entitlements> -->
+    <!-- </macOS> -->
+
+    <!-- Windows specific capabilities -->
+    <!-- <windows> -->
+    <!-- Option to use the Edge "WebView2" component rather than MSHTML (IE-based). Default false. Values true/false/exclusive -->
+    <!-- <UseWebView2></UseWebView2> -->
+    <!-- Maximum Direct3D API level to use. Set to '9' to ensure Direct3D 9 is used, or 0 to disable Direct3D. -->
+    <!-- <maxD3D></maxD3D> -->
+    <!-- </windows> -->
+
+    <!-- List of AIR Native Extensions to be loaded by the application -->
+    <!-- Optional attribute 'delayLoad' can be used to delay the loading of the
+         extension itself until it's requested via AS3 (ExtensionContext.loadExtension) -->
+    <!-- <extensions>
+             <extensionID>extension.id.to.load</extensionID>
+             <extensionID delayLoad="true">extension.to.load.on.demand</extensionID>
+         </extensions> -->
 
 </application>

@@ -23,7 +23,7 @@
         <option name="playerPath" value="FlashPlayerDebugger.exe" />
       </LauncherParameters>
     </option>
-    <option name="mobileRunTarget" value="Emulator" />
+    <option name="mobileRunTarget" value="AndroidDevice" />
     <option name="moduleName" value="SHELL_Mob" />
     <option name="overriddenMainClass" value="" />
     <option name="overriddenOutputFileName" value="" />

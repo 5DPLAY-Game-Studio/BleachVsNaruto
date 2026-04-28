@@ -25,7 +25,14 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.debug.swf" value="false" />
+            <entry key="compiler.debug.swf" value="true" />
+            <entry key="metadata.contributor" value="5dplay.net" />
+            <entry key="metadata.creator" value="5dplay.net" />
+            <entry key="metadata.date" value="11.26.2024" />
+            <entry key="metadata.description" value="BleachVsNaruto" />
+            <entry key="metadata.language" value="zh_CN" />
+            <entry key="metadata.publisher" value="5DPLAY Game Studio" />
+            <entry key="metadata.title" value="BleachVsNaruto" />
           </map>
           <option name="additionalOptions" value="-swf-version 37 -advanced-telemetry=true -optimize=true -use-network=true -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
         </compiler-options>
