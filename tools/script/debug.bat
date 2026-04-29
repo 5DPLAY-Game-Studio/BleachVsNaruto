@@ -19,12 +19,13 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
+setlocal enabledelayedexpansion
 
 :: 当前 BAT 文件绝对运行目录
 set BAT_HOME=%~dp0
 :: echo BAT_HOME: %BAT_HOME%
 
-:: ↓ 等同于 死神vs火影 - 监视器
+:: ↓ 等同于 title 死神vs火影 - 监视器
 call :ECHO_LANG :TITLE ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -65,13 +66,13 @@ adl -runtime "%RUNTIME%" "%APP_XML%" "%RUN_DIR%"
 
 :: 结束操作
 echo.
-exit
+exit 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
 pause >nul
-exit -1
+exit 1
 
 :: 判断文件是否存在，不存在给出提示信息
 :EXIST

@@ -36,7 +36,7 @@ echo 환경 변수 %~2가 정의되지 않았습니다!
 goto :EOF
 
 :TITLE
-title Apache fdb(Flash Player 디버거)
+title Apache fdb (Flash Player 디버거)
 goto :EOF
 
 :START_MSG

@@ -19,6 +19,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
+setlocal enabledelayedexpansion
 
 :: 当前 BAT 文件绝对运行目录
 set BAT_HOME=%~dp0
@@ -35,7 +36,6 @@ if "%FLEX_HOME%"=="" (
 	goto END
 )
 call :EXIST "%FLEX_HOME%"
-
 echo FLEX_HOME: %FLEX_HOME%
 
 set FLEX_BIN=%FLEX_HOME%\bin
@@ -53,47 +53,29 @@ set PATH=%FLEX_BIN%;%PATH%
 call :ECHO_LANG :START_MSG ""
 echo.
 
-:: 这里为什么要写多个 echo continue：
-:: 此处区域相当于 fdb 自己的命令输入，
-:: 如果只有一个 echo continue，那么程序在抛出错误时候会直接退出，
-:: 此处每一个 echo continue 就都可以承接一次【抛出错误】，
-:: 根据自身合适情况摄制合理的数量
 (
 	echo run %SWF_FILE%
+	echo connect
 	echo continue
 	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-	echo continue
-)|fdb -unit
+	echo quit
+	echo y
+) | fdb -unit
+
+timeout /t 1 >nul
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: 结束操作
 echo.
 call :ECHO_LANG :END_MSG ""
-exit
+exit 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
 :: pause >nul
-exit -1
+exit 1
 
 :: 判断文件是否存在，不存在给出提示信息
 :EXIST

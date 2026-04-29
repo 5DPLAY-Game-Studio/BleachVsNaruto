@@ -78,13 +78,13 @@ call :COPY "%ASSETS_DIR%" "%ASSETS_DIR_SHELL_MOB%"
 :: 结束操作
 echo.
 call :ECHO_LANG :SYNC_SUCCESS ""
-exit
+exit 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
 :: pause >nul
-exit -1
+exit 1
 
 :: 判断文件是否存在，不存在给出提示信息
 :EXIST

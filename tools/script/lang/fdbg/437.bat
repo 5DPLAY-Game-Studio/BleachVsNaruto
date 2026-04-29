@@ -36,7 +36,7 @@ echo Environment variable %~2 is undefined!
 goto :EOF
 
 :TITLE
-title Apache fdb（Flash Player Debugger）
+title Apache fdb (Flash Player Debugger)
 goto :EOF
 
 :START_MSG
