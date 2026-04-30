@@ -55,6 +55,10 @@ goto :EOF
 echo 연결된 기기: [%~2]
 goto :EOF
 
+:NOT_INSTALLED
+echo [%~2] 애플리케이션이 설치되어 있지 않습니다!
+goto :EOF
+
 :START_MSG
 echo 플래시 디버거를 시작합니다...
 goto :EOF

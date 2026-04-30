@@ -55,6 +55,10 @@ goto :EOF
 echo 接続済みデバイス: [%~2]
 goto :EOF
 
+:NOT_INSTALLED
+echo アプリケーション [%~2] がインストールされていません！
+goto :EOF
+
 :START_MSG
 echo フラッシュ デバッガーを起動しています...
 goto :EOF

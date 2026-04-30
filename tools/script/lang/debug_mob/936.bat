@@ -55,6 +55,10 @@ goto :EOF
 echo 已连接设备：[%~2]
 goto :EOF
 
+:NOT_INSTALLED
+echo 应用 [%~2] 未安装！
+goto :EOF
+
 :START_MSG
 echo 正在启动 Flash 调试器...
 goto :EOF

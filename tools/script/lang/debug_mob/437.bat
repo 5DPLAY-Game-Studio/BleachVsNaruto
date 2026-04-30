@@ -55,6 +55,10 @@ goto :EOF
 echo Connected devices: [%~2]
 goto :EOF
 
+:NOT_INSTALLED
+echo Application [%~2] is not installed!
+goto :EOF
+
 :START_MSG
 echo Starting Flash Debugger...
 goto :EOF
