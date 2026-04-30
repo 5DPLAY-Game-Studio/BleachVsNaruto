@@ -92,7 +92,20 @@ for /f "tokens=2 delims=:" %%a in ('chcp') do (
 	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
 )
 
-set LANG_BAT=%BAT_HOME%lang\fdbg\%CURRENT_CODEPAGE%.bat
+set SUPPORT_LANG=437 932 936 949
+set IS_SUPPORT=0
+for %%a in (%SUPPORT_LANG%) do (
+	if "%%a"=="%CURRENT_CODEPAGE%" (
+		set IS_SUPPORT=1
+		goto LANG_CHK
+	)
+)
+:LANG_CHK
+if %IS_SUPPORT%==0 (
+	set CURRENT_CODEPAGE=437
+)
+
+set LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat
 if not exist "%LANG_BAT%" (
 	echo ECHO_LANG [N/A]
 	goto :EOF
