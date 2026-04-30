@@ -28,8 +28,12 @@ set BAT_HOME=%~dp0
 :: ↓ 等同于 title Apache fdb（Flash Player 调试器）
 call :ECHO_LANG :TITLE ""
 
+:: 调试包名，格式为 air.应用程序 application 定义的 id。air 是自动添加的前缀
 set DBG_PACKAGE=air.net.play5d.game.bvn.mob
+:: 调试端口，默认 7936，应与 IDEA 中的 SHELL_Mob 模块启动配置中相同
 set DBG_PORT=7936
+:: 临时文件，转储 adb device 命令的输出
+set TMP_ADB_DEVICES=%TEMP%\adb_devices.txt
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -52,8 +56,6 @@ adb start-server >nul 2>nul
 :: 延时 2 秒让 adb 预启动
 timeout /t 2 >nul
 
-:: 临时文件，转储 adb device 命令的输出
-set TMP_ADB_DEVICES=%TEMP%\adb_devices.txt
 adb devices >nul 2>nul
 timeout /t 1 >nul
 adb devices >"%TMP_ADB_DEVICES%"
@@ -102,8 +104,8 @@ adb -s "!DEVICE_ID!" forward tcp:%DBG_PORT% tcp:%DBG_PORT% >nul
 
 :: 启动 fdb 等待 Adobe AIR 程序链接
 :: 重启应用程序
-adb shell am force-stop %DBG_PACKAGE% >nul
-adb shell am start -n %DBG_PACKAGE%/.AppEntry >nul
+adb -s "!DEVICE_ID!" shell am force-stop %DBG_PACKAGE% >nul
+adb -s "!DEVICE_ID!" shell am start -n %DBG_PACKAGE%/.AppEntry >nul
 
 :: 循环监听，直到关闭窗口
 :LOOP
@@ -146,7 +148,7 @@ goto :EOF
 :: 检测命令是否存在
 :CHK_CMD
 where %1 >nul 2>nul
-if errorlevel 1 (
+if %errorlevel%==1 (
 	call :ECHO_LANG :NO_CMD %1
 	goto END
 )
@@ -157,7 +159,7 @@ goto :EOF
 :: 移除末尾的 "device"，保留完整ID
 :GET_DEVICE_ID
 set "STRING=%~1"
-::					 ? 这里是 TAB
+::					   ↓ 这里是 TAB
 set "DEVICE_ID=!STRING:	device=!"
 goto :EOF
 
