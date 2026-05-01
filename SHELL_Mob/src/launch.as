@@ -251,7 +251,7 @@ public class launch extends Sprite {
 
     private function initGameConfig():void {
         var urls:Array = [
-            'http://1212321.cn-sh2.ufileos.com/upload/BVN_37.ini', 'http://1212321.com/file/get/BVN_37.ini'
+//            'http://1212321.cn-sh2.ufileos.com/upload/BVN_37.ini', 'http://1212321.com/file/get/BVN_37.ini'
         ];
         GamePolyCtrl.I.loadConfig(urls, gamePolyComplete);
     }
