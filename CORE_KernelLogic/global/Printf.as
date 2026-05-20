@@ -19,27 +19,29 @@
 package {
 
 /**
- * 全局函数，输出格式化字符串，使用 “<b>{}</b>” 符号作为占位符
+ * 全局函数，使用命名占位符格式化字符串并 trace 输出。
+ * 若 <code>params</code> 不为 null，则对 <code>format</code> 执行命名占位符替换后再输出。
  * <p/>
  * 下列代码演示如何使用全局方法 <code>Printf()</code> 输出格式化字符串：
- * <listing version="3.0">
- var source:String = "今天是星期{}，天气：{}";
+ * <listing version="3.0">  
+ var format:String = "今天是星期{weekday}，天气：{weather}";
+ var params:Object = {weekday: 1, weather: "晴"};
 
  // 输出结果：“今天是星期1，天气：晴”
- Printf(source, 1, "晴");
+ Printf(format, params);
  * </listing>
  *
- * @param         format 源字符串
- * @param         args   打印的参数列表
+ * @param           format  源字符串
+ * @param           params  占位符名到替换值的映射，可为 null
+ * 
+ * @see             String
+ * @see             Object
+ * @throws          ArgumentError
  *
- * @see           String
- * @see           Array
- * @throws        ArgumentError
- *
- * @langversion   3.0
- * @playerversion Flash 9, Lite 4
+ * @langversion     3.0
+ * @playerversion   Flash 9, Lite 4
  */
-public function Printf(format:String, ...args):void {
-    trace(Format.apply(null, [format].concat(args.toString().split(","))));
+public function Printf(format:String, params:Object = null):void {
+    trace(Format(format, params));
 }
 }

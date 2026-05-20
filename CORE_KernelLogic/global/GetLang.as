@@ -19,7 +19,7 @@
 package {
 
 /**
- * 全局函数，得到基于树形路径的格式化后的当前语言
+ * 全局函数，得到基于树形路径、并按命名占位符格式化后的当前语言文本。
  * <p/>
  * 下列代码演示如何使用全局方法 <code>GetLang()</code> 输出格式化后的当前语言：
  * <listing version="3.0">
@@ -29,23 +29,18 @@ package {
  trace(GetLang(tree));
  * </listing>
  *
- * @param         tree 文本的树形路径
- * @param         args 打印的参数列表
- *
- * @see           String
- * @see           Array
- * @throws        ArgumentError
- * @return        基于树形路径的格式化后的当前语言
- *
- * @langversion   3.0
- * @playerversion Flash 9, Lite 4
+ * @param           tree    树形路径
+ * @param           params  占位符名到替换值的映射，可为 null
+ * 
+ * @see             String
+ * @see             Object
+ * @throws          ArgumentError
+ * @return          基于树形路径、并按命名占位符格式化后的当前语言文本
+ * 
+ * @langversion     3.0
+ * @playerversion   Flash 9, Lite 4
  */
-public function GetLang(tree:String, ...args):String {
-    // 当前语言文本
-    var langText:String = GetLangText(tree);
-    // 格式化后的当前语言
-    var format:String   = Format.apply(null, [langText].concat(args.toString().split(",")));
-
-    return format;
+public function GetLang(tree:String, params:Object = null):String {
+    return Format(GetLangText(tree), params);
 }
 }

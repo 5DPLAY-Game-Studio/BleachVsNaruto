@@ -19,32 +19,33 @@
 package {
 
 /**
- * 全局函数，输出带前缀的格式化字符串，使用 “<b>{}</b>” 符号作为占位符
+ * 全局函数，输出带调试前缀的字符串。
  * <p/>
- * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出带前缀格式化字符串：
+ * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出带调试前缀的字符串：
  * <listing version="3.0">
- var source:String = "今天是星期{}，天气：{}";
+ var message:String = "今天是星期{weekday}，天气：{weather}";
+ var params:Object = {weekday: 1, weather: "晴"};
 
  // 输出结果：“* 跟踪 : 今天是星期1，天气：晴”
- Trace(source, 1, "晴");
+ Trace(message, params);
  * </listing>
  *
- * @param         format 源字符串
- * @param         args   打印的参数列表
+ * @param           message 消息模板或已格式化的完整消息
+ * @param           params  占位符参数，可为 null
+ * 
+ * @see             String
+ * @see             Object
+ * @throws          ArgumentError
  *
- * @see           String
- * @see           Array
- * @throws        ArgumentError
- *
- * @langversion   3.0
- * @playerversion Flash 9, Lite 4
+ * @langversion     3.0
+ * @playerversion   Flash 9, Lite 4
  */
-public function Trace(format:String, ...args):void {
-    // 输出内容
-    format = Format.apply(null, [format].concat(args.toString().split(",")));
-    // 输出前缀
-    var prefix:String = GetLangText('debug.trace.prefix');
+public function Trace(message:String, params:Object = null):void {
+    if (params != null) {
+        message = Format(message, params);
+    }
 
-    trace(prefix + format);
+    var prefix:String = GetLangText('debug.trace.prefix');
+    trace(prefix + message);
 }
 }

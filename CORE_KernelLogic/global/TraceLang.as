@@ -19,30 +19,27 @@
 package {
 
 /**
- * 全局函数，输出带前缀的基于树形路径的格式化后的当前语言
+ * 全局函数，输出带前缀的、基于语言包且支持命名占位符的调试信息。
  * <p/>
- * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出带前缀的格式化后的当前语言：
+ * 下列代码演示如何使用全局方法 <code>TraceLang()</code> 输出带前缀的、基于语言包且支持命名占位符的调试信息：
  * <listing version="3.0">
  var tree:String = "debug.trace.prefix";
 
- // 输出结果：“* 跟踪 : * 跟踪 : ”
- Trace(tree);
+ // 输出结果：“* 跟踪 : ”
+ TraceLang(tree);
  * </listing>
  *
- * @param         tree 文本的树形路径
- * @param         args 打印的参数列表
+ * @param           tree   文本的树形路径
+ * @param           params 占位符名到替换值的映射，可为 null
+ * 
+ * @see             String
+ * @see             Object
+ * @throws          ArgumentError
  *
- * @see           String
- * @see           Array
- * @throws        ArgumentError
- *
- * @langversion   3.0
- * @playerversion Flash 9, Lite 4
+ * @langversion     3.0
+ * @playerversion   Flash 9, Lite 4
  */
-public function TraceLang(tree:String, ...args):void {
-    // 输出内容
-    var format:String = GetLang.apply(null, [tree].concat(args.toString().split(",")));
-
-    Trace(format);
+public function TraceLang(tree:String, params:Object = null):void {
+    Trace(GetLang(tree, params));
 }
 }
