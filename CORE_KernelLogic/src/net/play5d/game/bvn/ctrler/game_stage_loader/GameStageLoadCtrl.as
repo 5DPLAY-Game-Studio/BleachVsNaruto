@@ -111,7 +111,10 @@ public class GameStageLoadCtrl extends EventDispatcher {
             }
 
             throw new Error(
-                    GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', fileUrl, DefinedClass.MC_MAIN));
+                    GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', {
+                        fileUrl: fileUrl,
+                        mainMc : DefinedClass.MC_MAIN
+                    }));
         }
 
         return null;
@@ -139,7 +142,10 @@ public class GameStageLoadCtrl extends EventDispatcher {
             }
 
             throw new Error(
-                    GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', fileUrl, DefinedClass.MC_MAIN));
+                    GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', {
+                        fileUrl: fileUrl,
+                        mainMc : DefinedClass.MC_MAIN
+                    }));
         }
 
         return null;
@@ -423,13 +429,19 @@ public class GameStageLoadCtrl extends EventDispatcher {
 //			msg += " (" + _loadStep + "/" + _loadStepLength + ")";
         var msg:String;
         if (_curLoadName) {
-            msg = Format(
-                    GetLangText('txt.game_stage_load_ctrl.loading_has_name'), itemName, _curLoadName, _loadStep,
-                    _loadStepLength
-            );
+            msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_has_name'), {
+                itemName  : itemName,
+                loadName  : _curLoadName,
+                step      : _loadStep,
+                stepLength: _loadStepLength
+            });
         }
         else {
-            msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_no_name'), itemName, _loadStep, _loadStepLength);
+            msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_no_name'), {
+                itemName  : itemName,
+                step      : _loadStep,
+                stepLength: _loadStepLength
+            });
         }
 
         var val:Number = (
