@@ -317,7 +317,7 @@ public class GameMainLogicCtrler {
             }
         }
         catch (e:Error) {
-            Debugger.log(GetLang('debug.log.data.game_main_logic_ctrler.render_game_sprite'), e);
+            Debugger.log(GetLang('debug.log.data.game_main_logic_ctrler.render_game_sprite', {error: e}));
         }
 
     }
