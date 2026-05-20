@@ -121,7 +121,7 @@ public function RunCheatCode(cheatCodeString:String, success:Function, isRunOnce
                 successes = true;
                 success();
 
-                Printf('Cheat code {} is activated!', cheatCodeString);
+                Printf('Cheat code {code} is activated!', {code: cheatCodeString});
             }
 
         }
