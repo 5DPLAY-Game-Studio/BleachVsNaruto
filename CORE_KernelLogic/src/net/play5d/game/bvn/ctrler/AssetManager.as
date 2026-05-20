@@ -307,7 +307,7 @@ public class AssetManager {
         }
 
         function loadErr():void {
-            TraceLang('debug.trace.data.asset_manager.load_sound_fail', curUrl);
+            TraceLang('debug.trace.data.asset_manager.load_sound_fail', {url: curUrl});
             loadNext();
         }
 
@@ -357,7 +357,7 @@ public class AssetManager {
         }
 
         function loadFail():void {
-            TraceLang('debug.trace.data.asset_manager.load_swf_fail', curUrl);
+            TraceLang('debug.trace.data.asset_manager.load_swf_fail', {url: curUrl});
             loadNext();
         }
 
@@ -403,11 +403,11 @@ public class AssetManager {
         }
 
         function bitmapFail():void {
-            TraceLang('debug.trace.data.asset_manager.load_font_bitmap_fail', url);
+            TraceLang('debug.trace.data.asset_manager.load_font_bitmap_fail', {url: url});
         }
 
         function loadXMLFail():void {
-            TraceLang('debug.trace.data.asset_manager.load_font_xml_fail', url);
+            TraceLang('debug.trace.data.asset_manager.load_font_xml_fail', {url: url});
         }
     }
 
