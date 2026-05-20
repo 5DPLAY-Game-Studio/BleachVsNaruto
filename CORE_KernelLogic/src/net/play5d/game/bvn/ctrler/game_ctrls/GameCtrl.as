@@ -234,7 +234,7 @@ public class GameCtrl {
 
         }
         else {
-            Debugger.log(GetLang('debug.log.data.game_ctrl.team_null', 'team'));
+            Debugger.log(GetLang('debug.log.data.game_ctrl.team_null', {name: 'team'}));
         }
     }
 
@@ -841,7 +841,7 @@ public class GameCtrl {
      * 下一场战斗
      */
     private function runNext():void {
-        TraceLang('debug.trace.data.game_ctrl.current_mode', GameMode.currentMode);
+        TraceLang('debug.trace.data.game_ctrl.current_mode', {mode: GameMode.currentMode});
 
         gameRunData.nextRound();
 
