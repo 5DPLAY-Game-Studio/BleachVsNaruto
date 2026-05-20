@@ -24,18 +24,16 @@ package {
  * <p/>
  * 下列代码演示如何使用全局方法 <code>Format()</code> 格式化字符串：
  * <listing version="3.0">
- var source:String = "今天是星期{}，天气：{}";
- var output:String = Format(
-     source,
-     {weekday: 1, weather: "晴"}
- );
+ var source:String = "今天是星期{weekday}，天气：{weather}";
+ var params:Object = {weekday: 1, weather: "晴"};
+ var output:String = Format(source, params);
 
  // 输出结果：“今天是星期1，天气：晴”
  trace(output);
  * </listing>
  *
- * @param           format 源字符串
- * @param           params 占位符名到替换值的映射
+ * @param           format  源字符串
+ * @param           params  占位符名到替换值的映射，可为 null
  *
  * @see             String
  * @see             Object

@@ -23,10 +23,11 @@ package {
  * <p/>
  * 下列代码演示如何使用全局方法 <code>GetLang()</code> 输出格式化后的当前语言：
  * <listing version="3.0">
- var tree:String = "debug.trace.prefix";
+ // 无占位符
+ trace(GetLang('debug.trace.prefix'));
 
- // 输出结果：“* 跟踪 : ”
- trace(GetLang(tree));
+ // 命名占位符（各语言 JSON 可自行排列 {amount} 顺序）
+ trace(GetLang('alert.musou_ctrl.need_more_money', {amount: 100}));
  * </listing>
  *
  * @param           tree    树形路径

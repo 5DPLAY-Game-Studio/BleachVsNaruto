@@ -19,8 +19,8 @@
 package {
 
 /**
- * 全局函数，使用命名占位符格式化字符串并 trace 输出。
- * 若 <code>params</code> 不为 null，则对 <code>format</code> 执行命名占位符替换后再输出。
+ * 全局函数，使用命名占位符格式化字符串并 trace 输出（无调试前缀）。
+ * 始终调用 <code>Format(format, params)</code>；模板含 <code>{name}</code> 而 <code>params</code> 缺键时将抛出 <code>ArgumentError</code>。
  * <p/>
  * 下列代码演示如何使用全局方法 <code>Printf()</code> 输出格式化字符串：
  * <listing version="3.0">  

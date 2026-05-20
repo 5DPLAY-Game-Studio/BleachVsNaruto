@@ -23,10 +23,11 @@ package {
  * <p/>
  * 下列代码演示如何使用全局方法 <code>TraceLang()</code> 输出带前缀的、基于语言包且支持命名占位符的调试信息：
  * <listing version="3.0">
- var tree:String = "debug.trace.prefix";
+ // 无占位符 → “* 跟踪 : ”
+ TraceLang('debug.trace.prefix');
 
- // 输出结果：“* 跟踪 : ”
- TraceLang(tree);
+ // 有占位符 → “* 跟踪 : 当前模式： …”
+ TraceLang('debug.trace.data.game_ctrl.current_mode', {mode: GameMode.currentMode});
  * </listing>
  *
  * @param           tree   文本的树形路径

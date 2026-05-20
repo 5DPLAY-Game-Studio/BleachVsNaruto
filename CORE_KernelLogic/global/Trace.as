@@ -20,6 +20,7 @@ package {
 
 /**
  * 全局函数，输出带调试前缀的字符串。
+ * 若 <code>params</code> 不为 null，则先对 <code>message</code> 执行 <code>Format</code>；为 null 时视为已格式化完成。
  * <p/>
  * 下列代码演示如何使用全局方法 <code>Trace()</code> 输出带调试前缀的字符串：
  * <listing version="3.0">

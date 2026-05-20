@@ -20,32 +20,35 @@ package {
 import net.play5d.game.bvn.utils.MultiLangUtils;
 
 /**
- * 全局函数，得到基于树形路径的当前语言
+ * 全局函数，按点分树形路径从语言包取得原始文案（不替换命名占位符）。
  * <p/>
- * 下列代码演示如何使用全局方法 <code>GetLangText()</code> 输出当前语言：
+ * 文案来自 <code>config/language/{locale}.json</code>，由 <code>MultiLangUtils</code> 加载。
+ * 若需替换 <code>{name}</code> 占位符，请使用 <code>GetLang(tree, params)</code>。
+ * <p/>
+ * 下列代码演示如何使用全局方法 <code>GetLangText()</code> 取得当前语言模板：
  * <listing version="3.0">
- var tree:String = "debug.trace.prefix";
+ // 无占位符
+ trace(GetLangText('debug.trace.prefix'));
 
- // 输出结果：“* 跟踪 : ”
- trace(GetLangText(tree));
+ // 含命名占位符的模板（此处仍为原文，未格式化）
+ trace(GetLangText('alert.musou_ctrl.need_more_money'));
  * </listing>
  *
- * @param         tree 文本的树形路径
+ * @param           tree    点分树形路径（如 <code>debug.trace.prefix</code>）
  *
- * @see           String
- * @return        基于树形路径的当前语言
+ * @see             String
+ * @see             GetLang
+ * @see             MultiLangUtils
+ * @return          语言包中的原始字符串；未找到时为 <code>[N/A]</code>
  *
- * @langversion   3.0
- * @playerversion Flash 9, Lite 4
+ * @langversion     3.0
+ * @playerversion   Flash 9, Lite 4
  */
 public function GetLangText(tree:String):String {
-    // 当前语言文本
+    // 从多语言工具按树形路径查询
     var langText:String = MultiLangUtils.I.getLangText(tree);
-
-    // 如果当前语言文本为 null，设置默认值 [N/A]
-    if (langText == null) {
-        langText = '[N/A]';
-    }
+    // 未加载或路径不存在时使用占位默认值
+    langText ||= '[N/A]';
 
     return langText;
 }
