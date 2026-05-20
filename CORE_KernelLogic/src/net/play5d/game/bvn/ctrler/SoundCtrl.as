@@ -225,7 +225,7 @@ public class SoundCtrl {
         }
 
         function loadFail():void {
-            TraceLang('debug.trace.data.sound_ctrl.load_fight_bgm_fail', curUrl);
+            TraceLang('debug.trace.data.sound_ctrl.load_fight_bgm_fail', {url: curUrl});
             loadNext();
         }
 
