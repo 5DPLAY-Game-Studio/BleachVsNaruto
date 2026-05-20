@@ -393,7 +393,7 @@ public class GameLogic {
     }
 
     public static function setGameMode(v:int):void {
-        TraceLang('debug.trace.data.game_logic.set_game_mode', v);
+        TraceLang('debug.trace.data.game_logic.set_game_mode', {mode: v});
         switch (v) {
         case 1:
             GameData.I.loadSelect('config/salect.xml');
