@@ -250,7 +250,7 @@ public class GameData {
             if (missAssisters.length > 0) {
                 msg += 'assister : ' + missAssisters.join(' , ') + ' ; ';
             }
-            throw new Error(GetLang('debug.error.data.game_data.verify_select_fail', 'select.xml', msg));
+            throw new Error(GetLang('debug.error.data.game_data.verify_select_fail', {file: 'select.xml', message: msg}));
         }
     }
 
@@ -303,7 +303,7 @@ public class GameData {
             if (missMaps.length > 0) {
                 msg += 'map : ' + missMaps.join(' , ') + ' ; ';
             }
-            throw new Error(GetLang('debug.error.data.game_data.verify_mission_fail', 'mission.xml', msg));
+            throw new Error(GetLang('debug.error.data.game_data.verify_mission_fail', {file: 'mission.xml', message: msg}));
         }
     }
 
@@ -324,7 +324,11 @@ public class GameData {
                     var map:MapVO = MapModel.I.getMap(mv.map);
                     if (map == null) {
                         throw new Error(
-                                GetLang('debug.error.data.game_data.verify_musou_fail', mosouId, 'map', mv.map));
+                                GetLang('debug.error.data.game_data.verify_musou_fail', {
+                                    mosouId: mosouId,
+                                    type   : 'map',
+                                    value  : mv.map
+                                }));
                     }
 
                     var ememies:Array = mv.getAllEnemieIds();
@@ -332,7 +336,11 @@ public class GameData {
                         var fighter:FighterVO = FighterModel.I.getFighter(f);
                         if (fighter == null) {
                             throw new Error(
-                                    GetLang('debug.error.data.game_data.verify_musou_fail', mosouId, 'fighter', f));
+                                    GetLang('debug.error.data.game_data.verify_musou_fail', {
+                                        mosouId: mosouId,
+                                        type   : 'fighter',
+                                        value  : f
+                                    }));
                         }
                     }
 
@@ -357,7 +365,7 @@ public class GameData {
             if (missFighters.length > 0) {
                 msg += "fighter : " + missFighters.join(" , ") + " ; ";
             }
-            throw new Error(GetLang('debug.error.data.game_data.verify_fighter_model_fail', msg));
+            throw new Error(GetLang('debug.error.data.game_data.verify_fighter_model_fail', {message: msg}));
         }
 
     }
