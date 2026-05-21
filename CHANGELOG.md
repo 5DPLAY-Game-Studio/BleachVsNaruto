@@ -2,6 +2,26 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.05212026_alpha] - 2026-05-21
+
+### 新增
+
+- 新增 [AGENTS.md](AGENTS.md) 文件以帮助 AI 助理理解项目。
+
+### 更改
+
+- 重构 Format 方法的实现。
+- 优化 ClassUtils 类中的 continuousAccess 方法实现。
+
+### 修复
+
+- 修复与完善 debug_mob 脚本问题。
+- 修复 `tools/script` 下脚本无默认语言问题，现在若未找到匹配语言，默认显示英文。
+
+### 移除
+
+- 移除手机端检查更新路径。
+
 ## [3.7.0.0.04232026_alpha] - 2026-04-23
 
 ### 更改
@@ -302,6 +322,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.05212026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04232026_alpha...3.7.0.0.05212026_alpha
 [3.7.0.0.04232026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.01152026_alpha...3.7.0.0.04232026_alpha
 [3.7.0.0.01152026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.01062026_alpha...3.7.0.0.01152026_alpha
 [3.7.0.0.01062026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.08242025_alpha...3.7.0.0.01062026_alpha
