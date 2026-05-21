@@ -568,7 +568,7 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
                 mc.gotoAndStop('hit');
             }
             catch (e:Error) {
-                ThrowError(e, GetLang('debug.error.data.bullet.do_hit', 'hit'));
+                ThrowError(e, GetLang('debug.error.data.bullet.do_hit', {frame: 'hit'}));
             }
         }
         _isHit   = true;
