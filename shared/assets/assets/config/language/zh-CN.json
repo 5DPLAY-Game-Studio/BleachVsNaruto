@@ -22,8 +22,8 @@
       "fighter"         : "角色",
       "assistant"       : "辅助",
       "bgm"             : "背景乐",
-      "loading_no_name" : "正在加载 [{}] ({}/{})",
-      "loading_has_name": "正在加载 [{}] : {} ({}/{})"
+      "loading_no_name" : "正在加载 [{itemName}] ({step}/{stepLength})",
+      "loading_has_name": "正在加载 [{itemName}] : {loadName} ({step}/{stepLength})"
     },
 
 
@@ -52,12 +52,12 @@
   },
   "alert": {
     "musou_ctrl": {
-      "need_more_money": "当前金币不足，还需要 {} 枚金币！"
+      "need_more_money": "当前金币不足，还需要 {amount} 枚金币！"
     }
   },
   "confirm": {
     "musou_ctrl": {
-      "unlock_fighter": "确定使用 {} 枚金币解锁人物？"
+      "unlock_fighter": "确定使用 {amount} 枚金币解锁人物？"
     }
   },
   "debug": {
@@ -65,24 +65,24 @@
       "prefix": "* 跟踪 : ",
       "data": {
         "asset_manager": {
-          "load_sound_fail"      : "加载声音 [{}] 失败！",
-          "load_swf_fail"        : "加载 SWF [{}] 失败！",
-          "load_font_bitmap_fail": "加载字体位图 [{}] 失败！",
-          "load_font_xml_fail"   : "加载字体 XML [{}] 失败！"
+          "load_sound_fail"      : "加载声音 [{url}] 失败！",
+          "load_swf_fail"        : "加载 SWF [{url}] 失败！",
+          "load_font_bitmap_fail": "加载字体位图 [{url}] 失败！",
+          "load_font_xml_fail"   : "加载字体 XML [{url}] 失败！"
         },
         "game_loader": {
-          "fighter_id_error"  : "GameLoader.loadAndCacheFighter:: 角色 [{}] 不存在！",
-          "fighter_load_error": "加载角色时发生错误： {}",
-          "assister_id_error" : "GameLoader.loadAssister:: 辅助 [{}] 不存在！",
-          "map_id_error"      : "GameLoader.loadMap::  地图 [{}] 不存在！",
-          "unload_cache_error": "GameLoader.dispose:: 卸装缓存发生错误： {}"
+          "fighter_id_error"  : "GameLoader.loadAndCacheFighter:: 角色 [{fighterId}] 不存在！",
+          "fighter_load_error": "加载角色时发生错误： {error}",
+          "assister_id_error" : "GameLoader.loadAssister:: 辅助 [{fighterId}] 不存在！",
+          "map_id_error"      : "GameLoader.loadMap::  地图 [{mapId}] 不存在！",
+          "unload_cache_error": "GameLoader.dispose:: 卸装缓存发生错误： {error}"
         },
         "game_logic":{
           "map_null"     : "地图为空！",
-          "set_game_mode": "设置游戏模式为： {}"
+          "set_game_mode": "设置游戏模式为： {mode}"
         },
         "sound_ctrl": {
-          "load_fight_bgm_fail": "SoundCtrl.loadFightBGM:: 加载声音 [{}] 失败!"
+          "load_fight_bgm_fail": "SoundCtrl.loadFightBGM:: 加载声音 [{url}] 失败!"
         },
         "game_ctrl": {
           "cleared"     : "已通关！",
@@ -90,7 +90,7 @@
           "continue"    : "是否继续？",
           "back_select" : "返回选人页面……",
           "time_over"   : "时间结束！",
-          "current_mode": "当前模式： {}"
+          "current_mode": "当前模式： {mode}"
         },
         "game_stage_load_ctrl": {
           "load_all_finish": "全部资源加载完成！"
@@ -104,32 +104,32 @@
           "self_die_complete"        : "无双模式的 onSelfDead 事件完成！",
           "mission_complete"         : "无双模式的任务完成！",
           "mission_complete_complete": "无双模式的 missionComplete 事件完成！",
-          "show_fzqi"                : "辅助能量 (FZQI) ======================= fzqi: {}, fzqiMax: {}",
+          "show_fzqi"                : "辅助能量 (FZQI) ======================= fzqi: {fzqi}, fzqiMax: {fzqiMax}",
           "boss_die"                 : "无双模式的 BOSS 死亡！"
         },
         "musou_enemy_bar_ctrl": {
           "remove_bar_error": "移除 敌人横条 出错！"
         },
         "musou_logic": {
-          "open_map_area": "开放地图探索区域： {}"
+          "open_map_area": "开放地图探索区域： {areaId}"
         },
         "fighter_vo": {
-          "undefined_bgm": "FighterVO.initByXML:: ID  为 {} 的角色值对象未定义背景音乐！"
+          "undefined_bgm": "FighterVO.initByXML:: ID  为 {fighterId} 的角色值对象未定义背景音乐！"
         },
         "game_data": {
           "load_select_error": "加载 选择数据 出错！"
         },
         "mission_model": {
-          "p1_data"         : "玩家1 数据： {}",
-          "p2_data"         : "玩家2 数据： {}",
+          "p1_data"         : "玩家1 数据： {data}",
+          "p2_data"         : "玩家2 数据： {data}",
           "mission_all_over": "所有关卡已完成！"
         },
         "musou_fighter_model": {
-          "repeat_add": "MusouFighterModel.addFighter:: 角色重复添加： {}"
+          "repeat_add": "MusouFighterModel.addFighter:: 角色重复添加： {fighterId}"
         },
         "musou_model": {
-          "load_area"    : "正在加载区域： {}",
-          "init_map_area": "初始化地图区域： {}"
+          "load_area"    : "正在加载区域： {areaUrl}",
+          "init_map_area": "初始化地图区域： {areaId}"
         },
         "musou_game_run_data_vo": {
           "main": "创建了新的 MusouGameRunDataVO 对象"
@@ -141,16 +141,16 @@
           "init_map": "初始化地图..."
         },
         "debugger": {
-          "error_msg": "Debugger.errorMsg:: 输出信息: {}"
+          "error_msg": "Debugger.errorMsg:: 输出信息: {message}"
         },
         "debug_util": {
           "debug_position": "DebugUtil.debugPosition:: 调试位置失败！"
         },
         "fighter_mc": {
-          "keyframe_not_exist": "关键帧不存在： {}"
+          "keyframe_not_exist": "关键帧不存在： {name}"
         },
         "fighter_action_logic": {
-          "enabled_failed": "FighterActionLogic.enabled:: 启用失败：{}"
+          "enabled_failed": "FighterActionLogic.enabled:: 启用失败：{error}"
         }
       }
     },
@@ -158,13 +158,13 @@
       "prefix": "* 日志 : ",
       "data": {
         "game_loader": {
-          "load_swf_error": "GameLoader.loadSWF:: 加载 SWF 文件错误： {}"
+          "load_swf_error": "GameLoader.loadSWF:: 加载 SWF 文件错误： {url}"
         },
         "game_ctrl": {
-          "team_null": "GameCtrl.addGameSprite:: 变量 '{}' 为空！"
+          "team_null": "GameCtrl.addGameSprite:: 变量 '{name}' 为空！"
         },
         "game_main_logic_ctrler": {
-          "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: {}"
+          "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: {error}"
         },
         "game_data": {
           "load_fighter_fail"  : "加载 角色数据 失败！",
@@ -183,7 +183,7 @@
           "build_game_fail": "构建游戏失败！"
         },
         "game_stage_load_ctrl": {
-          "not_find_main_mc"       : "在 [{}] 中未找到名为 {} 的元件！",
+          "not_find_main_mc"       : "在 [{fileUrl}] 中未找到名为 {mainMc} 的元件！",
           "get_map_data_fail"      : "获取 地图 数据失败！",
           "get_fighter_data_fail"  : "获取 角色 数据失败！",
           "get_assistant_data_fail": "获取 辅助 数据失败！"
@@ -192,19 +192,19 @@
           "build_game_fail": "构建游戏失败！"
         },
         "game_data": {
-          "verify_select_fail"       : "校验 {} 失败！ 失败信息：[{}]",
-          "verify_mission_fail"      : "校验 {} 失败！ 失败信息：[{}]",
-          "verify_musou_fail"        : "无双数据 [{}] 校验失败！ 未找到相关 {} 数据：[{}]",
-          "verify_fighter_model_fail": "FighterModel 数据校验失败！ 失败信息：[{}]"
+          "verify_select_fail"       : "校验 {file} 失败！ 失败信息：[{message}]",
+          "verify_mission_fail"      : "校验 {file} 失败！ 失败信息：[{message}]",
+          "verify_musou_fail"        : "无双数据 [{mosouId}] 校验失败！ 未找到相关 {type} 数据：[{value}]",
+          "verify_fighter_model_fail": "FighterModel 数据校验失败！ 失败信息：[{message}]"
         },
         "musou_mission_vo": {
           "init_musou_stage_fail": "初始化 无双场景 失败！"
         },
         "assister": {
-          "init_fail": "初始化失败！未定义函数 {}"
+          "init_fail": "初始化失败！未定义函数 {functionName}"
         },
         "bullet": {
-          "do_hit": "跳转 [{}] 帧失败！"
+          "do_hit": "跳转 [{frame}] 帧失败！"
         },
         "fighter_attacker": {
           "unsupported_type": "不支持的类型！"
@@ -214,9 +214,9 @@
           "fighter_ctrler_initialized": "fighter 已完成初始化！"
         },
         "fighter_mc": {
-          "render_animate" : "FighterMC.renderAnimate:: 渲染出错： {}",
-          "go_frame"       : "FighterMC.goFrame:: 渲染出错： {}",
-          "render_children": "FighterMC.renderChildren:: 渲染出错： {}"
+          "render_animate" : "FighterMC.renderAnimate:: 渲染出错： {stackTrace}",
+          "go_frame"       : "FighterMC.goFrame:: 渲染出错： {stackTrace}",
+          "render_children": "FighterMC.renderChildren:: 渲染出错： {stackTrace}"
         }
       }
     }
