@@ -19,6 +19,7 @@
 package net.play5d.pcl.utils {
 import flash.display.DisplayObject;
 import flash.events.Event;
+import flash.utils.Dictionary;
 import flash.utils.describeType;
 import flash.utils.getQualifiedClassName;
 
@@ -153,11 +154,20 @@ public class ClassUtils {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////
+
     /**
-     * 连续访问
-     * @param begin 起始节点
-     * @param list 依次访问的属性/方法（方法要加"()"）
-     * @return 最终结果
+     * 路径访问器缓存
+     * key: 路径数组的字符串表示
+     * value: 预编译的访问函数
+     */
+    private static var _pathCache:Dictionary = new Dictionary(true);
+    
+    /**
+     * 连续访问对象的嵌套属性或方法（优化版）
+     * @param begin 起始对象
+     * @param list 属性/方法路径数组，方法以 "()" 结尾
+     * @return 访问路径末端的对象，访问失败返回 null
      */
     public static function continuousAccess(begin:*, list:Array = null):* {
         if (begin == null) {
@@ -167,56 +177,81 @@ public class ClassUtils {
             return begin;
         }
 
-        /**
-         * 检查是否具有指定属性
-         * @param name 属性名
-         * @return 是否具有指定属性
-         */
-        function check(name:String):Boolean {
-            return begin.hasOwnProperty(name);
+        // 尝试从缓存获取预编译的访问器
+        var cacheKey:String = list.join(',');
+        var accessor:Function = _pathCache[cacheKey];
+        
+        // 缓存中存在，直接返回结果
+        if (accessor != null) {
+            return accessor(begin);
         }
 
+        // 缓存中不存在，编译访问器函数并缓存
+        accessor = _compileAccessor(list);
+        _pathCache[cacheKey] = accessor;
+        
+        return accessor(begin);
+    }
+
+    /**
+     * 编译路径数组为高效的访问器函数
+     * @param list 属性/方法路径数组
+     * @return 编译后的访问函数
+     */
+    private static function _compileAccessor(list:Array):Function {
         var len:int = list.length;
-        for (var i:int = 0; i < len; ++i) {
-            var nextNode:String = list[i] as String;
-            if (nextNode == null) {
-                return null;
-            }
-
-            try {
-                const BRACKET:String = '()';
-
-                if (nextNode.indexOf(BRACKET) == -1) {
-                    if (!check(nextNode)) {
-                        return null;
-                    }
-
-                    // 非函数式访问
-                    if (begin[nextNode] != null) {
-                        begin = begin[nextNode];
-                    }
-                }
-                else {
-                    // 函数式访问
-                    var nodeNameLen:int = nextNode.length - BRACKET.length;
-                    nextNode            = nextNode.substr(0, nodeNameLen);
-
-                    if (!check(nextNode)) {
-                        return null;
-                    }
-
-                    if (begin[nextNode]() != null) {
-                        begin = begin[nextNode]();
-                    }
-                }
-            }
-            catch (e:Error) {
-                trace('ClassUtil.continuousAccess::' + e);
-                return null;
+        var accessors:Array = [];
+        
+        for (var i:int = 0; i < len; i++) {
+            var node:String = list[i];
+            var isMethod:Boolean = node.length > 2 && 
+                                   node.charCodeAt(node.length - 2) == 40 &&  // '('
+                                   node.charCodeAt(node.length - 1) == 41;    // ')'
+            
+            if (isMethod) {
+                var methodName:String = node.substring(0, node.length - 2);
+                // 使用闭包捕获方法名
+                accessors.push(_createMethodAccessor(methodName));
+            } else {
+                // 使用闭包捕获属性名
+                accessors.push(_createPropertyAccessor(node));
             }
         }
+        
+        // 返回组合后的访问函数
+        return function(root:*):* {
+            var current:* = root;
+            for each (var func:Function in accessors) {
+                if (current == null) {
+                    return null;
+                }
 
-        return begin;
+                current = func(current);
+                
+                if (current == null) {
+                    return null;
+                }
+            }
+            return current;
+        };
+    }
+
+    /**
+     * 创建属性访问器
+     */
+    private static function _createPropertyAccessor(name:String):Function {
+        return function(obj:*):* {
+            return obj[name];
+        };
+    }
+
+    /**
+     * 创建方法访问器
+     */
+    private static function _createMethodAccessor(name:String):Function {
+        return function(obj:*):* {
+            return obj[name] ? obj[name]() : null;
+        };
     }
 }
 }
