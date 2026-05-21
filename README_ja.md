@@ -24,11 +24,11 @@
 
 ## ⭐ スターの歴史 <!-- omit in toc -->
 
-<a href = "https://www.star-history.com/#5DPLAY-Game-Studio/BleachVsNaruto&5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=5DPLAY-Game-Studio%2FBleachVsNaruto%2C5DPLAY-Game-Studio%2FBleachVsNaruto_FlashSrc&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=5DPLAY-Game-Studio/BleachVsNaruto,5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=5DPLAY-Game-Studio/BleachVsNaruto%2C5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=5DPLAY-Game-Studio/BleachVsNaruto%2C5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=5DPLAY-Game-Studio/BleachVsNaruto%2C5DPLAY-Game-Studio/BleachVsNaruto_FlashSrc&type=date&legend=top-left" />
  </picture>
 </a>
 
