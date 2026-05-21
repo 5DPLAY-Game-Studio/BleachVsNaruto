@@ -102,7 +102,7 @@ public class MusouLogic {
     }
 
     public function openMapArea(mapId:String, areaId:String):void {
-        TraceLang('debug.trace.data.musou_logic.open_map_area', areaId);
+        TraceLang('debug.trace.data.musou_logic.open_map_area', {areaId: areaId});
 
         var md:MusouPlayerData        = GameData.I.mosouData;
         var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getMapById(mapId);
@@ -155,11 +155,11 @@ public class MusouLogic {
     public function buyFighter(data:MusouFighterSellVO, succback:Function = null):void {
         var mosouData:MusouPlayerData = GameData.I.mosouData;
         if (mosouData.getMoney() < data.getPrice()) {
-            GameUI.alert('NEED MORE MONEY', GetLang('alert.musou_ctrl.need_more_money', data.getPrice()));
+            GameUI.alert('NEED MORE MONEY', GetLang('alert.musou_ctrl.need_more_money', {amount: data.getPrice()}));
             return;
         }
 
-        GameUI.confrim('CONFRIM', GetLang('confirm.musou_ctrl.unlock_fighter', data.getPrice()), function ():void {
+        GameUI.confrim('CONFRIM', GetLang('confirm.musou_ctrl.unlock_fighter', {amount: data.getPrice()}), function ():void {
             mosouData.loseMoney(data.getPrice());
             mosouData.addFighter(data.id);
             GameData.I.saveData();
