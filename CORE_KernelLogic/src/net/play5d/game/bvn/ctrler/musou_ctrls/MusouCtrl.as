@@ -325,7 +325,7 @@ public class MusouCtrl {
         to.fzqi   = to.fzqiMax;
         to.direct = from.direct;
 
-        TraceLang('debug.trace.data.musou_ctrl.show_fzqi', to.fzqi, to.fzqiMax);
+        TraceLang('debug.trace.data.musou_ctrl.show_fzqi', {fzqi: to.fzqi, fzqiMax: to.fzqiMax});
 
         if (to.initlized()) {
             GameCtrl.I.addGameSprite(to.team.id, to);
