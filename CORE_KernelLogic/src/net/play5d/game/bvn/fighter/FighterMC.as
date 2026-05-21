@@ -153,7 +153,7 @@ public class FighterMC {
                 _mc.nextFrame();
             }
             catch (e:Error) {
-                throw new Error(GetLang('debug.error.data.fighter_mc.render_animate', e.getStackTrace()));
+                throw new Error(GetLang('debug.error.data.fighter_mc.render_animate', {stackTrace: e.getStackTrace()}));
             }
         }
         renderChildren();
@@ -214,7 +214,7 @@ public class FighterMC {
             _mc.gotoAndStop(name);
         }
         catch (e:Error) {
-            throw new Error(GetLang('debug.error.data.fighter_mc.go_frame', e.getStackTrace()))
+            throw new Error(GetLang('debug.error.data.fighter_mc.go_frame', {stackTrace: e.getStackTrace()}))
         }
 
         renderChildren();
@@ -252,7 +252,7 @@ public class FighterMC {
 //			}
         _undefinedFrames.push(name);
 
-        TraceLang('debug.trace.data.fighter_mc.keyframe_not_exist', name);
+        TraceLang('debug.trace.data.fighter_mc.keyframe_not_exist', {name: name});
         return false;
     }
 
@@ -401,7 +401,7 @@ public class FighterMC {
                 }
             }
             catch (e:Error) {
-                throw new Error(GetLang('debug.error.data.fighter_mc.render_children', e.getStackTrace()))
+                throw new Error(GetLang('debug.error.data.fighter_mc.render_children', {stackTrace: e.getStackTrace()}))
             }
 
         }
