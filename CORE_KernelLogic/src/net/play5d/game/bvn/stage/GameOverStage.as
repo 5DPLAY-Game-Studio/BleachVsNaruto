@@ -239,12 +239,8 @@ public class GameOverStage implements IStage {
         _ui.addEventListener(Event.COMPLETE, showContYesComplete, false, 0, true);
         _ui.gotoAndPlay('continue_yes');
         _keyEnabled = false;
-        try {
-            _char.idle();
-        }
-        catch (e:Error) {
-            trace(e);
-        }
+
+        _char.idle(true);
         removeArrow();
     }
 

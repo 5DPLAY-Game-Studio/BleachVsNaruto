@@ -161,11 +161,16 @@ public class FighterMcCtrler {
         _fighter.addQi(qi);
     }
 
-    //恢复状态
-    public function idle(frame:String = null):void {
+    /**
+     * 恢复站立
+     *
+     * @param frame 帧名
+     * @param isIgnoreAlive 是否忽略存活条件
+     */
+    public function idle(frame:String = null, isIgnoreAlive:Boolean = false):void {
         frame ||= FighterSpecialFrame.IDLE;
 
-        if (!_fighter.isAlive) {
+        if (!_fighter.isAlive && !isIgnoreAlive) {
             trace('not alive!!!');
             return;
         }

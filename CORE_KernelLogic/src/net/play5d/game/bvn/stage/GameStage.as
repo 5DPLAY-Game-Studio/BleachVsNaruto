@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.stage {
 import flash.display.DisplayObject;
+import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.geom.Point;
 import flash.geom.Rectangle;
@@ -35,6 +36,7 @@ import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
@@ -118,6 +120,7 @@ public class GameStage extends Sprite implements IStage {
 
     public function addGameSprite(sp:IGameSprite):void {
         sp.setActive(true);
+
         if (_gameSprites.indexOf(sp) != -1) {
             return;
         }
@@ -132,6 +135,7 @@ public class GameStage extends Sprite implements IStage {
 
     public function addGameSpriteAt(sp:IGameSprite, index:int):void {
         sp.setActive(true);
+
         if (_gameSprites.indexOf(sp) != -1) {
             return;
         }
@@ -144,7 +148,17 @@ public class GameStage extends Sprite implements IStage {
         sp.setSpeedRate(GameConfig.SPEED_PLUS);
     }
 
+    /**
+     * 移除游戏元件
+     *
+     * @param sp 游戏元件
+     * @param isDispose 是否处理
+     */
     public function removeGameSprite(sp:IGameSprite, isDispose:Boolean = false):void {
+        if (!sp) {
+            return;
+        }
+
         if (isDispose) {
             sp.destory(true);
         }
@@ -156,12 +170,22 @@ public class GameStage extends Sprite implements IStage {
         if (index == -1) {
             return;
         }
+
+        var display:DisplayObject = sp.getDisplay();
+        if (!display) {
+            return;
+        }
+
+        // 处理非 BaseGameSprite 但继承了 IGameSprite 的元件
+        if (!(sp is BaseGameSprite) && display is MovieClip) {
+            var mc:MovieClip = display as MovieClip;
+
+            mc.stopAllMovieClips();
+            mc.gotoAndStop(1);
+        }
+
+        _playerLayer.removeChild(display);
         _gameSprites.splice(index, 1);
-        try {
-            _playerLayer.removeChild(sp.getDisplay());
-        }
-        catch (e:Error) {
-        }
     }
 
     /**
@@ -363,12 +387,13 @@ public class GameStage extends Sprite implements IStage {
 
         if (_gameSprites) {
             while (_gameSprites.length > 0) {
-                removeGameSprite(_gameSprites.shift(), true);
+                var continueLoser:FighterMain = GameCtrl.I.gameRunData.continueLoser;
+                var removedGameSprite:IGameSprite = _gameSprites.shift();
+                var isDispose:Boolean = continueLoser && removedGameSprite != continueLoser;
+
+                removeGameSprite(removedGameSprite, isDispose);
             }
-//				var gs:Array = _gameSprites.concat();
-//				for each(var i:IGameSprite in gs){
-//					removeGameSprite(i);
-//				}
+
             _gameSprites = null;
         }
 
