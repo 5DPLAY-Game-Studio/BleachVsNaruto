@@ -380,7 +380,16 @@ public class FighterTester extends Sprite {
         GameData.I.p2Select.fuzhu    = p2AssistantId;
         GameData.I.selectMap         = mapId;
 
-        Trace(p1FighterId, p1FighterId, p1AssistantId, p1AssistantId, mapId);
+        Trace(
+                'FighterTester: p1={p1FighterId}, assist1={p1AssistantId}, p2={p2FighterId}, assist2={p2AssistantId}, map={mapId}',
+                {
+                    p1FighterId  : p1FighterId,
+                    p1AssistantId: p1AssistantId,
+                    p2FighterId  : p2FighterId,
+                    p2AssistantId: p2AssistantId,
+                    mapId        : mapId
+                }
+        );
         loadGame();
     }
 
