@@ -96,12 +96,11 @@ public class launch extends Sprite {
     }
 
     private function initlize(e:Event = null):void {
-
         GameLogger.setLoger(new Loger());
-
         GameLogger.log('init...');
 
         removeEventListener(Event.ADDED_TO_STAGE, initlize);
+        STAGE = stage;
 
         ResUtils.swfLib = new SwfLib();
         AssetManager.I.setAssetLoader(_assetLoader);

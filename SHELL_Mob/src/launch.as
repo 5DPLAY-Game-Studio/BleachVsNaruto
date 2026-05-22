@@ -301,6 +301,7 @@ public class launch extends Sprite {
 
     private function initlize(e:Event = null):void {
         removeEventListener(Event.ADDED_TO_STAGE, initlize);
+        STAGE = stage;
 
         stage.align     = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;

@@ -404,6 +404,7 @@ public class FighterTester extends Sprite {
 
     private function initialize(e:Event = null):void {
         removeEventListener(Event.ADDED_TO_STAGE, initialize);
+        STAGE = stage;
 
         // 开启调试模式
         GameConfig.DEBUG_MODE = true;
