@@ -208,7 +208,7 @@ public class FighterMcCtrler {
 
 //			if(_doingAirAction){
 //			if(_fighter.isInAir){
-        if (!_isTouchFloor) {
+        if (!_isTouchFloor && _fighter.isInAir) {
             fall();
 //				trace('!_isTouchFloor.fall');
         }

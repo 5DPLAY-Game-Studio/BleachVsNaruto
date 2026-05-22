@@ -219,6 +219,8 @@ public class GameOverStage implements IStage {
                     fighter.y     = 0;
                     fighter.setVelocity(0, 0);
                     fighter.setVec2(0, 0);
+                    fighter.isInAir = false;
+                    fighter.isTouchBottom = true;
                     fighter.renderSelf();
                     fighter.lose();
                     ct.addChild(fighter.mc);
