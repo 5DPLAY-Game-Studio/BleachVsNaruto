@@ -587,9 +587,11 @@ public class FighterMain extends BaseGameSprite {
 
     /**
      * 站立
+     *
+     * @param isIgnoreAlive 是否忽略存活条件
      */
-    public function idle():void {
-        _fighterCtrl.getMcCtrl().idle();
+    public function idle(isIgnoreAlive:Boolean = false):void {
+        _fighterCtrl.getMcCtrl().idle(null, isIgnoreAlive);
     }
 
     /**

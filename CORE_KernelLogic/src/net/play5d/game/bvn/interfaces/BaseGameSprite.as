@@ -561,13 +561,13 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
         if (_destoryed) {
             return;
         }
-        try {
+//        try {
             render();
             renderAnimate();
-        }
-        catch (e:Error) {
-            Debugger.log('BaseGameSprite.renderSelfEnterFrame', e);
-        }
+//        }
+//        catch (e:Error) {
+//            Debugger.log('BaseGameSprite.renderSelfEnterFrame', e);
+//        }
     }
 
     /**
