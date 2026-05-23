@@ -95,12 +95,15 @@ public class MessionModel {
 
         GameData.I.p2Select ||= new SelectVO();
 
-        var fighters:Array = _curStage.getFighters();
+        // 清除之前的队伍配置，避免模式切换时残留
+        // GameData.I.p2Select.fighter1 = null;     // fighter1 无论如何都是必须使用的，都会被后续覆盖
+        GameData.I.p2Select.fighter2 = null;
+        GameData.I.p2Select.fighter3 = null;
 
-        for (var i:int; i < fighters.length; i++) {
-            GameData.I.p2Select['fighter' + (
-                                i + 1
-            )] = fighters[i];
+        var fighters:Array = _curStage.getFighters();
+        var fightersLen:int = fighters.length;
+        for (var i:int = 0; i < fightersLen; i++) {
+            GameData.I.p2Select['fighter' + (i + 1)] = fighters[i];
         }
         GameData.I.p2Select.fuzhu = _curStage.assister;
         GameData.I.selectMap      = _curStage.map;

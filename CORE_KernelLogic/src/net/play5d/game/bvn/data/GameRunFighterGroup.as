@@ -19,7 +19,10 @@
 package net.play5d.game.bvn.data {
 import flash.utils.Dictionary;
 
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+
 import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.data.vos.GameRunDataVO;
 
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
@@ -66,8 +69,16 @@ public class GameRunFighterGroup {
         fighter3 = null;
         assister = null;
 
+        var gameRunData:GameRunDataVO = GameCtrl.I.gameRunData;
+        if (!gameRunData) {
+            return;
+        }
+
+        // 进入续关页面的角色 FighterMain
+        var continueLoser:FighterMain = gameRunData.continueLoser;
+
         if (currentFighter) {
-            currentFighter.destory(true);
+            currentFighter.destory(continueLoser && currentFighter != continueLoser);
             currentFighter = null;
         }
         if (currentAssister) {

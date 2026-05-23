@@ -219,6 +219,8 @@ public class GameOverStage implements IStage {
                     fighter.y     = 0;
                     fighter.setVelocity(0, 0);
                     fighter.setVec2(0, 0);
+                    fighter.isInAir = false;
+                    fighter.isTouchBottom = true;
                     fighter.renderSelf();
                     fighter.lose();
                     ct.addChild(fighter.mc);
@@ -239,12 +241,8 @@ public class GameOverStage implements IStage {
         _ui.addEventListener(Event.COMPLETE, showContYesComplete, false, 0, true);
         _ui.gotoAndPlay('continue_yes');
         _keyEnabled = false;
-        try {
-            _char.idle();
-        }
-        catch (e:Error) {
-            trace(e);
-        }
+
+        _char.idle(true);
         removeArrow();
     }
 
