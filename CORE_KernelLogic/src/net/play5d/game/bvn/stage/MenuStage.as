@@ -129,6 +129,8 @@ public class MenuStage extends Sprite implements IStage {
             _btnGroup.destory();
             _btnGroup = null;
         }
+
+        GameRender.remove(render);
         GameInputer.enabled = false;
     }
 
