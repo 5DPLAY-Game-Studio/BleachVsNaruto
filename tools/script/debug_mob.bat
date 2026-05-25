@@ -28,10 +28,12 @@ set BAT_HOME=%~dp0
 :: ↓ 等同于 title Apache fdb（Flash Player 调试器）
 call :ECHO_LANG :TITLE ""
 
+:: APK 文件
+set DBG_FILE=%BAT_HOME%..\..\out\production\SHELL_Mob\launch.apk
 :: 启动 id。在 application.xml 中定义的 id
-set LAUNCH_ID=net.play5d.game.bvn.mob
+set DBG_ID=net.play5d.game.bvn.mob
 :: 调试包名，格式为 air.应用程序 application 定义的 id。air 是自动添加的前缀
-set DBG_PACKAGE=air.%LAUNCH_ID%
+set DBG_PACKAGE=air.%DBG_ID%
 :: 调试端口，默认 7936，应与 IDEA 中的 SHELL_Mob 模块启动配置中相同
 set DBG_PORT=7936
 :: 临时文件，转储 adb device 命令的输出
@@ -102,11 +104,19 @@ call :ECHO_LANG :CONNECT "!DEVICE_ID!"
 
 :: 检测应用是否安装
 adb shell pm path %DBG_PACKAGE% | findstr "package:" >nul 2>nul
-if not %errorlevel%==0 (
-	call :ECHO_LANG :NOT_INSTALLED "%DBG_PACKAGE%"
-	goto :END
+if %errorlevel%==0 (
+	goto :INSTALLED
 )
 
+call :ECHO_LANG :NOT_INSTALLED "%DBG_PACKAGE%"
+:: 检查 APK 文件是否存在
+call :EXIST "%DBG_FILE%"
+
+call :ECHO_LANG :INSTALLING "%DBG_PACKAGE%"
+:: 如果存在，安装应用到设备
+adb -s "!DEVICE_ID!" install "%DBG_FILE%"
+
+:INSTALLED
 :: 重置 adb 转发端口
 adb -s "!DEVICE_ID!" forward --remove-all >nul 2>nul
 adb -s "!DEVICE_ID!" forward tcp:%DBG_PORT% tcp:%DBG_PORT% >nul

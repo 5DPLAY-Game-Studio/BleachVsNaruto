@@ -59,6 +59,10 @@ goto :EOF
 echo Application [%~2] is not installed!
 goto :EOF
 
+:INSTALLING
+echo Installing application [%~2] ...
+goto :EOF
+
 :START_MSG
 echo Starting Flash Debugger...
 goto :EOF

@@ -59,6 +59,10 @@ goto :EOF
 echo 应用 [%~2] 未安装！
 goto :EOF
 
+:INSTALLING
+echo 正在安装应用 [%~2] ...
+goto :EOF
+
 :START_MSG
 echo 正在启动 Flash 调试器...
 goto :EOF
