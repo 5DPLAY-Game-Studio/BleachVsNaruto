@@ -59,6 +59,10 @@ goto :EOF
 echo アプリケーション [%~2] がインストールされていません！
 goto :EOF
 
+:INSTALLING
+echo アプリケーション [%~2] をインストールしています...
+goto :EOF
+
 :START_MSG
 echo フラッシュ デバッガーを起動しています...
 goto :EOF

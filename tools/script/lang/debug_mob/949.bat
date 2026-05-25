@@ -59,6 +59,10 @@ goto :EOF
 echo [%~2] 애플리케이션이 설치되어 있지 않습니다!
 goto :EOF
 
+:INSTALLING
+echo 애플리케이션 설치 중 [%~2] ...
+goto :EOF
+
 :START_MSG
 echo 플래시 디버거를 시작합니다...
 goto :EOF
