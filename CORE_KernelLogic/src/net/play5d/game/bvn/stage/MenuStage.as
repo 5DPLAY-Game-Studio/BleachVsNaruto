@@ -77,6 +77,7 @@ public class MenuStage extends Sprite implements IStage {
     public function afterBuild():void {
         _ui.gotoAndPlay(2);
 
+        // 延迟时间增加到 800ms，确保所有初始化完成（包括 setFPS、setQuality 等）
         setTimeout(function ():void {
             _ui.buttonMode    = true;
             _ui.useHandCursor = true;
@@ -88,10 +89,17 @@ public class MenuStage extends Sprite implements IStage {
             }
 
             GameRender.add(render);
+            
+            // 设置焦点到 stage，确保键盘事件能被捕获
+            // 特别是从设置菜单返回时，鼠标点击按钮会转移焦点
+            if (STAGE) {
+                STAGE.focus = STAGE;
+            }
+            
             GameInputer.focus();
             GameInputer.enabled = true;
 
-        }, 500);
+        }, 800);
 
         _versionTxt = new TextField();
         UIUtils.formatText(_versionTxt, {color: 0, size: 18});
@@ -135,6 +143,12 @@ public class MenuStage extends Sprite implements IStage {
     }
 
     private function render():void {
+        // 持续确保焦点正确，防止焦点被其他操作覆盖
+        // 特别是从设置菜单返回时，鼠标点击按钮会转移焦点
+        if (STAGE && STAGE.focus != STAGE) {
+            STAGE.focus = STAGE;
+        }
+        
         if (GameInputer.anyKey(1)) {
             showBtns();
         }
