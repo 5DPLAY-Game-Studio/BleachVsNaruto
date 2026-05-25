@@ -33,11 +33,26 @@ public class GameInputer {
 
     //按键持续延时，秒
     private static const JUST_DOWN_DELAY:Number = 0.1;
-    public static var enabled:Boolean       = true;
+    private static var _enabled:Boolean       = true;
+    private static var _isFocused:Boolean     = false;
     private static var _inputMap:Dictionary = new Dictionary();
     private static var _justDownKeys:Object      = {};
     private static var _justDownDelayKeys:Object = {};
     private static var _listenKeys:Object;
+
+    public static function get enabled():Boolean {
+        return _enabled;
+    }
+
+    public static function set enabled(v:Boolean):void {
+        _enabled = v;
+        if (v) {
+            focus(true);
+        }
+        else {
+            _isFocused = false;
+        }
+    }
 
     public static function initlize(stage:Stage):void {
         initInput();
@@ -73,7 +88,11 @@ public class GameInputer {
         setConfig(GameInputType.P2, GameData.I.config.key_p2);
     }
 
-    public static function focus():void {
+    public static function focus(force:Boolean = false):void {
+        if (!force && _isFocused) {
+            return;
+        }
+        _isFocused = true;
         callVoid('focus');
     }
 
