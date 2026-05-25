@@ -2,6 +2,19 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.05252026_alpha] - 2026-05-25
+
+### 更改
+
+- 重构 RunCheatCode 方法的逻辑实现，抽离与优化关键逻辑。
+
+### 修复
+
+- 修复未对 STAGE 全局变量进行初始化的问题。
+- 修复重新进入主菜单时，偶现无法响应键盘的 BUG。
+- [#13] 修复BUG: 闯关模式失败后的选择是否继续续关页面，聚光灯下的角色消失的问题。
+- 修复BUG: 修复 闯关选人图像未进行重置 的问题，体现在选完小队 3v3 后，进入 1v1 后会在 UI 展示相关界面显示为 1v3，但实际还是 1v1 的问题。
+
 ## [3.7.0.0.05212026_alpha] - 2026-05-21
 
 ### 新增
@@ -322,6 +335,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.05252026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05212026_alpha...3.7.0.0.05252026_alpha
 [3.7.0.0.05212026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04232026_alpha...3.7.0.0.05212026_alpha
 [3.7.0.0.04232026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.01152026_alpha...3.7.0.0.04232026_alpha
 [3.7.0.0.01152026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.01062026_alpha...3.7.0.0.01152026_alpha
@@ -354,3 +368,4 @@
 [#2]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/2
 [#3]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/3
 [#4]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/4
+[#13]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/issues/13
