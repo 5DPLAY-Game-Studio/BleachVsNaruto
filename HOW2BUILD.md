@@ -6,12 +6,12 @@
 
 ### 操作系统
 
-- Windows 7 SP1 或更高，建议 Windows 10。必须为 **64** 位操作系统。
+- Windows 10 1909 或更高，建议 Windows 10 22H2。必须为 **64** 位操作系统。
 
 ### 软件
 
-- [Intellij IDEA 2022.1.4] （构建源代码）
-- Adobe Animate 2018 （构建 fla/xfl 文件）
+- [Intellij IDEA 2022.3.3] （构建源代码）
+- Adobe Animate 2019 （构建 fla/xfl 文件）
 
 ### SDK
 
@@ -19,7 +19,7 @@
 
 ## 构建要求
 
-### Intellij IDEA 2022.1.4
+### Intellij IDEA 2022.3.3
 
 1. 安装插件
     - 安装插件 [Flash/Flex] （必须）和 [Chinese ​(Simplified)​ Language Pack / 中文语言包] （可选）
@@ -46,7 +46,7 @@
 
 - 单击 ***运行(U) -> 调试...*** 选项或按下 ***Alt + Shift + F9*** 快捷键，在弹出的 ***调试*** 菜单中选择 ***SHELL_Dev FighterTester***，编译完成片刻后将执行编译结果
 
-[Intellij IDEA 2022.1.4]: https://download.jetbrains.com/idea/ideaIU-2022.1.4.exe?_gl=1*ctjhlb*_gcl_au*MTMxNjgyNzEyOC4xNzI0ODYxMjEz*_ga*MTE0MDQ4OTE2Ni4xNzI0ODYxMjEx*_ga_9J976DJZ68*MTcyODI2ODM2NC44LjEuMTcyODI2ODM3MC41NC4wLjA.
+[Intellij IDEA 2022.3.3]: https://download.jetbrains.com/idea/ideaIU-2022.3.3.exe
 [flex4.16.1-air51.0.1.1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK/releases/download/flex4.16.1-air51.0.1.1/flex4.16.1-air51.0.1.1.rar
 [Apache FlexSDK]: https://flex.apache.org/
 [Harman AirSDK]: https://airsdk.harman.com/
