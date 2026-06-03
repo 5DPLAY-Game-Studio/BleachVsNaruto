@@ -57,6 +57,7 @@
 **블리치 vs 나루토** 는 ***ActionScript 3.0*** 스크립팅 언어를 사용하여 작성되었습니다.현재 지원되는 플랫폼은 다음과 같습니다:
 
 - [x] Windows
+- [ ] Windows on ARM
 - [ ] Mac OS
 - [ ] Linux
 - [ ] Harmony OS

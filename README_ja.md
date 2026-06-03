@@ -57,6 +57,7 @@
 **ブリーチ vs ナルト** は ***ActionScript 3.0*** スクリプト言語で記述されています。現在サポートされているプラ​​ットフォームは次のとおりです：
 
 - [x] Windows
+- [ ] Windows on ARM
 - [ ] Mac OS
 - [ ] Linux
 - [ ] Harmony OS

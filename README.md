@@ -57,6 +57,7 @@
 **死神vs火影** 使用 ***ActionScript 3.0*** 脚本语言编写。当前支持平台情况如下：
 
 - [x] Windows
+- [ ] Windows on ARM
 - [ ] Mac OS
 - [ ] Linux
 - [ ] Harmony OS

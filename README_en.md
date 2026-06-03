@@ -57,6 +57,7 @@ Here, you can challenge the limits of your own operation and reaction, or you ca
 **Bleach vs Naruto** is written in ***ActionScript 3.0***. Currently supported platforms are as follows:
 
 - [x] Windows
+- [ ] Windows on ARM
 - [ ] Mac OS
 - [ ] Linux
 - [ ] Harmony OS
