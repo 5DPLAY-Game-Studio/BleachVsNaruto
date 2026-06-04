@@ -21,28 +21,22 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.display.Stage;
 import flash.events.Event;
-import flash.events.KeyboardEvent;
 import flash.events.MouseEvent;
-import flash.events.TimerEvent;
 import flash.filters.GlowFilter;
 import flash.system.System;
 import flash.text.TextField;
-import flash.utils.Timer;
+import flash.utils.getTimer;
 
 import net.play5d.game.bvn.GameConfig;
-
 import net.play5d.game.bvn.ui.UIUtils;
-
 import net.play5d.kyo.display.BitmapText;
-
-import net.play5d.kyo.input.KyoKeyCode;
 
 public class Debugger {
     include '../../../../../../include/_INCLUDE_.as';
 
-    public static const DRAW_AREA:Boolean     = false;
-    public static const SAFE_MODE:Boolean     = false;
-    public static const DEBUG_ENABLED:Boolean = false;
+    public static const DRAW_AREA:Boolean      = false;
+    public static const SAFE_MODE:Boolean      = false;
+    public static const DEBUG_ENABLED:Boolean  = false;
     public static const HIDE_MAP:Boolean       = false;
     public static const HIDE_HITEFFECT:Boolean = false;
     public static var onErrorMsgCall:Function;
@@ -90,11 +84,11 @@ public class Debugger {
 
         UIUtils.formatText(hashText.textfield, {
             color: 0xFFFF00,
-            size: 10
+            size : 10
         });
 
         var sp:Sprite = new Sprite();
-        sp.y = GameConfig.GAME_SIZE.y - 20;
+        sp.y          = GameConfig.GAME_SIZE.y - 20;
         sp.addChild(hashText);
         sp.addEventListener(MouseEvent.CLICK, function (e:MouseEvent):void {
             System.setClipboard(hash);
@@ -103,66 +97,45 @@ public class Debugger {
         addChild(sp);
     }
 
+    private static var _fpsLastTime:int;
+    private static var _fpsFrameCount:int;
+    private static var _fpsText:TextField;
+    private static var _smoothedFPS:Number = 60;
+    private static const _FPS_ALPHA:Number = 0.15;
+
     public static function showFPS():void {
-
-        var currentTime:int = 0;
-        var n:int           = 0;
-        var fpsCount:int;
-        var fpsText:TextField;
-
-        fpsText              = new TextField();
-        fpsText.textColor    = 0xffff00;
-        fpsText.mouseEnabled = false;
-        _stage.addChild(fpsText);
-        _stage.addEventListener(Event.ENTER_FRAME, countFPS);
-
-        var fpsTimer:Timer = new Timer(1000, 0);
-        fpsTimer.addEventListener(TimerEvent.TIMER, updateFPS);
-        fpsTimer.start();
-
-        function countFPS(e:Event):void {
-            fpsCount++;
+        if (_fpsText != null) {
+            return;
         }
 
-        function updateFPS(e:TimerEvent):void {
-            fpsText.text = 'fps:' + fpsCount;
-            fpsCount     = 0;
+        _fpsLastTime   = getTimer();
+        _fpsFrameCount = 0;
+        _smoothedFPS   = 60;
+
+        _fpsText              = new TextField();
+        _fpsText.textColor    = 0xffff00;
+        _fpsText.mouseEnabled = false;
+        _stage.addChild(_fpsText);
+        _stage.addEventListener(Event.ENTER_FRAME, updateFPS);
+    }
+
+    private static function updateFPS(e:Event):void {
+        _fpsFrameCount++;
+
+        var currentTime:int = getTimer();
+        var deltaTime:int   = currentTime - _fpsLastTime;
+
+        if (deltaTime >= 100) {
+            var instantFPS:Number = _fpsFrameCount / (deltaTime / 1000);
+
+            _smoothedFPS = _FPS_ALPHA * instantFPS + (1 - _FPS_ALPHA) * _smoothedFPS;
+
+            _fpsText.text = 'fps:' + _smoothedFPS.toFixed(1);
+
+            _fpsLastTime   = currentTime;
+            _fpsFrameCount = 0;
         }
-
     }
-
-    public static function runScriect(stage:Stage, success:Function):void {
-        var _scriect:Array = [KyoKeyCode.P, KyoKeyCode.L, KyoKeyCode.A, KyoKeyCode.Y];
-        var _keyIndex:int;
-        var _successed:Boolean;
-
-        stage.addEventListener(KeyboardEvent.KEY_DOWN, function (e:KeyboardEvent):void {
-
-            if (_successed) {
-                return;
-            }
-
-            if (e.keyCode == _scriect[_keyIndex].code) {
-                _keyIndex++;
-
-                if (_keyIndex >= _scriect.length) {
-                    _successed = true;
-                    success();
-                }
-
-            }
-            else {
-                _keyIndex = 0;
-            }
-
-        }, false, 0, true);
-
-
-    }
-
-    public function Debugger() {
-    }
-
 
 }
 }
