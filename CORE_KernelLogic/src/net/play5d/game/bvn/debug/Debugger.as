@@ -20,12 +20,9 @@ package net.play5d.game.bvn.debug {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.display.Stage;
-import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.filters.GlowFilter;
 import flash.system.System;
-import flash.text.TextField;
-import flash.utils.getTimer;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ui.UIUtils;
@@ -56,7 +53,7 @@ public class Debugger {
     public static function initDebug(stage:Stage):void {
         _stage = stage;
 
-        showFPS();
+        FPSDisplay.show(stage);
     }
 
     public static function addChild(d:DisplayObject):void {
@@ -97,44 +94,22 @@ public class Debugger {
         addChild(sp);
     }
 
-    private static var _fpsLastTime:int;
-    private static var _fpsFrameCount:int;
-    private static var _fpsText:TextField;
-    private static var _smoothedFPS:Number = 60;
-    private static const _FPS_ALPHA:Number = 0.15;
-
-    public static function showFPS():void {
-        if (_fpsText != null) {
-            return;
-        }
-
-        _fpsLastTime   = getTimer();
-        _fpsFrameCount = 0;
-        _smoothedFPS   = 60;
-
-        _fpsText              = new TextField();
-        _fpsText.textColor    = 0xffff00;
-        _fpsText.mouseEnabled = false;
-        _stage.addChild(_fpsText);
-        _stage.addEventListener(Event.ENTER_FRAME, updateFPS);
+    /**
+     * 显示 Stage 刷新率 FPS 叠加层。
+     *
+     * @param stage 目标舞台，省略时使用 {@link #initDebug} 传入的 Stage
+     * @see FPSDisplay#show
+     */
+    public static function showFPS(stage:Stage = null):void {
+        FPSDisplay.show(stage || _stage);
     }
-
-    private static function updateFPS(e:Event):void {
-        _fpsFrameCount++;
-
-        var currentTime:int = getTimer();
-        var deltaTime:int   = currentTime - _fpsLastTime;
-
-        if (deltaTime >= 100) {
-            var instantFPS:Number = _fpsFrameCount / (deltaTime / 1000);
-
-            _smoothedFPS = _FPS_ALPHA * instantFPS + (1 - _FPS_ALPHA) * _smoothedFPS;
-
-            _fpsText.text = 'fps:' + _smoothedFPS.toFixed(1);
-
-            _fpsLastTime   = currentTime;
-            _fpsFrameCount = 0;
-        }
+    /**
+     * 隐藏并销毁 FPS 叠加层。
+     *
+     * @see FPSDisplay#hide
+     */
+    public static function hideFPS():void {
+        FPSDisplay.hide();
     }
 
 }
