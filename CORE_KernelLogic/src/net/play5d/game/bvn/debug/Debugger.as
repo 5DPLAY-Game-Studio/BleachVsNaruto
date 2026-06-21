@@ -63,12 +63,15 @@ public class Debugger {
     /**
      * 显示当前提交哈希
      *
-     * @param hash 提交哈希
+     * @param hash 完整提交哈希（用于复制到剪贴板）
+     * @param displayText 屏幕展示文本，省略时使用 <code>hash</code>
      */
-    public static function showCommitHash(hash:String):void {
+    public static function showCommitHash(hash:String, displayText:String = null):void {
         if (!hash) {
             return;
         }
+
+        var label:String = displayText || hash;
 
         var hashText:BitmapText = new BitmapText(
                 true,
@@ -77,7 +80,7 @@ public class Debugger {
         );
 
         hashText.font = FONT.fontName;
-        hashText.text = hash;
+        hashText.text = label;
 
         UIUtils.formatText(hashText.textfield, {
             color: 0xFFFF00,

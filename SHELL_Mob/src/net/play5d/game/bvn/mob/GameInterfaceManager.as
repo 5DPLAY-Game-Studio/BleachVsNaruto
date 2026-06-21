@@ -349,7 +349,8 @@ public class GameInterfaceManager implements IGameInterface {
 //                       '" target="_blank">bbs.1212321.com</a>' + '<br/>';
         var commitsHash:String = GithubUtils.getCommitsHash();
         var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
-        creditsInfo += '提交：<a href="' + commitsUrl + '" target="_blank">' + commitsHash + '</a><br/>' +
+        var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
+        creditsInfo += '提交：<a href="' + commitsUrl + '" target="_blank">' + commitsLabel + '</a><br/>' +
                        '官网：<a href="http://www.1212321.com/" target="_blank">www.1212321.com</a>    ' +
                        '论坛：<a href="http://bbs.1212321.com/" target="_blank">bbs.1212321.com</a><br/>' +
                        '邮箱：5dplay@qun.mail.163.com （人才招募中）<br/>';

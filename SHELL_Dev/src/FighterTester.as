@@ -434,7 +434,7 @@ public class FighterTester extends Sprite {
         _mainGame.initlize(_gameSprite, stage, function ():void {
             _mainGame.goLanguage(function ():void {
                 var hash:String = GithubUtils.getCommitsHash();
-                Debugger.showCommitHash(hash);
+                Debugger.showCommitHash(hash, GithubUtils.getCommitsDisplayLabel());
 
                 _theme          = new SteelTheme();
                 _theme.fontName = FONT.fontName;
