@@ -71,6 +71,7 @@
 | 代码重构 | 理解现有逻辑 → 保持兼容性 → 分阶段实施 |
 | 性能优化 | 性能评估 → 定位瓶颈 → 优化 → 验证 |
 | 架构设计 | 理解需求 → 设计方案 → 评审 → 实现 |
+| ASDoc 注释补全 | 读取文件 → 按规范补全 public/protected → lint 检查 → 简短报告 |
 
 **已掌握的项目上下文**：
 
@@ -159,8 +160,10 @@
 **基本要求**：
 
 - 所有 public/protected 方法、类、属性必须添加完整的 ASDoc 注释
-- 注释格式参考 JavaDoc 规范
+- **优先遵循 ASDoc 规范**；ActionScript 无对应能力时再参考 JavaDoc
 - 包含 `@param`、`@return`、`@throws` 等标签（如适用）
+- 注释正文使用**中文**；保留文件中已有的 `@author`、`@version` 等元数据
+- **仅补文档时不改业务逻辑**（不删改实现、不清理 dead code，除非用户另行要求）
 
 **详细注释标准**（参考 `CheatCodeManager.as`）：
 
@@ -170,7 +173,7 @@
 - **核心设计理念**：列出 3-4 个关键设计原则（如单一职责、全局共享、低耦合、高性能）
 - **设计特点**：列出 4-5 个关键特性（如共享监听器、双重触发模式、生命周期管理、高效存储、数据封装）
 - **工作原理**：分阶段说明工作流程（5-6 个阶段，如注册阶段 → 监听阶段 → 匹配阶段 → 触发阶段 → 清理阶段）
-- **使用示例**：提供 2-3 个实际使用场景的代码示例
+- **使用示例**：提供 2-3 个实际使用场景的代码示例（类级优先使用 `@example` + `<pre>`）
 - **性能考量**：列出 3-4 个性能优化点
 - **元数据**：包含 `@see`、`@author`、`@version` 标签
 
@@ -192,12 +195,79 @@
 - **约束条件**：说明属性的取值范围、默认值、约束条件
 - **使用场景**：说明属性的使用场景和注意事项
 
-**辅助类注释**：
+**辅助类注释**（内部类、`private` 嵌套类等）：
 
 - **设计目的**：列出 3-4 个设计目的（如数据封装、状态追踪、性能优化、类型安全）
 - **状态流转**：分阶段说明状态变化（如初始状态 → 匹配中 → 触发成功 → 重置状态）
 - **字段说明**：每个字段都包含详细的用途说明和约束条件
 - **构造函数说明**：说明构造函数的参数要求和初始化逻辑
+- 类定义处添加 `@private`，避免出现在公开 API 文档中
+
+**接口与事件类注释**：
+
+- **接口**：说明契约职责，使用 `@see` 指向典型实现类
+- **独立事件类**：为事件类型常量补充 `@eventType` 与分派时机说明
+
+**ASDoc 专有标签与惯例**：
+
+| 标签 / 机制 | 用途 |
+|------------|------|
+| `[Event]` 元数据 | 在类定义前声明可分派事件（Flex/AIR 组件文档惯例） |
+| `@eventType` | 标注事件类型；`[Event]` 注释块指向常量（如 `ClassName.EVENT_XXX`），常量定义处指向事件名字符串（如 `load_complete`） |
+| `@example` | 代码示例，常与 `<pre>` 组合；类级示例优先于仅使用 `<p><b>使用示例</b></p>` |
+| `@default` | 标注 public 属性的默认值 |
+| `@private` | 标注私有字段、私有方法、内部类，以及仅需 `@private` 的 setter |
+
+**事件常量描述**（Adobe 标准句式）：
+
+```actionscript
+/**
+ * EVENT_LOAD_COMPLETE 常量定义了
+ * <code>load_complete</code> 事件对象的 {@link flash.events.Event#type} 属性值。
+ *
+ * @eventType load_complete
+ */
+public static const EVENT_LOAD_COMPLETE:String = 'load_complete';
+```
+
+**事件类 `[Event]` 声明示例**：
+
+```actionscript
+/**
+ * 内容加载完成时分派的事件。
+ *
+ * @eventType SuperPlayer.EVENT_LOAD_COMPLETE
+ */
+[Event(name='load_complete', type='flash.events.Event')]
+public class SuperPlayer extends Sprite { ... }
+```
+
+**getter / setter 对**：
+
+- **getter**：完整 ASDoc（功能、约束、`@return`、`@default` 等）
+- **setter**：仅 `/** @private */`，不重复 getter 说明
+
+**链接与引用规范**：
+
+- 公开文档中**不要**对私有成员使用 `{@link}`（如 `_url`、`playVideo`）
+- 类级文档中**不要**直接引用私有字段名
+- 跨类引用内部类时避免 `{@link InsVideo}`，改用文字说明或 Flash API 全限定名
+- 方法引用使用 `@see #methodName()`（带括号）
+
+**注释详略分级**：
+
+- **复杂管理器 / 组件**（如 `CheatCodeManager`、`SuperPlayer`）：类级含设计理念、设计特点、工作原理、示例、性能考量
+- **算法 / 编码类**（如 `JPGEncoder`）：重点文档化 public API；私有实现方法仅标 `@private`
+- **简单工具类**：可省略与职责无关的章节，避免重复堆砌
+
+**非 ActionScript 文件**：
+
+- JavaScript 桥接脚本（如 `AS.js`）使用 **JSDoc**，不适用 ASDoc
+
+**批量补全 ASDoc 任务**：
+
+- 按目录或文件依次处理 public/protected 及必要的 internal 成员
+- 完成后**简短报告**即可（如「`XXX` 的 ASDoc 注释已补全」），不必展开逐条列举
 
 **注释格式示例**：
 
@@ -233,15 +303,15 @@
  *   <li><b>阶段5：</b>说明</li>
  * </ol>
  *
- * <p><b>使用示例：</b></p>
+ * @example
  * <pre>
  * // 示例1
- * var example1:Function = ClassName.I.method("param1", function():void {
+ * var example1:Function = ClassName.I.method('param1', function():void {
  *     // 逻辑
  * });
  *
  * // 示例2
- * ClassName.I.method("param2", function():void {
+ * ClassName.I.method('param2', function():void {
  *     // 逻辑
  * }, true);
  * </pre>
