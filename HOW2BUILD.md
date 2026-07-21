@@ -10,12 +10,13 @@
 
 ### 软件
 
-- [Intellij IDEA 2022.3.3] （构建源代码）
+- [Intellij IDEA 2022.3.3] （可选；也可用命令行脚本构建 SHELL_Dev）
 - Adobe Animate 2019 （构建 fla/xfl 文件）
 
 ### SDK
 
 - FlexSDK [flex4.16.1-air51.0.1.1]（此 SDK 由 [Apache FlexSDK] 与 [Harman AirSDK] 合并得到）（解压后请保持根目录名称为 ***flex4.16.1-air51.0.1.1***）
+- 命令行构建还需设置环境变量 ***FLEX_HOME***，指向上述 SDK 根目录（与 [`tools/script/debug.bat`](tools/script/debug.bat) 相同）
 
 ## 构建要求
 
@@ -38,7 +39,29 @@
 
 ## 执行构建
 
-### 构建项目
+### 命令行构建（SHELL_Dev，无需 IDEA / VSCode）
+
+前置：已安装 FlexSDK，并设置 `FLEX_HOME`（例如 `set FLEX_HOME=D:\sdk\flex4.16.1-air51.0.1.1`）。素材仍需按上文 TagAssets 准备。
+
+在仓库根目录执行：
+
+```bat
+tools\script\build.bat
+```
+
+该脚本按与 VSCode SHELL_Dev 任务相同的顺序，用 SDK 自带的 `compc` / `amxmlc` 编译：
+
+`LIB_Other` → `LIB_KyoLib` → `CORE_Shared` → `CORE_KernelLogic` → `CORE_Utils` → SyncAssets → `SHELL_Dev`
+
+成功后产物在 `out\production\`（含 `SHELL_Dev\FighterTester.swf` 与 app descriptor）。可选启动调试：
+
+```bat
+tools\script\debug.bat
+```
+
+编译参数与各模块 `asconfig.json` 对齐，具体见 `tools\script\flex-config\`。
+
+### 构建项目（IntelliJ IDEA）
 
 - 单击 ***构建(B) -> 构建项目(P)*** 选项或按下 ***Ctrl + F9*** 快捷键以快速构建工程
 
