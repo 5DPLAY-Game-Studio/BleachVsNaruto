@@ -69,7 +69,6 @@ public class ConfigVO implements ISaveData, IInstanceVO {
      * 扩展设置
      */
     public var extendConfig:IExtendConfig;
-    private var _cloneKeys:Array                 = ClassUtils.getClassProperty(ConfigVO);
 
     public function setDefaultConfig(keyConfig:KeyConfigVO):void {
         switch (keyConfig.id) {
