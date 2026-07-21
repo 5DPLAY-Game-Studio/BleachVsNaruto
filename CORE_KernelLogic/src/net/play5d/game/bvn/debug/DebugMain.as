@@ -33,7 +33,7 @@ import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.MCUtils;
-import net.play5d.pcl.utils.ColorUtils;
+import net.play5d.kyo.utils.KyoColor;
 
 /**
  * 调试面
@@ -178,7 +178,7 @@ public class DebugMain {
                 }
 
                 if (checkerArea && !checkerArea.isEmpty()) {
-                    var checkerShape:Shape = MainUtils.getNewShape(ColorUtils.YELLOW);
+                    var checkerShape:Shape = MainUtils.getNewShape(KyoColor.YELLOW);
                     renderMain(checkerShape, checkerArea);
                 }
             }
@@ -200,7 +200,7 @@ public class DebugMain {
         for each (var hitVO:HitVO in hitVOs) {
             var hitArea:Rectangle = hitVO.currentArea;
             if (hitArea && !hitArea.isEmpty()) {
-                var hitShape:Shape = MainUtils.getNewShape(ColorUtils.RED);
+                var hitShape:Shape = MainUtils.getNewShape(KyoColor.RED);
                 renderMain(hitShape, hitArea);
             }
         }
@@ -219,7 +219,7 @@ public class DebugMain {
         // 渲染角色本体被打面
         var bodyArea:Rectangle = fighter.getBodyArea();
         if (bodyArea && !bodyArea.isEmpty()) {
-            var bodyShape:Shape = MainUtils.getNewShape(ColorUtils.GREEN);
+            var bodyShape:Shape = MainUtils.getNewShape(KyoColor.GREEN);
             renderMain(bodyShape, bodyArea);
         }
 
@@ -234,7 +234,7 @@ public class DebugMain {
         if (checker) {
             var checkerArea:Rectangle = ctrler.getHitCheckRect(checker);
             if (checkerArea && !checkerArea.isEmpty()) {
-                var checkerShape:Shape = MainUtils.getNewShape(ColorUtils.YELLOW);
+                var checkerShape:Shape = MainUtils.getNewShape(KyoColor.YELLOW);
                 renderMain(checkerShape, checkerArea);
             }
         }
