@@ -88,35 +88,35 @@ public class AssetManager {
         }
 
         function loadNext():void {
+            loadStep++;
 
             switch (loadStep) {
-            case 0:
-                loadPreLoadSounds(loadNext, loadProcess);
+            case 1:
                 type = GetLang('txt.asset_manager.sound');
                 loadProcess(0);
-                break;
-            case 1:
-                loadGraphics([_effectSwfPath], loadNext, loadProcess);
-                type = GetLang('txt.asset_manager.effect');
-                loadProcess(0);
+                loadPreLoadSounds(loadNext, loadProcess);
                 break;
             case 2:
-                loadFonts(loadNext, loadProcess);
-                type = GetLang('txt.asset_manager.font');
+                type = GetLang('txt.asset_manager.effect');
                 loadProcess(0);
+                loadGraphics([_effectSwfPath], loadNext, loadProcess);
                 break;
             case 3:
-                loadBitmaps(loadNext, loadProcess);
-                type = GetLang('txt.asset_manager.bitmap');
+                type = GetLang('txt.asset_manager.font');
                 loadProcess(0);
+                loadFonts(loadNext, loadProcess);
                 break;
             case 4:
+                type = GetLang('txt.asset_manager.bitmap');
+                loadProcess(0);
+                loadBitmaps(loadNext, loadProcess);
+                break;
+            default:
                 initAssets();
                 if (back != null) {
                     back();
                 }
             }
-            loadStep++;
         }
 
         loadNext();
