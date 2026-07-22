@@ -36,10 +36,10 @@
             "problemMatcher": [],
             "dependsOrder"  : "sequence",
             "dependsOn"     : [
-                "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
                 "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
-                "ActionScript: compile debug - CORE_Utils/asconfig.json",
                 "ActionScript: compile debug - CORE_Shared/asconfig.json",
+                "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
+                "ActionScript: compile debug - CORE_Utils/asconfig.json",
 
                 "5DPLAY_TOOLS - SyncAssets"
             ]
