@@ -17,20 +17,43 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- Keep in sync with CORE_Shared/asconfig.json. Paths relative to this file. -->
+<!-- 与 asconfig.json 保持同步。路径相对于此模块根目录。 -->
 <flex-config>
+	<!-- 编译器选项 -->
 	<compiler>
+		<!-- 构建调试版本 -->
 		<debug>true</debug>
+		
+		<!-- 源代码路径，通常内容是和 include-sources 相同 -->
 		<source-path>
-			<path-element>../../../CORE_Shared/src</path-element>
-			<path-element>../../../CORE_Shared/global</path-element>
+			<path-element>src</path-element>
+			<path-element>global</path-element>
 		</source-path>
+		
+		<!-- 库文件的三种链接方式：Merged、External 和 Include -->
+		<!-- Merged -->
+		<library-path append="true">
+		</library-path>
+		
+		<!-- External -->
+		<external-library-path append="true">
+		</external-library-path>
+		
+		<!-- Include -->
+		<include-libraries append="true">
+		</include-libraries>
 	</compiler>
+	
+	<!-- 包含路径，用于编译时即使没有引用到的路径下的库也进行导入 -->
 	<include-sources>
-		<path-element>../../../CORE_Shared/src</path-element>
+		<path-element>src</path-element>
 	</include-sources>
+	
+	<!-- 包含类路径，用于编译时即使没有引用到的相关类也进行导入 -->
 	<include-classes>
 		<class>_SHARED_GLOBALS_</class>
 	</include-classes>
-	<output>../../../out/production/CORE_Shared/CORE_Shared.swc</output>
+	
+	<!-- 输出路径（默认使用 IDEA 的生成路径） -->
+	<output>../out/production/CORE_Shared/CORE_Shared.swc</output>
 </flex-config>

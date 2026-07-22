@@ -52,7 +52,9 @@
         ],
         // External
         "external-library-path": [
-
+            "${flexlib}/libs",
+            "${flexlib}/libs/air",
+            "${flexlib}/libs/mx"
         ],
         // Include
         "include-libraries": [

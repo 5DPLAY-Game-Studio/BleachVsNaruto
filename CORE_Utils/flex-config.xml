@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (C) 2021-2026, 5DPLAY Game Studio
+  ~ All rights reserved.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!--
+  与 asconfig.json 保持同步。路径相对于此模块根目录。
+  [Embed] /../assets 和 /../../.git 从源路径根“src”解析。
+  通过 tools/script/sdk-external.xml (build.bat / IDEA) 实现 Flex/AIR/MX。
+-->
+<flex-config>
+	<!-- 编译器选项 -->
+	<compiler>
+		<!-- 构建调试版本 -->
+		<debug>true</debug>
+		
+		<!-- 源代码路径，通常内容是和 include-sources 相同 -->
+		<source-path>
+			<path-element>src</path-element>
+		</source-path>
+		
+		<!-- 库文件的三种链接方式：Merged、External 和 Include -->
+		<!-- Merged -->
+		<library-path append="true">
+			<path-element>../out/production/LIB_KyoLib/LIB_KyoLib.swc</path-element>
+			<path-element>../out/production/CORE_KernelLogic/CORE_KernelLogic.swc</path-element>
+		</library-path>
+		
+		<!-- External -->
+		<external-library-path append="true">
+		</external-library-path>
+		
+		<!-- Include -->
+		<include-libraries append="true">
+		</include-libraries>
+	</compiler>
+	
+	<!-- 包含路径，用于编译时即使没有引用到的路径下的库也进行导入 -->
+	<include-sources>
+		<path-element>src</path-element>
+	</include-sources>
+	
+	<!-- 包含类路径，用于编译时即使没有引用到的相关类也进行导入 -->
+	<include-classes>
+	</include-classes>
+	
+	<!-- 输出路径（默认使用 IDEA 的生成路径） -->
+	<output>../out/production/CORE_Utils/CORE_Utils.swc</output>
+</flex-config>

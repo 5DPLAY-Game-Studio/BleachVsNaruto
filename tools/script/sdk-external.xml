@@ -17,17 +17,20 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- Keep in sync with SHELL_Dev/asconfig.json. Extra flags via build.bat CLI. -->
+<!--
+  Shared fragment for library modules (bat / IDEA additionalOptions).
+  Append Flex/AIR/MX onto external-library-path so library SWCs do not merge
+  mx.* (same intent as asconfig.json). MUST use append="true": without it,
+  load-config+= replaces the whole list and drops IDEA/bat paths such as
+  shared/lib/swc. Also never clear library-path (IDEA Merged module SWCs).
+  ${flexlib} = SDK frameworks directory.
+-->
 <flex-config>
 	<compiler>
-		<debug>true</debug>
-		<optimize>false</optimize>
-		<source-path>
-			<path-element>../../../SHELL_Dev/src</path-element>
-			<path-element>../../../CORE_KernelLogic/global</path-element>
-			<path-element>../../../shared/_tmp/dev</path-element>
-		</source-path>
+		<external-library-path append="true">
+			<path-element>${flexlib}/libs</path-element>
+			<path-element>${flexlib}/libs/air</path-element>
+			<path-element>${flexlib}/libs/mx</path-element>
+		</external-library-path>
 	</compiler>
-	<swf-version>37</swf-version>
-	<output>../../../out/production/SHELL_Dev/FighterTester.swf</output>
 </flex-config>

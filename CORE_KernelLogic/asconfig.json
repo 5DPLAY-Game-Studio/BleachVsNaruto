@@ -55,6 +55,9 @@
         ],
         // External
         "external-library-path": [
+            "${flexlib}/libs",
+            "${flexlib}/libs/air",
+            "${flexlib}/libs/mx",
             "../shared/lib/swc"
         ],
         // Include

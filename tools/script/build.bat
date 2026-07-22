@@ -29,12 +29,13 @@
 :: Prerequisites
 ::   FLEX_HOME points at Flex/AIR SDK root (flex4.16.1-air51.0.1.1).
 ::
-:: Flex load-config files (keep in sync with module asconfig.json):
-::   tools\script\flex-config\*.xml
+:: Flex load-config (keep in sync with each module asconfig.json / *.iml):
+::   <Module>/flex-config.xml
+::   tools\script\sdk-external.xml — Flex/AIR/MX as external for library SWCs
 ::
-:: Order (same as .vscode/tasks.json SHELL_Dev):
-::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_KernelLogic
-::   -> CORE_Utils -> sync.bat -> SHELL_Dev
+:: Order:
+::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_Components
+::   -> CORE_KernelLogic -> CORE_Utils -> sync.bat -> SHELL_Dev
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -65,8 +66,8 @@ set AMXMLC=%FLEX_BIN%\amxmlc.bat
 call :EXIST "%COMPC%"
 call :EXIST "%AMXMLC%"
 
-set CFG_DIR=%BAT_HOME%flex-config
-call :EXIST "%CFG_DIR%"
+set SDK_EXT=%BAT_HOME%sdk-external.xml
+call :EXIST "%SDK_EXT%"
 
 set PATH=%FLEX_BIN%;%PATH%
 
@@ -84,6 +85,7 @@ set OUT_DEV=%OUT_ROOT%\SHELL_Dev
 if not exist "%OUT_ROOT%\LIB_Other" mkdir "%OUT_ROOT%\LIB_Other"
 if not exist "%OUT_ROOT%\LIB_KyoLib" mkdir "%OUT_ROOT%\LIB_KyoLib"
 if not exist "%OUT_ROOT%\CORE_Shared" mkdir "%OUT_ROOT%\CORE_Shared"
+if not exist "%OUT_ROOT%\CORE_Components" mkdir "%OUT_ROOT%\CORE_Components"
 if not exist "%OUT_ROOT%\CORE_KernelLogic" mkdir "%OUT_ROOT%\CORE_KernelLogic"
 if not exist "%OUT_ROOT%\CORE_Utils" mkdir "%OUT_ROOT%\CORE_Utils"
 if not exist "%OUT_DEV%" mkdir "%OUT_DEV%"
@@ -92,41 +94,23 @@ if not exist "%OUT_DEV%" mkdir "%OUT_DEV%"
 :: 3) Compile libraries (compc + AIR config)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-call :COMPC_MODULE "LIB_Other" "%CFG_DIR%\LIB_Other.xml"
+call :COMPC_MODULE "LIB_Other" "%REPO_ROOT%\LIB_Other\flex-config.xml"
 if errorlevel 1 goto END
 
-call :PREPARE_KYO_LIBSRC
+call :COMPC_MODULE "LIB_KyoLib" "%REPO_ROOT%\LIB_KyoLib\flex-config.xml"
 if errorlevel 1 goto END
 
-call :COMPC_MODULE "LIB_KyoLib" "%CFG_DIR%\LIB_KyoLib.xml"
+call :COMPC_MODULE "CORE_Shared" "%REPO_ROOT%\CORE_Shared\flex-config.xml"
 if errorlevel 1 goto END
 
-call :COMPC_MODULE "CORE_Shared" "%CFG_DIR%\CORE_Shared.xml"
+call :COMPC_MODULE "CORE_Components" "%REPO_ROOT%\CORE_Components\flex-config.xml"
 if errorlevel 1 goto END
 
-call :ECHO_LANG :COMPILE_START "CORE_KernelLogic"
-call "%COMPC%" +configname=air ^
-	-load-config+="%CFG_DIR%\CORE_KernelLogic.xml" ^
-	-library-path+="%OUT_ROOT%\LIB_KyoLib\LIB_KyoLib.swc" ^
-	-library-path+="%OUT_ROOT%\CORE_Shared\CORE_Shared.swc" ^
-	-library-path+="%REPO_ROOT%\CORE_KernelLogic\lib\swc" ^
-	-external-library-path+="%REPO_ROOT%\shared\lib\swc"
-if errorlevel 1 (
-	call :ECHO_LANG :COMPILE_FAIL "CORE_KernelLogic"
-	goto END
-)
-call :ECHO_LANG :COMPILE_OK "CORE_KernelLogic"
+call :COMPC_MODULE "CORE_KernelLogic" "%REPO_ROOT%\CORE_KernelLogic\flex-config.xml"
+if errorlevel 1 goto END
 
-call :ECHO_LANG :COMPILE_START "CORE_Utils"
-call "%COMPC%" +configname=air ^
-	-load-config+="%CFG_DIR%\CORE_Utils.xml" ^
-	-library-path+="%OUT_ROOT%\LIB_KyoLib\LIB_KyoLib.swc" ^
-	-library-path+="%OUT_ROOT%\CORE_KernelLogic\CORE_KernelLogic.swc"
-if errorlevel 1 (
-	call :ECHO_LANG :COMPILE_FAIL "CORE_Utils"
-	goto END
-)
-call :ECHO_LANG :COMPILE_OK "CORE_Utils"
+call :COMPC_MODULE "CORE_Utils" "%REPO_ROOT%\CORE_Utils\flex-config.xml"
+if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 4) SyncAssets (cwd = shared, same as VSCode task)
@@ -143,26 +127,11 @@ if not "!SYNC_ERR!"=="0" (
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 5) Compile SHELL_Dev (amxmlc / AIR)
+:: 5) Compile SHELL_Dev (amxmlc / AIR; no sdk-external — app Merges framework)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ECHO_LANG :COMPILE_START "SHELL_Dev"
-call "%AMXMLC%" ^
-	-load-config+="%CFG_DIR%\SHELL_Dev.xml" ^
-	-library-path+="%OUT_ROOT%\CORE_KernelLogic\CORE_KernelLogic.swc" ^
-	-library-path+="%OUT_ROOT%\LIB_KyoLib\LIB_KyoLib.swc" ^
-	-library-path+="%OUT_ROOT%\CORE_Utils\CORE_Utils.swc" ^
-	-library-path+="%OUT_ROOT%\CORE_Shared\CORE_Shared.swc" ^
-	-library-path+="%MOD_DEV%\lib\swc" ^
-	-external-library-path+="%REPO_ROOT%\shared\lib\swc" ^
-	-swf-version=37 ^
-	-advanced-telemetry=true ^
-	-optimize=false ^
-	-use-network=false ^
-	-use-direct-blit=true ^
-	-use-gpu=true ^
-	-includes=_ALL_GLOBALS_ ^
-	"%MOD_DEV%\src\FighterTester.as"
+call "%AMXMLC%" -load-config+="%MOD_DEV%\flex-config.xml" "%MOD_DEV%\src\FighterTester.as"
 if errorlevel 1 (
 	call :ECHO_LANG :COMPILE_FAIL "SHELL_Dev"
 	goto END
@@ -202,46 +171,17 @@ exit /b 0
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :COMPC_MODULE
-:: %1 = module label, %2 = load-config xml
+:: %1 = module label, %2 = module flex-config.xml
+:: sdk-external.xml first: Flex/AIR/MX stay external (same as asconfig.json)
 call :ECHO_LANG :COMPILE_START %1
-call "%COMPC%" +configname=air -load-config+="%~2"
+call "%COMPC%" +configname=air ^
+	-load-config+="%SDK_EXT%" ^
+	-load-config+="%~2"
 if errorlevel 1 (
 	call :ECHO_LANG :COMPILE_FAIL %1
 	exit /b 1
 )
 call :ECHO_LANG :COMPILE_OK %1
-exit /b 0
-
-:: Filter LIB_KyoLib/lib/src: stub Crypto.as (real file breaks ASC parser)
-:PREPARE_KYO_LIBSRC
-set KYO_LIB_SRC=%REPO_ROOT%\LIB_KyoLib\lib\src
-set KYO_FILTERED=%REPO_ROOT%\out\build\LIB_KyoLib_libsrc
-call :EXIST "%KYO_LIB_SRC%"
-if exist "%KYO_FILTERED%" rd /s /q "%KYO_FILTERED%"
-mkdir "%REPO_ROOT%\out\build" 2>nul
-mkdir "%KYO_FILTERED%"
-robocopy "%KYO_LIB_SRC%" "%KYO_FILTERED%" /E /XF Crypto.as /NFL /NDL /NJH /NJS /nc /ns /np >nul
-set RC=!ERRORLEVEL!
-if !RC! GEQ 8 (
-	call :ECHO_LANG :COMPILE_FAIL "LIB_KyoLib libsrc filter"
-	exit /b 1
-)
-set STUB_DIR=%KYO_FILTERED%\com\hurlant\crypto
-if not exist "%STUB_DIR%" mkdir "%STUB_DIR%"
-(
-	echo package com.hurlant.crypto {
-	echo import flash.utils.ByteArray;
-	echo import com.hurlant.crypto.symmetric.ICipher;
-	echo import com.hurlant.crypto.symmetric.IPad;
-	echo public class Crypto {
-	echo public static function getCipher^(name:String, key:ByteArray, pad:IPad = null^):ICipher { return null; }
-	echo public static function getPad^(name:String^):IPad { return null; }
-	echo public static function getKeySize^(name:String^):uint { return 16; }
-	echo public static function getHMAC^(name:String^):* { return null; }
-	echo public static function getHash^(name:String^):* { return null; }
-	echo }
-	echo }
-) > "%STUB_DIR%\Crypto.as"
 exit /b 0
 
 :END

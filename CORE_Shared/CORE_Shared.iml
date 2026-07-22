@@ -7,7 +7,7 @@
           <sdk name="flex4.16.1-air51.0.1.1" />
         </dependencies>
         <compiler-options>
-          <option name="additionalOptions" value="-includes _SHARED_GLOBALS_" />
+          <option name="additionalOptions" value="-includes _SHARED_GLOBALS_ -load-config+=$MODULE_DIR$/../tools/script/sdk-external.xml" />
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
