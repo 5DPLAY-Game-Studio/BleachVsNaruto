@@ -36,7 +36,7 @@
             <entry key="metadata.publisher" value="5DPLAY Game Studio" />
             <entry key="metadata.title" value="FighterTester" />
           </map>
-          <option name="additionalOptions" value="-swf-version 37 -advanced-telemetry=true -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
+          <option name="additionalOptions" value="-swf-version 37 -advanced-telemetry=true -optimize=false -use-network=false -use-direct-blit=true -use-gpu=true -source-path+=$MODULE_DIR$/../CORE_KernelLogic/global -includes _ALL_GLOBALS_" />
         </compiler-options>
         <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/src/FighterTester-app.xml" package-file-name="FighterTester">
           <files-to-package>
