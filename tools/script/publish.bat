@@ -29,6 +29,12 @@
 ::   FLASH_HOME points at Flash/Animate install dir (contains Animate.exe
 ::   or Flash.exe), e.g. E:\Program Files\Adobe\Adobe Animate 2022
 ::
+:: Notes
+::   Launch uses -run-jsfl (Animate 2022+ hidden option). Old -AlwaysRunJSFL
+::   is not present in modern Animate.exe and has no effect.
+::   Also sets AppData Application.xml: DontPromptForJSFLOpen + RunJSFLAsCommand
+::   (same as checking "Don't show again" and choosing Run).
+::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
@@ -90,11 +96,18 @@ if errorlevel 1 (
 if exist "%RESULT_FILE%" del /f /q "%RESULT_FILE%" >nul 2>&1
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 3b) Suppress Open-JSFL Run/Edit prompt (prefs + CLI)
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+call :ENSURE_JSFL_NO_PROMPT
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 4) Launch Flash/Animate with JSFL (blocks until quit)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ECHO_LANG :LAUNCH ""
-start "" /wait "%FLASH_EXE%" "%JSFL%"
+:: -run-jsfl: "always run jsfl files as a command" (Animate.exe hidden option)
+start "" /wait "%FLASH_EXE%" -run-jsfl "%JSFL%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 5) Read JSFL result (Adobe exit codes are unreliable)
@@ -132,6 +145,13 @@ if not exist %1 (
 	call :ECHO_LANG :NOT_EXIST %1
 	goto END
 )
+goto :EOF
+
+:: Patch %APPDATA%\Adobe\Animate\<ver>\Application.xml so Open-JSFL dialog is skipped.
+:ENSURE_JSFL_NO_PROMPT
+set ANIMATE_APPDATA=%APPDATA%\Adobe\Animate
+if not exist "%ANIMATE_APPDATA%" goto :EOF
+powershell -NoProfile -ExecutionPolicy Bypass -File "%BAT_HOME%ensure_jsfl_no_prompt.ps1"
 goto :EOF
 
 :ECHO_LANG
