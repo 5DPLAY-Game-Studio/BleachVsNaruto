@@ -19,12 +19,19 @@
 
 <!--
   Keep in sync with LIB_Other/asconfig.json.
-  Paths relative to this file (tools/script/flex-config/).
-  Omits lib/Flash/src and lib/easy_lua/src (fail under current FlexSDK).
+  Paths relative to this file (tools/script/flex-config/), except ${flexlib}.
+  Flex/AIR/MX must be external (same as asconfig.json); air-config defaults
+  put libs/mx on library-path and would merge mx.* into this SWC.
 -->
 <flex-config>
 	<compiler>
 		<debug>true</debug>
+		<library-path append="false"/>
+		<external-library-path append="false">
+			<path-element>${flexlib}/libs</path-element>
+			<path-element>${flexlib}/libs/air</path-element>
+			<path-element>${flexlib}/libs/mx</path-element>
+		</external-library-path>
 		<include-libraries>
 			<library>../../../LIB_Other/swc/lua.swc</library>
 			<library>../../../LIB_Other/swc/EvalES4.swc</library>
@@ -32,7 +39,9 @@
 	</compiler>
 	<include-sources>
 		<path-element>../../../LIB_Other/src</path-element>
+		<path-element>../../../LIB_Other/lib/Flash/src</path-element>
 		<path-element>../../../LIB_Other/lib/ActionBSON/src</path-element>
+		<path-element>../../../LIB_Other/lib/easy_lua/src</path-element>
 		<path-element>../../../LIB_Other/lib/fzip/src</path-element>
 		<path-element>../../../LIB_Other/lib/as3xls/src</path-element>
 		<path-element>../../../LIB_Other/lib/tweener/src</path-element>

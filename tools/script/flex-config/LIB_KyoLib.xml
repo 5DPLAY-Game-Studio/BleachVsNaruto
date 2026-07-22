@@ -17,10 +17,22 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- Keep in sync with LIB_KyoLib/asconfig.json. Paths relative to this file. -->
+<!--
+  Keep in sync with LIB_KyoLib/asconfig.json.
+  Paths relative to this file, except ${flexlib}.
+  lib/src is the filtered tree at out/build/LIB_KyoLib_libsrc (Crypto.as stub).
+  Flex/AIR/MX must be external (same as asconfig.json); air-config defaults
+  put libs/mx on library-path and would merge mx.* into this SWC.
+-->
 <flex-config>
 	<compiler>
 		<debug>true</debug>
+		<library-path append="false"/>
+		<external-library-path append="false">
+			<path-element>${flexlib}/libs</path-element>
+			<path-element>${flexlib}/libs/air</path-element>
+			<path-element>${flexlib}/libs/mx</path-element>
+		</external-library-path>
 		<source-path>
 			<path-element>../../../LIB_KyoLib/src</path-element>
 			<path-element>../../../out/build/LIB_KyoLib_libsrc</path-element>
@@ -31,6 +43,7 @@
 	</compiler>
 	<include-sources>
 		<path-element>../../../LIB_KyoLib/src</path-element>
+		<path-element>../../../out/build/LIB_KyoLib_libsrc</path-element>
 	</include-sources>
 	<output>../../../out/production/LIB_KyoLib/LIB_KyoLib.swc</output>
 </flex-config>
