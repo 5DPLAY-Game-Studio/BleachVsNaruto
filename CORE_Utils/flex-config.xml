@@ -20,7 +20,7 @@
 <!--
   与 asconfig.json 保持同步。路径相对于此模块根目录。
   [Embed] /../assets 和 /../../.git 从源路径根“src”解析。
-  通过 tools/script/sdk-external.xml (build.bat / IDEA) 实现 Flex/AIR/MX。
+  通过 tools/script/conf/sdk-external.xml (build.bat / IDEA) 实现 Flex/AIR/MX。
 -->
 <flex-config>
 	<!-- 编译器选项 -->

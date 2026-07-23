@@ -19,7 +19,7 @@
 
 <!--
   与 asconfig.json 保持同步。路径相对于此模块根目录。
-  通过 tools/script/sdk-external.xml (build.bat / IDEA) 实现 Flex/AIR/MX。
+  通过 tools/script/conf/sdk-external.xml (build.bat / IDEA) 实现 Flex/AIR/MX。
   fl.* 来自合并的 LIB_KyoLib（包括 LIB_Other）。
 -->
 <flex-config>

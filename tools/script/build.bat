@@ -31,7 +31,7 @@
 ::
 :: Flex load-config（与各模块 asconfig.json / *.iml 保持同步）：
 ::   [Module]/flex-config.xml
-::   tools\script\sdk-external.xml - 库 SWC 将 Flex/AIR/MX 标为 external
+::   tools\script\conf\sdk-external.xml - 库 SWC 将 Flex/AIR/MX 标为 external
 ::
 :: 编译顺序：
 ::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_Components
@@ -74,7 +74,7 @@ call "%FUNC_COMMON%" EXIST "%AMXMLC%"
 if errorlevel 1 goto END
 
 :: 库模块共用：将 Flex/AIR/MX 标为 external
-set "SDK_EXT=%BAT_HOME%sdk-external.xml"
+set "SDK_EXT=%BAT_HOME%conf\sdk-external.xml"
 call "%FUNC_COMMON%" EXIST "%SDK_EXT%"
 if errorlevel 1 goto END
 
