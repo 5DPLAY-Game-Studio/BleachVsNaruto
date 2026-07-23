@@ -63,6 +63,10 @@ goto :EOF
 echo 애플리케이션 설치 중 [%~2] ...
 goto :EOF
 
+:INSTALL_FAIL
+echo 애플리케이션 설치 실패: %~2
+goto :EOF
+
 :START_MSG
 echo 플래시 디버거를 시작합니다...
 goto :EOF

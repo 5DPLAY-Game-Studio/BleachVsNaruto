@@ -63,6 +63,10 @@ goto :EOF
 echo Installing application [%~2] ...
 goto :EOF
 
+:INSTALL_FAIL
+echo Failed to install application: %~2
+goto :EOF
+
 :START_MSG
 echo Starting Flash Debugger...
 goto :EOF

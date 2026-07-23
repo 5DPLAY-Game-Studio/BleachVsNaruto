@@ -39,6 +39,10 @@ goto :EOF
 title Apache fdb (Flash Player 디버거)
 goto :EOF
 
+:USAGE
+echo 사용법: fdbg.bat [swf-file]
+goto :EOF
+
 :START_MSG
 echo 플래시 디버거를 시작합니다...
 goto :EOF

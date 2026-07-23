@@ -39,6 +39,10 @@ goto :EOF
 title Apache fdb（Flash Player デバッガー）
 goto :EOF
 
+:USAGE
+echo 使い方: fdbg.bat [swf-file]
+goto :EOF
+
 :START_MSG
 echo フラッシュ デバッガーを起動しています...
 goto :EOF

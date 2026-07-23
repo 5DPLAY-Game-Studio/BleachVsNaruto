@@ -39,6 +39,10 @@ goto :EOF
 title Apache fdb（Flash Player 调试器）
 goto :EOF
 
+:USAGE
+echo 用法: fdbg.bat [swf-file]
+goto :EOF
+
 :START_MSG
 echo 正在启动 Flash 调试器...
 goto :EOF

@@ -63,6 +63,10 @@ goto :EOF
 echo アプリケーション [%~2] をインストールしています...
 goto :EOF
 
+:INSTALL_FAIL
+echo アプリケーションのインストールに失敗しました: %~2
+goto :EOF
+
 :START_MSG
 echo フラッシュ デバッガーを起動しています...
 goto :EOF

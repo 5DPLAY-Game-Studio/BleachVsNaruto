@@ -17,74 +17,99 @@
 :: along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::
+:: 用途
+::   使用 AIR Debug Launcher（adl）启动 SHELL_Dev 调试包。
+::   通常在 tools\script\build.bat 成功后使用。
+::
+:: 用法
+::   tools\script\debug.bat
+::
+:: 前置条件
+::   - FLEX_HOME 指向 Flex/AIR SDK（含 bin\adl、runtimes\air\win）
+::   - 已构建 out\production\SHELL_Dev（含 FighterTester-app.xml 与 SWF）
+::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
 setlocal enabledelayedexpansion
 
-:: 当前 BAT 文件绝对运行目录
-set BAT_HOME=%~dp0
-:: echo BAT_HOME: %BAT_HOME%
+:: 当前 BAT 文件所在目录（末尾带反斜杠）
+set "BAT_HOME=%~dp0"
+call :INIT_LANG
 
-:: ↓ 等同于 title 死神vs火影 - 监视器
 call :ECHO_LANG :TITLE ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 1) Flex / AIR SDK
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: 检查环境变量 FLEX_HOME 是否存在，该变量指向已安装的 FlexSDK
 if "%FLEX_HOME%"=="" (
 	call :ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
 call :EXIST "%FLEX_HOME%"
+if errorlevel 1 goto END
 
-set FLEX_BIN=%FLEX_HOME%\bin
+set "FLEX_BIN=%FLEX_HOME%\bin"
 call :EXIST "%FLEX_BIN%"
-:: echo FLEX_BIN: %FLEX_BIN%
+if errorlevel 1 goto END
 
-set RUNTIME=%FLEX_HOME%\runtimes\air\win
+set "ADL=%FLEX_BIN%\adl.exe"
+call :EXIST "%ADL%"
+if errorlevel 1 goto END
+
+set "RUNTIME=%FLEX_HOME%\runtimes\air\win"
 call :EXIST "%RUNTIME%"
-:: echo RUNTIME: %RUNTIME%
-
-set RUN_DIR=%BAT_HOME%..\..\out\production\SHELL_Dev
-call :EXIST "%RUN_DIR%"
-:: echo RUN_DIR: %RUN_DIR%
-
-set APP_XML=%RUN_DIR%\FighterTester-app.xml
-call :EXIST "%APP_XML%"
-:: echo APP_XML: %APP_XML%
+if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 2) SHELL_Dev 运行目录与应用描述符
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-set PATH=%FLEX_BIN%;%PATH%
-:: 代码页切换为 utf-8 编码
+set "REPO_ROOT=%BAT_HOME%..\.."
+for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
+
+set "RUN_DIR=%REPO_ROOT%\out\production\SHELL_Dev"
+call :EXIST "%RUN_DIR%"
+if errorlevel 1 goto END
+
+set "APP_XML=%RUN_DIR%\FighterTester-app.xml"
+call :EXIST "%APP_XML%"
+if errorlevel 1 goto END
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 3) 启动 adl
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+set "PATH=%FLEX_BIN%;%PATH%"
+:: adl/控制台输出使用 UTF-8（与 AIR 调试日志更兼容）
 chcp 65001 >nul
 
-:: 执行 adl 命令以调试测试版
-adl -runtime "%RUNTIME%" "%APP_XML%" "%RUN_DIR%"
+"%ADL%" -runtime "%RUNTIME%" "%APP_XML%" "%RUN_DIR%"
+if errorlevel 1 goto END
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:: 结束操作
 echo.
-exit 0
+exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
 pause >nul
-exit 1
+exit /b 1
 
-:: 判断文件是否存在，不存在给出提示信息
+:: 路径不存在则提示并返回错误（调用方须检查 errorlevel）
 :EXIST
 if not exist %1 (
 	call :ECHO_LANG :NOT_EXIST %1
-	goto END
+	exit /b 1
 )
-goto :EOF
+exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:ECHO_LANG
+:: 依据当前控制台代码页选择 lang 目录下对应 codepage 的 bat（仅初始化一次）
+:INIT_LANG
 for /f "tokens=2 delims=:" %%a in ('chcp') do (
 	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
 )
@@ -92,22 +117,24 @@ for /f "tokens=2 delims=:" %%a in ('chcp') do (
 set SUPPORT_LANG=437 932 936 949
 set IS_SUPPORT=0
 for %%a in (%SUPPORT_LANG%) do (
-	if "%%a"=="%CURRENT_CODEPAGE%" (
+	if "%%a"=="!CURRENT_CODEPAGE!" (
 		set IS_SUPPORT=1
 		goto LANG_CHK
 	)
 )
 :LANG_CHK
-if %IS_SUPPORT%==0 (
+if !IS_SUPPORT!==0 (
 	set CURRENT_CODEPAGE=437
 )
 
-set LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat
-if not exist "%LANG_BAT%" (
+set "LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat"
+if not exist "%LANG_BAT%" set "LANG_BAT="
+goto :EOF
+
+:ECHO_LANG
+if "%LANG_BAT%"=="" (
 	echo ECHO_LANG [N/A]
 	goto :EOF
 )
-
-:: echo Code Page: %CURRENT_CODEPAGE%
 call "%LANG_BAT%" %1 %2
 goto :EOF

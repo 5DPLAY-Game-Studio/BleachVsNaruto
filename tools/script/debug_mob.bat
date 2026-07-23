@@ -17,116 +17,133 @@
 :: along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::
+:: 用途
+::   通过 adb + Apache fdb，在已连接的 Android 设备上调试 SHELL_Mob（AIR APK）。
+::
+:: 用法
+::   tools\script\debug_mob.bat
+::
+:: 前置条件
+::   - FLEX_HOME 指向 Flex/AIR SDK（含 bin\fdb）
+::   - PATH 中可用 adb（Android SDK platform-tools）
+::   - 设备已 USB 调试连接；调试端口与 IDEA SHELL_Mob 配置一致（7936）
+::   - 若未安装应用，需已构建 out\production\SHELL_Mob\launch.apk
+::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
 setlocal enabledelayedexpansion
 
-:: 当前 BAT 文件绝对运行目录
-set BAT_HOME=%~dp0
-:: echo BAT_HOME: %BAT_HOME%
+:: 当前 BAT 文件所在目录（末尾带反斜杠）
+set "BAT_HOME=%~dp0"
+call :INIT_LANG
 
-:: ↓ 等同于 title Apache fdb（Flash Player 调试器）
 call :ECHO_LANG :TITLE ""
 
-:: APK 文件
-set DBG_FILE=%BAT_HOME%..\..\out\production\SHELL_Mob\launch.apk
-:: 启动 id。在 application.xml 中定义的 id
-set DBG_ID=net.play5d.game.bvn.mob
-:: 调试包名，格式为 air.应用程序 application 定义的 id。air 是自动添加的前缀
-set DBG_PACKAGE=air.%DBG_ID%
-:: 调试端口，默认 7936，应与 IDEA 中的 SHELL_Mob 模块启动配置中相同
-set DBG_PORT=7936
-:: 临时文件，转储 adb device 命令的输出
-set TMP_ADB_DEVICES=%TEMP%\adb_devices.txt
-
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 1) 调试参数 / 路径
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: 检查环境变量 FLEX_HOME 是否存在，该变量指向已安装的 FlexSDK
+set "REPO_ROOT=%BAT_HOME%..\.."
+for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
+
+:: APK；包名 = air. + application.xml 中的 id；端口与 IDEA SHELL_Mob 一致
+set "DBG_FILE=%REPO_ROOT%\out\production\SHELL_Mob\launch.apk"
+set "DBG_ID=net.play5d.game.bvn.mob"
+set "DBG_PACKAGE=air.%DBG_ID%"
+set "DBG_ACTIVITY=%DBG_PACKAGE%/.AppEntry"
+set DBG_PORT=7936
+set "TMP_ADB_DEVICES=%TEMP%\adb_devices.txt"
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 2) Flex SDK + adb
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 if "%FLEX_HOME%"=="" (
 	call :ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
 call :EXIST "%FLEX_HOME%"
+if errorlevel 1 goto END
 echo FLEX_HOME: %FLEX_HOME%
 
-set FLEX_BIN=%FLEX_HOME%\bin
+set "FLEX_BIN=%FLEX_HOME%\bin"
 call :EXIST "%FLEX_BIN%"
-:: echo FLEX_BIN: %FLEX_BIN%
+if errorlevel 1 goto END
 
-:: 检查 adb 命令是否存在
+set "FDB=%FLEX_BIN%\fdb.bat"
+call :EXIST "%FDB%"
+if errorlevel 1 goto END
+
+set "PATH=%FLEX_BIN%;%PATH%"
+
 call :CHK_CMD adb
+if errorlevel 1 goto END
 
 adb start-server >nul 2>nul
-:: 延时 2 秒让 adb 预启动
+:: 等待 adb 服务就绪
 timeout /t 2 >nul
 
 adb devices >nul 2>nul
 timeout /t 1 >nul
 adb devices >"%TMP_ADB_DEVICES%"
 
-:: 解析 Android 设备 id
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 3) 解析已连接且状态为 device 的设备（仅取第一台）
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 set DEVICE_COUNT=0
 set "DEVICE_ID="
-for /f "usebackq skip=1 delims=" %%L in ("%TMP_ADB_DEVICES%") do (
-	set "LINE=%%L"
-	echo !LINE! | findstr "device" >nul
-	if !errorlevel!==0 (
+for /f "usebackq skip=1 tokens=1,2" %%A in ("%TMP_ADB_DEVICES%") do (
+	if /i "%%B"=="device" (
 		set /a DEVICE_COUNT+=1
-		
-		:: 获取设备 id
-		call :GET_DEVICE_ID "!LINE!"
-		:: 跳出循环，只处理遇到的第一个设备
-		goto :NEXT
+		set "DEVICE_ID=%%A"
+		goto NEXT
 	)
 )
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:: 下一步操作
 :NEXT
-
-set PATH=%FLEX_BIN%;%PATH%
+if exist "%TMP_ADB_DEVICES%" del /f /q "%TMP_ADB_DEVICES%" >nul 2>nul
 echo.
 
-:: 删除临时文件
-del "%TMP_ADB_DEVICES%" >nul 2>nul
-
-:: 没有检测到连接的设备，提示并退出
 if !DEVICE_COUNT!==0 (
 	call :ECHO_LANG :NO_DEVICE ""
-	goto :END
+	goto END
 )
 
-:: 如果有设备连接的操作
-:: 更新标题
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 4) 安装（若需） / 端口转发 / 启动应用
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 call :ECHO_LANG :TITLE_ADB "!DEVICE_ID!"
 call :ECHO_LANG :CONNECT "!DEVICE_ID!"
 
-:: 检测应用是否安装
-adb shell pm path %DBG_PACKAGE% | findstr "package:" >nul 2>nul
-if %errorlevel%==0 (
-	goto :INSTALLED
-)
+adb -s "!DEVICE_ID!" shell pm path %DBG_PACKAGE% | findstr "package:" >nul 2>nul
+if not errorlevel 1 goto INSTALLED
 
 call :ECHO_LANG :NOT_INSTALLED "%DBG_PACKAGE%"
-:: 检查 APK 文件是否存在
 call :EXIST "%DBG_FILE%"
+if errorlevel 1 goto END
 
 call :ECHO_LANG :INSTALLING "%DBG_PACKAGE%"
-:: 如果存在，安装应用到设备
 adb -s "!DEVICE_ID!" install "%DBG_FILE%"
+if errorlevel 1 (
+	call :ECHO_LANG :INSTALL_FAIL "%DBG_PACKAGE%"
+	goto END
+)
 
 :INSTALLED
-:: 重置 adb 转发端口
 adb -s "!DEVICE_ID!" forward --remove-all >nul 2>nul
 adb -s "!DEVICE_ID!" forward tcp:%DBG_PORT% tcp:%DBG_PORT% >nul
 
-:: 启动 fdb 等待 Adobe AIR 程序链接
-:: 重启应用程序
 adb -s "!DEVICE_ID!" shell am force-stop %DBG_PACKAGE% >nul
-adb -s "!DEVICE_ID!" shell am start -n %DBG_PACKAGE%/.AppEntry >nul
+adb -s "!DEVICE_ID!" shell am start -n %DBG_ACTIVITY% >nul
 
-:: 循环监听，直到关闭窗口
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 5) fdb 循环（关闭窗口结束）
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :LOOP
 call :ECHO_LANG :START_MSG ""
 echo.
@@ -137,56 +154,41 @@ echo.
 	echo continue
 	echo quit
 	echo y
-) | fdb -unit
+) | "%FDB%" -unit
 
 timeout /t 1 >nul
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:: 结束操作
 echo.
 call :ECHO_LANG :END_MSG ""
-:: pause >nul
-:: exit 0
-goto :LOOP
+goto LOOP
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
 pause >nul
-exit 1
+exit /b 1
 
-:: 判断文件是否存在，不存在给出提示信息
+:: 路径不存在则提示并返回错误（调用方须检查 errorlevel）
 :EXIST
 if not exist %1 (
 	call :ECHO_LANG :NOT_EXIST %1
-	goto END
+	exit /b 1
 )
-goto :EOF
+exit /b 0
 
-:: 检测命令是否存在
+:: 检测外部命令是否在 PATH 中（调用方须检查 errorlevel）
 :CHK_CMD
 where %1 >nul 2>nul
-if %errorlevel%==1 (
+if errorlevel 1 (
 	call :ECHO_LANG :NO_CMD %1
-	goto END
+	exit /b 1
 )
-goto :EOF
-
-::::::::::::::::::::::::::::::::::
-
-:: 移除末尾的 "device"，保留完整ID
-:GET_DEVICE_ID
-set "STRING=%~1"
-::					   ↓ 这里是 TAB
-set "DEVICE_ID=!STRING:	device=!"
-goto :EOF
-
-::::::::::::::::::::::::::::::::::
+exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:ECHO_LANG
+:: 依据当前控制台代码页选择 lang 目录下对应 codepage 的 bat（仅初始化一次）
+:INIT_LANG
 for /f "tokens=2 delims=:" %%a in ('chcp') do (
 	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
 )
@@ -194,22 +196,24 @@ for /f "tokens=2 delims=:" %%a in ('chcp') do (
 set SUPPORT_LANG=437 932 936 949
 set IS_SUPPORT=0
 for %%a in (%SUPPORT_LANG%) do (
-	if "%%a"=="%CURRENT_CODEPAGE%" (
+	if "%%a"=="!CURRENT_CODEPAGE!" (
 		set IS_SUPPORT=1
 		goto LANG_CHK
 	)
 )
 :LANG_CHK
-if %IS_SUPPORT%==0 (
+if !IS_SUPPORT!==0 (
 	set CURRENT_CODEPAGE=437
 )
 
-set LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat
-if not exist "%LANG_BAT%" (
+set "LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat"
+if not exist "%LANG_BAT%" set "LANG_BAT="
+goto :EOF
+
+:ECHO_LANG
+if "%LANG_BAT%"=="" (
 	echo ECHO_LANG [N/A]
 	goto :EOF
 )
-
-:: echo Code Page: %CURRENT_CODEPAGE%
 call "%LANG_BAT%" %1 %2
 goto :EOF

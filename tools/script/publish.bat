@@ -40,8 +40,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: 当前 BAT 文件绝对运行目录
-set BAT_HOME=%~dp0
+:: 当前 BAT 文件所在目录（末尾带反斜杠）
+set "BAT_HOME=%~dp0"
+call :INIT_LANG
 
 call :ECHO_LANG :TITLE ""
 call :ECHO_LANG :PUBLISH_START ""
@@ -50,46 +51,50 @@ call :ECHO_LANG :PUBLISH_START ""
 :: 1) FLASH_HOME + 可执行文件
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: 检查环境变量 FLASH_HOME 是否存在，该变量指向已安装的 Flash/Animate
+:: FLASH_HOME 须指向已安装的 Flash/Animate 根目录
 if "%FLASH_HOME%"=="" (
 	call :ECHO_LANG :UNDEFINE "FLASH_HOME"
 	goto END
 )
 call :EXIST "%FLASH_HOME%"
+if errorlevel 1 goto END
 
-set FLASH_EXE=
-if exist "%FLASH_HOME%\Animate.exe" set FLASH_EXE=%FLASH_HOME%\Animate.exe
-if "%FLASH_EXE%"=="" if exist "%FLASH_HOME%\Flash.exe" set FLASH_EXE=%FLASH_HOME%\Flash.exe
-if "%FLASH_EXE%"=="" if exist "%FLASH_HOME%\Support Files\Animate.exe" set FLASH_EXE=%FLASH_HOME%\Support Files\Animate.exe
-if "%FLASH_EXE%"=="" if exist "%FLASH_HOME%\Support Files\Flash.exe" set FLASH_EXE=%FLASH_HOME%\Support Files\Flash.exe
-
-if "%FLASH_EXE%"=="" (
+call :RESOLVE_FLASH_EXE
+if "!FLASH_EXE!"=="" (
 	call :ECHO_LANG :NO_EXE "%FLASH_HOME%"
 	goto END
 )
-call :ECHO_LANG :USE_EXE "%FLASH_EXE%"
+call :ECHO_LANG :USE_EXE "!FLASH_EXE!"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 2) 仓库 / FlashSrc / JSFL 路径
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-set REPO_ROOT=%BAT_HOME%..\..
-for %%I in ("%REPO_ROOT%") do set REPO_ROOT=%%~fI
+set "REPO_ROOT=%BAT_HOME%..\.."
+for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 
-set FLASH_SRC=%REPO_ROOT%\BleachVsNaruto_FlashSrc
+set "JSFL_DIR=%REPO_ROOT%\tools\jsfl"
+set "FLASH_SRC=%REPO_ROOT%\BleachVsNaruto_FlashSrc"
+set "JSFL=%JSFL_DIR%\publish_flashsrc.jsfl"
+set "ROOT_FILE=%JSFL_DIR%\_publish_root.txt"
+set "RESULT_FILE=%BAT_HOME%_publish_result.txt"
+set "ENSURE_PS1=%BAT_HOME%ensure_jsfl_no_prompt.ps1"
+set "ANIMATE_APPDATA=%APPDATA%\Adobe\Animate"
+
 call :EXIST "%FLASH_SRC%"
-
-set JSFL=%REPO_ROOT%\tools\jsfl\publish_flashsrc.jsfl
+if errorlevel 1 goto END
 call :EXIST "%JSFL%"
-
-set ROOT_FILE=%REPO_ROOT%\tools\jsfl\_publish_root.txt
-set RESULT_FILE=%BAT_HOME%_publish_result.txt
+if errorlevel 1 goto END
+call :EXIST "%ENSURE_PS1%"
+if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 3) 写入 JSFL 用的根路径；清除上次结果
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-> "%ROOT_FILE%" echo %FLASH_SRC%
+(
+	echo %FLASH_SRC%
+) > "%ROOT_FILE%"
 if errorlevel 1 (
 	call :ECHO_LANG :WRITE_FAIL "%ROOT_FILE%"
 	goto END
@@ -98,21 +103,21 @@ if errorlevel 1 (
 if exist "%RESULT_FILE%" del /f /q "%RESULT_FILE%" >nul 2>&1
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 3b) 抑制打开 JSFL 时的运行/编辑提示（偏好设置 + 命令行）
+:: 4) 抑制打开 JSFL 时的运行/编辑提示（偏好设置 + 命令行）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ENSURE_JSFL_NO_PROMPT
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 4) 启动 Flash/Animate 并执行 JSFL（阻塞至退出）
+:: 5) 启动 Flash/Animate 并执行 JSFL（阻塞至退出）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ECHO_LANG :LAUNCH ""
 :: -run-jsfl：始终将 jsfl 作为命令运行（Animate.exe 隐藏选项）
-start "" /wait "%FLASH_EXE%" -run-jsfl "%JSFL%"
+start "" /wait "!FLASH_EXE!" -run-jsfl "%JSFL%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 5) 读取 JSFL 结果（Adobe 退出码不可靠）
+:: 6) 读取 JSFL 结果（Adobe 退出码不可靠）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if not exist "%RESULT_FILE%" (
@@ -123,7 +128,7 @@ if not exist "%RESULT_FILE%" (
 set PUBLISH_CODE=1
 for /f "usebackq tokens=1 delims= " %%a in ("%RESULT_FILE%") do (
 	set PUBLISH_CODE=%%a
-	goto :HAVE_CODE
+	goto HAVE_CODE
 )
 :HAVE_CODE
 
@@ -142,22 +147,39 @@ goto END
 echo.
 exit /b 1
 
-:: 判断文件是否存在，不存在给出提示信息
+:: 路径不存在则提示并返回错误（调用方须检查 errorlevel）
 :EXIST
 if not exist %1 (
 	call :ECHO_LANG :NOT_EXIST %1
-	goto END
+	exit /b 1
+)
+exit /b 0
+
+:: 在 FLASH_HOME 下按优先级查找 Animate/Flash 可执行文件
+:RESOLVE_FLASH_EXE
+set "FLASH_EXE="
+for %%E in (
+	"Animate.exe"
+	"Flash.exe"
+	"Support Files\Animate.exe"
+	"Support Files\Flash.exe"
+) do (
+	if "!FLASH_EXE!"=="" (
+		if exist "%FLASH_HOME%\%%~E" set "FLASH_EXE=%FLASH_HOME%\%%~E"
+	)
 )
 goto :EOF
 
-:: 修补 %APPDATA%\Adobe\Animate\<ver>\Application.xml，跳过打开 JSFL 对话框
+:: 修补 AppData\Adobe\Animate 各版本 Application.xml，跳过打开 JSFL 对话框
 :ENSURE_JSFL_NO_PROMPT
-set ANIMATE_APPDATA=%APPDATA%\Adobe\Animate
 if not exist "%ANIMATE_APPDATA%" goto :EOF
-powershell -NoProfile -ExecutionPolicy Bypass -File "%BAT_HOME%ensure_jsfl_no_prompt.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%ENSURE_PS1%"
 goto :EOF
 
-:ECHO_LANG
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:: 依据当前控制台代码页选择 lang 目录下对应 codepage 的 bat（仅初始化一次）
+:INIT_LANG
 for /f "tokens=2 delims=:" %%a in ('chcp') do (
 	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
 )
@@ -175,11 +197,14 @@ if !IS_SUPPORT!==0 (
 	set CURRENT_CODEPAGE=437
 )
 
-set LANG_BAT=%BAT_HOME%lang\%~n0\!CURRENT_CODEPAGE!.bat
-if not exist "!LANG_BAT!" (
+set "LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat"
+if not exist "%LANG_BAT%" set "LANG_BAT="
+goto :EOF
+
+:ECHO_LANG
+if "%LANG_BAT%"=="" (
 	echo ECHO_LANG [N/A]
 	goto :EOF
 )
-
-call "!LANG_BAT!" %1 %2
+call "%LANG_BAT%" %1 %2
 goto :EOF

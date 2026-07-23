@@ -39,6 +39,10 @@ goto :EOF
 title Apache fdb (Flash Player Debugger)
 goto :EOF
 
+:USAGE
+echo Usage: fdbg.bat [swf-file]
+goto :EOF
+
 :START_MSG
 echo Starting Flash Debugger...
 goto :EOF

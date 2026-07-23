@@ -63,6 +63,10 @@ goto :EOF
 echo 正在安装应用 [%~2] ...
 goto :EOF
 
+:INSTALL_FAIL
+echo 安装应用失败：%~2
+goto :EOF
+
 :START_MSG
 echo 正在启动 Flash 调试器...
 goto :EOF
