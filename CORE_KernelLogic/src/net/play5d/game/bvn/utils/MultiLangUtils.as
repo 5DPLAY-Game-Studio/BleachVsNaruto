@@ -18,7 +18,7 @@
 
 package net.play5d.game.bvn.utils {
 import net.play5d.game.bvn.ctrler.AssetManager;
-import net.play5d.pcl.utils.ClassUtils;
+import net.play5d.alice.utils.ClassUtils;
 
 /**
  * 多语言工具集
