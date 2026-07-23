@@ -2,6 +2,24 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.07232026_alpha] - 2026-07-23
+
+### 新增
+
+- 新增命令行构建脚本 `build.bat` 与命令行发布脚本 `publish.bat`。
+
+### 更改
+
+- 独立 LIB_Other 库，作为子模块引入，使其不再与本工程关联，而是单独维护。
+- 更改了新的 FPS 显示，使其支持精确小数显示。
+- 更新 feathersui-openfl 库到 1.3.1 版本。
+- 重构 GithubUtils 类功能。
+- 重构 AGENTS 提示规则，拆分功能，并将其特化为专属 AI 读取应用的配置以加速 AI 阅读理解。
+
+### 修复
+
+- 修复加载界面偶现加载失败后，计数器仍自增 1 的 BUG
+
 ## [3.7.0.0.05252026_alpha] - 2026-05-25
 
 ### 更改
@@ -335,6 +353,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.07232026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05252026_alpha...3.7.0.0.07232026_alpha
 [3.7.0.0.05252026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05212026_alpha...3.7.0.0.05252026_alpha
 [3.7.0.0.05212026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.04232026_alpha...3.7.0.0.05212026_alpha
 [3.7.0.0.04232026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.01152026_alpha...3.7.0.0.04232026_alpha
