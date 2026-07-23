@@ -77,8 +77,9 @@ for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 set "JSFL_DIR=%REPO_ROOT%\tools\jsfl"
 set "FLASH_SRC=%REPO_ROOT%\BleachVsNaruto_FlashSrc"
 set "JSFL=%JSFL_DIR%\publish_flashsrc.jsfl"
-set "ROOT_FILE=%JSFL_DIR%\_publish_root.txt"
-set "RESULT_FILE=%BAT_HOME%_publish_result.txt"
+set "LOG_DIR=%BAT_HOME%log"
+set "ROOT_FILE=%LOG_DIR%\_publish_root.txt"
+set "RESULT_FILE=%LOG_DIR%\_publish_result.txt"
 set "ENSURE_PS1=%BAT_HOME%ps\ensure_jsfl_no_prompt.ps1"
 set "ANIMATE_APPDATA=%APPDATA%\Adobe\Animate"
 
@@ -92,6 +93,8 @@ if errorlevel 1 goto END
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 3) 写入 JSFL 用的根路径；清除上次结果
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 
 (
 	echo %FLASH_SRC%

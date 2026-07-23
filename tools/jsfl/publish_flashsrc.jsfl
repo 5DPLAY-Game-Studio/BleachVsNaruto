@@ -20,10 +20,10 @@
  * Non-interactive batch publish for BleachVsNaruto_FlashSrc.
  * Invoked by tools/script/publish.bat (do not use browseForFolderURL).
  *
- * Root path: tools/jsfl/_publish_root.txt (written by publish.bat),
+ * Root path: tools/script/log/_publish_root.txt (written by publish.bat),
  * or fallback from fl.scriptURI -> ../../BleachVsNaruto_FlashSrc.
  *
- * Result: tools/script/_publish_result.txt  (first line: 0=ok, 1=fail)
+ * Result: tools/script/log/_publish_result.txt  (first line: 0=ok, 1=fail)
  */
 
 var trace = fl.trace;
@@ -32,8 +32,8 @@ main();
 
 function main() {
 	var scriptDir = dirnameURI(fl.scriptURI);
-	var rootFile = scriptDir + "/_publish_root.txt";
-	var resultFile = scriptDir + "/../script/_publish_result.txt";
+	var rootFile = scriptDir + "/../script/log/_publish_root.txt";
+	var resultFile = scriptDir + "/../script/log/_publish_result.txt";
 
 	writeResult(resultFile, "1");
 

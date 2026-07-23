@@ -55,7 +55,9 @@ set "DBG_ID=net.play5d.game.bvn.mob"
 set "DBG_PACKAGE=air.%DBG_ID%"
 set "DBG_ACTIVITY=%DBG_PACKAGE%/.AppEntry"
 set DBG_PORT=7936
-set "TMP_ADB_DEVICES=%TEMP%\adb_devices.txt"
+set "LOG_DIR=%BAT_HOME%log"
+if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
+set "TMP_ADB_DEVICES=%LOG_DIR%\adb_devices.txt"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 2) Flex SDK + adb
