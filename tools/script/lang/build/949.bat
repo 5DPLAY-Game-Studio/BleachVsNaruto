@@ -25,52 +25,52 @@
 @echo off
 
 if "%1"=="" (
-	echo The tag is empty!
+	echo 태그가 비어있습니다!
 	goto :EOF
 )
 
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo 파일이 존재하지 않습니다: %~2
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo 환경 변수 %~2가 정의되지 않았습니다!
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Build SHELL_Dev
+title 빌드 프로젝트
 goto :EOF
 
 :BUILD_START
-echo Building SHELL_Dev debug chain...
+echo SHELL_Dev 디버그 체인을 구축하는 중...
 goto :EOF
 
 :COMPILE_START
-echo Compiling: %~2
+echo 컴파일 중: %~2
 goto :EOF
 
 :COMPILE_OK
-echo Compiled successfully: %~2
+echo 컴파일 성공: %~2
 goto :EOF
 
 :COMPILE_FAIL
-echo Compile failed: %~2
+echo 컴파일 실패: %~2
 goto :EOF
 
 :SYNC_START
-echo Synchronizing assets...
+echo 자산 동기화 중...
 goto :EOF
 
 :SYNC_FAIL
-echo Asset sync failed!
+echo 자산 동기화에 실패했습니다!
 goto :EOF
 
 :COPY_FAIL
-echo Failed to copy: %~2
+echo 복사 실패: %~2
 goto :EOF
 
 :BUILD_SUCCESS
-echo Build SHELL_Dev completed successfully!
+echo SHELL_Dev 빌드가 성공적으로 완료되었습니다!
 goto :EOF

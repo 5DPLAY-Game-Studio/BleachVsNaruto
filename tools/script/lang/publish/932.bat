@@ -25,52 +25,52 @@
 @echo off
 
 if "%1"=="" (
-	echo The tag is empty!
+	echo タグが空です!
 	goto :EOF
 )
 
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo ファイルが存在しません: %~2
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo 環境変数 %~2 が未定義です。
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Publish FlashSrc
+title リソースを公開する
 goto :EOF
 
 :PUBLISH_START
-echo Publishing BleachVsNaruto_FlashSrc via Flash/Animate...
+echo Flash/Animate 経由で BleachVsNaruto_FlashSrc をパブリッシュ中...
 goto :EOF
 
 :NO_EXE
-echo Animate.exe / Flash.exe not found under: %~2
+echo Animate.exe / Flash.exe が次の場所に見つかりません: %~2
 goto :EOF
 
 :USE_EXE
-echo Using: %~2
+echo 使用するもの： %~2
 goto :EOF
 
 :WRITE_FAIL
-echo Failed to write: %~2
+echo 書き込みに失敗しました: %~2
 goto :EOF
 
 :LAUNCH
-echo Launching Flash/Animate (JSFL). Window may open; wait until it finishes...
+echo Flash/Animate (JSFL) を起動します。ウィンドウが開く場合がありますので、完了するまでお待ちください...
 goto :EOF
 
 :NO_RESULT
-echo Publish result file missing (JSFL may have failed to start): %~2
+echo パブリッシュ結果ファイルが見つかりません（JSFL の起動に失敗した可能性があります）： %~2
 goto :EOF
 
 :PUBLISH_SUCCESS
-echo FlashSrc publish completed successfully!
+echo FlashSrc の公開が正常に完了しました！
 goto :EOF
 
 :PUBLISH_FAIL
-echo FlashSrc publish failed. code=%~2
+echo FlashSrc の公開に失敗しました。コード=%~2
 goto :EOF

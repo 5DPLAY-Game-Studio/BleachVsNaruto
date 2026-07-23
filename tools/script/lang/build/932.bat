@@ -25,52 +25,52 @@
 @echo off
 
 if "%1"=="" (
-	echo The tag is empty!
+	echo タグが空です!
 	goto :EOF
 )
 
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo ファイルが存在しません: %~2
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo 環境変数 %~2 が未定義です。
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Build SHELL_Dev
+title ビルド プロジェクト
 goto :EOF
 
 :BUILD_START
-echo Building SHELL_Dev debug chain...
+echo SHELL_Dev デバッグチェーンを構築中...
 goto :EOF
 
 :COMPILE_START
-echo Compiling: %~2
+echo コンパイル中: %~2
 goto :EOF
 
 :COMPILE_OK
-echo Compiled successfully: %~2
+echo コンパイルに成功しました: %~2
 goto :EOF
 
 :COMPILE_FAIL
-echo Compile failed: %~2
+echo コンパイルに失敗しました: %~2
 goto :EOF
 
 :SYNC_START
-echo Synchronizing assets...
+echo アセットを同期しています...
 goto :EOF
 
 :SYNC_FAIL
-echo Asset sync failed!
+echo アセットの同期に失敗しました！
 goto :EOF
 
 :COPY_FAIL
-echo Failed to copy: %~2
+echo コピーに失敗しました: %~2
 goto :EOF
 
 :BUILD_SUCCESS
-echo Build SHELL_Dev completed successfully!
+echo SHELL_Dev のビルドが正常に完了しました！
 goto :EOF

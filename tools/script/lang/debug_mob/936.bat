@@ -64,7 +64,7 @@ echo 正在安装应用 [%~2] ...
 goto :EOF
 
 :INSTALL_FAIL
-echo 安装应用失败：%~2
+echo 应用安装失败：[%~2]
 goto :EOF
 
 :START_MSG

@@ -40,7 +40,7 @@ echo Environment variable %~2 is undefined!
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Publish FlashSrc
+title Publish Resource
 goto :EOF
 
 :PUBLISH_START

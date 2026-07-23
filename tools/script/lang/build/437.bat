@@ -40,7 +40,7 @@ echo Environment variable %~2 is undefined!
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Build SHELL_Dev
+title Build Project
 goto :EOF
 
 :BUILD_START

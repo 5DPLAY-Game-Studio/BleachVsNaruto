@@ -25,52 +25,52 @@
 @echo off
 
 if "%1"=="" (
-	echo The tag is empty!
+	echo 태그가 비어있습니다!
 	goto :EOF
 )
 
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo 파일이 존재하지 않습니다: %~2
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo 환경 변수 %~2가 정의되지 않았습니다!
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Publish FlashSrc
+title 리소스 게시
 goto :EOF
 
 :PUBLISH_START
-echo Publishing BleachVsNaruto_FlashSrc via Flash/Animate...
+echo Flash/Animate 를 통해 BleachVsNaruto_FlashSrc 게시 중...
 goto :EOF
 
 :NO_EXE
-echo Animate.exe / Flash.exe not found under: %~2
+echo 다음 위치에서 Animate.exe / Flash.exe 를 찾을 수 없습니다: %~2
 goto :EOF
 
 :USE_EXE
-echo Using: %~2
+echo 사용: %~2
 goto :EOF
 
 :WRITE_FAIL
-echo Failed to write: %~2
+echo 쓰기 실패: %~2
 goto :EOF
 
 :LAUNCH
-echo Launching Flash/Animate (JSFL). Window may open; wait until it finishes...
+echo Flash/Animate(JSFL) 를 실행합니다. 창이 열릴 수 있으니 완료될 때까지 기다려 주십시오...
 goto :EOF
 
 :NO_RESULT
-echo Publish result file missing (JSFL may have failed to start): %~2
+echo 게시 결과 파일이 없습니다(JSFL 시작에 실패했을 수 있음): %~2
 goto :EOF
 
 :PUBLISH_SUCCESS
-echo FlashSrc publish completed successfully!
+echo FlashSrc 게시가 성공적으로 완료되었습니다!
 goto :EOF
 
 :PUBLISH_FAIL
-echo FlashSrc publish failed. code=%~2
+echo FlashSrc 게시 실패. 코드=%~2
 goto :EOF

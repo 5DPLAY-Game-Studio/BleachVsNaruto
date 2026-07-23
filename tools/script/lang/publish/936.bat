@@ -25,52 +25,52 @@
 @echo off
 
 if "%1"=="" (
-	echo The tag is empty!
+	echo 标签为空！
 	goto :EOF
 )
 
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo 文件不存在：%~2
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo 环境变量 %~2 未定义！
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Publish FlashSrc
+title 发布资源
 goto :EOF
 
 :PUBLISH_START
-echo Publishing BleachVsNaruto_FlashSrc via Flash/Animate...
+echo 正在通过 Flash/Animate 发布 BleachVsNaruto_FlashSrc……
 goto :EOF
 
 :NO_EXE
-echo Animate.exe / Flash.exe not found under: %~2
+echo 未在以下位置找到 Animate.exe / Flash.exe： %~2
 goto :EOF
 
 :USE_EXE
-echo Using: %~2
+echo 使用： %~2
 goto :EOF
 
 :WRITE_FAIL
-echo Failed to write: %~2
+echo 写入失败： %~2
 goto :EOF
 
 :LAUNCH
-echo Launching Flash/Animate (JSFL). Window may open; wait until it finishes...
+echo 正在启动 Flash/Animate (JSFL)。可能会弹出窗口；请等待其完成……
 goto :EOF
 
 :NO_RESULT
-echo Publish result file missing (JSFL may have failed to start): %~2
+echo 缺少发布结果文件（JSFL 可能未能启动）： %~2
 goto :EOF
 
 :PUBLISH_SUCCESS
-echo FlashSrc publish completed successfully!
+echo FlashSrc 发布成功！
 goto :EOF
 
 :PUBLISH_FAIL
-echo FlashSrc publish failed. code=%~2
+echo FlashSrc 发布失败。代码=%~2
 goto :EOF

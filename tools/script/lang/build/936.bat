@@ -25,52 +25,52 @@
 @echo off
 
 if "%1"=="" (
-	echo The tag is empty!
+	echo 标签为空！
 	goto :EOF
 )
 
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo 文件不存在：%~2
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo 环境变量 %~2 未定义！
 goto :EOF
 
 :TITLE
-title Bleach vs Naruto - Build SHELL_Dev
+title 构建项目
 goto :EOF
 
 :BUILD_START
-echo Building SHELL_Dev debug chain...
+echo 正在构建 SHELL_Dev 调试链...
 goto :EOF
 
 :COMPILE_START
-echo Compiling: %~2
+echo 正在编译： %~2
 goto :EOF
 
 :COMPILE_OK
-echo Compiled successfully: %~2
+echo 编译成功： %~2
 goto :EOF
 
 :COMPILE_FAIL
-echo Compile failed: %~2
+echo 编译失败： %~2
 goto :EOF
 
 :SYNC_START
-echo Synchronizing assets...
+echo 正在同步素材……
 goto :EOF
 
 :SYNC_FAIL
-echo Asset sync failed!
+echo 素材同步失败！
 goto :EOF
 
 :COPY_FAIL
-echo Failed to copy: %~2
+echo 复制失败： %~2
 goto :EOF
 
 :BUILD_SUCCESS
-echo Build SHELL_Dev completed successfully!
+echo SHELL_Dev 构建成功完成！
 goto :EOF
