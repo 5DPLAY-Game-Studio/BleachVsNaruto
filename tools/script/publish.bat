@@ -79,7 +79,7 @@ set "FLASH_SRC=%REPO_ROOT%\BleachVsNaruto_FlashSrc"
 set "JSFL=%JSFL_DIR%\publish_flashsrc.jsfl"
 set "ROOT_FILE=%JSFL_DIR%\_publish_root.txt"
 set "RESULT_FILE=%BAT_HOME%_publish_result.txt"
-set "ENSURE_PS1=%BAT_HOME%ensure_jsfl_no_prompt.ps1"
+set "ENSURE_PS1=%BAT_HOME%ps\ensure_jsfl_no_prompt.ps1"
 set "ANIMATE_APPDATA=%APPDATA%\Adobe\Animate"
 
 call "%FUNC_COMMON%" EXIST "%FLASH_SRC%"
