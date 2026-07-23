@@ -31,7 +31,7 @@
 | `SHELL_Dev` | 开发用壳 / Application | 本地跑、调试入口侧 |
 | `SHELL_Pc` | PC 发行壳 | |
 | `SHELL_Mob` | 移动端壳 | |
-| `tools` | 脚本与工具 | bat 约定 → [`bat_script.md`](bat_script.md) |
+| `tools` | 脚本与工具 | bat → [`bat_script.md`](bat_script.md)；jsfl → [`jsfl.md`](jsfl.md) |
 | `keysign` | 签名相关 | |
 | `out` | 构建输出 | 勿当源码改 |
 | `.idea` / `.vscode` | IDE 配置 | 含代码风格 `Project.xml` |

@@ -1,6 +1,6 @@
 # BAT 脚本约定（AI）
 
-何时读：新建/改 `tools/script` 下 `.bat`、`lang/` 多语言资源、或 `func/` 共用子程序。源码落点见 [`modules.md`](modules.md)（`tools`）。
+何时读：新建/改 `tools/script` 下 `.bat`、`lang/` 多语言资源、或 `func/` 共用子程序。源码落点见 [`modules.md`](modules.md)（`tools`）。Animate JSFL 侧见 [`jsfl.md`](jsfl.md)。
 
 ---
 

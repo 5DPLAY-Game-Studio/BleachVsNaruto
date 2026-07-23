@@ -24,7 +24,7 @@
 | 12 | 事件：`[Event]` 上方注释 `@eventType Class.CONST`；常量上 `@eventType eventName` |
 | 13 | `[Event]` 们在类注释之前；类注释在全部 `[Event]` 之后、类声明之前 |
 | 14 | 逻辑注释：复杂/关键/非常规处用 `//` 说「做什么」；属性/局部说明用 `/** */` 不用 `//` |
-| 15 | JS 桥接用 JSDoc，不用 ASDoc |
+| 15 | JS 桥接用 JSDoc，不用 ASDoc；`tools/jsfl` 另见 [`jsfl.md`](jsfl.md) |
 
 ## NEVER
 
