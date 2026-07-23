@@ -429,7 +429,7 @@ public class GameStage extends Sprite implements IStage {
     }
 
     /********************************************************************************************************************/
-    public function initMosouFight(p1group:GameRunFighterGroup, map:MapMain):void {
+    public function initMusouFight(p1group:GameRunFighterGroup, map:MapMain):void {
         _map           = map;
         _map.gameState = this;
 

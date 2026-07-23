@@ -90,7 +90,7 @@ public class BigFaceUI {
     public function updateLeader():void {
         var isLeaderMc:Sprite = _ui.getChildByName('isLeaderMc') as Sprite;
         if (isLeaderMc) {
-            isLeaderMc.visible = _data == GameData.I.mosouData.getLeader();
+            isLeaderMc.visible = _data == GameData.I.musouData.getLeader();
         }
     }
 

@@ -72,8 +72,8 @@ public class FighterMain extends BaseGameSprite {
     public var isSuperSteelBody:Boolean = false; //超级刚身状态
 
     public var data:FighterVO; //角色数据
-    public var mosouPlayerData:MusouFighterVO; //无双模式时有效
-    public var mosouEnemyData:MusouEnemyVO; //无双模式时有效
+    public var musouPlayerData:MusouFighterVO; //无双模式时有效
+    public var musouEnemyData:MusouEnemyVO; //无双模式时有效
 
     public var airHitTimes:int = 1; //允许空中打几次
     public var jumpTimes:int   = 2; //允许跳几次
@@ -86,7 +86,7 @@ public class FighterMain extends BaseGameSprite {
 
     public var introSaid:Boolean = false; //是否播放过开场
 
-    public var mosouLogic:MusouFighterLogic;
+    public var musouLogic:MusouFighterLogic;
     //当前被攻击的数据
     public var hurtHit:HitVO;
     public var defenseHit:HitVO;
@@ -98,7 +98,7 @@ public class FighterMain extends BaseGameSprite {
     private var _speed:Number   = 6;
 
     private var _currentHurts:Vector.<HitVO>;
-    private var _mosouPlayerLogic:MusouFighterLogic;
+    private var _musouPlayerLogic:MusouFighterLogic;
     private var _currentTarget:IGameSprite;
 
     private var _energyAddGap:int;
@@ -144,8 +144,8 @@ public class FighterMain extends BaseGameSprite {
             data = null;
         }
 
-        if (mosouEnemyData) {
-            mosouEnemyData = null;
+        if (musouEnemyData) {
+            musouEnemyData = null;
         }
 
         targetTeams    = null;
@@ -314,8 +314,8 @@ public class FighterMain extends BaseGameSprite {
         _mainMc.transform.colorTransform = _colorTransform ? _colorTransform : new ColorTransform();
     }
 
-    public function getMosouLogic():MusouFighterLogic {
-        return _mosouPlayerLogic;
+    public function getMusouLogic():MusouFighterLogic {
+        return _musouPlayerLogic;
     }
 
     /**
@@ -387,7 +387,7 @@ public class FighterMain extends BaseGameSprite {
                 ).isAlive && i.getActive()) {
                     var msd:MusouEnemyVO = (
                             i as FighterMain
-                    ).mosouEnemyData;
+                    ).musouEnemyData;
                     if (msd) {
                         if (msd.isBoss) {
                             targetsOrder.push({fighter: i, order: 0});
@@ -438,29 +438,29 @@ public class FighterMain extends BaseGameSprite {
         return _fighterCtrl.getMcCtrl().getFighterMc();
     }
 
-    public function initMosouFighter(v:MusouFighterVO):void {
-        mosouPlayerData   = v;
-        _mosouPlayerLogic = new MusouFighterLogic(v);
+    public function initMusouFighter(v:MusouFighterVO):void {
+        musouPlayerData   = v;
+        _musouPlayerLogic = new MusouFighterLogic(v);
         updateProperties();
     }
 
-    public function initMosouEnemy(v:MusouEnemyVO):void {
-        mosouEnemyData = v;
+    public function initMusouEnemy(v:MusouEnemyVO):void {
+        musouEnemyData = v;
     }
 
     public function updateProperties():void {
-        if (!mosouPlayerData || !_mosouPlayerLogic) {
+        if (!musouPlayerData || !_musouPlayerLogic) {
             return;
         }
 
-        hp     = hpMax = _mosouPlayerLogic.getHP();
-        qiMax  = _mosouPlayerLogic.getQI();
-        energy = energyMax = _mosouPlayerLogic.getEnergy();
+        hp     = hpMax = _musouPlayerLogic.getHP();
+        qiMax  = _musouPlayerLogic.getQI();
+        energy = energyMax = _musouPlayerLogic.getEnergy();
 
         qi = qiMax;
 
-        if (_mosouPlayerLogic) {
-            _mosouPlayerLogic.initFighterProps(this);
+        if (_musouPlayerLogic) {
+            _musouPlayerLogic.initFighterProps(this);
         }
     }
 
@@ -495,10 +495,10 @@ public class FighterMain extends BaseGameSprite {
     }
 
     public function onMcInited():void {
-        if (_mosouPlayerLogic) {
-            _mosouPlayerLogic.initFighterProps(this);
+        if (_musouPlayerLogic) {
+            _musouPlayerLogic.initFighterProps(this);
         }
-        if (mosouEnemyData) {
+        if (musouEnemyData) {
             MusouLogic.I.initEnemyProps(this);
         }
     }
@@ -676,21 +676,21 @@ public class FighterMain extends BaseGameSprite {
     /**
      * 无关模式的小兵
      */
-    public function isMosouEnemy():Boolean {
-        if (!mosouEnemyData) {
+    public function isMusouEnemy():Boolean {
+        if (!musouEnemyData) {
             return false;
         }
-        return !mosouEnemyData.isBoss;
+        return !musouEnemyData.isBoss;
     }
 
     /**
      * 无关模式的BOSS
      */
-    public function isMosouBoss():Boolean {
-        if (!mosouEnemyData) {
+    public function isMusouBoss():Boolean {
+        if (!musouEnemyData) {
             return false;
         }
-        return mosouEnemyData.isBoss;
+        return musouEnemyData.isBoss;
     }
 
     private function renderEnergy():void {

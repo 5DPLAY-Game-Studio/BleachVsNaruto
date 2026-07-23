@@ -36,7 +36,7 @@ public class MusouTimeUI {
 
     public function renderAnimate():void {
         if (_txt) {
-            var sec:int = GameCtrl.I.getMosouCtrl().gameRunData.gameTime / GameConfig.FPS_ANIMATE;
+            var sec:int = GameCtrl.I.getMusouCtrl().gameRunData.gameTime / GameConfig.FPS_ANIMATE;
             _txt.text   = KyoTimerFormat.secToTime(sec);
         }
     }

@@ -37,7 +37,7 @@ import net.play5d.game.bvn.stage.GameOverStage;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.stage.HowToPlayStage;
 import net.play5d.game.bvn.stage.LanguageStage;
-import net.play5d.game.bvn.stage.LoadingMosouStage;
+import net.play5d.game.bvn.stage.LoadingMusouStage;
 import net.play5d.game.bvn.stage.LoadingStage;
 import net.play5d.game.bvn.stage.LogoStage;
 import net.play5d.game.bvn.stage.MenuStage;
@@ -223,8 +223,8 @@ public class MainGame {
      */
     public function loadGame():void {
         if (GameMode.currentMode == GameMode.MUSOU_ARCADE) {
-            stageCtrl.goStage(new LoadingMosouStage(), true);
-            GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMosouStage);
+            stageCtrl.goStage(new LoadingMusouStage(), true);
+            GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, LoadingMusouStage);
         }
         else {
             stageCtrl.goStage(new LoadingStage(), true);
@@ -251,10 +251,10 @@ public class MainGame {
     /**
      * 无双模式游戏界面
      */
-    public function goMosouGame():void {
+    public function goMusouGame():void {
         var gs:GameStage = new GameStage();
         stageCtrl.goStage(gs);
-        GameCtrl.I.startMosouGame();
+        GameCtrl.I.startMusouGame();
         setFPS(GameConfig.FPS_GAME);
         setQuality(GameConfig.QUALITY_GAME);
         GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);

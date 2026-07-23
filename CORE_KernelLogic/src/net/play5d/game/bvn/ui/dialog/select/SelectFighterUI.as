@@ -77,7 +77,7 @@ public class SelectFighterUI {
     }
 
     public function updateUI():void {
-        _playerData = GameData.I.mosouData.getFighterDataById(sellData.id);
+        _playerData = GameData.I.musouData.getFighterDataById(sellData.id);
 
         if (_playerData) {
             _lvTxt.visible = true;

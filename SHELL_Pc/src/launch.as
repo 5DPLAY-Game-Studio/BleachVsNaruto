@@ -36,7 +36,7 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.URL;
 import net.play5d.game.bvn.win.AssetLoader;
 import net.play5d.game.bvn.win.GameInterfaceManager;
-import net.play5d.game.bvn.win.MosouDebugger;
+import net.play5d.game.bvn.win.MusouDebugger;
 import net.play5d.game.bvn.win.SwfLib;
 import net.play5d.game.bvn.win.utils.Loger;
 import net.play5d.game.bvn.win.utils.UIAssetUtil;
@@ -122,7 +122,7 @@ public class launch extends Sprite {
 //			GameSafeKeeper.I.loadConfigure(buildGame, safeFail);
         buildGame();
 
-        MosouDebugger.init(stage);
+        MusouDebugger.init(stage);
     }
 
     private function keyDownHandler(e:KeyboardEvent):void {

@@ -106,7 +106,7 @@ public class SelectFighterList extends Sprite {
     private function build():void {
         var fighters:Vector.<MusouFighterSellVO> = MusouFighterModel.I.fighters;
 
-        var currentFighterIds:Array = GameData.I.mosouData.getFighterTeamIds();
+        var currentFighterIds:Array = GameData.I.musouData.getFighterTeamIds();
 
         _fighterItems = new Vector.<SelectFighterUI>();
 

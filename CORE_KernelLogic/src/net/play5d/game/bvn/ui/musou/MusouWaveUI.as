@@ -48,16 +48,16 @@ public class MusouWaveUI {
     private var _circleBp:Bitmap;
 
     public function renderAnimate():void {
-        var mosouCtrl:MusouCtrl = GameCtrl.I.getMosouCtrl();
-        _txtCur.text            = mosouCtrl.currentWave.toString();
-        _txtMax.text            = mosouCtrl.waveCount.toString();
+        var musouCtrl:MusouCtrl = GameCtrl.I.getMusouCtrl();
+        _txtCur.text            = musouCtrl.currentWave.toString();
+        _txtMax.text            = musouCtrl.waveCount.toString();
         renderCircle();
     }
 
     private function renderCircle():void {
-        var mosouCtrl:MusouCtrl = GameCtrl.I.getMosouCtrl();
+        var musouCtrl:MusouCtrl = GameCtrl.I.getMusouCtrl();
         var angle:int           = (
-                                          mosouCtrl.getWavePercent() * 360
+                                          musouCtrl.getWavePercent() * 360
                                   ) << 0;
         _circleBp.bitmapData    = KyoDrawUtils.drawRing(10, 29, angle, [0xffff00, 0xff0000], 1);
 //			_circleBp.bitmapData = KyoDrawUtils.drawRing(10, _radius, angle, [0xffff00, 0xff0000],1);

@@ -1945,7 +1945,7 @@ public class FighterMcCtrler {
         var hity:Number = hitvo.hity;
 
         // 无双模式 - 小兵特殊处理
-        if (_fighter.mosouEnemyData && !_fighter.mosouEnemyData.isBoss) {
+        if (_fighter.musouEnemyData && !_fighter.musouEnemyData.isBoss) {
             if (!_fighter.isAlive) {
                 if (hity > 0) {
                     hity += Math.random() * 3;

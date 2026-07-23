@@ -31,7 +31,7 @@ import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
-import net.play5d.game.bvn.ui.MosouPauseDialog;
+import net.play5d.game.bvn.ui.MusouPauseDialog;
 import net.play5d.game.bvn.ui.fight.HitsUI;
 import net.play5d.game.bvn.ui.musou.enemy.BossHpUI;
 import net.play5d.game.bvn.ui.musou.enemy.EnemyHpUIGroup;
@@ -71,7 +71,7 @@ public class MusouUI implements IGameUI {
     private var _startAndKoPos:Point;
     private var _hitsUI:HitsUI;
     private var _bosses:Vector.<FighterMain> = new Vector.<FighterMain>();
-    private var _pauseDialog:MosouPauseDialog;
+    private var _pauseDialog:MusouPauseDialog;
 
     public function initlize(p1:GameRunFighterGroup):void {
         _hpbar.setFighter(p1);
@@ -82,7 +82,7 @@ public class MusouUI implements IGameUI {
     }
 
 //		public function updateEnemyHp(f:FighterMain):void{
-//			if(f.mosouData.isBoss){
+//			if(f.musouData.isBoss){
 //				_bossHpBar.setFighter(f);
 //				return;
 //			}else{
@@ -188,7 +188,7 @@ public class MusouUI implements IGameUI {
     }
 
     public function showStart(finishBack:Function = null, params:Object = null):void {
-        trace('Mosou Start!!');
+        trace('Musou Start!!');
 
         playStartKO('mission_start', false);
 
@@ -204,7 +204,7 @@ public class MusouUI implements IGameUI {
     }
 
     public function showEnd(finishBack:Function = null, params:Object = null):void {
-        trace('Mosou End!!');
+        trace('Musou End!!');
     }
 
     public function showBossIn(finishBack:Function = null):void {
@@ -329,7 +329,7 @@ public class MusouUI implements IGameUI {
 
     public function pause():void {
         if (!_pauseDialog) {
-            _pauseDialog = new MosouPauseDialog();
+            _pauseDialog = new MusouPauseDialog();
             _ui.addChild(_pauseDialog);
         }
         _pauseDialog.show();

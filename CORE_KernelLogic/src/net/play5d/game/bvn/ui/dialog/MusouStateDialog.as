@@ -35,10 +35,10 @@ import net.play5d.game.bvn.ui.musou.CoinUI;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 
-public class MosouStateDialog extends BaseDialog {
+public class MusouStateDialog extends BaseDialog {
     include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
-    public function MosouStateDialog() {
+    public function MusouStateDialog() {
         super();
 
         width  = 741;
@@ -119,7 +119,7 @@ public class MosouStateDialog extends BaseDialog {
     }
 
     protected override function onClose():void {
-        GameEvent.dispatchEvent(GameEvent.MOSOU_FIGHTER_CLOSE);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_FIGHTER_CLOSE);
     }
 
     protected override function onDestory():void {
@@ -137,18 +137,18 @@ public class MosouStateDialog extends BaseDialog {
 
     private function btnHandler(b:DisplayObject):void {
         if (b == _leaderBtn) {
-            GameData.I.mosouData.setLeader(_currentFighter);
+            GameData.I.musouData.setLeader(_currentFighter);
             GameData.I.saveData();
             for each(var i:BigFaceUI in _bigFaces) {
                 i.updateLeader();
             }
         }
         if (b == _changeBtn) {
-            _changeIndex = GameData.I.mosouData.getFighterTeam().indexOf(_currentFighter);
+            _changeIndex = GameData.I.musouData.getFighterTeam().indexOf(_currentFighter);
             if (_changeIndex < 0) {
                 _changeIndex = 0;
             }
-            DialogManager.showDialog(new MosouSelectDialog(_changeIndex));
+            DialogManager.showDialog(new MusouSelectDialog(_changeIndex));
         }
     }
 
@@ -217,7 +217,7 @@ public class MosouStateDialog extends BaseDialog {
     }
 
     private function initBigFaces():void {
-        var fighters:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fighters:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
         for (var i:int; i < fighters.length; i++) {
             if (_bigFaces[i]) {
                 _bigFaces[i].setFighter(fighters[i]);
@@ -230,7 +230,7 @@ public class MosouStateDialog extends BaseDialog {
     }
 
     private function updateBigFaces():void {
-        var fighters:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fighters:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
         for (var i:int; i < fighters.length; i++) {
             if (_bigFaces[i]) {
                 _bigFaces[i].setFighter(fighters[i]);

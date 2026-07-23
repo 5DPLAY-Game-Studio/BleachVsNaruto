@@ -108,7 +108,7 @@ public class WorldMapStage implements IStage {
 
         StateCtrl.I.transOut();
 
-        GameEvent.addEventListener(GameEvent.MOSOU_FIGHTER_UPDATE, updatePointsUI);
+        GameEvent.addEventListener(GameEvent.MUSOU_FIGHTER_UPDATE, updatePointsUI);
 
         GameRender.add(render, this);
 
@@ -139,7 +139,7 @@ public class WorldMapStage implements IStage {
         MainGame.I.stage.removeEventListener(MouseEvent.MOUSE_UP, mouseHandler);
         MainGame.I.stage.removeEventListener(MouseEvent.MOUSE_WHEEL, mouseHandler);
 
-        GameEvent.removeEventListener(GameEvent.MOSOU_FIGHTER_UPDATE, updatePointsUI);
+        GameEvent.removeEventListener(GameEvent.MUSOU_FIGHTER_UPDATE, updatePointsUI);
 
         if (_backBtn) {
             BtnUtils.destoryBtn(_backBtn);
@@ -199,7 +199,7 @@ public class WorldMapStage implements IStage {
 
         _pointUIs = new Vector.<WorldMapPointUI>();
 
-        var map:MusouWorldMapVO                = MusouModel.I.getMap(GameData.I.mosouData.getCurrentMap().id);
+        var map:MusouWorldMapVO                = MusouModel.I.getMap(GameData.I.musouData.getCurrentMap().id);
         var datas:Vector.<MusouWorldMapAreaVO> = map.areas;
         for each(var m:MusouWorldMapAreaVO in datas) {
             if (!pointMap[m.id]) {
@@ -222,7 +222,7 @@ public class WorldMapStage implements IStage {
 //				MainGame.I.loadGame();
         }, null, true);
 
-        GameEvent.dispatchEvent(GameEvent.CONFRIM_MOSOU_NEXT_MISSION);
+        GameEvent.dispatchEvent(GameEvent.CONFRIM_MUSOU_NEXT_MISSION);
     }
 
     private function focusCurrentPoint():void {
@@ -329,13 +329,13 @@ public class WorldMapStage implements IStage {
             return;
         }
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_MAP);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_MAP);
 
         if (MusouLogic.I.checkCurrentArea(data.id)) {
             gotoMission(data);
         }
         else {
-            GameData.I.mosouData.setCurrentArea(data.id);
+            GameData.I.musouData.setCurrentArea(data.id);
             updatePointsUI();
         }
 

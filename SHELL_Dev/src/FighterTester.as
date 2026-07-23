@@ -398,7 +398,7 @@ public class FighterTester extends Sprite {
         MainGame.stageCtrl.goStage(ls, true);
     }
 
-    private function initMosouFighters():void {
+    private function initMusouFighters():void {
 
     }
 
@@ -413,7 +413,7 @@ public class FighterTester extends Sprite {
 
 //			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
 
-        initMosouFighters();
+        initMusouFighters();
 
         _gameSprite = new Sprite();
         addChild(_gameSprite);

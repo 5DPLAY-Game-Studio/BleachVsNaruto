@@ -62,7 +62,7 @@ public class CoinUI {
 
     private function update(...param):void {
         _ui.addChild(_moneyTxt);
-        _moneyTxt.text = GameData.I.mosouData.getMoney().toString();
+        _moneyTxt.text = GameData.I.musouData.getMoney().toString();
     }
 
     private function clickHandler(b:*):void {
@@ -71,7 +71,7 @@ public class CoinUI {
 
     private function addMoneyBack(money:int):void {
         GameUI.alert('MONEY', '获得金币 ' + money + ' !');
-        GameData.I.mosouData.addMoney(money);
+        GameData.I.musouData.addMoney(money);
     }
 
 }

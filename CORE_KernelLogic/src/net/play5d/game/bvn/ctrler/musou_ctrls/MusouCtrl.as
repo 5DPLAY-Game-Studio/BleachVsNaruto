@@ -132,11 +132,11 @@ public class MusouCtrl {
 
         var p1Group:GameRunFighterGroup = GameCtrl.I.gameRunData.p1FighterGroup;
 
-        var datas:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var datas:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
 
-        p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter1, datas[0], '1'));
-        p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter2, datas[1], '1'));
-        p1Group.putFighter(GameRunFactory.createFighterByMosouData(p1Group.fighter3, datas[2], '1'));
+        p1Group.putFighter(GameRunFactory.createFighterByMusouData(p1Group.fighter1, datas[0], '1'));
+        p1Group.putFighter(GameRunFactory.createFighterByMusouData(p1Group.fighter2, datas[1], '1'));
+        p1Group.putFighter(GameRunFactory.createFighterByMusouData(p1Group.fighter3, datas[2], '1'));
 
         p1Group.currentFighter = p1Group.getFighter(p1Group.fighter1);
 
@@ -153,13 +153,13 @@ public class MusouCtrl {
 
         map.initlize();
 
-        GameCtrl.I.gameState.initMosouFight(GameCtrl.I.gameRunData.p1FighterGroup, map);
+        GameCtrl.I.gameState.initMusouFight(GameCtrl.I.gameRunData.p1FighterGroup, map);
 
         GameLogic.initGameLogic(map, GameCtrl.I.gameState.camera);
 
         GameCtrl.I.initMainLogic();
 
-        GameCtrl.I.initStart().startMosou();
+        GameCtrl.I.initStart().startMusou();
 
         GameInterface.instance.afterBuildGame();
 
@@ -172,7 +172,7 @@ public class MusouCtrl {
             SoundCtrl.I.smartPlayGameBGM('map');
         }
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_START);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_START);
 
     }
 
@@ -219,7 +219,7 @@ public class MusouCtrl {
         if (!fighter.initlized()) {
 
             var ctrl:IFighterActionCtrl;
-            if (fighter.mosouEnemyData && fighter.mosouEnemyData.isBoss) {
+            if (fighter.musouEnemyData && fighter.musouEnemyData.isBoss) {
                 ctrl      = new EnemyBossAICtrl();
                 (
                         ctrl as EnemyBossAICtrl
@@ -298,7 +298,7 @@ public class MusouCtrl {
     public function onSelfDead(f:FighterMain):void {
         _gameFinish = true;
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         (
                 GameUI.I.getUI() as MusouUI
@@ -573,16 +573,16 @@ public class MusouCtrl {
     private function getBossEnemies(checkIsAlive:Boolean = false):Vector.<FighterMain> {
         return _stageEnemies.filter(function (f:FighterMain, i:int, a:Vector.<FighterMain>):Boolean {
             if (checkIsAlive) {
-                return f.isAlive && f.mosouEnemyData.isBoss;
+                return f.isAlive && f.musouEnemyData.isBoss;
             }
-            return f.mosouEnemyData.isBoss;
+            return f.musouEnemyData.isBoss;
         });
     }
 
-    private function getEnemyByData(mosouData:MusouEnemyVO):FighterMain {
+    private function getEnemyByData(musouData:MusouEnemyVO):FighterMain {
         var filtered:Vector.<FighterMain> = _stageEnemies.filter(
                 function (f:FighterMain, i:int, a:Vector.<FighterMain>):Boolean {
-                    return f.mosouEnemyData == mosouData;
+                    return f.musouEnemyData == musouData;
                 });
 
         if (!filtered || filtered.length < 1) {
@@ -596,7 +596,7 @@ public class MusouCtrl {
         TraceLang('debug.trace.data.musou_ctrl.time_over');
         GameCtrl.I.actionEnable = false;
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         (
                 GameUI.I.getUI() as MusouUI
@@ -619,7 +619,7 @@ public class MusouCtrl {
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('win'), false);
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_MISSION_FINISH);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         GameCtrl.I.actionEnable = false;
         (
@@ -638,7 +638,7 @@ public class MusouCtrl {
 
     private function transFinish():void {
         MainGame.I.goWorldMap();
-        GameEvent.dispatchEvent(GameEvent.MOSOU_BACK_MAP);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_BACK_MAP);
     }
 
     private function checkNextOrWin(onBossDie:Boolean = false):void {
@@ -678,7 +678,7 @@ public class MusouCtrl {
 
     private function getAliveEnemies():Vector.<FighterMain> {
         return _stageEnemies.filter(function (f:FighterMain, i:int, a:Vector.<FighterMain>):Boolean {
-            if (f.mosouEnemyData && f.mosouEnemyData.repeat) {
+            if (f.musouEnemyData && f.musouEnemyData.repeat) {
                 return false;
             }
             return f.isAlive;
@@ -715,7 +715,7 @@ public class MusouCtrl {
         var data:MusouFighterVO = e.param;
 
         var p1:FighterMain = p1Group.currentFighter;
-        if (p1 && p1.mosouPlayerData == data) {
+        if (p1 && p1.musouPlayerData == data) {
             p1.updateProperties();
 
             var index:int = MusouFighterLogic.ALL_ACTION_LEVELS.indexOf(data.getLevel());

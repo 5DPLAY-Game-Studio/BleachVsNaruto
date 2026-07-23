@@ -169,9 +169,9 @@ public class FighterEffectCtrl {
     public function hitFloor(type:int, shakePow:Number = 0):void {
         if (_target is FighterMain && (
                 _target as FighterMain
-        ).mosouEnemyData && !(
+        ).musouEnemyData && !(
                 _target as FighterMain
-        ).mosouEnemyData.isBoss) {
+        ).musouEnemyData.isBoss) {
             if (shakePow > 1) {
                 shakePow = 1;
             }

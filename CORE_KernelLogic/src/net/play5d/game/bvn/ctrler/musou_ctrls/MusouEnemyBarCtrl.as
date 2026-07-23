@@ -37,7 +37,7 @@ public class MusouEnemyBarCtrl {
     }
 
     public function updateEnemyBar(f:FighterMain):void {
-        if (f.mosouEnemyData.isBoss) {
+        if (f.musouEnemyData.isBoss) {
             return;
         }
 

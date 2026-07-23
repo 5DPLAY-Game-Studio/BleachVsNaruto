@@ -39,7 +39,7 @@ public class GameStartCtrl {
     private var _p2:FighterMain;
     private var _isStart1v1:Boolean;
     private var _isStartNextRound:Boolean;
-    private var _isStartMosou:Boolean;
+    private var _isStartMusou:Boolean;
     private var _step:int;
     private var _holdFrame:int;
     private var _uiPlaying:Boolean;
@@ -59,8 +59,8 @@ public class GameStartCtrl {
         if (_isStartNextRound) {
             return renderNextRound();
         }
-        if (_isStartMosou) {
-            return renderStartMosou();
+        if (_isStartMusou) {
+            return renderStartMusou();
         }
         return false;
     }
@@ -86,8 +86,8 @@ public class GameStartCtrl {
 
     }
 
-    public function startMosou():void {
-        _isStartMosou = true;
+    public function startMusou():void {
+        _isStartMusou = true;
         _musouFinish = false;
         GameUI.I.getUI().showStart(function ():void {
             _musouFinish = true;
@@ -129,7 +129,7 @@ public class GameStartCtrl {
 
     }
 
-    private function renderStartMosou():Boolean {
+    private function renderStartMusou():Boolean {
         return _musouFinish;
     }
 

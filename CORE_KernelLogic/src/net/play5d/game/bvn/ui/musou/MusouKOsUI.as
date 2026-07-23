@@ -34,7 +34,7 @@ public class MusouKOsUI {
     private var _text:BitmapFontText;
 
     public function update():void {
-        _text.text = GameCtrl.I.getMosouCtrl().gameRunData.koNum.toString();
+        _text.text = GameCtrl.I.getMusouCtrl().gameRunData.koNum.toString();
     }
 
 }

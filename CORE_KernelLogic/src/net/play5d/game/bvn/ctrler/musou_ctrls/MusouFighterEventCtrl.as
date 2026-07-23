@@ -56,27 +56,27 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
 //			var ui:MusouUI = GameUI.I.getUI() as MusouUI;
 //			if(ui) ui.updateEnemyHp(f);
 
-        GameCtrl.I.getMosouCtrl().updateEnemy(f);
+        GameCtrl.I.getMusouCtrl().updateEnemy(f);
     }
 
     private function onEnemyBirth(f:FighterMain):void {
-        if (f.mosouEnemyData.isBoss) {
-            GameCtrl.I.getMosouCtrl().onBossBirth(f);
+        if (f.musouEnemyData.isBoss) {
+            GameCtrl.I.getMusouCtrl().onBossBirth(f);
         }
-        GameCtrl.I.getMosouCtrl().updateEnemy(f);
+        GameCtrl.I.getMusouCtrl().updateEnemy(f);
     }
 
     private function onEnemyDead(f:FighterMain):void {
-        GameCtrl.I.getMosouCtrl().gameRunData.koNum++;
+        GameCtrl.I.getMusouCtrl().gameRunData.koNum++;
         (
                 GameUI.I.getUI() as MusouUI
         ).updateKONum();
 
-        GameData.I.mosouData.addMoney(f.mosouEnemyData.getMoney());
-        GameData.I.mosouData.addFighterExp(f.mosouEnemyData.getExp());
+        GameData.I.musouData.addMoney(f.musouEnemyData.getMoney());
+        GameData.I.musouData.addFighterExp(f.musouEnemyData.getExp());
 
-        if (f.mosouEnemyData.isBoss) {
-            GameCtrl.I.getMosouCtrl().onBossDead(f);
+        if (f.musouEnemyData.isBoss) {
+            GameCtrl.I.getMusouCtrl().onBossDead(f);
 
             var ui:MusouUI = GameUI.I.getUI() as MusouUI;
             if (ui) {
@@ -87,7 +87,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         }
 
         EffectCtrl.I.removeEnemyEffect(f, function ():void {
-            GameCtrl.I.getMosouCtrl().removeEnemy(f);
+            GameCtrl.I.getMusouCtrl().removeEnemy(f);
         });
     }
 
@@ -98,7 +98,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
             return false;
         }
 
-        GameCtrl.I.getMosouCtrl().changeFighter(group.currentFighter, nextFighter);
+        GameCtrl.I.getMusouCtrl().changeFighter(group.currentFighter, nextFighter);
 
         return true;
     }
@@ -121,7 +121,7 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
 
     private function onEnemyEvent(event:FighterEvent):void {
         var f:FighterMain = event.fighter as FighterMain;
-        if (!f.mosouEnemyData) {
+        if (!f.musouEnemyData) {
             return;
         }
 
@@ -170,14 +170,14 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         var fighter:FighterMain = e.fighter as FighterMain;
 
         if (TeamID.TEAM_1 == fighter.team.id) {
-            GameCtrl.I.getMosouCtrl().onSelfDie(fighter);
+            GameCtrl.I.getMusouCtrl().onSelfDie(fighter);
         }
         if (TeamID.TEAM_2 == fighter.team.id) {
             MusouLogic.I.removeHitTarget(fighter);
 
-            var isBoss:Boolean = fighter.mosouEnemyData && fighter.mosouEnemyData.isBoss;
+            var isBoss:Boolean = fighter.musouEnemyData && fighter.musouEnemyData.isBoss;
             if (isBoss) {
-                GameCtrl.I.getMosouCtrl().onBossDie(fighter);
+                GameCtrl.I.getMusouCtrl().onBossDie(fighter);
             }
         }
     }
@@ -190,10 +190,10 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         var fighter:FighterMain = e.fighter as FighterMain;
 
         if (TeamID.TEAM_1 == fighter.team.id) {
-            GameCtrl.I.getMosouCtrl().onSelfDead(fighter);
+            GameCtrl.I.getMusouCtrl().onSelfDead(fighter);
         }
         if (TeamID.TEAM_2 == fighter.team.id) {
-//            MosouLogic.I.removeHitTarget(fighter);
+//            MusouLogic.I.removeHitTarget(fighter);
             onEnemyDead(fighter);
         }
     }

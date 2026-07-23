@@ -48,7 +48,7 @@ public class MusouLogic {
     private var _hitTargets:Vector.<FighterMain> = new Vector.<FighterMain>();
 
     public function checkCurrentArea(areaId:String):Boolean {
-        var md:MusouPlayerData = GameData.I.mosouData;
+        var md:MusouPlayerData = GameData.I.musouData;
         if (!md.getCurrentArea()) {
             return false;
         }
@@ -57,14 +57,14 @@ public class MusouLogic {
     }
 
     public function checkAreaIsOpen(areaId:String):Boolean {
-        var md:MusouPlayerData        = GameData.I.mosouData;
-        var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
+        var md:MusouPlayerData        = GameData.I.musouData;
+        var map:MusouWorldMapPlayerVO = GameData.I.musouData.getCurrentMap();
         return map.getOpenArea(areaId) != null;
     }
 
     public function getNextMission(area2:MusouWorldMapAreaVO):MusouMissionVO {
-        var md:MusouPlayerData             = GameData.I.mosouData;
-        var map:MusouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
+        var md:MusouPlayerData             = GameData.I.musouData;
+        var map:MusouWorldMapPlayerVO      = GameData.I.musouData.getCurrentMap();
         var area:MusouWorldMapAreaPlayerVO = map.getOpenArea(area2.id);
 
         if (!area) {
@@ -85,8 +85,8 @@ public class MusouLogic {
     }
 
     public function getAreaPercent(areaId:String):Number {
-        var md:MusouPlayerData             = GameData.I.mosouData;
-        var map:MusouWorldMapPlayerVO      = GameData.I.mosouData.getCurrentMap();
+        var md:MusouPlayerData             = GameData.I.musouData;
+        var map:MusouWorldMapPlayerVO      = GameData.I.musouData.getCurrentMap();
         var area:MusouWorldMapAreaPlayerVO = map.getOpenArea(areaId);
         if (!area) {
             return 0;
@@ -104,23 +104,23 @@ public class MusouLogic {
     public function openMapArea(mapId:String, areaId:String):void {
         TraceLang('debug.trace.data.musou_logic.open_map_area', {areaId: areaId});
 
-        var md:MusouPlayerData        = GameData.I.mosouData;
-        var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getMapById(mapId);
+        var md:MusouPlayerData        = GameData.I.musouData;
+        var map:MusouWorldMapPlayerVO = GameData.I.musouData.getMapById(mapId);
         map.openArea(areaId);
     }
 
     public function passMission(mission:MusouMissionVO):void {
-//			var md:MusouPlayerData = GameData.I.mosouData;
-//			var map:MusouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
+//			var md:MusouPlayerData = GameData.I.musouData;
+//			var map:MusouWorldMapPlayerVO = GameData.I.musouData.getCurrentMap();
 
 
-        var area:MusouWorldMapAreaPlayerVO = GameData.I.mosouData.getCurrentArea();
+        var area:MusouWorldMapAreaPlayerVO = GameData.I.musouData.getCurrentArea();
 
         if (area.passMission(mission.id)) {
-            GameData.I.mosouData.addMoney(2000);
+            GameData.I.musouData.addMoney(2000);
         }
         else {
-            GameData.I.mosouData.addMoney(500);
+            GameData.I.musouData.addMoney(500);
         }
 
 
@@ -129,7 +129,7 @@ public class MusouLogic {
     }
 
     public function updateMapAreas():void {
-        var pmap:MusouWorldMapPlayerVO = GameData.I.mosouData.getCurrentMap();
+        var pmap:MusouWorldMapPlayerVO = GameData.I.musouData.getCurrentMap();
 
         var map:MusouWorldMapVO = MusouModel.I.getMap(pmap.id);
         for each(var i:MusouWorldMapAreaVO in map.areas) {
@@ -153,15 +153,15 @@ public class MusouLogic {
     }
 
     public function buyFighter(data:MusouFighterSellVO, succback:Function = null):void {
-        var mosouData:MusouPlayerData = GameData.I.mosouData;
-        if (mosouData.getMoney() < data.getPrice()) {
+        var musouData:MusouPlayerData = GameData.I.musouData;
+        if (musouData.getMoney() < data.getPrice()) {
             GameUI.alert('NEED MORE MONEY', GetLang('alert.musou_ctrl.need_more_money', {amount: data.getPrice()}));
             return;
         }
 
         GameUI.confrim('CONFRIM', GetLang('confirm.musou_ctrl.unlock_fighter', {amount: data.getPrice()}), function ():void {
-            mosouData.loseMoney(data.getPrice());
-            mosouData.addFighter(data.id);
+            musouData.loseMoney(data.getPrice());
+            musouData.addFighter(data.id);
             GameData.I.saveData();
             if (succback != null) {
                 succback();
@@ -174,7 +174,7 @@ public class MusouLogic {
      * 敌人等级属性
      */
     public function initEnemyProps(f:FighterMain):void {
-        if (!f.mosouEnemyData) {
+        if (!f.musouEnemyData) {
             return;
         }
 
@@ -182,13 +182,13 @@ public class MusouLogic {
         var mv:MusouMissionVO = MusouModel.I.currentMission;
         var lv:int            = mv.enemyLevel;
 
-        f.mosouEnemyData.level = lv;
+        f.musouEnemyData.level = lv;
 
         var hpRate:Number, hpAdd:Number, atk:Number, skl:Number, bs:Number;
 
-        if (f.mosouEnemyData.isBoss) {
-            if (f.mosouEnemyData.maxHp > 0) {
-                f.hp = f.hpMax = f.mosouEnemyData.maxHp;
+        if (f.musouEnemyData.isBoss) {
+            if (f.musouEnemyData.maxHp > 0) {
+                f.hp = f.hpMax = f.musouEnemyData.maxHp;
             }
             else {
                 f.hp = f.hpMax = 1000 + (
@@ -209,8 +209,8 @@ public class MusouLogic {
 
         }
         else {
-            if (f.mosouEnemyData.maxHp > 0) {
-                f.hp = f.hpMax = f.mosouEnemyData.maxHp;
+            if (f.musouEnemyData.maxHp > 0) {
+                f.hp = f.hpMax = f.musouEnemyData.maxHp;
             }
             else {
                 hpRate = 1 + (

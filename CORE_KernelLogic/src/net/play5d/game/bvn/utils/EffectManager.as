@@ -60,26 +60,26 @@ public class EffectManager {
         var cacheVO:EffectCacheVO = _hitCache[hitvo];
 
         // 增加小兵的打击效果判断
-        var isMosouEnemy:Boolean = false;
+        var isMusouEnemy:Boolean = false;
         if (target && target is FighterMain) {
             var f:FighterMain = (
                     target as FighterMain
             );
-            isMosouEnemy      = f.isMosouEnemy();
+            isMusouEnemy      = f.isMusouEnemy();
         }
 
         if (cacheVO) {
-            if (isMosouEnemy && cacheVO.mosouEnemy) {
-                return cacheVO.mosouEnemy;
+            if (isMusouEnemy && cacheVO.musouEnemy) {
+                return cacheVO.musouEnemy;
             }
-            if (!isMosouEnemy && cacheVO.normal) {
+            if (!isMusouEnemy && cacheVO.normal) {
                 return cacheVO.normal;
             }
         }
 
         var effect:EffectVO;
-        if (isMosouEnemy) {
-            effect = EffectModel.I.getMosouEnemyHitEffect(hitvo.hitType);
+        if (isMusouEnemy) {
+            effect = EffectModel.I.getMusouEnemyHitEffect(hitvo.hitType);
         }
         else if (hitvo.customEffectVO) {
             effect = hitvo.customEffectVO;
@@ -106,8 +106,8 @@ public class EffectManager {
         }
 
         cacheVO = new EffectCacheVO();
-        if (isMosouEnemy) {
-            cacheVO.mosouEnemy = effect;
+        if (isMusouEnemy) {
+            cacheVO.musouEnemy = effect;
         }
         else {
             cacheVO.normal = effect;
@@ -123,25 +123,25 @@ public class EffectManager {
         var cacheVO:EffectCacheVO = _defCache[hitvo];
 
         // 增加小兵的打击效果判断
-        var isMosouEnemy:Boolean = false;
+        var isMusouEnemy:Boolean = false;
         if (target && target is FighterMain) {
             var f:FighterMain = (
                     target as FighterMain
             );
-            isMosouEnemy      = f.isMosouEnemy();
+            isMusouEnemy      = f.isMusouEnemy();
         }
 
         if (cacheVO) {
-            if (isMosouEnemy && cacheVO.mosouEnemy) {
-                return cacheVO.mosouEnemy;
+            if (isMusouEnemy && cacheVO.musouEnemy) {
+                return cacheVO.musouEnemy;
             }
-            if (!isMosouEnemy && cacheVO.normal) {
+            if (!isMusouEnemy && cacheVO.normal) {
                 return cacheVO.normal;
             }
         }
 
 
-        var effect:EffectVO = isMosouEnemy ? EffectModel.I.getMosouEnemyDefenseEffect(hitvo.hitType, defenseType) :
+        var effect:EffectVO = isMusouEnemy ? EffectModel.I.getMusouEnemyDefenseEffect(hitvo.hitType, defenseType) :
                               EffectModel.I.getDefenseEffect(hitvo.hitType, defenseType);
         if (!effect) {
             _defCache[hitvo] = null;
@@ -151,8 +151,8 @@ public class EffectManager {
         effect = effect.clone(effect.className) as EffectVO;
 
         cacheVO = new EffectCacheVO();
-        if (isMosouEnemy) {
-            cacheVO.mosouEnemy = effect;
+        if (isMusouEnemy) {
+            cacheVO.musouEnemy = effect;
         }
         else {
             cacheVO.normal = effect;

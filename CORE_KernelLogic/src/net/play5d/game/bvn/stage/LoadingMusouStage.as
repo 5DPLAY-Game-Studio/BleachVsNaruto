@@ -41,10 +41,10 @@ import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
-public class LoadingMosouStage implements IStage {
+public class LoadingMusouStage implements IStage {
     include '../../../../../../include/_INCLUDE_.as';
 
-    public function LoadingMosouStage() {
+    public function LoadingMusouStage() {
     }
     private var _ui:$loading$MC_loadingFight;
     private var _destoryed:Boolean;
@@ -62,7 +62,7 @@ public class LoadingMosouStage implements IStage {
      */
     public function build():void {
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_LOADING_START);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_LOADING_START);
 
         GameRender.add(render);
         GameInputer.focus();
@@ -107,7 +107,7 @@ public class LoadingMosouStage implements IStage {
 
         maps.push(mission.map);
 
-        var fvos:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fvos:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
         for (var i:int; i < fvos.length; i++) {
             fighters.push(fvos[i].id);
         }
@@ -128,7 +128,7 @@ public class LoadingMosouStage implements IStage {
         _sltUI.bar.txt.text   = msg;
         _sltUI.bar.bar.scaleX = process;
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_LOADING, {msg: msg, process: process});
+        GameEvent.dispatchEvent(GameEvent.MUSOU_LOADING, {msg: msg, process: process});
     }
 
     private function onLoadError(msg:String):void {
@@ -140,9 +140,9 @@ public class LoadingMosouStage implements IStage {
 //			return;
 
         initGameRunData();
-        StateCtrl.I.transIn(MainGame.I.goMosouGame, false);
+        StateCtrl.I.transIn(MainGame.I.goMusouGame, false);
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_LOADING_FINISH);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_LOADING_FINISH);
     }
 
     private function render():void {
@@ -160,15 +160,15 @@ public class LoadingMosouStage implements IStage {
     private function initGameRunData():void {
         var mission:MusouMissionVO = MusouModel.I.currentMission;
 
-        GameCtrl.I.initMosouGame();
+        GameCtrl.I.initMusouGame();
 
-        GameCtrl.I.getMosouCtrl().gameRunData.koNum = 0;
+        GameCtrl.I.getMusouCtrl().gameRunData.koNum = 0;
         MusouLogic.I.clearHits();
-        GameCtrl.I.getMosouCtrl().gameRunData.gameTimeMax = mission.time * GameConfig.FPS_ANIMATE;
-        GameCtrl.I.getMosouCtrl().gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
-//			GameCtrl.I.getMosouCtrl().gameRunData.gameTime = 30 * GameConfig.FPS_ANIMATE;
+        GameCtrl.I.getMusouCtrl().gameRunData.gameTimeMax = mission.time * GameConfig.FPS_ANIMATE;
+        GameCtrl.I.getMusouCtrl().gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
+//			GameCtrl.I.getMusouCtrl().gameRunData.gameTime = 30 * GameConfig.FPS_ANIMATE;
 
-        var fighterTeam:Vector.<MusouFighterVO> = GameData.I.mosouData.getFighterTeam();
+        var fighterTeam:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
 
         GameCtrl.I.gameRunData.p1FighterGroup.fighter1 = FighterModel.I.getFighter(fighterTeam[0].id);
         GameCtrl.I.gameRunData.p1FighterGroup.fighter2 = FighterModel.I.getFighter(fighterTeam[1].id);

@@ -25,10 +25,10 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.events.SetBtnEvent;
 
-public class MosouPauseDialog extends Sprite {
+public class MusouPauseDialog extends Sprite {
     include '../../../../../../include/_INCLUDE_.as';
 
-    public function MosouPauseDialog() {
+    public function MusouPauseDialog() {
         _bg = new Sprite();
         _bg.graphics.beginFill(0, 0.5);
         _bg.graphics.drawRect(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
@@ -112,7 +112,7 @@ public class MosouPauseDialog extends Sprite {
             _btnGroup.keyEnable = false;
             GameUI.confrim('BACK MAP?', '返回到大地图？', function ():void {
                 MainGame.I.goWorldMap();
-                GameEvent.dispatchEvent(GameEvent.MOSOU_BACK_MAP);
+                GameEvent.dispatchEvent(GameEvent.MUSOU_BACK_MAP);
             }, function ():void {
                 _btnGroup.keyEnable = true;
             }, true);

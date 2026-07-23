@@ -51,11 +51,11 @@ public class EffectModel {
         return _effect['hit_' + type];
     }
 
-    public function getMosouEnemyHitEffect(type:int):EffectVO {
+    public function getMusouEnemyHitEffect(type:int):EffectVO {
         return _effect['hit_enemy_' + type];
     }
 
-    public function getMosouEnemyDefenseEffect(hitType:int, defenseType:int):EffectVO {
+    public function getMusouEnemyDefenseEffect(hitType:int, defenseType:int):EffectVO {
         switch (defenseType) {
         case FighterDefenseType.SWORD:
             break;
@@ -140,8 +140,8 @@ public class EffectModel {
         initBuffEffect();
         initSteelHitEffect();
 
-        initMosouEnemyHitEffect();
-        initMosouEnemyDefenseEffect();
+        initMusouEnemyHitEffect();
+        initMusouEnemyDefenseEffect();
     }
 
     private function cacheEffects():void {
@@ -235,7 +235,7 @@ public class EffectModel {
 
     }
 
-    private function initMosouEnemyHitEffect():void {
+    private function initMusouEnemyHitEffect():void {
         addEnemyHitEffect(HitType.CATCH, 'xg_catch_hit', {freeze: 200, sound: 'snd_hit_cache'});
 
         addEnemyHitEffect(HitType.KAN, 'XG_kan2',
@@ -276,7 +276,7 @@ public class EffectModel {
         });
     }
 
-    private function initMosouEnemyDefenseEffect():void {
+    private function initMusouEnemyDefenseEffect():void {
         addEnemyDefenseEffect(HitType.KAN, 'XG_fykan',
                               {sound: 'snd_fykan', freeze: 50, blendMode: BlendMode.ADD, followDirect: true}
         );

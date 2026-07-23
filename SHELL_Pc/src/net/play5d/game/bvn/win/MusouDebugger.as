@@ -23,27 +23,27 @@ import flash.events.KeyboardEvent;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.GameData;
 
-public class MosouDebugger {
+public class MusouDebugger {
 
 
     public static function init(param1:Stage):void {
         param1.addEventListener('keyUp', keyHandler);
     }
 
-    public function MosouDebugger() {
+    public function MusouDebugger() {
         super();
     }
 
     private static function keyHandler(param1:KeyboardEvent):void {
         switch (int(param1.keyCode) - 112) {
         case 0:
-            GameData.I.mosouData.addMoney(100000);
+            GameData.I.musouData.addMoney(100000);
             break;
         case 1:
-            GameData.I.mosouData.addFighterExp(100000);
+            GameData.I.musouData.addFighterExp(100000);
             break;
         case 2:
-            GameCtrl.I.getMosouCtrl().anyWaypassMission();
+            GameCtrl.I.getMusouCtrl().anyWaypassMission();
         }
     }
 }

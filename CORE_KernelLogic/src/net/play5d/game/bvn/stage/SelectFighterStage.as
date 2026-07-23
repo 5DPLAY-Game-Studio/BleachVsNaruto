@@ -279,7 +279,7 @@ public class SelectFighterStage implements IStage {
 
                     if (GameMode.currentMode == GameMode.MUSOU_ARCADE) {
                         //开始运行过关模式
-                        startMosouGame();
+                        startMusouGame();
                     }
 
                 }
@@ -1312,8 +1312,8 @@ public class SelectFighterStage implements IStage {
         selectFinish();
     }
 
-    private function startMosouGame():void {
-//			MosouMissionModel.I.initMissions();
+    private function startMusouGame():void {
+//			MusouMissionModel.I.initMissions();
         selectFinish();
     }
 

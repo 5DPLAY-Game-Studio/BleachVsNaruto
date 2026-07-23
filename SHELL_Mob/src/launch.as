@@ -280,7 +280,7 @@ public class launch extends Sprite {
         GameEvent.addEventListener(GameEvent.ENTER_SINGLE_STAGE, enterStageHandler);
         GameEvent.addEventListener(GameEvent.ENTER_TEAM_STAGE, enterStageHandler);
         GameEvent.addEventListener(GameEvent.ENTER_TRAIN_STAGE, enterStageHandler);
-        GameEvent.addEventListener(GameEvent.ENTER_MOSOU_STAGE, enterStageHandler);
+        GameEvent.addEventListener(GameEvent.ENTER_MUSOU_STAGE, enterStageHandler);
     }
 
     private function initBackHandler():void {
@@ -384,8 +384,8 @@ public class launch extends Sprite {
         case GameEvent.ENTER_TRAIN_STAGE:
 //					UMengAneManager.I.sendEvent("game_mode_train");
             break;
-        case GameEvent.ENTER_MOSOU_STAGE:
-//					UMengAneManager.I.sendEvent("game_mode_mosou");
+        case GameEvent.ENTER_MUSOU_STAGE:
+//					UMengAneManager.I.sendEvent("game_mode_musou");
         }
     }
 

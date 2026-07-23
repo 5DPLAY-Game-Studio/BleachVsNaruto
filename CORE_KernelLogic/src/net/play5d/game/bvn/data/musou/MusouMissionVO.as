@@ -53,7 +53,7 @@ public class MusouMissionVO implements IInstanceVO {
 //			map = xml.@map;
 //			time = int(xml.@time);
 //			if(time < 1){
-//				throw new Error("init mousou stage error!");
+//				throw new Error("init musou stage error!");
 //			}
 //			waves = new Vector.<MusouWaveVO>();
 //

@@ -41,7 +41,7 @@ public class GameData {
 
     private const SAVE_ID:String = 'bvn3.5A';
     // 是否启动无双模式的数据保存
-    private const __MOSOU_DATA_ENABLED:Boolean = true;
+    private const __MUSOU_DATA_ENABLED:Boolean = true;
     private static var _i:GameData;
 
     public static function get I():GameData {
@@ -53,14 +53,14 @@ public class GameData {
 
     }
     public var config:ConfigVO           = new ConfigVO();
-    public var mosouData:MusouPlayerData = new MusouPlayerData();
+    public var musouData:MusouPlayerData = new MusouPlayerData();
     public var p1Select:SelectVO;
     public var p2Select:SelectVO;
     public var selectMap:String;
     public var score:int = 0;
     public var winnerId:String;
 
-//		private const __MOSOU_DATA_ENABLED:Boolean = false;
+//		private const __MUSOU_DATA_ENABLED:Boolean = false;
     public var isFristRun:Boolean = true;
 
     public function loadConfig(back:Function, fail:Function = null):void {
@@ -91,25 +91,25 @@ public class GameData {
 
         function loadMissionBack(data:Object):void {
             MessionModel.I.initByObject(data);
-//				AssetManager.I.loadXML("config/musou.xml",loadMosouMission , loadMosouMission);
+//				AssetManager.I.loadXML("config/musou.xml",loadMusouMission , loadMusouMission);
 
-            MusouModel.I.loadMapData(loadMosouDataBack, loadMosouFail);
+            MusouModel.I.loadMapData(loadMusouDataBack, loadMusouFail);
         }
 
-        function loadMosouDataBack():void {
+        function loadMusouDataBack():void {
             MusouFighterModel.I.init();
 
             validateSelect();
             validateMissionData();
-            validateMosouData();
+            validateMusouData();
 
             if (back != null) {
                 back();
             }
         }
 
-//			function loadMosouMission(data:String):void{
-//				MosouMissionModel.I.initByXML(new XML(data));
+//			function loadMusouMission(data:String):void{
+//				MusouMissionModel.I.initByXML(new XML(data));
 //				back();
 //			}
 
@@ -148,7 +148,7 @@ public class GameData {
             }
         }
 
-        function loadMosouFail():void {
+        function loadMusouFail():void {
             Debugger.log(GetLang('debug.log.data.game_data.load_musou_fail'));
             if (fail != null) {
                 fail(GetLang('debug.log.data.game_data.load_musou_fail'));
@@ -158,7 +158,7 @@ public class GameData {
     }
 
     public function initData():void {
-        mosouData.init();
+        musouData.init();
 //			GameData.I.loadSaveData();
     }
 
@@ -167,7 +167,7 @@ public class GameData {
         o.id         = SAVE_ID;
 
         o.config = config.toSaveObj();
-        o.mosou  = mosouData.toSaveObj();
+        o.musou  = musouData.toSaveObj();
 
 
         GameInterface.instance.saveGame(o);
@@ -185,8 +185,8 @@ public class GameData {
             config.readSaveObj(o.config);
         }
 
-        if (o.mosou && __MOSOU_DATA_ENABLED) {
-            mosouData.readSaveObj(o.mosou);
+        if (o.musou && __MUSOU_DATA_ENABLED) {
+            musouData.readSaveObj(o.musou);
         }
     }
 
@@ -308,7 +308,7 @@ public class GameData {
     }
 
     // 验证无双关卡
-    private function validateMosouData():void {
+    private function validateMusouData():void {
         var mapObj:Object = MusouModel.I.getAllMap();
 
         for (var i:String in mapObj) {
@@ -318,14 +318,14 @@ public class GameData {
             for each(var a:MusouWorldMapAreaVO in mwv.areas) {
                 for each(var mv:MusouMissionVO in a.missions) {
 
-                    var mosouId:String = mwv.id + ' - ' + a.id + ' - ' + mv.id;
+                    var musouId:String = mwv.id + ' - ' + a.id + ' - ' + mv.id;
 
 
                     var map:MapVO = MapModel.I.getMap(mv.map);
                     if (map == null) {
                         throw new Error(
                                 GetLang('debug.error.data.game_data.verify_musou_fail', {
-                                    mosouId: mosouId,
+                                    musouId: musouId,
                                     type   : 'map',
                                     value  : mv.map
                                 }));
@@ -337,7 +337,7 @@ public class GameData {
                         if (fighter == null) {
                             throw new Error(
                                     GetLang('debug.error.data.game_data.verify_musou_fail', {
-                                        mosouId: mosouId,
+                                        musouId: musouId,
                                         type   : 'fighter',
                                         value  : f
                                     }));

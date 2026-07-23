@@ -86,7 +86,7 @@ public class GameCtrl {
     private var _trainingCtrl:TrainingCtrler; //练习模式控制
     private var _mainLogicCtrl:GameMainLogicCtrler; //游戏主逻辑控制
     private var _endCtrl:GameEndCtrl; //KO，结束游戏控制
-    private var _mosouCtrl:MusouCtrl; // 无双游戏控制
+    private var _musouCtrl:MusouCtrl; // 无双游戏控制
     private var _isRenderGame:Boolean = true;
     private var _isPauseGame:Boolean; //暂停
     private var _gameRunning:Boolean;
@@ -96,8 +96,8 @@ public class GameCtrl {
     private var _gameStartAndPause:Boolean; //游戏开始时暂停
 
     public function getAttacker(name:String, team:int):FighterAttacker {
-        if (_mosouCtrl) {
-            return _mosouCtrl.getFighterEventCtrl().getAttacker(name, team);
+        if (_musouCtrl) {
+            return _musouCtrl.getFighterEventCtrl().getAttacker(name, team);
         }
         return _fighterEventCtrl.getAttacker(name, team);
     }
@@ -108,8 +108,8 @@ public class GameCtrl {
         }
     }
 
-    public function getMosouCtrl():MusouCtrl {
-        return _mosouCtrl;
+    public function getMusouCtrl():MusouCtrl {
+        return _musouCtrl;
     }
 
     public function getTeamMap():TeamMap {
@@ -131,7 +131,7 @@ public class GameCtrl {
         _gameRunning       = true;
         _gameStartAndPause = false;
 
-        if (!_mosouCtrl) {
+        if (!_musouCtrl) {
             _fighterEventCtrl = new FighterEventCtrl();
             _fighterEventCtrl.initlize();
         }
@@ -176,9 +176,9 @@ public class GameCtrl {
             gameState = null;
         }
 
-        if (_mosouCtrl) {
-            _mosouCtrl.destory();
-            _mosouCtrl = null;
+        if (_musouCtrl) {
+            _musouCtrl.destory();
+            _musouCtrl = null;
         }
 
         gameRunData.p1FighterGroup.destory();
@@ -267,7 +267,7 @@ public class GameCtrl {
     /**
      * 开始游戏
      */
-    public function startMosouGame():void {
+    public function startMusouGame():void {
         if (!autoStartAble) {
             return;
         }
@@ -278,7 +278,7 @@ public class GameCtrl {
 
         initTeam();
 
-        _mosouCtrl.buildGame();
+        _musouCtrl.buildGame();
 
         GameRender.add(render);
 
@@ -414,7 +414,7 @@ public class GameCtrl {
         if (pauseUI && !_isPauseGame) {
 
             if (_startCtrl || _endCtrl || (
-                    _mosouCtrl && _mosouCtrl.getGameFinished()
+                    _musouCtrl && _musouCtrl.getGameFinished()
             )) {
                 _gameStartAndPause = true;
                 return;
@@ -534,9 +534,9 @@ public class GameCtrl {
     }
 
     /************************************************************************************************************************************************************/
-    public function initMosouGame():void {
-        _mosouCtrl = new MusouCtrl();
-        _mosouCtrl.initalize();
+    public function initMusouGame():void {
+        _musouCtrl = new MusouCtrl();
+        _musouCtrl.initalize();
     }
 
     private function renderPause():void {
@@ -770,8 +770,8 @@ public class GameCtrl {
             _trainingCtrl.render();
         }
 
-        if (_mosouCtrl) {
-            _mosouCtrl.render();
+        if (_musouCtrl) {
+            _musouCtrl.render();
         }
     }
 
@@ -792,11 +792,11 @@ public class GameCtrl {
             _mainLogicCtrl.renderAnimate();
         }
 
-        if (_mosouCtrl) {
-            _mosouCtrl.renderAnimate();
+        if (_musouCtrl) {
+            _musouCtrl.renderAnimate();
         }
 
-        if (actionEnable && !_startCtrl && !_endCtrl && !_mosouCtrl) {
+        if (actionEnable && !_startCtrl && !_endCtrl && !_musouCtrl) {
             renderGameTime();
         }
     }

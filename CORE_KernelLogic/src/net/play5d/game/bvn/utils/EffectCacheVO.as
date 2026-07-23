@@ -27,6 +27,6 @@ public class EffectCacheVO implements IInstanceVO {
     public function EffectCacheVO() {
     }
     public var normal:EffectVO;
-    public var mosouEnemy:EffectVO;
+    public var musouEnemy:EffectVO;
 }
 }

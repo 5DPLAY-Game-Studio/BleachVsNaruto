@@ -37,7 +37,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
 import net.play5d.game.bvn.utils.TouchUtils;
 
-//import net.play5d.game.bvn.data.musou.MosouMissionModel;
+//import net.play5d.game.bvn.data.musou.MusouMissionModel;
 public class MenuBtnGroup extends Sprite {
     include '../../../../../../include/_INCLUDE_.as';
 
@@ -393,7 +393,7 @@ public class MenuBtnGroup extends Sprite {
                 GameMode.currentMode = GameMode.MUSOU_ARCADE;
                 MainGame.I.goWorldMap();
 
-                GameEvent.dispatchEvent(GameEvent.ENTER_MOSOU_STAGE);
+                GameEvent.dispatchEvent(GameEvent.ENTER_MUSOU_STAGE);
             };
             break;
         case 'OPTION':

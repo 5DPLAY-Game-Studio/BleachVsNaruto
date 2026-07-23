@@ -32,7 +32,7 @@ public class FighterActionLogic {
     private var _fighter:FighterMain;
     private var _action:FighterAction;
     private var _actionCtrler:IFighterActionCtrl;
-    private var _mosouLogic:MusouFighterLogic;
+    private var _musouLogic:MusouFighterLogic;
 
     public function enabled():Boolean {
 
@@ -43,8 +43,8 @@ public class FighterActionLogic {
             if (!_actionCtrler) {
                 _actionCtrler = _fighter.getCtrler().getMcCtrl().getActionCtrler();
             }
-            if (!_mosouLogic) {
-                _mosouLogic = _fighter.getMosouLogic();
+            if (!_musouLogic) {
+                _musouLogic = _fighter.getMusouLogic();
             }
         }
         catch (e:Error) {
@@ -104,56 +104,56 @@ public class FighterActionLogic {
     }
 
     public function skill1():Boolean {
-        if (_mosouLogic && !_mosouLogic.canSkill1()) {
+        if (_musouLogic && !_musouLogic.canSkill1()) {
             return false;
         }
         return _action.skill1 && _actionCtrler.skill1();
     }
 
     public function skill2():Boolean {
-        if (_mosouLogic && !_mosouLogic.canSkill2()) {
+        if (_musouLogic && !_musouLogic.canSkill2()) {
             return false;
         }
         return _action.skill2 && _actionCtrler.skill2();
     }
 
     public function skillAIR():Boolean {
-        if (_mosouLogic && !_mosouLogic.canSkillAir()) {
+        if (_musouLogic && !_musouLogic.canSkillAir()) {
             return false;
         }
         return _action.skillAIR && _actionCtrler.skillAIR();
     }
 
     public function zhao1():Boolean {
-        if (_mosouLogic && !_mosouLogic.canZhao1()) {
+        if (_musouLogic && !_musouLogic.canZhao1()) {
             return false;
         }
         return _action.zhao1 && _actionCtrler.zhao1();
     }
 
     public function zhao2():Boolean {
-        if (_mosouLogic && !_mosouLogic.canZhao2()) {
+        if (_musouLogic && !_musouLogic.canZhao2()) {
             return false;
         }
         return _action.zhao2 && _actionCtrler.zhao2();
     }
 
     public function zhao3():Boolean {
-        if (_mosouLogic && !_mosouLogic.canZhao3()) {
+        if (_musouLogic && !_musouLogic.canZhao3()) {
             return false;
         }
         return _action.zhao3 && _actionCtrler.zhao3();
     }
 
     public function catch1():Boolean {
-        if (_mosouLogic && !_mosouLogic.canCatch1()) {
+        if (_musouLogic && !_musouLogic.canCatch1()) {
             return false;
         }
         return _action.catch1 && _actionCtrler.catch1();
     }
 
     public function catch2():Boolean {
-        if (_mosouLogic && !_mosouLogic.canCatch2()) {
+        if (_musouLogic && !_musouLogic.canCatch2()) {
             return false;
         }
         return _action.catch2 && _actionCtrler.catch2();
@@ -161,28 +161,28 @@ public class FighterActionLogic {
 
 
     public function bisha():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBisha()) {
+        if (_musouLogic && !_musouLogic.canBisha()) {
             return false;
         }
         return _action.bisha && _actionCtrler.bisha();
     }
 
     public function bishaUP():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBishaUP()) {
+        if (_musouLogic && !_musouLogic.canBishaUP()) {
             return false;
         }
         return _action.bishaUP && _actionCtrler.bishaUP();
     }
 
     public function bishaSUPER():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBishaSuper()) {
+        if (_musouLogic && !_musouLogic.canBishaSuper()) {
             return false;
         }
         return _action.bishaSUPER && _actionCtrler.bishaSUPER();
     }
 
     public function bishaAIR():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBishaAir()) {
+        if (_musouLogic && !_musouLogic.canBishaAir()) {
             return false;
         }
         return _action.bishaAIR && _actionCtrler.bishaAIR();
@@ -192,7 +192,7 @@ public class FighterActionLogic {
         if (!FighterActionState.allowGhostStep(_fighter.actionState)) {
             return false;
         }
-        if (_mosouLogic && !_mosouLogic.canGhostStep()) {
+        if (_musouLogic && !_musouLogic.canGhostStep()) {
             return false;
         }
         return _actionCtrler.ghostStep();
@@ -202,7 +202,7 @@ public class FighterActionLogic {
         if (!FighterActionState.allowGhostStep(_fighter.actionState)) {
             return false;
         }
-        if (_mosouLogic && !_mosouLogic.canGhostStep()) {
+        if (_musouLogic && !_musouLogic.canGhostStep()) {
             return false;
         }
         return _actionCtrler.ghostJump();
@@ -212,28 +212,28 @@ public class FighterActionLogic {
         if (!FighterActionState.allowGhostStep(_fighter.actionState)) {
             return false;
         }
-        if (_mosouLogic && !_mosouLogic.canGhostStep()) {
+        if (_musouLogic && !_musouLogic.canGhostStep()) {
             return false;
         }
         return _actionCtrler.ghostJumpDown();
     }
 
     public function waiKai():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBankai()) {
+        if (_musouLogic && !_musouLogic.canBankai()) {
             return false;
         }
         return _actionCtrler.waiKai();
     }
 
     public function waiKaiW():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBankai()) {
+        if (_musouLogic && !_musouLogic.canBankai()) {
             return false;
         }
         return _actionCtrler.waiKaiW();
     }
 
     public function waiKaiS():Boolean {
-        if (_mosouLogic && !_mosouLogic.canBankai()) {
+        if (_musouLogic && !_musouLogic.canBankai()) {
             return false;
         }
         return _actionCtrler.waiKaiS();

@@ -58,7 +58,7 @@ public class GameEvent extends Event {
 //		public static const SELECT_FIGHTER_INDEX_FINISH:String = 'SELECT_FIGHTER_INDEX_FINISH';
 
 
-    public static const ENTER_MOSOU_STAGE:String  = 'ENTER_MOSOU_STAGE';
+    public static const ENTER_MUSOU_STAGE:String  = 'ENTER_MUSOU_STAGE';
     public static const ENTER_TEAM_STAGE:String   = 'ENTER_TEAM_STAGE';
     public static const ENTER_SINGLE_STAGE:String = 'ENTER_SINGLE_STAGE';
     public static const ENTER_TRAIN_STAGE:String  = 'ENTER_TRAIN_STAGE';
@@ -70,21 +70,21 @@ public class GameEvent extends Event {
     public static const WINNER_SHOW:String = 'SHOW_WINNER';
     public static const WINNER_END:String  = 'WINNER_END';
 
-    ////// MOSOU ====================
+    ////// MUSOU ====================
 
-    public static const MOSOU_MAP:String           = 'MOSOU_MAP';
-    public static const MOSOU_BACK_MAP:String      = 'MOSOU_BACK_MAP';
-    public static const MOSOU_FIGHTER:String       = 'MOSOU_FIGHTER';
-    public static const MOSOU_FIGHTER_CLOSE:String = 'MOSOU_FIGHTER_CLOSE';
+    public static const MUSOU_MAP:String           = 'MUSOU_MAP';
+    public static const MUSOU_BACK_MAP:String      = 'MUSOU_BACK_MAP';
+    public static const MUSOU_FIGHTER:String       = 'MUSOU_FIGHTER';
+    public static const MUSOU_FIGHTER_CLOSE:String = 'MUSOU_FIGHTER_CLOSE';
 
-    public static const MOSOU_FIGHTER_UPDATE:String = 'MOSOU_FIGHTER_UPDATE';
+    public static const MUSOU_FIGHTER_UPDATE:String = 'MUSOU_FIGHTER_UPDATE';
 
-    public static const MOSOU_LOADING_START:String  = 'MOSOU_LOADING_START';
-    public static const MOSOU_LOADING:String        = 'MOSOU_LOADING';
-    public static const MOSOU_LOADING_FINISH:String = 'MOSOU_LOADING_FINISH';
+    public static const MUSOU_LOADING_START:String  = 'MUSOU_LOADING_START';
+    public static const MUSOU_LOADING:String        = 'MUSOU_LOADING';
+    public static const MUSOU_LOADING_FINISH:String = 'MUSOU_LOADING_FINISH';
 
-    public static const MOSOU_MISSION_START:String  = 'MOSOU_MISSION_START';
-    public static const MOSOU_MISSION_FINISH:String = 'MOSOU_MISSION_FINISH';
+    public static const MUSOU_MISSION_START:String  = 'MUSOU_MISSION_START';
+    public static const MUSOU_MISSION_FINISH:String = 'MUSOU_MISSION_FINISH';
 
     ////// FIGHT ====================
 
@@ -98,7 +98,7 @@ public class GameEvent extends Event {
 
     public static const CONFRIM_BACK_MENU:String = 'CONFRIM_BACK_MENU';
 
-    public static const CONFRIM_MOSOU_NEXT_MISSION:String = 'CONFRIM_MOSOU_NEXT_MISSION';
+    public static const CONFRIM_MUSOU_NEXT_MISSION:String = 'CONFRIM_MUSOU_NEXT_MISSION';
 
 
     ////////////////////////////////////////////////////////////////////////////////////

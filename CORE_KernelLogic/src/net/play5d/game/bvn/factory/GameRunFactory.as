@@ -46,7 +46,7 @@ public class GameRunFactory {
             return null;
         }
 
-        fighter.mosouEnemyData = data;
+        fighter.musouEnemyData = data;
         fighter.hp             = fighter.hpMax = data.maxHp;
         return fighter;
     }
@@ -58,14 +58,14 @@ public class GameRunFactory {
         return fighter;
     }
 
-    public static function createFighterByMosouData(
-            data:FighterVO, mosouData:MusouFighterVO, playerId:String):FighterMain {
+    public static function createFighterByMusouData(
+            data:FighterVO, musouData:MusouFighterVO, playerId:String):FighterMain {
         var fighter:FighterMain = createFighterByData(data, playerId);
         if (!fighter) {
             return null;
         }
 
-        fighter.initMosouFighter(mosouData);
+        fighter.initMusouFighter(musouData);
         return fighter;
     }
 

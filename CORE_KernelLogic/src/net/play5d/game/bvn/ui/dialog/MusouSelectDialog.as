@@ -37,10 +37,10 @@ import net.play5d.game.bvn.ui.musou.CoinUI;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 
-public class MosouSelectDialog extends BaseDialog {
+public class MusouSelectDialog extends BaseDialog {
     include '../../../../../../../include/_INCLUDE_OVERRIDE_.as';
 
-    public function MosouSelectDialog(fighterIndex:int) {
+    public function MusouSelectDialog(fighterIndex:int) {
         super();
 
         width  = 741;
@@ -191,7 +191,7 @@ public class MosouSelectDialog extends BaseDialog {
             if (!_curFighterUI) {
                 return;
             }
-            GameData.I.mosouData.setFighterTeam(_fighterIndex, _curFighterUI.sellData.id);
+            GameData.I.musouData.setFighterTeam(_fighterIndex, _curFighterUI.sellData.id);
             GameData.I.saveData();
             closeSelf();
         }

@@ -90,7 +90,7 @@ public class MusouPlayerData implements ISaveData {
         }
         _fighterTeam[index] = mv;
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_FIGHTER_UPDATE);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_FIGHTER_UPDATE);
     }
 
     public function setLeader(v:MusouFighterVO):void {
@@ -117,7 +117,7 @@ public class MusouPlayerData implements ISaveData {
             break;
         }
 
-        GameEvent.dispatchEvent(GameEvent.MOSOU_FIGHTER_UPDATE);
+        GameEvent.dispatchEvent(GameEvent.MUSOU_FIGHTER_UPDATE);
     }
 
     public function getLeader():MusouFighterVO {

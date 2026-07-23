@@ -73,13 +73,13 @@ public class AdManager {
         GameEvent.addEventListener(GameEvent.GAME_OVER_CONTINUE, gameEventHandler);
         GameEvent.addEventListener(GameEvent.GAME_OVER, gameEventHandler);
         GameEvent.addEventListener(GameEvent.WINNER_SHOW, gameEventHandler);
-        GameEvent.addEventListener(GameEvent.MOSOU_MISSION_FINISH, gameEventHandler);
+        GameEvent.addEventListener(GameEvent.MUSOU_MISSION_FINISH, gameEventHandler);
         GameEvent.addEventListener(GameEvent.LOAD_GAME_START, gameEventHandler);
         GameEvent.addEventListener(GameEvent.LOAD_GAME_COMPLETE, gameEventHandler);
-        GameEvent.addEventListener(GameEvent.MOSOU_LOADING_START, gameEventHandler);
-        GameEvent.addEventListener(GameEvent.MOSOU_LOADING_FINISH, gameEventHandler);
+        GameEvent.addEventListener(GameEvent.MUSOU_LOADING_START, gameEventHandler);
+        GameEvent.addEventListener(GameEvent.MUSOU_LOADING_FINISH, gameEventHandler);
         GameEvent.addEventListener(GameEvent.CONFRIM_BACK_MENU, gameEventHandler);
-        GameEvent.addEventListener(GameEvent.CONFRIM_MOSOU_NEXT_MISSION, gameEventHandler);
+        GameEvent.addEventListener(GameEvent.CONFRIM_MUSOU_NEXT_MISSION, gameEventHandler);
     }
 
     public function onGameInited():void {
@@ -266,7 +266,7 @@ public class AdManager {
         case GameEvent.WINNER_SHOW:
             _adCtrler.showSmartAd();
             break;
-        case GameEvent.MOSOU_MISSION_FINISH:
+        case GameEvent.MUSOU_MISSION_FINISH:
             _adCtrler.showSmartAd();
             break;
         case GameEvent.LOAD_GAME_START:

@@ -194,7 +194,7 @@
         "game_data": {
           "verify_select_fail"       : "校验 {file} 失败！ 失败信息：[{message}]",
           "verify_mission_fail"      : "校验 {file} 失败！ 失败信息：[{message}]",
-          "verify_musou_fail"        : "无双数据 [{mosouId}] 校验失败！ 未找到相关 {type} 数据：[{value}]",
+          "verify_musou_fail"        : "无双数据 [{musouId}] 校验失败！ 未找到相关 {type} 数据：[{value}]",
           "verify_fighter_model_fail": "FighterModel 数据校验失败！ 失败信息：[{message}]"
         },
         "musou_mission_vo": {

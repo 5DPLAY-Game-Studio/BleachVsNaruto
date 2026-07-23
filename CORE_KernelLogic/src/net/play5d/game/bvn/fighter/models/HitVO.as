@@ -222,11 +222,11 @@ public class HitVO implements IInstanceVO {
      * @return 敌人 FighterMain 是否不为 Boss
      */
     private static function checkEnemyFighter(fighter:FighterMain):Boolean {
-        if (!fighter || !fighter.mosouEnemyData) {
+        if (!fighter || !fighter.musouEnemyData) {
             return false;
         }
 
-        return !fighter.mosouEnemyData.isBoss;
+        return !fighter.musouEnemyData.isBoss;
     }
 
 }
