@@ -18,22 +18,22 @@
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
-:: Purpose
-::   Build the SHELL_Dev debug chain with pure FlexSDK (compc / amxmlc),
-::   without IDEA or VSCode.
+:: ÓÃÍ¾
+::   Ê¹ÓÃ´¿ FlexSDK£¨compc / amxmlc£©¹¹½¨ SHELL_Dev µ÷ÊÔÁ´£¬
+::   ²»ÒÀÀµ IDEA »ò VSCode¡£
 ::
-:: Usage
+:: ÓÃ·¨
 ::   tools\script\build.bat
-::   Then optionally: tools\script\debug.bat
+::   Ö®ºó¿ÉÑ¡ÓÃ£ºtools\script\debug.bat
 ::
-:: Prerequisites
-::   FLEX_HOME points at Flex/AIR SDK root (flex4.16.1-air51.0.1.1).
+:: Ç°ÖÃÌõ¼þ
+::   FLEX_HOME Ö¸Ïò Flex/AIR SDK ¸ùÄ¿Â¼£¨flex4.16.1-air51.0.1.1£©¡£
 ::
-:: Flex load-config (keep in sync with each module asconfig.json / *.iml):
+:: Flex load-config£¨Óë¸÷Ä£¿é asconfig.json / *.iml ±£³ÖÍ¬²½£©£º
 ::   <Module>/flex-config.xml
-::   tools\script\sdk-external.xml â€” Flex/AIR/MX as external for library SWCs
+::   tools\script\sdk-external.xml ¡ª ¿â SWC ½« Flex/AIR/MX ±êÎª external
 ::
-:: Order:
+:: ±àÒëË³Ðò£º
 ::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_Components
 ::   -> CORE_KernelLogic -> CORE_Utils -> sync.bat -> SHELL_Dev
 ::
@@ -42,7 +42,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Current BAT directory (...\tools\script\)
+:: µ±Ç° BAT ÎÄ¼þ¾ø¶ÔÔËÐÐÄ¿Â¼
 set BAT_HOME=%~dp0
 
 call :ECHO_LANG :TITLE ""
@@ -52,6 +52,7 @@ call :ECHO_LANG :BUILD_START ""
 :: 1) Flex / AIR SDK
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:: ¼ì²é»·¾³±äÁ¿ FLEX_HOME ÊÇ·ñ´æÔÚ£¬¸Ã±äÁ¿Ö¸ÏòÒÑ°²×°µÄ FlexSDK
 if "%FLEX_HOME%"=="" (
 	call :ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
@@ -72,7 +73,7 @@ call :EXIST "%SDK_EXT%"
 set PATH=%FLEX_BIN%;%PATH%
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 2) Repo / output paths
+:: 2) ²Ö¿â / Êä³öÂ·¾¶
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 set REPO_ROOT=%BAT_HOME%..\..
@@ -91,7 +92,7 @@ if not exist "%OUT_ROOT%\CORE_Utils" mkdir "%OUT_ROOT%\CORE_Utils"
 if not exist "%OUT_DEV%" mkdir "%OUT_DEV%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 3) Compile libraries (compc + AIR config)
+:: 3) ±àÒë¸÷¿âÄ£¿é£¨compc + AIR config£©
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :COMPC_MODULE "LIB_Other" "%REPO_ROOT%\LIB_Other\flex-config.xml"
@@ -113,7 +114,7 @@ call :COMPC_MODULE "CORE_Utils" "%REPO_ROOT%\CORE_Utils\flex-config.xml"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 4) SyncAssets (cwd = shared, same as VSCode task)
+:: 4) Í¬²½ËØ²Ä£¨¹¤×÷Ä¿Â¼ = shared£¬Óë VSCode task Ò»ÖÂ£©
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ECHO_LANG :SYNC_START ""
@@ -127,7 +128,7 @@ if not "!SYNC_ERR!"=="0" (
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 5) Compile SHELL_Dev (amxmlc / AIR; no sdk-external â€” app Merges framework)
+:: 5) ±àÒë SHELL_Dev£¨amxmlc / AIR£»²»¼ÓÔØ sdk-external£¬Ó¦ÓÃ Merges ¿ò¼Ü£©
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ECHO_LANG :COMPILE_START "SHELL_Dev"
@@ -139,7 +140,7 @@ if errorlevel 1 (
 call :ECHO_LANG :COMPILE_OK "SHELL_Dev"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 6) Runtime files for ADL (debug.bat / VSCode launch)
+:: 6) ¸´ÖÆ ADL ÔËÐÐÊ±ÎÄ¼þ£¨¹© debug.bat / VSCode launch Ê¹ÓÃ£©
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 copy /Y "%MOD_DEV%\src\FighterTester-app.xml" "%OUT_DEV%\FighterTester-app.xml" >nul
@@ -164,6 +165,7 @@ if errorlevel 1 (
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:: ½áÊø²Ù×÷
 call :ECHO_LANG :BUILD_SUCCESS ""
 echo.
 exit /b 0
@@ -171,8 +173,8 @@ exit /b 0
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :COMPC_MODULE
-:: %1 = module label, %2 = module flex-config.xml
-:: sdk-external.xml first: Flex/AIR/MX stay external (same as asconfig.json)
+:: %1 = Ä£¿éÃû£¬%2 = Ä£¿é flex-config.xml
+:: ÏÈ¼ÓÔØ sdk-external.xml£ºFlex/AIR/MX ±£³Ö external£¨Óë asconfig.json Ò»ÖÂ£©
 call :ECHO_LANG :COMPILE_START %1
 call "%COMPC%" +configname=air ^
 	-load-config+="%SDK_EXT%" ^
@@ -188,7 +190,7 @@ exit /b 0
 echo.
 exit /b 1
 
-:: Path must exist
+:: ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ£¬²»´æÔÚ¸ø³öÌáÊ¾ÐÅÏ¢
 :EXIST
 if not exist %1 (
 	call :ECHO_LANG :NOT_EXIST %1

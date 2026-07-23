@@ -18,37 +18,39 @@
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
-:: Purpose
-::   Batch-publish BleachVsNaruto_FlashSrc (fla/xfl) via Flash/Animate JSFL.
-::   Does not modify tools/jsfl/Batch Release.jsfl (manual browse workflow).
+:: 用途
+::   通过 Flash/Animate JSFL 批量发布 BleachVsNaruto_FlashSrc（fla/xfl）。
+::   不修改 tools/jsfl/Batch Release.jsfl（手动浏览工作流）。
 ::
-:: Usage
+:: 用法
 ::   tools\script\publish.bat
 ::
-:: Prerequisites
-::   FLASH_HOME points at Flash/Animate install dir (contains Animate.exe
-::   or Flash.exe), e.g. E:\Program Files\Adobe\Adobe Animate 2022
+:: 前置条件
+::   FLASH_HOME 指向 Flash/Animate 安装目录（内含 Animate.exe
+::   或 Flash.exe），例如 E:\Program Files\Adobe\Adobe Animate 2022
 ::
-:: Notes
-::   Launch uses -run-jsfl (Animate 2022+ hidden option). Old -AlwaysRunJSFL
-::   is not present in modern Animate.exe and has no effect.
-::   Also sets AppData Application.xml: DontPromptForJSFLOpen + RunJSFLAsCommand
-::   (same as checking "Don't show again" and choosing Run).
+:: 说明
+::   启动使用 -run-jsfl（Animate 2022+ 隐藏选项）。旧的 -AlwaysRunJSFL
+::   在现代 Animate.exe 中不存在，无效。
+::   同时设置 AppData Application.xml：DontPromptForJSFLOpen + RunJSFLAsCommand
+::   （等同勾选“不再显示”并选择运行）。
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
 setlocal enabledelayedexpansion
 
+:: 当前 BAT 文件绝对运行目录
 set BAT_HOME=%~dp0
 
 call :ECHO_LANG :TITLE ""
 call :ECHO_LANG :PUBLISH_START ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 1) FLASH_HOME + exe
+:: 1) FLASH_HOME + 可执行文件
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:: 检查环境变量 FLASH_HOME 是否存在，该变量指向已安装的 Flash/Animate
 if "%FLASH_HOME%"=="" (
 	call :ECHO_LANG :UNDEFINE "FLASH_HOME"
 	goto END
@@ -68,7 +70,7 @@ if "%FLASH_EXE%"=="" (
 call :ECHO_LANG :USE_EXE "%FLASH_EXE%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 2) Repo / FlashSrc / JSFL paths
+:: 2) 仓库 / FlashSrc / JSFL 路径
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 set REPO_ROOT=%BAT_HOME%..\..
@@ -84,7 +86,7 @@ set ROOT_FILE=%REPO_ROOT%\tools\jsfl\_publish_root.txt
 set RESULT_FILE=%BAT_HOME%_publish_result.txt
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 3) Write root path for JSFL; clear previous result
+:: 3) 写入 JSFL 用的根路径；清除上次结果
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 > "%ROOT_FILE%" echo %FLASH_SRC%
@@ -96,21 +98,21 @@ if errorlevel 1 (
 if exist "%RESULT_FILE%" del /f /q "%RESULT_FILE%" >nul 2>&1
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 3b) Suppress Open-JSFL Run/Edit prompt (prefs + CLI)
+:: 3b) 抑制打开 JSFL 时的运行/编辑提示（偏好设置 + 命令行）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ENSURE_JSFL_NO_PROMPT
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 4) Launch Flash/Animate with JSFL (blocks until quit)
+:: 4) 启动 Flash/Animate 并执行 JSFL（阻塞至退出）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 call :ECHO_LANG :LAUNCH ""
-:: -run-jsfl: "always run jsfl files as a command" (Animate.exe hidden option)
+:: -run-jsfl：始终将 jsfl 作为命令运行（Animate.exe 隐藏选项）
 start "" /wait "%FLASH_EXE%" -run-jsfl "%JSFL%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 5) Read JSFL result (Adobe exit codes are unreliable)
+:: 5) 读取 JSFL 结果（Adobe 退出码不可靠）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if not exist "%RESULT_FILE%" (
@@ -140,6 +142,7 @@ goto END
 echo.
 exit /b 1
 
+:: 判断文件是否存在，不存在给出提示信息
 :EXIST
 if not exist %1 (
 	call :ECHO_LANG :NOT_EXIST %1
@@ -147,7 +150,7 @@ if not exist %1 (
 )
 goto :EOF
 
-:: Patch %APPDATA%\Adobe\Animate\<ver>\Application.xml so Open-JSFL dialog is skipped.
+:: 修补 %APPDATA%\Adobe\Animate\<ver>\Application.xml，跳过打开 JSFL 对话框
 :ENSURE_JSFL_NO_PROMPT
 set ANIMATE_APPDATA=%APPDATA%\Adobe\Animate
 if not exist "%ANIMATE_APPDATA%" goto :EOF
