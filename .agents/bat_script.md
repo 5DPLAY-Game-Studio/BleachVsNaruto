@@ -8,7 +8,7 @@
 
 | # | 规则 |
 |---|------|
-| 1 | 主脚本：`tools/script/<name>.bat`；多语言：`tools/script/lang/<name>/<codepage>.bat`；共用子程序：`tools/script/func/`；PowerShell：`tools/script/ps/`；配置：`tools/script/conf/` |
+| 1 | 主脚本：`tools/script/<name>.bat`；多语言：`tools/script/lang/<name>/<codepage>.bat`；共用子程序：`tools/script/func/`；PowerShell：`tools/script/ps/`；配置：`tools/script/conf/`；运行时日志/临时报告：`tools/script/log/` |
 | 2 | 主脚本与 `func/*.bat`：**GBK + CRLF**；中文注释详略得当（头：用途/用法/前置；段：短标题；子程序：一行职责） |
 | 3 | `lang/<cp>.bat` 按文件名编码读写：**437** ASCII；**932** cp932（Shift-JIS）；**936** GBK；**949** cp949。仅保留版权声明 + 文案标签，不加多余注释 |
 | 4 | 重复路径/开关/工具名抽成 `set "MY_VAR=..."`，之后用 `%MY_VAR%` / `!MY_VAR!`；列表用空格分隔一次定义（如 `SHELL_LIST`） |
@@ -38,6 +38,7 @@
 | `tools/script/func/common.bat` | 共用：`INIT_LANG`、`ECHO_LANG`、`EXIST`（**无** `setlocal`，以便写回调用方变量） |
 | `tools/script/ps/*.ps1` | 由 bat 调用的 PowerShell 辅助脚本 |
 | `tools/script/conf/*` | 构建/工具共享配置（如 `sdk-external.xml`） |
+| `tools/script/log/*` | bat/JSFL 运行时临时报告（如 `_publish_*.txt`、`adb_devices.txt`）；不入库 |
 | `tools/script/lang/<name>/<cp>.bat` | 按标签 `goto` 的文案；`%1`=标签，`%~2`=参数 |
 
 ---
