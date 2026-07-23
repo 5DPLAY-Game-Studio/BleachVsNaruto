@@ -2,7 +2,7 @@
 
 读者：仅 AI。`AGENTS.md` 与 `.agents/*.md` 均非给人读。在 `.agents/` **新建或改写**时遵守本文；人读说明见 `CHANGELOG.md` / `HOW2BUILD.md` / `README.md`。
 
-现有：`AGENTS.md`（入口索引）← `modules.md` `map.md` `code_style.md` `comment.md` `codegen.md` `doc_rules.md`。
+现有：`AGENTS.md`（入口索引）← `modules.md` `map.md` `code_style.md` `comment.md` `codegen.md` `bat_script.md` `doc_rules.md`。
 
 ---
 
