@@ -37,7 +37,8 @@ setlocal enabledelayedexpansion
 
 :: 当前 BAT 文件所在目录（末尾带反斜杠）
 set "BAT_HOME=%~dp0"
-call :INIT_LANG
+set "FUNC_COMMON=%BAT_HOME%func\common.bat"
+call "%FUNC_COMMON%" INIT_LANG "%~n0"
 
 :: 工作目录：调用方当前目录（应为 shared）
 set "WORK_SPACE=%CD%"
@@ -53,9 +54,9 @@ set TMP_NAME=_tmp
 set "ASSETS_DIR=%WORK_SPACE%\%ASSETS_NAME%\%ASSETS_NAME%"
 set "TMP_DIR=%WORK_SPACE%\%TMP_NAME%"
 
-call :EXIST "%ASSETS_DIR%"
+call "%FUNC_COMMON%" EXIST "%ASSETS_DIR%"
 if errorlevel 1 goto END
-call :EXIST "%TMP_DIR%"
+call "%FUNC_COMMON%" EXIST "%TMP_DIR%"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -66,7 +67,7 @@ if errorlevel 1 goto END
 set "SHELL_LIST=pc dev mob"
 
 for %%S in (%SHELL_LIST%) do (
-	call :EXIST "%TMP_DIR%\%%S"
+	call "%FUNC_COMMON%" EXIST "%TMP_DIR%\%%S"
 	if errorlevel 1 goto END
 )
 
@@ -85,7 +86,7 @@ for %%S in (%SHELL_LIST%) do (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 echo.
-call :ECHO_LANG :SYNC_SUCCESS ""
+call "%FUNC_COMMON%" ECHO_LANG :SYNC_SUCCESS ""
 exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -93,64 +94,25 @@ exit /b 0
 :END
 exit /b 1
 
-:: 路径不存在则提示并返回错误（调用方须检查 errorlevel）
-:EXIST
-if not exist %1 (
-	call :ECHO_LANG :NOT_EXIST %1
-	exit /b 1
-)
-exit /b 0
-
 :: 删除目录（不存在则跳过）
 :DEL
 if not exist "%~1" exit /b 0
 rd /s /q "%~1" >nul 2>nul
 if errorlevel 1 (
-	call :ECHO_LANG :DEL_DIR_FAIL "%~1"
+	call "%FUNC_COMMON%" ECHO_LANG :DEL_DIR_FAIL "%~1"
 	exit /b 1
 )
-call :ECHO_LANG :DEL_DIR_SUCCESS "%~1"
+call "%FUNC_COMMON%" ECHO_LANG :DEL_DIR_SUCCESS "%~1"
 exit /b 0
 
 :: 复制目录树到目标（%1=源，%2=目标）
 :COPY
 xcopy "%~1" "%~2\" /E /I /Y >nul
 if errorlevel 1 (
-	call :ECHO_LANG :COPY_DIR_FAIL "%~2"
+	call "%FUNC_COMMON%" ECHO_LANG :COPY_DIR_FAIL "%~2"
 	exit /b 1
 )
-call :ECHO_LANG :COPY_DIR_SUCCESS "%~2"
+call "%FUNC_COMMON%" ECHO_LANG :COPY_DIR_SUCCESS "%~2"
 exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:: 依据当前控制台代码页选择 lang 目录下对应 codepage 的 bat（仅初始化一次）
-:INIT_LANG
-for /f "tokens=2 delims=:" %%a in ('chcp') do (
-	for /f "tokens=1" %%b in ("%%a") do set CURRENT_CODEPAGE=%%b
-)
-
-set SUPPORT_LANG=437 932 936 949
-set IS_SUPPORT=0
-for %%a in (%SUPPORT_LANG%) do (
-	if "%%a"=="!CURRENT_CODEPAGE!" (
-		set IS_SUPPORT=1
-		goto LANG_CHK
-	)
-)
-:LANG_CHK
-if !IS_SUPPORT!==0 (
-	set CURRENT_CODEPAGE=437
-)
-
-set "LANG_BAT=%BAT_HOME%lang\%~n0\%CURRENT_CODEPAGE%.bat"
-if not exist "%LANG_BAT%" set "LANG_BAT="
-goto :EOF
-
-:ECHO_LANG
-if "%LANG_BAT%"=="" (
-	echo ECHO_LANG [N/A]
-	goto :EOF
-)
-call "%LANG_BAT%" %1 %2
-goto :EOF
