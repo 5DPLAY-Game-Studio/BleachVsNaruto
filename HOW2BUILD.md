@@ -1,24 +1,49 @@
 # 如何构建
 
-本文件将简述如何构建本工程。
+本文件将简述构建本工程的全部方法。
+
+您可以选择任意一种，都可完整编译。
 
 ## 环境需求
 
 ### 操作系统
 
-- Windows 10 1909 或更高，建议 Windows 10 22H2。必须为 **64** 位操作系统。
+- **Windows 10 1809** 或更高，建议 Windows 10 22H2。必须为 **64** 位操作系统。这是因为下述所需求的开发工具均已不支持早期 Windows 版本。
 
-### 软件
+### 软件 (IDE)
 
-- [Intellij IDEA 2022.3.3] （可选；也可用命令行脚本构建 SHELL_Dev）
-- Adobe Animate 2019 （构建 fla/xfl 文件）
+Flash IDE - 必须，用于构建 `BleachVsNaruto_FlashSrc` 目录下的 fla/xfl 文件。
+
+- Adobe Animate 2020
+
+Code IDE - 可选，依照您的开发喜好，选择合适的开发环境即可，本项目支持 **命令行** 编译。
+
+- [Intellij IDEA 2023.1.7] - 如果使用此环境开发，您需要具有对应 Ultimate Edition 版本的许可证。
+- [Microsoft Visual Studio Code] - 如果使用此环境开发，您需要 Java 17 的运行环境以运行 Flash 开发插件。（文档编辑中）
+
+对应具体 IDE 插件参考 [构建要求](#构建要求) 章节。
 
 ### SDK
 
-- FlexSDK [flex4.16.1-air51.0.1.1]（此 SDK 由 [Apache FlexSDK] 与 [Harman AirSDK] 合并得到）（解压后请保持根目录名称为 ***flex4.16.1-air51.0.1.1***）
-- 命令行构建还需设置环境变量 ***FLEX_HOME***，指向上述 SDK 根目录（与 [`tools/script/debug.bat`](tools/script/debug.bat) 相同）
+FlexSDK - 必须，编译工程必须使用其进行生成 SWF 文件。
+
+- [flex4.16.1-air51.0.1.1] - 此 SDK 由 [Apache FlexSDK] 与 [Harman AirSDK] 合并得到，解压后请保持根目录名称为 ***flex4.16.1-air51.0.1.1***。
+
+上述 FlexSDK 的构建方法可参照此 [README] 进行构建。
+
+### 环境变量
+
+必须，这些环境变量将被 `tools` 目录下的脚本文件等使用，缺失环境变量会造成脚本无法正常工作。
+
+- `FLEX_HOME` - 指向 FlexSDK 的全路径。
+- `FLASH_HOME` - 指向已安装 Animate/Flash 的全路径。
 
 ## 构建要求
+
+编译本项目最小化要求需要您必须安装 Flash IDE、下载 FlexSDK 和 设置环境变量。
+Code IDE 是可选项，其仅为您提供更好的开发体验，并非编译工程所必须的程序软件。
+
+若您想使用 Code IDE 来丰富开发体验，则您可以按照如下操作来安装相关插件，并调整设置。
 
 ### Intellij IDEA 2022.3.3
 
@@ -39,29 +64,12 @@
 
 ## 执行构建
 
-### 命令行构建（SHELL_Dev，无需 IDEA / VSCode）
+在执行构建之前，您需要确认 TagAssets 是否已经覆盖到工程目录下。
 
-前置：已安装 FlexSDK，并设置 `FLEX_HOME`（例如 `set FLEX_HOME=D:\sdk\flex4.16.1-air51.0.1.1`）。素材仍需按上文 TagAssets 准备。
+在 TagAssets 中，仅包含了一些未开放源代码的编译二进制（SWF 文件），并不包含已经开放源代码的也就是 `BleachVsNaruto_FlashSrc` 目录下源文件的编译产物，
+因此，您需要在本机编译源文件补齐缺失的 SWF/SWC 文件（重要，如果不执行此步骤，则会直接导致无法进行主程序的编译，其依赖此步的编译产物）。
 
-在仓库根目录执行：
-
-```bat
-tools\script\build.bat
-```
-
-该脚本按与 VSCode SHELL_Dev 任务相同的顺序，用 SDK 自带的 `compc` / `amxmlc` 编译：
-
-`LIB_Other` → `LIB_KyoLib` → `CORE_Shared` → `CORE_KernelLogic` → `CORE_Utils` → SyncAssets → `SHELL_Dev`
-
-成功后产物在 `out\production\`（含 `SHELL_Dev\FighterTester.swf` 与 app descriptor）。可选启动调试：
-
-```bat
-tools\script\debug.bat
-```
-
-编译参数与各模块 `asconfig.json` 对齐，具体见 `tools\script\flex-config\`。
-
-### 构建项目（IntelliJ IDEA）
+### 构建项目
 
 - 单击 ***构建(B) -> 构建项目(P)*** 选项或按下 ***Ctrl + F9*** 快捷键以快速构建工程
 
@@ -69,7 +77,7 @@ tools\script\debug.bat
 
 - 单击 ***运行(U) -> 调试...*** 选项或按下 ***Alt + Shift + F9*** 快捷键，在弹出的 ***调试*** 菜单中选择 ***SHELL_Dev FighterTester***，编译完成片刻后将执行编译结果
 
-[Intellij IDEA 2022.3.3]: https://download.jetbrains.com/idea/ideaIU-2022.3.3.exe
+[Intellij IDEA 2023.1.7]: https://download.jetbrains.com/idea/ideaIU-2023.1.7.exe?_gl=1*gtwm52*_gcl_aw*R0NMLjE3ODMzMDExMTcuQ2p3S0NBandnYWpTQmhCRUVpd0FTaWNKVTBmMmlqVGREVkVMeTJhdV9OZ3BHMGdKTXdaSVpVMkpwRDhGYVc3QXg4OUFTNlQ3NENGWE5Sb0N4U1VRQXZEX0J3RQ..*_gcl_au*MzkwNjQ2OTQ4LjE3ODAyODQxMDY.*FPAU*MzkwNjQ2OTQ4LjE3ODAyODQxMDY.*_ga*MTY1MTMxMDI1OS4xNzgwMjg0MTA2*_ga_9J976DJZ68*czE3ODQ3OTAzNzkkbzkkZzAkdDE3ODQ3OTA0MDEkajM4JGwwJGgw
 [flex4.16.1-air51.0.1.1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK/releases/download/flex4.16.1-air51.0.1.1/flex4.16.1-air51.0.1.1.rar
 [Apache FlexSDK]: https://flex.apache.org/
 [Harman AirSDK]: https://airsdk.harman.com/
@@ -78,3 +86,5 @@ tools\script\debug.bat
 [BleachVsNaruto_TagAssets]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_TagAssets
 [TagAssets\tag]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_TagAssets/tags
 [BleachVsNaruto\tag]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/tags
+[Microsoft Visual Studio Code]: https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
+[README]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK/blob/master/README.md
