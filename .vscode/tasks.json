@@ -118,15 +118,33 @@
         // LIB_KyoLib
         {
             "label"         : "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - LIB_KyoLib/asconfig.json (compc)",
+                "LIB_KyoLib: embed ASDoc into SWC"
+            ],
+            "group"         : "build",
+            "problemMatcher": []
+        },
+        {
+            "label"         : "ActionScript: compile debug - LIB_KyoLib/asconfig.json (compc)",
             "type"          : "actionscript",
             "debug"         : true,
             "asconfig"      : "LIB_KyoLib/asconfig.json",
-            "group"         : "build",
             "problemMatcher": [],
             "dependsOrder"  : "sequence",
             "dependsOn"     : [
                 "ActionScript: compile debug - LIB_Other/asconfig.json"
             ]
+        },
+        {
+            "label"         : "LIB_KyoLib: embed ASDoc into SWC",
+            "type"          : "shell",
+            "command"       : "${workspaceFolder}/LIB_KyoLib/tools/embed_asdoc.bat",
+            "options"       : {
+                "cwd"       : "${workspaceFolder}/LIB_KyoLib"
+            },
+            "problemMatcher": []
         },
         // LIB_Other
         {

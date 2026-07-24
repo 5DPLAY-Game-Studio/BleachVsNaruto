@@ -37,6 +37,7 @@
     <method v="2">
       <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_5DPLAY_TOOLS_SyncAssets" />
       <option name="Make" enabled="true" />
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_5DPLAY_TOOLS_EmbedKyoLibAsDoc" />
       <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_5DPLAY_TOOLS_EmbedSharedAsDoc" />
     </method>
   </configuration>
