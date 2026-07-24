@@ -27,13 +27,13 @@
 ::     MODE=full (default): HTML + embed into SWC.
 ::
 ::   set MODE=embed&& CORE_Shared\tools\asdoc.bat
-::     XML-only (skip-xsl) + embed. Used by embed_asdoc.bat / post-build.
+::     Full tempdita XML + embed (no need to open HTML). Used by embed_asdoc.bat.
 ::
 ::   set OPEN=1&& CORE_Shared\tools\asdoc.bat
 ::   set SKIP_SWC=1&& CORE_Shared\tools\asdoc.bat
 ::   set SWC_PATH=D:\path\CORE_Shared.swc&& CORE_Shared\tools\asdoc.bat
 ::   set IF_MISSING=1&& ...   Skip when SWC already has docs/packages.dita
-::   set NO_PAUSE=1&& ...     No pause on failure (for build.bat / IDE hooks)
+::   set NO_PAUSE=1&& ...     No pause on failure (for build.bat / External Tool)
 ::
 :: Prerequisites
 ::   1. FLEX_HOME -> Flex/AIR SDK (bin, lib\asdoc.jar, frameworks, asdoc\templates)
@@ -44,10 +44,11 @@
 ::   tools\asdoc.bat / tools\embed_asdoc.bat
 ::   tools\asdoc\build_terms_zh.ps1 / inject_docs_swc.ps1 / templates / zh_CN
 ::   out\asdoc\         HTML (MODE=full)
-::   out\asdoc_embed\   XML-only temp (MODE=embed)
+::   out\asdoc_embed\   Embed-mode output (+ tempdita for SWC docs/)
 ::
 :: Notes
 ::   ASCII-only console messages. No chcp / lang packs.
+::   IDEA: use External Tool EmbedSharedAsDoc (not File Watchers).
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -113,7 +114,7 @@ if /i "%MODE%"=="embed" (
 )
 if not exist "%DOC_OUT%" mkdir "%DOC_OUT%"
 
-:: File Watcher / re-entry: skip when SWC already has docs
+:: Skip when SWC already has docs (optional IF_MISSING=1)
 if /i "%IF_MISSING%"=="1" (
 	if exist "%SWC_PATH%" (
 		powershell -NoProfile -ExecutionPolicy Bypass -File "%MODULE_ROOT%\tools\asdoc\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TestHasDocs >nul 2>&1
@@ -170,35 +171,24 @@ echo Output: %DOC_OUT%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 4) Run asdoc.jar
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::
+:: Do NOT use -skip-xsl=true here: it drops Classes/fieldSummary/etc.
+:: from tempdita and leaves a thin SWC docs/ (~20KB). Keep full XML
+:: (same as HTML run); embed mode only changes -output dir.
+::
 
-if /i "%MODE%"=="embed" (
-	java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
-		+flexlib="%FLEX_FRAMEWORKS%" ^
-		-templates-path "%ASDOC_TMPL%" ^
-		-compiler.source-path "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
-		-doc-sources "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
-		-compiler.external-library-path "%FLEX_FRAMEWORKS%\libs" "%FLEX_FRAMEWORKS%\libs\air" "%FLEX_FRAMEWORKS%\libs\mx" ^
-		-lenient ^
-		-keep-xml=true ^
-		-skip-xsl=true ^
-		-main-title "CORE_Shared API" ^
-		-window-title "CORE_Shared ASDoc" ^
-		-footer "5DPLAY Game Studio - CORE_Shared" ^
-		-output "%DOC_OUT%"
-) else (
-	java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
-		+flexlib="%FLEX_FRAMEWORKS%" ^
-		-templates-path "%ASDOC_TMPL%" ^
-		-compiler.source-path "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
-		-doc-sources "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
-		-compiler.external-library-path "%FLEX_FRAMEWORKS%\libs" "%FLEX_FRAMEWORKS%\libs\air" "%FLEX_FRAMEWORKS%\libs\mx" ^
-		-lenient ^
-		-keep-xml=true ^
-		-main-title "CORE_Shared API" ^
-		-window-title "CORE_Shared ASDoc" ^
-		-footer "5DPLAY Game Studio - CORE_Shared" ^
-		-output "%DOC_OUT%"
-)
+java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
+	+flexlib="%FLEX_FRAMEWORKS%" ^
+	-templates-path "%ASDOC_TMPL%" ^
+	-compiler.source-path "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
+	-doc-sources "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
+	-compiler.external-library-path "%FLEX_FRAMEWORKS%\libs" "%FLEX_FRAMEWORKS%\libs\air" "%FLEX_FRAMEWORKS%\libs\mx" ^
+	-lenient ^
+	-keep-xml=true ^
+	-main-title "CORE_Shared API" ^
+	-window-title "CORE_Shared ASDoc" ^
+	-footer "5DPLAY Game Studio - CORE_Shared" ^
+	-output "%DOC_OUT%"
 
 if errorlevel 1 (
 	echo ASDoc generation failed.

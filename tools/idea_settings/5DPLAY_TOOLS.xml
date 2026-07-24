@@ -1,0 +1,16 @@
+<toolSet name="5DPLAY_TOOLS">
+  <tool name="SyncAssets" description="同步素材" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="$ProjectFileDir$\tools\script\sync.bat" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$/shared" />
+    </exec>
+  </tool>
+  <tool name="EmbedSharedAsDoc" description="嵌入 ASDoc 到 CORE_Shared.swc" showInMainMenu="true" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="$ProjectFileDir$\CORE_Shared\tools\embed_asdoc.bat" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$/CORE_Shared" />
+    </exec>
+  </tool>
+</toolSet>

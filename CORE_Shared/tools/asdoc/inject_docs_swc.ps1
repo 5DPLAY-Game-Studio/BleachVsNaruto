@@ -92,10 +92,22 @@ if ($files.Count -eq 0) {
     throw "No doc XML/DITA files to inject under: $ditaFull"
 }
 
-$zip = [System.IO.Compression.ZipFile]::Open(
-    $swcFull,
-    [System.IO.Compression.ZipArchiveMode]::Update
-)
+$zip = $null
+$deadline = [DateTime]::UtcNow.AddSeconds(30)
+while ($null -eq $zip) {
+    try {
+        $zip = [System.IO.Compression.ZipFile]::Open(
+            $swcFull,
+            [System.IO.Compression.ZipArchiveMode]::Update
+        )
+    }
+    catch {
+        if ([DateTime]::UtcNow -ge $deadline) {
+            throw
+        }
+        Start-Sleep -Milliseconds 200
+    }
+}
 try {
     # Drop previous docs/ entries so re-runs stay clean
     $old = @($zip.Entries | Where-Object {
@@ -116,7 +128,9 @@ try {
     }
 }
 finally {
-    $zip.Dispose()
+    if ($null -ne $zip) {
+        $zip.Dispose()
+    }
 }
 
 Write-Host ("injected={0} swc={1}" -f $files.Count, $swcFull)
