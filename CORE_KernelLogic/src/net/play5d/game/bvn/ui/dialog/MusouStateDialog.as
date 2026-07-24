@@ -122,9 +122,9 @@ public class MusouStateDialog extends BaseDialog {
         GameEvent.dispatchEvent(GameEvent.MUSOU_FIGHTER_CLOSE);
     }
 
-    protected override function onDestory():void {
+    protected override function onDestroy():void {
         if (_coinUI) {
-            _coinUI.destory();
+            _coinUI.destroy();
             _coinUI = null;
         }
     }

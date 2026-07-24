@@ -108,11 +108,11 @@ public class MusouCtrl {
 //			gameRunData.reset();
     }
 
-    public function destory():void {
+    public function destroy():void {
         GameEvent.removeEventListener(GameEvent.LEVEL_UP, onLevelUp);
 
         if (_enemyBarCtrl) {
-            _enemyBarCtrl.destory();
+            _enemyBarCtrl.destroy();
             _enemyBarCtrl = null;
         }
 
@@ -121,7 +121,7 @@ public class MusouCtrl {
         }
 
         if (_fighterEventCtrl) {
-            _fighterEventCtrl.destory();
+            _fighterEventCtrl.destroy();
             _fighterEventCtrl = null;
         }
 

@@ -107,7 +107,7 @@ public class CustomScreenBtnView {
 
     private function removeSelf():void {
         if (_screenPad) {
-            _screenPad.destory();
+            _screenPad.destroy();
             _screenPad = null;
         }
 

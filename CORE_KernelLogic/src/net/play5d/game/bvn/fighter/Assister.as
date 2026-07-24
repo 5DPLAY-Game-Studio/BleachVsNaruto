@@ -65,28 +65,28 @@ public class Assister extends BaseGameSprite {
         return _mainMc.name;
     }
 
-    public override function destory(dispose:Boolean = true):void {
+    public override function destroy(dispose:Boolean = true):void {
         if (!dispose) {
             return;
         }
 
         if (_hitAreaCache) {
-            _hitAreaCache.destory();
+            _hitAreaCache.destroy();
             _hitAreaCache = null;
         }
         if (_hitCheckAreaCache) {
-            _hitCheckAreaCache.destory();
+            _hitCheckAreaCache.destroy();
             _hitCheckAreaCache = null;
         }
         if (_ctrler) {
-            _ctrler.destory();
+            _ctrler.destroy();
             _ctrler = null;
         }
         data        = null;
         _rectCache  = null;
         _mcOrgPoint = null;
         _owner      = null;
-        super.destory(dispose);
+        super.destroy(dispose);
     }
 
     public override function render():void {

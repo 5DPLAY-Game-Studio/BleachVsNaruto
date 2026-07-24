@@ -64,7 +64,7 @@ public class MenuBtnGroup extends Sprite {
         _yadd = y;
     }
 
-    public function destory():void {
+    public function destroy():void {
 
         GameRender.remove(render);
 

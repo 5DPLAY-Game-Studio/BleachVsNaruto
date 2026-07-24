@@ -44,7 +44,7 @@ public class FighterAILogicBase {
     //连招优先级
     private var _contOrder:Array = [];
 
-    public function destory():void {
+    public function destroy():void {
         _fighter         = null;
         _fighterAction   = null;
         _target          = null;

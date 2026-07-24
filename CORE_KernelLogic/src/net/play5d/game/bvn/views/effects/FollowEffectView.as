@@ -172,7 +172,7 @@ public class FollowEffectView implements IGameSprite {
      * 销毁
      * @param dispose 处理
      */
-    public function destory(dispose:Boolean = true):void {
+    public function destroy(dispose:Boolean = true):void {
         if (_destroyed) {
             return;
         }
@@ -199,7 +199,7 @@ public class FollowEffectView implements IGameSprite {
      * 是否已销毁
      * @return 是否已销毁
      */
-    public function isDestoryed():Boolean {
+    public function isDestroyed():Boolean {
         return _destroyed;
     }
 

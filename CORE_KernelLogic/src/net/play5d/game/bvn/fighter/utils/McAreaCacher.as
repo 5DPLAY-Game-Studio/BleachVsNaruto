@@ -31,7 +31,7 @@ public class McAreaCacher {
     private var _idCache:Object    = {};
     private var _frameCache:Object = {};
 
-    public function destory():void {
+    public function destroy():void {
         _idCache    = null;
         _frameCache = null;
     }

@@ -160,7 +160,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         if (isDispose) {
-            sp.destory(true);
+            sp.destroy(true);
         }
         else {
             sp.setActive(false);
@@ -413,16 +413,16 @@ public class GameStage extends Sprite implements IStage {
         }
 
         if (gameUI) {
-            gameUI.destory();
+            gameUI.destroy();
             gameUI = null;
         }
 
-        EffectCtrl.I.destory();
+        EffectCtrl.I.destroy();
 
-        GameCtrl.I.destory();
+        GameCtrl.I.destroy();
 
         if (_map) {
-            _map.destory();
+            _map.destroy();
             _map = null;
         }
 

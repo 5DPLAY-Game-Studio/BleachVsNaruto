@@ -68,7 +68,7 @@ public class SetBtn extends Sprite {
         return _label.text;
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_label) {
             _label.dispose();
         }

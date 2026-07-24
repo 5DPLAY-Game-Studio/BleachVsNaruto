@@ -107,7 +107,7 @@ public class HowToPlayStage implements IStage {
         SoundCtrl.I.BGM(null);
         GameRender.remove(render);
         _ui.removeEventListener(Event.COMPLETE, uiComplete);
-        _ui.gotoAndStop('destory');
+        _ui.gotoAndStop('destroy');
     }
 
     private function render():void {

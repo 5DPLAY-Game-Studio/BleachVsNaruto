@@ -46,7 +46,7 @@ public class GameStartCtrl {
     private var _introTeamId:int = -1; //-1=both
     private var _musouFinish:Boolean = false;
 
-    public function destory():void {
+    public function destroy():void {
         _p1    = null;
         _p2    = null;
         _state = null;

@@ -72,11 +72,11 @@ public class WorldMapPointUI extends EventDispatcher {
         return new Point(_pointMc.x, _pointMc.y);
     }
 
-    public function destory():void {
-        BtnUtils.destoryBtn(_ppmc);
-        BtnUtils.destoryBtn(_facemc);
+    public function destroy():void {
+        BtnUtils.destroyBtn(_ppmc);
+        BtnUtils.destroyBtn(_facemc);
         if (_lvTxt) {
-            _lvTxt.destory();
+            _lvTxt.destroy();
             _lvTxt = null;
         }
     }

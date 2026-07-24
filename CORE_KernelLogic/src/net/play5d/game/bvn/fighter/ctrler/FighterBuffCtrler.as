@@ -32,7 +32,7 @@ public class FighterBuffCtrler {
     private var _attackRate:Number = 0;
     private var _buffObj:Object    = {};
 
-    public function destory():void {
+    public function destroy():void {
         _fighter = null;
     }
 

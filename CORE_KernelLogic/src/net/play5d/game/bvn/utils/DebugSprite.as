@@ -47,7 +47,7 @@ public class DebugSprite extends Sprite {
         trace('-----------------------------------------------------------');
     }
 
-    public function destory():void {
+    public function destroy():void {
         target = null;
         try {
             this.parent.removeChild(this);

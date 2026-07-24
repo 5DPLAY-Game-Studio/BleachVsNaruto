@@ -63,7 +63,7 @@ public class DotsGroupUI extends Sprite {
         }
     }
 
-    public function destory():void {
+    public function destroy():void {
         for each(var d:DotItemUI in _dotArr) {
             d.getUI().removeEventListener(TouchEvent.TOUCH_TAP, touchHandler);
             d.getUI().removeEventListener(MouseEvent.CLICK, mouseHandler);

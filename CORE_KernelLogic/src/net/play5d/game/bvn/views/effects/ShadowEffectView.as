@@ -49,7 +49,7 @@ public class ShadowEffectView {
     private var _addBpGap:int        = 1;
     private var _addBpFrame:int      = 0;
 
-    public function destory():void {
+    public function destroy():void {
         target = null;
         for (var i:int; i < _bps.length; i++) {
             var bp:Bitmap = _bps[i];

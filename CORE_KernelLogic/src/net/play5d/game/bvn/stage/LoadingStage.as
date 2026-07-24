@@ -53,7 +53,7 @@ public class LoadingStage implements IStage {
     }
     private var _ui:$loading$MC_loadingFight;
     private var _sltUI:$loading$MC_selectUI;
-    private var _destoryed:Boolean;
+    private var _destroyed:Boolean;
     private var _loadFin:Boolean;
     private var _selectIndexUI:SelectIndexUI;
     private var _gameFinished:Boolean;
@@ -145,10 +145,10 @@ public class LoadingStage implements IStage {
      * @param back 回调函数
      */
     public function destroy(back:Function = null):void {
-        _destoryed = true;
+        _destroyed = true;
 
         if (_selectIndexUI) {
-            _selectIndexUI.destory();
+            _selectIndexUI.destroy();
             _selectIndexUI = null;
         }
 
@@ -198,7 +198,7 @@ public class LoadingStage implements IStage {
     }
 
     private function finish():void {
-        if (_destoryed) {
+        if (_destroyed) {
             return;
         }
         if (!_selectIndexUI.isFinish() || !_loadFin) {

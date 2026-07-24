@@ -132,7 +132,7 @@ public class WinnerStage implements IStage {
         clearTimeout(_bgmDelay);
         GameEvent.dispatchEvent(GameEvent.WINNER_END);
         if (_ui) {
-            _ui.gotoAndStop("destory");
+            _ui.gotoAndStop("destroy");
             _ui = null;
         }
     }

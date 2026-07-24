@@ -32,7 +32,7 @@ public class MusouEnemyBarCtrl {
     private var _barMap:Dictionary = new Dictionary();
     private var _gameLayer:Sprite;
 
-    public function destory():void {
+    public function destroy():void {
         _barMap = null;
     }
 
@@ -75,7 +75,7 @@ public class MusouEnemyBarCtrl {
                 catch (e:Error) {
                     TraceLang('debug.trace.data.musou_enemy_bar_ctrl.remove_bar_error');
                 }
-                b.destory();
+                b.destroy();
                 delete _barMap[f];
             }
         }

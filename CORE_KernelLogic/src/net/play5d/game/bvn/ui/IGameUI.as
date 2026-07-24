@@ -22,7 +22,7 @@ import flash.display.DisplayObject;
 public interface IGameUI {
     function setVolume(v:Number):void;
 
-    function destory():void;
+    function destroy():void;
 
     function fadIn(animate:Boolean = true):void;
 

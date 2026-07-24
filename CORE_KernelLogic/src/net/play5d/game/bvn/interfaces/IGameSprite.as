@@ -75,13 +75,13 @@ public interface IGameSprite {
      * 销毁
      * @param dispose 处理
      */
-    function destory(dispose:Boolean = true):void;
+    function destroy(dispose:Boolean = true):void;
 
     /**
      * 是否已销毁
      * @return 是否已销毁
      */
-    function isDestoryed():Boolean;
+    function isDestroyed():Boolean;
 
     ////////////////////////////////////////////////////////////
 

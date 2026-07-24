@@ -60,7 +60,7 @@ public class LANHostCreateDialog implements Istage {
     public function afterBuild():void {
     }
 
-    public function destory(back:Function = null):void {
+    public function destroy(back:Function = null):void {
         ScreenPadManager.removeTouchListener(_ui.btn_ok);
         ScreenPadManager.removeTouchListener(_ui.btn_back);
     }

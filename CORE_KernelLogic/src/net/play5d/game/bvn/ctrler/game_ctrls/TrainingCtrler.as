@@ -49,7 +49,7 @@ public class TrainingCtrler {
         StateCtrl.I.transOut(null, true);
     }
 
-    public function destory():void {
+    public function destroy():void {
         _fighters      = null;
         _trainAddDelay = null;
     }

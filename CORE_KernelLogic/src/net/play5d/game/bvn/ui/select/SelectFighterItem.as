@@ -154,7 +154,7 @@ public class SelectFighterItem extends EventDispatcher {
         });
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (ui) {
             removeAllEventListener();
         }

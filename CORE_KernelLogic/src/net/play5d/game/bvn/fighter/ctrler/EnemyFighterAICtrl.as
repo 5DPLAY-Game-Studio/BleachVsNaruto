@@ -53,7 +53,7 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
     public function initlize():void {
     }
 
-    public function destory():void {
+    public function destroy():void {
         fighter = null;
         _target = null;
     }

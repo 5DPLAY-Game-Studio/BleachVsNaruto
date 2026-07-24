@@ -40,7 +40,7 @@ public class BigmapClould extends Sprite {
         }
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_clouds) {
             for each(var i:CloudView in _clouds) {
                 try {

@@ -194,7 +194,7 @@ public class SelecterItemUI {
         ui.y = y;
     }
 
-    public function destory():void {
+    public function destroy():void {
         enabled = false;
         removeSelecter();
         removeGroup();

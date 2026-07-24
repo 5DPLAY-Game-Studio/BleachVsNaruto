@@ -165,17 +165,17 @@ public class FighterCtrler implements IGameSpriteCntlr {
         return _fighter;
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_effectCtrl) {
-            _effectCtrl.destory();
+            _effectCtrl.destroy();
             _effectCtrl = null;
         }
         if (_fighterMcCtrl) {
-            _fighterMcCtrl.destory();
+            _fighterMcCtrl.destroy();
             _fighterMcCtrl = null;
         }
         if (_voiceCtrl) {
-            _voiceCtrl.destory();
+            _voiceCtrl.destroy();
             _voiceCtrl = null;
         }
         if (_cameraCtrler) {
@@ -187,7 +187,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             _rectCache = null;
         }
         if (hitModel) {
-            hitModel.destory();
+            hitModel.destroy();
             hitModel = null;
         }
         _fighter = null;

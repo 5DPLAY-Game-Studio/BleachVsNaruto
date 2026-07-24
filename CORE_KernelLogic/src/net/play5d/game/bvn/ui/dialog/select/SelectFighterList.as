@@ -62,7 +62,7 @@ public class SelectFighterList extends Sprite {
     private var _curPage:int;
     private var _totalPage:int;
 
-    public function destory():void {
+    public function destroy():void {
         this.removeEventListener(MouseEvent.MOUSE_WHEEL, mouseHandler);
 //			TouchUtils.I.unlistenOneFinger(MainGame.I.stage);
         TouchUtils.I.unlistenOneFinger(this);

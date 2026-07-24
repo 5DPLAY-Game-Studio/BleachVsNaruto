@@ -129,7 +129,7 @@ public class DialogManager {
         TweenLite.to(view, 0.2, {
             y: view.y - 10, alpha: 0, onComplete: function ():void {
                 d.close();
-                d.destory();
+                d.destroy();
                 try {
                     MainGame.I.root.removeChild(d.getDisplay());
                 }

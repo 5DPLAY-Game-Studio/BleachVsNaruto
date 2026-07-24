@@ -64,7 +64,7 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     protected var _isTouchSide:Boolean = false;
     protected var _isActive:Boolean = false;
     protected var _area:Rectangle;
-    protected var _destoryed:Boolean;
+    protected var _destroyed:Boolean;
     private var _frameFuncs:Array        = []; //在N帧后调用，临时保存的FUNCTION数组
     private var _frameAnimateFuncs:Array = []; //在N帧后调用，临时保存的FUNCTION数组
     private var _speedPlus:Number   = GameConfig.SPEED_PLUS; //速度比率
@@ -190,12 +190,12 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
         }
     }
 
-    public function isDestoryed():Boolean {
-        return _destoryed;
+    public function isDestroyed():Boolean {
+        return _destroyed;
     }
 
-    public function destory(dispose:Boolean = true):void {
-        _destoryed   = true;
+    public function destroy(dispose:Boolean = true):void {
+        _destroyed   = true;
         isAlive      = false;
         isAllowBeHit = false;
         stopRenderSelf();
@@ -215,7 +215,7 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     }
 
     public function renderAnimate():void {
-        if (_destoryed) {
+        if (_destroyed) {
             return;
         }
 
@@ -223,7 +223,7 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     }
 
     public function render():void {
-        if (_destoryed) {
+        if (_destroyed) {
             return;
         }
 
@@ -558,7 +558,7 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     }
 
     private function renderSelfEnterFrame():void {
-        if (_destoryed) {
+        if (_destroyed) {
             return;
         }
 //        try {

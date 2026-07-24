@@ -119,10 +119,10 @@ public class SetBtnGroup extends Sprite {
         GameInputer.enabled = true;
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_btns) {
             for each(var b:SetBtn in _btns) {
-                b.destory();
+                b.destroy();
                 b.removeEventListener(TouchEvent.TOUCH_TAP, touchHandler);
                 b.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
                 b.removeEventListener(MouseEvent.CLICK, mouseHandler);

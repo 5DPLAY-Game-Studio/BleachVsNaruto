@@ -97,7 +97,7 @@ public class SetScreenBtnView extends Sprite {
 
         if (_btnGroup) {
             try {
-                _btnGroup.destory();
+                _btnGroup.destroy();
                 this.removeChild(_btnGroup);
                 _btnGroup = null;
             }

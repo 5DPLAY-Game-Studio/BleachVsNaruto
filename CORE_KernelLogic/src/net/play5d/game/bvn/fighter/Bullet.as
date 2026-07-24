@@ -142,7 +142,7 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
     private var _speedPlus:Number = GameConfig.SPEED_PLUS; //速度比率
     private var _isActive:Boolean;
 
-    private var _destoryed:Boolean;
+    private var _destroyed:Boolean;
     private var _currentRect:Rectangle = new Rectangle();
 
     private var _team:TeamVO;
@@ -309,9 +309,9 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
 
     }
 
-    public function destory(dispose:Boolean = true):void {
+    public function destroy(dispose:Boolean = true):void {
 
-        _destoryed = true;
+        _destroyed = true;
 
         if (mc) {
             try {
@@ -337,8 +337,8 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
         _hitVO      = null;
     }
 
-    public function isDestoryed():Boolean {
-        return _destoryed;
+    public function isDestroyed():Boolean {
+        return _destroyed;
     }
 
     public function renderAnimate():void {

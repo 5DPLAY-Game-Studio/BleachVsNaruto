@@ -50,10 +50,10 @@ public class MoveListSp extends Sprite {
     private var _pic:Bitmap;
     private var _btns:SetBtnGroup;
 
-    public function destory():void {
+    public function destroy():void {
         if (_btns) {
             _btns.removeEventListener(SetBtnEvent.SELECT, onSelect);
-            _btns.destory();
+            _btns.destroy();
             _btns = null;
         }
     }

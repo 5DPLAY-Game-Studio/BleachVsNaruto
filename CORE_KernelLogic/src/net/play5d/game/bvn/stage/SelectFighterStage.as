@@ -401,7 +401,7 @@ public class SelectFighterStage implements IStage {
             }
             for (var j:int = 0; j < f.length; j++) {
                 var si:SelectFighterItem = f.getItemByIndex(j);
-                si.destory();
+                si.destroy();
             }
             _moreFighterMap[f] = null;
         }
@@ -417,33 +417,33 @@ public class SelectFighterStage implements IStage {
                 i.removeEventListener(MouseEvent.MOUSE_OVER, selectFighterMouseHandler);
                 i.removeEventListener(MouseEvent.CLICK, selectFighterMouseHandler);
                 i.removeEventListener(TouchEvent.TOUCH_TAP, selectFighterTouchHandler);
-                i.destory();
+                i.destroy();
             }
             _itemObj = null;
         }
 
         if (_p1Slt) {
-            _p1Slt.destory();
+            _p1Slt.destroy();
             _p1Slt = null;
         }
 
         if (_p2Slt) {
-            _p2Slt.destory();
+            _p2Slt.destroy();
             _p2Slt = null;
         }
 
         if (_mapSelectUI) {
-            _mapSelectUI.destory();
+            _mapSelectUI.destroy();
             _mapSelectUI = null;
         }
 
         if (_p1SelectedGroup) {
-            _p1SelectedGroup.destory();
+            _p1SelectedGroup.destroy();
             _p1SelectedGroup = null;
         }
 
         if (_p2SelectedGroup) {
-            _p2SelectedGroup.destory();
+            _p2SelectedGroup.destroy();
             _p2SelectedGroup = null;
         }
 
@@ -1243,7 +1243,7 @@ public class SelectFighterStage implements IStage {
             else {
                 nextStep();
             }
-            selt.destory();
+            selt.destroy();
 //				if(selt == _p1Slt) _p1Slt = null;
 //				if(selt == _p2Slt) _p2Slt = null;
         }

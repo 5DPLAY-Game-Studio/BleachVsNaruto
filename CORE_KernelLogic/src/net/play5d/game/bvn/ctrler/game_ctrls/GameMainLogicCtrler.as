@@ -66,7 +66,7 @@ public class GameMainLogicCtrler {
             cl   = team.children.length;
             for (j = 0; j < cl; j++) {
                 sp = team.children[j];
-                if (sp && !sp.isDestoryed()) {
+                if (sp && !sp.isDestroyed()) {
                     sp.setSpeedRate(v);
                 }
             }
@@ -74,7 +74,7 @@ public class GameMainLogicCtrler {
 
     }
 
-    public function destory():void {
+    public function destroy():void {
 
     }
 
@@ -124,7 +124,7 @@ public class GameMainLogicCtrler {
 
                 sp = children[j];
 
-                if (sp == null || sp.isDestoryed()) {
+                if (sp == null || sp.isDestroyed()) {
                     continue;
                 }
 
@@ -141,7 +141,7 @@ public class GameMainLogicCtrler {
                     for (l = 0; l < childLen; l++) {
                         sp2 = children2[l];
 
-                        if (sp2 == null || sp2.isDestoryed()) {
+                        if (sp2 == null || sp2.isDestroyed()) {
                             continue;
                         }
 
@@ -312,7 +312,7 @@ public class GameMainLogicCtrler {
             }
 
             sp.render();
-            if (_renderAnimate && !sp.isDestoryed()) {
+            if (_renderAnimate && !sp.isDestroyed()) {
                 sp.renderAnimate();
             }
         }

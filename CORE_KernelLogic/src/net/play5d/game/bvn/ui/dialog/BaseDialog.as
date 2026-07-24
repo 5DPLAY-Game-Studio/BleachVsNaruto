@@ -87,13 +87,13 @@ public class BaseDialog {
         DialogManager.closeDialog(this);
     }
 
-    public final function destory():void {
+    public final function destroy():void {
         if (_titleTxt) {
             _titleTxt.dispose();
             _titleTxt = null;
         }
 
-        onDestory();
+        onDestroy();
     }
 
     public final function hide():void {
@@ -129,7 +129,7 @@ public class BaseDialog {
 
     }
 
-    protected function onDestory():void {
+    protected function onDestroy():void {
 
     }
 

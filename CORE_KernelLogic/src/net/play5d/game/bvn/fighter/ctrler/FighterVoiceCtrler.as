@@ -38,7 +38,7 @@ public class FighterVoiceCtrler {
     private var _curLength:int;
     private var _soundTransform:SoundTransform;
 
-    public function destory():void {
+    public function destroy():void {
         if (_voiceObj) {
             _voiceObj = null;
         }

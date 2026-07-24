@@ -297,7 +297,7 @@ public class MapLayer extends Sprite {
         var area:Rectangle = null;
 
         for each (var sp:IGameSprite in gameSps) {
-            if (!sp || sp.isDestoryed()) {
+            if (!sp || sp.isDestroyed()) {
                 continue;
             }
 

@@ -48,7 +48,7 @@ public class FighterKeyCtrl implements IFighterActionCtrl {
 
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (!classicMode) {
             GameInputer.unListenKeys(inputType, 2);
         }

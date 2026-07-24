@@ -33,9 +33,9 @@ public class SelectedFighterGroup extends Sprite {
     private var _uis:Array = [];
     private var _curUI:SelectedFighterUI;
 
-    public function destory():void {
+    public function destroy():void {
         if (_curUI) {
-            _curUI.destory();
+            _curUI.destroy();
             _curUI = null;
         }
     }
@@ -74,7 +74,7 @@ public class SelectedFighterGroup extends Sprite {
         addChild(ui.ui);
         _uis.push(ui);
         if (_curUI) {
-            _curUI.destory();
+            _curUI.destroy();
             _curUI = null;
         }
         _curUI = ui;

@@ -50,7 +50,7 @@ public class BitmapFilterView implements IGameSprite {
     private var _bitmap:Bitmap;
     private var _filter:BitmapFilter;
     private var _filterOffset:Point;
-    private var _isDestoryed:Boolean;
+    private var _isDestroyed:Boolean;
     private var _bitmapFrame:int;
     private var _targetDisplay:DisplayObject;
     private var _targetBounds:Rectangle;
@@ -133,7 +133,7 @@ public class BitmapFilterView implements IGameSprite {
         if (!target || !_targetDisplay) {
             return;
         }
-        if (_isDestoryed) {
+        if (_isDestroyed) {
             return;
         }
         renderBitmapData();
@@ -152,8 +152,8 @@ public class BitmapFilterView implements IGameSprite {
         _bitmap.y = _targetDisplay.y - _filterOffset.y + _targetBounds.y;
     }
 
-    public function isDestoryed():Boolean {
-        return _isDestoryed;
+    public function isDestroyed():Boolean {
+        return _isDestroyed;
     }
 
     public function getDisplay():DisplayObject {
@@ -200,13 +200,13 @@ public class BitmapFilterView implements IGameSprite {
 
     }
 
-    public function destory(dispose:Boolean = true):void {
+    public function destroy(dispose:Boolean = true):void {
         if (dispose) {
             if (_bitmap.bitmapData) {
                 _bitmap.bitmapData.dispose();
                 _bitmap.bitmapData = null;
             }
-            _isDestoryed   = true;
+            _isDestroyed   = true;
             this.target    = null;
             _filter        = null;
             _filterOffset  = null;

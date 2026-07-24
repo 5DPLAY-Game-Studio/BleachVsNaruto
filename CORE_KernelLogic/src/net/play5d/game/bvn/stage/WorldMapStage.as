@@ -142,18 +142,18 @@ public class WorldMapStage implements IStage {
         GameEvent.removeEventListener(GameEvent.MUSOU_FIGHTER_UPDATE, updatePointsUI);
 
         if (_backBtn) {
-            BtnUtils.destoryBtn(_backBtn);
+            BtnUtils.destroyBtn(_backBtn);
             _backBtn = null;
         }
 
         if (_cloudUI) {
-            _cloudUI.destory();
+            _cloudUI.destroy();
             _cloudUI = null;
         }
 
         if (_pointUIs) {
             for each(var p:WorldMapPointUI in _pointUIs) {
-                p.destory();
+                p.destroy();
             }
             _pointUIs = null;
         }

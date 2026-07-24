@@ -115,17 +115,17 @@ public class FighterMC {
 //			mcCtrler.setMc(this);
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_bodyAreaCache) {
-            _bodyAreaCache.destory();
+            _bodyAreaCache.destroy();
             _bodyAreaCache = null;
         }
         if (_hitAreaCache) {
-            _hitAreaCache.destory();
+            _hitAreaCache.destroy();
             _hitAreaCache = null;
         }
         if (_hitCheckAreaCache) {
-            _hitCheckAreaCache.destory();
+            _hitCheckAreaCache.destroy();
             _hitCheckAreaCache = null;
         }
         _mc              = null;

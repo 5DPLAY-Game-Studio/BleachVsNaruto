@@ -145,9 +145,9 @@ public class MusouUI implements IGameUI {
     public function setVolume(v:Number):void {
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_pauseDialog) {
-            _pauseDialog.destory();
+            _pauseDialog.destroy();
             _pauseDialog = null;
         }
     }
@@ -386,7 +386,7 @@ public class MusouUI implements IGameUI {
         function onBtnClick(b:ContinueBtn):void {
             onClick();
 
-            b.destory();
+            b.destroy();
             try {
                 _ui.removeChild(b);
             }

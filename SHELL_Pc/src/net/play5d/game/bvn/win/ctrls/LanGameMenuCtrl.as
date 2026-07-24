@@ -53,7 +53,7 @@ public class LanGameMenuCtrl {
             catch (e:Error) {
                 trace(e);
             }
-            _exitDialog.destory();
+            _exitDialog.destroy();
             _exitDialog = null;
         }
 

@@ -47,7 +47,7 @@ public class LoadingMusouStage implements IStage {
     public function LoadingMusouStage() {
     }
     private var _ui:$loading$MC_loadingFight;
-    private var _destoryed:Boolean;
+    private var _destroyed:Boolean;
     private var _sltUI:$loading$MC_selectUI;
 
     /**
@@ -87,7 +87,7 @@ public class LoadingMusouStage implements IStage {
      * @param back 回调函数
      */
     public function destroy(back:Function = null):void {
-        _destoryed = true;
+        _destroyed = true;
 
         SoundCtrl.I.BGM(null);
 

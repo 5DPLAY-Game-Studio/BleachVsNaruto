@@ -62,7 +62,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
     private var _tmpKeyConfig:KeyConfigVO;
     private var _setKeyIndex:int;
 
-    public function destory():void {
+    public function destroy():void {
         if (_btnGroup) {
             try {
                 ui.removeChild(_btnGroup);
@@ -70,7 +70,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
             catch (e:Error) {
             }
             _btnGroup.removeEventListener(SetBtnEvent.SELECT, onBtnSelect);
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
     }

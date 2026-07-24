@@ -81,7 +81,7 @@ public class SelectMapUI extends Sprite {
 
     }
 
-    public function destory():void {
+    public function destroy():void {
 
         _prevListener    = null;
         _nextListener    = null;
@@ -110,7 +110,7 @@ public class SelectMapUI extends Sprite {
             }
         }
         if (_txt) {
-            _txt.destory();
+            _txt.destroy();
             _txt = null;
         }
     }

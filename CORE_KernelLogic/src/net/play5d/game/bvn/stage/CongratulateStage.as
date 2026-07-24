@@ -107,7 +107,7 @@ public class CongratulateStage implements IStage {
         GameRender.remove(render);
 
         if (_btngroup) {
-            _btngroup.destory();
+            _btngroup.destroy();
             _btngroup.removeEventListener(SetBtnEvent.SELECT, selectBtnHandler);
             _btngroup = null;
         }

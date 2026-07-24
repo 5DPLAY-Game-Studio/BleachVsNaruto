@@ -100,7 +100,7 @@ public class FighterAttackerCtrler implements IGameSpriteCntlr {
         return null;
     }
 
-    public function destory():void {
+    public function destroy():void {
         _attacker = null;
         effect    = null;
         ownerMc   = null;

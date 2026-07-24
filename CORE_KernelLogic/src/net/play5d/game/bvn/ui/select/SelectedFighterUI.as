@@ -91,14 +91,14 @@ public class SelectedFighterUI extends EventDispatcher {
 
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (ui) {
             ui.removeEventListener(TouchEvent.TOUCH_TAP, mouseHandler);
             ui.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
             ui.removeEventListener(MouseEvent.CLICK, mouseHandler);
         }
         if (_text) {
-            _text.destory();
+            _text.destroy();
             _text = null;
         }
     }

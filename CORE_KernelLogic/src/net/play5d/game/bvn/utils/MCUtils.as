@@ -160,7 +160,7 @@ public class MCUtils {
                 back(sp);
             }
 
-            if (!sp || sp.isDestoryed()) {
+            if (!sp || sp.isDestroyed()) {
                 i--;
             }
         }

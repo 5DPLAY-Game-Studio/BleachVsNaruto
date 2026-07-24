@@ -46,9 +46,9 @@ public class ContinueBtn extends Sprite {
         _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnClick);
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_btnGroup) {
-            _btnGroup.destory();
+            _btnGroup.destroy();
         }
     }
 

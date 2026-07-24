@@ -75,13 +75,13 @@ public class FighterMcCtrler {
     private var _justHurtResume:Boolean;
     private var _actionLogic:FighterActionLogic;
 
-    public function destory():void {
+    public function destroy():void {
         if (_actionCtrler) {
-            _actionCtrler.destory();
+            _actionCtrler.destroy();
             _actionCtrler = null;
         }
         if (_mc) {
-            _mc.destory();
+            _mc.destroy();
             _mc = null;
         }
         _fighter         = null;
