@@ -20,21 +20,20 @@ package net.play5d.game.bvn {
 
 use namespace bvn_internal;
 
+/**
+ * 游戏版本号对外入口。
+ *
+ * <p>对外暴露 <code>bvn_internal::VERSION</code>，供运行时与资源侧版本校验使用。</p>
+ *
+ * @see bvn_internal
+ */
 public class GameVersion {
     include '../../../../../include/ImportVersion.as';
 
-    /*----------------------------- 静态公有属性 -----------------------------*/
-
-    // 游戏版本
+    /**
+     * 当前共享库版本号。
+     * @default 见 <code>ImportVersion.as</code>
+     */
     public static const VERSION:String = bvn_internal::VERSION;
-
-    /*----------------------------- 静态私有属性 -----------------------------*/
-
-
-    /*----------------------------- 静态公有方法 -----------------------------*/
-
-
-    /*----------------------------- 静态私有方法 -----------------------------*/
-
 }
 }

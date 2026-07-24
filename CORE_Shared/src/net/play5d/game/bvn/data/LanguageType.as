@@ -19,62 +19,66 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 语言类型
+ * 语言类型。
+ *
+ * <p>语言码采用 BCP 47 风格字符串（如 <code>zh-CN</code>）。</p>
  */
 public class LanguageType {
     include '../../../../../../include/ImportVersion.as';
 
-    /*----------------------------- 静态公有属性 -----------------------------*/
-
-    // 简体中文
-    public static const CHINESE_SIMPLIFIED:String = 'zh-CN';
-    // 繁体中文
+    /** 简体中文 */
+    public static const CHINESE_SIMPLIFIED:String  = 'zh-CN';
+    /** 繁体中文 */
     public static const CHINESE_TRADITIONAL:String = 'zh-TW';
-    // 英文
-    public static const ENGLISH:String = 'en';
-    // 日文
-    public static const JAPANESE:String = 'ja';
-    // 韩文
-    public static const KOREAN:String = 'ko';
-    // 越南语
-    public static const VIETNAMESE:String = 'vi';
+    /** 英文 */
+    public static const ENGLISH:String             = 'en';
+    /** 日文 */
+    public static const JAPANESE:String            = 'ja';
+    /** 韩文 */
+    public static const KOREAN:String              = 'ko';
+    /** 越南语 */
+    public static const VIETNAMESE:String          = 'vi';
 
-    /*----------------------------- 静态私有属性 -----------------------------*/
-
-    // 所有语言
+    /** @private 全部支持的语言码 */
     private static const _allLanguages:Vector.<String> = (function ():Vector.<String> {
         var allLanguages:Vector.<String> = new Vector.<String>();
         allLanguages.push(
-                CHINESE_SIMPLIFIED, CHINESE_TRADITIONAL,
-                ENGLISH,
-                JAPANESE,
-                KOREAN,
-                VIETNAMESE
+            CHINESE_SIMPLIFIED, CHINESE_TRADITIONAL,
+            ENGLISH,
+            JAPANESE,
+            KOREAN,
+            VIETNAMESE
         );
 
         return allLanguages;
     })();
 
-    /*----------------------------- 静态公有方法 -----------------------------*/
-
     /**
-     * 是否支持当前语言
-     * @param language 语言
-     * @return 是否支持当前语言
+     * 是否支持指定语言。
+     *
+     * @param language 语言码。
+     * @return 支持时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * LanguageType.isSupported(LanguageType.ENGLISH); // true
+     * </listing>
      */
     public static function isSupported(language:String):Boolean {
         return _allLanguages.indexOf(language) != -1;
     }
 
     /**
-     * 是否为简体中文
-     * @return 是否为简体中文
+     * 是否为简体中文。
+     *
+     * @param language 语言码。
+     * @return 简体中文时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * LanguageType.isSimplifiedChinese('zh-CN'); // true
+     * </listing>
      */
     public static function isSimplifiedChinese(language:String):Boolean {
         return language == CHINESE_SIMPLIFIED;
     }
-
-    /*----------------------------- 静态私有方法 -----------------------------*/
-
 }
 }

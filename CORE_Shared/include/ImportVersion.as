@@ -20,5 +20,5 @@ import net.play5d.game.bvn.bvn_internal;
 
 use namespace bvn_internal;
 
-// 库版本
+/** @private 共享库版本号；对外请用 GameVersion.VERSION */
 bvn_internal static const VERSION:String = '3.9';

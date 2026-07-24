@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,14 +19,15 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 组件接口（CORE_Components）
+ * Animate 组件库（CORE_Components）组件接口。
+ *
+ * <p>约定组件可主动销毁自身占用的资源。</p>
  */
 public interface IComponents {
 
     /**
-     * 销毁自身
+     * 销毁自身。
      */
     function destroy():void;
-
 }
 }

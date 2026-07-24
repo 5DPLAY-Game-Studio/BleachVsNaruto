@@ -19,60 +19,61 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色动作状态
+ * 角色动作状态。
+ *
+ * <p>用整型常量表示当前动作阶段，并提供若干状态判定静态方法。</p>
+ *
+ * @see FighterSpecialFrame
+ * @see FighterHurtType
  */
 public class FighterActionState {
     include '../../../../../../../include/ImportVersion.as';
 
-    /*----------------------------- 静态公有属性 -----------------------------*/
-
-    // 正常
+    /** 正常 */
     public static const NORMAL:int = 0;
-    // 硬直（后摇）endAct()
+    /** 硬直（后摇，<code>endAct()</code>） */
     public static const FREEZE:int = 40;
 
-    // 正在普通攻击（J KJ）
+    /** 正在普通攻击（J / KJ） */
     public static const ATTACK_ING:int      = 10;
-    // 正在释放技能 （WJ SJ U WU SU KU）
+    /** 正在释放技能（WJ / SJ / U / WU / SU / KU） */
     public static const SKILL_ING:int       = 11;
-    // 正在释放必杀（I WI KI）
+    /** 正在释放必杀（I / WI / KI） */
     public static const BISHA_ING:int       = 12;
-    // 正在释放超必杀（SI）
+    /** 正在释放超必杀（SI） */
     public static const BISHA_SUPER_ING:int = 13;
 
-    // 正在跳跃（K）
+    /** 正在跳跃（K） */
     public static const JUMP_ING:int     = 14;
-    // 正在瞬步（L）
+    /** 正在瞬步（L） */
     public static const DASH_ING:int     = 15;
-    // 正在执行防反（防御反击，受击后触发）setHurtAction()
+    /** 正在执行防反（受击后触发，<code>setHurtAction()</code>） */
     public static const HURT_ACT_ING:int = 16;
 
-    // 正在防御（S）
+    /** 正在防御（S） */
     public static const DEFENCE_ING:int   = 20;
-    // 正在被打
+    /** 正在被打 */
     public static const HURT_ING:int      = 21;
-    // 正在被击飞
+    /** 正在被击飞 */
     public static const HURT_FLYING:int   = 22;
-    // 击飞后落地
+    /** 击飞后落地 */
     public static const HURT_DOWN:int     = 23;
-    // 落地后弹起
+    /** 落地后弹起 */
     public static const HURT_DOWN_TAN:int = 24;
 
-    // 死亡
+    /** 死亡 */
     public static const DEAD:int = 30;
 
-    // 正在万解/变身
+    /** 正在万解/变身 */
     public static const WAN_KAI_ING:int = 50;
-    // 正在执行开场
+    /** 正在执行开场 */
     public static const KAI_CHANG:int   = 60;
-    // 正在执行胜利
+    /** 正在执行胜利 */
     public static const WIN:int         = 61;
-    // 正在执行失败
+    /** 正在执行失败 */
     public static const LOSE:int        = 62;
 
-    /*----------------------------- 静态私有属性 -----------------------------*/
-
-    // 不允许进行胜利的动作状态【必杀、超必杀，万解】
+    /** @private 不允许进行胜利的动作状态（必杀、超必杀、万解） */
     private static const _isNotAllowWinStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(BISHA_ING, BISHA_SUPER_ING, WAN_KAI_ING);
@@ -80,7 +81,7 @@ public class FighterActionState {
         return states;
     })();
 
-    // 正在处于必杀中的动作状态【必杀，超必杀】
+    /** @private 正在处于必杀中的动作状态（必杀、超必杀） */
     private static const _isBishaIngStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(BISHA_ING, BISHA_SUPER_ING);
@@ -88,7 +89,7 @@ public class FighterActionState {
         return states;
     })();
 
-    // 正在处于攻击中的动作状态【普通攻击、释放技能，必杀，超必杀】
+    /** @private 正在处于攻击中的动作状态（普通攻击、技能、必杀、超必杀） */
     private static const _isAttackIngStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(ATTACK_ING, SKILL_ING, BISHA_ING, BISHA_SUPER_ING);
@@ -96,7 +97,7 @@ public class FighterActionState {
         return states;
     })();
 
-    // 正在处于被伤害中的动作状态【被打、击飞，击飞后落地，落地后弹起】
+    /** @private 正在处于被伤害中的动作状态（被打、击飞、落地、弹起） */
     private static const _isHurtIngStates:Vector.<int> = (function ():Vector.<int> {
         var states:Vector.<int> = new Vector.<int>();
         states.push(HURT_ING, HURT_FLYING, HURT_DOWN, HURT_DOWN_TAN);
@@ -104,56 +105,74 @@ public class FighterActionState {
         return states;
     })();
 
-    /*----------------------------- 静态公有方法 -----------------------------*/
-
     /**
-     * 判断当前动作是否允许进行胜利（不在【必杀、超必杀，万解】动作状态）
-     * @param actionState 当前动作
-     * @return 当前动作是否允许进行胜利
+     * 判断当前动作是否允许进入胜利（不在必杀、超必杀、万解中）。
+     *
+     * @param actionState 当前动作状态。
+     * @return 允许时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * FighterActionState.isAllowWinState(FighterActionState.NORMAL); // true
+     * </listing>
      */
     public static function isAllowWinState(actionState:int):Boolean {
-//        return actionState != BISHA_ING && actionState != BISHA_SUPER_ING && actionState != WAN_KAI_ING;
         return _isNotAllowWinStates.indexOf(actionState) == -1;
     }
 
     /**
-     * 判断当前动作是否允许进行幽步（不在【必杀、超必杀，万解】动作状态）
-     * @param actionState 当前动作
-     * @return 当前动作是否允许进行幽步
+     * 判断当前动作是否允许幽步（不在必杀、超必杀、万解中）。
+     *
+     * @param actionState 当前动作状态。
+     * @return 允许时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * FighterActionState.allowGhostStep(FighterActionState.NORMAL); // true
+     * </listing>
      */
     public static function allowGhostStep(actionState:int):Boolean {
-//        return actionState != BISHA_ING && actionState != BISHA_SUPER_ING && actionState != WAN_KAI_ING;
         return _isNotAllowWinStates.indexOf(actionState) == -1;
     }
 
     /**
-     * 判断当前动作是否处于必杀中（在【必杀，超必杀】动作状态）
-     * @param actionState 当前动作
-     * @return 当前动作是否处于必杀中
+     * 判断当前动作是否处于必杀中（必杀或超必杀）。
+     *
+     * @param actionState 当前动作状态。
+     * @return 处于必杀中时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * FighterActionState.isBishaIng(FighterActionState.BISHA_ING); // true
+     * </listing>
      */
     public static function isBishaIng(actionState:int):Boolean {
         return _isBishaIngStates.indexOf(actionState) != -1;
     }
 
     /**
-     * 判断当前动作是否处于攻击中（在【普通攻击、释放技能，必杀，超必杀】动作状态）
-     * @param actionState 当前动作
-     * @return 当前动作是否处于攻击中
+     * 判断当前动作是否处于攻击中（普通攻击、技能、必杀、超必杀）。
+     *
+     * @param actionState 当前动作状态。
+     * @return 处于攻击中时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * FighterActionState.isAttacking(FighterActionState.ATTACK_ING); // true
+     * </listing>
      */
     public static function isAttacking(actionState:int):Boolean {
         return _isAttackIngStates.indexOf(actionState) != -1;
     }
 
     /**
-     * 判断当前动作是否处于被伤害中（在【被打、击飞，击飞后落地，落地后弹起】动作状态）
-     * @param actionState 当前动作
-     * @return 当前动作是否处于被伤害中
+     * 判断当前动作是否处于被伤害中（被打、击飞、落地、弹起）。
+     *
+     * @param actionState 当前动作状态。
+     * @return 处于被伤害中时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * FighterActionState.isHurting(FighterActionState.HURT_ING); // true
+     * </listing>
      */
     public static function isHurting(actionState:int):Boolean {
         return _isHurtIngStates.indexOf(actionState) != -1;
     }
-
-    /*----------------------------- 静态私有方法 -----------------------------*/
-
 }
 }

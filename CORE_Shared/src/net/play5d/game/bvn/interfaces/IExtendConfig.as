@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,21 +19,26 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 扩展配置接口
+ * 扩展配置接口。
+ *
+ * <p>将扩展配置序列化到存档对象，或从存档对象还原。</p>
+ *
+ * @see ISaveData
  */
 public interface IExtendConfig {
 
     /**
-     * 保存到存档数据对象
-     * @return 存档数据对象
+     * 保存到存档数据对象。
+     *
+     * @return 存档数据对象。
      */
     function toSaveObj():Object;
 
     /**
-     * 读存档数据对象
-     * @param obj 存档数据对象
+     * 从存档数据对象读取。
+     *
+     * @param obj 存档数据对象。
      */
     function readSaveObj(obj:Object):void;
-
 }
 }

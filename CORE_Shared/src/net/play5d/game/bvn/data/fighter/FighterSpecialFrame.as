@@ -19,111 +19,104 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色特殊帧
+ * 角色特殊帧标签名。
+ *
+ * <p>对应角色时间轴上的帧标签，用于切换待机、攻击、受击、胜负等动作。</p>
+ *
+ * @see FighterHitRange
+ * @see FighterActionState
  */
 public class FighterSpecialFrame {
     include '../../../../../../../include/ImportVersion.as';
 
-    /*----------------------------- 静态公有属性 -----------------------------*/
-
-    // 站立
+    /** 站立 */
     public static const IDLE:String             = '站立';
-    // 走 A/D
+    /** 走（A/D） */
     public static const MOVE:String             = '走';
-    // 瞬步 L
+    /** 瞬步（L） */
     public static const DASH:String             = '瞬步';
-    // 起跳
+    /** 起跳 */
     public static const JUMP_START:String       = '起跳';
-    // 跳 K
+    /** 跳（K） */
     public static const JUMP:String             = '跳';
-    // 跳中
+    /** 跳中 */
     public static const JUMP_ING:String         = '跳中';
-    // 落
+    /** 落 */
     public static const JUMP_DOWN:String        = '落';
-    // 落地
+    /** 落地 */
     public static const JUMP_TOUCH_FLOOR:String = '落地';
 
-    // 跳砍 KJ
+    /** 跳砍（KJ） */
     public static const ATTACK_AIR:String  = '跳砍';
-    // 跳招 KU
+    /** 跳招（KU） */
     public static const SKILL_AIR:String   = '跳招';
-    // 跳招-上 WKU
+    /** 跳招-上（WKU） */
     public static const SKILL_AIR_W:String = '跳招-上';
-    // 跳招-下 SKU
+    /** 跳招-下（SKU） */
     public static const SKILL_AIR_S:String = '跳招-下';
 
-    // 砍1 J
+    /** 砍 1（J） */
     public static const ATTACK:String = '砍1';
 
-    // 砍技1 SJ
+    /** 砍技 1（SJ） */
     public static const SKILL_1:String = '砍技1';
-    // 砍技2 WJ
+    /** 砍技 2（WJ） */
     public static const SKILL_2:String = '砍技2';
 
-    // 招1 U
+    /** 招 1（U） */
     public static const ZHAO_1:String = '招1';
-    // 招2 SU
+    /** 招 2（SU） */
     public static const ZHAO_2:String = '招2';
-    // 招3 WU
+    /** 招 3（WU） */
     public static const ZHAO_3:String = '招3';
 
-    // 必杀 I
+    /** 必杀（I） */
     public static const BISHA:String       = '必杀';
-    // 上必杀 WI
+    /** 上必杀（WI） */
     public static const BISHA_UP:String    = '上必杀';
-    // 超必杀 SI
+    /** 超必杀（SI） */
     public static const BISHA_SUPER:String = '超必杀';
-    // 空中必杀 KI
+    /** 空中必杀（KI） */
     public static const BISHA_AIR:String   = '空中必杀';
 
-    // 摔1 A/D J
+    /** 摔 1（A/D + J） */
     public static const CATCH_1:String = '摔1';
-    // 摔2 A/D U
+    /** 摔 2（A/D + U） */
     public static const CATCH_2:String = '摔2';
 
-    // 防御 S
+    /** 防御（S） */
     public static const DEFENSE:String        = '防御';
-    // 防御恢复
+    /** 防御恢复 */
     public static const DEFENSE_RESUME:String = '防御恢复';
-    // 防住
-//    public static const DEFENSE_HIT:String    = '防住';
+    // public static const DEFENSE_HIT:String = '防住';
 
-    // 被打
+    /** 被打 */
     public static const HURT:String             = '被打';
-    // 击飞
+    /** 击飞 */
     public static const HURT_FLY:String         = '击飞';
-    // 击飞_落
+    /** 击飞_落 */
     public static const HURT_FALL:String        = '击飞_落';
-    // 击飞_弹
+    /** 击飞_弹 */
     public static const HURT_TAN:String         = '击飞_弹';
-    // 击飞_倒
+    /** 击飞_倒 */
     public static const HURT_DOWN:String        = '击飞_倒';
-    // 击飞_起
+    /** 击飞_起 */
     public static const HURT_DOWN_RESUME:String = '击飞_起';
-    // 起身
+    /** 起身 */
     public static const HURT_DOWN_JUMP:String   = '起身';
 
-    // 万解 JK
+    /** 万解（JK） */
     public static const BANKAI:String   = '万解';
-    // 万解W WJK
+    /** 万解 W（WJK） */
     public static const BANKAI_W:String = '万解W';
-    // 万解S SJK
+    /** 万解 S（SJK） */
     public static const BANKAI_S:String = '万解S';
 
-    // 开场
+    /** 开场 */
     public static const SAY_INTRO:String = '开场';
-    // 胜利
+    /** 胜利 */
     public static const WIN:String       = '胜利';
-    // 失败
+    /** 失败 */
     public static const LOSE:String      = '失败';
-
-    /*----------------------------- 静态私有属性 -----------------------------*/
-
-
-    /*----------------------------- 静态公有方法 -----------------------------*/
-
-
-    /*----------------------------- 静态私有方法 -----------------------------*/
-
 }
 }

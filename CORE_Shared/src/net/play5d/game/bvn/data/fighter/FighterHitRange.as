@@ -19,62 +19,58 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色攻击范围元件名
+ * 角色攻击范围元件名。
+ *
+ * <p>对应角色 SWF 中攻击判定面元件的链接名，供命中检测按招式取范围。</p>
+ *
+ * @see FighterSpecialFrame
  */
 public class FighterHitRange {
     include '../../../../../../../include/ImportVersion.as';
 
-    /*----------------------------- 静态公有属性 -----------------------------*/
-
-    // 跳砍 KJ
+    /** 跳砍（KJ） */
     public static const ATTACK_AIR:String = 'tkanmian';
-    // 跳招 KU
+    /** 跳招（KU） */
     public static const SKILL_AIR:String  = 'tzmian';
 
-    // 砍1 J
+    /** 砍 1（J） */
     public static const ATTACK:String = 'kanmian';
 
-    // 砍技1 SJ
+    /** 砍技 1（SJ） */
     public static const SKILL_1:String = 'kj1mian';
-    // 砍技2 WJ
+    /** 砍技 2（WJ） */
     public static const SKILL_2:String = 'kj2mian';
 
-    // 招1 U
+    /** 招 1（U） */
     public static const ZHAO_1:String = 'zh1mian';
-    // 招2 SU
+    /** 招 2（SU） */
     public static const ZHAO_2:String = 'zh2mian';
-    // 招3 WU
+    /** 招 3（WU） */
     public static const ZHAO_3:String = 'zh3mian';
 
-    // 必杀 I
+    /** 必杀（I） */
     public static const BISHA:String       = 'bsmian';
-    // 空中必杀 KI
+    /** 空中必杀（KI） */
     public static const BISHA_AIR:String   = 'kbsmian';
-    // 上必杀 WI
+    /** 上必杀（WI） */
     public static const BISHA_UP:String    = 'sbsmian';
-    // 超必杀 SI
+    /** 超必杀（SI） */
     public static const BISHA_SUPER:String = 'cbsmian';
 
-    // 全部攻击范围元件名
+    /**
+     * 全部攻击范围元件名。
+     */
     public static const ALL_HIT_RANGES:Vector.<String> = (function ():Vector.<String> {
         var allHitRanges:Vector.<String> = new Vector.<String>();
         allHitRanges.push(
-                ATTACK_AIR, SKILL_AIR,
-                ATTACK,
-                SKILL_1, SKILL_2,
-                ZHAO_1, ZHAO_2, ZHAO_3,
-                BISHA, BISHA_AIR, BISHA_UP, BISHA_SUPER
+            ATTACK_AIR, SKILL_AIR,
+            ATTACK,
+            SKILL_1, SKILL_2,
+            ZHAO_1, ZHAO_2, ZHAO_3,
+            BISHA, BISHA_AIR, BISHA_UP, BISHA_SUPER
         );
 
         return allHitRanges;
     })();
-
-    /*----------------------------- 静态私有属性 -----------------------------*/
-
-
-    /*----------------------------- 静态公有方法 -----------------------------*/
-
-
-    /*----------------------------- 静态私有方法 -----------------------------*/
 }
 }

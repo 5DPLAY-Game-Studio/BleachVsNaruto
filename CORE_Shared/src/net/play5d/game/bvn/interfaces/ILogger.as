@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,13 +19,14 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 日志记录器接口
+ * 日志记录器接口。
  */
 public interface ILogger {
 
     /**
-     * 记录日志
-     * @param msg 日志内容
+     * 记录日志。
+     *
+     * @param msg 日志内容。
      */
     function log(msg:String):void;
 }

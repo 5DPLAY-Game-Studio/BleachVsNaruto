@@ -19,21 +19,26 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 存档数据接口
+ * 存档数据接口。
+ *
+ * <p>约定可序列化对象与存档数据对象之间的读写。</p>
+ *
+ * @see IExtendConfig
  */
 public interface ISaveData {
 
     /**
-     * 保存到存档数据对象
-     * @return 存档数据对象
+     * 保存到存档数据对象。
+     *
+     * @return 存档数据对象。
      */
     function toSaveObj():Object;
 
     /**
-     * 读存档数据对象
-     * @param obj 存档数据对象
+     * 从存档数据对象读取。
+     *
+     * @param obj 存档数据对象。
      */
     function readSaveObj(obj:Object):void;
-
 }
 }

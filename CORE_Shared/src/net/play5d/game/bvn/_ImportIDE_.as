@@ -24,13 +24,16 @@ import net.play5d.game.bvn.data.fighter.*;
 import net.play5d.game.bvn.interfaces.*;
 
 /**
- * BleachVsNaruto_FlashSrc\SRC_XFL\swc\shared 主类
+ * shared SWC 在 Flash / Animate IDE 中的导入主类。
+ *
+ * <p>通过引用共享类型，保证编译进 <code>BleachVsNaruto_FlashSrc\SRC_XFL\swc\shared</code>。</p>
+ *
+ * @private
  */
 public class _ImportIDE_ extends Sprite {
 
+    /** @private 强制链接共享类型，防止被优化剔除 */
     private static const _NO_USE_:Array = [
-//        _SHARED_GLOBALS_,
-
         // net.play5d.game.bvn.data
         DefinedClass,
         GameMode,
@@ -54,6 +57,9 @@ public class _ImportIDE_ extends Sprite {
         ISaveData
     ];
 
+    /**
+     * 构造导入主类，并触发全局符号链接。
+     */
     public function _ImportIDE_() {
         _SHARED_GLOBALS_;
     }

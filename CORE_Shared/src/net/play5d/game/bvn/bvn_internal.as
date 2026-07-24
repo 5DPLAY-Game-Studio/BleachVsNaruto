@@ -18,6 +18,12 @@
 
 package net.play5d.game.bvn {
 
-// BVN 命名空间
+/**
+ * BVN 内部命名空间。
+ *
+ * <p>用于限制仅模块内部可见的成员（如共享库版本常量）。</p>
+ *
+ * @see GameVersion
+ */
 public namespace bvn_internal = 'https://github.com/5DPLAY-Game-Studio/BleachVsNaruto';
 }

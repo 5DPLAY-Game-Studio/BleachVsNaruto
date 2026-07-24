@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,22 +19,14 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 已定义的类链接名称
+ * 已定义的库链接类名。
+ *
+ * <p>供资源侧通过链接名取用共享库中的元件。</p>
  */
 public class DefinedClass {
     include '../../../../../../include/ImportVersion.as';
 
-    /*----------------------------- 静态公有属性 -----------------------------*/
-
+    /** 主界面 MovieClip 链接名 */
     public static const MC_MAIN:String = 'main_mc';
-
-    /*----------------------------- 静态私有属性 -----------------------------*/
-
-
-    /*----------------------------- 静态公有方法 -----------------------------*/
-
-
-    /*----------------------------- 静态私有方法 -----------------------------*/
-
 }
 }

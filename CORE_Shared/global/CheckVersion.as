@@ -20,10 +20,18 @@ package {
 import net.play5d.game.bvn.GameVersion;
 
 /**
- * 检查版本
- * @param version 版本字符
- * @param back 回调函数
- * @return
+ * 检查共享库版本是否与期望一致。
+ *
+ * <p>一致返回 <code>true</code>；不一致时若提供回调则先调用，再返回 <code>false</code>。</p>
+ *
+ * @param version 期望版本号。
+ * @param back 版本不匹配时的回调；可为 <code>null</code>。
+ * @return 版本匹配时为 <code>true</code>，否则为 <code>false</code>。
+ * @example
+ * <listing version="3.0">
+ * CheckVersion(GameVersion.VERSION); // true
+ * </listing>
+ * @see net.play5d.game.bvn.GameVersion#VERSION
  */
 public function CheckVersion(version:String, back:Function = null):Boolean {
     if (GameVersion.VERSION == version) {

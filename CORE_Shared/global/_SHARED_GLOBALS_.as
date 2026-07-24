@@ -18,6 +18,15 @@
 
 package {
 
+/**
+ * 强制链接共享全局符号（仅供编译期引用，禁止运行时使用）。
+ *
+ * <p>访问时几乎必定抛错；返回值包含需保留的全局函数列表。</p>
+ *
+ * @return 需链接的全局符号数组。
+ * @throws Error 禁止直接使用本变量。
+ * @private
+ */
 public function get _SHARED_GLOBALS_():* {
     if (Math.random() > 0) {
         throw new Error('This variable is not allowed to be used!');
