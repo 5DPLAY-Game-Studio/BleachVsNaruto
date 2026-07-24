@@ -1,6 +1,2 @@
 # IDEA 输出目录
 /out/
-
-# ASDoc: SDK 模板本地副本（由 tools/asdoc.bat 生成）
-/tools/asdoc/templates/
-/tools/asdoc/zh_CN/untranslated_candidates.txt

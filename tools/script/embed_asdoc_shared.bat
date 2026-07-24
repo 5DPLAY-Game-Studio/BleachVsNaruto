@@ -18,14 +18,16 @@
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
-:: Purpose
-::   Post-build hook: embed ASDoc into CORE_Shared.swc (no HTML).
-::   Called by build.bat, VSCode tasks, and IDEA External Tool
-::   (EmbedSharedAsDoc / Before Launch after Make).
+:: 用途
+::   构建后钩子：将 ASDoc 嵌入 CORE_Shared.swc（不生成可浏览 HTML）。
+::   由 build.bat、VSCode tasks、IDEA External Tool EmbedSharedAsDoc 调用。
 ::
-:: Usage
-::   CORE_Shared\tools\embed_asdoc.bat
-::   CORE_Shared\tools\embed_asdoc.bat "D:\...\CORE_Shared.swc"
+:: 用法
+::   tools\script\embed_asdoc_shared.bat
+::   tools\script\embed_asdoc_shared.bat "D:\...\CORE_Shared.swc"
+::
+:: 前置条件
+::   - 同 asdoc_shared.bat（FLEX_HOME、已编译的 CORE_Shared.swc）
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -33,12 +35,13 @@
 setlocal enabledelayedexpansion
 
 set "BAT_HOME=%~dp0"
+set "FUNC_COMMON=%BAT_HOME%func\common.bat"
+call "%FUNC_COMMON%" INIT_LANG "%~n0"
+
 set "MODE=embed"
 set "NO_PAUSE=1"
 
-set "MODULE_ROOT=%BAT_HOME%.."
-for %%I in ("%MODULE_ROOT%") do set "MODULE_ROOT=%%~fI"
-set "REPO_ROOT=%MODULE_ROOT%\.."
+set "REPO_ROOT=%BAT_HOME%..\.."
 for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 
 if "%SWC_PATH%"=="" (
@@ -49,12 +52,12 @@ if not "%~1"=="" (
 	set "SWC_PATH=%~f1"
 )
 
-:: IDEA may still hold the SWC briefly after Make
+:: IDEA Make 后可能短暂占用 SWC
 powershell -NoProfile -ExecutionPolicy Bypass -File "%BAT_HOME%asdoc\wait_swc_ready.ps1" -SwcPath "!SWC_PATH!" -TimeoutSec 45
 if errorlevel 1 (
-	echo SWC not ready for ASDoc embed: !SWC_PATH!
+	call "%FUNC_COMMON%" ECHO_LANG :SWC_NOT_READY "!SWC_PATH!"
 	exit /b 1
 )
 
-call "%BAT_HOME%asdoc.bat"
+call "%BAT_HOME%asdoc_shared.bat"
 exit /b %ERRORLEVEL%

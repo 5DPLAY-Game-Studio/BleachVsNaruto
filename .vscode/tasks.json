@@ -95,9 +95,9 @@
         {
             "label"         : "CORE_Shared: embed ASDoc into SWC",
             "type"          : "shell",
-            "command"       : "${workspaceFolder}/CORE_Shared/tools/embed_asdoc.bat",
+            "command"       : "${workspaceFolder}/tools/script/embed_asdoc_shared.bat",
             "options"       : {
-                "cwd"       : "${workspaceFolder}/CORE_Shared"
+                "cwd"       : "${workspaceFolder}/tools/script"
             },
             "problemMatcher": []
         },

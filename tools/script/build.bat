@@ -231,7 +231,7 @@ if /i "%~1"=="LIB_KyoLib" (
 )
 if /i "%~1"=="CORE_Shared" (
 	call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_START "%~1"
-	call "%REPO_ROOT%\CORE_Shared\tools\embed_asdoc.bat"
+	call "%BAT_HOME%embed_asdoc_shared.bat"
 	if errorlevel 1 (
 		call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_FAIL "%~1"
 		exit /b 1

@@ -13,10 +13,10 @@
 #
 # Usage
 #   powershell -NoProfile -ExecutionPolicy Bypass -File inject_docs_swc.ps1 `
-#     -SwcPath path\to\CORE_Shared.swc -TempDitaDir path\to\tempdita
+#     -SwcPath path\to\Library.swc -TempDitaDir path\to\tempdita
 #
 #   # Exit 0 if SWC already has docs/packages.dita; else exit 1
-#   powershell ... -File inject_docs_swc.ps1 -SwcPath path\to\CORE_Shared.swc -TestHasDocs
+#   powershell ... -File inject_docs_swc.ps1 -SwcPath path\to\Library.swc -TestHasDocs
 #
 # Notes
 #   This file MUST stay ASCII-only (encoding safety), same as build_terms_zh.ps1.

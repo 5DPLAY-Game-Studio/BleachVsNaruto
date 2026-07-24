@@ -3,8 +3,8 @@
 #
 # Purpose
 #   Read the Flex SDK English ASDoc_terms.xml, replace chrome labels using the
-#   maps below, and write tools/asdoc/zh_CN/ASDoc_terms.xml for asdoc.bat to
-#   overlay into the local templates copy.
+#   maps below, and write tools/script/asdoc/zh_CN/ASDoc_terms.xml for
+#   asdoc_shared.bat to overlay into the local templates copy.
 #
 # Why
 #   ASDoc has no built-in Chinese locale. UI chrome ("All Classes", "Properties",
@@ -12,15 +12,15 @@
 #   source ASDoc comments; this script only translates the shell labels.
 #
 # Usage
-#   Normally invoked by tools/asdoc.bat. Standalone:
-#     powershell -NoProfile -ExecutionPolicy Bypass -File tools/asdoc/build_terms_zh.ps1
+#   Normally invoked by tools/script/asdoc_shared.bat. Standalone:
+#     powershell -NoProfile -ExecutionPolicy Bypass -File tools/script/asdoc/build_terms_zh.ps1
 #   Requires FLEX_HOME (SDK must contain asdoc\templates\ASDoc_terms.xml).
 #
 # How to add translations
 #   1) Open zh_CN/untranslated_candidates.txt (refreshed at end of each run)
 #   2) Prefer $keyMap (by Key); use $valMap when many Keys share one English value
 #   3) Put Chinese as \uXXXX escapes only -- never raw non-ASCII in THIS file
-#   4) Re-run asdoc.bat (re-runs this script and regenerates HTML)
+#   4) Re-run asdoc_shared.bat (re-runs this script and regenerates HTML)
 #
 # Encoding (critical)
 #   This file MUST stay ASCII-only (comments and code). Editors/consoles that
