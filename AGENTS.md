@@ -5,6 +5,7 @@
 | 何时 | 打开 |
 |------|------|
 | 不确定改哪个顶层目录 | [`.agents/modules.md`](.agents/modules.md) |
+| 理清/改编译链与 ASDoc embed 顺序 | [`.agents/build_order.md`](.agents/build_order.md) |
 | KernelLogic 内模糊定位 | [`.agents/map.md`](.agents/map.md) |
 | 写/改代码格式 | [`.agents/code_style.md`](.agents/code_style.md) |
 | 写/补 ASDoc 与逻辑注释 | [`.agents/comment.md`](.agents/comment.md) |
