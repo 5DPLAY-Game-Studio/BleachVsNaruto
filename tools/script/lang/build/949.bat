@@ -74,3 +74,15 @@ goto :EOF
 :BUILD_SUCCESS
 echo SHELL_Dev 빌드가 성공적으로 완료되었습니다!
 goto :EOF
+
+:ASDOC_EMBED_START
+echo SWC에 ASDoc 삽입 중: %~2
+goto :EOF
+
+:ASDOC_EMBED_OK
+echo ASDoc 삽입 완료: %~2
+goto :EOF
+
+:ASDOC_EMBED_FAIL
+echo ASDoc 삽입 실패: %~2
+goto :EOF

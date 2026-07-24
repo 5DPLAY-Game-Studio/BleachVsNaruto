@@ -77,15 +77,29 @@
         // CORE_Shared
         {
             "label"         : "ActionScript: compile debug - CORE_Shared/asconfig.json",
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - CORE_Shared/asconfig.json (compc)",
+                "CORE_Shared: embed ASDoc into SWC"
+            ],
+            "group"         : "build",
+            "problemMatcher": []
+        },
+        {
+            "label"         : "ActionScript: compile debug - CORE_Shared/asconfig.json (compc)",
             "type"          : "actionscript",
             "debug"         : true,
             "asconfig"      : "CORE_Shared/asconfig.json",
-            "group"         : "build",
-            "problemMatcher": [],
-            "dependsOrder"  : "sequence",
-            "dependsOn"     : [
-
-            ]
+            "problemMatcher": []
+        },
+        {
+            "label"         : "CORE_Shared: embed ASDoc into SWC",
+            "type"          : "shell",
+            "command"       : "${workspaceFolder}/CORE_Shared/tools/embed_asdoc.bat",
+            "options"       : {
+                "cwd"       : "${workspaceFolder}/CORE_Shared"
+            },
+            "problemMatcher": []
         },
         // CORE_Utils
         {

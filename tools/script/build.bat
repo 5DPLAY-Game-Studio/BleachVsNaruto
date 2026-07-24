@@ -218,6 +218,17 @@ if errorlevel 1 (
 	exit /b 1
 )
 call "%FUNC_COMMON%" ECHO_LANG :COMPILE_OK "%~1"
+
+:: CORE_Shared: embed ASDoc into SWC for IDE code hints
+if /i "%~1"=="CORE_Shared" (
+	call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_START "%~1"
+	call "%REPO_ROOT%\CORE_Shared\tools\embed_asdoc.bat"
+	if errorlevel 1 (
+		call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_FAIL "%~1"
+		exit /b 1
+	)
+	call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_OK "%~1"
+)
 exit /b 0
 
 :END

@@ -74,3 +74,15 @@ goto :EOF
 :BUILD_SUCCESS
 echo Build SHELL_Dev completed successfully!
 goto :EOF
+
+:ASDOC_EMBED_START
+echo Embedding ASDoc into SWC: %~2
+goto :EOF
+
+:ASDOC_EMBED_OK
+echo ASDoc embedded: %~2
+goto :EOF
+
+:ASDOC_EMBED_FAIL
+echo ASDoc embed failed: %~2
+goto :EOF

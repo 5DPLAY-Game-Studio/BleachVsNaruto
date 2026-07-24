@@ -18,71 +18,37 @@
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
-:: ASCII-only messages (safe under any console code page).
+:: Purpose
+::   Post-build hook: embed ASDoc into CORE_Shared.swc (no HTML).
+::   Called by build.bat, VSCode tasks, and IDEA File Watcher.
+::
+:: Usage
+::   CORE_Shared\tools\embed_asdoc.bat
+::   CORE_Shared\tools\embed_asdoc.bat "D:\...\CORE_Shared.swc"
+::     Optional arg = SWC path (IDEA File Watcher passes $FilePath$).
+::     When arg is set, only runs if it is CORE_Shared.swc, and skips
+::     when docs/packages.dita is already present (watcher re-entry).
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
+setlocal enabledelayedexpansion
 
-if "%1"=="" (
-	echo 标签为空！
-	goto :EOF
+set "BAT_HOME=%~dp0"
+set "MODE=embed"
+set "NO_PAUSE=1"
+
+:: Optional SWC path from IDEA File Watcher ($FilePath$)
+if not "%~1"=="" (
+	set "SWC_PATH=%~f1"
+	echo "!SWC_PATH!" | findstr /I /C:"CORE_Shared.swc" >nul
+	if errorlevel 1 (
+		:: Not our SWC; ignore silently
+		exit /b 0
+	)
+	:: Prevent File Watcher loop after we rewrite the SWC
+	set "IF_MISSING=1"
 )
 
-goto %1
-
-:NOT_EXIST
-echo 文件不存在：%~2
-goto :EOF
-
-:UNDEFINE
-echo 环境变量 %~2 未定义！
-goto :EOF
-
-:TITLE
-title 构建项目
-goto :EOF
-
-:BUILD_START
-echo 正在构建 SHELL_Dev 调试链...
-goto :EOF
-
-:COMPILE_START
-echo 正在编译： %~2
-goto :EOF
-
-:COMPILE_OK
-echo 编译成功： %~2
-goto :EOF
-
-:COMPILE_FAIL
-echo 编译失败： %~2
-goto :EOF
-
-:SYNC_START
-echo 正在同步素材……
-goto :EOF
-
-:SYNC_FAIL
-echo 素材同步失败！
-goto :EOF
-
-:COPY_FAIL
-echo 复制失败： %~2
-goto :EOF
-
-:BUILD_SUCCESS
-echo SHELL_Dev 构建成功完成！
-goto :EOF
-
-:ASDOC_EMBED_START
-echo 正在将 ASDoc 嵌入 SWC: %~2
-goto :EOF
-
-:ASDOC_EMBED_OK
-echo ASDoc 已嵌入: %~2
-goto :EOF
-
-:ASDOC_EMBED_FAIL
-echo ASDoc 嵌入失败: %~2
-goto :EOF
+call "%BAT_HOME%asdoc.bat"
+exit /b %ERRORLEVEL%

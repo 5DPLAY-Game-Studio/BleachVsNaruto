@@ -74,3 +74,15 @@ goto :EOF
 :BUILD_SUCCESS
 echo SHELL_Dev ‚Ìƒrƒ‹ƒh‚ª³í‚ÉŠ®—¹‚µ‚Ü‚µ‚½I
 goto :EOF
+
+:ASDOC_EMBED_START
+echo SWC ‚É ASDoc ‚ð–„‚ßž‚ñ‚Å‚¢‚Ü‚·: %~2
+goto :EOF
+
+:ASDOC_EMBED_OK
+echo ASDoc ‚ð–„‚ßž‚Ý‚Ü‚µ‚½: %~2
+goto :EOF
+
+:ASDOC_EMBED_FAIL
+echo ASDoc ‚Ì–„‚ßž‚Ý‚ÉŽ¸”s‚µ‚Ü‚µ‚½: %~2
+goto :EOF

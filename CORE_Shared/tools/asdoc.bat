@@ -19,47 +19,54 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
 :: Purpose
-::   Generate ASDoc HTML for CORE_Shared (Chinese UI chrome + source ASDoc body).
+::   Generate ASDoc for CORE_Shared and/or embed ASDoc XML into the
+::   production SWC (docs/) for IDE code hints.
 ::
 :: Usage
 ::   CORE_Shared\tools\asdoc.bat
-::   set OPEN=1 && CORE_Shared\tools\asdoc.bat
-::     OPEN=1 opens index.html in the default browser after success.
+::     MODE=full (default): HTML + embed into SWC.
+::
+::   set MODE=embed&& CORE_Shared\tools\asdoc.bat
+::     XML-only (skip-xsl) + embed. Used by embed_asdoc.bat / post-build.
+::
+::   set OPEN=1&& CORE_Shared\tools\asdoc.bat
+::   set SKIP_SWC=1&& CORE_Shared\tools\asdoc.bat
+::   set SWC_PATH=D:\path\CORE_Shared.swc&& CORE_Shared\tools\asdoc.bat
+::   set IF_MISSING=1&& ...   Skip when SWC already has docs/packages.dita
+::   set NO_PAUSE=1&& ...     No pause on failure (for build.bat / IDE hooks)
 ::
 :: Prerequisites
-::   1. FLEX_HOME points at Flex/AIR SDK root (bin, lib\asdoc.jar, frameworks,
-::      asdoc\templates).
-::   2. A JRE/JDK that can run asdoc.jar. Do NOT use SDK asdoc.bat
-::      (-Xbootclasspath/p breaks on Java 9+).
+::   1. FLEX_HOME -> Flex/AIR SDK (bin, lib\asdoc.jar, frameworks, asdoc\templates)
+::   2. JRE/JDK that can run asdoc.jar (do NOT use SDK asdoc.bat on Java 9+)
+::   3. For embed: production SWC must exist (compc / IDEA / VSCode build first)
 ::
-:: Layout (relative to MODULE_ROOT = CORE_Shared)
-::   src\                      Documented package sources (-doc-sources)
-::   global\                   Top-level functions (CheckVersion, ...)
-::   include\                  Included by sources (not a separate -doc-sources)
-::   tools\asdoc.bat           This entry
-::   tools\asdoc\              Terms script, zh terms, local template cache
-::     build_terms_zh.ps1      Build Chinese ASDoc_terms.xml from SDK English
-::     zh_CN\ASDoc_terms.xml   Generated terms (refreshed each run)
-::     templates\              SDK template copy (gitignore; synced on first run)
-::   out\asdoc\                HTML output
-::
-:: Flow
-::   Check SDK -> build Chinese terms -> sync/overlay templates
-::   -> run asdoc.jar -> optional open browser
+:: Layout (MODULE_ROOT = CORE_Shared)
+::   tools\asdoc.bat / tools\embed_asdoc.bat
+::   tools\asdoc\build_terms_zh.ps1 / inject_docs_swc.ps1 / templates / zh_CN
+::   out\asdoc\         HTML (MODE=full)
+::   out\asdoc_embed\   XML-only temp (MODE=embed)
 ::
 :: Notes
-::   No chcp / no lang packs: keep the caller console code page unchanged.
-::   Console messages are ASCII-only for encoding safety.
+::   ASCII-only console messages. No chcp / lang packs.
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
 setlocal enabledelayedexpansion
 
-:: Directory of this bat (...\CORE_Shared\tools\)
 set BAT_HOME=%~dp0
 
-title CORE_Shared - ASDoc
+if /i "%MODE%"=="" set MODE=full
+if /i not "%MODE%"=="embed" if /i not "%MODE%"=="full" (
+	echo Invalid MODE=%MODE% ^(use full or embed^)
+	goto END
+)
+
+if /i "%MODE%"=="embed" (
+	title CORE_Shared - ASDoc embed
+) else (
+	title CORE_Shared - ASDoc
+)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 1) Flex / AIR SDK
@@ -74,7 +81,6 @@ call :EXIST "%FLEX_HOME%"
 set FLEX_BIN=%FLEX_HOME%\bin
 call :EXIST "%FLEX_BIN%"
 
-:: Invoke jar directly; SDK asdoc.bat breaks on Java 9+
 set ASDOC_JAR=%FLEX_HOME%\lib\asdoc.jar
 call :EXIST "%ASDOC_JAR%"
 
@@ -82,10 +88,9 @@ set FLEX_FRAMEWORKS=%FLEX_HOME%\frameworks
 call :EXIST "%FLEX_FRAMEWORKS%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: 2) Module paths
+:: 2) Module paths and target SWC
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:: MODULE_ROOT = CORE_Shared (parent of tools\)
 set MODULE_ROOT=%BAT_HOME%..
 for %%I in ("%MODULE_ROOT%") do set MODULE_ROOT=%%~fI
 
@@ -94,19 +99,44 @@ set SHARED_GLOBAL=%MODULE_ROOT%\global
 call :EXIST "%SHARED_SRC%"
 call :EXIST "%SHARED_GLOBAL%"
 
-set DOC_OUT=%MODULE_ROOT%\out\asdoc
+set REPO_ROOT=%MODULE_ROOT%\..
+for %%I in ("%REPO_ROOT%") do set REPO_ROOT=%%~fI
+
+if "%SWC_PATH%"=="" (
+	set SWC_PATH=%REPO_ROOT%\out\production\CORE_Shared\CORE_Shared.swc
+)
+
+if /i "%MODE%"=="embed" (
+	set DOC_OUT=%MODULE_ROOT%\out\asdoc_embed
+) else (
+	set DOC_OUT=%MODULE_ROOT%\out\asdoc
+)
 if not exist "%DOC_OUT%" mkdir "%DOC_OUT%"
+
+:: File Watcher / re-entry: skip when SWC already has docs
+if /i "%IF_MISSING%"=="1" (
+	if exist "%SWC_PATH%" (
+		powershell -NoProfile -ExecutionPolicy Bypass -File "%MODULE_ROOT%\tools\asdoc\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TestHasDocs >nul 2>&1
+		if not errorlevel 1 (
+			echo ASDoc already embedded in SWC; skip.
+			echo.
+			exit /b 0
+		)
+	)
+)
+
+:: Post-build embed requires SWC; fail fast
+if /i "%MODE%"=="embed" (
+	if not exist "%SWC_PATH%" (
+		echo SWC not found: %SWC_PATH%
+		echo Build CORE_Shared first.
+		goto END
+	)
+)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 3) Chinese UI chrome: terms + local templates
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::
-:: ASDoc has no locale switch. Chrome labels come from ASDoc_terms.xml:
-::   a) build_terms_zh.ps1 writes Chinese terms from SDK English table
-::   b) First run copies SDK asdoc\templates locally (gitignore)
-::   c) Overlay Chinese ASDoc_terms.xml into that templates dir
-::   d) asdoc -templates-path points at the local copy
-::
 
 set PATH=%FLEX_BIN%;%PATH%
 
@@ -130,42 +160,89 @@ if not exist "%ASDOC_TMPL%\asdoc-util.xslt" (
 )
 copy /Y "%ASDOC_ZH_TERMS%" "%ASDOC_TMPL%\ASDoc_terms.xml" >nul
 
-echo Generating CORE_Shared ASDoc...
+if /i "%MODE%"=="embed" (
+	echo Generating CORE_Shared ASDoc XML for SWC...
+) else (
+	echo Generating CORE_Shared ASDoc...
+)
 echo Output: %DOC_OUT%
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 4) Run asdoc.jar
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::
-::   +flexlib                  Flex frameworks root
-::   -templates-path           Local templates with Chinese terms
-::   -compiler.source-path     src + global
-::   -doc-sources              Document src + global APIs
-::   -compiler.external-library-path
-::                             SDK libs only (this module has no SWC deps)
-::   -lenient                  Softer checks on edge cases
-::   -keep-xml=false           Drop intermediate XML
-::
 
-java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
-	+flexlib="%FLEX_FRAMEWORKS%" ^
-	-templates-path "%ASDOC_TMPL%" ^
-	-compiler.source-path "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
-	-doc-sources "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
-	-compiler.external-library-path "%FLEX_FRAMEWORKS%\libs" "%FLEX_FRAMEWORKS%\libs\air" "%FLEX_FRAMEWORKS%\libs\mx" ^
-	-lenient ^
-	-keep-xml=false ^
-	-main-title "CORE_Shared API" ^
-	-window-title "CORE_Shared ASDoc" ^
-	-footer "5DPLAY Game Studio - CORE_Shared" ^
-	-output "%DOC_OUT%"
+if /i "%MODE%"=="embed" (
+	java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
+		+flexlib="%FLEX_FRAMEWORKS%" ^
+		-templates-path "%ASDOC_TMPL%" ^
+		-compiler.source-path "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
+		-doc-sources "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
+		-compiler.external-library-path "%FLEX_FRAMEWORKS%\libs" "%FLEX_FRAMEWORKS%\libs\air" "%FLEX_FRAMEWORKS%\libs\mx" ^
+		-lenient ^
+		-keep-xml=true ^
+		-skip-xsl=true ^
+		-main-title "CORE_Shared API" ^
+		-window-title "CORE_Shared ASDoc" ^
+		-footer "5DPLAY Game Studio - CORE_Shared" ^
+		-output "%DOC_OUT%"
+) else (
+	java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
+		+flexlib="%FLEX_FRAMEWORKS%" ^
+		-templates-path "%ASDOC_TMPL%" ^
+		-compiler.source-path "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
+		-doc-sources "%SHARED_SRC%" "%SHARED_GLOBAL%" ^
+		-compiler.external-library-path "%FLEX_FRAMEWORKS%\libs" "%FLEX_FRAMEWORKS%\libs\air" "%FLEX_FRAMEWORKS%\libs\mx" ^
+		-lenient ^
+		-keep-xml=true ^
+		-main-title "CORE_Shared API" ^
+		-window-title "CORE_Shared ASDoc" ^
+		-footer "5DPLAY Game Studio - CORE_Shared" ^
+		-output "%DOC_OUT%"
+)
 
 if errorlevel 1 (
 	echo ASDoc generation failed.
 	goto END
 )
 
-echo ASDoc generated: %DOC_OUT%\index.html
+if /i "%MODE%"=="full" (
+	echo ASDoc generated: %DOC_OUT%\index.html
+) else (
+	echo ASDoc XML generated: %DOC_OUT%\tempdita
+)
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 5) Embed tempdita into SWC docs/
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+set TEMPDITA=%DOC_OUT%\tempdita
+
+if /i "%SKIP_SWC%"=="1" (
+	echo [WARN] SKIP_SWC=1: SWC docs embedding skipped.
+	goto AFTER_SWC
+)
+
+if not exist "%TEMPDITA%" (
+	echo tempdita missing; cannot embed into SWC.
+	goto END
+)
+
+if not exist "%SWC_PATH%" (
+	echo [WARN] SWC not found: %SWC_PATH%
+	echo [WARN] Build CORE_Shared first, then re-run to embed docs.
+	if /i "%MODE%"=="embed" goto END
+	goto AFTER_SWC
+)
+
+echo Embedding ASDoc into SWC: %SWC_PATH%
+powershell -NoProfile -ExecutionPolicy Bypass -File "%MODULE_ROOT%\tools\asdoc\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TempDitaDir "%TEMPDITA%"
+if errorlevel 1 (
+	echo Failed to embed ASDoc into SWC.
+	goto END
+)
+echo ASDoc embedded into SWC docs/
+
+:AFTER_SWC
 
 if /i "%OPEN%"=="1" (
 	if exist "%DOC_OUT%\index.html" start "" "%DOC_OUT%\index.html"
@@ -177,7 +254,7 @@ exit /b 0
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
-pause >nul
+if /i not "%NO_PAUSE%"=="1" pause >nul
 exit /b 1
 
 :EXIST
