@@ -39,7 +39,7 @@ public class DebugUtil {
         if (map[d]) {
             (
                     map[d] as DebugSprite
-            ).destory();
+            ).destroy();
         }
 
         if (!d.parent && !container) {

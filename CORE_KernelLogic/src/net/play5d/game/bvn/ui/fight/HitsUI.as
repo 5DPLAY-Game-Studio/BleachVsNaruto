@@ -38,7 +38,7 @@ public class HitsUI {
     private var _isShow:Boolean;
     private var _orgPos:Point;
 
-    public function destory():void {
+    public function destroy():void {
         if (_txtmc) {
             try {
                 _mc.ct.removeChild(_txtmc);

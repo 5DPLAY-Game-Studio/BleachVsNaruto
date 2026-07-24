@@ -56,7 +56,7 @@ public class CoinUI {
     private var _ui:MovieClip;
     private var _moneyTxt:Text;
 
-    public function destory():void {
+    public function destroy():void {
         GameEvent.removeEventListener(GameEvent.MONEY_UPDATE, update);
     }
 

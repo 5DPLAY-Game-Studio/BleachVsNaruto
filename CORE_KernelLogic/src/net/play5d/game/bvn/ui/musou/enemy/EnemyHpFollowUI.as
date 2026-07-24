@@ -80,7 +80,7 @@ public class EnemyHpFollowUI {
         return _fighter.isAlive;
     }
 
-    public function destory():void {
+    public function destroy():void {
         _fighter = null;
         _bar     = null;
         _ui      = null;

@@ -65,7 +65,7 @@ public class BtnUtils {
 
     }
 
-    public static function destoryBtn(btn:DisplayObject):void {
+    public static function destroyBtn(btn:DisplayObject):void {
         if (!btn) {
             return;
         }

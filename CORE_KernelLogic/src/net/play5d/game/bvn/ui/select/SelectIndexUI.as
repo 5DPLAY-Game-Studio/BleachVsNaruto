@@ -71,13 +71,13 @@ public class SelectIndexUI extends Sprite {
         return _p1Group.isFinish && _p2Group.isFinish;
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_p1Group) {
-            _p1Group.destory();
+            _p1Group.destroy();
             _p1Group = null;
         }
         if (_p2Group) {
-            _p2Group.destory();
+            _p2Group.destroy();
             _p2Group = null;
         }
         onFinish = null;

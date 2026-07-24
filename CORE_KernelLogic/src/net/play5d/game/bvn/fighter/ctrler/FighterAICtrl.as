@@ -69,11 +69,11 @@ public class FighterAICtrl implements IFighterActionCtrl {
 
     }
 
-    public function destory():void {
+    public function destroy():void {
         fighter = null;
         _target = null;
         if (_AIlogic) {
-            _AIlogic.destory();
+            _AIlogic.destroy();
             _AIlogic = null;
         }
 //			_fighter.removeEventListener(FighterEvent.DO_ACTION,onFighterDoAction);

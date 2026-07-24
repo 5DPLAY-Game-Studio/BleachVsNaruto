@@ -105,30 +105,30 @@ public class FightUI implements IGameUI {
         _fightbar.showWin(fighter, wins);
     }
 
-    public function destory():void {
+    public function destroy():void {
         GameEvent.removeEventListener(GameEvent.SCORE_UPDATE, updateScore);
         if (_pauseDialog) {
-            _pauseDialog.destory();
+            _pauseDialog.destroy();
             _pauseDialog = null;
         }
         if (_fightbar) {
-            _fightbar.destory();
+            _fightbar.destroy();
             _fightbar = null;
         }
         if (_qibar1) {
-            _qibar1.destory();
+            _qibar1.destroy();
             _qibar1 = null;
         }
         if (_qibar2) {
-            _qibar2.destory();
+            _qibar2.destroy();
             _qibar2 = null;
         }
         if (_hits1) {
-            _hits1.destory();
+            _hits1.destroy();
             _hits1 = null;
         }
         if (_hits2) {
-            _hits2.destory();
+            _hits2.destroy();
             _hits2 = null;
         }
         if (ui) {
@@ -259,7 +259,7 @@ public class FightUI implements IGameUI {
         function onBtnClick(b:ContinueBtn):void {
             onClick();
 
-            b.destory();
+            b.destroy();
             try {
                 ui.removeChild(b);
             }

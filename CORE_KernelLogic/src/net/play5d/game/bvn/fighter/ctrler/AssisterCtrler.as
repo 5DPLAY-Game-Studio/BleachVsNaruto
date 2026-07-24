@@ -71,9 +71,9 @@ public class AssisterCtrler implements IGameSpriteCntlr {
         return null;
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_effectCtrl) {
-            _effectCtrl.destory();
+            _effectCtrl.destroy();
             _effectCtrl = null;
         }
         if (_cameraCtrler) {
@@ -82,7 +82,7 @@ public class AssisterCtrler implements IGameSpriteCntlr {
         }
 
         if (hitModel) {
-            hitModel.destory();
+            hitModel.destroy();
             hitModel = null;
         }
         _assister = null;

@@ -27,6 +27,6 @@ public interface IInnerSetUI extends IEventDispatcher {
 
     function getUI():DisplayObject;
 
-    function destory():void;
+    function destroy():void;
 }
 }

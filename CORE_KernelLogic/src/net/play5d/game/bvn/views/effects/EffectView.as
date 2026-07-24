@@ -46,7 +46,7 @@ public class EffectView {
     protected var _target:IGameSprite;
     protected var _data:EffectVO;
     private var _onRemoveFuncs:Array;
-    private var _isDestoryed:Boolean;
+    private var _isDestroyed:Boolean;
     private var _bitmapDatas:Vector.<BitmapDataCacheVO>;
     private var _frameLabels:Object;
     private var _orgX:Number = 0;
@@ -97,8 +97,8 @@ public class EffectView {
 
     }
 
-    public function destory():void {
-        _isDestoryed = true;
+    public function destroy():void {
+        _isDestroyed = true;
         if (isActive) {
             removeSelf();
         }
@@ -124,7 +124,7 @@ public class EffectView {
 
     public function renderAnimate():void {
 
-        if (_isDestoryed) {
+        if (_isDestroyed) {
             return;
         }
 

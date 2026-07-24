@@ -41,7 +41,7 @@ public class LANRoomPlayerItem {
         KyoBtnUtils.initBtn(ui.btn_out, outClickHandler);
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (ui.btn_out && ui.btn_out.visible) {
             KyoBtnUtils.disposeBtn(ui.btn_out);
         }

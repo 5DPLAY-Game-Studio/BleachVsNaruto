@@ -93,7 +93,7 @@ public class CreditsStage implements IStage {
      */
     public function destroy(back:Function = null):void {
         if (_btngroup) {
-            _btngroup.destory();
+            _btngroup.destroy();
             _btngroup.removeEventListener(SetBtnEvent.SELECT, selectBtnHandler);
             _btngroup = null;
         }

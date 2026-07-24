@@ -86,16 +86,16 @@ public class FighterHpBar {
         }
     }
 
-    public function destory():void {
+    public function destroy():void {
         _fighter = null;
 
         if (_hpText) {
-            _hpText.destory();
+            _hpText.destroy();
             _hpText = null;
         }
 
         if (_damageText) {
-            _damageText.destory();
+            _damageText.destroy();
             _damageText = null;
         }
     }

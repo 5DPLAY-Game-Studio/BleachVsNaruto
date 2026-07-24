@@ -53,7 +53,7 @@ public class BishaFaceEffectView {
         mc.gotoAndPlay(2);
     }
 
-    public function destory():void {
+    public function destroy():void {
         for each(var i:DisplayObject in _faceObj) {
             if (i is Bitmap) {
                 (

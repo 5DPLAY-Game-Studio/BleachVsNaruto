@@ -28,7 +28,7 @@ public class FighterHitModel {
     private var _hitObj:Object = {};  //攻击定义
     private var _fighter:IGameSprite;
 
-    public function destory():void {
+    public function destroy():void {
         _hitObj  = null;
         _fighter = null;
     }

@@ -157,7 +157,7 @@ public class RootSprite {
         }
         else {
             if (_gameSideBg) {
-                _gameSideBg.destory();
+                _gameSideBg.destroy();
                 _gameSideBg = null;
             }
         }

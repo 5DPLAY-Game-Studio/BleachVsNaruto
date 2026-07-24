@@ -63,7 +63,7 @@ public class GameRunFighterGroup {
 
     private var _fighterMap:Dictionary;
 
-    public function destory():void {
+    public function destroy():void {
         fighter1 = null;
         fighter2 = null;
         fighter3 = null;
@@ -78,11 +78,11 @@ public class GameRunFighterGroup {
         var continueLoser:FighterMain = gameRunData.continueLoser;
 
         if (currentFighter) {
-            currentFighter.destory(continueLoser && currentFighter != continueLoser);
+            currentFighter.destroy(continueLoser && currentFighter != continueLoser);
             currentFighter = null;
         }
         if (currentAssister) {
-            currentAssister.destory(true);
+            currentAssister.destroy(true);
             currentAssister = null;
         }
     }

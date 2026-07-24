@@ -174,7 +174,7 @@ public class GameUI {
 
         if (_ui) {
             if (!(_ui is FightUI)) {
-                _ui.destory();
+                _ui.destroy();
                 _ui = new FightUI();
                 _ui.setVolume(volume);
             }
@@ -192,7 +192,7 @@ public class GameUI {
 
         if (_ui) {
             if (_ui is FightUI == false) {
-                _ui.destory();
+                _ui.destroy();
                 _ui = new FightUI();
                 _ui.setVolume(volume);
             }
@@ -231,9 +231,9 @@ public class GameUI {
         }
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_ui) {
-            _ui.destory();
+            _ui.destroy();
         }
     }
 
@@ -280,7 +280,7 @@ public class GameUI {
 //					try{
 //						(_ui as FightUI).ui.removeChild(_bishaFace.ui);
 //					}catch(e:*){}
-//					_bishaFace.destory();
+//					_bishaFace.destroy();
 //					_bishaFace = null;
 //				});
 //			}

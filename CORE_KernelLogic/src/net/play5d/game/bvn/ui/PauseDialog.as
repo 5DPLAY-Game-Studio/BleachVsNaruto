@@ -50,14 +50,14 @@ public class PauseDialog extends Sprite {
     private var _btnGroup:SetBtnGroup;
     private var _moveList:MoveListSp;
 
-    public function destory():void {
+    public function destroy():void {
         if (_btnGroup) {
             _btnGroup.removeEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
         if (_moveList) {
-            _moveList.destory();
+            _moveList.destroy();
             _moveList = null;
         }
     }

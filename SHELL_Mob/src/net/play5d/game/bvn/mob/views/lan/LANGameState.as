@@ -37,7 +37,7 @@ public class LANGameState implements Istage {
 
     }
 
-    public function destory(back:Function = null):void {
+    public function destroy(back:Function = null):void {
         ScreenPadManager.clearTouchListener();
     }
 

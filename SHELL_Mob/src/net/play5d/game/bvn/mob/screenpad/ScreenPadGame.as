@@ -147,7 +147,7 @@ public class ScreenPadGame extends EventDispatcher {
         return o;
     }
 
-    public function destory():void {
+    public function destroy():void {
 
         isShowing = false;
 

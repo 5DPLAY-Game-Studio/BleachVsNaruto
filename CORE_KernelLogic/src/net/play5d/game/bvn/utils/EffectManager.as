@@ -40,14 +40,14 @@ public class EffectManager {
     private var _defCache:Dictionary                 = new Dictionary();
     private var _shineCache:Vector.<ShineEffectView> = new Vector.<ShineEffectView>();
 
-    public function destory():void {
+    public function destroy():void {
         for each(var i:Vector.<EffectView> in _viewCache) {
             for each(var j:EffectView in i) {
-                j.destory();
+                j.destroy();
             }
         }
         for each(var k:ShineEffectView in _shineCache) {
-            k.destory();
+            k.destroy();
         }
 
         _viewCache  = null;

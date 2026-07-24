@@ -38,10 +38,10 @@ public class LANExitDialog extends Sprite {
     private var _bg:Sprite;
     private var _btnGroup:SetBtnGroup;
 
-    public function destory():void {
+    public function destroy():void {
         if (_btnGroup) {
             _btnGroup.removeEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
     }

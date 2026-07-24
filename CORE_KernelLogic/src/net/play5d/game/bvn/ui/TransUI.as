@@ -37,7 +37,7 @@ public class TransUI {
     private var _fadOutBack:Function;
     private var _rendering:Boolean = true;
 
-    public function destory():void {
+    public function destroy():void {
         GameRender.remove(render);
     }
 

@@ -56,7 +56,7 @@ public class MapMain {
     // 地图颜色变换
     private var _colorTransform:ColorTransform = new ColorTransform();
 
-    public function destory():void {
+    public function destroy():void {
         if (mapMc) {
             try {
                 //mapMc.stopAllMovieClips();

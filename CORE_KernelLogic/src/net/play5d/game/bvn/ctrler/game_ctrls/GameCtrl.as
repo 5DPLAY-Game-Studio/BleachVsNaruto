@@ -141,34 +141,34 @@ public class GameCtrl {
         KeyBoarder.focus();
     }
 
-    public function destory():void {
+    public function destroy():void {
 
         GameRender.remove(render);
         GameLogic.clear();
         GameInputer.clearInput();
 
         if (_fighterEventCtrl) {
-            _fighterEventCtrl.destory();
+            _fighterEventCtrl.destroy();
             _fighterEventCtrl = null;
         }
 
         if (_mainLogicCtrl) {
-            _mainLogicCtrl.destory();
+            _mainLogicCtrl.destroy();
             _mainLogicCtrl = null;
         }
 
         if (_trainingCtrl) {
-            _trainingCtrl.destory();
+            _trainingCtrl.destroy();
             _trainingCtrl = null;
         }
 
         if (_startCtrl) {
-            _startCtrl.destory();
+            _startCtrl.destroy();
             _startCtrl = null;
         }
 
         if (_endCtrl) {
-            _endCtrl.destory();
+            _endCtrl.destroy();
             _endCtrl = null;
         }
 
@@ -177,12 +177,12 @@ public class GameCtrl {
         }
 
         if (_musouCtrl) {
-            _musouCtrl.destory();
+            _musouCtrl.destroy();
             _musouCtrl = null;
         }
 
-        gameRunData.p1FighterGroup.destory();
-        gameRunData.p2FighterGroup.destory();
+        gameRunData.p1FighterGroup.destroy();
+        gameRunData.p2FighterGroup.destroy();
 
         gameRunData.clear();
         GameLoader.dispose();
@@ -250,7 +250,7 @@ public class GameCtrl {
         else {
 //				Debugger.log("GameCtrl.removeGameSprite :: team is null!");
         }
-        sp.destory(dispose);
+        sp.destroy(dispose);
     }
 
     /**
@@ -740,7 +740,7 @@ public class GameCtrl {
             actionEnable    = false;
             var fin:Boolean = _startCtrl.render();
             if (fin) {
-                _startCtrl.destory();
+                _startCtrl.destroy();
                 _startCtrl   = null;
                 actionEnable = true;
                 gameRunData.setAllowLoseHP(true);
@@ -756,7 +756,7 @@ public class GameCtrl {
         if (_endCtrl) {
             var fin2:Boolean = _endCtrl.render();
             if (fin2) {
-                _endCtrl.destory();
+                _endCtrl.destroy();
                 _endCtrl = null;
                 runNext();
             }

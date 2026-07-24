@@ -43,7 +43,7 @@ public class BlackBackView extends Sprite {
     private var isRenderFadOut:Boolean;
     private var _bg:Bitmap;
 
-    public function destory():void {
+    public function destroy():void {
         if (_bg) {
             try {
                 removeChild(_bg);
@@ -120,7 +120,7 @@ public class BlackBackView extends Sprite {
 
     private function removeBishaFace():void {
         if (_bishaFace) {
-            _bishaFace.destory();
+            _bishaFace.destroy();
             _bishaFace = null;
         }
     }

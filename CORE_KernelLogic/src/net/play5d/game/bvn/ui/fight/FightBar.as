@@ -97,7 +97,7 @@ public class FightBar {
         return _ui;
     }
 
-    public function destory():void {
+    public function destroy():void {
         if (_ui) {
             _ui.removeEventListener(Event.COMPLETE, uiPlayComplete);
             _ui.gotoAndStop('destory');
@@ -105,22 +105,22 @@ public class FightBar {
         }
 
         if (_hpBar1) {
-            _hpBar1.destory();
+            _hpBar1.destroy();
             _hpBar1 = null;
         }
 
         if (_hpBar2) {
-            _hpBar2.destory();
+            _hpBar2.destroy();
             _hpBar2 = null;
         }
 
         if (_energyBar1) {
-            _energyBar1.destory();
+            _energyBar1.destroy();
             _energyBar1 = null;
         }
 
         if (_energyBar2) {
-            _energyBar2.destory();
+            _energyBar2.destroy();
             _energyBar2 = null;
         }
 

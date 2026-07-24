@@ -134,7 +134,7 @@ public class MenuStage extends Sprite implements IStage {
             }
             catch (e:Error) {
             }
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
 

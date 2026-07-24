@@ -99,21 +99,21 @@ public class MusouSelectDialog extends BaseDialog {
     private var _dotGroup:DotsGroupUI;
     private var _coinico:Sprite;
 
-    protected override function onDestory():void {
-        super.onDestory();
+    protected override function onDestroy():void {
+        super.onDestroy();
 
         if (_coinUI) {
-            _coinUI.destory();
+            _coinUI.destroy();
             _coinUI = null;
         }
 
         if (_dotGroup) {
-            _dotGroup.destory();
+            _dotGroup.destroy();
             _dotGroup = null;
         }
 
         if (_selectFighterList) {
-            _selectFighterList.destory();
+            _selectFighterList.destroy();
             _selectFighterList = null;
         }
     }

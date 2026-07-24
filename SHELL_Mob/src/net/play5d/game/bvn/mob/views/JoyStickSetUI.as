@@ -67,7 +67,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         return _ui;
     }
 
-    public function destory():void {
+    public function destroy():void {
         GameRender.remove(renderSet);
 
         if (_btnGroup) {
@@ -78,7 +78,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
             catch (e:Error) {
             }
 
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
     }

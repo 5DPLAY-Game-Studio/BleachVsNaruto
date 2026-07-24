@@ -47,12 +47,12 @@ public class ShineEffectView extends Bitmap {
     private var _alpha:int;
     private var _renderGap:int = 0;
     private var _renderFrame:int;
-    private var _isDestoryed:Boolean;
+    private var _isDestroyed:Boolean;
     private var _startTimer:int;
     private var _frameTime:int;
 
-    public function destory():void {
-        _isDestoryed = true;
+    public function destroy():void {
+        _isDestroyed = true;
         if (isActive) {
             removeSelf();
         }
@@ -96,7 +96,7 @@ public class ShineEffectView extends Bitmap {
     }
 
     public function render():void {
-        if (_isDestoryed) {
+        if (_isDestroyed) {
             return;
         }
 

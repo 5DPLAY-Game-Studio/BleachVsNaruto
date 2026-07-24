@@ -74,7 +74,7 @@ public class GameSideBg extends Bitmap {
         shadow.bitmapData.dispose();
     }
 
-    public function destory():void {
+    public function destroy():void {
         try {
             this.parent.removeChild(this);
         }

@@ -58,7 +58,7 @@ public class GameEndCtrl {
         _isRender = true;
     }
 
-    public function destory():void {
+    public function destroy():void {
         _winner = null;
         _loser  = null;
     }

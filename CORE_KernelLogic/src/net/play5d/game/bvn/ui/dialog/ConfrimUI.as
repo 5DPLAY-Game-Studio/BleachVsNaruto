@@ -51,14 +51,14 @@ public class ConfrimUI extends BaseDialog {
 //		public var noBack:Function;
     private var _ui:Sprite;
 
-    override protected function onDestory():void {
-        super.onDestory();
+    override protected function onDestroy():void {
+        super.onDestroy();
 
         if (_old_cnTxt) {
             _old_cnTxt = null;
         }
         if (_cnTxt) {
-            _cnTxt.destory();
+            _cnTxt.destroy();
             _cnTxt = null;
         }
         if (_enTxt) {
@@ -67,12 +67,12 @@ public class ConfrimUI extends BaseDialog {
         }
         if (_btnGroup) {
             _btnGroup.removeEventListener(SetBtnEvent.SELECT, selectHandler);
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
 
-        BtnUtils.destoryBtn(_noBtn);
-        BtnUtils.destoryBtn(_yesBtn);
+        BtnUtils.destroyBtn(_noBtn);
+        BtnUtils.destroyBtn(_yesBtn);
     }
 
     override public function setMsg(en:String = null, cn:String = null):void {

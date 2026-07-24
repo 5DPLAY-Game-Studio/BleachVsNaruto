@@ -49,14 +49,14 @@ public class MusouConfrimUI extends BaseDialog {
 //		protected var _yesBtn:SimpleButton;
     private var _ui:$dialog$MC_confirm;
 
-    protected override function onDestory():void {
-        super.onDestory();
+    protected override function onDestroy():void {
+        super.onDestroy();
         if (_cnTxt) {
-            _cnTxt.destory();
+            _cnTxt.destroy();
             _cnTxt = null;
         }
-        BtnUtils.destoryBtn(_noBtn);
-        BtnUtils.destoryBtn(_yesBtn);
+        BtnUtils.destroyBtn(_noBtn);
+        BtnUtils.destroyBtn(_yesBtn);
     }
 
     override public function setMsg(en:String = null, cn:String = null):void {

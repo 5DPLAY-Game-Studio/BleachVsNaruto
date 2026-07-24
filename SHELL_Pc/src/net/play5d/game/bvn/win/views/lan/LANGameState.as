@@ -89,7 +89,7 @@ public class LANGameState implements IStage {
      */
     public function destroy(back:Function = null):void {
         if (_btnGroup) {
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
     }

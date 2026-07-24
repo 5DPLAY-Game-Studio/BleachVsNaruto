@@ -64,7 +64,7 @@ public class EnemyHpUI {
         return _fighter.isAlive;
     }
 
-    public function destory():void {
+    public function destroy():void {
 
     }
 

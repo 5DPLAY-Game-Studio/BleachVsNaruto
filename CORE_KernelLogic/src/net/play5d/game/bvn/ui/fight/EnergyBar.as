@@ -47,7 +47,7 @@ public class EnergyBar {
         return _ui;
     }
 
-    public function destory():void {
+    public function destroy():void {
         _fighter = null;
     }
 

@@ -48,7 +48,7 @@ public class FighterEffectCtrl {
     private var _isShadowIng:Boolean;
     private var _isGlowIng:Boolean;
 
-    public function destory():void {
+    public function destroy():void {
         _target        = null;
         _targetDisplay = null;
         _faceObj       = null;

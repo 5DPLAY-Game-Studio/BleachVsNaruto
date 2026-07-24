@@ -96,7 +96,7 @@ public class SettingStage implements IStage {
             _btnGroup.visible = false;
         }
 
-        destoryInnerSetUI();
+        destroyInnerSetUI();
 
         _innerSetUI = innerUI;
 
@@ -132,10 +132,10 @@ public class SettingStage implements IStage {
             }
             _btnGroup.removeEventListener(SetBtnEvent.SELECT, onBtnSelect);
             _btnGroup.removeEventListener(SetBtnEvent.OPTION_CHANGE, onOptionChange);
-            _btnGroup.destory();
+            _btnGroup.destroy();
             _btnGroup = null;
         }
-        destoryInnerSetUI();
+        destroyInnerSetUI();
     }
 
     private function initBackBtn():void {
@@ -165,7 +165,7 @@ public class SettingStage implements IStage {
         goInnerSetPage(setBtnUI);
     }
 
-    private function destoryInnerSetUI():void {
+    private function destroyInnerSetUI():void {
         if (_innerSetUI) {
             try {
                 _ui.removeChild(_innerSetUI.getUI());
@@ -174,7 +174,7 @@ public class SettingStage implements IStage {
             }
             _innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET, innerSetHandler);
             _innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
-            _innerSetUI.destory();
+            _innerSetUI.destroy();
             _innerSetUI = null;
         }
 

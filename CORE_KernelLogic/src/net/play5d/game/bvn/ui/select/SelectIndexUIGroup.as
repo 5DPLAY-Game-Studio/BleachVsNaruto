@@ -101,7 +101,7 @@ public class SelectIndexUIGroup extends Sprite {
         updateOrder();
     }
 
-    public function destory():void {
+    public function destroy():void {
         removeArrow();
 
         if (_fighters) {
@@ -109,13 +109,13 @@ public class SelectIndexUIGroup extends Sprite {
                 i.removeEventListener(MouseEvent.MOUSE_OVER, selectFighterMouseHandler);
                 i.removeEventListener(MouseEvent.CLICK, selectFighterMouseHandler);
                 i.removeEventListener(TouchEvent.TOUCH_TAP, selectFighterTouchHandler);
-                i.destory();
+                i.destroy();
             }
             _fighters = null;
         }
 
         if (_fuzhu) {
-            _fuzhu.destory();
+            _fuzhu.destroy();
             _fuzhu = null;
         }
 

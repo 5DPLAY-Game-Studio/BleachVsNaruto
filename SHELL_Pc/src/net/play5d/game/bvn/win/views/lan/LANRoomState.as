@@ -171,7 +171,7 @@ public class LANRoomState implements IStage {
             }
             catch (e:Error) {
             }
-            item.destory();
+            item.destroy();
         }
 
         delete _playerMap[id];

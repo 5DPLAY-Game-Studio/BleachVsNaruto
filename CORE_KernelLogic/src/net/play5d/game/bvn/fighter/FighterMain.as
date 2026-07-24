@@ -122,13 +122,13 @@ public class FighterMain extends BaseGameSprite {
         }
     }
 
-    public override function destory(dispose:Boolean = true):void {
+    public override function destroy(dispose:Boolean = true):void {
         if (!dispose) {
             return;
         }
 
         if (_fighterCtrl) {
-            _fighterCtrl.destory();
+            _fighterCtrl.destroy();
             _fighterCtrl = null;
         }
         if (_mainMc) {
@@ -136,7 +136,7 @@ public class FighterMain extends BaseGameSprite {
             _mainMc.gotoAndStop(1);
         }
         if (_buffCtrler) {
-            _buffCtrler.destory();
+            _buffCtrler.destroy();
             _buffCtrler = null;
         }
 
@@ -152,13 +152,13 @@ public class FighterMain extends BaseGameSprite {
         _currentTarget = null;
         _currentHurts  = null;
 
-        super.destory(dispose);
+        super.destroy(dispose);
     }
 
     public override function renderAnimate():void {
         super.renderAnimate();
 
-        if (_destoryed) {
+        if (_destroyed) {
             return;
         }
 
@@ -199,7 +199,7 @@ public class FighterMain extends BaseGameSprite {
     public override function render():void {
         super.render();
 
-        if (_destoryed) {
+        if (_destroyed) {
             return;
         }
 

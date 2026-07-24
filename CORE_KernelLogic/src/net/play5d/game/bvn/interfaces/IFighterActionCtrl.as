@@ -24,7 +24,7 @@ public interface IFighterActionCtrl {
 
     function renderAnimate():void;
 
-    function destory():void;
+    function destroy():void;
 
     function enabled():Boolean;
 

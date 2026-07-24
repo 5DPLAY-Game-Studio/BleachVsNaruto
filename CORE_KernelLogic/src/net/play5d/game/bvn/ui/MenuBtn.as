@@ -164,7 +164,7 @@ public class MenuBtn extends EventDispatcher {
         }
 
         if (_cnTxt) {
-            _cnTxt.destory();
+            _cnTxt.destroy();
             _cnTxt = null;
         }
 

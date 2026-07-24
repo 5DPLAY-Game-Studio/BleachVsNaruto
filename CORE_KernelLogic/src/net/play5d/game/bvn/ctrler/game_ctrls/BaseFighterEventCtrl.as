@@ -53,7 +53,7 @@ public class BaseFighterEventCtrl {
         return null;
     }
 
-    public function destory():void {
+    public function destroy():void {
         FighterEventDispatcher.removeAllListeners();
     }
 

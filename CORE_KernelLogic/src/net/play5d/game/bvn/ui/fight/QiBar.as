@@ -61,7 +61,7 @@ public class QiBar {
     private var _isRenderAnimate:Boolean;
     private var _faceBp:Bitmap;
 
-    public function destory():void {
+    public function destroy():void {
         if (_ui) {
             _ui.removeEventListener(Event.COMPLETE, uiPlayComplete);
             _ui.gotoAndStop('destory');
