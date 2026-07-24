@@ -110,3 +110,15 @@ goto :EOF
 :EMBED_OK
 echo ASDoc embedded into SWC docs/
 goto :EOF
+
+:SWC_NOT_READY
+echo SWC not ready for ASDoc embed: %~2
+goto :EOF
+
+:EMBED_LIBS_START
+echo Embedding ASDoc into library SWCs...
+goto :EOF
+
+:EMBED_LIBS_OK
+echo ASDoc embedded into library SWCs.
+goto :EOF

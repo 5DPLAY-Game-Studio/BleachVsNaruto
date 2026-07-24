@@ -19,6 +19,8 @@
 #   powershell ... -File inject_docs_swc.ps1 -SwcPath path\to\Library.swc -TestHasDocs
 #
 # Notes
+#   Canonical copy: tools/script/ps/ (monorepo). LIB_KyoLib keeps a fallback
+#   copy under tools/asdoc/ for standalone submodule builds.
 #   This file MUST stay ASCII-only (encoding safety), same as build_terms_zh.ps1.
 # =============================================================================
 

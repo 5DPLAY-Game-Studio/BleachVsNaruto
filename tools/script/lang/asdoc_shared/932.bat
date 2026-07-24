@@ -110,3 +110,15 @@ goto :EOF
 :EMBED_OK
 echo ASDoc を SWC docs/ に埋め込みました
 goto :EOF
+
+:SWC_NOT_READY
+echo ASDoc 埋め込みの準備ができていません: %~2
+goto :EOF
+
+:EMBED_LIBS_START
+echo ライブラリ SWC に ASDoc を埋め込んでいます...
+goto :EOF
+
+:EMBED_LIBS_OK
+echo ライブラリ SWC への ASDoc 埋め込みが完了しました。
+goto :EOF

@@ -19,15 +19,13 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
 :: 用途
-::   构建后钩子：将 ASDoc 嵌入 CORE_Shared.swc（不生成可浏览 HTML）。
-::   由 build.bat、VSCode tasks、embed_asdoc_libs.bat 调用。
+::   IDEA After Make：依次将 ASDoc 嵌入 LIB_KyoLib.swc 与 CORE_Shared.swc。
 ::
 :: 用法
-::   tools\script\embed_asdoc_shared.bat
-::   tools\script\embed_asdoc_shared.bat "D:\...\CORE_Shared.swc"
+::   tools\script\embed_asdoc_libs.bat
 ::
 :: 前置条件
-::   - 同 asdoc_shared.bat（FLEX_HOME、已编译的 CORE_Shared.swc）
+::   - 同各模块 embed 钩子；须先 Make / 编译产出 SWC
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -36,29 +34,24 @@ setlocal enabledelayedexpansion
 
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-:: 复用 asdoc_shared 文案（含 :SWC_NOT_READY）
 call "%FUNC_COMMON%" INIT_LANG "asdoc_shared"
-
-set "MODE=embed"
-set "NO_PAUSE=1"
 
 set "REPO_ROOT=%BAT_HOME%..\.."
 for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 
-if "%SWC_PATH%"=="" (
-	set "SWC_PATH=%REPO_ROOT%\out\production\CORE_Shared\CORE_Shared.swc"
-)
+call "%FUNC_COMMON%" ECHO_LANG :EMBED_LIBS_START ""
 
-if not "%~1"=="" (
-	set "SWC_PATH=%~f1"
-)
-
-:: IDEA Make 后可能短暂占用 SWC
-powershell -NoProfile -ExecutionPolicy Bypass -File "%BAT_HOME%ps\wait_swc_ready.ps1" -SwcPath "!SWC_PATH!" -TimeoutSec 45
+call "%REPO_ROOT%\LIB_KyoLib\tools\embed_asdoc.bat"
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :SWC_NOT_READY "!SWC_PATH!"
+	call "%FUNC_COMMON%" ECHO_LANG :EMBED_FAIL "LIB_KyoLib"
 	exit /b 1
 )
 
-call "%BAT_HOME%asdoc_shared.bat"
-exit /b %ERRORLEVEL%
+call "%BAT_HOME%embed_asdoc_shared.bat"
+if errorlevel 1 (
+	call "%FUNC_COMMON%" ECHO_LANG :EMBED_FAIL "CORE_Shared"
+	exit /b 1
+)
+
+call "%FUNC_COMMON%" ECHO_LANG :EMBED_LIBS_OK ""
+exit /b 0

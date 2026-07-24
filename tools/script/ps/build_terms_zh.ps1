@@ -3,8 +3,8 @@
 #
 # Purpose
 #   Read the Flex SDK English ASDoc_terms.xml, replace chrome labels using the
-#   maps below, and write tools/script/asdoc/zh_CN/ASDoc_terms.xml for
-#   asdoc_shared.bat to overlay into the local templates copy.
+#   maps below, and write ASDoc_terms.xml under -OutDir for asdoc bats to
+#   overlay into their local templates copy.
 #
 # Why
 #   ASDoc has no built-in Chinese locale. UI chrome ("All Classes", "Properties",
@@ -12,15 +12,15 @@
 #   source ASDoc comments; this script only translates the shell labels.
 #
 # Usage
-#   Normally invoked by tools/script/asdoc_shared.bat. Standalone:
-#     powershell -NoProfile -ExecutionPolicy Bypass -File tools/script/asdoc/build_terms_zh.ps1
+#   Invoked by asdoc_shared.bat / LIB_KyoLib tools\asdoc.bat:
+#     powershell ... -File tools/script/ps/build_terms_zh.ps1 -OutDir path\to\zh_CN
 #   Requires FLEX_HOME (SDK must contain asdoc\templates\ASDoc_terms.xml).
 #
 # How to add translations
 #   1) Open zh_CN/untranslated_candidates.txt (refreshed at end of each run)
 #   2) Prefer $keyMap (by Key); use $valMap when many Keys share one English value
 #   3) Put Chinese as \uXXXX escapes only -- never raw non-ASCII in THIS file
-#   4) Re-run asdoc_shared.bat (re-runs this script and regenerates HTML)
+#   4) Re-run asdoc_shared.bat / asdoc.bat (re-runs this script and regenerates)
 #
 # Encoding (critical)
 #   This file MUST stay ASCII-only (comments and code). Editors/consoles that
@@ -32,13 +32,23 @@
 #   zh_CN/untranslated_candidates.txt  Remaining English-looking rows (Key\tValue)
 # =============================================================================
 
+param(
+    # Directory that receives ASDoc_terms.xml (and untranslated_candidates.txt).
+    # Callers pass module-specific zh_CN (Shared: tools/script/asdoc/zh_CN,
+    # KyoLib: LIB_KyoLib/tools/asdoc/zh_CN). Empty = legacy next to this script.
+    [string] $OutDir = ''
+)
+
 $ErrorActionPreference = 'Stop'
 $flexHome = $env:FLEX_HOME
 if (-not $flexHome) { throw 'FLEX_HOME is not set' }
 
-# Source = SDK English template; output dir = zh_CN next to this script
+# Source = SDK English template; output = -OutDir (or zh_CN beside this script)
 $src = Join-Path $flexHome 'asdoc\templates\ASDoc_terms.xml'
-$outDir = Join-Path $PSScriptRoot 'zh_CN'
+if (-not $OutDir) {
+    $OutDir = Join-Path $PSScriptRoot 'zh_CN'
+}
+$outDir = $OutDir
 New-Item -ItemType Directory -Force -Path $outDir | Out-Null
 
 # Expand \uXXXX escapes to chars; leave ordinary ASCII unchanged

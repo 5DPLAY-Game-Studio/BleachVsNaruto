@@ -33,9 +33,10 @@
 ::   [Module]/flex-config.xml
 ::   tools\script\conf\sdk-external.xml - 库 SWC 将 Flex/AIR/MX 标为 external
 ::
-:: 编译顺序：
-::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_Components
-::   -> CORE_KernelLogic -> CORE_Utils -> sync.bat -> SHELL_Dev
+:: 编译顺序（SHELL_Dev 最小链）：
+::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_KernelLogic
+::   -> CORE_Utils -> sync.bat -> SHELL_Dev
+:: CORE_Components 一并编译（供独立组件消费；SHELL_* 不依赖）
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -96,7 +97,7 @@ set "SHARED_DIR=%REPO_ROOT%\shared"
 set "SYNC_BAT=%BAT_HOME%sync.bat"
 set "FLEX_CFG=flex-config.xml"
 
-:: 库模块编译顺序（与 VSCode task / HOW2BUILD 一致）
+:: 库模块编译顺序（含 CORE_Components；VSCode SHELL_Dev 链可跳过 Components）
 set "LIB_MODULES=LIB_Other LIB_KyoLib CORE_Shared CORE_Components CORE_KernelLogic CORE_Utils"
 
 :: SHELL_Dev 源文件与同步产物路径
@@ -220,18 +221,12 @@ if errorlevel 1 (
 call "%FUNC_COMMON%" ECHO_LANG :COMPILE_OK "%~1"
 
 :: LIB_KyoLib / CORE_Shared: embed ASDoc into SWC for IDE code hints
-if /i "%~1"=="LIB_KyoLib" (
+set "EMBED_BAT="
+if /i "%~1"=="LIB_KyoLib" set "EMBED_BAT=%REPO_ROOT%\LIB_KyoLib\tools\embed_asdoc.bat"
+if /i "%~1"=="CORE_Shared" set "EMBED_BAT=%BAT_HOME%embed_asdoc_shared.bat"
+if defined EMBED_BAT (
 	call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_START "%~1"
-	call "%REPO_ROOT%\LIB_KyoLib\tools\embed_asdoc.bat"
-	if errorlevel 1 (
-		call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_FAIL "%~1"
-		exit /b 1
-	)
-	call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_OK "%~1"
-)
-if /i "%~1"=="CORE_Shared" (
-	call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_START "%~1"
-	call "%BAT_HOME%embed_asdoc_shared.bat"
+	call "!EMBED_BAT!"
 	if errorlevel 1 (
 		call "%FUNC_COMMON%" ECHO_LANG :ASDOC_EMBED_FAIL "%~1"
 		exit /b 1

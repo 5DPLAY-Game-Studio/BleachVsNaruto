@@ -110,3 +110,15 @@ goto :EOF
 :EMBED_OK
 echo ASDoc이 SWC docs/에 삽입되었습니다
 goto :EOF
+
+:SWC_NOT_READY
+echo ASDoc 삽입을 위해 SWC가 준비되지 않았습니다: %~2
+goto :EOF
+
+:EMBED_LIBS_START
+echo 라이브러리 SWC에 ASDoc 삽입 중...
+goto :EOF
+
+:EMBED_LIBS_OK
+echo 라이브러리 SWC ASDoc 삽입 완료.
+goto :EOF

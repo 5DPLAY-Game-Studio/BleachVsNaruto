@@ -1,9 +1,9 @@
 # =============================================================================
 # wait_swc_ready.ps1
 #
-# Wait until CORE_Shared.swc exists, size is stable, and the file can be opened
-# for write (IDEA Flex compiler often locks it briefly after Make).
-# ASCII-only.
+# Wait until a SWC exists, size is stable, and the file can be opened for write
+# (IDEA Flex compiler often locks it briefly after Make).
+# ASCII-only. Shared by asdoc_shared / LIB_KyoLib embed hooks.
 # =============================================================================
 
 param(

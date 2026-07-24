@@ -25,6 +25,9 @@
     // 任务组
     "tasks": [
         /******************** 构建程序 ********************/
+        // SHELL_Dev 依赖链（与 build.bat 最小链一致，不含 CORE_Components）：
+        //   LIB_Other -> LIB_KyoLib(+embed) -> CORE_Shared(+embed)
+        //   -> CORE_KernelLogic -> CORE_Utils -> SyncAssets -> SHELL_Dev
 
         // SHELL_Dev
         {
@@ -40,7 +43,6 @@
                 "ActionScript: compile debug - CORE_Shared/asconfig.json",
                 "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
                 "ActionScript: compile debug - CORE_Utils/asconfig.json",
-
                 "5DPLAY_TOOLS - SyncAssets"
             ]
         },

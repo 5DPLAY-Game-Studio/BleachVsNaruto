@@ -110,3 +110,15 @@ goto :EOF
 :EMBED_OK
 echo ASDoc 已嵌入 SWC docs/
 goto :EOF
+
+:SWC_NOT_READY
+echo SWC 尚未就绪，无法嵌入 ASDoc：%~2
+goto :EOF
+
+:EMBED_LIBS_START
+echo 正在将 ASDoc 嵌入库 SWC...
+goto :EOF
+
+:EMBED_LIBS_OK
+echo 库 SWC 的 ASDoc 嵌入完成。
+goto :EOF

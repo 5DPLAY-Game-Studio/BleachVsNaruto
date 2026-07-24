@@ -41,15 +41,16 @@
 ::   - embed 模式：须先有生产 SWC（compc / IDEA / VSCode 已编译）
 ::
 :: 布局
-::   tools\script\asdoc_shared.bat / embed_asdoc_shared.bat
-::   tools\script\asdoc\          术语、注入、等待、本地 templates、zh_CN
+::   tools\script\asdoc_shared.bat / embed_asdoc_shared.bat / embed_asdoc_libs.bat
+::   tools\script\ps\              共用 inject / wait / build_terms_zh
+::   tools\script\asdoc\          本地 templates、zh_CN（Shared）
 ::   CORE_Shared\out\asdoc\       HTML（MODE=full）
 ::   CORE_Shared\out\asdoc_embed\ embed 输出（含 tempdita）
 ::
 :: 注意
 ::   勿使用 -skip-xsl=true（会丢掉汇总 XML，导致 SWC docs 过薄）。
-::   IDEA：用 External Tool EmbedSharedAsDoc（非 File Watchers）。
-::   LIB_KyoLib 因可独立运行，其 asdoc 仍留在子模块 tools\ 内。
+::   IDEA：用 External Tool EmbedLibsAsDoc（非 File Watchers）。
+::   LIB_KyoLib 因可独立运行，其 asdoc 仍留在子模块 tools\ 内（优先复用本仓库 ps\）。
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -104,6 +105,7 @@ for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 
 set "MODULE_ROOT=%REPO_ROOT%\CORE_Shared"
 set "ASDOC_HOME=%BAT_HOME%asdoc"
+set "ASDOC_PS=%BAT_HOME%ps"
 
 set "SHARED_SRC=%MODULE_ROOT%\src"
 set "SHARED_GLOBAL=%MODULE_ROOT%\global"
@@ -112,6 +114,8 @@ if errorlevel 1 goto END
 call "%FUNC_COMMON%" EXIST "%SHARED_GLOBAL%"
 if errorlevel 1 goto END
 call "%FUNC_COMMON%" EXIST "%ASDOC_HOME%"
+if errorlevel 1 goto END
+call "%FUNC_COMMON%" EXIST "%ASDOC_PS%"
 if errorlevel 1 goto END
 
 if "%SWC_PATH%"=="" (
@@ -128,7 +132,7 @@ if not exist "%DOC_OUT%" mkdir "%DOC_OUT%"
 :: 可选：SWC 已有 docs 则跳过
 if /i "%IF_MISSING%"=="1" (
 	if exist "%SWC_PATH%" (
-		powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_HOME%\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TestHasDocs >nul 2>&1
+		powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_PS%\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TestHasDocs >nul 2>&1
 		if not errorlevel 1 (
 			call "%FUNC_COMMON%" ECHO_LANG :SKIP_ALREADY_EMBEDDED ""
 			echo.
@@ -155,7 +159,7 @@ set "PATH=%FLEX_BIN%;%PATH%"
 set "ASDOC_TMPL=%ASDOC_HOME%\templates"
 set "ASDOC_ZH_TERMS=%ASDOC_HOME%\zh_CN\ASDoc_terms.xml"
 
-powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_HOME%\build_terms_zh.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_PS%\build_terms_zh.ps1" -OutDir "%ASDOC_HOME%\zh_CN"
 if not exist "%ASDOC_ZH_TERMS%" (
 	call "%FUNC_COMMON%" ECHO_LANG :GEN_FAIL ""
 	goto END
@@ -235,7 +239,7 @@ if not exist "%SWC_PATH%" (
 )
 
 call "%FUNC_COMMON%" ECHO_LANG :EMBED_START "%SWC_PATH%"
-powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_HOME%\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TempDitaDir "%TEMPDITA%"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_PS%\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TempDitaDir "%TEMPDITA%"
 if errorlevel 1 (
 	call "%FUNC_COMMON%" ECHO_LANG :EMBED_FAIL ""
 	goto END
