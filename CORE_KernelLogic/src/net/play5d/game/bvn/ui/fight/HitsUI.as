@@ -53,7 +53,6 @@ public class HitsUI {
         }
 
         _orgPos = null;
-//			_mc.gotoAndStop('destory');
     }
 
     public function show(num:int):void {
