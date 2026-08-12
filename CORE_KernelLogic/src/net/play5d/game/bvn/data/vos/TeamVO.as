@@ -33,9 +33,12 @@ public class TeamVO implements IInstanceVO {
     public var id:int;
     public var name:String;
     public var children:Vector.<IGameSprite> = new Vector.<IGameSprite>();
+    /** @private getAliveChildren 复用缓冲 */
+    private var _aliveBuf:Vector.<IGameSprite> = new Vector.<IGameSprite>();
 
     public function getAliveChildren():Vector.<IGameSprite> {
-        var result:Vector.<IGameSprite> = new Vector.<IGameSprite>();
+        var result:Vector.<IGameSprite> = _aliveBuf;
+        result.length                   = 0;
         for (var i:int; i < children.length; i++) {
             var c:IGameSprite = children[i];
             if (c is BaseGameSprite) {

@@ -107,6 +107,8 @@ public class FighterAttacker extends BaseGameSprite {
 //		public var y:Number = 0;
     private var _startY:Number = 0;
     private var _hitAreaCache:McAreaCacher      = new McAreaCacher('hit');
+    /** @private getCurrentHits 复用缓冲 */
+    private var _hitsBuf:Array = [];
     private var _hitCheckAreaCache:McAreaCacher = new McAreaCacher('hit_check');
     private var _rectCache:Object               = {};
 
@@ -172,7 +174,8 @@ public class FighterAttacker extends BaseGameSprite {
             return null;
         }
 
-        var hits:Array = [];
+        var hits:Array = _hitsBuf;
+        hits.length    = 0;
 
         var i:int;
         var dobj:Object;

@@ -99,6 +99,8 @@ public class FighterMain extends BaseGameSprite {
     private var _currentHurts:Vector.<HitVO>;
     private var _musouPlayerLogic:MusouFighterLogic;
     private var _currentTarget:IGameSprite;
+    /** @private getTargets 复用缓冲 */
+    private var _targetsBuf:Vector.<IGameSprite> = new Vector.<IGameSprite>();
 
     private var _energyAddGap:int;
     private var _explodeHitVO:HitVO;
@@ -420,9 +422,16 @@ public class FighterMain extends BaseGameSprite {
         if (!targetTeams || targetTeams.length < 1) {
             return null;
         }
-        var ts:Vector.<IGameSprite> = new Vector.<IGameSprite>();
+        var ts:Vector.<IGameSprite> = _targetsBuf;
+        ts.length                   = 0;
         for (var i:int; i < targetTeams.length; i++) {
-            ts = ts.concat(targetTeams[i].getAliveChildren());
+            var children:Vector.<IGameSprite> = targetTeams[i].getAliveChildren();
+            if (!children) {
+                continue;
+            }
+            for (var j:int = 0; j < children.length; j++) {
+                ts.push(children[j]);
+            }
         }
         return ts;
     }

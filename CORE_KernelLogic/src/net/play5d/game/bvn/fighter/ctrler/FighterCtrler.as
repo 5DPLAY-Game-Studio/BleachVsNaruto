@@ -54,6 +54,8 @@ public class FighterCtrler implements IGameSpriteCntlr {
 //		private var _initAction:String = "开场";
     private var _rectCache:Object = {};
     private var _doingWankai:Boolean;
+    /** @private getCurrentHits 复用缓冲，避免对撞热路径反复 new Array */
+    private var _hitsBuf:Array = [];
 
     //由FLASH IDE调用，定义血量
     public function get hp():Number {
@@ -512,7 +514,8 @@ public class FighterCtrler implements IGameSpriteCntlr {
             return null;
         }
 
-        var hits:Array = [];
+        var hits:Array = _hitsBuf;
+        hits.length    = 0;
 
         var i:int;
         var dobj:Object;

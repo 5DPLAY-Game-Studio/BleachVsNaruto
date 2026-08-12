@@ -42,6 +42,8 @@ public class FighterAILogicBase {
     private var _hitDownActCache:Object = {};
     //连招优先级
     private var _contOrder:Array = [];
+    /** @private getTargetDistance 复用 */
+    private var _distancePoint:Point = new Point();
 
     public function destroy():void {
         _fighter         = null;
@@ -147,9 +149,9 @@ public class FighterAILogicBase {
     }
 
     protected function getTargetDistance(target:IGameSprite):Point {
-        var xDis:Number = Math.abs(target.x - _fighter.x);
-        var yDis:Number = Math.abs(target.y - _fighter.y);
-        return new Point(xDis, yDis);
+        _distancePoint.x = Math.abs(target.x - _fighter.x);
+        _distancePoint.y = Math.abs(target.y - _fighter.y);
+        return _distancePoint;
     }
 
     protected function mergeRateObject(oldObj:Object, newObj:Object):void {

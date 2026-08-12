@@ -38,6 +38,24 @@ public class GameMainLogicCtrler {
     public function GameMainLogicCtrler() {
     }
     public var renderHit:Boolean = true;
+
+    /** @private 身体重叠粗测距离（像素） */
+    private static const BODY_SKIP_DIST:Number = 200;
+    /** @private 攻击判定粗测距离（像素） */
+    private static const HIT_SKIP_DIST:Number  = 600;
+
+    /** @private */
+    private var _bodyHitRect:Rectangle = new Rectangle();
+    /** @private */
+    private var _hitRectA:Rectangle    = new Rectangle();
+    /** @private */
+    private var _hitRectB:Rectangle    = new Rectangle();
+    /** @private getVec 复用 */
+    private var _vecOut:Object         = {A: 0, B: 0};
+    /** @private */
+    private var _hitResultA:Object     = {hitVO: null, hitRect: null};
+    /** @private */
+    private var _hitResultB:Object     = {hitVO: null, hitRect: null};
     private var _gameState:GameStage;
     private var _leftSide:Number  = 0;
     private var _rightSide:Number = 0;
@@ -144,8 +162,10 @@ public class GameMainLogicCtrler {
                             continue;
                         }
 
-                        checkBodyHit(sp, sp2);
-                        if (_renderAnimate) {
+                        if (!farApart(sp, sp2, BODY_SKIP_DIST)) {
+                            checkBodyHit(sp, sp2);
+                        }
+                        if (_renderAnimate && !farApart(sp, sp2, HIT_SKIP_DIST)) {
                             checkHit(sp, sp2);
                         }
                     }
@@ -166,49 +186,6 @@ public class GameMainLogicCtrler {
 
         if (!renderHit) {
             return;
-        }
-
-        function getVec(vec:Number):Object {
-            var rate:Number = (
-                                      bb.heavy / ba.heavy
-                              ) * 0.5;
-            if (rate > 0.9) {
-                rate = 0.9;
-            }
-            if (rate < 0.1) {
-                rate = 0.1;
-            }
-
-            var vecA:Number = vec * rate;
-            var vecB:Number = vec * (
-                    1 - rate
-            );
-
-            if (A.getIsTouchSide() && B.getIsTouchSide()) {
-                vecA = vec;
-                vecB = vec;
-            }
-            else if (A.getIsTouchSide()) {
-                vecA = 0;
-                vecB = vec;
-            }
-            else if (B.getIsTouchSide()) {
-                vecB = 0;
-                vecA = vec;
-            }
-
-            //				if(A.getIsTouchSide()){
-            //					vecA = 0;
-            //					vecB = vec;
-            //				}
-
-            //				if(B.getIsTouchSide()){
-            //					vecB = 0;
-            //					vecA = vec;
-            //				}
-
-            return {A: vecA, B: vecB};
-
         }
 
         if (!(
@@ -239,9 +216,7 @@ public class GameMainLogicCtrler {
             return;
         }
 
-        var bodyHit:Rectangle = bodyA.intersection(bodyB);
-
-        if (!bodyHit || bodyHit.isEmpty()) {
+        if (!intersectInto(bodyA, bodyB, _bodyHitRect) || _bodyHitRect.isEmpty()) {
             return;
         }
 
@@ -261,8 +236,8 @@ public class GameMainLogicCtrler {
                 )) {
                 return;
             }
-            if (bodyHit.width > 2) {
-                overVec ||= getVec(5 * GameConfig.SPEED_PLUS);
+            if (_bodyHitRect.width > 2) {
+                overVec ||= fillVec(5 * GameConfig.SPEED_PLUS, ba, bb);
                 ba.move(-overVec.A);
                 bb.move(overVec.B);
             }
@@ -275,25 +250,62 @@ public class GameMainLogicCtrler {
                 )) {
                 return;
             }
-            if (bodyHit.width > 2) {
-                overVec ||= getVec(5 * GameConfig.SPEED_PLUS);
+            if (_bodyHitRect.width > 2) {
+                overVec ||= fillVec(5 * GameConfig.SPEED_PLUS, ba, bb);
                 ba.move(overVec.A);
                 bb.move(-overVec.B);
             }
         }
 
         if (vecA != 0) {
-            var vo:Object = getVec(vecA);
+            var vo:Object = fillVec(vecA, ba, bb);
             bb.move(vo.B);
             ba.move(-vo.A);
         }
 
         if (vecB != 0) {
-            var vo2:Object = getVec(vecB);
+            var vo2:Object = fillVec(vecB, ba, bb);
             ba.move(vo2.A);
             bb.move(-vo2.B);
         }
 
+    }
+
+    /**
+     * @private 按双方重量分配位移量，写入复用对象。
+     */
+    private function fillVec(vec:Number, ba:BaseGameSprite, bb:BaseGameSprite):Object {
+        var rate:Number = (
+                                  bb.heavy / ba.heavy
+                          ) * 0.5;
+        if (rate > 0.9) {
+            rate = 0.9;
+        }
+        if (rate < 0.1) {
+            rate = 0.1;
+        }
+
+        var vecA:Number = vec * rate;
+        var vecB:Number = vec * (
+                1 - rate
+        );
+
+        if (ba.getIsTouchSide() && bb.getIsTouchSide()) {
+            vecA = vec;
+            vecB = vec;
+        }
+        else if (ba.getIsTouchSide()) {
+            vecA = 0;
+            vecB = vec;
+        }
+        else if (bb.getIsTouchSide()) {
+            vecB = 0;
+            vecA = vec;
+        }
+
+        _vecOut.A = vecA;
+        _vecOut.B = vecB;
+        return _vecOut;
     }
 
     //运行游戏元件
@@ -370,8 +382,8 @@ public class GameMainLogicCtrler {
 
         }
 
-        var AhitB:Object = getHitObj(hitsA, bodyB);
-        var BhitA:Object = getHitObj(hitsB, bodyA);
+        var AhitB:Object = getHitObj(hitsA, bodyB, _hitResultA, _hitRectA);
+        var BhitA:Object = getHitObj(hitsB, bodyA, _hitResultB, _hitRectB);
 
         if (AhitB) {
             B.beHit(AhitB.hitVO, AhitB.hitRect);
@@ -395,9 +407,13 @@ public class GameMainLogicCtrler {
      * 获取攻击到角色的区域
      * @param hitArray 攻击数组[FighterHitVO]
      * @param body 被攻击的角色区域
+     * @param out 复用结果 { hitVO , hitRect }
+     * @param hitRectOut 复用相交矩形
      * return { hitVO:FighterHitVO , hitRect:Rectangle } 或 null
      */
-    private function getHitObj(hitArray:Array, body:Rectangle):Object {
+    private function getHitObj(
+            hitArray:Array, body:Rectangle, out:Object, hitRectOut:Rectangle
+    ):Object {
         if (!body) {
             return null;
         }
@@ -406,7 +422,6 @@ public class GameMainLogicCtrler {
         }
 
         var i:int;
-        var hitRect:Rectangle;
         var hitLen:int = hitArray.length;
         var hitvo:HitVO;
         var hitArea:Rectangle;
@@ -426,13 +441,43 @@ public class GameMainLogicCtrler {
                 _gameState.drawGameRect(hitArea);
             }
 
-            hitRect = hitArea.intersection(body);
-            if (hitRect && !hitRect.isEmpty()) {
-                return {hitVO: hitvo, hitRect: hitRect};
-            }  //返回{hitVO , hitRect}
+            if (intersectInto(hitArea, body, hitRectOut) && !hitRectOut.isEmpty()) {
+                out.hitVO   = hitvo;
+                out.hitRect = hitRectOut;
+                return out;
+            }
         }
 
         return null;
+    }
+
+    /**
+     * @private 粗测：双方锚点距离是否超出阈值，超出则可跳过细测。
+     */
+    private static function farApart(A:IGameSprite, B:IGameSprite, maxDist:Number):Boolean {
+        var dx:Number = A.x - B.x;
+        if (dx > maxDist || dx < -maxDist) {
+            return true;
+        }
+        var dy:Number = A.y - B.y;
+        return dy > maxDist || dy < -maxDist;
+    }
+
+    /**
+     * @private 将 a∩b 写入 out，避免 Rectangle.intersection 分配。
+     * @return 有交集时为 <code>true</code>。
+     */
+    private static function intersectInto(a:Rectangle, b:Rectangle, out:Rectangle):Boolean {
+        var x:Number = a.x > b.x ? a.x : b.x;
+        var y:Number = a.y > b.y ? a.y : b.y;
+        var r:Number = a.right < b.right ? a.right : b.right;
+        var bot:Number = a.bottom < b.bottom ? a.bottom : b.bottom;
+        if (r <= x || bot <= y) {
+            out.setTo(0, 0, 0, 0);
+            return false;
+        }
+        out.setTo(x, y, r - x, bot - y);
+        return true;
     }
 
 }

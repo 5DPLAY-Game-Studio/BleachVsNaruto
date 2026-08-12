@@ -63,6 +63,12 @@ public class MapLayer extends Sprite {
     private var _smoothing:Boolean;
     // 当前显示对象
     private var _currentShow:DisplayObject;
+    /** @private 光学遮挡降频计数 */
+    private var _opticalFrame:int;
+    /** @private renderOptical 复用边界矩形 */
+    private var _opticalRect:Rectangle = new Rectangle();
+    /** @private 光学检测降频间隔（逻辑帧） */
+    private static const OPTICAL_GAP:int = 2;
 
     /**
      * 获取地图显示对象
@@ -139,17 +145,32 @@ public class MapLayer extends Sprite {
             return;
         }
 
-        var r:Rectangle;
+        if (++_opticalFrame < OPTICAL_GAP) {
+            return;
+        }
+        _opticalFrame = 0;
+
+        if (!gameSps || gameSps.length < 1) {
+            for (var c:int = 0; c < spLength; c++) {
+                var cd:DisplayObject = sp.getChildAt(c);
+                if (cd is MovieClip) {
+                    cd.alpha = 1;
+                }
+            }
+            return;
+        }
+
+        var r:Rectangle = _opticalRect;
         var d:DisplayObject;
+        var bds:Rectangle;
         for (var i:int = 0; i < spLength; i++) {
             d = sp.getChildAt(i);
             if (!(d is MovieClip)) {
                 continue;
             }
 
-            r = d.getBounds(sp);
-            r.x += sp.x + this.x;
-            r.y += sp.y + this.y;
+            bds = d.getBounds(sp);
+            r.setTo(bds.x + sp.x + this.x, bds.y + sp.y + this.y, bds.width, bds.height);
 
             // 如果相交，设置半透明
             d.alpha = checkHitGameSprite(r, gameSps) ? 0.5 : 1;

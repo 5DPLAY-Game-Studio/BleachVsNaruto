@@ -63,6 +63,8 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     protected var _isTouchSide:Boolean = false;
     protected var _isActive:Boolean = false;
     protected var _area:Rectangle;
+    /** @private getArea 复用世界坐标矩形 */
+    private var _areaWorld:Rectangle = new Rectangle();
     protected var _destroyed:Boolean;
     private var _frameFuncs:Array        = []; //在N帧后调用，临时保存的FUNCTION数组
     private var _frameAnimateFuncs:Array = []; //在N帧后调用，临时保存的FUNCTION数组
@@ -441,12 +443,8 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
             return null;
         }
 
-        var newRect:Rectangle = _area.clone();
-
-        newRect.x += _x;
-        newRect.y += _y;
-
-        return newRect;
+        _areaWorld.setTo(_area.x + _x, _area.y + _y, _area.width, _area.height);
+        return _areaWorld;
     }
 
     /**
