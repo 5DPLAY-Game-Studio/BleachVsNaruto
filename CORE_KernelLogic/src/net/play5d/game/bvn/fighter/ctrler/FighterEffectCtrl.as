@@ -47,6 +47,15 @@ public class FighterEffectCtrl {
     private var _isShadowIng:Boolean;
     private var _isGlowIng:Boolean;
 
+    /** @private 发光扩展偏移（白 / 黄共用） */
+    private static const GLOW_OFFSET:Point = new Point(20, 20);
+    /** @private */
+    private static const GLOW_WHITE:GlowFilter =
+            new GlowFilter(0xffffff, 1, 20, 20, 2, 1, false, true);
+    /** @private */
+    private static const GLOW_YELLOW:GlowFilter =
+            new GlowFilter(0xffff00, 1, 20, 20, 2, 1, false, true);
+
     public function destroy():void {
         _target        = null;
         _targetDisplay = null;
@@ -226,10 +235,8 @@ public class FighterEffectCtrl {
     public function startGlow(color:uint = 0xffffff):void {
         _isGlowIng = true;
 
-        var offset:Point      = new Point(20, 20);
-        var strength:Number   = 2;
-        var filter:GlowFilter = new GlowFilter(color, 1, offset.x, offset.y, strength, 1, false, true);
-        EffectCtrl.I.startFilter(_target, filter, offset);
+        var filter:GlowFilter = color == 0xffff00 ? GLOW_YELLOW : GLOW_WHITE;
+        EffectCtrl.I.startFilter(_target, filter, GLOW_OFFSET);
     }
 
     /**

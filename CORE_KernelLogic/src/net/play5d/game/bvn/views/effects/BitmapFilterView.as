@@ -31,6 +31,7 @@ import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.utils.DisplayFrameBitmapCache;
+import net.play5d.kyo.utils.BitmapDataPool;
 
 /**
  * 角色发光等持续滤镜的位图覆盖层。
@@ -237,6 +238,9 @@ public class BitmapFilterView implements IGameSprite {
         _bitmap.bitmapData = bd;
         _cacheKey          = key;
         _bdCached          = cache.isFilterCached(key, bd);
+        if (_bdCached) {
+            cache.retainFilter(key);
+        }
 
         _targetBounds = _targetDisplay.getBounds(_targetDisplay);
     }
@@ -258,15 +262,17 @@ public class BitmapFilterView implements IGameSprite {
         if (!_bitmap || !_bitmap.bitmapData) {
             return;
         }
-        if (!_bdCached) {
-            try {
-                _bitmap.bitmapData.dispose();
+        if (_bdCached) {
+            if (_cacheKey) {
+                DisplayFrameBitmapCache.I.releaseFilter(_cacheKey);
             }
-            catch (e:Error) {
-            }
+        }
+        else {
+            BitmapDataPool.I.release(_bitmap.bitmapData);
         }
         _bitmap.bitmapData = null;
         _bdCached          = false;
+        _cacheKey          = null;
     }
 
 }

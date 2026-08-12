@@ -29,6 +29,7 @@ import net.play5d.game.bvn.data.vos.BitmapDataCacheVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.utils.DisplayFrameBitmapCache;
+import net.play5d.kyo.utils.BitmapDataPool;
 
 /**
  * 残影效果视图。
@@ -67,12 +68,14 @@ public class ShadowEffectView {
     public var stopShadow:Boolean;
     public var onRemove:Function;
     private var _bps:Vector.<Bitmap> = new Vector.<Bitmap>();
-    /** @private Bitmap -&gt; 位图是否由帧缓存持有 */
+    /** @private Bitmap -&gt; 缓存键（String）或 false（未入缓存） */
     private var _bpCached:Dictionary = new Dictionary();
     private var _alphaLoss:Number    = 0.1;
     private var _alphaStart:Number   = 0.8;
     private var _addBpGap:int        = 1;
     private var _addBpFrame:int      = 0;
+    /** @private 复用颜色变换，避免采样时反复分配 */
+    private var _colorTransform:ColorTransform = new ColorTransform();
 
     /**
      * 销毁残影并释放显示对象。
@@ -125,10 +128,10 @@ public class ShadowEffectView {
     private function addShadowBp():void {
         var ct:ColorTransform;
         if (r != 0 || g != 0 || b != 0) {
-            ct             = new ColorTransform();
-            ct.redOffset   = r;
-            ct.greenOffset = g;
-            ct.blueOffset  = b;
+            _colorTransform.redOffset   = r;
+            _colorTransform.greenOffset = g;
+            _colorTransform.blueOffset  = b;
+            ct                          = _colorTransform;
         }
 
         var cache:DisplayFrameBitmapCache = DisplayFrameBitmapCache.I;
@@ -147,7 +150,13 @@ public class ShadowEffectView {
         bp.scaleY         = target.scaleY;
         container.addChildAt(bp, 0);
         _bps.push(bp);
-        _bpCached[bp] = cache.isShadowCached(key, vo);
+        if (cache.isShadowCached(key, vo)) {
+            cache.retainShadow(key);
+            _bpCached[bp] = key;
+        }
+        else {
+            _bpCached[bp] = false;
+        }
     }
 
     private function buildCacheKey():String {
@@ -184,15 +193,14 @@ public class ShadowEffectView {
         if (!bp) {
             return;
         }
-        var cached:Boolean     = _bpCached && _bpCached[bp];
-        var bd:BitmapData      = bp.bitmapData;
+        var cacheKey:*    = _bpCached ? _bpCached[bp] : null;
+        var bd:BitmapData = bp.bitmapData;
         DisplayFrameBitmapCache.I.releaseBitmap(bp);
-        if (!cached && bd) {
-            try {
-                bd.dispose();
-            }
-            catch (e:Error) {
-            }
+        if (cacheKey is String) {
+            DisplayFrameBitmapCache.I.releaseShadow(cacheKey as String);
+        }
+        else if (bd) {
+            BitmapDataPool.I.release(bd);
         }
         if (_bpCached) {
             delete _bpCached[bp];

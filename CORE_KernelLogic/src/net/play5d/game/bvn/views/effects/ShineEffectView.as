@@ -55,18 +55,27 @@ public class ShineEffectView extends Bitmap {
         if (isActive) {
             removeSelf();
         }
+        if (bitmapData) {
+            bitmapData.dispose();
+            bitmapData = null;
+        }
     }
 
     public function init(color:uint = 0xffffff, alpha:Number = 0.2):void {
-
-        if (this.bitmapData) {
-            this.bitmapData.dispose();
-            this.bitmapData = null;
+        var w:int = int(GameConfig.GAME_SIZE.x / 10);
+        var h:int = int(GameConfig.GAME_SIZE.y / 10);
+        if (!this.bitmapData || this.bitmapData.width != w || this.bitmapData.height != h) {
+            if (this.bitmapData) {
+                this.bitmapData.dispose();
+            }
+            this.bitmapData = new BitmapData(w, h, false, color);
+        }
+        else {
+            this.bitmapData.fillRect(this.bitmapData.rect, color);
         }
 
-        this.bitmapData = new BitmapData(GameConfig.GAME_SIZE.x / 10, GameConfig.GAME_SIZE.y / 10, false, color);
-        this.width      = GameConfig.GAME_SIZE.x;
-        this.height     = GameConfig.GAME_SIZE.y;
+        this.width  = GameConfig.GAME_SIZE.x;
+        this.height = GameConfig.GAME_SIZE.y;
 
 //			this.transform.colorTransform.color = color;
         isActive = true;
@@ -120,11 +129,6 @@ public class ShineEffectView extends Bitmap {
     public function removeSelf():void {
 
         isActive = false;
-
-        if (bitmapData) {
-            bitmapData.dispose();
-            bitmapData = null;
-        }
 
         if (this.parent) {
             try {

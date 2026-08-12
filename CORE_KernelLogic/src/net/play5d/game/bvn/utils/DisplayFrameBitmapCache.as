@@ -37,7 +37,9 @@ import net.play5d.kyo.utils.BitmapDataPool;
  * 角色显示帧位图缓存（残影 / 发光滤镜）。
  *
  * <p>按角色 id、姿态键与效果参数缓存栅格化结果，避免同一姿势反复
- * <code>draw</code> / <code>applyFilter</code>。位图显示对象亦做轻量池化。
+ * <code>draw</code> / <code>applyFilter</code>。位图显示对象亦做轻量池化；
+ * 栅格化缓冲走 <code>BitmapDataPool</code>。缓存满时仅淘汰未被
+ * <code>retainShadow</code> / <code>retainFilter</code> 引用的条目。
  * 战斗结束应调用 <code>clear</code>。</p>
  *
  * @see net.play5d.kyo.utils.BitmapDataPool
@@ -78,9 +80,13 @@ public class DisplayFrameBitmapCache {
     /** @private */
     private var _shadowKeys:Vector.<String> = new Vector.<String>();
     /** @private */
+    private var _shadowRetain:Object        = {};
+    /** @private */
     private var _filterMap:Object           = {};
     /** @private */
     private var _filterKeys:Vector.<String> = new Vector.<String>();
+    /** @private */
+    private var _filterRetain:Object        = {};
     /** @private */
     private var _bitmapPool:Vector.<Bitmap> = new Vector.<Bitmap>();
     /** @private */
@@ -158,13 +164,31 @@ public class DisplayFrameBitmapCache {
      *
      * @param key 缓存键。
      * @param vo 位图与偏移。
-     * @return 已由缓存持有时为 <code>true</code>；已满未写入为 <code>false</code>。
+     * @return 已由缓存持有时为 <code>true</code>；无法腾出空间时为 <code>false</code>。
      */
     public function putShadow(key:String, vo:BitmapDataCacheVO):Boolean {
         if (!key || !vo || !vo.bitmapData) {
             return false;
         }
-        return putLru(_shadowMap, _shadowKeys, key, vo, MAX_SHADOW, true);
+        return putLru(_shadowMap, _shadowKeys, _shadowRetain, key, vo, MAX_SHADOW, true);
+    }
+
+    /**
+     * 增加残影缓存引用（显示中禁止淘汰）。
+     *
+     * @param key 缓存键。
+     */
+    public function retainShadow(key:String):void {
+        retainKey(_shadowRetain, key);
+    }
+
+    /**
+     * 减少残影缓存引用。
+     *
+     * @param key 缓存键。
+     */
+    public function releaseShadow(key:String):void {
+        releaseKey(_shadowRetain, key);
     }
 
     /**
@@ -185,13 +209,31 @@ public class DisplayFrameBitmapCache {
      *
      * @param key 缓存键。
      * @param bd 滤镜后位图。
-     * @return 已由缓存持有时为 <code>true</code>；已满未写入为 <code>false</code>。
+     * @return 已由缓存持有时为 <code>true</code>；无法腾出空间时为 <code>false</code>。
      */
     public function putFilter(key:String, bd:BitmapData):Boolean {
         if (!key || !bd) {
             return false;
         }
-        return putLru(_filterMap, _filterKeys, key, bd, MAX_FILTER, false);
+        return putLru(_filterMap, _filterKeys, _filterRetain, key, bd, MAX_FILTER, false);
+    }
+
+    /**
+     * 增加滤镜缓存引用（显示中禁止淘汰）。
+     *
+     * @param key 缓存键。
+     */
+    public function retainFilter(key:String):void {
+        retainKey(_filterRetain, key);
+    }
+
+    /**
+     * 减少滤镜缓存引用。
+     *
+     * @param key 缓存键。
+     */
+    public function releaseFilter(key:String):void {
+        releaseKey(_filterRetain, key);
     }
 
     /**
@@ -221,7 +263,10 @@ public class DisplayFrameBitmapCache {
             return null;
         }
 
-        var bd:BitmapData = new BitmapData(w, h, true, 0);
+        var bd:BitmapData = BitmapDataPool.I.acquire(w, h, true, 0);
+        if (!bd) {
+            return null;
+        }
         _tmpMatrix.identity();
         _tmpMatrix.tx = -bds.x;
         _tmpMatrix.ty = -bds.y;
@@ -264,7 +309,7 @@ public class DisplayFrameBitmapCache {
     }
 
     /**
-     * 绘制带滤镜的位图；中间缓冲走 <code>BitmapDataPool</code>。
+     * 绘制带滤镜的位图；中间与输出缓冲走 <code>BitmapDataPool</code>。
      *
      * @param target 目标显示对象。
      * @param filter 滤镜。
@@ -315,7 +360,11 @@ public class DisplayFrameBitmapCache {
             return null;
         }
 
-        var dst:BitmapData = new BitmapData(fw, fh, true, 0);
+        var dst:BitmapData = BitmapDataPool.I.acquire(fw, fh, true, 0);
+        if (!dst) {
+            BitmapDataPool.I.release(src);
+            return null;
+        }
         _tmpPoint.setTo(0, 0);
         dst.applyFilter(src, _tmpRect, _tmpPoint, filter);
         BitmapDataPool.I.release(src);
@@ -375,6 +424,8 @@ public class DisplayFrameBitmapCache {
     public function clear():void {
         disposeShadowAll();
         disposeFilterAll();
+        _shadowRetain = {};
+        _filterRetain = {};
         _bitmapPool.length = 0;
         BitmapDataPool.I.clear();
     }
@@ -392,44 +443,85 @@ public class DisplayFrameBitmapCache {
 
     /**
      * @private
-     * 写入缓存。已存在则保留旧条目；已满则拒绝新键（避免淘汰仍被残影引用的位图）。
-     * @return 是否由缓存持有（调用方据此决定销毁时是否 dispose）。
+     * 写入缓存。已存在则保留旧条目；已满则淘汰无引用条目。
+     * @return 是否由缓存持有（调用方据此决定销毁时是否归还池）。
      */
     private function putLru(
-            map:Object, keys:Vector.<String>, key:String, value:Object, max:int, isShadowVO:Boolean
+            map:Object, keys:Vector.<String>, retain:Object, key:String, value:Object, max:int,
+            isShadowVO:Boolean
     ):Boolean {
         if (map[key]) {
             touchKey(keys, key);
             if (value && value != map[key]) {
-                if (isShadowVO) {
-                    var dupVo:BitmapDataCacheVO = value as BitmapDataCacheVO;
-                    if (dupVo && dupVo.bitmapData) {
-                        try {
-                            dupVo.bitmapData.dispose();
-                        }
-                        catch (e:Error) {
-                        }
-                    }
-                }
-                else {
-                    var dupBd:BitmapData = value as BitmapData;
-                    if (dupBd) {
-                        try {
-                            dupBd.dispose();
-                        }
-                        catch (e2:Error) {
-                        }
-                    }
-                }
+                releaseCachedValue(value, isShadowVO);
             }
             return true;
         }
-        if (keys.length >= max) {
-            return false;
+        while (keys.length >= max) {
+            if (!evictOne(map, keys, retain, isShadowVO)) {
+                return false;
+            }
         }
         map[key] = value;
         keys.push(key);
         return true;
+    }
+
+    /** @private */
+    private function evictOne(
+            map:Object, keys:Vector.<String>, retain:Object, isShadowVO:Boolean
+    ):Boolean {
+        for (var i:int = 0; i < keys.length; i++) {
+            var ek:String = keys[i];
+            if (int(retain[ek]) > 0) {
+                continue;
+            }
+            keys.splice(i, 1);
+            var old:Object = map[ek];
+            delete map[ek];
+            releaseCachedValue(old, isShadowVO);
+            return true;
+        }
+        return false;
+    }
+
+    /** @private */
+    private function releaseCachedValue(value:Object, isShadowVO:Boolean):void {
+        if (isShadowVO) {
+            var vo:BitmapDataCacheVO = value as BitmapDataCacheVO;
+            if (vo && vo.bitmapData) {
+                BitmapDataPool.I.release(vo.bitmapData);
+                vo.bitmapData = null;
+            }
+        }
+        else {
+            var bd:BitmapData = value as BitmapData;
+            if (bd) {
+                BitmapDataPool.I.release(bd);
+            }
+        }
+    }
+
+    /** @private */
+    private function retainKey(retain:Object, key:String):void {
+        if (!key) {
+            return;
+        }
+        retain[key] = int(retain[key]) + 1;
+    }
+
+    /** @private */
+    private function releaseKey(retain:Object, key:String):void {
+        if (!key) {
+            return;
+        }
+        var n:int = int(retain[key]) - 1;
+        if (n <= 0) {
+            delete retain[key];
+        }
+        else {
+            retain[key] = n;
+        }
     }
 
     /** @private */
