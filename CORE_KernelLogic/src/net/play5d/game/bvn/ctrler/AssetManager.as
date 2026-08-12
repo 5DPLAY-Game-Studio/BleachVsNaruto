@@ -74,19 +74,44 @@ public class AssetManager {
     }
 
     public function loadBasic(back:Function, progress:Function = null):void {
-
-        var loadStep:int  = 0;
-        var loadCount:int = 4;
+        var loadStep:int     = 0;
+        var loadCount:int    = 4;
+        var reportStep:int   = 0;
         var type:String;
+        var finished:Boolean = false;
 
         function loadProgress(p:Number):void {
+            // 收尾阶段 loadStep 会变为 5；滞后 PROGRESS 不得再上报成 (5/4)
+            if (finished || reportStep < 1 || reportStep > loadCount) {
+                return;
+            }
             if (progress != null) {
-                progress(p, type, loadStep, loadCount);
+                if (p > 1) {
+                    p = 1;
+                }
+                progress(p, type, reportStep, loadCount);
             }
         }
 
         function loadNext():void {
+            if (finished) {
+                return;
+            }
+
             loadStep++;
+
+            if (loadStep > loadCount) {
+                finished   = true;
+                reportStep = 0;
+                initAssets();
+                if (back != null) {
+                    back();
+                }
+
+                return;
+            }
+
+            reportStep = loadStep;
 
             switch (loadStep) {
             case 1:
@@ -109,11 +134,6 @@ public class AssetManager {
                 loadProgress(0);
                 loadBitmaps(loadNext, loadProgress);
                 break;
-            default:
-                initAssets();
-                if (back != null) {
-                    back();
-                }
             }
         }
 

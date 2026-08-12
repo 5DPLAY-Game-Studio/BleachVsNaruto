@@ -113,6 +113,12 @@ public class GameLoadingStage implements IStage {
             trace(message + '::进度超过100%');
             p = 1;
         }
+        if (step > totalStep) {
+            step = totalStep;
+        }
+        if (step < 1) {
+            step = 1;
+        }
         _ui.bar.bar.scaleX = p;
 
         var txt:String = '游戏初始化：正在加载' + message + '资源(' + step + '/' + totalStep + ')';

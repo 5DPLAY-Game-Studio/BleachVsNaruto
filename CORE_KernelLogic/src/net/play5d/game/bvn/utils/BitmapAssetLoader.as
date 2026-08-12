@@ -108,10 +108,12 @@ public class BitmapAssetLoader {
 
     private function loadNext():void {
         if (_urls.length < 1) {
+            _progressBack = null;
             if (_successBack != null) {
                 _successBack();
                 _successBack = null;
             }
+
             return;
         }
         var url:String = _urls.shift();
