@@ -209,7 +209,7 @@ public class EffectCtrl {
         renderSlowDown();
         renderShine();
 
-        _frameEffectCount = new Dictionary();
+        clearFrameEffectCount();
 
         for (var i:int = 0; i < _effects.length; i++) {
             _effects[i].render();
@@ -948,6 +948,15 @@ public class EffectCtrl {
         renderRemoveEnemy();
 
         renderBgBlur();
+    }
+
+    /**
+     * @private 清空本帧特效计数表，复用 Dictionary 避免每帧分配。
+     */
+    private function clearFrameEffectCount():void {
+        for (var k:* in _frameEffectCount) {
+            delete _frameEffectCount[k];
+        }
     }
 
     private function isRenderAnimate():Boolean {
