@@ -139,6 +139,8 @@ public class DockedDebugWindow {
         _window.stage.scaleMode = StageScaleMode.NO_SCALE;
         _window.stage.align     = StageAlign.TOP_LEFT;
         _window.stage.color     = _bgColor;
+        // 独立 stage，需单独关闭焦点黄框（主窗 stageFocusRect 不影响此处）
+        _window.stage.stageFocusRect = false;
         _window.stage.addChild(_root);
 
         _window.width  = _panelWidth;
