@@ -29,6 +29,7 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.HitType;
+import net.play5d.game.bvn.data.fighter.FighterHitFloorType;
 import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.debug.Debugger;
@@ -157,6 +158,10 @@ public class EffectCtrl {
             _blackBack = null;
         }
 
+        _renderBlackBack = false;
+        _blackBackMul    = BLACK_BACK_NORMAL;
+        _blackBackCt     = null;
+
         _effects                  = null;
         _justRenderAnimateTargets = null;
         _justRenderTargets        = null;
@@ -185,6 +190,10 @@ public class EffectCtrl {
 
         _blackBack = new BlackBackView();
 //			_backRootLayer.addChild(_blackBack);
+
+        _renderBlackBack = false;
+        _blackBackMul    = BLACK_BACK_NORMAL;
+        _blackBackCt     = null;
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
 
@@ -693,13 +702,13 @@ public class EffectCtrl {
      */
     public function hitFloorEffect(type:int, x:Number, y:Number):void {
         switch (type) {
-        case 0:
+        case FighterHitFloorType.TAN:
             doEffectById('hit_floor', x, y);
             break;
-        case 1:
+        case FighterHitFloorType.NORMAL:
             doEffectById('hit_floor_low', x, y);
             break;
-        case 2:
+        case FighterHitFloorType.HEAVY:
             doEffectById('hit_floor_heavy', x, y);
             doEffectById('hit_floor_yan', x, y);
             break;
@@ -954,64 +963,81 @@ public class EffectCtrl {
         return true;
     }
 
+    /** @private 是否渲染必杀背景变暗 */
+    private var _renderBlackBack:Boolean;
+    /** @private 当前已应用到地图的 RGB 倍率 */
+    private var _blackBackMul:Number = 1;
+    /** @private 复用的颜色变换，避免每帧 new */
+    private var _blackBackCt:ColorTransform;
 
-    private var _renderBlackBack:Boolean = false; // 是否渲染黑屏背景
-    private var _renderBlackBackOut:Boolean = false; // 是否渲染黑屏结束消失动画
+    /** @private 每帧向目标倍率逼近的步长 */
+    private static const BLACK_BACK_RATE:Number = 0.025;
+    /** @private 必杀中背景变暗目标倍率 */
+    private static const BLACK_BACK_DARK:Number = 0.3;
+    /** @private 正常亮度倍率 */
+    private static const BLACK_BACK_NORMAL:Number = 1;
+
     /**
-     * 渲染必杀黑屏
+     * 渲染必杀时的地图变暗。
+     *
+     * <p>必杀中直接压暗（黑屏遮盖期间淡入无意义）；结束后按步长淡出恢复。</p>
      */
     private function renderBlackBack():void {
-        const rate:Number = 0.025;
-
-        // 获得地图
         var mapLayer:MapMain = _gameStage.getMap();
-        if (!P1 || !P2) {
+        if (!mapLayer) {
             return;
         }
 
-        var p1IsBishaIng:Boolean = FighterActionState.isBishaIng(P1.actionState);
-        var p2IsBishaIng:Boolean = FighterActionState.isBishaIng(P2.actionState);
+        // 任一方在必杀中则维持变暗（兼容仅一方存在的模式）
+        var bishaIng:Boolean
+            = (P1 && FighterActionState.isBishaIng(P1.actionState))
+            || (P2 && FighterActionState.isBishaIng(P2.actionState));
 
-        // 获得当前地图颜色通道
-        var mapCt:ColorTransform = mapLayer.getColorTransform();
-        // 如果结束渲染开始
-        if (!p1IsBishaIng && !p2IsBishaIng) {
-            // 如果当前通道值加上最小变化速率 rate 的数值 > 1
-            // 那么重置颜色通道
-            if (mapCt.redMultiplier + rate > 1) {
-                mapLayer.resetColorTransform();
-
-                _renderBlackBackOut = false;
-                _renderBlackBack = false;
-
-                return;
+        if (bishaIng) {
+            if (_blackBackMul != BLACK_BACK_DARK) {
+                applyBlackBackMul(mapLayer, BLACK_BACK_DARK);
             }
 
-            mapCt.redMultiplier += rate;
-            mapCt.greenMultiplier = mapCt.blueMultiplier = mapCt.redMultiplier;
-            mapLayer.setColorTransform(mapCt);
+            return;
+        }
+
+        // 必杀结束：淡出恢复正常亮度
+        if (_blackBackMul + BLACK_BACK_RATE >= BLACK_BACK_NORMAL) {
+            mapLayer.resetColorTransform();
+            _renderBlackBack = false;
+            _blackBackMul    = BLACK_BACK_NORMAL;
 
             return;
         }
 
-
-        if (mapCt.redMultiplier == 0.3) {
-            return;
-        }
-
-        // 如果没有开始
-        // 将地图背景 RGB 通道值设为 0.5 （半黑）
-        var ct:ColorTransform = new ColorTransform();
-        ct.redMultiplier = ct.greenMultiplier = ct.blueMultiplier = 0.3;
-        mapLayer.setColorTransform(ct);
+        applyBlackBackMul(mapLayer, _blackBackMul + BLACK_BACK_RATE);
     }
 
     /**
-     * 开始渲染必杀黑屏
+     * 将地图 RGB 倍率设为指定值。
+     * @param mapLayer 地图。
+     * @param mul RGB 通道倍率。
+     */
+    private function applyBlackBackMul(mapLayer:MapMain, mul:Number):void {
+        if (!_blackBackCt) {
+            _blackBackCt = new ColorTransform();
+        }
+
+        _blackBackMul = mul;
+        _blackBackCt.redMultiplier = _blackBackCt.greenMultiplier = _blackBackCt.blueMultiplier = mul;
+        mapLayer.setColorTransform(_blackBackCt);
+    }
+
+    /**
+     * 开始渲染必杀背景变暗。
+     *
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.startRenderBlackBack();
+     * </listing>
      */
     public function startRenderBlackBack():void {
         _renderBlackBack = true;
-        _renderBlackBackOut = false;
     }
 
     private function renderFreeze():void {
