@@ -165,8 +165,10 @@ public class SetBtn extends Sprite {
     private function changeOption(index:int, _dispatchEvent:Boolean = true):void {
         _optionIndex = index;
         updateOption();
-        updateLine();
-
+        // 仅悬停展示中才刷新下划线，避免 setOptionByValue 初始化时全部亮起
+        if (_line.visible) {
+            updateLine();
+        }
 
         if (_dispatchEvent) {
             var e:SetBtnEvent = new SetBtnEvent(SetBtnEvent.OPTION_CHANGE);

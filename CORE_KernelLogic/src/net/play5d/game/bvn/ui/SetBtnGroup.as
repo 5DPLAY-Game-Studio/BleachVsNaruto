@@ -156,7 +156,15 @@ public class SetBtnGroup extends Sprite {
 
         var btn:SetBtn = _btns[id];
 
-        if (_arrowIndex >= 0 && _arrowIndex < _btns.length) {
+        // 首次选中时清掉初始化可能残留的下划线；之后只切当前项
+        if (_arrowIndex < 0) {
+            for each (var other:SetBtn in _btns) {
+                if (other != btn) {
+                    other.hoverOut();
+                }
+            }
+        }
+        else if (_arrowIndex < _btns.length) {
             _btns[_arrowIndex].hoverOut();
         }
         btn.hover();
