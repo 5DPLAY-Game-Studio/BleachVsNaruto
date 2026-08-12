@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2025, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.debug {
-import flash.display.DisplayObject;
+import flash.display.Graphics;
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.geom.Rectangle;
@@ -31,38 +31,61 @@ import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.kyo.utils.KyoColor;
 
 /**
- * 调试面
+ * 判定面调试叠加层。
+ *
+ * <p>开启后在游戏图层顶部用单个 <code>Shape</code> 绘制被打面、攻击面与判定面，
+ * 每帧清屏重绘，避免反复创建子显示对象。</p>
+ *
+ * @example
+ * <listing version="3.0">
+ * DebugMain.I.initialize();
+ * DebugMain.I.isRender = true;
+ * </listing>
+ * @see #initialize()
+ * @see #isRender
  */
 public class DebugMain {
-
-    // 实例
-    private static var _instance:DebugMain;
+    /** @private */
+    private static var _i:DebugMain;
 
     /**
-     * 获取实例
+     * 单例。
+     * @return 全局实例。
      */
     public static function get I():DebugMain {
-        _instance ||= new DebugMain();
+        if (!_i) {
+            _i = new DebugMain();
+        }
 
-        return _instance;
+        return _i;
     }
-    // 是否渲染面
-    public var isRender:Boolean        = false;
-    // 是否已初始化过
-    private var _isInitialized:Boolean = false;
-    // 游戏图层
-    private var _gameLayer:Sprite;
 
-    // 所有面元件
-    private var _allMainSp:Sprite;
+    /** @private 面填充透明度 */
+    private static const FILL_ALPHA:Number = 0.33;
 
     /**
-     * 初始化
+     * 是否绘制判定面。
+     * @default false
+     */
+    public var isRender:Boolean = false;
+
+    /** @private 是否已注册渲染回调 */
+    private var _isInitialized:Boolean;
+    /** @private 当前游戏图层 */
+    private var _gameLayer:Sprite;
+    /** @private 叠加绘制层（单 Shape） */
+    private var _overlay:Shape;
+
+    /**
+     * 注册帧后渲染回调（幂等）。
+     * @example
+     * <listing version="3.0">
+     * DebugMain.I.initialize();
+     * </listing>
      */
     public function initialize():void {
         if (_isInitialized) {
@@ -74,122 +97,107 @@ public class DebugMain {
     }
 
     /**
-     * 渲染面
-     * @param display
-     * @param rect
-     */
-    public function renderMain(display:DisplayObject, rect:Rectangle):void {
-        if (!display || !rect) {
-            return;
-        }
-
-        display.x      = rect.x;
-        display.y      = rect.y;
-        display.width  = rect.width;
-        display.height = rect.height;
-
-        _allMainSp.addChild(display);
-    }
-
-    /**
-     * 渲染
+     * 每帧：关闭时卸层；开启时确保叠加层并重绘全部面。
      */
     private function render():void {
-        // 停止渲染面，则清除目前所有的已渲染面
         if (!isRender) {
-            cleanAllMain();
+            if (_overlay) {
+                cleanOverlay();
+            }
+
             return;
         }
 
-        // 游戏场景不存在，返回
         if (!GameCtrl.I.gameState) {
             return;
         }
 
-        _gameLayer = GameCtrl.I.gameState.gameLayer;
-
-        // 角色数据不存在，停止并清除所有的已渲染面
         if (!P1 || !P2) {
-            cleanAllMain();
+            cleanOverlay();
+
             return;
         }
 
-        const ALL_MAIN_SP_NAME:String = 'allMainSp';
-        // 如果游戏图层不存在 所有面 元件，则生成一个
-        if (!_gameLayer.getChildByName(ALL_MAIN_SP_NAME)) {
-            _allMainSp      = new Sprite();
-            _allMainSp.name = ALL_MAIN_SP_NAME;
-            _gameLayer.addChild(_allMainSp);
+        if (!ensureOverlay()) {
+            return;
         }
 
-        // 将 所有面 元件置于游戏图层最顶层
-        _gameLayer.setChildIndex(_gameLayer.getChildByName(ALL_MAIN_SP_NAME), _gameLayer.numChildren - 1);
-        // 清空 所有面 元件里的所有面图形元件
-        _allMainSp.removeChildren();
-
-        // 开始渲染绘制新帧的 所有面
+        _overlay.graphics.clear();
         renderAllMain();
     }
 
     /**
-     * 渲染所有面
+     * 确保叠加层挂在当前游戏图层顶层。
+     * @return 图层可用且叠加层已就绪。
      */
-    private function renderAllMain():void {
-        // 渲染角色的面
-        renderFighterMain(P1);
-        renderFighterMain(P2);
-
-        // 渲染部分精灵面
-        MCUtils.renderGameSpritesCB(callBack);
-
-        /**
-         * 回调
-         * @param sp 当前游戏精灵
-         */
-        function callBack(sp:IGameSprite):void {
-            if (!sp) {
-                return;
-            }
-
-            // 渲染辅助、飞行道具、独立道具的攻击面
-            if (sp is Assister || sp is Bullet || sp is FighterAttacker) {
-                [ArrayElementType('net.play5d.game.bvn.fighter.models.HitVO')]
-                var hitVOs:Array = sp.getCurrentHits();
-                renderHitMain(hitVOs);
-            }
-
-            // 渲染辅助、独立道具的判定面
-            if (sp is Assister || sp is FighterAttacker) {
-                var checker:String;
-                var checkerArea:Rectangle;
-
-                if (sp is Assister) {
-                    checker = (sp as Assister).getCtrler().hitTargetChecker;
-                    if (checker) {
-                        checkerArea = (sp as Assister).getHitCheckRect(checker);
-                    }
-                }
-                if (sp is FighterAttacker) {
-                    checker = (sp as FighterAttacker).getCtrler().hitTargetChecker;
-                    if (checker) {
-                        checkerArea = (sp as FighterAttacker).getHitCheckRect(checker);
-                    }
-                }
-
-                if (checkerArea && !checkerArea.isEmpty()) {
-                    var checkerShape:Shape = MainUtils.getNewShape(KyoColor.YELLOW);
-                    renderMain(checkerShape, checkerArea);
-                }
-            }
-
-
+    private function ensureOverlay():Boolean {
+        var layer:Sprite = GameCtrl.I.gameState.gameLayer;
+        if (!layer) {
+            return false;
         }
 
+        // 场景切换后图层引用失效，需重建挂载
+        if (_gameLayer != layer) {
+            cleanOverlay();
+            _gameLayer = layer;
+        }
+
+        if (!_overlay) {
+            _overlay      = new Shape();
+            _overlay.name = 'debugHitOverlay';
+        }
+
+        if (_overlay.parent != _gameLayer) {
+            _gameLayer.addChild(_overlay);
+        }
+        else if (_gameLayer.getChildIndex(_overlay) != _gameLayer.numChildren - 1) {
+            _gameLayer.setChildIndex(_overlay, _gameLayer.numChildren - 1);
+        }
+
+        return true;
     }
 
     /**
-     * 渲染攻击面
-     * @param hitVOs 攻击值对象数组
+     * 绘制本帧全部判定相关矩形。
+     */
+    private function renderAllMain():void {
+        renderFighterMain(P1);
+        renderFighterMain(P2);
+        MCUtils.renderGameSpritesCB(onGameSprite);
+    }
+
+    /**
+     * 遍历游戏精灵时的绘制回调。
+     * @param sp 当前精灵。
+     */
+    private function onGameSprite(sp:IGameSprite):void {
+        if (!sp) {
+            return;
+        }
+
+        if (sp is Assister || sp is Bullet || sp is FighterAttacker) {
+            renderHitMain(sp.getCurrentHits());
+        }
+
+        if (sp is Assister) {
+            var assist:Assister = sp as Assister;
+            var aChecker:String = assist.getCtrler().hitTargetChecker;
+            if (aChecker) {
+                renderCheckerArea(assist.getHitCheckRect(aChecker));
+            }
+        }
+        else if (sp is FighterAttacker) {
+            var attacker:FighterAttacker = sp as FighterAttacker;
+            var tChecker:String          = attacker.getCtrler().hitTargetChecker;
+            if (tChecker) {
+                renderCheckerArea(attacker.getHitCheckRect(tChecker));
+            }
+        }
+    }
+
+    /**
+     * 绘制攻击面列表。
+     * @param hitVOs 攻击值对象数组。
      */
     private function renderHitMain(hitVOs:Array):void {
         if (!hitVOs || hitVOs.length == 0) {
@@ -199,111 +207,69 @@ public class DebugMain {
         for each (var hitVO:HitVO in hitVOs) {
             var hitArea:Rectangle = hitVO.currentArea;
             if (hitArea && !hitArea.isEmpty()) {
-                var hitShape:Shape = MainUtils.getNewShape(KyoColor.RED);
-                renderMain(hitShape, hitArea);
+                drawArea(KyoColor.RED, hitArea);
             }
         }
     }
 
     /**
-     * 渲染角色所有面
-     *
-     * @param fighter 目标角色
+     * 绘制角色被打面、攻击面与判定面。
+     * @param fighter 目标角色。
      */
     private function renderFighterMain(fighter:FighterMain):void {
         if (!fighter) {
             return;
         }
 
-        // 渲染角色本体被打面
         var bodyArea:Rectangle = fighter.getBodyArea();
         if (bodyArea && !bodyArea.isEmpty()) {
-            var bodyShape:Shape = MainUtils.getNewShape(KyoColor.LIME);
-            renderMain(bodyShape, bodyArea);
+            drawArea(KyoColor.LIME, bodyArea);
         }
 
-        // 渲染角色本体攻击面 + 灵压爆发攻击面
-        [ArrayElementType('net.play5d.game.bvn.fighter.models.HitVO')]
-        var hitVOs:Array = fighter.getCurrentHits();
-        renderHitMain(hitVOs);
+        renderHitMain(fighter.getCurrentHits());
 
-        // 渲染角色本体判定面
         var ctrler:FighterCtrler = fighter.getCtrler();
-        var checker:String     = ctrler.getMcCtrl().getAction().hitTargetChecker;
+        var checker:String       = ctrler.getMcCtrl().getAction().hitTargetChecker;
         if (checker) {
-            var checkerArea:Rectangle = ctrler.getHitCheckRect(checker);
-            if (checkerArea && !checkerArea.isEmpty()) {
-                var checkerShape:Shape = MainUtils.getNewShape(KyoColor.YELLOW);
-                renderMain(checkerShape, checkerArea);
+            renderCheckerArea(ctrler.getHitCheckRect(checker));
+        }
+    }
+
+    /**
+     * 绘制判定面矩形。
+     * @param area 判定区域；空则跳过。
+     */
+    private function renderCheckerArea(area:Rectangle):void {
+        if (area && !area.isEmpty()) {
+            drawArea(KyoColor.YELLOW, area);
+        }
+    }
+
+    /**
+     * 在叠加层上绘制半透明矩形。
+     * @param color 填充色。
+     * @param rect 世界/图层坐标矩形。
+     */
+    private function drawArea(color:uint, rect:Rectangle):void {
+        var g:Graphics = _overlay.graphics;
+        g.beginFill(color, FILL_ALPHA);
+        g.drawRect(rect.x, rect.y, rect.width, rect.height);
+        g.endFill();
+    }
+
+    /**
+     * 从显示列表移除叠加层并清空引用。
+     */
+    private function cleanOverlay():void {
+        if (_overlay) {
+            if (_overlay.parent) {
+                _overlay.parent.removeChild(_overlay);
             }
-        }
-    }
-
-
-    /**
-     * 清理已绘制的所有面
-     */
-    private function cleanAllMain():void {
-        if (!_allMainSp) {
-            return;
+            _overlay.graphics.clear();
+            _overlay = null;
         }
 
-        _allMainSp.removeChildren();
-        _gameLayer.removeChild(_allMainSp);
-        _allMainSp = null;
+        _gameLayer = null;
     }
 }
-}
-
-import flash.display.Shape;
-import flash.filters.BitmapFilterQuality;
-import flash.filters.GlowFilter;
-import flash.text.TextFormat;
-
-/**
- * 面相关实用工具
- */
-class MainUtils {
-
-    // 默认样式
-    public static const DEFAULT_FORMAT:TextFormat = (function ():TextFormat {
-        var format:TextFormat = new TextFormat();
-        format.font           = '微软雅黑';
-        format.color          = 0x000000;
-        format.size           = 6;
-
-        return format;
-    })();
-
-    // 发光滤镜
-    public static const GLOW_FILTER:GlowFilter = (function ():GlowFilter {
-        var filter:GlowFilter = new GlowFilter();
-
-        filter.color   = 0xFFFFFF;
-        filter.alpha   = 1;
-        filter.blurX   = 25;
-        filter.blurY   = 25;
-        filter.quality = BitmapFilterQuality.LOW;
-
-        return filter;
-    })();
-
-    /**
-     * 得到一个新 Shape 图形
-     *
-     * @param color 颜色
-     * @param alpha 透明度
-     *
-     * @return 新 Shape 图形
-     */
-    public static function getNewShape(color:uint, alpha:Number = 0.33):Shape {
-        var shape:Shape = new Shape();
-
-        shape.graphics.beginFill(color, alpha);
-        shape.graphics.drawRect(0, 0, 10, 10);
-        shape.graphics.endFill();
-
-        return shape;
-    }
-
 }
