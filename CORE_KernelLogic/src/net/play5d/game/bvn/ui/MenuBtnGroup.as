@@ -57,6 +57,8 @@ public class MenuBtnGroup extends Sprite {
     private var _btnHeight:Number = 0;
     private var _btns:Array = [];
     private var _showIngChildrenBtn:MenuBtn;
+    /** @private 当前悬停项，避免每次全量遍历 */
+    private var _hoverBtn:MenuBtn;
 
     public function setGap(x:Number, y:Number):void {
         _xadd = x;
@@ -75,7 +77,8 @@ public class MenuBtnGroup extends Sprite {
             b.removeEventListener(MouseEvent.MOUSE_OVER, mouseHandler);
             b.dispose();
         }
-        _btns = null;
+        _btns     = null;
+        _hoverBtn = null;
     }
 
     public function fadIn(duration:Number = 0.5, itemDelay:Number = 0.05):void {
@@ -269,36 +272,30 @@ public class MenuBtnGroup extends Sprite {
     }
 
     private function hoverBtn(btn:MenuBtn, isMoveScroll:Boolean = true):void {
-//			trace('hoverBtn',btn.index);
-        var b:MenuBtn;
-        for (var i:int; i < _btns.length; i++) {
-            b = _btns[i];
-            if (b == btn) {
-                b.hover();
-                _btnIndex = i;
-                if (isMoveScroll) {
-                    moveScroll();
-                }
-            }
-            else {
-                b.normal();
-            }
+        if (_hoverBtn == btn) {
+            return;
         }
+
+        if (_hoverBtn) {
+            _hoverBtn.normal();
+        }
+
+        btn.hover();
+        _hoverBtn = btn;
 
         if (_showIngChildrenBtn) {
             var children:Array = _showIngChildrenBtn.children;
-            for (var j:int; j < children.length; j++) {
-                b = children[j];
-                if (b == btn) {
-                    b.hover();
-                    _btnIndex = j;
-                }
-                else {
-                    b.normal();
-                }
+            var childIndex:int = children.indexOf(btn);
+            if (childIndex != -1) {
+                _btnIndex = childIndex;
+                return;
             }
         }
 
+        _btnIndex = _btns.indexOf(btn);
+        if (isMoveScroll) {
+            moveScroll();
+        }
     }
 
     private function getFucByLabel(label:String):Function {
@@ -450,6 +447,9 @@ public class MenuBtnGroup extends Sprite {
             }
             catch (e:Error) {
             }
+        }
+        if (_hoverBtn && children.indexOf(_hoverBtn) != -1) {
+            _hoverBtn = null;
         }
         _showIngChildrenBtn.closeChild();
         _showIngChildrenBtn = null;

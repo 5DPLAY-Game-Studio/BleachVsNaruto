@@ -2,7 +2,7 @@
 
 何时读：新增/改动**首次交互**可能卡顿的路径（悬停、点击、首次弹窗、首次缓动、首次 SWC 音、首次位图字），或改 `WarmupCtrl` / `SoundCtrl` 预热 API。
 
-源码入口：`CORE_KernelLogic/.../ctrler/WarmupCtrl.as`；音效预热：`SoundCtrl.warmMenuSounds` / `warmCommonSwcSounds` / `warmSwcSound`；语言项：`CountryItem.warmUp`。
+源码入口：`CORE_KernelLogic/.../ctrler/WarmupCtrl.as`；音效预热：`SoundCtrl.warmMenuSounds` / `warmCommonSwcSounds` / `warmSwcSound`；语言项：`CountryItem.warmUp`；菜单：`MenuBtn.warmCommon`；设置线：`SetBtnLine.warmCommon`。
 
 ---
 
@@ -33,7 +33,7 @@
 |------|-----|----------|
 | 早期 | `WarmupCtrl.I.warmEarly()` | TweenLite 引擎；`snd_menu1/2` |
 | 语言项 | `WarmupCtrl.I.warmCountryItems(items)` | `CountryItem.warmUp` |
-| 基础后 | `WarmupCtrl.I.warmBasic()` | 缓动插件 Back/Elastic；常用 SWC 音；`font1`；scale 探针；BGM 播放器；`DialogManager.warmUp`；`BitmapDataPool`；滤镜类 |
+| 基础后 | `WarmupCtrl.I.warmBasic()` | 缓动插件 Back/Elastic；常用 SWC 音；`font1`；`MenuBtn`/`SetBtnLine`；scale 探针；BGM 播放器；`DialogManager.warmUp`；`BitmapDataPool`；滤镜类 |
 
 接线：语言列表建完 → early + countryItems；`AssetManager.initAssets` 末尾 → `warmBasic()`。
 
@@ -50,6 +50,22 @@
 | 首次全屏遮罩 / 对话框底 | `DialogManager.warmUp`（basic） |
 | 首次 `BitmapDataPool.acquire` 常用尺寸 | `warmBitmapDataPool`（basic） |
 | 首次 `GlowFilter` / `DropShadowFilter` 构造 | `warmFilters`（basic） |
+| 菜单底板 MC 首次 `visible` / 光栅化 | `MenuBtn.warmCommon`（basic） |
+| 设置下划线首次 `graphics` + scale | `SetBtnLine.warmCommon`（basic） |
+
+---
+
+## 排查结论（同类项）
+
+| 路径 | 结论 |
+|------|------|
+| `CountryItem` / `LanguageStage` | 已做：scale 展开、光栅化、悬停只切当前项、音效缓存 |
+| `SoundCtrl.playSwcSound` | 已全局 Class→Sound 缓存 + early/common 预热；选图/选人等 `sndSelect` 无需再单点预热 |
+| `MenuBtn` / `MenuBtnGroup` | 已做：`warmCommon` 光栅化底板；`hoverBtn` 只切当前项；fadIn Back 由探针覆盖 |
+| `SetBtn` / `SetBtnLine` / `SetBtnGroup` | 已做：`SetBtnLine.warmCommon`；`setArrowIndex` 只切当前项（本就有同 index 早退） |
+| `SelectMapUI` / `SelectIndexUIGroup` | 仅 `sndSelect`，音效侧已覆盖；无 scale≈0 悬停底板 |
+| `WorldMapPointUI` / 选人缩放 | 较晚界面 + Back 已在 `warmBasic` 探针；不必再为每个 MC 做 `warmUp` |
+| 对战特效 MC / 残影池 | 另阶段；勿塞进启动 `warmBasic` |
 
 ---
 

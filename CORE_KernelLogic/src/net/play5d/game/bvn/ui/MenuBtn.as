@@ -20,6 +20,7 @@ package net.play5d.game.bvn.ui {
 import com.greensock.TweenLite;
 import com.greensock.easing.Elastic;
 
+import flash.display.BitmapData;
 import flash.events.Event;
 import flash.events.EventDispatcher;
 import flash.geom.ColorTransform;
@@ -31,6 +32,71 @@ import net.play5d.kyo.display.BitmapText;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 
 public class MenuBtn extends EventDispatcher {
+
+    /** @private */
+    private static var _commonWarmed:Boolean;
+
+    /**
+     * 预热菜单按钮底板光栅化与悬停 scale 路径，避免首次悬停卡顿。
+     *
+     * <p>幂等；不入显示列表、不发声。须在 <code>loadBasic</code> / <code>font1</code> 之后调用。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * MenuBtn.warmCommon();
+     * </listing>
+     */
+    public static function warmCommon():void {
+        if (_commonWarmed) {
+            return;
+        }
+        _commonWarmed = true;
+
+        try {
+            var btn:MenuBtn = new MenuBtn('WARM', '');
+            var bg:*        = btn.ui.bg;
+            bg.visible      = true;
+            bg.scaleX       = 1;
+            bg.gotoAndStop(1);
+            forceRasterizeDisplay(bg);
+
+            bg.gotoAndStop(2);
+            forceRasterizeDisplay(bg);
+            bg.gotoAndStop(1);
+
+            TweenLite.killTweensOf(bg);
+            bg.scaleX = 0.01;
+            TweenLite.to(bg, 0.01, {scaleX: 1});
+            TweenLite.killTweensOf(bg);
+            bg.scaleX  = 1;
+            bg.visible = false;
+
+            btn.dispose();
+        }
+        catch (e:Error) {
+        }
+    }
+
+    /**
+     * @private 强制光栅化显示对象。
+     */
+    private static function forceRasterizeDisplay(target:*):void {
+        if (!target) {
+            return;
+        }
+        var w:int = Math.ceil(Math.abs(target.width));
+        var h:int = Math.ceil(Math.abs(target.height));
+        if (w < 1 || h < 1) {
+            return;
+        }
+        try {
+            var bd:BitmapData = new BitmapData(w, h, true, 0);
+            bd.draw(target);
+            bd.dispose();
+        }
+        catch (e:Error) {
+        }
+    }
 
     public function MenuBtn(label:String, cn:String = '', func:Function = null) {
         this.cn    = cn;

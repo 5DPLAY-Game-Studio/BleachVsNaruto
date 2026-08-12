@@ -156,19 +156,14 @@ public class SetBtnGroup extends Sprite {
 
         var btn:SetBtn = _btns[id];
 
+        if (_arrowIndex >= 0 && _arrowIndex < _btns.length) {
+            _btns[_arrowIndex].hoverOut();
+        }
+        btn.hover();
+
         _arrowIndex = id;
         _arrow.x    = btn.x - 10;
         _arrow.y    = btn.y + 15;
-
-        _btns.every(function (item:SetBtn, i:int, v:Vector.<SetBtn>):Boolean {
-            if (btn == item) {
-                item.hover();
-            }
-            else {
-                item.hoverOut();
-            }
-            return true;
-        });
 
         if (sound) {
             SoundCtrl.I.sndSelect();

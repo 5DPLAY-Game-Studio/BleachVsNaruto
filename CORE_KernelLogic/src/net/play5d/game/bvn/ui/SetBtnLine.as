@@ -25,6 +25,33 @@ import flash.text.TextFormatAlign;
 
 public class SetBtnLine extends Sprite {
 
+    /** @private */
+    private static var _commonWarmed:Boolean;
+
+    /**
+     * 预热设置项下划线绘制与 scale 展开路径，避免首次悬停卡顿。
+     *
+     * <p>幂等；不入显示列表。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * SetBtnLine.warmCommon();
+     * </listing>
+     */
+    public static function warmCommon():void {
+        if (_commonWarmed) {
+            return;
+        }
+        _commonWarmed = true;
+
+        try {
+            var line:SetBtnLine = new SetBtnLine();
+            line.warmUp();
+        }
+        catch (e:Error) {
+        }
+    }
+
     public function SetBtnLine() {
 
 
@@ -45,6 +72,16 @@ public class SetBtnLine extends Sprite {
     }
     private var _txt:TextField;
     private var _line:Sprite;
+
+    /**
+     * 预热本实例的画线与缓动路径。
+     */
+    public function warmUp():void {
+        show(200, 'WARM');
+        TweenLite.killTweensOf(_line);
+        _line.scaleX = 1;
+        hide();
+    }
 
     public function show(width:Number, text:String):void {
         _line.graphics.clear();
