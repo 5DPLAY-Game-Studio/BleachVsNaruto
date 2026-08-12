@@ -142,6 +142,8 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
 
     private var _destroyed:Boolean;
     private var _currentRect:Rectangle = new Rectangle();
+    /** @private getCurrentHits 复用单元素缓冲 */
+    private var _hitsBuf:Array         = [];
 
     private var _team:TeamVO;
 
@@ -519,7 +521,9 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
         }
 
         _hitVO.currentArea = getCurrentRect(_bulletArea);
-        return [_hitVO];
+        _hitsBuf[0]        = _hitVO;
+        _hitsBuf.length    = 1;
+        return _hitsBuf;
     }
 
     public function getArea():Rectangle {

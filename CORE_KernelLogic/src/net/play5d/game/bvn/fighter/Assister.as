@@ -55,6 +55,8 @@ public class Assister extends BaseGameSprite {
     private var _hitAreaCache:McAreaCacher      = new McAreaCacher('hit');
     private var _hitCheckAreaCache:McAreaCacher = new McAreaCacher('hit_check');
     private var _rectCache:Object               = {};
+    /** @private getCurrentHits 复用缓冲 */
+    private var _hitsBuf:Array                  = [];
     private var _mcOrgPoint:Point;
     private var _owner:IGameSprite;
     private var _isRenderMainAnimate:Boolean    = true;
@@ -145,7 +147,8 @@ public class Assister extends BaseGameSprite {
             return null;
         }
 
-        var hits:Array = [];
+        var hits:Array = _hitsBuf;
+        hits.length    = 0;
 
         var i:int;
         var dobj:Object;
