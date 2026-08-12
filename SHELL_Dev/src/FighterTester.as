@@ -25,9 +25,19 @@ import feathers.style.Theme;
 import feathers.text.TextFormat;
 import feathers.themes.steel.SteelTheme;
 
+import flash.display.NativeWindow;
+import flash.display.NativeWindowDisplayState;
+import flash.display.NativeWindowInitOptions;
+import flash.display.NativeWindowRenderMode;
+import flash.display.NativeWindowSystemChrome;
+import flash.display.NativeWindowType;
 import flash.display.Sprite;
+import flash.display.StageAlign;
+import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.events.NativeWindowBoundsEvent;
+import flash.events.NativeWindowDisplayStateEvent;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
@@ -59,9 +69,20 @@ import net.play5d.kyo.storage.KyoSharedObject;
 
 //	import flash.text.TextFormat;
 
-[SWF(width='1000', height='600', frameRate='30', backgroundColor='#000000')]
+[SWF(width='800', height='600', frameRate='30', backgroundColor='#000000')]
 public class FighterTester extends Sprite {
     private const KEY:String = 'text';
+
+    /** @private 调试面板内容宽 */
+    private static const DEBUG_PANEL_WIDTH:Number = 200;
+    /** @private 调试面板内容高 */
+    private static const DEBUG_PANEL_HEIGHT:Number = 600;
+    /** @private 下拉/输入控件宽 */
+    private static const CONTROL_WIDTH:Number = 182;
+    /** @private 按钮宽 */
+    private static const BUTTON_WIDTH:Number = 175;
+    /** @private 内容区底边（末行按钮 y + height） */
+    private static const CONTENT_BOTTOM:Number = 590;
 
     public function FighterTester() {
         // 忽略旧版角色
@@ -77,6 +98,8 @@ public class FighterTester extends Sprite {
     private var _theme:SteelTheme;
     private var _mainGame:MainGame;
     private var _testUI:Sprite;
+    private var _testContent:Sprite;
+    private var _debugWindow:NativeWindow;
     private var _p1InputId:PopUpListView;
     private var _p2InputId:PopUpListView;
     private var _p1FzInputId:PopUpListView;
@@ -88,6 +111,8 @@ public class FighterTester extends Sprite {
 
     private var _gameSprite:Sprite;
     private var _assetLoader:AssetLoader = new AssetLoader();
+    /** @private 正在执行吸附，避免 MOVE 回调递归 */
+    private var _docking:Boolean;
 
     private function initBackHandler():void {
         buildTestUI();
@@ -98,15 +123,13 @@ public class FighterTester extends Sprite {
     }
 
     private function buildTestUI():void {
-        _testUI   = new Sprite();
-        _testUI.x = 810;
-        _testUI.graphics.beginFill(0x333333, 1);
-        _testUI.graphics.drawRect(-10, 0, 200, 600);
-        _testUI.graphics.endFill();
-        addChild(_testUI);
+        _testUI      = new Sprite();
+        _testContent = new Sprite();
+        _testUI.addChild(_testContent);
 
-        var xx:Number = 0;
+        var xx:Number = (DEBUG_PANEL_WIDTH - CONTROL_WIDTH) * 0.5;
         var yy:Number = 0;
+        var bx:Number = (DEBUG_PANEL_WIDTH - BUTTON_WIDTH) * 0.5;
 
         var fighterData:Array = (
                 function ():Array {
@@ -228,14 +251,14 @@ public class FighterTester extends Sprite {
         yy += 30;
 
         _debugText                  = addLabel(GetLang('dev.txt.fighter_tester.error_message_prompt'), yy, xx);
-        _debugText.width            = 190;
+        _debugText.width            = CONTROL_WIDTH;
         _debugText.height           = 200;
         _debugText.textFormat.color = 0xff0000;
         _debugText.wordWrap         = true;
 
 //			addButton("改变FPS",400,50,100,30,changeFPS);
-        addButton(GetLang('dev.txt.fighter_tester.btn_test'), 560, 3, 175, 30, testGame);
-        addButton('显示判定面', 520, 3, 175, 30, renderMainClickHandler);
+        addButton(GetLang('dev.txt.fighter_tester.btn_test'), 560, bx, BUTTON_WIDTH, 30, testGame);
+        addButton('显示判定面', 520, bx, BUTTON_WIDTH, 30, renderMainClickHandler);
 
         var saveObj:Object = KyoSharedObject.load('fighter_test_config');
         if (saveObj && saveObj.p1) {
@@ -272,6 +295,122 @@ public class FighterTester extends Sprite {
             }
 
         }
+
+        openDebugWindow();
+    }
+
+    /**
+     * 打开吸附于主窗口右侧的调试面板窗口。
+     */
+    private function openDebugWindow():void {
+        var options:NativeWindowInitOptions = new NativeWindowInitOptions();
+        options.type         = NativeWindowType.NORMAL;
+        options.systemChrome = NativeWindowSystemChrome.STANDARD;
+        // 与 app.xml 主窗 renderMode=gpu 一致，否则 NativeWindow 抛 #1508
+        options.renderMode   = NativeWindowRenderMode.GPU;
+        options.transparent  = false;
+        options.resizable    = false;
+        options.maximizable  = false;
+        options.minimizable  = false;
+
+        _debugWindow                 = new NativeWindow(options);
+        _debugWindow.title           = 'Debug';
+        _debugWindow.stage.scaleMode = StageScaleMode.NO_SCALE;
+        _debugWindow.stage.align     = StageAlign.TOP_LEFT;
+        _debugWindow.stage.color     = 0x333333;
+        _debugWindow.stage.addChild(_testUI);
+
+        _debugWindow.width  = DEBUG_PANEL_WIDTH;
+        _debugWindow.height = DEBUG_PANEL_HEIGHT;
+        _debugWindow.activate();
+
+        // 按系统边框修正，使内容区达到面板设计尺寸
+        var chromeW:Number = _debugWindow.width - _debugWindow.stage.stageWidth;
+        var chromeH:Number = _debugWindow.height - _debugWindow.stage.stageHeight;
+        _debugWindow.width  = DEBUG_PANEL_WIDTH + chromeW;
+        _debugWindow.height = DEBUG_PANEL_HEIGHT + chromeH;
+
+        dockDebugWindow();
+        layoutDebugContent();
+
+        var mainWin:NativeWindow = stage.nativeWindow;
+        mainWin.addEventListener(NativeWindowBoundsEvent.MOVE, onMainWindowBoundsChange);
+        mainWin.addEventListener(NativeWindowBoundsEvent.RESIZE, onMainWindowBoundsChange);
+        mainWin.addEventListener(
+                NativeWindowDisplayStateEvent.DISPLAY_STATE_CHANGE,
+                onMainWindowDisplayStateChange
+        );
+        mainWin.addEventListener(Event.CLOSING, onMainWindowClosing);
+        _debugWindow.addEventListener(NativeWindowBoundsEvent.MOVE, onDebugWindowBoundsChange);
+    }
+
+    /**
+     * 将调试窗口吸附到主窗口右侧并对齐高度。
+     */
+    private function dockDebugWindow():void {
+        if (!_debugWindow || _debugWindow.closed || _docking) {
+            return;
+        }
+
+        var mainWin:NativeWindow = stage.nativeWindow;
+        var dockX:Number         = mainWin.x + mainWin.width;
+        var dockY:Number         = mainWin.y;
+
+        _docking = true;
+        _debugWindow.height = mainWin.height;
+        _debugWindow.x      = dockX;
+        _debugWindow.y      = dockY;
+        _docking = false;
+
+        layoutDebugContent();
+    }
+
+    /**
+     * 将调试面板组件在窗口内容区内居中。
+     */
+    private function layoutDebugContent():void {
+        if (!_testUI || !_testContent || !_debugWindow || _debugWindow.closed) {
+            return;
+        }
+
+        var sw:Number = _debugWindow.stage.stageWidth;
+        var sh:Number = _debugWindow.stage.stageHeight;
+
+        _testUI.graphics.clear();
+        _testUI.graphics.beginFill(0x333333, 1);
+        _testUI.graphics.drawRect(0, 0, sw, sh);
+        _testUI.graphics.endFill();
+
+        _testContent.x = (sw - DEBUG_PANEL_WIDTH) * 0.5;
+        _testContent.y = Math.max(0, (sh - CONTENT_BOTTOM) * 0.5);
+    }
+
+    private function onMainWindowBoundsChange(e:NativeWindowBoundsEvent):void {
+        dockDebugWindow();
+    }
+
+    private function onDebugWindowBoundsChange(e:NativeWindowBoundsEvent):void {
+        dockDebugWindow();
+    }
+
+    private function onMainWindowDisplayStateChange(e:NativeWindowDisplayStateEvent):void {
+        if (!_debugWindow || _debugWindow.closed) {
+            return;
+        }
+
+        if (stage.nativeWindow.displayState == NativeWindowDisplayState.MINIMIZED) {
+            _debugWindow.visible = false;
+        }
+        else {
+            _debugWindow.visible = true;
+            dockDebugWindow();
+        }
+    }
+
+    private function onMainWindowClosing(e:Event):void {
+        if (_debugWindow && !_debugWindow.closed) {
+            _debugWindow.close();
+        }
     }
 
     private function addLabel(txt:String, y:Number = 0, x:Number = 0):Label {
@@ -289,7 +428,7 @@ public class FighterTester extends Sprite {
         label.y            = y;
         label.mouseEnabled = false;
 
-        _testUI.addChild(label);
+        _testContent.addChild(label);
         return label;
     }
 
@@ -305,10 +444,10 @@ public class FighterTester extends Sprite {
 
         listView.x      = x;
         listView.y      = y;
-        listView.width  = 182;
+        listView.width  = CONTROL_WIDTH;
         listView.height = 27;
 
-        _testUI.addChild(listView);
+        _testContent.addChild(listView);
         return listView;
     }
 
@@ -326,7 +465,7 @@ public class FighterTester extends Sprite {
             btn.addEventListener(MouseEvent.CLICK, click);
         }
 
-        _testUI.addChild(btn);
+        _testContent.addChild(btn);
         return btn;
     }
 
