@@ -106,6 +106,12 @@ public class GameCamera {
     private var _foffsetX:Number   = 0;
     private var _foffsetY:Number   = 0;
     private var _screenSize:Point;
+    /** @private 上次写入 scrollRect / scale，未变化则跳过赋值 */
+    private var _appliedScrollX:Number     = NaN;
+    private var _appliedScrollY:Number     = NaN;
+    private var _appliedScrollW:Number     = NaN;
+    private var _appliedScrollH:Number     = NaN;
+    private var _appliedStageScale:Number  = NaN;
 
     public function destroy():void {
         stageSize = null;
@@ -263,10 +269,20 @@ public class GameCamera {
     }
 
     private function applySet():void {
-        _stage.scrollRect = _rect;
+        if (_appliedScrollX != _rect.x || _appliedScrollY != _rect.y ||
+            _appliedScrollW != _rect.width || _appliedScrollH != _rect.height) {
+            _appliedScrollX = _rect.x;
+            _appliedScrollY = _rect.y;
+            _appliedScrollW = _rect.width;
+            _appliedScrollH = _rect.height;
+            _stage.scrollRect = _rect;
+        }
 //			_stage.x = -_rect.x;
 //			_stage.y = -_rect.y;
-        _stage.scaleX = _stage.scaleY = _stageScale;
+        if (_appliedStageScale != _stageScale) {
+            _appliedStageScale = _stageScale;
+            _stage.scaleX      = _stage.scaleY = _stageScale;
+        }
     }
 
     /**
