@@ -13,6 +13,7 @@
 | 写/补 ASDoc 与逻辑注释；**共享模块勿跨模块 `@see`** | [`.agents/comment.md`](.agents/comment.md) |
 | `LIB_KyoLib` 首选 API；**`kyo.air.*` 仅 AIR** | [`.agents/kyolib.md`](.agents/kyolib.md) |
 | 单例/命名/类型/复用；**纯静态工具类勿写空构造** | [`.agents/codegen.md`](.agents/codegen.md) |
+| 新增首次交互卡顿源 / 改预热 | [`.agents/warmup.md`](.agents/warmup.md) |
 | 写/改 `tools/script` bat / lang / func | [`.agents/bat_script.md`](.agents/bat_script.md) |
 | 写/改 `tools/jsfl` | [`.agents/jsfl.md`](.agents/jsfl.md) |
 | 在 `.agents/` 新建 AI md | [`.agents/doc_rules.md`](.agents/doc_rules.md) |

@@ -92,16 +92,31 @@ public class DialogManager {
 
     }
 
+    /**
+     * 预创建对话框遮罩，避免首次弹窗时分配卡顿（不加入显示列表）。
+     */
+    public static function warmUp():void {
+        ensureDialogBg();
+    }
+
     private static function addDialogBg():void {
-        if (!_dialogBG) {
-            var bp:BitmapData = new BitmapData(1, 1, false, 0);
-            _dialogBG         = new Sprite();
-            _dialogBG.graphics.beginBitmapFill(bp, null, true, false);
-            _dialogBG.graphics.drawRect(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
-            _dialogBG.graphics.endFill();
-            _dialogBG.alpha = 0.7;
-        }
+        ensureDialogBg();
         MainGame.I.root.addChild(_dialogBG);
+    }
+
+    /**
+     * @private 确保遮罩 Sprite 已创建。
+     */
+    private static function ensureDialogBg():void {
+        if (_dialogBG) {
+            return;
+        }
+        var bp:BitmapData = new BitmapData(1, 1, false, 0);
+        _dialogBG         = new Sprite();
+        _dialogBG.graphics.beginBitmapFill(bp, null, true, false);
+        _dialogBG.graphics.drawRect(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
+        _dialogBG.graphics.endFill();
+        _dialogBG.alpha = 0.7;
     }
 
     private static function fadIn(d:BaseDialog, back:Function = null):void {

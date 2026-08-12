@@ -35,7 +35,7 @@ import net.play5d.kyo.display.bitmap.BitmapFontLoader;
 import net.play5d.kyo.loader.KyoClassLoader;
 import net.play5d.kyo.loader.KyoSoundLoader;
 import net.play5d.kyo.utils.KyoArrayUtils;
-//import net.play5d.utils;
+
 public class AssetManager {
 
     private const _effectSwfPath:String = 'effect.swf';
@@ -346,6 +346,9 @@ public class AssetManager {
             font1.spaceGap = 10;
             font1.offsetY  = -5;
         }
+
+        // 基础资源就绪后统一预热，避免进入菜单 / 对战后首次交互卡顿
+        WarmupCtrl.I.warmBasic();
     }
 
     private function loadGraphics(loadarray:Array, back:Function = null, progress:Function = null):void {

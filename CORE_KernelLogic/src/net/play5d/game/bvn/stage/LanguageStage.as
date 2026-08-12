@@ -26,11 +26,10 @@ import flash.events.MouseEvent;
 import flash.events.TouchEvent;
 import flash.text.Font;
 
-import com.greensock.TweenLite;
-
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ctrler.WarmupCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.LanguageType;
 import net.play5d.game.bvn.ui.language.CountryItem;
@@ -271,23 +270,9 @@ public class LanguageStage implements IStage {
             _insCountries.push(country);
         }
 
-        // 预热选中条与 TweenLite，避免鼠标首次移入时卡顿
-        warmLanguageItems();
-    }
-
-    /**
-     * 预热语言项显示与缓动引擎。
-     */
-    private function warmLanguageItems():void {
-        // 触发 TweenLite 引擎冷启动（与具体目标无关）
-        TweenLite.to(_ui, 0, {alpha: _ui.alpha});
-
-        for each (var country:CountryItem in _insCountries) {
-            country.warmUp();
-        }
-
-        // 预实例化菜单选择音，避免首次悬停时 new Sound 卡顿
-        SoundCtrl.I.warmMenuSelectSound();
+        // 预热选中条与早期引擎 / 音效，避免鼠标首次移入时卡顿
+        WarmupCtrl.I.warmEarly();
+        WarmupCtrl.I.warmCountryItems(_insCountries);
     }
 
     ////////////////////////////////////////////////////////////////////////////////

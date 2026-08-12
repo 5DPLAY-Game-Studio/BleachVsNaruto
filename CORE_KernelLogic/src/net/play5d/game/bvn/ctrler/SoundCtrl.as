@@ -292,11 +292,50 @@ public class SoundCtrl {
     }
 
     /**
-     * 预实例化菜单选择音，避免首次播放时 <code>new Sound</code> 卡顿。
+     * 预实例化菜单选择 / 确认音（语言页早期可用）。
+     */
+    public function warmMenuSounds():void {
+        warmSwcSound(snd_menu1);
+        warmSwcSound(snd_menu2);
+    }
+
+    /**
+     * 预实例化常用 SWC 音效，避免首次 <code>new Sound</code> 卡顿。
+     *
+     * <p>含菜单、胜负 / KO、幽步等。</p>
+     */
+    public function warmCommonSwcSounds():void {
+        warmMenuSounds();
+        warmSwcSound(snd_menu5);
+        warmSwcSound(snd_gameover);
+        warmSwcSound(snd_over_hit);
+        warmSwcSound(snd_ko);
+        warmSwcSound(snd_ko_bs);
+        warmSwcSound(snd_ghost_jump);
+        warmSwcSound(snd_ghost_jump2);
+        warmSwcSound(snd_ghost_dash);
+    }
+
+    /**
+     * @deprecated 请改用 <code>warmMenuSounds</code>。
      */
     public function warmMenuSelectSound():void {
-        if (snd_menu1) {
-            new snd_menu1();
+        warmMenuSounds();
+    }
+
+    /**
+     * 预实例化单个 SWC 声音类（不播放）。
+     *
+     * @param sndCls 声音类链接。
+     */
+    public function warmSwcSound(sndCls:Class):void {
+        if (!sndCls) {
+            return;
+        }
+        try {
+            new sndCls();
+        }
+        catch (e:Error) {
         }
     }
 
