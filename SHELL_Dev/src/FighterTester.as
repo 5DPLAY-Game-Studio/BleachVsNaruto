@@ -25,19 +25,9 @@ import feathers.style.Theme;
 import feathers.text.TextFormat;
 import feathers.themes.steel.SteelTheme;
 
-import flash.display.NativeWindow;
-import flash.display.NativeWindowDisplayState;
-import flash.display.NativeWindowInitOptions;
-import flash.display.NativeWindowRenderMode;
-import flash.display.NativeWindowSystemChrome;
-import flash.display.NativeWindowType;
 import flash.display.Sprite;
-import flash.display.StageAlign;
-import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.events.NativeWindowBoundsEvent;
-import flash.events.NativeWindowDisplayStateEvent;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
@@ -59,6 +49,7 @@ import net.play5d.game.bvn.debug.DebugMain;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.LoadingStage;
+import net.play5d.game.bvn.test.DockedDebugWindow;
 import net.play5d.game.bvn.test.GameInterfaceManager;
 import net.play5d.game.bvn.test.SwfLib;
 import net.play5d.game.bvn.ui.UIUtils;
@@ -99,7 +90,7 @@ public class FighterTester extends Sprite {
     private var _mainGame:MainGame;
     private var _testUI:Sprite;
     private var _testContent:Sprite;
-    private var _debugWindow:NativeWindow;
+    private var _debugWindow:DockedDebugWindow;
     private var _p1InputId:PopUpListView;
     private var _p2InputId:PopUpListView;
     private var _p1FzInputId:PopUpListView;
@@ -111,8 +102,6 @@ public class FighterTester extends Sprite {
 
     private var _gameSprite:Sprite;
     private var _assetLoader:AssetLoader = new AssetLoader();
-    /** @private 正在执行吸附，避免 MOVE 回调递归 */
-    private var _docking:Boolean;
 
     private function initBackHandler():void {
         buildTestUI();
@@ -187,12 +176,12 @@ public class FighterTester extends Sprite {
         _p1FzInputId = addInput(assistantData, yy, xx);
         yy += 30;
 
-        addLabel(GetLang('dev.txt.fighter_tester.p2_fighter_id'), yy);
+        addLabel(GetLang('dev.txt.fighter_tester.p2_fighter_id'), yy, xx);
         yy += 30;
         _p2InputId = addInput(fighterData, yy, xx);
         yy += 30;
 
-        addLabel(GetLang('dev.txt.fighter_tester.p2_assistant_id'), yy);
+        addLabel(GetLang('dev.txt.fighter_tester.p2_assistant_id'), yy, xx);
         yy += 30;
         _p2FzInputId = addInput(assistantData, yy, xx);
         yy += 30;
@@ -296,121 +285,15 @@ public class FighterTester extends Sprite {
 
         }
 
-        openDebugWindow();
-    }
-
-    /**
-     * 打开吸附于主窗口右侧的调试面板窗口。
-     */
-    private function openDebugWindow():void {
-        var options:NativeWindowInitOptions = new NativeWindowInitOptions();
-        options.type         = NativeWindowType.NORMAL;
-        options.systemChrome = NativeWindowSystemChrome.STANDARD;
-        // 与 app.xml 主窗 renderMode=gpu 一致，否则 NativeWindow 抛 #1508
-        options.renderMode   = NativeWindowRenderMode.GPU;
-        options.transparent  = false;
-        options.resizable    = false;
-        options.maximizable  = false;
-        options.minimizable  = false;
-
-        _debugWindow                 = new NativeWindow(options);
-        _debugWindow.title           = 'Debug';
-        _debugWindow.stage.scaleMode = StageScaleMode.NO_SCALE;
-        _debugWindow.stage.align     = StageAlign.TOP_LEFT;
-        _debugWindow.stage.color     = 0x333333;
-        _debugWindow.stage.addChild(_testUI);
-
-        _debugWindow.width  = DEBUG_PANEL_WIDTH;
-        _debugWindow.height = DEBUG_PANEL_HEIGHT;
-        _debugWindow.activate();
-
-        // 按系统边框修正，使内容区达到面板设计尺寸
-        var chromeW:Number = _debugWindow.width - _debugWindow.stage.stageWidth;
-        var chromeH:Number = _debugWindow.height - _debugWindow.stage.stageHeight;
-        _debugWindow.width  = DEBUG_PANEL_WIDTH + chromeW;
-        _debugWindow.height = DEBUG_PANEL_HEIGHT + chromeH;
-
-        dockDebugWindow();
-        layoutDebugContent();
-
-        var mainWin:NativeWindow = stage.nativeWindow;
-        mainWin.addEventListener(NativeWindowBoundsEvent.MOVE, onMainWindowBoundsChange);
-        mainWin.addEventListener(NativeWindowBoundsEvent.RESIZE, onMainWindowBoundsChange);
-        mainWin.addEventListener(
-                NativeWindowDisplayStateEvent.DISPLAY_STATE_CHANGE,
-                onMainWindowDisplayStateChange
+        _debugWindow = new DockedDebugWindow(stage.nativeWindow);
+        _debugWindow.open(
+                _testUI,
+                _testContent,
+                'Debug',
+                DEBUG_PANEL_WIDTH,
+                DEBUG_PANEL_HEIGHT,
+                CONTENT_BOTTOM
         );
-        mainWin.addEventListener(Event.CLOSING, onMainWindowClosing);
-        _debugWindow.addEventListener(NativeWindowBoundsEvent.MOVE, onDebugWindowBoundsChange);
-    }
-
-    /**
-     * 将调试窗口吸附到主窗口右侧并对齐高度。
-     */
-    private function dockDebugWindow():void {
-        if (!_debugWindow || _debugWindow.closed || _docking) {
-            return;
-        }
-
-        var mainWin:NativeWindow = stage.nativeWindow;
-        var dockX:Number         = mainWin.x + mainWin.width;
-        var dockY:Number         = mainWin.y;
-
-        _docking = true;
-        _debugWindow.height = mainWin.height;
-        _debugWindow.x      = dockX;
-        _debugWindow.y      = dockY;
-        _docking = false;
-
-        layoutDebugContent();
-    }
-
-    /**
-     * 将调试面板组件在窗口内容区内居中。
-     */
-    private function layoutDebugContent():void {
-        if (!_testUI || !_testContent || !_debugWindow || _debugWindow.closed) {
-            return;
-        }
-
-        var sw:Number = _debugWindow.stage.stageWidth;
-        var sh:Number = _debugWindow.stage.stageHeight;
-
-        _testUI.graphics.clear();
-        _testUI.graphics.beginFill(0x333333, 1);
-        _testUI.graphics.drawRect(0, 0, sw, sh);
-        _testUI.graphics.endFill();
-
-        _testContent.x = (sw - DEBUG_PANEL_WIDTH) * 0.5;
-        _testContent.y = Math.max(0, (sh - CONTENT_BOTTOM) * 0.5);
-    }
-
-    private function onMainWindowBoundsChange(e:NativeWindowBoundsEvent):void {
-        dockDebugWindow();
-    }
-
-    private function onDebugWindowBoundsChange(e:NativeWindowBoundsEvent):void {
-        dockDebugWindow();
-    }
-
-    private function onMainWindowDisplayStateChange(e:NativeWindowDisplayStateEvent):void {
-        if (!_debugWindow || _debugWindow.closed) {
-            return;
-        }
-
-        if (stage.nativeWindow.displayState == NativeWindowDisplayState.MINIMIZED) {
-            _debugWindow.visible = false;
-        }
-        else {
-            _debugWindow.visible = true;
-            dockDebugWindow();
-        }
-    }
-
-    private function onMainWindowClosing(e:Event):void {
-        if (_debugWindow && !_debugWindow.closed) {
-            _debugWindow.close();
-        }
     }
 
     private function addLabel(txt:String, y:Number = 0, x:Number = 0):Label {
