@@ -120,11 +120,12 @@ public class CountryItem extends Sprite {
         ) {
             _cMc.gotoAndStop(v);
             _txt.gotoAndStop(v);
-
-            return;
+        }
+        else {
+            _cMc.gotoAndStop(1);
         }
 
-        _cMc.gotoAndStop(1);
+        refreshLayout();
     }
 
     // 字体类
@@ -143,6 +144,8 @@ public class CountryItem extends Sprite {
 
     // 是否被选中
     private var _selected:Boolean;
+    /** @private 选中条展开目标宽度（缓存，避免悬停时反复量测） */
+    private var _expandWidth:Number = 0;
 
     /**
      * 是否被选中
@@ -159,9 +162,34 @@ public class CountryItem extends Sprite {
 
         _selected = b;
 
+        if (_expandWidth <= 0) {
+            refreshLayout();
+        }
+
+        TweenLite.killTweensOf(_base);
         TweenLite.to(_base, 0.2, {
-            width: b ? width * WIDTH_COEFFICIENT : 0
+            width: b ? _expandWidth : 0
         });
+    }
+
+    /**
+     * 预热选中条显示对象与缓动，避免首次悬停时卡顿。
+     */
+    public function warmUp():void {
+        if (_expandWidth <= 0) {
+            refreshLayout();
+        }
+
+        var targetW:Number = _expandWidth > 0 ? _expandWidth : 1;
+        _base.width        = targetW;
+        // 强制一次量测 / 光栅化
+        _base.width;
+        _base.height;
+
+        TweenLite.killTweensOf(_base);
+        // 0 时长 tween：触发 TweenLite 对该目标的内部初始化
+        TweenLite.to(_base, 0, {width: _selected ? targetW : 0});
+        _base.width = _selected ? targetW : 0;
     }
 
     /**
@@ -198,6 +226,8 @@ public class CountryItem extends Sprite {
      * 销毁
      */
     public function destroy():void {
+        TweenLite.killTweensOf(_base);
+
         _pMc = null;
         _cMc = null;
 
@@ -210,17 +240,18 @@ public class CountryItem extends Sprite {
         _fontCls = null;
     }
 
-//    public function setProgress(progress:Number = 0):void {
-//        var difference:Number = 1 - progress;
-//
-//        if (difference < 0) {
-//            difference = 0;
-//        }
-//        if (difference > 1) {
-//            difference = 1;
-//        }
-//
-//        _pMc.scaleY = difference;
-//    }
+    /**
+     * @private 按当前 top 尺寸刷新底条高度与展开宽度缓存。
+     */
+    private function refreshLayout():void {
+        var topW:Number = _top.width;
+        var topH:Number = _top.height;
+
+        _expandWidth = topW * WIDTH_COEFFICIENT;
+        _base.height = topH * HEIGHT_COEFFICIENT;
+        _base.x      = topW / 2;
+        _base.y      = topH / 2;
+    }
+
 }
 }

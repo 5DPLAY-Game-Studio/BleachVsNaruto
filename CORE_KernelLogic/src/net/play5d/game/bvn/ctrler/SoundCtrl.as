@@ -291,6 +291,15 @@ public class SoundCtrl {
         playSwcSound(snd_menu1);
     }
 
+    /**
+     * 预实例化菜单选择音，避免首次播放时 <code>new Sound</code> 卡顿。
+     */
+    public function warmMenuSelectSound():void {
+        if (snd_menu1) {
+            new snd_menu1();
+        }
+    }
+
     //确定音效
     public function sndConfrim():void {
         playSwcSound(snd_menu2);
