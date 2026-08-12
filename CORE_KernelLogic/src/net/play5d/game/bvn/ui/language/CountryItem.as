@@ -19,8 +19,10 @@
 package net.play5d.game.bvn.ui.language {
 import com.greensock.TweenLite;
 
+import flash.display.BitmapData;
 import flash.display.MovieClip;
 import flash.display.Sprite;
+import flash.geom.Matrix;
 
 import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.game.bvn.utils.ResUtils;
@@ -58,7 +60,7 @@ public class CountryItem extends Sprite {
         addChild(_base);
         addChild(_top);
 
-        _base.width  = 0;
+        _base.scaleX = 0;
         _base.height = height * HEIGHT_COEFFICIENT;
         _base.x      = width / 2;
         _base.y      = height / 2;
@@ -144,8 +146,10 @@ public class CountryItem extends Sprite {
 
     // 是否被选中
     private var _selected:Boolean;
-    /** @private 选中条展开目标宽度（缓存，避免悬停时反复量测） */
-    private var _expandWidth:Number = 0;
+    /** @private 选中条目标 scaleX（相对元件固有宽度） */
+    private var _expandScale:Number = 1;
+    /** @private 底条固有宽度（scaleX=1） */
+    private var _baseNaturalW:Number = 0;
 
     /**
      * 是否被选中
@@ -162,13 +166,14 @@ public class CountryItem extends Sprite {
 
         _selected = b;
 
-        if (_expandWidth <= 0) {
+        if (_expandScale <= 0 || _baseNaturalW < 1) {
             refreshLayout();
         }
 
         TweenLite.killTweensOf(_base);
+        // 用 scaleX 代替 width，避免缓动每帧重算布局
         TweenLite.to(_base, 0.2, {
-            width: b ? _expandWidth : 0
+            scaleX: b ? _expandScale : 0
         });
     }
 
@@ -176,20 +181,21 @@ public class CountryItem extends Sprite {
      * 预热选中条显示对象与缓动，避免首次悬停时卡顿。
      */
     public function warmUp():void {
-        if (_expandWidth <= 0) {
+        if (_expandScale <= 0 || _baseNaturalW < 1) {
             refreshLayout();
         }
 
-        var targetW:Number = _expandWidth > 0 ? _expandWidth : 1;
-        _base.width        = targetW;
-        // 强制一次量测 / 光栅化
-        _base.width;
-        _base.height;
-
+        var targetScale:Number = _expandScale > 0 ? _expandScale : 1;
         TweenLite.killTweensOf(_base);
-        // 0 时长 tween：触发 TweenLite 对该目标的内部初始化
-        TweenLite.to(_base, 0, {width: _selected ? targetW : 0});
-        _base.width = _selected ? targetW : 0;
+        _base.scaleX = targetScale;
+
+        // 强制光栅化（仅读 width 不够）
+        forceRasterizeBase();
+
+        // 非零时长 scale 缓动，打通悬停真实路径
+        TweenLite.to(_base, 0.01, {scaleX: targetScale});
+        TweenLite.killTweensOf(_base);
+        _base.scaleX = _selected ? targetScale : 0;
     }
 
     /**
@@ -241,16 +247,48 @@ public class CountryItem extends Sprite {
     }
 
     /**
-     * @private 按当前 top 尺寸刷新底条高度与展开宽度缓存。
+     * @private 按当前 top 尺寸刷新底条高度与展开 scale。
      */
     private function refreshLayout():void {
         var topW:Number = _top.width;
         var topH:Number = _top.height;
 
-        _expandWidth = topW * WIDTH_COEFFICIENT;
+        _base.scaleX = 1;
+        if (_baseNaturalW < 1) {
+            _baseNaturalW = _base.width;
+            if (_baseNaturalW < 1) {
+                _baseNaturalW = 1;
+            }
+        }
+
+        _expandScale = (topW * WIDTH_COEFFICIENT) / _baseNaturalW;
         _base.height = topH * HEIGHT_COEFFICIENT;
         _base.x      = topW / 2;
         _base.y      = topH / 2;
+        _base.scaleX = _selected ? _expandScale : 0;
+    }
+
+    /**
+     * @private 将底条 draw 到临时位图，强制 Flash 完成一次光栅化。
+     */
+    private function forceRasterizeBase():void {
+        if (!_base) {
+            return;
+        }
+        var w:int = Math.ceil(Math.abs(_base.width));
+        var h:int = Math.ceil(Math.abs(_base.height));
+        if (w < 1 || h < 1) {
+            return;
+        }
+        try {
+            var bd:BitmapData = new BitmapData(w, h, true, 0);
+            var m:Matrix      = new Matrix();
+            m.translate(w * 0.5, h * 0.5);
+            bd.draw(_base, m);
+            bd.dispose();
+        }
+        catch (e:Error) {
+        }
     }
 
 }

@@ -18,7 +18,9 @@
 
 package net.play5d.game.bvn.ctrler {
 import flash.media.Sound;
+import flash.media.SoundChannel;
 import flash.media.SoundTransform;
+import flash.utils.Dictionary;
 import flash.utils.getTimer;
 
 import net.play5d.game.bvn.data.vos.BgmVO;
@@ -45,6 +47,10 @@ public class SoundCtrl {
     private var _waitingSound:Object;
     private var _sndTransform:SoundTransform = new SoundTransform();
     private var _lastSndTime:int;
+    /** @private SWC 声音类 -&gt; 复用实例，避免每次 new */
+    private var _swcSoundCache:Dictionary;
+    /** @private 静音预热用 */
+    private var _silentTransform:SoundTransform;
 
     public function setSoundVolumn(v:Number):void {
         _sndTransform.volume = v;
@@ -112,7 +118,7 @@ public class SoundCtrl {
             return;
         }
 
-        playSound(new sndCls());
+        playSound(getCachedSwcSound(sndCls));
     }
 
     /**
@@ -324,7 +330,7 @@ public class SoundCtrl {
     }
 
     /**
-     * 预实例化单个 SWC 声音类（不播放）。
+     * 预实例化单个 SWC 声音类并做一次静音播放，打通解码 / 混音路径。
      *
      * @param sndCls 声音类链接。
      */
@@ -333,10 +339,30 @@ public class SoundCtrl {
             return;
         }
         try {
-            new sndCls();
+            var snd:Sound = getCachedSwcSound(sndCls);
+            if (!_silentTransform) {
+                _silentTransform = new SoundTransform(0);
+            }
+            var ch:SoundChannel = snd.play(0, 0, _silentTransform);
+            if (ch) {
+                ch.stop();
+            }
         }
         catch (e:Error) {
         }
+    }
+
+    /**
+     * @private 取得或创建并缓存 SWC 声音实例。
+     */
+    private function getCachedSwcSound(sndCls:Class):Sound {
+        _swcSoundCache ||= new Dictionary();
+        var snd:Sound = _swcSoundCache[sndCls] as Sound;
+        if (!snd) {
+            snd                     = new sndCls() as Sound;
+            _swcSoundCache[sndCls]  = snd;
+        }
+        return snd;
     }
 
     //确定音效

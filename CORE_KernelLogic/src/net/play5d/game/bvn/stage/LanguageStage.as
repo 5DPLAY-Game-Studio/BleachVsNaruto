@@ -52,6 +52,8 @@ public class LanguageStage implements IStage {
 
     // 点击回调事件
     private var _clickCallBack:Function;
+    /** @private 当前选中项，悬停时只切换两项 */
+    private var _currentSelected:CountryItem;
 
     /**
      * 点击回调事件
@@ -135,7 +137,8 @@ public class LanguageStage implements IStage {
             _insCountries = null;
         }
 
-        _clickCallBack = null;
+        _currentSelected = null;
+        _clickCallBack   = null;
 //        _ui            = null;
     }
 
@@ -227,6 +230,9 @@ public class LanguageStage implements IStage {
             throw new Error('语言元素数目不匹配！');
         }
 
+        // 先预热引擎与音效，再创建列表，缩短可交互后的冷路径
+        WarmupCtrl.I.warmEarly();
+
         var len:int    = langArr.length;
         var gap:Number = GameConfig.GAME_SIZE.y / (
                 len + 1
@@ -237,11 +243,8 @@ public class LanguageStage implements IStage {
             var lang:String     = langArr[i - 1];
             // 当前字体路径
             var fontPath:String = fontPathArr[i - 1];
-            // 当前字体类
+            // 当前字体类（注册推迟到点击，避免列表构建时批量 registerFont 卡顿）
             var fontCls:Class   = AssetManager.I.getClass('font', fontPath);
-
-            // 注册字体
-            Font.registerFont(fontCls);
 
             // 国家元件
             var country:CountryItem = new CountryItem();
@@ -254,7 +257,8 @@ public class LanguageStage implements IStage {
 
             // 语言帧确定后再设选中，避免展开宽度按默认帧计算
             if (GameData.I.config.language == lang) {
-                country.selected = true;
+                country.selected   = true;
+                _currentSelected   = country;
             }
 
             // 进行触摸或者鼠标逻辑处理
@@ -270,8 +274,6 @@ public class LanguageStage implements IStage {
             _insCountries.push(country);
         }
 
-        // 预热选中条与早期引擎 / 音效，避免鼠标首次移入时卡顿
-        WarmupCtrl.I.warmEarly();
         WarmupCtrl.I.warmCountryItems(_insCountries);
     }
 
@@ -300,17 +302,18 @@ public class LanguageStage implements IStage {
      * @param e 鼠标事件
      */
     private function mouseOverHandler(e:Event):void {
+        var target:CountryItem = e.currentTarget.parent as CountryItem;
+        if (!target || target == _currentSelected) {
+            return;
+        }
+
         SoundCtrl.I.sndSelect();
 
-        var target:CountryItem = e.currentTarget.parent as CountryItem;
-        target.selected        = true;
-
-        // 设置其他的 InsCountry 元件 selected 属性为 false
-        for each (var country:CountryItem in _insCountries) {
-            if (country != target) {
-                country.selected = false;
-            }
+        if (_currentSelected) {
+            _currentSelected.selected = false;
         }
+        target.selected  = true;
+        _currentSelected = target;
     }
 
     /**
@@ -330,6 +333,9 @@ public class LanguageStage implements IStage {
         if (!LanguageType.isSupported(language)) {
             throw new Error('不支持的语言！');
         }
+
+        // 仅注册所选语言字体
+        Font.registerFont(fontCls);
 
         GameData.I.config.language = language;
         LANGUAGE                   = language;

@@ -139,6 +139,10 @@ public class WarmupCtrl {
         var probe:Sprite = getProbe();
         TweenLite.killTweensOf(probe);
         TweenLite.to(probe, 0, {alpha: probe.alpha});
+        // 非零时长 scale 缓动，覆盖悬停真实路径
+        probe.scaleX = 0;
+        TweenLite.to(probe, 0.01, {scaleX: 1});
+        probe.scaleX = 1;
     }
 
     /**
