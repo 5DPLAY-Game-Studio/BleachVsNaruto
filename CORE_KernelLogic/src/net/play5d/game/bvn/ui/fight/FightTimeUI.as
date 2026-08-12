@@ -44,12 +44,15 @@ public class FightTimeUI {
 
             _ui.wuxian.visible = false;
             _numMc.number      = time;
+            _lastTime          = time;
         }
 
     }
     private var _ui:$fight$MC_time;
     private var _numMc:MCNumber;
     private var _renderTime:Boolean;
+    /** @private 上次显示的秒数，未变则跳过 MCNumber 重建 */
+    private var _lastTime:int = int.MIN_VALUE;
 
     public function get timeUI():DisplayObject {
         return _numMc;
@@ -59,7 +62,11 @@ public class FightTimeUI {
         if (!_renderTime) {
             return;
         }
-        var time:int  = GameCtrl.I.gameRunData.gameTime;
+        var time:int = GameCtrl.I.gameRunData.gameTime;
+        if (time == _lastTime) {
+            return;
+        }
+        _lastTime     = time;
         _numMc.number = time;
     }
 
