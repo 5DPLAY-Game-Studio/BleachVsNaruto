@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 日志记录器接口。
+ * 日志记录器注入契约。
  *
- * <p>由外壳注入实现，供内核通过统一入口输出诊断信息。</p>
+ * <p>由入口注入实现，供玩法侧经统一入口输出诊断信息。</p>
  */
 public interface ILogger {
 

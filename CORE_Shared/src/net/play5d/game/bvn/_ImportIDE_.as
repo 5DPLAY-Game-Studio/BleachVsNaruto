@@ -59,6 +59,7 @@ public class _ImportIDE_ extends Sprite {
         // net.play5d.game.bvn.data.fighter
         FighterActionState,
         FighterDefenseType,
+        FighterHitFloorType,
         FighterHitRange,
         FighterHurtType,
         FighterSpecialFrame,

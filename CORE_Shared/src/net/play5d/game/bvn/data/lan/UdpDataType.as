@@ -18,10 +18,13 @@
 
 package net.play5d.game.bvn.data.lan {
 /**
- * UDP 载荷在 <code>UDPDataVO</code> 内的数据类型标记。
+ * UDP 载荷在 <code>UDPDataVO</code> 内的数据类型公开常量。
  *
- * <p>线格式首字节由壳层 UDP 收发解析后再映射到本常量；
+ * <p>线格式首字节由 <code>UdpPacketUtils</code> 解析后再映射到本常量；
  * 数值与线字节不必相同。</p>
+ *
+ * @see UDPDataVO
+ * @see UdpPacketUtils
  */
 public class UdpDataType {
     include '../../../../../../../include/ImportVersion.as';

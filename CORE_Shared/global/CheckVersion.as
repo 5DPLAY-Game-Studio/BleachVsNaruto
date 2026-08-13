@@ -20,7 +20,7 @@ package {
 import net.play5d.game.bvn.GameVersion;
 
 /**
- * 检查共享库版本是否与期望一致。
+ * 检查共享库版本是否与期望一致（顶层公开函数）。
  *
  * <p>一致返回 <code>true</code>；不一致时若提供回调则先调用，再返回 <code>false</code>。</p>
  *

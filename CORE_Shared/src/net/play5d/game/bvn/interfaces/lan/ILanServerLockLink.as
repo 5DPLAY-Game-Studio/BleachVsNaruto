@@ -21,11 +21,11 @@ package net.play5d.game.bvn.interfaces.lan {
 /**
  * 锁帧服务端对壳层会话的依赖契约。
  *
- * <p>负责 UDP 广播输入/同步载荷，由壳的联机主机控制实现。</p>
+ * <p>负责 UDP 广播输入/同步载荷，由壳的联机主机控制实现并注入。</p>
  *
  * @example
  * <listing version="3.0">
- * var link:ILanServerLockLink = new MyLANServerCtrl();
+ * var link:ILanServerLockLink = serverSession;
  * link.sendUDP(bytes);
  * </listing>
  */

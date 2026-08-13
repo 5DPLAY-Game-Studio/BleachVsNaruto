@@ -21,11 +21,12 @@ package net.play5d.game.bvn {
 use namespace bvn_internal;
 
 /**
- * 游戏版本号对外入口。
+ * 游戏版本号对外静态入口。
  *
- * <p>对外暴露 <code>bvn_internal::VERSION</code>，供运行时与资源侧版本校验使用。</p>
+ * <p>暴露 <code>bvn_internal::VERSION</code>，供运行时与资源侧版本校验。</p>
  *
  * @see bvn_internal
+ * @see #VERSION
  */
 public class GameVersion {
     include '../../../../../include/ImportVersion.as';

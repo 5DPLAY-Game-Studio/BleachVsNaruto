@@ -21,11 +21,11 @@ package net.play5d.game.bvn.interfaces.lan {
 /**
  * 锁帧客户端对壳层会话的依赖契约。
  *
- * <p>负责 UDP 发送、延迟展示与同步错误状态，由壳的联机会话控制实现。</p>
+ * <p>负责 UDP 发送、延迟展示与同步错误状态，由壳的联机会话控制实现并注入。</p>
  *
  * @example
  * <listing version="3.0">
- * var link:ILanClientLockLink = new MyLANClientCtrl();
+ * var link:ILanClientLockLink = clientSession;
  * link.updateDelay(32);
  * </listing>
  */

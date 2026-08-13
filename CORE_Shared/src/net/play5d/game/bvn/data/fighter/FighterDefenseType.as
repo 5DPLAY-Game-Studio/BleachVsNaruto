@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色防御类型。
+ * 角色防御类型公开常量。
  *
- * <p>区分剑伤/砍伤与拳击/打击，用于防御减伤等逻辑。</p>
+ * <p>区分剑伤/砍伤与拳击/打击，供防御减伤等逻辑共用。</p>
  */
 public class FighterDefenseType {
     include '../../../../../../../include/ImportVersion.as';

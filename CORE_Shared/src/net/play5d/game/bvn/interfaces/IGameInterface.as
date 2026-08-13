@@ -26,18 +26,15 @@ import net.play5d.game.bvn.interfaces.IGameInput;
 /**
  * 壳层游戏能力注入契约。
  *
- * <p>由各入口实现并赋给 <code>GameInterface.instance</code>，内核通过该接口访问存档、
- * 输入、菜单、排行榜与平台扩展，而不依赖具体壳实现。</p>
+ * <p>由各入口实现并赋给玩法侧的接口持有者，使内核经本契约访问存档、输入、菜单、排行榜与平台扩展，而不依赖具体壳类型。</p>
  *
- * <p><code>applyConfig</code> 参数为 <code>Object</code>（运行时为配置 VO），以免 Shared
- * 反向依赖内核配置类型。</p>
+ * <p><code>applyConfig</code> 参数为 <code>Object</code>（运行时为配置 VO），以免 Shared 反向依赖玩法配置类型。</p>
  *
  * @see IExtendConfig
  * @see IGameInput
  * @example
  * <listing version="3.0">
- * // GameInterface.instance = new MyGameInterfaceManager();
- * var inputs:Vector.&lt;IGameInput&gt; = GameInterface.instance.getGameInput('P1');
+ * var inputs:Vector.&lt;IGameInput&gt; = gameInterface.getGameInput('P1');
  * </listing>
  */
 public interface IGameInterface {

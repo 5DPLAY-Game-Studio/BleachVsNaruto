@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.data.lan {
 
 /**
- * 局域网选人阶段数据包类型。
+ * 局域网选人阶段数据包类型公开常量。
  */
 public class SelectFighterDataType {
     include '../../../../../../../include/ImportVersion.as';

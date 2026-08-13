@@ -18,7 +18,9 @@
 
 package net.play5d.game.bvn.data.lan {
 /**
- * Socket 同步用按键缓冲（Pc/Mob 共用；Mob 额外使用 select/back）。
+ * Socket 同步按键缓冲（公开属性 + <code>clear</code>）。
+ *
+ * <p>Pc/Mob 共用字段形状；Mob 额外使用 <code>select</code>/<code>back</code>。不含网络收发。</p>
  */
 public class SocketInputData {
     include '../../../../../../../include/ImportVersion.as';

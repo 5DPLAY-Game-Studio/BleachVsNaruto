@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 语言类型。
+ * 语言类型公开常量与判定。
  *
- * <p>语言码采用 BCP 47 风格字符串（如 <code>zh-CN</code>）。</p>
+ * <p>语言码采用 BCP 47 风格字符串（如 <code>zh-CN</code>）；静态方法用于支持性检查。</p>
  */
 public class LanguageType {
     include '../../../../../../include/ImportVersion.as';

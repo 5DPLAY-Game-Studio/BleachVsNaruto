@@ -21,11 +21,11 @@ package net.play5d.game.bvn.interfaces.lan {
 /**
  * 联机退出确认对话框契约。
  *
- * <p>由 Kernel 提供实现；壳注入联机会话状态与退出回调后交给联机菜单控制逻辑。</p>
+ * <p>由玩法侧提供实现；壳在构造时注入联机会话状态与退出回调，再交给联机菜单控制逻辑。</p>
  *
  * @example
  * <listing version="3.0">
- * var d:ILanExitDialog = new MyLanExitDialog();
+ * var d:ILanExitDialog = exitDialog;
  * d.show();
  * </listing>
  */

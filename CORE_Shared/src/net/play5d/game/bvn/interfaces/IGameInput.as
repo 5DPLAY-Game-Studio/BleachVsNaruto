@@ -20,13 +20,13 @@ package net.play5d.game.bvn.interfaces {
 import flash.display.Stage;
 
 /**
- * 游戏输入设备契约。
+ * 游戏输入设备注入契约。
  *
- * <p>由壳或内核提供键盘 / 手柄 / 触屏 / 联机通道等实现，经入口注入后供菜单与对局查询按键状态。</p>
+ * <p>由壳或玩法侧提供键盘 / 手柄 / 触屏 / 联机通道等实现，经入口注入后供菜单与对局查询按键状态。</p>
  *
  * @example
  * <listing version="3.0">
- * var input:IGameInput = new MyKeyInput();
+ * var input:IGameInput = keyInput;
  * input.initlize(stage);
  * input.enabled = true;
  * if (input.attack()) {

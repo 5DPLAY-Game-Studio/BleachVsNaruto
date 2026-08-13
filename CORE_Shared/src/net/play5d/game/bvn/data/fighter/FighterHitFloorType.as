@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色击落地类型。
+ * 角色击落地类型公开常量。
  *
- * <p>整型常量：0=弹起，1=正常落地，2=重落地。供 <code>hitFloor</code> 等效果区分落地表现。</p>
+ * <p>0=弹起，1=正常落地，2=重落地；供落地表现区分。</p>
  */
 public class FighterHitFloorType {
     include '../../../../../../../include/ImportVersion.as';

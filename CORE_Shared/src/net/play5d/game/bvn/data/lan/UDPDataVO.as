@@ -20,7 +20,9 @@ package net.play5d.game.bvn.data.lan {
 import flash.utils.ByteArray;
 
 /**
- * UDP 收包封装：来源地址与按类型取出的载荷。
+ * UDP 收包公开数据形状：来源地址与按类型取出的载荷。
+ *
+ * <p>由 <code>UdpPacketUtils.decode</code> 填充；本类型只持有数据与访问器。</p>
  *
  * @see UdpDataType
  * @see UdpPacketUtils

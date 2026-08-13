@@ -18,9 +18,10 @@
 
 package net.play5d.game.bvn.data.lan {
 /**
- * 跨平台一致的局域网 Object/JSON 消息工厂。
+ * 跨壳一致的局域网 Object/JSON 消息工厂（静态公开 API）。
  *
- * <p>寻主机（FIND_HOST）因 Pc/Mob 线格式不同，仍由各壳消息工厂实现。</p>
+ * <p>仅构造与 <code>LanMsgType</code> 对齐的消息对象；不含收发。
+ * 寻主机（FIND_HOST）因 Pc/Mob 线格式不同，仍由各壳消息工厂实现。</p>
  *
  * @see LanMsgType
  */
@@ -28,9 +29,9 @@ public class LanSocketMsgFactory {
     include '../../../../../../../include/ImportVersion.as';
 
     /**
-     * 加入游戏。
+     * 创建「请求加入」消息。
      * @param name 玩家名。
-     * @return 消息对象。
+     * @return 含 <code>type=JOIN</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createJoinMsg('player1');
@@ -45,8 +46,8 @@ public class LanSocketMsgFactory {
     }
 
     /**
-     * 加入游戏成功。
-     * @return 消息对象。
+     * 创建「加入成功」回包。
+     * @return 含 <code>type=JOIN_BACK</code>、<code>success=true</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createJoinSuccMsg();
@@ -61,9 +62,9 @@ public class LanSocketMsgFactory {
     }
 
     /**
-     * 加入房间通知。
+     * 创建「有人加入房间」通知。
      * @param name 玩家名。
-     * @return 消息对象。
+     * @return 含 <code>type=JOIN_IN</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createJoinInMsg('player1');
@@ -78,9 +79,9 @@ public class LanSocketMsgFactory {
     }
 
     /**
-     * 加入游戏失败。
-     * @param msg 失败原因。
-     * @return 消息对象。
+     * 创建「加入失败」回包。
+     * @param msg 失败原因；可为 <code>null</code>。
+     * @return 含 <code>type=JOIN_BACK</code>、<code>success=false</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createJoinFailMsg('room full');
@@ -96,9 +97,9 @@ public class LanSocketMsgFactory {
     }
 
     /**
-     * 踢出房间。
-     * @param msg 原因。
-     * @return 消息对象。
+     * 创建「踢出房间」消息。
+     * @param msg 原因；可为 <code>null</code>。
+     * @return 含 <code>type=KICK_OUT</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createKickOutMsg('timeout');
@@ -113,10 +114,10 @@ public class LanSocketMsgFactory {
     }
 
     /**
-     * 聊天。
+     * 创建聊天消息。
      * @param chart 内容。
      * @param name 发送者名。
-     * @return 消息对象。
+     * @return 含 <code>type=CHART</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createChart('hello', 'player1');
@@ -132,8 +133,8 @@ public class LanSocketMsgFactory {
     }
 
     /**
-     * 开始游戏。
-     * @return 消息对象。
+     * 创建「开始游戏」消息。
+     * @return 含 <code>type=START_GAME</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createStartGame();

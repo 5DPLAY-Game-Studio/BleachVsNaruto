@@ -9,7 +9,7 @@
 | 优先级 | 模块 | 何时进 |
 |--------|------|--------|
 | 1 | `CORE_KernelLogic` | 战斗/场景/UI 玩法/数据逻辑（约 90% 代码任务） |
-| 2 | `CORE_Shared` | 对外常量、版本、与资源侧共享的接口 |
+| 2 | `CORE_Shared` | 对外公开的静态方法 / 属性 / 接口（含版本与注入契约） |
 | 3 | `CORE_Utils` / `LIB_KyoLib` | 通用工具；后者为独立子模块库 |
 | — | `BleachVsNaruto_FlashSrc` | 美术/XFL；**代码任务默认避开** |
 | — | `CORE_Components` | Animate 组件库；约定见 [`components.md`](components.md)；常规玩法少碰 |
@@ -21,7 +21,7 @@
 | 目录 | 角色 | 备注 |
 |------|------|------|
 | `CORE_KernelLogic` | 核心玩法逻辑 | 入口速查 → [`map.md`](map.md) |
-| `CORE_Shared` | 对外共享 API / 版本 / 注入契约（`ISwfLib`/`IGameInput`/`IGameInterface`/`ILan*`） | **不含** Embed 实现；UI SWF 的 `SwfLib` 在 Utils |
+| `CORE_Shared` | 对外公开 API：接口、静态常量/属性、薄静态工具与跨壳数据形状 | 宜放：注入契约（`ISwfLib`/`IGameInput`/`IGameInterface`/`ILan*`）、版本、`Lan*` 消息码/工厂、跨壳 VO。**不含** Embed；UI SWF 的 `SwfLib` 在 Utils。勿放：DisplayList UI、壳会话控制器、非公开实现细节 |
 | `CORE_Utils` | 工程内公用工具 / `SwfLib` Embed | |
 | `LIB_KyoLib` | 通用显示/输入/加载等库 | git 子模块；首选 API → [`kyolib.md`](kyolib.md) |
 | `LIB_Other` | 其它第三方/附属库 | |
@@ -58,3 +58,4 @@ SHELL_* ──启动──► CORE_KernelLogic
 - 常规功能优先改 `CORE_Components` 或长时间泡在 `BleachVsNaruto_FlashSrc`
 - 把 `out/` 当源码仓库改
 - 能在 KernelLogic 解决却先大改 `LIB_KyoLib`（除非确属库能力）
+- 往 `CORE_Shared` 塞 Embed、壳专属 UI/会话逻辑，或仅单模块使用的非公开实现

@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色特殊帧标签名。
+ * 角色特殊帧标签名公开常量。
  *
- * <p>对应角色时间轴上的帧标签，用于切换待机、攻击、受击、胜负等动作。</p>
+ * <p>对应角色时间轴帧标签，供资源与玩法切换待机、攻击、受击、胜负等动作。</p>
  *
  * @see FighterHitRange
  * @see FighterActionState

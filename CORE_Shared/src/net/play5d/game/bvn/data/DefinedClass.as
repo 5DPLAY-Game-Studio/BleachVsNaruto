@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 已定义的库链接类名。
+ * 库链接类名公开常量。
  *
- * <p>供资源侧通过链接名取用共享库中的元件。</p>
+ * <p>供资源侧按链接名取用共享库元件。</p>
  */
 public class DefinedClass {
     include '../../../../../../include/ImportVersion.as';

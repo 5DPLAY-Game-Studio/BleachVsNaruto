@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * Animate 组件库组件接口。
+ * Animate 组件可销毁契约。
  *
- * <p>约定组件可主动销毁自身占用的资源；实现位于组件库 SWC。</p>
+ * <p>约定组件可主动释放自身资源；具体实现位于组件库 SWC，本库仅公开接口。</p>
  */
 public interface IComponents {
 

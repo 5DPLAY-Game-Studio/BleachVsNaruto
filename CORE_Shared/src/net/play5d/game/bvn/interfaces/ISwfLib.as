@@ -21,8 +21,8 @@ package net.play5d.game.bvn.interfaces {
 /**
  * 内嵌 UI SWF 资源库契约。
  *
- * <p>各入口在启动时注入实现，供运行时按模块取出对应 SWF 的 <code>Class</code>
- * 再实例化界面元件。默认 Embed 实现位于 Utils 层的 <code>SwfLib</code>。</p>
+ * <p>各入口注入实现后，运行时按模块取出对应 SWF 的 <code>Class</code> 再实例化界面元件。
+ * Embed 实现不在本库；默认实现位于工具层的 <code>SwfLib</code>。</p>
  *
  * @example
  * <listing version="3.0">

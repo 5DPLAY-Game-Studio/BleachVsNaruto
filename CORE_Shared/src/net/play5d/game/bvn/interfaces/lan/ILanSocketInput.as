@@ -19,13 +19,13 @@
 package net.play5d.game.bvn.interfaces.lan {
 
 /**
- * 锁帧用的 Socket 输入通道契约。
+ * 锁帧用 Socket 输入通道契约。
  *
  * <p>由壳的联机输入实现采集/回写打包键值，供锁帧客户端与服务端逻辑注入。</p>
  *
  * @example
  * <listing version="3.0">
- * var input:ILanSocketInput = new MyGameSocketInput();
+ * var input:ILanSocketInput = socketInput;
  * input.renderInput();
  * var keys:int = input.getSocketData();
  * </listing>

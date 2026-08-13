@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 队伍 ID。
+ * 队伍 ID 公开常量。
  *
  * @see GameMode#getAllTeams()
  */

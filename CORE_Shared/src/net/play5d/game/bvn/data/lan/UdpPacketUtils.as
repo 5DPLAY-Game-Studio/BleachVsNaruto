@@ -20,10 +20,11 @@ package net.play5d.game.bvn.data.lan {
 import flash.utils.ByteArray;
 
 /**
- * UDP 线格式编解码（首字节类型 + 载荷）。
+ * UDP 线格式编解码（对外静态工具）。
  *
- * <p>线字节：1=字符串、2=二进制、3=对象；写入 <code>UDPDataVO.dataType</code>
- * 时映射为 <code>UdpDataType</code> 常量。</p>
+ * <p>Pc/Mob 共用线布局：首字节类型 + 载荷（1=字符串、2=二进制、3=对象）。
+ * 解码结果写入 <code>UDPDataVO</code>，类型映射为 <code>UdpDataType</code>。
+ * 仅做字节变换，不含网络收发。</p>
  *
  * @see UDPDataVO
  * @see UdpDataType
