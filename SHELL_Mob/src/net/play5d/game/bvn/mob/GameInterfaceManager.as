@@ -299,8 +299,13 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
 
-    public function applyConfig(config:ConfigVO):void {
-        switch (config.quality) {
+    public function applyConfig(config:Object):void {
+        var cfg:ConfigVO = config as ConfigVO;
+        if (!cfg) {
+            return;
+        }
+
+        switch (cfg.quality) {
         case GameQuality.BEST:
             GameConfig.setGameFps(60);
             GameConfig.FPS_SHINE_EFFECT = 15;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,16 +19,32 @@
 package net.play5d.game.bvn.interfaces {
 import flash.utils.ByteArray;
 
+/**
+ * 壳层 <code>IGameInterface</code> 的静态入口与默认菜单。
+ *
+ * <p>入口启动时设置 <code>instance</code>；未注入时部分方法提供安全默认行为。</p>
+ *
+ * @see IGameInterface
+ * @example
+ * <listing version="3.0">
+ * GameInterface.instance = new MyGameInterfaceManager();
+ * var menu:Array = GameInterface.getDefaultMenu();
+ * </listing>
+ */
 public class GameInterface {
-
-//		private static var _i:GameInterface;
-//		public static function get I():GameInterface{
-//			_i ||= new GameInterface();
-//			return _i;
-//		}
-
+    /**
+     * 当前壳实现；未注入时部分静态方法走默认逻辑。
+     */
     public static var instance:IGameInterface;
 
+    /**
+     * 默认主菜单结构（多语言文案）。
+     * @return 菜单项数组。
+     * @example
+     * <listing version="3.0">
+     * var a:Array = GameInterface.getDefaultMenu();
+     * </listing>
+     */
     public static function getDefaultMenu():Array {
         var a:Array = [
 
@@ -64,6 +80,18 @@ public class GameInterface {
         return a;
     }
 
+    /**
+     * 校验资源文件；无实例时默认通过。
+     * @param url 资源路径。
+     * @param file 文件字节。
+     * @return 通过为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * if (!GameInterface.checkFile(url, bytes)) {
+     *     return;
+     * }
+     * </listing>
+     */
     public static function checkFile(url:String, file:ByteArray):Boolean {
         if (instance) {
             return instance.checkFile(url, file);
@@ -71,6 +99,16 @@ public class GameInterface {
         return true;
     }
 
+    /**
+     * 增加无双金币；无实例时回退随机小数额。
+     * @param back 成功回调，签名为 <code>function(money:int):void</code>。
+     * @example
+     * <listing version="3.0">
+     * GameInterface.addMoney(function (mm:int):void {
+     *     // ...
+     * });
+     * </listing>
+     */
     public static function addMoney(back:Function):void {
         function addMoneyBack(money:*):void {
             var mm:int = int(money);
@@ -89,9 +127,5 @@ public class GameInterface {
         }
         addMoneyBack(100 + Math.random() * 500);
     }
-
-//		public var moreGames:Function;
-//		public var
-
 }
 }

@@ -363,8 +363,13 @@ public class GameInterfaceManager implements IGameInterface {
         return true;
     }
 
-    public function applyConfig(config:ConfigVO):void {
-        switch (config.quality) {
+    public function applyConfig(config:Object):void {
+        var cfg:ConfigVO = config as ConfigVO;
+        if (!cfg) {
+            return;
+        }
+
+        switch (cfg.quality) {
         case GameQuality.BEST:
             MainGame.I.stage.quality = StageQuality.HIGH_16X16;
             MainGame.I.setFPS(60);
