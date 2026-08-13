@@ -303,14 +303,20 @@ public class LANClientCtrl implements ILanClientLockLink {
         if (!wait) {
 //				trace("同步异常");
             gameEnd();
-            GameUI.alert("DISCONNECT", "发生异常");
+            GameUI.alert(
+                    GetLang('alert.lan_client_ctrl.disconnect_title'),
+                    GetLang('alert.lan_client_ctrl.disconnect_error')
+            );
             return;
         }
         _syncErrorTimes++;
         if (_syncErrorTimes > 10) {
 //				trace("同步错误，强制退出");
             gameEnd();
-            GameUI.alert("DISCONNECT", "发生异常");
+            GameUI.alert(
+                    GetLang('alert.lan_client_ctrl.disconnect_title'),
+                    GetLang('alert.lan_client_ctrl.disconnect_error')
+            );
 //				dispose();
         }
     }
@@ -546,11 +552,14 @@ public class LANClientCtrl implements ILanClientLockLink {
         case SocketEvent.CLOSE:
             if (active) {
                 gameEnd();
-                GameUI.alert('DISCONNECT', '与主机断开连接');
+                GameUI.alert(
+                        GetLang('alert.lan_client_ctrl.disconnect_title'),
+                        GetLang('alert.lan_client_ctrl.disconnect_host')
+                );
             }
             else {
                 if (_room) {
-                    _room.exitRoom('连接中断');
+                    _room.exitRoom(GetLang('alert.lan_client_ctrl.connection_interrupt'));
                 }
                 dispose();
             }

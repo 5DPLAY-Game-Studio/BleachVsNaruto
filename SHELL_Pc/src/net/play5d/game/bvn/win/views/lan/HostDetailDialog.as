@@ -56,8 +56,8 @@ public class HostDetailDialog implements IStage {
     public function setData(data:HostVO):void {
         _data             = data;
         _ui.txt_name.text = data.name;
-        _ui.txt_mode.text = '游戏模式：' + data.getGameModeStr();
-        _ui.txt_time.text = '创建时间：' + LANUtils.getTimeStr(data.updateTime);
+        _ui.txt_mode.text = GetLang('txt.host_detail_dialog.game_mode', {mode: data.getGameModeStr()});
+        _ui.txt_time.text = GetLang('txt.host_detail_dialog.create_time', {time: LANUtils.getTimeStr(data.updateTime)});
 
         if (data.password) {
             initPass();
@@ -102,7 +102,7 @@ public class HostDetailDialog implements IStage {
         }
         else {
             if (msg) {
-                GameUI.alert('FAILED', msg);
+                GameUI.alert(GetLang('alert.failed_title'), msg);
             }
         }
     }
@@ -127,7 +127,10 @@ public class HostDetailDialog implements IStage {
 
         if (_data.password) {
             if (_ui.pass.txt.text != _data.password) {
-                GameUI.alert('FAIL', '密码不正确');
+                GameUI.alert(
+                        GetLang('alert.password_incorrect_title'),
+                        GetLang('alert.password_incorrect')
+                );
                 return;
             }
         }

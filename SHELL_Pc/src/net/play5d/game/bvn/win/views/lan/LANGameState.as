@@ -51,10 +51,10 @@ public class LANGameState implements IStage {
 
         _btnGroup = new SetBtnGroup();
         _btnGroup.setBtnData([
-                                 {label: 'JOIN GAME', cn: '加入游戏'},
-                                 {label: 'BUILD GAME', cn: '创建游戏'},
-                                 {label: 'PROFILE', cn: '个人信息'},
-                                 {label: 'EXIT', cn: '退出'}
+                                 {label: 'JOIN GAME', cn: GetLang('txt.lan_game_state.join')},
+                                 {label: 'BUILD GAME', cn: GetLang('txt.lan_game_state.create')},
+                                 {label: 'PROFILE', cn: GetLang('txt.lan_game_state.profile')},
+                                 {label: 'EXIT', cn: GetLang('txt.lan_game_state.exit')}
                              ]);
 
         _btnGroup.addEventListener(SetBtnEvent.SELECT, btnHandler);

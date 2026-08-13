@@ -67,7 +67,7 @@ public class LANHostCreateDialog implements IStage {
 
         _ui.txt_pass.visible = false;
 
-        _ui.comb_mode.addItem({label: 'TEAM VS - 小队模式', data: 1});
+        _ui.comb_mode.addItem({label: GetLang('txt.lan_host_create_dialog.mode_team_combo'), data: 1});
 //			_ui.comb_mode.addItem( { label: "SINGLE VS - 单人模式", data:2 } );
     }
 
@@ -99,7 +99,10 @@ public class LANHostCreateDialog implements IStage {
         var mode:int    = _ui.comb_mode.selectedItem.data;
 
         if (name == '') {
-            GameUI.alert('ERROR', '请输入主机名称');
+            GameUI.alert(
+                    GetLang('alert.input_host_name_title'),
+                    GetLang('alert.input_host_name')
+            );
             return;
         }
 

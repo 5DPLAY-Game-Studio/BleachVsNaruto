@@ -148,7 +148,7 @@ public class LANRoomState implements IStage {
     public function addPlayer(id:String, name:String):void {
 
         if (_playerMap[id]) {
-            trace('player:' + id + '已存在！');
+            TraceLang('debug.trace.data.lan_room_state.player_exists', {id: id});
             return;
         }
 
@@ -184,7 +184,7 @@ public class LANRoomState implements IStage {
     public function exitRoom(msg:String = null):void {
         exit();
         if (msg) {
-            GameUI.alert('EXIT', msg);
+            GameUI.alert(GetLang('alert.exit_title'), msg);
         }
     }
 
@@ -209,7 +209,9 @@ public class LANRoomState implements IStage {
     private function initUI():void {
         _ui.txt_name.text     = _host.name;
         _ui.txt_mode.text     = _host.getGameModeStr();
-        _ui.txt_pass.text     = _host.password ? '密码：' + _host.password : '';
+        _ui.txt_pass.text     = _host.password
+                ? GetLang('txt.lan_room_state.password', {password: _host.password})
+                : '';
         _ui.btn_start.visible = _isOwner;
         _ui.txt_start.visible = _isOwner;
         _txtChart             = _ui.txt_chart;
@@ -271,9 +273,9 @@ public class LANRoomState implements IStage {
 //					lockStart();
 //				}
 
-            pushChart((
-                      _startTimer.repeatCount - _startTimer.currentCount + 1
-                      ) + '秒后开始游戏', null);
+            pushChart(GetLang('txt.lan_room_state.start_countdown', {
+                sec: _startTimer.repeatCount - _startTimer.currentCount + 1
+            }), null);
         }
 
         if (e.type == TimerEvent.TIMER_COMPLETE) {

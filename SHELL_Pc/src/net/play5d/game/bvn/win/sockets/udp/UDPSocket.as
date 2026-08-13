@@ -122,7 +122,7 @@ public class UDPSocket {
             send(_broadCastAddress, port, msg);
         }
         else {
-            trace('获取广播地址失败!');
+            TraceLang('debug.trace.data.udp_socket.broadcast_fail');
         }
 
     }

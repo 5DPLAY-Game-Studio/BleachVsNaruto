@@ -162,7 +162,10 @@ public class LANServerCtrl implements ILanServerLockLink {
             if (_clients[i].id == id) {
                 client = _clients[i];
 
-                SocketServer.I.sendJson(client.socket, SocketMsgFactory.createKickOutMsg('你已被踢出房间'));
+                SocketServer.I.sendJson(
+                        client.socket,
+                        SocketMsgFactory.createKickOutMsg(GetLang('txt.lan_server_ctrl.kick_out'))
+                );
 
                 if (_kickTimeoutInt == 0) {
                     _kickTimeoutInt = setTimeout(kickTimeout, 3000);
@@ -306,7 +309,7 @@ public class LANServerCtrl implements ILanServerLockLink {
         case MsgType.JOIN_IN:
             if (_room) {
                 _room.setStartAble(true);
-                sendChart(msgObj.name + '进入房间');
+                sendChart(GetLang('txt.lan_server_ctrl.player_enter', {name: msgObj.name}));
             }
             break;
         case MsgType.CHART:
@@ -324,7 +327,10 @@ public class LANServerCtrl implements ILanServerLockLink {
         if (_clients.length > 0) {
             //超出人数限制
             //					e.clientSocket.close();
-            SocketServer.I.sendJson(clientSocket, SocketMsgFactory.createJoinFailMsg('人数已满'));
+            SocketServer.I.sendJson(
+                    clientSocket,
+                    SocketMsgFactory.createJoinFailMsg(GetLang('txt.lan_server_ctrl.room_full'))
+            );
             return;
         }
 
@@ -337,7 +343,7 @@ public class LANServerCtrl implements ILanServerLockLink {
         _clients.push(cv);
         if (_room) {
             _room.addPlayer(cv.ip, cv.name);
-            sendChart(cv.name + '正在进入房间...');
+            sendChart(GetLang('txt.lan_server_ctrl.player_entering', {name: cv.name}));
             _room.setStartAble(false);
         }
 
@@ -392,13 +398,16 @@ public class LANServerCtrl implements ILanServerLockLink {
 
             if (active) {
                 gameEnd();
-                GameUI.alert('PLAYER EXIT', '玩家退出房间');
+                GameUI.alert(
+                        GetLang('alert.lan_server_ctrl.player_exit_title'),
+                        GetLang('alert.lan_server_ctrl.player_exit')
+                );
             }
             for (var i:int; i < _clients.length; i++) {
                 if (_clients[i].socket == e.clientSocket) {
                     if (_room) {
                         _room.removePlayer(_clients[i].ip);
-                        _room.pushChart(_clients[i].name + '退出房间');
+                        _room.pushChart(GetLang('txt.lan_server_ctrl.player_exit_chart', {name: _clients[i].name}));
                         _room.setStartAble(false);
                     }
                     _clients.splice(i, 1);

@@ -63,17 +63,18 @@ public class HostVO {
     }
 
     public function getListName():String {
-        var after:String = status == 1 ? '(满)' : '';
-        return name;
+        var after:String = status == 1 ? GetLang('txt.host_vo.full') : '';
+
+        return name + after;
     }
 
     public function getGameModeStr():String {
         switch (gameMode) {
         case 1:
-            return 'TEAM VS - 小队对战';
+            return GetLang('txt.host_vo.mode_team');
             break;
         case 2:
-            return 'SINGLE VS - 单人对战';
+            return GetLang('txt.host_vo.mode_single');
             break;
         }
         return null;

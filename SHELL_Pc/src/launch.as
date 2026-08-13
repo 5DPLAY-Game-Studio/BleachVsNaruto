@@ -66,7 +66,7 @@ public class launch extends Sprite {
         //_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
         _mainGame.initlize(this, stage, function ():void {
             _mainGame.goLanguage(function ():void {
-                trace('字体名称：' + FONT.fontName);
+                TraceLang('debug.trace.data.root_sprite.current_font', {fontName: FONT.fontName});
                 UIUtils.LOCK_FONT = FONT.fontName;
 
                 GameData.I.saveData();
