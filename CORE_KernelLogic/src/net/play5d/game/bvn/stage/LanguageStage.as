@@ -149,6 +149,10 @@ public class LanguageStage implements IStage {
      * @param progress 加载进度
      */
     private function loadProgress(progress:Number):void {
+        if (!_loadingBar) {
+            return;
+        }
+
         if (progress > 1) {
             progress = 1;
         }
@@ -187,9 +191,12 @@ public class LanguageStage implements IStage {
                 loadUrls,
                 function ():void {
                     // 载入字体成功回调
-
-                    _loadingBar.visible = false;
-                    _ui.removeChild(_loadingBar);
+                    if (_loadingBar) {
+                        if (_loadingBar.parent) {
+                            _loadingBar.parent.removeChild(_loadingBar);
+                        }
+                        _loadingBar = null;
+                    }
 
                     // 添加语言项目
                     addLanguageItem(languages, loadUrls);

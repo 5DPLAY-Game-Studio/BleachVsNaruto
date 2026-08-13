@@ -17,6 +17,9 @@
  */
 
 package net.play5d.game.bvn.test {
+import feathers.style.Theme;
+import feathers.themes.steel.SteelTheme;
+
 import flash.display.NativeWindow;
 import flash.display.NativeWindowDisplayState;
 import flash.display.NativeWindowInitOptions;
@@ -34,25 +37,32 @@ import flash.events.NativeWindowDisplayStateEvent;
  * 吸附于主窗口右侧的调试 NativeWindow。
  *
  * <p>与主窗同为 <code>gpu</code> 渲染模式；主窗移动/缩放时同步位置与高度，
- * 并将内容在窗口客户区内居中。</p>
+ * 并将内容在窗口客户区内居中。亮暗模式由外部按钮调用 <code>toggleDarkMode()</code>，
+ * 作用于共享 <code>SteelTheme</code>，并通过 <code>onDarkModeChange</code> 通知持久化。</p>
  *
  * @example
  * <listing version="3.0">
  * var win:DockedDebugWindow = new DockedDebugWindow(stage.nativeWindow);
- * win.open(root, inner);
+ * win.onDarkModeChange = onDarkModeChange;
+ * win.open(root, inner, 'Debug', 400, 600, 520, theme, true);
  * </listing>
  * @see #open()
  * @see #close()
+ * @see #toggleDarkMode()
+ * @see #darkMode
  */
 public class DockedDebugWindow {
     /** @private 默认内容宽 */
-    private static const DEFAULT_WIDTH:Number = 200;
+    private static const DEFAULT_WIDTH:Number = 400;
     /** @private 默认内容高 */
     private static const DEFAULT_HEIGHT:Number = 600;
     /** @private 默认内容底边（用于垂直居中） */
-    private static const DEFAULT_CONTENT_BOTTOM:Number = 590;
-    /** @private 默认背景色 */
-    private static const DEFAULT_BG:uint = 0x333333;
+    private static const DEFAULT_CONTENT_BOTTOM:Number = 520;
+
+    /**
+     * 亮暗切换回调 <code>function(darkMode:Boolean):void</code>。
+     */
+    public var onDarkModeChange:Function;
 
     /** @private */
     private var _mainWindow:NativeWindow;
@@ -68,8 +78,10 @@ public class DockedDebugWindow {
     private var _panelHeight:Number;
     /** @private */
     private var _contentBottom:Number;
+    /** @private 共享 Steel 主题（不由本类 dispose） */
+    private var _theme:SteelTheme;
     /** @private */
-    private var _bgColor:uint;
+    private var _darkMode:Boolean;
     /** @private 正在执行吸附，避免 MOVE 回调递归 */
     private var _docking:Boolean;
 
@@ -90,6 +102,15 @@ public class DockedDebugWindow {
     }
 
     /**
+     * 当前是否暗色模式。
+     * @return 暗色为 <code>true</code>。
+     * @default true
+     */
+    public function get darkMode():Boolean {
+        return _darkMode;
+    }
+
+    /**
      * 打开调试窗并放入内容，吸附到主窗右侧。
      *
      * @param root 根容器，用于铺满背景。
@@ -98,20 +119,22 @@ public class DockedDebugWindow {
      * @param panelWidth 设计内容宽。
      * @param panelHeight 设计内容高。
      * @param contentBottom 内容底边 y，用于垂直居中。
-     * @param bgColor 背景色。
+     * @param theme 共享 <code>SteelTheme</code>；提供时挂到本窗 stage。
+     * @param darkMode 初始是否暗色。
      * @example
      * <listing version="3.0">
-     * win.open(panelRoot, panelInner, 'Debug');
+     * win.open(panelRoot, panelInner, 'Debug', 400, 600, 520, theme, true);
      * </listing>
      */
     public function open(
             root         :Sprite,
-            inner        :Sprite  = null,
-            title        :String  = 'Debug',
-            panelWidth   :Number  = DEFAULT_WIDTH,
-            panelHeight  :Number  = DEFAULT_HEIGHT,
-            contentBottom:Number  = DEFAULT_CONTENT_BOTTOM,
-            bgColor      :uint    = DEFAULT_BG
+            inner        :Sprite     = null,
+            title        :String     = 'Debug',
+            panelWidth   :Number     = DEFAULT_WIDTH,
+            panelHeight  :Number     = DEFAULT_HEIGHT,
+            contentBottom:Number     = DEFAULT_CONTENT_BOTTOM,
+            theme        :SteelTheme = null,
+            darkMode     :Boolean    = true
     ):void {
         if (!_mainWindow || isOpen || !root) {
             return;
@@ -122,7 +145,8 @@ public class DockedDebugWindow {
         _panelWidth    = panelWidth;
         _panelHeight   = panelHeight;
         _contentBottom = contentBottom;
-        _bgColor       = bgColor;
+        _theme         = theme;
+        _darkMode      = darkMode;
 
         var options:NativeWindowInitOptions = new NativeWindowInitOptions();
         options.type         = NativeWindowType.NORMAL;
@@ -138,9 +162,15 @@ public class DockedDebugWindow {
         _window.title           = title;
         _window.stage.scaleMode = StageScaleMode.NO_SCALE;
         _window.stage.align     = StageAlign.TOP_LEFT;
-        _window.stage.color     = _bgColor;
+        _window.stage.color     = currentBgColor();
         // 独立 stage，需单独关闭焦点黄框（主窗 stageFocusRect 不影响此处）
         _window.stage.stageFocusRect = false;
+
+        if (_theme) {
+            _theme.darkMode = _darkMode;
+            Theme.setTheme(_theme, _window.stage, false);
+        }
+
         _window.stage.addChild(_root);
 
         _window.width  = _panelWidth;
@@ -156,14 +186,37 @@ public class DockedDebugWindow {
         dock();
         layoutContent();
 
-        _mainWindow.addEventListener(NativeWindowBoundsEvent.MOVE, onMainBoundsChange);
-        _mainWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, onMainBoundsChange);
+        _mainWindow.addEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
+        _mainWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, onBoundsChange);
         _mainWindow.addEventListener(
                 NativeWindowDisplayStateEvent.DISPLAY_STATE_CHANGE,
                 onMainDisplayStateChange
         );
         _mainWindow.addEventListener(Event.CLOSING, onMainClosing);
-        _window.addEventListener(NativeWindowBoundsEvent.MOVE, onDebugBoundsChange);
+        _window.addEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
+    }
+
+    /**
+     * 切换亮暗模式并通知 <code>onDarkModeChange</code>。
+     * @example
+     * <listing version="3.0">
+     * win.toggleDarkMode();
+     * </listing>
+     */
+    public function toggleDarkMode():void {
+        applyDarkMode(!_darkMode, true);
+    }
+
+    /**
+     * 同步亮暗模式（不触发 <code>onDarkModeChange</code>）。
+     * @param darkMode 是否暗色。
+     * @example
+     * <listing version="3.0">
+     * win.setDarkMode(false);
+     * </listing>
+     */
+    public function setDarkMode(darkMode:Boolean):void {
+        applyDarkMode(darkMode, false);
     }
 
     /**
@@ -179,6 +232,7 @@ public class DockedDebugWindow {
         _window = null;
         _root   = null;
         _inner  = null;
+        _theme  = null;
     }
 
     /**
@@ -211,9 +265,11 @@ public class DockedDebugWindow {
 
         var sw:Number = _window.stage.stageWidth;
         var sh:Number = _window.stage.stageHeight;
+        var bg:uint   = currentBgColor();
 
+        _window.stage.color = bg;
         _root.graphics.clear();
-        _root.graphics.beginFill(_bgColor, 1);
+        _root.graphics.beginFill(bg, 1);
         _root.graphics.drawRect(0, 0, sw, sh);
         _root.graphics.endFill();
 
@@ -223,11 +279,29 @@ public class DockedDebugWindow {
         }
     }
 
-    private function onMainBoundsChange(e:NativeWindowBoundsEvent):void {
-        dock();
+    /**
+     * 应用亮暗并可选通知外部。
+     * @param darkMode 是否暗色。
+     * @param notify 是否回调 <code>onDarkModeChange</code>。
+     */
+    private function applyDarkMode(darkMode:Boolean, notify:Boolean):void {
+        _darkMode = darkMode;
+        if (_theme) {
+            _theme.darkMode = _darkMode;
+        }
+        layoutContent();
+
+        if (notify && onDarkModeChange != null) {
+            onDarkModeChange(_darkMode);
+        }
     }
 
-    private function onDebugBoundsChange(e:NativeWindowBoundsEvent):void {
+    /** @private */
+    private function currentBgColor():uint {
+        return DebugThemeChrome.bgColor(_darkMode);
+    }
+
+    private function onBoundsChange(e:NativeWindowBoundsEvent):void {
         dock();
     }
 
@@ -254,8 +328,8 @@ public class DockedDebugWindow {
             return;
         }
 
-        _mainWindow.removeEventListener(NativeWindowBoundsEvent.MOVE, onMainBoundsChange);
-        _mainWindow.removeEventListener(NativeWindowBoundsEvent.RESIZE, onMainBoundsChange);
+        _mainWindow.removeEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
+        _mainWindow.removeEventListener(NativeWindowBoundsEvent.RESIZE, onBoundsChange);
         _mainWindow.removeEventListener(
                 NativeWindowDisplayStateEvent.DISPLAY_STATE_CHANGE,
                 onMainDisplayStateChange
@@ -263,7 +337,7 @@ public class DockedDebugWindow {
         _mainWindow.removeEventListener(Event.CLOSING, onMainClosing);
 
         if (_window && !_window.closed) {
-            _window.removeEventListener(NativeWindowBoundsEvent.MOVE, onDebugBoundsChange);
+            _window.removeEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
         }
     }
 }

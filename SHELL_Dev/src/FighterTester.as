@@ -20,6 +20,7 @@ package {
 import feathers.controls.Button;
 import feathers.controls.Label;
 import feathers.controls.PopUpListView;
+import feathers.controls.TextArea;
 import feathers.data.ArrayCollection;
 import feathers.style.Theme;
 import feathers.text.TextFormat;
@@ -46,10 +47,13 @@ import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.DebugMain;
+import net.play5d.game.bvn.debug.DebugSpriteBounds;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.LoadingStage;
+import net.play5d.game.bvn.test.DebugThemeChrome;
 import net.play5d.game.bvn.test.DockedDebugWindow;
+import net.play5d.game.bvn.test.SpriteInspectorWindow;
 import net.play5d.game.bvn.test.GameInterfaceManager;
 import net.play5d.game.bvn.test.SwfLib;
 import net.play5d.game.bvn.ui.UIUtils;
@@ -64,16 +68,34 @@ import net.play5d.kyo.storage.KyoSharedObject;
 public class FighterTester extends Sprite {
     private const KEY:String = 'text';
 
-    /** @private 调试面板内容宽 */
-    private static const DEBUG_PANEL_WIDTH:Number = 200;
+    /** @private 调试面板内容宽（左右分栏） */
+    private static const DEBUG_PANEL_WIDTH:Number = 400;
     /** @private 调试面板内容高 */
     private static const DEBUG_PANEL_HEIGHT:Number = 600;
+    /** @private 列内边距 */
+    private static const COL_PAD:Number = 10;
+    /** @private 左右列间距 */
+    private static const COL_GAP:Number = 10;
+    /** @private 单列宽 */
+    private static const COL_WIDTH:Number = 185;
     /** @private 下拉/输入控件宽 */
-    private static const CONTROL_WIDTH:Number = 182;
+    private static const CONTROL_WIDTH:Number = 175;
     /** @private 按钮宽 */
     private static const BUTTON_WIDTH:Number = 175;
-    /** @private 内容区底边（末行按钮 y + height） */
-    private static const CONTENT_BOTTOM:Number = 590;
+    /** @private 左栏标签行高 */
+    private static const LABEL_HEIGHT:Number = 22;
+    /** @private 左栏字段组数（标签+下拉） */
+    private static const FIELD_COUNT:int = 7;
+    /** @private 右栏功能按钮数（不含底部测试） */
+    private static const SIDE_BUTTON_COUNT:int = 3;
+    /** @private 右栏功能按钮高 */
+    private static const SIDE_BUTTON_HEIGHT:Number = 34;
+    /** @private 右栏功能按钮行距 */
+    private static const BUTTON_GAP:Number = 10;
+    /** @private 底部测试按钮高 */
+    private static const TEST_BUTTON_HEIGHT:Number = 40;
+    /** @private 底部测试按钮与上方内容间距 */
+    private static const TEST_BUTTON_GAP:Number = 10;
 
     public function FighterTester() {
         // 忽略旧版角色
@@ -87,10 +109,20 @@ public class FighterTester extends Sprite {
         }
     }
     private var _theme:SteelTheme;
+    /** @private Feathers 全局暗色；写入 fighter_test_config */
+    private var _darkMode:Boolean = true;
     private var _mainGame:MainGame;
     private var _testUI:Sprite;
     private var _testContent:Sprite;
+    /** @private 左栏：下拉列表 */
+    private var _leftCol:Sprite;
+    /** @private 右栏：功能按钮 + 错误 TextArea */
+    private var _rightCol:Sprite;
+    /** @private 底部通栏测试按钮 */
+    private var _testBtn:Button;
     private var _debugWindow:DockedDebugWindow;
+    private var _spriteInspector:SpriteInspectorWindow;
+    private var _themeBtn:Button;
     private var _p1InputId:PopUpListView;
     private var _p2InputId:PopUpListView;
     private var _p1FzInputId:PopUpListView;
@@ -98,7 +130,8 @@ public class FighterTester extends Sprite {
     private var _autoReceiveHp:PopUpListView;
     private var _mapInputId:PopUpListView;
     private var _fpsInput:PopUpListView;
-    private var _debugText:Label;
+    /** @private 右栏下半：错误信息多行文本 */
+    private var _debugText:TextArea;
 
     private var _gameSprite:Sprite;
     private var _assetLoader:AssetLoader = new AssetLoader();
@@ -114,11 +147,26 @@ public class FighterTester extends Sprite {
     private function buildTestUI():void {
         _testUI      = new Sprite();
         _testContent = new Sprite();
+        _leftCol     = new Sprite();
+        _rightCol    = new Sprite();
+        _leftCol.x   = COL_PAD;
+        _leftCol.y   = COL_PAD;
+        _rightCol.x  = COL_PAD + COL_WIDTH + COL_GAP;
+        _rightCol.y  = COL_PAD;
+        _testContent.addChild(_leftCol);
+        _testContent.addChild(_rightCol);
         _testUI.addChild(_testContent);
 
-        var xx:Number = (DEBUG_PANEL_WIDTH - CONTROL_WIDTH) * 0.5;
-        var yy:Number = 0;
-        var bx:Number = (DEBUG_PANEL_WIDTH - BUTTON_WIDTH) * 0.5;
+        var colH:Number  = DEBUG_PANEL_HEIGHT - COL_PAD * 2;
+        var mainH:Number = colH - TEST_BUTTON_HEIGHT - TEST_BUTTON_GAP;
+        var lx:Number    = (COL_WIDTH - CONTROL_WIDTH) * 0.5;
+        var bx:Number    = (COL_WIDTH - BUTTON_WIDTH) * 0.5;
+        var fieldSlot:Number = mainH / FIELD_COUNT;
+        var halfH:Number     = mainH * 0.5;
+        var btnH:Number      = SIDE_BUTTON_HEIGHT;
+        var stackH:Number    = btnH * SIDE_BUTTON_COUNT + BUTTON_GAP * (SIDE_BUTTON_COUNT - 1);
+        // 上半区垂直居中按钮组，上下留白
+        var by:Number = Math.max(BUTTON_GAP, (halfH - stackH) * 0.5);
 
         var fighterData:Array = (
                 function ():Array {
@@ -143,10 +191,13 @@ public class FighterTester extends Sprite {
                     return data;
                 }
         )();
-        addLabel(GetLang('dev.txt.fighter_tester.p1_fighter_id'), yy, xx);
-        yy += 30;
-        _p1InputId = addInput(fighterData, yy, xx);
-        yy += 30;
+        _p1InputId = addField(
+                GetLang('dev.txt.fighter_tester.p1_fighter_id'),
+                fighterData,
+                0,
+                fieldSlot,
+                lx
+        );
 
         var assistantData:Array = (
                 function ():Array {
@@ -171,20 +222,27 @@ public class FighterTester extends Sprite {
                     return data;
                 }
         )();
-        addLabel(GetLang('dev.txt.fighter_tester.p1_assistant_id'), yy, xx);
-        yy += 30;
-        _p1FzInputId = addInput(assistantData, yy, xx);
-        yy += 30;
-
-        addLabel(GetLang('dev.txt.fighter_tester.p2_fighter_id'), yy, xx);
-        yy += 30;
-        _p2InputId = addInput(fighterData, yy, xx);
-        yy += 30;
-
-        addLabel(GetLang('dev.txt.fighter_tester.p2_assistant_id'), yy, xx);
-        yy += 30;
-        _p2FzInputId = addInput(assistantData, yy, xx);
-        yy += 30;
+        _p1FzInputId = addField(
+                GetLang('dev.txt.fighter_tester.p1_assistant_id'),
+                assistantData,
+                1,
+                fieldSlot,
+                lx
+        );
+        _p2InputId = addField(
+                GetLang('dev.txt.fighter_tester.p2_fighter_id'),
+                fighterData,
+                2,
+                fieldSlot,
+                lx
+        );
+        _p2FzInputId = addField(
+                GetLang('dev.txt.fighter_tester.p2_assistant_id'),
+                assistantData,
+                3,
+                fieldSlot,
+                lx
+        );
 
         var mapData:Array = (
                 function ():Array {
@@ -209,10 +267,13 @@ public class FighterTester extends Sprite {
                     return data;
                 }
         )();
-        addLabel(GetLang('dev.txt.fighter_tester.map_id'), yy, xx);
-        yy += 30;
-        _mapInputId = addInput(mapData, yy, xx);
-        yy += 45;
+        _mapInputId = addField(
+                GetLang('dev.txt.fighter_tester.map_id'),
+                mapData,
+                4,
+                fieldSlot,
+                lx
+        );
 
         var fpsData:Array = [
             {
@@ -221,11 +282,13 @@ public class FighterTester extends Sprite {
                 text: '60'
             }
         ];
-        addLabel(GetLang('dev.txt.fighter_tester.game_fps'), yy, xx);
-        yy += 30;
-        //	_fpsInput = addInput(GameConfig.FPS_GAME.toString(),yy,60);
-        _fpsInput = addInput(fpsData, yy, xx);
-        yy += 30;
+        _fpsInput = addField(
+                GetLang('dev.txt.fighter_tester.game_fps'),
+                fpsData,
+                5,
+                fieldSlot,
+                lx
+        );
 
         var recoverData:Array = [
             {
@@ -234,20 +297,38 @@ public class FighterTester extends Sprite {
                 text: GetLang('txt.options.disable')
             }
         ];
-        addLabel(GetLang('dev.txt.fighter_tester.training_recover'), yy, xx);
-        yy += 30;
-        _autoReceiveHp = addInput(recoverData, yy, xx);
-        yy += 30;
+        _autoReceiveHp = addField(
+                GetLang('dev.txt.fighter_tester.training_recover'),
+                recoverData,
+                6,
+                fieldSlot,
+                lx
+        );
 
-        _debugText                  = addLabel(GetLang('dev.txt.fighter_tester.error_message_prompt'), yy, xx);
-        _debugText.width            = CONTROL_WIDTH;
-        _debugText.height           = 200;
-        _debugText.textFormat.color = 0xff0000;
-        _debugText.wordWrap         = true;
+        _themeBtn = addButton(themeButtonLabel(), by, bx, BUTTON_WIDTH, btnH, onThemeButtonClick);
+        by += btnH + BUTTON_GAP;
+        addButton('显示判定面', by, bx, BUTTON_WIDTH, btnH, renderMainClickHandler);
+        by += btnH + BUTTON_GAP;
+        addButton('显示精灵框', by, bx, BUTTON_WIDTH, btnH, renderSpriteBoundsClickHandler);
 
-//			addButton("改变FPS",400,50,100,30,changeFPS);
-        addButton(GetLang('dev.txt.fighter_tester.btn_test'), 560, bx, BUTTON_WIDTH, 30, testGame);
-        addButton('显示判定面', 520, bx, BUTTON_WIDTH, 30, renderMainClickHandler);
+        // 错误区占下半；初次用正文显示提示，点测试后清空，之后只承接 Debugger
+        _debugText          = new TextArea();
+        _debugText.editable = false;
+        _debugText.x        = bx;
+        _debugText.y        = halfH;
+        _debugText.width    = BUTTON_WIDTH;
+        _debugText.height   = halfH;
+        _rightCol.addChild(_debugText);
+        applyDebugTextAreaStyle();
+        setDebugLogText(GetLang('dev.txt.fighter_tester.error_message_prompt'));
+
+        _testBtn        = new Button(GetLang('dev.txt.fighter_tester.btn_test'));
+        _testBtn.x      = COL_PAD;
+        _testBtn.y      = COL_PAD + mainH + TEST_BUTTON_GAP;
+        _testBtn.width  = DEBUG_PANEL_WIDTH - COL_PAD * 2;
+        _testBtn.height = TEST_BUTTON_HEIGHT;
+        _testBtn.addEventListener(MouseEvent.CLICK, testGame);
+        _testContent.addChild(_testBtn);
 
         var saveObj:Object = KyoSharedObject.load('fighter_test_config');
         if (saveObj && saveObj.p1) {
@@ -266,7 +347,6 @@ public class FighterTester extends Sprite {
                 listView.selectedItem = listView.dataProvider.get(index);
             }
 
-
             setCurrentItem(_p1InputId, saveObj.p1.id);
 
             setCurrentItem(_p2InputId, saveObj.p2.id);
@@ -276,7 +356,7 @@ public class FighterTester extends Sprite {
             }
 
             if (saveObj.p2.fz) {
-                setCurrentItem(_p2FzInputId, saveObj.p1.fz);
+                setCurrentItem(_p2FzInputId, saveObj.p2.fz);
             }
 
             if (saveObj.map) {
@@ -285,33 +365,139 @@ public class FighterTester extends Sprite {
 
         }
 
-        _debugWindow = new DockedDebugWindow(stage.nativeWindow);
+        _debugWindow                  = new DockedDebugWindow(stage.nativeWindow);
+        _debugWindow.onDarkModeChange = onDebugDarkModeChange;
         _debugWindow.open(
                 _testUI,
                 _testContent,
                 'Debug',
                 DEBUG_PANEL_WIDTH,
                 DEBUG_PANEL_HEIGHT,
-                CONTENT_BOTTOM
+                DEBUG_PANEL_HEIGHT,
+                _theme,
+                _darkMode
         );
+        applyDebugLabelColors();
+    }
+
+    /**
+     * 调试窗亮暗切换：同步全局 SteelTheme、属性窗，并写入 SharedObject。
+     * @param darkMode 是否暗色。
+     */
+    private function onDebugDarkModeChange(darkMode:Boolean):void {
+        _darkMode = darkMode;
+        if (_theme) {
+            _theme.darkMode = _darkMode;
+            Theme.setTheme(_theme);
+        }
+        if (_themeBtn) {
+            _themeBtn.text = themeButtonLabel();
+        }
+        applyDebugLabelColors();
+        applyDebugTextAreaStyle();
+        if (_spriteInspector) {
+            _spriteInspector.setDarkMode(_darkMode);
+        }
+        persistDarkMode();
+    }
+
+    /**
+     * 亮暗按钮文案（显示将切换到的模式）。
+     * @return 按钮文字。
+     */
+    private function themeButtonLabel():String {
+        return _darkMode ? '亮色' : '暗色';
+    }
+
+    /**
+     * 右栏亮暗按钮：委托调试窗切换主题。
+     * @param e 点击事件。
+     */
+    private function onThemeButtonClick(e:MouseEvent):void {
+        if (_debugWindow) {
+            _debugWindow.toggleDarkMode();
+        }
+    }
+
+    /**
+     * 按当前亮暗刷新调试面板 Label 颜色。
+     */
+    private function applyDebugLabelColors():void {
+        if (!_leftCol) {
+            return;
+        }
+
+        var tf:TextFormat = DebugThemeChrome.textFormat(_darkMode, false, 14);
+        for (var i:int = 0; i < _leftCol.numChildren; i++) {
+            var label:Label = _leftCol.getChildAt(i) as Label;
+            if (!label) {
+                continue;
+            }
+            label.textFormat = tf;
+        }
+    }
+
+    /**
+     * 错误信息 TextArea 使用红色正文格式。
+     */
+    private function applyDebugTextAreaStyle():void {
+        if (!_debugText) {
+            return;
+        }
+
+        var tf:TextFormat = DebugThemeChrome.textFormat(_darkMode, false, 14);
+        tf.color              = 0xff0000;
+        _debugText.textFormat = tf;
+    }
+
+    /**
+     * 将 darkMode 合并写入 fighter_test_config。
+     */
+    private function persistDarkMode():void {
+        var data:Object = KyoSharedObject.load('fighter_test_config');
+        if (!data) {
+            data = {};
+        }
+
+        KyoSharedObject.save('fighter_test_config', {
+            p1      : data.p1,
+            p2      : data.p2,
+            map     : data.map,
+            darkMode: _darkMode
+        });
+    }
+
+    /**
+     * 左栏按槽位平分高度放置标签+下拉。
+     * @param txt 标签文案。
+     * @param data 下拉数据。
+     * @param index 槽位下标。
+     * @param slotH 单槽高度。
+     * @param x 控件 x。
+     * @return 下拉列表。
+     */
+    private function addField(
+            txt  :String,
+            data :Array,
+            index:int,
+            slotH:Number,
+            x    :Number
+    ):PopUpListView {
+        var y0:Number = index * slotH;
+        addLabel(txt, y0, x);
+
+        return addInput(data, y0 + LABEL_HEIGHT, x);
     }
 
     private function addLabel(txt:String, y:Number = 0, x:Number = 0):Label {
-        Theme.setTheme(_theme);
         var label:Label = new Label(txt);
 
-        var tf:TextFormat = new TextFormat();
-
-        tf.size  = 14;
-        tf.color = 0xffffff;
-        tf.font  = FONT.fontName;
-
-        label.textFormat   = tf;
+        label.textFormat   = DebugThemeChrome.textFormat(_darkMode, false, 14);
         label.x            = x;
         label.y            = y;
         label.mouseEnabled = false;
 
-        _testContent.addChild(label);
+        _leftCol.addChild(label);
         return label;
     }
 
@@ -330,14 +516,14 @@ public class FighterTester extends Sprite {
         listView.width  = CONTROL_WIDTH;
         listView.height = 27;
 
-        _testContent.addChild(listView);
+        _leftCol.addChild(listView);
         return listView;
     }
 
     private function addButton(
             label:String, y:Number = 0, x:Number = 0, width:Number = 100, height:Number = 50,
             click:Function = null
-    ):Sprite {
+    ):Button {
         var btn:Button = new Button(label);
         btn.x          = x;
         btn.y          = y;
@@ -348,12 +534,35 @@ public class FighterTester extends Sprite {
             btn.addEventListener(MouseEvent.CLICK, click);
         }
 
-        _testContent.addChild(btn);
+        _rightCol.addChild(btn);
         return btn;
     }
 
     private function onDebugLog(msg:String):void {
-        _debugText.text = msg;
+        setDebugLogText(msg);
+    }
+
+    /**
+     * 写入/清空错误信息 TextArea。
+     * <p>直接赋空串时 TextArea 视口偶发不刷新，清空时先脏写再置空。</p>
+     * @param msg 错误文案；<code>null</code> 或空串表示清空。
+     */
+    private function setDebugLogText(msg:String):void {
+        if (!_debugText) {
+            return;
+        }
+
+        var next:String = (msg != null) ? msg : '';
+        if (next.length == 0) {
+            if (_debugText.text != null && _debugText.text.length > 0) {
+                _debugText.text = ' ';
+            }
+            _debugText.text = '';
+
+            return;
+        }
+
+        _debugText.text = next;
     }
 
     private function changeFPS(...params):void {
@@ -367,7 +576,7 @@ public class FighterTester extends Sprite {
      * 点击测试游戏
      */
     private function testGame(...params):void {
-        _debugText.text = '';
+        setDebugLogText('');
 
         var p1FighterId:String, p2FighterId:String;
         var p1AssistantId:String, p2AssistantId:String;
@@ -382,10 +591,10 @@ public class FighterTester extends Sprite {
         mapId = _mapInputId.selectedItem[KEY];
 
         KyoSharedObject.save('fighter_test_config', {
-            p1: {id: p1FighterId, fz: p1AssistantId},
-            p2: {id: p2FighterId, fz: p2AssistantId},
-
-            map: mapId
+            p1      : {id: p1FighterId, fz: p1AssistantId},
+            p2      : {id: p2FighterId, fz: p2AssistantId},
+            map     : mapId,
+            darkMode: _darkMode
         });
 
         changeFPS();
@@ -458,11 +667,18 @@ public class FighterTester extends Sprite {
                 var hash:String = GithubUtils.getCommitsHash();
                 Debugger.showCommitHash(hash, GithubUtils.getCommitsDisplayLabel());
 
+                var saveTheme:Object = KyoSharedObject.load('fighter_test_config');
+                _darkMode = true;
+                if (saveTheme && saveTheme.hasOwnProperty('darkMode')) {
+                    _darkMode = Boolean(saveTheme.darkMode);
+                }
+
                 _theme          = new SteelTheme();
-                _theme.fontName = FONT.fontName;
+                _theme.darkMode = _darkMode;
+                _theme.fontName = DebugThemeChrome.fontName();
                 Theme.setTheme(_theme);
 
-                UIUtils.LOCK_FONT = FONT.fontName;
+                UIUtils.LOCK_FONT = DebugThemeChrome.fontName();
 
                 GameData.I.saveData();
                 _mainGame.initalizeLoad(initBackHandler, initFailHandler);
@@ -493,6 +709,33 @@ public class FighterTester extends Sprite {
         }
 
         DebugMain.I.isRender = !DebugMain.I.isRender;
+    }
+
+    private function renderSpriteBoundsClickHandler(e:MouseEvent):void {
+        var btn:Button = e.target as Button;
+        if (!btn) {
+            return;
+        }
+
+        if (DebugSpriteBounds.I.isRender) {
+            btn.text = '显示精灵框';
+            if (_spriteInspector) {
+                _spriteInspector.stop();
+            }
+        }
+        else {
+            DebugSpriteBounds.I.initialize();
+            btn.text = '隐藏精灵框';
+            if (!_spriteInspector) {
+                _spriteInspector = new SpriteInspectorWindow(stage.nativeWindow, _theme, _darkMode);
+            }
+            else {
+                _spriteInspector.setDarkMode(_darkMode);
+            }
+            _spriteInspector.start();
+        }
+
+        DebugSpriteBounds.I.isRender = !DebugSpriteBounds.I.isRender;
     }
 }
 }
