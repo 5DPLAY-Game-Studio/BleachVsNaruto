@@ -261,7 +261,7 @@
           "repeat_add": "MusouFighterModel.addFighter:: 角色重复添加： {fighterId}"
         },
         "musou_model": {
-          "load_area": "正在加载区域： {areaUrl}",
+          "load_area"    : "正在加载区域： {areaUrl}",
           "init_map_area": "初始化地图区域： {areaId}"
         },
         "musou_game_run_data_vo": {
@@ -413,7 +413,21 @@
         "game_fps"            : "游戏帧率",
         "training_recover"    : "练习模式回复效果",
         "error_message_prompt": "错误信息提示……",
-        "btn_test"            : "测试"
+        "btn_test"            : "测试",
+        "show_hit_area"       : "显示判定面",
+        "hide_hit_area"       : "隐藏判定面",
+        "show_sprite_bounds"  : "显示精灵框",
+        "hide_sprite_bounds"  : "隐藏精灵框",
+        "theme_light"         : "亮色",
+        "theme_dark"          : "暗色"
+      },
+      "sprite_inspector_window": {
+        "idle"        : "点击实体以锁定跟踪\n右键清除跟踪",
+        "title"       : "Sprite Inspector",
+        "title_locked": "Sprite · {name}"
+      },
+      "game_interface_manager": {
+        "commit": "提交：<a href=\"{url}\" target=\"_blank\">{label}</a><br/>"
       }
     }
   }

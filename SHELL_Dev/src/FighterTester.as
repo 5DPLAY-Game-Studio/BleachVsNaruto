@@ -307,9 +307,9 @@ public class FighterTester extends Sprite {
 
         _themeBtn = addButton(themeButtonLabel(), by, bx, BUTTON_WIDTH, btnH, onThemeButtonClick);
         by += btnH + BUTTON_GAP;
-        addButton('显示判定面', by, bx, BUTTON_WIDTH, btnH, renderMainClickHandler);
+        addButton(GetLang('dev.txt.fighter_tester.show_hit_area'), by, bx, BUTTON_WIDTH, btnH, renderMainClickHandler);
         by += btnH + BUTTON_GAP;
-        addButton('显示精灵框', by, bx, BUTTON_WIDTH, btnH, renderSpriteBoundsClickHandler);
+        addButton(GetLang('dev.txt.fighter_tester.show_sprite_bounds'), by, bx, BUTTON_WIDTH, btnH, renderSpriteBoundsClickHandler);
 
         // 错误区占下半；初次用正文显示提示，点测试后清空，之后只承接 Debugger
         _debugText          = new TextArea();
@@ -406,7 +406,7 @@ public class FighterTester extends Sprite {
      * @return 按钮文字。
      */
     private function themeButtonLabel():String {
-        return _darkMode ? '亮色' : '暗色';
+        return _darkMode ? GetLang('dev.txt.fighter_tester.theme_light') : GetLang('dev.txt.fighter_tester.theme_dark');
     }
 
     /**
@@ -601,7 +601,7 @@ public class FighterTester extends Sprite {
 
         GameMode.currentMode = GameMode.TRAINING;
 
-        TrainingCtrler.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == '启用';
+        TrainingCtrler.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == GetLang('txt.options.enable');
 
         GameData.I.p1Select          = new SelectVO();
         GameData.I.p2Select          = new SelectVO();
@@ -701,11 +701,11 @@ public class FighterTester extends Sprite {
         }
 
         if (DebugMain.I.isRender) {
-            btn.text = '显示判定面';
+            btn.text = GetLang('dev.txt.fighter_tester.show_hit_area');
         }
         else {
             DebugMain.I.initialize();
-            btn.text = '隐藏判定面';
+            btn.text = GetLang('dev.txt.fighter_tester.hide_hit_area');
         }
 
         DebugMain.I.isRender = !DebugMain.I.isRender;
@@ -718,14 +718,14 @@ public class FighterTester extends Sprite {
         }
 
         if (DebugSpriteBounds.I.isRender) {
-            btn.text = '显示精灵框';
+            btn.text = GetLang('dev.txt.fighter_tester.show_sprite_bounds');
             if (_spriteInspector) {
                 _spriteInspector.stop();
             }
         }
         else {
             DebugSpriteBounds.I.initialize();
-            btn.text = '隐藏精灵框';
+            btn.text = GetLang('dev.txt.fighter_tester.hide_sprite_bounds');
             if (!_spriteInspector) {
                 _spriteInspector = new SpriteInspectorWindow(stage.nativeWindow, _theme, _darkMode);
             }

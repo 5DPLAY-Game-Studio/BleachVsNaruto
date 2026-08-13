@@ -98,7 +98,10 @@ public class GameInterfaceManager implements IGameInterface {
         var commitsHash:String = GithubUtils.getCommitsHash();
         var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
         var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
-        creditsInfo += '提交：<a href="' + commitsUrl + '" target="_blank">' + commitsLabel + '</a><br/>';
+        creditsInfo += GetLang('dev.txt.game_interface_manager.commit', {
+            url  : commitsUrl,
+            label: commitsLabel
+        });
 
         var txt:TextField = new TextField();
 
