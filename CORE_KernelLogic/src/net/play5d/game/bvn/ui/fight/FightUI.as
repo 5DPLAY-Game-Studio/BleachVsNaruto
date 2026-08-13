@@ -36,6 +36,7 @@ import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
+import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
@@ -64,6 +65,16 @@ public class FightUI implements IGameUI {
         ui.addChild(_p1PosUI);
         ui.addChild(_p2PosUI);
 
+        if (GameMode.currentMode == GameMode.TRAINING) {
+            _inputHistory1   = new TrainingInputHistoryUI(GameInputType.P1);
+            _inputHistory1.x = 20;
+            ui.addChild(_inputHistory1);
+
+            _inputHistory2   = new TrainingInputHistoryUI(GameInputType.P2, true);
+            _inputHistory2.x = GameConfig.GAME_SIZE.x - 20;
+            ui.addChild(_inputHistory2);
+        }
+
         if (GameMode.isArcade()) {
             trace('fightUI.initlize');
             _fightbar.initScore();
@@ -86,6 +97,8 @@ public class FightUI implements IGameUI {
     private var _flyTimer:Number = 0;
     private var _p1PosUI:$fight$SP_playerPos1;
     private var _p2PosUI:$fight$SP_playerPos2;
+    private var _inputHistory1:TrainingInputHistoryUI;
+    private var _inputHistory2:TrainingInputHistoryUI;
 
     public function initlize(p1:GameRunFighterGroup, p2:GameRunFighterGroup):void {
         _fightbar.setFighter(p1, p2);
@@ -130,6 +143,14 @@ public class FightUI implements IGameUI {
             _hits2.destroy();
             _hits2 = null;
         }
+        if (_inputHistory1) {
+            _inputHistory1.destroy();
+            _inputHistory1 = null;
+        }
+        if (_inputHistory2) {
+            _inputHistory2.destroy();
+            _inputHistory2 = null;
+        }
         if (ui) {
             try {
                 ui.removeChildren();
@@ -151,6 +172,13 @@ public class FightUI implements IGameUI {
         _fightbar.render();
         _qibar1.render();
         _qibar2.render();
+
+        if (_inputHistory1) {
+            _inputHistory1.render();
+        }
+        if (_inputHistory2) {
+            _inputHistory2.render();
+        }
 
         var zoom:Number = GameCtrl.I.gameState.camera.getZoom();
 

@@ -27,12 +27,13 @@ import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.HitType;
-import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterInputCmd;
+import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
+import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.HitVO;
@@ -224,6 +225,7 @@ public class FighterMcCtrler {
         }
 
         FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.IDLE);
+        _fighter.dispatchEvent(new FighterEvent(FighterEvent.IDLE));
     }
 
     //循环播放  parent.$mc_ctrler.loop("走");
@@ -1079,34 +1081,34 @@ public class FighterMcCtrler {
         renderSpecial();
 
         if (_actionLogic.catch1()) {
-            doCatch(_action.catch1);
+            doCatch(_action.catch1, FighterInputCmd.ATTACK);
         }
         if (_actionLogic.catch2()) {
-            doCatch(_action.catch2);
+            doCatch(_action.catch2, FighterInputCmd.ZHAO_1);
         }
 
         if (_actionLogic.bishaSUPER()) {
-            doBisha(_action.bishaSUPER, _action.bishaSUPERQi, true);
+            doBisha(_action.bishaSUPER, _action.bishaSUPERQi, true, FighterInputCmd.BISHA_SUPER);
         }
         if (_actionLogic.bishaUP()) {
-            doBisha(_action.bishaUP, _action.bishaUPQi);
+            doBisha(_action.bishaUP, _action.bishaUPQi, false, FighterInputCmd.BISHA_UP);
         }
         if (_actionLogic.bisha()) {
-            doBisha(_action.bisha, _action.bishaQi);
+            doBisha(_action.bisha, _action.bishaQi, false, FighterInputCmd.BISHA);
         }
 
         if (_actionLogic.skill2()) {
-            doSkill(_action.skill2);
+            doSkill(_action.skill2, FighterInputCmd.SKILL_2);
         }
         if (_actionLogic.skill1()) {
-            doSkill(_action.skill1);
+            doSkill(_action.skill1, FighterInputCmd.SKILL_1);
         }
 
         if (_actionLogic.zhao3()) {
-            doSkill(_action.zhao3);
+            doSkill(_action.zhao3, FighterInputCmd.ZHAO_3);
         }
         if (_actionLogic.zhao2()) {
-            doSkill(_action.zhao2);
+            doSkill(_action.zhao2, FighterInputCmd.ZHAO_2);
         }
 
         if (_actionLogic.attack()) {
@@ -1114,7 +1116,7 @@ public class FighterMcCtrler {
         }
 
         if (_actionLogic.zhao1()) {
-            doSkill(_action.zhao1);
+            doSkill(_action.zhao1, FighterInputCmd.ZHAO_1);
         }
 
         if (_actionLogic.defense()) {
@@ -1174,27 +1176,27 @@ public class FighterMcCtrler {
         }
 
         if (_actionLogic.waiKai()) {
-            return checkDoWankai(_action.waiKai, FighterSpecialFrame.BANKAI);
+            return checkDoWankai(_action.waiKai, FighterSpecialFrame.BANKAI, FighterInputCmd.BANKAI);
         }
         if (_actionLogic.waiKaiW()) {
-            return checkDoWankai(_action.waiKaiW, FighterSpecialFrame.BANKAI_W);
+            return checkDoWankai(_action.waiKaiW, FighterSpecialFrame.BANKAI_W, FighterInputCmd.BANKAI_W);
         }
         if (_actionLogic.waiKaiS()) {
-            return checkDoWankai(_action.waiKaiS, FighterSpecialFrame.BANKAI_S);
+            return checkDoWankai(_action.waiKaiS, FighterSpecialFrame.BANKAI_S, FighterInputCmd.BANKAI_S);
         }
 
         return false;
     }
 
-    private function checkDoWankai(action:String, attackingAct:String):Boolean {
+    private function checkDoWankai(action:String, attackingAct:String, inputText:String):Boolean {
         if (action) {
-            doWaiKaiAction(action);
+            doWaiKaiAction(action, inputText);
             return true;
         }
 
         if (_doingAction == FighterSpecialFrame.ATTACK) {
             if (_doActionFrame < 2) {
-                doWaiKaiAction(attackingAct);
+                doWaiKaiAction(attackingAct, inputText);
                 return true;
             }
         }
@@ -1237,27 +1239,27 @@ public class FighterMcCtrler {
         //仅限连招使用
         if (FighterActionState.isAttacking(_fighter.actionState)) {
             if (_actionLogic.bishaSUPER()) {
-                doBisha(_action.bishaSUPER, _action.bishaSUPERQi, true);
+                doBisha(_action.bishaSUPER, _action.bishaSUPERQi, true, FighterInputCmd.BISHA_SUPER);
             }
             if (_actionLogic.bishaUP()) {
-                doBisha(_action.bishaUP, _action.bishaUPQi);
+                doBisha(_action.bishaUP, _action.bishaUPQi, false, FighterInputCmd.BISHA_UP);
             }
             if (_actionLogic.bisha()) {
-                doBisha(_action.bisha, _action.bishaQi);
+                doBisha(_action.bisha, _action.bishaQi, false, FighterInputCmd.BISHA);
             }
 
             if (_actionLogic.skill2()) {
-                doSkill(_action.skill2);
+                doSkill(_action.skill2, FighterInputCmd.SKILL_2);
             }
             if (_actionLogic.skill1()) {
-                doSkill(_action.skill1);
+                doSkill(_action.skill1, FighterInputCmd.SKILL_1);
             }
 
             if (_actionLogic.zhao3()) {
-                doSkill(_action.zhao3);
+                doSkill(_action.zhao3, FighterInputCmd.ZHAO_3);
             }
             if (_actionLogic.zhao2()) {
-                doSkill(_action.zhao2);
+                doSkill(_action.zhao2, FighterInputCmd.ZHAO_2);
             }
 
             if (_actionLogic.attack()) {
@@ -1265,7 +1267,7 @@ public class FighterMcCtrler {
             }
 
             if (_actionLogic.zhao1()) {
-                doSkill(_action.zhao1);
+                doSkill(_action.zhao1, FighterInputCmd.ZHAO_1);
             }
         }
 
@@ -1401,8 +1403,17 @@ public class FighterMcCtrler {
 
     /**
      * 执行动作
+     *
+     * @param action 动作帧标签。
+     * @param airAct 是否为空中动作。
+     * @param delayParam 跳转延迟参数。
+     * @param inputText 练习模式输入历史指令串（与帧标签无关，如 <code>WJ</code>）。
+     * @param highlight 是否使用菜单选中同款红色高亮。
      */
-    private function doAction(action:String, airAct:Boolean = false, delayParam:Object = null):void {
+    private function doAction(
+            action:String, airAct:Boolean = false, delayParam:Object = null, inputText:String = null,
+            highlight:Boolean                                                                 = false
+    ):void {
 
         if (action == null) {
             return;
@@ -1432,7 +1443,22 @@ public class FighterMcCtrler {
         _doActionFrame = 0;
         _mc.goFrame(action, true, 0, delayParam);
 
-        _fighter.dispatchEvent(new FighterEvent(FighterEvent.DO_ACTION));
+        var actEvt:FighterEvent = new FighterEvent(FighterEvent.DO_ACTION);
+        actEvt.params           = {action: action, input: inputText, highlight: highlight};
+        _fighter.dispatchEvent(actEvt);
+    }
+
+    /**
+     * @private 向练习模式输入历史派发指令（不切换动作帧）。
+     * @param highlight 是否使用菜单选中同款红色高亮。
+     */
+    private function dispatchTrainingInput(inputText:String, highlight:Boolean = false):void {
+        if (!inputText) {
+            return;
+        }
+        var actEvt:FighterEvent = new FighterEvent(FighterEvent.DO_ACTION);
+        actEvt.params           = {input: inputText, highlight: highlight};
+        _fighter.dispatchEvent(actEvt);
     }
 
     /**
@@ -1613,7 +1639,7 @@ public class FighterMcCtrler {
         if (_actionCtrler.moveRIGHT()) {
             _fighter.direct = 1;
         }
-        doAction(action);
+        doAction(action, false, null, FighterInputCmd.DASH);
         _fighter.actionState  = FighterActionState.DASH_ING;
         _fighter.isAllowBeHit = false;
         isApplyG(false);
@@ -1628,7 +1654,7 @@ public class FighterMcCtrler {
         }
         _fighter.useEnergy(30);
 
-        doAction(action);
+        doAction(action, false, null, FighterInputCmd.DASH);
         _fighter.actionState  = FighterActionState.DASH_ING;
         _fighter.isAllowBeHit = false;
         isApplyG(false);
@@ -1652,6 +1678,10 @@ public class FighterMcCtrler {
         _jumpDelayFrame      = GameConfig.JUMP_DELAY_FRAME;
         _action.isJumping    = true;
         _fighter.actionState = FighterActionState.JUMP_ING;
+
+        var jumpEvt:FighterEvent = new FighterEvent(FighterEvent.DO_ACTION);
+        jumpEvt.params           = {action: FighterSpecialFrame.JUMP, input: FighterInputCmd.JUMP};
+        _fighter.dispatchEvent(jumpEvt);
     }
 
     /**
@@ -1688,56 +1718,85 @@ public class FighterMcCtrler {
         _action.isJumping    = true;
         _fighter.actionState = FighterActionState.JUMP_ING;
 
-
+        var airJumpEvt:FighterEvent = new FighterEvent(FighterEvent.DO_ACTION);
+        airJumpEvt.params           = {action: FighterSpecialFrame.JUMP, input: FighterInputCmd.JUMP};
+        _fighter.dispatchEvent(airJumpEvt);
     }
 
     /**
      * 执行攻击
      */
     private function doAttack(action:String):void {
-        doAction(action);
+        doAction(action, false, null, FighterInputCmd.ATTACK);
         _fighter.actionState = FighterActionState.ATTACK_ING;
     }
 
     /**
      * 执行技能
+     * @param inputText 练习模式输入历史指令（如 WJ / SJ）
      */
-    private function doSkill(action:String):void {
-        doAction(action);
+    private function doSkill(action:String, inputText:String):void {
+        doAction(action, false, null, inputText);
         _fighter.actionState = FighterActionState.SKILL_ING;
     }
 
     /**
      * 执行摔技
+     * @param btnLetter 按键字母 J 或 U，左右由当前方向键决定
      */
-    private function doCatch(action:String):void {
+    private function doCatch(action:String, btnLetter:String):void {
         if (!allowCatch()) {
             return;
         }
 //			if(!_action.CDOK("catch")) return;
 //			_action.setCD("catch" , 5000);
 
-        doAction(action);
+        doAction(action, false, null, getCatchInputSideLetter() + btnLetter);
         _fighter.actionState = FighterActionState.SKILL_ING;
     }
 
     /**
-     * 执行必杀
+     * @private 摔技左右方向字母（绝对左右键）。
      */
-    private function doBisha(action:String, qi:int, isSuper:Boolean = false):void {
+    private function getCatchInputSideLetter():String {
+        if (_actionCtrler.moveRIGHT() && !_actionCtrler.moveLEFT()) {
+            return FighterInputCmd.RIGHT;
+        }
+        if (_actionCtrler.moveLEFT() && !_actionCtrler.moveRIGHT()) {
+            return FighterInputCmd.LEFT;
+        }
+        if (_actionCtrler.moveRIGHT()) {
+            return FighterInputCmd.RIGHT;
+        }
+        if (_actionCtrler.moveLEFT()) {
+            return FighterInputCmd.LEFT;
+        }
+        if (_fighter && _fighter.direct > 0) {
+            return FighterInputCmd.RIGHT;
+        }
+
+        return FighterInputCmd.LEFT;
+    }
+
+    /**
+     * 执行必杀
+     * @param inputText 练习模式输入历史指令（如 I / WI / SI）
+     */
+    private function doBisha(action:String, qi:int, isSuper:Boolean = false, inputText:String = null):void {
         if (!_fighter.useQi(qi)) {
             return;
         }
 
         _fighter.actionState = isSuper ? FighterActionState.BISHA_SUPER_ING : FighterActionState.BISHA_ING;
 
-        doAction(action);
+        doAction(action, false, null, inputText);
     }
 
     /**
-     * 执行必杀
+     * 执行万解
+     * @param inputText 练习模式输入历史指令（如 JK / WJK / SJK）
      */
-    private function doWaiKaiAction(action:String):void {
+    private function doWaiKaiAction(action:String, inputText:String):void {
         if (!_mc.checkFrame(action)) {
             return;
         }
@@ -1746,7 +1805,7 @@ public class FighterMcCtrler {
         }
         ;
         _fighter.actionState = FighterActionState.WAN_KAI_ING;
-        doAction(action);
+        doAction(action, false, null, inputText);
         _fighter.isAllowBeHit = false;
     }
 
@@ -1763,7 +1822,7 @@ public class FighterMcCtrler {
         _action.airHitTimes--;
         _action.jumpTimes = 0;
 
-        doAction(action, true);
+        doAction(action, true, null, FighterInputCmd.ATTACK_AIR);
 
         _fighter.actionState = FighterActionState.ATTACK_ING;
     }
@@ -1776,6 +1835,7 @@ public class FighterMcCtrler {
             return;
         }
 
+        var inputText:String = FighterInputCmd.SKILL_AIR;
         if (_action.isJumping) {
             var act:String = null;
             if (_actionCtrler.zhao3()) {
@@ -1785,7 +1845,8 @@ public class FighterMcCtrler {
                 act = FighterSpecialFrame.SKILL_AIR_S;
             }
             if (act && _mc.checkFrame(act)) {
-                action = act;
+                action    = act;
+                inputText = (act == FighterSpecialFrame.SKILL_AIR_W) ? FighterInputCmd.SKILL_AIR_W : FighterInputCmd.SKILL_AIR_S;
             }
         }
 
@@ -1794,7 +1855,7 @@ public class FighterMcCtrler {
         _action.airHitTimes = 0;
         _action.jumpTimes   = 0;
 
-        doAction(action, true);
+        doAction(action, true, null, inputText);
         _fighter.actionState = FighterActionState.SKILL_ING;
     }
 
@@ -1812,7 +1873,7 @@ public class FighterMcCtrler {
         _fighter.actionState = FighterActionState.BISHA_ING;
 
         _action.airHitTimes = 0;
-        doAction(action, true);
+        doAction(action, true, null, FighterInputCmd.BISHA_AIR);
     }
 
     //判断是否背对着敌人
@@ -2074,6 +2135,7 @@ public class FighterMcCtrler {
             _fighter.energyExplode();
         }
 
+        dispatchTrainingInput(FighterInputCmd.ASSIST, true);
         FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_RESUME);
 
     }
@@ -2353,7 +2415,7 @@ public class FighterMcCtrler {
 
         var vecx:Number = _fighter.getVecX();
 
-        doAction(FighterSpecialFrame.HURT_DOWN_JUMP);
+        doAction(FighterSpecialFrame.HURT_DOWN_JUMP, false, null, FighterInputCmd.DASH, true);
         _fighter.isAllowBeHit = false;
         _fighter.setVelocity(vecx);
         _fighter.setDamping(vecx * 0.1);
@@ -2365,6 +2427,7 @@ public class FighterMcCtrler {
             move(8, 0);
             _mc.goFrame(FighterSpecialFrame.MOVE, true);
             _ghostType = 0;
+            dispatchTrainingInput(FighterInputCmd.GHOST_DASH_S);
         }
     }
 
@@ -2375,6 +2438,7 @@ public class FighterMcCtrler {
             _mc.goFrame(FighterSpecialFrame.JUMP, false);
             _action.jumpTimes--;
             _ghostType = 1;
+            dispatchTrainingInput(FighterInputCmd.GHOST_DASH_W);
         }
     }
 
@@ -2383,6 +2447,7 @@ public class FighterMcCtrler {
             move(0, 15);
             _mc.goFrame(FighterSpecialFrame.JUMP_DOWN, false);
             _ghostType = 2;
+            dispatchTrainingInput(FighterInputCmd.GHOST_DASH_S);
         }
     }
 
