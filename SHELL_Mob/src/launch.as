@@ -36,7 +36,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.mob.ScreenRotater;
-import net.play5d.game.bvn.mob.SwfLib;
+import net.play5d.game.bvn.SwfLib;
 import net.play5d.game.bvn.mob.ads.AdManager;
 import net.play5d.game.bvn.mob.ads.ctrl.AdCtrler;
 import net.play5d.game.bvn.mob.ctrls.GamePolyCtrl;

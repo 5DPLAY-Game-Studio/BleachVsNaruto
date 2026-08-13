@@ -55,7 +55,7 @@ import net.play5d.game.bvn.test.DebugThemeChrome;
 import net.play5d.game.bvn.test.DockedDebugWindow;
 import net.play5d.game.bvn.test.SpriteInspectorWindow;
 import net.play5d.game.bvn.test.GameInterfaceManager;
-import net.play5d.game.bvn.test.SwfLib;
+import net.play5d.game.bvn.SwfLib;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.AssetLoader;
 import net.play5d.game.bvn.utils.GithubUtils;
