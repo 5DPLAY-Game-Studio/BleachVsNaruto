@@ -1,7 +1,7 @@
 package net.play5d.game.bvn.mob.views.lan {
 import flash.display.Sprite;
 
-import net.play5d.game.bvn.ctrler.lan.ILanExitDialog;
+import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputType;

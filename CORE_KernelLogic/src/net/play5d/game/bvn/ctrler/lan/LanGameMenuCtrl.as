@@ -22,12 +22,13 @@ import flash.events.KeyboardEvent;
 import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
 import net.play5d.kyo.utils.KeyBoarder;
 
 /**
  * 联机对局 ESC 退出菜单（对话框由壳注入）。
  *
- * @see ILanExitDialog
+ * @see net.play5d.game.bvn.interfaces.lan.ILanExitDialog
  */
 public class LanGameMenuCtrl {
     /** @private */

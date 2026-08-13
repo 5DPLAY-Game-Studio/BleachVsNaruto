@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.win.input {
 import flash.display.Stage;
 
-import net.play5d.game.bvn.ctrler.lan.ILanSocketInput;
+import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.input.IGameInput;
 import net.play5d.game.bvn.data.lan.SocketInputData;
 

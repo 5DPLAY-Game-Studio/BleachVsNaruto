@@ -23,7 +23,7 @@ import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.ctrler.lan.ILanServerLockLink;
+import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
 import net.play5d.game.bvn.ctrler.lan.LanGameMenuCtrl;
 import net.play5d.game.bvn.ctrler.lan.LockFrameServerLogic;
 import net.play5d.game.bvn.ctrler.lan.SelectFighterServerLogic;

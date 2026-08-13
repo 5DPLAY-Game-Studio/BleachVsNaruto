@@ -21,7 +21,7 @@
 | 目录 | 角色 | 备注 |
 |------|------|------|
 | `CORE_KernelLogic` | 核心玩法逻辑 | 入口速查 → [`map.md`](map.md) |
-| `CORE_Shared` | 对外共享 API / 版本 / `ISwfLib`+`SwfLib` | 编译资源时进 `shared` SWC；UI SWF Embed 在此，壳侧注入 |
+| `CORE_Shared` | 对外共享 API / 版本 / `ISwfLib`+`SwfLib` / `interfaces.lan.ILan*` | 编译资源时进 `shared` SWC；UI SWF Embed 与联机注入契约在此 |
 | `CORE_Utils` | 工程内公用工具 | |
 | `LIB_KyoLib` | 通用显示/输入/加载等库 | git 子模块；首选 API → [`kyolib.md`](kyolib.md) |
 | `LIB_Other` | 其它第三方/附属库 | |

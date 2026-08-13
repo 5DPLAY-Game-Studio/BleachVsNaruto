@@ -23,6 +23,8 @@ import flash.utils.getTimer;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.lan.LanMsgType;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
+import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.utils.LANUtils;
 
 /**
@@ -31,8 +33,8 @@ import net.play5d.game.bvn.utils.LANUtils;
  * <p>通过 <code>init</code> 注入会话与双方 <code>ILanSocketInput</code>。</p>
  *
  * @see LockFrameServerLogic
- * @see ILanClientLockLink
- * @see ILanSocketInput
+ * @see net.play5d.game.bvn.interfaces.lan.ILanClientLockLink
+ * @see net.play5d.game.bvn.interfaces.lan.ILanSocketInput
  */
 public class LockFrameClientLogic {
     /**

@@ -16,34 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.lan {
+package net.play5d.game.bvn.interfaces.lan {
+
 /**
- * 锁帧用的 Socket 输入通道（壳层 <code>GameSocketInput</code> 实现）。
+ * 锁帧服务端对壳层会话的依赖契约。
  *
- * @see LockFrameClientLogic
- * @see LockFrameServerLogic
+ * <p>负责 UDP 广播输入/同步载荷，由壳的联机主机控制实现。</p>
+ *
+ * @example
+ * <listing version="3.0">
+ * var link:ILanServerLockLink = new MyLANServerCtrl();
+ * link.sendUDP(bytes);
+ * </listing>
  */
-public interface ILanSocketInput {
+public interface ILanServerLockLink {
     /**
-     * 采集本机按键到内部缓冲。
+     * 发送 UDP 载荷。
+     * @param data 通常为 <code>ByteArray</code>。
+     * @example
+     * <listing version="3.0">
+     * link.sendUDP(bytes);
+     * </listing>
      */
-    function renderInput():void;
-
-    /**
-     * 取出当前缓冲键值。
-     * @return 键位打包值。
-     */
-    function getSocketData():int;
-
-    /**
-     * 清空缓冲。
-     */
-    function resetInput():void;
-
-    /**
-     * 写入远端/缓存键值。
-     * @param v 键位打包值。
-     */
-    function setSocketData(v:int):void;
+    function sendUDP(data:Object):void;
 }
 }

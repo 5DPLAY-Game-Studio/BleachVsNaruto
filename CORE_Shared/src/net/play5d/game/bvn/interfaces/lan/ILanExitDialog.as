@@ -16,31 +16,56 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.lan {
+package net.play5d.game.bvn.interfaces.lan {
+
 /**
- * 联机退出确认对话框（壳层实现并注入 <code>LanGameMenuCtrl</code>）。
+ * 联机退出确认对话框契约。
  *
- * @see LanGameMenuCtrl
+ * <p>由壳实现并注入联机菜单控制逻辑。</p>
+ *
+ * @example
+ * <listing version="3.0">
+ * var d:ILanExitDialog = new MyLanExitDialog();
+ * d.show();
+ * </listing>
  */
 public interface ILanExitDialog {
     /**
      * 显示对话框。
+     * @example
+     * <listing version="3.0">
+     * dialog.show();
+     * </listing>
      */
     function show():void;
 
     /**
      * 隐藏对话框。
+     * @example
+     * <listing version="3.0">
+     * dialog.hide();
+     * </listing>
      */
     function hide():void;
 
     /**
      * 是否正在显示。
      * @return 显示中为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * if (dialog.isShowing()) {
+     *     dialog.hide();
+     * }
+     * </listing>
      */
     function isShowing():Boolean;
 
     /**
      * 销毁内部资源。
+     * @example
+     * <listing version="3.0">
+     * dialog.destroy();
+     * </listing>
      */
     function destroy():void;
 }
