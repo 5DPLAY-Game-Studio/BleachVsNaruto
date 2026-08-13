@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 存档数据接口。
+ * 可存档对象序列化契约。
  *
- * <p>约定可序列化对象与存档数据对象之间的读写。</p>
+ * <p>约定对象与存档数据之间的读写形状；实现位于玩法或壳配置侧。</p>
  *
  * @see IExtendConfig
  */

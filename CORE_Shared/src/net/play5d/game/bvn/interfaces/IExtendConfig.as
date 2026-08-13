@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 扩展配置接口。
+ * 壳扩展配置序列化契约。
  *
- * <p>将扩展配置序列化到存档对象，或从存档对象还原。</p>
+ * <p>将扩展配置写入存档对象，或从存档对象还原。</p>
  *
  * @see ISaveData
  */

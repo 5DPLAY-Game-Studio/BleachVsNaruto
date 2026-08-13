@@ -19,10 +19,12 @@
 package net.play5d.game.bvn.data.lan {
 
 /**
- * 局域网消息类型中跨平台一致的常量。
+ * 局域网消息类型公开常量（跨壳一致部分）。
  *
  * <p><code>FIND_HOST</code> / <code>FIND_HOST_BACK</code> 因 Pc（String）与 Mob（int）线格式不同，
- * 仍由各壳 <code>MsgType</code> 定义。</p>
+ * 仍由各壳消息类型定义。</p>
+ *
+ * @see LanSocketMsgFactory
  */
 public class LanMsgType {
     include '../../../../../../../include/ImportVersion.as';

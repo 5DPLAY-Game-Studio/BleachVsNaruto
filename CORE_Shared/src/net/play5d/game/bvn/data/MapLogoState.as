@@ -19,7 +19,9 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 地图 Logo 显示状态。
+ * 地图 Logo 显示状态常量。
+ *
+ * <p>跨壳地图 UI 共用的公开枚举值。</p>
  */
 public class MapLogoState {
     include '../../../../../../include/ImportVersion.as';

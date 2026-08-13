@@ -19,11 +19,12 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色动作状态。
+ * 角色动作状态公开常量与判定。
  *
- * <p>用整型常量表示当前动作阶段，并提供若干状态判定静态方法。</p>
+ * <p>整型常量供资源与玩法共用；静态判定方法仅做集合查询，不含战斗推进逻辑。</p>
  *
  * @see FighterSpecialFrame
+ * @see #isAllowWinState()
  */
 public class FighterActionState {
     include '../../../../../../../include/ImportVersion.as';
@@ -107,7 +108,7 @@ public class FighterActionState {
     }
 
     /**
-     * 判断当前动作是否允许幽步（不在必杀、超必杀、万解中）。
+     * 判断当前动作是否允许幽步（规则同 <code>isAllowWinState</code>）。
      *
      * @param actionState 当前动作状态。
      * @return 允许时为 <code>true</code>。
@@ -115,6 +116,7 @@ public class FighterActionState {
      * <listing version="3.0">
      * FighterActionState.allowGhostStep(FighterActionState.NORMAL); // true
      * </listing>
+     * @see #isAllowWinState()
      */
     public static function allowGhostStep(actionState:int):Boolean {
         return _isNotAllowWinStates.indexOf(actionState) == -1;

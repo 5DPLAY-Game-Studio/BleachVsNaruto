@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 攻击命中特效类型。
+ * 攻击命中特效类型公开常量与判定。
  *
- * <p>决定受击时播放的命中特效，并提供重击类型判定。</p>
+ * <p>资源与玩法共用命中特效 ID；<code>isHeavy</code> 判定是否为重击类。</p>
  */
 public class HitType {
     include '../../../../../../include/ImportVersion.as';

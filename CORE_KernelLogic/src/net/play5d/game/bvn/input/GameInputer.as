@@ -24,6 +24,7 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.interfaces.GameInterface;
+import net.play5d.game.bvn.interfaces.IGameInput;
 
 /**
  * 游戏输入(针对菜单类操作)

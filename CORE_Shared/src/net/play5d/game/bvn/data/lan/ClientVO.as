@@ -20,7 +20,10 @@ package net.play5d.game.bvn.data.lan {
 import flash.net.Socket;
 
 /**
- * 局域网已连接客户端描述。
+ * 局域网已连接客户端公开数据。
+ *
+ * <p>跨壳共用的房间客户端形状：地址、显示名与可选 TCP 套接字引用。
+ * <code>socket</code> 仅作会话绑定字段，由壳在接入时赋值；本库不负责收发。</p>
  */
 public class ClientVO {
     /**
@@ -28,6 +31,7 @@ public class ClientVO {
      * @example
      * <listing version="3.0">
      * var client:ClientVO = new ClientVO();
+     * client.ip = '192.168.1.2';
      * </listing>
      */
     public function ClientVO() {
@@ -49,19 +53,20 @@ public class ClientVO {
      */
     public var name:String;
     /**
-     * TCP 套接字。
+     * 壳侧 TCP 套接字引用（会话绑定；可为 <code>null</code>）。
      * @default null
      */
     public var socket:Socket;
 
     /**
-     * 客户端标识（当前为 IP）。
+     * 客户端标识（当前等于 <code>ip</code>）。
      * @return 标识字符串。
      * @example
      * <listing version="3.0">
-     * client.ip; // '192.168.1.2'
+     * client.ip = '192.168.1.2';
      * client.id; // '192.168.1.2'
      * </listing>
+     * @see #ip
      */
     public function get id():String {
         return ip;

@@ -16,32 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ctrler.lan {
+package net.play5d.game.bvn.interfaces.lan {
+
 /**
- * 联机退出确认对话框（壳层实现并注入 <code>LanGameMenuCtrl</code>）。
+ * 锁帧服务端对壳层会话的依赖契约。
  *
- * @see LanGameMenuCtrl
+ * <p>负责 UDP 广播输入/同步载荷，由壳的联机主机控制实现并注入。</p>
+ *
+ * @example
+ * <listing version="3.0">
+ * var link:ILanServerLockLink = serverSession;
+ * link.sendUDP(bytes);
+ * </listing>
  */
-public interface ILanExitDialog {
+public interface ILanServerLockLink {
     /**
-     * 显示对话框。
+     * 发送 UDP 载荷。
+     * @param data 通常为 <code>ByteArray</code>。
+     * @example
+     * <listing version="3.0">
+     * link.sendUDP(bytes);
+     * </listing>
      */
-    function show():void;
-
-    /**
-     * 隐藏对话框。
-     */
-    function hide():void;
-
-    /**
-     * 是否正在显示。
-     * @return 显示中为 <code>true</code>。
-     */
-    function isShowing():Boolean;
-
-    /**
-     * 销毁内部资源。
-     */
-    function destroy():void;
+    function sendUDP(data:Object):void;
 }
 }

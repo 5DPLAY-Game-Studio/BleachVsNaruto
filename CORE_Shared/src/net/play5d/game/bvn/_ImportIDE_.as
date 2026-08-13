@@ -18,13 +18,24 @@
 
 package net.play5d.game.bvn {
 import flash.display.Sprite;
+import flash.net.Socket;
 
 import net.play5d.game.bvn.data.*;
 import net.play5d.game.bvn.data.fighter.*;
+import net.play5d.game.bvn.data.lan.ClientVO;
 import net.play5d.game.bvn.data.lan.LanMsgType;
+import net.play5d.game.bvn.data.lan.LanSocketMsgFactory;
 import net.play5d.game.bvn.data.lan.LanSyncType;
 import net.play5d.game.bvn.data.lan.SelectFighterDataType;
+import net.play5d.game.bvn.data.lan.SocketInputData;
+import net.play5d.game.bvn.data.lan.UDPDataVO;
+import net.play5d.game.bvn.data.lan.UdpDataType;
+import net.play5d.game.bvn.data.lan.UdpPacketUtils;
 import net.play5d.game.bvn.interfaces.*;
+import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
+import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
+import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
+import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 
 /**
  * shared SWC 在 Flash / Animate IDE 中的导入主类。
@@ -48,22 +59,38 @@ public class _ImportIDE_ extends Sprite {
         // net.play5d.game.bvn.data.fighter
         FighterActionState,
         FighterDefenseType,
+        FighterHitFloorType,
         FighterHitRange,
         FighterHurtType,
         FighterInputCmd,
         FighterSpecialFrame,
 
         // net.play5d.game.bvn.data.lan
+        ClientVO,
         LanMsgType,
+        LanSocketMsgFactory,
         LanSyncType,
         SelectFighterDataType,
+        SocketInputData,
+        UdpDataType,
+        UDPDataVO,
+        UdpPacketUtils,
 
         // net.play5d.game.bvn.interfaces
         IAssetLoader,
         IComponents,
         IExtendConfig,
+        IGameInput,
+        IGameInterface,
         ILogger,
-        ISaveData
+        ISaveData,
+        ISwfLib,
+
+        // net.play5d.game.bvn.interfaces.lan
+        ILanClientLockLink,
+        ILanExitDialog,
+        ILanServerLockLink,
+        ILanSocketInput
     ];
 
     /**

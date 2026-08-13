@@ -1,9 +1,10 @@
 package net.play5d.game.bvn.mob.views {
 import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.input.JoyStickConfigVO;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
-import net.play5d.game.bvn.input.JoyStickConfigVO;
 import net.play5d.game.bvn.stage.SettingStage;
+import net.play5d.game.bvn.ui.JoyStickSetUI;
 import net.play5d.kyo.stage.IStage;
 
 public class ViewManager {
@@ -33,6 +34,9 @@ public class ViewManager {
         }
         var setStg:SettingStage         = curStg as SettingStage;
         var joyStickSetUI:JoyStickSetUI = new JoyStickSetUI();
+        joyStickSetUI.onApplyJoyConfig  = function ():void {
+            GameInterfaceManager.config.updateJoyConfig();
+        };
         joyStickSetUI.setConfig(player, config);
         setStg.goInnerSetPage(joyStickSetUI);
     }

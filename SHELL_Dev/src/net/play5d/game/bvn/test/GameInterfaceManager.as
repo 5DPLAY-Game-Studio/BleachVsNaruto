@@ -24,9 +24,8 @@ import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 import flash.utils.ByteArray;
 
-import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.input.GameKeyInput;
-import net.play5d.game.bvn.input.IGameInput;
+import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
@@ -90,7 +89,7 @@ public class GameInterfaceManager implements IGameInterface {
         return false;
     }
 
-    public function applyConfig(config:ConfigVO):void {
+    public function applyConfig(config:Object):void {
     }
 
     public function getCreadits(creditsInfo:String):Sprite {

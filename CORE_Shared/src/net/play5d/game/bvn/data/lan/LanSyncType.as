@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.data.lan {
 
 /**
- * 局域网对局同步消息类型。
+ * 局域网对局同步消息类型公开常量。
  */
 public class LanSyncType {
     include '../../../../../../../include/ImportVersion.as';

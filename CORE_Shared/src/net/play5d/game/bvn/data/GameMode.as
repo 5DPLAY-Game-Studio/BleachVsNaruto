@@ -19,11 +19,13 @@
 package net.play5d.game.bvn.data {
 
 /**
- * 游戏模式。
+ * 游戏模式公开常量与查询。
  *
- * <p>定义各玩法模式常量，并通过 <code>currentMode</code> 与静态方法查询当前模式类别。</p>
+ * <p>提供跨壳 / 资源侧共用的模式 ID，以及基于 <code>currentMode</code> 的类别判定静态方法。
+ * <code>currentMode</code> 为进程级公开状态，由入口在切模式时写入。</p>
  *
  * @see TeamID
+ * @see #currentMode
  */
 public class GameMode {
     include '../../../../../../include/ImportVersion.as';
@@ -106,7 +108,7 @@ public class GameMode {
     ];
 
     /**
-     * 获得全部队伍信息。
+     * 获得默认队伍列表（公开静态 API）。
      *
      * @return 含 <code>id</code> / <code>name</code> 的队伍对象数组。
      * @example

@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色被打类型。
+ * 角色被打类型公开常量。
  *
  * <p>区分普通被打与击飞两类受击表现。</p>
  *

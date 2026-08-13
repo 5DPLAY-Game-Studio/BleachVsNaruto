@@ -24,6 +24,8 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.lan.LanMsgType;
 import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
+import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.LANUtils;
 import net.play5d.kyo.stage.IStage;
@@ -34,8 +36,8 @@ import net.play5d.kyo.stage.IStage;
  * <p>等待间隔与同步间隔使用 <code>LANUtils.LOCK_KEYFRAME</code> / <code>SYNC_GAP</code>。</p>
  *
  * @see LockFrameClientLogic
- * @see ILanServerLockLink
- * @see ILanSocketInput
+ * @see net.play5d.game.bvn.interfaces.lan.ILanServerLockLink
+ * @see net.play5d.game.bvn.interfaces.lan.ILanSocketInput
  */
 public class LockFrameServerLogic {
     /**

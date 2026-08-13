@@ -19,9 +19,9 @@
 package net.play5d.game.bvn.data.fighter {
 
 /**
- * 角色攻击范围元件名。
+ * 角色攻击范围元件名公开常量。
  *
- * <p>对应角色 SWF 中攻击判定面元件的链接名，供命中检测按招式取范围。</p>
+ * <p>对应角色 SWF 攻击判定面链接名，供命中检测按招式取范围。</p>
  *
  * @see FighterSpecialFrame
  */

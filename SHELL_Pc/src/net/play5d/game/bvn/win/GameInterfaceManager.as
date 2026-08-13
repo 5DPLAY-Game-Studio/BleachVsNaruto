@@ -36,7 +36,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.IGameInput;
+import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
@@ -363,8 +363,13 @@ public class GameInterfaceManager implements IGameInterface {
         return true;
     }
 
-    public function applyConfig(config:ConfigVO):void {
-        switch (config.quality) {
+    public function applyConfig(config:Object):void {
+        var cfg:ConfigVO = config as ConfigVO;
+        if (!cfg) {
+            return;
+        }
+
+        switch (cfg.quality) {
         case GameQuality.BEST:
             MainGame.I.stage.quality = StageQuality.HIGH_16X16;
             MainGame.I.setFPS(60);
