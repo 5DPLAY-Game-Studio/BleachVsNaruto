@@ -25,6 +25,14 @@
       "loading_no_name" : "正在加载 [{itemName}] ({step}/{stepLength})",
       "loading_has_name": "正在加载 [{itemName}] : {loadName} ({step}/{stepLength})"
     },
+    "game_data": {
+      "load_fighter_fail"  : "加载 角色数据 失败！",
+      "load_assistant_fail": "加载 辅助数据 失败！",
+      "load_select_fail"   : "加载 选择数据 失败！",
+      "load_map_fail"      : "加载 地图数据 失败！",
+      "load_mission_fail"  : "加载 关卡数据 失败！",
+      "load_musou_fail"    : "加载 无双数据 失败！"
+    },
 
 
 
@@ -52,12 +60,25 @@
   },
   "alert": {
     "musou_ctrl": {
-      "need_more_money": "当前金币不足，还需要 {amount} 枚金币！"
+      "need_more_money_title": "NEED MORE MONEY",
+      "need_more_money"      : "当前金币不足，还需要 {amount} 枚金币！"
+    },
+    "world_map": {
+      "not_open_title": "NOT OPEN",
+      "not_open"      : "暂未开放"
     }
   },
   "confirm": {
     "musou_ctrl": {
-      "unlock_fighter": "确定使用 {amount} 枚金币解锁人物？"
+      "unlock_fighter_title": "CONFIRM",
+      "unlock_fighter"      : "确定使用 {amount} 枚金币解锁人物？"
+    },
+    "world_map": {
+      "next_mission_title"     : "CONFIRM",
+      "next_mission"           : "进入下一关？",
+      "next_mission_all_finish": "已通过全部关卡，是否进入最后一关？",
+      "exit_title"             : "EXIT",
+      "exit"                   : "返回到游戏主菜单？"
     }
   },
   "debug": {
@@ -165,14 +186,6 @@
         },
         "game_main_logic_ctrler": {
           "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: {error}"
-        },
-        "game_data": {
-          "load_fighter_fail"  : "加载 角色数据 失败！",
-          "load_assistant_fail": "加载 辅助数据 失败！",
-          "load_select_fail"   : "加载 选择数据 失败！",
-          "load_map_fail"      : "加载 地图数据 失败！",
-          "load_mission_fail"  : "加载 关卡数据 失败！",
-          "load_musou_fail"    : "加载 无双数据 失败！"
         }
       }
     },

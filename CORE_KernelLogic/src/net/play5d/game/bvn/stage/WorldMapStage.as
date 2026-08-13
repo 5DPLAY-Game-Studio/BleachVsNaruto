@@ -214,8 +214,10 @@ public class WorldMapStage implements IStage {
 
     private function gotoMission(data:MusouWorldMapAreaVO):void {
         var allFinish:Boolean = MusouLogic.I.getAreaPercent(data.id) >= 1;
-        var txt:String        = allFinish ? '已通过全部关卡，是否进入最后一关？' : '进入下一关？';
-        GameUI.confrim('CONFRIM', txt, function ():void {
+        var txt:String        = allFinish ?
+                GetLang('confirm.world_map.next_mission_all_finish') :
+                GetLang('confirm.world_map.next_mission');
+        GameUI.confrim(GetLang('confirm.world_map.next_mission_title'), txt, function ():void {
             MusouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
 //				MainGame.I.loadGame();
@@ -309,7 +311,11 @@ public class WorldMapStage implements IStage {
     }
 
     private function backHandler(...params):void {
-        GameUI.confrim('EXIT', '返回到游戏主菜单？', MainGame.I.goMenu);
+        GameUI.confrim(
+                GetLang('confirm.world_map.exit_title'),
+                GetLang('confirm.world_map.exit'),
+                MainGame.I.goMenu
+        );
         GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
     }
 
@@ -324,7 +330,10 @@ public class WorldMapStage implements IStage {
         var data:MusouWorldMapAreaVO = p.data;
 
         if (data.building()) {
-            GameUI.alert('NOT OPEN', '暂未开放');
+            GameUI.alert(
+                    GetLang('alert.world_map.not_open_title'),
+                    GetLang('alert.world_map.not_open')
+            );
             return;
         }
 

@@ -113,44 +113,50 @@ public class GameData {
 //			}
 
         function loadFighterFail():void {
-            Debugger.log(GetLang('debug.log.data.game_data.load_fighter_fail'));
+            var msg:String = GetLang('txt.game_data.load_fighter_fail');
+            Debugger.log(msg);
             if (fail != null) {
-                fail(GetLang('debug.log.data.game_data.load_fighter_fail'));
+                fail(msg);
             }
         }
 
         function loadAssisterFail():void {
-            Debugger.log(GetLang('debug.log.data.game_data.load_assistant_fail'));
+            var msg:String = GetLang('txt.game_data.load_assistant_fail');
+            Debugger.log(msg);
             if (fail != null) {
-                fail(GetLang('debug.log.data.game_data.load_assistant_fail'));
+                fail(msg);
             }
         }
 
         function loadSelectFail():void {
-            Debugger.log(GetLang('debug.log.data.game_data.load_select_fail'));
+            var msg:String = GetLang('txt.game_data.load_select_fail');
+            Debugger.log(msg);
             if (fail != null) {
-                fail(GetLang('debug.log.data.game_data.load_select_fail'));
+                fail(msg);
             }
         }
 
         function loadMapFail():void {
-            Debugger.log(GetLang('debug.log.data.game_data.load_map_fail'));
+            var msg:String = GetLang('txt.game_data.load_map_fail');
+            Debugger.log(msg);
             if (fail != null) {
-                fail(GetLang('debug.log.data.game_data.load_map_fail'));
+                fail(msg);
             }
         }
 
         function loadMissionFail():void {
-            Debugger.log(GetLang('debug.log.data.game_data.load_mission_fail'));
+            var msg:String = GetLang('txt.game_data.load_mission_fail');
+            Debugger.log(msg);
             if (fail != null) {
-                fail(GetLang('debug.log.data.game_data.load_mission_fail'));
+                fail(msg);
             }
         }
 
         function loadMusouFail():void {
-            Debugger.log(GetLang('debug.log.data.game_data.load_musou_fail'));
+            var msg:String = GetLang('txt.game_data.load_musou_fail');
+            Debugger.log(msg);
             if (fail != null) {
-                fail(GetLang('debug.log.data.game_data.load_musou_fail'));
+                fail(msg);
             }
         }
 

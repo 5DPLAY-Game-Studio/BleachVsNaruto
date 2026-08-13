@@ -23,7 +23,7 @@
 | 战斗 HUD | `ui/fight/` |
 | 选人 UI | `ui/select/` `ui/dialog/select/` |
 | 菜单 / 暂停 / 设置 | `ui/` `stage/SettingStage.as` |
-| 多语言 | `utils/MultiLangUtils.as` `ui/language/` `stage/LanguageStage.as` |
+| 多语言 | `utils/MultiLangUtils.as` `ui/language/` `stage/LanguageStage.as`；键约定见 [i18n.md](i18n.md) |
 | 作弊码 | `utils/CheatCodeManager.as` |
 | 事件 | `events/` `fighter/events/` |
 

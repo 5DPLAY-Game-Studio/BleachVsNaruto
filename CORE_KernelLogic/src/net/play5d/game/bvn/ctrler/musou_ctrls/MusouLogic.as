@@ -154,18 +154,27 @@ public class MusouLogic {
     public function buyFighter(data:MusouFighterSellVO, succback:Function = null):void {
         var musouData:MusouPlayerData = GameData.I.musouData;
         if (musouData.getMoney() < data.getPrice()) {
-            GameUI.alert('NEED MORE MONEY', GetLang('alert.musou_ctrl.need_more_money', {amount: data.getPrice()}));
+            GameUI.alert(
+                    GetLang('alert.musou_ctrl.need_more_money_title'),
+                    GetLang('alert.musou_ctrl.need_more_money', {amount: data.getPrice()})
+            );
             return;
         }
 
-        GameUI.confrim('CONFRIM', GetLang('confirm.musou_ctrl.unlock_fighter', {amount: data.getPrice()}), function ():void {
-            musouData.loseMoney(data.getPrice());
-            musouData.addFighter(data.id);
-            GameData.I.saveData();
-            if (succback != null) {
-                succback();
-            }
-        }, null ,true);
+        GameUI.confrim(
+                GetLang('confirm.musou_ctrl.unlock_fighter_title'),
+                GetLang('confirm.musou_ctrl.unlock_fighter', {amount: data.getPrice()}),
+                function ():void {
+                    musouData.loseMoney(data.getPrice());
+                    musouData.addFighter(data.id);
+                    GameData.I.saveData();
+                    if (succback != null) {
+                        succback();
+                    }
+                },
+                null,
+                true
+        );
 
     }
 

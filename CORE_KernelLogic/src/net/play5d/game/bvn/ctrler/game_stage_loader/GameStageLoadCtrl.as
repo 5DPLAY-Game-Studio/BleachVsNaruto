@@ -409,26 +409,22 @@ public class GameStageLoadCtrl extends EventDispatcher {
         var itemName:String;
         switch (_loadingType) {
         case GameStageLoadDefine.TYPE_MAP:
-            itemName = GetLangText('txt.game_stage_load_ctrl.map');
+            itemName = GetLang('txt.game_stage_load_ctrl.map');
             break;
         case GameStageLoadDefine.TYPE_FIGHTER:
-            itemName = GetLangText('txt.game_stage_load_ctrl.fighter');
+            itemName = GetLang('txt.game_stage_load_ctrl.fighter');
             break;
         case GameStageLoadDefine.TYPE_ASSISTER:
-            itemName = GetLangText('txt.game_stage_load_ctrl.assistant');
+            itemName = GetLang('txt.game_stage_load_ctrl.assistant');
             break;
         case GameStageLoadDefine.TYPE_BGM:
-            itemName = GetLangText('txt.game_stage_load_ctrl.bgm');
+            itemName = GetLang('txt.game_stage_load_ctrl.bgm');
             break;
         }
 
-//			var msg:String = "正在加载" + itemName;
-//			if(_curLoadName) msg += " : " + _curLoadName;
-//
-//			msg += " (" + _loadStep + "/" + _loadStepLength + ")";
         var msg:String;
         if (_curLoadName) {
-            msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_has_name'), {
+            msg = GetLang('txt.game_stage_load_ctrl.loading_has_name', {
                 itemName  : itemName,
                 loadName  : _curLoadName,
                 step      : _loadStep,
@@ -436,7 +432,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             });
         }
         else {
-            msg = Format(GetLangText('txt.game_stage_load_ctrl.loading_no_name'), {
+            msg = GetLang('txt.game_stage_load_ctrl.loading_no_name', {
                 itemName  : itemName,
                 step      : _loadStep,
                 stepLength: _loadStepLength
