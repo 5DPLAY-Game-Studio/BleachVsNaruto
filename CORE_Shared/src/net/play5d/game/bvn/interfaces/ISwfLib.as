@@ -22,12 +22,11 @@ package net.play5d.game.bvn.interfaces {
  * 内嵌 UI SWF 资源库契约。
  *
  * <p>各入口在启动时注入实现，供运行时按模块取出对应 SWF 的 <code>Class</code>
- * 再实例化界面元件。默认实现为 <code>SwfLib</code>。</p>
+ * 再实例化界面元件。默认 Embed 实现位于 Utils 层的 <code>SwfLib</code>。</p>
  *
- * @see net.play5d.game.bvn.SwfLib
  * @example
  * <listing version="3.0">
- * var lib:ISwfLib = new SwfLib();
+ * var lib:ISwfLib = swfLib;
  * var titleSwf:Class = lib.title;
  * </listing>
  */

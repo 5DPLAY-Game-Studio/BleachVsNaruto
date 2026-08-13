@@ -16,17 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn {
+package net.play5d.game.bvn.utils {
 import net.play5d.game.bvn.interfaces.ISwfLib;
 
 /**
- * 共享 UI SWF 资源库默认实现。
+ * UI SWF 资源库默认实现（Utils 层，避免 Shared/IDE 资源 SWC 内嵌体积）。
  *
  * <p>将 <code>shared/lib/swf</code> 下各界面 SWF Embed 进库，供 Dev / Pc / Mob
  * 等入口统一注入。Embed 路径以本模块 <code>src</code> 为根解析到仓库
  * <code>shared/lib/swf</code>。</p>
  *
- * @see ISwfLib
+ * @see net.play5d.game.bvn.interfaces.ISwfLib
  * @example
  * <listing version="3.0">
  * // 入口启动时注入（示例）

@@ -25,7 +25,7 @@ import flash.text.TextFormat;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.input.GameKeyInput;
-import net.play5d.game.bvn.input.IGameInput;
+import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;

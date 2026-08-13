@@ -21,7 +21,7 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.utils.ByteArray;
 
-import net.play5d.game.bvn.input.IGameInput;
+import net.play5d.game.bvn.interfaces.IGameInput;
 
 /**
  * 壳层游戏能力注入契约。

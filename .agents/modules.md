@@ -21,8 +21,8 @@
 | 目录 | 角色 | 备注 |
 |------|------|------|
 | `CORE_KernelLogic` | 核心玩法逻辑 | 入口速查 → [`map.md`](map.md) |
-| `CORE_Shared` | 对外共享 API / 版本 / `ISwfLib`+`SwfLib` / `IGameInput` / `IGameInterface` / `interfaces.lan.ILan*` | 编译资源时进 `shared` SWC；UI Embed 与跨壳注入契约在此 |
-| `CORE_Utils` | 工程内公用工具 | |
+| `CORE_Shared` | 对外共享 API / 版本 / 注入契约（`ISwfLib`/`IGameInput`/`IGameInterface`/`ILan*`） | **不含** Embed 实现；UI SWF 的 `SwfLib` 在 Utils |
+| `CORE_Utils` | 工程内公用工具 / `SwfLib` Embed | |
 | `LIB_KyoLib` | 通用显示/输入/加载等库 | git 子模块；首选 API → [`kyolib.md`](kyolib.md) |
 | `LIB_Other` | 其它第三方/附属库 | |
 | `CORE_Components` | Animate 可交互组件类 | 供 `component.xfl`；约定 → [`components.md`](components.md) |

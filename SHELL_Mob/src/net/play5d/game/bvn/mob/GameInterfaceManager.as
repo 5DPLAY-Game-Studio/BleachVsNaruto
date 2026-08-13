@@ -14,7 +14,7 @@ import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.IGameInput;
+import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
