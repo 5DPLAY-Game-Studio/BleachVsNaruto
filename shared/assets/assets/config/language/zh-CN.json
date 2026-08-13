@@ -4,7 +4,6 @@
       "enable" : "启用",
       "disable": "禁用"
     },
-
     "asset_manager": {
       "sound" : "声音",
       "effect": "效果",
@@ -33,29 +32,121 @@
       "load_mission_fail"  : "加载 关卡数据 失败！",
       "load_musou_fail"    : "加载 无双数据 失败！"
     },
-
-
-
     "game_interface": {
-      "team_play"          : "小队模式",
-      "team_play_acrade"   : "闯关模式",
-      "team_play_vs_people": "2P对战",
-      "team_play_vs_CPU"   : "对战电脑",
-      "team_play_watch"    : "观战电脑",
-
+      "team_play"            : "小队模式",
+      "team_play_acrade"     : "闯关模式",
+      "team_play_vs_people"  : "2P对战",
+      "team_play_vs_CPU"     : "对战电脑",
+      "team_play_watch"      : "观战电脑",
       "single_play"          : "小队模式",
       "single_play_acrade"   : "闯关模式",
       "single_play_vs_people": "2P对战",
       "single_play_vs_CPU"   : "对战电脑",
       "single_play_watch"    : "观战电脑",
-
-      "musou_play"  : "无双模式",
-      "musou_acrade": "无双模式",
-      
-      "option"    : "游戏设置",
-      "training"  : "练习模式",
-      "credits"   : "制作组",
-      "more_games": "更多游戏"
+      "musou_play"           : "无双模式",
+      "musou_acrade"         : "无双模式",
+      "option"               : "游戏设置",
+      "training"             : "练习模式",
+      "credits"              : "制作组",
+      "more_games"           : "更多游戏"
+    },
+    "common": {
+      "continue"   : "继续游戏",
+      "move_list"  : "出招表",
+      "back"       : "返回",
+      "apply"      : "应用",
+      "cancel"     : "取消",
+      "yes"        : "是",
+      "no"         : "否",
+      "set_all"    : "设置全部",
+      "set_default": "还原默认按键"
+    },
+    "pause_dialog": {
+      "game_title": "返回标题"
+    },
+    "musou_pause_dialog": {
+      "back_map": "回大地图"
+    },
+    "lan_exit_dialog": {
+      "exit": "退出联机"
+    },
+    "set_btn_group": {
+      "p1_key_set"         : "玩家1 按键设置",
+      "p2_key_set"         : "玩家2 按键设置",
+      "com_level"          : "电脑等级",
+      "com_level_very_easy": "非常简单",
+      "com_level_easy"     : "简单",
+      "com_level_normal"   : "正常",
+      "com_level_hard"     : "困难",
+      "com_level_very_hard": "非常困难",
+      "com_level_hell"     : "地狱",
+      "operate_mode"       : "按键操作模式",
+      "operate_normal"     : "正常模式",
+      "operate_classic"    : "经典模式",
+      "life"               : "生命值",
+      "time"               : "对战时间",
+      "time_30"            : "30秒",
+      "time_60"            : "60秒",
+      "time_90"            : "90秒",
+      "time_unlimited"     : "无限制",
+      "sound"              : "游戏音效",
+      "bgm"                : "背景音乐",
+      "quality"            : "画质等级",
+      "quality_low"        : "低",
+      "quality_medium"     : "中",
+      "quality_high"       : "高",
+      "quality_best"       : "最高",
+      "show_hp"            : "显示血量",
+      "hp_show"            : "显示",
+      "hp_hide"            : "隐藏"
+    },
+    "joy_stick_set_ui": {
+      "none"           : "不使用",
+      "use_joy"        : "绑定手柄",
+      "buy_joy"        : "购买推荐手柄",
+      "key_up2"        : "上(摇杆)",
+      "key_down2"      : "下(摇杆)",
+      "key_left2"      : "左(摇杆)",
+      "key_right2"     : "右(摇杆)",
+      "key_up"         : "上(按钮)",
+      "key_down"       : "下(按钮)",
+      "key_left"       : "左(按钮)",
+      "key_right"      : "右(按钮)",
+      "key_attack"     : "攻击",
+      "key_jump"       : "跳跃",
+      "key_dash"       : "冲刺",
+      "key_skill"      : "技能",
+      "key_super_skill": "大招",
+      "key_special"    : "特殊",
+      "key_waikai"     : "卍解",
+      "key_back"       : "返回键",
+      "key_select"     : "确认键（菜单）"
+    },
+    "set_ctrl_btn_ui": {
+      "key_up"        : "上",
+      "key_down"      : "下",
+      "key_left"      : "左",
+      "key_right"     : "右",
+      "key_attack"    : "攻击",
+      "key_jump"      : "跳跃",
+      "key_dash"      : "冲刺",
+      "key_skill"     : "技能",
+      "key_super_kill": "大招",
+      "key_special"   : "特殊"
+    },
+    "set_btn_dialog": {
+      "push_key": "请按下一个键设置【{name}】"
+    },
+    "game_loading_stage": {
+      "prepare"       : "游戏初始化：准备游戏资源",
+      "loading_config": "游戏初始化：正在加载配置文件",
+      "prepare_fail"  : "游戏初始化失败：准备游戏资源失败!",
+      "config_fail"   : "游戏初始化失败：加载配置文件失败!",
+      "loading_assets": "游戏初始化：正在加载游戏资源",
+      "loading_step"  : "游戏初始化：正在加载{itemName}资源({step}/{totalStep})"
+    },
+    "credits_stage": {
+      "body": "原作：<a href='event:myEvent'>剑jian</a><br>企划：数字化流天、L、社长、Diazynez<br>程序：Nagisa、Diazynez、BearBrine、パチュリー<br>美术：数字化流天、L、V.临界幻想、小数、Azreal、影、赤炎、小海、主流、曦城子、酸菜鱼、<br>          卡布托、Future、Nagisa、惊鸿、杯梓、星空幻梦、花里、Just...<br>测试：ゞ影孞&僮畵ヾ、成环、cat232181、无宇逆风、叽咕村夫、默默、小皮、山之叟、欲上天、<br>          LOTTU、肥宅正品、ppx、七米、星空幻梦、逝时_流光...<br>贡献：灰原·银、Grimm（WEB发行）<br>对接：Lemon_kenbai、黑羽、诺斯给给...<br>运营：多情丶回忆、FZCL石头门、纯白暮弦、风之旅人、寒窗听雨、黑猫、老秦、凌辰夜风、<br>          萌新、某个热爱理科的死宅、天双、御礼...<br>"
     }
   },
   "alert": {
@@ -66,6 +157,19 @@
     "world_map": {
       "not_open_title": "NOT OPEN",
       "not_open"      : "暂未开放"
+    },
+    "joy_stick_set_ui": {
+      "no_joystick_title"   : "NO JOYSTICK CONNECT",
+      "no_joystick"         : "未检测到可用的手柄",
+      "set_default_ok_title": "SET JOYSTICK DEFAULT SUCCESS",
+      "set_default_ok"      : "已设置为默认按键"
+    },
+    "coin_ui": {
+      "money_title": "MONEY",
+      "money"      : "获得金币 {amount} !"
+    },
+    "menu_stage": {
+      "update_title": "UPDATE"
     }
   },
   "confirm": {
@@ -79,6 +183,14 @@
       "next_mission_all_finish": "已通过全部关卡，是否进入最后一关？",
       "exit_title"             : "EXIT",
       "exit"                   : "返回到游戏主菜单？"
+    },
+    "common": {
+      "back_menu_title": "BACK TITLE?",
+      "back_menu"      : "返回到主菜单？"
+    },
+    "musou_pause_dialog": {
+      "back_map_title": "BACK MAP?",
+      "back_map"      : "返回到大地图？"
     }
   },
   "debug": {
@@ -95,10 +207,10 @@
           "fighter_id_error"  : "GameLoader.loadAndCacheFighter:: 角色 [{fighterId}] 不存在！",
           "fighter_load_error": "加载角色时发生错误： {error}",
           "assister_id_error" : "GameLoader.loadAssister:: 辅助 [{fighterId}] 不存在！",
-          "map_id_error"      : "GameLoader.loadMap::  地图 [{mapId}] 不存在！",
+          "map_id_error"      : "GameLoader.loadMap:: 地图 [{mapId}] 不存在！",
           "unload_cache_error": "GameLoader.dispose:: 卸装缓存发生错误： {error}"
         },
-        "game_logic":{
+        "game_logic": {
           "map_null"     : "地图为空！",
           "set_game_mode": "设置游戏模式为： {mode}"
         },
@@ -135,7 +247,7 @@
           "open_map_area": "开放地图探索区域： {areaId}"
         },
         "fighter_vo": {
-          "undefined_bgm": "FighterVO.initByXML:: ID  为 {fighterId} 的角色值对象未定义背景音乐！"
+          "undefined_bgm": "FighterVO.initByXML:: ID 为 {fighterId} 的角色值对象未定义背景音乐！"
         },
         "game_data": {
           "load_select_error": "加载 选择数据 出错！"
@@ -149,7 +261,7 @@
           "repeat_add": "MusouFighterModel.addFighter:: 角色重复添加： {fighterId}"
         },
         "musou_model": {
-          "load_area"    : "正在加载区域： {areaUrl}",
+          "load_area": "正在加载区域： {areaUrl}",
           "init_map_area": "初始化地图区域： {areaId}"
         },
         "musou_game_run_data_vo": {
@@ -171,7 +283,25 @@
           "keyframe_not_exist": "关键帧不存在： {name}"
         },
         "fighter_action_logic": {
-          "enabled_failed": "FighterActionLogic.enabled:: 启用失败：{error}"
+          "enabled_failed": "FighterActionLogic.enabled:: 启用失败： {error}"
+        },
+        "fighter_ctrler": {
+          "set_ctrler_fail": "设置 ctrler 失败！"
+        },
+        "set_ctrl_btn_ui": {
+          "key_mc_missing": "mc[k{index}] 不存在！"
+        },
+        "joy_sticker": {
+          "platform_unsupported": "该平台不支持手柄！"
+        },
+        "game_loading_stage": {
+          "progress_over_100": "{where}:: 进度超过100%"
+        },
+        "select_fighter_stage": {
+          "start_game"  : "开始游戏",
+          "init_fighter": "初始化选人",
+          "init_assist" : "初始化辅助",
+          "select_map"  : "选择地图"
         }
       }
     },
@@ -186,6 +316,19 @@
         },
         "game_main_logic_ctrler": {
           "render_game_sprite": "GameMainLogicCtrler.renderGameSprite:: {error}"
+        },
+        "game_loading_stage": {
+          "preload_fail": "游戏初始化失败：准备游戏资源失败：{error}",
+          "config_fail" : "游戏初始化失败：加载配置文件失败：{error}"
+        },
+        "select_fighter_stage": {
+          "fighter_data_missing": "SelectFighterStage.addFighterItem:: 未找到角色数据：{fighterId}",
+          "pos_undefined"       : "pos 未定义 {psn}{posSN}",
+          "pos_x_oob"           : "pos.x 越界 {detail}",
+          "pos_y_oob"           : "pos.y 越界 {detail}"
+        },
+        "fighter_effect_ctrl": {
+          "undefined_bisha": "未定义必杀特写： {id}"
         }
       }
     },
@@ -230,26 +373,47 @@
           "render_animate" : "FighterMC.renderAnimate:: 渲染出错： {stackTrace}",
           "go_frame"       : "FighterMC.goFrame:: 渲染出错： {stackTrace}",
           "render_children": "FighterMC.renderChildren:: 渲染出错： {stackTrace}"
+        },
+        "language_stage": {
+          "element_count_mismatch": "语言元素数目不匹配！",
+          "unsupported_language"  : "不支持的语言！"
+        },
+        "game_camera": {
+          "zoom_invalid": "zoom 不能 <= 0 !"
+        },
+        "game_stage": {
+          "camera_already_init": "游戏镜头已初始化！"
+        },
+        "res_utils": {
+          "init_in_progress": "正在初始化过程中，不能再次初始化！",
+          "swf_lib_not_init": "未初始化 SwfLib ！",
+          "not_initialized" : "未进行初始化！"
+        },
+        "embed_swf_asset_util": {
+          "init_in_progress": "正在初始化过程中，不能再次初始化！",
+          "not_initialized" : "未进行初始化！"
+        },
+        "embed_swf": {
+          "no_movie_clip_data": "未发现 swf 的 movieClipData ！"
+        },
+        "selecter_item_ui": {
+          "select_vo_unset": "未设置 selectVO！"
         }
       }
     }
   },
-
-
   "dev": {
     "txt": {
       "fighter_tester": {
-        "p1_fighter_id"  : "玩家 1 角色 id",
-        "p1_assistant_id": "玩家 1 辅助 id",
-        "p2_fighter_id"  : "玩家 2 角色 id",
-        "p2_assistant_id": "玩家 2 辅助 id",
-
+        "p1_fighter_id"       : "玩家 1 角色 id",
+        "p1_assistant_id"     : "玩家 1 辅助 id",
+        "p2_fighter_id"       : "玩家 2 角色 id",
+        "p2_assistant_id"     : "玩家 2 辅助 id",
         "map_id"              : "地图 id",
         "game_fps"            : "游戏帧率",
         "training_recover"    : "练习模式回复效果",
         "error_message_prompt": "错误信息提示……",
-
-        "btn_test": "测试"
+        "btn_test"            : "测试"
       }
     }
   }

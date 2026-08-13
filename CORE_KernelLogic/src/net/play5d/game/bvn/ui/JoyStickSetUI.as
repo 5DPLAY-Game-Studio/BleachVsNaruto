@@ -185,7 +185,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     private function initBtns():void {
         var joysticks:Vector.<GameInputDevice> = JoySticker.getAllDeivces();
 
-        var joyOptions:Array = [{label: 'NONE', cn: '不使用', value: null}];
+        var joyOptions:Array = [{label: 'NONE', cn: GetLang('txt.joy_stick_set_ui.none'), value: null}];
         for (var i:int; i < joysticks.length; i++) {
             var di:GameInputDevice = joysticks[i];
             joyOptions.push({
@@ -199,14 +199,14 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         _btnGroup.startY = 30;
         _btnGroup.setBtnData([
                                  {
-                                     label      : 'USE JOY', cn: '绑定手柄', options: joyOptions, optoinKey: 'deviceId',
+                                     label      : 'USE JOY', cn: GetLang('txt.joy_stick_set_ui.use_joy'), options: joyOptions, optoinKey: 'deviceId',
                                      optionValue: _tmpJoyConfig.deviceId
                                  },
-                                 {label: 'SET ALL', cn: '设置全部'},
-                                 {label: 'SET DEFAULT', cn: '还原默认按键'},
-                                 {label: 'BUY JOY', cn: '购买推荐手柄'},
-                                 {label: 'APPLY', cn: '应用'},
-                                 {label: 'CANCEL', cn: '取消'}
+                                 {label: 'SET ALL', cn: GetLang('txt.common.set_all')},
+                                 {label: 'SET DEFAULT', cn: GetLang('txt.common.set_default')},
+                                 {label: 'BUY JOY', cn: GetLang('txt.joy_stick_set_ui.buy_joy')},
+                                 {label: 'APPLY', cn: GetLang('txt.common.apply')},
+                                 {label: 'CANCEL', cn: GetLang('txt.common.cancel')}
                              ]);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnSelect);
         _btnGroup.addEventListener(SetBtnEvent.OPTION_CHANGE, onOptoinChange);
@@ -237,23 +237,23 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     /** @private */
     private function initKeyMapping():void {
         _mappings = [
-            {id: 'up2', name: 'UP roker', cn: '上(摇杆)'},
-            {id: 'down2', name: 'DOWN roker', cn: '下(摇杆)'},
-            {id: 'left2', name: 'LEFT roker', cn: '左(摇杆)'},
-            {id: 'right2', name: 'RIGHT roker', cn: '右(摇杆)'},
-            {id: 'up', name: 'UP button', cn: '上(按钮)'},
-            {id: 'down', name: 'DOWN button', cn: '下(按钮)'},
-            {id: 'left', name: 'LEFT button', cn: '左(按钮)'},
-            {id: 'right', name: 'RIGHT button', cn: '右(按钮)'},
-            {id: 'attack', name: 'ATTACK', cn: '攻击'},
-            {id: 'jump', name: 'JUMP', cn: '跳跃'},
-            {id: 'dash', name: 'DASH', cn: '冲刺'},
-            {id: 'skill', name: 'SKILL', cn: '技能'},
-            {id: 'superSkill', name: 'SUPER SKILL', cn: '大招'},
-            {id: 'special', name: 'SPECIAL', cn: '特殊'},
-            {id: 'waikai', name: 'BANN KAI', cn: '卍解'},
-            {id: 'back', name: 'BACK', cn: '返回键'},
-            {id: 'select', name: 'SELECT', cn: '确认键（菜单）'},
+            {id: 'up2', name: 'UP roker', cn: GetLang('txt.joy_stick_set_ui.key_up2')},
+            {id: 'down2', name: 'DOWN roker', cn: GetLang('txt.joy_stick_set_ui.key_down2')},
+            {id: 'left2', name: 'LEFT roker', cn: GetLang('txt.joy_stick_set_ui.key_left2')},
+            {id: 'right2', name: 'RIGHT roker', cn: GetLang('txt.joy_stick_set_ui.key_right2')},
+            {id: 'up', name: 'UP button', cn: GetLang('txt.joy_stick_set_ui.key_up')},
+            {id: 'down', name: 'DOWN button', cn: GetLang('txt.joy_stick_set_ui.key_down')},
+            {id: 'left', name: 'LEFT button', cn: GetLang('txt.joy_stick_set_ui.key_left')},
+            {id: 'right', name: 'RIGHT button', cn: GetLang('txt.joy_stick_set_ui.key_right')},
+            {id: 'attack', name: 'ATTACK', cn: GetLang('txt.joy_stick_set_ui.key_attack')},
+            {id: 'jump', name: 'JUMP', cn: GetLang('txt.joy_stick_set_ui.key_jump')},
+            {id: 'dash', name: 'DASH', cn: GetLang('txt.joy_stick_set_ui.key_dash')},
+            {id: 'skill', name: 'SKILL', cn: GetLang('txt.joy_stick_set_ui.key_skill')},
+            {id: 'superSkill', name: 'SUPER SKILL', cn: GetLang('txt.joy_stick_set_ui.key_super_skill')},
+            {id: 'special', name: 'SPECIAL', cn: GetLang('txt.joy_stick_set_ui.key_special')},
+            {id: 'waikai', name: 'BANN KAI', cn: GetLang('txt.joy_stick_set_ui.key_waikai')},
+            {id: 'back', name: 'BACK', cn: GetLang('txt.joy_stick_set_ui.key_back')},
+            {id: 'select', name: 'SELECT', cn: GetLang('txt.joy_stick_set_ui.key_select')},
         ];
     }
 
@@ -281,7 +281,10 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         switch (e.selectedLabel) {
         case 'SET ALL':
             if (!JoySticker.isActive(_tmpJoyConfig.deviceId)) {
-                GameUI.alert('NO JOYSTICK CONNECT', '未检测到可用的手柄');
+                GameUI.alert(
+                    GetLang('alert.joy_stick_set_ui.no_joystick_title'),
+                    GetLang('alert.joy_stick_set_ui.no_joystick')
+                );
 
                 return;
             }
@@ -295,7 +298,10 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         case 'SET DEFAULT':
             _tmpJoyConfig          = new JoyStickConfigVO();
             _tmpJoyConfig.deviceId = _deviceId;
-            GameUI.alert('SET JOYSTICK DEFAULT SUCCESS', '已设置为默认按键');
+            GameUI.alert(
+                GetLang('alert.joy_stick_set_ui.set_default_ok_title'),
+                GetLang('alert.joy_stick_set_ui.set_default_ok')
+            );
             break;
         case 'BUY JOY':
             WebUtils.getURL('http://bbs.1212321.com/forum.php?mod=viewthread&tid=110');

@@ -74,7 +74,7 @@ public class CreditsStage implements IStage {
         _btngroup = new SetBtnGroup();
 //			_btngroup.x = 20;
         _btngroup.y = GameConfig.GAME_SIZE.y - 150;
-        _btngroup.setBtnData([{label: 'BACK', cn: '返回'}]);
+        _btngroup.setBtnData([{label: 'BACK', cn: GetLang('txt.common.back')}]);
         _btngroup.addEventListener(SetBtnEvent.SELECT, selectBtnHandler);
         _ui.addChild(_btngroup);
 
@@ -105,19 +105,7 @@ public class CreditsStage implements IStage {
 //				"         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
 //				"策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
 //				"卓越贡献：社长、渺渺" + "<br/>";
-        var msg:String =
-                    '原作：<a href=\'event:myEvent\'>剑jian</a><br>' +
-                    '企划：数字化流天、L、社长、Diazynez<br>' +
-                    '程序：Nagisa、Diazynez、BearBrine、パチュリー<br>' +
-                    '美术：数字化流天、L、V.临界幻想、小数、Azreal、影、赤炎、小海、主流、曦城子、酸菜鱼、<br>          ' +
-                    '卡布托、Future、Nagisa、惊鸿、杯梓、星空幻梦、花里、Just...<br>' +
-                    '测试：ゞ影孞&僮畵ヾ、成环、cat232181、无宇逆风、叽咕村夫、默默、小皮、山之叟、欲上天、<br>          ' +
-                    'LOTTU、肥宅正品、ppx、七米、星空幻梦、逝时_流光...<br>' +
-                    '贡献：灰原·银、Grimm（WEB发行）<br>' +
-                    '对接：Lemon_kenbai、黑羽、诺斯给给...<br>' +
-                    '运营：多情丶回忆、FZCL石头门、纯白暮弦、风之旅人、寒窗听雨、黑猫、老秦、凌辰夜风、<br>          ' +
-                    '萌新、某个热爱理科的死宅、天双、御礼...<br>';
-        return msg;
+        return GetLang('txt.credits_stage.body');
     }
 
     private function getDefaultCredits(msg:String):Sprite {

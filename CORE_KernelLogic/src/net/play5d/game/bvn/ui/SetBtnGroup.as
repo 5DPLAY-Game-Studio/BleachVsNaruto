@@ -83,10 +83,10 @@ public class SetBtnGroup extends Sprite {
 
     public function initKeySet():void {
         setBtnData([
-                       {label: 'SET ALL', cn: '设置全部'},
-                       {label: 'SET DEFAULT', cn: '还原默认按键'},
-                       {label: 'APPLY', cn: '应用'},
-                       {label: 'CANCEL', cn: '取消'}
+                       {label: 'SET ALL', cn: GetLang('txt.common.set_all')},
+                       {label: 'SET DEFAULT', cn: GetLang('txt.common.set_default')},
+                       {label: 'APPLY', cn: GetLang('txt.common.apply')},
+                       {label: 'CANCEL', cn: GetLang('txt.common.cancel')}
                    ]);
     }
 
@@ -190,30 +190,30 @@ public class SetBtnGroup extends Sprite {
 
         var settingMenu:Array = GameInterface.instance.getSettingMenu();
         settingMenu ||= [
-            {txt: 'P1 KEY SET', cn: '玩家1 按键设置'},
-            {txt: 'P2 KEY SET', cn: '玩家2 按键设置'},
+            {txt: 'P1 KEY SET', cn: GetLang('txt.set_btn_group.p1_key_set')},
+            {txt: 'P2 KEY SET', cn: GetLang('txt.set_btn_group.p2_key_set')},
             {
-                txt      : 'COM LEVEL', cn: '电脑等级',
+                txt      : 'COM LEVEL', cn: GetLang('txt.set_btn_group.com_level'),
                 options  : [
-                    {label: 'VERY EASY', cn: '非常简单', value: 1},
-                    {label: 'EASY', cn: '简单', value: 2},
-                    {label: 'NORMAL', cn: '正常', value: 3},
-                    {label: 'HARD', cn: '困难', value: 4},
-                    {label: 'VERY HARD', cn: '非常困难', value: 5},
-                    {label: 'HELL', cn: '地狱', value: 6}
+                    {label: 'VERY EASY', cn: GetLang('txt.set_btn_group.com_level_very_easy'), value: 1},
+                    {label: 'EASY', cn: GetLang('txt.set_btn_group.com_level_easy'), value: 2},
+                    {label: 'NORMAL', cn: GetLang('txt.set_btn_group.com_level_normal'), value: 3},
+                    {label: 'HARD', cn: GetLang('txt.set_btn_group.com_level_hard'), value: 4},
+                    {label: 'VERY HARD', cn: GetLang('txt.set_btn_group.com_level_very_hard'), value: 5},
+                    {label: 'HELL', cn: GetLang('txt.set_btn_group.com_level_hell'), value: 6}
                 ],
                 optoinKey: 'AI_level'
             },
             {
-                txt      : 'OPERATE MODE', cn: '按键操作模式',
+                txt      : 'OPERATE MODE', cn: GetLang('txt.set_btn_group.operate_mode'),
                 options  : [
-                    {label: 'NORMAL', cn: '正常模式', value: 0},
-                    {label: 'CLASSIC', cn: '经典模式', value: 1}
+                    {label: 'NORMAL', cn: GetLang('txt.set_btn_group.operate_normal'), value: 0},
+                    {label: 'CLASSIC', cn: GetLang('txt.set_btn_group.operate_classic'), value: 1}
                 ],
                 optoinKey: 'keyInputMode'
             },
             {
-                txt      : 'LIFE', cn: '生命值',
+                txt      : 'LIFE', cn: GetLang('txt.set_btn_group.life'),
                 options  : [
                     {label: '50%', cn: '50%', value: 0.5},
                     {label: '100%', cn: '100%', value: 1},
@@ -224,17 +224,17 @@ public class SetBtnGroup extends Sprite {
                 optoinKey: 'fighterHP'
             },
             {
-                txt      : 'TIME', cn: '对战时间',
+                txt      : 'TIME', cn: GetLang('txt.set_btn_group.time'),
                 options  : [
-                    {label: '30s', cn: '30秒', value: 30},
-                    {label: '60s', cn: '60秒', value: 60},
-                    {label: '90s', cn: '90秒', value: 90},
-                    {label: '∞', cn: '无限制', value: -1}
+                    {label: '30s', cn: GetLang('txt.set_btn_group.time_30'), value: 30},
+                    {label: '60s', cn: GetLang('txt.set_btn_group.time_60'), value: 60},
+                    {label: '90s', cn: GetLang('txt.set_btn_group.time_90'), value: 90},
+                    {label: '∞', cn: GetLang('txt.set_btn_group.time_unlimited'), value: -1}
                 ],
                 optoinKey: 'fightTime'
             },
             {
-                txt      : 'SOUND', cn: '游戏音效',
+                txt      : 'SOUND', cn: GetLang('txt.set_btn_group.sound'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -246,7 +246,7 @@ public class SetBtnGroup extends Sprite {
                 optoinKey: 'soundVolume'
             },
             {
-                txt      : 'BGM', cn: '背景音乐',
+                txt      : 'BGM', cn: GetLang('txt.set_btn_group.bgm'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -258,20 +258,20 @@ public class SetBtnGroup extends Sprite {
                 optoinKey: 'bgmVolume'
             },
             {
-                txt      : 'QUALITY', cn: '画质等级',
+                txt      : 'QUALITY', cn: GetLang('txt.set_btn_group.quality'),
                 options  : [
-                    {label: 'LOW', cn: '低', value: GameQuality.LOW},
-                    {label: 'MEDIUM', cn: '中', value: GameQuality.MEDIUM},
-                    {label: 'HIGH', cn: '高', value: GameQuality.HIGH},
-                    {label: 'BEST', cn: '最高', value: GameQuality.BEST}
+                    {label: 'LOW', cn: GetLang('txt.set_btn_group.quality_low'), value: GameQuality.LOW},
+                    {label: 'MEDIUM', cn: GetLang('txt.set_btn_group.quality_medium'), value: GameQuality.MEDIUM},
+                    {label: 'HIGH', cn: GetLang('txt.set_btn_group.quality_high'), value: GameQuality.HIGH},
+                    {label: 'BEST', cn: GetLang('txt.set_btn_group.quality_best'), value: GameQuality.BEST}
                 ],
                 optoinKey: 'quality'
             },
             {
-                txt      : 'SHOW HP', cn: '显示血量',
+                txt      : 'SHOW HP', cn: GetLang('txt.set_btn_group.show_hp'),
                 options  : [
-                    {label: 'SHOW', cn: '显示', value: true},
-                    {label: 'HIDE', cn: '隐藏', value: false},
+                    {label: 'SHOW', cn: GetLang('txt.set_btn_group.hp_show'), value: true},
+                    {label: 'HIDE', cn: GetLang('txt.set_btn_group.hp_hide'), value: false},
                 ],
                 optoinKey: 'isShowHp'
             }
@@ -292,8 +292,8 @@ public class SetBtnGroup extends Sprite {
             }
         }
 
-        addBtn('CANCEL', '取消');
-        addBtn('APPLY', '应用');
+        addBtn('CANCEL', GetLang('txt.common.cancel'));
+        addBtn('APPLY', GetLang('txt.common.apply'));
 
         this.graphics.beginFill(0, 0);
         this.graphics.drawRect(0, 0, GameConfig.GAME_SIZE.x, _btns[_btns.length - 1].y + 300);

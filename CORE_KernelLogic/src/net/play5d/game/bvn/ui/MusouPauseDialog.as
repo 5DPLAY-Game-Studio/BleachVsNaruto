@@ -37,9 +37,9 @@ public class MusouPauseDialog extends Sprite {
 
         _btnGroup = new SetBtnGroup();
         _btnGroup.setBtnData([
-                                 {label: 'BACK MAP', cn: '回大地图'},
-                                 {label: 'MOVE LIST', cn: '出招表'},
-                                 {label: 'CONTINUE', cn: '继续游戏'}
+                                 {label: 'BACK MAP', cn: GetLang('txt.musou_pause_dialog.back_map')},
+                                 {label: 'MOVE LIST', cn: GetLang('txt.common.move_list')},
+                                 {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
                              ], 2);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
 
@@ -109,12 +109,18 @@ public class MusouPauseDialog extends Sprite {
         switch (e.selectedLabel) {
         case 'BACK MAP':
             _btnGroup.keyEnable = false;
-            GameUI.confrim('BACK MAP?', '返回到大地图？', function ():void {
-                MainGame.I.goWorldMap();
-                GameEvent.dispatchEvent(GameEvent.MUSOU_BACK_MAP);
-            }, function ():void {
-                _btnGroup.keyEnable = true;
-            }, true);
+            GameUI.confrim(
+                GetLang('confirm.musou_pause_dialog.back_map_title'),
+                GetLang('confirm.musou_pause_dialog.back_map'),
+                function ():void {
+                    MainGame.I.goWorldMap();
+                    GameEvent.dispatchEvent(GameEvent.MUSOU_BACK_MAP);
+                },
+                function ():void {
+                    _btnGroup.keyEnable = true;
+                },
+                true
+            );
             break;
         case 'MOVE LIST':
             showMoveList();

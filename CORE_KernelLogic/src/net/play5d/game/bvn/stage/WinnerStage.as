@@ -297,7 +297,13 @@ public class WinnerStage implements IStage {
             goNext();
             break;
         case btns.btn_exit:
-            GameUI.confrim('BACK TITLE?', '返回到主菜单？', MainGame.I.goMenu, null, IsMobile());
+            GameUI.confrim(
+                GetLang('confirm.common.back_menu_title'),
+                GetLang('confirm.common.back_menu'),
+                MainGame.I.goMenu,
+                null,
+                IsMobile()
+            );
             GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
             break;
         }

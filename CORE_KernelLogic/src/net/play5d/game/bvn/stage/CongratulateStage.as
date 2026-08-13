@@ -149,7 +149,7 @@ public class CongratulateStage implements IStage {
         _btngroup   = new SetBtnGroup();
         _btngroup.x = 230;
         _btngroup.y = scoretxt.y + scoretxt.height + 100;
-        _btngroup.setBtnData([{label: 'BACK', cn: '返回'}]);
+        _btngroup.setBtnData([{label: 'BACK', cn: GetLang('txt.common.back')}]);
         _btngroup.addEventListener(SetBtnEvent.SELECT, selectBtnHandler);
         _btngroup.keyEnable = false;
         _ui.addChild(_btngroup);

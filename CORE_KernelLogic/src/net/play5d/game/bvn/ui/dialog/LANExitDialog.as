@@ -69,8 +69,8 @@ public class LANExitDialog extends Sprite implements ILanExitDialog {
 
         _btnGroup = new SetBtnGroup();
         _btnGroup.setBtnData([
-                                 {label: 'CONTINUE', cn: '继续游戏'},
-                                 {label: 'EXIT', cn: '退出联机'}
+                                 {label: 'CONTINUE', cn: GetLang('txt.common.continue')},
+                                 {label: 'EXIT', cn: GetLang('txt.lan_exit_dialog.exit')}
                              ], 0);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
 

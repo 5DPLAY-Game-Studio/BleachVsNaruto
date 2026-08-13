@@ -122,16 +122,16 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
     private function initKeyMapping():void {
         var kmc:MovieClip = ui.keysmc;
         var keys:Array    = [
-            {id: 'up', name: 'UP', cn: '上'},
-            {id: 'down', name: 'DOWN', cn: '下'},
-            {id: 'left', name: 'LEFT', cn: '左'},
-            {id: 'right', name: 'RIGHT', cn: '右'},
-            {id: 'attack', name: 'ATTACK', cn: '攻击'},
-            {id: 'jump', name: 'JUMP', cn: '跳跃'},
-            {id: 'dash', name: 'DASH', cn: '冲刺'},
-            {id: 'skill', name: 'SKILL', cn: '技能'},
-            {id: 'superKill', name: 'SUPER SKILL', cn: '大招'},
-            {id: 'beckons', name: 'SPECIAL', cn: '特殊'}
+            {id: 'up', name: 'UP', cn: GetLang('txt.set_ctrl_btn_ui.key_up')},
+            {id: 'down', name: 'DOWN', cn: GetLang('txt.set_ctrl_btn_ui.key_down')},
+            {id: 'left', name: 'LEFT', cn: GetLang('txt.set_ctrl_btn_ui.key_left')},
+            {id: 'right', name: 'RIGHT', cn: GetLang('txt.set_ctrl_btn_ui.key_right')},
+            {id: 'attack', name: 'ATTACK', cn: GetLang('txt.set_ctrl_btn_ui.key_attack')},
+            {id: 'jump', name: 'JUMP', cn: GetLang('txt.set_ctrl_btn_ui.key_jump')},
+            {id: 'dash', name: 'DASH', cn: GetLang('txt.set_ctrl_btn_ui.key_dash')},
+            {id: 'skill', name: 'SKILL', cn: GetLang('txt.set_ctrl_btn_ui.key_skill')},
+            {id: 'superKill', name: 'SUPER SKILL', cn: GetLang('txt.set_ctrl_btn_ui.key_super_kill')},
+            {id: 'jiaohue', name: 'SPECIAL', cn: GetLang('txt.set_ctrl_btn_ui.key_special')}
         ];
 
         _keyMappings = [];
@@ -141,7 +141,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
             var kui:Sprite = kmc.getChildByName('k' + i) as Sprite;
             var o:Object   = keys[i];
             if (!kui) {
-                trace('mc[k' + i + ']不存在！');
+                TraceLang('debug.trace.data.set_ctrl_btn_ui.key_mc_missing', {index: i});
                 continue;
             }
             var km:KeyMapping = new KeyMapping(kui, o.id, o.name, o.cn);

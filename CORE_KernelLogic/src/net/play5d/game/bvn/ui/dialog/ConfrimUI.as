@@ -125,7 +125,10 @@ public class ConfrimUI extends BaseDialog {
         _btnGroup.startX = _btnGroup.startY = 0;
         _btnGroup.direct = 0;
         _btnGroup.gap    = 200;
-        _btnGroup.setBtnData([{label: 'YES', cn: '是'}, {label: 'NO', cn: '否'}], 1);
+        _btnGroup.setBtnData([
+                                 {label: 'YES', cn: GetLang('txt.common.yes')},
+                                 {label: 'NO', cn: GetLang('txt.common.no')}
+                             ], 1);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, selectHandler);
         _btnGroup.x = (
                               GameConfig.GAME_SIZE.x - _btnGroup.width

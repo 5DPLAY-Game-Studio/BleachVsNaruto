@@ -479,7 +479,7 @@ public class GameStage extends Sprite implements IStage {
 
     public function initCamera():void {
         if (camera) {
-            throw new Error('游戏镜头已初始化！');
+            throw new Error(GetLang('debug.error.data.game_stage.camera_already_init'));
             return;
         }
 

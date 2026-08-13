@@ -69,7 +69,10 @@ public class CoinUI {
     }
 
     private function addMoneyBack(money:int):void {
-        GameUI.alert('MONEY', '获得金币 ' + money + ' !');
+        GameUI.alert(
+            GetLang('alert.coin_ui.money_title'),
+            GetLang('alert.coin_ui.money', {amount: money})
+        );
         GameData.I.musouData.addMoney(money);
     }
 

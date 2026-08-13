@@ -57,11 +57,11 @@ public class ResUtils {
     public function initalize(back:Function = null, error:Function = null):void {
 
         if (_initing) {
-            throw new Error('正在初始化过程中，不能再次初始化！');
+            throw new Error(GetLang('debug.error.data.res_utils.init_in_progress'));
         }
 
         if (swfLib == null) {
-            throw new Error('未初始化SwfLib !!');
+            throw new Error(GetLang('debug.error.data.res_utils.swf_lib_not_init'));
         }
 
         if (_inited) {
@@ -137,7 +137,7 @@ public class ResUtils {
     public function getItemClass(embedSwf:Class, itemName:String):Class {
 
         if (!_swfPool) {
-            throw new Error('未进行初始化！');
+            throw new Error(GetLang('debug.error.data.res_utils.not_initialized'));
         }
 
         var swf:EmbedSwf = _swfPool[embedSwf];
@@ -149,7 +149,7 @@ public class ResUtils {
 
     public function getItemProperty(embedSwf:Class, name:String):* {
         if (!_swfPool) {
-            throw new Error('未进行初始化！');
+            throw new Error(GetLang('debug.error.data.res_utils.not_initialized'));
         }
 
         var swf:EmbedSwf = _swfPool[embedSwf];
@@ -161,7 +161,7 @@ public class ResUtils {
 
     public function callSwfFunction(embedSwf:Class, func:String, params:Array = null):* {
         if (!_swfPool) {
-            throw new Error('未进行初始化！');
+            throw new Error(GetLang('debug.error.data.res_utils.not_initialized'));
         }
 
         var swf:EmbedSwf = _swfPool[embedSwf];

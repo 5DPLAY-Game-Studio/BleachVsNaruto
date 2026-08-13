@@ -289,7 +289,7 @@ public class FighterEffectCtrl {
 
         var faceClass:Class = _faceObj[id];
         if (!faceClass) {
-            Debugger.errorMsg('未定义必杀特写:' + id);
+            Debugger.errorMsg(GetLang('debug.log.data.fighter_effect_ctrl.undefined_bisha', {id: id}));
             return null;
         }
         var bd:BitmapData = new faceClass();

@@ -299,7 +299,7 @@ public class SelectFighterStage implements IStage {
     }
 
     public function goLoadGame():void {
-        trace("开始游戏");
+        TraceLang('debug.trace.data.select_fighter_stage.start_game');
         StateCtrl.I.transIn(MainGame.I.loadGame);
     }
 
@@ -347,7 +347,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function initFighter():void {
-        trace('初始化选人');
+        TraceLang('debug.trace.data.select_fighter_stage.init_fighter');
         clear();
         _selectState = SELECT_STATE_FIGHTER;
         buildList(_config.charList);
@@ -369,7 +369,7 @@ public class SelectFighterStage implements IStage {
 
     //初始化辅助
     private function initAssist():void {
-        trace('初始化辅助');
+        TraceLang('debug.trace.data.select_fighter_stage.init_assist');
         clear();
         _selectState = SELECT_STATE_ASSIST;
         buildList(_config.assistList);
@@ -509,7 +509,7 @@ public class SelectFighterStage implements IStage {
         var fv:FighterVO = _selectState == SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(sv.fighterID) :
                            FighterModel.I.getFighter(sv.fighterID);
         if (!fv) {
-            Debugger.log('SelectFighterStage.addFighterItem :: 未找到角色数据：' + sv.fighterID);
+            Debugger.log(GetLang('debug.log.data.select_fighter_stage.fighter_data_missing', {fighterId: sv.fighterID}));
             return null;
         }
 
@@ -916,7 +916,7 @@ public class SelectFighterStage implements IStage {
             var fv:FighterVO = _selectState == SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(fid) :
                                FighterModel.I.getFighter(fid);
             if (!fv) {
-                Debugger.log('SelectFighterStage.addFighterItem :: 未找到角色数据：' + fid);
+                Debugger.log(GetLang('debug.log.data.select_fighter_stage.fighter_data_missing', {fighterId: fid}));
                 continue;
             }
 
@@ -932,7 +932,10 @@ public class SelectFighterStage implements IStage {
 
                 var pos:Point = posArr[psn];
                 if (!pos) {
-                    Debugger.log('pos未定义' + psn + ' / ' + posSN);
+                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_undefined', {
+                        psn  : psn + ' / ',
+                        posSN: posSN
+                    }));
                     continue;
                 }
 
@@ -948,11 +951,15 @@ public class SelectFighterStage implements IStage {
                 );
 
                 if (mmx < 0 || mmx > GameConfig.GAME_SIZE.x) {
-                    Debugger.log('pos.x 越界 (' + mmx + ')  ' + psn + ' / ' + posSN);
+                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_x_oob', {
+                        detail: '(' + mmx + ')  ' + psn + ' / ' + posSN
+                    }));
                     continue;
                 }
                 if (mmy < 0 || mmy > GameConfig.GAME_SIZE.y) {
-                    Debugger.log('pos.y 越界 (' + mmy + ')  ' + psn + ' / ' + posSN);
+                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_y_oob', {
+                        detail: '(' + mmy + ')  ' + psn + ' / ' + posSN
+                    }));
                     continue;
                 }
 
@@ -1126,7 +1133,13 @@ public class SelectFighterStage implements IStage {
                 GameUI.cancelConfrim();
             }
             else {
-                GameUI.confrim('BACK TITLE?', '返回到主菜单？', MainGame.I.goMenu, null, IsMobile());
+                GameUI.confrim(
+                    GetLang('confirm.common.back_menu_title'),
+                    GetLang('confirm.common.back_menu'),
+                    MainGame.I.goMenu,
+                    null,
+                    IsMobile()
+                );
                 GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
             }
         }
@@ -1255,7 +1268,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function initMap():void {
-        trace('选择地图');
+        TraceLang('debug.trace.data.select_fighter_stage.select_map');
 
         GameEvent.dispatchEvent(GameEvent.SELECT_MAP);
 
@@ -1325,7 +1338,13 @@ public class SelectFighterStage implements IStage {
     }
 
     private function backMenuHandler(e:Event):void {
-        GameUI.confrim('BACK TITLE?', '返回到主菜单？', MainGame.I.goMenu, null, IsMobile());
+        GameUI.confrim(
+            GetLang('confirm.common.back_menu_title'),
+            GetLang('confirm.common.back_menu'),
+            MainGame.I.goMenu,
+            null,
+            IsMobile()
+        );
         GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
     }
 

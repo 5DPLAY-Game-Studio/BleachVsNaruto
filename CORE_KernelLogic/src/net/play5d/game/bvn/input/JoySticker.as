@@ -53,7 +53,7 @@ public class JoySticker {
         trace('JoySticker.initlize');
 
         if (!GameInput.isSupported) {
-            trace('该平台不支持手柄！');
+            TraceLang('debug.trace.data.joy_sticker.platform_unsupported');
             return;
         }
 

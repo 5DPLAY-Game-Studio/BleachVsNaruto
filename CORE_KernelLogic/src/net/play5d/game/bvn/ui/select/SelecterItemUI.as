@@ -137,7 +137,7 @@ public class SelecterItemUI {
     public function select(back:Function = null):void {
 
         if (!selectVO) {
-            throw new Error('未设置selectVO!');
+            throw new Error(GetLang('debug.error.data.selecter_item_ui.select_vo_unset'));
             return;
         }
 

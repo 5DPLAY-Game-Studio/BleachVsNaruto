@@ -42,7 +42,7 @@ public class EmbedSwf {
         var bytes:ByteArray = _swf.movieClipData;
 
         if (!bytes) {
-            throw new Error('未发现swf的movieClipData!');
+            throw new Error(GetLang('debug.error.data.embed_swf.no_movie_clip_data'));
         }
 
         var loader:Loader = new Loader();

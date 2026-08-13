@@ -37,9 +37,9 @@ public class PauseDialog extends Sprite {
 
         _btnGroup = new SetBtnGroup();
         _btnGroup.setBtnData([
-                                 {label: 'GAME TITLE', cn: '返回标题'},
-                                 {label: 'MOVE LIST', cn: '出招表'},
-                                 {label: 'CONTINUE', cn: '继续游戏'}
+                                 {label: 'GAME TITLE', cn: GetLang('txt.pause_dialog.game_title')},
+                                 {label: 'MOVE LIST', cn: GetLang('txt.common.move_list')},
+                                 {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
                              ], 2);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
 
@@ -77,7 +77,6 @@ public class PauseDialog extends Sprite {
             return false;
         }
 
-
         this.visible        = false;
         _btnGroup.keyEnable = false;
 //			GameUI.closeConfrim();
@@ -108,11 +107,17 @@ public class PauseDialog extends Sprite {
         switch (e.selectedLabel) {
         case 'GAME TITLE':
             _btnGroup.keyEnable = false;
-            GameUI.confrim('BACK TITLE?', '返回到主菜单？', function ():void {
-                MainGame.I.goMenu();
-            }, function ():void {
-                _btnGroup.keyEnable = true;
-            }, IsMobile());
+            GameUI.confrim(
+                GetLang('confirm.common.back_menu_title'),
+                GetLang('confirm.common.back_menu'),
+                function ():void {
+                    MainGame.I.goMenu();
+                },
+                function ():void {
+                    _btnGroup.keyEnable = true;
+                },
+                IsMobile()
+            );
             break;
         case 'MOVE LIST':
             showMoveList();

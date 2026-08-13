@@ -193,7 +193,7 @@ public class MenuStage extends Sprite implements IStage {
 
     private function versionClickHandler(e:MouseEvent):void {
         if (MainGame.UPDATE_INFO) {
-            GameUI.alert('UPDATE', MainGame.UPDATE_INFO);
+            GameUI.alert(GetLang('alert.menu_stage.update_title'), MainGame.UPDATE_INFO);
         }
     }
 }

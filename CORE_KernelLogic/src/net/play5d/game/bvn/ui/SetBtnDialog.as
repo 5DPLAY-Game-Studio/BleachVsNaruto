@@ -55,7 +55,7 @@ public class SetBtnDialog {
 
         _keyNameTxt.text = name;
         _keyNameTxt.x    = -_keyNameTxt.width / 2;
-        _cntxt.text      = '请按下一个键设置【' + cn + '】';
+        _cntxt.text      = GetLang('txt.set_btn_dialog.push_key', {name: cn});
 
         isShow = true;
     }

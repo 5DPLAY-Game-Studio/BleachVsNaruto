@@ -417,7 +417,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             _fighterMcCtrl.setActionCtrler(ctrler);
         }
         else {
-            trace('设置ctrler失败！');
+            TraceLang('debug.trace.data.fighter_ctrler.set_ctrler_fail');
         }
     }
 

@@ -54,7 +54,7 @@ public class GameLoadingStage implements IStage {
 
         if (AssetManager.I.needPreLoad()) {
             AssetManager.I.loadPreLoad(loadPreloadBack, loadPreloadFail, loadPreloadProgress);
-            msg('游戏初始化：准备游戏资源');
+            msg(GetLang('txt.game_loading_stage.prepare'));
         }
         else {
             loadPreloadBack();
@@ -77,12 +77,12 @@ public class GameLoadingStage implements IStage {
 
     private function loadPreloadBack():void {
         GameData.I.loadConfig(loadConfigBack, loadConfigFail);
-        msg('游戏初始化：正在加载配置文件');
+        msg(GetLang('txt.game_loading_stage.loading_config'));
     }
 
     private function loadPreloadFail(errorStr:String = null):void {
-        Debugger.log('游戏初始化失败：准备游戏资源失败：', errorStr);
-        msg('游戏初始化失败：准备游戏资源失败!');
+        Debugger.log(GetLang('debug.log.data.game_loading_stage.preload_fail', {error: errorStr || ''}));
+        msg(GetLang('txt.game_loading_stage.prepare_fail'));
         if (_initFail != null) {
             _initFail(errorStr);
         }
@@ -96,8 +96,8 @@ public class GameLoadingStage implements IStage {
     }
 
     private function loadConfigFail(errorStr:String):void {
-        Debugger.log('游戏初始化失败：加载配置文件失败：', errorStr);
-        msg('游戏初始化失败：加载配置文件失败!');
+        Debugger.log(GetLang('debug.log.data.game_loading_stage.config_fail', {error: errorStr || ''}));
+        msg(GetLang('txt.game_loading_stage.config_fail'));
         if (_initFail != null) {
             _initFail(errorStr);
         }
@@ -105,12 +105,12 @@ public class GameLoadingStage implements IStage {
 
     private function loadConfigBack():void {
         AssetManager.I.loadBasic(loadAssetBack, loadAssetProgress);
-        msg('游戏初始化：正在加载游戏资源');
+        msg(GetLang('txt.game_loading_stage.loading_assets'));
     }
 
     private function loadAssetProgress(p:Number, message:String, step:int, totalStep:int):void {
         if (p > 1) {
-            trace(message + '::进度超过100%');
+            TraceLang('debug.trace.data.game_loading_stage.progress_over_100', {where: message});
             p = 1;
         }
         if (step > totalStep) {
@@ -121,7 +121,11 @@ public class GameLoadingStage implements IStage {
         }
         _ui.bar.bar.scaleX = p;
 
-        var txt:String = '游戏初始化：正在加载' + message + '资源(' + step + '/' + totalStep + ')';
+        var txt:String = GetLang('txt.game_loading_stage.loading_step', {
+            itemName : message,
+            step     : step,
+            totalStep: totalStep
+        });
         msg(txt);
         GameEvent.dispatchEvent(GameEvent.LOADING_GAME, {msg: txt, progress: p, step: step, totalStep: totalStep});
     }

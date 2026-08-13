@@ -150,7 +150,13 @@ public class LoadingMusouStage implements IStage {
                 GameUI.cancelConfrim();
             }
             else {
-                GameUI.confrim('BACK TITLE?', '返回到主菜单？', MainGame.I.goMenu, null, true);
+                GameUI.confrim(
+                    GetLang('confirm.common.back_menu_title'),
+                    GetLang('confirm.common.back_menu'),
+                    MainGame.I.goMenu,
+                    null,
+                    true
+                );
                 GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
             }
         }

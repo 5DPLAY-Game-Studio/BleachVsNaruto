@@ -61,7 +61,7 @@ public class EmbedSwfAssetUtil {
     public function initalize(back:Function = null):void {
 
         if (_initing) {
-            throw new Error('正在初始化过程中，不能再次初始化！');
+            throw new Error(GetLang('debug.error.data.embed_swf_asset_util.init_in_progress'));
         }
 
         if (_inited) {
@@ -128,7 +128,7 @@ public class EmbedSwfAssetUtil {
     public function getItemClass(itemName:String):Class {
 
         if (!_swfPool) {
-            throw new Error('未进行初始化！');
+            throw new Error(GetLang('debug.error.data.embed_swf_asset_util.not_initialized'));
         }
 
         var ui:Class     = getUiClass();
