@@ -46,7 +46,7 @@ import net.play5d.game.bvn.utils.LANUtils;
 import net.play5d.game.bvn.utils.LockFrameLogic;
 import net.play5d.game.bvn.win.utils.MsgType;
 import net.play5d.game.bvn.win.utils.SocketMsgFactory;
-import net.play5d.game.bvn.win.views.lan.LANExitDialog;
+import net.play5d.game.bvn.ui.dialog.LANExitDialog;
 import net.play5d.game.bvn.win.views.lan.LANGameState;
 import net.play5d.game.bvn.win.views.lan.LANRoomState;
 
@@ -206,7 +206,20 @@ public class LANServerCtrl implements ILanServerLockLink {
         _connGameLogic = new LockFrameServerLogic();
         _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
 
-        LanGameMenuCtrl.I.init(new LANExitDialog());
+        LanGameMenuCtrl.I.init(new LANExitDialog(
+                function ():Boolean {
+                    return LANClientCtrl.I.active;
+                },
+                function ():Boolean {
+                    return LANServerCtrl.I.active;
+                },
+                function ():void {
+                    LANClientCtrl.I.gameEnd();
+                },
+                function ():void {
+                    LANServerCtrl.I.gameQuit();
+                }
+        ));
 
         initSyncEvent();
     }

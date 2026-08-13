@@ -21,7 +21,7 @@ package net.play5d.game.bvn.interfaces.lan {
 /**
  * 联机退出确认对话框契约。
  *
- * <p>由壳实现并注入联机菜单控制逻辑。</p>
+ * <p>由 Kernel 提供实现；壳注入联机会话状态与退出回调后交给联机菜单控制逻辑。</p>
  *
  * @example
  * <listing version="3.0">

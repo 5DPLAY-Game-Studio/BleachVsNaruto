@@ -7,7 +7,7 @@ import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.mob.data.HostVO;
 import net.play5d.kyo.air.socket.SocketClient;
 import net.play5d.game.bvn.utils.LANUtils;
-import net.play5d.game.bvn.mob.views.lan.LANExitDialog;
+import net.play5d.game.bvn.ui.dialog.LANExitDialog;
 import net.play5d.game.bvn.mob.views.lan.LANGameState;
 
 public class LANGameCtrl {
@@ -55,7 +55,20 @@ public class LANGameCtrl {
             break;
         }
 
-        LanGameMenuCtrl.I.init(new LANExitDialog());
+        LanGameMenuCtrl.I.init(new LANExitDialog(
+                function ():Boolean {
+                    return LANClientCtrl.I.active;
+                },
+                function ():Boolean {
+                    return LANServerCtrl.I.active;
+                },
+                function ():void {
+                    LANClientCtrl.I.gameEnd();
+                },
+                function ():void {
+                    LANServerCtrl.I.gameQuit();
+                }
+        ));
 
         MainGame.I.goSelect();
     }
