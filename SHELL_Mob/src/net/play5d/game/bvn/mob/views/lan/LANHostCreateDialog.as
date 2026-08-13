@@ -16,20 +16,7 @@ public class LANHostCreateDialog implements Istage {
     public var onOK:Function;
     public var setting:Object = {};
     private var _ui:MovieClip;
-    private var _settingData:Array = [
-        {
-            'title': '游戏模式', 'en': 'Game Mode', 'key': 'game_mode',
-            options: [{'name': '小队', 'en': 'Team vs', 'value': 1}, {'name': '单人', 'en': 'Single vs', 'value': 2}]
-        },
-        {
-            'title': '回合时间', 'en': 'Game Time', 'key': 'game_time',
-            options: [{'name': '60', 'en': '60', 'value': 60}, {'name': '90', 'en': '90', 'value': 90}]
-        },
-        {
-            'title': '人物血量', 'en': 'HP', 'key': 'hp',
-            options: [{'name': '100%', 'en': '100%', 'value': 1}, {'name': '200%', 'en': '200%', 'value': 2}]
-        }
-    ];
+    private var _settingData:Array;
     private var _setItems:Array;
     private var _isOK:Boolean;
 
@@ -51,6 +38,7 @@ public class LANHostCreateDialog implements Istage {
     }
 
     public function build():void {
+        initSettingData();
         _ui = UIAssetUtil.I.createDisplayObject('dialog_host');
         buildItems();
         ScreenPadManager.addTouchListener(_ui.btn_ok, okHandler);
@@ -63,6 +51,38 @@ public class LANHostCreateDialog implements Istage {
     public function destroy(back:Function = null):void {
         ScreenPadManager.removeTouchListener(_ui.btn_ok);
         ScreenPadManager.removeTouchListener(_ui.btn_back);
+    }
+
+    private function initSettingData():void {
+        _settingData = [
+            {
+                title  : GetLang('txt.lan_host_create_dialog.game_mode'),
+                en     : 'Game Mode',
+                key    : 'game_mode',
+                options: [
+                    {name: GetLang('txt.lan_host_create_dialog.game_mode_team'), en: 'Team vs', value: 1},
+                    {name: GetLang('txt.lan_host_create_dialog.game_mode_single'), en: 'Single vs', value: 2}
+                ]
+            },
+            {
+                title  : GetLang('txt.lan_host_create_dialog.game_time'),
+                en     : 'Game Time',
+                key    : 'game_time',
+                options: [
+                    {name: '60', en: '60', value: 60},
+                    {name: '90', en: '90', value: 90}
+                ]
+            },
+            {
+                title  : GetLang('txt.lan_host_create_dialog.hp'),
+                en     : 'HP',
+                key    : 'hp',
+                options: [
+                    {name: '100%', en: '100%', value: 1},
+                    {name: '200%', en: '200%', value: 2}
+                ]
+            }
+        ];
     }
 
     private function buildItems():void {

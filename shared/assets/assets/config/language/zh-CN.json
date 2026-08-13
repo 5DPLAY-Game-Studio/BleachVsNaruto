@@ -38,7 +38,7 @@
       "team_play_vs_people"  : "2P对战",
       "team_play_vs_CPU"     : "对战电脑",
       "team_play_watch"      : "观战电脑",
-      "single_play"          : "小队模式",
+      "single_play"          : "单人模式",
       "single_play_acrade"   : "闯关模式",
       "single_play_vs_people": "2P对战",
       "single_play_vs_CPU"   : "对战电脑",
@@ -147,6 +147,40 @@
     },
     "credits_stage": {
       "body": "原作：<a href='event:myEvent'>剑jian</a><br>企划：数字化流天、L、社长、Diazynez<br>程序：Nagisa、Diazynez、BearBrine、パチュリー<br>美术：数字化流天、L、V.临界幻想、小数、Azreal、影、赤炎、小海、主流、曦城子、酸菜鱼、<br>          卡布托、Future、Nagisa、惊鸿、杯梓、星空幻梦、花里、Just...<br>测试：ゞ影孞&僮畵ヾ、成环、cat232181、无宇逆风、叽咕村夫、默默、小皮、山之叟、欲上天、<br>          LOTTU、肥宅正品、ppx、七米、星空幻梦、逝时_流光...<br>贡献：灰原·银、Grimm（WEB发行）<br>对接：Lemon_kenbai、黑羽、诺斯给给...<br>运营：多情丶回忆、FZCL石头门、纯白暮弦、风之旅人、寒窗听雨、黑猫、老秦、凌辰夜风、<br>          萌新、某个热爱理科的死宅、天双、御礼...<br>"
+    },
+    "game_interface_manager": {
+      "joy_set"       : "按钮设置",
+      "screen_mode"   : "屏幕模式",
+      "screen_fill"   : "拉伸",
+      "screen_ratio"  : "等比例",
+      "credits_footer": "提交：<a href=\"{url}\" target=\"_blank\">{label}</a><br/>官网：<a href=\"http://www.1212321.com/\" target=\"_blank\">www.1212321.com</a>    论坛：<a href=\"http://bbs.1212321.com/\" target=\"_blank\">bbs.1212321.com</a><br/>邮箱：5dplay@qun.mail.163.com （人才招募中）<br/>"
+    },
+    "set_screen_btn_view": {
+      "preinstall" : "预置位置",
+      "type_1"     : "设定1",
+      "type_2"     : "设定2",
+      "alpha"      : "按钮透明度",
+      "sp_skill"   : "必杀按键",
+      "wankai"     : "卍解按键",
+      "special"    : "辅助/灵爆/替身术按键",
+      "auto_show"  : "自动显示/隐藏",
+      "always_show": "总是显示",
+      "custom"     : "自定义",
+      "apply"      : "确定"
+    },
+    "lan_host_create_dialog": {
+      "game_mode"       : "游戏模式",
+      "game_mode_team"  : "小队",
+      "game_mode_single": "单人",
+      "game_time"       : "回合时间",
+      "hp"              : "人物血量"
+    },
+    "host_vo": {
+      "mode_team"  : "TEAM VS - 小队对战",
+      "mode_single": "SINGLE VS - 单人对战"
+    },
+    "lan_server_ctrl": {
+      "room_full": "人数已满"
     }
   },
   "alert": {
@@ -170,6 +204,18 @@
     },
     "menu_stage": {
       "update_title": "UPDATE"
+    },
+    "lan_client_ctrl": {
+      "disconnect_title": "DISCONNECT",
+      "disconnect_error": "发生异常",
+      "disconnect_host" : "与主机断开连接"
+    },
+    "lan_server_ctrl": {
+      "player_exit_title": "PLAYER EXIT",
+      "player_exit"      : "玩家退出房间"
+    },
+    "update_ctrl": {
+      "force_update": "您的版本过低，请进行更新！"
     }
   },
   "confirm": {
@@ -191,6 +237,14 @@
     "musou_pause_dialog": {
       "back_map_title": "BACK MAP?",
       "back_map"      : "返回到大地图？"
+    },
+    "update_ctrl": {
+      "optional_update"   : "有新的版本，是否更新？ {info}",
+      "update_info_prefix": "\n更新内容： {detail}"
+    },
+    "set_screen_btn_view": {
+      "lose_custom_title": "Custom already set, are you sure ?",
+      "lose_custom"      : "自定义按钮已设定，改变此项将丢失自定义按钮设定，确定要改变？"
     }
   },
   "debug": {
@@ -302,6 +356,9 @@
           "init_fighter": "初始化选人",
           "init_assist" : "初始化辅助",
           "select_map"  : "选择地图"
+        },
+        "root_sprite": {
+          "current_font": "当前字体： {fontName}"
         }
       }
     },
@@ -398,6 +455,12 @@
         },
         "selecter_item_ui": {
           "select_vo_unset": "未设置 selectVO！"
+        },
+        "ad_event_listener": {
+          "already_listen": "{action} 已侦听，仅支持侦听一次！"
+        },
+        "ad_group": {
+          "add_ad_first": "add ad first!"
         }
       }
     }

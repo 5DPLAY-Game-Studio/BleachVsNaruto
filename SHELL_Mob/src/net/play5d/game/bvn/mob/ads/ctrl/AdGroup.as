@@ -181,7 +181,7 @@ public class AdGroup extends EventDispatcher {
 
     public function initalize():void {
         if (_adList.length < 1) {
-            throw new Error('add ad first!');
+            throw new Error(GetLang('debug.error.data.ad_group.add_ad_first'));
         }
         initListener();
         _initAdQueue = new Vector.<IAd>();

@@ -7,7 +7,7 @@ public class AdEventListener {
 
     public function listen(adAction:String, handler:Function):void {
         if (_listenMap[adAction]) {
-            throw Error(adAction + '已侦听，仅支持侦听一次！');
+            throw new Error(GetLang('debug.error.data.ad_event_listener.already_listen', {action: adAction}));
         }
         _listenMap[adAction] = handler;
     }

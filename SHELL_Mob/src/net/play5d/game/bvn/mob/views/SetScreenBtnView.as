@@ -28,17 +28,17 @@ public class SetScreenBtnView extends Sprite {
         _btnGroup.setBtnData([
 
                                  {
-                                     label      : 'PREINSTALL', cn: '预置位置',
+                                     label      : 'PREINSTALL', cn: GetLang('txt.set_screen_btn_view.preinstall'),
                                      options    : [
-                                         {label: 'TYPE 1', cn: '设定1', value: 0},
-                                         {label: 'TYPE 2', cn: '设定2', value: 1},
+                                         {label: 'TYPE 1', cn: GetLang('txt.set_screen_btn_view.type_1'), value: 0},
+                                         {label: 'TYPE 2', cn: GetLang('txt.set_screen_btn_view.type_2'), value: 1},
                                      ],
                                      optoinKey  : 'joyMode',
                                      optionValue: config.joyMode
                                  },
 
                                  {
-                                     label      : 'ALPHA', cn: '按钮透明度',
+                                     label      : 'ALPHA', cn: GetLang('txt.set_screen_btn_view.alpha'),
                                      options    : [
                                          {label: '10%', cn: '10%', value: 0.1},
                                          {label: '30%', cn: '30%', value: 0.3},
@@ -51,37 +51,37 @@ public class SetScreenBtnView extends Sprite {
                                  },
 
                                  {
-                                     label      : 'SP SKILL', cn: '必杀按键',
+                                     label      : 'SP SKILL', cn: GetLang('txt.set_screen_btn_view.sp_skill'),
                                      options    : [
-                                         {label: 'AUTO', cn: '自动显示/隐藏', value: true},
-                                         {label: 'ALWAYS', cn: '总是显示', value: false}
+                                         {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
+                                         {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
                                      ],
                                      optoinKey  : 'superSkillAutoHide',
                                      optionValue: config.superSkillAutoHide
                                  },
 
                                  {
-                                     label      : 'WANKAI', cn: '卍解按键',
+                                     label      : 'WANKAI', cn: GetLang('txt.set_screen_btn_view.wankai'),
                                      options    : [
-                                         {label: 'AUTO', cn: '自动显示/隐藏', value: true},
-                                         {label: 'ALWAYS', cn: '总是显示', value: false}
+                                         {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
+                                         {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
                                      ],
                                      optoinKey  : 'wankaiAutoHide',
                                      optionValue: config.wankaiAutoHide
                                  },
 
                                  {
-                                     label      : 'SPECIAL', cn: '辅助/灵爆/替身术按键',
+                                     label      : 'SPECIAL', cn: GetLang('txt.set_screen_btn_view.special'),
                                      options    : [
-                                         {label: 'AUTO', cn: '自动显示/隐藏', value: true},
-                                         {label: 'ALWAYS', cn: '总是显示', value: false}
+                                         {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
+                                         {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
                                      ],
                                      optoinKey  : 'specialAutoHide',
                                      optionValue: config.specialAutoHide
                                  },
 
-                                 {label: 'CUSTOM', cn: '自定义'},
-                                 {label: 'APPLY', cn: '确定'}
+                                 {label: 'CUSTOM', cn: GetLang('txt.set_screen_btn_view.custom')},
+                                 {label: 'APPLY', cn: GetLang('txt.set_screen_btn_view.apply')}
                              ]);
         _btnGroup.initScroll(RootSprite.FULL_SCREEN_SIZE.x, RootSprite.FULL_SCREEN_SIZE.y);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnSelect);
@@ -131,8 +131,10 @@ public class SetScreenBtnView extends Sprite {
     private function onOptionChange(e:SetBtnEvent):void {
         if (e.optionKey == 'joyMode') {
             if (GameInterfaceManager.config.screenPadConfig.joySet) {
-                GameUI.confrim('Custom already set, are you sure ?',
-                               '自定义按钮已设定，改变此项将丢失自定义按钮设定，确定要改变？', function ():void {
+                GameUI.confrim(
+                        GetLang('confirm.set_screen_btn_view.lose_custom_title'),
+                        GetLang('confirm.set_screen_btn_view.lose_custom'),
+                        function ():void {
                             GameInterfaceManager.config.screenPadConfig.joySet = null;
                             var config:ScreenPadConfigVO                       = GameInterfaceManager.config.screenPadConfig;
                             config.setValueByKey(e.optionKey, e.optionValue);

@@ -50,10 +50,10 @@ public class HostVO {
     public function getGameModeStr():String {
         switch (gameMode) {
         case 1:
-            return 'TEAM VS - 小队对战';
+            return GetLang('txt.host_vo.mode_team');
             break;
         case 2:
-            return 'SINGLE VS - 单人对战';
+            return GetLang('txt.host_vo.mode_single');
             break;
         }
         return null;

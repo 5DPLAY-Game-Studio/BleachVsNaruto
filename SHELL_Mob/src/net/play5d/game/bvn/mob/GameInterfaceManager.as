@@ -79,18 +79,18 @@ public class GameInterfaceManager implements IGameInterface {
         var a:Array = [
 
             {
-                txt: 'TEAM PLAY', cn: '小队模式', children: [
-                    {txt: 'TEAM ACRADE', cn: '闯关模式'},
-                    {txt: 'TEAM VS CPU', cn: '对战电脑'},
-                    {txt:'TEAM WATCH',cn:'观战电脑'}
+                txt: 'TEAM PLAY', cn: GetLang('txt.game_interface.team_play'), children: [
+                    {txt: 'TEAM ACRADE', cn: GetLang('txt.game_interface.team_play_acrade')},
+                    {txt: 'TEAM VS CPU', cn: GetLang('txt.game_interface.team_play_vs_CPU')},
+                    {txt: 'TEAM WATCH', cn: GetLang('txt.game_interface.team_play_watch')}
                 ]
             },
 
             {
-                txt: 'SINGLE PLAY', cn: '单人模式', children: [
-                    {txt: 'SINGLE ACRADE', cn: '闯关模式'},
-                    {txt: 'SINGLE VS CPU', cn: '对战电脑'},
-                    {txt:'SINGLE WATCH',cn:'观战电脑'}
+                txt: 'SINGLE PLAY', cn: GetLang('txt.game_interface.single_play'), children: [
+                    {txt: 'SINGLE ACRADE', cn: GetLang('txt.game_interface.single_play_acrade')},
+                    {txt: 'SINGLE VS CPU', cn: GetLang('txt.game_interface.single_play_vs_CPU')},
+                    {txt: 'SINGLE WATCH', cn: GetLang('txt.game_interface.single_play_watch')}
                 ]
             },
 
@@ -99,15 +99,15 @@ public class GameInterfaceManager implements IGameInterface {
 //				}},
 
             {
-                txt: 'MUSOU PLAY', cn: '无双模式', children: [
-                    {txt: 'MUSOU ACRADE', cn: '无双模式'}
+                txt: 'MUSOU PLAY', cn: GetLang('txt.game_interface.musou_play'), children: [
+                    {txt: 'MUSOU ACRADE', cn: GetLang('txt.game_interface.musou_acrade')}
                 ]
             },
 
             /*{txt:'SURVIVOR',cn:'挑战模式'},*/ //暂未开放
-            {txt: 'OPTION', cn: '游戏设置'},
-            {txt: 'TRAINING', cn: '练习模式'},
-            {txt: 'CREDITS', cn: '制作组'},
+            {txt: 'OPTION', cn: GetLang('txt.game_interface.option')},
+            {txt: 'TRAINING', cn: GetLang('txt.game_interface.training')},
+            {txt: 'CREDITS', cn: GetLang('txt.game_interface.credits')},
 //            {txt: 'MORE GAMES', cn: '更多游戏'}
 //				{txt:'EXIT',cn:'退出游戏',func:function():void{
 //					GameUI.confrim('EXIT GAME','退出游戏？',NativeApplication.nativeApplication.exit);
@@ -121,23 +121,23 @@ public class GameInterfaceManager implements IGameInterface {
         return [
 //				{txt:"JOYSTICK SET",cn:"手柄设置",select:ViewManager.I.goP1JoyStickSet},
             {
-                txt   : 'JOY SET', cn: '按钮设置',
+                txt   : 'JOY SET', cn: GetLang('txt.game_interface_manager.joy_set'),
                 select: ViewManager.I.setScreenBtns
             },
             {
-                txt      : 'COM LEVEL', cn: '电脑等级',
+                txt      : 'COM LEVEL', cn: GetLang('txt.set_btn_group.com_level'),
                 options  : [
-                    {label: 'VERY EASY', cn: '非常简单', value: 1},
-                    {label: 'EASY', cn: '简单', value: 2},
-                    {label: 'NORMAL', cn: '正常', value: 3},
-                    {label: 'HARD', cn: '困难', value: 4},
-                    {label: 'VERY HARD', cn: '非常困难', value: 5},
-                    {label: 'HELL', cn: '地狱', value: 6}
+                    {label: 'VERY EASY', cn: GetLang('txt.set_btn_group.com_level_very_easy'), value: 1},
+                    {label: 'EASY', cn: GetLang('txt.set_btn_group.com_level_easy'), value: 2},
+                    {label: 'NORMAL', cn: GetLang('txt.set_btn_group.com_level_normal'), value: 3},
+                    {label: 'HARD', cn: GetLang('txt.set_btn_group.com_level_hard'), value: 4},
+                    {label: 'VERY HARD', cn: GetLang('txt.set_btn_group.com_level_very_hard'), value: 5},
+                    {label: 'HELL', cn: GetLang('txt.set_btn_group.com_level_hell'), value: 6}
                 ],
                 optoinKey: 'AI_level'
             },
             {
-                txt      : 'LIFE', cn: '生命值',
+                txt      : 'LIFE', cn: GetLang('txt.set_btn_group.life'),
                 options  : [
                     {label: '50%', cn: '50%', value: 0.5},
                     {label: '100%', cn: '100%', value: 1},
@@ -148,25 +148,25 @@ public class GameInterfaceManager implements IGameInterface {
                 optoinKey: 'fighterHP'
             },
             {
-                txt      : 'TIME', cn: '对战时间',
+                txt      : 'TIME', cn: GetLang('txt.set_btn_group.time'),
                 options  : [
-                    {label: '30s', cn: '30秒', value: 30},
-                    {label: '60s', cn: '60秒', value: 60},
-                    {label: '90s', cn: '90秒', value: 90},
-                    {label: '∞', cn: '无限制', value: -1}
+                    {label: '30s', cn: GetLang('txt.set_btn_group.time_30'), value: 30},
+                    {label: '60s', cn: GetLang('txt.set_btn_group.time_60'), value: 60},
+                    {label: '90s', cn: GetLang('txt.set_btn_group.time_90'), value: 90},
+                    {label: '∞', cn: GetLang('txt.set_btn_group.time_unlimited'), value: -1}
                 ],
                 optoinKey: 'fightTime'
             },
             {
-                txt      : 'SCREEN MODE', cn: '屏幕模式',
+                txt      : 'SCREEN MODE', cn: GetLang('txt.game_interface_manager.screen_mode'),
                 options  : [
-                    {label: 'FILL', cn: '拉伸', value: 0},
-                    {label: 'CENTER', cn: '等比例', value: 1}
+                    {label: 'FILL', cn: GetLang('txt.game_interface_manager.screen_fill'), value: 0},
+                    {label: 'CENTER', cn: GetLang('txt.game_interface_manager.screen_ratio'), value: 1}
                 ],
                 optoinKey: 'screenMode'
             },
             {
-                txt      : 'SOUND', cn: '游戏音效',
+                txt      : 'SOUND', cn: GetLang('txt.set_btn_group.sound'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -178,7 +178,7 @@ public class GameInterfaceManager implements IGameInterface {
                 optoinKey: 'soundVolume'
             },
             {
-                txt      : 'BGM', cn: '背景音乐',
+                txt      : 'BGM', cn: GetLang('txt.set_btn_group.bgm'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -190,20 +190,20 @@ public class GameInterfaceManager implements IGameInterface {
                 optoinKey: 'bgmVolume'
             },
             {
-                txt      : 'QUALITY', cn: '画质等级',
+                txt      : 'QUALITY', cn: GetLang('txt.set_btn_group.quality'),
                 options  : [
-                    {label: 'LOW', cn: '低', value: GameQuality.LOW},
-                    {label: 'MEDIUM', cn: '中', value: GameQuality.MEDIUM},
-                    {label: 'HIGH', cn: '高', value: GameQuality.HIGH},
-                    {label: 'BEST', cn: '最高', value: GameQuality.BEST}
+                    {label: 'LOW', cn: GetLang('txt.set_btn_group.quality_low'), value: GameQuality.LOW},
+                    {label: 'MEDIUM', cn: GetLang('txt.set_btn_group.quality_medium'), value: GameQuality.MEDIUM},
+                    {label: 'HIGH', cn: GetLang('txt.set_btn_group.quality_high'), value: GameQuality.HIGH},
+                    {label: 'BEST', cn: GetLang('txt.set_btn_group.quality_best'), value: GameQuality.BEST}
                 ],
                 optoinKey: 'quality'
             },
             {
-                txt      : 'SHOW HP', cn: '显示血量',
+                txt      : 'SHOW HP', cn: GetLang('txt.set_btn_group.show_hp'),
                 options  : [
-                    {label: 'SHOW', cn: '显示', value: true},
-                    {label: 'HIDE', cn: '隐藏', value: false},
+                    {label: 'SHOW', cn: GetLang('txt.set_btn_group.hp_show'), value: true},
+                    {label: 'HIDE', cn: GetLang('txt.set_btn_group.hp_hide'), value: false},
                 ],
                 optoinKey: 'isShowHp'
             }
@@ -352,13 +352,13 @@ public class GameInterfaceManager implements IGameInterface {
 //                       '" target="_blank">www.1212321.com</a>' + '<br/>';
 //        creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.1212321.com/') +
 //                       '" target="_blank">bbs.1212321.com</a>' + '<br/>';
-        var commitsHash:String = GithubUtils.getCommitsHash();
-        var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
+        var commitsHash:String  = GithubUtils.getCommitsHash();
+        var commitsUrl:String   = GithubUtils.getCommitsUrlByHash(commitsHash);
         var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
-        creditsInfo += '提交：<a href="' + commitsUrl + '" target="_blank">' + commitsLabel + '</a><br/>' +
-                       '官网：<a href="http://www.1212321.com/" target="_blank">www.1212321.com</a>    ' +
-                       '论坛：<a href="http://bbs.1212321.com/" target="_blank">bbs.1212321.com</a><br/>' +
-                       '邮箱：5dplay@qun.mail.163.com （人才招募中）<br/>';
+        creditsInfo += GetLang('txt.game_interface_manager.credits_footer', {
+            url  : commitsUrl,
+            label: commitsLabel
+        });
 
         var txt:TextField = new TextField();
 

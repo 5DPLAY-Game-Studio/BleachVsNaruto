@@ -33,33 +33,38 @@ public class UpdateCtrl {
         }
 
         if (version.forceUpdate) {
-            GameUI.alert('UPDATE', '您的版本过低，请进行更新！', function ():void {
-                WebUtils.getURL(version.url);
-                if (updateBack != null) {
-                    updateBack();
-                }
-            });
+            GameUI.alert(
+                    GetLang('alert.menu_stage.update_title'),
+                    GetLang('alert.update_ctrl.force_update'),
+                    function ():void {
+                        WebUtils.getURL(version.url);
+                        if (updateBack != null) {
+                            updateBack();
+                        }
+                    }
+            );
             return;
         }
 
-        var updateInfo:String = '\n' +
-                                (
-                                        version.info ?
-                                '更新内容：' + version.info
-                                                     :
-                                        ''
-                                );
+        var updateInfo:String = version.info
+                ? GetLang('confirm.update_ctrl.update_info_prefix', {detail: version.info})
+                : '';
 
-        GameUI.confrim('UPDATE', '有新的版本，是否更新？' + updateInfo, function ():void {
-            WebUtils.getURL(version.url);
-            if (updateBack != null) {
-                updateBack();
-            }
-        }, function ():void {
-            if (skipBack != null) {
-                skipBack();
-            }
-        });
+        GameUI.confrim(
+                GetLang('alert.menu_stage.update_title'),
+                GetLang('confirm.update_ctrl.optional_update', {info: updateInfo}),
+                function ():void {
+                    WebUtils.getURL(version.url);
+                    if (updateBack != null) {
+                        updateBack();
+                    }
+                },
+                function ():void {
+                    if (skipBack != null) {
+                        skipBack();
+                    }
+                }
+        );
     }
 }
 }
