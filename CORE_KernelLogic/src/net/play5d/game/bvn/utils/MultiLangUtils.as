@@ -58,8 +58,8 @@ public class MultiLangUtils {
          * @param data 加载成功的数据
          */
         function loadSuccess(data:Object):void {
-            trace(data);
             _languageObj = data;
+            _cacheObj    = {};
 
             if (back != null) {
                 back();
