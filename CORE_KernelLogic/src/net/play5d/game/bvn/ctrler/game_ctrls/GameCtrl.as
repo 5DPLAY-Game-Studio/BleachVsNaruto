@@ -79,11 +79,10 @@ public class GameCtrl {
      */
     private var _teamMap:TeamMap = new TeamMap();
     private var _startCtrl:GameStartCtrl; //开场控制
-    private var _fighterEventCtrl:FighterEventCtrl; //角色事件控制
+    private var _fightSession:IFightSession; //格斗 / 无双会话
     private var _trainingCtrl:TrainingCtrler; //练习模式控制
     private var _mainLogicCtrl:GameMainLogicCtrler; //游戏主逻辑控制
     private var _endCtrl:GameEndCtrl; //KO，结束游戏控制
-    private var _musouCtrl:MusouCtrl; // 无双游戏控制
     private var _isRenderGame:Boolean = true;
     private var _isPauseGame:Boolean; //暂停
     private var _gameRunning:Boolean;
@@ -93,10 +92,7 @@ public class GameCtrl {
     private var _gameStartAndPause:Boolean; //游戏开始时暂停
 
     public function getAttacker(name:String, team:int):FighterAttacker {
-        if (_musouCtrl) {
-            return _musouCtrl.getFighterEventCtrl().getAttacker(name, team);
-        }
-        return _fighterEventCtrl.getAttacker(name, team);
+        return _fightSession.getAttacker(name, team);
     }
 
     public function setRenderHit(v:Boolean):void {
@@ -106,7 +102,7 @@ public class GameCtrl {
     }
 
     public function getMusouCtrl():MusouCtrl {
-        return _musouCtrl;
+        return _fightSession ? _fightSession.getMusouCtrl() : null;
     }
 
     public function getTeamMap():TeamMap {
@@ -128,10 +124,10 @@ public class GameCtrl {
         _gameRunning       = true;
         _gameStartAndPause = false;
 
-        if (!_musouCtrl) {
-            _fighterEventCtrl = new FighterEventCtrl();
-            _fighterEventCtrl.initialize();
+        if (!_fightSession) {
+            _fightSession = new VersusFightSession();
         }
+        _fightSession.onGameInitialize();
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
 
@@ -144,9 +140,10 @@ public class GameCtrl {
         GameLogic.clear();
         GameInputer.clearInput();
 
-        if (_fighterEventCtrl) {
-            _fighterEventCtrl.destroy();
-            _fighterEventCtrl = null;
+        // 格斗：FighterEventCtrl 原先在此阶段销毁
+        if (_fightSession && !_fightSession.getMusouCtrl()) {
+            _fightSession.destroy();
+            _fightSession = null;
         }
 
         if (_mainLogicCtrl) {
@@ -173,9 +170,10 @@ public class GameCtrl {
             gameState = null;
         }
 
-        if (_musouCtrl) {
-            _musouCtrl.destroy();
-            _musouCtrl = null;
+        // 无双：MusouCtrl 原先在此阶段销毁
+        if (_fightSession) {
+            _fightSession.destroy();
+            _fightSession = null;
         }
 
         gameRunData.p1FighterGroup.destroy();
@@ -275,7 +273,7 @@ public class GameCtrl {
 
         initTeam();
 
-        _musouCtrl.buildGame();
+        _fightSession.buildGame();
 
         GameRender.add(render);
 
@@ -411,7 +409,7 @@ public class GameCtrl {
         if (pauseUI && !_isPauseGame) {
 
             if (_startCtrl || _endCtrl || (
-                    _musouCtrl && _musouCtrl.getGameFinished()
+                    _fightSession && _fightSession.isFinished()
             )) {
                 _gameStartAndPause = true;
                 return;
@@ -532,8 +530,7 @@ public class GameCtrl {
 
     /************************************************************************************************************************************************************/
     public function initMusouGame():void {
-        _musouCtrl = new MusouCtrl();
-        _musouCtrl.initialize();
+        _fightSession = new MusouFightSession();
     }
 
     private function renderPause():void {
@@ -767,8 +764,8 @@ public class GameCtrl {
             _trainingCtrl.render();
         }
 
-        if (_musouCtrl) {
-            _musouCtrl.render();
+        if (_fightSession) {
+            _fightSession.render();
         }
     }
 
@@ -789,11 +786,12 @@ public class GameCtrl {
             _mainLogicCtrl.renderAnimate();
         }
 
-        if (_musouCtrl) {
-            _musouCtrl.renderAnimate();
+        if (_fightSession) {
+            _fightSession.renderAnimate();
         }
 
-        if (actionEnable && !_startCtrl && !_endCtrl && !_musouCtrl) {
+        if (actionEnable && !_startCtrl && !_endCtrl && _fightSession &&
+            _fightSession.allowsRoundTimer()) {
             renderGameTime();
         }
     }

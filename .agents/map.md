@@ -7,7 +7,7 @@
 |------|------|
 | 启动入口 | `MainGame.as` |
 | 场景（菜单/选人/对战/加载/地图） | `stage/` → `MenuStage` `SelectFighterStage` `GameStage` `Loading*` `WorldMapStage` |
-| 对战流程 | `ctrler/game_ctrls/` → `GameCtrl` |
+| 对战流程 | `ctrler/game_ctrls/` → `GameCtrl` + `IFightSession`（`VersusFightSession` / `MusouFightSession`） |
 | 无双 / 闯关 | `ctrler/musou_ctrls/` `data/musou/` `ui/musou/` `ui/big_map/` |
 | 角色 / 动作 / 受击 | `fighter/` `fighter/ctrler/` `fighter/models/` → `FighterMain` `FighterAction*` `HitVO` |
 | 援助 | `fighter/Assister.as` `fighter/ctrler/AssisterCtrler.as` |
