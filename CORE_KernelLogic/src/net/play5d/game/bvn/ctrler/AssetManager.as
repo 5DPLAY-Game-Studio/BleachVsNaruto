@@ -53,7 +53,6 @@ public class AssetManager {
     private var _bitmapFontLoader:BitmapFontLoader = new BitmapFontLoader();
 //		private var _assetLoader:IAssetLoader = ResUtils.I.callSwfFunction(ResUtils.I.extend, "getAssetLoader");
     private var _assetLoader:IAssetLoader = null;
-    private var _fighterFaceCache:Object = {};
 
     public function init():void {
 //			if(!_assetLoader){

@@ -41,7 +41,6 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.map.FloorVO;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.stage.GameCamera;
-import net.play5d.game.bvn.ui.select.SelectIndexUI;
 import net.play5d.game.bvn.utils.ResUtils;
 
 public class GameLogic {
@@ -397,7 +396,6 @@ public class GameLogic {
         case 1:
             GameData.I.loadSelect('config/salect.xml');
 //            ResUtils.WINNER = '$loading$MC_stageWinner';
-            SelectIndexUI.SHOW_MODE   = 1;
             GameConfig.SHOW_UI_STATUS = 1;
             GameEndCtrl.SHOW_CONTINUE = true;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
@@ -405,7 +403,6 @@ public class GameLogic {
         case 2:
             GameData.I.loadDebugSelect('salect.xml');
 //            ResUtils.WINNER = '$loading$MC_stageWinner2';
-            SelectIndexUI.SHOW_MODE   = 1;
             GameConfig.SHOW_UI_STATUS = 1;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
             GameEndCtrl.SHOW_CONTINUE = true;
@@ -413,7 +410,6 @@ public class GameLogic {
         default:
             GameData.I.loadSelect('config/select.xml');
             ResUtils.WINNER           = '$loading$MC_stageWinner';
-            SelectIndexUI.SHOW_MODE   = 0;
             GameConfig.SHOW_UI_STATUS = 0;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_4399;
             GameEndCtrl.SHOW_CONTINUE = false;

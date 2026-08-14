@@ -38,3 +38,9 @@
 | 血条 UI | `ui/fight/` 或 `ui/musou/` |
 | 按键 | `input/` `KeyConfigVO` |
 | 镜头 | `GameCamera` `FighterCameraCtrler` |
+
+## 依赖边界（增量优化）
+
+| NEVER | 改为 |
+|-------|------|
+| `ctrler`/`fighter`/`data` 回写 `ui/` 静态字段或新增具体控件 import | 写 `GameConfig` / 事件 / 数据；既有 `GameUI` 门面除外 |

@@ -22,14 +22,13 @@ import flash.display.Sprite;
 import flash.geom.Point;
 import flash.utils.setTimeout;
 
+import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.utils.ResUtils;
 
 public class SelectIndexUI extends Sprite {
-
-    public static var SHOW_MODE:int = 0;
 
     public function SelectIndexUI() {
         super();
@@ -86,7 +85,7 @@ public class SelectIndexUI extends Sprite {
         _p1Group = new SelectIndexUIGroup();
         _p2Group = new SelectIndexUIGroup();
 
-        if (SHOW_MODE == 1) {
+        if (GameConfig.SHOW_UI_STATUS == 1) {
             _p1Group.x = 35;
             _p2Group.x = 535;
             _p1Group.setFighterScale(0.75);
@@ -169,7 +168,7 @@ public class SelectIndexUI extends Sprite {
                 ResUtils.swfLib.select, '$loading$SP_selectArrow2'
         );
 
-        _p2Group.initArrow(arrow, new Point(SHOW_MODE == 1 ? 230 : 260, 30));
+        _p2Group.initArrow(arrow, new Point(GameConfig.SHOW_UI_STATUS == 1 ? 230 : 260, 30));
 
         if (autoSelect) {
             _p2Group.autoSelect();

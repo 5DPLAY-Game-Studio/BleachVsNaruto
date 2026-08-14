@@ -27,6 +27,7 @@
 - 为「优雅」引入无需求的抽象层/框架
 - 大任务无步骤规划就铺开大范围改动
 - 生成无参空构造 `public function Xxx() { }`（含仅 `super();`、仅「构造方法/无需实例化」ASDoc）
+- `ctrler` / `fighter` / `data` **新增**对具体 UI 控件的 import，或回写 `ui/` 静态字段（应写 `GameConfig` / 事件 / 数据；既有 `GameUI` 门面调用除外）
 
 ---
 

@@ -61,35 +61,35 @@ public class GameData {
 
     public function loadConfig(back:Function, fail:Function = null):void {
 
-        AssetManager.I.loadJSON('config/fighter.json', loadFighterBack, loadFighterFail);
+        AssetManager.I.loadJSON('config/fighter.json', loadFighterBack, failWith('txt.game_data.load_fighter_fail'));
 
         function loadFighterBack(data:Object):void {
             FighterModel.I.initByObject(data);
-            AssetManager.I.loadJSON('config/assist.json', loadAssetsBack, loadAssisterFail);
+            AssetManager.I.loadJSON('config/assist.json', loadAssetsBack, failWith('txt.game_data.load_assistant_fail'));
         }
 
         function loadAssetsBack(data:Object):void {
             AssisterModel.I.initByObject(data);
-            AssetManager.I.loadXML('config/select.xml', loadSelectBack, loadSelectFail);
+            AssetManager.I.loadXML('config/select.xml', loadSelectBack, failWith('txt.game_data.load_select_fail'));
         }
 
         function loadSelectBack(data:XML):void {
             config.select_config.setByXML(data);
 //				AssetManager.I.loadXML("config/map.xml",loadMapBack , loadMapFail);
-            AssetManager.I.loadJSON('config/map.json', loadMapBack, loadMapFail);
+            AssetManager.I.loadJSON('config/map.json', loadMapBack, failWith('txt.game_data.load_map_fail'));
         }
 
         function loadMapBack(data:Object):void {
             MapModel.I.initByObject(data);
 //				AssetManager.I.loadXML("config/mission.xml",loadMissionBack , loadMissionFail);
-            AssetManager.I.loadJSON('config/mission.json', loadMissionBack, loadMissionFail);
+            AssetManager.I.loadJSON('config/mission.json', loadMissionBack, failWith('txt.game_data.load_mission_fail'));
         }
 
         function loadMissionBack(data:Object):void {
             MessionModel.I.initByObject(data);
 //				AssetManager.I.loadXML("config/musou.xml",loadMusouMission , loadMusouMission);
 
-            MusouModel.I.loadMapData(loadMusouDataBack, loadMusouFail);
+            MusouModel.I.loadMapData(loadMusouDataBack, failWith('txt.game_data.load_musou_fail'));
         }
 
         function loadMusouDataBack():void {
@@ -109,52 +109,14 @@ public class GameData {
 //				back();
 //			}
 
-        function loadFighterFail():void {
-            var msg:String = GetLang('txt.game_data.load_fighter_fail');
-            Debugger.log(msg);
-            if (fail != null) {
-                fail(msg);
-            }
-        }
-
-        function loadAssisterFail():void {
-            var msg:String = GetLang('txt.game_data.load_assistant_fail');
-            Debugger.log(msg);
-            if (fail != null) {
-                fail(msg);
-            }
-        }
-
-        function loadSelectFail():void {
-            var msg:String = GetLang('txt.game_data.load_select_fail');
-            Debugger.log(msg);
-            if (fail != null) {
-                fail(msg);
-            }
-        }
-
-        function loadMapFail():void {
-            var msg:String = GetLang('txt.game_data.load_map_fail');
-            Debugger.log(msg);
-            if (fail != null) {
-                fail(msg);
-            }
-        }
-
-        function loadMissionFail():void {
-            var msg:String = GetLang('txt.game_data.load_mission_fail');
-            Debugger.log(msg);
-            if (fail != null) {
-                fail(msg);
-            }
-        }
-
-        function loadMusouFail():void {
-            var msg:String = GetLang('txt.game_data.load_musou_fail');
-            Debugger.log(msg);
-            if (fail != null) {
-                fail(msg);
-            }
+        function failWith(langKey:String):Function {
+            return function ():void {
+                var msg:String = GetLang(langKey);
+                Debugger.log(msg);
+                if (fail != null) {
+                    fail(msg);
+                }
+            };
         }
 
     }
