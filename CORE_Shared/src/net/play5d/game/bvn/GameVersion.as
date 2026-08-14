@@ -33,7 +33,12 @@ public class GameVersion {
 
     /**
      * 当前共享库版本号。
+     *
      * @default 见 <code>ImportVersion.as</code>
+     * @example
+     * <listing version="3.0">
+     * var v:String = GameVersion.VERSION;
+     * </listing>
      */
     public static const VERSION:String = bvn_internal::VERSION;
 }

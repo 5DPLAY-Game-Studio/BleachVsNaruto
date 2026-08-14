@@ -30,12 +30,12 @@ import net.play5d.game.bvn.interfaces.IGameInput;
  *
  * <p><code>applyConfig</code> 参数为 <code>Object</code>（运行时为配置 VO），以免 Shared 反向依赖玩法配置类型。</p>
  *
- * @see IExtendConfig
- * @see IGameInput
  * @example
  * <listing version="3.0">
  * var inputs:Vector.&lt;IGameInput&gt; = gameInterface.getGameInput('P1');
  * </listing>
+ * @see IExtendConfig
+ * @see IGameInput
  */
 public interface IGameInterface {
     /**
@@ -174,10 +174,10 @@ public interface IGameInterface {
      * @return 展示用精灵。
      * @example
      * <listing version="3.0">
-     * var sp:Sprite = instance.getCreadits(info);
+     * var sp:Sprite = instance.getCredits(info);
      * </listing>
      */
-    function getCreadits(creditsInfo:String):Sprite;
+    function getCredits(creditsInfo:String):Sprite;
 
     /**
      * 校验资源文件。

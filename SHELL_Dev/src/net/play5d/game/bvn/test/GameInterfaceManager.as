@@ -92,7 +92,7 @@ public class GameInterfaceManager implements IGameInterface {
     public function applyConfig(config:Object):void {
     }
 
-    public function getCreadits(creditsInfo:String):Sprite {
+    public function getCredits(creditsInfo:String):Sprite {
         return CreditsSpriteUtil.build(creditsInfo, 'dev.txt.game_interface_manager.commit');
     }
 

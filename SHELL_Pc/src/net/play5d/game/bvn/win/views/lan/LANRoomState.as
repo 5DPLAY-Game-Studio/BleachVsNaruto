@@ -42,7 +42,7 @@ public class LANRoomState implements IStage {
     public function LANRoomState() {
     }
     private var _ui:MovieClip;
-    private var _txtChart:*;
+    private var _txtChat:*;
     private var _host:HostVO;
     private var _isOwner:Boolean;
     private var _playerMap:Object = {};
@@ -60,9 +60,9 @@ public class LANRoomState implements IStage {
      */
     public function build():void {
         _ui = UIAssetUtil.I.createDisplayObject('room_mc');
-        _ui.input_chart.addEventListener('enter', submitChart);
+        _ui.input_chart.addEventListener('enter', submitChat);
 
-        KyoBtnUtils.initBtn(_ui.btn_chart, submitChart);
+        KyoBtnUtils.initBtn(_ui.btn_chart, submitChat);
         KyoBtnUtils.initBtn(_ui.btn_start, startGame);
         KyoBtnUtils.initBtn(_ui.btn_exit, exit);
 
@@ -125,7 +125,7 @@ public class LANRoomState implements IStage {
         }
 
         try {
-            _ui.input_chart.removeEventListener('enter', submitChart);
+            _ui.input_chart.removeEventListener('enter', submitChat);
             KyoBtnUtils.disposeBtn(_ui.btn_chart);
             KyoBtnUtils.disposeBtn(_ui.btn_start);
             KyoBtnUtils.disposeBtn(_ui.btn_exit);
@@ -176,9 +176,9 @@ public class LANRoomState implements IStage {
         delete _playerMap[id];
     }
 
-    public function pushChart(str:String, name:String = null):void {
-        var chartStr:String = name ? name + ' : ' + str : str;
-        _txtChart.appendText(chartStr + '\n');
+    public function pushChat(str:String, name:String = null):void {
+        var chatStr:String = name ? name + ' : ' + str : str;
+        _txtChat.appendText(chatStr + '\n');
     }
 
     public function exitRoom(msg:String = null):void {
@@ -214,23 +214,23 @@ public class LANRoomState implements IStage {
                 : '';
         _ui.btn_start.visible = _isOwner;
         _ui.txt_start.visible = _isOwner;
-        _txtChart             = _ui.txt_chart;
+        _txtChat              = _ui.txt_chart;
         addOwner();
     }
 
-    private function submitChart(...params):void {
-        var chart:String = _ui.input_chart.text;
-        if (chart == '') {
+    private function submitChat(...params):void {
+        var content:String = _ui.input_chart.text;
+        if (content == '') {
             return;
         }
 
         _ui.input_chart.text = '';
 
         if (_isOwner) {
-            LANServerCtrl.I.sendChart(chart, LanGameModel.I.playerName);
+            LANServerCtrl.I.sendChat(content, LanGameModel.I.playerName);
         }
         else {
-            LANClientCtrl.I.sendChart(chart);
+            LANClientCtrl.I.sendChat(content);
         }
 
     }
@@ -264,7 +264,7 @@ public class LANRoomState implements IStage {
 
     private function startTimerHandler(e:TimerEvent):void {
         if (e.type == TimerEvent.TIMER) {
-            pushChart(GetLang('txt.lan_room_state.start_countdown', {
+            pushChat(GetLang('txt.lan_room_state.start_countdown', {
                 sec: _startTimer.repeatCount - _startTimer.currentCount + 1
             }), null);
         }

@@ -38,11 +38,11 @@ public class LanSocketMsgFactory {
      * </listing>
      */
     public static function createJoinMsg(name:String):Object {
-        var o:Object = {};
-        o.type       = LanMsgType.JOIN;
-        o.name       = name;
+        var msg:Object = {};
+        msg.type       = LanMsgType.JOIN;
+        msg.name       = name;
 
-        return o;
+        return msg;
     }
 
     /**
@@ -50,15 +50,15 @@ public class LanSocketMsgFactory {
      * @return 含 <code>type=JOIN_BACK</code>、<code>success=true</code> 的消息对象。
      * @example
      * <listing version="3.0">
-     * LanSocketMsgFactory.createJoinSuccMsg();
+     * LanSocketMsgFactory.createJoinSuccessMsg();
      * </listing>
      */
-    public static function createJoinSuccMsg():Object {
-        var o:Object = {};
-        o.type       = LanMsgType.JOIN_BACK;
-        o.success    = true;
+    public static function createJoinSuccessMsg():Object {
+        var msg:Object = {};
+        msg.type       = LanMsgType.JOIN_BACK;
+        msg.success    = true;
 
-        return o;
+        return msg;
     }
 
     /**
@@ -71,65 +71,66 @@ public class LanSocketMsgFactory {
      * </listing>
      */
     public static function createJoinInMsg(name:String):Object {
-        var o:Object = {};
-        o.type       = LanMsgType.JOIN_IN;
-        o.name       = name;
+        var msg:Object = {};
+        msg.type       = LanMsgType.JOIN_IN;
+        msg.name       = name;
 
-        return o;
+        return msg;
     }
 
     /**
      * 创建「加入失败」回包。
-     * @param msg 失败原因；可为 <code>null</code>。
+     * @param failReason 失败原因；可为 <code>null</code>。
      * @return 含 <code>type=JOIN_BACK</code>、<code>success=false</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createJoinFailMsg('room full');
      * </listing>
      */
-    public static function createJoinFailMsg(msg:String = null):Object {
-        var o:Object = {};
-        o.type       = LanMsgType.JOIN_BACK;
-        o.success    = false;
-        o.msg        = msg;
+    public static function createJoinFailMsg(failReason:String = null):Object {
+        var msg:Object = {};
+        msg.type       = LanMsgType.JOIN_BACK;
+        msg.success    = false;
+        msg.msg        = failReason;
 
-        return o;
+        return msg;
     }
 
     /**
      * 创建「踢出房间」消息。
-     * @param msg 原因；可为 <code>null</code>。
+     * @param reason 原因；可为 <code>null</code>。
      * @return 含 <code>type=KICK_OUT</code> 的消息对象。
      * @example
      * <listing version="3.0">
      * LanSocketMsgFactory.createKickOutMsg('timeout');
      * </listing>
      */
-    public static function createKickOutMsg(msg:String = null):Object {
-        var o:Object = {};
-        o.type       = LanMsgType.KICK_OUT;
-        o.msg        = msg;
+    public static function createKickOutMsg(reason:String = null):Object {
+        var msg:Object = {};
+        msg.type       = LanMsgType.KICK_OUT;
+        msg.msg        = reason;
 
-        return o;
+        return msg;
     }
 
     /**
      * 创建聊天消息。
-     * @param chart 内容。
+     *
+     * @param content 聊天内容。
      * @param name 发送者名。
-     * @return 含 <code>type=CHART</code> 的消息对象。
+     * @return 含 <code>type=CHAT</code> 的消息对象。
      * @example
      * <listing version="3.0">
-     * LanSocketMsgFactory.createChart('hello', 'player1');
+     * LanSocketMsgFactory.createChat('hello', 'player1');
      * </listing>
      */
-    public static function createChart(chart:String, name:String):Object {
-        var o:Object = {};
-        o.type       = LanMsgType.CHART;
-        o.msg        = chart;
-        o.name       = name;
+    public static function createChat(content:String, name:String):Object {
+        var msg:Object = {};
+        msg.type       = LanMsgType.CHAT;
+        msg.msg        = content;
+        msg.name       = name;
 
-        return o;
+        return msg;
     }
 
     /**
@@ -141,10 +142,10 @@ public class LanSocketMsgFactory {
      * </listing>
      */
     public static function createStartGame():Object {
-        var o:Object = {};
-        o.type       = LanMsgType.START_GAME;
+        var msg:Object = {};
+        msg.type       = LanMsgType.START_GAME;
 
-        return o;
+        return msg;
     }
 }
 }

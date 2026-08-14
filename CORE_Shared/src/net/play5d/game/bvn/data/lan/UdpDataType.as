@@ -20,8 +20,10 @@ package net.play5d.game.bvn.data.lan {
 /**
  * UDP 载荷在 <code>UDPDataVO</code> 内的数据类型公开常量。
  *
- * <p>线格式首字节由 <code>UdpPacketUtils</code> 解析后再映射到本常量；
- * 数值与线字节不必相同。</p>
+ * <p>本类常量为解码后的 API 取值，供 <code>UDPDataVO.dataType</code> 使用。
+ * 线格式首字节由 <code>UdpPacketUtils</code> 解析后再映射到本常量：
+ * 线字节 1→<code>STRING</code>、2→<code>BYTEARRAY</code>、3→<code>OBJECT</code>。
+ * 因此 <code>BYTEARRAY</code>/<code>STRING</code> 的数值与线字节对调，切勿把本常量当线首字节写入。</p>
  *
  * @see UDPDataVO
  * @see UdpPacketUtils

@@ -10,7 +10,7 @@ import net.play5d.game.bvn.data.lan.LanMsgType;
  */
 public class MsgType {
 
-    public static const CHART:String = LanMsgType.CHART;
+    public static const CHAT:String = LanMsgType.CHAT;
 
     public static const START_GAME:String = LanMsgType.START_GAME;
 

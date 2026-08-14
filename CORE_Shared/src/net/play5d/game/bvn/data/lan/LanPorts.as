@@ -20,6 +20,8 @@ package net.play5d.game.bvn.data.lan {
 
 /**
  * 局域网默认端口常量（跨壳一致）。
+ *
+ * <p>UDP 发现与 TCP 会话的默认端口；各壳须使用相同取值才能互通。</p>
  */
 public class LanPorts {
     include '../../../../../../../include/ImportVersion.as';

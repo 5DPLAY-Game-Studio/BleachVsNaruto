@@ -50,7 +50,7 @@ public class FighterActionState {
     /** 正在执行受击触发动作（如反击等） */
     public static const HURT_ACT_ING:int = 16;
 
-    /** 正在防御（S） */
+    /** 正在防御（S）；常量名 <code>DEFENCE</code> 为历史英式拼写 */
     public static const DEFENCE_ING:int   = 20;
     /** 正在被打 */
     public static const HURT_ING:int      = 21;
@@ -108,7 +108,9 @@ public class FighterActionState {
     }
 
     /**
-     * 判断当前动作是否允许幽步（规则同 <code>isAllowWinState</code>）。
+     * 判断当前动作是否允许幽步。
+     *
+     * <p>历史别名，实现与 <code>isAllowWinState</code> 相同（均排除必杀、超必杀、万解）。</p>
      *
      * @param actionState 当前动作状态。
      * @return 允许时为 <code>true</code>。

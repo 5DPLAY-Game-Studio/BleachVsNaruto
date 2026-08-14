@@ -96,11 +96,11 @@ public class UdpPacketUtils {
             data.setData(byte.readUTFBytes(byte.bytesAvailable));
             break;
         case WIRE_BYTEARRAY:
-            data.dataType     = UdpDataType.BYTEARRAY;
-            var tmp:ByteArray = new ByteArray();
-            tmp.writeBytes(byte, 1, byte.bytesAvailable);
-            tmp.position = 0;
-            data.setData(tmp);
+            data.dataType         = UdpDataType.BYTEARRAY;
+            var payload:ByteArray = new ByteArray();
+            payload.writeBytes(byte, 1, byte.bytesAvailable);
+            payload.position = 0;
+            data.setData(payload);
             break;
         case WIRE_OBJECT:
             data.dataType = UdpDataType.OBJECT;

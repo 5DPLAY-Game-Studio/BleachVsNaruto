@@ -193,8 +193,8 @@
     "lan_server_ctrl": {
       "room_full"         : "人数已满",
       "player_entering"   : "{name} 正在进入房间...",
-      "player_exit_chart" : "{name} 退出房间",
-      "kick_chart"        : "已将 {name} 请出房间",
+      "player_exit_chat"  : "{name} 退出房间",
+      "kick_chat"         : "已将 {name} 请出房间",
       "player_enter"      : "{name} 进入房间",
       "kick_out"          : "你已被踢出房间"
     },

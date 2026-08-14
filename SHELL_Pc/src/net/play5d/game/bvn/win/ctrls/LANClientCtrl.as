@@ -137,8 +137,8 @@ public class LANClientCtrl implements ILanClientLockLink {
         GameEvent.removeEventListener(GameEvent.GAME_START, onRoundStart);
     }
 
-    public function sendChart(chart:String):void {
-        _socket.sendJSON(SocketMsgFactory.createChart(chart, LanGameModel.I.playerName));
+    public function sendChat(content:String):void {
+        _socket.sendJSON(SocketMsgFactory.createChat(content, LanGameModel.I.playerName));
     }
 
     public function sendTCP(o:Object):void {
@@ -351,9 +351,9 @@ public class LANClientCtrl implements ILanClientLockLink {
                 _joinBack = null;
             }
             break;
-        case MsgType.CHART:
+        case MsgType.CHAT:
             if (_room) {
-                _room.pushChart(o.msg, o.name);
+                _room.pushChat(o.msg, o.name);
             }
             break;
         case MsgType.START_GAME:

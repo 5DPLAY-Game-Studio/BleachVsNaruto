@@ -243,7 +243,7 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
         _playerClient = cv;
 
 
-        SocketServer.I.sendJson(cv.socket, SocketMsgFactory.createJoinSuccMsg());
+        SocketServer.I.sendJson(cv.socket, SocketMsgFactory.createJoinSuccessMsg());
 
         dispatchEvent(new LanEvent(LanEvent.CLIENT_JOIN_SUCCESS));
 

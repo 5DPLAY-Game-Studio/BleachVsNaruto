@@ -41,7 +41,7 @@ public class CreditsStage implements IStage {
     }
     private var _ui:Sprite;
     private var _btngroup:SetBtnGroup;
-    private var _createsSp:DisplayObject;
+    private var _creditsSp:DisplayObject;
 
     /**
      * 显示对象
@@ -66,10 +66,10 @@ public class CreditsStage implements IStage {
 
         var msg:String = getCreditsText();
 
-        _createsSp = GameInterface.instance.getCreadits(msg);
-        _createsSp ||= getDefaultCredits(msg);
+        _creditsSp = GameInterface.instance.getCredits(msg);
+        _creditsSp ||= getDefaultCredits(msg);
 
-        _ui.addChild(_createsSp);
+        _ui.addChild(_creditsSp);
 
         _btngroup = new SetBtnGroup();
 //			_btngroup.x = 20;

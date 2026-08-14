@@ -20,13 +20,18 @@ package net.play5d.game.bvn.data.lan {
 /**
  * Socket 同步按键缓冲（公开属性 + <code>clear</code>）。
  *
- * <p>Pc/Mob 共用字段形状；Mob 额外使用 <code>select</code>/<code>back</code>。不含网络收发。</p>
+ * <p>跨壳 / 锁帧共用的按键缓冲形状：方向、攻击与技能位，以及菜单用的
+ * <code>select</code>/<code>back</code>。战斗位可由 <code>SocketInputBitCodec.unpack</code>
+ * 写入；不含网络收发。</p>
+ *
+ * @see SocketInputBitCodec
  */
 public class SocketInputData {
     include '../../../../../../../include/ImportVersion.as';
 
     /**
      * 构造空缓冲。
+     *
      * @example
      * <listing version="3.0">
      * var input:SocketInputData = new SocketInputData();
@@ -86,18 +91,19 @@ public class SocketInputData {
      */
     public var special:Boolean;
     /**
-     * 确认/选择（主要 Mob）。
+     * 确认 / 选择。
      * @default false
      */
     public var select:Boolean;
     /**
-     * 返回（主要 Mob）。
+     * 返回。
      * @default false
      */
     public var back:Boolean;
 
     /**
      * 清空全部按键标记。
+     *
      * @example
      * <listing version="3.0">
      * input.clear();

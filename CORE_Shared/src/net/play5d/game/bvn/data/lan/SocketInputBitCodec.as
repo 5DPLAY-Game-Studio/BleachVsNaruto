@@ -21,7 +21,9 @@ package net.play5d.game.bvn.data.lan {
 /**
  * Socket 锁帧按键整数与 <code>SocketInputData</code> 位解包。
  *
- * <p>线序从低位到高位：special … up（与历史 <code>toString(2)</code> 解包一致）。</p>
+ * <p>跨壳锁帧共用的按键缓冲形状：将打包整数按历史 <code>toString(2)</code>
+ * 线序写入 <code>SocketInputData</code>（从低位到高位：special … up）。
+ * 仅做位变换，不含网络收发。</p>
  *
  * @see SocketInputData
  */
@@ -35,23 +37,26 @@ public class SocketInputBitCodec {
      * @param data 写入目标。
      * @example
      * <listing version="3.0">
-     * SocketInputBitCodec.unpack(msg, data);
+     * var data:SocketInputData = new SocketInputData();
+     * SocketInputBitCodec.unpack(1, data); // '1' → special
+     * data.special; // true
+     * SocketInputBitCodec.unpack(33, data); // '100001' → special + attack
      * </listing>
      */
     public static function unpack(msg:int, data:SocketInputData):void {
-        var ejz:String = msg.toString(2);
-        var l:int      = ejz.length;
+        var bits:String = msg.toString(2);
+        var bitLen:int  = bits.length;
 
-        data.special    = ejz.charAt(l - 1) == '1';
-        data.superSkill = ejz.charAt(l - 2) == '1';
-        data.skill      = ejz.charAt(l - 3) == '1';
-        data.dash       = ejz.charAt(l - 4) == '1';
-        data.jump       = ejz.charAt(l - 5) == '1';
-        data.attack     = ejz.charAt(l - 6) == '1';
-        data.right      = ejz.charAt(l - 7) == '1';
-        data.left       = ejz.charAt(l - 8) == '1';
-        data.down       = ejz.charAt(l - 9) == '1';
-        data.up         = ejz.charAt(l - 10) == '1';
+        data.special    = bits.charAt(bitLen - 1) == '1';
+        data.superSkill = bits.charAt(bitLen - 2) == '1';
+        data.skill      = bits.charAt(bitLen - 3) == '1';
+        data.dash       = bits.charAt(bitLen - 4) == '1';
+        data.jump       = bits.charAt(bitLen - 5) == '1';
+        data.attack     = bits.charAt(bitLen - 6) == '1';
+        data.right      = bits.charAt(bitLen - 7) == '1';
+        data.left       = bits.charAt(bitLen - 8) == '1';
+        data.down       = bits.charAt(bitLen - 9) == '1';
+        data.up         = bits.charAt(bitLen - 10) == '1';
     }
 }
 }

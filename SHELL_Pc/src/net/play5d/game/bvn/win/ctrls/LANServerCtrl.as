@@ -134,10 +134,10 @@ public class LANServerCtrl implements ILanServerLockLink {
         _host    = null;
     }
 
-    public function sendChart(chart:String, name:String = null):void {
-        sendClientsChart(chart, name);
+    public function sendChat(content:String, name:String = null):void {
+        sendClientsChat(content, name);
         if (_room) {
-            _room.pushChart(chart, name);
+            _room.pushChat(content, name);
         }
     }
 
@@ -310,15 +310,15 @@ public class LANServerCtrl implements ILanServerLockLink {
         case MsgType.JOIN_IN:
             if (_room) {
                 _room.setStartAble(true);
-                sendChart(GetLang('txt.lan_server_ctrl.player_enter', {name: msgObj.name}));
+                sendChat(GetLang('txt.lan_server_ctrl.player_enter', {name: msgObj.name}));
             }
             break;
-        case MsgType.CHART:
+        case MsgType.CHAT:
             var cv:ClientVO = findClient(clientSocket);
             if (_room) {
-                _room.pushChart(msgObj.msg, cv.name);
+                _room.pushChat(msgObj.msg, cv.name);
             }
-            sendClientsChart(msgObj.msg, cv.name);
+            sendClientsChat(msgObj.msg, cv.name);
             break;
         }
 
@@ -343,11 +343,11 @@ public class LANServerCtrl implements ILanServerLockLink {
         _clients.push(cv);
         if (_room) {
             _room.addPlayer(cv.ip, cv.name);
-            sendChart(GetLang('txt.lan_server_ctrl.player_entering', {name: cv.name}));
+            sendChat(GetLang('txt.lan_server_ctrl.player_entering', {name: cv.name}));
             _room.setStartAble(false);
         }
 
-        SocketServer.I.sendJson(cv.socket, SocketMsgFactory.createJoinSuccMsg());
+        SocketServer.I.sendJson(cv.socket, SocketMsgFactory.createJoinSuccessMsg());
 
         if (onPlayerJoinSuccess != null) {
             onPlayerJoinSuccess();
@@ -364,8 +364,8 @@ public class LANServerCtrl implements ILanServerLockLink {
         return null;
     }
 
-    private function sendClientsChart(chart:String, name:String):void {
-        var msg:Object = SocketMsgFactory.createChart(chart, name);
+    private function sendClientsChat(content:String, name:String):void {
+        var msg:Object = SocketMsgFactory.createChat(content, name);
         for each(var i:ClientVO in _clients) {
             SocketServer.I.sendJson(i.socket, msg);
         }
@@ -391,7 +391,7 @@ public class LANServerCtrl implements ILanServerLockLink {
                 if (_clients[i].socket == e.clientSocket) {
                     if (_room) {
                         _room.removePlayer(_clients[i].ip);
-                        _room.pushChart(GetLang('txt.lan_server_ctrl.player_exit_chart', {name: _clients[i].name}));
+                        _room.pushChat(GetLang('txt.lan_server_ctrl.player_exit_chat', {name: _clients[i].name}));
                         _room.setStartAble(false);
                     }
                     _clients.splice(i, 1);

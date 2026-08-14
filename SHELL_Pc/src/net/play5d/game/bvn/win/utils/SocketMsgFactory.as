@@ -56,8 +56,8 @@ public class SocketMsgFactory {
     /**
      * 加入游戏成功
      */
-    public static function createJoinSuccMsg():Object {
-        return LanSocketMsgFactory.createJoinSuccMsg();
+    public static function createJoinSuccessMsg():Object {
+        return LanSocketMsgFactory.createJoinSuccessMsg();
     }
 
     /**
@@ -84,8 +84,8 @@ public class SocketMsgFactory {
     /**
      * 消息
      */
-    public static function createChart(chart:String, name:String):Object {
-        return LanSocketMsgFactory.createChart(chart, name);
+    public static function createChat(content:String, name:String):Object {
+        return LanSocketMsgFactory.createChat(content, name);
     }
 
     /**

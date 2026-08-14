@@ -21,7 +21,8 @@ package net.play5d.game.bvn.interfaces {
 /**
  * 可存档对象序列化契约。
  *
- * <p>约定对象与存档数据之间的读写形状；实现位于玩法或壳配置侧。</p>
+ * <p>方法形状与 <code>IExtendConfig</code> 相同（<code>toSaveObj</code> / <code>readSaveObj</code>），
+ * 但角色不同：本接口面向玩法或壳侧的可存档对象本身；<code>IExtendConfig</code> 面向壳扩展配置块。</p>
  *
  * @see IExtendConfig
  */

@@ -89,7 +89,6 @@ public class FighterSpecialFrame {
     public static const DEFENSE:String        = '防御';
     /** 防御恢复 */
     public static const DEFENSE_RESUME:String = '防御恢复';
-    // public static const DEFENSE_HIT:String = '防住';
 
     /** 被打 */
     public static const HURT:String             = '被打';

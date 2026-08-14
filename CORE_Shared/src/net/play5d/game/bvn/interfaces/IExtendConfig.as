@@ -21,7 +21,8 @@ package net.play5d.game.bvn.interfaces {
 /**
  * 壳扩展配置序列化契约。
  *
- * <p>将扩展配置写入存档对象，或从存档对象还原。</p>
+ * <p>方法形状与 <code>ISaveData</code> 相同（<code>toSaveObj</code> / <code>readSaveObj</code>），
+ * 但角色不同：本接口面向壳扩展配置块；<code>ISaveData</code> 面向一般可存档对象。</p>
  *
  * @see ISaveData
  */

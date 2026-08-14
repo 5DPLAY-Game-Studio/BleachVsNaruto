@@ -26,14 +26,7 @@ import flash.net.Socket;
  * <code>socket</code> 仅作会话绑定字段，由壳在接入时赋值；本库不负责收发。</p>
  */
 public class ClientVO {
-    /**
-     * 构造空客户端 VO。
-     * @example
-     * <listing version="3.0">
-     * var client:ClientVO = new ClientVO();
-     * client.ip = '192.168.1.2';
-     * </listing>
-     */
+    /** 构造空客户端 VO。 */
     public function ClientVO() {
     }
 
@@ -60,6 +53,7 @@ public class ClientVO {
 
     /**
      * 客户端标识（当前等于 <code>ip</code>）。
+     *
      * @return 标识字符串。
      * @example
      * <listing version="3.0">

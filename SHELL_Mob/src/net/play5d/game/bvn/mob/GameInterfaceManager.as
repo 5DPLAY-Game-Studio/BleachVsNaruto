@@ -296,7 +296,7 @@ public class GameInterfaceManager implements IGameInterface {
 
     }
 
-    public function getCreadits(creditsInfo:String):Sprite {
+    public function getCredits(creditsInfo:String):Sprite {
         return CreditsSpriteUtil.build(creditsInfo, 'txt.game_interface_manager.credits_footer');
     }
 

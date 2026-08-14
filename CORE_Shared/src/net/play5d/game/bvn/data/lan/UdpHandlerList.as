@@ -25,7 +25,7 @@ package net.play5d.game.bvn.data.lan {
  * 网络收发仍由壳 <code>IUdpTransport</code> 实现。</p>
  *
  * @see UDPDataVO
- * @see IUdpTransport
+ * @see net.play5d.game.bvn.interfaces.lan.IUdpTransport
  */
 public class UdpHandlerList {
     include '../../../../../../../include/ImportVersion.as';
@@ -35,6 +35,13 @@ public class UdpHandlerList {
 
     /**
      * 当前回调数量。
+     *
+     * @return 已注册回调个数；尚未初始化时为 0。
+     * @default 0
+     * @example
+     * <listing version="3.0">
+     * list.length; // 0
+     * </listing>
      */
     public function get length():int {
         return _handlers ? _handlers.length : 0;
@@ -44,7 +51,11 @@ public class UdpHandlerList {
      * 注册收包回调（去重）。
      *
      * @param func <code>Function(UDPDataVO):void</code>。
-     * @return 若本次为首次加入列表返回 true（便于壳注册底层监听）。
+     * @return 本次为首次加入（列表由空变非空）时为 <code>true</code>，便于壳注册底层监听。
+     * @example
+     * <listing version="3.0">
+     * list.add(onData);
+     * </listing>
      */
     public function add(func:Function):Boolean {
         _handlers ||= new Vector.<Function>();
@@ -60,14 +71,18 @@ public class UdpHandlerList {
      * 移除收包回调。
      *
      * @param func 先前注册的回调。
+     * @example
+     * <listing version="3.0">
+     * list.remove(onData);
+     * </listing>
      */
     public function remove(func:Function):void {
         if (!_handlers) {
             return;
         }
-        var id:int = _handlers.indexOf(func);
-        if (id != -1) {
-            _handlers.splice(id, 1);
+        var index:int = _handlers.indexOf(func);
+        if (index != -1) {
+            _handlers.splice(index, 1);
         }
     }
 
@@ -75,14 +90,18 @@ public class UdpHandlerList {
      * 向所有回调派发数据。
      *
      * @param data 解码后的 UDP 数据。
+     * @example
+     * <listing version="3.0">
+     * list.dispatch(vo);
+     * </listing>
      */
     public function dispatch(data:UDPDataVO):void {
         if (!_handlers) {
             return;
         }
-        for each(var f:Function in _handlers) {
-            if (f != null) {
-                f(data);
+        for each(var handler:Function in _handlers) {
+            if (handler != null) {
+                handler(data);
             }
         }
     }

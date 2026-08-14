@@ -37,6 +37,7 @@ import flash.display.Stage;
 public interface IGameInput {
     /**
      * 是否启用输入。
+     *
      * @return 启用为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -47,13 +48,12 @@ public interface IGameInput {
      */
     function get enabled():Boolean;
 
-    /**
-     * @private
-     */
+    /** @private */
     function set enabled(v:Boolean):void;
 
     /**
      * 绑定舞台并完成初始化。
+     *
      * @param stage 当前舞台。
      * @example
      * <listing version="3.0">
@@ -64,6 +64,7 @@ public interface IGameInput {
 
     /**
      * 应用键位或设备配置。
+     *
      * @param config 实现相关的配置对象。
      * @example
      * <listing version="3.0">
@@ -74,6 +75,7 @@ public interface IGameInput {
 
     /**
      * 取得输入焦点（如重新监听按键）。
+     *
      * @example
      * <listing version="3.0">
      * input.focus();
@@ -83,6 +85,7 @@ public interface IGameInput {
 
     /**
      * 是否有任意键按下。
+     *
      * @return 有按键为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -95,6 +98,7 @@ public interface IGameInput {
 
     /**
      * 返回 / 取消。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -107,6 +111,7 @@ public interface IGameInput {
 
     /**
      * 确认 / 选择。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -119,6 +124,7 @@ public interface IGameInput {
 
     /**
      * 上。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -131,6 +137,7 @@ public interface IGameInput {
 
     /**
      * 下。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -143,6 +150,7 @@ public interface IGameInput {
 
     /**
      * 左。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -155,6 +163,7 @@ public interface IGameInput {
 
     /**
      * 右。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -167,6 +176,7 @@ public interface IGameInput {
 
     /**
      * 攻击。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -179,6 +189,7 @@ public interface IGameInput {
 
     /**
      * 跳跃。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -191,6 +202,7 @@ public interface IGameInput {
 
     /**
      * 冲刺 / 疾走。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -203,6 +215,7 @@ public interface IGameInput {
 
     /**
      * 技能。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -215,6 +228,7 @@ public interface IGameInput {
 
     /**
      * 必杀。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -227,6 +241,7 @@ public interface IGameInput {
 
     /**
      * 特殊。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -239,6 +254,7 @@ public interface IGameInput {
 
     /**
      * 万解 / 变身类按键。
+     *
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
@@ -251,6 +267,7 @@ public interface IGameInput {
 
     /**
      * 清空缓冲或瞬时状态。
+     *
      * @example
      * <listing version="3.0">
      * input.clear();
