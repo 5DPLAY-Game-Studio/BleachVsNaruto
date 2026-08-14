@@ -1047,7 +1047,7 @@ public class FighterMcCtrler {
     //招唤
     private function renderSpecial():void {
 //			if(_fighter.actionState != FighterActionState.NORNAL && _fighter.actionState !=
-// FighterActionState.DEFENCE_ING) return;
+// FighterActionState.DEFENSE_ING) return;
 
 //			if(_actionCtrler.specailSkill()){
 //				if(_fighter.fzqi >= _fighter.fzqiMax){
@@ -1618,7 +1618,7 @@ public class FighterMcCtrler {
             return;
         }
 
-        _fighter.actionState = FighterActionState.DEFENCE_ING;
+        _fighter.actionState = FighterActionState.DEFENSE_ING;
         dampingPercent(1, 1);
         setDefenseAction();
     }

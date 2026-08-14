@@ -248,8 +248,8 @@ public class TrainingInputHistoryUI extends Sprite {
         _prevLeft  = leftDown;
         _prevRight = rightDown;
 
-        if (state == FighterActionState.DEFENCE_ING &&
-            _prevActionState != FighterActionState.DEFENCE_ING) {
+        if (state == FighterActionState.DEFENSE_ING &&
+            _prevActionState != FighterActionState.DEFENSE_ING) {
             // 幽步（下+冲刺）或其连段间隙不单独记 S，避免 S SL S SL
             if (!GameInputer.dash(_inputType, 0) &&
                 !(isLastText(FighterInputCmd.GHOST_DASH_S) && GameInputer.down(_inputType, 0))) {

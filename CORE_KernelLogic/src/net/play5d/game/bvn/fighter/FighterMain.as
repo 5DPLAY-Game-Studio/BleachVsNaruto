@@ -714,7 +714,7 @@ public class FighterMain extends BaseGameSprite {
                 }
             }
             else {
-                if (actionState == FighterActionState.DEFENCE_ING) {
+                if (actionState == FighterActionState.DEFENSE_ING) {
                     energy += GameConfig.ENERGY_ADD_DEFENSE;
                 }
                 else if (FighterActionState.isAttacking(actionState)) {

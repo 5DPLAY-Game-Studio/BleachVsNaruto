@@ -109,7 +109,7 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
         var fighter:FighterMain = e.fighter as FighterMain;
 
         if (fighter.actionState != FighterActionState.NORMAL &&
-            fighter.actionState != FighterActionState.DEFENCE_ING)
+            fighter.actionState != FighterActionState.DEFENSE_ING)
         {
             return;
         }

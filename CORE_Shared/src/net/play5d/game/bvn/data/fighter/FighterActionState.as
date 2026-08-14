@@ -50,8 +50,8 @@ public class FighterActionState {
     /** 正在执行受击触发动作（如反击等） */
     public static const HURT_ACT_ING:int = 16;
 
-    /** 正在防御（S）；常量名 <code>DEFENCE</code> 为历史英式拼写 */
-    public static const DEFENCE_ING:int   = 20;
+    /** 正在防御（S） */
+    public static const DEFENSE_ING:int   = 20;
     /** 正在被打 */
     public static const HURT_ING:int      = 21;
     /** 正在被击飞 */
