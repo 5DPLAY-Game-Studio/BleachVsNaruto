@@ -32,8 +32,6 @@ public class EffectModel {
         return _i;
     }
 
-    public function EffectModel() {
-    }
     //		private var _hitEffects:Object;
     private var _effect:Object;
 

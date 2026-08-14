@@ -74,8 +74,6 @@ public class MusouEnemyVO implements IInstanceVO {
         return result;
     }
 
-    public function MusouEnemyVO() {
-    }
     public var fighterID:String;
     public var maxHp:int = 0;
     public var atk:int   = 0;

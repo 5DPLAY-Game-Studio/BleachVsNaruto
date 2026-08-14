@@ -46,8 +46,6 @@ public class AssetManager {
         return _i;
     }
 
-    public function AssetManager() {
-    }
     private var _swfLoader:KyoClassLoader          = new KyoClassLoader();
     private var _soundLoader:KyoSoundLoader        = new KyoSoundLoader();
 //		private var _assetLoader:IAssetLoader = new AssetLoader();

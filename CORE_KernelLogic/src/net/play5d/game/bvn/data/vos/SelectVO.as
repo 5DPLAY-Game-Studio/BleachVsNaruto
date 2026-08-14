@@ -23,8 +23,6 @@ public class SelectVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    public function SelectVO() {
-    }
 
 //		选中的人物ID
     public var fighter1:String;

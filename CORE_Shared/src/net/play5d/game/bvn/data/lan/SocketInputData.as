@@ -37,8 +37,6 @@ public class SocketInputData {
      * var input:SocketInputData = new SocketInputData();
      * </listing>
      */
-    public function SocketInputData() {
-    }
 
     /**
      * 上。

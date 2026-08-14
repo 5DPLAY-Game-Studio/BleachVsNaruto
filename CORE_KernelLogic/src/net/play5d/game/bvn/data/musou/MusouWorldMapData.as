@@ -21,8 +21,6 @@ import net.play5d.game.bvn.interfaces.ISaveData;
 
 public class MusouWorldMapData implements ISaveData {
 
-    public function MusouWorldMapData() {
-    }
     private var _mapAreaList:Vector.<MusouWorldMapAreaVO>;
 
     public function toSaveObj():Object {

@@ -30,14 +30,6 @@ import net.play5d.game.bvn.ide.utils.IdeRuntimeUtils;
 public class BaseMc extends BaseIdeCtrler {
 
     /**
-     * 构造方法。
-     */
-    public function BaseMc() {
-        super();
-        _ctrlerProp = IdeRuntimeUtils.MC_CTRLER_PROP;
-    }
-
-    /**
      * 安全调用 MC 控制器方法。
      *
      * @param methodName 方法名。

@@ -30,8 +30,6 @@ public class MapModel {
         return _i;
     }
 
-    public function MapModel() {
-    }
     private var _mapObj:Object;
     [ArrayElementType('net.play5d.game.bvn.data.vos.MapVO')]
     private var _mapArray:Array;

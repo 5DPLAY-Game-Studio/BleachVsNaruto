@@ -60,8 +60,6 @@ public class LANClientCtrl implements ILanClientLockLink {
         return _i;
     }
 
-    public function LANClientCtrl() {
-    }
     public var active:Boolean;
     private var _delayText:TextField;
     private var _socket:SocketClient;

@@ -26,8 +26,6 @@ public class MusouFighterModel {
         return _i;
     }
 
-    public function MusouFighterModel() {
-    }
 
     public var fighters:Vector.<MusouFighterSellVO>;
     private var _inited:Boolean = false;

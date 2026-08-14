@@ -32,8 +32,6 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 import net.play5d.kyo.stage.IStage;
 
 public class HostDetailDialog implements IStage {
-    public function HostDetailDialog() {
-    }
     private var _ui:MovieClip;
     private var _data:HostVO;
 

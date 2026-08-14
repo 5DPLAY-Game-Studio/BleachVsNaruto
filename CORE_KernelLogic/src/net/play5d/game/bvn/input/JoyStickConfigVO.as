@@ -29,8 +29,6 @@ public class JoyStickConfigVO {
     /**
      * 构造默认键位。
      */
-    public function JoyStickConfigVO() {
-    }
 
     /**
      * 设备 id。

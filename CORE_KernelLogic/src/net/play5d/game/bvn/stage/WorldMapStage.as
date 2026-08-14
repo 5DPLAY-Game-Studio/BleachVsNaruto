@@ -47,8 +47,6 @@ import net.play5d.kyo.stage.IStage;
 
 public class WorldMapStage implements IStage {
 
-    public function WorldMapStage() {
-    }
     private var _ui:Sprite;
     private var _mapUI:Sprite;
     private var _viewMc:Sprite;

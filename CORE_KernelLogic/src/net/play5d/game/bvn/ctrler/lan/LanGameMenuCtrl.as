@@ -47,8 +47,6 @@ public class LanGameMenuCtrl {
     /**
      * 构造控制器。
      */
-    public function LanGameMenuCtrl() {
-    }
 
     /** @private */
     private var _isKeyDown:Boolean;

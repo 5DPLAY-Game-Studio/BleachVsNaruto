@@ -34,8 +34,6 @@ import net.play5d.game.bvn.stage.GameCamera;
 
 public class AssisterCtrler implements IGameSpriteCntlr {
 
-    public function AssisterCtrler() {
-    }
     public var hitModel:FighterHitModel;
     public var hitTargetAction:String;
     public var hitTargetChecker:String;

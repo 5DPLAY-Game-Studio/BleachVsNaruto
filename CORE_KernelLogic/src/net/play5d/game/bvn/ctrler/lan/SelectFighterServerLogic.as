@@ -36,8 +36,6 @@ public class SelectFighterServerLogic {
     /**
      * 构造选人服务端逻辑。
      */
-    public function SelectFighterServerLogic() {
-    }
 
     /** @private */
     private var _timeout:int;

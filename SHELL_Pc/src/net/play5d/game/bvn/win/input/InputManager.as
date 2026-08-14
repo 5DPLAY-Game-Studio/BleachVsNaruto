@@ -30,8 +30,6 @@ public class InputManager {
         return _i;
     }
 
-    public function InputManager() {
-    }
     public var key_menu:GameKeyInput = new GameKeyInput();
     public var key_p1:GameKeyInput   = new GameKeyInput();
     public var key_p2:GameKeyInput   = new GameKeyInput();

@@ -12,8 +12,6 @@ public class MobileCtrler {
         return _i;
     }
 
-    public function MobileCtrler() {
-    }
 
     public function pause():void {
         trace('pause process');

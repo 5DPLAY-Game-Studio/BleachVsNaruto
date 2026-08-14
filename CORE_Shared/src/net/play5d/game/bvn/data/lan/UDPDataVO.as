@@ -35,8 +35,6 @@ public class UDPDataVO {
      * var vo:UDPDataVO = new UDPDataVO();
      * </listing>
      */
-    public function UDPDataVO() {
-    }
 
     /**
      * 载荷类型，见 <code>UdpDataType</code>。

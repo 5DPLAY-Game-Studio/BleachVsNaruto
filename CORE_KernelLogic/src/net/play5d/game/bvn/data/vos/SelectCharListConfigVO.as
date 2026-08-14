@@ -23,9 +23,6 @@ public class SelectCharListConfigVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    public function SelectCharListConfigVO() {
-
-    }
 
     public var list:Array = [];
     public var HCount:int; //列数

@@ -18,8 +18,6 @@
 
 package net.play5d.game.bvn.win.data {
 public class HostVO {
-    public function HostVO() {
-    }
     public var ip:String;
     public var tcpPort:int;
     public var udpPort:int;

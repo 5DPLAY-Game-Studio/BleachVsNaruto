@@ -39,8 +39,6 @@ import net.play5d.kyo.stage.IStage;
 
 public class CongratulateStage implements IStage {
 
-    public function CongratulateStage() {
-    }
     private var _mainUI:Sprite;
     private var _ui:Sprite;
     private var _exitHeight:Number = 0;

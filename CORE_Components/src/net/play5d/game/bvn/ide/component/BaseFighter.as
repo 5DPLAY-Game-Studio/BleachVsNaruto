@@ -30,14 +30,6 @@ import net.play5d.game.bvn.ide.utils.IdeRuntimeUtils;
 public class BaseFighter extends BaseIdeCtrler {
 
     /**
-     * 构造方法。
-     */
-    public function BaseFighter() {
-        super();
-        _ctrlerProp = IdeRuntimeUtils.FIGHTER_CTRLER_PROP;
-    }
-
-    /**
      * 安全调用角色主控制器方法。
      *
      * @param methodName 方法名。

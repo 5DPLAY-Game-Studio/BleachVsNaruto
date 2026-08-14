@@ -24,8 +24,6 @@ public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
 
     include '../../../../../../../../include/Clone.as';
 
-    public function MusouWorldMapAreaPlayerVO() {
-    }
     public var id:String;
 
 //		public var missions:Vector.<MusouMissionPlayerVO> = new Vector.<MusouMissionPlayerVO>();

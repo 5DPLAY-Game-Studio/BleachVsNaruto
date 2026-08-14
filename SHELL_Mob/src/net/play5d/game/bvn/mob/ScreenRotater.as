@@ -15,8 +15,6 @@ public class ScreenRotater {
         return _i;
     }
 
-    public function ScreenRotater() {
-    }
     /**
      * 灵敏度，0.1 ~ 0.9
      */

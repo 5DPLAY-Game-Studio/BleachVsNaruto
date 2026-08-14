@@ -158,8 +158,6 @@ public class DialogManager {
         }
     }
 
-    public function DialogManager() {
-    }
 
 }
 }

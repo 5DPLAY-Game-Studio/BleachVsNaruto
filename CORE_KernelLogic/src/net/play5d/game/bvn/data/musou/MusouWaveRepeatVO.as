@@ -23,8 +23,6 @@ public class MusouWaveRepeatVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    public function MusouWaveRepeatVO() {
-    }
     /**
      * 类型：
      * 0=按时间重复

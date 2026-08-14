@@ -48,9 +48,6 @@ public class GameData {
         return _i;
     }
 
-    public function GameData() {
-
-    }
     public var config:ConfigVO           = new ConfigVO();
     public var musouData:MusouPlayerData = new MusouPlayerData();
     public var p1Select:SelectVO;

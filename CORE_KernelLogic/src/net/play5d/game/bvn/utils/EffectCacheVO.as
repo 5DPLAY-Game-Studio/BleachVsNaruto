@@ -24,8 +24,6 @@ public class EffectCacheVO implements IInstanceVO {
 
     include '../../../../../../include/Clone.as';
 
-    public function EffectCacheVO() {
-    }
     public var normal:EffectVO;
     public var musouEnemy:EffectVO;
 }

@@ -34,8 +34,6 @@ import net.play5d.kyo.stage.IStage;
 import net.play5d.kyo.utils.KyoBtnUtils;
 
 public class LANHostCreateDialog implements IStage {
-    public function LANHostCreateDialog() {
-    }
     public var onCreate:Function;
     public var onClose:Function;
     private var _ui:MovieClip;

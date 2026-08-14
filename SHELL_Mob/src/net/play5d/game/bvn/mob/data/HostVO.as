@@ -3,8 +3,6 @@ import flash.utils.ByteArray;
 
 public class HostVO {
 
-    public function HostVO() {
-    }
     public var ip:String;
     public var ownerName:String;
     public var gameMode:int = 1;

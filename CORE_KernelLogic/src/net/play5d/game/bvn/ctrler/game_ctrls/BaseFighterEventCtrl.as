@@ -31,8 +31,6 @@ import net.play5d.game.bvn.views.effects.FollowEffectView;
 
 public class BaseFighterEventCtrl {
 
-    public function BaseFighterEventCtrl() {
-    }
     private var _attackers:Array = [];
 
     public function initialize():void {

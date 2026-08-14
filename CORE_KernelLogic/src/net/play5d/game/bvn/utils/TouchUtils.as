@@ -36,8 +36,6 @@ public class TouchUtils {
         return _i;
     }
 
-    public function TouchUtils() {
-    }
     private var _oneFingerPoint:TouchPoint;
     private var _oneFingerDraging:Boolean;
     private var _callBackMap:Dictionary = new Dictionary();

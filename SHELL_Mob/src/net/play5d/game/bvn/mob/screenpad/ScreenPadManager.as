@@ -147,9 +147,6 @@ public class ScreenPadManager {
         }
     }
 
-    public function ScreenPadManager() {
-
-    }
 
     private static function pauseResumeHandler(e:GameEvent):void {
         if (e.type == GameEvent.PAUSE_GAME) {

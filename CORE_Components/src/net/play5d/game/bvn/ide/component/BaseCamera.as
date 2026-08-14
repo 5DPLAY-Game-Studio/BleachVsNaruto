@@ -30,14 +30,6 @@ import net.play5d.game.bvn.ide.utils.IdeRuntimeUtils;
 public class BaseCamera extends BaseIdeCtrler {
 
     /**
-     * 构造方法。
-     */
-    public function BaseCamera() {
-        super();
-        _ctrlerProp = IdeRuntimeUtils.CAMERA_CTRLER_PROP;
-    }
-
-    /**
      * 安全调用镜头控制器方法。
      *
      * @param methodName 方法名。

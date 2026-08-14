@@ -10,8 +10,6 @@ import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.kyo.stage.effect.ZoomEffect;
 
 public class LANHostCreateDialog implements Istage {
-    public function LANHostCreateDialog() {
-    }
     public var onClose:Function;
     public var onOK:Function;
     public var setting:Object = {};

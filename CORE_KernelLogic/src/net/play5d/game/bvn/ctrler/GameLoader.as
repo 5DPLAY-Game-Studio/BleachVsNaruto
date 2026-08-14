@@ -240,9 +240,6 @@ public class GameLoader {
 
     }
 
-    public function GameLoader() {
-    }
-
 
 }
 }

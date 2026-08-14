@@ -24,10 +24,7 @@ import net.play5d.game.bvn.utils.ResUtils;
 
 public class TransUI {
 
-    public function TransUI() {
-        ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_transition');
-    }
-    public var ui:$common$MC_transition;
+    public var ui:$common$MC_transition = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_transition');
     private var _renderAnimateGap:int   = 0; //刷新动画间隔
     private var _renderAnimateFrame:int = 0;
     private var _fadInBack:Function;

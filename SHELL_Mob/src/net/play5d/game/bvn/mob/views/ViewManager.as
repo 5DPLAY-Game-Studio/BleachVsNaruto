@@ -15,8 +15,6 @@ public class ViewManager {
         return _i;
     }
 
-    public function ViewManager() {
-    }
 
     public function goP1JoyStickSet():void {
         goJoyStickSet(1, GameInterfaceManager.config.joy1Config);

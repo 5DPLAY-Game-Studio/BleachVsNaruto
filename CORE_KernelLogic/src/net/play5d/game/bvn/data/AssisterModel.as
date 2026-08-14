@@ -28,8 +28,6 @@ public class AssisterModel {
         return _i;
     }
 
-    public function AssisterModel() {
-    }
     private var _assisterObj:Object;
 
     public function getAllAssisters():Object {

@@ -70,8 +70,6 @@ public class SelectFighterStage implements IStage {
     private static const SELECT_STATE_MAP:int     = 2;
     public static var AUTO_FINISH:Boolean = true;
 
-    public function SelectFighterStage() {
-    }
     private var _selectState:int;
     private var _ui:$select$MC_stgSelect;
     private var _fighterListUI:Sprite;

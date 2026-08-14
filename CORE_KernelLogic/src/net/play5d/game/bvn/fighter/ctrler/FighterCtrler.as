@@ -39,9 +39,6 @@ import net.play5d.game.bvn.stage.GameCamera;
  */
 public class FighterCtrler implements IGameSpriteCntlr {
 
-    public function FighterCtrler() {
-    }
-
     public var hitModel:FighterHitModel;
 
     private var _effectCtrl:FighterEffectCtrl;

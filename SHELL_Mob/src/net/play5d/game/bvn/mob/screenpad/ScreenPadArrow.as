@@ -10,8 +10,6 @@ import net.play5d.kyo.utils.KyoDisplayUtils;
 
 public class ScreenPadArrow extends ScreenPadBtnBase {
 
-    public function ScreenPadArrow() {
-    }
     private var _keyUP:String;
     private var _keyDOWN:String;
     private var _keyLEFT:String;

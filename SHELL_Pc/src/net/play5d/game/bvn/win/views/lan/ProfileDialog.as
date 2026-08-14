@@ -29,8 +29,6 @@ import net.play5d.kyo.stage.IStage;
 import net.play5d.kyo.utils.KyoBtnUtils;
 
 public class ProfileDialog implements IStage {
-    public function ProfileDialog() {
-    }
     public var onClose:Function;
     private var _ui:MovieClip;
 

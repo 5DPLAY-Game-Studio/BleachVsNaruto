@@ -16,8 +16,6 @@ public class GamePolyCtrl {
         return _i;
     }
 
-    public function GamePolyCtrl() {
-    }
     private var _versionInfo:VersionInfoVO;
 
     public function getVersion():VersionInfoVO {

@@ -44,12 +44,6 @@ public class LockFrameLogic {
         return _i;
     }
 
-    /**
-     * 构造函数（通常通过 <code>I</code> 使用）。
-     */
-    public function LockFrameLogic() {
-    }
-
     /** @private */
     private var _stage:Stage;
     /** @private */

@@ -22,8 +22,6 @@ public class RootSprite {
         return _i;
     }
 
-    public function RootSprite() {
-    }
     private var _sp:Sprite;
     private var _gameSprite:Sprite;
     private var _mainGame:MainGame;

@@ -24,8 +24,6 @@ import net.play5d.game.bvn.GameConfig;
  */
 public class FighterAction {
 
-    public function FighterAction() {
-    }
     public var isMoving:Boolean;
     public var isJumping:Boolean;
     public var isDefensing:Boolean;

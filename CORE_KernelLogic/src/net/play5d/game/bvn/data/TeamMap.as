@@ -21,8 +21,6 @@ import net.play5d.game.bvn.data.vos.TeamVO;
 
 public class TeamMap {
 
-    public function TeamMap() {
-    }
     public var teams:Vector.<TeamVO> = new Vector.<TeamVO>();
     private var _teamObj:Object      = {};
 

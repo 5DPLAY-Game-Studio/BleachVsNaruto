@@ -30,8 +30,6 @@ public class GameEndCtrl {
 
     public static var SHOW_CONTINUE:Boolean = false;
 
-    public function GameEndCtrl() {
-    }
     private var _winner:FighterMain;
     private var _loser:FighterMain;
     private var _step:int;

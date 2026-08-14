@@ -37,8 +37,6 @@ import net.play5d.kyo.stage.IStage;
 
 public class CreditsStage implements IStage {
 
-    public function CreditsStage() {
-    }
     private var _ui:Sprite;
     private var _btngroup:SetBtnGroup;
     private var _creditsSp:DisplayObject;

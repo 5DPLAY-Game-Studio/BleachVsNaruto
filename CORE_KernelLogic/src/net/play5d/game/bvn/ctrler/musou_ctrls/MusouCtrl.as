@@ -53,8 +53,6 @@ public class MusouCtrl {
 
     public const gameRunData:MusouGameRunDataVO = new MusouGameRunDataVO();
 
-    public function MusouCtrl() {
-    }
     public var waveCount:int;
     public var currentWave:int;
     private var _mission:MusouMissionVO;

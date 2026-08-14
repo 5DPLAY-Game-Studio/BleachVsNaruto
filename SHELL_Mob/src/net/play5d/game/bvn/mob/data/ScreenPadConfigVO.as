@@ -1,8 +1,6 @@
 package net.play5d.game.bvn.mob.data {
 public class ScreenPadConfigVO {
 
-    public function ScreenPadConfigVO() {
-    }
     /**
      * 按键模式
      */

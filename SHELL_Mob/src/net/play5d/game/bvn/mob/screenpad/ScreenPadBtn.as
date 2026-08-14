@@ -1,10 +1,6 @@
 package net.play5d.game.bvn.mob.screenpad {
 public class ScreenPadBtn extends ScreenPadBtnBase {
 
-    public function ScreenPadBtn() {
-    }
-
-
     protected override function downState():void {
         display.scaleX = display.scaleY = _orgScale * 0.95;
         display.x += (

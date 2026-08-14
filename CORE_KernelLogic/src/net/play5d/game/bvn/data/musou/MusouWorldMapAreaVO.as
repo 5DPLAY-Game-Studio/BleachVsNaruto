@@ -23,8 +23,6 @@ public class MusouWorldMapAreaVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    public function MusouWorldMapAreaVO() {
-    }
     public var id:String;
     public var name:String;
     public var missions:Vector.<MusouMissionVO>;

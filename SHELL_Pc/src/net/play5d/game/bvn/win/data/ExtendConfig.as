@@ -23,8 +23,6 @@ import net.play5d.game.bvn.input.JoyStickExtendConfigHelper;
 
 public class ExtendConfig implements IExtendConfig {
 
-    public function ExtendConfig() {
-    }
     public var joyMenuConfig:JoyStickConfigVO = new JoyStickConfigVO();
     public var joy1Config:JoyStickConfigVO    = new JoyStickConfigVO();
     public var joy2Config:JoyStickConfigVO    = new JoyStickConfigVO();

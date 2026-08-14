@@ -31,12 +31,6 @@ import flash.utils.describeType;
  */
 public class EmbedSwfAssetUtil {
 
-    /**
-     * 构造函数。
-     */
-    public function EmbedSwfAssetUtil() {
-    }
-
     /** @private */
     private var _swfPool:Dictionary;
     /** @private */

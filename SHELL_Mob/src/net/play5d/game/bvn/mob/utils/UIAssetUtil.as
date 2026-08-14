@@ -15,8 +15,6 @@ public class UIAssetUtil extends EmbedSwfAssetUtil {
         return _i;
     }
 
-    public function UIAssetUtil() {
-    }
 
     [Embed(source='/../../shared/lib/swf/mob_ui.swf')]
     public var win_ui:Class;

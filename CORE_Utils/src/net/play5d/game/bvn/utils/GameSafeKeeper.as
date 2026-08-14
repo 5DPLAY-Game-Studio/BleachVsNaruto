@@ -33,8 +33,6 @@ public class GameSafeKeeper {
         return _i;
     }
 
-    public function GameSafeKeeper() {
-    }
 
     private var _fileSaveMap:Object;
     private var _configFailed:Boolean;

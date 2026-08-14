@@ -32,8 +32,6 @@ import net.play5d.game.bvn.utils.CreditsSpriteUtil;
 import net.play5d.kyo.utils.WebUtils;
 
 public class GameInterfaceManager implements IGameInterface {
-    public function GameInterfaceManager() {
-    }
 
     public function initTitleUI(ui:DisplayObject):void {
     }

@@ -28,9 +28,6 @@ import net.play5d.kyo.utils.WrapInteger;
 
 public class MusouPlayerData implements ISaveData {
 
-    public function MusouPlayerData() {
-
-    }
     public var userId:String;
     public var userName:String;
     private var _money:WrapInteger                      = new WrapInteger(0);

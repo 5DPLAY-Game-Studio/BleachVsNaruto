@@ -27,8 +27,6 @@ public class Loger implements ILogger {
     private static var _file:File;
     private static var _fileStream:FileStream;
 
-    public function Loger() {
-    }
 
     public function log(v:String):void {
 

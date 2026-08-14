@@ -33,8 +33,6 @@ public class UIAssetUtil extends EmbedSwfAssetUtil {
         return _i;
     }
 
-    public function UIAssetUtil() {
-    }
 
     [Embed(source='/../../shared/lib/swf/win_ui.swf')]
     public var win_ui:Class;

@@ -55,8 +55,6 @@ public class LANServerCtrl implements ILanServerLockLink {
         return _i;
     }
 
-    public function LANServerCtrl() {
-    }
     public var active:Boolean;
     public var onPlayerJoinSuccess:Function;
     private var _room:LANRoomState;

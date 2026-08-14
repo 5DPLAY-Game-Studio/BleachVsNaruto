@@ -35,14 +35,6 @@ public class BaseEffect extends BaseIdeCtrler {
     private var _noArgMethod:String = null;
 
     /**
-     * 构造方法。
-     */
-    public function BaseEffect() {
-        super();
-        _ctrlerProp = IdeRuntimeUtils.EFFECT_CTRLER_PROP;
-    }
-
-    /**
      * 绑定无参效果：标题 + 预览 + <code>doAction</code> 调用。
      *
      * @param titleLabel 标题（自动加 <code>// </code>）。

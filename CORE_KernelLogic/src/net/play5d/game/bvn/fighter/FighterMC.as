@@ -36,9 +36,6 @@ import net.play5d.game.bvn.utils.MCUtils;
 
 public class FighterMC {
 
-    public function FighterMC() {
-        super();
-    }
     private var _mcCtrler:FighterMcCtrler;
     private var _fighter:FighterMain;
 //		private var _action:FighterAction = new FighterAction();

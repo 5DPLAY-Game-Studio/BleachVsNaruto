@@ -39,8 +39,6 @@ import net.play5d.kyo.utils.KyoBtnUtils;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 
 public class LANRoomState implements IStage {
-    public function LANRoomState() {
-    }
     private var _ui:MovieClip;
     private var _txtChat:*;
     private var _host:HostVO;

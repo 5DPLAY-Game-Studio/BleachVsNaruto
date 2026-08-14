@@ -26,8 +26,6 @@ import net.play5d.game.bvn.ui.musou.enemy.EnemyHpFollowUI;
 
 public class MusouEnemyBarCtrl {
 
-    public function MusouEnemyBarCtrl() {
-    }
     private var _barMap:Dictionary = new Dictionary();
     private var _gameLayer:Sprite;
 

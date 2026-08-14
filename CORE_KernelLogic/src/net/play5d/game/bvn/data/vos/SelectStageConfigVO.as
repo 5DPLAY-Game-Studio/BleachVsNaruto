@@ -25,8 +25,6 @@ public class SelectStageConfigVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    public function SelectStageConfigVO() {
-    }
 
     public var x:Number      = 0;
     public var y:Number      = 0;

@@ -19,8 +19,6 @@ public class LANGameCtrl {
         return _i;
     }
 
-    public function LANGameCtrl() {
-    }
     public var gameMode:int;
     public var userName:String = 'test';
     private var _client:SocketClient;

@@ -48,8 +48,6 @@ public class LoadingStage implements IStage {
 
     public static var AUTO_START_GAME:Boolean = true;
 
-    public function LoadingStage() {
-    }
     private var _ui:$loading$MC_loadingFight;
     private var _sltUI:$loading$MC_selectUI;
     private var _destroyed:Boolean;

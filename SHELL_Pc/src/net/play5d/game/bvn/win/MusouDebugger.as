@@ -25,14 +25,10 @@ import net.play5d.game.bvn.data.GameData;
 
 public class MusouDebugger {
 
-
     public static function init(param1:Stage):void {
         param1.addEventListener('keyUp', keyHandler);
     }
 
-    public function MusouDebugger() {
-        super();
-    }
 
     private static function keyHandler(param1:KeyboardEvent):void {
         switch (int(param1.keyCode) - 112) {

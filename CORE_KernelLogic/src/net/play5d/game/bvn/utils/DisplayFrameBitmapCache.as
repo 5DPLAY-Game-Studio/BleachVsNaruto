@@ -65,9 +65,6 @@ public class DisplayFrameBitmapCache {
         return _i;
     }
 
-    public function DisplayFrameBitmapCache() {
-    }
-
     /** @private 残影缓存上限 */
     private static const MAX_SHADOW:int = 160;
     /** @private 滤镜缓存上限 */

@@ -32,8 +32,6 @@ import net.play5d.game.bvn.views.effects.SteelHitEffect;
 
 public class EffectManager {
 
-    public function EffectManager() {
-    }
     private var _viewCache:Dictionary                = new Dictionary();
     private var _hitCache:Dictionary                 = new Dictionary();
     private var _defCache:Dictionary                 = new Dictionary();

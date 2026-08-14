@@ -39,8 +39,6 @@ public class LockFrameClientLogic {
     /**
      * 构造锁帧客户端逻辑。
      */
-    public function LockFrameClientLogic() {
-    }
 
     /**
      * 是否参与渲染推进。

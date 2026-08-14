@@ -24,8 +24,6 @@ public class MusouMissionPlayerVO implements ISaveData, IInstanceVO {
 
     include '../../../../../../../../include/Clone.as';
 
-    public function MusouMissionPlayerVO() {
-    }
     public var id:String;
 //		public var isPassed:Boolean = false;
     public var stars:int = 0;

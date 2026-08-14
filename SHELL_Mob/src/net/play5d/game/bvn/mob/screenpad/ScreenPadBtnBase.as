@@ -4,8 +4,6 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 public class ScreenPadBtnBase {
-    public function ScreenPadBtnBase() {
-    }
     public var moveAble:Boolean = false;
     public var display:Bitmap;
     public var touchPos:Point   = new Point();

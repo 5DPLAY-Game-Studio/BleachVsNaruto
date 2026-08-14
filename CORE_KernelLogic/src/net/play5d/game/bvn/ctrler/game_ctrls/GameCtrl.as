@@ -68,8 +68,6 @@ public class GameCtrl {
         return _i;
     }
 
-    public function GameCtrl() {
-    }
     public var gameState:GameStage; //游戏主场景
     public var actionEnable:Boolean = false; //是否可操作
     public var autoStartAble:Boolean    = true; //是否可以本机逻辑开始游戏

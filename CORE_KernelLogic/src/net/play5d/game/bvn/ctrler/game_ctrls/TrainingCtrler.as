@@ -31,8 +31,6 @@ public class TrainingCtrler {
     public static var RECOVER_QI:Boolean    = true;
     public static var RECOVER_FZ_QI:Boolean = true;
 
-    public function TrainingCtrler() {
-    }
     private var _trainAddDelay:Object;
     private var _fighters:Array;
 

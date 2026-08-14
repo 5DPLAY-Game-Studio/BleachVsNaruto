@@ -33,8 +33,6 @@ public class MusouModel {
         return _i;
     }
 
-    public function MusouModel() {
-    }
     public var currentArea:MusouWorldMapAreaVO;
     public var currentMission:MusouMissionVO;
     private var _mapObj:Object = {};

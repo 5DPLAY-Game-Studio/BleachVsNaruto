@@ -33,8 +33,6 @@ public class GameInterfaceManager implements IGameInterface {
         return _extendsConfig;
     }
 
-    public function GameInterfaceManager() {
-    }
 
     public function initTitleUI(ui:DisplayObject):void {
     }

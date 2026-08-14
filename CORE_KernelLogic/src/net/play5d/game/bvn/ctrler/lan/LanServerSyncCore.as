@@ -37,8 +37,6 @@ public class LanServerSyncCore {
     /**
      * 构造同步内核。
      */
-    public function LanServerSyncCore() {
-    }
 
     /** @private */
     private var _lockFrame:LockFrameServerLogic;

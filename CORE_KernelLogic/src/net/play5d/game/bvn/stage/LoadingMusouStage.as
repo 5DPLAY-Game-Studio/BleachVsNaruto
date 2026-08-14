@@ -43,8 +43,6 @@ import net.play5d.kyo.stage.IStage;
 
 public class LoadingMusouStage implements IStage {
 
-    public function LoadingMusouStage() {
-    }
     private var _ui:$loading$MC_loadingFight;
     private var _destroyed:Boolean;
     private var _sltUI:$loading$MC_selectUI;

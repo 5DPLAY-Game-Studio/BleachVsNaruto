@@ -38,8 +38,6 @@ public class SoundCtrl {
         return _i;
     }
 
-    public function SoundCtrl() {
-    }
     private var _bgSound:KyoBGSounder;
     private var _soundLoader:KyoSoundLoader;
     private var _bgmObj:Object;

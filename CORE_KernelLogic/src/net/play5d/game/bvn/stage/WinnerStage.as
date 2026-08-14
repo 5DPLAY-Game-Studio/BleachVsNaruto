@@ -49,8 +49,6 @@ import net.play5d.kyo.stage.IStage;
 
 public class WinnerStage implements IStage {
 
-    public function WinnerStage() {
-    }
     private var _ui:MovieClip;
     private var _scoreText:BitmapFontText;
     private var _winnerFaces:Array;

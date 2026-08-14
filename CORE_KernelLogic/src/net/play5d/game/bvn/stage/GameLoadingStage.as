@@ -28,8 +28,6 @@ import net.play5d.kyo.stage.IStage;
 
 public class GameLoadingStage implements IStage {
 
-    public function GameLoadingStage() {
-    }
     private var _ui:$loading$MC_loadingCover;
     private var _initBack:Function;
     private var _initFail:Function;

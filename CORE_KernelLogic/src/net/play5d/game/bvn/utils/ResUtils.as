@@ -43,8 +43,6 @@ public class ResUtils {
         return _i;
     }
 
-    public function ResUtils() {
-    }
     private var _swfPool:Dictionary;
     private var _initBack:Function;
     private var _initError:Function;

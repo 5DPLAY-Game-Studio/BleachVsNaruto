@@ -29,9 +29,6 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 import net.play5d.kyo.stage.IStage;
 
 public class LANGameState implements IStage {
-    public function LANGameState() {
-        super();
-    }
     private var _ui:Sprite;
     private var _btnGroup:SetBtnGroup;
     private var _hostList:HostListDialog;

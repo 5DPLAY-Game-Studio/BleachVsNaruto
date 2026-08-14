@@ -14,8 +14,6 @@ public class UDPSocket implements IUdpTransport {
     public static const BUFFER_LENGTH:int    = 50;
     public static const RECEIVE_TIME_OUT:int = 10;
 
-    public function UDPSocket() {
-    }
     private var _handlers:UdpHandlerList;
 
     /**

@@ -38,9 +38,6 @@ import net.play5d.kyo.utils.KyoRandom;
 
 public class SelectIndexUIGroup extends Sprite {
 
-    public function SelectIndexUIGroup() {
-        super();
-    }
     public var isFinish:Boolean;
     public var fzx:Number          = 0;
     public var fzy:Number          = 325;

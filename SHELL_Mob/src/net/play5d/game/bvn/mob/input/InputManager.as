@@ -11,8 +11,6 @@ public class InputManager {
         return _i;
     }
 
-    public function InputManager() {
-    }
     public var screen_menu:ScreenPadInput = new ScreenPadInput();
     public var screen_p1:ScreenPadInput   = new ScreenPadInput();
     public var joy_menu:GameJoystickInput = new GameJoystickInput(1);

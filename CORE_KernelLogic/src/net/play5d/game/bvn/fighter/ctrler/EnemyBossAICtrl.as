@@ -19,10 +19,6 @@
 package net.play5d.game.bvn.fighter.ctrler {
 public class EnemyBossAICtrl extends FighterAICtrl {
 
-    public function EnemyBossAICtrl() {
-        super();
-    }
-
     public override function waiKai():Boolean {
         return false;
     }

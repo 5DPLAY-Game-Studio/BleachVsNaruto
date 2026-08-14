@@ -29,8 +29,6 @@ import net.play5d.game.bvn.fighter.FighterMain;
 
 public class GameRunFighterGroup {
 
-    public function GameRunFighterGroup() {
-    }
     public var fighter1:FighterVO;
     public var fighter2:FighterVO;
     public var fighter3:FighterVO;

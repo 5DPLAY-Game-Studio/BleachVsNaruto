@@ -33,8 +33,6 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
  */
 public class EnemyFighterAICtrl implements IFighterActionCtrl {
 
-    public function EnemyFighterAICtrl() {
-    }
     public var fighter:FighterMain;
 //		private var _targetFighter:FighterMain;
     private var _target:IGameSprite;

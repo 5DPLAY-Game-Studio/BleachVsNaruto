@@ -35,8 +35,6 @@ import net.play5d.game.bvn.stage.GameStage;
  */
 public class GameMainLogicCtrler {
 
-    public function GameMainLogicCtrler() {
-    }
     public var renderHit:Boolean = true;
 
     /** @private 身体重叠粗测距离（像素） */

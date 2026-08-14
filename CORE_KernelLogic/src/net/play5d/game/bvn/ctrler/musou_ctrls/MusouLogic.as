@@ -39,9 +39,6 @@ public class MusouLogic {
         return _i;
     }
 
-    public function MusouLogic() {
-    }
-
 
     private var _hitNum:int;
     private var _hitTargets:Vector.<FighterMain> = new Vector.<FighterMain>();

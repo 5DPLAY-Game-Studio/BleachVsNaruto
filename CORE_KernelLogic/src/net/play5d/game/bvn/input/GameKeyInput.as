@@ -27,8 +27,6 @@ import net.play5d.kyo.utils.KeyBoarder;
 
 public class GameKeyInput implements IGameInput {
 
-    public function GameKeyInput() {
-    }
     private var _config:KeyConfigVO;
     private var _downKeys:Object = {};
 

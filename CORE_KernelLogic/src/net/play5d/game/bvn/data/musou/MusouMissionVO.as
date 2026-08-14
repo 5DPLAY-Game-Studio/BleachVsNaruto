@@ -23,8 +23,6 @@ public class MusouMissionVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    public function MusouMissionVO() {
-    }
     public var id:String;
     /**
      * 名称

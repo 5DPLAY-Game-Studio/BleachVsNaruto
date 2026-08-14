@@ -67,12 +67,6 @@ public class WarmupCtrl {
         return _i;
     }
 
-    /**
-     * 构造函数。
-     */
-    public function WarmupCtrl() {
-    }
-
     /** @private */
     private var _earlyDone:Boolean;
     /** @private */

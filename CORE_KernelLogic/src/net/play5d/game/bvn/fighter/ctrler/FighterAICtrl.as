@@ -26,8 +26,6 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 
 public class FighterAICtrl implements IFighterActionCtrl {
 
-    public function FighterAICtrl() {
-    }
     public var AILevel:int; //1-6  very easy,easy,normal,hrad,very hard,hell
     public var fighter:FighterMain;
 //		private var _targetFighter:FighterMain;

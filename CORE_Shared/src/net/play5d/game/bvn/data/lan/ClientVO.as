@@ -27,8 +27,6 @@ import flash.net.Socket;
  */
 public class ClientVO {
     /** 构造空客户端 VO。 */
-    public function ClientVO() {
-    }
 
     /**
      * 客户端 IP。

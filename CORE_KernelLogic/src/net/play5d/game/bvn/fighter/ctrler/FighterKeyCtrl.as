@@ -23,8 +23,6 @@ import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 
 public class FighterKeyCtrl implements IFighterActionCtrl {
 
-    public function FighterKeyCtrl() {
-    }
     public var inputType:String;
     public var classicMode:Boolean = false;
     private var _justDown:int      = 0;

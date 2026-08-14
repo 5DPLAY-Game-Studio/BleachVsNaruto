@@ -67,8 +67,6 @@ public class EffectCtrl {
         return _i;
     }
 
-    public function EffectCtrl() {
-    }
     public var shineMaxCount:int = 3;
     public var freezeEnabled:Boolean = true;
     public var bgBlurEnabled:Boolean = true;

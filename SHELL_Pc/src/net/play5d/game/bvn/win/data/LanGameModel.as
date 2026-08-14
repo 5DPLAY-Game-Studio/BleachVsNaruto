@@ -25,8 +25,6 @@ public class LanGameModel {
         return _i;
     }
 
-    public function LanGameModel() {
-    }
     public var playerName:String = 'someone';
 }
 }

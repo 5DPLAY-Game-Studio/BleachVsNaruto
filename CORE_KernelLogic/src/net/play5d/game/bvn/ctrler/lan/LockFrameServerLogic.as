@@ -42,8 +42,6 @@ public class LockFrameServerLogic {
     /**
      * 构造锁帧服务端逻辑。
      */
-    public function LockFrameServerLogic() {
-    }
 
     /**
      * 是否参与渲染推进。

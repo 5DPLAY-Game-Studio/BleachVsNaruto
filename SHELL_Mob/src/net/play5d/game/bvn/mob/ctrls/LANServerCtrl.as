@@ -33,8 +33,6 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
         return _i;
     }
 
-    public function LANServerCtrl() {
-    }
     public var active:Boolean;
     private var _clientK:int;
     private var _serverK:int;

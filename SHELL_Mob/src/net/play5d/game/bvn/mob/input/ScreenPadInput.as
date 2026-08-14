@@ -4,8 +4,6 @@ import flash.display.Stage;
 import net.play5d.game.bvn.interfaces.IGameInput;
 
 public class ScreenPadInput implements IGameInput {
-    public function ScreenPadInput() {
-    }
     private var isDownObj:Object = {};
 
     private var _enabled:Boolean = true;

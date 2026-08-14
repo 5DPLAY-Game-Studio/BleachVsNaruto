@@ -32,8 +32,6 @@ public class MessionModel {
         return _i;
     }
 
-    public function MessionModel() {
-    }
     public var AI_LEVEL:int = 3;  //1-6
     private var _curMession:MessionVO;  //当前关卡
     private var _curStageId:int;  //当前关卡ID

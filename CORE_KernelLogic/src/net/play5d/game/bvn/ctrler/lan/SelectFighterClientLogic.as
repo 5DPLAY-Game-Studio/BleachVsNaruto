@@ -33,8 +33,6 @@ public class SelectFighterClientLogic {
     /**
      * 构造选人客户端逻辑。
      */
-    public function SelectFighterClientLogic() {
-    }
 
     /** @private 发送 TCP 回调，签名 <code>function(data:Object):void</code> */
     private var _sendTCP:Function;

@@ -32,13 +32,10 @@ public class StateCtrl {
         return _i;
     }
 
-    public function StateCtrl() {
-        _transContainer = MainGame.I.root;
-    }
     public var transEnabled:Boolean = true;
     private var _transUI:TransUI;
     private var _quickTransUI:QuickTransUI;
-    private var _transContainer:Sprite;
+    private var _transContainer:Sprite = MainGame.I.root;
 
     public function transIn(back:Function = null, removeAfterComplete:Boolean = false):void {
 

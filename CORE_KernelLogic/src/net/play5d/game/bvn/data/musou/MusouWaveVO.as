@@ -76,8 +76,6 @@ public class MusouWaveVO implements IInstanceVO {
         return wave;
     }
 
-    public function MusouWaveVO() {
-    }
     public var id:int;
     /**
      * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）

@@ -13,8 +13,6 @@ public class UpdateCtrl {
         return _i;
     }
 
-    public function UpdateCtrl() {
-    }
 
     public function update(updateBack:Function = null, skipBack:Function = null):void {
         var version:VersionInfoVO = GamePolyCtrl.I.getVersion();

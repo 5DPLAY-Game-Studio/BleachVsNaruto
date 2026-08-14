@@ -45,8 +45,6 @@ public class MenuStage extends Sprite implements IStage {
     public static var MenuPosition:Point = new Point(470, 100);
     public static var MenuGap:Point      = new Point(-40, 5);
 
-    public function MenuStage() {
-    }
     private var _ui:$title$MC_stgTitle;
     private var _btnGroup:MenuBtnGroup;
     private var _versionTxt:TextField;

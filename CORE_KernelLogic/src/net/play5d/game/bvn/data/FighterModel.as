@@ -29,8 +29,6 @@ public class FighterModel {
         return _i;
     }
 
-    public function FighterModel() {
-    }
     private var _fighterObj:Object;
 
     public function getAllFighters():Object {
