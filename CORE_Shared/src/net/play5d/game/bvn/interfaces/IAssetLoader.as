@@ -60,7 +60,7 @@ public interface IAssetLoader {
      * @param progress 进度回调，签名为 <code>function(p:Number):void</code>（<code>p</code> 为 0–1）；可为 <code>null</code>。
      * @example
      * <listing version="3.0">
-     * loader.loadSwf('fighter/ichigo.swf', onSwf, onFail, onProgress);
+     * loader.loadSwf('fighter/demo.swf', onSwf, onFail, onProgress);
      * </listing>
      */
     function loadSwf(url:String, back:Function, fail:Function = null, progress:Function = null):void;
@@ -99,7 +99,7 @@ public interface IAssetLoader {
      * @param url 资源路径。
      * @example
      * <listing version="3.0">
-     * loader.dispose('fighter/ichigo.swf');
+     * loader.dispose('fighter/demo.swf');
      * </listing>
      */
     function dispose(url:String):void;

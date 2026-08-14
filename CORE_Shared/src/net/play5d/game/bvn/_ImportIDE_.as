@@ -18,28 +18,12 @@
 
 package net.play5d.game.bvn {
 import flash.display.Sprite;
-import flash.net.Socket;
 
 import net.play5d.game.bvn.data.*;
 import net.play5d.game.bvn.data.fighter.*;
-import net.play5d.game.bvn.data.lan.ClientVO;
-import net.play5d.game.bvn.data.lan.LanMsgType;
-import net.play5d.game.bvn.data.lan.LanPorts;
-import net.play5d.game.bvn.data.lan.LanSocketMsgFactory;
-import net.play5d.game.bvn.data.lan.LanSyncType;
-import net.play5d.game.bvn.data.lan.SelectFighterDataType;
-import net.play5d.game.bvn.data.lan.SocketInputBitCodec;
-import net.play5d.game.bvn.data.lan.SocketInputData;
-import net.play5d.game.bvn.data.lan.UDPDataVO;
-import net.play5d.game.bvn.data.lan.UdpDataType;
-import net.play5d.game.bvn.data.lan.UdpHandlerList;
-import net.play5d.game.bvn.data.lan.UdpPacketUtils;
+import net.play5d.game.bvn.data.lan.*;
 import net.play5d.game.bvn.interfaces.*;
-import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
-import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
-import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
-import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
-import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
+import net.play5d.game.bvn.interfaces.lan.*;
 
 /**
  * shared SWC 在 Flash / Animate IDE 中的导入主类。
@@ -50,62 +34,68 @@ import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
  */
 public class _ImportIDE_ extends Sprite {
 
-    /** @private 强制链接共享类型，防止被优化剔除 */
-    private static const _NO_USE_:Vector.<Class> = new <Class>[
-        // net.play5d.game.bvn.data
-        DefinedClass,
-        GameMode,
-        HitType,
-        LanguageType,
-        MapLogoState,
-        TeamID,
+    /**
+     * 强制链接共享类型，防止被优化剔除。
+     * @private
+     */
+    private static function get _NO_USE_():Vector.<Class> {
+        return new <Class>[
+            // net.play5d.game.bvn.data
+            DefinedClass,
+            GameMode,
+            HitType,
+            LanguageType,
+            MapLogoState,
+            TeamID,
 
-        // net.play5d.game.bvn.data.fighter
-        FighterActionState,
-        FighterDefenseType,
-        FighterHitFloorType,
-        FighterHitRange,
-        FighterHurtType,
-        FighterInputCmd,
-        FighterSpecialFrame,
+            // net.play5d.game.bvn.data.fighter
+            FighterActionState,
+            FighterDefenseType,
+            FighterHitFloorType,
+            FighterHitRange,
+            FighterHurtType,
+            FighterInputCmd,
+            FighterSpecialFrame,
 
-        // net.play5d.game.bvn.data.lan
-        ClientVO,
-        LanMsgType,
-        LanPorts,
-        LanSocketMsgFactory,
-        LanSyncType,
-        SelectFighterDataType,
-        SocketInputBitCodec,
-        SocketInputData,
-        UdpDataType,
-        UdpHandlerList,
-        UDPDataVO,
-        UdpPacketUtils,
+            // net.play5d.game.bvn.data.lan
+            ClientVO,
+            LanMsgType,
+            LanPorts,
+            LanSocketMsgFactory,
+            LanSyncType,
+            SelectFighterDataType,
+            SocketInputBitCodec,
+            SocketInputData,
+            UdpDataType,
+            UdpHandlerList,
+            UDPDataVO,
+            UdpPacketUtils,
 
-        // net.play5d.game.bvn.interfaces
-        IAssetLoader,
-        IComponents,
-        IExtendConfig,
-        IGameInput,
-        IGameInterface,
-        ILogger,
-        ISaveData,
-        ISwfLib,
+            // net.play5d.game.bvn.interfaces
+            IAssetLoader,
+            IComponents,
+            IExtendConfig,
+            IGameInput,
+            IGameInterface,
+            ILogger,
+            ISaveData,
+            ISwfLib,
 
-        // net.play5d.game.bvn.interfaces.lan
-        ILanClientLockLink,
-        ILanExitDialog,
-        ILanServerLockLink,
-        ILanSocketInput,
-        IUdpTransport
-    ];
+            // net.play5d.game.bvn.interfaces.lan
+            ILanClientLockLink,
+            ILanExitDialog,
+            ILanServerLockLink,
+            ILanSocketInput,
+            IUdpTransport
+        ];
+    }
 
     /**
      * 构造导入主类，并触发全局符号链接。
      */
     public function _ImportIDE_() {
         _SHARED_GLOBALS_;
+        _NO_USE_;
     }
 }
 }
