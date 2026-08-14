@@ -8,7 +8,7 @@
 
 | # | 规则 |
 |---|------|
-| 1 | 工具/管理器类优先单例，静态访问器 **`ClassName.I`**（与仓内现有管理器一致） |
+| 1 | 工具/管理器类优先单例，静态访问器 **`ClassName.I`**；懒初始化写 **`_i ||= new ClassName()`**（与仓内现有管理器一致） |
 | 2 | 命名：类 `PascalCase`；方法/变量 `camelCase`；常量 `UPPER_SNAKE_CASE`；私有成员 `_` 前缀 |
 | 3 | 强类型；避免无必要的 `*` |
 | 4 | 关键操作有适当错误处理（校验、抛错或可恢复路径，与邻码一致） |
@@ -21,6 +21,7 @@
 ## NEVER
 
 - 管理器/工具该单例却到处 `new` 多实例（除非现有 API 明确非单例）
+- 单例懒初始化写成 `if (!_i) { _i = new …; }`（应用 `_i ||= new …`）
 - 私有字段不用 `_`、常量不用全大写下划线等破坏仓内一致性
 - 能明确类型却滥用 `*`
 - 为「优雅」引入无需求的抽象层/框架
@@ -44,14 +45,14 @@ public class FooUtils {
 
 ## 单例形态
 
+懒初始化统一用 **`_i ||= new Xxx()`**（勿写 `if (!_i) { _i = new …; }`）。
+
 ```actionscript
 public class FooCtrl {
     private static var _i:FooCtrl;
 
     public static function get I():FooCtrl {
-        if (!_i) {
-            _i = new FooCtrl();
-        }
+        _i ||= new FooCtrl();
         return _i;
     }
 }

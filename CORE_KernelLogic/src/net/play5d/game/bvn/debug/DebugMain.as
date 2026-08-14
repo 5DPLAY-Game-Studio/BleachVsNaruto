@@ -57,9 +57,7 @@ public class DebugMain {
      * @return 全局实例。
      */
     public static function get I():DebugMain {
-        if (!_i) {
-            _i = new DebugMain();
-        }
+        _i ||= new DebugMain();
 
         return _i;
     }

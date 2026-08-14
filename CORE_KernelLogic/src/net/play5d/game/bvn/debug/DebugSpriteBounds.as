@@ -65,9 +65,7 @@ public class DebugSpriteBounds {
      * @return 全局实例。
      */
     public static function get I():DebugSpriteBounds {
-        if (!_i) {
-            _i = new DebugSpriteBounds();
-        }
+        _i ||= new DebugSpriteBounds();
 
         return _i;
     }

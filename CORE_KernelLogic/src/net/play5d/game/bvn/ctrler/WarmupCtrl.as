@@ -61,9 +61,8 @@ public class WarmupCtrl {
      * 单例。
      */
     public static function get I():WarmupCtrl {
-        if (!_i) {
-            _i = new WarmupCtrl();
-        }
+        _i ||= new WarmupCtrl();
+
         return _i;
     }
 

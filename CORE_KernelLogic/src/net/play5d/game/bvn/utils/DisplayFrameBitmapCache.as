@@ -59,9 +59,8 @@ public class DisplayFrameBitmapCache {
      * 单例。
      */
     public static function get I():DisplayFrameBitmapCache {
-        if (!_i) {
-            _i = new DisplayFrameBitmapCache();
-        }
+        _i ||= new DisplayFrameBitmapCache();
+
         return _i;
     }
 
