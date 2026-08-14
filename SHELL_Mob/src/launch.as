@@ -35,20 +35,18 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.mob.ScreenRotater;
-import net.play5d.game.bvn.utils.SwfLib;
-import net.play5d.game.bvn.mob.ads.AdManager;
-import net.play5d.game.bvn.mob.ads.ctrl.AdCtrler;
 import net.play5d.game.bvn.mob.ctrls.GamePolyCtrl;
 import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.ctrls.UpdateCtrl;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
-import net.play5d.kyo.utils.KyoTimerUtils;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
 import net.play5d.game.bvn.ui.fight.FightUI;
 import net.play5d.game.bvn.utils.AssetLoader;
 import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.game.bvn.utils.SwfLib;
 import net.play5d.game.bvn.utils.URL;
+import net.play5d.kyo.utils.KyoTimerUtils;
 
 [SWF(frameRate='30', backgroundColor='#000000')]
 public class launch extends Sprite {
@@ -63,9 +61,7 @@ public class launch extends Sprite {
     [Embed(source='/../assets/startup.png')]
     private var startupBitmap:Class;
     private var _startBitmap:Bitmap;
-    private var _sdkTimer:int;
     private var _isActive:Boolean = true;
-    private var _preInited:Boolean = false;
     private var _assetLoader:AssetLoader = new AssetLoader();
 
     private function showStartPic():void {
@@ -83,38 +79,6 @@ public class launch extends Sprite {
         addChild(_startBitmap);
     }
 
-    private function initSDK():void {
-        sdkBack();
-        adBack();
-        _sdkTimer = KyoTimerUtils.setTimeout(initGame, 10000);
-
-        //竞技版删除广告
-    }
-
-    private function sdkBack():void {
-        trace('sdkBack');
-        KyoTimerUtils.clearTimeout(_sdkTimer);
-    }
-
-    private function adBack():void {
-        KyoTimerUtils.clearTimeout(_sdkTimer);
-        preInitGame();
-
-        if (AdCtrler.SHOW_OPENAD_ON_START) {
-            KyoTimerUtils.setTimeout(initGame, 500);
-        }
-        else {
-            initGame();
-        }
-    }
-
-    private function preInitGame():void {
-        if (_preInited) {
-            return;
-        }
-        _preInited = true;
-    }
-
     private function removeStartBitmap():void {
         if (_startBitmap) {
             try {
@@ -129,16 +93,7 @@ public class launch extends Sprite {
     }
 
     private function initGame():void {
-        KyoTimerUtils.clearTimeout(_sdkTimer);
-
-        preInitGame();
         removeStartBitmap();
-
-        if (!AdManager.I.checkPackage()) {
-            trace('check package name failure!');
-            NativeApplication.nativeApplication.exit();
-            return;
-        }
 
         stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
         stage.addEventListener(Event.RESIZE, RootSprite.I.updateFullScreenSize);
@@ -167,13 +122,7 @@ public class launch extends Sprite {
 
     private function initGameConfig():void {
         var urls:Array = [];
-        GamePolyCtrl.I.loadConfig(urls, gamePolyComplete);
-    }
-
-    private function gamePolyComplete():void {
-        AdManager.I.updatePolity();
-        AdManager.I.beforeGameInit();
-        buildGame();
+        GamePolyCtrl.I.loadConfig(urls, buildGame);
     }
 
     private function buildGame():void {
@@ -188,7 +137,6 @@ public class launch extends Sprite {
     }
 
     private function updateBack():void {
-        AdManager.I.onGameInited();
         RootSprite.I.getMainGame().goMenu();
     }
 
@@ -203,14 +151,12 @@ public class launch extends Sprite {
         stage.align     = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
-        AdCtrler.SHOW_OPENAD_ON_START = true;
-
         GameConfig.TOUCH_MODE = true; //开启触屏模式
 
         ScreenRotater.I.init(stage);
 
         showStartPic();
-        initSDK();
+        initGame();
     }
 
     private function activeHandler(e:Event):void {
@@ -223,7 +169,6 @@ public class launch extends Sprite {
             trace('pause');
             KyoTimerUtils.pauseAllTimer();
             MobileCtrler.I.pause();
-            AdManager.I.onDeactive();
         }
         else {
             if (_isActive) {
@@ -234,7 +179,6 @@ public class launch extends Sprite {
             trace('resume');
             KyoTimerUtils.resumeAllTimer();
             MobileCtrler.I.resume();
-            AdManager.I.onActive();
         }
     }
 

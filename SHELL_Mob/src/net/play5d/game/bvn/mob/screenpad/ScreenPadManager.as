@@ -11,7 +11,6 @@ import flash.utils.Dictionary;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.input.InputManager;
 import net.play5d.game.bvn.mob.input.ScreenPadInput;
 import net.play5d.game.bvn.stage.GameStage;
@@ -174,12 +173,6 @@ public class ScreenPadManager {
     }
 
     private static function touchHandler(e:TouchEvent):void {
-
-        if (MobileCtrler.I.isAdPause) {
-            MobileCtrler.I.adResume();
-            return;
-        }
-
         switch (_curMode) {
         case 1:
             break;

@@ -3,7 +3,6 @@ import com.adobe.crypto.MD5;
 
 import flash.filesystem.File;
 
-import net.play5d.game.bvn.mob.data.AdConfVO;
 import net.play5d.game.bvn.mob.data.VersionInfoVO;
 import net.play5d.kyo.air.utils.FileUtils;
 import net.play5d.kyo.loader.KyoURLLoader;
@@ -20,14 +19,9 @@ public class GamePolyCtrl {
     public function GamePolyCtrl() {
     }
     private var _versionInfo:VersionInfoVO;
-    private var _adConfList:Vector.<AdConfVO>;
 
     public function getVersion():VersionInfoVO {
         return _versionInfo;
-    }
-
-    public function getAdConf():Vector.<AdConfVO> {
-        return _adConfList;
     }
 
     public function loadConfig(urls:Array, back:Function):void {
@@ -86,24 +80,6 @@ public class GamePolyCtrl {
                 _versionInfo.info        = vs.I;
                 _versionInfo.forceUpdate = vs.F;
                 _versionInfo.enabled     = vs.E;
-
-            }
-
-            var ad:Array = o.AD;
-            if (ad) {
-                _adConfList = new Vector.<AdConfVO>;
-
-                for (var i:int = 0; i < ad.length; i++) {
-                    var ado:Object = ad[i];
-
-                    var acvo:AdConfVO = new AdConfVO();
-                    acvo.code         = ado.C;
-                    acvo.rank         = ado.P;
-                    acvo.rate         = ado.R;
-                    acvo.enabled      = ado.E;
-
-                    _adConfList.push(acvo);
-                }
             }
 
             return true;
@@ -122,7 +98,7 @@ public class GamePolyCtrl {
     }
 
     private function readLocalConfig():void {
-        var f:File      = File.applicationStorageDirectory.resolvePath("bvnpoly.conf");
+        var f:File      = File.applicationStorageDirectory.resolvePath('bvnpoly.conf');
         var data:String = FileUtils.readTextFile(f.nativePath);
 
         parseConfig(data);
