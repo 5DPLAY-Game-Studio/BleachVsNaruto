@@ -16,7 +16,7 @@
 | 碰撞 | `collision/` → `CollisionBridge` |
 | 加载 / 资源 | `ctrler/GameLoader.as` `ctrler/AssetManager.as` `ctrler/game_stage_loader/` |
 | 音效 | `ctrler/SoundCtrl.as` |
-| 特效 | `ctrler/EffectCtrl.as` `views/effects/` |
+| 特效 | `ctrler/EffectCtrl.as`（门面）+ `ctrler/effect/`（`EffectHitHandler` / `EffectShakeHandler` / `EffectSlowHandler`）+ `views/effects/` |
 | 启动预热（首次交互卡顿） | `ctrler/WarmupCtrl.as` → 约定见 [`.agents/warmup.md`](warmup.md) |
 | 渲染节拍 | `ctrler/GameRender.as` |
 | 数据 / VO | `data/` `data/vos/` |

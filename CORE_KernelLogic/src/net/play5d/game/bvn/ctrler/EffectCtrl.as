@@ -26,13 +26,14 @@ import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.ctrler.effect.EffectHitHandler;
+import net.play5d.game.bvn.ctrler.effect.EffectShakeHandler;
+import net.play5d.game.bvn.ctrler.effect.EffectSlowHandler;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
-import net.play5d.game.bvn.data.HitType;
 import net.play5d.game.bvn.data.fighter.FighterHitFloorType;
 import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.data.TeamID;
-import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
@@ -55,7 +56,6 @@ import net.play5d.kyo.utils.UUID;
 
 public class EffectCtrl {
 
-    private const SHAKE_POW_MAX:int = 10;
     public static var EFFECT_SMOOTHING:Boolean = true; //特效抗锯齿
     public static var SHADOW_ENABLED:Boolean   = true; //残影开关
     public static var SHAKE_ENABLED:Boolean    = true; //震动开关
@@ -69,7 +69,19 @@ public class EffectCtrl {
 
     public var shineMaxCount:int = 3;
     public var freezeEnabled:Boolean = true;
-    public var bgBlurEnabled:Boolean = true;
+
+    /**
+     * 是否允许背景模糊。
+     */
+    public function get bgBlurEnabled():Boolean {
+        return _slowHandler.bgBlurEnabled;
+    }
+
+    /** @private */
+    public function set bgBlurEnabled(v:Boolean):void {
+        _slowHandler.bgBlurEnabled = v;
+    }
+
     private var _gameStage:GameStage;
     private var _effectLayer:Sprite;
     private var _manager:EffectManager;
@@ -82,25 +94,9 @@ public class EffectCtrl {
     private var _filterEffects:Vector.<BitmapFilterView> = new Vector.<BitmapFilterView>();
     private var _blackBack:BlackBackView;
 
-    private var _shakeHoldX:int   = 0;
-    private var _shakeHoldY:int   = 0;
-    private var _shakePowX:int    = 0;
-    private var _shakePowY:int    = 0;
-    private var _shakeXDirect:int = 1;
-    private var _shakeYDirect:int = 1;
-    private var _shakeFrameX:int  = 0;
-    private var _shakeFrameY:int  = 0;
-    private var _shakeLoseX:int   = 0;
-    private var _shakeLoseY:int   = 0;
-
-
-    private var _renderAnimateGap:int   = 0; //刷新动画间隔
-    private var _renderAnimateFrame:int = 0;
-    private var _renderAnimate:Boolean  = true;
-
-    private var _slowDownFrame:int;
-    private var _blurFrame:int;
-//		private var _blurHalfFrame:int;
+    private var _shakeHandler:EffectShakeHandler = new EffectShakeHandler();
+    private var _slowHandler:EffectSlowHandler   = new EffectSlowHandler();
+    private var _hitHandler:EffectHitHandler     = new EffectHitHandler();
 
     private var _replaceSkillFrame:int;
     private var _replaceSkillFrameHold:int;
@@ -109,8 +105,6 @@ public class EffectCtrl {
     private var _explodeEffectPos:Point;
 
     private var _onFreezeOver:Vector.<Function> = null;
-
-    private var _hitFocusTarget:IGameSprite;
 
     private var _frameEffectCount:Dictionary = new Dictionary();
     private var _removeEnemieMap:Object = {};
@@ -142,7 +136,7 @@ public class EffectCtrl {
 
     public function destroy():void {
         // 执行销毁时结束震动
-        endShake();
+        _shakeHandler.destroy();
         // 灵压爆发与替身术剩余帧数归零
         _replaceSkillFrame = _explodeSkillFrame = 0;
 
@@ -155,6 +149,9 @@ public class EffectCtrl {
             _blackBack.destroy();
             _blackBack = null;
         }
+
+        _hitHandler.destroy();
+        _slowHandler.destroy();
 
         _renderBlackBack = false;
         _blackBackMul    = BLACK_BACK_NORMAL;
@@ -193,7 +190,9 @@ public class EffectCtrl {
         _blackBackMul    = BLACK_BACK_NORMAL;
         _blackBackCt     = null;
 
-        _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
+        _shakeHandler.initialize(gameStage);
+        _slowHandler.initialize(gameStage);
+        _hitHandler.bind(this, _manager);
 
     }
 
@@ -204,7 +203,7 @@ public class EffectCtrl {
 
         //			if(_shineEffect) _shineEffect.render();
 
-        renderSlowDown();
+        _slowHandler.render();
         renderShine();
 
         clearFrameEffectCount();
@@ -213,7 +212,7 @@ public class EffectCtrl {
             _effects[i].render();
         }
 
-        if (isRenderAnimate()) {
+        if (_slowHandler.isRenderAnimate()) {
             renderAnimate();
         }
 
@@ -239,124 +238,15 @@ public class EffectCtrl {
     }
 
     public function doHitEffect(hitvo:HitVO, hitRect:Rectangle, target:IGameSprite = null):void {
-
-        if (Debugger.HIDE_HITEFFECT) {
-            return;
-        }
-
-        var effect:EffectVO = _manager.getHitEffectVOByHitVO(hitvo, target);
-        if (!effect) {
-            return;
-        }
-
-        var ex:Number = hitRect.x + hitRect.width / 2;
-        var ey:Number = hitRect.y + hitRect.height / 2;
-
-        var direct:int = 1;
-        if (effect.followDirect && hitvo.owner && hitvo.owner is IGameSprite) {
-            direct = (
-                    hitvo.owner as IGameSprite
-            ).direct;
-        }
-
-        if (hitvo.slowDown > 0) {
-            slowDown(1.5, hitvo.slowDown * 1000);
-        }
-
-        if (hitvo.focusTarget) {
-            _hitFocusTarget = target;
-            GameCtrl.I.gameState.cameraFocusOne(target.getDisplay());
-        }
-        else {
-            if (_hitFocusTarget && _hitFocusTarget == target) {
-                _hitFocusTarget = null;
-            }
-        }
-
-        doEffectVO(effect, ex, ey, direct, target);
+        _hitHandler.doHitEffect(hitvo, hitRect, target);
     }
 
     public function doDefenseEffect(hitvo:HitVO, hitRect:Rectangle, defenseType:int, target:IGameSprite = null):void {
-
-//			var hitType:int = hitvo.hitType;
-//
-//			switch(defenseType){
-//				case FighterDefenseType.SWOARD:
-//					break;
-//				case FighterDefenseType.HAND:
-//					if(hitType == HitType.KAN) hitType = HitType.DA;
-//					if(hitType == HitType.KAN_HEAVY) hitType = HitType.DA_HEAVY;
-//					break;
-//			}
-
-        var effect:EffectVO = _manager.getDefenseEffectVOByHitVO(hitvo, defenseType, target);
-
-        if (!effect) {
-            return;
-        }
-
-        var ex:Number = hitRect.x + hitRect.width / 2;
-        var ey:Number = hitRect.y + hitRect.height / 2;
-
-        if (effect.shake) {
-            if (effect.shake.pow != undefined && effect.shake.pow != 0) {
-                //					var pow:Number = effect.shake.pow;
-                //					var hitXY:Number = Math.abs(hitvo.hitx) + Math.abs(hitvo.hity);
-                //					effect.shake.x = pow * (hitvo.hitx / hitXY);
-                //					effect.shake.y = pow * (hitvo.hity / hitXY);
-                effect.shake.x = 0;
-                effect.shake.y = effect.shake.pow;
-            }
-        }
-
-        var direct:int = 1;
-        if (effect.followDirect && hitvo.owner && hitvo.owner is IGameSprite) {
-            direct = (
-                    hitvo.owner as IGameSprite
-            ).direct;
-        }
-
-        doEffectVO(effect, ex, ey, direct, target);
+        _hitHandler.doDefenseEffect(hitvo, hitRect, defenseType, target);
     }
 
     public function doSteelHitEffect(hitvo:HitVO, hitRect:Rectangle, target:IGameSprite):void {
-
-        if (Debugger.HIDE_HITEFFECT) {
-            return;
-        }
-
-        var effect:EffectVO;
-
-        switch (hitvo.hitType) {
-        case HitType.NONE:
-            return;
-        case HitType.KAN:
-        case HitType.KAN_HEAVY:
-            effect = EffectModel.I.getEffect('steel_hit_kan');
-            break;
-        case HitType.DA:
-        case HitType.DA_HEAVY:
-            effect = EffectModel.I.getEffect('steel_hit_qdj');
-            break;
-        default:
-            effect = EffectModel.I.getEffect('steel_hit_mfdj');
-        }
-
-        if (!effect) {
-            return;
-        }
-
-        var ex:Number = hitRect.x + hitRect.width / 2;
-        var ey:Number = hitRect.y + hitRect.height / 2;
-
-        var direct:int = 1;
-        if (effect.followDirect && hitvo.owner && hitvo.owner is IGameSprite) {
-            direct = (
-                    hitvo.owner as IGameSprite
-            ).direct;
-        }
-
-        doEffectVO(effect, ex, ey, direct, target);
+        _hitHandler.doSteelHitEffect(hitvo, hitRect, target);
     }
 
     public function doEffectById(
@@ -473,7 +363,7 @@ public class EffectCtrl {
 
         if (time > 300) {
             if (GameCtrl.I.slowRate > 0) {
-                bgBlur(GameCtrl.I.slowRate * 4, 0, 500);
+                _slowHandler.bgBlur(GameCtrl.I.slowRate * 4, 0, 500);
             }
         }
 
@@ -497,79 +387,15 @@ public class EffectCtrl {
     }
 
     public function startShake(sx:Number, sy:Number):void {
-        _shakeHoldX = sx;
-        _shakeHoldY = sy;
+        _shakeHandler.startShake(sx, sy);
     }
 
     public function endShake():void {
-        _shakeHoldX  = 0;
-        _shakeHoldY  = 0;
-        _gameStage.x = 0;
-        _gameStage.y = 0;
+        _shakeHandler.endShake();
     }
 
     public function shake(powX:Number = 0, powY:Number = 3, time:int = 500):void {
-
-        if (!SHAKE_ENABLED) {
-            return;
-        }
-
-        if (isNaN(powX) || isNaN(powY)) {
-            return;
-        }
-
-        if (Math.abs(_shakePowX) > Math.abs(powX) || Math.abs(_shakePowY) > Math.abs(powY)) {
-            return;
-        }
-
-        //			trace('shake' , powX , powY , time);
-
-        if (powX != 0) {
-            if (_shakePowX == 0) {
-                _shakeXDirect = powX > 0 ? 1 : -1;
-                _shakePowX    = Math.abs(powX);
-            }
-            else {
-                _shakePowX += Math.abs(powX) / 2;
-            }
-
-            if (_shakePowX > SHAKE_POW_MAX) {
-                _shakePowX = SHAKE_POW_MAX;
-            }
-        }
-
-        if (powY != 0) {
-            if (_shakePowY == 0) {
-                _shakeYDirect = powY > 0 ? 1 : -1;
-                _shakePowY    = Math.abs(powY);
-            }
-            else {
-                _shakePowY += Math.abs(powY) / 2;
-            }
-            if (_shakePowY > SHAKE_POW_MAX) {
-                _shakePowY = SHAKE_POW_MAX;
-            }
-        }
-
-        if (time <= 0) {
-            time = 500;
-        }
-
-        _shakeLoseX = Math.ceil(_shakePowX / (
-                time / 1000 * GameConfig.FPS_ANIMATE
-        ));
-        _shakeLoseY = Math.ceil(_shakePowY / (
-                time / 1000 * GameConfig.FPS_ANIMATE
-        ));
-
-        //			trace('shake2' , _shakePowX , _shakePowY , _shakeLoseX , _shakeLoseY , time);
-
-        if (_shakeLoseX < 1) {
-            _shakeLoseX = 1;
-        }
-        if (_shakeLoseY < 1) {
-            _shakeLoseY = 1;
-        }
+        _shakeHandler.shake(powX, powY, time);
     }
 
     public function startShadow(
@@ -718,52 +544,19 @@ public class EffectCtrl {
      * 慢放效果
      */
     public function slowDown(rate:Number, time:int = 1000):void {
-        //			var fps:Number = GameConfig.FPS_GAME / rate;
-        //			MainGame.I.setFPS(fps);
-
-        if (GameCtrl.I.slowRate > rate) {
-            return;
-        }
-
-        GameCtrl.I.slow(rate);
-        bgBlur(rate * 2, 0, 250);
-        _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / (
-                                      GameConfig.FPS_ANIMATE / rate
-        )) - 1;
-        if (time == 0) {
-            _slowDownFrame = 0;
-        }
-        else {
-            //				_slowDownFrame = time / fps;
-            _slowDownFrame = time / 1000 * GameConfig.FPS_GAME;
-        }
+        _slowHandler.slowDown(rate, time);
     }
 
     public function bgBlur(blurX:Number, blurY:Number, time:int = 1000):void {
-        if (!BG_BULR_ENABLED) {
-            return;
-        }
-        if (!bgBlurEnabled) {
-            return;
-        }
-        if (_gameStage.getMap().getSmoothing().x > blurX || _gameStage.getMap().getSmoothing().y > 0) {
-            return;
-        }
-        _gameStage.getMap().setSmoothing(blurX, blurY);
-        _blurFrame = time / 1000 * GameConfig.FPS_ANIMATE;
-//			if(time > 1000) _blurHalfFrame = _blurFrame / 2;
+        _slowHandler.bgBlur(blurX, blurY, time);
     }
 
     public function cancelBgBlur():void {
-        _blurFrame = 0;
-        _gameStage.getMap().setSmoothing(0, 0);
+        _slowHandler.cancelBgBlur();
     }
 
     public function slowDownResume():void {
-        //			MainGame.I.setFPS(GameConfig.FPS_GAME);
-        GameCtrl.I.slowResume();
-        _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
-        _slowDownFrame    = 0;
+        _slowHandler.slowDownResume();
     }
 
     //		public function dash(target:FighterMain):void{
@@ -940,12 +733,11 @@ public class EffectCtrl {
             _blackBack.renderAnimate();
         }
 
-        renderShakeX();
-        renderShakeY();
+        _shakeHandler.renderAnimate();
 
         renderRemoveEnemy();
 
-        renderBgBlur();
+        _slowHandler.renderAnimate();
     }
 
     /**
@@ -955,19 +747,6 @@ public class EffectCtrl {
         for (var k:* in _frameEffectCount) {
             delete _frameEffectCount[k];
         }
-    }
-
-    private function isRenderAnimate():Boolean {
-        if (_renderAnimateGap > 0) {
-            if (_renderAnimateFrame++ >= _renderAnimateGap) {
-                _renderAnimateFrame = 0;
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        return true;
     }
 
     /** @private 是否渲染必杀背景变暗 */
@@ -1058,54 +837,10 @@ public class EffectCtrl {
                     _onFreezeOver = null;
                 }
 
-                if (_hitFocusTarget) {
-                    _hitFocusTarget = null;
-                    GameCtrl.I.gameState.cameraResume();
-                }
+                _hitHandler.clearHitFocusOnFreezeEnd();
 
                 GameCtrl.I.resume();
             }
-        }
-    }
-
-    private function renderShakeX():void {
-        var shakeX:Number = _shakeHoldX + _shakePowX;
-        if (shakeX > 0) {
-            _gameStage.x = shakeX * _shakeXDirect;
-            if (_shakePowX > 0 && _shakeFrameX % 2 == 0) {
-                _shakePowX -= _shakeLoseX;
-                if (_shakePowX < _shakeLoseX) {
-                    _shakePowX   = 0;
-                    _gameStage.x = 0;
-                    _shakeFrameX = 0;
-                    _shakeLoseX  = 0;
-                    return;
-                }
-            }
-            _shakeFrameX++;
-            _shakeXDirect *= -1;
-        }
-    }
-
-    private function renderShakeY():void {
-        var shakeY:Number = _shakeHoldY + _shakePowY;
-        if (shakeY > 0) {
-            _gameStage.y = shakeY * _shakeYDirect;
-            if (_shakePowY > 0 && _shakeFrameY % 2 == 0) {
-                _shakePowY -= _shakeLoseY;
-
-                if (_shakePowY < _shakeLoseY) {
-                    _shakePowY   = 0;
-                    _gameStage.y = 0;
-                    _shakeFrameY = 0;
-                    _shakeLoseY  = 0;
-                    return;
-                }
-            }
-
-            _shakeYDirect *= -1;
-            _shakeFrameY++;
-
         }
     }
 
@@ -1209,27 +944,6 @@ public class EffectCtrl {
 //        }
 
         _blackBack.showBishaFace(faceId, face);
-    }
-
-    private function renderBgBlur():void {
-        if (_blurFrame > 0) {
-//				if(_blurFrame < _blurHalfFrame){
-//					var smoothing:Point = _gameStage.getMap().getSmoothing();
-//					_gameStage.getMap().setSmoothing(smoothing.x / 2, smoothing.y / 2);
-//				}
-            if (--_blurFrame <= 0) {
-                cancelBgBlur();
-            }
-        }
-    }
-
-    private function renderSlowDown():void {
-        if (_slowDownFrame > 0) {
-            _slowDownFrame--;
-            if (_slowDownFrame <= 0) {
-                slowDownResume();
-            }
-        }
     }
 
     private function endReplaceSkill():void {
