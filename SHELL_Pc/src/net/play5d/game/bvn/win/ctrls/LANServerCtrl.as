@@ -22,14 +22,11 @@ import flash.utils.clearTimeout;
 import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
 import net.play5d.game.bvn.ctrler.lan.LanGameMenuCtrl;
+import net.play5d.game.bvn.ctrler.lan.LanServerSyncCore;
 import net.play5d.game.bvn.ctrler.lan.LockFrameServerLogic;
 import net.play5d.game.bvn.ctrler.lan.SelectFighterServerLogic;
-import net.play5d.game.bvn.data.vos.GameRunDataVO;
-import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
@@ -42,7 +39,6 @@ import net.play5d.kyo.air.socket.events.SocketEvent;
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.win.sockets.udp.UDPSocket;
 import net.play5d.kyo.utils.JsonUtils;
-import net.play5d.game.bvn.data.lan.LanSyncType;
 import net.play5d.game.bvn.utils.LANUtils;
 import net.play5d.game.bvn.utils.LockFrameLogic;
 import net.play5d.game.bvn.win.utils.MsgType;
@@ -82,6 +78,7 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     private var _selectLogic:SelectFighterServerLogic;
     private var _connGameLogic:LockFrameServerLogic;
+    private var _syncCore:LanServerSyncCore;
 
     private var _udpSocket:UDPSocket;
     private var _kickTimeoutInt:int;
@@ -223,7 +220,8 @@ public class LANServerCtrl implements ILanServerLockLink {
                 }
         ));
 
-        initSyncEvent();
+        _syncCore ||= new LanServerSyncCore();
+        _syncCore.bind(_connGameLogic, sendTCP);
     }
 
     public function gameEnd():void {
@@ -240,7 +238,9 @@ public class LANServerCtrl implements ILanServerLockLink {
             _connGameLogic = null;
         }
 
-        disposeSyncEvent();
+        if (_syncCore) {
+            _syncCore.unbind();
+        }
 
         var room:LANRoomState = new LANRoomState();
         MainGame.stageCtrl.goStage(room);
@@ -254,7 +254,9 @@ public class LANServerCtrl implements ILanServerLockLink {
         GameInterface.instance.updateInputConfig();
         LockFrameLogic.I.dispose();
 
-        disposeSyncEvent();
+        if (_syncCore) {
+            _syncCore.unbind();
+        }
         LanGameMenuCtrl.I.dispose();
 
         stopServer();
@@ -369,21 +371,6 @@ public class LANServerCtrl implements ILanServerLockLink {
         }
     }
 
-    private function initSyncEvent():void {
-
-        GameEvent.addEventListener(GameEvent.ROUND_END, onGameRoundEnd);
-        GameEvent.addEventListener(GameEvent.GAME_START, onGameStart);
-        GameEvent.addEventListener(GameEvent.GAME_END, onGameEnd);
-        GameEvent.addEventListener(GameEvent.ROUND_START, onRoundStart);
-    }
-
-    private function disposeSyncEvent():void {
-        GameEvent.removeEventListener(GameEvent.ROUND_END, onGameRoundEnd);
-        GameEvent.removeEventListener(GameEvent.GAME_START, onGameStart);
-        GameEvent.removeEventListener(GameEvent.GAME_END, onGameEnd);
-        GameEvent.removeEventListener(GameEvent.ROUND_START, onRoundStart);
-    }
-
     private function socketHandler(e:SocketEvent):void {
         trace(e);
         switch (e.type) {
@@ -430,46 +417,6 @@ public class LANServerCtrl implements ILanServerLockLink {
         if (json) {
             receiveJson(json, e.clientSocket);
         }
-    }
-
-    private function onGameStart(e:GameEvent):void {
-        //SYNC,type,round
-
-        _connGameLogic.enabled = true;
-        _connGameLogic.reset();
-
-        var data:Array = ['SYNC', LanSyncType.GAME_START];
-        sendTCP(data);
-    }
-
-    private function onGameEnd(e:GameEvent):void {
-
-        _connGameLogic.enabled = false;
-        _connGameLogic.reset();
-
-        var data:Array = ['SYNC', LanSyncType.GAME_FINISH];
-        sendTCP(data);
-    }
-
-    private function onRoundStart(e:GameEvent):void {
-        //SYNC,type,round
-        _connGameLogic.enabled = true;
-    }
-
-    private function onGameRoundEnd(e:GameEvent):void {
-        //SYNC,type,round,p1hp,p2hp
-        var runData:GameRunDataVO = GameCtrl.I.gameRunData;
-        var p1:FighterMain        = runData.p1FighterGroup.currentFighter;
-        var p2:FighterMain        = runData.p2FighterGroup.currentFighter;
-        var data:Array            = [
-            'SYNC', LanSyncType.ROUND_FINISH,
-            runData.round, runData.isTimerOver, runData.isDrawGame,
-            p1.hp << 0, p2.hp << 0
-        ];
-        sendTCP(data);
-
-        _connGameLogic.enabled = false;
-        _connGameLogic.reset();
     }
 
 }

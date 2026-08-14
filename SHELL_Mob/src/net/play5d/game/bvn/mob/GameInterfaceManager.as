@@ -2,7 +2,6 @@ package net.play5d.game.bvn.mob {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.filesystem.File;
-import flash.geom.Matrix;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.GameConfig;
@@ -15,7 +14,7 @@ import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
-import net.play5d.game.bvn.map.MapMain;
+import net.play5d.game.bvn.map.MapLayerCacheUtil;
 import net.play5d.game.bvn.mob.data.ExtendConfig;
 import net.play5d.game.bvn.mob.input.InputManager;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
@@ -225,19 +224,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function afterBuildGame():void {
-        var map:MapMain = GameCtrl.I.gameState.getMap();
-        if (map.mapLayer) {
-            map.mapLayer.cacheAsBitmapMatrix = new Matrix();
-        }
-        if (map.frontLayer) {
-            map.frontLayer.cacheAsBitmapMatrix = new Matrix();
-        }
-        if (map.frontFixLayer) {
-            map.frontFixLayer.cacheAsBitmapMatrix = new Matrix();
-        }
-        if (map.bgLayer) {
-            map.bgLayer.cacheAsBitmap = true;
-        }
+        MapLayerCacheUtil.enableBitmapCache(GameCtrl.I.gameState.getMap());
     }
 
     /**

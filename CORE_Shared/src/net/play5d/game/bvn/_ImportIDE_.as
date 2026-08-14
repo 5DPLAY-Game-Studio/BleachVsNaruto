@@ -31,6 +31,7 @@ import net.play5d.game.bvn.data.lan.SelectFighterDataType;
 import net.play5d.game.bvn.data.lan.SocketInputData;
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.data.lan.UdpDataType;
+import net.play5d.game.bvn.data.lan.UdpHandlerList;
 import net.play5d.game.bvn.data.lan.UdpPacketUtils;
 import net.play5d.game.bvn.interfaces.*;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
@@ -76,6 +77,7 @@ public class _ImportIDE_ extends Sprite {
         SelectFighterDataType,
         SocketInputData,
         UdpDataType,
+        UdpHandlerList,
         UDPDataVO,
         UdpPacketUtils,
 

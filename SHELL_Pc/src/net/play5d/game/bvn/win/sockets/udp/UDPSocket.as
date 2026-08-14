@@ -25,6 +25,7 @@ import flash.net.NetworkInterface;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.data.lan.UDPDataVO;
+import net.play5d.game.bvn.data.lan.UdpHandlerList;
 import net.play5d.game.bvn.data.lan.UdpPacketUtils;
 import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
 
@@ -37,7 +38,7 @@ public class UDPSocket implements IUdpTransport {
         _udpsocket = new DatagramSocket();
     }
     private var _udpsocket:DatagramSocket;
-    private var _dataBacks:Vector.<Function>;
+    private var _handlers:UdpHandlerList;
     private var _onLineClients:Array;
     private var _broadCastAddress:String;
 
@@ -62,10 +63,8 @@ public class UDPSocket implements IUdpTransport {
      * @param func
      */
     public function addDataHandler(func:Function):void {
-        _dataBacks ||= new Vector.<Function>();
-        if (_dataBacks.indexOf(func) == -1) {
-            _dataBacks.push(func);
-        }
+        _handlers ||= new UdpHandlerList();
+        _handlers.add(func);
 
         if (_udpsocket.hasEventListener(DatagramSocketDataEvent.DATA)) {
             return;
@@ -79,10 +78,7 @@ public class UDPSocket implements IUdpTransport {
      *
      */
     public function removeDataHandler(func:Function):void {
-        var id:int = _dataBacks.indexOf(func);
-        if (id != -1) {
-            _dataBacks.splice(id, 1);
-        }
+        _handlers && _handlers.remove(func);
     }
 
     /**
@@ -138,11 +134,7 @@ public class UDPSocket implements IUdpTransport {
     private function dataHandler(e:DatagramSocketDataEvent):void {
         var data:UDPDataVO = UdpPacketUtils.decode(e.data, e.srcAddress, e.srcPort);
 
-        for each(var f:Function in _dataBacks) {
-            if (f != null) {
-                f(data);
-            }
-        }
+        _handlers && _handlers.dispatch(data);
     }
 
 }

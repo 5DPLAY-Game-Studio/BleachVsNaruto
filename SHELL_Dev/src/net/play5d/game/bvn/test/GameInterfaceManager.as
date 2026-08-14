@@ -21,11 +21,13 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.utils.ByteArray;
 
+import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.input.GameKeyInput;
 import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
+import net.play5d.game.bvn.map.MapLayerCacheUtil;
 import net.play5d.game.bvn.utils.CreditsSpriteUtil;
 import net.play5d.kyo.utils.WebUtils;
 
@@ -77,6 +79,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function afterBuildGame():void {
+        MapLayerCacheUtil.enableBitmapCache(GameCtrl.I.gameState.getMap());
     }
 
     /**
