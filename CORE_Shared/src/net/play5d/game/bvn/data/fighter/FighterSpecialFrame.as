@@ -25,6 +25,7 @@ package net.play5d.game.bvn.data.fighter {
  *
  * @see FighterHitRange
  * @see FighterActionState
+ * @see FighterInputCmd
  */
 public class FighterSpecialFrame {
     include '../../../../../../../include/ImportVersion.as';

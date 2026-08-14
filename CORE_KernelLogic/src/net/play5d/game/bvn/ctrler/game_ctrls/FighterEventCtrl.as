@@ -24,6 +24,7 @@ import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
+import net.play5d.game.bvn.data.fighter.FighterInputCmd;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
@@ -117,6 +118,11 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
         }
 
         fighter.fzqi = 0;
+
+        // 练习模式：仅在援助真正召唤成功时记一次 O
+        var trainEvt:FighterEvent = new FighterEvent(FighterEvent.DO_ACTION);
+        trainEvt.params           = {input: FighterInputCmd.ASSIST};
+        fighter.dispatchEvent(trainEvt);
 
         var group:GameRunFighterGroup = TeamID.TEAM_1 == fighter.team.id ?
                                         GameCtrl.I.gameRunData.p1FighterGroup :
