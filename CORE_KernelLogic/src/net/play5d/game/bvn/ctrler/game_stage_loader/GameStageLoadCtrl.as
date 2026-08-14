@@ -450,7 +450,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
         _errorCallBack(msg);
     }
 
-    private function disposeLoader(l:Loader):void {
+    private static function disposeLoader(l:Loader):void {
         try {
             l.unloadAndStop(true);
         }
@@ -467,7 +467,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
 
 
     // 数组去重
-    private function unique(arr:Array):Array {
+    private static function unique(arr:Array):Array {
         var hash:Array = [];
         for (var i:int = 0; i < arr.length; i++) {
             if (arr[i] === null || arr[i] === undefined) {
@@ -519,7 +519,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
         loadNext();
     }
 
-    private function convertLoadAssets(source:*, keyMap:Object):Vector.<LoadAssetVO> {
+    private static function convertLoadAssets(source:*, keyMap:Object):Vector.<LoadAssetVO> {
         var result:Vector.<LoadAssetVO> = new Vector.<LoadAssetVO>();
         var urlMap:Object               = {};
         for each(var i:* in source) {

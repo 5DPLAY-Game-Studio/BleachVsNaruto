@@ -119,7 +119,7 @@ public class AssetLoader implements IAssetLoader {
 
     }
 
-    private function getFullUrl(url:String):String {
+    private static function getFullUrl(url:String):String {
         return 'assets/' + url;
     }
 

@@ -378,7 +378,7 @@ public class BaseIdeCtrler extends BaseComponent {
     }
 
     /** @private 是否视为空参数（null / 空串） */
-    private function isBlankParam(value:*):Boolean {
+    private static function isBlankParam(value:*):Boolean {
         if (value == null) {
             return true;
         }
@@ -389,7 +389,7 @@ public class BaseIdeCtrler extends BaseComponent {
     }
 
     /** @private 将参数格式化为 AS 字面量 */
-    private function formatLiteral(value:*):String {
+    private static function formatLiteral(value:*):String {
         if (value == null) {
             return 'null';
         }
@@ -408,7 +408,7 @@ public class BaseIdeCtrler extends BaseComponent {
     }
 
     /** @private 是否为色值字面量（0xRRGGBB / #RRGGBB） */
-    private function isColorLiteral(s:String):Boolean {
+    private static function isColorLiteral(s:String):Boolean {
         if (!s) {
             return false;
         }
@@ -422,7 +422,7 @@ public class BaseIdeCtrler extends BaseComponent {
     }
 
     /** @private #RRGGBB → 0xrrggbb；已是 0x 则保持 */
-    private function normalizeColorLiteral(s:String):String {
+    private static function normalizeColorLiteral(s:String):String {
         if (s.charAt(0) == '#') {
             return '0x' + s.substring(1).toLowerCase();
         }

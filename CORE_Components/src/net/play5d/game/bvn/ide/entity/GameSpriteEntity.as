@@ -224,7 +224,7 @@ public class GameSpriteEntity {
     }
 
     /** @private */
-    private function getType(sp:*):String {
+    private static function getType(sp:*):String {
         if (!sp) {
             return GameSpriteType.UNKNOWN;
         }

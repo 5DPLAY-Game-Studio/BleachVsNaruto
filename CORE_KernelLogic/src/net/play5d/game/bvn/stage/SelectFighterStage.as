@@ -618,7 +618,7 @@ public class SelectFighterStage implements IStage {
         }
     }
 
-    private function checkSelected(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
+    private static function checkSelected(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
 
         if (!sf.selectData && !sf.fighterData) {
             return false;
@@ -1098,7 +1098,7 @@ public class SelectFighterStage implements IStage {
         return null;
     }
 
-    private function renderRandom(selt:SelecterItemUI):void {
+    private static function renderRandom(selt:SelecterItemUI):void {
         if (selt.randoms) {
             if (selt.randFrame > 0) {
                 selt.randFrame = 0;

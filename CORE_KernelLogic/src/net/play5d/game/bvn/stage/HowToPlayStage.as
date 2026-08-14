@@ -116,7 +116,7 @@ public class HowToPlayStage implements IStage {
         }
     }
 
-    private function setKeyText(text:TextField, code:int):void {
+    private static function setKeyText(text:TextField, code:int):void {
         var name:String = KyoKeyCode.code2name(code);
         if (name) {
             text.text = name;

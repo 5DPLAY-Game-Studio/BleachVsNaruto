@@ -478,7 +478,7 @@ public class TrainingInputHistoryUI extends Sprite {
     }
 
     /** @private 是否为移动/防御单键（打断连段）。 */
-    private function isMoveOrGuardText(s:String):Boolean {
+    private static function isMoveOrGuardText(s:String):Boolean {
         return s == FighterInputCmd.LEFT ||
                s == FighterInputCmd.RIGHT ||
                s == FighterInputCmd.DEFENSE;

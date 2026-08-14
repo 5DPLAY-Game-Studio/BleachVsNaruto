@@ -96,7 +96,7 @@ public class CreditsStage implements IStage {
         }
     }
 
-    private function getCreditsText():String {
+    private static function getCreditsText():String {
 
 //			var msg:String = "设计、美术、程序：剑jian" + "<br/>" +
 //				"人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +

@@ -249,11 +249,11 @@ public class BitmapFilterView implements IGameSprite {
         if (!_targetFighter || !_targetFighter.data || !_targetFighter.data.id) {
             return null;
         }
-        var pose:String = DisplayFrameBitmapCache.I.buildPoseKey(_targetFighter);
+        var pose:String = DisplayFrameBitmapCache.buildPoseKey(_targetFighter);
         if (!pose) {
             return null;
         }
-        return DisplayFrameBitmapCache.I.buildFilterKey(
+        return DisplayFrameBitmapCache.buildFilterKey(
                 _targetFighter.data.id, pose, _filter, _filterOffset
         );
     }

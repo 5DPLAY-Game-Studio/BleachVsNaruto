@@ -226,7 +226,7 @@ public class SelectIndexUIGroup extends Sprite {
         selectFinish();
     }
 
-    private function sortFighters(a:SelectedFighterUI, b:SelectedFighterUI):int {
+    private static function sortFighters(a:SelectedFighterUI, b:SelectedFighterUI):int {
         var ai:int = a.getFighterIndex();
         var bi:int = b.getFighterIndex();
 

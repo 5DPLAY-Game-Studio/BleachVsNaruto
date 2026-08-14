@@ -61,7 +61,7 @@ public class MusouMiniHpBar {
 
     }
 
-    private function getScale(val:Number, max:Number):Number {
+    private static function getScale(val:Number, max:Number):Number {
         var rate:Number = val / max;
         if (rate < 0.0001) {
             rate = 0.0001;

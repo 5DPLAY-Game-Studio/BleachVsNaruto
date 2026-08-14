@@ -430,7 +430,7 @@ public class AssetManager {
         }
     }
 
-    private function getFighterFaceUrls(fighters:Object, loadBar:Boolean = false, loadWin:Boolean = false):Array {
+    private static function getFighterFaceUrls(fighters:Object, loadBar:Boolean = false, loadWin:Boolean = false):Array {
         var ra:Array = [];
         for each(var i:FighterVO in fighters) {
             if (i.faceUrl) {
@@ -449,7 +449,7 @@ public class AssetManager {
         return ra;
     }
 
-    private function getMapPicUrls(maps:Object):Array {
+    private static function getMapPicUrls(maps:Object):Array {
         var ra:Array = [];
         for each(var i:MapVO in maps) {
             ra.push(i.picUrl);

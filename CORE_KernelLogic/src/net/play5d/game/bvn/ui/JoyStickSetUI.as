@@ -170,7 +170,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     }
 
     /** @private */
-    private function subString(str:String, len:int):String {
+    private static function subString(str:String, len:int):String {
         if (!str) {
             return null;
         }

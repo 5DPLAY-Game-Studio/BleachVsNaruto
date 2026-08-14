@@ -167,11 +167,11 @@ public class ShadowEffectView {
         if (!f.data || !f.data.id) {
             return null;
         }
-        var pose:String = DisplayFrameBitmapCache.I.buildPoseKey(f);
+        var pose:String = DisplayFrameBitmapCache.buildPoseKey(f);
         if (!pose) {
             return null;
         }
-        return DisplayFrameBitmapCache.I.buildShadowKey(f.data.id, pose, r, g, b);
+        return DisplayFrameBitmapCache.buildShadowKey(f.data.id, pose, r, g, b);
     }
 
     private function removeBitmap(bp:Bitmap):void {

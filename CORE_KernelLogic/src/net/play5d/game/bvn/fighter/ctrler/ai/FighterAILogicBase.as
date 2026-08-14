@@ -154,7 +154,7 @@ public class FighterAILogicBase {
         return _distancePoint;
     }
 
-    protected function mergeRateObject(oldObj:Object, newObj:Object):void {
+    protected static function mergeRateObject(oldObj:Object, newObj:Object):void {
         for (var i:String in newObj) {
             if (oldObj[i] == undefined) {
                 oldObj[i] = newObj[i];

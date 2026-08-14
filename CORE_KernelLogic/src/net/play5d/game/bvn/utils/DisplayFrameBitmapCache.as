@@ -47,7 +47,7 @@ import net.play5d.kyo.utils.BitmapDataPool;
  * @see net.play5d.game.bvn.views.effects.BitmapFilterView
  * @example
  * <listing version="3.0">
- * var key:String = DisplayFrameBitmapCache.I.buildShadowKey('ichigo', pose, 0, 0, 255);
+ * var key:String = DisplayFrameBitmapCache.buildShadowKey('ichigo', pose, 0, 0, 255);
  * var vo:BitmapDataCacheVO = DisplayFrameBitmapCache.I.getShadow(key);
  * </listing>
  */
@@ -98,7 +98,7 @@ public class DisplayFrameBitmapCache {
      * @param fighter 角色。
      * @return 姿态键；无法解析时为空串。
      */
-    public function buildPoseKey(fighter:FighterMain):String {
+    public static function buildPoseKey(fighter:FighterMain):String {
         if (!fighter) {
             return '';
         }
@@ -119,7 +119,7 @@ public class DisplayFrameBitmapCache {
      * @param b 蓝色偏移。
      * @return 缓存键。
      */
-    public function buildShadowKey(
+    public static function buildShadowKey(
             fighterId:String, poseKey:String, r:int, g:int, b:int
     ):String {
         return 's|' + fighterId + '|' + poseKey + '|' + r + ',' + g + ',' + b;
@@ -134,7 +134,7 @@ public class DisplayFrameBitmapCache {
      * @param filterOffset 绘制扩展。
      * @return 缓存键。
      */
-    public function buildFilterKey(
+    public static function buildFilterKey(
             fighterId:String, poseKey:String, filter:BitmapFilter, filterOffset:Point
     ):String {
         var ox:int = filterOffset ? int(filterOffset.x) : 0;
@@ -427,7 +427,7 @@ public class DisplayFrameBitmapCache {
     }
 
     /** @private */
-    private function filterHash(filter:BitmapFilter):String {
+    private static function filterHash(filter:BitmapFilter):String {
         if (filter is GlowFilter) {
             var gf:GlowFilter = filter as GlowFilter;
             return 'g' + gf.color + '_' + gf.alpha + '_' + gf.blurX + '_' + gf.blurY + '_' +
@@ -499,7 +499,7 @@ public class DisplayFrameBitmapCache {
     }
 
     /** @private */
-    private function retainKey(retain:Object, key:String):void {
+    private static function retainKey(retain:Object, key:String):void {
         if (!key) {
             return;
         }
@@ -507,7 +507,7 @@ public class DisplayFrameBitmapCache {
     }
 
     /** @private */
-    private function releaseKey(retain:Object, key:String):void {
+    private static function releaseKey(retain:Object, key:String):void {
         if (!key) {
             return;
         }
@@ -521,7 +521,7 @@ public class DisplayFrameBitmapCache {
     }
 
     /** @private */
-    private function touchKey(keys:Vector.<String>, key:String):void {
+    private static function touchKey(keys:Vector.<String>, key:String):void {
         var idx:int = keys.indexOf(key);
         if (idx != -1) {
             keys.splice(idx, 1);
