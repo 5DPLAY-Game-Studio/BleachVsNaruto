@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,39 +16,68 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.win.input {
+package net.play5d.game.bvn.input {
 import flash.display.Stage;
 
-import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
-import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.data.lan.SocketInputData;
+import net.play5d.game.bvn.interfaces.IGameInput;
+import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 
+/**
+ * 联机锁帧用 Socket 输入通道。
+ *
+ * <p>聚合多个本地 <code>IGameInput</code>，打包为整数键位供锁帧同步；
+ * 亦可从对端解包回写。</p>
+ *
+ * @see ILanSocketInput
+ * @see IGameInput
+ */
 public class GameSocketInput implements IGameInput, ILanSocketInput {
+
+    /**
+     * 创建通道并初始化键位掩码。
+     */
     public function GameSocketInput() {
         initK();
     }
+
+    /** @private */
     private var _data:SocketInputData;
+    /** @private */
     private var _inputers:Vector.<IGameInput>;
-
+    /** @private */
     private var _inputData:int = 0;
-
+    /** @private */
     private var _upK:int;
+    /** @private */
     private var _downK:int;
+    /** @private */
     private var _leftK:int;
+    /** @private */
     private var _rightK:int;
+    /** @private */
     private var _attackK:int;
+    /** @private */
     private var _jumpK:int;
+    /** @private */
     private var _dashK:int;
+    /** @private */
     private var _skillK:int;
+    /** @private */
     private var _bishaK:int;
+    /** @private */
     private var _specialK:int;
-
+    /** @private */
     private var _enabled:Boolean = false;
 
+    /**
+     * 是否启用本通道。
+     */
     public function get enabled():Boolean {
         return _enabled;
     }
 
+    /** @private */
     public function set enabled(v:Boolean):void {
         _enabled = v;
         if (v) {
@@ -59,6 +88,11 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         }
     }
 
+    /**
+     * 设置聚合的本地输入源。
+     *
+     * @param inputers 本地 <code>IGameInput</code> 列表。
+     */
     public function setInputers(inputers:Array):void {
         _inputers = new Vector.<IGameInput>();
         for each(var i:IGameInput in inputers) {
@@ -67,10 +101,9 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
     }
 
     /**
-     * 每一帧获取按键状态 ，只要在时间范围内按过，就算有效
+     * 每一帧采集按键，时间范围内按过即有效。
      */
     public function renderInput():void {
-
         if (!_inputers || _inputers.length < 1) {
             return;
         }
@@ -113,11 +146,12 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
             p.special() && (
                     _inputData |= _specialK
             );
-
         }
-
     }
 
+    /**
+     * 非锁帧场景采集（含 select/back）。
+     */
     public function freeRender():void {
         if (!_inputers || _inputers.length < 1) {
             return;
@@ -147,17 +181,24 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
             _data.superSkill ||= p.superSkill();
             _data.special ||= p.special();
 
+            _data.select ||= p.select();
+            _data.back ||= p.back();
         }
     }
 
     /**
-     * 清空按键状态
+     * 清空按键状态。
      */
     public function resetInput():void {
         _inputData = 0;
         renderInput();
     }
 
+    /**
+     * 从整数整数解包写入当前键位状态。
+     *
+     * @param msg 打包后的按键整数。
+     */
     public function setSocketData(msg:int):void {
         if (!_data) {
             trace('GameSocketInput.data is null!');
@@ -176,20 +217,26 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         _data.left       = ejz.charAt(l - 8) == '1';
         _data.down       = ejz.charAt(l - 9) == '1';
         _data.up         = ejz.charAt(l - 10) == '1';
-
     }
 
     /**
-     * 获取按键状态数据,返回一个二进制数转十进制数
+     * 获取打包后的按键整数。
+     *
+     * @return 二进制键位转十进制。
      */
     public function getSocketData():int {
         return _inputData;
     }
 
+    /**
+     * @param stage 舞台（本实现无需绑定）。
+     */
     public function initialize(stage:Stage):void {
-
     }
 
+    /**
+     * @param config 配置对象（本实现忽略）。
+     */
     public function setConfig(config:Object):void {
     }
 
@@ -205,7 +252,9 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
     }
 
     public function select():Boolean {
-        return _data && _data.attack;
+        return _data && (
+                _data.attack || _data.select
+        );
     }
 
     public function up():Boolean {
@@ -268,7 +317,6 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         _skillK   = parseInt('0000000100', 2);
         _bishaK   = parseInt('0000000010', 2);
         _specialK = parseInt('0000000001', 2);
-
     }
 }
 }

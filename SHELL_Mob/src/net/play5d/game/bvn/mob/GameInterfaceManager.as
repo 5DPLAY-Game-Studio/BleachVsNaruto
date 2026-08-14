@@ -3,9 +3,6 @@ import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.filesystem.File;
 import flash.geom.Matrix;
-import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-import flash.text.TextFormat;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.GameConfig;
@@ -24,8 +21,8 @@ import net.play5d.game.bvn.mob.input.InputManager;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.kyo.air.utils.FileUtils;
 import net.play5d.game.bvn.mob.views.ViewManager;
+import net.play5d.game.bvn.utils.CreditsSpriteUtil;
 import net.play5d.game.bvn.utils.GameSafeKeeper;
-import net.play5d.game.bvn.utils.GithubUtils;
 import net.play5d.game.bvn.utils.URL;
 
 public class GameInterfaceManager implements IGameInterface {
@@ -247,6 +244,12 @@ public class GameInterfaceManager implements IGameInterface {
      * 更新输入设置
      */
     public function updateInputConfig():Boolean {
+        var onJoyChanged:Function = function ():void {
+            _extendsConfig.updateJoyConfig();
+        };
+        InputManager.I.joy_menu.onDevicesChanged = onJoyChanged;
+        InputManager.I.joy_p1.onDevicesChanged   = onJoyChanged;
+
         InputManager.I.joy_menu.setConfig(_extendsConfig.joyMenuConfig);
         InputManager.I.joy_p1.setConfig(_extendsConfig.joy1Config);
 
@@ -307,37 +310,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function getCreadits(creditsInfo:String):Sprite {
-        var sp:Sprite = new Sprite();
-
-        var commitsHash:String  = GithubUtils.getCommitsHash();
-        var commitsUrl:String   = GithubUtils.getCommitsUrlByHash(commitsHash);
-        var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
-        creditsInfo += GetLang('txt.game_interface_manager.credits_footer', {
-            url  : commitsUrl,
-            label: commitsLabel
-        });
-
-        var txt:TextField = new TextField();
-
-        var tf:TextFormat = new TextFormat();
-        tf.font           = FONT.fontName;
-        tf.size           = 17;
-        tf.color          = 0xffff00;
-        tf.leading        = 10;
-
-        txt.defaultTextFormat = tf;
-
-        txt.multiline = true;
-
-        txt.htmlText = creditsInfo;
-        txt.autoSize = TextFieldAutoSize.LEFT;
-
-        txt.x = 30;
-        txt.y = 25;
-
-        sp.addChild(txt);
-
-        return sp;
+        return CreditsSpriteUtil.build(creditsInfo, 'txt.game_interface_manager.credits_footer');
     }
 
     public function checkFile(url:String, file:ByteArray):Boolean {

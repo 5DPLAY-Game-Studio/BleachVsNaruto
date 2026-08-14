@@ -24,9 +24,6 @@ import flash.display.StageDisplayState;
 import flash.display.StageQuality;
 import flash.events.MouseEvent;
 import flash.geom.Matrix;
-import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-import flash.text.TextFormat;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.GameConfig;
@@ -42,8 +39,8 @@ import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.utils.CreditsSpriteUtil;
 import net.play5d.game.bvn.utils.EmbedAssetUtils;
-import net.play5d.game.bvn.utils.GithubUtils;
 import net.play5d.game.bvn.utils.PayUtils;
 import net.play5d.game.bvn.utils.URL;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
@@ -329,6 +326,13 @@ public class GameInterfaceManager implements IGameInterface {
      * 更新输入设置
      */
     public function updateInputConfig():Boolean {
+        var onJoyChanged:Function = function ():void {
+            _extendsConfig.updateJoyConfig();
+        };
+        InputManager.I.joy_menu.onDevicesChanged = onJoyChanged;
+        InputManager.I.joy_p1.onDevicesChanged   = onJoyChanged;
+        InputManager.I.joy_p2.onDevicesChanged   = onJoyChanged;
+
         if (LANServerCtrl.I.active || LANClientCtrl.I.active) {
 
             /**
@@ -419,34 +423,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function getCreadits(creditsInfo:String):Sprite {
-        var sp:Sprite = new Sprite();
-
-        var commitsHash:String = GithubUtils.getCommitsHash();
-        var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
-        var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
-        creditsInfo += GetLang('txt.game_interface_manager.credits_footer', {
-            url  : commitsUrl,
-            label: commitsLabel
-        });
-
-        var txt:TextField = new TextField();
-
-        var tf:TextFormat = new TextFormat();
-        tf.font           = FONT.fontName;
-        tf.size           = 17;
-        tf.color          = 0xffff00;
-        tf.leading        = 10;
-
-        txt.defaultTextFormat = tf;
-
-        txt.multiline = true;
-        txt.htmlText  = creditsInfo;
-        txt.autoSize  = TextFieldAutoSize.LEFT;
-
-        txt.x = 30;
-        txt.y = 25;
-
-        sp.addChild(txt);
+        var sp:Sprite = CreditsSpriteUtil.build(creditsInfo, 'txt.game_interface_manager.credits_footer');
 
         var android:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getAndroid());
         android.y          = 400;

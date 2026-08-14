@@ -1,4 +1,7 @@
 package net.play5d.game.bvn.mob.input {
+import net.play5d.game.bvn.input.GameJoystickInput;
+import net.play5d.game.bvn.input.GameSocketInput;
+
 public class InputManager {
 
     private static var _i:InputManager;

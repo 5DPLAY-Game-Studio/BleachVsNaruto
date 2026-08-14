@@ -17,7 +17,9 @@
  */
 
 package net.play5d.game.bvn.win.input {
+import net.play5d.game.bvn.input.GameJoystickInput;
 import net.play5d.game.bvn.input.GameKeyInput;
+import net.play5d.game.bvn.input.GameSocketInput;
 
 public class InputManager {
 

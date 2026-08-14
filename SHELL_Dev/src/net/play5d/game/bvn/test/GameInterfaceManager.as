@@ -19,9 +19,6 @@
 package net.play5d.game.bvn.test {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
-import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-import flash.text.TextFormat;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.input.GameKeyInput;
@@ -29,7 +26,7 @@ import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameInterface;
-import net.play5d.game.bvn.utils.GithubUtils;
+import net.play5d.game.bvn.utils.CreditsSpriteUtil;
 import net.play5d.kyo.utils.WebUtils;
 
 public class GameInterfaceManager implements IGameInterface {
@@ -93,37 +90,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function getCreadits(creditsInfo:String):Sprite {
-        var sp:Sprite = new Sprite();
-
-        var commitsHash:String = GithubUtils.getCommitsHash();
-        var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
-        var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
-        creditsInfo += GetLang('dev.txt.game_interface_manager.commit', {
-            url  : commitsUrl,
-            label: commitsLabel
-        });
-
-        var txt:TextField = new TextField();
-
-        var tf:TextFormat = new TextFormat();
-        tf.font           = FONT.fontName;
-        tf.size           = 17;
-        tf.color          = 0xffff00;
-        tf.leading        = 10;
-
-        txt.defaultTextFormat = tf;
-
-        txt.multiline = true;
-        txt.htmlText = creditsInfo;
-
-        txt.autoSize = TextFieldAutoSize.LEFT;
-
-        txt.x = 30;
-        txt.y = 25;
-
-        sp.addChild(txt);
-
-        return sp;
+        return CreditsSpriteUtil.build(creditsInfo, 'dev.txt.game_interface_manager.commit');
     }
 
     public function checkFile(url:String, file:ByteArray):Boolean {
