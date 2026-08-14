@@ -17,99 +17,35 @@
  */
 
 package net.play5d.game.bvn.ui {
-import flash.display.Sprite;
-
-import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.events.SetBtnEvent;
 
-public class MusouPauseDialog extends Sprite {
+/**
+ * 无双暂停对话框。
+ *
+ * @see BasePauseDialog
+ */
+public class MusouPauseDialog extends BasePauseDialog {
 
+    /**
+     * 构造无双暂停菜单。
+     */
     public function MusouPauseDialog() {
-        _bg = new Sprite();
-        _bg.graphics.beginFill(0, 0.5);
-        _bg.graphics.drawRect(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
-        _bg.graphics.endFill();
-
-        addChild(_bg);
-
-        _btnGroup = new SetBtnGroup();
-        _btnGroup.setBtnData([
-                                 {label: 'BACK MAP', cn: GetLang('txt.musou_pause_dialog.back_map')},
-                                 {label: 'MOVE LIST', cn: GetLang('txt.common.move_list')},
-                                 {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
-                             ], 2);
-        _btnGroup.addEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
-
-        addChild(_btnGroup);
-    }
-    private var _bg:Sprite;
-    private var _btnGroup:SetBtnGroup;
-    private var _moveList:MoveListSp;
-
-    public function destroy():void {
-        if (_btnGroup) {
-            _btnGroup.removeEventListener(SetBtnEvent.SELECT, btnGroupSelectHandler);
-            _btnGroup.destroy();
-            _btnGroup = null;
-        }
-        if (_moveList) {
-            _moveList.destroy();
-            _moveList = null;
-        }
+        super([
+                  {label: 'BACK MAP', cn: GetLang('txt.musou_pause_dialog.back_map')},
+                  {label: 'MOVE LIST', cn: GetLang('txt.common.move_list')},
+                  {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
+              ], true);
     }
 
-    public function isShowing():Boolean {
-        return visible;
-    }
-
-    public function show():void {
-        this.visible        = true;
-        _btnGroup.keyEnable = true;
-        _btnGroup.setArrowIndex(2);
-    }
-
-    public function hide():Boolean {
-        if (_moveList && _moveList.isShowing()) {
-            hideMoveList();
+    /** @inheritDoc */
+    override protected function handleExtraSelect(label:String):Boolean {
+        if (label != 'BACK MAP') {
             return false;
         }
 
-        this.visible        = false;
         _btnGroup.keyEnable = false;
-        GameUI.closeConfrim();
-
-        return true;
-    }
-
-    private function showMoveList():void {
-        if (!_moveList) {
-            _moveList              = new MoveListSp();
-            _moveList.onBackSelect = hideMoveList;
-            addChild(_moveList);
-        }
-
-        _btnGroup.keyEnable = false;
-        _moveList.show();
-    }
-
-    private function hideMoveList():void {
-        _moveList.hide();
-        _btnGroup.keyEnable = true;
-
-        GameEvent.dispatchEvent(GameEvent.PAUSE_GAME_MENU, "movelist-back");
-    }
-
-    private function btnGroupSelectHandler(e:SetBtnEvent):void {
-        if (GameUI.showingDialog()) {
-            return;
-        }
-        switch (e.selectedLabel) {
-        case 'BACK MAP':
-            _btnGroup.keyEnable = false;
-            GameUI.confrim(
+        GameUI.confrim(
                 GetLang('confirm.musou_pause_dialog.back_map_title'),
                 GetLang('confirm.musou_pause_dialog.back_map'),
                 function ():void {
@@ -120,17 +56,9 @@ public class MusouPauseDialog extends Sprite {
                     _btnGroup.keyEnable = true;
                 },
                 true
-            );
-            break;
-        case 'MOVE LIST':
-            showMoveList();
-            GameEvent.dispatchEvent(GameEvent.PAUSE_GAME_MENU, 'movelist');
-            break;
-        case 'CONTINUE':
-            GameCtrl.I.resume(true);
-            break;
-        }
-    }
+        );
 
+        return true;
+    }
 }
 }

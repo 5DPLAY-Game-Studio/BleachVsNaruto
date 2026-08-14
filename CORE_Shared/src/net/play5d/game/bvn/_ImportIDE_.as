@@ -28,6 +28,7 @@ import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.data.lan.LanSocketMsgFactory;
 import net.play5d.game.bvn.data.lan.LanSyncType;
 import net.play5d.game.bvn.data.lan.SelectFighterDataType;
+import net.play5d.game.bvn.data.lan.SocketInputBitCodec;
 import net.play5d.game.bvn.data.lan.SocketInputData;
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.data.lan.UdpDataType;
@@ -75,6 +76,7 @@ public class _ImportIDE_ extends Sprite {
         LanSocketMsgFactory,
         LanSyncType,
         SelectFighterDataType,
+        SocketInputBitCodec,
         SocketInputData,
         UdpDataType,
         UdpHandlerList,

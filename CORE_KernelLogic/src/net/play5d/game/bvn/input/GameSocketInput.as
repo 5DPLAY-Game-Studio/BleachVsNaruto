@@ -19,6 +19,7 @@
 package net.play5d.game.bvn.input {
 import flash.display.Stage;
 
+import net.play5d.game.bvn.data.lan.SocketInputBitCodec;
 import net.play5d.game.bvn.data.lan.SocketInputData;
 import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
@@ -205,18 +206,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
             return;
         }
 
-        var ejz:String   = msg.toString(2);
-        var l:int        = ejz.length;
-        _data.special    = ejz.charAt(l - 1) == '1';
-        _data.superSkill = ejz.charAt(l - 2) == '1';
-        _data.skill      = ejz.charAt(l - 3) == '1';
-        _data.dash       = ejz.charAt(l - 4) == '1';
-        _data.jump       = ejz.charAt(l - 5) == '1';
-        _data.attack     = ejz.charAt(l - 6) == '1';
-        _data.right      = ejz.charAt(l - 7) == '1';
-        _data.left       = ejz.charAt(l - 8) == '1';
-        _data.down       = ejz.charAt(l - 9) == '1';
-        _data.up         = ejz.charAt(l - 10) == '1';
+        SocketInputBitCodec.unpack(msg, _data);
     }
 
     /**

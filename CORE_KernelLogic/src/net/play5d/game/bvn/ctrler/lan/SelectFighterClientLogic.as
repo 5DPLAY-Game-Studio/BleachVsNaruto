@@ -46,8 +46,7 @@ public class SelectFighterClientLogic {
     public function init(sendTCP:Function):void {
         _sendTCP = sendTCP;
 
-        SelectFighterStage.AUTO_FINISH = false;
-        LoadingStage.AUTO_START_GAME   = false;
+        SelectFighterSyncPayload.disableAutoFinish();
         GameEvent.addEventListener(GameEvent.SELECT_FIGHTER_STEP, onSelectStep);
         GameEvent.addEventListener(GameEvent.SELECT_FIGHTER_INDEX, onSelectIndex);
     }
@@ -109,18 +108,9 @@ public class SelectFighterClientLogic {
     /** @private */
     private function onSelectFighter(arr:Array):void {
         if (MainGame.stageCtrl.currentStage is SelectFighterStage) {
-            GameData.I.p1Select.fighter1 = arr[2];
-            GameData.I.p1Select.fighter2 = arr[3];
-            GameData.I.p1Select.fighter3 = arr[4];
-            GameData.I.p1Select.fuzhu    = arr[5];
-
-            GameData.I.p2Select.fighter1 = arr[6];
-            GameData.I.p2Select.fighter2 = arr[7];
-            GameData.I.p2Select.fighter3 = arr[8];
-            GameData.I.p2Select.fuzhu    = arr[9];
-
-            GameData.I.selectMap = arr[10];
-
+            GameData.I.selectMap = SelectFighterSyncPayload.unpackFighterFinish(
+                    arr, GameData.I.p1Select, GameData.I.p2Select
+            );
             (MainGame.stageCtrl.currentStage as SelectFighterStage).goLoadGame();
         }
     }

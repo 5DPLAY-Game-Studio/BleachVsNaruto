@@ -23,7 +23,6 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.lan.LanMsgType;
 import net.play5d.game.bvn.data.vos.GameRunDataVO;
-import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.stage.GameStage;
@@ -215,50 +214,27 @@ public class LockFrameServerLogic {
     /** @private */
     private function getSyncUpdate():ByteArray {
         var curStg:IStage = MainGame.stageCtrl.currentStage;
-
-        if (curStg is GameStage) {
-            if (GameCtrl.I.actionEnable) {
-                var runData:GameRunDataVO = GameCtrl.I.gameRunData;
-                var p1:FighterMain        = runData.p1FighterGroup.currentFighter;
-                var p2:FighterMain        = runData.p2FighterGroup.currentFighter;
-
-                var byte:ByteArray = new ByteArray();
-                byte.writeByte(LanMsgType.INPUT_SYNC);
-                byte.writeShort(_renderFrame);
-                byte.writeByte(runData.round);
-                byte.writeByte(runData.gameTime);
-
-                byte.writeShort(p1.hp << 0);
-                byte.writeShort(p1.qi << 0);
-                byte.writeShort(p1.x << 0);
-                byte.writeShort(p1.y << 0);
-
-                byte.writeShort(p2.hp << 0);
-                byte.writeShort(p2.qi << 0);
-                byte.writeShort(p2.x << 0);
-                byte.writeShort(p2.y << 0);
-
-                return byte;
-            }
+        if (!(curStg is GameStage) || !GameCtrl.I.actionEnable) {
+            return null;
         }
 
-        return null;
+        var runData:GameRunDataVO = GameCtrl.I.gameRunData;
+
+        return LanInputSyncCodec.encode(
+                _renderFrame, runData.round, runData.gameTime,
+                runData.p1FighterGroup.currentFighter,
+                runData.p2FighterGroup.currentFighter
+        );
     }
 
     /** @private */
     private function cacheUpdate():void {
-        for (var i:int = _renderFrame; i < _renderNextFrame; i++) {
-            _updateCache[i] = [_serverK, _clientK];
-        }
+        LockFrameInputCache.fill(_updateCache, _renderFrame, _renderNextFrame, _serverK, _clientK);
     }
 
     /** @private */
     private function renderUpdate():void {
-        var cacheKeys:Array = _updateCache[_renderFrame];
-        if (cacheKeys) {
-            _inputP1.setSocketData(cacheKeys[0]);
-            _inputP2.setSocketData(cacheKeys[1]);
-        }
+        LockFrameInputCache.apply(_updateCache, _renderFrame, _inputP1, _inputP2);
     }
 }
 }

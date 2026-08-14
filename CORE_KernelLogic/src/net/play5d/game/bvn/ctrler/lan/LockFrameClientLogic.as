@@ -22,7 +22,6 @@ import flash.utils.getTimer;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.lan.LanMsgType;
-import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.utils.LANUtils;
@@ -149,63 +148,27 @@ public class LockFrameClientLogic {
      * @return 已识别时为 <code>true</code>。
      */
     public function receiveSyncUpdate(msgArr:ByteArray):Boolean {
-        if (!msgArr) {
-            return false;
-        }
-
-        msgArr.position = 0;
-        var type:int    = msgArr.readByte();
-        if (type != LanMsgType.INPUT_SYNC) {
+        var snap:LanInputSyncSnapshot = LanInputSyncCodec.decode(msgArr);
+        if (!snap) {
             return false;
         }
 
         _updateCache = {};
-
-        var frame:int = msgArr.readShort();
-        var round:int = msgArr.readByte();
-        var time:int  = msgArr.readByte();
-
-        var p1hp:int = msgArr.readShort();
-        var p1qi:int = msgArr.readShort();
-        var p1x:int  = msgArr.readShort();
-        var p1y:int  = msgArr.readShort();
-
-        var p2hp:int = msgArr.readShort();
-        var p2qi:int = msgArr.readShort();
-        var p2x:int  = msgArr.readShort();
-        var p2y:int  = msgArr.readShort();
-
-        _serverFrame = frame;
+        _serverFrame = snap.frame;
 
         try {
-            if (GameCtrl.I.gameRunData.round != round) {
+            if (GameCtrl.I.gameRunData.round != snap.round) {
                 _link.syncError(true);
 
                 return true;
             }
 
-            GameCtrl.I.gameRunData.gameTime = time;
-
-            var p1:FighterMain = GameCtrl.I.gameRunData.p1FighterGroup.currentFighter;
-            var p2:FighterMain = GameCtrl.I.gameRunData.p2FighterGroup.currentFighter;
-
-            p1.hp = p1hp;
-            p1.qi = p1qi;
-            p1.x  = p1x;
-            p1.y  = p1y;
-
-            p2.hp = p2hp;
-            p2.qi = p2qi;
-            p2.x  = p2x;
-            p2.y  = p2y;
-
-            if (p1.hp > 0 && !p1.isAlive) {
-                p1.relive();
-            }
-            if (p2.hp > 0 && !p1.isAlive) {
-                p2.relive();
-            }
-
+            GameCtrl.I.gameRunData.gameTime = snap.gameTime;
+            LanInputSyncCodec.applyToFighters(
+                    snap,
+                    GameCtrl.I.gameRunData.p1FighterGroup.currentFighter,
+                    GameCtrl.I.gameRunData.p2FighterGroup.currentFighter
+            );
             _link.resetSyncError();
         }
         catch (e:Error) {
@@ -276,18 +239,12 @@ public class LockFrameClientLogic {
 
     /** @private */
     private function cacheUpdate():void {
-        for (var i:int = _serverFrame; i < _serverNextFrame; i++) {
-            _updateCache[i] = [_serverK, _clientK];
-        }
+        LockFrameInputCache.fill(_updateCache, _serverFrame, _serverNextFrame, _serverK, _clientK);
     }
 
     /** @private */
     private function renderUpdate():void {
-        var cacheKeys:Array = _updateCache[_clientFrame];
-        if (cacheKeys) {
-            _inputP1.setSocketData(cacheKeys[0]);
-            _inputP2.setSocketData(cacheKeys[1]);
-        }
+        LockFrameInputCache.apply(_updateCache, _clientFrame, _inputP1, _inputP2);
     }
 }
 }

@@ -51,8 +51,7 @@ public class SelectFighterServerLogic {
     public function init(sendTCP:Function):void {
         _sendTCP = sendTCP;
 
-        SelectFighterStage.AUTO_FINISH = false;
-        LoadingStage.AUTO_START_GAME   = false;
+        SelectFighterSyncPayload.disableAutoFinish();
 
         GameEvent.addEventListener(GameEvent.SELECT_FIGHTER_STEP, onSelectStep);
         GameEvent.addEventListener(GameEvent.SELECT_FIGHTER_FINISH, onSelectFinish);
@@ -143,15 +142,9 @@ public class SelectFighterServerLogic {
 
     /** @private */
     private function onSelectFinish(e:GameEvent):void {
-        var data:Array = [
-            SelectFighterDataType.KEY, SelectFighterDataType.FIGHTER_FINISH,
-            GameData.I.p1Select.fighter1, GameData.I.p1Select.fighter2, GameData.I.p1Select.fighter3,
-            GameData.I.p1Select.fuzhu,
-            GameData.I.p2Select.fighter1, GameData.I.p2Select.fighter2, GameData.I.p2Select.fighter3,
-            GameData.I.p2Select.fuzhu,
-            GameData.I.selectMap
-        ];
-        _sendTCP(data);
+        _sendTCP(SelectFighterSyncPayload.packFighterFinish(
+                GameData.I.p1Select, GameData.I.p2Select, GameData.I.selectMap
+        ));
 
         var stg:SelectFighterStage = MainGame.stageCtrl.currentStage as SelectFighterStage;
         stg.goLoadGame();
