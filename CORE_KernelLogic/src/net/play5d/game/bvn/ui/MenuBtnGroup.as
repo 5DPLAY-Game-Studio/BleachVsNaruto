@@ -167,11 +167,11 @@ public class MenuBtnGroup extends Sprite {
             if (func != null) {
                 func();
             }
-            this.mouseEnabled = this.mouseChildren = true;
-            enabled           = true;
+            mouseEnabled = mouseChildren = true;
+            enabled     = true;
         };
-//			this.mouseEnabled = this.mouseChildren = false;
-        enabled               = false;
+//			mouseEnabled = mouseChildren = false;
+        enabled = false;
         target.select(callFunc);
     }
 
