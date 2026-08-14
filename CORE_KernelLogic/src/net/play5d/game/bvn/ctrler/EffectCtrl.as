@@ -174,7 +174,7 @@ public class EffectCtrl {
 
     }
 
-    public function initlize(gameStage:GameStage, effectLayer:Sprite):void {
+    public function initialize(gameStage:GameStage, effectLayer:Sprite):void {
         DisplayFrameBitmapCache.I.clear();
 
         _manager = new EffectManager();

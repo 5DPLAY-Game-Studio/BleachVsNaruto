@@ -59,13 +59,13 @@ public class launch extends Sprite {
 //		private var _gameSprite:Sprite;
     public function launch() {
 //			I = this;
-//			addEventListener(Event.ADDED_TO_STAGE,initlize);
+//			addEventListener(Event.ADDED_TO_STAGE,initialize);
 
         if (stage) {
-            initlize();
+            initialize();
         }
         else {
-            addEventListener(Event.ADDED_TO_STAGE, initlize);
+            addEventListener(Event.ADDED_TO_STAGE, initialize);
         }
     }
 //		private var _gameSideBg:GameSideBg;
@@ -226,7 +226,7 @@ public class launch extends Sprite {
 
         URL.MARK = 'bvn_mob' + MainGame.VERSION;
 
-        ScreenPadManager.initlize(stage);
+        ScreenPadManager.initialize(stage);
 
         //			englishVersion();
 
@@ -241,7 +241,7 @@ public class launch extends Sprite {
 
     private function initUI():void {
         trace('initUI');
-        UIAssetUtil.I.initalize(initGameConfig);
+        UIAssetUtil.I.initialize(initGameConfig);
     }
 
     private function englishVersion():void {
@@ -271,7 +271,7 @@ public class launch extends Sprite {
 //			addChild(_gameSprite);
 
 //			_mainGame = new MainGame();
-//			_mainGame.initlize(_gameSprite , stage , initBackHandler , initFailHandler);
+//			_mainGame.initialize(_gameSprite , stage , initBackHandler , initFailHandler);
 
 //			if(Debugger.DEBUG_ENABLED) Debugger.initDebug(stage);
 
@@ -299,8 +299,8 @@ public class launch extends Sprite {
         NativeApplication.nativeApplication.exit();
     }
 
-    private function initlize(e:Event = null):void {
-        removeEventListener(Event.ADDED_TO_STAGE, initlize);
+    private function initialize(e:Event = null):void {
+        removeEventListener(Event.ADDED_TO_STAGE, initialize);
         STAGE = stage;
 
         stage.align     = StageAlign.TOP_LEFT;

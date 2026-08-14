@@ -28,7 +28,7 @@ public class ScreenPadManager {
 
     private static var _listened:Dictionary = new Dictionary();
 
-    public static function initlize(stage:Stage):void {
+    public static function initialize(stage:Stage):void {
 
 //			ScreenPadUtils.scale = RootSprite.FULL_SCREEN_SIZE.y / GameConfig.GAME_SIZE.y;
 

@@ -39,7 +39,7 @@ public class GameEndCtrl {
     private var _holdFrame:int;
     private var _drawGame:Boolean;
 
-    public function initlize(winner:FighterMain, loser:FighterMain):void {
+    public function initialize(winner:FighterMain, loser:FighterMain):void {
         GameCtrl.I.gameRunData.setAllowLoseHP(false);
 
         _winner   = winner;

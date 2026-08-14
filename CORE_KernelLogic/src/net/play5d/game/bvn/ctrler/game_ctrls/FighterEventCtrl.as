@@ -34,8 +34,8 @@ import net.play5d.game.bvn.utils.MCUtils;
 
 public class FighterEventCtrl extends BaseFighterEventCtrl {
 
-    public override function initlize():void {
-        super.initlize();
+    public override function initialize():void {
+        super.initialize();
 
         FighterEventDispatcher.addEventListener(FighterEvent.DO_SPECIAL, addAssister);
 

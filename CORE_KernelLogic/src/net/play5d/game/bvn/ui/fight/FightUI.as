@@ -76,7 +76,7 @@ public class FightUI implements IGameUI {
         }
 
         if (GameMode.isArcade()) {
-            trace('fightUI.initlize');
+            trace('fightUI.initialize');
             _fightbar.initScore();
             GameEvent.addEventListener(GameEvent.SCORE_UPDATE, updateScore);
         }
@@ -100,7 +100,7 @@ public class FightUI implements IGameUI {
     private var _inputHistory1:TrainingInputHistoryUI;
     private var _inputHistory2:TrainingInputHistoryUI;
 
-    public function initlize(p1:GameRunFighterGroup, p2:GameRunFighterGroup):void {
+    public function initialize(p1:GameRunFighterGroup, p2:GameRunFighterGroup):void {
         _fightbar.setFighter(p1, p2);
         _qibar1.setFighter(p1.currentFighter, p1.currentAssister);
         _qibar2.setFighter(p2.currentFighter, p2.currentAssister);

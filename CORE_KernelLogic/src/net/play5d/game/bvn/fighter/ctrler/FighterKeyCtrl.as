@@ -29,7 +29,7 @@ public class FighterKeyCtrl implements IFighterActionCtrl {
     public var classicMode:Boolean = false;
     private var _justDown:int      = 0;
 
-    public function initlize():void {
+    public function initialize():void {
         if (!classicMode) {
             _justDown = 2;
             GameInputer.listenKeys(inputType, ['attack', 'jump', 'dash', 'skill', 'superSkill'], 2);

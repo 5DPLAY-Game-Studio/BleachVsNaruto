@@ -27,7 +27,7 @@ import flash.utils.describeType;
  * <p>子类需提供 UI Embed 字段，并实现 <code>getUiClass</code>。</p>
  *
  * @see EmbedSwf
- * @see #initalize()
+ * @see #initialize()
  */
 public class EmbedSwfAssetUtil {
 
@@ -58,7 +58,7 @@ public class EmbedSwfAssetUtil {
      * 初始化：加载本实例上全部 Embed 变量。
      * @param back 全部就绪回调。
      */
-    public function initalize(back:Function = null):void {
+    public function initialize(back:Function = null):void {
 
         if (_initing) {
             throw new Error(GetLang('debug.error.data.embed_swf_asset_util.init_in_progress'));

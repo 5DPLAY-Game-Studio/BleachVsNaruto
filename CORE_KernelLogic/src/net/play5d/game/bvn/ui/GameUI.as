@@ -183,7 +183,7 @@ public class GameUI {
             _ui.setVolume(volume);
         }
 
-        (_ui as FightUI).initlize(p1, p2);
+        (_ui as FightUI).initialize(p1, p2);
     }
 
     public function initMission(p1:GameRunFighterGroup):void {
@@ -203,7 +203,7 @@ public class GameUI {
 
         (
                 _ui as MusouUI
-        ).initlize(p1);
+        ).initialize(p1);
     }
 
     public function render():void {

@@ -31,8 +31,8 @@ public class GameJoystickInput implements IGameInput {
         _config.deviceId = id;
     }
 
-    public function initlize(stage:Stage):void {
-        JoySticker.initlize(function ():void {
+    public function initialize(stage:Stage):void {
+        JoySticker.initialize(function ():void {
             GameInterfaceManager.config.updateJoyConfig();
         });
     }

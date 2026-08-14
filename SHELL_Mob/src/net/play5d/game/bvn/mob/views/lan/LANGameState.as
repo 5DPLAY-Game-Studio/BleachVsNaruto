@@ -175,7 +175,7 @@ public class LANGameState implements Istage {
         function clientCom1(e:Event):void {
             _ui.removeEventListener(Event.COMPLETE, clientCom1);
             ScreenPadManager.addTouchListener(_ui.btn_back, backHandler);
-            LANClientCtrl.I.initlize();
+            LANClientCtrl.I.initialize();
             LANClientCtrl.I.findHost(findHostHandler);
         }
 

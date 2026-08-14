@@ -214,7 +214,7 @@ public class AdCtrler extends EventDispatcher {
             _adGroup.onlyOneAd = ads[0];
         }
 
-        _adGroup.initalize();
+        _adGroup.initialize();
         initConfMap();
     }
 

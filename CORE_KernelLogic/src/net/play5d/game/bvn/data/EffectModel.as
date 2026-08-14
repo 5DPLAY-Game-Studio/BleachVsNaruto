@@ -37,7 +37,7 @@ public class EffectModel {
     //		private var _hitEffects:Object;
     private var _effect:Object;
 
-    public function initlize():void {
+    public function initialize():void {
         initEffects();
         cacheEffects();
     }

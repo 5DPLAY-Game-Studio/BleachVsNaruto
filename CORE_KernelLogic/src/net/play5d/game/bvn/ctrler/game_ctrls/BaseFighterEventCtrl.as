@@ -35,7 +35,7 @@ public class BaseFighterEventCtrl {
     }
     private var _attackers:Array = [];
 
-    public function initlize():void {
+    public function initialize():void {
         FighterEventDispatcher.removeAllListeners();
 
         FighterEventDispatcher.addEventListener(FighterEvent.FIRE_BULLET, fireBullet);

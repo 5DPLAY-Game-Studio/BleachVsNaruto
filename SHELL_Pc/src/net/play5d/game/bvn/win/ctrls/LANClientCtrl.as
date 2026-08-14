@@ -85,7 +85,7 @@ public class LANClientCtrl implements ILanClientLockLink {
     private var _onFindHostBack:Function;
     private var _findHostTimer:Timer;
 
-    public function initlize():void {
+    public function initialize():void {
         if (!_udpSocket) {
             _udpSocket = new UDPSocket();
             _udpSocket.listen(LANGameCtrl.PORT_UDP_CLIENT);

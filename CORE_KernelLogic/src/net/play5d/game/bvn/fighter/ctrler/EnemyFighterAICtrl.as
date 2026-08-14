@@ -49,7 +49,7 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
     private var _attack:Boolean = false;
     private var _zhao:Boolean;
 
-    public function initlize():void {
+    public function initialize():void {
     }
 
     public function destroy():void {

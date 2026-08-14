@@ -82,8 +82,8 @@ public class MainGame {
         return _rootSprite;
     }
 
-    public function initlize(root:Sprite, stage:Stage, initBack:Function = null, initFail:Function = null):void {
-        ResUtils.I.initalize(resInitBack, initFail);
+    public function initialize(root:Sprite, stage:Stage, initBack:Function = null, initFail:Function = null):void {
+        ResUtils.I.initialize(resInitBack, initFail);
 
         KyoTimeout.init(root);
 
@@ -103,7 +103,7 @@ public class MainGame {
             GameRender.initialize(stage);
 
             GameLogger.log('Initializing game inputter...');
-            GameInputer.initlize(_stage);
+            GameInputer.initialize(_stage);
 
             GameLogger.log('Initializing game scroll rectangle...');
             root.scrollRect = new Rectangle(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
@@ -125,7 +125,7 @@ public class MainGame {
         }
     }
 
-    public function initalizeLoad(initBack:Function = null, initFail:Function = null):void {
+    public function initializeLoad(initBack:Function = null, initFail:Function = null):void {
         GameLogger.log('Initializing game loading...');
 
         var loadingState:GameLoadingStage = new GameLoadingStage();
@@ -144,7 +144,7 @@ public class MainGame {
             GameLogger.log('Initializing game inputter configuration...');
             GameInputer.updateConfig();
 
-            EffectModel.I.initlize();
+            EffectModel.I.initialize();
 
             GameEvent.dispatchEvent(GameEvent.LOAD_GAME_COMPLETE);
 

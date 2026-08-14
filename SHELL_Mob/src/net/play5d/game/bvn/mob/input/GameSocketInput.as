@@ -36,7 +36,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         if (v) {
             _data = new SocketInputData();
 //				for each(var i:IGameInput in _inputers){
-//					i.initlize(MainGame.I.stage);
+//					i.initialize(MainGame.I.stage);
 //				}
         }
         else {
@@ -174,7 +174,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         return _inputData;
     }
 
-    public function initlize(stage:Stage):void {
+    public function initialize(stage:Stage):void {
 
     }
 

@@ -41,7 +41,7 @@ public class JoySticker {
      * 初始化，只会调用一次。
      * @param onDevicesChanged 手柄增减后回调；可为 <code>null</code>。
      */
-    public static function initlize(onDevicesChanged:Function = null):void {
+    public static function initialize(onDevicesChanged:Function = null):void {
         if (onDevicesChanged != null) {
             _onDevicesChanged = onDevicesChanged;
         }
@@ -50,7 +50,7 @@ public class JoySticker {
             return;
         }
 
-        trace('JoySticker.initlize');
+        trace('JoySticker.initialize');
 
         if (!GameInput.isSupported) {
             TraceLang('debug.trace.data.joy_sticker.platform_unsupported');

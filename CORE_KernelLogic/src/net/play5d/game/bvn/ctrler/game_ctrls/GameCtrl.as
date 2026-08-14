@@ -122,7 +122,7 @@ public class GameCtrl {
     /**
      * 初始化
      */
-    public function initlize(gameState:GameStage):void {
+    public function initialize(gameState:GameStage):void {
         this.gameState = gameState;
 
         _isPauseGame       = false;
@@ -132,7 +132,7 @@ public class GameCtrl {
 
         if (!_musouCtrl) {
             _fighterEventCtrl = new FighterEventCtrl();
-            _fighterEventCtrl.initlize();
+            _fighterEventCtrl.initialize();
         }
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
@@ -336,7 +336,7 @@ public class GameCtrl {
             break;
         }
 
-        fighter.initlize();
+        fighter.initialize();
         fighter.setActionCtrl(ctrl);
 
         addGameSprite(team, fighter);
@@ -403,7 +403,7 @@ public class GameCtrl {
 
     public function initMainLogic():void {
         _mainLogicCtrl = new GameMainLogicCtrler();
-        _mainLogicCtrl.initlize(gameState, _teamMap);
+        _mainLogicCtrl.initialize(gameState, _teamMap);
     }
 
     public function pause(pauseUI:Boolean = false):void {
@@ -479,7 +479,7 @@ public class GameCtrl {
         }
 
         _endCtrl = new GameEndCtrl();
-        _endCtrl.initlize(winner, loser);
+        _endCtrl.initialize(winner, loser);
         actionEnable = false;
 
         GameEvent.dispatchEvent(GameEvent.ROUND_END);
@@ -535,7 +535,7 @@ public class GameCtrl {
     /************************************************************************************************************************************************************/
     public function initMusouGame():void {
         _musouCtrl = new MusouCtrl();
-        _musouCtrl.initalize();
+        _musouCtrl.initialize();
     }
 
     private function renderPause():void {
@@ -589,7 +589,7 @@ public class GameCtrl {
 
         if (GameMode.currentMode == GameMode.TRAINING) {
             _trainingCtrl = new TrainingCtrler();
-            _trainingCtrl.initlize([p1, p2]);
+            _trainingCtrl.initialize([p1, p2]);
             gameRunData.gameTimeMax = -1;
         }
 
@@ -612,7 +612,7 @@ public class GameCtrl {
         //temp
 //			p1.id = 'p1';
 
-        map.initlize();
+        map.initialize();
 
         // initFight 方法中包含镜头初始化的实现
         gameState.initFight(

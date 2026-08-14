@@ -45,10 +45,10 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 public class launch extends Sprite {
     public function launch() {
         if (stage) {
-            initlize();
+            initialize();
         }
         else {
-            addEventListener(Event.ADDED_TO_STAGE, initlize);
+            addEventListener(Event.ADDED_TO_STAGE, initialize);
         }
     }
     private var _mainGame:MainGame;
@@ -63,14 +63,14 @@ public class launch extends Sprite {
         GameLogger.log('buildGame');
 
         _mainGame = new MainGame();
-        //_mainGame.initlize(this , stage , initBackHandler , initFailHandler);
-        _mainGame.initlize(this, stage, function ():void {
+        //_mainGame.initialize(this , stage , initBackHandler , initFailHandler);
+        _mainGame.initialize(this, stage, function ():void {
             _mainGame.goLanguage(function ():void {
                 TraceLang('debug.trace.data.root_sprite.current_font', {fontName: FONT.fontName});
                 UIUtils.LOCK_FONT = FONT.fontName;
 
                 GameData.I.saveData();
-                _mainGame.initalizeLoad(initBackHandler, initFailHandler);
+                _mainGame.initializeLoad(initBackHandler, initFailHandler);
             });
 
         }, initFailHandler);
@@ -86,7 +86,7 @@ public class launch extends Sprite {
 
         GameLogger.log('init ok');
 
-        UIAssetUtil.I.initalize(_mainGame.goLogo);
+        UIAssetUtil.I.initialize(_mainGame.goLogo);
         //			_mainGame.goMenu();
         //			_mainGame.goCongratulations();
     }
@@ -95,11 +95,11 @@ public class launch extends Sprite {
         GameLogger.log('init fail');
     }
 
-    private function initlize(e:Event = null):void {
+    private function initialize(e:Event = null):void {
         GameLogger.setLoger(new Loger());
         GameLogger.log('init...');
 
-        removeEventListener(Event.ADDED_TO_STAGE, initlize);
+        removeEventListener(Event.ADDED_TO_STAGE, initialize);
         STAGE = stage;
 
         ResUtils.swfLib = new SwfLib();

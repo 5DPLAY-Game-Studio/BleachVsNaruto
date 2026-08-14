@@ -36,7 +36,7 @@ public class TrainingCtrler {
     private var _trainAddDelay:Object;
     private var _fighters:Array;
 
-    public function initlize(fighters:Array):void {
+    public function initialize(fighters:Array):void {
         _fighters = fighters;
 
         for each(var i:FighterMain in _fighters) {

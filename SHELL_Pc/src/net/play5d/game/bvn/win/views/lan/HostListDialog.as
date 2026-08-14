@@ -78,7 +78,7 @@ public class HostListDialog implements IStage {
 
         initBtns(['btn_back', 'btn_refresh', 'btn_prev', 'btn_next']);
 
-        LANClientCtrl.I.initlize();
+        LANClientCtrl.I.initialize();
 
         findHosts();
     }

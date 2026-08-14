@@ -52,7 +52,7 @@
 //			_adList.push(ad);
 //		}
 //
-//		public function initalize():void{
+//		public function initialize():void{
 //			if(_adList.length < 1){
 //				throw new Error('add ad first!');
 //				return;
@@ -89,7 +89,7 @@
 //			_initTimer = KyoTimerUtils.setTimeout(initTimeout, 5000, d);
 //
 //			trace('init ::', d, ' - ', _initAdCount - _initAdQueue.length, '/', _initAdCount);
-//			d.initalize(_listener);
+//			d.initialize(_listener);
 //		}
 //
 //		private function initTimeout(ad:IAd):void{
@@ -179,7 +179,7 @@ public class AdGroup extends EventDispatcher {
         _adList.push(param1);
     }
 
-    public function initalize():void {
+    public function initialize():void {
         if (_adList.length < 1) {
             throw new Error(GetLang('debug.error.data.ad_group.add_ad_first'));
         }
@@ -315,7 +315,7 @@ public class AdGroup extends EventDispatcher {
         var _loc1_:IAd = _initAdQueue.shift();
         _initTimer     = KyoTimerUtils.setTimeout(initTimeout, 5000, _loc1_);
         trace('init ::', _loc1_, ' - ', _initAdCount - _initAdQueue.length, '/', _initAdCount);
-        _loc1_.initalize(_listener);
+        _loc1_.initialize(_listener);
     }
 
     private function initTimeout(param1:IAd):void {

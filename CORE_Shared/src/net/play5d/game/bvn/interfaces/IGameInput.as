@@ -27,7 +27,7 @@ import flash.display.Stage;
  * @example
  * <listing version="3.0">
  * var input:IGameInput = keyInput;
- * input.initlize(stage);
+ * input.initialize(stage);
  * input.enabled = true;
  * if (input.attack()) {
  *     // ...
@@ -57,10 +57,10 @@ public interface IGameInput {
      * @param stage 当前舞台。
      * @example
      * <listing version="3.0">
-     * input.initlize(stage);
+     * input.initialize(stage);
      * </listing>
      */
-    function initlize(stage:Stage):void;
+    function initialize(stage:Stage):void;
 
     /**
      * 应用键位或设备配置。

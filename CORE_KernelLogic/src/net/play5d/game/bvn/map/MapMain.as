@@ -167,7 +167,7 @@ public class MapMain {
         }
     }
 
-    public function initlize():void {
+    public function initialize():void {
         var leftLine:DisplayObject         = mapMc.getChildByName('line_left');
         var rightLine:DisplayObject        = mapMc.getChildByName('line_right');
         var bottomLine:DisplayObject       = mapMc.getChildByName('line_bottom');

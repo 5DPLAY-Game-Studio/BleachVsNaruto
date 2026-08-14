@@ -21,7 +21,7 @@ public class ScreenPadInput implements IGameInput {
         }
     }
 
-    public function initlize(stage:Stage):void {
+    public function initialize(stage:Stage):void {
     }
 
     public function setConfig(config:Object):void {

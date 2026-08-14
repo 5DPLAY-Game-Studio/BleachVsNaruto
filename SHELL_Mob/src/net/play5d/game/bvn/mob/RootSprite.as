@@ -46,14 +46,14 @@ public class RootSprite {
         _gameSprite = new Sprite();
         _sp.addChild(_gameSprite);
         _mainGame = new MainGame();
-//        _mainGame.initlize(_gameSprite, STAGE, successBack, failBack);
-        _mainGame.initlize(_gameSprite, STAGE, function ():void {
+//        _mainGame.initialize(_gameSprite, STAGE, successBack, failBack);
+        _mainGame.initialize(_gameSprite, STAGE, function ():void {
             _mainGame.goLanguage(function ():void {
                 TraceLang('debug.trace.data.root_sprite.current_font', {fontName: FONT.fontName});
                 UIUtils.LOCK_FONT = FONT.fontName;
 
                 GameData.I.saveData();
-                _mainGame.initalizeLoad(successBack, failBack);
+                _mainGame.initializeLoad(successBack, failBack);
             });
 
         }, failBack);

@@ -62,7 +62,7 @@ public class GameMainLogicCtrler {
     private var _teamMap:TeamMap;
     private var _renderAnimate:Boolean;
 
-    public function initlize(gameState:GameStage, teamMap:TeamMap):void {
+    public function initialize(gameState:GameStage, teamMap:TeamMap):void {
         _gameState = gameState;
         _teamMap   = teamMap;
 

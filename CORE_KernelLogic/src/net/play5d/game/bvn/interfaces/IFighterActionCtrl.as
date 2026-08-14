@@ -18,7 +18,7 @@
 
 package net.play5d.game.bvn.interfaces {
 public interface IFighterActionCtrl {
-    function initlize():void;
+    function initialize():void;
 
     function render():void;
 

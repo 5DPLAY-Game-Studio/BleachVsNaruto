@@ -80,7 +80,7 @@ public class BaseAd implements IAd {
         return $configCode;
     }
 
-    public function initalize(listener:AdEventListener):void {
+    public function initialize(listener:AdEventListener):void {
     }
 
     public function showOpen():void {

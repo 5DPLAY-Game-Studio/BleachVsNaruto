@@ -36,7 +36,7 @@ public class FighterAICtrl implements IFighterActionCtrl {
     private var _ai_update_frame:int;
     private var _AIlogic:FighterAILogic;
 
-    public function initlize():void {
+    public function initialize():void {
 //			_fighter.addEventListener(FighterEvent.DO_ACTION,onFighterDoAction);
 //			AILevel = level;
 

@@ -472,7 +472,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
     public function initMc(mc:MovieClip):void {
         if (mc) {
 //				var fighterMc:FighterMC = new FighterMC();
-//				fighterMc.initlize(mc , _fighter , _fighterMcCtrl);
+//				fighterMc.initialize(mc , _fighter , _fighterMcCtrl);
 //				_fighterMcCtrl.setMc(fighterMc);
 
 //				fighterMc.goFrame(_initAction);

@@ -83,7 +83,7 @@ public class MusouCtrl {
         return _gameFinish;
     }
 
-    public function initalize():void {
+    public function initialize():void {
         _mission         = MusouModel.I.currentMission;
         _missionComplete = false;
 
@@ -94,7 +94,7 @@ public class MusouCtrl {
         _stageEnemies = new Vector.<FighterMain>();
 
         _fighterEventCtrl = new MusouFighterEventCtrl();
-        _fighterEventCtrl.initlize();
+        _fighterEventCtrl.initialize();
 
         waveCount   = _mission.waves.length;
         currentWave = 0;
@@ -150,7 +150,7 @@ public class MusouCtrl {
 
         GameCtrl.I.addFighter(p1, 1);
 
-        map.initlize();
+        map.initialize();
 
         GameCtrl.I.gameState.initMusouFight(GameCtrl.I.gameRunData.p1FighterGroup, map);
 
@@ -215,7 +215,7 @@ public class MusouCtrl {
             return;
         }
 
-        if (!fighter.initlized()) {
+        if (!fighter.initialized()) {
 
             var ctrl:IFighterActionCtrl;
             if (fighter.musouEnemyData && fighter.musouEnemyData.isBoss) {
@@ -234,7 +234,7 @@ public class MusouCtrl {
                 ).fighter = fighter;
             }
 
-            fighter.initlize();
+            fighter.initialize();
             fighter.setActionCtrl(ctrl);
         }
         else {
@@ -326,7 +326,7 @@ public class MusouCtrl {
 
         TraceLang('debug.trace.data.musou_ctrl.show_fzqi', {fzqi: to.fzqi, fzqiMax: to.fzqiMax});
 
-        if (to.initlized()) {
+        if (to.initialized()) {
             GameCtrl.I.addGameSprite(to.team.id, to);
         }
         else {

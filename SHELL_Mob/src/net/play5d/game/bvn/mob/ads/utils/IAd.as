@@ -10,7 +10,7 @@ public interface IAd {
     /**
      * 初始化
      */
-    function initalize(listener:AdEventListener):void;
+    function initialize(listener:AdEventListener):void;
 
     /**
      * 超时时间（有效期）

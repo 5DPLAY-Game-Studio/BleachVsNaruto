@@ -191,8 +191,8 @@ public class GameStage extends Sprite implements IStage {
      * 构建
      */
     public function build():void {
-        GameCtrl.I.initlize(this);
-        EffectCtrl.I.initlize(this, _playerLayer);
+        GameCtrl.I.initialize(this);
+        EffectCtrl.I.initialize(this, _playerLayer);
         gameUI = new GameUI();
 
         GameEvent.dispatchEvent(GameEvent.FIGHT_START);

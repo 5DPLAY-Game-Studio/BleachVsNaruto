@@ -84,7 +84,7 @@ public class MusouEnemyBarCtrl {
 
     }
 
-    private function initalize():void {
+    private function initialize():void {
     }
 
 }

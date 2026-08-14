@@ -475,7 +475,7 @@ public class FighterMain extends BaseGameSprite {
     public function setActionCtrl(ctrler:IFighterActionCtrl):void {
         if (_fighterCtrl) {
             _fighterCtrl.setActionCtrl(ctrler);
-            ctrler.initlize();
+            ctrler.initialize();
         }
     }
 
@@ -483,11 +483,11 @@ public class FighterMain extends BaseGameSprite {
 //			super.applayG(g);
 //		}
 
-    public function initlized():Boolean {
+    public function initialized():Boolean {
         return _fighterCtrl != null;
     }
 
-    public function initlize():void {
+    public function initialize():void {
 
         if (_fighterCtrl) {
             ThrowError(Error, GetLang('debug.error.data.fighter_main.fighter_ctrler_initialized'));

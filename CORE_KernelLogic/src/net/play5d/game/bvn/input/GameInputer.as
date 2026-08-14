@@ -54,9 +54,9 @@ public class GameInputer {
         }
     }
 
-    public static function initlize(stage:Stage):void {
+    public static function initialize(stage:Stage):void {
         initInput();
-        callVoid('initlize', stage);
+        callVoid('initialize', stage);
         GameRender.add(render);
     }
 

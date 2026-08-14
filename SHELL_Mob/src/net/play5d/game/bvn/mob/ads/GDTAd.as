@@ -45,7 +45,7 @@ public class GDTAd extends BaseAd {
     private var _listener:AdEventListener;
     private var _currentShowingVideoType:String;
 
-    override public function initalize(param1:AdEventListener):void {
+    override public function initialize(param1:AdEventListener):void {
         _listener = param1;
 //			GDTManager.Instance.addEventListener("status",statusHandler);
 //			GDTManager.Instance.initAdSDK(this.appid,false);

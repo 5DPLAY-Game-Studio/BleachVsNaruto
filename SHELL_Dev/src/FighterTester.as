@@ -662,7 +662,7 @@ public class FighterTester extends Sprite {
         GameData.I.config.keyInputMode = 1;
 
         _mainGame = new MainGame();
-        _mainGame.initlize(_gameSprite, stage, function ():void {
+        _mainGame.initialize(_gameSprite, stage, function ():void {
             _mainGame.goLanguage(function ():void {
                 var hash:String = GithubUtils.getCommitsHash();
                 Debugger.showCommitHash(hash, GithubUtils.getCommitsDisplayLabel());
@@ -681,7 +681,7 @@ public class FighterTester extends Sprite {
                 UIUtils.LOCK_FONT = DebugThemeChrome.fontName();
 
                 GameData.I.saveData();
-                _mainGame.initalizeLoad(initBackHandler, initFailHandler);
+                _mainGame.initializeLoad(initBackHandler, initFailHandler);
             });
 
         }, initFailHandler);

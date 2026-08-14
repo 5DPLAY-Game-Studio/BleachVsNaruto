@@ -32,8 +32,8 @@ import net.play5d.game.bvn.ui.musou.MusouUI;
 
 public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
 
-    public override function initlize():void {
-        super.initlize();
+    public override function initialize():void {
+        super.initialize();
 
         FighterEventDispatcher.addEventListener(FighterEvent.HIT_TARGET, onHitTarget);
 

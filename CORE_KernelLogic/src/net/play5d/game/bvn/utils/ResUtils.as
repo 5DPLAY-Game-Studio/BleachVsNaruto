@@ -54,7 +54,7 @@ public class ResUtils {
 //		private var GameFont:Class;
     private var _initing:Boolean;
 
-    public function initalize(back:Function = null, error:Function = null):void {
+    public function initialize(back:Function = null, error:Function = null):void {
 
         if (_initing) {
             throw new Error(GetLang('debug.error.data.res_utils.init_in_progress'));

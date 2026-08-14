@@ -42,7 +42,7 @@ public class CSJAd extends BaseAd {
     private var _currentShowingVideoType:String;
     private var _rewardSuccess:Function;
 
-    override public function initalize(param1:AdEventListener):void {
+    override public function initialize(param1:AdEventListener):void {
         _listener = param1;
 //			TTAdManager.Instance.addEventListener("status",statusHandler);
 //			TTAdManager.Instance.initAdSDK(this.appid,"死神vs火影",false);

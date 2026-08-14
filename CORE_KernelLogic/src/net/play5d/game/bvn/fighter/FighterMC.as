@@ -141,7 +141,7 @@ public class FighterMC {
         return key;
     }
 
-    public function initlize(mc:MovieClip, fighter:FighterMain, mcCtrler:FighterMcCtrler):void {
+    public function initialize(mc:MovieClip, fighter:FighterMain, mcCtrler:FighterMcCtrler):void {
         _mc             = mc;
         _fighter        = fighter;
         _fighterDisplay = fighter.getDisplay();

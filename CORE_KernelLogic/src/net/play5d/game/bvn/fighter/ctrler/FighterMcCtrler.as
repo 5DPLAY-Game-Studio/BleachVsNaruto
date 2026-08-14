@@ -129,7 +129,7 @@ public class FighterMcCtrler {
      */
     public function initMc(source:MovieClip):FighterMC {
         _mc = new FighterMC();
-        _mc.initlize(source, _fighter, this);
+        _mc.initialize(source, _fighter, this);
         idle();
         return _mc;
     }

@@ -72,7 +72,7 @@ public class MusouUI implements IGameUI {
     private var _bosses:Vector.<FighterMain> = new Vector.<FighterMain>();
     private var _pauseDialog:MusouPauseDialog;
 
-    public function initlize(p1:GameRunFighterGroup):void {
+    public function initialize(p1:GameRunFighterGroup):void {
         _hpbar.setFighter(p1);
     }
 

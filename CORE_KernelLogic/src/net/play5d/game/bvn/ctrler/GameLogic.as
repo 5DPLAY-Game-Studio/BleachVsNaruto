@@ -432,21 +432,21 @@ public class GameLogic {
 
     //		public static function startVsMode(p1:FighterMain , p2:FighterMain , map:MapMain):void{
     //			if(p1){
-    //				p1.initlize();
+    //				p1.initialize();
     //				var ctrl:FighterKeyCtrl = new FighterKeyCtrl();
     //				ctrl.config = GameData.I.config.key_p1;
     //				p1.setCtrl(ctrl);
     //			}
     //
     //			if(p2){
-    //				p2.initlize();
+    //				p2.initialize();
     //				var ctrl2:FighterKeyCtrl = new FighterKeyCtrl();
     //				ctrl2.config = GameData.I.config.key_p2;
     //				p2.setCtrl(ctrl2);
     //			}
     //
     //			if(map){
-    //				map.initlize();
+    //				map.initialize();
     //				setMap(map);
     //			}
     //
