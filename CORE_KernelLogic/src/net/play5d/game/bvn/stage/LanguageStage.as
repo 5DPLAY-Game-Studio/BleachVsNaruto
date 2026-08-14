@@ -171,24 +171,29 @@ public class LanguageStage implements IStage {
         var languagesObj:Array = data['languages'];
 
         // 语言集合
-        var languages:Array = [];
-        // 字体资源路径集合
-        var loadUrls:Array  = [];
+        var languages:Array  = [];
+        // 字体资源路径集合（与 languages 一一对应，可含重复）
+        var loadUrls:Array   = [];
+        // 去重后的加载列表
+        var uniqueUrls:Array = [];
+        var seenUrl:Object   = {};
 
         // 提取语言与对应字体文件路径
         for each (var langObj:Object in languagesObj) {
             for (var lang:String in langObj) {
+                var fontUrl:String = fontDir + langObj[lang];
                 languages.push(lang);
-                loadUrls.push(fontDir + langObj[lang]);
+                loadUrls.push(fontUrl);
+                if (!seenUrl[fontUrl]) {
+                    seenUrl[fontUrl] = true;
+                    uniqueUrls.push(fontUrl);
+                }
             }
         }
 
-//        trace(languages);
-//        trace(loadUrls);
-
-        // 开始载入字体
+        // 开始载入字体（去重；失败中止，避免成功回调里 getClass 抛「未加载」）
         AssetManager.I.loadSWFs(
-                loadUrls,
+                uniqueUrls,
                 function ():void {
                     // 载入字体成功回调
                     if (_loadingBar) {
@@ -201,8 +206,17 @@ public class LanguageStage implements IStage {
                     // 添加语言项目
                     addLanguageItem(languages, loadUrls);
                 },
-                loadProgress
+                loadProgress,
+                loadFontFail
         );
+    }
+
+    /**
+     * 字体 SWF 加载最终失败（含一次重试后仍失败）
+     * @param url 失败的字体路径
+     */
+    private function loadFontFail(url:String):void {
+        trace('LanguageStage: font SWF load fail: ' + url);
     }
 
     /**

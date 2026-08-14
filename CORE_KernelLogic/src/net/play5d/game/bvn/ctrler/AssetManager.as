@@ -251,9 +251,17 @@ public class AssetManager {
         _assetLoader.dispose(url);
     }
 
-    public function loadSWFs(loadarray:Array, back:Function = null, progress:Function = null):void {
-        loadGraphics(loadarray, back, progress);
-
+    /**
+     * 按序加载 SWF 并登记到类加载器。
+     * @param loadarray URL 数组（相对 assets 路径）。
+     * @param back 全部成功回调；可省略。
+     * @param progress 单项进度回调；可省略。
+     * @param fail 单项最终失败回调（参数为失败 URL）；传入则失败后中止且不调 <code>back</code>；省略则跳过失败项继续（如 effect.swf）。
+     */
+    public function loadSWFs(
+            loadarray:Array, back:Function = null, progress:Function = null, fail:Function = null
+    ):void {
+        loadGraphics(loadarray, back, progress, fail);
     }
 
     public function needPreLoad():Boolean {
@@ -349,11 +357,14 @@ public class AssetManager {
         WarmupCtrl.I.warmBasic();
     }
 
-    private function loadGraphics(loadarray:Array, back:Function = null, progress:Function = null):void {
+    private function loadGraphics(
+            loadarray:Array, back:Function = null, progress:Function = null, fail:Function = null
+    ):void {
 
         var loads:Array = loadarray.concat();
         var loadedAmount:int;
         var curUrl:String;
+        var curRetry:int;
 
         loadNext();
 
@@ -364,7 +375,16 @@ public class AssetManager {
                 }
                 return;
             }
-            curUrl = loads.shift();
+            curUrl   = loads.shift();
+            curRetry = 0;
+
+            // 已登记则跳过，避免同 URL 重复加载（如 zh-CN / en 共用字体）
+            if (_swfLoader.hasSwf(curUrl)) {
+                loadedAmount++;
+                loadNext();
+                return;
+            }
+
             _assetLoader.loadSwf(curUrl, loadCom, loadFail, progress);
         }
 
@@ -376,8 +396,32 @@ public class AssetManager {
         }
 
         function loadFail():void {
-            TraceLang('debug.trace.data.asset_manager.load_swf_fail', {url: curUrl});
+            // 偶发 IO 失败时重试一次
+            if (curRetry < 1) {
+                curRetry++;
+                trace('load SWF retry: ' + curUrl);
+                _assetLoader.loadSwf(curUrl, loadCom, loadFail, progress);
+                return;
+            }
+
+            logSwfFail(curUrl);
+
+            // 有 fail 则中止（语言页）；无 fail 则跳过继续（effect 等）
+            if (fail != null) {
+                fail(curUrl);
+                return;
+            }
             loadNext();
+        }
+
+        function logSwfFail(url:String):void {
+            // 语言页早于语言包初始化，TraceLang 会变成 [N/A][N/A]
+            if (GetLangText('debug.trace.data.asset_manager.load_swf_fail') != '[N/A]') {
+                TraceLang('debug.trace.data.asset_manager.load_swf_fail', {url: url});
+            }
+            else {
+                trace('load SWF fail: ' + url);
+            }
         }
 
     }
