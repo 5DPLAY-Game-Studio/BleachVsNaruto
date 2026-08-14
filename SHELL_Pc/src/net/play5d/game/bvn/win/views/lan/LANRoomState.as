@@ -37,7 +37,7 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 import net.play5d.kyo.stage.IStage;
 import net.play5d.kyo.utils.KyoBtnUtils;
 import net.play5d.kyo.utils.KyoDisplayUtils;
-//import net.play5d.game.bvn.win.ctrls.LANUDPCtrler;
+
 public class LANRoomState implements IStage {
     public function LANRoomState() {
     }
@@ -252,10 +252,6 @@ public class LANRoomState implements IStage {
 
     }
 
-//		public function pushMsg(msg:String):void{
-//			_txtChart.appendText(msg+"\n");
-//		}
-
     private function addOwner():void {
         var item:MovieClip = UIAssetUtil.I.createDisplayObject('player_item_mc');
         item.txt.text      = _host.ownerName;
@@ -268,11 +264,6 @@ public class LANRoomState implements IStage {
 
     private function startTimerHandler(e:TimerEvent):void {
         if (e.type == TimerEvent.TIMER) {
-
-//				if(_startTimer.currentCount == 2){
-//					lockStart();
-//				}
-
             pushChart(GetLang('txt.lan_room_state.start_countdown', {
                 sec: _startTimer.repeatCount - _startTimer.currentCount + 1
             }), null);

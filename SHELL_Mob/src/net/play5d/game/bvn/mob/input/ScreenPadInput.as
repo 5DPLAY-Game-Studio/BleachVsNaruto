@@ -35,72 +35,58 @@ public class ScreenPadInput implements IGameInput {
     }
 
     public function anyKey():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['select'] || isDownObj['back'];
     }
 
     public function back():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['back'];
     }
 
     public function select():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['select'];
     }
 
     public function up():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['up'];
     }
 
     public function down():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['down'];
     }
 
     public function left():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['left'];
     }
 
     public function right():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['right'];
     }
 
     public function attack():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['attack'];
     }
 
     public function jump():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['jump'];
     }
 
     public function dash():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['dash'];
     }
 
     public function skill():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['skill'];
     }
 
     public function superSkill():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['superSkill'];
     }
 
     public function special():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['special'];
     }
 
     public function wankai():Boolean {
-//			if(!_enabled) return false;
         return isDownObj['wankai'];
     }
 

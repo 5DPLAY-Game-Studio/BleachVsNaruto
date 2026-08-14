@@ -71,7 +71,6 @@ public class ScreenPadGame extends EventDispatcher {
             _stage.addChild(_btns[i].display);
             _btns[i].onAdd();
         }
-//			listen();
     }
 
     public function hide():void {
@@ -400,8 +399,6 @@ public class ScreenPadGame extends EventDispatcher {
         if (key == null) {
             return;
         }
-
-//			trace('setInputerDown' , key , down);
 
         if (menuInputer) {
             switch (key) {

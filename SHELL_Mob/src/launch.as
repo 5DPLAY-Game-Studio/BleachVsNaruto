@@ -31,7 +31,6 @@ import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
@@ -45,22 +44,15 @@ import net.play5d.game.bvn.mob.ctrls.UpdateCtrl;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.kyo.utils.KyoTimerUtils;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
-import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
 import net.play5d.game.bvn.ui.fight.FightUI;
 import net.play5d.game.bvn.utils.AssetLoader;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.URL;
 
-//	import net.play5d.game.bvn.mob.utils.UMengAneManager;
 [SWF(frameRate='30', backgroundColor='#000000')]
 public class launch extends Sprite {
-//		private var _mainGame:MainGame;
-//		private var _gameSprite:Sprite;
     public function launch() {
-//			I = this;
-//			addEventListener(Event.ADDED_TO_STAGE,initialize);
-
         if (stage) {
             initialize();
         }
@@ -68,31 +60,15 @@ public class launch extends Sprite {
             addEventListener(Event.ADDED_TO_STAGE, initialize);
         }
     }
-//		private var _gameSideBg:GameSideBg;
     [Embed(source='/../assets/startup.png')]
     private var startupBitmap:Class;
     private var _startBitmap:Bitmap;
     private var _sdkTimer:int;
-//		private var _initTimer:int;
     private var _isActive:Boolean = true;
-
-//		private var _showGameSide:Boolean = false;
-//
-//		public static var FULL_SCREEN_SIZE:Point = new Point();
-//
-//		public static var STAGE:Stage;
-//
-//		public static var I:launch;
     private var _preInited:Boolean = false;
     private var _assetLoader:AssetLoader = new AssetLoader();
 
-//		public function addChildToGameSprite(v:DisplayObject):void{
-//			_gameSprite && _gameSprite.addChild(v);
-//		}
-
     private function showStartPic():void {
-//			AdManager.toast("showStartPic");
-
         RootSprite.STAGE = stage;
         RootSprite.I.init(this);
         RootSprite.I.updateFullScreenSize();
@@ -108,41 +84,11 @@ public class launch extends Sprite {
     }
 
     private function initSDK():void {
-//			AdManager.toast("initSDK");
-
-//			var ads:Vector.<IAd> = new Vector.<IAd>();
-//			var csj:CSJAd = new CSJAd("5213224","887554940","946640343","946860998");
-//			csj.setADEnabled("OPEN",true);
-//			csj.setADEnabled("INTER",false);
-//			csj.setADEnabled("VIDEO",true);
-//			csj.setADEnabled("REWARD_VIDEO",true);
-//			csj.setADEnabled("NATIVE",true);
-//			csj.setRankAndRate("OPEN",10,100);
-//			csj.setRankAndRate("VIDEO",6,80);
-//			csj.setRankAndRate("REWARD_VIDEO",5,100);
-//			csj.setRankAndRate("NATIVE",10,100);
-//			ads.push(csj);
-//
-//			var gdt:GDTAd = new GDTAd("1110076897","3082021928935304","3072533491204880","7032629938039577",null);
-//			gdt.setADEnabled("OPEN",false);
-//			gdt.setADEnabled("INTER",true);
-//			gdt.setADEnabled("VIDEO",true);
-//			gdt.setADEnabled("REWARD_VIDEO",true);
-//			gdt.setADEnabled("NATIVE",false);
-//			gdt.setRankAndRate("INTER",10,100);
-//			gdt.setRankAndRate("VIDEO",5,100);
-//			gdt.setRankAndRate("REWARD_VIDEO",6,20);
-//			gdt.setRankAndRate("NATIVE",6,30);
-//			ads.push(gdt);
-//
-//			AdManager.I.initAD(ads, false, sdkBack, adBack);
-
         sdkBack();
         adBack();
         _sdkTimer = KyoTimerUtils.setTimeout(initGame, 10000);
 
         //竞技版删除广告
-
     }
 
     private function sdkBack():void {
@@ -151,8 +97,6 @@ public class launch extends Sprite {
     }
 
     private function adBack():void {
-//			AdManager.toast("adBack");
-
         KyoTimerUtils.clearTimeout(_sdkTimer);
         preInitGame();
 
@@ -169,17 +113,6 @@ public class launch extends Sprite {
             return;
         }
         _preInited = true;
-//
-//			if(_startBitmap){
-//				try{
-//					removeChild(_startBitmap);
-//				}catch(e:Error){}
-//				_startBitmap.bitmapData.dispose();
-//				_startBitmap = null;
-//			}
-//
-//			ScreenRotater.I.init(stage);
-
     }
 
     private function removeStartBitmap():void {
@@ -197,7 +130,6 @@ public class launch extends Sprite {
 
     private function initGame():void {
         KyoTimerUtils.clearTimeout(_sdkTimer);
-//			KyoTimerUtils.clearTimeout(_initTimer);
 
         preInitGame();
         removeStartBitmap();
@@ -211,7 +143,6 @@ public class launch extends Sprite {
         stage.addEventListener(KeyboardEvent.KEY_DOWN, keyHandler);
         stage.addEventListener(Event.RESIZE, RootSprite.I.updateFullScreenSize);
 
-
         ResUtils.swfLib = new SwfLib();
         AssetManager.I.setAssetLoader(_assetLoader);
         GameInterface.instance = new GameInterfaceManager();
@@ -222,19 +153,9 @@ public class launch extends Sprite {
 
         GameConfig.SHOW_HOW_TO_PLAY = false;
 
-//			UIUtils.LOCK_FONT = "Droid Sans Fallback";
-
         URL.MARK = 'bvn_mob' + MainGame.VERSION;
 
         ScreenPadManager.initialize(stage);
-
-        //			englishVersion();
-
-        //			ScreenPadManager.testMode();
-        //			return;
-
-//			return; //逐行排查错误！
-//			GameSafeKeeper.I.loadConfigure(initUI, safeFail);
 
         initUI();
     }
@@ -244,15 +165,8 @@ public class launch extends Sprite {
         UIAssetUtil.I.initialize(initGameConfig);
     }
 
-    private function englishVersion():void {
-        GameUI.SHOW_CN_TEXT                  = false;
-        GameInterfaceManager.ENGLISH_VERSION = true;
-    }
-
     private function initGameConfig():void {
-        var urls:Array = [
-//            'http://1212321.cn-sh2.ufileos.com/upload/BVN_37.ini', 'http://1212321.com/file/get/BVN_37.ini'
-        ];
+        var urls:Array = [];
         GamePolyCtrl.I.loadConfig(urls, gamePolyComplete);
     }
 
@@ -263,24 +177,7 @@ public class launch extends Sprite {
     }
 
     private function buildGame():void {
-//			updateFullScreenSize();
-
-//			_gameSprite = new Sprite();
-        //			_gameSprite.scaleX = stage.fullScreenWidth / GameConfig.GAME_SIZE.x;
-        //			_gameSprite.scaleY = stage.fullScreenHeight / GameConfig.GAME_SIZE.y;
-//			addChild(_gameSprite);
-
-//			_mainGame = new MainGame();
-//			_mainGame.initialize(_gameSprite , stage , initBackHandler , initFailHandler);
-
-//			if(Debugger.DEBUG_ENABLED) Debugger.initDebug(stage);
-
         RootSprite.I.buildGame(initBackHandler, initFailHandler);
-
-        GameEvent.addEventListener(GameEvent.ENTER_SINGLE_STAGE, enterStageHandler);
-        GameEvent.addEventListener(GameEvent.ENTER_TEAM_STAGE, enterStageHandler);
-        GameEvent.addEventListener(GameEvent.ENTER_TRAIN_STAGE, enterStageHandler);
-        GameEvent.addEventListener(GameEvent.ENTER_MUSOU_STAGE, enterStageHandler);
     }
 
     private function initBackHandler():void {
@@ -305,37 +202,15 @@ public class launch extends Sprite {
 
         stage.align     = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
-//			stage.mouseChildren = false;
 
         AdCtrler.SHOW_OPENAD_ON_START = true;
 
-			GameConfig.TOUCH_MODE = true;//开启触屏模式
+        GameConfig.TOUCH_MODE = true; //开启触屏模式
 
         ScreenRotater.I.init(stage);
 
         showStartPic();
         initSDK();
-
-//			stage.autoOrients = false;
-//
-//			updateFullScreenSize();
-//
-//			stage.addEventListener(Event.DEACTIVATE,activeHandler);
-//			stage.addEventListener(Event.ACTIVATE,activeHandler);
-//
-//
-//			_startBitmap = new startupBitmap();
-//			_startBitmap.width = FULL_SCREEN_SIZE.x;
-//			_startBitmap.height = FULL_SCREEN_SIZE.y;
-//			_startBitmap.rotation = 90;
-//			_startBitmap.x = FULL_SCREEN_SIZE.y;
-//			addChild(_startBitmap);
-//
-//			STAGE = stage;
-//
-//			AdManager.I.initAD(sdkBack, adBack);
-//
-//			_sdkTimer = KyoTimerUtils.setTimeout(initGame , 10000);
     }
 
     private function activeHandler(e:Event):void {
@@ -348,7 +223,6 @@ public class launch extends Sprite {
             trace('pause');
             KyoTimerUtils.pauseAllTimer();
             MobileCtrler.I.pause();
-//				UMengAneManager.I.onDeactive();
             AdManager.I.onDeactive();
         }
         else {
@@ -360,32 +234,13 @@ public class launch extends Sprite {
             trace('resume');
             KyoTimerUtils.resumeAllTimer();
             MobileCtrler.I.resume();
-//				UMengAneManager.I.onActive();
             AdManager.I.onActive();
         }
     }
 
     private function keyHandler(e:KeyboardEvent):void {
         if (e.keyCode == Keyboard.BACK) {
-            //				GameCtrl.I.pause(true);
-            //				GameUI.confrim('EXIT GAME','退出游戏？',NativeApplication.nativeApplication.exit);
             e.preventDefault();
-        }
-    }
-
-    private function enterStageHandler(e:GameEvent):void {
-        switch (e.type) {
-        case GameEvent.ENTER_SINGLE_STAGE:
-//					UMengAneManager.I.sendEvent("game_mode_single");
-            break;
-        case GameEvent.ENTER_TEAM_STAGE:
-//					UMengAneManager.I.sendEvent("game_mode_team");
-            break;
-        case GameEvent.ENTER_TRAIN_STAGE:
-//					UMengAneManager.I.sendEvent("game_mode_train");
-            break;
-        case GameEvent.ENTER_MUSOU_STAGE:
-//					UMengAneManager.I.sendEvent("game_mode_musou");
         }
     }
 

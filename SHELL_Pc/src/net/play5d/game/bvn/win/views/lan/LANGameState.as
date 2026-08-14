@@ -62,11 +62,6 @@ public class LANGameState implements IStage {
         _ui.addChild(_btnGroup);
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('continue'));
-//
-//			_hostList.ui.x = 20;
-//			_hostList.ui.y = 50;
-//
-//			_ui.addChild(_hostList.ui);
     }
 
     public function showHostList():void {

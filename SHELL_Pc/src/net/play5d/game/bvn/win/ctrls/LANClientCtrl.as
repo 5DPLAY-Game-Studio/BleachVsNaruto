@@ -55,8 +55,6 @@ import net.play5d.game.bvn.win.views.lan.LANGameState;
 import net.play5d.game.bvn.win.views.lan.LANRoomState;
 import net.play5d.kyo.utils.KyoTimeout;
 
-//import net.play5d.kyo.utils.setFrameOut;
-
 public class LANClientCtrl implements ILanClientLockLink {
     private static var _i:LANClientCtrl;
 
@@ -75,7 +73,6 @@ public class LANClientCtrl implements ILanClientLockLink {
     private var _joinBack:Function;
     private var _syncErrorTimes:int;
     private var _selectLogic:SelectFighterClientLogic;
-//		private var _connGameLogic:OptimisticClientLogic;
     private var _connGameLogic:LockFrameClientLogic;
     private var _delayCache:Array = [];
     private var _syncRoundFinishInt:int;
@@ -211,7 +208,6 @@ public class LANClientCtrl implements ILanClientLockLink {
         _selectLogic = new SelectFighterClientLogic();
         _selectLogic.init(sendTCP);
 
-//			_connGameLogic = new OptimisticClientLogic();
         _connGameLogic = new LockFrameClientLogic();
         _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
 
@@ -301,7 +297,6 @@ public class LANClientCtrl implements ILanClientLockLink {
 
     public function syncError(wait:Boolean = false):void {
         if (!wait) {
-//				trace("同步异常");
             gameEnd();
             GameUI.alert(
                     GetLang('alert.lan_client_ctrl.disconnect_title'),
@@ -311,13 +306,11 @@ public class LANClientCtrl implements ILanClientLockLink {
         }
         _syncErrorTimes++;
         if (_syncErrorTimes > 10) {
-//				trace("同步错误，强制退出");
             gameEnd();
             GameUI.alert(
                     GetLang('alert.lan_client_ctrl.disconnect_title'),
                     GetLang('alert.lan_client_ctrl.disconnect_error')
             );
-//				dispose();
         }
     }
 
@@ -427,9 +420,6 @@ public class LANClientCtrl implements ILanClientLockLink {
                 case LanSyncType.ROUND_FINISH:
                     _connGameLogic.enabled = false;
                     _connGameLogic.reset();
-//							syncRoundFinish(arr);
-//							clearTimeout(_syncRoundFinishInt);
-//							_syncRoundFinishInt = setTimeout(syncRoundFinish , 30 , arr);
 
                     KyoTimeout.setFrameTimeout(function ():void {
                         syncRoundFinish(arr);
@@ -571,8 +561,6 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     private function onReceiveData(e:SocketEvent):void {
-//			if(_connGameLogic && _connGameLogic.receiveUpdate(e.data)) return;
-
         var obj:Object = e.getDataObject();
 
         if (!obj) {

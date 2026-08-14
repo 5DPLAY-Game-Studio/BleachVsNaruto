@@ -28,8 +28,6 @@ public class RootSprite {
     private var _gameSprite:Sprite;
     private var _mainGame:MainGame;
     private var _showGameSide:Boolean = false;
-
-//		private var _assetLoader:AssetLoader = new AssetLoader();
     private var _gameSideBg:GameSideBg;
 
     public function getMainGame():MainGame {
@@ -41,12 +39,9 @@ public class RootSprite {
     }
 
     public function buildGame(successBack:Function, failBack:Function):void {
-//			AssetManager.I.setAssetLoader(_assetLoader);
-
         _gameSprite = new Sprite();
         _sp.addChild(_gameSprite);
         _mainGame = new MainGame();
-//        _mainGame.initialize(_gameSprite, STAGE, successBack, failBack);
         _mainGame.initialize(_gameSprite, STAGE, function ():void {
             _mainGame.goLanguage(function ():void {
                 TraceLang('debug.trace.data.root_sprite.current_font', {fontName: FONT.fontName});
@@ -145,8 +140,6 @@ public class RootSprite {
                     sizeY * YScale
             );
 
-//				trace('resize', screenPoint, gameRect);
-
             if (!_gameSideBg) {
                 _gameSideBg = new GameSideBg(screenPoint, gameRect);
                 _sp.addChildAt(_gameSideBg, 0);
@@ -162,13 +155,11 @@ public class RootSprite {
             }
         }
 
-
         GameConfig.GAME_SCALE.x = XScale;
         GameConfig.GAME_SCALE.y = YScale;
 
         _showGameSide = showGameSide;
 
-//			trace('RESET GAME_SIZE', GameConfig.GAME_SCALE.x, GameConfig.GAME_SCALE.y);
         trace('==== UPDATE GAME SIZE =========================================');
         trace('stage W & H :', stageWidth, stageHeight);
         trace('game rect :', _gameSprite.x, _gameSprite.y, sizeX * XScale, sizeY * YScale);

@@ -5,8 +5,6 @@ public class HostVO {
 
     public function HostVO() {
     }
-//		public var tcpPort:int;
-//		public var udpPort:int;
     public var ip:String;
     public var ownerName:String;
     public var gameMode:int = 1;

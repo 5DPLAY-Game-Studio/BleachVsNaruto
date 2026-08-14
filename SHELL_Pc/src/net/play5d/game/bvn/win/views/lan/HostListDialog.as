@@ -34,7 +34,6 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 import net.play5d.kyo.stage.IStage;
 import net.play5d.kyo.utils.KyoBtnUtils;
 
-//import net.play5d.game.bvn.win.ctrls.LANUDPCtrler;
 public class HostListDialog implements IStage {
 
     public function HostListDialog() {

@@ -1,13 +1,3 @@
-//package net.play5d.game.bvn.mob.ads
-//{
-//	public class GDTAd
-//	{
-//		public function GDTAd()
-//		{
-//		}
-//	}
-//}
-
 package net.play5d.game.bvn.mob.ads {
 import flash.events.StatusEvent;
 
@@ -15,7 +5,6 @@ import net.play5d.game.bvn.mob.ads.utils.AdEventListener;
 import net.play5d.kyo.utils.KyoTimerUtils;
 
 public class GDTAd extends BaseAd {
-
 
     public function GDTAd(param1:String, param2:String, param3:String, param4:String, param5:String) {
         super();
@@ -47,12 +36,9 @@ public class GDTAd extends BaseAd {
 
     override public function initialize(param1:AdEventListener):void {
         _listener = param1;
-//			GDTManager.Instance.addEventListener("status",statusHandler);
-//			GDTManager.Instance.initAdSDK(this.appid,false);
     }
 
     override public function showOpen():void {
-//			GDTManager.Instance.showSplash(this.splashid);
         _listener.onShow(this, 'OPEN');
     }
 
@@ -64,12 +50,10 @@ public class GDTAd extends BaseAd {
             return;
         }
         AdManager.toast('GDT - cacheInter');
-//			GDTManager.Instance.loadInterstitail(this.interstitial);
         _interLoading = true;
     }
 
     override public function showInter():void {
-//			GDTManager.Instance.showInterstitial();
         _listener.onShow(this, 'INTER');
     }
 
@@ -80,7 +64,6 @@ public class GDTAd extends BaseAd {
         if (_videoLoading) {
             return;
         }
-//			GDTManager.Instance.loadRewardVideo(this.rewardvideo);
         _videoLoading = true;
     }
 
@@ -90,7 +73,6 @@ public class GDTAd extends BaseAd {
             return;
         }
         _currentShowingVideoType = 'VIDEO';
-//			GDTManager.Instance.showRewardAd();
         _listener.onShow(this, 'VIDEO');
     }
 
@@ -105,16 +87,13 @@ public class GDTAd extends BaseAd {
         _onRewardVideoSucc       = param3;
         _onRewardVideoFail       = param4;
         _currentShowingVideoType = 'REWARD_VIDEO';
-//			GDTManager.Instance.showRewardAd();
         _listener.onShow(this, 'REWARD_VIDEO');
     }
 
     override public function showNative(param1:Boolean):void {
-//			GDTManager.Instance.showNativeExpressAd(nativeId,param1);
     }
 
     override public function closeNative():void {
-//			GDTManager.Instance.closeNativeExpressAd();
     }
 
     override public function onGamePause():void {

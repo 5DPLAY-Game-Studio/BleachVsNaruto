@@ -62,8 +62,6 @@ import net.play5d.game.bvn.utils.GithubUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.storage.KyoSharedObject;
 
-//	import flash.text.TextFormat;
-
 [SWF(width='800', height='600', frameRate='30', backgroundColor='#000000')]
 public class FighterTester extends Sprite {
     private const KEY:String = 'text';
@@ -641,8 +639,6 @@ public class FighterTester extends Sprite {
         GameConfig.DEBUG_MODE = true;
 
         stage.stageFocusRect = false;
-
-//			ResUtils.I.createDisplayObject(ResUtils.I.title , 'stg_title');
 
         initMusouFighters();
 

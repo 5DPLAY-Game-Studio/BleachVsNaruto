@@ -5,7 +5,6 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.mob.ads.AdManager;
 
-//	import net.play5d.game.bvn.mob.utils.UMengAneManager;
 public class MobileCtrler {
     private static var _i:MobileCtrler;
 
@@ -13,8 +12,6 @@ public class MobileCtrler {
         _i ||= new MobileCtrler();
         return _i;
     }
-
-//		private var _adPauseView:AdPauseView;
 
     public function MobileCtrler() {
     }
@@ -29,11 +26,6 @@ public class MobileCtrler {
 
         isAdPause = true;
 
-//			if(!_adPauseView){
-//				_adPauseView = new AdPauseView();
-//			}
-//			launch.STAGE.addChild(_adPauseView);
-
         GameCtrl.I.pause(true);
         SoundCtrl.I.pauseBGM();
     }
@@ -47,11 +39,6 @@ public class MobileCtrler {
 
         trace('adResume');
 
-//			if(_adPauseView){
-//				try{
-//					launch.STAGE.removeChild(_adPauseView);
-//				}catch(e:Error){}
-//			}
         SoundCtrl.I.resumeBGM();
         GameCtrl.I.resume(true);
     }
@@ -68,10 +55,7 @@ public class MobileCtrler {
         trace('resume process');
         System.resume();
         AdManager.I.onResume();
-//			if(!isAdPause){
         SoundCtrl.I.resumeBGM();
-//				GameCtrl.I.resume(true);
-//			}
     }
 
 }

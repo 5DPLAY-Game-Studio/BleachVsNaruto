@@ -46,8 +46,6 @@ public class LANClientCtrl implements ILanClientLockLink {
     private var _joinBack:Function;
     private var _syncErrorTimes:int;
     private var _selectLogic:SelectFighterClientLogic;
-//		private var _connGameLogic:SimpleLockFrameClientLogic;
-//		private var _connGameLogic:OptimisticClientLogic;
     private var _connGameLogic:LockFrameClientLogic;
     private var _delayCache:Array = [];
     private var _syncRoundFinishInt:int;
@@ -172,8 +170,6 @@ public class LANClientCtrl implements ILanClientLockLink {
 
         _connGameLogic = new LockFrameClientLogic();
         _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
-//			_connGameLogic = new OptimisticClientLogic();
-//			_connGameLogic = new SimpleLockFrameClientLogic();
 
         GameCtrl.I.autoEndRoundAble    = false;
         GameCtrl.I.autoStartAble       = false;
@@ -245,7 +241,6 @@ public class LANClientCtrl implements ILanClientLockLink {
 
     public function syncError(wait:Boolean = false):void {
         if (!wait) {
-//				trace("同步异常");
             gameEnd();
             GameUI.alert(
                     GetLang('alert.lan_client_ctrl.disconnect_title'),
@@ -255,13 +250,11 @@ public class LANClientCtrl implements ILanClientLockLink {
         }
         _syncErrorTimes++;
         if (_syncErrorTimes > 10) {
-//				trace("同步错误，强制退出");
             gameEnd();
             GameUI.alert(
                     GetLang('alert.lan_client_ctrl.disconnect_title'),
                     GetLang('alert.lan_client_ctrl.disconnect_error')
             );
-//				dispose();
         }
     }
 
@@ -335,12 +328,10 @@ public class LANClientCtrl implements ILanClientLockLink {
                 _joinBack = null;
             }
             if (!succ) {
-//						GameUI.alert("FAILED",o.msg);
                 dispose();
             }
             break;
         case MsgType.START_GAME:
-//					if(_socket) _socket.sendJSON(SocketMsgFactory.createStartGameBack());
             gameStart(_host);
             break;
         }
@@ -363,9 +354,6 @@ public class LANClientCtrl implements ILanClientLockLink {
                 case LanSyncType.ROUND_FINISH:
                     _connGameLogic.enabled = false;
                     _connGameLogic.reset();
-//							syncRoundFinish(arr);
-//							clearTimeout(_syncRoundFinishInt);
-//							_syncRoundFinishInt = setTimeout(syncRoundFinish , 30 , arr);
                     setFrameOut(function ():void {
                         syncRoundFinish(arr);
                     }, 1, MainGame.I.stage);
@@ -503,9 +491,6 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     private function onReceiveData(e:SocketEvent):void {
-//			if(_connGameLogic && _connGameLogic.receiveUpdate(e.data)) return;
-//			if(_connGameLogic && _connGameLogic.receiveInput(e.data)) return;
-
         var obj:Object = e.getDataObject();
 
         if (!obj) {

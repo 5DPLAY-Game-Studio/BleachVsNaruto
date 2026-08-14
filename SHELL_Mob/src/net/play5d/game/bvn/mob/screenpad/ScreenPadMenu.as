@@ -13,9 +13,7 @@ public class ScreenPadMenu {
         build();
     }
     public var inputers:Vector.<ScreenPadInput>;
-//		private var _ok:ScreenPadBtn;
     private var _arrow:ScreenPadArrow;
-//		private var _cancel:ScreenPadBtn;
     private var _stage:Stage;
     private var _listened:Boolean;
     private var _downCache:Object = {};
@@ -133,8 +131,6 @@ public class ScreenPadMenu {
         if (key == null) {
             return;
         }
-
-//			trace('setInputerDown' , key , down);
 
         var t:ScreenPadInput;
         var i:int, j:int;

@@ -33,7 +33,6 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 import net.play5d.kyo.stage.IStage;
 import net.play5d.kyo.utils.KyoBtnUtils;
 
-//import net.play5d.game.bvn.win.ctrls.UDPHostCtrl;
 public class LANHostCreateDialog implements IStage {
     public function LANHostCreateDialog() {
     }
@@ -68,7 +67,6 @@ public class LANHostCreateDialog implements IStage {
         _ui.txt_pass.visible = false;
 
         _ui.comb_mode.addItem({label: GetLang('txt.lan_host_create_dialog.mode_team_combo'), data: 1});
-//			_ui.comb_mode.addItem( { label: "SINGLE VS - 单人模式", data:2 } );
     }
 
     /**

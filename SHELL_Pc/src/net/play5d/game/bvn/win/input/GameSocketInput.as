@@ -53,9 +53,6 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         _enabled = v;
         if (v) {
             _data = new SocketInputData();
-//				for each(var i:IGameInput in _inputers){
-//					i.initialize(MainGame.I.stage);
-//				}
         }
         else {
             _data = null;

@@ -53,14 +53,9 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
 
     private var _renderSyncFrame:int;
 
-//		private var _renderNextFrameDelay:int;
-//		private var _updateServerInputDelay:int;
-
     private var _sendUpdateFrame:int;
 
     private var _selectLogic:SelectFighterServerLogic;
-//		private var _connGameLogic:OptimisticServerLogic;
-//		private var _connGameLogic:SimpleLockFrameServerLogic;
     private var _connGameLogic:LockFrameServerLogic;
 
     private var _playerClient:ClientVO;
@@ -124,8 +119,6 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
         _selectLogic = new SelectFighterServerLogic();
         _selectLogic.init(sendTCP);
 
-//			_connGameLogic = new OptimisticServerLogic();
-//			_connGameLogic = new SimpleLockFrameServerLogic();
         _connGameLogic = new LockFrameServerLogic();
         _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
 
@@ -230,7 +223,6 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
     private function receiveJoin(msgObj:Object, clientSocket:Socket):void {
         if (_clients.length > 0) {
             //超出人数限制
-            //					e.clientSocket.close();
             SocketServer.I.sendJson(
                     clientSocket,
                     SocketMsgFactory.createJoinFailMsg(GetLang('txt.lan_server_ctrl.room_full'))
@@ -259,7 +251,6 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
             if (i.socket == socket) {
                 return i;
             }
-//				if(i.socket.remoteAddress == socket.remoteAddress) return i;
         }
         return null;
     }
@@ -342,8 +333,6 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
 
     private function onRoundStart(e:GameEvent):void {
         //SYNC,type,round
-//			var data:Array = ['SYNC' , LanSyncType.ROUND_START , GameCtrl.I.gameRunData.round];
-//			sendTCP(data);
         _connGameLogic.enabled = true;
     }
 

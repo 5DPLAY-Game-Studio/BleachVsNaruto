@@ -94,10 +94,6 @@ public class GameInterfaceManager implements IGameInterface {
                 ]
             },
 
-//				{txt:'WIFI PLAY',cn:'WIFI对战',func:function():void{
-//					LANGameCtrl.I.goLANGameState();
-//				}},
-
             {
                 txt: 'MUSOU PLAY', cn: GetLang('txt.game_interface.musou_play'), children: [
                     {txt: 'MUSOU ACRADE', cn: GetLang('txt.game_interface.musou_acrade')}
@@ -108,18 +104,12 @@ public class GameInterfaceManager implements IGameInterface {
             {txt: 'OPTION', cn: GetLang('txt.game_interface.option')},
             {txt: 'TRAINING', cn: GetLang('txt.game_interface.training')},
             {txt: 'CREDITS', cn: GetLang('txt.game_interface.credits')},
-//            {txt: 'MORE GAMES', cn: '更多游戏'}
-//				{txt:'EXIT',cn:'退出游戏',func:function():void{
-//					GameUI.confrim('EXIT GAME','退出游戏？',NativeApplication.nativeApplication.exit);
-////					AdManager.I.showFullScreenAD();
-//				}}
         ];
         return a;
     }
 
     public function getSettingMenu():Array {
         return [
-//				{txt:"JOYSTICK SET",cn:"手柄设置",select:ViewManager.I.goP1JoyStickSet},
             {
                 txt   : 'JOY SET', cn: GetLang('txt.game_interface_manager.joy_set'),
                 select: ViewManager.I.setScreenBtns
@@ -161,7 +151,7 @@ public class GameInterfaceManager implements IGameInterface {
                 txt      : 'SCREEN MODE', cn: GetLang('txt.game_interface_manager.screen_mode'),
                 options  : [
                     {label: 'FILL', cn: GetLang('txt.game_interface_manager.screen_fill'), value: 0},
-                    {label: 'CENTER', cn: GetLang('txt.game_interface_manager.screen_ratio'), value: 1}
+                    {label: 'RATIO', cn: GetLang('txt.game_interface_manager.screen_ratio'), value: 1}
                 ],
                 optoinKey: 'screenMode'
             },
@@ -257,35 +247,6 @@ public class GameInterfaceManager implements IGameInterface {
      * 更新输入设置
      */
     public function updateInputConfig():Boolean {
-//			if(LANServerCtrl.I.active || LANClientCtrl.I.active){
-//
-//				/**
-//				 * 使用锁帧同步算法进行游戏操作同步
-//				 * 客户端采集操作数据，定时发给服务器，服务器定时更新服务端和客户端
-//				 * 服务端在同样的时间线采集操作数据，定时更新并发送到客户端
-//				 */
-//
-//				InputManager.I.screen_menu.enabled = false;
-//				InputManager.I.screen_p1.enabled = false;
-//
-//				InputManager.I.joy_menu.enabled = false;
-//				InputManager.I.joy_p1.enabled = false;
-//
-//				//				InputManager.I.socket_input_menu.enabled = false;
-//				InputManager.I.socket_input_p1.enabled = true;
-//				InputManager.I.socket_input_p2.enabled = true;
-//
-//				if(LANServerCtrl.I.active){
-//					InputManager.I.socket_input_p1.setInputers([InputManager.I.screen_p1 , InputManager.I.joy_p1]);
-//				}
-//
-//				if(LANClientCtrl.I.active){
-//					InputManager.I.socket_input_p2.setInputers([InputManager.I.screen_p1 , InputManager.I.joy_p1]);
-//				}
-//
-//				return true;
-//			}
-
         InputManager.I.joy_menu.setConfig(_extendsConfig.joyMenuConfig);
         InputManager.I.joy_p1.setConfig(_extendsConfig.joy1Config);
 
@@ -348,10 +309,6 @@ public class GameInterfaceManager implements IGameInterface {
     public function getCreadits(creditsInfo:String):Sprite {
         var sp:Sprite = new Sprite();
 
-//        creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') +
-//                       '" target="_blank">www.1212321.com</a>' + '<br/>';
-//        creditsInfo += '游戏论坛 : <a href="' + URL.markURL('http://bbs.1212321.com/') +
-//                       '" target="_blank">bbs.1212321.com</a>' + '<br/>';
         var commitsHash:String  = GithubUtils.getCommitsHash();
         var commitsUrl:String   = GithubUtils.getCommitsUrlByHash(commitsHash);
         var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
@@ -372,15 +329,7 @@ public class GameInterfaceManager implements IGameInterface {
 
         txt.multiline = true;
 
-//        if (ENGLISH_VERSION) {
-//            txt.htmlText = 'website : <a href="' + URL.markURL('http://www.1212321.com/') +
-//                           '" target="_blank">www.1212321.com</a>' + '<br/>' +
-//                           'bbs : <a href="' + URL.markURL('http://bbs.1212321.com/') +
-//                           '" target="_blank">bbs.1212321.com</a>' + '<br/>';
-//        }
-//        else {
-            txt.htmlText = creditsInfo;
-//        }
+        txt.htmlText = creditsInfo;
         txt.autoSize = TextFieldAutoSize.LEFT;
 
         txt.x = 30;
@@ -396,18 +345,8 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function addMusouMoney(back:Function):void {
-//			var succ:* = function():void {
-//				back(addMoney);
-//			};
-//			var fail:* = function():void {
-//				GameUI.alert("FAIL","广告加载失败或正在加载");
-//			};
-//			var watchAD:* = function():void {
-//				AdManager.I.showRewardVideo("金币",addMoney,succ,fail);
-//			};
         var addMoney:int = 100 + Math.random() * 200;
         back(addMoney);
-        //		GameUI.confrim("ADD MONEY","观看广告获得 1000-3000 金币! \n (制作不易，跪求支持)",watchAD);
     }
 
 }

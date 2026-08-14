@@ -66,7 +66,6 @@ public class AssetLoader implements IAssetLoader {
     public function loadBitmap(url:String, back:Function, fail:Function = null, progress:Function = null):void {
         url = getFullUrl(url);
         KyoLoaderLite.load(url, back, fail, progress);
-
     }
 
     public function loadSound(url:String, back:Function, fail:Function = null, progress:Function = null):void {
@@ -102,13 +101,6 @@ public class AssetLoader implements IAssetLoader {
                 progress(e.bytesLoaded / e.bytesTotal);
             }
         }
-
-
-        //			loadAssetBytes(url, function(v:ByteArray):void{
-        //				var s:BytesSound = new BytesSound(v);
-        //				if(back != null) back(s);
-        //			}, fail, progress);
-
     }
 
     public function dispose(url:String):void {
@@ -119,17 +111,11 @@ public class AssetLoader implements IAssetLoader {
     }
 
     public function loadPreLoad(back:Function, fail:Function = null, progress:Function = null):void {
-
     }
 
     private function getFullUrl(url:String):String {
         return 'assets/' + url;
     }
-
-    //		private function loadAssetBytes(url:String, back:Function, fail:Function, progress:Function = null):void{
-    //			KyoURLLoader.load('assets/' + url, back, fail, {dataFormat: URLLoaderDataFormat.BINARY}, progress);
-    //		}
-
 
 }
 }

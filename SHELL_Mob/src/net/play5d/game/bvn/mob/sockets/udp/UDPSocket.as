@@ -103,7 +103,6 @@ public class UDPSocket {
     }
 
     private function log(...params):void {
-//			trace.apply(null, params);
     }
 
 }

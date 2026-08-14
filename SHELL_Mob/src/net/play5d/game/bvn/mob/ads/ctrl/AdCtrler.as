@@ -33,8 +33,6 @@ public class AdCtrler extends EventDispatcher {
     private const _showAdTimesTotal:int = 1;
     private const _showVideoAdTimesTotal:int = 2;
     public static var SHOW_OPENAD_ON_START:Boolean = true;
-
-//		private var _topAdShowing:Boolean;
     public static var SMART_ONLY_VIDEO:Boolean     = false;
 
     public function AdCtrler() {
@@ -45,12 +43,6 @@ public class AdCtrler extends EventDispatcher {
     private var _openCloseBack:Function;
     private var _showOpenAdTimer:int;
     private var _adGroup:AdGroup;
-
-    // ADS
-//		private var _ydad:YdAd;
-//		private var _yuad:YuAd;
-//		private var _juhead:JuHeAd;
-//		private var _joomobad:JooMobAd;
     private var _adConfMap:Object = {};
 
     public function avaliable():Boolean {
@@ -105,30 +97,18 @@ public class AdCtrler extends EventDispatcher {
         _showVideoAdTimes++;
         if (_showVideoAdTimes >= _showVideoAdTimesTotal) {
             _showVideoAdTimes = 0;
-//				showVideoAd();
             AdManager.I.showAd(AdType.VIDEO);
             return;
         }
 
-//			showInterAd();
         AdManager.I.showAd(AdType.NATIVE);
     }
 
     public function showInterAdOrVideoAd():void {
-//
-//			if(_topAdShowing){
-//				return;
-//			}
         showInterAd();
     }
 
     public function showInterAd():void {
-//
-//			if(_topAdShowing){
-//				return;
-//			}
-
-        //			_wxAne.showInterstitial();
         _adGroup.showInter();
     }
 
@@ -141,11 +121,6 @@ public class AdCtrler extends EventDispatcher {
     }
 
     public function showVideoAd():void {
-//
-//			if(_topAdShowing){
-//				return;
-//			}
-
         _adGroup.showVideo();
     }
 
@@ -154,11 +129,6 @@ public class AdCtrler extends EventDispatcher {
     }
 
     public function showOpenAd():void {
-//
-//			if(_topAdShowing){
-//				return;
-//			}
-
         if (!_adGroup.showOpen()) {
             openCloseBack();
         }
@@ -194,22 +164,10 @@ public class AdCtrler extends EventDispatcher {
         _adGroup.addEventListener(AdEvent.AD_ACTION, adActionHandler);
 
         // 初始化AD列表
-//			_ydad = new YdAd();
-//			_adGroup.add(_ydad);
         for each(var ad:IAd in ads) {
             _adGroup.add(ad);
         }
 
-//			_yuad = new YuAd();
-//			_adGroup.add(_yuad);
-//
-//			_juhead = new JuHeAd();
-//			_adGroup.add(_juhead);
-//
-//			_joomobad = new JooMobAd();
-//			_adGroup.add(_joomobad);
-
-//			_adGroup.onlyOneAd = _ydad;
         if (onlyOne && ads.length == 1) {
             _adGroup.onlyOneAd = ads[0];
         }
@@ -237,10 +195,6 @@ public class AdCtrler extends EventDispatcher {
         }
     }
 
-//		public function getPackageName():String{
-//			return _ydad.getANE().getPackageName();
-//		}
-
     private function openCloseBack():void {
         clearTimeout(_showOpenAdTimer);
         if (_openCloseBack != null) {
@@ -266,9 +220,6 @@ public class AdCtrler extends EventDispatcher {
             else {
                 openCloseBack();
             }
-
-//				showOpenAd();
-//				setTimeout(showOpenAd, 2000);
         }
 
         if (e.adAction == AdAction.INIT_FAIL) {
@@ -276,21 +227,15 @@ public class AdCtrler extends EventDispatcher {
 
         if (e.adAction == AdAction.SHOW) {
             if (e.adType == AdType.OPEN) {
-//					_topAdShowing = true;
                 clearTimeout(_showOpenAdTimer);
-            }
-            if (e.adType == AdType.VIDEO) {
-//					_topAdShowing = true;
             }
         }
 
         if (e.adAction == AdAction.CLOSE) {
             if (e.adType == AdType.OPEN) {
-//					_topAdShowing = false;
                 openCloseBack();
             }
             if (e.adType == AdType.VIDEO) {
-//					_topAdShowing = false;
                 _adGroup.cacheVideo();
             }
             if (e.adType == AdType.INTER) {
@@ -309,11 +254,7 @@ public class AdCtrler extends EventDispatcher {
 
         if (e.adAction == AdAction.ERROR) {
             if (e.adType == AdType.OPEN) {
-//					_topAdShowing = false;
                 openCloseBack();
-            }
-            if (e.adType == AdType.VIDEO) {
-//					_topAdShowing = false;
             }
         }
 

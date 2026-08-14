@@ -20,7 +20,6 @@ import net.play5d.kyo.stage.events.KyoStageEvent;
 
 public class ScreenPadManager {
 
-//		private static var _menu:ScreenPadMenu;
     private static var _game:ScreenPadGame;
     private static var _selectFighter:ScreenPadSelectFighter;
     private static var _curMode:int = -1;
@@ -29,17 +28,10 @@ public class ScreenPadManager {
     private static var _listened:Dictionary = new Dictionary();
 
     public static function initialize(stage:Stage):void {
-
-//			ScreenPadUtils.scale = RootSprite.FULL_SCREEN_SIZE.y / GameConfig.GAME_SIZE.y;
-
         _stage = stage;
 
         GameEvent.addEventListener(GameEvent.PAUSE_GAME, pauseResumeHandler);
         GameEvent.addEventListener(GameEvent.RESUME_GAME, pauseResumeHandler);
-
-//			_menu = new ScreenPadMenu(stage);
-//			_menu.inputers = new Vector.<ScreenPadInput>();
-//			_menu.inputers.push(InputManager.I.screen_menu , InputManager.I.screen_p1);
 
         _game          = new ScreenPadGame(stage);
         _game.inputers = new Vector.<ScreenPadInput>();
@@ -51,15 +43,11 @@ public class ScreenPadManager {
         _selectFighter.inputers.push(InputManager.I.screen_menu, InputManager.I.screen_p1);
 
         Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
-
-//			gameMode();
-
     }
 
     public static function reBuild():void {
         var mode:int = _curMode;
         _curMode     = 0;
-//			_menu.reBuild();
         _game.reBuild();
         _selectFighter.reBuild();
 
@@ -91,7 +79,6 @@ public class ScreenPadManager {
     }
 
     public static function testMode():void {
-//			listen();
         gameMode();
     }
 
@@ -109,7 +96,6 @@ public class ScreenPadManager {
 
     private static function hideALL():void {
         _curMode = 0;
-//			_menu.hide();
         _game.hide();
         _selectFighter.hide();
     }
@@ -124,10 +110,8 @@ public class ScreenPadManager {
             _stage.mouseChildren = true;
         }
 
-//			_menu.show();
         _game.hide();
         _selectFighter.hide();
-//			AdManager.I.showBanner();
     }
 
     private static function gameMode():void {
@@ -140,10 +124,8 @@ public class ScreenPadManager {
         }
 
         _curMode = 2;
-//			_menu.hide();
         _selectFighter.hide();
         _game.show();
-//			AdManager.I.hideBanner();
     }
 
     private static function selectFighterMode():void {
@@ -180,12 +162,6 @@ public class ScreenPadManager {
     }
 
     private static function stateChangeHandler(e:KyoStageEvent):void {
-
-//			if(e.stage is LogoState || e.stage is LANGameState){
-//				hideALL();
-//				return;
-//			}
-
         if (e.stage is GameStage) {
             gameMode();
         }
@@ -206,7 +182,6 @@ public class ScreenPadManager {
 
         switch (_curMode) {
         case 1:
-//					_menu.touchHandler(e);
             break;
         case 2:
             _game.touchHandler(e);

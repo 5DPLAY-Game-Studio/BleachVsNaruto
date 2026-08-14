@@ -23,8 +23,6 @@ public class AdManager {
         if (!DEBUG) {
             return;
         }
-
-//			TTAdManager.Instance.showToast(msg);
     }
 
     public function AdManager() {
@@ -164,14 +162,6 @@ public class AdManager {
     }
 
     public function checkPackage():Boolean {
-//			try{
-//				var pkgName:String = _adCtrler.getPackageName();
-//				return (pkgName == 'com.jarworld.bleach.bvn' || pkgName == "com.jarworld.bleach.bvn.debug");
-//			}catch(e:Error){
-//				trace('checkPackage', e);
-//			}
-//			return false;
-
         return true;
     }
 

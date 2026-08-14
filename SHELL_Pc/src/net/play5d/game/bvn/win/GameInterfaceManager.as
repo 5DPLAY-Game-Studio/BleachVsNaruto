@@ -288,7 +288,6 @@ public class GameInterfaceManager implements IGameInterface {
         case GameInputType.MENU:
             vec.push(InputManager.I.key_menu);
             vec.push(InputManager.I.joy_menu);
-//					vec.push(InputManager.I.socket_input_menu);
             break;
         case GameInputType.P1:
             vec.push(InputManager.I.key_p1);
@@ -346,7 +345,6 @@ public class GameInterfaceManager implements IGameInterface {
             InputManager.I.joy_p1.enabled   = false;
             InputManager.I.joy_p2.enabled   = false;
 
-//				InputManager.I.socket_input_menu.enabled = false;
             InputManager.I.socket_input_p1.enabled = true;
             InputManager.I.socket_input_p2.enabled = true;
 
@@ -371,12 +369,8 @@ public class GameInterfaceManager implements IGameInterface {
         InputManager.I.joy_p1.setConfig(_extendsConfig.joy1Config);
         InputManager.I.joy_p2.setConfig(_extendsConfig.joy2Config);
 
-//			InputManager.I.socket_input_menu.enabled = false;
         InputManager.I.socket_input_p1.enabled = false;
         InputManager.I.socket_input_p2.enabled = false;
-
-
-//			_extendsConfig.updateJoyConfig();
 
         return true;
     }
@@ -427,11 +421,6 @@ public class GameInterfaceManager implements IGameInterface {
     public function getCreadits(creditsInfo:String):Sprite {
         var sp:Sprite = new Sprite();
 
-//			creditsInfo += '安卓手机版 : <a href="' + URL.markURL('https://www.3839.com/a/103303.htm') + '"
-// target="_blank">安卓手机版本下载</a>'+"<br/>"; creditsInfo += '游戏官网 : <a href="' + URL.markURL('http://www.1212321.com/') +
-// '" target="_blank">www.1212321.com</a>'+"&nbsp;&nbsp; "; creditsInfo += '游戏论坛 : <a href="' +
-// URL.markURL('http://bbs.5dplay.net/') + '" target="_blank">bbs.5dplay.net</a>'+"<br/>";  creditsInfo += '5dplay.net
-// 已转向 1212321.com，并以新的面孔出现，请知晓。' + "<br/>"; creditsInfo += '游戏做到今天非常不易，期待您的捐赠（金额不限），谢谢！' + "<br/>";
         var commitsHash:String = GithubUtils.getCommitsHash();
         var commitsUrl:String = GithubUtils.getCommitsUrlByHash(commitsHash);
         var commitsLabel:String = GithubUtils.getCommitsDisplayLabel();
@@ -485,17 +474,6 @@ public class GameInterfaceManager implements IGameInterface {
         weixin.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
         sp.addChild(weixin);
 
-//			var pateronSp:Sprite = new Sprite();
-//			var pateron:Bitmap = EmbedAssetUtils.getPatreon();
-//			pateron.width = 100;
-//			pateron.height = 129;
-//			pateronSp.addChild(pateron);
-//			pateronSp.y = 250;
-//			pateronSp.x = 680;
-//			pateronSp.buttonMode = true;
-//			pateronSp.addEventListener(MouseEvent.MOUSE_UP,URL.supportUS,false,0,true);
-//			sp.addChild(pateronSp);
-
         function payOverHandler(e:MouseEvent):void {
             if (e.currentTarget == alipay) {
                 alipay.alpha  = 1;
@@ -520,7 +498,6 @@ public class GameInterfaceManager implements IGameInterface {
 
     public function checkFile(url:String, file:ByteArray):Boolean {
         return true;
-        //return GameSafeKeeper.I.checkFile(url, file);
     }
 
     public function addMusouMoney(back:Function):void {

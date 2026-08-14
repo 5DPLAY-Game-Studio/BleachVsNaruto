@@ -184,8 +184,6 @@ public class LANServerCtrl implements ILanServerLockLink {
             _kickTimeoutInt = 0;
 
             if (client && client.socket.connected) {
-//					view.removePlayer(id);
-//					_clients.splice(i,1);
                 client.socket.close();
             }
         }
@@ -326,7 +324,6 @@ public class LANServerCtrl implements ILanServerLockLink {
     private function receiveJoin(msgObj:Object, clientSocket:Socket):void {
         if (_clients.length > 0) {
             //超出人数限制
-            //					e.clientSocket.close();
             SocketServer.I.sendJson(
                     clientSocket,
                     SocketMsgFactory.createJoinFailMsg(GetLang('txt.lan_server_ctrl.room_full'))
@@ -360,7 +357,6 @@ public class LANServerCtrl implements ILanServerLockLink {
             if (i.socket == socket) {
                 return i;
             }
-//				if(i.socket.remoteAddress == socket.remoteAddress) return i;
         }
         return null;
     }
@@ -456,8 +452,6 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     private function onRoundStart(e:GameEvent):void {
         //SYNC,type,round
-//			var data:Array = ['SYNC' , LanSyncType.ROUND_START , GameCtrl.I.gameRunData.round];
-//			sendAll(data);
         _connGameLogic.enabled = true;
     }
 

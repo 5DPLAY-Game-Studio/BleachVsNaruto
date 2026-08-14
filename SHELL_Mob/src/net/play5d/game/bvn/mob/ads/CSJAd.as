@@ -1,13 +1,3 @@
-//package net.play5d.game.bvn.mob.ads
-//{
-//	public class CSJAd
-//	{
-//		public function CSJAd()
-//		{
-//		}
-//	}
-//}
-
 package net.play5d.game.bvn.mob.ads {
 import flash.events.StatusEvent;
 
@@ -15,7 +5,6 @@ import net.play5d.game.bvn.mob.ads.utils.AdEventListener;
 import net.play5d.kyo.utils.KyoTimerUtils;
 
 public class CSJAd extends BaseAd {
-
 
     public function CSJAd(param1:String, param2:String, param3:String, param4:String) {
         super();
@@ -44,13 +33,9 @@ public class CSJAd extends BaseAd {
 
     override public function initialize(param1:AdEventListener):void {
         _listener = param1;
-//			TTAdManager.Instance.addEventListener("status",statusHandler);
-//			TTAdManager.Instance.initAdSDK(this.appid,"死神vs火影",false);
-//			TTAdManager.Instance.autoSetAdSize(false);
     }
 
     override public function showOpen():void {
-//			TTAdManager.Instance.showSplash(this.splashid);
         _listener.onShow(this, 'OPEN');
         KyoTimerUtils.setTimeout(openFinish, 1000);
     }
@@ -65,12 +50,10 @@ public class CSJAd extends BaseAd {
         if (!nativeId) {
             return;
         }
-//			TTAdManager.Instance.showNativeExpressAd(nativeId,param1);
         _listener.onShow(this, 'NATIVE');
     }
 
     override public function closeNative():void {
-//			TTAdManager.Instance.closeNativeExpressAd();
     }
 
     override public function cacheVideo():void {
@@ -81,7 +64,6 @@ public class CSJAd extends BaseAd {
             return;
         }
         _videoLoading = true;
-//			TTAdManager.Instance.loadInterstitail(this.interstitial);
     }
 
     override public function playVideo():void {
@@ -90,7 +72,6 @@ public class CSJAd extends BaseAd {
             return;
         }
         _currentShowingVideoType = 'VIDEO';
-//			TTAdManager.Instance.showInterstitial();
         _listener.onShow(this, 'VIDEO');
     }
 
@@ -104,7 +85,6 @@ public class CSJAd extends BaseAd {
         }
         _rewardSuccess           = param3;
         _currentShowingVideoType = 'REWARD_VIDEO';
-//			TTAdManager.Instance.showInterstitial();
         _listener.onShow(this, 'REWARD_VIDEO');
     }
 

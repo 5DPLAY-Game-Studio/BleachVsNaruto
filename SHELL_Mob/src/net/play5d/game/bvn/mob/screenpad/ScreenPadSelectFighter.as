@@ -108,8 +108,6 @@ public class ScreenPadSelectFighter {
             return;
         }
 
-        //			trace('setInputerDown' , key , down);
-
         var t:ScreenPadInput;
         var i:int, j:int;
         var ks:Array;

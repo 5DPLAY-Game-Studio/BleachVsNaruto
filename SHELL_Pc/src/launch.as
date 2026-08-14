@@ -54,16 +54,10 @@ public class launch extends Sprite {
     private var _mainGame:MainGame;
     private var _assetLoader:AssetLoader = new AssetLoader();
 
-    private function safeFail(...param):void {
-        trace('safe fail !');
-    }
-
     private function buildGame():void {
-
         GameLogger.log('buildGame');
 
         _mainGame = new MainGame();
-        //_mainGame.initialize(this , stage , initBackHandler , initFailHandler);
         _mainGame.initialize(this, stage, function ():void {
             _mainGame.goLanguage(function ():void {
                 TraceLang('debug.trace.data.root_sprite.current_font', {fontName: FONT.fontName});
@@ -79,16 +73,12 @@ public class launch extends Sprite {
         }
 
         stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
-
     }
 
     private function initBackHandler():void {
-
         GameLogger.log('init ok');
 
         UIAssetUtil.I.initialize(_mainGame.goLogo);
-        //			_mainGame.goMenu();
-        //			_mainGame.goCongratulations();
     }
 
     private function initFailHandler(msg:String):void {
@@ -107,10 +97,6 @@ public class launch extends Sprite {
 
         GameInterface.instance = new GameInterfaceManager();
 
-//			if(GameInterfaceManager.config.isFullScreen){
-//				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-//			}
-
         GameUI.BITMAP_UI = true;
 
         GameData.I.config.AI_level     = 1;
@@ -119,7 +105,6 @@ public class launch extends Sprite {
 
         URL.MARK = 'bvn_win' + MainGame.VERSION;
 
-//			GameSafeKeeper.I.loadConfigure(buildGame, safeFail);
         buildGame();
 
         MusouDebugger.init(stage);
