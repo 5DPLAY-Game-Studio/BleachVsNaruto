@@ -14,6 +14,7 @@ import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.data.lan.ClientVO;
+import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.mob.data.HostVO;
 import net.play5d.game.bvn.mob.events.LanEvent;
 import net.play5d.game.bvn.mob.input.InputManager;
@@ -70,13 +71,13 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
 
     public function startServer(host:HostVO):void {
         _host = host;
-        SocketServer.I.bind(LANGameCtrl.PORT_TCP);
+        SocketServer.I.bind(LanPorts.TCP);
         SocketServer.I.addEventListener(SocketEvent.CLIENT_CONNECT, socketHandler);
         SocketServer.I.addEventListener(SocketEvent.CLIENT_DIS_CONNECT, socketHandler);
         SocketServer.I.addEventListener(SocketEvent.RECEIVE_DATA, socketDataHandler);
 
         _udpSocket = new UDPSocket();
-        _udpSocket.listen(LANGameCtrl.PORT_UDP_SERVER);
+        _udpSocket.listen(LanPorts.UDP_SERVER);
         _udpSocket.addDataHandler(udpDataHandler);
     }
 
@@ -187,7 +188,7 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
 
     public function sendUDP(data:Object):void {
         if (_udpClientIP) {
-            _udpSocket.send(_udpClientIP, LANGameCtrl.PORT_UDP_CLIENT, data);
+            _udpSocket.send(_udpClientIP, LanPorts.UDP_CLIENT, data);
         }
     }
 
@@ -198,7 +199,7 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
         if (dataBytes && dataBytes.readByte() == MsgType.FIND_HOST) {
             if (!active) {
                 _udpSocket.send(
-                        d.fromIP, LANGameCtrl.PORT_UDP_CLIENT, SocketMsgFactory.createFindHostBackMsg());
+                        d.fromIP, LanPorts.UDP_CLIENT, SocketMsgFactory.createFindHostBackMsg());
             }
             return;
         }

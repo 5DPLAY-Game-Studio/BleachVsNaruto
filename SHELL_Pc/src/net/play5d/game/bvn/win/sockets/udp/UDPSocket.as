@@ -26,11 +26,12 @@ import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.data.lan.UdpPacketUtils;
+import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
 
 /**
  * UDP协议收发消息管理器（Pc / DatagramSocket）。
  */
-public class UDPSocket {
+public class UDPSocket implements IUdpTransport {
     public function UDPSocket() {
         trace('DatagramSocket.isSupported = ', DatagramSocket.isSupported);
         _udpsocket = new DatagramSocket();

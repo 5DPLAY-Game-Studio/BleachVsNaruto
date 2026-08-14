@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.win.data {
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.input.JoyStickConfigVO;
-import net.play5d.game.bvn.input.JoySticker;
+import net.play5d.game.bvn.input.JoyStickExtendConfigHelper;
 
 public class ExtendConfig implements IExtendConfig {
 
@@ -59,7 +59,7 @@ public class ExtendConfig implements IExtendConfig {
 
     public function updateJoyConfig():void {
         initDefaultDevices();
-        joyMenuConfig.deviceId = joy1Config.deviceId;
+        JoyStickExtendConfigHelper.syncMenuDeviceFromP1(joyMenuConfig, joy1Config);
     }
 
     private function initDefaultDevices():void {
@@ -71,14 +71,8 @@ public class ExtendConfig implements IExtendConfig {
 
         _isInitDefaultJoystick = true;
 
-        setDefaultDevice(joy1Config, 0);
-        setDefaultDevice(joy2Config, 1);
-    }
-
-    private function setDefaultDevice(joy:JoyStickConfigVO, index:int):void {
-        if (!joy.deviceIsSet && joy.deviceId == null) {
-            joy.deviceId = JoySticker.getDeviceId(index);
-        }
+        JoyStickExtendConfigHelper.setDefaultDevice(joy1Config, 0);
+        JoyStickExtendConfigHelper.setDefaultDevice(joy2Config, 1);
     }
 
 }

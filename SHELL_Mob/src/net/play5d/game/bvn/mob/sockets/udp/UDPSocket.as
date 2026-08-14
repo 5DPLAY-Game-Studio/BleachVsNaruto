@@ -3,11 +3,12 @@ import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.data.lan.UdpPacketUtils;
+import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
 
 /**
  * UDP协议收发消息管理器（Mob / AndroidUDP）。
  */
-public class UDPSocket {
+public class UDPSocket implements IUdpTransport {
 
     public static const BUFFER_LENGTH:int    = 50;
     public static const RECEIVE_TIME_OUT:int = 10;

@@ -21,18 +21,17 @@ import flash.events.TimerEvent;
 import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.utils.Timer;
-import flash.utils.clearTimeout;
-import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
+import net.play5d.game.bvn.ctrler.lan.LanClientSyncCore;
 import net.play5d.game.bvn.ctrler.lan.LanGameMenuCtrl;
 import net.play5d.game.bvn.ctrler.lan.LockFrameClientLogic;
 import net.play5d.game.bvn.ctrler.lan.SelectFighterClientLogic;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.GameInterface;
+import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.stage.LoadingStage;
 import net.play5d.game.bvn.stage.SelectFighterStage;
@@ -45,7 +44,6 @@ import net.play5d.kyo.air.socket.events.SocketEvent;
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.win.sockets.udp.UDPSocket;
 import net.play5d.kyo.utils.JsonUtils;
-import net.play5d.game.bvn.data.lan.LanSyncType;
 import net.play5d.game.bvn.utils.LANUtils;
 import net.play5d.game.bvn.utils.LockFrameLogic;
 import net.play5d.game.bvn.win.utils.MsgType;
@@ -53,7 +51,6 @@ import net.play5d.game.bvn.win.utils.SocketMsgFactory;
 import net.play5d.game.bvn.ui.dialog.LANExitDialog;
 import net.play5d.game.bvn.win.views.lan.LANGameState;
 import net.play5d.game.bvn.win.views.lan.LANRoomState;
-import net.play5d.kyo.utils.KyoTimeout;
 
 public class LANClientCtrl implements ILanClientLockLink {
     private static var _i:LANClientCtrl;
@@ -71,13 +68,9 @@ public class LANClientCtrl implements ILanClientLockLink {
     private var _udpSocket:UDPSocket;
     private var _room:LANRoomState;
     private var _joinBack:Function;
-    private var _syncErrorTimes:int;
     private var _selectLogic:SelectFighterClientLogic;
     private var _connGameLogic:LockFrameClientLogic;
-    private var _delayCache:Array = [];
-    private var _syncRoundFinishInt:int;
-    private var _syncGameFinishInt:int;
-    private var _syncGameStartInt:int;
+    private var _syncCore:LanClientSyncCore;
     private var _host:HostVO;
     private var _onFindHostBack:Function;
     private var _findHostTimer:Timer;
@@ -85,7 +78,7 @@ public class LANClientCtrl implements ILanClientLockLink {
     public function initialize():void {
         if (!_udpSocket) {
             _udpSocket = new UDPSocket();
-            _udpSocket.listen(LANGameCtrl.PORT_UDP_CLIENT);
+            _udpSocket.listen(LanPorts.UDP_CLIENT);
             _udpSocket.addDataHandler(udpDataHandler);
         }
     }
@@ -122,41 +115,10 @@ public class LANClientCtrl implements ILanClientLockLink {
      * 更新延迟（毫秒）
      */
     public function updateDelay(v:int):void {
-        if (!_delayText) {
+        if (!_syncCore) {
             return;
         }
-
-        _delayCache.push(v);
-
-        if (_delayCache.length >= 10) {
-
-            var count:int = 0;
-            for each(var i:int in _delayCache) {
-                count += i;
-            }
-            var delay:int = count / _delayCache.length;
-
-            _delayCache = [];
-
-            var color:uint = 0xff0000;
-            if (delay < 200) {
-                color = 0x00FF00;
-            }
-            else if (delay < 500) {
-                color = 0xFFFF00;
-            }
-
-            delay -= 100;
-            if (delay < 0) {
-                delay = 0;
-            }
-
-            _delayText.text = delay + ' ms';
-
-            _delayText.textColor = color;
-
-        }
-
+        _syncCore.updateDelay(v);
     }
 
     public function join(host:HostVO, back:Function):void {
@@ -211,6 +173,9 @@ public class LANClientCtrl implements ILanClientLockLink {
         _connGameLogic = new LockFrameClientLogic();
         _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
 
+        _syncCore ||= new LanClientSyncCore(100);
+        _syncCore.bind(_connGameLogic, onSyncFatalError, _delayText);
+
         GameCtrl.I.autoEndRoundAble    = false;
         GameCtrl.I.autoStartAble       = false;
         SelectFighterStage.AUTO_FINISH = false;
@@ -247,6 +212,9 @@ public class LANClientCtrl implements ILanClientLockLink {
         if (_selectLogic) {
             _selectLogic.dispose();
             _selectLogic = null;
+        }
+        if (_syncCore) {
+            _syncCore.unbind();
         }
         if (_connGameLogic) {
             _connGameLogic.dispose();
@@ -292,26 +260,23 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     public function resetSyncError():void {
-        _syncErrorTimes = 0;
+        if (_syncCore) {
+            _syncCore.resetSyncError();
+        }
     }
 
     public function syncError(wait:Boolean = false):void {
-        if (!wait) {
-            gameEnd();
-            GameUI.alert(
-                    GetLang('alert.lan_client_ctrl.disconnect_title'),
-                    GetLang('alert.lan_client_ctrl.disconnect_error')
-            );
-            return;
+        if (_syncCore) {
+            _syncCore.syncError(wait);
         }
-        _syncErrorTimes++;
-        if (_syncErrorTimes > 10) {
-            gameEnd();
-            GameUI.alert(
-                    GetLang('alert.lan_client_ctrl.disconnect_title'),
-                    GetLang('alert.lan_client_ctrl.disconnect_error')
-            );
-        }
+    }
+
+    private function onSyncFatalError():void {
+        gameEnd();
+        GameUI.alert(
+                GetLang('alert.lan_client_ctrl.disconnect_title'),
+                GetLang('alert.lan_client_ctrl.disconnect_error')
+        );
     }
 
     private function receiveHostHandler(data:UDPDataVO):Boolean {
@@ -327,8 +292,8 @@ public class LANClientCtrl implements ILanClientLockLink {
             var hv:HostVO = new HostVO();
             hv.readJson(dataObj.host);
             hv.ip      = data.fromIP;
-            hv.tcpPort = LANGameCtrl.PORT_TCP;
-            hv.udpPort = LANGameCtrl.PORT_UDP_SERVER;
+            hv.tcpPort = LanPorts.TCP;
+            hv.udpPort = LanPorts.UDP_SERVER;
             _onFindHostBack(hv);
         }
         return true;
@@ -406,132 +371,11 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     private function receiveSync(o:Object):Boolean {
-
-        if (o is Array) {
-            var arr:Array = o as Array;
-            if (arr[0] == 'SYNC') {
-
-                var type:int = arr[1];
-
-                switch (type) {
-                case LanSyncType.GAME_START:
-                    syncStartGame();
-                    break;
-                case LanSyncType.ROUND_FINISH:
-                    _connGameLogic.enabled = false;
-                    _connGameLogic.reset();
-
-                    KyoTimeout.setFrameTimeout(function ():void {
-                        syncRoundFinish(arr);
-                    }, 1, MainGame.I.stage);
-                    break;
-                case LanSyncType.GAME_FINISH:
-                    syncGameFinish();
-                    break;
-
-                }
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private function syncStartGame():void {
-        try {
-            GameCtrl.I.doStartGame();
-            _syncErrorTimes        = 0;
-            _connGameLogic.enabled = true;
-            _connGameLogic.reset();
-        }
-        catch (e:Error) {
-            trace('LanSyncType.GAME_START', e);
-            syncError(true);
-            clearTimeout(_syncGameStartInt);
-            _syncGameStartInt = setTimeout(syncStartGame, 500);
-        }
-    }
-
-    private function syncRoundFinish(arr:Array):void {
-        //SYNC,type,round,timerover,drawgame,p1hp,p2hp
-
-        var round:int          = arr[2];
-        var isTimeOver:Boolean = arr[3];
-        var isDrawGame:Boolean = arr[4];
-        var p1hp:int           = arr[5];
-        var p2hp:int           = arr[6];
-
-        try {
-
-            if (GameCtrl.I.gameRunData.round != round) {
-                syncError(true);
-                clearTimeout(_syncRoundFinishInt);
-                _syncRoundFinishInt = setTimeout(syncRoundFinish, 500, arr);
-                return;
-            }
-
-            if (isTimeOver) {
-                GameCtrl.I.gameRunData.isTimerOver = true;
-                GameCtrl.I.gameRunData.gameTime    = 0;
-            }
-
-            var p1:FighterMain = GameCtrl.I.gameRunData.p1FighterGroup.currentFighter;
-            var p2:FighterMain = GameCtrl.I.gameRunData.p2FighterGroup.currentFighter;
-            p1.hp              = p1hp;
-            p2.hp              = p2hp;
-
-            if (isDrawGame) {
-                GameCtrl.I.drawGame();
-            }
-            else {
-                var winner:FighterMain, loser:FighterMain;
-
-                if (p1.hp > p2.hp) {
-                    winner = p1;
-                    loser  = p2;
-                }
-                else {
-                    winner = p2;
-                    loser  = p1;
-                }
-
-                if (!isTimeOver) {
-                    loser.die();
-                }
-
-                GameCtrl.I.doGameEnd(winner, loser);
-            }
-
-            _syncErrorTimes = 0;
-        }
-        catch (e:Error) {
-            trace(e);
-            syncError(true);
-            clearTimeout(_syncRoundFinishInt);
-            _syncRoundFinishInt = setTimeout(syncRoundFinish, 500, arr);
-        }
-    }
-
-    private function syncGameFinish():void {
-        _connGameLogic.enabled = false;
-        _connGameLogic.reset();
-
-        if (!GameCtrl.I.fightFinished) {
-            try {
-                GameCtrl.I.fightFinish();
-            }
-            catch (e:Error) {
-                syncError(true);
-                clearTimeout(_syncGameFinishInt);
-                _syncGameFinishInt = setTimeout(syncGameFinish, 500);
-            }
-
-        }
-
+        return _syncCore && _syncCore.receiveSync(o);
     }
 
     private function findHostTimerHandler(e:TimerEvent):void {
-        _udpSocket.sendBroadcast(LANGameCtrl.PORT_UDP_SERVER, SocketMsgFactory.createFindHostMsg());
+        _udpSocket.sendBroadcast(LanPorts.UDP_SERVER, SocketMsgFactory.createFindHostMsg());
     }
 
     private function socketHandler(e:SocketEvent):void {
@@ -583,7 +427,7 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     private function onRoundStart(e:GameEvent):void {
-        _connGameLogic.enabled = true;
+        _syncCore && _syncCore.onRoundStart();
     }
 
 }

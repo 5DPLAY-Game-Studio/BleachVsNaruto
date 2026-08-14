@@ -34,6 +34,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.data.lan.ClientVO;
+import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.win.data.HostVO;
 import net.play5d.game.bvn.win.input.InputManager;
 import net.play5d.kyo.air.socket.SocketServer;
@@ -98,13 +99,13 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     public function startServer(host:HostVO):void {
         _host = host;
-        SocketServer.I.bind(LANGameCtrl.PORT_TCP);
+        SocketServer.I.bind(LanPorts.TCP);
         SocketServer.I.addEventListener(SocketEvent.CLIENT_CONNECT, socketHandler);
         SocketServer.I.addEventListener(SocketEvent.CLIENT_DIS_CONNECT, socketHandler);
         SocketServer.I.addEventListener(SocketEvent.RECEIVE_DATA, tcpDataHandler);
 
         _udpSocket = new UDPSocket();
-        _udpSocket.listen(LANGameCtrl.PORT_UDP_SERVER);
+        _udpSocket.listen(LanPorts.UDP_SERVER);
         _udpSocket.addDataHandler(udpDataHandler);
 
     }
@@ -280,7 +281,7 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     public function sendUDP(data:Object):void {
         for each(var i:String in _udpClientMap) {
-            _udpSocket.send(i, LANGameCtrl.PORT_UDP_CLIENT, data);
+            _udpSocket.send(i, LanPorts.UDP_CLIENT, data);
         }
     }
 

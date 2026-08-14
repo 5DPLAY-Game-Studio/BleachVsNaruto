@@ -24,6 +24,7 @@ import net.play5d.game.bvn.data.*;
 import net.play5d.game.bvn.data.fighter.*;
 import net.play5d.game.bvn.data.lan.ClientVO;
 import net.play5d.game.bvn.data.lan.LanMsgType;
+import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.data.lan.LanSocketMsgFactory;
 import net.play5d.game.bvn.data.lan.LanSyncType;
 import net.play5d.game.bvn.data.lan.SelectFighterDataType;
@@ -36,6 +37,7 @@ import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
 import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
+import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
 
 /**
  * shared SWC 在 Flash / Animate IDE 中的导入主类。
@@ -68,6 +70,7 @@ public class _ImportIDE_ extends Sprite {
         // net.play5d.game.bvn.data.lan
         ClientVO,
         LanMsgType,
+        LanPorts,
         LanSocketMsgFactory,
         LanSyncType,
         SelectFighterDataType,
@@ -90,7 +93,8 @@ public class _ImportIDE_ extends Sprite {
         ILanClientLockLink,
         ILanExitDialog,
         ILanServerLockLink,
-        ILanSocketInput
+        ILanSocketInput,
+        IUdpTransport
     ];
 
     /**

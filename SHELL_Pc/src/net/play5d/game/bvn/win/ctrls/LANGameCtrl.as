@@ -23,11 +23,6 @@ import net.play5d.game.bvn.win.views.lan.LANGameState;
 
 public class LANGameCtrl {
 
-    public static const PORT_UDP_SERVER:int = 17477;
-    public static const PORT_UDP_CLIENT:int = 17478;
-
-    public static const PORT_TCP:int = 17511;
-
     private static var _i:LANGameCtrl;
 
     public static function get I():LANGameCtrl {

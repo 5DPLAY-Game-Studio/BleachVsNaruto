@@ -25,7 +25,7 @@ import flash.events.MouseEvent;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.win.ctrls.LANGameCtrl;
+import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.win.ctrls.LANServerCtrl;
 import net.play5d.game.bvn.win.data.HostVO;
 import net.play5d.game.bvn.win.data.LanGameModel;
@@ -113,8 +113,8 @@ public class LANHostCreateDialog implements IStage {
         hv.gameMode   = mode;
         hv.password   = pass;
         hv.ownerName  = LanGameModel.I.playerName;
-        hv.tcpPort    = LANGameCtrl.PORT_TCP;
-        hv.udpPort    = LANGameCtrl.PORT_UDP_SERVER;
+        hv.tcpPort    = LanPorts.TCP;
+        hv.udpPort    = LanPorts.UDP_SERVER;
 
         LANServerCtrl.I.startServer(hv);
 
