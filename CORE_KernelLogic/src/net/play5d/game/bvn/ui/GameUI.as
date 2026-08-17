@@ -195,21 +195,15 @@ public class GameUI {
     public function initMission(p1:GameRunFighterGroup):void {
         var volume:Number = GameData.I.config.soundVolume;
 
-        if (_ui) {
-            if (_ui is FightUI == false) {
+        if (!(_ui is MusouUI)) {
+            if (_ui) {
                 _ui.destroy();
-                _ui = new FightUI();
-                _ui.setVolume(volume);
             }
-        }
-        else {
             _ui = new MusouUI();
             _ui.setVolume(volume);
         }
 
-        (
-                _ui as MusouUI
-        ).initialize(p1);
+        (_ui as MusouUI).initialize(p1);
     }
 
     public function render():void {
@@ -232,13 +226,14 @@ public class GameUI {
 
     public function fadOut():void {
         if (_ui) {
-            _ui.fadIn();
+            _ui.fadOut();
         }
     }
 
     public function destroy():void {
         if (_ui) {
             _ui.destroy();
+            _ui = null;
         }
     }
 

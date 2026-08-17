@@ -377,7 +377,9 @@ public class GameCtrl {
     }
 
     public function startNextRound():void {
-        _roundCtrl.startNextRound();
+        if (_roundCtrl) {
+            _roundCtrl.startNextRound();
+        }
     }
 
     /**

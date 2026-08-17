@@ -422,7 +422,7 @@
           "team_null" : "GameCtrl.addGameSprite:: 变量 '{name}' 为空！"
         },
         "game_main_logic_ctrler": {
-          "render_game_sprite" : "GameMainLogicCtrler.renderGameSprite:: {error}"
+          "render_game_sprite" : "GameMainLogicCtrl.renderGameSprite:: {error}"
         },
         "game_loading_stage": {
           "preload_fail" : "游戏初始化失败：准备游戏资源失败： {error}",
