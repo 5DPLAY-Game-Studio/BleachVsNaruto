@@ -7,7 +7,7 @@
 |------|------|
 | 启动入口 | `MainGame.as` |
 | 场景（菜单/选人/对战/加载/地图） | `stage/` → `MenuStage` `SelectFighterStage` `GameStage` `Loading*` `WorldMapStage` |
-| 对战流程 | `ctrler/game_ctrls/` → `GameCtrl` + `IFightSession`（`VersusFightSession` / `MusouFightSession`） |
+| 对战流程 | `ctrler/game_ctrls/` → `GameCtrl` + `GameRoundCtrl` + `IFightSession`（`VersusFightSession` / `MusouFightSession`）；生成 `GameRunFactory`；Sprite 染色 `GameSpriteUtil` |
 | 无双 / 闯关 | `ctrler/musou_ctrls/` `data/musou/` `ui/musou/` `ui/big_map/` |
 | 角色 / 动作 / 受击 | `fighter/` `fighter/ctrler/` → `FighterMcCtrler`（时间轴门面，`$mc_ctrler`）+ `fighter/ctrler/mc/`（`FighterMcRuntime` / Hurt / Action + Floor/Air/Ghost Handler）；`FighterActionLogic`；`fighter/models/` → `HitVO` |
 | 援助 | `fighter/Assister.as` `fighter/ctrler/AssisterCtrler.as` |
@@ -55,6 +55,18 @@
 |----|-----|------|
 | 全局 | `ctrler.*` | 对局、特效、加载、联机、无双会话 |
 | 实体 | `fighter.ctrler.*` | 单角色 MC/键/AI/镜头/语音；MC 内部协作在 `fighter.ctrler.mc.*` |
+
+## 命名约定（Ctrl / Handler / Flow / Session）
+
+| 后缀 | 含义 | 例 |
+|------|------|----|
+| `Ctrl` | 可独立生命周期的控制器 / 门面 | `GameCtrl` `TrainingCtrl` `GameMainLogicCtrl` |
+| `Handler` | 门面下的协作块（无独立会话） | `Effect*Handler` `FighterMc*Handler` |
+| `Flow` | 步进状态机 | `ISelectModeFlow` |
+| `Session` | 对局模式会话 | `VersusFightSession` |
+| `Util` / `Factory` | 无状态静态工具 | `GameSpriteUtil` `GameRunFactory` `LANUtils` |
+
+Flash IDE 时间轴面（`FighterCtrler` 等）保留既有 `*Ctrler` 名，不强行改。
 
 ## Flash IDE 冻结面
 

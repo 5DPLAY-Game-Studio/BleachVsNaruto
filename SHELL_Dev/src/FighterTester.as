@@ -36,7 +36,7 @@ import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.StateCtrl;
-import net.play5d.game.bvn.ctrler.game_ctrls.TrainingCtrler;
+import net.play5d.game.bvn.ctrler.game_ctrls.TrainingCtrl;
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
@@ -599,7 +599,7 @@ public class FighterTester extends Sprite {
 
         GameMode.currentMode = GameMode.TRAINING;
 
-        TrainingCtrler.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == GetLang('txt.options.enable');
+        TrainingCtrl.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == GetLang('txt.options.enable');
 
         GameData.I.p1Select          = new SelectVO();
         GameData.I.p2Select          = new SelectVO();

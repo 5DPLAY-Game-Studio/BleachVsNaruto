@@ -38,7 +38,6 @@ import net.play5d.game.bvn.data.TeamMap;
 import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.factory.GameRunFactory;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.ctrler.FighterAICtrl;
@@ -80,9 +79,10 @@ public class GameCtrl {
     private var _teamMap:TeamMap = new TeamMap();
     private var _startCtrl:GameStartCtrl; //开场控制
     private var _fightSession:IFightSession; //格斗 / 无双会话
-    private var _trainingCtrl:TrainingCtrler; //练习模式控制
-    private var _mainLogicCtrl:GameMainLogicCtrler; //游戏主逻辑控制
+    private var _trainingCtrl:TrainingCtrl; //练习模式控制
+    private var _mainLogicCtrl:GameMainLogicCtrl; //游戏主逻辑控制
     private var _endCtrl:GameEndCtrl; //KO，结束游戏控制
+    private var _roundCtrl:GameRoundCtrl; //回合推进
     private var _isRenderGame:Boolean = true;
     private var _isPauseGame:Boolean; //暂停
     private var _gameRunning:Boolean;
@@ -109,6 +109,27 @@ public class GameCtrl {
         return _teamMap;
     }
 
+    /** @private 供 GameRoundCtrl */
+    public function get roundStartCtrl():GameStartCtrl {
+        return _startCtrl;
+    }
+
+    /** @private */
+    public function set roundStartCtrl(v:GameStartCtrl):void {
+        _startCtrl = v;
+    }
+
+    /** @private 供 GameRoundCtrl */
+    public function get roundTimeFrame():int {
+        return _renderTimeFrame;
+    }
+
+    /** @private */
+    public function set roundTimeFrame(v:int):void {
+        _renderTimeFrame = v;
+    }
+
+
     public function getFighterByData(data:FighterVO):FighterMain {
         return this.gameState.getFighterByData(data);
     }
@@ -130,6 +151,9 @@ public class GameCtrl {
         _fightSession.onGameInitialize();
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
+
+        _roundCtrl ||= new GameRoundCtrl();
+        _roundCtrl.bind(this);
 
         KeyBoarder.focus();
     }
@@ -164,6 +188,11 @@ public class GameCtrl {
         if (_endCtrl) {
             _endCtrl.destroy();
             _endCtrl = null;
+        }
+
+        if (_roundCtrl) {
+            _roundCtrl.destroy();
+            _roundCtrl = null;
         }
 
         if (gameState) {
@@ -348,7 +377,7 @@ public class GameCtrl {
     }
 
     public function startNextRound():void {
-        doBuildNextRound(GameMode.isTeamMode());
+        _roundCtrl.startNextRound();
     }
 
     /**
@@ -398,7 +427,7 @@ public class GameCtrl {
     }
 
     public function initMainLogic():void {
-        _mainLogicCtrl = new GameMainLogicCtrler();
+        _mainLogicCtrl = new GameMainLogicCtrl();
         _mainLogicCtrl.initialize(gameState, _teamMap);
     }
 
@@ -583,7 +612,7 @@ public class GameCtrl {
         var p2:FighterMain = p2Group.currentFighter;
 
         if (GameMode.currentMode == GameMode.TRAINING) {
-            _trainingCtrl = new TrainingCtrler();
+            _trainingCtrl = new TrainingCtrl();
             _trainingCtrl.initialize([p1, p2]);
             gameRunData.gameTimeMax = -1;
         }
@@ -650,50 +679,6 @@ public class GameCtrl {
 
     }
 
-    /**
-     * 运行下一个回合
-     */
-    private function buildNextRound(isTeamMode:Boolean):void {
-//			if(!autoStartAble) return;
-        doBuildNextRound(isTeamMode);
-    }
-
-    /**
-     * 执行构建下一回合
-     * @param isTeamMode 是否为小队模式
-     */
-    private function doBuildNextRound(isTeamMode:Boolean):void {
-        gameState.resetFight(gameRunData.p1FighterGroup, gameRunData.p2FighterGroup);
-
-        _startCtrl = new GameStartCtrl(gameState);
-
-        if (isTeamMode) {
-            if (gameRunData.lastWinner) {
-                gameRunData.lastWinner.hp = gameRunData.lastWinnerHp;
-            }
-
-            var loseTeam:int = TeamID.UNKNOWN;
-            if (gameRunData.lastWinnerTeam) {
-                loseTeam = TeamID.TEAM_1 == gameRunData.lastWinnerTeam.id ?
-                           TeamID.TEAM_2 :
-                           TeamID.TEAM_1;
-            }
-
-            _startCtrl.start1v1(
-                    gameRunData.p1FighterGroup.currentFighter,
-                    gameRunData.p2FighterGroup.currentFighter,
-                    loseTeam
-            );
-        }
-        else {
-            _startCtrl.startNextRound();
-        }
-
-        gameRunData.isDrawGame = false;
-
-        GameEvent.dispatchEvent(GameEvent.ROUND_START);
-    }
-
     private function initTeam():void {
         _teamMap.clear();
 
@@ -706,7 +691,7 @@ public class GameCtrl {
     }
 
     /**
-     * 主ENTER_FRAME
+     * 主 ENTER_FRAME
      */
     private function render():void {
         renderPause();
@@ -752,7 +737,7 @@ public class GameCtrl {
             if (fin2) {
                 _endCtrl.destroy();
                 _endCtrl = null;
-                runNext();
+                _roundCtrl.onEndFinished();
             }
         }
 
@@ -792,148 +777,8 @@ public class GameCtrl {
 
         if (actionEnable && !_startCtrl && !_endCtrl && _fightSession &&
             _fightSession.allowsRoundTimer()) {
-            renderGameTime();
+            _roundCtrl.renderGameTime();
         }
-    }
-
-    private function renderGameTime():void {
-        if (gameRunData.gameTimeMax != -1) {
-            if (++_renderTimeFrame > GameConfig.FPS_ANIMATE) {
-                _renderTimeFrame = 0;
-                gameRunData.gameTime--;
-                if (gameRunData.gameTime <= 0) {
-                    fightTimeover();
-                }
-            }
-        }
-    }
-
-    private function fightTimeover():void {
-        TraceLang('debug.trace.data.game_ctrl.time_over');
-
-        actionEnable = false;
-
-        var fighter1:FighterMain = gameRunData.p1FighterGroup.currentFighter;
-        var fighter2:FighterMain = gameRunData.p2FighterGroup.currentFighter;
-
-        gameRunData.isTimerOver = true;
-
-        if (fighter1.hp == fighter2.hp) {
-            drawGame();
-            return;
-        }
-
-        if (fighter1.hp > fighter2.hp) {
-            gameEnd(fighter1, fighter2);
-        }
-        else {
-            gameEnd(fighter2, fighter1);
-        }
-
-    }
-
-    /**
-     * 下一场战斗
-     */
-    private function runNext():void {
-        TraceLang('debug.trace.data.game_ctrl.current_mode', {mode: GameMode.currentMode});
-
-        gameRunData.nextRound();
-
-        if (GameMode.isTeamMode()) {
-            if (startNextTeamFight()) {
-                buildNextRound(true);
-                gameRunData.lastWinner = null;
-                return;
-            }
-        }
-
-        if (GameMode.isSingleMode()) {
-            if (gameRunData.p1Wins < 2 && gameRunData.p2Wins < 2) {
-                buildNextRound(false);
-                gameRunData.lastWinner = null;
-                return;
-            }
-        }
-
-        fightFinish();
-
-    }
-
-    private function startNextTeamFight():Boolean {
-
-        if (gameRunData.isDrawGame) {
-
-            var p1NextFighter:FighterVO = gameRunData.p1FighterGroup.getNextFighter();
-            var p2NextFighter:FighterVO = gameRunData.p2FighterGroup.getNextFighter();
-
-//				trace(p1NextFighter , p2NextFighter);
-
-            if (!p1NextFighter && !p2NextFighter) {
-                return true;
-            }
-
-            if (p1NextFighter && !p2NextFighter) {
-                gameRunData.lastWinnerTeam = gameRunData.p1FighterGroup.currentFighter.team;
-                return false;
-            }
-
-            if (!p1NextFighter && p2NextFighter) {
-                gameRunData.lastWinnerTeam = gameRunData.p2FighterGroup.currentFighter.team;
-                return false;
-            }
-
-            nextFighter(gameRunData.p1FighterGroup);
-            nextFighter(gameRunData.p2FighterGroup);
-
-            return true;
-        }
-
-        switch (gameRunData.lastWinnerTeam.id) {
-        case TeamID.TEAM_1:
-            return nextFighter(gameRunData.p2FighterGroup);
-        case TeamID.TEAM_2:
-            return nextFighter(gameRunData.p1FighterGroup);
-        }
-
-        gameRunData.lastWinnerTeam = null;
-
-        return true;
-    }
-
-    private function nextFighter(fg:GameRunFighterGroup):Boolean {
-        if (!fg) {
-            return false;
-        }
-
-        var team:TeamVO = fg.currentFighter.team;
-
-        var nextFighterData:FighterVO = fg.getNextFighter();
-        if (!nextFighterData) {
-            return false;
-        }
-
-        var nextFighter:FighterMain = GameRunFactory.createFighterByData(nextFighterData, team.id.toString());
-        if (!nextFighter) {
-            return false;
-        }
-
-        if (gameRunData.lastLoserData) {
-            if (gameRunData.lastLoserData.comicType == nextFighter.data.comicType) {
-                nextFighter.qi = gameRunData.lastLoserQi + 100;
-                if (nextFighter.qi > nextFighter.qiMax) {
-                    nextFighter.qi = nextFighter.qiMax;
-                }
-            }
-        }
-
-        removeFighter(fg.currentFighter, true);
-
-        fg.currentFighter = nextFighter;
-
-        addFighter(fg.currentFighter, team.id);
-
-        return true;
     }
 
     private function setAnimateFPS(v:Number):void {

@@ -31,8 +31,8 @@ import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.kyo.utils.KyoColor;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
 
 /**
  * 判定面调试叠加层。
@@ -161,7 +161,7 @@ public class DebugMain {
     private function renderAllMain():void {
         renderFighterMain(P1);
         renderFighterMain(P2);
-        MCUtils.renderGameSpritesCB(onGameSprite);
+        GameSpriteUtil.renderGameSpritesCB(onGameSprite);
     }
 
     /**

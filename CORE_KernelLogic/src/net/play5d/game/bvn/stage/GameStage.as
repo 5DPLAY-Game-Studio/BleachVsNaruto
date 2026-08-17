@@ -40,8 +40,8 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.kyo.stage.IStage;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
 
 public class GameStage extends Sprite implements IStage {
 
@@ -81,7 +81,7 @@ public class GameStage extends Sprite implements IStage {
 //		private var _renderAnimateFrame:int = 0;
 
     public function setVisibleByClass(cls:Class, visible:Boolean):void {
-        MCUtils.renderGameSpritesCB(function (sp:IGameSprite):void {
+        GameSpriteUtil.renderGameSpritesCB(function (sp:IGameSprite):void {
             var clsName:String = getQualifiedClassName(sp);
             var defCls:Class   = getDefinitionByName(clsName) as Class;
 
@@ -248,7 +248,7 @@ public class GameStage extends Sprite implements IStage {
 
         // 执行 P2 变色
         if (GameCtrl.I.gameRunData.isSameFighter) {
-            MCUtils.autoChangeSpColor(P2);
+            GameSpriteUtil.autoChangeSpColor(P2);
         }
 
         var stageSize:Point;
@@ -296,7 +296,7 @@ public class GameStage extends Sprite implements IStage {
 
         // 执行 P2 变色
         if (GameCtrl.I.gameRunData.isSameFighter) {
-            MCUtils.autoChangeSpColor(P2);
+            GameSpriteUtil.autoChangeSpColor(P2);
         }
 
         gameUI.initFight(p1group, p2group);

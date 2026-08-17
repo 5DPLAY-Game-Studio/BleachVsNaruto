@@ -33,8 +33,8 @@ import net.play5d.game.bvn.fighter.Bullet;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.kyo.utils.KyoColor;
+import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
 
 /**
  * 战斗实体线框叠加层（调试用）。
@@ -178,7 +178,7 @@ public class DebugSpriteBounds {
 
         _overlay.graphics.clear();
         _items.length = 0;
-        MCUtils.renderGameSpritesCB(collectSprite);
+        GameSpriteUtil.renderGameSpritesCB(collectSprite);
         drawCollected();
     }
 

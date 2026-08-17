@@ -26,7 +26,6 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.game.bvn.views.effects.FollowEffectView;
 
 public class BaseFighterEventCtrl {
@@ -95,7 +94,7 @@ public class BaseFighterEventCtrl {
         // 若为 FighterMain 或 Assister，直接参考添加 Attacker 实现
         // 若为 Attacker，则必须再次向其上级判断是 FighterMain 还是 Assister
 
-        MCUtils.autoChangeSpColor(bullet, event.fighter);
+        GameSpriteUtil.autoChangeSpColor(bullet, event.fighter);
 
         GameCtrl.I.addGameSprite(event.fighter.team.id, bullet);
     }
@@ -114,7 +113,7 @@ public class BaseFighterEventCtrl {
         // P2 相同角色下召唤的独立道具变色逻辑
         // Attacker 的上级只可能是 FighterMain 或者 Assister
 
-        MCUtils.autoChangeSpColor(attacker, event.fighter);
+        GameSpriteUtil.autoChangeSpColor(attacker, event.fighter);
 
         _attackers.push(attacker);
 
@@ -140,7 +139,7 @@ public class BaseFighterEventCtrl {
         // 若为 FighterMain 或 Assister，直接参考添加 Attacker 实现
         // 若为 Attacker，则必须再次向其上级判断是 FighterMain 还是 Assister
 
-        MCUtils.autoChangeSpColor(effect, event.fighter);
+        GameSpriteUtil.autoChangeSpColor(effect, event.fighter);
 
         var isUnderBody:Boolean = params.isUnderBody;
         GameCtrl.I.addGameSprite(event.fighter.team.id, effect, isUnderBody ? 0 : -1);

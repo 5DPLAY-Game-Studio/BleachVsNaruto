@@ -96,31 +96,6 @@ public class EffectCtrl {
 
     private var _frameEffectCount:Dictionary = new Dictionary();
     private var _removeEnemieMap:Object = {};
-    //P 当前，N前提条件
-    private var wayPoints:Array = [
-
-        {P: "p1", N: null},
-
-        {P: "p2", N: "p1"},
-        {P: "p2_1", N: "p2"},
-        {P: "p2_2", N: "p2"},
-
-
-        {P: "p3", N: ["p2_1", "p2_2"]},
-        {P: "p3_1", N: "p3"},
-        {P: "p3_1_1", N: "p3_1"},
-        {P: "p3_1_2", N: "p3_1_1"},
-
-        {P: "p3_2", N: "p3"},
-        {P: "p3_2_4", N: "p3_2"}, {P: "p3_2_3", N: "p3_2_4"},
-        {P: "p3_2_1", N: "p3_2"}, {P: "p3_2_2", N: "p3_2_1"},
-        {P: "p3_2_5", N: "p3_2_4"},
-        {P: "p3_2_6", N: ["p3_2_5", "p3_2_4"]},
-
-        {P: "p4", N: ["p3_1_2", "p3_2_5"]},
-
-        {P: "p5", N: "p3_2_6"},
-    ];
 
     public function destroy():void {
         // 执行销毁时结束震动

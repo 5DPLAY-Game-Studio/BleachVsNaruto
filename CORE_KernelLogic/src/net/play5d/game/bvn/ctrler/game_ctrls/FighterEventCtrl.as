@@ -30,7 +30,6 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.utils.MCUtils;
 
 public class FighterEventCtrl extends BaseFighterEventCtrl {
 
@@ -135,7 +134,7 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
         assister.onRemove = removeAssister;
 
         // P2 相同辅助变色逻辑
-        MCUtils.autoChangeSpColor(assister, fighter);
+        GameSpriteUtil.autoChangeSpColor(assister, fighter);
 
         GameCtrl.I.addGameSprite(e.fighter.team.id, assister);
         EffectCtrl.I.assisterEffect(assister);
