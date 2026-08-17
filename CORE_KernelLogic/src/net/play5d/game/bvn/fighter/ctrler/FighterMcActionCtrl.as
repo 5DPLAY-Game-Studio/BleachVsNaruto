@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.fighter.ctrler {
 import flash.display.DisplayObject;
+import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.GameLogic;
@@ -704,15 +705,6 @@ public class FighterMcActionCtrl {
         _mc.goFrame(FighterSpecialFrame.JUMP_DOWN, false);
     }
 
-    /**
-     * 执行动作
-     *
-     * @param action 动作帧标签。
-     * @param airAct 是否为空中动作。
-     * @param delayParam 跳转延迟参数。
-     * @param inputText 练习模式输入历史指令串（与帧标签无关，如 <code>WJ</code>）。
-     * @param highlight 是否使用菜单选中同款红色高亮。
-
     private function setMoveAction():void {
         _action.clearAction();
 
@@ -736,8 +728,8 @@ public class FighterMcActionCtrl {
 
         _owner.setDefense();
 
-        setCatch1();
-        setCatch2();
+        _owner.setCatch1();
+        _owner.setCatch2();
 
     }
 
@@ -1193,8 +1185,6 @@ public class FighterMcActionCtrl {
         _fighter.getCtrler().setDirectToTarget();
         _owner.idle();
     }
-
-}
 
 }
 }

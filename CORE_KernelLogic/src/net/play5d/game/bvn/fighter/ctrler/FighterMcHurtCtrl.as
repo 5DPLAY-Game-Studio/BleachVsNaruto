@@ -30,6 +30,7 @@ import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
