@@ -277,7 +277,7 @@ public class EffectCtrl {
             return;
         }
         var frame:int = (
-                                time / 1000
+                                time * 0.001
                         ) * GameConfig.FPS_GAME;
         if (frame < 1) {
             return;

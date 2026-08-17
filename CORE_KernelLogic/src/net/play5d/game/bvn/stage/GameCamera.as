@@ -162,18 +162,20 @@ public class GameCamera {
     public function setZoom(value:Number):void {
         _zoom = value;
 
-        _noTweenRect.width  = _screenSize.x / _zoom;
-        _noTweenRect.height = _screenSize.y / _zoom;
+        var invZoom:Number = 1 / _zoom;
 
-        _foffsetX = _screenSize.x / 2 / _zoom;
-        _foffsetY = _screenSize.y / 2 / _zoom;
+        _noTweenRect.width  = _screenSize.x * invZoom;
+        _noTweenRect.height = _screenSize.y * invZoom;
+
+        _foffsetX = _screenSize.x * 0.5 * invZoom;
+        _foffsetY = _screenSize.y * 0.5 * invZoom;
 
         //边界
         if (_fbR) {
             _fbR.x      = _stageBounds.x * _zoom;
             _fbR.y      = _stageBounds.y * _zoom;
-            _fbR.width  = _stageBounds.width - _screenSize.x / _zoom;
-            _fbR.height = _stageBounds.height - _screenSize.y / _zoom;
+            _fbR.width  = _stageBounds.width - _screenSize.x * invZoom;
+            _fbR.height = _stageBounds.height - _screenSize.y * invZoom;
         }
     }
 
@@ -197,7 +199,7 @@ public class GameCamera {
 
     public function moveCenter():void {
         _focus = null;
-        _point = new Point(stageSize.x / 2, stageSize.y / 2);
+        _point = new Point(stageSize.x * 0.5, stageSize.y * 0.5);
     }
 
     public function render():void {
@@ -303,7 +305,7 @@ public class GameCamera {
                 r = a;
             }
             distanceX = r.x - l.x;
-            _point.x  = l.x + distanceX / 2;
+            _point.x  = l.x + distanceX * 0.5;
         }
         if (focusY) {
             var u:DisplayObject, d:DisplayObject;
@@ -316,7 +318,7 @@ public class GameCamera {
                 d = a;
             }
             distanceY = d.y - u.y;
-            _point.y  = u.y + distanceY / 2;
+            _point.y  = u.y + distanceY * 0.5;
         }
 
         if (autoZoom) {
@@ -376,8 +378,9 @@ public class GameCamera {
             _stageScale = _zoom;
         }
 
-        _rect.width  = (_screenSize.x / _stageScale + 1) >> 0;
-        _rect.height = (_screenSize.y / _stageScale + 1) >> 0;
+        var invStageScale:Number = 1 / _stageScale;
+        _rect.width  = (_screenSize.x * invStageScale + 1) >> 0;
+        _rect.height = (_screenSize.y * invStageScale + 1) >> 0;
     }
 
 }

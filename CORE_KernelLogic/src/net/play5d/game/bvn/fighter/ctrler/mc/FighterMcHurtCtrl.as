@@ -611,7 +611,7 @@ public class FighterMcHurtCtrl {
         if (hitvo.hurtType == 0) {
             _action.isHurting = true;
             _hurtHoldFrame    = Math.round((
-                                                   hitvo.hurtTime / 1000
+                                                   hitvo.hurtTime * 0.001
                                            ) * GameConfig.FPS_ANIMATE) + GameConfig.HURT_FRAME_OFFSET;
             if (_hurtHoldFrame < GameConfig.HURT_GAP_FRAME) {
                 _hurtHoldFrame = GameConfig.HURT_GAP_FRAME;
@@ -778,7 +778,7 @@ public class FighterMcHurtCtrl {
             defEnergy = _fighter.energyMax * GameConfig.ENERGY_LOSE_DEFENSE_BREAK_RATE;
         }
         else {
-            defEnergy = hitvo.getDamage() / 5;
+            defEnergy = hitvo.getDamage() * 0.2;
             if (defEnergy > 50) {
                 defEnergy = 50;
             }
@@ -806,8 +806,8 @@ public class FighterMcHurtCtrl {
 
         if (hitvo.hurtType == 0) {
             _defenseHoldFrame = int((
-                                    hitvo.hurtTime / 1000
-                                    ) * GameConfig.FPS_GAME / 5);
+                                    hitvo.hurtTime * 0.001
+                                    ) * GameConfig.FPS_GAME * 0.2);
             if (_defenseHoldFrame < GameConfig.DEFENSE_HOLD_FRAME_MIN) {
                 _defenseHoldFrame
                         = GameConfig.DEFENSE_HOLD_FRAME_MIN;
@@ -835,7 +835,7 @@ public class FighterMcHurtCtrl {
      * 破防
      */
     private function doBreakDefense(hitvo:HitVO, hitRect:Rectangle):void {
-        _fighter.loseHp(hitvo.getDamage() / 10);
+        _fighter.loseHp(hitvo.getDamage() * 0.1);
 
         if (hitvo.hurtType == 0) {
             _beHitGap = GameConfig.BREAK_DEF_GAP_FRAME;
@@ -878,8 +878,8 @@ public class FighterMcHurtCtrl {
         _fighter.setDamping(GameConfig.HURT_DAMPING_X);
 
         if (hitvo && hitRect) {
-            var effectx:Number = hitRect.x + hitRect.width / 2;
-            var effecty:Number = hitRect.y + hitRect.height / 2;
+            var effectx:Number = hitRect.x + hitRect.width * 0.5;
+            var effecty:Number = hitRect.y + hitRect.height * 0.5;
             EffectCtrl.I.doDefenseEffect(hitvo, hitRect, _fighter.defenseType);
             EffectCtrl.I.doEffectById('break_def', effectx, effecty, _fighter.direct);
         }

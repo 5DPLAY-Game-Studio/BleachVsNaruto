@@ -141,7 +141,7 @@ public class EffectShakeHandler {
                 _shakePowX    = Math.abs(powX);
             }
             else {
-                _shakePowX += Math.abs(powX) / 2;
+                _shakePowX += Math.abs(powX) * 0.5;
             }
 
             if (_shakePowX > SHAKE_POW_MAX) {
@@ -155,7 +155,7 @@ public class EffectShakeHandler {
                 _shakePowY    = Math.abs(powY);
             }
             else {
-                _shakePowY += Math.abs(powY) / 2;
+                _shakePowY += Math.abs(powY) * 0.5;
             }
             if (_shakePowY > SHAKE_POW_MAX) {
                 _shakePowY = SHAKE_POW_MAX;
@@ -166,12 +166,9 @@ public class EffectShakeHandler {
             time = 500;
         }
 
-        _shakeLoseX = Math.ceil(_shakePowX / (
-                time / 1000 * GameConfig.FPS_ANIMATE
-        ));
-        _shakeLoseY = Math.ceil(_shakePowY / (
-                time / 1000 * GameConfig.FPS_ANIMATE
-        ));
+        var shakeFrames:Number = time * 0.001 * GameConfig.FPS_ANIMATE;
+        _shakeLoseX = Math.ceil(_shakePowX / shakeFrames);
+        _shakeLoseY = Math.ceil(_shakePowY / shakeFrames);
 
         if (_shakeLoseX < 1) {
             _shakeLoseX = 1;

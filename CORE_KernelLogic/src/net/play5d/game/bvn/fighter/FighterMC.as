@@ -557,7 +557,7 @@ public class FighterMC {
                 _hurtFlyState = 4;
 
                 var yDiff:Number = _fighter.y - _hurtYMin;
-                var vecy:Number  = yDiff / 25 * (
+                var vecy:Number  = yDiff * 0.04 * (
                         1 + _hity * 0.1
                 );
 
@@ -574,7 +574,7 @@ public class FighterMC {
             else {
                 goFrame(FighterSpecialFrame.HURT_TAN, false);
                 yDiff = _fighter.y - _hurtYMin;
-                vecy  = yDiff / 25;
+                vecy  = yDiff * 0.04;
 
                 if (vecy < GameConfig.HIT_FLOOR_TAN_Y_MIN) {
                     vecy = GameConfig.HIT_FLOOR_TAN_Y_MIN;

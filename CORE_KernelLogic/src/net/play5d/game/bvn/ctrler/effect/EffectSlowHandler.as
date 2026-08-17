@@ -134,7 +134,7 @@ public class EffectSlowHandler {
             _slowDownFrame = 0;
         }
         else {
-            _slowDownFrame = time / 1000 * GameConfig.FPS_GAME;
+            _slowDownFrame = time * 0.001 * GameConfig.FPS_GAME;
         }
     }
 
@@ -160,7 +160,7 @@ public class EffectSlowHandler {
             return;
         }
         _gameStage.getMap().setSmoothing(blurX, blurY);
-        _blurFrame = time / 1000 * GameConfig.FPS_ANIMATE;
+        _blurFrame = time * 0.001 * GameConfig.FPS_ANIMATE;
     }
 
     /**
