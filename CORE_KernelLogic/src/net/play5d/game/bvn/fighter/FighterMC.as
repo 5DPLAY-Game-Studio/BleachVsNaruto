@@ -68,6 +68,10 @@ public class FighterMC {
     private var _goFrameDelay:Object = null;
     private var _hitx:Number = 0;
     private var _hity:Number = 0;
+    private var _childAnimFrame:int      = -1;
+    private var _childAnimChildCount:int = -1;
+    private var _childAnimList:Vector.<MovieClip> = new Vector.<MovieClip>();
+    private var _childAnimTotals:Vector.<int>     = new Vector.<int>();
 
     /**
      * 当前帧名称
@@ -118,22 +122,12 @@ public class FighterMC {
         if (!_mc) {
             return '';
         }
-        var key:String = String(_mc.currentFrame);
-        var i:int;
-        var length:int = _mc.numChildren;
-        for (i = 0; i < length; i++) {
-            var child:MovieClip = _mc.getChildAt(i) as MovieClip;
-            if (!child) {
-                continue;
-            }
-            var mcName:String = child.name;
-            if (mcName == 'AImain' || mcName == 'bdmn' || mcName.indexOf('atm') != -1) {
-                continue;
-            }
-            if (child.totalFrames < 2) {
-                continue;
-            }
-            key += '_' + child.currentFrame;
+        ensureChildAnimCache();
+        var key:String                   = String(_mc.currentFrame);
+        var list:Vector.<MovieClip>      = _childAnimList;
+        var n:int                        = list.length;
+        for (var i:int = 0; i < n; i++) {
+            key += '_' + list[i].currentFrame;
         }
         return key;
     }
@@ -164,6 +158,8 @@ public class FighterMC {
         _fighter         = null;
         _fighterDisplay  = null;
         _undefinedFrames = null;
+        _childAnimList   = null;
+        _childAnimTotals = null;
     }
 
     public function getChildByName(name:String):DisplayObject {
@@ -401,41 +397,62 @@ public class FighterMC {
      * 播放子MC
      */
     private function renderChildren():void {
-        var i:int;
-        var length:int = _mc.numChildren;
-        for (i = 0; i < length; i++) {
-
-            try {
-                var mc:MovieClip = _mc.getChildAt(i) as MovieClip;
-                if (mc) {
-                    var mcName:String = mc.name;
-                    if (mcName == 'AImain' || mcName == 'bdmn' || mcName.indexOf('atm') != -1) {
-                        continue;
+        try {
+            ensureChildAnimCache();
+            var list:Vector.<MovieClip> = _childAnimList;
+            var totals:Vector.<int>     = _childAnimTotals;
+            var n:int                   = list.length;
+            for (var i:int = 0; i < n; i++) {
+                var mc:MovieClip    = list[i];
+                var totalFrames:int = totals[i];
+                switch (mc.currentFrameLabel) {
+                case 'stop':
+                    break;
+                default:
+                    if (mc.currentFrame == totalFrames) {
+                        mc.gotoAndStop(1);
                     }
-
-                    var totalFrames:int = mc.totalFrames;
-                    if (totalFrames < 2) {
-                        continue;
+                    else {
+                        mc.nextFrame();
                     }
-
-                    switch (mc.currentFrameLabel) {
-                    case 'stop':
-                        break;
-                    default:
-                        if (mc.currentFrame == totalFrames) {
-                            mc.gotoAndStop(1);
-                        }
-                        else {
-                            mc.nextFrame();
-                        }
-                    }
-
                 }
             }
-            catch (e:Error) {
-                throw new Error(GetLang('debug.error.data.fighter_mc.render_children', {stackTrace: e.getStackTrace()}))
-            }
+        }
+        catch (e:Error) {
+            throw new Error(GetLang('debug.error.data.fighter_mc.render_children', {stackTrace: e.getStackTrace()}))
+        }
+    }
 
+    /**
+     * 按主时间轴当前帧缓存需推进的子 MC（跳过 AImain/bdmn/atm 与单帧件）。
+     */
+    private function ensureChildAnimCache():void {
+        var frame:int      = _mc.currentFrame;
+        var childCount:int = _mc.numChildren;
+        if (frame == _childAnimFrame && childCount == _childAnimChildCount) {
+            return;
+        }
+
+        _childAnimFrame         = frame;
+        _childAnimChildCount    = childCount;
+        _childAnimList.length   = 0;
+        _childAnimTotals.length = 0;
+
+        for (var i:int = 0; i < childCount; i++) {
+            var mc:MovieClip = _mc.getChildAt(i) as MovieClip;
+            if (!mc) {
+                continue;
+            }
+            var mcName:String = mc.name;
+            if (mcName == 'AImain' || mcName == 'bdmn' || mcName.indexOf('atm') != -1) {
+                continue;
+            }
+            var totalFrames:int = mc.totalFrames;
+            if (totalFrames < 2) {
+                continue;
+            }
+            _childAnimList.push(mc);
+            _childAnimTotals.push(totalFrames);
         }
     }
 
