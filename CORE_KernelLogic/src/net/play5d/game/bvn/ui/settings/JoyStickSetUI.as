@@ -31,6 +31,7 @@ import net.play5d.game.bvn.input.JoyStickConfigVO;
 import net.play5d.game.bvn.input.JoyStickSetVO;
 import net.play5d.game.bvn.input.JoySticker;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
+import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.kyo.utils.WebUtils;
 
 /**

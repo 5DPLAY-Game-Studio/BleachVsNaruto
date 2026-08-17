@@ -20,6 +20,7 @@ package net.play5d.game.bvn.ui {
 import flash.display.Sprite;
 
 import net.play5d.game.bvn.events.SetBtnEvent;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 
 public class ContinueBtn extends Sprite {
 

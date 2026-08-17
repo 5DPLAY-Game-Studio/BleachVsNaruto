@@ -164,7 +164,7 @@ public class SelectFighterCursorCtrl {
                );
     }
 
-    private function moveToSelectFighter(slt:SelecterItemUI, sf:SelectFighterItem):void {
+    public function moveToSelectFighter(slt:SelecterItemUI, sf:SelectFighterItem):void {
         if (!sf || !sf.selectData) {
             return;
         }
@@ -187,7 +187,7 @@ public class SelectFighterCursorCtrl {
         showMoreFighters(slt, sf);
     }
 
-    private function moveToSelectFighterMore(slt:SelecterItemUI, sf:SelectFighterItem):void {
+    public function moveToSelectFighterMore(slt:SelecterItemUI, sf:SelectFighterItem):void {
         slt.randoms = null;
 
         slt.moreX = sf.position.x;
@@ -314,13 +314,7 @@ public class SelectFighterCursorCtrl {
             si = new SelectFighterItem(fv, null, true);
             trace(posSN, morePosition, si.fighterData.id);
 
-            if (GameConfig.TOUCH_MODE) {
-                si.addEventListener(TouchEvent.TOUCH_TAP, selectFighterTouchHandler);
-            }
-            else {
-                si.addEventListener(MouseEvent.MOUSE_OVER, selectFighterMouseHandler);
-                si.addEventListener(MouseEvent.CLICK, selectFighterMouseHandler);
-            }
+            _list.bindItemInput(si);
 
             si.position = fighterPos;
 

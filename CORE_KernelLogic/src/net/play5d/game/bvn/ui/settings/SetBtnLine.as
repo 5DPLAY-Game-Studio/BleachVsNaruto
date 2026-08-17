@@ -23,6 +23,9 @@ import flash.display.Sprite;
 import flash.text.TextField;
 import flash.text.TextFormatAlign;
 
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.ui.UIUtils;
+
 public class SetBtnLine extends Sprite {
 
     /** @private */

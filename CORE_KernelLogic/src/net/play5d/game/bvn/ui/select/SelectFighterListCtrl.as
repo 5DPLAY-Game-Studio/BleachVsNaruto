@@ -79,7 +79,7 @@ public class SelectFighterListCtrl {
     /** @private */
     private var _moreFighterMap:Dictionary = new Dictionary();
     /** @private */
-    private var _moreFighterCache:Object   = {};
+    private var _moreFighterCache:Dictionary = new Dictionary();
 
     /**
      * @param fighterListUI 角色格子容器。
@@ -212,7 +212,7 @@ public class SelectFighterListCtrl {
             _moreFighterMap[f] = null;
         }
         _moreFighterMap   = new Dictionary();
-        _moreFighterCache = {};
+        _moreFighterCache = new Dictionary();
     }
 
     /**
@@ -353,13 +353,7 @@ public class SelectFighterListCtrl {
 
         var si:SelectFighterItem = new SelectFighterItem(fv, sv);
 
-        if (GameConfig.TOUCH_MODE) {
-            si.addEventListener(TouchEvent.TOUCH_TAP, selectFighterTouchHandler);
-        }
-        else {
-            si.addEventListener(MouseEvent.MOUSE_OVER, selectFighterMouseHandler);
-            si.addEventListener(MouseEvent.CLICK, selectFighterMouseHandler);
-        }
+        bindItemInput(si);
 
         _fighterListUI.addChild(si.ui);
 
@@ -369,6 +363,21 @@ public class SelectFighterListCtrl {
         _itemObj[sv.x + ',' + sv.y] = si;
 
         return si;
+    }
+
+    /**
+     * 绑定格子鼠标 / 触屏（供 CursorCtrl 创建「更多角色」时复用）。
+     *
+     * @param si 格子。
+     */
+    public function bindItemInput(si:SelectFighterItem):void {
+        if (GameConfig.TOUCH_MODE) {
+            si.addEventListener(TouchEvent.TOUCH_TAP, selectFighterTouchHandler);
+        }
+        else {
+            si.addEventListener(MouseEvent.MOUSE_OVER, selectFighterMouseHandler);
+            si.addEventListener(MouseEvent.CLICK, selectFighterMouseHandler);
+        }
     }
 
     private function selectFighterMouseHandler(type:String, target:SelectFighterItem):void {
@@ -426,7 +435,7 @@ public class SelectFighterListCtrl {
         if (_p1Slt && _p1Slt.enabled) {
 
             if (_p1Slt.moreEnabled() && target.isMore) {
-                moveToSelectFighterMore(_p1Slt, target);
+                _cursor.moveToSelectFighterMore(_p1Slt, target);
                 SoundCtrl.I.sndSelect();
                 return;
             }
@@ -434,14 +443,14 @@ public class SelectFighterListCtrl {
             if (checkSelected(_p1Slt, target)) {
                 return;
             }
-            moveToSelectFighter(_p1Slt, target);
+            _cursor.moveToSelectFighter(_p1Slt, target);
             SoundCtrl.I.sndSelect();
             return;
         }
         if (_p2Slt && _p2Slt.enabled) {
 
             if (_p2Slt.moreEnabled() && target.isMore) {
-                moveToSelectFighterMore(_p2Slt, target);
+                _cursor.moveToSelectFighterMore(_p2Slt, target);
                 SoundCtrl.I.sndSelect();
                 return;
             }
@@ -449,7 +458,7 @@ public class SelectFighterListCtrl {
             if (checkSelected(_p2Slt, target)) {
                 return;
             }
-            moveToSelectFighter(_p2Slt, target);
+            _cursor.moveToSelectFighter(_p2Slt, target);
             SoundCtrl.I.sndSelect();
             return;
         }
@@ -521,16 +530,6 @@ public class SelectFighterListCtrl {
     /** @private 供 CursorCtrl */
     public function get curListConfig():SelectCharListConfigVO {
         return _curListConfig;
-    }
-
-    /** @private */
-    public function get curListMap():Object {
-        return _curListMap;
-    }
-
-    /** @private */
-    public function get fighterItems():Vector.<SelectFighterItem> {
-        return _fighterItems;
     }
 
     /** @private */
@@ -608,4 +607,5 @@ public class SelectFighterListCtrl {
         _cursor.moveSelecter(slt, addX, addY);
     }
 
+}
 }

@@ -24,6 +24,7 @@ import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.events.SetBtnEvent;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 
 public class MoveListSp extends Sprite {
 

@@ -34,6 +34,7 @@ import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.interfaces.GameInterface;
+import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
 import net.play5d.game.bvn.utils.TouchUtils;
 

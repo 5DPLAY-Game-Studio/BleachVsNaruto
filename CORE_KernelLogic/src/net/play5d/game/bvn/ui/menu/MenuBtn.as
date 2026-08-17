@@ -27,6 +27,8 @@ import flash.geom.ColorTransform;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
+import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.BitmapText;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
