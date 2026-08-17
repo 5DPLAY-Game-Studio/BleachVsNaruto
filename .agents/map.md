@@ -21,7 +21,7 @@
 | 渲染节拍 | `ctrler/GameRender.as` |
 | 数据 / VO | `data/` `data/vos/` |
 | 战斗 HUD | `ui/fight/` |
-| 选人 UI | `ui/select/` `ui/dialog/select/`；模式步进 → `ui/select/flow/`（`SelectModeFlowFactory`） |
+| 选人 UI | `ui/select/` `SelectFighterListCtrl`（列表/光标）`ui/select/flow/`（模式步进）`ui/dialog/select/` |
 | 菜单 / 暂停 / 设置 | `ui/` `stage/SettingStage.as` |
 | 多语言 | `utils/MultiLangUtils.as` `ui/language/` `stage/LanguageStage.as`；键约定见 [i18n.md](i18n.md) |
 | 作弊码 | `utils/CheatCodeManager.as` |
