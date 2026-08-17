@@ -20,36 +20,32 @@ package net.play5d.game.bvn.ctrler {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.filters.BitmapFilter;
-import flash.geom.ColorTransform;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.ctrler.effect.EffectBlackBackHandler;
 import net.play5d.game.bvn.ctrler.effect.EffectHitHandler;
+import net.play5d.game.bvn.ctrler.effect.EffectShadowHandler;
 import net.play5d.game.bvn.ctrler.effect.EffectShakeHandler;
 import net.play5d.game.bvn.ctrler.effect.EffectSlowHandler;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.fighter.FighterHitFloorType;
 import net.play5d.game.bvn.data.vos.EffectVO;
-import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.DisplayFrameBitmapCache;
 import net.play5d.game.bvn.utils.EffectManager;
 import net.play5d.game.bvn.views.effects.BitmapFilterView;
-import net.play5d.game.bvn.views.effects.BlackBackView;
 import net.play5d.game.bvn.views.effects.BuffEffectView;
 import net.play5d.game.bvn.views.effects.EffectView;
-import net.play5d.game.bvn.views.effects.ShadowEffectView;
 import net.play5d.game.bvn.views.effects.ShineEffectView;
 import net.play5d.game.bvn.views.effects.SpecialEffectView;
 import net.play5d.kyo.utils.UUID;
@@ -87,22 +83,14 @@ public class EffectCtrl {
     private var _manager:EffectManager;
     private var _freezeFrame:int                         = 0;
     private var _effects:Vector.<EffectView>;
-    private var _justRenderAnimateTargets:Vector.<BaseGameSprite>;
-    private var _justRenderTargets:Vector.<BaseGameSprite>;
     private var _shineEffects:Vector.<ShineEffectView>;
-    private var _shadowEffects:Dictionary;
     private var _filterEffects:Vector.<BitmapFilterView> = new Vector.<BitmapFilterView>();
-    private var _blackBack:BlackBackView;
 
-    private var _shakeHandler:EffectShakeHandler = new EffectShakeHandler();
-    private var _slowHandler:EffectSlowHandler   = new EffectSlowHandler();
-    private var _hitHandler:EffectHitHandler     = new EffectHitHandler();
-
-    private var _replaceSkillFrame:int;
-    private var _replaceSkillFrameHold:int;
-    private var _replaceSkillPos:Point;
-    private var _explodeSkillFrame:int;
-    private var _explodeEffectPos:Point;
+    private var _shakeHandler:EffectShakeHandler         = new EffectShakeHandler();
+    private var _slowHandler:EffectSlowHandler           = new EffectSlowHandler();
+    private var _hitHandler:EffectHitHandler             = new EffectHitHandler();
+    private var _shadowHandler:EffectShadowHandler       = new EffectShadowHandler();
+    private var _blackBackHandler:EffectBlackBackHandler = new EffectBlackBackHandler();
 
     private var _onFreezeOver:Vector.<Function> = null;
 
@@ -137,33 +125,21 @@ public class EffectCtrl {
     public function destroy():void {
         // 执行销毁时结束震动
         _shakeHandler.destroy();
-        // 灵压爆发与替身术剩余帧数归零
-        _replaceSkillFrame = _explodeSkillFrame = 0;
 
         if (_manager) {
             _manager.destroy();
             _manager = null;
         }
 
-        if (_blackBack) {
-            _blackBack.destroy();
-            _blackBack = null;
-        }
-
+        _blackBackHandler.destroy();
+        _shadowHandler.destroy();
         _hitHandler.destroy();
         _slowHandler.destroy();
 
-        _renderBlackBack = false;
-        _blackBackMul    = BLACK_BACK_NORMAL;
-        _blackBackCt     = null;
-
-        _effects                  = null;
-        _justRenderAnimateTargets = null;
-        _justRenderTargets        = null;
-        _shineEffects             = null;
-        _shadowEffects            = null;
-        _gameStage                = null;
-        _effectLayer              = null;
+        _effects       = null;
+        _shineEffects  = null;
+        _gameStage     = null;
+        _effectLayer   = null;
 
         DisplayFrameBitmapCache.I.clear();
 
@@ -177,22 +153,14 @@ public class EffectCtrl {
         _gameStage   = gameStage;
         _effectLayer = effectLayer;
 
-        _effects                  = new Vector.<EffectView>();
-        _justRenderAnimateTargets = new Vector.<BaseGameSprite>();
-        _justRenderTargets        = new Vector.<BaseGameSprite>();
-        _shineEffects             = new Vector.<ShineEffectView>();
-        _shadowEffects            = new Dictionary();
-
-        _blackBack = new BlackBackView();
-//			_backRootLayer.addChild(_blackBack);
-
-        _renderBlackBack = false;
-        _blackBackMul    = BLACK_BACK_NORMAL;
-        _blackBackCt     = null;
+        _effects      = new Vector.<EffectView>();
+        _shineEffects = new Vector.<ShineEffectView>();
 
         _shakeHandler.initialize(gameStage);
         _slowHandler.initialize(gameStage);
         _hitHandler.bind(this, _manager);
+        _shadowHandler.initialize(effectLayer);
+        _blackBackHandler.initialize(this, gameStage);
 
     }
 
@@ -216,24 +184,7 @@ public class EffectCtrl {
             renderAnimate();
         }
 
-        // 如果角色调用了 bisha()，那么则会开始渲染黑屏背景函数
-        if (_renderBlackBack) {
-            renderBlackBack();
-        }
-
-        if (_replaceSkillFrameHold > 0) {
-            renderReplaceSkill();
-        }
-        if (_explodeSkillFrame > 0) {
-            renderEnergyExplode();
-        }
-
-        if (_justRenderTargets.length > 0) {
-            for each(var g:BaseGameSprite in _justRenderTargets) {
-                g.render();
-                GameLogic.fixGameSpritePosition(g);
-            }
-        }
+        _blackBackHandler.render();
 
     }
 
@@ -401,111 +352,27 @@ public class EffectCtrl {
     public function startShadow(
             target:DisplayObject, r:int = 0, g:int = 0, b:int = 0, owner:BaseGameSprite = null
     ):void {
-
-        if (!SHADOW_ENABLED) {
-            return;
-        }
-
-        var sv:ShadowEffectView = _shadowEffects[target];
-
-        if (sv) {
-            sv.r          = r;
-            sv.g          = g;
-            sv.b          = b;
-            sv.owner      = owner;
-            sv.stopShadow = false;
-            return;
-        }
-
-        sv           = new ShadowEffectView(target, r, g, b, owner);
-        sv.onRemove  = removeShadow;
-        sv.container = _effectLayer;
-
-        _shadowEffects[target] = sv;
+        _shadowHandler.startShadow(target, r, g, b, owner);
     }
 
-    //		public function isFreezing():Boolean{
-    //			return _freezeFrame > 0;
-    //		}
-
     public function endShadow(target:DisplayObject):void {
-
-        if (!SHADOW_ENABLED) {
-            return;
-        }
-
-        if (!_shadowEffects) {
-            return;
-        }
-        var sv:ShadowEffectView = _shadowEffects[target];
-        if (sv) {
-            sv.stopShadow = true;
-        }
+        _shadowHandler.endShadow(target);
     }
 
     public function bisha(target:BaseGameSprite, isSuper:Boolean = false, face:DisplayObject = null):void {
-        justRenderAnimate(target);
-        GameCtrl.I.pause();
-        GameCtrl.I.setRenderHit(false);
-        _gameStage.addChildAt(_blackBack, 0);
-        _blackBack.fadIn();
-        if (face && target is FighterMain) {
-            showFace((
-                             target as FighterMain
-                     ), face);
-        }
-
-        if (isSuper) {
-            GameCtrl.I.gameState.cameraFocusOne(target.getDisplay());
-            doEffectById('bisha_super', target.x, target.y - 50);
-        }
-        else {
-            doEffectById('bisha', target.x, target.y - 50);
-        }
-
-        _gameStage.getMap().setVisible(false);
-        _gameStage.setVisibleByClass(BitmapFilterView, false);
-
+        _blackBackHandler.bisha(target, isSuper, face);
     }
 
     public function endBisha(target:BaseGameSprite):void {
-        if (cancelJustRenderAnimate(target)) {
-            GameCtrl.I.resume();
-            GameCtrl.I.gameState.cameraResume();
-            GameCtrl.I.setRenderHit(true);
-            _blackBack.fadOut();
-
-            _gameStage.getMap().setVisible(true);
-            _gameStage.setVisibleByClass(BitmapFilterView, true);
-        }
+        _blackBackHandler.endBisha(target);
     }
 
     public function wanKai(target:FighterMain, face:DisplayObject = null):void {
-        justRenderAnimate(target);
-        GameCtrl.I.pause();
-        GameCtrl.I.setRenderHit(false);
-        _gameStage.addChildAt(_blackBack, 0);
-        _blackBack.fadIn();
-        if (face) {
-            showFace(target, face);
-        }
-
-        GameCtrl.I.gameState.cameraFocusOne(target.getDisplay());
-        doEffectById('bisha_super', target.x, target.y - 50);
-
-        _gameStage.getMap().setVisible(false);
-        _gameStage.setVisibleByClass(BitmapFilterView, false);
-
+        _blackBackHandler.wanKai(target, face);
     }
 
     public function endWanKai(target:FighterMain):void {
-        if (cancelJustRenderAnimate(target)) {
-            GameCtrl.I.resume();
-            GameCtrl.I.gameState.cameraResume();
-            _blackBack.fadOut();
-            GameCtrl.I.setRenderHit(true);
-            _gameStage.getMap().setVisible(true);
-        }
+        _blackBackHandler.endWanKai(target);
     }
 
     public function jumpEffect(x:Number, y:Number):void {
@@ -594,54 +461,22 @@ public class EffectCtrl {
      * @param target
      */
     public function replaceSkill(target:BaseGameSprite):void {
-        //			_pauseRenderTarget = target;
-        GameCtrl.I.pause();
-        _gameStage.addChildAt(_blackBack, 0);
-        _gameStage.getMap().setVisible(false);
-
-        doEffectById('replaceSp', target.x, target.y);
-        _replaceSkillPos = new Point(target.x, target.y);
-
-        _replaceSkillFrame     = 0;
-        _replaceSkillFrameHold = GameConfig.FPS_GAME;
+        _blackBackHandler.replaceSkill(target);
     }
 
     /**
      * 灵压爆发
      */
     public function energyExplode(target:BaseGameSprite):void {
-        //			_pauseRenderTarget = target;
-        GameCtrl.I.pause();
-        _gameStage.addChildAt(_blackBack, 0);
-        _gameStage.getMap().setVisible(false);
-
-        doEffectById('explodeSp', target.x, target.y);
-        _explodeEffectPos = new Point(target.x, target.y);
-
-        _explodeSkillFrame = 0.7 * GameConfig.FPS_GAME;
+        _blackBackHandler.energyExplode(target);
     }
 
     public function ghostStep(target:BaseGameSprite):void {
-        justRender(target);
-        justRenderAnimate(target);
-        GameCtrl.I.pause();
-        _gameStage.addChildAt(_blackBack, 0);
-        _blackBack.fadIn();
-        _gameStage.getMap().setVisible(false);
-        SoundCtrl.I.playSwcSound(snd_ghost_jump);
-        //			slowDown(1.1,0);
+        _blackBackHandler.ghostStep(target);
     }
 
     public function endGhostStep(target:BaseGameSprite):void {
-        var cancel1:Boolean = cancelJustRender(target);
-        var cancel2:Boolean = cancelJustRenderAnimate(target);
-        if (cancel1 && cancel2) {
-            GameCtrl.I.resume();
-            _blackBack.fadOut();
-            _gameStage.getMap().setVisible(true);
-        }
-
-        //			slowDown(1.1,200);
+        _blackBackHandler.endGhostStep(target);
     }
 
     /**
@@ -707,10 +542,7 @@ public class EffectCtrl {
     }
 
     private function renderAnimate():void {
-        var sv:ShineEffectView;
         var ev:EffectView;
-        var s:ShadowEffectView;
-        var f:BitmapFilterView;
         var i:int = 0;
 
         for (i = 0; i < _effects.length; i++) {
@@ -718,20 +550,8 @@ public class EffectCtrl {
             ev.renderAnimate();
         }
 
-        for each(s in _shadowEffects) {
-            s.render();
-        }
-
-        if (_justRenderAnimateTargets.length > 0) {
-            var g:BaseGameSprite;
-            for each(g in _justRenderAnimateTargets) {
-                g.renderAnimate();
-            }
-        }
-
-        if (_blackBack) {
-            _blackBack.renderAnimate();
-        }
+        _shadowHandler.renderAnimate();
+        _blackBackHandler.renderAnimate();
 
         _shakeHandler.renderAnimate();
 
@@ -749,71 +569,6 @@ public class EffectCtrl {
         }
     }
 
-    /** @private 是否渲染必杀背景变暗 */
-    private var _renderBlackBack:Boolean;
-    /** @private 当前已应用到地图的 RGB 倍率 */
-    private var _blackBackMul:Number = 1;
-    /** @private 复用的颜色变换，避免每帧 new */
-    private var _blackBackCt:ColorTransform;
-
-    /** @private 每帧向目标倍率逼近的步长 */
-    private static const BLACK_BACK_RATE:Number = 0.025;
-    /** @private 必杀中背景变暗目标倍率 */
-    private static const BLACK_BACK_DARK:Number = 0.3;
-    /** @private 正常亮度倍率 */
-    private static const BLACK_BACK_NORMAL:Number = 1;
-
-    /**
-     * 渲染必杀时的地图变暗。
-     *
-     * <p>必杀中直接压暗（黑屏遮盖期间淡入无意义）；结束后按步长淡出恢复。</p>
-     */
-    private function renderBlackBack():void {
-        var mapLayer:MapMain = _gameStage.getMap();
-        if (!mapLayer) {
-            return;
-        }
-
-        // 任一方在必杀中则维持变暗（兼容仅一方存在的模式）
-        var bishaIng:Boolean
-            = (P1 && FighterActionState.isBishaIng(P1.actionState))
-            || (P2 && FighterActionState.isBishaIng(P2.actionState));
-
-        if (bishaIng) {
-            if (_blackBackMul != BLACK_BACK_DARK) {
-                applyBlackBackMul(mapLayer, BLACK_BACK_DARK);
-            }
-
-            return;
-        }
-
-        // 必杀结束：淡出恢复正常亮度
-        if (_blackBackMul + BLACK_BACK_RATE >= BLACK_BACK_NORMAL) {
-            mapLayer.resetColorTransform();
-            _renderBlackBack = false;
-            _blackBackMul    = BLACK_BACK_NORMAL;
-
-            return;
-        }
-
-        applyBlackBackMul(mapLayer, _blackBackMul + BLACK_BACK_RATE);
-    }
-
-    /**
-     * 将地图 RGB 倍率设为指定值。
-     * @param mapLayer 地图。
-     * @param mul RGB 通道倍率。
-     */
-    private function applyBlackBackMul(mapLayer:MapMain, mul:Number):void {
-        if (!_blackBackCt) {
-            _blackBackCt = new ColorTransform();
-        }
-
-        _blackBackMul = mul;
-        _blackBackCt.redMultiplier = _blackBackCt.greenMultiplier = _blackBackCt.blueMultiplier = mul;
-        mapLayer.setColorTransform(_blackBackCt);
-    }
-
     /**
      * 开始渲染必杀背景变暗。
      *
@@ -823,7 +578,7 @@ public class EffectCtrl {
      * </listing>
      */
     public function startRenderBlackBack():void {
-        _renderBlackBack = true;
+        _blackBackHandler.startRenderBlackBack();
     }
 
     private function renderFreeze():void {
@@ -862,52 +617,6 @@ public class EffectCtrl {
         }
     }
 
-    /**
-     * 只RENDER指定元素
-     * @param targets BaseGameSprite | Vector.<BaseGameSprite>
-     */
-    private function justRender(target:BaseGameSprite):void {
-        if (_justRenderTargets.indexOf(target) == -1) {
-            _justRenderTargets.push(target);
-        }
-    }
-
-    /**
-     * 只RENDER指定元素 (动画帧率)
-     * @param animateTargets BaseGameSprite | Vector.<BaseGameSprite>
-     */
-    private function justRenderAnimate(animateTarget:BaseGameSprite):void {
-        if (_justRenderAnimateTargets.indexOf(animateTarget) == -1) {
-            _justRenderAnimateTargets.push(animateTarget);
-        }
-    }
-
-    /**
-     * 取消RENDER指定元素
-     * @param targets
-     * @return 是否已全部取消
-     */
-    private function cancelJustRender(target:BaseGameSprite):Boolean {
-        var index:int = _justRenderTargets.indexOf(target);
-        if (index != -1) {
-            _justRenderTargets.splice(index, 1);
-        }
-        return _justRenderTargets.length < 1;
-    }
-
-    /**
-     * 取消RENDER指定元素 (动画帧率)
-     * @param animateTargets
-     * @return 是否已全部取消
-     */
-    private function cancelJustRenderAnimate(target:BaseGameSprite):Boolean {
-        var index:int = _justRenderAnimateTargets.indexOf(target);
-        if (index != -1) {
-            _justRenderAnimateTargets.splice(index, 1);
-        }
-        return _justRenderAnimateTargets.length < 1;
-    }
-
     private function removeShine(s:ShineEffectView):void {
         var id:int = _shineEffects.indexOf(s);
         if (id != -1) {
@@ -915,76 +624,7 @@ public class EffectCtrl {
         }
     }
 
-    private function removeShadow(s:ShadowEffectView):void {
-        if (!_shadowEffects) {
-            return;
-        }
-        delete _shadowEffects[s.target];
-    }
-
-    /**
-     * 显示必杀特写
-     * @param target 特写目标
-     * @param face 特写显示对象
-     */
-    private function showFace(target:FighterMain, face:DisplayObject):void {
-        var faceId:int            = TeamID.TEAM_1;
-        var curTarget:IGameSprite = target.getCurrentTarget();
-        if (curTarget) {
-            var display:DisplayObject = curTarget.getDisplay();
-            if (display) {
-                faceId = target.getDisplay().x > display.x ?
-                         TeamID.TEAM_2 :
-                         TeamID.TEAM_1;
-            }
-        }
-
-//        if(TeamID.isTeam2(target)) {
-//            faceId = TeamID.TEAM_2;
-//        }
-
-        _blackBack.showBishaFace(faceId, face);
-    }
-
-    private function endReplaceSkill():void {
-        GameCtrl.I.resume();
-        //			_pauseRenderTarget = null;
-        _blackBack.fadOut();
-        _gameStage.getMap().setVisible(true);
-        _replaceSkillFrameHold = 0;
-    }
-
-    private function renderReplaceSkill():void {
-        _replaceSkillFrame++;
-        if (_replaceSkillFrame == 1) {
-            doEffectById('replaceSp2', _replaceSkillPos.x, _replaceSkillPos.y);
-        }
-
-        if (_replaceSkillFrame > _replaceSkillFrameHold) {
-            endReplaceSkill();
-        }
-    }
-
-    private function endEnergyExplode():void {
-        doEffectById('explodeSp2', _explodeEffectPos.x, _explodeEffectPos.y);
-
-        GameCtrl.I.resume();
-        //			_pauseRenderTarget = null;
-        _blackBack.fadOut();
-        _gameStage.getMap().setVisible(true);
-        _explodeSkillFrame = 0;
-    }
-
-    private function renderEnergyExplode():void {
-        _explodeSkillFrame--;
-        if (_explodeSkillFrame <= 0) {
-            endEnergyExplode();
-        }
-    }
-
     private function renderRemoveEnemy():void {
-        var removes:Array = [];
-
         for (var i:String in _removeEnemieMap) {
             var o:Object          = _removeEnemieMap[i];
             var f:FighterMain     = o.fighter;
