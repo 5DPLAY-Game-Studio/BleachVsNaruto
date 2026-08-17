@@ -26,7 +26,6 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.data.HitType;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.data.fighter.FighterInputCmd;
 import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
@@ -48,8 +47,12 @@ public class FighterMcCtrler {
 //			_mc = mc;
         _fighter     = fighter;
         _actionLogic = new FighterActionLogic(fighter);
+        _hurtCtrl    = new FighterMcHurtCtrl();
+        _hurtCtrl.bind(this);
     }
     public var effectCtrler:FighterEffectCtrl;
+    /** @private 受击/防御域 */
+    private var _hurtCtrl:FighterMcHurtCtrl;
     private var _actionCtrler:IFighterActionCtrl; //角色操作控制
     private var _mc:FighterMC; //角色SWF中的MC元件控制
     private var _fighter:FighterMain; //角色SWF主类
@@ -58,24 +61,20 @@ public class FighterMcCtrler {
     private var _doingAirAction:String; //当前空中动作
     private var _isFalling:Boolean; //是否正在落下
     private var _jumpDelayFrame:int = 0; //跳跃延时（帧）
-    private var _hurtHoldFrame:int    = 0; //被打延时
-    private var _defenseHoldFrame:int = 0; //防御延时
-    private var _beHitGap:int; //受攻击间隔(帧)
     private var _doActionFrame:int; //执行动作的帧数
     private var _isTouchFloor:Boolean = true;//是否已经在地上
-    private var _isDefense:Boolean; //是否正在防御
-    private var _defenseFrameDelay:int = 0;
     private var _moveTargetParam:MoveTargetParamVO; //是否正在防御
-    private var _hurtDownFrame:int;
     private var _ghostStepIng:Boolean;
     private var _ghostStepFrame:int;
     private var _autoDirectFrame:int;
-    private var _justDefenseFrame:int;
     private var _ghostType:int = 0;
-    private var _justHurtResume:Boolean;
     private var _actionLogic:FighterActionLogic;
 
     public function destroy():void {
+        if (_hurtCtrl) {
+            _hurtCtrl.destroy();
+            _hurtCtrl = null;
+        }
         if (_actionCtrler) {
             _actionCtrler.destroy();
             _actionCtrler = null;
@@ -107,6 +106,68 @@ public class FighterMcCtrler {
 
     public function getActionCtrler():IFighterActionCtrl {
         return _actionCtrler;
+    }
+
+    /**
+     * 角色主类（供 HurtCtrl 使用）。
+     */
+    public function getFighter():FighterMain {
+        return _fighter;
+    }
+
+    /**
+     * 动作判定逻辑（供 HurtCtrl 使用）。
+     */
+    public function getActionLogic():FighterActionLogic {
+        return _actionLogic;
+    }
+
+    /**
+     * 是否已贴地（供 HurtCtrl 读写）。
+     */
+    public function get isTouchFloorFlag():Boolean {
+        return _isTouchFloor;
+    }
+
+    /** @private */
+    public function set isTouchFloorFlag(v:Boolean):void {
+        _isTouchFloor = v;
+    }
+
+    /**
+     * 是否正在下落（供 HurtCtrl 读写）。
+     */
+    public function get isFallingFlag():Boolean {
+        return _isFalling;
+    }
+
+    /** @private */
+    public function set isFallingFlag(v:Boolean):void {
+        _isFalling = v;
+    }
+
+    /**
+     * 当前动作名（供 HurtCtrl 读写）。
+     */
+    public function get doingActionName():String {
+        return _doingAction;
+    }
+
+    /** @private */
+    public function set doingActionName(v:String):void {
+        _doingAction = v;
+    }
+
+    /**
+     * 当前空中动作名（供 HurtCtrl 读写）。
+     */
+    public function get doingAirActionName():String {
+        return _doingAirAction;
+    }
+
+    /** @private */
+    public function set doingAirActionName(v:String):void {
+        _doingAirAction = v;
     }
 
     /**
@@ -151,7 +212,6 @@ public class FighterMcCtrler {
         }
     }
 
-
     //----------------------------------------------------------------------------------------------
     //    帧上调用方法     =============================================================================
     //----------------------------------------------------------------------------------------------
@@ -175,17 +235,13 @@ public class FighterMcCtrler {
             return;
         }
 
-        if (FighterActionState.isHurting(_fighter.actionState)) {
-            _justHurtResume = true;
-        }
+        _hurtCtrl.onIdleEnter(FighterActionState.isHurting(_fighter.actionState));
 
         endAct();
         _doingAction    = null;
         _doingAirAction = null;
 
         setSteelBody(false);
-
-        _justDefenseFrame = 0.1 * GameConfig.FPS_GAME;
 
         effectCtrler.endShadow();
         effectCtrler.endShake();
@@ -194,15 +250,13 @@ public class FighterMcCtrler {
         _action.clearState();
 
         _fighter.actionState  = FighterActionState.NORMAL;
-        _fighter.isAllowBeHit = !_justHurtResume;
+        _fighter.isAllowBeHit = !_hurtCtrl.justHurtResume;
         _fighter.isApplyG     = true;
         _fighter.isCross      = false;
         _fighter.hurtHit      = null;
         _fighter.defenseHit   = null;
         _fighter.clearHurtHits();
         _fighter.getDisplay().visible = true;
-
-        _isDefense = false;
 
         _autoDirectFrame = 0;
 
@@ -636,7 +690,7 @@ public class FighterMcCtrler {
         _mc.playHurtFly(x * _fighter.direct, y, false);
         _action.isHurtFlying = true;
         _fighter.actionState = FighterActionState.HURT_FLYING;
-        _hurtDownFrame       = 0;
+        _hurtCtrl.resetHurtDownFrame();
         _isFalling           = false;
     }
 
@@ -731,9 +785,7 @@ public class FighterMcCtrler {
             return;
         }
 
-        if (_justDefenseFrame > 0) {
-            _justDefenseFrame--;
-        }
+        _hurtCtrl.tickJustDefenseFrame();
 
         _action.render();
 
@@ -748,17 +800,17 @@ public class FighterMcCtrler {
 //			renderAssist();
 
         if (_action.isHurtFlying) {
-            renderHurtFlying();
+            _hurtCtrl.renderHurtFlying();
             return;
         }
 
         if (_action.isHurting) {
-            renderHurt();
+            _hurtCtrl.renderHurt();
             return;
         }
 
         if (_action.isDefenseHiting) {
-            renderDefense(false, true);
+            _hurtCtrl.renderDefense(false, true);
             return;
         }
 
@@ -780,17 +832,11 @@ public class FighterMcCtrler {
             renderFloorAction();
         }
 
-
     }
 
     public function renderAnimate():void {
 
-        if (_justHurtResume) {
-            _fighter.isAllowBeHit = true;
-            _justHurtResume       = false;
-        }
-
-        renderBeHitGap();
+        _hurtCtrl.renderAnimatePrelude();
 
         if (_mc) {
             _mc.renderAnimate();
@@ -807,10 +853,10 @@ public class FighterMcCtrler {
 
         if (_action) {
             if (_action.isHurting) {
-                renderHurtAnimate();
+                _hurtCtrl.renderHurtAnimate();
             }
             if (_action.isDefenseHiting) {
-                renderDefensHiting();
+                _hurtCtrl.renderDefensHiting();
             }
 
             if (_action.isJumping) {
@@ -821,7 +867,7 @@ public class FighterMcCtrler {
                 _doActionFrame++;
             }
             if (_action.isDefensing) {
-                renderDefenseAnimate();
+                _hurtCtrl.renderDefenseAnimate();
             }
         }
 
@@ -865,7 +911,6 @@ public class FighterMcCtrler {
 
         _isTouchFloor = true;
         _isFalling    = false;
-
 
     }
 
@@ -920,76 +965,7 @@ public class FighterMcCtrler {
      * @param hitRect 攻击范围
      */
     public function beHit(hitVO:HitVO, hitRect:Rectangle = null):void {
-        if (_action.hurtAction) {
-            doAction(_action.hurtAction);
-            return;
-        }
-
-        var target:IGameSprite       = hitVO.owner;
-        var targetBGS:BaseGameSprite =
-                    (target && (target is BaseGameSprite)) ?
-                    target as BaseGameSprite :
-                    null;
-        if (_fighter.getIsTouchSide() &&
-            target &&
-            targetBGS &&
-            targetBGS.isAllowReversePush
-        ) {
-            if (Math.abs(_fighter.x - target.x) < 100) {
-//                var dampingX:Number = _isDefense ?
-//                                      GameConfig.DEFENSE_DAMPING_X :
-//                                      (hitVO.hurtType == 1 ? 0.2 : GameConfig.HURT_DAMPING_X);
-                var dampingX:Number = 0.3;
-                var vecX:Number     = -hitVO.hitx * targetBGS.direct * 1.4;
-                if (vecX > 20) {
-                    vecX = 20;
-                }
-                if (vecX < -20) {
-                    vecX = -20;
-                }
-
-                targetBGS.setVec2(vecX, 0, dampingX, 0);
-            }
-        }
-
-//        if (_isDefense) {
-//            if (hitVO.isBreakDef && hitVO.hitType == HitType.CATCH) {
-//                doHurt(hitVO, hitRect);
-//                return;
-//            }
-//
-//            if (hitVO.checkDirect && hitVO.owner) {
-//                if (checkDefDirect(hitVO.owner)) {
-//                    doHurt(hitVO, hitRect);
-//                    return;
-//                }
-//            }
-//
-//            doDefenseHit(hitVO, hitRect);
-//        }
-//        else {
-//            if (_fighter.isSteelBody && _fighter.isAlive) {
-//                doSteelHurt(hitVO, hitRect);
-//            }
-//            else {
-//                doHurt(hitVO, hitRect);
-//            }
-//        }
-
-        if (_fighter.isSteelBody) {
-            if (_fighter.isAlive) {
-                doSteelHurt(hitVO, hitRect);
-            }
-        }
-        else if (_isDefense &&
-                 !(hitVO.isBreakDef && hitVO.hitType == HitType.CATCH) &&
-                 !(hitVO.checkDirect && hitVO.owner && checkDefDirect(hitVO.owner)))
-        {
-            doDefenseHit(hitVO, hitRect);
-        }
-        else {
-            doHurt(hitVO, hitRect);
-        }
+        _hurtCtrl.beHit(hitVO, hitRect);
     }
 
     /**
@@ -1014,34 +990,6 @@ public class FighterMcCtrler {
     public function doLose():void {
         _fighter.actionState = FighterActionState.LOSE;
         _mc.goFrame(FighterSpecialFrame.LOSE);
-    }
-
-    //正在被击飞
-    private function renderHurtFlying():void {
-        if (!_fighter.isInAir) {
-            _isTouchFloor = true;
-        }
-
-        if (!_fighter.isAlive) {
-            return;
-        }
-
-        if (_fighter.actionState == FighterActionState.HURT_DOWN_TAN) {
-            _hurtDownFrame = 1;
-        }
-
-        if (_hurtDownFrame > 0) {
-            if (!_actionLogic || !_actionLogic.enabled()) {
-                return;
-            }
-            if (++_hurtDownFrame < GameConfig.HURT_DOWN_JUMP_FRAME) {
-                if (_actionLogic.hurtFlyResume()) {
-                    doHurtDownJump();
-                    _hurtDownFrame = 0;
-                }
-            }
-        }
-
     }
 
     //招唤
@@ -1120,7 +1068,7 @@ public class FighterMcCtrler {
         }
 
         if (_actionLogic.defense()) {
-            doDefense();
+            _hurtCtrl.doDefense();
         }
 
         if (_actionLogic.dash()) {
@@ -1145,7 +1093,7 @@ public class FighterMcCtrler {
             renderMoving();
         }
         if (_action.isDefensing) {
-            renderDefense();
+            _hurtCtrl.renderDefense();
         }
 
         if (_actionLogic.ghostStep()) {
@@ -1295,7 +1243,6 @@ public class FighterMcCtrler {
 //			var targetDisplay:DisplayObject = target.getDisplay();
 //			if(!targetDisplay) return;
 
-
 //			var selfDisplay:DisplayObject = _fighter.getDisplay();
 //			if(!selfDisplay) return;
 
@@ -1369,7 +1316,6 @@ public class FighterMcCtrler {
             }
         }
 
-
     }
 
     /**
@@ -1392,7 +1338,7 @@ public class FighterMcCtrler {
         _isFalling      = true;
         _doingAirAction = null;
         _isTouchFloor   = false;
-        _isDefense      = false;
+        _hurtCtrl.clearDefense();
 
         _fighter.setVecX(0);
 
@@ -1410,7 +1356,7 @@ public class FighterMcCtrler {
      * @param inputText 练习模式输入历史指令串（与帧标签无关，如 <code>WJ</code>）。
      * @param highlight 是否使用菜单选中同款红色高亮。
      */
-    private function doAction(
+    public function doAction(
             action:String, airAct:Boolean = false, delayParam:Object = null, inputText:String = null,
             highlight:Boolean                                                                 = false
     ):void {
@@ -1434,7 +1380,7 @@ public class FighterMcCtrler {
         _action.clearAction();
         _isFalling = false;
 
-        _isDefense = false;
+        _hurtCtrl.clearDefense();
 
         _fighter.isAllowBeHit = true;
         _fighter.isCross      = false;
@@ -1452,7 +1398,7 @@ public class FighterMcCtrler {
      * @private 向练习模式输入历史派发指令（不切换动作帧）。
      * @param highlight 是否使用菜单选中同款红色高亮。
      */
-    private function dispatchTrainingInput(inputText:String, highlight:Boolean = false):void {
+    public function dispatchTrainingInput(inputText:String, highlight:Boolean = false):void {
         if (!inputText) {
             return;
         }
@@ -1535,95 +1481,6 @@ public class FighterMcCtrler {
     }
 
     /**
-     * 正在防御（动画控制）
-     */
-    private function renderDefense(setActions:Boolean = true, isJustDefense:Boolean = false):void {
-
-//			renderBeHitGap();
-
-        if (_actionCtrler.moveLEFT()) {
-            if (_fighter.direct != -1) {
-                _fighter.direct = -1;
-                setDefenseAction(setActions, isJustDefense);
-            }
-        }
-
-        if (_actionCtrler.moveRIGHT()) {
-            if (_fighter.direct != 1) {
-                _fighter.direct = 1;
-                setDefenseAction(setActions, isJustDefense);
-            }
-        }
-
-    }
-
-    private function renderDefenseAnimate():void {
-        if (_action.isDefenseHiting) {
-            return;
-        }
-        if (_defenseFrameDelay-- > 0) {
-            return;
-        }
-
-        if (_actionCtrler.enabled() && _actionCtrler.defense()) {
-            if (!_isDefense) {
-                _isDefense = true;
-            }
-        }
-        else {
-            if (_defenseFrameDelay > -5) {
-                return;
-            }
-            _action.isDefensing = false;
-            _mc.goFrame(FighterSpecialFrame.DEFENSE_RESUME, false, 0, {call: idle, delay: 1});
-        }
-    }
-
-    /**
-     * 设定防御动作
-     */
-    private function setDefenseAction(setActions:Boolean = true, isJustDefense:Boolean = false):void {
-//			trace('setDefenseAction');
-
-        if (setActions) {
-            _action.clearAction();
-            _action.clearState();
-
-            _action.isDefensing = true;
-            setSkill1();
-            setZhao2();
-            setBishaSUPER();
-            setJumpDown();
-        }
-
-        if (isJustDefense) {
-            _isDefense = true;
-        }
-        else {
-            _isDefense = _justDefenseFrame > 0 ? true : false;
-        }
-
-        _defenseFrameDelay = 1;
-
-        _mc.goFrame(FighterSpecialFrame.DEFENSE, true, 3);
-
-        FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DEFENSE);
-    }
-
-    /**
-     * 执行防御
-     */
-    private function doDefense():void {
-        if (_action.isDefensing) {
-            return;
-        }
-
-        _fighter.actionState = FighterActionState.DEFENSE_ING;
-        dampingPercent(1, 1);
-        setDefenseAction();
-    }
-
-    /**
      * 执行冲刺
      */
     private function doDash(action:String):void {
@@ -1696,7 +1553,7 @@ public class FighterMcCtrler {
         _fighter.setVecY(GameConfig.NO_TOUCH_BAN_ON_VECY);
         _fighter.setDamping(0, 1);
         _fighter.y += 1;
-        _isDefense = false;
+        _hurtCtrl.clearDefense();
         _mc.goFrame(acion, false);
         setTouchFloor();
     }
@@ -1876,455 +1733,6 @@ public class FighterMcCtrler {
         doAction(action, true, null, FighterInputCmd.BISHA_AIR);
     }
 
-    //判断是否背对着敌人
-    private function checkDefDirect(hiter:IGameSprite):Boolean {
-        var minx:int = 5;
-        if (_fighter.x < hiter.x - minx) {
-            return _fighter.direct < 0 && hiter.direct < 0;
-        }
-        if (_fighter.x > hiter.x + minx) {
-            return _fighter.direct > 0 && hiter.direct > 0;
-        }
-        return false;
-    }
-
-    private function doSteelHurt(hitvo:HitVO, hitRect:Rectangle):void {
-
-//			if(_fighter.energyOverLoad){
-//				doHurt(hitvo, hitRect);
-//				return;
-//			}
-
-        if (!_fighter.isSuperSteelBody && (
-                _fighter.energyOverLoad || hitvo.isBisha() || hitvo.isCatch()
-        )) {
-            doHurt(hitvo, hitRect);
-            return;
-        }
-
-        _fighter.hurtHit = hitvo;
-        if (_fighter.isSuperSteelBody) {
-            _fighter.loseHp(hitvo.getDamage() * GameConfig.STEEL_SUPER_HURT_HP_PERCENT);
-        }
-        else {
-            _fighter.loseHp(hitvo.getDamage() * GameConfig.STEEL_HURT_HP_PERCENT);
-        }
-
-        if (_fighter.isAlive && GameLogic.checkFighterDie(_fighter)) {
-            FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DIE);
-            _fighter.isAlive = false;
-            doHurt(hitvo, hitRect);
-            return;
-        }
-
-        if (hitvo.hurtType == 1) {
-            _beHitGap = GameConfig.STEEL_HURT_DOWN_GAP_FRAME;
-        }
-        else {
-            _beHitGap = GameConfig.STEEL_HURT_GAP_FRAME;
-        }
-
-        if (_fighter.isSuperSteelBody) {
-            _fighter.useEnergy(hitvo.getDamage() * 0.2);
-        }
-        else {
-            if (hitvo.isBreakDef) {
-                _fighter.useEnergy(hitvo.getDamage());
-            }
-            else {
-                _fighter.useEnergy(hitvo.getDamage() * 0.4);
-            }
-        }
-
-        _fighter.isAllowBeHit = false;
-
-        if (!_fighter.isSuperSteelBody) {
-            var hitx:Number = hitvo.hitx;
-            var hity:Number = hitvo.hity;
-            if (hitvo.owner) {
-                hitx *= hitvo.owner.direct;
-            }
-
-            var vev2X:Number = hitx;
-            var vev2Y:Number = hity;
-            if (hitvo.isBreakDef) {
-                vev2X *= 2;
-                vev2Y *= 2;
-            }
-
-            _fighter.setVec2(vev2X, vev2Y, Math.abs(hitx * 0.1), Math.abs(hity * 0.1));
-        }
-
-//			if(hitvo && hitRect) EffectCtrl.I.doHitEffect(hitvo , hitRect , _fighter);
-        if (hitvo && hitRect) {
-            EffectCtrl.I.doSteelHitEffect(hitvo, hitRect, _fighter);
-        }
-    }
-
-    /**
-     * 执行受伤
-     *
-     * @param hitVO 攻击值对象
-     * @param hitRect 攻击范围
-     */
-    private function doHurt(hitVO:HitVO, hitRect:Rectangle):void {
-        if (hitVO && hitRect) {
-            EffectCtrl.I.doHitEffect(hitVO, hitRect, _fighter);
-        }
-
-        _fighter.hurtHit = hitVO;
-        _fighter.loseHp(hitVO.getDamage());
-
-        _fighter.isAllowBeHit = false;
-        _beHitGap             = GameConfig.HURT_GAP_FRAME;
-
-        if (_fighter.isAlive && GameLogic.checkFighterDie(_fighter)) {
-            _fighter.isAlive = false;
-            FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DIE);
-        }
-
-        if (!_fighter.isAlive || !hitVO.isWeakHit()) {
-            doHurtAnimate(hitVO, hitRect);
-        }
-
-        // 受到非击飞类伤害时，根据要求设置自身是否受到重力效果
-        // 当僵直结束时，角色会自动恢复重力（idle 效果）
-        if (_fighter.isAlive && hitVO.hurtType == 0) {
-            _fighter.isApplyG = hitVO.targetApplyG;
-        }
-    }
-
-    private function doHurtAnimate(hitvo:HitVO, hitRect:Rectangle):void {
-        effectCtrler.endShadow();
-        effectCtrler.endShake();
-
-        _fighter.isApplyG = true;
-        _isDefense        = false;
-
-        var hitx:Number = hitvo.hitx;
-        var hity:Number = hitvo.hity;
-
-        // 无双模式 - 小兵特殊处理
-        if (_fighter.musouEnemyData && !_fighter.musouEnemyData.isBoss) {
-            if (!_fighter.isAlive) {
-                if (hity > 0) {
-                    hity += Math.random() * 3;
-                }
-                else {
-                    hity -= 3 + Math.random() * 3;
-                }
-                hitx += 2 + Math.random() * 3;
-            }
-        }
-        // ---------------------------------------------------------------------------
-
-        if (hitvo.owner) {
-            hitx *= hitvo.owner.direct;
-        }
-
-        if (_fighter.isInAir) {
-            if (hity <= 0) {
-                hity -= GameConfig.HURT_Y_ADD_INAIR;
-            }
-        }
-        else {
-            if (hity < 0) {
-                hity -= GameConfig.HURT_Y_ADD;
-                _isTouchFloor = false;
-            }
-        }
-
-        _action.clearState();
-        _doingAirAction = null;
-        _doingAction    = null;
-        setSteelBody(false);
-
-        if (hitvo.hurtType == 0) {
-            _action.isHurting = true;
-            _hurtHoldFrame    = Math.round((
-                                                   hitvo.hurtTime / 1000
-                                           ) * GameConfig.FPS_ANIMATE) + GameConfig.HURT_FRAME_OFFSET;
-            if (_hurtHoldFrame < GameConfig.HURT_GAP_FRAME) {
-                _hurtHoldFrame = GameConfig.HURT_GAP_FRAME;
-            }
-
-            if (hitvo.hitType == HitType.CATCH) {
-                _mc.goFrame(FighterSpecialFrame.HURT, false);
-            }
-            else {
-                _mc.goFrame(FighterSpecialFrame.HURT, true, 7);
-            }
-
-            _fighter.actionState = FighterActionState.HURT_ING;
-
-            _fighter.setVelocity(hitx, hity);
-            _fighter.setDamping(GameConfig.HURT_DAMPING_X, GameConfig.HURT_DAMPING_Y);
-
-            if (_fighter.isAlive && HitType.isHeavy(hitvo.hitType)) {
-                _fighter.getCtrler().getVoiceCtrl().playVoice(FighterVoice.HURT, 0.5);
-            }
-
-        }
-
-        if (hitvo.hurtType == 1) {
-            _action.isHurtFlying = true;
-            _fighter.actionState = FighterActionState.HURT_FLYING;
-            _hurtDownFrame       = 0;
-
-            _mc.playHurtFly(hitx, hity);
-
-            if (_fighter.isAlive) {
-                _fighter.getCtrler().getVoiceCtrl().playVoice(FighterVoice.HURT_FLY, 1);
-            }
-            else {
-                _fighter.getCtrler().getVoiceCtrl().playVoice(FighterVoice.DIE, 1);
-            }
-
-        }
-
-        _isFalling = false;
-
-        FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT);
-    }
-
-    private function renderHurt():void {
-        if (!_fighter.isAlive) {
-            return;
-        }
-        renderHurtBreak();
-    }
-
-    /**
-     *  被打反击
-     */
-    private function renderHurtBreak():void {
-
-        if (!_actionCtrler.specailSkill()) {
-            return;
-        }
-
-        if (!_fighter.hasEnergy(50)) {
-            return;
-        }
-        if (_fighter.qi < 100) {
-            return;
-        }
-
-        var bishaHit:Boolean = _fighter.getLastHurtHitVO().isBisha();
-        if (bishaHit) {
-            return;
-        }
-
-        var breakHit:Boolean = _fighter.hurtBreakHit();
-        if (breakHit) {
-            return;
-        }
-
-        var damage:int = _fighter.currentHurtDamage();
-        if (damage > 210) {
-            return;
-        }
-
-        _fighter.useQi(100);
-        _fighter.useEnergy(100);
-
-        if (_fighter.data.comicType == 1) {
-            _fighter.replaceSkill();
-        }
-        else {
-            _fighter.energyExplode();
-        }
-
-        dispatchTrainingInput(FighterInputCmd.ASSIST, true);
-        FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_RESUME);
-
-    }
-
-    private function renderHurtAnimate():void {
-//			renderBeHitGap();
-        if (_hurtHoldFrame-- <= 0) {
-
-            if (!_fighter.isAlive) {
-                _action.clearState();
-
-                if (_fighter.isInAir) {
-                    var vec:Point = _fighter.getVec2();
-                    hurtFly(vec.x, vec.y);
-                }
-                else {
-                    _mc.playHurtDown();
-                }
-
-                _fighter.getCtrler().getVoiceCtrl().playVoice(FighterVoice.DIE, 1);
-
-            }
-            else {
-                hurtResume();
-            }
-
-//				trace("恢复被打");
-        }
-    }
-
-    private function hurtResume():void {
-        //当被打到空中后又落地，恢复状态时，不要再有落地动作
-        if (!_fighter.isInAir && !_isTouchFloor) {
-            _isTouchFloor = true;
-        }
-        idle();
-        FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_RESUME);
-    }
-
-    private function renderBeHitGap():void {
-        if (_beHitGap > 0) {
-            if (--_beHitGap <= 0) {
-//					trace('isAllowBeHit');
-                _fighter.isAllowBeHit = true;
-            }
-        }
-    }
-
-    private function doDefenseHit(hitvo:HitVO, hitRect:Rectangle):void {
-
-        _fighter.loseHp(hitvo.getDamage() * GameConfig.DEFENSE_LOSE_HP_RATE);
-
-        if (_fighter.isAlive && GameLogic.checkFighterDie(_fighter)) {
-            FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DIE);
-            _fighter.isAlive = false;
-
-            doHurt(hitvo, hitRect);
-            return;
-        }
-
-        _fighter.defenseHit = hitvo;
-
-        var defEnergy:int = 0;
-        if (hitvo.isBreakDef) {
-            defEnergy = _fighter.energyMax * GameConfig.ENERGY_LOSE_DEFENSE_BREAK_RATE;
-        }
-        else {
-            defEnergy = hitvo.getDamage() / 5;
-            if (defEnergy > 50) {
-                defEnergy = 50;
-            }
-        }
-
-        if (!_fighter.hasEnergy(defEnergy, false)) {
-//				trace('break def');
-            _fighter.useEnergy(defEnergy);
-            doBreakDefense(hitvo, hitRect);
-            return;
-        }
-
-        _fighter.useEnergy(defEnergy);
-
-        _beHitGap             = GameConfig.DEFENSE_GAP_FRAME;
-        _fighter.isAllowBeHit = false;
-
-        var hitx:Number = hitvo.hitx;
-
-        if (hitvo.owner) {
-            hitx *= hitvo.owner.direct;
-        }
-
-        _action.isDefenseHiting = true;
-
-        if (hitvo.hurtType == 0) {
-            _defenseHoldFrame = int((
-                                    hitvo.hurtTime / 1000
-                                    ) * GameConfig.FPS_GAME / 5);
-            if (_defenseHoldFrame < GameConfig.DEFENSE_HOLD_FRAME_MIN) {
-                _defenseHoldFrame
-                        = GameConfig.DEFENSE_HOLD_FRAME_MIN;
-            }
-            if (_defenseHoldFrame > GameConfig.DEFENSE_HOLD_FRAME_MAX) {
-                _defenseHoldFrame
-                        = GameConfig.DEFENSE_HOLD_FRAME_MAX;
-            }
-        }
-        else {
-            _defenseHoldFrame = GameConfig.DEFENSE_HOLD_FRAME_DOWN;
-            _beHitGap         = GameConfig.DEFENSE_GAP_FRAME_DOWN;
-        }
-
-        _fighter.setVelocity(hitx, 0);
-        _fighter.setDamping(GameConfig.DEFENSE_DAMPING_X, 0);
-
-        if (hitvo && hitRect) {
-            EffectCtrl.I.doDefenseEffect(hitvo, hitRect, _fighter.defenseType);
-        }
-
-    }
-
-    /**
-     * 破防
-     */
-    private function doBreakDefense(hitvo:HitVO, hitRect:Rectangle):void {
-        _fighter.loseHp(hitvo.getDamage() / 10);
-
-        if (hitvo.hurtType == 0) {
-            _beHitGap = GameConfig.BREAK_DEF_GAP_FRAME;
-        }
-        if (hitvo.hurtType == 1) {
-            _beHitGap = GameConfig.BREAK_DEF_DOWN_GAP_FRAME;
-        }
-
-        _fighter.isAllowBeHit = false;
-
-        _fighter.energyOverLoad = false;
-
-        _isDefense = false;
-
-        var hitx:Number = hitvo.hitx;
-//			trace('hitx',hitx);
-        if (hitx < 5) {
-            hitx = 5;
-        }
-        if (hitx > 10) {
-            hitx = 10;
-        }
-
-        if (hitvo.owner) {
-            hitx *= hitvo.owner.direct;
-        }
-
-//			trace('hitx2',hitx);
-
-        _action.clearState();
-
-        _action.isHurting = true;
-        _hurtHoldFrame    = GameConfig.BREAK_DEF_HOLD_FRAME;
-
-        _mc.goFrame(FighterSpecialFrame.HURT, true, 7);
-
-        _fighter.actionState = FighterActionState.HURT_ING;
-
-        _fighter.setVelocity(hitx);
-        _fighter.setDamping(GameConfig.HURT_DAMPING_X);
-
-        if (hitvo && hitRect) {
-            var effectx:Number = hitRect.x + hitRect.width / 2;
-            var effecty:Number = hitRect.y + hitRect.height / 2;
-            EffectCtrl.I.doDefenseEffect(hitvo, hitRect, _fighter.defenseType);
-            EffectCtrl.I.doEffectById('break_def', effectx, effecty, _fighter.direct);
-        }
-    }
-
-    /**
-     * 正在防御
-     */
-    private function renderDefensHiting():void {
-//			renderBeHitGap();
-        if (_defenseHoldFrame > 0) {
-            _defenseHoldFrame--;
-        }
-        else {
-            if (_fighter.getVecX() == 0) {
-                _action.isDefenseHiting = false;
-            }
-        }
-    }
-
     private function renderCheckTargetHit():void {
         var checkerName:String = _action.hitTargetChecker;
         if (!checkerName) {
@@ -2393,33 +1801,6 @@ public class FighterMcCtrler {
         }
 
         return disX < 2 && disY < 1;
-    }
-
-    /**
-     * 倒地起身
-     */
-    private function doHurtDownJump():void {
-        if (_doingAction == FighterSpecialFrame.HURT_DOWN_JUMP) {
-            return;
-        }
-        if (_fighter.currentHurtDamage() > 240) {
-            return;
-        }
-        if (!_fighter.hasEnergy(30)) {
-            return;
-        }
-
-        _mc.stopHurtFly();
-
-        _fighter.useEnergy(30);
-
-        var vecx:Number = _fighter.getVecX();
-
-        doAction(FighterSpecialFrame.HURT_DOWN_JUMP, false, null, FighterInputCmd.DASH, true);
-        _fighter.isAllowBeHit = false;
-        _fighter.setVelocity(vecx);
-        _fighter.setDamping(vecx * 0.1);
-        FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_RESUME);
     }
 
     private function doGhostStep():void {
