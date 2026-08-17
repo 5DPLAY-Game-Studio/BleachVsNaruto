@@ -53,6 +53,8 @@ public class EffectView {
     private var _curFrame:int;
     private var _rotation:int;
     private var _direct:int;
+    private var _offsetSrc:Point = new Point();
+    private var _offsetRot:Point = new Point();
 
     /**
      * 抽象方法，设置关联对象
@@ -190,7 +192,9 @@ public class EffectView {
 
             if (_rotation != 0) {
                 var radians:Number = KyoMath.asRadians(_rotation);
-                var dis:Point      = KyoMath.getPointByRadians(new Point(frameVO.offsetX, frameVO.offsetY), radians);
+                _offsetSrc.x       = frameVO.offsetX;
+                _offsetSrc.y       = frameVO.offsetY;
+                var dis:Point      = KyoMath.getPointByRadians(_offsetSrc, radians, 1, _offsetRot);
                 display.x          = _orgX + dis.x;
                 display.y          = _orgY + dis.y;
             }

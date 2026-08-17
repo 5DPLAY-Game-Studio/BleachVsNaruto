@@ -373,46 +373,45 @@ public class FighterMain extends BaseGameSprite {
         }
 
         var targets:Vector.<IGameSprite> = getTargets();
-        var targetsOrder:Array           = [];
         if (targets && targets.length > 0) {
-
-            for each(var i:IGameSprite in targets) {
-
+            var best:IGameSprite = null;
+            var bestOrder:int    = int.MAX_VALUE;
+            var n:int            = targets.length;
+            for (var ti:int = 0; ti < n; ti++) {
+                var i:IGameSprite = targets[ti];
+                var order:int;
                 if (i.getBodyArea() == null) {
-                    targetsOrder.push({fighter: i, order: 5});
-                    continue;
+                    order = 5;
                 }
-
-                if (i is FighterMain && (
+                else if (i is FighterMain && (
                         i as FighterMain
                 ).isAlive && i.getActive()) {
                     var msd:MusouEnemyVO = (
                             i as FighterMain
                     ).musouEnemyData;
-                    if (msd) {
-                        if (msd.isBoss) {
-                            targetsOrder.push({fighter: i, order: 0});
-                        }
-                        else {
-                            targetsOrder.push({fighter: i, order: 1});
-                        }
+                    if (msd && !msd.isBoss) {
+                        order = 1;
                     }
                     else {
-                        targetsOrder.push({fighter: i, order: 0});
+                        order = 0;
                     }
                 }
                 else if (i is BaseGameSprite && (
                         i as BaseGameSprite
                 ).isAlive && i.getActive()) {
-                    targetsOrder.push({fighter: i, order: 10});
+                    order = 10;
                 }
                 else {
-                    targetsOrder.push({fighter: i, order: 20});
+                    order = 20;
+                }
+
+                if (order < bestOrder) {
+                    bestOrder = order;
+                    best      = i;
                 }
             }
-            targetsOrder.sortOn('order', Array.NUMERIC);
 
-            _currentTarget = targetsOrder[0].fighter;
+            _currentTarget = best;
         }
 
         return _currentTarget;

@@ -91,7 +91,7 @@ public class FighterAILogicBase {
         if (!hr) {
             return false;
         }
-        return area.intersection(hr).isEmpty() == false;
+        return area.intersects(hr);
     }
 
 //		public function onDoAction():void{

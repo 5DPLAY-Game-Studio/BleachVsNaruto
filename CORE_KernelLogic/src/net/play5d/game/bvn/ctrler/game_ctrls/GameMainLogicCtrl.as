@@ -121,21 +121,24 @@ public class GameMainLogicCtrl {
         var children:Vector.<IGameSprite>, children2:Vector.<IGameSprite>;
         var teamLen:int                   = teams.length;
         var childLen:int;
+        var childrenLen:int;
         var displays:Vector.<IGameSprite> = _gameState.getGameSprites();
+        var displayLen:int                = displays.length;
 
         //			if(_renderAnimate) gameState.renderAnimate();
 
 
-        for (i = 0; i < displays.length; i++) {
+        for (i = 0; i < displayLen; i++) {
             renderGameSprite(displays[i]);
         }
 
 
         for (i = 0; i < teamLen; i++) {
 
-            team     = teams[i];
-            children = team.children;
-            for (j = 0; j < children.length; j++) {
+            team        = teams[i];
+            children    = team.children;
+            childrenLen = children.length;
+            for (j = 0; j < childrenLen; j++) {
 
                 sp = children[j];
 

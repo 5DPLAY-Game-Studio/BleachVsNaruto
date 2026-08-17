@@ -279,7 +279,7 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
         if (!hr) {
             return false;
         }
-        return !area.intersection(hr).isEmpty();
+        return area.intersects(hr);
     }
 }
 }
