@@ -27,7 +27,7 @@ import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.utils.EffectManager;
+import net.play5d.game.bvn.ctrler.effect.EffectManager;
 
 /**
  * 命中 / 防御 / 刚体命中特效域。

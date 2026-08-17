@@ -48,6 +48,8 @@ public class FighterMcHurtCtrl {
 
     /** @private */
     private var _owner:FighterMcCtrler;
+    /** @private */
+    private var _rt:FighterMcRuntime;
 
     /** @private 被打延时 */
     private var _hurtHoldFrame:int = 0;
@@ -70,13 +72,15 @@ public class FighterMcHurtCtrl {
      * 绑定门面。
      *
      * @param owner <code>FighterMcCtrler</code> 门面。
+     * @param rt 共享运行时状态。
      * @example
      * <listing version="3.0">
-     * hurtCtrl.bind(mcCtrler);
+     * hurtCtrl.bind(mcCtrler, runtime);
      * </listing>
      */
-    public function bind(owner:FighterMcCtrler):void {
+    public function bind(owner:FighterMcCtrler, rt:FighterMcRuntime):void {
         _owner = owner;
+        _rt    = rt;
     }
 
     /**
@@ -89,6 +93,7 @@ public class FighterMcHurtCtrl {
      */
     public function destroy():void {
         _owner = null;
+        _rt    = null;
     }
 
     /**
@@ -171,67 +176,67 @@ public class FighterMcHurtCtrl {
 
     /** @private */
     private function get _fighter():FighterMain {
-        return _owner.getFighter();
+        return _rt.fighter;
     }
 
     /** @private */
     private function get _mc():FighterMC {
-        return _owner.getFighterMc();
+        return _rt.mc;
     }
 
     /** @private */
     private function get _action():FighterAction {
-        return _owner.getAction();
+        return _rt.action;
     }
 
     /** @private */
     private function get _actionLogic():FighterActionLogic {
-        return _owner.getActionLogic();
+        return _rt.actionLogic;
     }
 
     /** @private */
     private function get _actionCtrler():IFighterActionCtrl {
-        return _owner.getActionCtrler();
+        return _rt.actionCtrler;
     }
 
     /** @private */
     private function get _isTouchFloor():Boolean {
-        return _owner.isTouchFloorFlag;
+        return _rt.isTouchFloor;
     }
 
     /** @private */
     private function set _isTouchFloor(v:Boolean):void {
-        _owner.isTouchFloorFlag = v;
+        _rt.isTouchFloor = v;
     }
 
     /** @private */
     private function get _isFalling():Boolean {
-        return _owner.isFallingFlag;
+        return _rt.isFalling;
     }
 
     /** @private */
     private function set _isFalling(v:Boolean):void {
-        _owner.isFallingFlag = v;
+        _rt.isFalling = v;
     }
 
     /** @private */
     private function get _doingAction():String {
-        return _owner.doingActionName;
+        return _rt.doingAction;
     }
 
     /** @private */
     private function set _doingAction(v:String):void {
-        _owner.doingActionName = v;
+        _rt.doingAction = v;
     }
 
     /** @private */
     private function get _doingAirAction():String {
-        return _owner.doingAirActionName;
+        return _rt.doingAirAction;
     }
 
     /** @private */
     private function set _doingAirAction(v:String):void {
-        _owner.doingAirActionName = v;
+        _rt.doingAirAction = v;
     }
 
     /**

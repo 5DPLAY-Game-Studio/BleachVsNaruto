@@ -42,7 +42,7 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.DisplayFrameBitmapCache;
-import net.play5d.game.bvn.utils.EffectManager;
+import net.play5d.game.bvn.ctrler.effect.EffectManager;
 import net.play5d.game.bvn.views.effects.BitmapFilterView;
 import net.play5d.game.bvn.views.effects.BuffEffectView;
 import net.play5d.game.bvn.views.effects.EffectView;
