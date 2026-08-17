@@ -9,7 +9,7 @@
 | 场景（菜单/选人/对战/加载/地图） | `stage/` → `MenuStage` `SelectFighterStage` `GameStage` `Loading*` `WorldMapStage` |
 | 对战流程 | `ctrler/game_ctrls/` → `GameCtrl` + `IFightSession`（`VersusFightSession` / `MusouFightSession`） |
 | 无双 / 闯关 | `ctrler/musou_ctrls/` `data/musou/` `ui/musou/` `ui/big_map/` |
-| 角色 / 动作 / 受击 | `fighter/` `fighter/ctrler/` → `FighterMcCtrler`（时间轴门面，`$mc_ctrler`）+ `FighterMcRuntime` + `FighterMcHurtCtrl` / `FighterMcActionCtrl`；`FighterActionLogic`；`fighter/models/` → `HitVO` |
+| 角色 / 动作 / 受击 | `fighter/` `fighter/ctrler/` → `FighterMcCtrler`（时间轴门面，`$mc_ctrler`）+ `fighter/ctrler/mc/`（`FighterMcRuntime` / Hurt / Action + Floor/Air/Ghost Handler）；`FighterActionLogic`；`fighter/models/` → `HitVO` |
 | 援助 | `fighter/Assister.as` `fighter/ctrler/AssisterCtrler.as` |
 | AI | `fighter/ctrler/EnemyFighterAICtrl.as` `fighter/ctrler/ai/` |
 | 输入 | `input/` `ctrler/KeyEvent.as` `data/vos/KeyConfigVO.as` |
@@ -22,8 +22,8 @@
 | 渲染节拍 | `ctrler/GameRender.as` |
 | 数据 / VO | `data/` `data/vos/`（存档/模式/通用）；角色判定 VO → `fighter/models`；角色瞬时 VO → `fighter/vos` |
 | 战斗 HUD | `ui/fight/` |
-| 选人 UI | `ui/select/` `SelectFighterListCtrl`（列表/光标）`ui/select/flow/`（模式步进）`ui/dialog/select/` |
-| 菜单 / 暂停 / 设置 | `ui/` `stage/SettingStage.as` |
+| 选人 UI | `ui/select/` → `SelectFighterListCtrl`（列表）+ `SelectFighterCursorCtrl`（光标/更多角色）；`ui/select/flow/`（模式步进）；`ui/dialog/select/` |
+| 菜单 / 暂停 / 设置 | `ui/menu/`（`MenuBtn*`）`ui/settings/`（`SetBtn*` / `JoyStickSetUI` / `KeyMapping`）`stage/SettingStage.as` |
 | 多语言 | `utils/MultiLangUtils.as` `ui/language/` `stage/LanguageStage.as`；键约定见 [i18n.md](i18n.md) |
 | 作弊码 | `utils/CheatCodeManager.as` |
 | 事件 | `events/` `fighter/events/` |
@@ -31,8 +31,9 @@
 | 说法 | 先打开 |
 |------|--------|
 | 卡加载 | `stage/Loading*` `GameLoader` `AssetManager` |
-| 主菜单 | `MenuStage` `ui/MenuBtn*` |
-| 选人错乱 | `SelectFighterStage` `ui/select/` `ui/select/flow/` `data/vos/SelectVO` |
+| 主菜单 | `MenuStage` `ui/menu/MenuBtn*` |
+| 选人错乱 | `SelectFighterStage` `ui/select/`（含 `SelectFighterCursorCtrl`）`ui/select/flow/` `data/vos/SelectVO` |
+| 设置/按键 UI | `SettingStage` `ui/settings/` |
 | 角色/技能 | `fighter/` `GameCtrl` `input/` |
 | 判定 | `collision/` `HitVO` `FighterActionLogic` |
 | 无双/续关 | `musou_*` `WorldMapStage` |
@@ -52,7 +53,7 @@
 | 层 | 包 | 职责 |
 |----|-----|------|
 | 全局 | `ctrler.*` | 对局、特效、加载、联机、无双会话 |
-| 实体 | `fighter.ctrler.*` | 单角色 MC/键/AI/镜头/语音 |
+| 实体 | `fighter.ctrler.*` | 单角色 MC/键/AI/镜头/语音；MC 内部协作在 `fighter.ctrler.mc.*` |
 
 ## Flash IDE 冻结面
 

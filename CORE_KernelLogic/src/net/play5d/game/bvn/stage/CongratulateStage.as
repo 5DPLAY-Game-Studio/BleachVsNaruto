@@ -32,7 +32,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputer;
-import net.play5d.game.bvn.ui.SetBtnGroup;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;

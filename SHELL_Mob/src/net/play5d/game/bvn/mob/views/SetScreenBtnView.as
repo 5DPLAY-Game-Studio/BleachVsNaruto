@@ -7,7 +7,7 @@ import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.mob.data.ScreenPadConfigVO;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.SetBtnGroup;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 
 public class SetScreenBtnView extends Sprite {
 

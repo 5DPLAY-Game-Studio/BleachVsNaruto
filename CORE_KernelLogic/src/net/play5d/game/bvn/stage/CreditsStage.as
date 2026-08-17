@@ -31,7 +31,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.interfaces.GameInterface;
-import net.play5d.game.bvn.ui.SetBtnGroup;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 

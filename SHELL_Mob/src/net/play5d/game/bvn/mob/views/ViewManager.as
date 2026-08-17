@@ -4,7 +4,7 @@ import net.play5d.game.bvn.input.JoyStickConfigVO;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.stage.SettingStage;
-import net.play5d.game.bvn.ui.JoyStickSetUI;
+import net.play5d.game.bvn.ui.settings.JoyStickSetUI;
 import net.play5d.kyo.stage.IStage;
 
 public class ViewManager {

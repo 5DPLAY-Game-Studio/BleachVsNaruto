@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.ui {
+package net.play5d.game.bvn.ui.menu {
 import com.greensock.TweenLite;
 import com.greensock.easing.Elastic;
 

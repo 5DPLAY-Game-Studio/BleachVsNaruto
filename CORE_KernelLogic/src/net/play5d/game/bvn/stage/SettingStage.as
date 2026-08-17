@@ -37,8 +37,8 @@ import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
-import net.play5d.game.bvn.ui.SetBtnGroup;
-import net.play5d.game.bvn.ui.SetCtrlBtnUI;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
+import net.play5d.game.bvn.ui.settings.SetCtrlBtnUI;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 

@@ -24,7 +24,7 @@ import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.SetBtnGroup;
+import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 
 /**
  * 联机对局 ESC 退出确认对话框。

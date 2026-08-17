@@ -27,8 +27,8 @@ import flash.filters.DropShadowFilter;
 import flash.filters.GlowFilter;
 
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.ui.MenuBtn;
-import net.play5d.game.bvn.ui.SetBtnLine;
+import net.play5d.game.bvn.ui.menu.MenuBtn;
+import net.play5d.game.bvn.ui.settings.SetBtnLine;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
 import net.play5d.game.bvn.ui.language.CountryItem;
 import net.play5d.kyo.display.bitmap.BitmapFont;

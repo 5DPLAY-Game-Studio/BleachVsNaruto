@@ -16,7 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.ctrler {
+package net.play5d.game.bvn.fighter.ctrler.mc {
+import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
+import net.play5d.game.bvn.fighter.ctrler.FighterActionLogic;
+import net.play5d.game.bvn.fighter.ctrler.FighterVoice;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 

@@ -27,7 +27,6 @@ import flash.geom.Point;
 import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
@@ -41,11 +40,12 @@ import net.play5d.kyo.utils.ArrayMap;
 import net.play5d.kyo.utils.KyoRandom;
 
 /**
- * 选人列表与光标导航。
+ * 选人列表门面。
  *
- * <p>由 <code>SelectFighterStage</code> 持有；负责格子构建、鼠标/触屏、方向键移动与「更多角色」展开。</p>
+ * <p>由 <code>SelectFighterStage</code> 持有；负责格子构建与鼠标/触屏。方向键光标与「更多角色」委派 <code>SelectFighterCursorCtrl</code>。</p>
  *
  * @see SelectFighterStage
+ * @see SelectFighterCursorCtrl
  * @see SelecterItemUI
  */
 public class SelectFighterListCtrl {
@@ -54,6 +54,9 @@ public class SelectFighterListCtrl {
     public static const SELECT_STATE_FIGHTER:int = 0;
     /** 选人阶段：援助 */
     public static const SELECT_STATE_ASSIST:int  = 1;
+
+    /** @private */
+    private var _cursor:SelectFighterCursorCtrl;
 
     /** @private */
     private var _fighterListUI:Sprite;
@@ -89,6 +92,8 @@ public class SelectFighterListCtrl {
     public function SelectFighterListCtrl(fighterListUI:Sprite, config:SelectStageConfigVO) {
         _fighterListUI = fighterListUI;
         _config        = config;
+        _cursor        = new SelectFighterCursorCtrl();
+        _cursor.bind(this);
     }
 
     /**
@@ -164,12 +169,16 @@ public class SelectFighterListCtrl {
      */
     public function destroy():void {
         clearItems();
-        _fighterListUI   = null;
-        _config          = null;
-        _p1Slt           = null;
-        _p2Slt           = null;
-        _onSelectConfrim = null;
-        _moreFighterMap  = null;
+        if (_cursor) {
+            _cursor.destroy();
+            _cursor = null;
+        }
+        _fighterListUI    = null;
+        _config           = null;
+        _p1Slt            = null;
+        _p2Slt            = null;
+        _onSelectConfrim  = null;
+        _moreFighterMap   = null;
         _moreFighterCache = null;
     }
 
@@ -446,7 +455,10 @@ public class SelectFighterListCtrl {
         }
     }
 
-    private static function checkSelected(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
+    /**
+     * 格子是否已被该选人器选过。
+     */
+    public static function checkSelected(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
 
         if (!sf.selectData && !sf.fighterData) {
             return false;
@@ -492,398 +504,6 @@ public class SelectFighterListCtrl {
         return _itemObj[x + ',' + y];
     }
 
-    public function moveSlt(slt:SelecterItemUI, x:int, y:int, fix:Boolean = true):Boolean {
-        var sf:SelectFighterItem = getFighterItem(x, y);
-        var left:Boolean, right:Boolean, up:Boolean, down:Boolean;
-
-        if (!sf || (
-                sf && checkSelected(slt, sf)
-        )) {
-            if (!fix) {
-                return true;
-            }
-
-            var i:int, j:int;
-
-            if (x > slt.x) {
-                right = true;
-                for (i = 0; i < _curListConfig.HCount; i++) {
-                    j = x + i;
-                    if (j > _curListConfig.HCount - 1) {
-                        j -= _curListConfig.HCount;
-                    }
-                    sf = getFighterItem(j, slt.y);
-                    if (sf && !checkSelected(slt, sf)) {
-                        break;
-                    }
-                }
-            }
-
-            if (x < slt.x) {
-                left = true;
-                for (i = 0; i < _curListConfig.HCount; i++) {
-                    j = x - i;
-                    if (j < 0) {
-                        j = _curListConfig.HCount + j;
-                    }
-                    sf = getFighterItem(j, slt.y);
-                    if (sf && !checkSelected(slt, sf)) {
-                        break;
-                    }
-                }
-            }
-
-            if (y > slt.y) {
-                down = true;
-                if (y > _curListConfig.VCount - 1) {
-                    y = 0;
-                }
-                for (i = y; i < _curListConfig.VCount; i++) {
-                    sf = getHLineFighter(slt.x, i);
-//						if(sf && !slt.isSelected(sf.selectData.fighterID)) break;
-                    if (sf) {
-                        break;
-                    }
-                }
-            }
-
-            if (y < slt.y) {
-                up = true;
-                if (y < 0) {
-                    y = _curListConfig.VCount - 1;
-                }
-                for (i = y; i >= 0; i--) {
-                    sf = getHLineFighter(slt.x, i);
-//						if(sf && !slt.isSelected(sf.selectData.fighterID)) break;
-                    if (sf) {
-                        break;
-                    }
-                }
-            }
-
-        }
-
-        if (!sf) {
-            return false;
-        }
-
-        slt.x = sf.selectData.x;
-        slt.y = sf.selectData.y;
-
-        if (checkSelected(slt, sf)) {
-            if (up || down) {
-                //涓嬩竴琛屽凡琚€変腑锛屽悜鍙崇Щ涓€涓?
-                var succ:Boolean = moveSlt(slt, slt.x + 1, slt.y);
-                if (!succ) {
-                    //濡傛灉涓婁竴琛屾垨涓嬩竴琛屽凡缁忛€夋弧锛岀户缁壘涓婁竴琛屾垨涓嬩竴琛?
-                    if (up) {
-                        moveSlt(slt, slt.x, slt.y - 1);
-                    }
-                    if (down) {
-                        moveSlt(slt, slt.x, slt.y + 1);
-                    }
-                }
-            }
-            return true;
-        }
-
-        moveToSelectFighter(slt, sf);
-
-        return true;
-    }
-
-    private function isHoverFighter(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
-        if (!sf.selectData) {
-            return false;
-        }
-        return (
-                       slt.x == sf.selectData.x
-               ) && (
-                       slt.y == sf.selectData.y
-               );
-    }
-
-    private function moveToSelectFighter(slt:SelecterItemUI, sf:SelectFighterItem):void {
-        if (!sf || !sf.selectData) {
-            return;
-        }
-
-        slt.randoms = null;
-
-        slt.x = sf.selectData.x;
-        slt.y = sf.selectData.y;
-
-        slt.moveTo(sf.ui.x, sf.ui.y);
-
-        slt.currentFighter = sf.fighterData;
-
-        if (slt.group) {
-            slt.group.updateFighter(slt.currentFighter);
-        }
-
-        checkRandom(slt);
-
-        showMoreFighters(slt, sf);
-    }
-
-    private function moveToSelectFighterMore(slt:SelecterItemUI, sf:SelectFighterItem):void {
-        slt.randoms = null;
-
-        slt.moreX = sf.position.x;
-        slt.moreY = sf.position.y;
-
-        slt.moveTo(sf.ui.x, sf.ui.y);
-        slt.currentFighter = sf.fighterData;
-
-        if (slt.group) {
-            slt.group.updateFighter(slt.currentFighter);
-        }
-    }
-
-    /**
-     * 浜虹墿鍏宠仈鐨勬洿澶氫汉鐗?
-     */
-    private function showMoreFighters(slt:SelecterItemUI, sf:SelectFighterItem):void {
-
-        if (slt.showingMoreSelecter == sf) {
-            return;
-        }
-
-        var fighterItems:ArrayMap;
-        var si:SelectFighterItem;
-        var i:int;
-
-        fighterItems = _moreFighterMap[slt];
-        if (fighterItems) {
-            for (i = 0; i < fighterItems.length; i++) {
-                si = fighterItems.getItemByIndex(i);
-                si.hideMore();
-            }
-            _moreFighterMap[slt] = null;
-        }
-        slt.setMoreEnabled(false);
-
-        if (!sf.selectData.moreFighterIDs || sf.selectData.moreFighterIDs.length < 1) {
-            return;
-        }
-
-
-        // 妫€鏌ョ紦瀛?===========================================================
-        fighterItems = _moreFighterCache[sf.fighterData.id];
-        if (fighterItems && fighterItems.length > 0) {
-            for (i = 0; i < fighterItems.length; i++) {
-                si = fighterItems.getItemByIndex(i);
-                _fighterListUI.addChild(si.ui);
-                si.showMore(i * 0.01);
-            }
-            _moreFighterMap[slt] = fighterItems;
-            slt.setMoreEnabled(true, sf);
-            return;
-        }
-
-        // 鍒涘缓鏂扮殑澶村儚 =====================================================
-        var fighterIds:Array = sf.selectData.moreFighterIDs;
-
-        fighterItems = new ArrayMap();
-
-        // 鍛ㄥ洿, 涓€鍦?涓綅缃?
-        var posArr:Array = [
-            new Point(0, -1), new Point(0, 1), new Point(-1, 0), new Point(1, 0), new Point(-1, -1), new Point(1, -1),
-            new Point(-1, 1), new Point(1, 1)
-        ];
-        var posSN:int    = 0;
-
-        for (i = 0; i < fighterIds.length; i++) {
-            var fid:String = fighterIds[i];
-            trace(fid);
-
-            var fv:FighterVO = _selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(fid) :
-                               FighterModel.I.getFighter(fid);
-            if (!fv) {
-                Debugger.log(GetLang('debug.log.data.select_fighter_stage.fighter_data_missing', {fighterId: fid}));
-                continue;
-            }
-
-            var unitWidth:Number  = 60;
-            var unitHeight:Number = 60;
-
-            var morePosition:Point = null;
-            var addN:int           = 0;
-            var fighterPos:Point   = null;
-            while (morePosition == null) {
-                var psn:int = posSN % 8;
-                posSN++;
-
-                var pos:Point = posArr[psn];
-                if (!pos) {
-                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_undefined', {
-                        psn  : psn + ' / ',
-                        posSN: posSN
-                    }));
-                    continue;
-                }
-
-                var mmx:Number = sf.ui.x + (
-                        pos.x * (
-                                unitWidth + 5
-                        )
-                );
-                var mmy:Number = sf.ui.y + (
-                        pos.y * (
-                                unitHeight + 5
-                        )
-                );
-
-                if (mmx < 0 || mmx > GameConfig.GAME_SIZE.x) {
-                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_x_oob', {
-                        detail: '(' + mmx + ')  ' + psn + ' / ' + posSN
-                    }));
-                    continue;
-                }
-                if (mmy < 0 || mmy > GameConfig.GAME_SIZE.y) {
-                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_y_oob', {
-                        detail: '(' + mmy + ')  ' + psn + ' / ' + posSN
-                    }));
-                    continue;
-                }
-
-                fighterPos   = pos.clone();
-                morePosition = new Point(mmx, mmy);
-            }
-
-            si = new SelectFighterItem(fv, null, true);
-            trace(posSN, morePosition, si.fighterData.id);
-
-            if (GameConfig.TOUCH_MODE) {
-                si.addEventListener(TouchEvent.TOUCH_TAP, selectFighterTouchHandler);
-            }
-            else {
-                si.addEventListener(MouseEvent.MOUSE_OVER, selectFighterMouseHandler);
-                si.addEventListener(MouseEvent.CLICK, selectFighterMouseHandler);
-            }
-
-            si.position = fighterPos;
-
-            si.initMoreTween(new Point(sf.ui.x, sf.ui.y), morePosition);
-            _fighterListUI.addChild(si.ui);
-
-            addN++;
-
-            si.showMore(addN * 0.01);
-
-            fighterItems.push(si.positionId, si);
-            _moreFighterMap[slt]                 = fighterItems;
-            _moreFighterCache[sf.fighterData.id] = fighterItems;
-
-        }
-
-        slt.setMoreEnabled(true, sf);
-    }
-
-    private function moveMoreSlt(slt:SelecterItemUI, x:int, y:int):Boolean {
-        var moreFighters:ArrayMap = _moreFighterMap[slt];
-
-        if (!moreFighters || moreFighters.length < 1) {
-            return false;
-        }
-
-        if (x == 0 && y == 0 && slt.showingMoreSelecter) {
-            slt.moreX = 0;
-            slt.moreY = 0;
-
-            slt.moveTo(slt.showingMoreSelecter.ui.x, slt.showingMoreSelecter.ui.y);
-            slt.currentFighter = slt.showingMoreSelecter.fighterData;
-            if (slt.group) {
-                slt.group.updateFighter(slt.currentFighter);
-            }
-            return true;
-        }
-
-        var itemId:String          = SelectFighterItem.getIdByPoint(x, y);
-        var item:SelectFighterItem = moreFighters.getItemById(itemId);
-
-        if (!item) {
-            return false;
-        }
-
-        if (slt.isSelected(item.fighterData.id)) {
-            return false;
-        }
-
-        slt.randoms = null;
-
-        slt.moreX = item.position.x;
-        slt.moreY = item.position.y;
-
-        slt.moveTo(item.ui.x, item.ui.y);
-        slt.currentFighter = item.fighterData;
-
-        if (slt.group) {
-            slt.group.updateFighter(slt.currentFighter);
-        }
-
-        return true;
-    }
-
-    /**
-     * *******************************************************************************************************************************************************
-     */
-
-    private function checkRandom(slt:SelecterItemUI):Boolean {
-        if (slt.currentFighter.id.indexOf('random') != -1) {
-            switch (_selectState) {
-            case SelectFighterListCtrl.SELECT_STATE_FIGHTER:
-                slt.randoms = FighterModel.I.getFighters(slt.currentFighter.comicType, function (fv:FighterVO):Boolean {
-                    return fv.id.indexOf('random') == -1 && GameLogic.canSelectFighter(fv.id) &&
-                           !slt.selectVO.isSelected(fv.id);
-                });
-                break;
-            case SelectFighterListCtrl.SELECT_STATE_ASSIST:
-                slt.randoms = AssisterModel.I.getAssisters(
-                        slt.currentFighter.comicType, function (fv:FighterVO):Boolean {
-                            return fv.id.indexOf('random') == -1 && GameLogic.canSelectAssist(fv.id);
-                        });
-                break;
-            default:
-                return false;
-            }
-            slt.randFrame = 0;
-            renderRandom(slt);
-            return true;
-        }
-
-        return false;
-    }
-
-    private function getHLineFighter(startX:int, Y:int):SelectFighterItem {
-        var X:int, k:int;
-        var sf:SelectFighterItem;
-        while (true) {
-            X = startX + k;
-            if (X >= 0 && X < _curListConfig.HCount) {
-                sf = getFighterItem(X, Y);
-                if (sf) {
-                    return sf;
-                }
-            }
-
-            if (k == 0) {
-                k = 1;
-            }
-            else if (k > 0) {
-                k *= -1;
-            }
-            else {
-                if (k < -_curListConfig.HCount) {
-                    return null;
-                }
-                k *= -1;
-                k++;
-            }
-        }
-        return null;
-    }
-
     public static function renderRandom(selt:SelecterItemUI):void {
         if (selt.randoms) {
             if (selt.randFrame > 0) {
@@ -898,18 +518,94 @@ public class SelectFighterListCtrl {
         }
     }
 
-    public function moveSelecter(slt:SelecterItemUI, addX:int, addY:int):void {
-        if (slt.moreEnabled()) {
-            if (moveMoreSlt(slt, slt.moreX + addX, slt.moreY + addY)) {
-                return;
-            }
-            else {
-                slt.setMoreEnabled(false);
-            }
-        }
-
-        moveSlt(slt, slt.x + addX, slt.y + addY);
+    /** @private 供 CursorCtrl */
+    public function get curListConfig():SelectCharListConfigVO {
+        return _curListConfig;
     }
 
-}
+    /** @private */
+    public function get curListMap():Object {
+        return _curListMap;
+    }
+
+    /** @private */
+    public function get fighterItems():Vector.<SelectFighterItem> {
+        return _fighterItems;
+    }
+
+    /** @private */
+    public function get moreFighterMap():Object {
+        return _moreFighterMap;
+    }
+
+    /** @private */
+    public function get moreFighterCache():Dictionary {
+        return _moreFighterCache;
+    }
+
+    /** @private */
+    public function set moreFighterCache(v:Dictionary):void {
+        _moreFighterCache = v;
+    }
+
+    /** @private */
+    public function get p1Slt():SelecterItemUI {
+        return _p1Slt;
+    }
+
+    /** @private */
+    public function get p2Slt():SelecterItemUI {
+        return _p2Slt;
+    }
+
+    /** @private */
+    public function get onSelectConfrimFn():Function {
+        return _onSelectConfrim;
+    }
+
+    /** @private */
+    public function get config():SelectStageConfigVO {
+        return _config;
+    }
+
+    /** @private */
+    public function get fighterListUI():Sprite {
+        return _fighterListUI;
+    }
+
+    /**
+     * 按格坐标取格子（供 CursorCtrl）。
+     */
+    public function getFighterItemAt(x:int, y:int):SelectFighterItem {
+        return getFighterItem(x, y);
+    }
+
+    /**
+     * 悬停（供 CursorCtrl / 鼠标）。
+     */
+    public function doHoverItem(target:SelectFighterItem):void {
+        doHover(target);
+    }
+
+    /**
+     * 点选（供 CursorCtrl / 鼠标）。
+     */
+    public function doSelectItem(target:SelectFighterItem):void {
+        doSelect(target);
+    }
+
+    /**
+     * 移动光标到格子。
+     */
+    public function moveSlt(slt:SelecterItemUI, x:int, y:int, fix:Boolean = true):Boolean {
+        return _cursor.moveSlt(slt, x, y, fix);
+    }
+
+    /**
+     * 相对移动光标。
+     */
+    public function moveSelecter(slt:SelecterItemUI, addX:int, addY:int):void {
+        _cursor.moveSelecter(slt, addX, addY);
+    }
+
 }

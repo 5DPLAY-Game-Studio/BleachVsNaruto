@@ -16,7 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.fighter.ctrler {
+package net.play5d.game.bvn.fighter.ctrler.mc {
+import net.play5d.game.bvn.fighter.ctrler.FighterActionLogic;
 import net.play5d.game.bvn.fighter.FighterAction;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
@@ -76,6 +77,11 @@ public class FighterMcRuntime {
      * 当前空中动作帧标签。
      */
     public var doingAirAction:String;
+
+    /**
+     * 当前 doAction 已持续帧数（供卍解等判定）。
+     */
+    public var doActionFrame:int;
 
 }
 }

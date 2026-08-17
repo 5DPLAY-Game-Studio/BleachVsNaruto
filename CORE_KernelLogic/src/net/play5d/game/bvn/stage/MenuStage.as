@@ -34,7 +34,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.input.GameInputer;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.MenuBtnGroup;
+import net.play5d.game.bvn.ui.menu.MenuBtnGroup;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.shapes.Box;
