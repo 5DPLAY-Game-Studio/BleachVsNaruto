@@ -21,7 +21,7 @@
 | 渲染节拍 | `ctrler/GameRender.as` |
 | 数据 / VO | `data/` `data/vos/` |
 | 战斗 HUD | `ui/fight/` |
-| 选人 UI | `ui/select/` `ui/dialog/select/` |
+| 选人 UI | `ui/select/` `ui/dialog/select/`；模式步进 → `ui/select/flow/`（`SelectModeFlowFactory`） |
 | 菜单 / 暂停 / 设置 | `ui/` `stage/SettingStage.as` |
 | 多语言 | `utils/MultiLangUtils.as` `ui/language/` `stage/LanguageStage.as`；键约定见 [i18n.md](i18n.md) |
 | 作弊码 | `utils/CheatCodeManager.as` |
@@ -31,7 +31,7 @@
 |------|--------|
 | 卡加载 | `stage/Loading*` `GameLoader` `AssetManager` |
 | 主菜单 | `MenuStage` `ui/MenuBtn*` |
-| 选人错乱 | `SelectFighterStage` `ui/select/` `data/vos/SelectVO` |
+| 选人错乱 | `SelectFighterStage` `ui/select/` `ui/select/flow/` `data/vos/SelectVO` |
 | 角色/技能 | `fighter/` `GameCtrl` `input/` |
 | 判定 | `collision/` `HitVO` `FighterActionLogic` |
 | 无双/续关 | `musou_*` `WorldMapStage` |

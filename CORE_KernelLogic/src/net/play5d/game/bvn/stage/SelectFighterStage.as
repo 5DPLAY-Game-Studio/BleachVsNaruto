@@ -57,6 +57,9 @@ import net.play5d.game.bvn.ui.select.SelectFighterItem;
 import net.play5d.game.bvn.ui.select.SelectUIFactory;
 import net.play5d.game.bvn.ui.select.SelectedFighterGroup;
 import net.play5d.game.bvn.ui.select.SelecterItemUI;
+import net.play5d.game.bvn.ui.select.flow.ISelectModeFlow;
+import net.play5d.game.bvn.ui.select.flow.SelectFlowAction;
+import net.play5d.game.bvn.ui.select.flow.SelectModeFlowFactory;
 import net.play5d.kyo.utils.KeyBoarder;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
@@ -84,6 +87,7 @@ public class SelectFighterStage implements IStage {
     private var _curStep:int = 0;
     private var _tweenTime:int = 500;
     private var _twoPlayerSelectFin:Boolean;  //解决两玩家同时选人
+    private var _modeFlow:ISelectModeFlow;
     [Embed(source='/../assets/cancel.png')]
     private var _backMenuPicClass:Class;
     private var _backMenuBtn:Sprite;
@@ -190,7 +194,8 @@ public class SelectFighterStage implements IStage {
 
         _ui.addChild(_fighterListUI);
 
-        _config = GameData.I.config.select_config;
+        _config   = GameData.I.config.select_config;
+        _modeFlow = SelectModeFlowFactory.create();
 
         GameRender.add(render);
         GameInputer.focus();
@@ -217,83 +222,34 @@ public class SelectFighterStage implements IStage {
     }
 
     public function nextStep():void {
-        switch (_curStep) {
-        case 0: //初始化
+        var a:SelectFlowAction = _modeFlow.resolveNextStep(_curStep);
+        if (a.nextStep >= 0) {
+            _curStep = a.nextStep;
+        }
+
+        switch (a.action) {
+        case SelectFlowAction.INIT_FIGHTER:
             initFighter();
-            _curStep = 1;
             break;
-        case 1:
-            //主角选择完成
-            if (GameMode.isVsCPU()) {
-                _p1Slt.removeSelecter();
-                _p1Slt.enabled = false;
-                initSelecterP2();
-                _p2Slt.inputType = GameInputType.P1;
-                _curStep         = 2;
-            }
-            else {
-                //初始化辅助
-
-                fadOutList(initAssist);
-
-//						initAssist();
-//						selectFinish();
-                _curStep = 3;
-            }
-
+        case SelectFlowAction.ENABLE_P2_WITH_P1_INPUT:
+            enableP2WithP1Input();
             break;
-        case 2:
-            //初始化辅助
-//					initAssist();
+        case SelectFlowAction.FADOUT_ASSIST:
             fadOutList(initAssist);
-            _curStep = 3;
             break;
-        case 3:
-            //主角辅助选择完成
-            if (GameMode.isVsCPU()) {
-                _p1Slt.removeSelecter();
-                _p1Slt.enabled = false;
-                initSelecterP2();
-                _p2Slt.inputType = GameInputType.P1;
-                _curStep         = 4;
-            }
-            else {
-
-                if (GameMode.isVsCPU() || GameMode.isVsPeople()) {
-                    //选择地图
-
-                    fadOutList(initMap);
-
-//							initMap();
-                    _curStep = 5;
-                }
-                else {
-
-                    if (GameMode.isArcade()) {
-                        //开始运行过关模式
-                        startAcradeGame();
-                    }
-
-                    if (GameMode.currentMode == GameMode.MUSOU_ARCADE) {
-                        //开始运行过关模式
-                        startMusouGame();
-                    }
-
-                }
-
-            }
-            break;
-        case 4:
-            //选择地图
-            _curStep = 5;
+        case SelectFlowAction.FADOUT_MAP:
             fadOutList(initMap);
-//					initMap();
             break;
-        case 5:
+        case SelectFlowAction.START_ARCADE:
+            startAcradeGame();
+            break;
+        case SelectFlowAction.START_MUSOU:
+            startMusouGame();
+            break;
+        case SelectFlowAction.SELECT_FINISH:
             selectFinish();
             break;
         }
-
     }
 
     public function goLoadGame():void {
@@ -317,6 +273,7 @@ public class SelectFighterStage implements IStage {
         GameInputer.enabled = false;
         SoundCtrl.I.BGM(null);
         GameUI.closeConfrim();
+        _modeFlow = null;
 
         if (_backMenuBtn) {
             _backMenuBtn.removeEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
@@ -351,7 +308,7 @@ public class SelectFighterStage implements IStage {
         buildList(_config.charList);
 
         GameData.I.p1Select = new SelectVO();
-        if (GameMode.isVsPeople() || GameMode.isVsCPU()) {
+        if (_modeFlow.createP2SelectVO()) {
             GameData.I.p2Select = new SelectVO();
         }
 
@@ -668,7 +625,7 @@ public class SelectFighterStage implements IStage {
 
         GameInputer.enabled = true;
 
-        if (GameMode.isVsPeople()) {
+        if (_modeFlow.initBothSelecters()) {
             initSelecterP1();
             initSelecterP2();
             _twoPlayerSelectFin = false;
@@ -676,6 +633,16 @@ public class SelectFighterStage implements IStage {
         else {
             initSelecterP1();
         }
+    }
+
+    /**
+     * CPU / 观战：P1 选完后用 P1 键位为 P2 选人。
+     */
+    private function enableP2WithP1Input():void {
+        _p1Slt.removeSelecter();
+        _p1Slt.enabled = false;
+        initSelecterP2();
+        _p2Slt.inputType = GameInputType.P1;
     }
 
     private function initSelecterP1():void {
@@ -1238,7 +1205,7 @@ public class SelectFighterStage implements IStage {
 
     private function playerSeltBack(selt:SelecterItemUI):void {
         if (selt.selectFinish()) {
-            if (GameMode.isVsPeople()) {
+            if (_modeFlow.shouldWaitBothPlayers()) {
                 GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER_STEP, selt.getCurrentSelectes());
 
                 var otherSlt:SelecterItemUI = selt == _p1Slt ? _p2Slt : _p1Slt;
