@@ -30,7 +30,7 @@ import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.utils.DisplayFrameBitmapCache;
+import net.play5d.game.bvn.ctrler.effect.DisplayFrameBitmapCache;
 import net.play5d.kyo.utils.BitmapDataPool;
 
 /**

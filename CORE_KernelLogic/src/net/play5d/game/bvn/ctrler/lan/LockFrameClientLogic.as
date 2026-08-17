@@ -24,7 +24,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.lan.LanMsgType;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
-import net.play5d.game.bvn.utils.LANUtils;
+import net.play5d.game.bvn.ctrler.lan.LANUtils;
 
 /**
  * 锁帧算法（客户端）。

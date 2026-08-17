@@ -26,7 +26,7 @@ import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.stage.GameStage;
-import net.play5d.game.bvn.utils.LANUtils;
+import net.play5d.game.bvn.ctrler.lan.LANUtils;
 import net.play5d.kyo.stage.IStage;
 
 /**

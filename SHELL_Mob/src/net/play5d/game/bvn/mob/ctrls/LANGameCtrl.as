@@ -6,7 +6,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.mob.data.HostVO;
 import net.play5d.kyo.air.socket.SocketClient;
-import net.play5d.game.bvn.utils.LANUtils;
+import net.play5d.game.bvn.ctrler.lan.LANUtils;
 import net.play5d.game.bvn.ui.dialog.LANExitDialog;
 import net.play5d.game.bvn.mob.views.lan.LANGameState;
 

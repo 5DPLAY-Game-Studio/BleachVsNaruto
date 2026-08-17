@@ -18,12 +18,15 @@
 
 package net.play5d.game.bvn.ui {
 import flash.display.DisplayObject;
+import flash.display.Sprite;
 
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.events.GameEvent;
+import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.dialog.AlertUI;
 import net.play5d.game.bvn.ui.dialog.BaseDialog;
 import net.play5d.game.bvn.ui.dialog.ConfrimUI;
@@ -46,6 +49,9 @@ public class GameUI {
     private static var _confrimUI:BaseDialog;
     private static var _confrimUICls:Class;
     private static var _alertUI:AlertUI;
+    private static var _transUI:TransUI;
+    private static var _quickTransUI:QuickTransUI;
+    private static var _transContainer:Sprite;
 
     public static function showingDialog():Boolean {
         return _confrimUI != null || _alertUI != null;
@@ -236,6 +242,228 @@ public class GameUI {
         }
     }
 
+    /**
+     * 显示 Continue（对战 UI）。
+     *
+     * @param onClick 点击回调。
+     */
+    public function showContinue(onClick:Function):void {
+        if (_ui) {
+            _ui.showContinue(onClick);
+        }
+    }
+
+    /**
+     * 无双：刷新角色血条组。
+     */
+    public function updateMusouFighter():void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.updateFighter();
+        }
+    }
+
+    /**
+     * 无双：失败结算。
+     *
+     * @param finishBack 结束回调。
+     */
+    public function showMusouLose(finishBack:Function = null):void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.showLose(finishBack);
+        }
+    }
+
+    /**
+     * 无双：胜利结算。
+     *
+     * @param finishBack 结束回调。
+     */
+    public function showMusouWin(finishBack:Function = null):void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.showWin(finishBack);
+        }
+    }
+
+    /**
+     * 无双：设置 Boss 血条。
+     *
+     * @param f Boss。
+     */
+    public function setMusouBossHp(f:FighterMain):void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.setBossHp(f);
+        }
+    }
+
+    /**
+     * 无双：Boss 入场演出。
+     *
+     * @param finishBack 结束回调。
+     */
+    public function showMusouBossIn(finishBack:Function = null):void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.showBossIn(finishBack);
+        }
+    }
+
+    /**
+     * 无双：Boss KO 演出。
+     *
+     * @param boss Boss。
+     * @param finishBack 结束回调。
+     */
+    public function showMusouBossKO(boss:FighterMain, finishBack:Function = null):void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.showBossKO(boss, finishBack);
+        }
+    }
+
+    /**
+     * 无双：刷新 KO 数。
+     */
+    public function updateMusouKONum():void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.updateKONum();
+        }
+    }
+
+    /**
+     * 无双：刷新 Boss 血条列表。
+     */
+    public function updateMusouBossHp():void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.updateBossHp();
+        }
+    }
+
+    /**
+     * 无双：跟随敌人血条。
+     *
+     * @param f 敌人。
+     */
+    public function updateMusouEnemyBar(f:FighterMain):void {
+        var ui:MusouUI = _ui as MusouUI;
+        if (ui) {
+            ui.updateEnemyBar(f);
+        }
+    }
+
+    /**
+     * 场景转场淡入。
+     *
+     * @param back 完成回调。
+     * @param removeAfterComplete 完成后是否移除转场层。
+     */
+    public static function transIn(back:Function = null, removeAfterComplete:Boolean = false):void {
+        addTransUI();
+        if (removeAfterComplete) {
+            _transUI.fadIn(removeSelf);
+        }
+        else {
+            _transUI.fadIn(back);
+        }
+
+        function removeSelf():void {
+            if (back != null) {
+                back();
+            }
+            removeTransUI();
+        }
+    }
+
+    /**
+     * 场景转场淡出。
+     *
+     * @param back 完成回调。
+     * @param removeAfterComplete 完成后是否移除转场层。
+     */
+    public static function transOut(back:Function = null, removeAfterComplete:Boolean = true):void {
+        addTransUI();
+        if (removeAfterComplete) {
+            _transUI.fadOut(removeSelf);
+        }
+        else {
+            _transUI.fadOut(back);
+        }
+
+        function removeSelf():void {
+            if (back != null) {
+                back();
+            }
+            removeTransUI();
+        }
+    }
+
+    /**
+     * 快速转场。
+     *
+     * @param back 完成回调。
+     */
+    public static function quickTrans(back:Function = null):void {
+        ensureTransContainer();
+        if (!_transContainer) {
+            if (back != null) {
+                back();
+            }
+
+            return;
+        }
+        _quickTransUI ||= new QuickTransUI();
+        _transContainer.addChild(_quickTransUI);
+        _quickTransUI.fadInAndOut(transCom);
+
+        function transCom():void {
+            try {
+                _transContainer.removeChild(_quickTransUI);
+            }
+            catch (e:Error) {
+            }
+            if (back != null) {
+                back();
+            }
+        }
+    }
+
+    /**
+     * 清除转场层。
+     */
+    public static function clearTrans():void {
+        removeTransUI();
+    }
+
+    private static function ensureTransContainer():void {
+        if (!_transContainer && MainGame.I) {
+            _transContainer = MainGame.I.root;
+        }
+    }
+
+    private static function addTransUI():void {
+        ensureTransContainer();
+        if (!_transUI) {
+            _transUI = new TransUI();
+        }
+        _transContainer.addChild(_transUI.ui);
+    }
+
+    private static function removeTransUI():void {
+        if (!_transUI || !_transContainer) {
+            return;
+        }
+        try {
+            _transContainer.removeChild(_transUI.ui);
+        }
+        catch (e:Error) {
+        }
+    }
+
     private function renderAnimate():void {
         if (_ui) {
             _ui.renderAnimate();
@@ -255,35 +483,4 @@ public class GameUI {
         return true;
     }
 
-//		public function showHits(hits:int , id:int):void{
-//			_ui.showHits(hits,id);
-//		}
-//
-//		public function hideHits(id:int):void{
-//			_ui.hideHits(id);
-//		}
-
-//		public function showBishaFace(faceid:int , face:DisplayObject):void{
-//			if(!_bishaFace){
-//				_bishaFace = new BishaFaceUI();
-//				(_ui as FightUI).ui.addChild(_bishaFace.ui);
-//			}
-//
-//			_bishaFace.setFace(faceid , face);
-//			_bishaFace.fadIn();
-//		}
-//
-//		public function removeBishaFace():void{
-//			if(_bishaFace){
-//				_bishaFace.fadOut(function():void{
-//					try{
-//						(_ui as FightUI).ui.removeChild(_bishaFace.ui);
-//					}catch(e:*){}
-//					_bishaFace.destroy();
-//					_bishaFace = null;
-//				});
-//			}
-//		}
-
-}
 }

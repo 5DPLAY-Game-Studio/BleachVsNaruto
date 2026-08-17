@@ -17,7 +17,7 @@
 | 7 | 模块落点服从 [`modules.md`](modules.md)（默认 `CORE_KernelLogic`） |
 | 8 | 需要本地信息时主动用工具（读文件/搜索/只读 git 等）；大任务用 Todo 规划拆步 |
 | 9 | **无用空构造一律不写**：纯静态类、单例、普通类均省略无参空构造（含仅 `super();`）；也不写「无需实例化 / 构造方法」空构造 ASDoc。可写在字段上的初始化勿放进构造 |
-| 10 | VO 落点：存档/模式/通用 → `data` / `data/vos`；角色判定 → `fighter/models`；角色瞬时 → `fighter/vos`；输入配置可留 `input` |
+| 10 | VO 落点：存档/模式/通用 → `data` / `data/vos`；角色判定 → `fighter/models`；角色瞬时 → `fighter/vos`；特效帧缓存 → `ctrler/effect`；输入配置可留 `input` |
 | 11 | 新逻辑跟域包走；**勿**往 `utils/` 堆业务。通用字符串/显示/加载小工具才进 `utils` |
 
 ## NEVER

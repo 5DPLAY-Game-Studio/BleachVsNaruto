@@ -16,14 +16,15 @@
 | 碰撞 | `collision/` → `CollisionBridge` |
 | 加载 / 资源 | `ctrler/GameLoader.as` `ctrler/AssetManager.as` `ctrler/game_stage_loader/` |
 | 音效 | `ctrler/SoundCtrl.as` |
-| 特效 | `ctrler/EffectCtrl.as`（门面）+ `ctrler/effect/`（Handler + `EffectManager` / `EffectCacheVO`）+ `views/effects/` |
-| 联机锁帧 | `ctrler/lan/LockFrameLogic.as`（壳 `LAN*Ctrl` 调用） |
+| 特效 | `ctrler/EffectCtrl.as`（门面）+ `ctrler/effect/`（Handler + `EffectManager` / `EffectCacheVO` / `DisplayFrameBitmapCache`）+ `views/effects/` |
+| 联机锁帧 | `ctrler/lan/`（`LANUtils` / `LockFrameLogic`；壳 `LAN*Ctrl` 调用） |
 | 启动预热（首次交互卡顿） | `ctrler/WarmupCtrl.as` → 约定见 [`.agents/warmup.md`](warmup.md) |
 | 渲染节拍 | `ctrler/GameRender.as` |
-| 数据 / VO | `data/` `data/vos/`（存档/模式/通用）；角色判定 VO → `fighter/models`；角色瞬时 VO → `fighter/vos` |
+| 数据 / VO | `data/` `data/vos/`（存档/模式/通用）；角色判定 VO → `fighter/models`；角色瞬时 VO → `fighter/vos`；特效帧缓存 → `ctrler/effect/BitmapDataCacheVO`（`EffectVO` 仍在 `data/vos`，由 `EffectModel` 持有） |
 | 战斗 HUD | `ui/fight/` |
 | 选人 UI | `ui/select/` → `SelectFighterListCtrl`（列表）+ `SelectFighterCursorCtrl`（光标/更多角色）；`ui/select/flow/`（模式步进）；`ui/dialog/select/` |
 | 菜单 / 暂停 / 设置 | `ui/menu/`（`MenuBtn*`）`ui/settings/`（`SetBtn*` / `JoyStickSetUI` / `KeyMapping`）`stage/SettingStage.as` |
+| 无双 UI | `ui/musou/`（含 `enemy/MusouEnemyBarCtrl`）；ctrler 只走 `GameUI` 门面 |
 | 多语言 | `utils/MultiLangUtils.as` `ui/language/` `stage/LanguageStage.as`；键约定见 [i18n.md](i18n.md) |
 | 作弊码 | `utils/CheatCodeManager.as` |
 | 事件 | `events/` `fighter/events/` |
@@ -45,7 +46,7 @@
 
 | NEVER | 改为 |
 |-------|------|
-| `ctrler`/`fighter`/`data` 回写 `ui/` 静态字段或新增具体控件 import | 写 `GameConfig` / 事件 / 数据；既有 `GameUI` 门面除外 |
+| `ctrler`/`fighter`/`data` 回写 `ui/` 静态字段或新增具体控件 import | 写 `GameConfig` / 事件 / 数据；既有 `GameUI` 门面除外（转场用 `GameUI.trans*` / `StateCtrl`） |
 | 往 `utils/` 塞域业务（特效/联机/角色状态机等） | 放入对应域包（如 `ctrler/effect`、`ctrler/lan`、`fighter/ctrler`） |
 
 ## 控制层分工

@@ -17,122 +17,79 @@
  */
 
 package net.play5d.game.bvn.ctrler {
-import flash.display.Sprite;
+import net.play5d.game.bvn.ui.GameUI;
 
-import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ui.QuickTransUI;
-import net.play5d.game.bvn.ui.TransUI;
-
+/**
+ * 场景转场控制（门面转到 <code>GameUI</code> 静态转场 API）。
+ *
+ * @see GameUI#transIn()
+ * @see GameUI#transOut()
+ * @see GameUI#quickTrans()
+ */
 public class StateCtrl {
 
     private static var _i:StateCtrl;
 
+    /**
+     * 单例。
+     */
     public static function get I():StateCtrl {
         _i ||= new StateCtrl();
+
         return _i;
     }
 
+    /** 是否启用转场 */
     public var transEnabled:Boolean = true;
-    private var _transUI:TransUI;
-    private var _quickTransUI:QuickTransUI;
-    private var _transContainer:Sprite = MainGame.I.root;
 
+    /**
+     * 转场淡入。
+     *
+     * @param back 完成回调。
+     * @param removeAfterComplete 完成后是否移除转场层。
+     */
     public function transIn(back:Function = null, removeAfterComplete:Boolean = false):void {
-
         if (!transEnabled) {
             if (back != null) {
                 back();
             }
+
             return;
         }
-
-        addTransUI();
-
-        if (removeAfterComplete) {
-            _transUI.fadIn(removeSelf);
-        }
-        else {
-            _transUI.fadIn(back);
-        }
-
-        function removeSelf():void {
-            if (back != null) {
-                back();
-            }
-            removeTrainsUI();
-        }
-
+        GameUI.transIn(back, removeAfterComplete);
     }
 
+    /**
+     * 转场淡出。
+     *
+     * @param back 完成回调。
+     * @param removeAfterComplete 完成后是否移除转场层。
+     */
     public function transOut(back:Function = null, removeAfterComplete:Boolean = true):void {
-
         if (!transEnabled) {
             if (back != null) {
                 back();
             }
+
             return;
         }
-
-        addTransUI();
-
-        if (removeAfterComplete) {
-            _transUI.fadOut(removeSelf);
-        }
-        else {
-            _transUI.fadOut(back);
-        }
-
-        function removeSelf():void {
-            if (back != null) {
-                back();
-            }
-            removeTrainsUI();
-        }
-
+        GameUI.transOut(back, removeAfterComplete);
     }
 
+    /**
+     * 快速转场。
+     *
+     * @param back 完成回调。
+     */
     public function quickTrans(back:Function = null):void {
-        if (!_transContainer) {
-            if (back != null) {
-                back();
-            }
-            return;
-        }
-        _quickTransUI ||= new QuickTransUI();
-        _transContainer.addChild(_quickTransUI);
-        _quickTransUI.fadInAndOut(transCom);
-
-        function transCom():void {
-            try {
-                _transContainer.removeChild(_quickTransUI);
-            }
-            catch (e:Error) {
-            }
-            if (back != null) {
-                back();
-            }
-        }
+        GameUI.quickTrans(back);
     }
 
+    /**
+     * 清除转场层。
+     */
     public function clearTrans():void {
-        removeTrainsUI();
+        GameUI.clearTrans();
     }
 
-    private function addTransUI():void {
-        if (!_transUI) {
-            _transUI = new TransUI();
-        }
-
-        _transContainer.addChild(_transUI.ui);
-    }
-
-    private function removeTrainsUI():void {
-        try {
-            _transContainer.removeChild(_transUI.ui);
-        }
-        catch (e:Error) {
-        }
-    }
-
-}
 }

@@ -27,7 +27,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
 import net.play5d.game.bvn.win.data.HostVO;
-import net.play5d.game.bvn.utils.LANUtils;
+import net.play5d.game.bvn.ctrler.lan.LANUtils;
 import net.play5d.game.bvn.win.utils.UIAssetUtil;
 import net.play5d.kyo.stage.IStage;
 

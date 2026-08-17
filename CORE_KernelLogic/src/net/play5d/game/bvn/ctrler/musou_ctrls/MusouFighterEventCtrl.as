@@ -28,7 +28,6 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.musou.MusouUI;
 
 public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
 
@@ -67,20 +66,14 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
 
     private function onEnemyDead(f:FighterMain):void {
         GameCtrl.I.getMusouCtrl().gameRunData.koNum++;
-        (
-                GameUI.I.getUI() as MusouUI
-        ).updateKONum();
+        GameUI.I.updateMusouKONum();
 
         GameData.I.musouData.addMoney(f.musouEnemyData.getMoney());
         GameData.I.musouData.addFighterExp(f.musouEnemyData.getExp());
 
         if (f.musouEnemyData.isBoss) {
             GameCtrl.I.getMusouCtrl().onBossDead(f);
-
-            var ui:MusouUI = GameUI.I.getUI() as MusouUI;
-            if (ui) {
-                ui.updateBossHp();
-            }
+            GameUI.I.updateMusouBossHp();
 
             return;
         }

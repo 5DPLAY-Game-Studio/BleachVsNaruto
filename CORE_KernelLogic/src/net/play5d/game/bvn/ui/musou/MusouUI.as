@@ -35,6 +35,7 @@ import net.play5d.game.bvn.ui.MusouPauseDialog;
 import net.play5d.game.bvn.ui.fight.HitsUI;
 import net.play5d.game.bvn.ui.musou.enemy.BossHpUI;
 import net.play5d.game.bvn.ui.musou.enemy.EnemyHpUIGroup;
+import net.play5d.game.bvn.ui.musou.enemy.MusouEnemyBarCtrl;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoTimeout;
 
@@ -58,11 +59,13 @@ public class MusouUI implements IGameUI {
         _startAndKoPos = new Point(_startAndKoMc.x, _startAndKoMc.y);
 
         _enemyHpBarGroup = new EnemyHpUIGroup(_ui.ct_enemybar);
+        _enemyBarCtrl    = new MusouEnemyBarCtrl();
     }
     private var _ui:$musou$MC_ui;
     private var _hpbar:MusouFightBarUI;
     private var _bossHpBar:BossHpUI;
     private var _enemyHpBarGroup:EnemyHpUIGroup;
+    private var _enemyBarCtrl:MusouEnemyBarCtrl;
     private var _timeUI:MusouTimeUI;
     private var _waveUI:MusouWaveUI;
     private var _KOUI:MusouKOsUI;
@@ -78,6 +81,17 @@ public class MusouUI implements IGameUI {
 
     public function updateFighter():void {
         _hpbar.updateFighters();
+    }
+
+    /**
+     * 更新跟随敌人的血条。
+     *
+     * @param f 敌人。
+     */
+    public function updateEnemyBar(f:FighterMain):void {
+        if (_enemyBarCtrl) {
+            _enemyBarCtrl.updateEnemyBar(f);
+        }
     }
 
 //		public function updateEnemyHp(f:FighterMain):void{
@@ -149,6 +163,10 @@ public class MusouUI implements IGameUI {
             _pauseDialog.destroy();
             _pauseDialog = null;
         }
+        if (_enemyBarCtrl) {
+            _enemyBarCtrl.destroy();
+            _enemyBarCtrl = null;
+        }
     }
 
     public function fadIn(animate:Boolean = true):void {
@@ -165,6 +183,9 @@ public class MusouUI implements IGameUI {
         _hpbar.render();
         _bossHpBar.render();
         _enemyHpBarGroup.render();
+        if (_enemyBarCtrl) {
+            _enemyBarCtrl.render();
+        }
     }
 
     public function renderAnimate():void {
@@ -172,6 +193,9 @@ public class MusouUI implements IGameUI {
         _timeUI.renderAnimate();
         _waveUI.renderAnimate();
         renderStartAndKO();
+        if (_enemyBarCtrl) {
+            _enemyBarCtrl.renderAnimate();
+        }
     }
 
     public function showHits(hits:int, id:int):void {
@@ -377,7 +401,7 @@ public class MusouUI implements IGameUI {
         }
     }
 
-    private function showContinue(onClick:Function):void {
+    public function showContinue(onClick:Function):void {
         if (!_ui) {
             return;
         }

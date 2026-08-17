@@ -22,7 +22,7 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 
 import net.play5d.game.bvn.win.data.HostVO;
-import net.play5d.game.bvn.utils.LANUtils;
+import net.play5d.game.bvn.ctrler.lan.LANUtils;
 import net.play5d.game.bvn.win.utils.UIAssetUtil;
 
 public class HostListItem {

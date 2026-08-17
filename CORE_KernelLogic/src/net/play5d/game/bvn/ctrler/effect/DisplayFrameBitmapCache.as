@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils {
+package net.play5d.game.bvn.ctrler.effect {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.DisplayObject;
@@ -28,7 +28,6 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.getQualifiedClassName;
 
-import net.play5d.game.bvn.data.vos.BitmapDataCacheVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.kyo.utils.BitmapDataPool;

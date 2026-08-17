@@ -47,7 +47,6 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.musou.MusouUI;
 
 public class MusouCtrl {
 
@@ -63,7 +62,6 @@ public class MusouCtrl {
     private var _renderTimer:int;
     private var _renderTimerMax:int;
     private var _fighterEventCtrl:MusouFighterEventCtrl;
-    private var _enemyBarCtrl:MusouEnemyBarCtrl;
     private var _changeFighterGap:int;
     private var _resumeGap:int;
     private var _enemyCreators:Vector.<EnemyCreator> = new Vector.<EnemyCreator>();
@@ -87,8 +85,6 @@ public class MusouCtrl {
 
         _bossCount = _mission.bossCount();
 
-        _enemyBarCtrl = new MusouEnemyBarCtrl();
-
         _stageEnemies = new Vector.<FighterMain>();
 
         _fighterEventCtrl = new MusouFighterEventCtrl();
@@ -107,11 +103,6 @@ public class MusouCtrl {
 
     public function destroy():void {
         GameEvent.removeEventListener(GameEvent.LEVEL_UP, onLevelUp);
-
-        if (_enemyBarCtrl) {
-            _enemyBarCtrl.destroy();
-            _enemyBarCtrl = null;
-        }
 
         if (_enemyCreators) {
             _enemyCreators = null;
@@ -174,11 +165,9 @@ public class MusouCtrl {
     }
 
     public function render():void {
-        _enemyBarCtrl.render();
     }
 
     public function renderAnimate():void {
-        _enemyBarCtrl.renderAnimate();
         renderBossIn();
 
         if (!GameCtrl.I.actionEnable) {
@@ -297,9 +286,7 @@ public class MusouCtrl {
 
         GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
-        (
-                GameUI.I.getUI() as MusouUI
-        ).showLose(function ():void {
+        GameUI.I.showMusouLose(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.self_die_complete');
             backToWorldMap();
         });
@@ -334,9 +321,7 @@ public class MusouCtrl {
         group.currentFighter = to;
 
         _changeFighterGap = GameConfig.FPS_ANIMATE;
-        (
-                GameUI.I.getUI() as MusouUI
-        ).updateFighter();
+        GameUI.I.updateMusouFighter();
 
         EffectCtrl.I.doEffectById('team_change', to.x, to.y);
 
@@ -346,9 +331,7 @@ public class MusouCtrl {
     }
 
     public function updateEnemy(v:FighterMain):void {
-        if (_enemyBarCtrl) {
-            _enemyBarCtrl.updateEnemyBar(v);
-        }
+        GameUI.I.updateMusouEnemyBar(v);
     }
 
     public function updateCamera():void {
@@ -379,13 +362,12 @@ public class MusouCtrl {
 
         _bossInAnimate = false;
 
-        var ui:MusouUI = GameUI.I.getUI() as MusouUI;
-        if (ui) {
-            ui.setBossHp(f);
+        if (GameUI.I) {
+            GameUI.I.setMusouBossHp(f);
             _bossInAnimate = true;
             SoundCtrl.I.BGM(null);
 
-            ui.showBossIn(function ():void {
+            GameUI.I.showMusouBossIn(function ():void {
                 _bossInAnimate = false;
 
                 var played:Boolean = false;
@@ -404,9 +386,7 @@ public class MusouCtrl {
 
     public function onBossDie(f:FighterMain):void {
         TraceLang('debug.trace.data.musou_ctrl.boss_die');
-        (
-                GameUI.I.getUI() as MusouUI
-        ).showBossKO(f, function ():void {
+        GameUI.I.showMusouBossKO(f, function ():void {
 
         });
     }
@@ -595,9 +575,7 @@ public class MusouCtrl {
 
         GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
-        (
-                GameUI.I.getUI() as MusouUI
-        ).showLose(function ():void {
+        GameUI.I.showMusouLose(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.time_over_complete');
             backToWorldMap();
         });
@@ -619,9 +597,7 @@ public class MusouCtrl {
         GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         GameCtrl.I.actionEnable = false;
-        (
-                GameUI.I.getUI() as MusouUI
-        ).showWin(function ():void {
+        GameUI.I.showMusouWin(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.mission_complete_complete');
 
             MusouLogic.I.passMission(_mission);

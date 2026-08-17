@@ -24,7 +24,6 @@ import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.fight.FightUI;
 
 public class GameEndCtrl {
 
@@ -103,9 +102,7 @@ public class GameEndCtrl {
 
             if (SHOW_CONTINUE) {
                 _holdFrame = 10 * 60 * GameConfig.FPS_GAME;
-                (
-                        GameUI.I.getUI() as FightUI
-                ).showContinue(function ():void {
+                GameUI.I.showContinue(function ():void {
                     _holdFrame = 0;
                 });
             }
@@ -158,9 +155,7 @@ public class GameEndCtrl {
 
             if (SHOW_CONTINUE) {
                 _holdFrame = 10 * 60 * GameConfig.FPS_GAME;
-                (
-                        GameUI.I.getUI() as FightUI
-                ).showContinue(function ():void {
+                GameUI.I.showContinue(function ():void {
                     _holdFrame = 0;
                 });
             }

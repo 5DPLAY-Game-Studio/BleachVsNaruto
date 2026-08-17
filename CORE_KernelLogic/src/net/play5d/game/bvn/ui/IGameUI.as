@@ -42,6 +42,8 @@ public interface IGameUI {
 
     function showEnd(finishBack:Function = null, params:Object = null):void;
 
+    function showContinue(onClick:Function):void;
+
     function clearStartAndEnd():void;
 
     function pause():void;

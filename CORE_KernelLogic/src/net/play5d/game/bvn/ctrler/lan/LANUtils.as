@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.play5d.game.bvn.utils {
+package net.play5d.game.bvn.ctrler.lan {
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.kyo.utils.KyoTimerFormat;
 
