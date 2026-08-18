@@ -54,7 +54,7 @@ sync.bat / shared assets ──────────────────�
 | CORE_Components | ✓（依赖 KyoLib+Shared） | ✓ 独立 task（depends KyoLib+Shared） | ✓ 若模块在工程内 |
 | KernelLogic / Utils | ✓ | ✓ | ✓ Make |
 | sync | 库后、壳前 | 壳 task 末依赖 | **Make 前** SyncAssets |
-| SHELL | amxmlc Dev | asconfig Dev / Pc；Pc 发行用 `SHELL_Pc: package Windows captive runtime`（SDK `adt -target bundle`）→ `out/production/SHELL_Pc/launch` | Make |
+| SHELL | amxmlc Dev + amxmlc Pc + `package_shell_pc.bat` | asconfig Dev / Pc；Pc 发行用 `SHELL_Pc: package Windows captive runtime`（SDK `adt -target bundle`）→ `out/production/SHELL_Pc/launch` | Make |
 
 ---
 

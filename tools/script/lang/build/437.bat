@@ -44,7 +44,7 @@ title Build Project
 goto :EOF
 
 :BUILD_START
-echo Building SHELL_Dev debug chain...
+echo Building SHELL_Dev debug chain and SHELL_Pc release package...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,19 @@ echo Failed to copy: %~2
 goto :EOF
 
 :BUILD_SUCCESS
-echo Build SHELL_Dev completed successfully!
+echo Build completed successfully (SHELL_Dev + SHELL_Pc package)!
+goto :EOF
+
+:PACKAGE_PC_START
+echo Packaging SHELL_Pc captive runtime...
+goto :EOF
+
+:PACKAGE_PC_FAIL
+echo SHELL_Pc package failed!
+goto :EOF
+
+:PACKAGE_PC_OK
+echo SHELL_Pc package completed successfully!
 goto :EOF
 
 :ASDOC_EMBED_START

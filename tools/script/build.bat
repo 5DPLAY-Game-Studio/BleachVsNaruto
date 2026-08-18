@@ -92,9 +92,12 @@ for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 set "OUT_ROOT=%REPO_ROOT%\out\production"
 set "MOD_DEV=%REPO_ROOT%\SHELL_Dev"
 set "OUT_DEV=%OUT_ROOT%\SHELL_Dev"
+set "MOD_PC=%REPO_ROOT%\SHELL_Pc"
+set "OUT_PC=%OUT_ROOT%\SHELL_Pc"
 
 set "SHARED_DIR=%REPO_ROOT%\shared"
 set "SYNC_BAT=%BAT_HOME%sync.bat"
+set "PACKAGE_PC_BAT=%BAT_HOME%package_shell_pc.bat"
 set "FLEX_CFG=flex-config.xml"
 
 :: 库模块编译顺序（含 CORE_Components；VSCode SHELL_Dev 链可跳过 Components）
@@ -111,15 +114,24 @@ set "OUT_APP_XML=%OUT_DEV%\FighterTester-app.xml"
 set "OUT_ASSETS=%OUT_DEV%\assets"
 set "OUT_ICON=%OUT_DEV%\icon"
 
+:: SHELL_Pc 源文件与配置
+set "PC_MAIN_AS=%MOD_PC%\src\launch.as"
+set "PC_CFG=%MOD_PC%\%FLEX_CFG%"
+
 call "%FUNC_COMMON%" EXIST "%MOD_DEV%"
+if errorlevel 1 goto END
+call "%FUNC_COMMON%" EXIST "%MOD_PC%"
 if errorlevel 1 goto END
 call "%FUNC_COMMON%" EXIST "%SHARED_DIR%"
 if errorlevel 1 goto END
 call "%FUNC_COMMON%" EXIST "%SYNC_BAT%"
 if errorlevel 1 goto END
+call "%FUNC_COMMON%" EXIST "%PACKAGE_PC_BAT%"
+if errorlevel 1 goto END
 
 :: 确保各模块输出目录存在（compc / amxmlc 写入 out\production）
 if not exist "%OUT_DEV%" mkdir "%OUT_DEV%"
+if not exist "%OUT_PC%" mkdir "%OUT_PC%"
 for %%M in (%LIB_MODULES%) do (
 	if not exist "%OUT_ROOT%\%%M" mkdir "%OUT_ROOT%\%%M"
 )
@@ -194,6 +206,36 @@ if errorlevel 1 (
 	call "%FUNC_COMMON%" ECHO_LANG :COPY_FAIL "icon"
 	goto END
 )
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 7) 编译 SHELL_Pc（amxmlc / AIR）
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+call "%FUNC_COMMON%" EXIST "%PC_CFG%"
+if errorlevel 1 goto END
+call "%FUNC_COMMON%" EXIST "%PC_MAIN_AS%"
+if errorlevel 1 goto END
+
+call "%FUNC_COMMON%" ECHO_LANG :COMPILE_START "SHELL_Pc"
+call "%AMXMLC%" -load-config+="%PC_CFG%" "%PC_MAIN_AS%"
+if errorlevel 1 (
+	call "%FUNC_COMMON%" ECHO_LANG :COMPILE_FAIL "SHELL_Pc"
+	goto END
+)
+call "%FUNC_COMMON%" ECHO_LANG :COMPILE_OK "SHELL_Pc"
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 8) 打包 SHELL_Pc（SDK adt captive runtime）
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+call "%FUNC_COMMON%" ECHO_LANG :PACKAGE_PC_START ""
+call "%PACKAGE_PC_BAT%"
+if errorlevel 1 (
+	call "%FUNC_COMMON%" ECHO_LANG :PACKAGE_PC_FAIL ""
+	goto END
+)
+call "%FUNC_COMMON%" ECHO_LANG :PACKAGE_PC_OK ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

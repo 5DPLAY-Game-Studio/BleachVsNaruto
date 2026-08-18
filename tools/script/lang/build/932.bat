@@ -44,7 +44,7 @@ title ビルド プロジェクト
 goto :EOF
 
 :BUILD_START
-echo SHELL_Dev デバッグチェーンを構築中...
+echo SHELL_Dev デバッグチェーンと SHELL_Pc リリースパッケージを構築中...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,19 @@ echo コピーに失敗しました: %~2
 goto :EOF
 
 :BUILD_SUCCESS
-echo SHELL_Dev のビルドが正常に完了しました！
+echo ビルド完了（SHELL_Dev + SHELL_Pc パッケージ）！
+goto :EOF
+
+:PACKAGE_PC_START
+echo SHELL_Pc キャプティブランタイムをパッケージ中...
+goto :EOF
+
+:PACKAGE_PC_FAIL
+echo SHELL_Pc のパッケージに失敗しました！
+goto :EOF
+
+:PACKAGE_PC_OK
+echo SHELL_Pc のパッケージが完了しました！
 goto :EOF
 
 :ASDOC_EMBED_START

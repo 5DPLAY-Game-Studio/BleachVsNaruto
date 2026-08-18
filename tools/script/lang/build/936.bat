@@ -44,7 +44,7 @@ title 构建项目
 goto :EOF
 
 :BUILD_START
-echo 正在构建 SHELL_Dev 调试链...
+echo 正在构建 SHELL_Dev 调试链与 SHELL_Pc 发行包...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,19 @@ echo 复制失败： %~2
 goto :EOF
 
 :BUILD_SUCCESS
-echo SHELL_Dev 构建成功完成！
+echo 构建成功完成（SHELL_Dev + SHELL_Pc 打包）！
+goto :EOF
+
+:PACKAGE_PC_START
+echo 正在打包 SHELL_Pc 捆绑运行时发行版...
+goto :EOF
+
+:PACKAGE_PC_FAIL
+echo SHELL_Pc 打包失败！
+goto :EOF
+
+:PACKAGE_PC_OK
+echo SHELL_Pc 打包成功！
 goto :EOF
 
 :ASDOC_EMBED_START
