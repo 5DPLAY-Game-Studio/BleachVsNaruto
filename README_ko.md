@@ -34,7 +34,7 @@
 
 # 블리치 vs 나루토 <!-- omit in toc -->
 
-[简体中文](README.md) | [English](README_en.md) | [日本語](README_ja.md) | 한국인
+[简体中文](README.md) | [English](README_en.md) | [日本語](README_ja.md) | 한국인 | [Tiếng Việt](README_vi.md)
 
 **블리치 vs 나루토** 는 **剑jian** 과 제작팀 **5DPLAY Game Studio** 가 개발한 새로운 컨셉의 전략 격투 게임입니다.
 

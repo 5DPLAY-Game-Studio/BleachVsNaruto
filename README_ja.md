@@ -34,7 +34,7 @@
 
 # ブリーチ vs ナルト <!-- omit in toc -->
 
-[简体中文](README.md) | [English](README_en.md) | 日本語 | [한국인](README_ko.md)
+[简体中文](README.md) | [English](README_en.md) | 日本語 | [한국인](README_ko.md) | [Tiếng Việt](README_vi.md)
 
 **ブリーチ vs ナルト** は、**剑jian** とその制作チーム **5DPLAY Game Studio** によって開発された新しいコンセプトの戦略格闘ゲームです。
 
