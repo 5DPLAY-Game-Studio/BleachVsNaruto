@@ -46,15 +46,15 @@ sync.bat / shared assets ──────────────────�
 
 ## 三管道对照
 
-| 步骤 | `build.bat` | VSCode `SHELL_Dev` | IDEA `SHELL_*` Run |
-|------|-------------|--------------------|--------------------|
+| 步骤 | `build.bat` | VSCode `SHELL_Dev` / `SHELL_Pc` | IDEA `SHELL_*` Run |
+|------|-------------|-----------------------------------|--------------------|
 | LIB_Other | ✓ | ✓（经 KyoLib task） | ✓ Make |
 | LIB_KyoLib + embed | ✓ 紧随 compc | ✓ 紧随 compc | Embed **在 Make 后** |
 | CORE_Shared + embed | ✓ 紧随 compc | ✓ 紧随 compc | 同上（`EmbedLibsAsDoc`） |
 | CORE_Components | ✓（依赖 KyoLib+Shared） | ✓ 独立 task（depends KyoLib+Shared） | ✓ 若模块在工程内 |
 | KernelLogic / Utils | ✓ | ✓ | ✓ Make |
 | sync | 库后、壳前 | 壳 task 末依赖 | **Make 前** SyncAssets |
-| SHELL | amxmlc Dev | asconfig Dev | Make |
+| SHELL | amxmlc Dev | asconfig Dev / Pc；Pc 发行用 `SHELL_Pc: package Windows captive runtime`（SDK `adt -target bundle`）→ `out/production/SHELL_Pc/launch` | Make |
 
 ---
 

@@ -68,7 +68,7 @@
     <initialWindow>
         <!-- The main SWF or HTML file of the application. Required. -->
         <!-- Note: In Flash Builder, the SWF reference is set automatically. -->
-        <content>[此值将由 Flash Builder 在输出 app.xml 中覆盖]</content>
+        <content>launch.swf</content>
 
         <!-- The title of the main window. Optional. -->
         <!-- <title></title> -->

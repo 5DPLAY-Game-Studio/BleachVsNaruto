@@ -25,9 +25,9 @@
     // 任务组
     "tasks": [
         /******************** 构建程序 ********************/
-        // SHELL_Dev 依赖链（与 build.bat 最小链一致，不含 CORE_Components）：
+        // SHELL_* 依赖链（与 build.bat 最小链一致，不含 CORE_Components）：
         //   LIB_Other -> LIB_KyoLib(+embed) -> CORE_Shared(+embed)
-        //   -> CORE_KernelLogic -> CORE_Utils -> SyncAssets -> SHELL_Dev
+        //   -> CORE_KernelLogic -> CORE_Utils -> SyncAssets -> SHELL_*
         // CORE_Components 独立 task：LIB_KyoLib + CORE_Shared -> Components
 
         // SHELL_Dev
@@ -45,6 +45,43 @@
                 "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
                 "ActionScript: compile debug - CORE_Utils/asconfig.json",
                 "5DPLAY_TOOLS - SyncAssets"
+            ]
+        },
+        // SHELL_Pc
+        {
+            "label"         : "ActionScript: compile release - SHELL_Pc/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : false,
+            "asconfig"      : "SHELL_Pc/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+                "ActionScript: compile debug - CORE_Shared/asconfig.json",
+                "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
+                "ActionScript: compile debug - CORE_Utils/asconfig.json",
+                "5DPLAY_TOOLS - SyncAssets"
+            ]
+        },
+        // SHELL_Pc：Windows 捆绑运行时发行版 → out/production/SHELL_Pc/launch
+        // 先编译 SHELL_Pc，再用 SDK adt 打包（--storepass 写在 package_shell_pc.bat）
+        {
+            "label"         : "SHELL_Pc: package Windows captive runtime",
+            "type"          : "shell",
+            "command"       : "\"${workspaceFolder}\\tools\\script\\package_shell_pc.bat\"",
+            "options"       : {
+                "cwd"       : "${workspaceFolder}\\tools\\script",
+                "shell"     : {
+                    "executable": "cmd.exe",
+                    "args"     : ["/d", "/c"]
+                }
+            },
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile release - SHELL_Pc/asconfig.json"
             ]
         },
 
