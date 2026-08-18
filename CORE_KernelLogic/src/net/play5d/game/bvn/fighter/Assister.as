@@ -46,7 +46,7 @@ public class Assister extends BaseGameSprite {
             _mainMc.setAssistCtrler(_ctrler);
         }
         else {
-            throw new Error(GetLang('debug.error.data.assister.init_fail', {functionName: 'setAssistCtrler()'}));
+            ThrowError(Error, GetLang('debug.error.data.assister.init_fail', {functionName: 'setAssistCtrler()'}));
         }
     }
     public var onRemove:Function;

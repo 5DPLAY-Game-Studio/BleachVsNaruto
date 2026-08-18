@@ -257,7 +257,8 @@ public class GameStage extends Sprite implements IStage {
             stageSize = new Point(_map.mapLayer.width, GameConfig.GAME_SIZE.y);
         }
         else {
-            throw new Error('map is error! :: mapLayer is null!');
+            ThrowError(Error, 'map is error! :: mapLayer is null!');
+            return;
         }
 
         initCamera();
@@ -467,7 +468,8 @@ public class GameStage extends Sprite implements IStage {
             stageSize = new Point(_map.mapLayer.width, GameConfig.GAME_SIZE.y);
         }
         else {
-            throw new Error('map is error! :: mapLayer is null!');
+            ThrowError(Error, 'map is error! :: mapLayer is null!');
+            return;
         }
 
         initCamera();
@@ -479,7 +481,7 @@ public class GameStage extends Sprite implements IStage {
 
     public function initCamera():void {
         if (camera) {
-            throw new Error(GetLang('debug.error.data.game_stage.camera_already_init'));
+            ThrowError(Error, GetLang('debug.error.data.game_stage.camera_already_init'));
             return;
         }
 

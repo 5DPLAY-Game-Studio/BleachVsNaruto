@@ -73,7 +73,8 @@ public class InstanceVOClone {
         if (len == 2) {
             return new cls(args[0], args[1]) as IInstanceVO;
         }
-        throw new ArgumentError('InstanceVOClone: unsupported ctor arity ' + len);
+        ThrowError(ArgumentError, 'InstanceVOClone: unsupported ctor arity ' + len);
+        return null;
     }
 
     /** @private 获取并缓存类的可拷贝属性名 */

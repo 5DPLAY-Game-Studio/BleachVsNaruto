@@ -248,7 +248,8 @@ public class LanguageStage implements IStage {
      */
     private function addLanguageItem(langArr:Array, fontPathArr:Array):void {
         if (langArr.length != fontPathArr.length) {
-            throw new Error(GetLang('debug.error.data.language_stage.element_count_mismatch'));
+            ThrowError(Error, GetLang('debug.error.data.language_stage.element_count_mismatch'));
+            return;
         }
 
         // 先预热引擎与音效，再创建列表，缩短可交互后的冷路径
@@ -352,7 +353,8 @@ public class LanguageStage implements IStage {
 
         // 如果是不支持的语言，输出不支持
         if (!LanguageType.isSupported(language)) {
-            throw new Error(GetLang('debug.error.data.language_stage.unsupported_language'));
+            ThrowError(Error, GetLang('debug.error.data.language_stage.unsupported_language'));
+            return;
         }
 
         // 仅注册所选语言字体

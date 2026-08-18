@@ -42,7 +42,8 @@ public class EmbedSwf {
         var bytes:ByteArray = _swf.movieClipData;
 
         if (!bytes) {
-            throw new Error(GetLang('debug.error.data.embed_swf.no_movie_clip_data'));
+            ThrowError(Error, GetLang('debug.error.data.embed_swf.no_movie_clip_data'));
+            return;
         }
 
         var loader:Loader = new Loader();
@@ -103,8 +104,8 @@ public class EmbedSwf {
             return fn.apply(null, params);
         }
         catch (e:Error) {
-            trace(e);
-            throw new Error('swf.' + func + ' call failed ! ');
+            ThrowError(e, 'swf.' + func + ' call failed ! ');
+            return null;
         }
     }
 

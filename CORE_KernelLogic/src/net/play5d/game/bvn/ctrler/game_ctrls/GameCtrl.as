@@ -622,7 +622,8 @@ public class GameCtrl {
         var map:MapMain = GameRunFactory.createMapByData(gameRunData.map);
 
         if (!p1 || !p2 || !map) {
-            throw new Error(GetLang('debug.error.data.game_ctrl.build_game_fail'));
+            ThrowError(Error, GetLang('debug.error.data.game_ctrl.build_game_fail'));
+            return;
         }
 
 //        if (p1.data.id == p2.data.id) {

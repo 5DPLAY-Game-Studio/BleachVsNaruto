@@ -491,7 +491,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
 
         }
         else {
-            throw new Error('FighterCtrler.initMc Error :: mc is null!');
+            ThrowError(Error, 'FighterCtrler.initMc Error :: mc is null!');
         }
     }
 

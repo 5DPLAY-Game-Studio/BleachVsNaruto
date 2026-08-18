@@ -132,7 +132,7 @@ public class MusouCtrl {
         var map:MapMain    = GameRunFactory.createMapByData(GameCtrl.I.gameRunData.map);
 
         if (!p1 || !map) {
-            throw new Error(GetLang('debug.error.data.musou_ctrl.build_game_fail'));
+            ThrowError(Error, GetLang('debug.error.data.musou_ctrl.build_game_fail'));
             return;
         }
 

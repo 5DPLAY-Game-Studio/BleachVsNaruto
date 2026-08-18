@@ -22,12 +22,13 @@ package {
  * 抛出或仅打印错误（调试版可真正 throw）。
  *
  * <p><code>errorParam</code> 可为 <code>Error</code> 实例或其子类的
- * <code>Class</code>。非调试环境或 <code>isThrow</code> 为
- * <code>false</code> 时只打印堆栈，不抛出。</p>
+ * <code>Class</code>。传入 <code>Class</code> 时以 <code>message</code>
+ * 构造。非调试环境或 <code>isThrow</code> 为 <code>false</code> 时只打印堆栈，
+ * 不抛出。</p>
  *
  * @param errorParam <code>Error</code> 实例，或可 <code>new</code> 出
  *                   <code>Error</code> 的类。
- * @param message 写入 <code>error.message</code> 的文案；默认空串。
+ * @param message 写入 <code>error.message</code> 的文案；空串（默认）时保留原消息。
  * @param isThrow 为 <code>true</code>（默认）且 <code>IsDebugger()</code> 时真正抛出。
  * @throws Error 调试环境且 <code>isThrow</code> 为真时抛出。
  * @example
@@ -40,36 +41,36 @@ package {
  * @see Printf
  */
 public function ThrowError(errorParam:*, message:String = '', isThrow:Boolean = true):void {
-    if (!errorParam) {
-        Printf('Error parameter is invalid');
-        return;
-    }
+    var error:Error          = errorParam as Error;
+    var applyMessage:Boolean = true;
 
-    var error:Error = null;
-
-    if (errorParam is Error) {
-        error = errorParam as Error;
-    }
-    else if (errorParam is Class) {
+    if (!error && errorParam is Class) {
         try {
-            error = new errorParam() as Error;
+            error = new errorParam(message) as Error;
         }
         catch (e:Error) {
-            ThrowError(e, 'Failed to throw Error');
-            return;
-        }
-        if (!error) {
-            Printf('Error class is not instantiated or is of wrong type');
-            return;
+            // 构造失败：沿用异常本身，勿覆盖其 message
+            error        = e;
+            applyMessage = false;
         }
     }
-    else {
-        Printf('Error parameter is invalid');
+
+    if (!error) {
+        if (errorParam is Class) {
+            Printf('Error class is not instantiated or is of wrong type');
+        }
+        else {
+            Printf('Error parameter is invalid');
+        }
         return;
     }
 
-    error.message = message;
-    Printf(error.getStackTrace());
+    if (applyMessage && message) {
+        error.message = message;
+    }
+
+    // 堆栈/文案可能含 { }，不走 Printf/Format
+    trace(error.getStackTrace() || error.toString());
 
     if (IsDebugger() && isThrow) {
         throw error;

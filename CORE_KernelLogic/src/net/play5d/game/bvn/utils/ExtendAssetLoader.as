@@ -23,7 +23,8 @@ public class ExtendAssetLoader implements IAssetLoader {
 
     public function ExtendAssetLoader(extend:*) {
         if (!extend) {
-            throw new Error('extend is null !');
+            ThrowError(Error, 'extend is null !');
+            return;
         }
         _extend = extend;
     }

@@ -368,7 +368,8 @@ public class GameCamera {
 
     private function renderZoom():void {
         if (_zoom <= 0) {
-            throw new Error(GetLang('debug.error.data.game_camera.zoom_invalid'));
+            ThrowError(Error, GetLang('debug.error.data.game_camera.zoom_invalid'));
+            return;
         }
 
         if (tweenSpd > 1) {

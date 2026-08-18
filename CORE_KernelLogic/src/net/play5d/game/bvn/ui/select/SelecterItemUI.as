@@ -105,7 +105,8 @@ public class SelecterItemUI {
             this.moreX = 0;
             this.moreY = 0;
             if (!curSelecter) {
-                throw Error('Need SelectFighterItem !!');
+                ThrowError(Error, 'Need SelectFighterItem !!');
+                return;
             }
             this.showingMoreSelecter = curSelecter;
             if (this.showingMoreSelecter) {
@@ -137,7 +138,7 @@ public class SelecterItemUI {
     public function select(back:Function = null):void {
 
         if (!selectVO) {
-            throw new Error(GetLang('debug.error.data.selecter_item_ui.select_vo_unset'));
+            ThrowError(Error, GetLang('debug.error.data.selecter_item_ui.select_vo_unset'));
             return;
         }
 
