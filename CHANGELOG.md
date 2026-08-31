@@ -2,6 +2,25 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.08312026_alpha] - 2026-08-31
+
+### 新增
+
+- 增加选取游戏 Sprite 实体并展开详细属性（可修改、锁定）的功能。
+- 增加练习模式中展示输入按键历史的功能。
+
+### 更改
+
+- 重构优化多处性能问题。
+- 优化语言选择页面卡顿问题。
+- 迁移合并多处冗余设计。
+
+### 修复
+
+- 强化修复加载界面偶现加载失败后，计数器仍自增 1 的 BUG。
+- 修复所有错误的 **initialize** 拼写。
+- 修复偶现的初始化加载字体失败。
+
 ## [3.7.0.0.08112026_alpha] - 2026-08-11
 
 ### 新增
@@ -376,6 +395,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.08312026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.08112026_alpha...3.7.0.0.08312026_alpha
 [3.7.0.0.08112026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07232026_alpha...3.7.0.0.08112026_alpha
 [3.7.0.0.07232026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05252026_alpha...3.7.0.0.07232026_alpha
 [3.7.0.0.05252026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05212026_alpha...3.7.0.0.05252026_alpha
