@@ -17,7 +17,7 @@ Flash IDE - **必须**，用于构建 `BleachVsNaruto_FlashSrc` 目录下的 .fl
 
 Code IDE - 可选，依照您的开发喜好，选择合适的开发环境即可，本项目支持 **命令行** 编译。
 
-- [Intellij IDEA 2023.1.7] - 如果使用此环境开发，您需要具有对应 Ultimate Edition 版本的许可证。
+- [Intellij IDEA 2023.2.8] - 如果使用此环境开发，您需要具有对应 Ultimate Edition 版本的许可证。
 - [Microsoft Visual Studio Code] - 如果使用此环境开发，您需要 Java 17 的运行环境以运行 Flash 开发插件。（文档编辑中）
 
 对应具体 IDE 插件参考 [构建要求](#构建要求) 章节。
@@ -58,9 +58,9 @@ Code IDE 是可选项，其仅为您提供更好的开发体验，并非编译�
 3. 导入素材同步工具
     - 执行 ***文件(F) -> 管理 IDE 设置 -> 导入设置***，在弹出的 ***导入文件的位置*** 对话框中选择工程目录下的 ***tools\idea_settings\5DPLAY_TOOLS.zip***，在弹出的 ***选择要导入的组件*** 对话框中单击【确认】按钮，按要求重启 IDEA
 
-## 执行构建
+## 构建项目
 
-在执行构建之前，您需要确认 TagAssets 是否已经手动覆盖到工程目录下。
+在构建项目之前，您需要确认 TagAssets 是否已经手动覆盖到工程目录下。
 
 ### TagAssets 获取
 
@@ -70,7 +70,17 @@ Code IDE 是可选项，其仅为您提供更好的开发体验，并非编译�
 在 TagAssets 中，仅包含了一些未开放源代码的编译二进制（SWF 文件），并不包含已经开放源代码的也就是 `BleachVsNaruto_FlashSrc` 目录下源文件的编译产物，
 因此，您需要在本机编译源文件补齐缺失的 SWF/SWC 文件（重要，如果不执行此步骤，则会直接导致无法进行主程序的编译，其依赖此步的编译产物）。
 
-### 构建项目
+在执行所有形式的构建之前，您需要先使用 Animate/Flash 对所有的 Flash 资源进行编译补齐（或更新相应 Flash 资源）：
+
+- 执行 `tools\script\publish.bat`，此脚本会调起已安装的 Animate/Flash 来编译并发布`BleachVsNaruto_FlashSrc` 目录下的 .fla/.xfl 文件。
+
+### 命令行构建
+
+本项目支持以命令行的方式执行最小化的构建操作。在执行操作前，请检查是否满足构建要求。若您确定已满足构建要求，则：
+
+- 执行 `tools\script\build.bat`，此脚本将会自动调用 SDK 中的相关工具进行编译与发布，并将编译过程中产生的错误进行报告。
+
+### Intellij IDEA
 
 - 单击 ***构建(B) -> 构建项目(P)*** 选项或按下 ***Ctrl + F9*** 快捷键以快速构建工程
 
@@ -78,7 +88,7 @@ Code IDE 是可选项，其仅为您提供更好的开发体验，并非编译�
 
 - 单击 ***运行(U) -> 调试...*** 选项或按下 ***Alt + Shift + F9*** 快捷键，在弹出的 ***调试*** 菜单中选择 ***SHELL_Dev FighterTester***，编译完成片刻后将执行编译结果
 
-[Intellij IDEA 2023.1.7]: https://download.jetbrains.com/idea/ideaIU-2023.1.7.exe?_gl=1*gtwm52*_gcl_aw*R0NMLjE3ODMzMDExMTcuQ2p3S0NBandnYWpTQmhCRUVpd0FTaWNKVTBmMmlqVGREVkVMeTJhdV9OZ3BHMGdKTXdaSVpVMkpwRDhGYVc3QXg4OUFTNlQ3NENGWE5Sb0N4U1VRQXZEX0J3RQ..*_gcl_au*MzkwNjQ2OTQ4LjE3ODAyODQxMDY.*FPAU*MzkwNjQ2OTQ4LjE3ODAyODQxMDY.*_ga*MTY1MTMxMDI1OS4xNzgwMjg0MTA2*_ga_9J976DJZ68*czE3ODQ3OTAzNzkkbzkkZzAkdDE3ODQ3OTA0MDEkajM4JGwwJGgw
+[Intellij IDEA 2023.2.8]: https://download.jetbrains.com/idea/ideaIU-2023.2.8.exe
 [flex4.16.1-air51.0.1.1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK/releases/download/flex4.16.1-air51.0.1.1/flex4.16.1-air51.0.1.1.rar
 [BleachVsNaruto_FlexSDK]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK
 [Flash/Flex]: https://plugins.jetbrains.com/plugin/14508-flash-flex
