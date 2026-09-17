@@ -406,7 +406,7 @@ public class GameLogic {
             GameEndCtrl.SHOW_CONTINUE = true;
             break;
         default:
-            GameData.I.loadSelect('config/select.xml');
+            GameData.I.loadSelect('config/select.json');
             ResUtils.WINNER           = '$loading$MC_stageWinner';
             GameConfig.SHOW_UI_STATUS = 0;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_4399;

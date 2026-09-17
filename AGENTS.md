@@ -9,6 +9,7 @@
 | KernelLogic 内模糊定位 | [`.agents/map.md`](.agents/map.md) |
 | 写/改 `CORE_Components`（Animate 组件） | [`.agents/components.md`](.agents/components.md) |
 | 写/改代码格式 | [`.agents/code_style.md`](.agents/code_style.md) |
+| 写/改 `shared/assets/.../config` 玩法 JSON | [`.agents/json_style.md`](.agents/json_style.md) |
 | 写/改文件完成后 | 复查是否误加空行 → [`.agents/code_style.md`](.agents/code_style.md) |
 | 写/补 ASDoc 与逻辑注释；**共享模块勿跨模块 `@see`** | [`.agents/comment.md`](.agents/comment.md) |
 | `LIB_KyoLib` 首选 API；**`kyo.air.*` 仅 AIR** | [`.agents/kyolib.md`](.agents/kyolib.md) |

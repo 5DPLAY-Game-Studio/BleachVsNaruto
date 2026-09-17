@@ -43,69 +43,70 @@ public class SelectStageConfigVO implements IInstanceVO {
     //	public var VCount:int; //行数
     public var unitSize:Point = new Point(50, 50);
 
-    public function setByXML(xml:XML):void {
+    /**
+     * 通过对象进行初始化
+     *
+     * @param obj 对象
+     */
+    public function initByObject(obj:Object):void {
+        var layoutObj:Object = obj['stage_setting']['layout'];
 
-        var layoutXML:Object = xml.stage_setting.layout;
+        x      = Number(layoutObj['x']);
+        y      = Number(layoutObj['y']);
+        width  = Number(layoutObj['width']);
+        height = Number(layoutObj['height']);
 
-        x      = Number(layoutXML.@x);
-        y      = Number(layoutXML.@y);
-        width  = Number(layoutXML.@width);
-        height = Number(layoutXML.@height);
+        top    = Number(layoutObj['top']);
+        bottom = Number(layoutObj['bottom']);
+        left   = Number(layoutObj['left']);
+        right  = Number(layoutObj['right']);
 
-        top    = Number(layoutXML.@top);
-        bottom = Number(layoutXML.@bottom);
-        left   = Number(layoutXML.@left);
-        right  = Number(layoutXML.@right);
-
-        charList   = newListByXML(xml.char_list);
-        assistList = newListByXML(xml.assist_list);
-
+        charList   = newListByObject(obj['char_list'] as Array);
+        assistList = newListByObject(obj['assist_list'] as Array);
     }
 
-
-    private function newListByXML(xml:XMLList):SelectCharListConfigVO {
+    private function newListByObject(listArr:Array):SelectCharListConfigVO {
         var sv:SelectCharListConfigVO = new SelectCharListConfigVO();
 
-        sv.VCount = xml.children().length();
+        sv.VCount = listArr.length;
 
-        for (var y:int; y < xml.children().length(); y++) {
-            var row:XML = xml.children()[y];
+        for (var y:int = 0; y < listArr.length; y++) {
+            var row:Object  = listArr[y];
+            var items:Array = row['item'] as Array;
 
-            var rowOffset:Point     = null;
-            var rowOffsetStr:String = row.@offset;
-
-            if (rowOffsetStr && rowOffsetStr.length > 0) {
-                var rowOffsetArr:Array = rowOffsetStr.split(',');
-                rowOffset              = new Point(rowOffsetArr[0], rowOffsetArr[1]);
+            var rowOffset:Point    = null;
+            var rowOffsetArr:Array = row['offset'] as Array;
+            if (rowOffsetArr && rowOffsetArr.length >= 2) {
+                rowOffset = new Point(rowOffsetArr[0], rowOffsetArr[1]);
             }
 
-            if (sv.HCount < row.children().length()) {
-                sv.HCount = row.children().length();
+            if (sv.HCount < items.length) {
+                sv.HCount = items.length;
             }
 
-            for (var x:int = 0; x < row.children().length(); x++) {
-                var item:XML = row.children()[x];
+            for (var x:int = 0; x < items.length; x++) {
+                var item:Object = items[x];
 
-                var moreIds:Array     = null;
-                var moreIdsStr:String = item.@moreFighter;
-                if (moreIdsStr && moreIdsStr.length > 0) {
-                    moreIds = moreIdsStr.split(',');
-                }
-
-                var fighterID:String = item.toString();
-                if (fighterID && fighterID.length < 1) {
-                    fighterID = null;
-                }
+                var fighterID:String = null;
+                var moreIds:Array    = null;
                 var offset:Point     = rowOffset ? rowOffset.clone() : null;
-                var offsetStr:String = item.@offset;
-                if (offsetStr && offsetStr.length > 0) {
-                    var offsetArr:Array = offsetStr.split(',');
-                    if (offset) {
-                        offset.x += Number(offsetArr[0]);
-                        offset.y += Number(offsetArr[1]);
+
+                if (item) {
+                    if (item['id']) {
+                        fighterID = item['id'];
                     }
-                    else {
-                        offset = new Point(offsetArr[0], offsetArr[1]);
+
+                    moreIds = item['more_fighter'] as Array;
+
+                    var offsetArr:Array = item['offset'] as Array;
+                    if (offsetArr && offsetArr.length >= 2) {
+                        if (offset) {
+                            offset.x += Number(offsetArr[0]);
+                            offset.y += Number(offsetArr[1]);
+                        }
+                        else {
+                            offset = new Point(offsetArr[0], offsetArr[1]);
+                        }
                     }
                 }
 
@@ -113,11 +114,9 @@ public class SelectStageConfigVO implements IInstanceVO {
                 cv.moreFighterIDs           = moreIds;
                 sv.list.push(cv);
             }
-
         }
 
         return sv;
-
     }
 
 }

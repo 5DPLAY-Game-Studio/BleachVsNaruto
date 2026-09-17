@@ -69,11 +69,11 @@ public class GameData {
 
         function loadAssetsBack(data:Object):void {
             AssisterModel.I.initByObject(data);
-            AssetManager.I.loadXML('config/select.xml', loadSelectBack, failWith('txt.game_data.load_select_fail'));
+            AssetManager.I.loadJSON('config/select.json', loadSelectBack, failWith('txt.game_data.load_select_fail'));
         }
 
-        function loadSelectBack(data:XML):void {
-            config.select_config.setByXML(data);
+        function loadSelectBack(data:Object):void {
+            config.select_config.initByObject(data);
 //				AssetManager.I.loadXML("config/map.xml",loadMapBack , loadMapFail);
             AssetManager.I.loadJSON('config/map.json', loadMapBack, failWith('txt.game_data.load_map_fail'));
         }
@@ -154,15 +154,15 @@ public class GameData {
     }
 
     public function loadSelect(url:String):void {
-        AssetManager.I.loadXML(url, function (data:XML):void {
+        AssetManager.I.loadJSON(url, function (data:Object):void {
             setSelectData(data);
         }, function ():void {
             TraceLang('debug.trace.data.game_data.load_select_error');
         });
     }
 
-    public function setSelectData(xml:XML):void {
-        config.select_config.setByXML(xml);
+    public function setSelectData(data:Object):void {
+        config.select_config.initByObject(data);
     }
 
     // 验证选人
@@ -204,7 +204,7 @@ public class GameData {
             if (missAssisters.length > 0) {
                 msg += 'assister : ' + missAssisters.join(' , ') + ' ; ';
             }
-            throw new Error(GetLang('debug.error.data.game_data.verify_select_fail', {file: 'select.xml', message: msg}));
+            throw new Error(GetLang('debug.error.data.game_data.verify_select_fail', {file: 'select.json', message: msg}));
         }
     }
 
