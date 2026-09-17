@@ -126,5 +126,25 @@ public class FighterModel {
         }
     }
 
+    /**
+     * 清空已注册角色。
+     */
+    public function clear():void {
+        _fighterObj = {};
+    }
+
+    /**
+     * 注册单个角色（同 id 覆盖）。
+     *
+     * @param fv 角色 VO。
+     */
+    public function register(fv:FighterVO):void {
+        if (!fv || !fv.id) {
+            return;
+        }
+        _fighterObj ||= {};
+        _fighterObj[fv.id] = fv;
+    }
+
 }
 }

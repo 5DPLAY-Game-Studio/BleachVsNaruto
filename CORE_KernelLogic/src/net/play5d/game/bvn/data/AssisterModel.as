@@ -79,5 +79,25 @@ public class AssisterModel {
             _assisterObj[fv.id] = fv;
         }
     }
+
+    /**
+     * 清空已注册援助。
+     */
+    public function clear():void {
+        _assisterObj = {};
+    }
+
+    /**
+     * 注册单个援助（同 id 覆盖）。
+     *
+     * @param fv 援助 VO。
+     */
+    public function register(fv:FighterVO):void {
+        if (!fv || !fv.id) {
+            return;
+        }
+        _assisterObj ||= {};
+        _assisterObj[fv.id] = fv;
+    }
 }
 }

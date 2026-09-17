@@ -1,8 +1,8 @@
 # 配置 JSON 格式（AI）
 
 何时读：写/改 `shared/assets/assets/config/*.json`（含新建或由 XML 迁移）。  
-范例：`mission.json`、`select.json`、`map.json`、`assist.json`、`fighter.json`。  
-语言包格式见 [`i18n.md`](i18n.md)，不套用本文排版细则。
+范例：`mission.json`、`select.json`、`map.json`、`assist.json`、`fighter.json`、角色包 `meta.json` / `packs.json`。  
+角色包目录与加载约定见 [`packs.md`](packs.md)。语言包格式见 [`i18n.md`](i18n.md)，不套用本文排版细则。
 
 ---
 
@@ -68,6 +68,56 @@
 
 | 配置 | 加载 | 解析 |
 |------|------|------|
-| `fighter.json` / `assist.json` | `loadJSON` | `FighterModel` / `AssisterModel.initByObject` |
+| `packs.json` + `packs/**/meta.json` | `PackRegistry` | `FighterModel` / `AssisterModel` |
+| `fighter.json` / `assist.json` | 工具生成 / 调试回退 | `FighterModel` / `AssisterModel.initByObject` |
 | `select.json` | `loadJSON` | `SelectStageConfigVO.initByObject` |
 | `map.json` / `mission.json` | `loadJSON` | `MapModel` / `MessionModel.initByObject` |
+
+---
+
+## 角色包 `meta.json` / `packs.json`
+
+```json
+{
+  "pack": "ichigo",
+  "kind": "fighter",
+  "file": "ichigo.swf",
+  "variants": [{
+      "id"         : "ichigo",
+      "name"       : "黑崎·一护",
+      "comic_type" : 0,
+      "start_frame": 1,
+      "faces": {
+        "face"    : "face/ichigo.png",
+        "face_big": "face/ichigo_b.png",
+        "face_bar": "face/ichigo_m.png",
+        "face_win": "face/ichigo_w.png"
+      },
+      "says": [
+        "..."
+      ],
+      "bgm": {
+        "url" : "character/ichigo.mp3",
+        "rate": 70
+      },
+      "hasWarning": true
+    }]
+}
+```
+
+```json
+{
+  "fighters": [
+    "ichigo"
+  ],
+  "assists": [
+    "kon"
+  ]
+}
+```
+
+| 点 | 做法 |
+|----|------|
+| `faces.*` | 相对包根；可省略不存在的键 |
+| `file` | 包内 SWF 文件名（可含原 `xb/` 等子路径时改写为包根文件名） |
+| `kind` | `fighter` / `assist` |

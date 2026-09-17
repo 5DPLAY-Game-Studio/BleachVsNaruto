@@ -20,7 +20,7 @@
 | 联机锁帧 | `ctrler/lan/`（`LANUtils` / `LockFrameLogic`；壳 `LAN*Ctrl` 调用） |
 | 启动预热（首次交互卡顿） | `ctrler/WarmupCtrl.as` → 约定见 [`.agents/warmup.md`](warmup.md) |
 | 渲染节拍 | `ctrler/GameRender.as` |
-| 数据 / VO | `data/` `data/vos/`（存档/模式/通用）；角色判定 VO → `fighter/models`；角色瞬时 VO → `fighter/vos`；特效帧缓存 → `ctrler/effect/BitmapDataCacheVO`（`EffectVO` 仍在 `data/vos`，由 `EffectModel` 持有） |
+| 数据 / VO | `data/` `data/vos/`（存档/模式/通用）；角色包 `PackRegistry`；角色判定 VO → `fighter/models`；角色瞬时 VO → `fighter/vos`；特效帧缓存 → `ctrler/effect/BitmapDataCacheVO`（`EffectVO` 仍在 `data/vos`，由 `EffectModel` 持有） |
 | 战斗 HUD | `ui/fight/` |
 | 选人 UI | `ui/select/` → `SelectFighterListCtrl`（列表）+ `SelectFighterCursorCtrl`（光标/更多角色）；`ui/select/flow/`（模式步进）；`ui/dialog/select/` |
 | 菜单 / 暂停 / 设置 | `ui/menu/`（`MenuBtn*`）`ui/settings/`（`SetBtn*` / `JoyStickSetUI` / `KeyMapping`）`stage/SettingStage.as` |

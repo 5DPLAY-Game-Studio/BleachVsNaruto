@@ -331,7 +331,9 @@ public class SelectFighterCursorCtrl {
 
         }
 
-        slt.setMoreEnabled(true, sf);
+        if (fighterItems.length > 0) {
+            slt.setMoreEnabled(true, sf);
+        }
     }
 
     private function moveMoreSlt(slt:SelecterItemUI, x:int, y:int):Boolean {

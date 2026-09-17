@@ -27,6 +27,7 @@ import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.data.PackRegistry;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;
@@ -39,6 +40,7 @@ import net.play5d.game.bvn.win.GameInterfaceManager;
 import net.play5d.game.bvn.win.MusouDebugger;
 import net.play5d.game.bvn.utils.SwfLib;
 import net.play5d.game.bvn.win.utils.Loger;
+import net.play5d.game.bvn.win.utils.PackModScanner;
 import net.play5d.game.bvn.win.utils.UIAssetUtil;
 
 [SWF(width='800', height='600', frameRate='30', backgroundColor='#000000')]
@@ -96,6 +98,8 @@ public class launch extends Sprite {
         AssetManager.I.setAssetLoader(_assetLoader);
 
         GameInterface.instance = new GameInterfaceManager();
+
+        PackRegistry.extraPackRootsProvider = PackModScanner.listExtraPacks;
 
         GameUI.BITMAP_UI = true;
 

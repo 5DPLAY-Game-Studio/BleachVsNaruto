@@ -63,20 +63,22 @@ public class FighterVO implements IInstanceVO {
             startFrame = dataObj['start_frame'];
         }
 
-        if (dataObj['urls']['file']) {
-            fileUrl    = fighterPath + dataObj['urls']['file'];
-        }
-        if (dataObj['urls']['face']) {
-            faceUrl    = facePath + dataObj['urls']['face'];
-        }
-        if (dataObj['urls']['face_big']) {
-            faceBigUrl = facePath + dataObj['urls']['face_big'];
-        }
-        if (dataObj['urls']['face_bar']) {
-            faceBarUrl = facePath + dataObj['urls']['face_bar'];
-        }
-        if (dataObj['urls']['face_win']) {
-            faceWinUrl = facePath + dataObj['urls']['face_win'];
+        if (dataObj['urls']) {
+            if (dataObj['urls']['file']) {
+                fileUrl    = fighterPath + dataObj['urls']['file'];
+            }
+            if (dataObj['urls']['face']) {
+                faceUrl    = facePath + dataObj['urls']['face'];
+            }
+            if (dataObj['urls']['face_big']) {
+                faceBigUrl = facePath + dataObj['urls']['face_big'];
+            }
+            if (dataObj['urls']['face_bar']) {
+                faceBarUrl = facePath + dataObj['urls']['face_bar'];
+            }
+            if (dataObj['urls']['face_win']) {
+                faceWinUrl = facePath + dataObj['urls']['face_win'];
+            }
         }
 
         contactFriends = [];

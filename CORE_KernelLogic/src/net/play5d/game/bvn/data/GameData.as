@@ -60,33 +60,24 @@ public class GameData {
 
     public function loadConfig(back:Function, fail:Function = null):void {
 
-        AssetManager.I.loadJSON('config/fighter.json', loadFighterBack, failWith('txt.game_data.load_fighter_fail'));
+        PackRegistry.I.load(loadPacksBack, failWith('txt.game_data.load_fighter_fail'));
 
-        function loadFighterBack(data:Object):void {
-            FighterModel.I.initByObject(data);
-            AssetManager.I.loadJSON('config/assist.json', loadAssetsBack, failWith('txt.game_data.load_assistant_fail'));
-        }
-
-        function loadAssetsBack(data:Object):void {
-            AssisterModel.I.initByObject(data);
+        function loadPacksBack():void {
             AssetManager.I.loadJSON('config/select.json', loadSelectBack, failWith('txt.game_data.load_select_fail'));
         }
 
         function loadSelectBack(data:Object):void {
             config.select_config.initByObject(data);
-//				AssetManager.I.loadXML("config/map.xml",loadMapBack , loadMapFail);
             AssetManager.I.loadJSON('config/map.json', loadMapBack, failWith('txt.game_data.load_map_fail'));
         }
 
         function loadMapBack(data:Object):void {
             MapModel.I.initByObject(data);
-//				AssetManager.I.loadXML("config/mission.xml",loadMissionBack , loadMissionFail);
             AssetManager.I.loadJSON('config/mission.json', loadMissionBack, failWith('txt.game_data.load_mission_fail'));
         }
 
         function loadMissionBack(data:Object):void {
             MessionModel.I.initByObject(data);
-//				AssetManager.I.loadXML("config/musou.xml",loadMusouMission , loadMusouMission);
 
             MusouModel.I.loadMapData(loadMusouDataBack, failWith('txt.game_data.load_musou_fail'));
         }
@@ -102,11 +93,6 @@ public class GameData {
                 back();
             }
         }
-
-//			function loadMusouMission(data:String):void{
-//				MusouMissionModel.I.initByXML(new XML(data));
-//				back();
-//			}
 
         function failWith(langKey:String):Function {
             return function ():void {
@@ -165,7 +151,7 @@ public class GameData {
         config.select_config.initByObject(data);
     }
 
-    // 验证选人
+    // 验证选人（缺失软降级：空槽 / 过滤 more，不抛错）
     private function validateSelect():void {
         var missFighters:Array  = [];
         var missAssisters:Array = [];
@@ -174,24 +160,35 @@ public class GameData {
         var f:String;
         var fighter:FighterVO;
         for each(s in config.select_config.charList.list) {
+            if (s.fighterID && !FighterModel.I.getFighter(s.fighterID)) {
+                if (missFighters.indexOf(s.fighterID) == -1) {
+                    missFighters.push(s.fighterID);
+                }
+                s.fighterID = null;
+            }
+            s.moreFighterIDs = filterExistingIds(s.moreFighterIDs, false, missFighters);
+
             for each(f in s.getAllFighterIDs()) {
                 fighter = FighterModel.I.getFighter(f);
-                if (fighter == null) {
-                    if (missFighters.indexOf(f) == -1) {
-                        missFighters.push(f);
-                    }
+                if (fighter == null && missFighters.indexOf(f) == -1) {
+                    missFighters.push(f);
                 }
             }
         }
 
         for each(s in config.select_config.assistList.list) {
+            if (s.fighterID && !AssisterModel.I.getAssister(s.fighterID)) {
+                if (missAssisters.indexOf(s.fighterID) == -1) {
+                    missAssisters.push(s.fighterID);
+                }
+                s.fighterID = null;
+            }
+            s.moreFighterIDs = filterExistingIds(s.moreFighterIDs, true, missAssisters);
 
             for each(f in s.getAllFighterIDs()) {
                 fighter = AssisterModel.I.getAssister(f);
-                if (fighter == null) {
-                    if (missAssisters.indexOf(f) == -1) {
-                        missAssisters.push(f);
-                    }
+                if (fighter == null && missAssisters.indexOf(f) == -1) {
+                    missAssisters.push(f);
                 }
             }
         }
@@ -204,11 +201,41 @@ public class GameData {
             if (missAssisters.length > 0) {
                 msg += 'assister : ' + missAssisters.join(' , ') + ' ; ';
             }
-            throw new Error(GetLang('debug.error.data.game_data.verify_select_fail', {file: 'select.json', message: msg}));
+            Debugger.log(GetLang('debug.error.data.game_data.verify_select_fail', {file: 'select.json', message: msg}));
         }
     }
 
-    // 验证关卡
+    /**
+     * 过滤仍存在于模型中的 id 列表。
+     *
+     * @param ids       原 id 数组。
+     * @param assister  是否按援助模型查。
+     * @param missOut   缺失 id 汇总。
+     * @return 过滤后数组；全无则 <code>null</code>。
+     */
+    private function filterExistingIds(ids:Array, assister:Boolean, missOut:Array):Array {
+        if (!ids || ids.length < 1) {
+            return ids;
+        }
+
+        var kept:Array = [];
+        for each (var id:String in ids) {
+            if (!id) {
+                continue;
+            }
+            var ok:Boolean = assister ? AssisterModel.I.getAssister(id) != null : FighterModel.I.getFighter(id) != null;
+            if (ok) {
+                kept.push(id);
+            }
+            else if (missOut.indexOf(id) == -1) {
+                missOut.push(id);
+            }
+        }
+
+        return kept.length > 0 ? kept : null;
+    }
+
+    // 验证关卡（缺失软降级：跳过缺角 id，不抛错）
     private function validateMissionData():void {
         var missFighters:Array  = [];
         var missMaps:Array      = [];
@@ -219,13 +246,20 @@ public class GameData {
             var ms:Vector.<MessionStageVO> = m.stageList;
             for each(var s:MessionStageVO in ms) {
 
-                for each(var f:String in s.fighters) {
-                    var fighter:FighterVO = FighterModel.I.getFighter(f);
-                    if (fighter == null) {
-                        if (missFighters.indexOf(f) == -1) {
-                            missFighters.push(f);
+                if (s.fighters) {
+                    var kept:Array = [];
+                    for each(var f:String in s.fighters) {
+                        var fighter:FighterVO = FighterModel.I.getFighter(f);
+                        if (fighter == null) {
+                            if (missFighters.indexOf(f) == -1) {
+                                missFighters.push(f);
+                            }
+                        }
+                        else {
+                            kept.push(f);
                         }
                     }
+                    s.fighters = kept;
                 }
 
                 var map:MapVO = MapModel.I.getMap(s.map);
@@ -235,10 +269,13 @@ public class GameData {
                     }
                 }
 
-                var assister:FighterVO = AssisterModel.I.getAssister(s.assister);
-                if (assister == null) {
-                    if (missAssisters.indexOf(s.assister) == -1) {
-                        missAssisters.push(s.assister);
+                if (s.assister) {
+                    var assister:FighterVO = AssisterModel.I.getAssister(s.assister);
+                    if (assister == null) {
+                        if (missAssisters.indexOf(s.assister) == -1) {
+                            missAssisters.push(s.assister);
+                        }
+                        s.assister = null;
                     }
                 }
 
@@ -257,11 +294,11 @@ public class GameData {
             if (missMaps.length > 0) {
                 msg += 'map : ' + missMaps.join(' , ') + ' ; ';
             }
-            throw new Error(GetLang('debug.error.data.game_data.verify_mission_fail', {file: 'mission.xml', message: msg}));
+            Debugger.log(GetLang('debug.error.data.game_data.verify_mission_fail', {file: 'mission.json', message: msg}));
         }
     }
 
-    // 验证无双关卡
+    // 验证无双关卡（缺失软降级：仅日志，不抛错）
     private function validateMusouData():void {
         var mapObj:Object = MusouModel.I.getAllMap();
 
@@ -277,7 +314,7 @@ public class GameData {
 
                     var map:MapVO = MapModel.I.getMap(mv.map);
                     if (map == null) {
-                        throw new Error(
+                        Debugger.log(
                                 GetLang('debug.error.data.game_data.verify_musou_fail', {
                                     musouId: musouId,
                                     type   : 'map',
@@ -289,7 +326,7 @@ public class GameData {
                     for each(var f:String in ememies) {
                         var fighter:FighterVO = FighterModel.I.getFighter(f);
                         if (fighter == null) {
-                            throw new Error(
+                            Debugger.log(
                                     GetLang('debug.error.data.game_data.verify_musou_fail', {
                                         musouId: musouId,
                                         type   : 'fighter',
@@ -315,11 +352,9 @@ public class GameData {
         }
 
         if (missFighters.length > 0) {
-            var msg:String = "";
-            if (missFighters.length > 0) {
-                msg += "fighter : " + missFighters.join(" , ") + " ; ";
-            }
-            throw new Error(GetLang('debug.error.data.game_data.verify_fighter_model_fail', {message: msg}));
+            var msg:String = '';
+            msg += 'fighter : ' + missFighters.join(' , ') + ' ; ';
+            Debugger.log(GetLang('debug.error.data.game_data.verify_fighter_model_fail', {message: msg}));
         }
 
     }
