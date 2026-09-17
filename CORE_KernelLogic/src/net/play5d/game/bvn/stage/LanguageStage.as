@@ -32,6 +32,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.WarmupCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.LanguageType;
+import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.ui.language.CountryItem;
 import net.play5d.game.bvn.utils.MultiLangUtils;
 import net.play5d.game.bvn.utils.ResUtils;
@@ -54,6 +55,8 @@ public class LanguageStage implements IStage {
     private var _clickCallBack:Function;
     /** @private 当前选中项，悬停时只切换两项 */
     private var _currentSelected:CountryItem;
+    /** @private 正在加载所选语言字体，禁止重复点击 */
+    private var _fontLoading:Boolean;
 
     /**
      * 点击回调事件
@@ -116,13 +119,7 @@ public class LanguageStage implements IStage {
             _backGround = null;
         }
 
-        if (_loadingBar) {
-            if (_ui.contains(_loadingBar)) {
-                _ui.removeChild(_loadingBar);
-            }
-
-            _loadingBar = null;
-        }
+        hideLoadingBar(true);
 
         if (_insCountries) {
             for each (var country:CountryItem in _insCountries) {
@@ -139,6 +136,7 @@ public class LanguageStage implements IStage {
 
         _currentSelected = null;
         _clickCallBack   = null;
+        _fontLoading     = false;
 //        _ui            = null;
     }
 
@@ -171,44 +169,20 @@ public class LanguageStage implements IStage {
         var languagesObj:Array = data['languages'];
 
         // 语言集合
-        var languages:Array  = [];
+        var languages:Array = [];
         // 字体资源路径集合（与 languages 一一对应，可含重复）
-        var loadUrls:Array   = [];
-        // 去重后的加载列表
-        var uniqueUrls:Array = [];
-        var seenUrl:Object   = {};
+        var loadUrls:Array  = [];
 
-        // 提取语言与对应字体文件路径
+        // 提取语言与对应字体文件路径（进页不预载字体 SWF）
         for each (var langObj:Object in languagesObj) {
             for (var lang:String in langObj) {
-                var fontUrl:String = fontDir + langObj[lang];
                 languages.push(lang);
-                loadUrls.push(fontUrl);
-                if (!seenUrl[fontUrl]) {
-                    seenUrl[fontUrl] = true;
-                    uniqueUrls.push(fontUrl);
-                }
+                loadUrls.push(fontDir + langObj[lang]);
             }
         }
 
-        // 开始载入字体（去重；失败中止，避免成功回调里 getClass 抛「未加载」）
-        AssetManager.I.loadSWFs(
-                uniqueUrls,
-                function ():void {
-                    // 载入字体成功回调
-                    if (_loadingBar) {
-                        if (_loadingBar.parent) {
-                            _loadingBar.parent.removeChild(_loadingBar);
-                        }
-                        _loadingBar = null;
-                    }
-
-                    // 添加语言项目
-                    addLanguageItem(languages, loadUrls);
-                },
-                loadProgress,
-                loadFontFail
-        );
+        hideLoadingBar(false);
+        addLanguageItem(languages, loadUrls);
     }
 
     /**
@@ -216,30 +190,26 @@ public class LanguageStage implements IStage {
      * @param url 失败的字体路径
      */
     private function loadFontFail(url:String):void {
-        trace('LanguageStage: font SWF load fail: ' + url);
+        _fontLoading = false;
+        hideLoadingBar(false);
+        setCountriesInteractive(true);
+
+        // 语言包尚未就绪，无法 GetLang；可见提示走 Debugger
+        Debugger.errorMsg('LanguageStage: font SWF load fail: ' + url);
     }
 
     /**
      * 加载配置失败回调
      */
     private function loadConfigFail():void {
+        _fontLoading = false;
+        hideLoadingBar(false);
+        setCountriesInteractive(true);
 
+        Debugger.errorMsg('LanguageStage: language config / pack load fail');
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-
-//    /**
-//     * 注册字体
-//     * @param fontPathArr 字体路径数组
-//     */
-//    private function registerFont(fontPathArr:Array):void {
-//        for each (var fontPath:String in fontPathArr) {
-//            var fontCls:Class = AssetManager.I.getClass('font', fontPath);
-////            trace(new fontCls().fontName);
-//            // 注册字体
-//            Font.registerFont(fontCls);
-//        }
-//    }
 
     /**
      * 添加语言项目
@@ -263,24 +233,22 @@ public class LanguageStage implements IStage {
         for (var i:int = 1; i <= len; i++) {
             // 当前语言
             var lang:String     = langArr[i - 1];
-            // 当前字体路径
+            // 当前字体路径（点击后再 loadSWFs）
             var fontPath:String = fontPathArr[i - 1];
-            // 当前字体类（注册推迟到点击，避免列表构建时批量 registerFont 卡顿）
-            var fontCls:Class   = AssetManager.I.getClass('font', fontPath);
 
             // 国家元件
             var country:CountryItem = new CountryItem();
 
             country.language   = lang;
-            country.fontCls    = fontCls;
+            country.fontUrl    = fontPath;
             country.y          = i * gap - country.height / 2;
             country.x          = GameConfig.GAME_SIZE.x / 2 - country.width / 2;
             country.buttonMode = true;
 
             // 语言帧确定后再设选中，避免展开宽度按默认帧计算
             if (GameData.I.config.language == lang) {
-                country.selected   = true;
-                _currentSelected   = country;
+                country.selected = true;
+                _currentSelected = country;
             }
 
             // 进行触摸或者鼠标逻辑处理
@@ -303,7 +271,7 @@ public class LanguageStage implements IStage {
 
     private function touchTapHandler(e:Event):void {
         var target:CountryItem = e.currentTarget.parent as CountryItem;
-        if (!target) {
+        if (!target || _fontLoading) {
             return;
         }
 
@@ -325,7 +293,7 @@ public class LanguageStage implements IStage {
      */
     private function mouseOverHandler(e:Event):void {
         var target:CountryItem = e.currentTarget.parent as CountryItem;
-        if (!target || target == _currentSelected) {
+        if (!target || target == _currentSelected || _fontLoading) {
             return;
         }
 
@@ -343,13 +311,21 @@ public class LanguageStage implements IStage {
      * @param e 鼠标事件
      */
     private function clickHandler(e:Event):void {
-        SoundCtrl.I.sndConfrim();
+        if (_fontLoading) {
+            return;
+        }
 
         var target:CountryItem = e.currentTarget.parent as CountryItem;
+        if (!target) {
+            return;
+        }
+
+        SoundCtrl.I.sndConfrim();
+
         // 所选语言
-        var language:String    = target.language;
-        // 所选语言的字体类
-        var fontCls:Class      = target.fontCls;
+        var language:String = target.language;
+        // 所选语言的字体路径
+        var fontUrl:String  = target.fontUrl;
 
         // 如果是不支持的语言，输出不支持
         if (!LanguageType.isSupported(language)) {
@@ -357,15 +333,89 @@ public class LanguageStage implements IStage {
             return;
         }
 
-        // 仅注册所选语言字体
+        _fontLoading = true;
+        setCountriesInteractive(false);
+        showLoadingBar();
+
+        // 仅加载所选语言字体
+        AssetManager.I.loadSWFs(
+                [fontUrl],
+                function ():void {
+                    applyLanguageFont(language, fontUrl);
+                },
+                loadProgress,
+                loadFontFail
+        );
+    }
+
+    /**
+     * 注册所选字体并加载语言包
+     * @param language 语言码
+     * @param fontUrl 字体 SWF 路径
+     */
+    private function applyLanguageFont(language:String, fontUrl:String):void {
+        var fontCls:Class = AssetManager.I.getClass('font', fontUrl);
+
         Font.registerFont(fontCls);
 
         GameData.I.config.language = language;
         LANGUAGE                   = language;
         FONT                       = new fontCls() as Font;
 
+        hideLoadingBar(true);
+
         // 加载语言 Json 文件
         MultiLangUtils.I.initialize(language, _clickCallBack, loadConfigFail);
+    }
+
+    /**
+     * 显示字体加载进度条
+     */
+    private function showLoadingBar():void {
+        if (!_loadingBar) {
+            _loadingBar   = ResUtils.I.createDisplayObject(ResUtils.swfLib.language, '$language$MC_loadingBar');
+            _loadingBar.x = 17;
+            _loadingBar.y = 555;
+        }
+
+        _loadingBar.bar.scaleX = 0;
+        if (!_ui.contains(_loadingBar)) {
+            _ui.addChild(_loadingBar);
+        }
+    }
+
+    /**
+     * 隐藏加载进度条
+     * @param dispose 是否销毁实例
+     */
+    private function hideLoadingBar(dispose:Boolean):void {
+        if (!_loadingBar) {
+            return;
+        }
+
+        if (_ui.contains(_loadingBar)) {
+            _ui.removeChild(_loadingBar);
+        }
+
+        if (dispose) {
+            _loadingBar = null;
+        }
+    }
+
+    /**
+     * 设置语言列表是否可交互
+     * @param enabled 是否可交互
+     */
+    private function setCountriesInteractive(enabled:Boolean):void {
+        if (!_insCountries) {
+            return;
+        }
+
+        for each (var country:CountryItem in _insCountries) {
+            country.mouseEnabled  = enabled;
+            country.mouseChildren = enabled;
+            country.buttonMode    = enabled;
+        }
     }
 
 }

@@ -130,18 +130,19 @@ public class CountryItem extends Sprite {
         refreshLayout();
     }
 
-    // 字体类
-    private var _fontCls:Class;
+    // 字体 SWF 路径（相对 assets）
+    private var _fontUrl:String;
 
     /**
-     * 字体类
+     * 字体 SWF 路径（相对 assets）
      */
-    public function get fontCls():Class {
-        return _fontCls;
+    public function get fontUrl():String {
+        return _fontUrl;
     }
 
-    public function set fontCls(v:Class):void {
-        _fontCls = v;
+    /** @private */
+    public function set fontUrl(v:String):void {
+        _fontUrl = v;
     }
 
     // 是否被选中
@@ -243,7 +244,7 @@ public class CountryItem extends Sprite {
         _top  = null;
         _base = null;
 
-        _fontCls = null;
+        _fontUrl = null;
     }
 
     /**
