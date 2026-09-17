@@ -34,7 +34,6 @@ import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
-import net.play5d.kyo.loader.KyoURLLoader;
 
 public class GameData {
 
@@ -156,15 +155,6 @@ public class GameData {
 
     public function loadSelect(url:String):void {
         AssetManager.I.loadXML(url, function (data:XML):void {
-            setSelectData(data);
-        }, function ():void {
-            TraceLang('debug.trace.data.game_data.load_select_error');
-        });
-    }
-
-    public function loadDebugSelect(url:String):void {
-        KyoURLLoader.load(url, function (v:String):void {
-            var data:XML = new XML(v);
             setSelectData(data);
         }, function ():void {
             TraceLang('debug.trace.data.game_data.load_select_error');

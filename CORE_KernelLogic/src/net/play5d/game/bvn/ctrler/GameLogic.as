@@ -394,14 +394,12 @@ public class GameLogic {
         TraceLang('debug.trace.data.game_logic.set_game_mode', {mode: v});
         switch (v) {
         case 1:
-            GameData.I.loadSelect('config/salect.xml');
 //            ResUtils.WINNER = '$loading$MC_stageWinner';
             GameConfig.SHOW_UI_STATUS = 1;
             GameEndCtrl.SHOW_CONTINUE = true;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
             break;
         case 2:
-            GameData.I.loadDebugSelect('salect.xml');
 //            ResUtils.WINNER = '$loading$MC_stageWinner2';
             GameConfig.SHOW_UI_STATUS = 1;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
