@@ -1,8 +1,8 @@
 {
   "fighter": {
     "path": {
-      "fighter": "",
-      "face"   : "",
+      "fighter": "packs/fighters/",
+      "face"   : "packs/fighters/",
       "bgm"    : "bgm/"
     },
 
@@ -12,11 +12,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/aizen/aizen.swf",
-        "face"    : "packs/fighters/aizen/face/aizen_captain.png",
-        "face_big": "packs/fighters/aizen/face/aizen_captain_b.png",
-        "face_bar": "packs/fighters/aizen/face/aizen_captain_m.png",
-        "face_win": "packs/fighters/aizen/face/aizen_captain_w.png"
+        "file"    : "aizen/aizen.swf",
+        "face"    : "aizen/face/aizen_captain.png",
+        "face_big": "aizen/face/aizen_captain_b.png",
+        "face_bar": "aizen/face/aizen_captain_m.png",
+        "face_win": "aizen/face/aizen_captain_w.png"
       },
       "says"       : [
         "这个世界在最初并没有真实,也没有谎言,只有俨然存在的事实,|可是,存在于这个世界的所有事物,|只会将对自己有利的事实误认为真实而活。",
@@ -36,11 +36,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/aizen/aizen.swf",
-        "face"    : "packs/fighters/aizen/face/aizen.png",
-        "face_big": "packs/fighters/aizen/face/aizen_b.png",
-        "face_bar": "packs/fighters/aizen/face/aizen_m.png",
-        "face_win": "packs/fighters/aizen/face/aizen_w.png"
+        "file"    : "aizen/aizen.swf",
+        "face"    : "aizen/face/aizen.png",
+        "face_big": "aizen/face/aizen_b.png",
+        "face_bar": "aizen/face/aizen_m.png",
+        "face_win": "aizen/face/aizen_w.png"
       },
       "says"       : [
         "这个世界在最初并没有真实,也没有谎言,只有俨然存在的事实,|可是,存在于这个世界的所有事物,|只会将对自己有利的事实误认为真实而活。",
@@ -60,7 +60,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/bear1/bear1.swf"
+        "file": "bear1/bear1.swf"
       },
       "hasWarning" : true
     }, {
@@ -69,7 +69,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/bird1/bird1.swf"
+        "file": "bird1/bird1.swf"
       },
       "hasWarning" : true
     }, {
@@ -78,11 +78,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/byakuya/byakuya.swf",
-        "face"    : "packs/fighters/byakuya/face/byakuya.png",
-        "face_big": "packs/fighters/byakuya/face/byakuya_b.png",
-        "face_bar": "packs/fighters/byakuya/face/byakuya_m.png",
-        "face_win": "packs/fighters/byakuya/face/byakuya_w.png"
+        "file"    : "byakuya/byakuya.swf",
+        "face"    : "byakuya/face/byakuya.png",
+        "face_big": "byakuya/face/byakuya_b.png",
+        "face_bar": "byakuya/face/byakuya_m.png",
+        "face_win": "byakuya/face/byakuya_w.png"
       },
       "says"       : [
         "真是迟钝啊。连倒下去都是这样。",
@@ -102,11 +102,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/byakuya/byakuya.swf",
-        "face"    : "packs/fighters/byakuya/face/byakuya_bankai.png",
-        "face_big": "packs/fighters/byakuya/face/byakuya_bankai_b.png",
-        "face_bar": "packs/fighters/byakuya/face/byakuya_bankai_m.png",
-        "face_win": "packs/fighters/byakuya/face/byakuya_w.png"
+        "file"    : "byakuya/byakuya.swf",
+        "face"    : "byakuya/face/byakuya_bankai.png",
+        "face_big": "byakuya/face/byakuya_bankai_b.png",
+        "face_bar": "byakuya/face/byakuya_bankai_m.png",
+        "face_win": "byakuya/face/byakuya_w.png"
       },
       "says"       : [
         "真是迟钝啊。连倒下去都是这样。",
@@ -126,11 +126,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/byakuya_old/byakuya_old.swf",
-        "face"    : "packs/fighters/byakuya_old/face/byakuya_bankai_old.png",
-        "face_big": "packs/fighters/byakuya_old/face/byakuya_bankai_old_b.png",
-        "face_bar": "packs/fighters/byakuya_old/face/byakuya_bankai_old_m.png",
-        "face_win": "packs/fighters/byakuya_old/face/byakuya_w.png"
+        "file"    : "byakuya_old/byakuya_old.swf",
+        "face"    : "byakuya_old/face/byakuya_bankai_old.png",
+        "face_big": "byakuya_old/face/byakuya_bankai_old_b.png",
+        "face_bar": "byakuya_old/face/byakuya_bankai_old_m.png",
+        "face_win": "byakuya_old/face/byakuya_w.png"
       },
       "says"       : [
         "真是迟钝啊。连倒下去都是这样。",
@@ -150,11 +150,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/chad/chad.swf",
-        "face"    : "packs/fighters/chad/face/chad.png",
-        "face_big": "packs/fighters/chad/face/chad_b.png",
-        "face_bar": "packs/fighters/chad/face/chad_m.png",
-        "face_win": "packs/fighters/chad/face/chad_w.png"
+        "file"    : "chad/chad.swf",
+        "face"    : "chad/face/chad.png",
+        "face_big": "chad/face/chad_b.png",
+        "face_bar": "chad/face/chad_m.png",
+        "face_win": "chad/face/chad_w.png"
       },
       "says"       : [
         "如果手上没有剑，我就不能保护你。",
@@ -172,11 +172,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/deidara/deidara.swf",
-        "face"    : "packs/fighters/deidara/face/deidara.png",
-        "face_big": "packs/fighters/deidara/face/deidara_b.png",
-        "face_bar": "packs/fighters/deidara/face/deidara_m.png",
-        "face_win": "packs/fighters/deidara/face/deidara_w.png"
+        "file"    : "deidara/deidara.swf",
+        "face"    : "deidara/face/deidara.png",
+        "face_big": "deidara/face/deidara_b.png",
+        "face_bar": "deidara/face/deidara_m.png",
+        "face_win": "deidara/face/deidara_w.png"
       },
       "says"       : [
         "艺术就是爆炸！嗯。",
@@ -194,11 +194,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/deidara_old/deidara_old.swf",
-        "face"    : "packs/fighters/deidara_old/face/deidara_old.png",
-        "face_big": "packs/fighters/deidara_old/face/deidara_old_b.png",
-        "face_bar": "packs/fighters/deidara_old/face/deidara_old_m.png",
-        "face_win": "packs/fighters/deidara_old/face/deidara_old_w.png"
+        "file"    : "deidara_old/deidara_old.swf",
+        "face"    : "deidara_old/face/deidara_old.png",
+        "face_big": "deidara_old/face/deidara_old_b.png",
+        "face_bar": "deidara_old/face/deidara_old_m.png",
+        "face_win": "deidara_old/face/deidara_old_w.png"
       },
       "says"       : [
         "艺术就是爆炸！嗯。",
@@ -216,7 +216,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/dog1/dog1.swf"
+        "file": "dog1/dog1.swf"
       },
       "hasWarning" : true
     }, {
@@ -225,11 +225,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/gaara/gaara.swf",
-        "face"    : "packs/fighters/gaara/face/gaara.png",
-        "face_big": "packs/fighters/gaara/face/gaara_b.png",
-        "face_bar": "packs/fighters/gaara/face/gaara_m.png",
-        "face_win": "packs/fighters/gaara/face/gaara_w.png"
+        "file"    : "gaara/gaara.swf",
+        "face"    : "gaara/face/gaara.png",
+        "face_big": "gaara/face/gaara_b.png",
+        "face_bar": "gaara/face/gaara_m.png",
+        "face_win": "gaara/face/gaara_w.png"
       },
       "says"       : [
         "就只有这样而已吗?"
@@ -245,11 +245,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/gaara_old/gaara_old.swf",
-        "face"    : "packs/fighters/gaara_old/face/gaara_old.png",
-        "face_big": "packs/fighters/gaara_old/face/gaara_old_b.png",
-        "face_bar": "packs/fighters/gaara_old/face/gaara_old_m.png",
-        "face_win": "packs/fighters/gaara_old/face/gaara_old_w.png"
+        "file"    : "gaara_old/gaara_old.swf",
+        "face"    : "gaara_old/face/gaara_old.png",
+        "face_big": "gaara_old/face/gaara_old_b.png",
+        "face_bar": "gaara_old/face/gaara_old_m.png",
+        "face_win": "gaara_old/face/gaara_old_w.png"
       },
       "says"       : [
         "就只有这样而已吗?"
@@ -265,11 +265,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/gin/gin.swf",
-        "face"    : "packs/fighters/gin/face/gin.png",
-        "face_big": "packs/fighters/gin/face/gin_b.png",
-        "face_bar": "packs/fighters/gin/face/gin_m.png",
-        "face_win": "packs/fighters/gin/face/gin_w.png"
+        "file"    : "gin/gin.swf",
+        "face"    : "gin/face/gin.png",
+        "face_big": "gin/face/gin_b.png",
+        "face_bar": "gin/face/gin_m.png",
+        "face_win": "gin/face/gin_w.png"
       },
       "says"       : [
         "我无话可说！",
@@ -289,11 +289,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/grimmjow/grimmjow.swf",
-        "face"    : "packs/fighters/grimmjow/face/grimmjow.png",
-        "face_big": "packs/fighters/grimmjow/face/grimmjow_b.png",
-        "face_bar": "packs/fighters/grimmjow/face/grimmjow_m.png",
-        "face_win": "packs/fighters/grimmjow/face/grimmjow_w.png"
+        "file"    : "grimmjow/grimmjow.swf",
+        "face"    : "grimmjow/face/grimmjow.png",
+        "face_big": "grimmjow/face/grimmjow_b.png",
+        "face_bar": "grimmjow/face/grimmjow_m.png",
+        "face_win": "grimmjow/face/grimmjow_w.png"
       },
       "says"       : [
         "不了解爱，也不了解光……只有破坏才是存在的证明！",
@@ -311,11 +311,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/hinata/hinata.swf",
-        "face"    : "packs/fighters/hinata/face/hinata.png",
-        "face_big": "packs/fighters/hinata/face/hinata_b.png",
-        "face_bar": "packs/fighters/hinata/face/hinata_m.png",
-        "face_win": "packs/fighters/hinata/face/hinata_w.png"
+        "file"    : "hinata/hinata.swf",
+        "face"    : "hinata/face/hinata.png",
+        "face_big": "hinata/face/hinata_b.png",
+        "face_bar": "hinata/face/hinata_m.png",
+        "face_win": "hinata/face/hinata_w.png"
       },
       "says"       : [
         "在喜欢的人面前，我可不能……丢脸啊……",
@@ -333,11 +333,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo/ichigo.swf",
-        "face"    : "packs/fighters/ichigo/face/ichigo.png",
-        "face_big": "packs/fighters/ichigo/face/ichigo_b.png",
-        "face_bar": "packs/fighters/ichigo/face/ichigo_m.png",
-        "face_win": "packs/fighters/ichigo/face/ichigo_w.png"
+        "file"    : "ichigo/ichigo.swf",
+        "face"    : "ichigo/face/ichigo.png",
+        "face_big": "ichigo/face/ichigo_b.png",
+        "face_bar": "ichigo/face/ichigo_m.png",
+        "face_win": "ichigo/face/ichigo_w.png"
       },
       "says"       : [
         "光是战斗根本没有意思 只是活下去也没有意义。",
@@ -355,11 +355,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo/ichigo.swf",
-        "face"    : "packs/fighters/ichigo/face/ichigo_bankai.png",
-        "face_big": "packs/fighters/ichigo/face/ichigo_bankai_b.png",
-        "face_bar": "packs/fighters/ichigo/face/ichigo_bankai_m.png",
-        "face_win": "packs/fighters/ichigo/face/ichigo_bankai_w.png"
+        "file"    : "ichigo/ichigo.swf",
+        "face"    : "ichigo/face/ichigo_bankai.png",
+        "face_big": "ichigo/face/ichigo_bankai_b.png",
+        "face_bar": "ichigo/face/ichigo_bankai_m.png",
+        "face_win": "ichigo/face/ichigo_bankai_w.png"
       },
       "says"       : [
         "光是战斗根本没有意思 只是活下去也没有意义。",
@@ -377,11 +377,11 @@
       "comic_type" : 0,
       "start_frame": 3,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo/ichigo.swf",
-        "face"    : "packs/fighters/ichigo/face/ichigo_vizored_half.png",
-        "face_big": "packs/fighters/ichigo/face/ichigo_vizored_half_b.png",
-        "face_bar": "packs/fighters/ichigo/face/ichigo_vizored_half_m.png",
-        "face_win": "packs/fighters/ichigo/face/ichigo_vizored_half_w.png"
+        "file"    : "ichigo/ichigo.swf",
+        "face"    : "ichigo/face/ichigo_vizored_half.png",
+        "face_big": "ichigo/face/ichigo_vizored_half_b.png",
+        "face_bar": "ichigo/face/ichigo_vizored_half_m.png",
+        "face_win": "ichigo/face/ichigo_vizored_half_w.png"
       },
       "says"       : [
         "一护，王与坐骑的区别是什么？|不要告诉我是两只脚和四只脚的区别！",
@@ -399,11 +399,11 @@
       "comic_type" : 0,
       "start_frame": 4,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo/ichigo.swf",
-        "face"    : "packs/fighters/ichigo/face/ichigo_vizored.png",
-        "face_big": "packs/fighters/ichigo/face/ichigo_vizored_b.png",
-        "face_bar": "packs/fighters/ichigo/face/ichigo_vizored_m.png",
-        "face_win": "packs/fighters/ichigo/face/ichigo_vizored_w.png"
+        "file"    : "ichigo/ichigo.swf",
+        "face"    : "ichigo/face/ichigo_vizored.png",
+        "face_big": "ichigo/face/ichigo_vizored_b.png",
+        "face_bar": "ichigo/face/ichigo_vizored_m.png",
+        "face_win": "ichigo/face/ichigo_vizored_w.png"
       },
       "says"       : [
         "光是战斗根本没有意思 只是活下去也没有意义。",
@@ -421,11 +421,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo_zero/ichigo_zero.swf",
-        "face"    : "packs/fighters/ichigo_zero/face/ichigo_zero.png",
-        "face_big": "packs/fighters/ichigo_zero/face/ichigo_zero_b.png",
-        "face_bar": "packs/fighters/ichigo_zero/face/ichigo_zero_m.png",
-        "face_win": "packs/fighters/ichigo_zero/face/ichigo_w.png"
+        "file"    : "ichigo_zero/ichigo_zero.swf",
+        "face"    : "ichigo_zero/face/ichigo_zero.png",
+        "face_big": "ichigo_zero/face/ichigo_zero_b.png",
+        "face_bar": "ichigo_zero/face/ichigo_zero_m.png",
+        "face_win": "ichigo_zero/face/ichigo_w.png"
       },
       "says"       : [
         "光是战斗根本没有意思 只是活下去也没有意义。",
@@ -443,11 +443,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo_zero/ichigo_zero.swf",
-        "face"    : "packs/fighters/ichigo_zero/face/ogihci.png",
-        "face_big": "packs/fighters/ichigo_zero/face/ogihci_b.png",
-        "face_bar": "packs/fighters/ichigo_zero/face/ogihci_m.png",
-        "face_win": "packs/fighters/ichigo_zero/face/ogihci_w.png"
+        "file"    : "ichigo_zero/ichigo_zero.swf",
+        "face"    : "ichigo_zero/face/ogihci.png",
+        "face_big": "ichigo_zero/face/ogihci_b.png",
+        "face_bar": "ichigo_zero/face/ogihci_m.png",
+        "face_win": "ichigo_zero/face/ogihci_w.png"
       },
       "says"       : [
         "一护，王与坐骑的区别是什么？|不要告诉我是两只脚和四只脚的区别！",
@@ -465,11 +465,11 @@
       "comic_type" : 0,
       "start_frame": 3,
       "urls"       : {
-        "file"    : "packs/fighters/ichigo_zero/ichigo_zero.swf",
-        "face"    : "packs/fighters/ichigo_zero/face/ogihci_bankai.png",
-        "face_big": "packs/fighters/ichigo_zero/face/ogihci_bankai_b.png",
-        "face_bar": "packs/fighters/ichigo_zero/face/ogihci_bankai_m.png",
-        "face_win": "packs/fighters/ichigo_zero/face/ogihci_w.png"
+        "file"    : "ichigo_zero/ichigo_zero.swf",
+        "face"    : "ichigo_zero/face/ogihci_bankai.png",
+        "face_big": "ichigo_zero/face/ogihci_bankai_b.png",
+        "face_bar": "ichigo_zero/face/ogihci_bankai_m.png",
+        "face_win": "ichigo_zero/face/ogihci_w.png"
       },
       "says"       : [
         "一护，王与坐骑的区别是什么？|不要告诉我是两只脚和四只脚的区别！",
@@ -487,11 +487,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/ikkaku/ikkaku.swf",
-        "face"    : "packs/fighters/ikkaku/face/ikkaku.png",
-        "face_big": "packs/fighters/ikkaku/face/ikkaku_b.png",
-        "face_bar": "packs/fighters/ikkaku/face/ikkaku_m.png",
-        "face_win": "packs/fighters/ikkaku/face/ikkaku_w.png"
+        "file"    : "ikkaku/ikkaku.swf",
+        "face"    : "ikkaku/face/ikkaku.png",
+        "face_big": "ikkaku/face/ikkaku_b.png",
+        "face_bar": "ikkaku/face/ikkaku_m.png",
+        "face_win": "ikkaku/face/ikkaku_w.png"
       },
       "says"       : [
         "我们每个人，打从出生的那一刻起就要迈向死亡。",
@@ -510,11 +510,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/itachi/itachi.swf",
-        "face"    : "packs/fighters/itachi/face/itachi.png",
-        "face_big": "packs/fighters/itachi/face/itachi_b.png",
-        "face_bar": "packs/fighters/itachi/face/itachi_m.png",
-        "face_win": "packs/fighters/itachi/face/itachi_w.png"
+        "file"    : "itachi/itachi.swf",
+        "face"    : "itachi/face/itachi.png",
+        "face_big": "itachi/face/itachi_b.png",
+        "face_bar": "itachi/face/itachi_m.png",
+        "face_win": "itachi/face/itachi_w.png"
       },
       "says"       : [
         "优秀也是有烦恼的……",
@@ -532,11 +532,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/itachi_old/itachi_old.swf",
-        "face"    : "packs/fighters/itachi_old/face/itachi_old.png",
-        "face_big": "packs/fighters/itachi_old/face/itachi_old_b.png",
-        "face_bar": "packs/fighters/itachi_old/face/itachi_old_m.png",
-        "face_win": "packs/fighters/itachi_old/face/itachi_old_w.png"
+        "file"    : "itachi_old/itachi_old.swf",
+        "face"    : "itachi_old/face/itachi_old.png",
+        "face_big": "itachi_old/face/itachi_old_b.png",
+        "face_bar": "itachi_old/face/itachi_old_m.png",
+        "face_win": "itachi_old/face/itachi_old_w.png"
       },
       "says"       : [
         "优秀也是有烦恼的……",
@@ -554,11 +554,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/jiraiya/jiraiya.swf",
-        "face"    : "packs/fighters/jiraiya/face/jiraiya.png",
-        "face_big": "packs/fighters/jiraiya/face/jiraiya_b.png",
-        "face_bar": "packs/fighters/jiraiya/face/jiraiya_m.png",
-        "face_win": "packs/fighters/jiraiya/face/jiraiya_w.png"
+        "file"    : "jiraiya/jiraiya.swf",
+        "face"    : "jiraiya/face/jiraiya.png",
+        "face_big": "jiraiya/face/jiraiya_b.png",
+        "face_bar": "jiraiya/face/jiraiya_m.png",
+        "face_win": "jiraiya/face/jiraiya_w.png"
       },
       "says"       : [
         "不分东南西北，整个天下都是无人能敌的三忍白发童子蛤蟆使者。",
@@ -576,11 +576,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/juggo/juggo.swf",
-        "face"    : "packs/fighters/juggo/face/juggo.png",
-        "face_big": "packs/fighters/juggo/face/juggo_b.png",
-        "face_bar": "packs/fighters/juggo/face/juggo_m.png",
-        "face_win": "packs/fighters/juggo/face/juggo_w.png"
+        "file"    : "juggo/juggo.swf",
+        "face"    : "juggo/face/juggo.png",
+        "face_big": "juggo/face/juggo_b.png",
+        "face_bar": "juggo/face/juggo_m.png",
+        "face_win": "juggo/face/juggo_w.png"
       },
       "says"       : [
         "……",
@@ -598,11 +598,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/juggo_old/juggo_old.swf",
-        "face"    : "packs/fighters/juggo_old/face/juggo_old.png",
-        "face_big": "packs/fighters/juggo_old/face/juggo_old_b.png",
-        "face_bar": "packs/fighters/juggo_old/face/juggo_old_m.png",
-        "face_win": "packs/fighters/juggo_old/face/juggo_old_w.png"
+        "file"    : "juggo_old/juggo_old.swf",
+        "face"    : "juggo_old/face/juggo_old.png",
+        "face_big": "juggo_old/face/juggo_old_b.png",
+        "face_bar": "juggo_old/face/juggo_old_m.png",
+        "face_win": "juggo_old/face/juggo_old_w.png"
       },
       "says"       : [
         "……",
@@ -620,11 +620,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/kakashi/kakashi.swf",
-        "face"    : "packs/fighters/kakashi/face/kakashi.png",
-        "face_big": "packs/fighters/kakashi/face/kakashi_b.png",
-        "face_bar": "packs/fighters/kakashi/face/kakashi_m.png",
-        "face_win": "packs/fighters/kakashi/face/kakashi_w.png"
+        "file"    : "kakashi/kakashi.swf",
+        "face"    : "kakashi/face/kakashi.png",
+        "face_big": "kakashi/face/kakashi_b.png",
+        "face_bar": "kakashi/face/kakashi_m.png",
+        "face_win": "kakashi/face/kakashi_w.png"
       },
       "says"       : [
         "忍者是不能按常理来思考的！",
@@ -642,11 +642,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/kakashi/kakashi.swf",
-        "face"    : "packs/fighters/kakashi/face/kakashi_kamui.png",
-        "face_big": "packs/fighters/kakashi/face/kakashi_kamui_b.png",
-        "face_bar": "packs/fighters/kakashi/face/kakashi_kamui_m.png",
-        "face_win": "packs/fighters/kakashi/face/kakashi_kamui_w.png"
+        "file"    : "kakashi/kakashi.swf",
+        "face"    : "kakashi/face/kakashi_kamui.png",
+        "face_big": "kakashi/face/kakashi_kamui_b.png",
+        "face_bar": "kakashi/face/kakashi_kamui_m.png",
+        "face_win": "kakashi/face/kakashi_kamui_w.png"
       },
       "says"       : [
         "忍者是不能按常理来思考的！",
@@ -664,11 +664,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/karin/karin.swf",
-        "face"    : "packs/fighters/karin/face/karin.png",
-        "face_big": "packs/fighters/karin/face/karin_b.png",
-        "face_bar": "packs/fighters/karin/face/karin_m.png",
-        "face_win": "packs/fighters/karin/face/karin_w.png"
+        "file"    : "karin/karin.swf",
+        "face"    : "karin/face/karin.png",
+        "face_big": "karin/face/karin_b.png",
+        "face_bar": "karin/face/karin_m.png",
+        "face_win": "karin/face/karin_w.png"
       },
       "says"       : [
         "佐助，人家想和佐助两个人……",
@@ -686,11 +686,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/kenpachi/kenpachi.swf",
-        "face"    : "packs/fighters/kenpachi/face/kenpachi.png",
-        "face_big": "packs/fighters/kenpachi/face/kenpachi_b.png",
-        "face_bar": "packs/fighters/kenpachi/face/kenpachi_m.png",
-        "face_win": "packs/fighters/kenpachi/face/kenpachi_w.png"
+        "file"    : "kenpachi/kenpachi.swf",
+        "face"    : "kenpachi/face/kenpachi.png",
+        "face_big": "kenpachi/face/kenpachi_b.png",
+        "face_bar": "kenpachi/face/kenpachi_m.png",
+        "face_win": "kenpachi/face/kenpachi_w.png"
       },
       "says"       : [
         "来吧、厮杀吧！",
@@ -709,11 +709,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/kenshin/kenshin.swf",
-        "face"    : "packs/fighters/kenshin/face/kenshin.png",
-        "face_big": "packs/fighters/kenshin/face/kenshin_b.png",
-        "face_bar": "packs/fighters/kenshin/face/kenshin_m.png",
-        "face_win": "packs/fighters/kenshin/face/kenshin_w.png"
+        "file"    : "kenshin/kenshin.swf",
+        "face"    : "kenshin/face/kenshin.png",
+        "face_big": "kenshin/face/kenshin_b.png",
+        "face_bar": "kenshin/face/kenshin_m.png",
+        "face_win": "kenshin/face/kenshin_w.png"
       },
       "says"       : [
         "剑是凶器，剑技是杀人的伎俩，|无论用多么美丽的语言去掩饰，那始终是事实",
@@ -739,11 +739,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/kenshin/kenshin.swf",
-        "face"    : "packs/fighters/kenshin/face/kenshin_slash.png",
-        "face_big": "packs/fighters/kenshin/face/kenshin_slash_b.png",
-        "face_bar": "packs/fighters/kenshin/face/kenshin_slash_m.png",
-        "face_win": "packs/fighters/kenshin/face/kenshin_slash_w.png"
+        "file"    : "kenshin/kenshin.swf",
+        "face"    : "kenshin/face/kenshin_slash.png",
+        "face_big": "kenshin/face/kenshin_slash_b.png",
+        "face_bar": "kenshin/face/kenshin_slash_m.png",
+        "face_win": "kenshin/face/kenshin_slash_w.png"
       },
       "says"       : [
         "剑是凶器，剑技是杀人的伎俩，|无论用多么美丽的语言去掩饰，那始终是事实",
@@ -769,11 +769,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/killerbee/killerbee.swf",
-        "face"    : "packs/fighters/killerbee/face/killerbee.png",
-        "face_big": "packs/fighters/killerbee/face/killerbee_b.png",
-        "face_bar": "packs/fighters/killerbee/face/killerbee_m.png",
-        "face_win": "packs/fighters/killerbee/face/killerbee_w.png"
+        "file"    : "killerbee/killerbee.swf",
+        "face"    : "killerbee/face/killerbee.png",
+        "face_big": "killerbee/face/killerbee_b.png",
+        "face_bar": "killerbee/face/killerbee_m.png",
+        "face_win": "killerbee/face/killerbee_w.png"
       },
       "says"       : [
         "你这笨蛋，你这混蛋！",
@@ -791,11 +791,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/kimimaro/kimimaro.swf",
-        "face"    : "packs/fighters/kimimaro/face/kimimaro.png",
-        "face_big": "packs/fighters/kimimaro/face/kimimaro_b.png",
-        "face_bar": "packs/fighters/kimimaro/face/kimimaro_m.png",
-        "face_win": "packs/fighters/kimimaro/face/kimimaro_w.png"
+        "file"    : "kimimaro/kimimaro.swf",
+        "face"    : "kimimaro/face/kimimaro.png",
+        "face_big": "kimimaro/face/kimimaro_b.png",
+        "face_bar": "kimimaro/face/kimimaro_m.png",
+        "face_win": "kimimaro/face/kimimaro_w.png"
       },
       "says"       : [
         "好吧，想怎么个死法",
@@ -813,11 +813,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/konan/konan.swf",
-        "face"    : "packs/fighters/konan/face/konan.png",
-        "face_big": "packs/fighters/konan/face/konan_b.png",
-        "face_bar": "packs/fighters/konan/face/konan_m.png",
-        "face_win": "packs/fighters/konan/face/konan_w.png"
+        "file"    : "konan/konan.swf",
+        "face"    : "konan/face/konan.png",
+        "face_big": "konan/face/konan_b.png",
+        "face_bar": "konan/face/konan_m.png",
+        "face_win": "konan/face/konan_w.png"
       },
       "says"       : [
         "……"
@@ -833,11 +833,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/lee/lee.swf",
-        "face"    : "packs/fighters/lee/face/lee.png",
-        "face_big": "packs/fighters/lee/face/lee_b.png",
-        "face_bar": "packs/fighters/lee/face/lee_m.png",
-        "face_win": "packs/fighters/lee/face/lee_w.png"
+        "file"    : "lee/lee.swf",
+        "face"    : "lee/face/lee.png",
+        "face_big": "lee/face/lee_b.png",
+        "face_bar": "lee/face/lee_m.png",
+        "face_win": "lee/face/lee_w.png"
       },
       "says"       : [
         "我就是木叶美丽的苍蓝之兽——李洛克",
@@ -855,11 +855,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/lee/lee.swf",
-        "face"    : "packs/fighters/lee/face/lee_domen.png",
-        "face_big": "packs/fighters/lee/face/lee_domen_b.png",
-        "face_bar": "packs/fighters/lee/face/lee_domen_m.png",
-        "face_win": "packs/fighters/lee/face/lee_w.png"
+        "file"    : "lee/lee.swf",
+        "face"    : "lee/face/lee_domen.png",
+        "face_big": "lee/face/lee_domen_b.png",
+        "face_bar": "lee/face/lee_domen_m.png",
+        "face_win": "lee/face/lee_w.png"
       },
       "says"       : [
         "我就是木叶美丽的苍蓝之兽——李洛克",
@@ -877,11 +877,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/madara/madara.swf",
-        "face"    : "packs/fighters/madara/face/madara.png",
-        "face_big": "packs/fighters/madara/face/madara_b.png",
-        "face_bar": "packs/fighters/madara/face/madara_m.png",
-        "face_win": "packs/fighters/madara/face/madara_w.png"
+        "file"    : "madara/madara.swf",
+        "face"    : "madara/face/madara.png",
+        "face_big": "madara/face/madara_b.png",
+        "face_bar": "madara/face/madara_m.png",
+        "face_win": "madara/face/madara_w.png"
       },
       "says"       : [
         "现在的我没有力量，换句话说，现在的我只是一具躯壳罢了。",
@@ -902,11 +902,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/mayuri/mayuri.swf",
-        "face"    : "packs/fighters/mayuri/face/mayuri.png",
-        "face_big": "packs/fighters/mayuri/face/mayuri_b.png",
-        "face_bar": "packs/fighters/mayuri/face/mayuri_m.png",
-        "face_win": "packs/fighters/mayuri/face/mayuri_w.png"
+        "file"    : "mayuri/mayuri.swf",
+        "face"    : "mayuri/face/mayuri.png",
+        "face_big": "mayuri/face/mayuri_b.png",
+        "face_bar": "mayuri/face/mayuri_m.png",
+        "face_win": "mayuri/face/mayuri_w.png"
       },
       "says"       : [
         "我已经对你没兴趣了，闪一边去。",
@@ -924,11 +924,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/naruto/naruto.swf",
-        "face"    : "packs/fighters/naruto/face/naruto.png",
-        "face_big": "packs/fighters/naruto/face/naruto_b.png",
-        "face_bar": "packs/fighters/naruto/face/naruto_m.png",
-        "face_win": "packs/fighters/naruto/face/naruto_w.png"
+        "file"    : "naruto/naruto.swf",
+        "face"    : "naruto/face/naruto.png",
+        "face_big": "naruto/face/naruto_b.png",
+        "face_bar": "naruto/face/naruto_m.png",
+        "face_win": "naruto/face/naruto_w.png"
       },
       "says"       : [
         "只要你变成全村人都认可的最棒忍者，|你就可以把火影这个名字抢过来！",
@@ -946,11 +946,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/naruto/naruto.swf",
-        "face"    : "packs/fighters/naruto/face/naruto_oneTail.png",
-        "face_big": "packs/fighters/naruto/face/naruto_oneTail_b.png",
-        "face_bar": "packs/fighters/naruto/face/naruto_oneTail_m.png",
-        "face_win": "packs/fighters/naruto/face/naruto_oneTail_w.png"
+        "file"    : "naruto/naruto.swf",
+        "face"    : "naruto/face/naruto_oneTail.png",
+        "face_big": "naruto/face/naruto_oneTail_b.png",
+        "face_bar": "naruto/face/naruto_oneTail_m.png",
+        "face_win": "naruto/face/naruto_oneTail_w.png"
       },
       "says"       : [
         "只要你变成全村人都认可的最棒忍者，|你就可以把火影这个名字抢过来！",
@@ -968,11 +968,11 @@
       "comic_type" : 1,
       "start_frame": 3,
       "urls"       : {
-        "file"    : "packs/fighters/naruto/naruto.swf",
-        "face"    : "packs/fighters/naruto/face/naruto_fourTail.png",
-        "face_big": "packs/fighters/naruto/face/naruto_fourTail_b.png",
-        "face_bar": "packs/fighters/naruto/face/naruto_fourTail_m.png",
-        "face_win": "packs/fighters/naruto/face/naruto_oneTail_w.png"
+        "file"    : "naruto/naruto.swf",
+        "face"    : "naruto/face/naruto_fourTail.png",
+        "face_big": "naruto/face/naruto_fourTail_b.png",
+        "face_bar": "naruto/face/naruto_fourTail_m.png",
+        "face_win": "naruto/face/naruto_oneTail_w.png"
       },
       "says"       : [
         "只要你变成全村人都认可的最棒忍者，|你就可以把火影这个名字抢过来！",
@@ -990,11 +990,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/naruto_hermit/naruto_hermit.swf",
-        "face"    : "packs/fighters/naruto_hermit/face/naruto_hermit.png",
-        "face_big": "packs/fighters/naruto_hermit/face/naruto_hermit_b.png",
-        "face_bar": "packs/fighters/naruto_hermit/face/naruto_hermit_m.png",
-        "face_win": "packs/fighters/naruto_hermit/face/naruto_hermit_w.png"
+        "file"    : "naruto_hermit/naruto_hermit.swf",
+        "face"    : "naruto_hermit/face/naruto_hermit.png",
+        "face_big": "naruto_hermit/face/naruto_hermit_b.png",
+        "face_bar": "naruto_hermit/face/naruto_hermit_m.png",
+        "face_win": "naruto_hermit/face/naruto_hermit_w.png"
       },
       "says"       : [
         "只要你变成全村人都认可的最棒忍者，|你就可以把火影这个名字抢过来！",
@@ -1012,11 +1012,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/naruto_hermit/naruto_hermit.swf",
-        "face"    : "packs/fighters/naruto_hermit/face/naruto_kurama.png",
-        "face_big": "packs/fighters/naruto_hermit/face/naruto_kurama_b.png",
-        "face_bar": "packs/fighters/naruto_hermit/face/naruto_kurama_m.png",
-        "face_win": "packs/fighters/naruto_hermit/face/naruto_kurama_w.png"
+        "file"    : "naruto_hermit/naruto_hermit.swf",
+        "face"    : "naruto_hermit/face/naruto_kurama.png",
+        "face_big": "naruto_hermit/face/naruto_kurama_b.png",
+        "face_bar": "naruto_hermit/face/naruto_kurama_m.png",
+        "face_win": "naruto_hermit/face/naruto_kurama_w.png"
       },
       "says"       : [
         "只要你变成全村人都认可的最棒忍者，|你就可以把火影这个名字抢过来！",
@@ -1034,11 +1034,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/naruto_hermit_old/naruto_hermit_old.swf",
-        "face"    : "packs/fighters/naruto_hermit_old/face/naruto_hermit_old.png",
-        "face_big": "packs/fighters/naruto_hermit_old/face/naruto_hermit_old_b.png",
-        "face_bar": "packs/fighters/naruto_hermit_old/face/naruto_hermit_old_m.png",
-        "face_win": "packs/fighters/naruto_hermit_old/face/naruto_hermit_old_w.png"
+        "file"    : "naruto_hermit_old/naruto_hermit_old.swf",
+        "face"    : "naruto_hermit_old/face/naruto_hermit_old.png",
+        "face_big": "naruto_hermit_old/face/naruto_hermit_old_b.png",
+        "face_bar": "naruto_hermit_old/face/naruto_hermit_old_m.png",
+        "face_win": "naruto_hermit_old/face/naruto_hermit_old_w.png"
       },
       "says"       : [
         "只要你变成全村人都认可的最棒忍者，|你就可以把火影这个名字抢过来！",
@@ -1056,11 +1056,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/neji/neji.swf",
-        "face"    : "packs/fighters/neji/face/neji.png",
-        "face_big": "packs/fighters/neji/face/neji_b.png",
-        "face_bar": "packs/fighters/neji/face/neji_m.png",
-        "face_win": "packs/fighters/neji/face/neji_w.png"
+        "file"    : "neji/neji.swf",
+        "face"    : "neji/face/neji.png",
+        "face_big": "neji/face/neji_b.png",
+        "face_bar": "neji/face/neji_m.png",
+        "face_win": "neji/face/neji_w.png"
       },
       "says"       : [
         "我从来都不认为——上忍就是终点！",
@@ -1078,7 +1078,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja1/ninja1.swf"
+        "file": "ninja1/ninja1.swf"
       },
       "hasWarning" : true
     }, {
@@ -1087,7 +1087,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja2/ninja2.swf"
+        "file": "ninja2/ninja2.swf"
       },
       "hasWarning" : true
     }, {
@@ -1096,7 +1096,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja_earth1/ninja_earth1.swf"
+        "file": "ninja_earth1/ninja_earth1.swf"
       },
       "hasWarning" : true
     }, {
@@ -1105,7 +1105,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja_fire1/ninja_fire1.swf"
+        "file": "ninja_fire1/ninja_fire1.swf"
       },
       "hasWarning" : true
     }, {
@@ -1114,7 +1114,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja_fire2/ninja_fire2.swf"
+        "file": "ninja_fire2/ninja_fire2.swf"
       },
       "hasWarning" : true
     }, {
@@ -1123,7 +1123,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja_sand1/ninja_sand1.swf"
+        "file": "ninja_sand1/ninja_sand1.swf"
       },
       "hasWarning" : true
     }, {
@@ -1132,7 +1132,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/ninja_thunder1/ninja_thunder1.swf"
+        "file": "ninja_thunder1/ninja_thunder1.swf"
       },
       "hasWarning" : true
     }, {
@@ -1141,11 +1141,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/obito/obito.swf",
-        "face"    : "packs/fighters/obito/face/obito.png",
-        "face_big": "packs/fighters/obito/face/obito_b.png",
-        "face_bar": "packs/fighters/obito/face/obito_m.png",
-        "face_win": "packs/fighters/obito/face/obito_w.png"
+        "file"    : "obito/obito.swf",
+        "face"    : "obito/face/obito.png",
+        "face_big": "obito/face/obito_b.png",
+        "face_bar": "obito/face/obito_m.png",
+        "face_win": "obito/face/obito_w.png"
       },
       "says"       : [
         "不重视同伴的人，连废物都不如！",
@@ -1164,11 +1164,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/obito/obito.swf",
-        "face"    : "packs/fighters/obito/face/obito_trueColors.png",
-        "face_big": "packs/fighters/obito/face/obito_trueColors_b.png",
-        "face_bar": "packs/fighters/obito/face/obito_trueColors_m.png",
-        "face_win": "packs/fighters/obito/face/obito_w.png"
+        "file"    : "obito/obito.swf",
+        "face"    : "obito/face/obito_trueColors.png",
+        "face_big": "obito/face/obito_trueColors_b.png",
+        "face_bar": "obito/face/obito_trueColors_m.png",
+        "face_win": "obito/face/obito_w.png"
       },
       "says"       : [
         "不重视同伴的人，连废物都不如！",
@@ -1187,11 +1187,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/obito_old/obito_old.swf",
-        "face"    : "packs/fighters/obito_old/face/obito_old.png",
-        "face_big": "packs/fighters/obito_old/face/obito_old_b.png",
-        "face_bar": "packs/fighters/obito_old/face/obito_old_m.png",
-        "face_win": "packs/fighters/obito_old/face/obito_old_w.png"
+        "file"    : "obito_old/obito_old.swf",
+        "face"    : "obito_old/face/obito_old.png",
+        "face_big": "obito_old/face/obito_old_b.png",
+        "face_bar": "obito_old/face/obito_old_m.png",
+        "face_win": "obito_old/face/obito_old_w.png"
       },
       "says"       : [
         "不重视同伴的人，连废物都不如！",
@@ -1210,11 +1210,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/orihime/orihime.swf",
-        "face"    : "packs/fighters/orihime/face/orihime.png",
-        "face_big": "packs/fighters/orihime/face/orihime_b.png",
-        "face_bar": "packs/fighters/orihime/face/orihime_m.png",
-        "face_win": "packs/fighters/orihime/face/orihime_w.png"
+        "file"    : "orihime/orihime.swf",
+        "face"    : "orihime/face/orihime.png",
+        "face_big": "orihime/face/orihime_b.png",
+        "face_bar": "orihime/face/orihime_m.png",
+        "face_win": "orihime/face/orihime_w.png"
       },
       "says"       : [
         "如果我是那雨滴的话……|那么，我能够像把不曾交会的天空与大地连接起来那样……|把某人的心串联起来吗？",
@@ -1231,11 +1231,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/orochimaru/orochimaru.swf",
-        "face"    : "packs/fighters/orochimaru/face/orochimaru.png",
-        "face_big": "packs/fighters/orochimaru/face/orochimaru_b.png",
-        "face_bar": "packs/fighters/orochimaru/face/orochimaru_m.png",
-        "face_win": "packs/fighters/orochimaru/face/orochimaru_w.png"
+        "file"    : "orochimaru/orochimaru.swf",
+        "face"    : "orochimaru/face/orochimaru.png",
+        "face_big": "orochimaru/face/orochimaru_b.png",
+        "face_bar": "orochimaru/face/orochimaru_m.png",
+        "face_win": "orochimaru/face/orochimaru_w.png"
       },
       "says"       : [
         "条约只是让对手麻痹的伪装，从现在开始历史将被改写",
@@ -1253,11 +1253,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/pain/pain.swf",
-        "face"    : "packs/fighters/pain/face/pain.png",
-        "face_big": "packs/fighters/pain/face/pain_b.png",
-        "face_bar": "packs/fighters/pain/face/pain_m.png",
-        "face_win": "packs/fighters/pain/face/pain_w.png"
+        "file"    : "pain/pain.swf",
+        "face"    : "pain/face/pain.png",
+        "face_big": "pain/face/pain_b.png",
+        "face_bar": "pain/face/pain_m.png",
+        "face_win": "pain/face/pain_w.png"
       },
       "says"       : [
         "……"
@@ -1273,11 +1273,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/pain_old/pain_old.swf",
-        "face"    : "packs/fighters/pain_old/face/pain_old.png",
-        "face_big": "packs/fighters/pain_old/face/pain_old_b.png",
-        "face_bar": "packs/fighters/pain_old/face/pain_old_m.png",
-        "face_win": "packs/fighters/pain_old/face/pain_old_w.png"
+        "file"    : "pain_old/pain_old.swf",
+        "face"    : "pain_old/face/pain_old.png",
+        "face_big": "pain_old/face/pain_old_b.png",
+        "face_bar": "pain_old/face/pain_old_m.png",
+        "face_win": "pain_old/face/pain_old_w.png"
       },
       "says"       : [
         "……"
@@ -1293,7 +1293,7 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file": "packs/fighters/pig1/pig1.swf"
+        "file": "pig1/pig1.swf"
       },
       "hasWarning" : true
     }, {
@@ -1301,21 +1301,21 @@
       "name"      : "随机选择 全人物",
       "comic_type": -1,
       "urls"      : {
-        "face": "packs/fighters/random/face/random.png"
+        "face": "random/face/random.png"
       }
     }, {
       "id"        : "random_bleach",
       "name"      : "随机选择 死神",
       "comic_type": 0,
       "urls"      : {
-        "face": "packs/fighters/random_bleach/face/random_bleach.png"
+        "face": "random_bleach/face/random_bleach.png"
       }
     }, {
       "id"        : "random_naruto",
       "name"      : "随机选择 火影",
       "comic_type": 1,
       "urls"      : {
-        "face": "packs/fighters/random_naruto/face/random_naruto.png"
+        "face": "random_naruto/face/random_naruto.png"
       }
     }, {
       "id"         : "renji",
@@ -1323,11 +1323,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/renji/renji.swf",
-        "face"    : "packs/fighters/renji/face/renji.png",
-        "face_big": "packs/fighters/renji/face/renji_b.png",
-        "face_bar": "packs/fighters/renji/face/renji_m.png",
-        "face_win": "packs/fighters/renji/face/renji_w.png"
+        "file"    : "renji/renji.swf",
+        "face"    : "renji/face/renji.png",
+        "face_big": "renji/face/renji_b.png",
+        "face_bar": "renji/face/renji_m.png",
+        "face_win": "renji/face/renji_w.png"
       },
       "says"       : [
         "我曾经发誓，我说过我一定要救她……|并没有向谁，仅仅是向我的——灵魂而发誓！",
@@ -1346,11 +1346,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/rukia/rukia.swf",
-        "face"    : "packs/fighters/rukia/face/rukia.png",
-        "face_big": "packs/fighters/rukia/face/rukia_b.png",
-        "face_bar": "packs/fighters/rukia/face/rukia_m.png",
-        "face_win": "packs/fighters/rukia/face/rukia_w.png"
+        "file"    : "rukia/rukia.swf",
+        "face"    : "rukia/face/rukia.png",
+        "face_big": "rukia/face/rukia_b.png",
+        "face_bar": "rukia/face/rukia_m.png",
+        "face_win": "rukia/face/rukia_w.png"
       },
       "says"       : [
         "命运是轮回的吗?还是伸向前方的? | 假如,是轮回的话,那就应该把那轮回之环击碎吗?  | 还是应该逆来顺受呢?",
@@ -1367,11 +1367,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/rukia/rukia.swf",
-        "face"    : "packs/fighters/rukia/face/rukia_shikai.png",
-        "face_big": "packs/fighters/rukia/face/rukia_shikai_b.png",
-        "face_bar": "packs/fighters/rukia/face/rukia_shikai_m.png",
-        "face_win": "packs/fighters/rukia/face/rukia_shikai_w.png"
+        "file"    : "rukia/rukia.swf",
+        "face"    : "rukia/face/rukia_shikai.png",
+        "face_big": "rukia/face/rukia_shikai_b.png",
+        "face_bar": "rukia/face/rukia_shikai_m.png",
+        "face_win": "rukia/face/rukia_shikai_w.png"
       },
       "says"       : [
         "命运是轮回的吗?还是伸向前方的? | 假如,是轮回的话,那就应该把那轮回之环击碎吗?  | 还是应该逆来顺受呢?",
@@ -1388,11 +1388,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/sakura/sakura.swf",
-        "face"    : "packs/fighters/sakura/face/sakura.png",
-        "face_big": "packs/fighters/sakura/face/sakura_b.png",
-        "face_bar": "packs/fighters/sakura/face/sakura_m.png",
-        "face_win": "packs/fighters/sakura/face/sakura_w.png"
+        "file"    : "sakura/sakura.swf",
+        "face"    : "sakura/face/sakura.png",
+        "face_big": "sakura/face/sakura_b.png",
+        "face_bar": "sakura/face/sakura_m.png",
+        "face_win": "sakura/face/sakura_w.png"
       },
       "says"       : [
         "我每次都受到其他人的保护，好不甘心哦……既然如此，这次……必须有我来保护我所珍惜的人们了……",
@@ -1409,11 +1409,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/sakura_sr/sakura_sr.swf",
-        "face"    : "packs/fighters/sakura_sr/face/sakura_sr.png",
-        "face_big": "packs/fighters/sakura_sr/face/sakura_sr_b.png",
-        "face_bar": "packs/fighters/sakura_sr/face/sakura_sr_m.png",
-        "face_win": "packs/fighters/sakura_sr/face/sakura_sr_w.png"
+        "file"    : "sakura_sr/sakura_sr.swf",
+        "face"    : "sakura_sr/face/sakura_sr.png",
+        "face_big": "sakura_sr/face/sakura_sr_b.png",
+        "face_bar": "sakura_sr/face/sakura_sr_m.png",
+        "face_win": "sakura_sr/face/sakura_sr_w.png"
       },
       "says"       : [
         "我每次都受到其他人的保护，好不甘心哦……既然如此，这次……必须有我来保护我所珍惜的人们了……",
@@ -1430,11 +1430,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/sasuke/sasuke.swf",
-        "face"    : "packs/fighters/sasuke/face/sasuke.png",
-        "face_big": "packs/fighters/sasuke/face/sasuke_b.png",
-        "face_bar": "packs/fighters/sasuke/face/sasuke_m.png",
-        "face_win": "packs/fighters/sasuke/face/sasuke_w.png"
+        "file"    : "sasuke/sasuke.swf",
+        "face"    : "sasuke/face/sasuke.png",
+        "face_big": "sasuke/face/sasuke_b.png",
+        "face_bar": "sasuke/face/sasuke_m.png",
+        "face_win": "sasuke/face/sasuke_w.png"
       },
       "says"       : [
         "羁绊太多，只会迷失自我。",
@@ -1452,11 +1452,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/sasuke/sasuke.swf",
-        "face"    : "packs/fighters/sasuke/face/sasuke_mantra.png",
-        "face_big": "packs/fighters/sasuke/face/sasuke_mantra_b.png",
-        "face_bar": "packs/fighters/sasuke/face/sasuke_mantra_m.png",
-        "face_win": "packs/fighters/sasuke/face/sasuke_mantra_w.png"
+        "file"    : "sasuke/sasuke.swf",
+        "face"    : "sasuke/face/sasuke_mantra.png",
+        "face_big": "sasuke/face/sasuke_mantra_b.png",
+        "face_bar": "sasuke/face/sasuke_mantra_m.png",
+        "face_win": "sasuke/face/sasuke_mantra_w.png"
       },
       "says"       : [
         "羁绊太多，只会迷失自我。",
@@ -1474,11 +1474,11 @@
       "comic_type" : 1,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/sasuke/sasuke.swf",
-        "face"    : "packs/fighters/sasuke/face/sasuke_susanoo.png",
-        "face_big": "packs/fighters/sasuke/face/sasuke_susanoo_b.png",
-        "face_bar": "packs/fighters/sasuke/face/sasuke_susanoo_m.png",
-        "face_win": "packs/fighters/sasuke/face/sasuke_susanoo_w.png"
+        "file"    : "sasuke/sasuke.swf",
+        "face"    : "sasuke/face/sasuke_susanoo.png",
+        "face_big": "sasuke/face/sasuke_susanoo_b.png",
+        "face_bar": "sasuke/face/sasuke_susanoo_m.png",
+        "face_win": "sasuke/face/sasuke_susanoo_w.png"
       },
       "says"       : [
         "羁绊太多，只会迷失自我。",
@@ -1496,11 +1496,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/sasuke_susanoo/sasuke_susanoo.swf",
-        "face"    : "packs/fighters/sasuke_susanoo/face/sasuke_susanoo.png",
-        "face_big": "packs/fighters/sasuke_susanoo/face/sasuke_susanoo_b.png",
-        "face_bar": "packs/fighters/sasuke_susanoo/face/sasuke_susanoo_m.png",
-        "face_win": "packs/fighters/sasuke_susanoo/face/sasuke_susanoo_w.png"
+        "file"    : "sasuke_susanoo/sasuke_susanoo.swf",
+        "face"    : "sasuke_susanoo/face/sasuke_susanoo.png",
+        "face_big": "sasuke_susanoo/face/sasuke_susanoo_b.png",
+        "face_bar": "sasuke_susanoo/face/sasuke_susanoo_m.png",
+        "face_win": "sasuke_susanoo/face/sasuke_susanoo_w.png"
       },
       "says"       : [
         "羁绊太多，只会迷失自我。",
@@ -1518,11 +1518,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/sasuke_susanoo_old/sasuke_susanoo_old.swf",
-        "face"    : "packs/fighters/sasuke_susanoo_old/face/sasuke_susanoo.png",
-        "face_big": "packs/fighters/sasuke_susanoo_old/face/sasuke_susanoo_old_b.png",
-        "face_bar": "packs/fighters/sasuke_susanoo_old/face/sasuke_susanoo_old_m.png",
-        "face_win": "packs/fighters/sasuke_susanoo_old/face/sasuke_susanoo_old_w.png"
+        "file"    : "sasuke_susanoo_old/sasuke_susanoo_old.swf",
+        "face"    : "sasuke_susanoo_old/face/sasuke_susanoo.png",
+        "face_big": "sasuke_susanoo_old/face/sasuke_susanoo_old_b.png",
+        "face_bar": "sasuke_susanoo_old/face/sasuke_susanoo_old_m.png",
+        "face_win": "sasuke_susanoo_old/face/sasuke_susanoo_old_w.png"
       },
       "says"       : [
         "羁绊太多，只会迷失自我。",
@@ -1540,11 +1540,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/soifon/soifon.swf",
-        "face"    : "packs/fighters/soifon/face/soifon.png",
-        "face_big": "packs/fighters/soifon/face/soifon_b.png",
-        "face_bar": "packs/fighters/soifon/face/soifon_m.png",
-        "face_win": "packs/fighters/soifon/face/soifon_w.png"
+        "file"    : "soifon/soifon.swf",
+        "face"    : "soifon/face/soifon.png",
+        "face_big": "soifon/face/soifon_b.png",
+        "face_bar": "soifon/face/soifon_m.png",
+        "face_win": "soifon/face/soifon_w.png"
       },
       "says"       : [
         "你的影子就像是……毫无目的的毒针一样……将我的去路给缝死。",
@@ -1561,11 +1561,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/soifon_old/soifon_old.swf",
-        "face"    : "packs/fighters/soifon_old/face/soifon_old.png",
-        "face_big": "packs/fighters/soifon_old/face/soifon_b.png",
-        "face_bar": "packs/fighters/soifon_old/face/soifon_m.png",
-        "face_win": "packs/fighters/soifon_old/face/soifon_w.png"
+        "file"    : "soifon_old/soifon_old.swf",
+        "face"    : "soifon_old/face/soifon_old.png",
+        "face_big": "soifon_old/face/soifon_b.png",
+        "face_bar": "soifon_old/face/soifon_m.png",
+        "face_win": "soifon_old/face/soifon_w.png"
       },
       "says"       : [
         "你的影子就像是……毫无目的的毒针一样……将我的去路给缝死。",
@@ -1582,11 +1582,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/starrk/starrk.swf",
-        "face"    : "packs/fighters/starrk/face/starrk.png",
-        "face_big": "packs/fighters/starrk/face/starrk_b.png",
-        "face_bar": "packs/fighters/starrk/face/starrk_m.png",
-        "face_win": "packs/fighters/starrk/face/starrk_w.png"
+        "file"    : "starrk/starrk.swf",
+        "face"    : "starrk/face/starrk.png",
+        "face_big": "starrk/face/starrk_b.png",
+        "face_bar": "starrk/face/starrk_m.png",
+        "face_win": "starrk/face/starrk_w.png"
       },
       "says"       : [
         "难以忍受的孤独蚀骨吸髓，无法摆脱，无论怎样，只要不再一个人就好，甚至是将自己一分为二。",
@@ -1603,11 +1603,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/suigetsu/suigetsu.swf",
-        "face"    : "packs/fighters/suigetsu/face/suigetsu.png",
-        "face_big": "packs/fighters/suigetsu/face/suigetsu_b.png",
-        "face_bar": "packs/fighters/suigetsu/face/suigetsu_m.png",
-        "face_win": "packs/fighters/suigetsu/face/suigetsu_w.png"
+        "file"    : "suigetsu/suigetsu.swf",
+        "face"    : "suigetsu/face/suigetsu.png",
+        "face_big": "suigetsu/face/suigetsu_b.png",
+        "face_bar": "suigetsu/face/suigetsu_m.png",
+        "face_win": "suigetsu/face/suigetsu_w.png"
       },
       "says"       : [
         "你想保护的并不是我想保护的",
@@ -1625,11 +1625,11 @@
       "comic_type" : 1,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/temari/temari.swf",
-        "face"    : "packs/fighters/temari/face/temari.png",
-        "face_big": "packs/fighters/temari/face/temari_b.png",
-        "face_bar": "packs/fighters/temari/face/temari_m.png",
-        "face_win": "packs/fighters/temari/face/temari_w.png"
+        "file"    : "temari/temari.swf",
+        "face"    : "temari/face/temari.png",
+        "face_big": "temari/face/temari_b.png",
+        "face_bar": "temari/face/temari_m.png",
+        "face_win": "temari/face/temari_w.png"
       },
       "says"       : [
         "笨蛋！",
@@ -1646,11 +1646,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/tensa/tensa.swf",
-        "face"    : "packs/fighters/tensa/face/tensa.png",
-        "face_big": "packs/fighters/tensa/face/tensa_b.png",
-        "face_bar": "packs/fighters/tensa/face/tensa_m.png",
-        "face_win": "packs/fighters/tensa/face/tensa_w.png"
+        "file"    : "tensa/tensa.swf",
+        "face"    : "tensa/face/tensa.png",
+        "face_big": "tensa/face/tensa_b.png",
+        "face_bar": "tensa/face/tensa_m.png",
+        "face_win": "tensa/face/tensa_w.png"
       },
       "says"       : [
         "你想保护的并不是我想保护的",
@@ -1668,11 +1668,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/toushirou/toushirou.swf",
-        "face"    : "packs/fighters/toushirou/face/toushirou.png",
-        "face_big": "packs/fighters/toushirou/face/toushirou_b.png",
-        "face_bar": "packs/fighters/toushirou/face/toushirou_m.png",
-        "face_win": "packs/fighters/toushirou/face/toushirou_w.png"
+        "file"    : "toushirou/toushirou.swf",
+        "face"    : "toushirou/face/toushirou.png",
+        "face_big": "toushirou/face/toushirou_b.png",
+        "face_bar": "toushirou/face/toushirou_m.png",
+        "face_win": "toushirou/face/toushirou_w.png"
       },
       "says"       : [
         "在强烈的阳光下，印在薄冰之上的足迹消失无踪。 | 不必害怕被欺骗，这世界原本就建立在假象之上。",
@@ -1690,11 +1690,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/toushirou/toushirou.swf",
-        "face"    : "packs/fighters/toushirou/face/toushirou_bankai.png",
-        "face_big": "packs/fighters/toushirou/face/toushirou_bankai_b.png",
-        "face_bar": "packs/fighters/toushirou/face/toushirou_bankai_m.png",
-        "face_win": "packs/fighters/toushirou/face/toushirou_w.png"
+        "file"    : "toushirou/toushirou.swf",
+        "face"    : "toushirou/face/toushirou_bankai.png",
+        "face_big": "toushirou/face/toushirou_bankai_b.png",
+        "face_bar": "toushirou/face/toushirou_bankai_m.png",
+        "face_win": "toushirou/face/toushirou_w.png"
       },
       "says"       : [
         "在强烈的阳光下，印在薄冰之上的足迹消失无踪。 | 不必害怕被欺骗，这世界原本就建立在假象之上。",
@@ -1712,11 +1712,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/ulquiorra/ulquiorra.swf",
-        "face"    : "packs/fighters/ulquiorra/face/ulquiorra.png",
-        "face_big": "packs/fighters/ulquiorra/face/ulquiorra_b.png",
-        "face_bar": "packs/fighters/ulquiorra/face/ulquiorra_m.png",
-        "face_win": "packs/fighters/ulquiorra/face/ulquiorra_w.png"
+        "file"    : "ulquiorra/ulquiorra.swf",
+        "face"    : "ulquiorra/face/ulquiorra.png",
+        "face_big": "ulquiorra/face/ulquiorra_b.png",
+        "face_bar": "ulquiorra/face/ulquiorra_m.png",
+        "face_win": "ulquiorra/face/ulquiorra_w.png"
       },
       "says"       : [
         "太阳已经被我们击落了。",
@@ -1734,11 +1734,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/ulquiorra/ulquiorra.swf",
-        "face"    : "packs/fighters/ulquiorra/face/ulquiorra_resurreccion.png",
-        "face_big": "packs/fighters/ulquiorra/face/ulquiorra_resurreccion_b.png",
-        "face_bar": "packs/fighters/ulquiorra/face/ulquiorra_resurreccion_m.png",
-        "face_win": "packs/fighters/ulquiorra/face/ulquiorra_w.png"
+        "file"    : "ulquiorra/ulquiorra.swf",
+        "face"    : "ulquiorra/face/ulquiorra_resurreccion.png",
+        "face_big": "ulquiorra/face/ulquiorra_resurreccion_b.png",
+        "face_bar": "ulquiorra/face/ulquiorra_resurreccion_m.png",
+        "face_win": "ulquiorra/face/ulquiorra_w.png"
       },
       "says"       : [
         "太阳已经被我们击落了。",
@@ -1756,11 +1756,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/ulquiorra_old/ulquiorra_old.swf",
-        "face"    : "packs/fighters/ulquiorra_old/face/ulquiorra_old.png",
-        "face_big": "packs/fighters/ulquiorra_old/face/ulquiorra_old_b.png",
-        "face_bar": "packs/fighters/ulquiorra_old/face/ulquiorra_old_m.png",
-        "face_win": "packs/fighters/ulquiorra_old/face/ulquiorra_old_w.png"
+        "file"    : "ulquiorra_old/ulquiorra_old.swf",
+        "face"    : "ulquiorra_old/face/ulquiorra_old.png",
+        "face_big": "ulquiorra_old/face/ulquiorra_old_b.png",
+        "face_bar": "ulquiorra_old/face/ulquiorra_old_m.png",
+        "face_win": "ulquiorra_old/face/ulquiorra_old_w.png"
       },
       "says"       : [
         "太阳已经被我们击落了。",
@@ -1778,11 +1778,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/uryuu/uryuu.swf",
-        "face"    : "packs/fighters/uryuu/face/uryuu.png",
-        "face_big": "packs/fighters/uryuu/face/uryuu_b.png",
-        "face_bar": "packs/fighters/uryuu/face/uryuu_m.png",
-        "face_win": "packs/fighters/uryuu/face/uryuu_w.png"
+        "file"    : "uryuu/uryuu.swf",
+        "face"    : "uryuu/face/uryuu.png",
+        "face_big": "uryuu/face/uryuu_b.png",
+        "face_bar": "uryuu/face/uryuu_m.png",
+        "face_win": "uryuu/face/uryuu_w.png"
       },
       "says"       : [
         "我赌上灭却师的骄傲，一定要赢你！",
@@ -1800,11 +1800,11 @@
       "comic_type" : 0,
       "start_frame": 2,
       "urls"       : {
-        "file"    : "packs/fighters/uryuu/uryuu.swf",
-        "face"    : "packs/fighters/uryuu/face/uryuu_ginreigojiaku.png",
-        "face_big": "packs/fighters/uryuu/face/uryuu_ginreigojiaku_b.png",
-        "face_bar": "packs/fighters/uryuu/face/uryuu_ginreigojiaku_m.png",
-        "face_win": "packs/fighters/uryuu/face/uryuu_ginreigojiaku_w.png"
+        "file"    : "uryuu/uryuu.swf",
+        "face"    : "uryuu/face/uryuu_ginreigojiaku.png",
+        "face_big": "uryuu/face/uryuu_ginreigojiaku_b.png",
+        "face_bar": "uryuu/face/uryuu_ginreigojiaku_m.png",
+        "face_win": "uryuu/face/uryuu_ginreigojiaku_w.png"
       },
       "says"       : [
         "我赌上灭却师的骄傲，一定要赢你！",
@@ -1822,11 +1822,11 @@
       "comic_type" : 0,
       "start_frame": 1,
       "urls"       : {
-        "file"    : "packs/fighters/yoruichi/yoruichi.swf",
-        "face"    : "packs/fighters/yoruichi/face/yoruichi.png",
-        "face_big": "packs/fighters/yoruichi/face/yoruichi_b.png",
-        "face_bar": "packs/fighters/yoruichi/face/yoruichi_m.png",
-        "face_win": "packs/fighters/yoruichi/face/yoruichi_w.png"
+        "file"    : "yoruichi/yoruichi.swf",
+        "face"    : "yoruichi/face/yoruichi.png",
+        "face_big": "yoruichi/face/yoruichi_b.png",
+        "face_bar": "yoruichi/face/yoruichi_m.png",
+        "face_win": "yoruichi/face/yoruichi_w.png"
       },
       "says"       : [
         "要是输了，就再也回不来了。",

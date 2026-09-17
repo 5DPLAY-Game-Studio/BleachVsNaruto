@@ -82,16 +82,19 @@
   "pack": "ichigo",
   "kind": "fighter",
   "file": "ichigo.swf",
+  "path": {
+    "face": "face/"
+  },
   "variants": [{
       "id"         : "ichigo",
       "name"       : "黑崎·一护",
       "comic_type" : 0,
       "start_frame": 1,
       "faces": {
-        "face"    : "face/ichigo.png",
-        "face_big": "face/ichigo_b.png",
-        "face_bar": "face/ichigo_m.png",
-        "face_win": "face/ichigo_w.png"
+        "face"    : "ichigo.png",
+        "face_big": "ichigo_b.png",
+        "face_bar": "ichigo_m.png",
+        "face_win": "ichigo_w.png"
       },
       "says": [
         "..."
@@ -118,6 +121,7 @@
 
 | 点 | 做法 |
 |----|------|
-| `faces.*` | 相对包根；可省略不存在的键 |
-| `file` | 包内 SWF 文件名（可含原 `xb/` 等子路径时改写为包根文件名） |
+| `path.face` | 默认 `face/`；`faces.*` 写裸文件名（亦可遗留 `face/xxx.png`） |
+| `file` | 包内 SWF 文件名 |
 | `kind` | `fighter` / `assist` |
+| 生成总表 | `path.fighter/face = packs/fighters\|assists/`，urls 为 `<pack>/...` |

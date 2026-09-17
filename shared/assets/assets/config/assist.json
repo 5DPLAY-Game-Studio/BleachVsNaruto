@@ -1,8 +1,8 @@
 {
   "fighter": {
     "path": {
-      "fighter": "",
-      "face"   : "",
+      "fighter": "packs/assists/",
+      "face"   : "packs/assists/",
       "bgm"    : "bgm/"
     },
 
@@ -11,9 +11,9 @@
       "name"      : "朽木·白哉",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/byakuya/byakuya.swf",
-        "face"    : "packs/assists/byakuya/face/byakuya.png",
-        "face_big": "packs/assists/byakuya/face/byakuya_b.png"
+        "file"    : "byakuya/byakuya.swf",
+        "face"    : "byakuya/face/byakuya.png",
+        "face_big": "byakuya/face/byakuya_b.png"
       },
       "hasWarning": true
     }, {
@@ -21,9 +21,9 @@
       "name"      : "我爱罗",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/gaara/gaara.swf",
-        "face"    : "packs/assists/gaara/face/gaara.png",
-        "face_big": "packs/assists/gaara/face/gaara_b.png"
+        "file"    : "gaara/gaara.swf",
+        "face"    : "gaara/face/gaara.png",
+        "face_big": "gaara/face/gaara_b.png"
       },
       "hasWarning": true
     }, {
@@ -31,9 +31,9 @@
       "name"      : "市丸·银",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/gin/gin.swf",
-        "face"    : "packs/assists/gin/face/gin.png",
-        "face_big": "packs/assists/gin/face/gin_b.png"
+        "file"    : "gin/gin.swf",
+        "face"    : "gin/face/gin.png",
+        "face_big": "gin/face/gin_b.png"
       },
       "hasWarning": true
     }, {
@@ -41,9 +41,9 @@
       "name"      : "葛力姆乔·贾卡杰克",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/grimmjow/grimmjow.swf",
-        "face"    : "packs/assists/grimmjow/face/grimmjow.png",
-        "face_big": "packs/assists/grimmjow/face/grimmjow_b.png"
+        "file"    : "grimmjow/grimmjow.swf",
+        "face"    : "grimmjow/face/grimmjow.png",
+        "face_big": "grimmjow/face/grimmjow_b.png"
       },
       "hasWarning": true
     }, {
@@ -51,9 +51,9 @@
       "name"      : "蒂雅·赫丽贝尔",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/halibel/halibel.swf",
-        "face"    : "packs/assists/halibel/face/halibel.png",
-        "face_big": "packs/assists/halibel/face/halibel_b.png"
+        "file"    : "halibel/halibel.swf",
+        "face"    : "halibel/face/halibel.png",
+        "face_big": "halibel/face/halibel_b.png"
       },
       "hasWarning": true
     }, {
@@ -61,9 +61,9 @@
       "name"      : "日向·雏田",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/hinata/hinata.swf",
-        "face"    : "packs/assists/hinata/face/hinata.png",
-        "face_big": "packs/assists/hinata/face/hinata_b.png"
+        "file"    : "hinata/hinata.swf",
+        "face"    : "hinata/face/hinata.png",
+        "face_big": "hinata/face/hinata_b.png"
       },
       "hasWarning": true
     }, {
@@ -71,9 +71,9 @@
       "name"      : "蝎",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/hiruko/hiruko.swf",
-        "face"    : "packs/assists/hiruko/face/hiruko.png",
-        "face_big": "packs/assists/hiruko/face/hiruko_b.png"
+        "file"    : "hiruko/hiruko.swf",
+        "face"    : "hiruko/face/hiruko.png",
+        "face_big": "hiruko/face/hiruko_b.png"
       },
       "hasWarning": true
     }, {
@@ -81,9 +81,9 @@
       "name"      : "黑崎·一护 牛头",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/ichigo_hollow/ichigo_hollow.swf",
-        "face"    : "packs/assists/ichigo_hollow/face/ichigo_hollow.png",
-        "face_big": "packs/assists/ichigo_hollow/face/ichigo_hollow_b.png"
+        "file"    : "ichigo_hollow/ichigo_hollow.swf",
+        "face"    : "ichigo_hollow/face/ichigo_hollow.png",
+        "face_big": "ichigo_hollow/face/ichigo_hollow_b.png"
       },
       "hasWarning": true
     }, {
@@ -91,9 +91,9 @@
       "name"      : "黑崎·一护 修行",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/ichigo_padipata/ichigo_padipata.swf",
-        "face"    : "packs/assists/ichigo_padipata/face/ichigo_padipata.png",
-        "face_big": "packs/assists/ichigo_padipata/face/ichigo_padipata_b.png"
+        "file"    : "ichigo_padipata/ichigo_padipata.swf",
+        "face"    : "ichigo_padipata/face/ichigo_padipata.png",
+        "face_big": "ichigo_padipata/face/ichigo_padipata_b.png"
       },
       "hasWarning": true
     }, {
@@ -101,9 +101,9 @@
       "name"      : "斑目·一角",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/ikkaku/ikkaku.swf",
-        "face"    : "packs/assists/ikkaku/face/ikkaku.png",
-        "face_big": "packs/assists/ikkaku/face/ikkaku_b.png"
+        "file"    : "ikkaku/ikkaku.swf",
+        "face"    : "ikkaku/face/ikkaku.png",
+        "face_big": "ikkaku/face/ikkaku_b.png"
       },
       "hasWarning": true
     }, {
@@ -111,9 +111,9 @@
       "name"      : "山中·井野",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/ino/ino.swf",
-        "face"    : "packs/assists/ino/face/ino.png",
-        "face_big": "packs/assists/ino/face/ino_b.png"
+        "file"    : "ino/ino.swf",
+        "face"    : "ino/face/ino.png",
+        "face_big": "ino/face/ino_b.png"
       },
       "hasWarning": true
     }, {
@@ -121,9 +121,9 @@
       "name"      : "宇智波·鼬",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/itachi/itachi.swf",
-        "face"    : "packs/assists/itachi/face/itachi.png",
-        "face_big": "packs/assists/itachi/face/itachi_b.png"
+        "file"    : "itachi/itachi.swf",
+        "face"    : "itachi/face/itachi.png",
+        "face_big": "itachi/face/itachi_b.png"
       },
       "hasWarning": true
     }, {
@@ -131,9 +131,9 @@
       "name"      : "自来也",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/jiraiya/jiraiya.swf",
-        "face"    : "packs/assists/jiraiya/face/jiraiya.png",
-        "face_big": "packs/assists/jiraiya/face/jiraiya_b.png"
+        "file"    : "jiraiya/jiraiya.swf",
+        "face"    : "jiraiya/face/jiraiya.png",
+        "face_big": "jiraiya/face/jiraiya_b.png"
       },
       "hasWarning": true
     }, {
@@ -141,9 +141,9 @@
       "name"      : "药师·兜",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/kabuto/kabuto.swf",
-        "face"    : "packs/assists/kabuto/face/kabuto.png",
-        "face_big": "packs/assists/kabuto/face/kabuto_b.png"
+        "file"    : "kabuto/kabuto.swf",
+        "face"    : "kabuto/face/kabuto.png",
+        "face_big": "kabuto/face/kabuto_b.png"
       },
       "hasWarning": true
     }, {
@@ -151,9 +151,9 @@
       "name"      : "更木·剑八",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/kenpachi/kenpachi.swf",
-        "face"    : "packs/assists/kenpachi/face/kenpachi.png",
-        "face_big": "packs/assists/kenpachi/face/kenpachi_b.png"
+        "file"    : "kenpachi/kenpachi.swf",
+        "face"    : "kenpachi/face/kenpachi.png",
+        "face_big": "kenpachi/face/kenpachi_b.png"
       },
       "hasWarning": true
     }, {
@@ -161,9 +161,9 @@
       "name"      : "君麻吕",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/kimimaro/kimimaro.swf",
-        "face"    : "packs/assists/kimimaro/face/kimimaro.png",
-        "face_big": "packs/assists/kimimaro/face/kimimaro_b.png"
+        "file"    : "kimimaro/kimimaro.swf",
+        "face"    : "kimimaro/face/kimimaro.png",
+        "face_big": "kimimaro/face/kimimaro_b.png"
       },
       "hasWarning": true
     }, {
@@ -171,9 +171,9 @@
       "name"      : "魂",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/kon/kon.swf",
-        "face"    : "packs/assists/kon/face/kon.png",
-        "face_big": "packs/assists/kon/face/kon_b.png"
+        "file"    : "kon/kon.swf",
+        "face"    : "kon/face/kon.png",
+        "face_big": "kon/face/kon_b.png"
       },
       "hasWarning": true
     }, {
@@ -181,9 +181,9 @@
       "name"      : "宇智波·斑",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/madara/madara.swf",
-        "face"    : "packs/assists/madara/face/madara.png",
-        "face_big": "packs/assists/madara/face/madara_b.png"
+        "file"    : "madara/madara.swf",
+        "face"    : "madara/face/madara.png",
+        "face_big": "madara/face/madara_b.png"
       },
       "hasWarning": true
     }, {
@@ -191,9 +191,9 @@
       "name"      : "波风·水门",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/minato/minato.swf",
-        "face"    : "packs/assists/minato/face/minato.png",
-        "face_big": "packs/assists/minato/face/minato_b.png"
+        "file"    : "minato/minato.swf",
+        "face"    : "minato/face/minato.png",
+        "face_big": "minato/face/minato_b.png"
       },
       "hasWarning": true
     }, {
@@ -201,9 +201,9 @@
       "name"      : "漩涡·鸣人",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/naruto/naruto.swf",
-        "face"    : "packs/assists/naruto/face/naruto.png",
-        "face_big": "packs/assists/naruto/face/naruto_b.png"
+        "file"    : "naruto/naruto.swf",
+        "face"    : "naruto/face/naruto.png",
+        "face_big": "naruto/face/naruto_b.png"
       },
       "hasWarning": true
     }, {
@@ -211,9 +211,9 @@
       "name"      : "涅·音梦",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/nemu/nemu.swf",
-        "face"    : "packs/assists/nemu/face/nemu.png",
-        "face_big": "packs/assists/nemu/face/nemu_b.png"
+        "file"    : "nemu/nemu.swf",
+        "face"    : "nemu/face/nemu.png",
+        "face_big": "nemu/face/nemu_b.png"
       },
       "hasWarning": true
     }, {
@@ -221,9 +221,9 @@
       "name"      : "宇智波·带土 真面目",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/obito_trueColors/obito_trueColors.swf",
-        "face"    : "packs/assists/obito_trueColors/face/obito_trueColors.png",
-        "face_big": "packs/assists/obito_trueColors/face/obito_trueColors_b.png"
+        "file"    : "obito_trueColors/obito_trueColors.swf",
+        "face"    : "obito_trueColors/face/obito_trueColors.png",
+        "face_big": "obito_trueColors/face/obito_trueColors_b.png"
       },
       "hasWarning": true
     }, {
@@ -231,9 +231,9 @@
       "name"      : "井上·织姬",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/orihime/orihime.swf",
-        "face"    : "packs/assists/orihime/face/orihime.png",
-        "face_big": "packs/assists/orihime/face/orihime_b.png"
+        "file"    : "orihime/orihime.swf",
+        "face"    : "orihime/face/orihime.png",
+        "face_big": "orihime/face/orihime_b.png"
       },
       "hasWarning": true
     }, {
@@ -241,30 +241,30 @@
       "name"      : "随机选择 全人物",
       "comic_type": -1,
       "urls"      : {
-        "face": "packs/assists/random/face/random.png"
+        "face": "random/face/random.png"
       }
     }, {
       "id"        : "random_bleach",
       "name"      : "随机选择 死神",
       "comic_type": -1,
       "urls"      : {
-        "face": "packs/assists/random_bleach/face/random_bleach.png"
+        "face": "random_bleach/face/random_bleach.png"
       }
     }, {
       "id"        : "random_naruto",
       "name"      : "随机选择 火影",
       "comic_type": -1,
       "urls"      : {
-        "face": "packs/assists/random_naruto/face/random_naruto.png"
+        "face": "random_naruto/face/random_naruto.png"
       }
     }, {
       "id"        : "rangiku",
       "name"      : "松本·乱菊",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/rangiku/rangiku.swf",
-        "face"    : "packs/assists/rangiku/face/rangiku.png",
-        "face_big": "packs/assists/rangiku/face/rangiku_b.png"
+        "file"    : "rangiku/rangiku.swf",
+        "face"    : "rangiku/face/rangiku.png",
+        "face_big": "rangiku/face/rangiku_b.png"
       },
       "hasWarning": true
     }, {
@@ -272,9 +272,9 @@
       "name"      : "阿散井·恋次",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/renji/renji.swf",
-        "face"    : "packs/assists/renji/face/renji.png",
-        "face_big": "packs/assists/renji/face/renji_b.png"
+        "file"    : "renji/renji.swf",
+        "face"    : "renji/face/renji.png",
+        "face_big": "renji/face/renji_b.png"
       },
       "hasWarning": true
     }, {
@@ -282,9 +282,9 @@
       "name"      : "佐井",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/sai/sai.swf",
-        "face"    : "packs/assists/sai/face/sai.png",
-        "face_big": "packs/assists/sai/face/sai_b.png"
+        "file"    : "sai/sai.swf",
+        "face"    : "sai/face/sai.png",
+        "face_big": "sai/face/sai_b.png"
       },
       "hasWarning": true
     }, {
@@ -292,9 +292,9 @@
       "name"      : "春野·樱",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/sakura/sakura.swf",
-        "face"    : "packs/assists/sakura/face/sakura.png",
-        "face_big": "packs/assists/sakura/face/sakura_b.png"
+        "file"    : "sakura/sakura.swf",
+        "face"    : "sakura/face/sakura.png",
+        "face_big": "sakura/face/sakura_b.png"
       },
       "hasWarning": true
     }, {
@@ -302,9 +302,9 @@
       "name"      : "奈良·鹿丸",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/shikamaru/shikamaru.swf",
-        "face"    : "packs/assists/shikamaru/face/shikamaru.png",
-        "face_big": "packs/assists/shikamaru/face/shikamaru_b.png"
+        "file"    : "shikamaru/shikamaru.swf",
+        "face"    : "shikamaru/face/shikamaru.png",
+        "face_big": "shikamaru/face/shikamaru_b.png"
       },
       "hasWarning": true
     }, {
@@ -312,9 +312,9 @@
       "name"      : "志志雄·真实",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/shishio/shishio.swf",
-        "face"    : "packs/assists/shishio/face/shishio.png",
-        "face_big": "packs/assists/shishio/face/shishio_b.png"
+        "file"    : "shishio/shishio.swf",
+        "face"    : "shishio/face/shishio.png",
+        "face_big": "shishio/face/shishio_b.png"
       },
       "hasWarning": true
     }, {
@@ -322,9 +322,9 @@
       "name"      : "碎蜂",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/soifon/soifon.swf",
-        "face"    : "packs/assists/soifon/face/soifon.png",
-        "face_big": "packs/assists/soifon/face/soifon_b.png"
+        "file"    : "soifon/soifon.swf",
+        "face"    : "soifon/face/soifon.png",
+        "face_big": "soifon/face/soifon_b.png"
       },
       "hasWarning": true
     }, {
@@ -332,9 +332,9 @@
       "name"      : "柯雅泰·史塔克",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/starrk/starrk.swf",
-        "face"    : "packs/assists/starrk/face/starrk.png",
-        "face_big": "packs/assists/starrk/face/starrk_b.png"
+        "file"    : "starrk/starrk.swf",
+        "face"    : "starrk/face/starrk.png",
+        "face_big": "starrk/face/starrk_b.png"
       },
       "hasWarning": true
     }, {
@@ -342,9 +342,9 @@
       "name"      : "鬼灯·水月",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/suigetsu/suigetsu.swf",
-        "face"    : "packs/assists/suigetsu/face/suigetsu.png",
-        "face_big": "packs/assists/suigetsu/face/suigetsu_b.png"
+        "file"    : "suigetsu/suigetsu.swf",
+        "face"    : "suigetsu/face/suigetsu.png",
+        "face_big": "suigetsu/face/suigetsu_b.png"
       },
       "hasWarning": true
     }, {
@@ -352,9 +352,9 @@
       "name"      : "手鞠",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/temari/temari.swf",
-        "face"    : "packs/assists/temari/face/temari.png",
-        "face_big": "packs/assists/temari/face/temari_b.png"
+        "file"    : "temari/temari.swf",
+        "face"    : "temari/face/temari.png",
+        "face_big": "temari/face/temari_b.png"
       },
       "hasWarning": true
     }, {
@@ -362,9 +362,9 @@
       "name"      : "天天",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/tenten/tenten.swf",
-        "face"    : "packs/assists/tenten/face/tenten.png",
-        "face_big": "packs/assists/tenten/face/tenten_b.png"
+        "file"    : "tenten/tenten.swf",
+        "face"    : "tenten/face/tenten.png",
+        "face_big": "tenten/face/tenten_b.png"
       },
       "hasWarning": true
     }, {
@@ -372,9 +372,9 @@
       "name"      : "大野木",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/tsuchikage/tsuchikage.swf",
-        "face"    : "packs/assists/tsuchikage/face/tsuchikage.png",
-        "face_big": "packs/assists/tsuchikage/face/tsuchikage_b.png"
+        "file"    : "tsuchikage/tsuchikage.swf",
+        "face"    : "tsuchikage/face/tsuchikage.png",
+        "face_big": "tsuchikage/face/tsuchikage_b.png"
       },
       "hasWarning": true
     }, {
@@ -382,9 +382,9 @@
       "name"      : "纲手",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/tsunate/tsunate.swf",
-        "face"    : "packs/assists/tsunate/face/tsunate.png",
-        "face_big": "packs/assists/tsunate/face/tsunate_b.png"
+        "file"    : "tsunate/tsunate.swf",
+        "face"    : "tsunate/face/tsunate.png",
+        "face_big": "tsunate/face/tsunate_b.png"
       },
       "hasWarning": true
     }, {
@@ -392,9 +392,9 @@
       "name"      : "石田·雨龙",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/uryuu/uryuu.swf",
-        "face"    : "packs/assists/uryuu/face/uryuu.png",
-        "face_big": "packs/assists/uryuu/face/uryuu_b.png"
+        "file"    : "uryuu/uryuu.swf",
+        "face"    : "uryuu/face/uryuu.png",
+        "face_big": "uryuu/face/uryuu_b.png"
       },
       "hasWarning": true
     }, {
@@ -402,9 +402,9 @@
       "name"      : "泡沫",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/utakata/utakata.swf",
-        "face"    : "packs/assists/utakata/face/utakata.png",
-        "face_big": "packs/assists/utakata/face/utakata_b.png"
+        "file"    : "utakata/utakata.swf",
+        "face"    : "utakata/face/utakata.png",
+        "face_big": "utakata/face/utakata_b.png"
       },
       "hasWarning": true
     }, {
@@ -412,9 +412,9 @@
       "name"      : "草鹿·八千流",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/yachiru/yachiru.swf",
-        "face"    : "packs/assists/yachiru/face/yachiru.png",
-        "face_big": "packs/assists/yachiru/face/yachiru_b.png"
+        "file"    : "yachiru/yachiru.swf",
+        "face"    : "yachiru/face/yachiru.png",
+        "face_big": "yachiru/face/yachiru_b.png"
       },
       "hasWarning": true
     }, {
@@ -422,9 +422,9 @@
       "name"      : "山本·元柳斎重国",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/yamamoto/yamamoto.swf",
-        "face"    : "packs/assists/yamamoto/face/yamamoto.png",
-        "face_big": "packs/assists/yamamoto/face/yamamoto_b.png"
+        "file"    : "yamamoto/yamamoto.swf",
+        "face"    : "yamamoto/face/yamamoto.png",
+        "face_big": "yamamoto/face/yamamoto_b.png"
       },
       "hasWarning": true
     }, {
@@ -432,9 +432,9 @@
       "name"      : "千手·扉间",
       "comic_type": 1,
       "urls"      : {
-        "file"    : "packs/assists/yls/yls.swf",
-        "face"    : "packs/assists/yls/face/yls.png",
-        "face_big": "packs/assists/yls/face/yls_b.png"
+        "file"    : "yls/yls.swf",
+        "face"    : "yls/face/yls.png",
+        "face_big": "yls/face/yls_b.png"
       },
       "hasWarning": true
     }, {
@@ -442,9 +442,9 @@
       "name"      : "四枫院·夜一",
       "comic_type": 0,
       "urls"      : {
-        "file"    : "packs/assists/yoruichi/yoruichi.swf",
-        "face"    : "packs/assists/yoruichi/face/yoruichi.png",
-        "face_big": "packs/assists/yoruichi/face/orihime_b.png"
+        "file"    : "yoruichi/yoruichi.swf",
+        "face"    : "yoruichi/face/yoruichi.png",
+        "face_big": "yoruichi/face/orihime_b.png"
       },
       "hasWarning": true
     }]

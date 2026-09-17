@@ -179,7 +179,12 @@ public class PackRegistry {
         }
 
         var fileName:String = meta['file'] as String;
-        var pathObj:Object  = {
+        var faceBase:String = 'face/';
+        if (meta['path'] && meta['path']['face']) {
+            faceBase = String(meta['path']['face']);
+        }
+
+        var pathObj:Object = {
             fighter: root,
             face   : root,
             bgm    : 'bgm/'
@@ -196,16 +201,16 @@ public class PackRegistry {
             }
             if (faces) {
                 if (faces['face']) {
-                    urls['face'] = faces['face'];
+                    urls['face'] = resolvePackRel(String(faces['face']), faceBase);
                 }
                 if (faces['face_big']) {
-                    urls['face_big'] = faces['face_big'];
+                    urls['face_big'] = resolvePackRel(String(faces['face_big']), faceBase);
                 }
                 if (faces['face_bar']) {
-                    urls['face_bar'] = faces['face_bar'];
+                    urls['face_bar'] = resolvePackRel(String(faces['face_bar']), faceBase);
                 }
                 if (faces['face_win']) {
-                    urls['face_win'] = faces['face_win'];
+                    urls['face_win'] = resolvePackRel(String(faces['face_win']), faceBase);
                 }
             }
 
@@ -241,6 +246,24 @@ public class PackRegistry {
                 FighterModel.I.register(fv);
             }
         }
+    }
+
+    /**
+     * 包内相对路径：裸文件名拼 <code>faceBase</code>；已含 <code>/</code> 则原样使用。
+     *
+     * @param rel      faces 字段值。
+     * @param faceBase 如 <code>face/</code>。
+     * @return 相对包根路径。
+     */
+    private function resolvePackRel(rel:String, faceBase:String):String {
+        if (!rel) {
+            return rel;
+        }
+        if (rel.indexOf('/') >= 0) {
+            return rel;
+        }
+
+        return faceBase + rel;
     }
 
 }
