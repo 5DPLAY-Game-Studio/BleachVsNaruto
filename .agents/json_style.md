@@ -10,7 +10,7 @@
 
 | # | 规则 |
 |---|------|
-| 1 | 缩进 **2 空格**；UTF-8；键名数据字段用 **`snake_case`** |
+| 1 | 缩进 **2 空格**；UTF-8；**CRLF**（`\r\n`）换行；键名数据字段用 **`snake_case`** |
 | 2 | 对象数组用紧凑写法：`"key": [{` … `}, {` … `}]`（`[` 与首 `{` 同行，元素间 `}, {`） |
 | 3 | `[{` 后对象属性相对该键行再缩进 **+4**（见下例；与 `mission` / `map` / `select` 一致） |
 | 4 | 同一对象内键长短不一时，**按 `:` 对齐**（在 `"` 与 `:` 之间补空格） |
@@ -18,12 +18,15 @@
 | 6 | 短数值数组可单行：`[-10, 0]` |
 | 7 | 逻辑分组之间空一行（如 `path` 与 `data`、根级大块之间） |
 | 8 | 解析侧用 `initByObject` + `AssetManager.I.loadJSON`；勿再为同配置写 XML 路径 |
+| 9 | 工具生成 JSON 时显式写 CRLF（如 Python `Path.write_text(..., newline='\r\n')`） |
+| 10 | 批量格式化：`python tools/script/py/format_json.py`（默认 `shared/assets/assets/**/*.json`） |
 
 ## NEVER
 
 - 标准 `json.dump` 式逐对象全展开：`"key": [\n  {\n    ...\n  },\n  {`（除非整文件本就无对象数组）
 - 键名 `camelCase`（配置数据字段；既有例外如 `hasWarning` 保持不改）
 - 把语言包 `language/*.json` 的键树规则套到玩法配置（或反之）
+- 使用 LF（`\n`）或混合换行；生成/保存须为 CRLF
 
 ---
 

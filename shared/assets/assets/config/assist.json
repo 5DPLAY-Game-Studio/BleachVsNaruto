@@ -7,446 +7,446 @@
     },
 
     "data": [{
-      "id"        : "byakuya",
-      "name"      : "朽木·白哉",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "byakuya/byakuya.swf",
-        "face"    : "byakuya/face/byakuya.png",
-        "face_big": "byakuya/face/byakuya_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "gaara",
-      "name"      : "我爱罗",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "gaara/gaara.swf",
-        "face"    : "gaara/face/gaara.png",
-        "face_big": "gaara/face/gaara_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "gin",
-      "name"      : "市丸·银",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "gin/gin.swf",
-        "face"    : "gin/face/gin.png",
-        "face_big": "gin/face/gin_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "grimmjow",
-      "name"      : "葛力姆乔·贾卡杰克",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "grimmjow/grimmjow.swf",
-        "face"    : "grimmjow/face/grimmjow.png",
-        "face_big": "grimmjow/face/grimmjow_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "halibel",
-      "name"      : "蒂雅·赫丽贝尔",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "halibel/halibel.swf",
-        "face"    : "halibel/face/halibel.png",
-        "face_big": "halibel/face/halibel_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "hinata",
-      "name"      : "日向·雏田",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "hinata/hinata.swf",
-        "face"    : "hinata/face/hinata.png",
-        "face_big": "hinata/face/hinata_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "hiruko",
-      "name"      : "蝎",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "hiruko/hiruko.swf",
-        "face"    : "hiruko/face/hiruko.png",
-        "face_big": "hiruko/face/hiruko_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "ichigo_hollow",
-      "name"      : "黑崎·一护 牛头",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "ichigo_hollow/ichigo_hollow.swf",
-        "face"    : "ichigo_hollow/face/ichigo_hollow.png",
-        "face_big": "ichigo_hollow/face/ichigo_hollow_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "ichigo_padipata",
-      "name"      : "黑崎·一护 修行",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "ichigo_padipata/ichigo_padipata.swf",
-        "face"    : "ichigo_padipata/face/ichigo_padipata.png",
-        "face_big": "ichigo_padipata/face/ichigo_padipata_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "ikkaku",
-      "name"      : "斑目·一角",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "ikkaku/ikkaku.swf",
-        "face"    : "ikkaku/face/ikkaku.png",
-        "face_big": "ikkaku/face/ikkaku_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "ino",
-      "name"      : "山中·井野",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "ino/ino.swf",
-        "face"    : "ino/face/ino.png",
-        "face_big": "ino/face/ino_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "itachi",
-      "name"      : "宇智波·鼬",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "itachi/itachi.swf",
-        "face"    : "itachi/face/itachi.png",
-        "face_big": "itachi/face/itachi_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "jiraiya",
-      "name"      : "自来也",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "jiraiya/jiraiya.swf",
-        "face"    : "jiraiya/face/jiraiya.png",
-        "face_big": "jiraiya/face/jiraiya_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "kabuto",
-      "name"      : "药师·兜",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "kabuto/kabuto.swf",
-        "face"    : "kabuto/face/kabuto.png",
-        "face_big": "kabuto/face/kabuto_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "kenpachi",
-      "name"      : "更木·剑八",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "kenpachi/kenpachi.swf",
-        "face"    : "kenpachi/face/kenpachi.png",
-        "face_big": "kenpachi/face/kenpachi_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "kimimaro",
-      "name"      : "君麻吕",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "kimimaro/kimimaro.swf",
-        "face"    : "kimimaro/face/kimimaro.png",
-        "face_big": "kimimaro/face/kimimaro_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "kon",
-      "name"      : "魂",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "kon/kon.swf",
-        "face"    : "kon/face/kon.png",
-        "face_big": "kon/face/kon_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "madara",
-      "name"      : "宇智波·斑",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "madara/madara.swf",
-        "face"    : "madara/face/madara.png",
-        "face_big": "madara/face/madara_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "minato",
-      "name"      : "波风·水门",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "minato/minato.swf",
-        "face"    : "minato/face/minato.png",
-        "face_big": "minato/face/minato_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "naruto",
-      "name"      : "漩涡·鸣人",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "naruto/naruto.swf",
-        "face"    : "naruto/face/naruto.png",
-        "face_big": "naruto/face/naruto_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "nemu",
-      "name"      : "涅·音梦",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "nemu/nemu.swf",
-        "face"    : "nemu/face/nemu.png",
-        "face_big": "nemu/face/nemu_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "obito_trueColors",
-      "name"      : "宇智波·带土 真面目",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "obito_trueColors/obito_trueColors.swf",
-        "face"    : "obito_trueColors/face/obito_trueColors.png",
-        "face_big": "obito_trueColors/face/obito_trueColors_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "orihime",
-      "name"      : "井上·织姬",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "orihime/orihime.swf",
-        "face"    : "orihime/face/orihime.png",
-        "face_big": "orihime/face/orihime_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "random",
-      "name"      : "随机选择 全人物",
-      "comic_type": -1,
-      "urls"      : {
-        "face": "random/face/random.png"
-      }
-    }, {
-      "id"        : "random_bleach",
-      "name"      : "随机选择 死神",
-      "comic_type": -1,
-      "urls"      : {
-        "face": "random_bleach/face/random_bleach.png"
-      }
-    }, {
-      "id"        : "random_naruto",
-      "name"      : "随机选择 火影",
-      "comic_type": -1,
-      "urls"      : {
-        "face": "random_naruto/face/random_naruto.png"
-      }
-    }, {
-      "id"        : "rangiku",
-      "name"      : "松本·乱菊",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "rangiku/rangiku.swf",
-        "face"    : "rangiku/face/rangiku.png",
-        "face_big": "rangiku/face/rangiku_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "renji",
-      "name"      : "阿散井·恋次",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "renji/renji.swf",
-        "face"    : "renji/face/renji.png",
-        "face_big": "renji/face/renji_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "sai",
-      "name"      : "佐井",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "sai/sai.swf",
-        "face"    : "sai/face/sai.png",
-        "face_big": "sai/face/sai_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "sakura",
-      "name"      : "春野·樱",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "sakura/sakura.swf",
-        "face"    : "sakura/face/sakura.png",
-        "face_big": "sakura/face/sakura_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "shikamaru",
-      "name"      : "奈良·鹿丸",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "shikamaru/shikamaru.swf",
-        "face"    : "shikamaru/face/shikamaru.png",
-        "face_big": "shikamaru/face/shikamaru_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "shishio",
-      "name"      : "志志雄·真实",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "shishio/shishio.swf",
-        "face"    : "shishio/face/shishio.png",
-        "face_big": "shishio/face/shishio_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "soifon",
-      "name"      : "碎蜂",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "soifon/soifon.swf",
-        "face"    : "soifon/face/soifon.png",
-        "face_big": "soifon/face/soifon_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "starrk",
-      "name"      : "柯雅泰·史塔克",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "starrk/starrk.swf",
-        "face"    : "starrk/face/starrk.png",
-        "face_big": "starrk/face/starrk_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "suigetsu",
-      "name"      : "鬼灯·水月",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "suigetsu/suigetsu.swf",
-        "face"    : "suigetsu/face/suigetsu.png",
-        "face_big": "suigetsu/face/suigetsu_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "temari",
-      "name"      : "手鞠",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "temari/temari.swf",
-        "face"    : "temari/face/temari.png",
-        "face_big": "temari/face/temari_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "tenten",
-      "name"      : "天天",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "tenten/tenten.swf",
-        "face"    : "tenten/face/tenten.png",
-        "face_big": "tenten/face/tenten_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "tsuchikage",
-      "name"      : "大野木",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "tsuchikage/tsuchikage.swf",
-        "face"    : "tsuchikage/face/tsuchikage.png",
-        "face_big": "tsuchikage/face/tsuchikage_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "tsunate",
-      "name"      : "纲手",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "tsunate/tsunate.swf",
-        "face"    : "tsunate/face/tsunate.png",
-        "face_big": "tsunate/face/tsunate_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "uryuu",
-      "name"      : "石田·雨龙",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "uryuu/uryuu.swf",
-        "face"    : "uryuu/face/uryuu.png",
-        "face_big": "uryuu/face/uryuu_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "utakata",
-      "name"      : "泡沫",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "utakata/utakata.swf",
-        "face"    : "utakata/face/utakata.png",
-        "face_big": "utakata/face/utakata_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "yachiru",
-      "name"      : "草鹿·八千流",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "yachiru/yachiru.swf",
-        "face"    : "yachiru/face/yachiru.png",
-        "face_big": "yachiru/face/yachiru_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "yamamoto",
-      "name"      : "山本·元柳斎重国",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "yamamoto/yamamoto.swf",
-        "face"    : "yamamoto/face/yamamoto.png",
-        "face_big": "yamamoto/face/yamamoto_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "yls",
-      "name"      : "千手·扉间",
-      "comic_type": 1,
-      "urls"      : {
-        "file"    : "yls/yls.swf",
-        "face"    : "yls/face/yls.png",
-        "face_big": "yls/face/yls_b.png"
-      },
-      "hasWarning": true
-    }, {
-      "id"        : "yoruichi",
-      "name"      : "四枫院·夜一",
-      "comic_type": 0,
-      "urls"      : {
-        "file"    : "yoruichi/yoruichi.swf",
-        "face"    : "yoruichi/face/yoruichi.png",
-        "face_big": "yoruichi/face/orihime_b.png"
-      },
-      "hasWarning": true
-    }]
+        "id"        : "byakuya",
+        "name"      : "朽木·白哉",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "byakuya/byakuya.swf",
+          "face"    : "byakuya/face/byakuya.png",
+          "face_big": "byakuya/face/byakuya_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "gaara",
+        "name"      : "我爱罗",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "gaara/gaara.swf",
+          "face"    : "gaara/face/gaara.png",
+          "face_big": "gaara/face/gaara_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "gin",
+        "name"      : "市丸·银",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "gin/gin.swf",
+          "face"    : "gin/face/gin.png",
+          "face_big": "gin/face/gin_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "grimmjow",
+        "name"      : "葛力姆乔·贾卡杰克",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "grimmjow/grimmjow.swf",
+          "face"    : "grimmjow/face/grimmjow.png",
+          "face_big": "grimmjow/face/grimmjow_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "halibel",
+        "name"      : "蒂雅·赫丽贝尔",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "halibel/halibel.swf",
+          "face"    : "halibel/face/halibel.png",
+          "face_big": "halibel/face/halibel_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "hinata",
+        "name"      : "日向·雏田",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "hinata/hinata.swf",
+          "face"    : "hinata/face/hinata.png",
+          "face_big": "hinata/face/hinata_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "hiruko",
+        "name"      : "蝎",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "hiruko/hiruko.swf",
+          "face"    : "hiruko/face/hiruko.png",
+          "face_big": "hiruko/face/hiruko_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "ichigo_hollow",
+        "name"      : "黑崎·一护 牛头",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "ichigo_hollow/ichigo_hollow.swf",
+          "face"    : "ichigo_hollow/face/ichigo_hollow.png",
+          "face_big": "ichigo_hollow/face/ichigo_hollow_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "ichigo_padipata",
+        "name"      : "黑崎·一护 修行",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "ichigo_padipata/ichigo_padipata.swf",
+          "face"    : "ichigo_padipata/face/ichigo_padipata.png",
+          "face_big": "ichigo_padipata/face/ichigo_padipata_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "ikkaku",
+        "name"      : "斑目·一角",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "ikkaku/ikkaku.swf",
+          "face"    : "ikkaku/face/ikkaku.png",
+          "face_big": "ikkaku/face/ikkaku_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "ino",
+        "name"      : "山中·井野",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "ino/ino.swf",
+          "face"    : "ino/face/ino.png",
+          "face_big": "ino/face/ino_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "itachi",
+        "name"      : "宇智波·鼬",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "itachi/itachi.swf",
+          "face"    : "itachi/face/itachi.png",
+          "face_big": "itachi/face/itachi_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "jiraiya",
+        "name"      : "自来也",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "jiraiya/jiraiya.swf",
+          "face"    : "jiraiya/face/jiraiya.png",
+          "face_big": "jiraiya/face/jiraiya_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "kabuto",
+        "name"      : "药师·兜",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "kabuto/kabuto.swf",
+          "face"    : "kabuto/face/kabuto.png",
+          "face_big": "kabuto/face/kabuto_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "kenpachi",
+        "name"      : "更木·剑八",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "kenpachi/kenpachi.swf",
+          "face"    : "kenpachi/face/kenpachi.png",
+          "face_big": "kenpachi/face/kenpachi_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "kimimaro",
+        "name"      : "君麻吕",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "kimimaro/kimimaro.swf",
+          "face"    : "kimimaro/face/kimimaro.png",
+          "face_big": "kimimaro/face/kimimaro_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "kon",
+        "name"      : "魂",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "kon/kon.swf",
+          "face"    : "kon/face/kon.png",
+          "face_big": "kon/face/kon_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "madara",
+        "name"      : "宇智波·斑",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "madara/madara.swf",
+          "face"    : "madara/face/madara.png",
+          "face_big": "madara/face/madara_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "minato",
+        "name"      : "波风·水门",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "minato/minato.swf",
+          "face"    : "minato/face/minato.png",
+          "face_big": "minato/face/minato_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "naruto",
+        "name"      : "漩涡·鸣人",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "naruto/naruto.swf",
+          "face"    : "naruto/face/naruto.png",
+          "face_big": "naruto/face/naruto_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "nemu",
+        "name"      : "涅·音梦",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "nemu/nemu.swf",
+          "face"    : "nemu/face/nemu.png",
+          "face_big": "nemu/face/nemu_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "obito_trueColors",
+        "name"      : "宇智波·带土 真面目",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "obito_trueColors/obito_trueColors.swf",
+          "face"    : "obito_trueColors/face/obito_trueColors.png",
+          "face_big": "obito_trueColors/face/obito_trueColors_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "orihime",
+        "name"      : "井上·织姬",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "orihime/orihime.swf",
+          "face"    : "orihime/face/orihime.png",
+          "face_big": "orihime/face/orihime_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "random",
+        "name"      : "随机选择 全人物",
+        "comic_type": -1,
+        "urls"      : {
+          "face": "random/face/random.png"
+        }
+      }, {
+        "id"        : "random_bleach",
+        "name"      : "随机选择 死神",
+        "comic_type": -1,
+        "urls"      : {
+          "face": "random_bleach/face/random_bleach.png"
+        }
+      }, {
+        "id"        : "random_naruto",
+        "name"      : "随机选择 火影",
+        "comic_type": -1,
+        "urls"      : {
+          "face": "random_naruto/face/random_naruto.png"
+        }
+      }, {
+        "id"        : "rangiku",
+        "name"      : "松本·乱菊",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "rangiku/rangiku.swf",
+          "face"    : "rangiku/face/rangiku.png",
+          "face_big": "rangiku/face/rangiku_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "renji",
+        "name"      : "阿散井·恋次",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "renji/renji.swf",
+          "face"    : "renji/face/renji.png",
+          "face_big": "renji/face/renji_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "sai",
+        "name"      : "佐井",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "sai/sai.swf",
+          "face"    : "sai/face/sai.png",
+          "face_big": "sai/face/sai_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "sakura",
+        "name"      : "春野·樱",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "sakura/sakura.swf",
+          "face"    : "sakura/face/sakura.png",
+          "face_big": "sakura/face/sakura_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "shikamaru",
+        "name"      : "奈良·鹿丸",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "shikamaru/shikamaru.swf",
+          "face"    : "shikamaru/face/shikamaru.png",
+          "face_big": "shikamaru/face/shikamaru_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "shishio",
+        "name"      : "志志雄·真实",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "shishio/shishio.swf",
+          "face"    : "shishio/face/shishio.png",
+          "face_big": "shishio/face/shishio_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "soifon",
+        "name"      : "碎蜂",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "soifon/soifon.swf",
+          "face"    : "soifon/face/soifon.png",
+          "face_big": "soifon/face/soifon_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "starrk",
+        "name"      : "柯雅泰·史塔克",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "starrk/starrk.swf",
+          "face"    : "starrk/face/starrk.png",
+          "face_big": "starrk/face/starrk_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "suigetsu",
+        "name"      : "鬼灯·水月",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "suigetsu/suigetsu.swf",
+          "face"    : "suigetsu/face/suigetsu.png",
+          "face_big": "suigetsu/face/suigetsu_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "temari",
+        "name"      : "手鞠",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "temari/temari.swf",
+          "face"    : "temari/face/temari.png",
+          "face_big": "temari/face/temari_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "tenten",
+        "name"      : "天天",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "tenten/tenten.swf",
+          "face"    : "tenten/face/tenten.png",
+          "face_big": "tenten/face/tenten_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "tsuchikage",
+        "name"      : "大野木",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "tsuchikage/tsuchikage.swf",
+          "face"    : "tsuchikage/face/tsuchikage.png",
+          "face_big": "tsuchikage/face/tsuchikage_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "tsunate",
+        "name"      : "纲手",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "tsunate/tsunate.swf",
+          "face"    : "tsunate/face/tsunate.png",
+          "face_big": "tsunate/face/tsunate_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "uryuu",
+        "name"      : "石田·雨龙",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "uryuu/uryuu.swf",
+          "face"    : "uryuu/face/uryuu.png",
+          "face_big": "uryuu/face/uryuu_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "utakata",
+        "name"      : "泡沫",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "utakata/utakata.swf",
+          "face"    : "utakata/face/utakata.png",
+          "face_big": "utakata/face/utakata_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "yachiru",
+        "name"      : "草鹿·八千流",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "yachiru/yachiru.swf",
+          "face"    : "yachiru/face/yachiru.png",
+          "face_big": "yachiru/face/yachiru_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "yamamoto",
+        "name"      : "山本·元柳斎重国",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "yamamoto/yamamoto.swf",
+          "face"    : "yamamoto/face/yamamoto.png",
+          "face_big": "yamamoto/face/yamamoto_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "yls",
+        "name"      : "千手·扉间",
+        "comic_type": 1,
+        "urls"      : {
+          "file"    : "yls/yls.swf",
+          "face"    : "yls/face/yls.png",
+          "face_big": "yls/face/yls_b.png"
+        },
+        "hasWarning": true
+      }, {
+        "id"        : "yoruichi",
+        "name"      : "四枫院·夜一",
+        "comic_type": 0,
+        "urls"      : {
+          "file"    : "yoruichi/yoruichi.swf",
+          "face"    : "yoruichi/face/yoruichi.png",
+          "face_big": "yoruichi/face/orihime_b.png"
+        },
+        "hasWarning": true
+      }]
   }
 }

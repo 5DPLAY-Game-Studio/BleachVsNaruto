@@ -1,5 +1,5 @@
 {
-  "bgm": {
+  "bgm"  : {
     "path": "bgm/",
     "item": [
       "loading.mp3",
@@ -12,6 +12,7 @@
       "winloop.mp3"
     ]
   },
+
   "sound": {
     "path": "sounds/",
     "item": [

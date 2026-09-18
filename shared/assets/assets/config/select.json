@@ -11,8 +11,8 @@
       "bottom": 10
     }
   },
-  
-  "char_list": [{
+
+  "char_list"    : [{
       "item": [{
           "id"          : "ichigo",
           "more_fighter": [
@@ -264,8 +264,8 @@
           "offset": [-10, 0]
         }, {}, {}, {}, {}]
     }],
-  
-  "assist_list": [{
+
+  "assist_list"  : [{
       "item": [{
           "id": "kon"
         }, {
