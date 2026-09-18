@@ -29,15 +29,11 @@ public class MapVO implements IInstanceVO {
     public var picUrl:String;
     public var bgm:String;
 
-//		public function initByXML(xml:XML):void{
-//			id = xml.@id;
-//			name = xml.@name;
-//
-//			fileUrl = xml.file.@url;
-//			picUrl = xml.img.@url;
-//			bgm = xml.bgm.@url;
-//		}
-
+    /**
+     * 通过对象进行初始化。
+     *
+     * @param obj 含 <code>path</code> 与地图字段的对象。
+     */
     public function initByObject(obj:Object):void {
         var pathObj:Object = obj['path'];
 
@@ -47,18 +43,29 @@ public class MapVO implements IInstanceVO {
         if (obj['file']) {
             fileUrl = pathObj['map'] + obj['file'];
         }
-        else {
+        else if (!('file' in obj)) {
             fileUrl = pathObj['map'] + obj['id'] + '.swf';
+        }
+        else {
+            fileUrl = null;
         }
 
         if (obj['img']) {
             picUrl = pathObj['map'] + obj['img'];
         }
-        else {
+        else if (!('img' in obj)) {
             picUrl = pathObj['map'] + obj['id'] + '.png';
         }
+        else {
+            picUrl = null;
+        }
 
-        bgm = pathObj['bgm'] + obj['bgm'];
+        if (obj['bgm']) {
+            bgm = pathObj['bgm'] + obj['bgm'];
+        }
+        else {
+            bgm = null;
+        }
     }
 
 }

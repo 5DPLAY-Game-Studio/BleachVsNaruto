@@ -85,5 +85,35 @@ public class MapModel {
         }
     }
 
+    /**
+     * 清空已注册地图。
+     */
+    public function clear():void {
+        _mapObj   = {};
+        _mapArray = [];
+    }
+
+    /**
+     * 注册单个地图（同 id 覆盖）。
+     *
+     * @param mv 地图 VO。
+     */
+    public function register(mv:MapVO):void {
+        if (!mv || !mv.id) {
+            return;
+        }
+        _mapObj ||= {};
+        _mapArray ||= [];
+
+        if (_mapObj[mv.id]) {
+            var idx:int = _mapArray.indexOf(_mapObj[mv.id]);
+            if (idx >= 0) {
+                _mapArray.splice(idx, 1);
+            }
+        }
+        _mapObj[mv.id] = mv;
+        _mapArray.push(mv);
+    }
+
 }
 }

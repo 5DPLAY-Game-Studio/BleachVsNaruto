@@ -19,10 +19,11 @@
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.debug.Debugger;
 
 /**
- * 角色包注册：按 <code>packs.json</code> 加载各包 <code>meta.json</code>，并合并壳注入的外部包根。
+ * 角色/地图包注册：按 <code>packs.json</code> 加载各包 <code>meta.json</code>，并合并壳注入的外部包根。
  *
  * <p>外部包通过 <code>extraPackRootsProvider</code> 注入；同 id 时外部覆盖内置。</p>
  *
@@ -72,6 +73,7 @@ public class PackRegistry {
 
         FighterModel.I.clear();
         AssisterModel.I.clear();
+        MapModel.I.clear();
 
         AssetManager.I.loadJSON('config/packs.json', onPacksLoaded, onPacksFail);
     }
@@ -90,6 +92,7 @@ public class PackRegistry {
 
         appendBuiltin('fighter', (data['fighters'] as Array) || []);
         appendBuiltin('assist', (data['assists'] as Array) || []);
+        appendBuiltin('map', (data['maps'] as Array) || []);
         appendExtras();
 
         loadNext();
@@ -97,7 +100,16 @@ public class PackRegistry {
 
     /** @private */
     private function appendBuiltin(kind:String, ids:Array):void {
-        var base:String = kind == 'assist' ? 'packs/assists/' : 'packs/fighters/';
+        var base:String;
+        if (kind == 'assist') {
+            base = 'packs/assists/';
+        }
+        else if (kind == 'map') {
+            base = 'packs/maps/';
+        }
+        else {
+            base = 'packs/fighters/';
+        }
         for each (var id:String in ids) {
             if (!id) {
                 continue;
@@ -170,6 +182,11 @@ public class PackRegistry {
     /** @private */
     private function registerPack(kind:String, root:String, meta:Object):void {
         if (!meta) {
+            return;
+        }
+
+        if (kind == 'map') {
+            registerMapPack(root, meta);
             return;
         }
 
@@ -246,6 +263,36 @@ public class PackRegistry {
                 FighterModel.I.register(fv);
             }
         }
+    }
+
+    /** @private */
+    private function registerMapPack(root:String, meta:Object):void {
+        var pathObj:Object = {
+            map: root,
+            bgm: 'bgm/'
+        };
+
+        var obj:Object = {
+            path: pathObj,
+            id  : meta['id'] || meta['pack'],
+            name: meta['name']
+        };
+        if (meta['file']) {
+            obj['file'] = meta['file'];
+        }
+        else {
+            obj['file'] = '';
+        }
+        if (meta['img']) {
+            obj['img'] = meta['img'];
+        }
+        if (meta['bgm']) {
+            obj['bgm'] = meta['bgm'];
+        }
+
+        var mv:MapVO = new MapVO();
+        mv.initByObject(obj);
+        MapModel.I.register(mv);
     }
 
     /**

@@ -68,10 +68,10 @@
 
 | 配置 | 加载 | 解析 |
 |------|------|------|
-| `packs.json` + `packs/**/meta.json` | `PackRegistry` | `FighterModel` / `AssisterModel` |
-| `fighter.json` / `assist.json` | 工具生成 / 调试回退 | `FighterModel` / `AssisterModel.initByObject` |
+| `packs.json` + `packs/**/meta.json` | `PackRegistry` | `FighterModel` / `AssisterModel` / `MapModel` |
+| `fighter.json` / `assist.json` / `map.json` | 工具生成 / 调试回退 | 对应 Model |
 | `select.json` | `loadJSON` | `SelectStageConfigVO.initByObject` |
-| `map.json` / `mission.json` | `loadJSON` | `MapModel` / `MessionModel.initByObject` |
+| `mission.json` | `loadJSON` | `MessionModel.initByObject` |
 
 ---
 
@@ -115,6 +115,9 @@
   ],
   "assists": [
     "kon"
+  ],
+  "maps": [
+    "xianshi"
   ]
 }
 ```
@@ -123,5 +126,27 @@
 |----|------|
 | `path.face` | 默认 `face/`；`faces.*` 写裸文件名（亦可遗留 `face/xxx.png`） |
 | `file` | 包内 SWF 文件名 |
-| `kind` | `fighter` / `assist` |
-| 生成总表 | `path.fighter/face = packs/fighters\|assists/`，urls 为 `<pack>/...` |
+| `kind` | `fighter` / `assist` / `map` |
+| 生成总表 | 角色：`path = packs/fighters\|assists/`；地图：`path.map = packs/maps/` |
+
+---
+
+## 地图包 `meta.json`
+
+```json
+{
+  "pack": "xianshi",
+  "kind": "map",
+  "id"  : "xianshi",
+  "name": "现世",
+  "file": "xianshi.swf",
+  "img" : "xianshi.png",
+  "bgm" : "city.mp3"
+}
+```
+
+| 点 | 做法 |
+|----|------|
+| `file` | 可省略（如 `random` 无 SWF） |
+| `img` | 选图缩略图；省略则默认 `<id>.png` |
+| `bgm` | 相对全局 `bgm/`；可省略 |

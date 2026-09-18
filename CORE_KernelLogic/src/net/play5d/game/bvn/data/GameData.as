@@ -68,11 +68,6 @@ public class GameData {
 
         function loadSelectBack(data:Object):void {
             config.select_config.initByObject(data);
-            AssetManager.I.loadJSON('config/map.json', loadMapBack, failWith('txt.game_data.load_map_fail'));
-        }
-
-        function loadMapBack(data:Object):void {
-            MapModel.I.initByObject(data);
             AssetManager.I.loadJSON('config/mission.json', loadMissionBack, failWith('txt.game_data.load_mission_fail'));
         }
 

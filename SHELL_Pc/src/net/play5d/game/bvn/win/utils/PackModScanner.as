@@ -20,7 +20,7 @@ package net.play5d.game.bvn.win.utils {
 import flash.filesystem.File;
 
 /**
- * 扫描 AIR 应用目录下 <code>assets/mods</code> 角色包，供 PackRegistry 合并。
+ * 扫描 AIR 应用目录下 <code>assets/mods</code> 角色/地图包，供 PackRegistry 合并。
  */
 public class PackModScanner {
 
@@ -37,6 +37,7 @@ public class PackModScanner {
         var result:Array = [];
         appendKind(result, 'fighter', 'mods/fighters');
         appendKind(result, 'assist', 'mods/assists');
+        appendKind(result, 'map', 'mods/maps');
 
         return result;
     }
