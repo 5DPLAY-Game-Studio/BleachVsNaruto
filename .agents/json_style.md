@@ -1,7 +1,7 @@
 # 配置 JSON 格式（AI）
 
 何时读：写/改 `shared/assets/assets/config/*.json`（含新建或由 XML 迁移）。  
-范例：`mission.json`、`select.json`、`map.json`、`assist.json`、`fighter.json`、角色包 `meta.json` / `packs.json`。  
+范例：`mission.json`、`select.json`、角色包 `meta.json` / `packs.json`。  
 角色包目录与加载约定见 [`packs.md`](packs.md)。语言包格式见 [`i18n.md`](i18n.md)，不套用本文排版细则。
 
 ---
@@ -72,7 +72,6 @@
 | 配置 | 加载 | 解析 |
 |------|------|------|
 | `packs.json` + `packs/**/meta.json` | `PackRegistry` | `FighterModel` / `AssisterModel` / `MapModel` |
-| `fighter.json` / `assist.json` / `map.json` | 工具生成 / 调试回退 | 对应 Model |
 | `select.json` | `loadJSON` | `SelectStageConfigVO.initByObject` |
 | `mission.json` | `loadJSON` | `MessionModel.initByObject` |
 

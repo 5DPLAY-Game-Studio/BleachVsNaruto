@@ -21,6 +21,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.debug.Debugger;
+import net.play5d.game.bvn.utils.PackLangUtil;
 
 /**
  * 角色/地图包注册：按 <code>packs.json</code> 加载各包 <code>meta.json</code>，并合并壳注入的外部包根。
@@ -231,17 +232,36 @@ public class PackRegistry {
                 }
             }
 
+            var variantId:String = v['id'] != null ? String(v['id']) : null;
+            // language.{locale}.name/says[id] → 兼容旧形态
+            var localePack:Object = PackLangUtil.pickLocalePack(meta['language'] as Object);
+            var nameRaw:*         = lookupRootI18n(localePack ? localePack['name'] : null, variantId);
+            if (nameRaw == null) {
+                nameRaw = lookupRootI18n(meta['name'], variantId);
+            }
+            if (nameRaw == null) {
+                nameRaw = v['name'];
+            }
+            var saysRaw:* = lookupRootI18n(localePack ? localePack['says'] : null, variantId);
+            if (saysRaw == null) {
+                saysRaw = lookupRootI18n(meta['says'], variantId);
+            }
+            if (saysRaw == null) {
+                saysRaw = v['says'];
+            }
+
             var dataObj:Object = {
-                id        : v['id'],
-                name      : v['name'],
+                id        : variantId,
+                name      : PackLangUtil.resolveString(nameRaw, variantId),
                 comic_type: v['comic_type'],
                 urls      : urls
             };
             if (v['start_frame'] != null) {
                 dataObj['start_frame'] = v['start_frame'];
             }
-            if (v['says']) {
-                dataObj['says'] = v['says'];
+            var says:Array = PackLangUtil.resolveStringArray(saysRaw);
+            if (says) {
+                dataObj['says'] = says;
             }
             if (v['bgm']) {
                 dataObj['bgm'] = v['bgm'];
@@ -272,10 +292,16 @@ public class PackRegistry {
             bgm: 'bgm/'
         };
 
+        var mapId:String      = meta['id'] || meta['pack'];
+        var localePack:Object = PackLangUtil.pickLocalePack(meta['language'] as Object);
+        var nameRaw:*         = localePack ? localePack['name'] : null;
+        if (nameRaw == null) {
+            nameRaw = meta['name'];
+        }
         var obj:Object = {
             path: pathObj,
-            id  : meta['id'] || meta['pack'],
-            name: meta['name']
+            id  : mapId,
+            name: PackLangUtil.resolveString(nameRaw, mapId != null ? String(mapId) : null)
         };
         if (meta['file']) {
             obj['file'] = meta['file'];
@@ -311,6 +337,20 @@ public class PackRegistry {
         }
 
         return faceBase + rel;
+    }
+
+    /**
+     * @private 从根节点 <code>name</code>/<code>says</code> 按 variant id 取值
+     */
+    private static function lookupRootI18n(rootMap:Object, variantId:String):* {
+        if (!rootMap || !variantId) {
+            return null;
+        }
+        if (rootMap is Array || rootMap is String) {
+            return null;
+        }
+
+        return rootMap[variantId];
     }
 
 }

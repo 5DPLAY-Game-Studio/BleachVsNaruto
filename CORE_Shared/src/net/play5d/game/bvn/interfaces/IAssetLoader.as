@@ -46,7 +46,7 @@ public interface IAssetLoader {
      * @param fail 失败回调，签名为 <code>function():void</code>；可为 <code>null</code>。
      * @example
      * <listing version="3.0">
-     * loader.loadJSON('config/map.json', onJson);
+     * loader.loadJSON('config/packs.json', onJson);
      * </listing>
      */
     function loadJSON(url:String, back:Function, fail:Function = null):void;
