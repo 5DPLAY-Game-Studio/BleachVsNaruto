@@ -17,11 +17,15 @@
  */
 
 package net.play5d.game.bvn.utils {
-import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.alice.utils.ClassUtils;
+import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.data.LanguageType;
 
 /**
  * 多语言工具集
+ *
+ * <p>所选语言缺键时静默回退到简体中文（<code>zh-CN</code>）；
+ * 中文亦无定义时由 <code>GetLangText</code> 返回 <code>[N/A]</code>。</p>
  */
 public class MultiLangUtils {
 
@@ -38,40 +42,62 @@ public class MultiLangUtils {
         _instance ||= new MultiLangUtils();
         return _instance;
     }
-    // 解析的语言对象
+
+    // 当前语言对象
     private var _languageObj:Object;
-    // 多语言缓存池
+    // 简体中文兜底对象
+    private var _fallbackObj:Object;
+    // 多语言缓存池（已解析最终文案）
     private var _cacheObj:Object = {};
 
     /**
      * 初始化
      * @param language 所选语言
-     * @param back 成功回调
-     * @param fail 失败回调
+     * @param back 成功回调（zh-CN 就绪即可；其它语言包缺失时仍成功并走中文兜底）
+     * @param fail 失败回调（仅 zh-CN 加载失败）
      */
     public function initialize(language:String, back:Function, fail:Function):void {
-        var url:String = 'config/language/' + language + '.json';
-        AssetManager.I.loadJSON(url, loadSuccess, loadFailed);
+        var fallbackUrl:String = langUrl(LanguageType.CHINESE_SIMPLIFIED);
 
-        /**
-         * 加载成功回调
-         * @param data 加载成功的数据
-         */
-        function loadSuccess(data:Object):void {
-            _languageObj = data;
+        AssetManager.I.loadJSON(fallbackUrl, onFallbackOk, onFallbackFail);
+
+        function onFallbackOk(data:Object):void {
+            _fallbackObj = data;
             _cacheObj    = {};
 
+            if (LanguageType.isSimplifiedChinese(language)) {
+                _languageObj = data;
+                if (back != null) {
+                    back();
+                }
+                return;
+            }
+
+            AssetManager.I.loadJSON(langUrl(language), onLangOk, onLangFail);
+        }
+
+        function onFallbackFail():void {
+            _fallbackObj = null;
+            _languageObj = null;
+            _cacheObj    = {};
+
+            if (fail != null) {
+                fail();
+            }
+        }
+
+        function onLangOk(data:Object):void {
+            _languageObj = data;
             if (back != null) {
                 back();
             }
         }
 
-        /**
-         * 加载失败回调
-         */
-        function loadFailed():void {
-            if (fail != null) {
-                fail();
+        function onLangFail():void {
+            // 所选语言包缺失：静默仅用 zh-CN
+            _languageObj = null;
+            if (back != null) {
+                back();
             }
         }
     }
@@ -79,25 +105,46 @@ public class MultiLangUtils {
     /**
      * 得到当前语言文本
      * @param tree 文本的树形路径
-     * @return 当前语言文本
+     * @return 当前语言文本；缺键时回退 zh-CN；皆无则 <code>null</code>
      */
     public function getLangText(tree:String):String {
-        if (!_languageObj) {
+        if (!_languageObj && !_fallbackObj) {
             return null;
         }
-        // 如果缓存中存在已有的对象，则返回缓存中的数值
-        if (_cacheObj[tree]) {
+
+        if (_cacheObj.hasOwnProperty(tree)) {
             return _cacheObj[tree];
         }
 
-        var text:String = ClassUtils.continuousAccess(_languageObj, tree.split(SEPARATOR));
+        var text:String = lookupText(_languageObj, tree);
+        if (!text) {
+            text = lookupText(_fallbackObj, tree);
+        }
         if (!text) {
             return null;
         }
 
-        // 缓存
         _cacheObj[tree] = text;
         return text;
+    }
+
+    /**
+     * @private 语言包 URL
+     */
+    private static function langUrl(language:String):String {
+        return 'config/language/' + language + '.json';
+    }
+
+    /**
+     * @private 按点分路径取字符串叶节点
+     */
+    private function lookupText(obj:Object, tree:String):String {
+        if (!obj) {
+            return null;
+        }
+
+        var text:String = ClassUtils.continuousAccess(obj, tree.split(SEPARATOR));
+        return text || null;
     }
 
 }

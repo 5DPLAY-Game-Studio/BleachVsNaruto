@@ -23,11 +23,12 @@ import net.play5d.game.bvn.utils.MultiLangUtils;
  * 按点分树形路径从语言包取得原始文案（不替换命名占位符）。
  *
  * <p>文案来自 <code>config/language/{locale}.json</code>，由
- * <code>MultiLangUtils</code> 加载。需替换 <code>{name}</code> 时请用
- * <code>GetLang</code>。</p>
+ * <code>MultiLangUtils</code> 加载。当前语言缺键时静默回退
+ * <code>zh-CN</code>；中文亦无则返回 <code>[N/A]</code>。
+ * 需替换 <code>{name}</code> 时请用 <code>GetLang</code>。</p>
  *
  * @param tree 点分树形路径（如 <code>debug.trace.prefix</code>）。
- * @return 语言包中的原始字符串；未找到时为 <code>[N/A]</code>。
+ * @return 语言包中的原始字符串；两级皆无时为 <code>[N/A]</code>。
  * @example
  * <listing version="3.0">
  * GetLangText('debug.trace.prefix');
