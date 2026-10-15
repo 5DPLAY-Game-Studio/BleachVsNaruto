@@ -13,11 +13,11 @@
 
 Flash IDE - **必须**，用于构建 `BleachVsNaruto_FlashSrc` 目录下的 .fla/.xfl 文件。
 
-- Adobe Animate 2020
+- Adobe Animate 2021
 
 Code IDE - 可选，依照您的开发喜好，选择合适的开发环境即可，本项目支持 **命令行** 编译。
 
-- [Intellij IDEA 2023.2.8] - 如果使用此环境开发，您需要具有对应 Ultimate Edition 版本的许可证。
+- [Intellij IDEA 2024.1.7] - 如果使用此环境开发，您需要具有对应 Ultimate Edition 版本的许可证。
 - [Microsoft Visual Studio Code] - 如果使用此环境开发，您需要 Java 17 的运行环境以运行 Flash 开发插件。（文档编辑中）
 
 对应具体 IDE 插件参考 [构建要求](#构建要求) 章节。
@@ -35,7 +35,7 @@ FlexSDK - **必须**，编译工程必须使用它进行编译及打包。
 **必须**，这些环境变量将被 `tools` 目录下的脚本文件等使用，缺失环境变量则脚本会无法正常工作。
 
 - `FLEX_HOME` - 指向 FlexSDK 的全路径。例如：`FLEX_HOME=D:\sdk\flex4.16.1-air51.0.1.1`
-- `FLASH_HOME` - 指向已安装 Animate/Flash 的全路径。例如：`FLASH_HOME=C:\Program Files\Adobe\Adobe Animate 2020`
+- `FLASH_HOME` - 指向已安装 Animate/Flash 的全路径。例如：`FLASH_HOME=C:\Program Files\Adobe\Adobe Animate 2021`
 
 ## 构建要求
 
@@ -88,7 +88,7 @@ Code IDE 是可选项，其仅为您提供更好的开发体验，并非编译�
 
 - 单击 ***运行(U) -> 调试...*** 选项或按下 ***Alt + Shift + F9*** 快捷键，在弹出的 ***调试*** 菜单中选择 ***SHELL_Dev FighterTester***，编译完成片刻后将执行编译结果
 
-[Intellij IDEA 2023.2.8]: https://download.jetbrains.com/idea/ideaIU-2023.2.8.exe
+[Intellij IDEA 2024.1.7]: https://download.jetbrains.com/idea/ideaIU-2024.1.7.exe
 [flex4.16.1-air51.0.1.1]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK/releases/download/flex4.16.1-air51.0.1.1/flex4.16.1-air51.0.1.1.rar
 [BleachVsNaruto_FlexSDK]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto_FlexSDK
 [Flash/Flex]: https://plugins.jetbrains.com/plugin/14508-flash-flex
