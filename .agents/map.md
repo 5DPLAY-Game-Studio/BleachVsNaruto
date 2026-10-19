@@ -48,6 +48,16 @@
 |-------|------|
 | `ctrler`/`fighter`/`data` 回写 `ui/` 静态字段或新增具体控件 import | 写 `GameConfig` / 事件 / 数据；既有 `GameUI` 门面除外（转场用 `GameUI.trans*` / `StateCtrl`） |
 | 往 `utils/` 塞域业务（特效/联机/角色状态机等） | 放入对应域包（如 `ctrler/effect`、`ctrler/lan`、`fighter/ctrler`） |
+| `stage/`/`ui/` 直写 `GameCtrl.gameRunData` / `MusouCtrl.gameRunData` 或直接 `GameCtrl.I.destroy()` | 走 `GameCtrl` 命令方法（`setupMusouGame` / `prepareFight` / `finishContinue` 等）；View 只表达意图、不碰内部字段 |
+
+### 单例访问白名单
+
+| 单例 / 状态 | 类别 | 允许访问 |
+|------------|------|----------|
+| `SoundCtrl` `AssetManager` `GameRender` `GameInputer` | 基础设施服务（Service Locator） | 全局任意 |
+| `GameData`（`config`/`score`/`select`/`musouData`） | Model | 任意读；对局态字段由所属流程写入（选人流程 / `GameCtrl` / `GameLogic` 计分），勿跨场景散写 |
+| `GameCtrl.gameRunData` / `MusouCtrl.gameRunData` | Controller 内部状态 | 仅 `GameCtrl` 与其子控制器；View 禁写 |
+| `EffectCtrl` | 域服务 | 走门面/注入，勿散落单例 |
 
 ## 控制层分工
 
