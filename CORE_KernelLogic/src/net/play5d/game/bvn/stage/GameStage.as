@@ -45,7 +45,8 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
 
 public class GameStage extends Sprite implements IStage {
 
-    public function GameStage() {
+    public function GameStage(gameCtrl:GameCtrl) {
+        _gameCtrl = gameCtrl;
 //			this.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x , GameConfig.GAME_SIZE.y);
 
         _gameLayer.mouseChildren = false;
@@ -61,6 +62,7 @@ public class GameStage extends Sprite implements IStage {
     private var _cameraFocus:Array;
 
     private var _gameLayer:Sprite = new Sprite(); //主游戏层
+    private var _gameCtrl:GameCtrl;
 
     public function get gameLayer():Sprite {
         return _gameLayer;
@@ -191,7 +193,7 @@ public class GameStage extends Sprite implements IStage {
      * 构建
      */
     public function build():void {
-        GameCtrl.I.initialize(this);
+        _gameCtrl.initialize(this);
         EffectCtrl.I.initialize(this, _playerLayer);
         gameUI = new GameUI();
 
@@ -247,7 +249,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         // 执行 P2 变色
-        if (GameCtrl.I.gameRunData.isSameFighter) {
+        if (_gameCtrl.gameRunData.isSameFighter) {
             GameSpriteUtil.autoChangeSpColor(P2);
         }
 
@@ -296,7 +298,7 @@ public class GameStage extends Sprite implements IStage {
         }
 
         // 执行 P2 变色
-        if (GameCtrl.I.gameRunData.isSameFighter) {
+        if (_gameCtrl.gameRunData.isSameFighter) {
             GameSpriteUtil.autoChangeSpColor(P2);
         }
 
@@ -387,7 +389,7 @@ public class GameStage extends Sprite implements IStage {
 
         if (_gameSprites) {
             while (_gameSprites.length > 0) {
-                var continueLoser:FighterMain = GameCtrl.I.gameRunData.continueLoser;
+                var continueLoser:FighterMain = _gameCtrl.gameRunData.continueLoser;
                 var removedGameSprite:IGameSprite = _gameSprites.shift();
                 var isDispose:Boolean = continueLoser && removedGameSprite != continueLoser;
 
@@ -419,7 +421,7 @@ public class GameStage extends Sprite implements IStage {
 
         EffectCtrl.I.destroy();
 
-        GameCtrl.I.destroy();
+        _gameCtrl.destroy();
 
         if (_map) {
             _map.destroy();
