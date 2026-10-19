@@ -22,6 +22,7 @@ import flash.display.Stage;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
@@ -239,7 +240,7 @@ public class MainGame {
      * 游戏界面
      */
     public function goGame():void {
-        var gs:GameStage = new GameStage(GameCtrl.I);
+        var gs:GameStage = new GameStage(GameCtrl.I, EffectCtrl.I);
         stageCtrl.goStage(gs);
         GameCtrl.I.startGame();
         setFPS(GameConfig.FPS_GAME);
@@ -251,7 +252,7 @@ public class MainGame {
      * 无双模式游戏界面
      */
     public function goMusouGame():void {
-        var gs:GameStage = new GameStage(GameCtrl.I);
+        var gs:GameStage = new GameStage(GameCtrl.I, EffectCtrl.I);
         stageCtrl.goStage(gs);
         GameCtrl.I.startMusouGame();
         setFPS(GameConfig.FPS_GAME);

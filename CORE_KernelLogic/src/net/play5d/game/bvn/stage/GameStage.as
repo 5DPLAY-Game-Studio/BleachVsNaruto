@@ -45,8 +45,9 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
 
 public class GameStage extends Sprite implements IStage {
 
-    public function GameStage(gameCtrl:GameCtrl) {
-        _gameCtrl = gameCtrl;
+    public function GameStage(gameCtrl:GameCtrl, effectCtrl:EffectCtrl) {
+        _gameCtrl   = gameCtrl;
+        _effectCtrl = effectCtrl;
 //			this.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x , GameConfig.GAME_SIZE.y);
 
         _gameLayer.mouseChildren = false;
@@ -63,6 +64,7 @@ public class GameStage extends Sprite implements IStage {
 
     private var _gameLayer:Sprite = new Sprite(); //主游戏层
     private var _gameCtrl:GameCtrl;
+    private var _effectCtrl:EffectCtrl;
 
     public function get gameLayer():Sprite {
         return _gameLayer;
@@ -194,7 +196,7 @@ public class GameStage extends Sprite implements IStage {
      */
     public function build():void {
         _gameCtrl.initialize(this);
-        EffectCtrl.I.initialize(this, _playerLayer);
+        _effectCtrl.initialize(this, _playerLayer);
         gameUI = new GameUI();
 
         GameEvent.dispatchEvent(GameEvent.FIGHT_START);
@@ -419,7 +421,7 @@ public class GameStage extends Sprite implements IStage {
             gameUI = null;
         }
 
-        EffectCtrl.I.destroy();
+        _effectCtrl.destroy();
 
         _gameCtrl.destroy();
 
