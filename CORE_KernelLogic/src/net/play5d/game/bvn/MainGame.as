@@ -240,21 +240,24 @@ public class MainGame {
      * 游戏界面
      */
     public function goGame():void {
-        var gs:GameStage = new GameStage(GameCtrl.I, EffectCtrl.I);
-        stageCtrl.goStage(gs);
-        GameCtrl.I.startGame();
-        setFPS(GameConfig.FPS_GAME);
-        setQuality(GameConfig.QUALITY_GAME);
-        GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);
+        enterGameStage(GameCtrl.I.startGame);
     }
 
     /**
      * 无双模式游戏界面
      */
     public function goMusouGame():void {
+        enterGameStage(GameCtrl.I.startMusouGame);
+    }
+
+    /**
+     * 组装并切入对局场景，按给定回调启动对战/无双会话。
+     * @param start 启动回调。
+     */
+    private function enterGameStage(start:Function):void {
         var gs:GameStage = new GameStage(GameCtrl.I, EffectCtrl.I);
         stageCtrl.goStage(gs);
-        GameCtrl.I.startMusouGame();
+        start();
         setFPS(GameConfig.FPS_GAME);
         setQuality(GameConfig.QUALITY_GAME);
         GameEvent.dispatchEvent(GameEvent.ENTER_STAGE, GameStage);
