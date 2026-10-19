@@ -115,8 +115,7 @@ public class GameOverStage implements IStage {
             _char = null;
         }
 
-        GameCtrl.I.gameRunData.continueLoser = null;
-        GameCtrl.I.destroy();
+        GameCtrl.I.finishContinue();
 
     }
 

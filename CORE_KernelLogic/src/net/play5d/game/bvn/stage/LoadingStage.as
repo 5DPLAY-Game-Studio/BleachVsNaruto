@@ -29,11 +29,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
-import net.play5d.game.bvn.data.AssisterModel;
-import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.GameRunFighterGroup;
-import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
@@ -109,20 +105,7 @@ public class LoadingStage implements IStage {
     }
 
     public function gotoGame(sort1:Array, sort2:Array):void {
-        var p1group:GameRunFighterGroup = GameCtrl.I.gameRunData.p1FighterGroup;
-        var p2group:GameRunFighterGroup = GameCtrl.I.gameRunData.p2FighterGroup;
-
-        p1group.fighter1 = FighterModel.I.getFighter(sort1[0], true);
-        p1group.fighter2 = FighterModel.I.getFighter(sort1[1], true);
-        p1group.fighter3 = FighterModel.I.getFighter(sort1[2], true);
-        p1group.assister = AssisterModel.I.getAssister(GameData.I.p1Select.fuzhu, true);
-
-        p2group.fighter1 = FighterModel.I.getFighter(sort2[0], true);
-        p2group.fighter2 = FighterModel.I.getFighter(sort2[1], true);
-        p2group.fighter3 = FighterModel.I.getFighter(sort2[2], true);
-        p2group.assister = AssisterModel.I.getAssister(GameData.I.p2Select.fuzhu, true);
-
-        GameCtrl.I.gameRunData.map = MapModel.I.getMap(GameData.I.selectMap);
+        GameCtrl.I.prepareFight(sort1, sort2);
 
         GameEvent.dispatchEvent(GameEvent.FIGHT_LOADING_FINISH);
 

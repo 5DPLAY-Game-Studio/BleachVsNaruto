@@ -27,9 +27,16 @@ import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
+import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.data.AssisterModel;
+import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
+import net.play5d.game.bvn.data.MapModel;
+import net.play5d.game.bvn.data.musou.MusouMissionVO;
+import net.play5d.game.bvn.data.musou.MusouModel;
+import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.MessionModel;
@@ -215,6 +222,21 @@ public class GameCtrl {
     }
 
     /**
+     * 结束续关流程并清理对局。
+     *
+     * <p>由续关界面销毁时调用，清空续关保留角色并释放对局控制器。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.finishContinue();
+     * </listing>
+     */
+    public function finishContinue():void {
+        gameRunData.continueLoser = null;
+        destroy();
+    }
+
+    /**
      * 获得敌方队伍
      * @param sp 游戏元件
      * @return 敌方队伍
@@ -324,6 +346,35 @@ public class GameCtrl {
         GameEvent.dispatchEvent(GameEvent.GAME_START);
 
         GameRender.add(render);
+    }
+
+    /**
+     * 组装选人对局数据。
+     *
+     * <p>按选人排序写入双方队伍与地图，供 <code>buildGame</code> 使用。</p>
+     *
+     * @param sort1 P1 选人顺序（三个角色 id）。
+     * @param sort2 P2 选人顺序（三个角色 id）。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.prepareFight(p1Order, p2Order);
+     * </listing>
+     */
+    public function prepareFight(sort1:Array, sort2:Array):void {
+        var p1group:GameRunFighterGroup = gameRunData.p1FighterGroup;
+        var p2group:GameRunFighterGroup = gameRunData.p2FighterGroup;
+
+        p1group.fighter1 = FighterModel.I.getFighter(sort1[0], true);
+        p1group.fighter2 = FighterModel.I.getFighter(sort1[1], true);
+        p1group.fighter3 = FighterModel.I.getFighter(sort1[2], true);
+        p1group.assister = AssisterModel.I.getAssister(GameData.I.p1Select.fuzhu, true);
+
+        p2group.fighter1 = FighterModel.I.getFighter(sort2[0], true);
+        p2group.fighter2 = FighterModel.I.getFighter(sort2[1], true);
+        p2group.fighter3 = FighterModel.I.getFighter(sort2[2], true);
+        p2group.assister = AssisterModel.I.getAssister(GameData.I.p2Select.fuzhu, true);
+
+        gameRunData.map = MapModel.I.getMap(GameData.I.selectMap);
     }
 
     public function addFighter(fighter:FighterMain, team:int):void {
@@ -562,6 +613,36 @@ public class GameCtrl {
     /************************************************************************************************************************************************************/
     public function initMusouGame():void {
         _fightSession = new MusouFightSession();
+    }
+
+    /**
+     * 组装无双对局数据。
+     *
+     * <p>初始化无双会话并按当前任务写入计时、玩家队伍与地图，供 <code>startMusouGame</code> 使用。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.setupMusouGame();
+     * </listing>
+     */
+    public function setupMusouGame():void {
+        var mission:MusouMissionVO = MusouModel.I.currentMission;
+
+        initMusouGame();
+
+        var musouCtrl:MusouCtrl = getMusouCtrl();
+        musouCtrl.gameRunData.koNum = 0;
+        MusouLogic.I.clearHits();
+        musouCtrl.gameRunData.gameTimeMax = mission.time * GameConfig.FPS_ANIMATE;
+        musouCtrl.gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
+
+        var fighterTeam:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
+
+        gameRunData.p1FighterGroup.fighter1 = FighterModel.I.getFighter(fighterTeam[0].id);
+        gameRunData.p1FighterGroup.fighter2 = FighterModel.I.getFighter(fighterTeam[1].id);
+        gameRunData.p1FighterGroup.fighter3 = FighterModel.I.getFighter(fighterTeam[2].id);
+
+        gameRunData.map = MapModel.I.getMap(mission.map);
     }
 
     private function renderPause():void {

@@ -19,7 +19,6 @@
 package net.play5d.game.bvn.stage {
 import flash.display.DisplayObject;
 
-import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.GameRender;
@@ -27,10 +26,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.ctrler.game_stage_loader.GameStageLoadCtrl;
-import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
-import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
@@ -136,7 +132,7 @@ public class LoadingMusouStage implements IStage {
 //			trace("onLoadFinish");
 //			return;
 
-        initGameRunData();
+        GameCtrl.I.setupMusouGame();
         StateCtrl.I.transIn(MainGame.I.goMusouGame, false);
 
         GameEvent.dispatchEvent(GameEvent.MUSOU_LOADING_FINISH);
@@ -158,27 +154,6 @@ public class LoadingMusouStage implements IStage {
                 GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
             }
         }
-    }
-
-    private function initGameRunData():void {
-        var mission:MusouMissionVO = MusouModel.I.currentMission;
-
-        GameCtrl.I.initMusouGame();
-
-        GameCtrl.I.getMusouCtrl().gameRunData.koNum = 0;
-        MusouLogic.I.clearHits();
-        GameCtrl.I.getMusouCtrl().gameRunData.gameTimeMax = mission.time * GameConfig.FPS_ANIMATE;
-        GameCtrl.I.getMusouCtrl().gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
-//			GameCtrl.I.getMusouCtrl().gameRunData.gameTime = 30 * GameConfig.FPS_ANIMATE;
-
-        var fighterTeam:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
-
-        GameCtrl.I.gameRunData.p1FighterGroup.fighter1 = FighterModel.I.getFighter(fighterTeam[0].id);
-        GameCtrl.I.gameRunData.p1FighterGroup.fighter2 = FighterModel.I.getFighter(fighterTeam[1].id);
-        GameCtrl.I.gameRunData.p1FighterGroup.fighter3 = FighterModel.I.getFighter(fighterTeam[2].id);
-
-        GameCtrl.I.gameRunData.map = MapModel.I.getMap(mission.map);
-
     }
 }
 }
