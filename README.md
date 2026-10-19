@@ -80,6 +80,8 @@
 
 要想从源码构建本程序，您应该阅读 [HOW2BUILD.md](HOW2BUILD.md) 文件作为参考依据。
 
+如果您是初次了解本工程，建议使用 `master` 分支，其功能通常会更为稳定。
+
 ## 工程结构
 
 - `BleachVsNaruto_FlashSrc` - 所需部分二进制文件（扩展名：swf）的源文件（扩展名：fla 或 xfl）

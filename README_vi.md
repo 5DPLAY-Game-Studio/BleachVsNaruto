@@ -80,6 +80,8 @@ Nếu bạn chỉ quan tâm đến các tập tin nhị phân của dự án nà
 
 Để biên dịch chương trình này từ mã nguồn, bạn nên đọc tệp [HOW2BUILD.md](HOW2BUILD.md) để tham khảo.
 
+Nếu bạn mới làm quen với dự án này, chúng tôi khuyên bạn nên sử dụng nhánh `master`, vì các tính năng trên nhánh này thường ổn định hơn.
+
 ## Cấu trúc kỹ thuật
 
 - `BleachVsNaruto_FlashSrc` - Các tệp nguồn (phần mở rộng: fla hoặc xfl) của các tệp nhị phân cần thiết (phần mở rộng: swf)

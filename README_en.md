@@ -80,6 +80,8 @@ For a detailed change log of this project, see the [CHANGELOG.md](CHANGELOG.md) 
 
 To build this program from source, you should read the [HOW2BUILD.md](HOW2BUILD.md) file as a guide.
 
+If you are new to this project, we recommend using the `master` branch, as its features are generally more stable.
+
 ## Engineering Structure
 
 - `BleachVsNaruto_FlashSrc` - Source files (extension: fla or xfl) of the required binary files (extension: swf)
