@@ -33,7 +33,7 @@ public class FighterHurtFlyType {
     public static const NO_HURT_FLY:int = 0;
 
     /** 击飞 */
-    public static const HURT_FLY:int      = 1;
+    public static const HURT_FLY_ING:int  = 1;
     /** 落地 */
     public static const HURT_FLY_FALL:int = 2;
     /** 弹起 */

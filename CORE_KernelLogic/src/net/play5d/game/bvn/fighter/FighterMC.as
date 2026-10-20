@@ -352,7 +352,7 @@ public class FighterMC {
         _fighter.setVelocity(hitx, hity);
         _fighter.setDamping(GameConfig.HURT_FLY_DAMPING_X, GameConfig.HURT_FLY_DAMPING_Y);
 
-        _hurtFlyType = FighterHurtFlyType.HURT_FLY;
+        _hurtFlyType = FighterHurtFlyType.HURT_FLY_ING;
 
         _hurtYMin = _fighter.y;
         _hitx     = hitx;
@@ -544,7 +544,7 @@ public class FighterMC {
 
     private function renderHurtFly():void {
         switch (_hurtFlyType) {
-        case FighterHurtFlyType.HURT_FLY:
+        case FighterHurtFlyType.HURT_FLY_ING:
             if (--_hurtFlyFrame <= 0 && !_fighter.isInAir) {
                 goFrame(FighterSpecialFrame.HURT_FALL);
                 _hurtFlyType = FighterHurtFlyType.HURT_FLY_FALL;
