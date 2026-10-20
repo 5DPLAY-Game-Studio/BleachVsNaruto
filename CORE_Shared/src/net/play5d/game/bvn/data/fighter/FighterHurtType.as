@@ -24,6 +24,7 @@ package net.play5d.game.bvn.data.fighter {
  * <p>区分普通被打与击飞两类受击表现。</p>
  *
  * @see FighterActionState
+ * @see FighterHurtFlyType
  */
 public class FighterHurtType {
     include '../../../../../../../include/ImportVersion.as';

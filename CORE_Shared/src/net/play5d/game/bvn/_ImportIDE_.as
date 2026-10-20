@@ -53,6 +53,7 @@ public class _ImportIDE_ extends Sprite {
             FighterDefenseType,
             FighterHitFloorType,
             FighterHitRange,
+            FighterHurtFlyType,
             FighterHurtType,
             FighterInputCmd,
             FighterSpecialFrame,

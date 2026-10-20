@@ -23,6 +23,7 @@ import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.data.fighter.FighterHitFloorType;
+import net.play5d.game.bvn.data.fighter.FighterHurtFlyType;
 import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.data.fighter.FighterHitRange;
@@ -49,15 +50,8 @@ public class FighterMC {
     private var _undefinedFrames:Array = []; //不存在的帧名称缓冲池
     private var _hurtFlyFrame:int = 0; //击飞中空中的帧数
     private var _hurtDownFrame:int; //倒地的时间
-    /**
-     * 击飞状态
-     * 0=没有被击飞
-     * 1=击飞
-     * 2=落地
-     * 3=弹起
-     * 4=倒地
-     */
-    private var _hurtFlyState:int;
+
+    private var _hurtFlyType:int = FighterHurtFlyType.NO_HURT_FLY;
     private var _hurtYMin:Number = 0;
     private var _isHeavyDownAttack:Boolean;
     private var _bodyAreaCache:McAreaCacher     = new McAreaCacher('body');
@@ -188,7 +182,7 @@ public class FighterMC {
         findBodyArea();
         findHitArea();
 
-        if (_hurtFlyState != 0) {
+        if (_hurtFlyType != FighterHurtFlyType.NO_HURT_FLY) {
             renderHurtFly();
         }
 
@@ -358,7 +352,7 @@ public class FighterMC {
         _fighter.setVelocity(hitx, hity);
         _fighter.setDamping(GameConfig.HURT_FLY_DAMPING_X, GameConfig.HURT_FLY_DAMPING_Y);
 
-        _hurtFlyState = 1;
+        _hurtFlyType = FighterHurtFlyType.HURT_FLY;
 
         _hurtYMin = _fighter.y;
         _hitx     = hitx;
@@ -382,7 +376,7 @@ public class FighterMC {
      *  停止击飞动画
      */
     public function stopHurtFly():void {
-        _hurtFlyState = 0;
+        _hurtFlyType = FighterHurtFlyType.NO_HURT_FLY;
     }
 
     public function getHitRange(id:String):Rectangle {
@@ -540,7 +534,7 @@ public class FighterMC {
         goFrame(FighterSpecialFrame.HURT_DOWN, false);
 
         _hurtDownFrame = GameConfig.HIT_DOWN_FRAME;
-        _hurtFlyState  = 4;
+        _hurtFlyType   = FighterHurtFlyType.HURT_FLY_LIE;
 
         _mcCtrler.touchFloor();
 
@@ -549,17 +543,17 @@ public class FighterMC {
     }
 
     private function renderHurtFly():void {
-        switch (_hurtFlyState) {
-        case 1: //击飞
+        switch (_hurtFlyType) {
+        case FighterHurtFlyType.HURT_FLY:
             if (--_hurtFlyFrame <= 0 && !_fighter.isInAir) {
                 goFrame(FighterSpecialFrame.HURT_FALL);
-                _hurtFlyState = 2;
+                _hurtFlyType = FighterHurtFlyType.HURT_FLY_FALL;
             }
             if (_hurtYMin > _fighter.y) {
                 _hurtYMin = _fighter.y;
             }
             break;
-        case 2: //落地
+        case FighterHurtFlyType.HURT_FLY_FALL:
             if (_curFrameCount < 2) {
                 return;
             }
@@ -571,7 +565,7 @@ public class FighterMC {
                 FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_DOWN);
 //						_fighter.setVelocity(0,0);
                 _fighter.setDamping(GameConfig.HIT_FLOOR_DAMPING_X_HEAVY);
-                _hurtFlyState = 4;
+                _hurtFlyType = FighterHurtFlyType.HURT_FLY_LIE;
 
                 var yDiff:Number = _fighter.y - _hurtYMin;
                 var vecy:Number  = yDiff * 0.04 * (
@@ -603,7 +597,7 @@ public class FighterMC {
 //						trace('vecy',vecy);
 
                 _fighter.setVecY(-vecy);
-                _hurtFlyState = 3;
+                _hurtFlyType = FighterHurtFlyType.HURT_FLY_TAN;
 
                 _fighter.actionState = FighterActionState.HURT_DOWN_TAN;
 
@@ -617,7 +611,7 @@ public class FighterMC {
                 _mcCtrler.effectCtrler.hitFloor(FighterHitFloorType.TAN, vecy);
             }
             break;
-        case 3: //弹起
+        case FighterHurtFlyType.HURT_FLY_TAN:
             if (_curFrameCount < 2) {
                 return;
             }
@@ -628,17 +622,17 @@ public class FighterMC {
             goFrame(FighterSpecialFrame.HURT_DOWN, false);
             _fighter.setDamping(GameConfig.HIT_FLOOR_DAMPING_X);
             _hurtDownFrame = GameConfig.HIT_DOWN_FRAME;
-            _hurtFlyState  = 4;
+            _hurtFlyType   = FighterHurtFlyType.HURT_FLY_LIE;
 
             _mcCtrler.effectCtrler.hitFloor(FighterHitFloorType.NORMAL, 1);
 
             _fighter.actionState = FighterActionState.HURT_DOWN;
             FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_DOWN);
             break;
-        case 4: //倒地
+        case FighterHurtFlyType.HURT_FLY_LIE:
 
             if (!_fighter.isAlive) {
-                _hurtFlyState        = 0;
+                _hurtFlyType         = FighterHurtFlyType.NO_HURT_FLY;
                 _fighter.actionState = FighterActionState.DEAD;
                 FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DEAD);
                 return;
@@ -646,7 +640,7 @@ public class FighterMC {
 
             if (--_hurtDownFrame <= 0) {
                 goFrame(FighterSpecialFrame.HURT_DOWN_RESUME, true);
-                _hurtFlyState = 0;
+                _hurtFlyType = FighterHurtFlyType.NO_HURT_FLY;
             }
             break;
         }
