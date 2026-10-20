@@ -42,7 +42,8 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
      * 						x:Number(速度X)|{start:Number(开始速度),add:Number(加速度),max:Number(最大速度)} ,
      * 						y:Number(速度Y)|{start:Number(开始速度),add:Number(加速度),max:Number(最大速度)} ,
      * 						hold:int(持续帧数) ,
-     * 						hits:int(攻击次数)
+     * 						hits:int(攻击次数) ,
+     * 						onHit:{delayFrame:int(延迟帧数,&gt;=0),func:Function(回调)}
      * 					 }
      */
     public function Bullet(mc:MovieClip, params:Object = null) {
@@ -113,6 +114,10 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
                 hp = hpMax = params.hp;
             }
 
+            if (params.onHit) {
+                onHit = params.onHit;
+            }
+
         }
 
     }
@@ -125,6 +130,16 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
     public var hitSpeed:Point = new Point(NaN, NaN);
     public var holdFrame:int = -1;
     public var onRemove:Function;
+    /**
+     * doHit 后的延迟回调配置。
+     *
+     * <p>字段：<code>delayFrame</code>（&gt;=0 的延迟帧数）、
+     * <code>func</code>（回调，签名 <code>function(param:Object):void</code>，
+     * <code>param</code> 含字段 <code>bullet</code>）。
+     * 挂到发射方主人的 <code>setAnimateFrameOut</code>：与动画帧同步，
+     * 游戏暂停时停表，主人销毁后不再触发；子弹自身销毁不影响已调度回调。</p>
+     */
+    public var onHit:Object;
     public var mc:MovieClip;
     public var hitTimes:int = -1;
     public var owner:IGameSprite;
@@ -330,6 +345,7 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
         hitSpeed = null;
 
         owner       = null;
+        onHit       = null;
         _area       = null;
         _orgScale   = null;
         _team       = null;
@@ -572,9 +588,74 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
             catch (e:Error) {
                 ThrowError(e, GetLang('debug.error.data.bullet.do_hit', {frame: 'hit'}));
             }
+            startOnHitDelay();
         }
         _isHit   = true;
         _hitAble = false;
+    }
+
+    /**
+     * 启动 onHit 延迟回调。
+     *
+     * <p>挂到发射方主人的 <code>setAnimateFrameOut</code>，不依赖子弹自身
+     * <code>renderAnimate</code>。与游戏动画帧、暂停同步；主人销毁后自然失效。</p>
+     */
+    private function startOnHitDelay():void {
+        if (!onHit || onHit.func == null) {
+            return;
+        }
+
+        var delayFrame:int = int(onHit.delayFrame);
+        if (delayFrame < 0) {
+            delayFrame = 0;
+        }
+
+        var func:Function = onHit.func;
+        var param:Object  = {
+            bullet: this
+        };
+
+        if (delayFrame == 0) {
+            func(param);
+            return;
+        }
+
+        var host:BaseGameSprite = getOnHitDelayHost();
+        if (host) {
+            host.setAnimateFrameOut(function ():void {
+                func(param);
+            }, delayFrame);
+        }
+        else {
+            func(param);
+        }
+    }
+
+    /**
+     * 解析 onHit 延迟宿主：优先主角色（Attacker / Assister → FighterMain）。
+     *
+     * @return 可用于 <code>setAnimateFrameOut</code> 的主人；无则 <code>null</code>
+     */
+    private function getOnHitDelayHost():BaseGameSprite {
+        var o:IGameSprite = owner;
+        if (o is FighterAttacker) {
+            o = (o as FighterAttacker).getOwner();
+        }
+        if (o is Assister) {
+            var ao:IGameSprite = (o as Assister).getOwner();
+            if (ao is FighterMain) {
+                return ao as FighterMain;
+            }
+            return o as Assister;
+        }
+        if (o is FighterMain) {
+            return o as FighterMain;
+        }
+        if (o is BaseGameSprite) {
+            return o as BaseGameSprite;
+        }
+
+        return null;
     }
 
     private function getCurrentRect(rect:Rectangle):Rectangle {
