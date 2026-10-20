@@ -28,6 +28,8 @@ public class GameConfig {
     public static var DEBUG_MODE:Boolean = false;
     // 触屏模式
     public static var TOUCH_MODE:Boolean = false;
+    // 触屏返回按钮素材（由 SHELL_Mob 注入 Embed Class）
+    public static var TOUCH_BACK_BTN:Class;
 
     ///////////////////////////////////////////////////////////////////////////
 

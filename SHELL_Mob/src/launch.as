@@ -38,6 +38,7 @@ import net.play5d.game.bvn.mob.ScreenRotater;
 import net.play5d.game.bvn.mob.ctrls.GamePolyCtrl;
 import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.ctrls.UpdateCtrl;
+import net.play5d.game.bvn.mob.screenpad.ScreenPadAsset;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
@@ -151,7 +152,8 @@ public class launch extends Sprite {
         stage.align     = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
 
-        GameConfig.TOUCH_MODE = true; //开启触屏模式
+        GameConfig.TOUCH_MODE     = true; //开启触屏模式
+        GameConfig.TOUCH_BACK_BTN = ScreenPadAsset.cancel;
 
         ScreenRotater.I.init(stage);
 

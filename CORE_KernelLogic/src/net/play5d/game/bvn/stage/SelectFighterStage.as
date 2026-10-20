@@ -72,8 +72,6 @@ public class SelectFighterStage implements IStage {
     private var _tweenTime:int = 500;
     private var _twoPlayerSelectFin:Boolean;  //解决两玩家同时选人
     private var _modeFlow:ISelectModeFlow;
-    [Embed(source='/../assets/cancel.png')]
-    private var _backMenuPicClass:Class;
     private var _backMenuBtn:Sprite;
 
     /**
@@ -267,9 +265,13 @@ public class SelectFighterStage implements IStage {
     }
 
     private function initBackBtn():void {
+        if (!GameConfig.TOUCH_BACK_BTN) {
+            return;
+        }
+
         if (!_backMenuBtn) {
             _backMenuBtn         = new Sprite();
-            var btnBitmap:Bitmap = new _backMenuPicClass();
+            var btnBitmap:Bitmap = new GameConfig.TOUCH_BACK_BTN();
             btnBitmap.width      = 100;
             btnBitmap.smoothing  = true;
             btnBitmap.scaleY     = btnBitmap.scaleX;
