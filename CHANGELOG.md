@@ -2,6 +2,28 @@
 
 本项目的所有重要变更都将会记录在此文件中。
 
+## [3.7.0.0.10292026_alpha] - 2026-10-29
+
+### 新增
+
+- 增加 Bullet 的 onHit 参数，支持延迟调用关联方法。
+
+### 更改
+
+- 重构 select.xml 文件为 select.json 文件。
+- 重构角色包架构，将集中的 fighter 解构减弱拆解为小包模式。
+- 优化多语言加载字体流程，且增加多语言加载失败或无对应键值时使用 zh_CN 作为兜底显示。
+- 优化加强了游戏 MVC 设计模式。
+
+### 修复
+
+- 修复在高于等于 2024.2 版本的 IDEA 中，进行调试时输出乱码的错误。
+
+### 移除
+
+- 移除废弃的 salect.xml 文件及其职责。
+- 移除重复的 cancel.png 素材及其引用。
+
 ## [3.7.0.0.08312026_alpha] - 2026-08-31
 
 ### 新增
@@ -395,6 +417,7 @@
 - [#1] 修复在执行构建前的资源清理时，5DPLAY_TOOLS 提供的 SyncAssets 工具只清理了 pc 通道的资源
 - [#2] 修复BUG: 不存在无双模式时，声音被意外唤醒
 
+[3.7.0.0.10292026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.08312026_alpha...3.7.0.0.10292026_alpha
 [3.7.0.0.08312026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.08112026_alpha...3.7.0.0.08312026_alpha
 [3.7.0.0.08112026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.07232026_alpha...3.7.0.0.08112026_alpha
 [3.7.0.0.07232026_alpha]: https://github.com/5DPLAY-Game-Studio/BleachVsNaruto/compare/3.7.0.0.05252026_alpha...3.7.0.0.07232026_alpha
