@@ -62,7 +62,11 @@ Code IDE 是可选项，其仅为您提供更好的开发体验，并非编译�
 
 1. 安装插件
     - 安装插件 [AS3, MXML, and SWF Extension Pack]（必须）。
-    - 可以按 ***Ctrl + Shift + X*** 打开扩展商店，在上电脑搜寻插件。
+    - 可以按 ***Ctrl + Shift + X*** 打开扩展商店，在商店中搜寻插件。
+2. 更新 SDK 设置
+    - 点击 VSCode 左下角 【⚙】 图标，在弹出的菜单中点击 ***设置 Ctrl+,*** 菜单，弹出 ***设置*** 对话框。
+    - 在弹出的 ***设置*** 对话框中，顶部有个名为 ***搜索设置(历史记录⬆⬇)*** 的搜索框，在搜索框中搜索 `as3mxml.sdk.framework` ，第一个匹配的设置项应为 ***As3mxml > Sdk: Framework***，点击下方的 【在 settings.json 中编辑】超链接，将会弹出一个编辑 settings.json 文件的窗口。
+    - 在弹出的窗口中可以看到在文件末尾新增了一行内容为 `"as3mxml.sdk.framework": "",` 的配置，将已下载并解压完成的 FlexSDK 的绝对路径，填入此配置中（以 `` \\ `` 为路径分隔符，例如：`"as3mxml.sdk.framework": "D:\\sdk\\flex4.16.1-air51.0.1.1",`）。
 
 ## 构建项目
 
