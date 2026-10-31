@@ -17,29 +17,16 @@
  */
 
 package net.play5d.game.bvn.ctrler.game_ctrls {
-import flash.geom.ColorTransform;
-
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameLoader;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.GameRender;
-import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
-import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
-import net.play5d.game.bvn.data.AssisterModel;
-import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
-import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.musou.MusouMissionVO;
-import net.play5d.game.bvn.data.musou.MusouModel;
-import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.data.vos.GameRunDataVO;
-import net.play5d.game.bvn.data.GameRunFighterGroup;
-import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.data.TeamMap;
 import net.play5d.game.bvn.data.vos.TeamVO;
@@ -53,16 +40,18 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputer;
-import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
-import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.kyo.utils.KeyBoarder;
 
 /**
- * 游戏控制类
+ * 对局门面：暂停、回合、精灵与帧循环。
+ *
+ * <p>格斗 / 无双的组装、建场、开局和结束后去向由 <code>IFightSession</code> 承担。</p>
+ *
+ * @see IFightSession
  */
 public class GameCtrl {
 
@@ -155,6 +144,7 @@ public class GameCtrl {
         if (!_fightSession) {
             _fightSession = new VersusFightSession();
         }
+        _fightSession.bind(this);
         _fightSession.onGameInitialize();
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;
@@ -311,47 +301,41 @@ public class GameCtrl {
     }
 
     /**
-     * 开始游戏
+     * 开始无双对局。
+     *
+     * <p>标志位之后交给当前无双会话开局。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.startMusouGame();
+     * </listing>
      */
     public function startMusouGame():void {
         if (!autoStartAble) {
             return;
         }
         fightFinished = false;
-
-        _isPauseGame        = false;
-        GameInputer.enabled = true;
-
-        initTeam();
-
-        _fightSession.buildGame();
-
-        GameRender.add(render);
-
+        (_fightSession as MusouFightSession).start();
     }
 
     /**
-     * 开始格斗模式
+     * 开始格斗模式。
+     *
+     * <p>不检查 <code>autoStartAble</code>，供本机开局与联机同步开局共用。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.doStartGame();
+     * </listing>
      */
     public function doStartGame():void {
-        _isPauseGame = false;
-
-        GameInputer.enabled = true;
-
-        gameRunData.reset();
-
-        initTeam();
-        buildGame();
-
-        GameEvent.dispatchEvent(GameEvent.GAME_START);
-
-        GameRender.add(render);
+        versusSession().start();
     }
 
     /**
      * 组装选人对局数据。
      *
-     * <p>按选人排序写入双方队伍与地图，供 <code>buildGame</code> 使用。</p>
+     * <p>确保格斗会话存在，并按选人排序写入双方队伍与地图。</p>
      *
      * @param sort1 P1 选人顺序（三个角色 id）。
      * @param sort2 P2 选人顺序（三个角色 id）。
@@ -361,20 +345,7 @@ public class GameCtrl {
      * </listing>
      */
     public function prepareFight(sort1:Array, sort2:Array):void {
-        var p1group:GameRunFighterGroup = gameRunData.p1FighterGroup;
-        var p2group:GameRunFighterGroup = gameRunData.p2FighterGroup;
-
-        p1group.fighter1 = FighterModel.I.getFighter(sort1[0], true);
-        p1group.fighter2 = FighterModel.I.getFighter(sort1[1], true);
-        p1group.fighter3 = FighterModel.I.getFighter(sort1[2], true);
-        p1group.assister = AssisterModel.I.getAssister(GameData.I.p1Select.fuzhu, true);
-
-        p2group.fighter1 = FighterModel.I.getFighter(sort2[0], true);
-        p2group.fighter2 = FighterModel.I.getFighter(sort2[1], true);
-        p2group.fighter3 = FighterModel.I.getFighter(sort2[2], true);
-        p2group.assister = AssisterModel.I.getAssister(GameData.I.p2Select.fuzhu, true);
-
-        gameRunData.map = MapModel.I.getMap(GameData.I.selectMap);
+        versusSession().prepare(sort1, sort2);
     }
 
     public function addFighter(fighter:FighterMain, team:int):void {
@@ -434,42 +405,17 @@ public class GameCtrl {
     }
 
     /**
-     * 战斗结束，进行下一关
+     * 战斗结束，按当前会话决定去向。
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.fightFinish();
+     * </listing>
      */
     public function fightFinish():void {
         fightFinished = true;
-
-        if (GameMode.isArcade()) {
-            if (TeamID.TEAM_1 == gameRunData.lastWinnerTeam.id) {
-                if (MessionModel.I.missionAllComplete()) {
-                    TraceLang('debug.trace.data.game_ctrl.cleared');
-
-                    MainGame.I.goCongratulations();
-                }
-                else {
-                    TraceLang('debug.trace.data.game_ctrl.next');
-
-                    GameData.I.winnerId = gameRunData.p1FighterGroup.currentFighter.data.id;
-                    MainGame.I.goWinner();
-                }
-
-
-            }
-            else {
-                // 跳转是否继续
-                TraceLang('debug.trace.data.game_ctrl.continue');
-
-                gameRunData.continueLoser = gameRunData.p1FighterGroup.currentFighter;
-                MainGame.I.goContinue();
-            }
-        }
-
-        if (GameMode.isVsCPU() || GameMode.isVsPeople()) {
-            // 返回选人
-            TraceLang('debug.trace.data.game_ctrl.back_select');
-
-            GameEvent.dispatchEvent(GameEvent.GAME_END);
-            MainGame.I.goSelect();
+        if (_fightSession) {
+            _fightSession.onFightFinished();
         }
     }
 
@@ -610,9 +556,23 @@ public class GameCtrl {
         GameCtrl.I.gameEnd(winner, loser);
     }
 
-    /************************************************************************************************************************************************************/
+    /**
+     * 安装无双会话。
+     *
+     * <p>替换已有会话。随后由 <code>setupMusouGame</code> 组装数据。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.initMusouGame();
+     * </listing>
+     */
     public function initMusouGame():void {
+        if (_fightSession) {
+            _fightSession.destroy();
+            _fightSession = null;
+        }
         _fightSession = new MusouFightSession();
+        _fightSession.bind(this);
     }
 
     /**
@@ -626,23 +586,51 @@ public class GameCtrl {
      * </listing>
      */
     public function setupMusouGame():void {
-        var mission:MusouMissionVO = MusouModel.I.currentMission;
-
         initMusouGame();
+        _fightSession.prepare(null, null);
+    }
 
-        var musouCtrl:MusouCtrl = getMusouCtrl();
-        musouCtrl.gameRunData.koNum = 0;
-        MusouLogic.I.clearHits();
-        musouCtrl.gameRunData.gameTimeMax = mission.time * GameConfig.FPS_ANIMATE;
-        musouCtrl.gameRunData.gameTime    = mission.time * GameConfig.FPS_ANIMATE;
+    /**
+     * 取得或安装格斗会话。
+     *
+     * @return 格斗会话。
+     */
+    private function versusSession():VersusFightSession {
+        if (!(_fightSession is VersusFightSession)) {
+            if (_fightSession) {
+                _fightSession.destroy();
+                _fightSession = null;
+            }
+            _fightSession = new VersusFightSession();
+        }
+        _fightSession.bind(this);
 
-        var fighterTeam:Vector.<MusouFighterVO> = GameData.I.musouData.getFighterTeam();
+        return _fightSession as VersusFightSession;
+    }
 
-        gameRunData.p1FighterGroup.fighter1 = FighterModel.I.getFighter(fighterTeam[0].id);
-        gameRunData.p1FighterGroup.fighter2 = FighterModel.I.getFighter(fighterTeam[1].id);
-        gameRunData.p1FighterGroup.fighter3 = FighterModel.I.getFighter(fighterTeam[2].id);
+    /**
+     * 清除暂停标记，供会话开局。
+     */
+    function clearPause():void {
+        _isPauseGame = false;
+    }
 
-        gameRunData.map = MapModel.I.getMap(mission.map);
+    /**
+     * 注册主循环，供会话开局。
+     */
+    function beginMatchRender():void {
+        GameRender.add(render);
+    }
+
+    /**
+     * 挂上练习控制器。
+     *
+     * @param p1 左侧角色。
+     * @param p2 右侧角色。
+     */
+    function attachTraining(p1:FighterMain, p2:FighterMain):void {
+        _trainingCtrl = new TrainingCtrl();
+        _trainingCtrl.initialize([p1, p2]);
     }
 
     private function renderPause():void {
@@ -679,91 +667,10 @@ public class GameCtrl {
         }
     }
 
-    private function buildGame():void {
-        var p1Group:GameRunFighterGroup = gameRunData.p1FighterGroup;
-        var p2Group:GameRunFighterGroup = gameRunData.p2FighterGroup;
-        p1Group.currentFighter  = GameRunFactory.createFighterByData(
-                p1Group.fighter1,
-                '1'
-        );
-        p2Group.currentFighter  = GameRunFactory.createFighterByData(
-                p2Group.fighter1,
-                '2'
-        );
-
-        var p1:FighterMain = p1Group.currentFighter;
-        var p2:FighterMain = p2Group.currentFighter;
-
-        if (GameMode.currentMode == GameMode.TRAINING) {
-            _trainingCtrl = new TrainingCtrl();
-            _trainingCtrl.initialize([p1, p2]);
-            gameRunData.gameTimeMax = -1;
-        }
-
-        var map:MapMain = GameRunFactory.createMapByData(gameRunData.map);
-
-        if (!p1 || !p2 || !map) {
-            ThrowError(Error, GetLang('debug.error.data.game_ctrl.build_game_fail'));
-            return;
-        }
-
-//        if (p1.data.id == p2.data.id) {
-//            var ct:ColorTransform = new ColorTransform();
-//            ct.greenOffset        = -85;
-//            p2.colorTransform     = ct;
-//        }
-//        else {
-//            p2.colorTransform = null;
-//        }
-
-
-        //temp
-//			p1.id = 'p1';
-
-        map.initialize();
-
-        // initFight 方法中包含镜头初始化的实现
-        gameState.initFight(
-                gameRunData.p1FighterGroup,
-                gameRunData.p2FighterGroup,
-                map,
-                initBack
-        );
-        function initBack():void {
-            p1Group.currentAssister = GameRunFactory.createAssisterByData(
-                    p1Group.assister,
-                    '1'
-            );
-            p2Group.currentAssister = GameRunFactory.createAssisterByData(
-                    p2Group.assister,
-                    '2'
-            );
-        }
-
-        addFighter(p1, 1);
-        addFighter(p2, 2);
-
-        GameLogic.initGameLogic(map, gameState.camera);
-
-        initMainLogic();
-
-        if (GameMode.currentMode == GameMode.TRAINING) {
-            actionEnable = true;
-            GameUI.I.fadIn();
-
-            SoundCtrl.I.smartPlayGameBGM('map');
-
-        }
-        else {
-            initStart();
-            _startCtrl.start1v1(p1, p2);
-        }
-
-        GameInterface.instance.afterBuildGame();
-
-    }
-
-    private function initTeam():void {
+    /**
+     * 按当前模式重建队伍表。
+     */
+    function initTeam():void {
         _teamMap.clear();
 
         var teams:Array = GameMode.getAllTeams();

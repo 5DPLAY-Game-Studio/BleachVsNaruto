@@ -21,9 +21,9 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 
 /**
- * 对局会话：格斗 / 无双等模式差异的窄接口。
+ * 对局会话：格斗 / 无双的组装、开局、建场与结束后去向。
  *
- * <p><code>GameCtrl</code> 持有一份实现；公共入口（如 <code>getMusouCtrl</code>）保持不变。</p>
+ * <p><code>GameCtrl</code> 持有一份实现，并保留暂停、回合、精灵等共用入口。</p>
  *
  * @example
  * <listing version="3.0">
@@ -36,6 +36,17 @@ import net.play5d.game.bvn.fighter.FighterAttacker;
  */
 public interface IFightSession {
     /**
+     * 绑定对局门面。组装、开局与建场通过门面使用共用能力。
+     *
+     * @param host 对局门面。
+     * @example
+     * <listing version="3.0">
+     * session.bind(GameCtrl.I);
+     * </listing>
+     */
+    function bind(host:GameCtrl):void;
+
+    /**
      * 对局场景已就绪时调用（创建角色事件监听等）。
      *
      * @example
@@ -44,6 +55,30 @@ public interface IFightSession {
      * </listing>
      */
     function onGameInitialize():void;
+
+    /**
+     * 按本模式组装对局数据。
+     *
+     * <p>格斗使用双方选人顺序。无双忽略这两个参数，按当前任务组装。</p>
+     *
+     * @param sort1 P1 选人顺序；无双可为 <code>null</code>。
+     * @param sort2 P2 选人顺序；无双可为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * session.prepare(p1Order, p2Order);
+     * </listing>
+     */
+    function prepare(sort1:Array, sort2:Array):void;
+
+    /**
+     * 开局：清暂停、建场并注册主循环。
+     *
+     * @example
+     * <listing version="3.0">
+     * session.start();
+     * </listing>
+     */
+    function start():void;
 
     /**
      * 释放会话资源。
@@ -69,7 +104,7 @@ public interface IFightSession {
     function getAttacker(name:String, team:int):FighterAttacker;
 
     /**
-     * 构建并启动本模式对局内容（无双建波等；格斗模式由 <code>GameCtrl</code> 自行 <code>buildGame</code>）。
+     * 构建本模式场上内容。格斗建双方与地图；无双建波。
      *
      * @example
      * <listing version="3.0">
@@ -77,6 +112,16 @@ public interface IFightSession {
      * </listing>
      */
     function buildGame():void;
+
+    /**
+     * 本模式对局结束后的去向。无双由自身流程处理时为空实现。
+     *
+     * @example
+     * <listing version="3.0">
+     * session.onFightFinished();
+     * </listing>
+     */
+    function onFightFinished():void;
 
     /**
      * 逻辑帧推进。
