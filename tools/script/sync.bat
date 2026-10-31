@@ -41,9 +41,9 @@ set "FUNC_COMMON=%BAT_HOME%func\common.bat"
 call "!FUNC_COMMON!" INIT_LANG "%~n0"
 
 :: 工作目录：调用方当前目录（应为 shared）
-set "WORK_SPACE=%CD%"
-echo BAT_HOME: %BAT_HOME%
-echo WORK_SPACE: %WORK_SPACE%
+set "WORK_SPACE=!CD!"
+echo BAT_HOME: !BAT_HOME!
+echo WORK_SPACE: !WORK_SPACE!
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 1) 源素材与 _tmp 根目录
@@ -106,8 +106,14 @@ call "!FUNC_COMMON!" ECHO_LANG :DEL_DIR_SUCCESS "%~1"
 exit /b 0
 
 :: 复制目录树到目标（%1=源，%2=目标）
+:: 不用 "%~2\"：尾部 \" 会吞掉引号，路径中的 & 会被拆开
 :COPY
-xcopy "%~1" "%~2\" /E /I /Y >nul
+if not exist "%~2" mkdir "%~2"
+if errorlevel 1 (
+	call "!FUNC_COMMON!" ECHO_LANG :COPY_DIR_FAIL "%~2"
+	exit /b 1
+)
+xcopy "%~1" "%~2" /E /I /Y >nul
 if errorlevel 1 (
 	call "!FUNC_COMMON!" ECHO_LANG :COPY_DIR_FAIL "%~2"
 	exit /b 1

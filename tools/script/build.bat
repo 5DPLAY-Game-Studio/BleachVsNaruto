@@ -194,14 +194,16 @@ if errorlevel 1 (
 )
 
 if exist "%OUT_ASSETS%" rd /s /q "%OUT_ASSETS%"
-xcopy "%DEV_ASSETS_SRC%" "%OUT_ASSETS%\" /E /I /Y >nul
+mkdir "%OUT_ASSETS%"
+xcopy "%DEV_ASSETS_SRC%" "%OUT_ASSETS%" /E /I /Y >nul
 if errorlevel 1 (
 	call "!FUNC_COMMON!" ECHO_LANG :COPY_FAIL "assets"
 	goto END
 )
 
 if exist "%OUT_ICON%" rd /s /q "%OUT_ICON%"
-xcopy "%DEV_ICON_SRC%" "%OUT_ICON%\" /E /I /Y >nul
+mkdir "%OUT_ICON%"
+xcopy "%DEV_ICON_SRC%" "%OUT_ICON%" /E /I /Y >nul
 if errorlevel 1 (
 	call "!FUNC_COMMON!" ECHO_LANG :COPY_FAIL "icon"
 	goto END

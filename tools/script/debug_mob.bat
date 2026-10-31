@@ -69,7 +69,7 @@ if "%FLEX_HOME%"=="" (
 )
 call "!FUNC_COMMON!" EXIST "%FLEX_HOME%"
 if errorlevel 1 goto END
-echo FLEX_HOME: %FLEX_HOME%
+echo FLEX_HOME: !FLEX_HOME!
 
 set "FLEX_BIN=%FLEX_HOME%\bin"
 call "!FUNC_COMMON!" EXIST "%FLEX_BIN%"

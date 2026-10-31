@@ -53,7 +53,7 @@ set "SWF_FILE=%~1"
 for %%I in ("%SWF_FILE%") do set "SWF_FILE=%%~fI"
 call "!FUNC_COMMON!" EXIST "%SWF_FILE%"
 if errorlevel 1 goto END
-echo SWF_FILE: %SWF_FILE%
+echo SWF_FILE: !SWF_FILE!
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 2) Flex SDK + fdb
@@ -65,12 +65,12 @@ if "%FLEX_HOME%"=="" (
 )
 call "!FUNC_COMMON!" EXIST "%FLEX_HOME%"
 if errorlevel 1 goto END
-echo FLEX_HOME: %FLEX_HOME%
+echo FLEX_HOME: !FLEX_HOME!
 
 set "FLEX_BIN=%FLEX_HOME%\bin"
 call "!FUNC_COMMON!" EXIST "%FLEX_BIN%"
 if errorlevel 1 goto END
-echo FLEX_BIN: %FLEX_BIN%
+echo FLEX_BIN: !FLEX_BIN!
 
 set "FDB=%FLEX_BIN%\fdb.bat"
 call "!FUNC_COMMON!" EXIST "%FDB%"
