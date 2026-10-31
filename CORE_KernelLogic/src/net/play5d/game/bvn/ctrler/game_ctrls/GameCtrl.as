@@ -202,8 +202,9 @@ public class GameCtrl {
             _fightSession = null;
         }
 
-        gameRunData.p1FighterGroup.destroy();
-        gameRunData.p2FighterGroup.destroy();
+        var continueLoser:FighterMain = gameRunData.continueLoser;
+        gameRunData.p1FighterGroup.destroy(continueLoser);
+        gameRunData.p2FighterGroup.destroy(continueLoser);
 
         gameRunData.clear();
         GameLoader.dispose();

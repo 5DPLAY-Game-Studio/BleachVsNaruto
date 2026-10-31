@@ -19,10 +19,7 @@
 package net.play5d.game.bvn.data {
 import flash.utils.Dictionary;
 
-import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-
 import net.play5d.game.bvn.data.vos.FighterVO;
-import net.play5d.game.bvn.data.vos.GameRunDataVO;
 
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
@@ -60,19 +57,22 @@ public class GameRunFighterGroup {
 
     private var _fighterMap:Dictionary;
 
-    public function destroy():void {
+    /**
+     * 清空队伍数据并销毁场上角色。
+     *
+     * <p>续关保留的角色不释放显示对象。</p>
+     *
+     * @param continueLoser 续关要留下的角色；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * group.destroy(runData.continueLoser);
+     * </listing>
+     */
+    public function destroy(continueLoser:FighterMain = null):void {
         fighter1 = null;
         fighter2 = null;
         fighter3 = null;
         assister = null;
-
-        var gameRunData:GameRunDataVO = GameCtrl.I.gameRunData;
-        if (!gameRunData) {
-            return;
-        }
-
-        // 进入续关页面的角色 FighterMain
-        var continueLoser:FighterMain = gameRunData.continueLoser;
 
         if (currentFighter) {
             currentFighter.destroy(continueLoser && currentFighter != continueLoser);

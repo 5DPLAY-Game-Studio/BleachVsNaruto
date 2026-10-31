@@ -22,6 +22,7 @@ import flash.display.Stage;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.ConfigCtrl;
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
@@ -113,7 +114,7 @@ public class MainGame {
             stageCtrl = new KyoStageCtrl(_rootSprite);
 
             GameLogger.log('Initializing game configuration...');
-            GameData.I.config.applyConfig();
+            ConfigCtrl.apply(GameData.I.config);
 
             GameLogger.log('Initializing game inputter configuration...');
             GameInputer.updateConfig();
@@ -140,7 +141,7 @@ public class MainGame {
             GameData.I.initData();
 
             GameLogger.log('Initializing game configuration...');
-            GameData.I.config.applyConfig();
+            ConfigCtrl.apply(GameData.I.config);
 
             GameLogger.log('Initializing game inputter configuration...');
             GameInputer.updateConfig();

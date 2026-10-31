@@ -17,7 +17,6 @@
  */
 
 package net.play5d.game.bvn.data.musou.player {
-import net.play5d.game.bvn.ctrler.musou_ctrls.MusouLogic;
 import net.play5d.game.bvn.interfaces.ISaveData;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
@@ -305,7 +304,8 @@ public class MusouPlayerData implements ISaveData {
 
         for each(var m:MusouWorldMapAreaVO in map2.areas) {
             if (!m.preOpens || m.preOpens.length < 1) {
-                MusouLogic.I.openMapArea(map.id, m.id);
+                TraceLang('debug.trace.data.musou_logic.open_map_area', {areaId: m.id});
+                map.openArea(m.id);
             }
         }
 

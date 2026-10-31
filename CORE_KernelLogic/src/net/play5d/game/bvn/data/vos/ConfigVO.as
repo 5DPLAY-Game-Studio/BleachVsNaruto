@@ -21,10 +21,6 @@ package net.play5d.game.bvn.data.vos {
 import flash.display.StageQuality;
 import flash.ui.Keyboard;
 
-import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.GameQuality;
-import net.play5d.game.bvn.ctrler.EffectCtrl;
-import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.interfaces.ISaveData;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
@@ -32,7 +28,11 @@ import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
 /**
- * 配置值对象
+ * 配置值对象。
+ *
+ * <p>只保存键位、画质、音量等值。应用到画面和声音由 <code>ConfigCtrl</code> 负责。</p>
+ *
+ * @see net.play5d.game.bvn.ctrler.ConfigCtrl
  */
 public class ConfigVO implements ISaveData, IInstanceVO {
 
@@ -151,16 +151,6 @@ public class ConfigVO implements ISaveData, IInstanceVO {
     public function setValueByKey(key:String, value:*):void {
         if (this.hasOwnProperty(key)) {
             this[key] = value;
-
-            switch (key) {
-            case 'bgmVolume':
-                SoundCtrl.I.setBgmVolumn(bgmVolume);
-                break;
-            case 'soundVolume':
-                SoundCtrl.I.setSoundVolumn(soundVolume);
-                break;
-            }
-
             return;
         }
         if (extendConfig) {
@@ -183,47 +173,6 @@ public class ConfigVO implements ISaveData, IInstanceVO {
 //			extendObj ||= {};
 //			extendObj[key] = value;
 //		}
-
-    public function applyConfig():void {
-        switch (quality) {
-        case GameQuality.LOW:
-            GameConfig.QUALITY_GAME = StageQuality.LOW;
-            GameConfig.setGameFps(30);
-            GameConfig.FPS_SHINE_EFFECT = 15;
-            EffectCtrl.EFFECT_SMOOTHING = false;
-            break;
-        case GameQuality.MEDIUM:
-            GameConfig.QUALITY_GAME = StageQuality.LOW;
-            GameConfig.setGameFps(60);
-            GameConfig.FPS_SHINE_EFFECT = 30;
-            EffectCtrl.EFFECT_SMOOTHING = false;
-            break;
-        case GameQuality.HIGH:
-            GameConfig.QUALITY_GAME = StageQuality.MEDIUM;
-            GameConfig.setGameFps(60);
-            GameConfig.FPS_SHINE_EFFECT = 30;
-            EffectCtrl.EFFECT_SMOOTHING = false;
-            break;
-        case GameQuality.HIGHER:
-            GameConfig.QUALITY_GAME = StageQuality.HIGH;
-            GameConfig.setGameFps(60);
-            GameConfig.FPS_SHINE_EFFECT = 30;
-            EffectCtrl.EFFECT_SMOOTHING = true;
-            break;
-        case GameQuality.BEST:
-            GameConfig.QUALITY_GAME = StageQuality.HIGH;
-            GameConfig.setGameFps(60);
-            GameConfig.FPS_SHINE_EFFECT = 60;
-            EffectCtrl.EFFECT_SMOOTHING = true;
-            break;
-        }
-
-        GameInterface.instance.applyConfig(this);
-        SoundCtrl.I.setBgmVolumn(bgmVolume);
-        SoundCtrl.I.setSoundVolumn(soundVolume);
-
-    }
-
 
 }
 }

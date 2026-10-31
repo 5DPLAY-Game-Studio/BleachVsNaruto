@@ -30,6 +30,7 @@ import flash.events.TouchEvent;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
+import net.play5d.game.bvn.ctrler.ConfigCtrl;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
@@ -204,7 +205,7 @@ public class SettingStage implements IStage {
 
     private function backMenuHandler(e:Event):void {
         GameData.I.saveData();
-        GameData.I.config.applyConfig();
+        ConfigCtrl.apply(GameData.I.config);
         GameInputer.updateConfig();
         MainGame.I.goMenu();
     }
@@ -212,6 +213,9 @@ public class SettingStage implements IStage {
     private function onOptionChange(e:SetBtnEvent):void {
         var config:ConfigVO = GameData.I.config;
         config.setValueByKey(e.optionKey, e.optionValue);
+        if (e.optionKey == 'bgmVolume' || e.optionKey == 'soundVolume') {
+            ConfigCtrl.applyVolume(config);
+        }
     }
 
     private function onBtnSelect(e:SetBtnEvent):void {
@@ -228,7 +232,7 @@ public class SettingStage implements IStage {
             break;
         case 'APPLY':
             GameData.I.saveData();
-            GameData.I.config.applyConfig();
+            ConfigCtrl.apply(GameData.I.config);
             GameInputer.updateConfig();
             MainGame.I.goMenu();
             break;

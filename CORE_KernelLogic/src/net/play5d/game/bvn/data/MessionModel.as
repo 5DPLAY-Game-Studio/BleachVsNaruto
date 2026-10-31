@@ -17,7 +17,6 @@
  */
 
 package net.play5d.game.bvn.data {
-import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MessionStageVO;
 import net.play5d.game.bvn.data.vos.MessionVO;
@@ -131,10 +130,6 @@ public class MessionModel {
         _curStageId++;
 
         initMession();
-
-        if (GameMode.isArcade()) {
-            GameLogic.addScoreByPassMission();
-        }
     }
 
     public function missionAllComplete():Boolean {
