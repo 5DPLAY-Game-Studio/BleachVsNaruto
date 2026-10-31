@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 環境変数 %~2 が未定義です。
+echo 環境変数 !LANG_PARAM! が未定義です。
 goto :EOF
 
 :TITLE

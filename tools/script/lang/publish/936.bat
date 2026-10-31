@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 环境变量 %~2 未定义！
+echo 环境变量 !LANG_PARAM! 未定义！
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo 正在通过 Flash/Animate 发布 BleachVsNaruto_FlashSrc……
 goto :EOF
 
 :NO_EXE
-echo 未在以下位置找到 Animate.exe / Flash.exe： %~2
+echo 未在以下位置找到 Animate.exe / Flash.exe： !LANG_PARAM!
 goto :EOF
 
 :USE_EXE
-echo 使用： %~2
+echo 使用： !LANG_PARAM!
 goto :EOF
 
 :WRITE_FAIL
-echo 写入失败： %~2
+echo 写入失败： !LANG_PARAM!
 goto :EOF
 
 :LAUNCH
@@ -64,7 +64,7 @@ echo 正在启动 Flash/Animate (JSFL)。可能会弹出窗口；请等待其完成……
 goto :EOF
 
 :NO_RESULT
-echo 缺少发布结果文件（JSFL 可能未能启动）： %~2
+echo 缺少发布结果文件（JSFL 可能未能启动）： !LANG_PARAM!
 goto :EOF
 
 :PUBLISH_SUCCESS
@@ -72,5 +72,5 @@ echo FlashSrc 发布成功！
 goto :EOF
 
 :PUBLISH_FAIL
-echo FlashSrc 发布失败。代码=%~2
+echo FlashSrc 发布失败。代码=!LANG_PARAM!
 goto :EOF

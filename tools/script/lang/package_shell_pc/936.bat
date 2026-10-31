@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 环境变量 %~2 未定义！
+echo 环境变量 !LANG_PARAM! 未定义！
 goto :EOF
 
 :TITLE
@@ -44,11 +44,11 @@ echo 正在使用 SDK adt 打包 SHELL_Pc 捆绑运行时发行版...
 goto :EOF
 
 :SDK_INFO
-echo SDK：%~2
+echo SDK：!LANG_PARAM!
 goto :EOF
 
 :OUT_INFO
-echo 输出：%~2
+echo 输出：!LANG_PARAM!
 goto :EOF
 
 :PACKAGE_FAIL
@@ -56,5 +56,5 @@ echo 打包失败！
 goto :EOF
 
 :PACKAGE_SUCCESS
-echo 打包成功：%~2
+echo 打包成功：!LANG_PARAM!
 goto :EOF

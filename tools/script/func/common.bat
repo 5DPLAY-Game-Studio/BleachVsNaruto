@@ -24,9 +24,9 @@
 :: 用法
 ::   set "BAT_HOME=%~dp0"
 ::   set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-::   call "%FUNC_COMMON%" INIT_LANG "%~n0"
-::   call "%FUNC_COMMON%" ECHO_LANG :TAG "arg"
-::   call "%FUNC_COMMON%" EXIST "path"
+::   call "!FUNC_COMMON!" INIT_LANG "%~n0"
+::   call "!FUNC_COMMON!" ECHO_LANG :TAG "arg"
+::   call "!FUNC_COMMON!" EXIST "path"
 ::   if errorlevel 1 goto END
 ::
 :: 前置条件
@@ -36,14 +36,14 @@
 ::
 :: 导出
 ::   INIT_LANG  - 按控制台代码页选择 lang 下对应脚本与 codepage，设置 LANG_BAT
-::   ECHO_LANG  - 调用 LANG_BAT 输出多语言文案
+::   ECHO_LANG  - 设置 LANG_PARAM 后相对调用 lang（避免绝对路径含 '&'）；文案用 !LANG_PARAM!
 ::   EXIST      - 路径存在返回 0，否则提示并返回 1
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 @echo off
 if "%~1"=="" exit /b 1
-call :%~1 %2 %3 %4 %5 %6 %7 %8 %9
+call :%~1 "%~2" "%~3"
 exit /b
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -74,19 +74,25 @@ set "LANG_BAT=%BAT_HOME%lang\%SCRIPT_NAME%\%CURRENT_CODEPAGE%.bat"
 if not exist "%LANG_BAT%" set "LANG_BAT="
 exit /b 0
 
-:: %1 = 语言标签（如 :TITLE），%2 = 可选参数
+:: %1 = 语言标签（如 :TITLE），%2 = 可选参数（经 LANG_PARAM 交给 lang，文案用 !LANG_PARAM!）
 :ECHO_LANG
 if "%LANG_BAT%"=="" (
 	echo ECHO_LANG [N/A]
 	exit /b 0
 )
-call "%LANG_BAT%" %1 %2
-exit /b 0
+set "LANG_PARAM=%~2"
+:: call 的绝对路径若含 '&' 会被拆命令；先 pushd 再相对调用
+pushd "!BAT_HOME!." || exit /b 1
+call "lang\!SCRIPT_NAME!\!CURRENT_CODEPAGE!.bat" %~1
+set "ECHO_EC=!errorlevel!"
+popd
+set "LANG_PARAM="
+exit /b !ECHO_EC!
 
 :: %1 = 路径；不存在则提示并返回 1
 :EXIST
-if not exist %1 (
-	call :ECHO_LANG :NOT_EXIST %1
+if not exist "%~1" (
+	call :ECHO_LANG :NOT_EXIST "%~1"
 	exit /b 1
 )
 exit /b 0

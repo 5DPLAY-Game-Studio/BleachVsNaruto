@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo Environment variable !LANG_PARAM! is undefined!
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo Publishing BleachVsNaruto_FlashSrc via Flash/Animate...
 goto :EOF
 
 :NO_EXE
-echo Animate.exe / Flash.exe not found under: %~2
+echo Animate.exe / Flash.exe not found under: !LANG_PARAM!
 goto :EOF
 
 :USE_EXE
-echo Using: %~2
+echo Using: !LANG_PARAM!
 goto :EOF
 
 :WRITE_FAIL
-echo Failed to write: %~2
+echo Failed to write: !LANG_PARAM!
 goto :EOF
 
 :LAUNCH
@@ -64,7 +64,7 @@ echo Launching Flash/Animate (JSFL). Window may open; wait until it finishes...
 goto :EOF
 
 :NO_RESULT
-echo Publish result file missing (JSFL may have failed to start): %~2
+echo Publish result file missing (JSFL may have failed to start): !LANG_PARAM!
 goto :EOF
 
 :PUBLISH_SUCCESS
@@ -72,5 +72,5 @@ echo FlashSrc publish completed successfully!
 goto :EOF
 
 :PUBLISH_FAIL
-echo FlashSrc publish failed. code=%~2
+echo FlashSrc publish failed. code=!LANG_PARAM!
 goto :EOF

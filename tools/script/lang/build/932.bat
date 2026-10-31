@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 環境変数 %~2 が未定義です。
+echo 環境変数 !LANG_PARAM! が未定義です。
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo SHELL_Dev デバッグチェーンと SHELL_Pc リリースパッケージを構築中...
 goto :EOF
 
 :COMPILE_START
-echo コンパイル中: %~2
+echo コンパイル中: !LANG_PARAM!
 goto :EOF
 
 :COMPILE_OK
-echo コンパイルに成功しました: %~2
+echo コンパイルに成功しました: !LANG_PARAM!
 goto :EOF
 
 :COMPILE_FAIL
-echo コンパイルに失敗しました: %~2
+echo コンパイルに失敗しました: !LANG_PARAM!
 goto :EOF
 
 :SYNC_START
@@ -68,7 +68,7 @@ echo アセットの同期に失敗しました！
 goto :EOF
 
 :COPY_FAIL
-echo コピーに失敗しました: %~2
+echo コピーに失敗しました: !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
@@ -88,13 +88,13 @@ echo SHELL_Pc のパッケージが完了しました！
 goto :EOF
 
 :ASDOC_EMBED_START
-echo SWC に ASDoc を埋め込んでいます: %~2
+echo SWC に ASDoc を埋め込んでいます: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_OK
-echo ASDoc を埋め込みました: %~2
+echo ASDoc を埋め込みました: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_FAIL
-echo ASDoc の埋め込みに失敗しました: %~2
+echo ASDoc の埋め込みに失敗しました: !LANG_PARAM!
 goto :EOF

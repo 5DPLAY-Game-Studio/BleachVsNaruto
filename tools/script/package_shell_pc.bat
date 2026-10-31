@@ -39,8 +39,8 @@ setlocal enabledelayedexpansion
 
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "%~n0"
-call "%FUNC_COMMON%" ECHO_LANG :TITLE ""
+call "!FUNC_COMMON!" INIT_LANG "%~n0"
+call "!FUNC_COMMON!" ECHO_LANG :TITLE ""
 
 set "REPO_ROOT=%BAT_HOME%..\.."
 for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
@@ -63,21 +63,21 @@ set "BUNDLE_NAME=launch"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if "%FLEX_HOME%"=="" (
-	call "%FUNC_COMMON%" ECHO_LANG :UNDEFINE "FLEX_HOME"
+	call "!FUNC_COMMON!" ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
 
-call "%FUNC_COMMON%" EXIST "%ADT%"
+call "!FUNC_COMMON!" EXIST "%ADT%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%OUT_SWF%"
+call "!FUNC_COMMON!" EXIST "%OUT_SWF%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%SRC_APP_XML%"
+call "!FUNC_COMMON!" EXIST "%SRC_APP_XML%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%ASSETS_DIR%"
+call "!FUNC_COMMON!" EXIST "%ASSETS_DIR%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%ICON_DIR%"
+call "!FUNC_COMMON!" EXIST "%ICON_DIR%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%KEYSTORE%"
+call "!FUNC_COMMON!" EXIST "%KEYSTORE%"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -86,9 +86,9 @@ if errorlevel 1 goto END
 
 if exist "%OUT_BUNDLE%" rd /s /q "%OUT_BUNDLE%"
 
-call "%FUNC_COMMON%" ECHO_LANG :PACKAGE_START ""
-call "%FUNC_COMMON%" ECHO_LANG :SDK_INFO "%FLEX_HOME%"
-call "%FUNC_COMMON%" ECHO_LANG :OUT_INFO "%OUT_BUNDLE%"
+call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_START ""
+call "!FUNC_COMMON!" ECHO_LANG :SDK_INFO "%FLEX_HOME%"
+call "!FUNC_COMMON!" ECHO_LANG :OUT_INFO "%OUT_BUNDLE%"
 
 pushd "%OUT_DIR%"
 call "%ADT%" -package ^
@@ -105,11 +105,11 @@ call "%ADT%" -package ^
 set ADT_ERR=!errorlevel!
 popd
 if not "!ADT_ERR!"=="0" (
-	call "%FUNC_COMMON%" ECHO_LANG :PACKAGE_FAIL ""
+	call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_FAIL ""
 	goto END
 )
 
-call "%FUNC_COMMON%" ECHO_LANG :PACKAGE_SUCCESS "%OUT_BUNDLE%"
+call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_SUCCESS "%OUT_BUNDLE%"
 exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

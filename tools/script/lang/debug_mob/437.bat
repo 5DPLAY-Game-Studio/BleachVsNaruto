@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo Environment variable !LANG_PARAM! is undefined!
 goto :EOF
 
 :TITLE
@@ -40,7 +40,7 @@ title Apache fdb (Flash Player Debugger)
 goto :EOF
 
 :TITLE_ADB
-title Apache fdb (Flash Player Debugger) - [%~2]
+title Apache fdb (Flash Player Debugger) - [!LANG_PARAM!]
 goto :EOF
 
 :NO_DEVICE
@@ -48,23 +48,23 @@ echo No device connection detected...
 goto :EOF
 
 :NO_CMD
-echo Command %~2 not found!
+echo Command !LANG_PARAM! not found!
 goto :EOF
 
 :CONNECT
-echo Connected devices: [%~2]
+echo Connected devices: [!LANG_PARAM!]
 goto :EOF
 
 :NOT_INSTALLED
-echo Application [%~2] is not installed!
+echo Application [!LANG_PARAM!] is not installed!
 goto :EOF
 
 :INSTALLING
-echo Installing application [%~2] ...
+echo Installing application [!LANG_PARAM!] ...
 goto :EOF
 
 :INSTALL_FAIL
-echo Failed to install application: [%~2]
+echo Failed to install application: [!LANG_PARAM!]
 goto :EOF
 
 :START_MSG

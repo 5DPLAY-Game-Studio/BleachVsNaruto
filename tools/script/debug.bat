@@ -37,31 +37,31 @@ setlocal enabledelayedexpansion
 :: 当前 BAT 文件所在目录（末尾带反斜杠）
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "%~n0"
+call "!FUNC_COMMON!" INIT_LANG "%~n0"
 
-call "%FUNC_COMMON%" ECHO_LANG :TITLE ""
+call "!FUNC_COMMON!" ECHO_LANG :TITLE ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 1) Flex / AIR SDK
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if "%FLEX_HOME%"=="" (
-	call "%FUNC_COMMON%" ECHO_LANG :UNDEFINE "FLEX_HOME"
+	call "!FUNC_COMMON!" ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
-call "%FUNC_COMMON%" EXIST "%FLEX_HOME%"
+call "!FUNC_COMMON!" EXIST "%FLEX_HOME%"
 if errorlevel 1 goto END
 
 set "FLEX_BIN=%FLEX_HOME%\bin"
-call "%FUNC_COMMON%" EXIST "%FLEX_BIN%"
+call "!FUNC_COMMON!" EXIST "%FLEX_BIN%"
 if errorlevel 1 goto END
 
 set "ADL=%FLEX_BIN%\adl.exe"
-call "%FUNC_COMMON%" EXIST "%ADL%"
+call "!FUNC_COMMON!" EXIST "%ADL%"
 if errorlevel 1 goto END
 
 set "RUNTIME=%FLEX_HOME%\runtimes\air\win"
-call "%FUNC_COMMON%" EXIST "%RUNTIME%"
+call "!FUNC_COMMON!" EXIST "%RUNTIME%"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -72,11 +72,11 @@ set "REPO_ROOT=%BAT_HOME%..\.."
 for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 
 set "RUN_DIR=%REPO_ROOT%\out\production\SHELL_Dev"
-call "%FUNC_COMMON%" EXIST "%RUN_DIR%"
+call "!FUNC_COMMON!" EXIST "%RUN_DIR%"
 if errorlevel 1 goto END
 
 set "APP_XML=%RUN_DIR%\FighterTester-app.xml"
-call "%FUNC_COMMON%" EXIST "%APP_XML%"
+call "!FUNC_COMMON!" EXIST "%APP_XML%"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

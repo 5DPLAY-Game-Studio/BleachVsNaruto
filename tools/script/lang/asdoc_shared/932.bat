@@ -28,15 +28,15 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 環境変数 %~2 が未定義です！
+echo 環境変数 !LANG_PARAM! が未定義です！
 goto :EOF
 
 :INVALID_MODE
-echo 無効な MODE=%~2（full または embed を使用）
+echo 無効な MODE=!LANG_PARAM!（full または embed を使用）
 goto :EOF
 
 :TITLE_FULL
@@ -52,11 +52,11 @@ echo SWC に ASDoc は既に埋め込まれています。スキップします。
 goto :EOF
 
 :SWC_NOT_FOUND
-echo SWC が見つかりません: %~2
+echo SWC が見つかりません: !LANG_PARAM!
 goto :EOF
 
 :BUILD_MODULE_FIRST
-echo 先に %~2 をビルドしてください。
+echo 先に !LANG_PARAM! をビルドしてください。
 goto :EOF
 
 :GEN_HTML_START
@@ -68,7 +68,7 @@ echo SWC 用の CORE_Shared ASDoc XML を生成しています...
 goto :EOF
 
 :OUTPUT_DIR
-echo 出力: %~2
+echo 出力: !LANG_PARAM!
 goto :EOF
 
 :GEN_FAIL
@@ -76,11 +76,11 @@ echo ASDoc の生成に失敗しました。
 goto :EOF
 
 :GEN_OK_HTML
-echo ASDoc を生成しました: %~2
+echo ASDoc を生成しました: !LANG_PARAM!
 goto :EOF
 
 :GEN_OK_XML
-echo ASDoc XML を生成しました: %~2
+echo ASDoc XML を生成しました: !LANG_PARAM!
 goto :EOF
 
 :SKIP_SWC_WARN
@@ -92,15 +92,15 @@ echo tempdita がないため SWC に埋め込めません。
 goto :EOF
 
 :SWC_MISSING_WARN
-echo [警告] SWC が見つかりません: %~2
+echo [警告] SWC が見つかりません: !LANG_PARAM!
 goto :EOF
 
 :BUILD_THEN_RERUN
-echo [警告] 先に %~2 をビルドしてから再実行し、ドキュメントを埋め込んでください。
+echo [警告] 先に !LANG_PARAM! をビルドしてから再実行し、ドキュメントを埋め込んでください。
 goto :EOF
 
 :EMBED_START
-echo SWC に ASDoc を埋め込んでいます: %~2
+echo SWC に ASDoc を埋め込んでいます: !LANG_PARAM!
 goto :EOF
 
 :EMBED_FAIL
@@ -112,7 +112,7 @@ echo ASDoc を SWC docs/ に埋め込みました
 goto :EOF
 
 :SWC_NOT_READY
-echo ASDoc 埋め込みの準備ができていません: %~2
+echo ASDoc 埋め込みの準備ができていません: !LANG_PARAM!
 goto :EOF
 
 :EMBED_LIBS_START

@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 環境変数 %~2 が未定義です。
+echo 環境変数 !LANG_PARAM! が未定義です。
 goto :EOF
 
 :TITLE
@@ -40,7 +40,7 @@ title Apache fdb（Flash Player デバッガー）
 goto :EOF
 
 :TITLE_ADB
-title Apache fdb（Flash Player デバッガー） - [%~2]
+title Apache fdb（Flash Player デバッガー） - [!LANG_PARAM!]
 goto :EOF
 
 :NO_DEVICE
@@ -48,23 +48,23 @@ echo デバイスの接続が検出されませんでした...
 goto :EOF
 
 :NO_CMD
-echo コマンド %~2 が見つかりません！
+echo コマンド !LANG_PARAM! が見つかりません！
 goto :EOF
 
 :CONNECT
-echo 接続済みデバイス: [%~2]
+echo 接続済みデバイス: [!LANG_PARAM!]
 goto :EOF
 
 :NOT_INSTALLED
-echo アプリケーション [%~2] がインストールされていません！
+echo アプリケーション [!LANG_PARAM!] がインストールされていません！
 goto :EOF
 
 :INSTALLING
-echo アプリケーション [%~2] をインストールしています...
+echo アプリケーション [!LANG_PARAM!] をインストールしています...
 goto :EOF
 
 :INSTALL_FAIL
-echo アプリケーションのインストールに失敗しました: [%~2]
+echo アプリケーションのインストールに失敗しました: [!LANG_PARAM!]
 goto :EOF
 
 :START_MSG

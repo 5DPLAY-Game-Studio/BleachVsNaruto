@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 環境変数 %~2 が未定義です。
+echo 環境変数 !LANG_PARAM! が未定義です。
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo Flash/Animate 経由で BleachVsNaruto_FlashSrc をパブリッシュ中...
 goto :EOF
 
 :NO_EXE
-echo Animate.exe / Flash.exe が次の場所に見つかりません: %~2
+echo Animate.exe / Flash.exe が次の場所に見つかりません: !LANG_PARAM!
 goto :EOF
 
 :USE_EXE
-echo 使用するもの： %~2
+echo 使用するもの： !LANG_PARAM!
 goto :EOF
 
 :WRITE_FAIL
-echo 書き込みに失敗しました: %~2
+echo 書き込みに失敗しました: !LANG_PARAM!
 goto :EOF
 
 :LAUNCH
@@ -64,7 +64,7 @@ echo Flash/Animate (JSFL) を起動します。ウィンドウが開く場合がありますので、完了
 goto :EOF
 
 :NO_RESULT
-echo パブリッシュ結果ファイルが見つかりません（JSFL の起動に失敗した可能性があります）： %~2
+echo パブリッシュ結果ファイルが見つかりません（JSFL の起動に失敗した可能性があります）： !LANG_PARAM!
 goto :EOF
 
 :PUBLISH_SUCCESS
@@ -72,5 +72,5 @@ echo FlashSrc の公開が正常に完了しました！
 goto :EOF
 
 :PUBLISH_FAIL
-echo FlashSrc の公開に失敗しました。コード=%~2
+echo FlashSrc の公開に失敗しました。コード=!LANG_PARAM!
 goto :EOF

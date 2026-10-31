@@ -36,22 +36,22 @@ setlocal enabledelayedexpansion
 :: 当前 BAT 文件所在目录（末尾带反斜杠）
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "%~n0"
+call "!FUNC_COMMON!" INIT_LANG "%~n0"
 
-call "%FUNC_COMMON%" ECHO_LANG :TITLE ""
+call "!FUNC_COMMON!" ECHO_LANG :TITLE ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 1) 参数：SWF 路径
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if "%~1"=="" (
-	call "%FUNC_COMMON%" ECHO_LANG :USAGE ""
+	call "!FUNC_COMMON!" ECHO_LANG :USAGE ""
 	goto END
 )
 
 set "SWF_FILE=%~1"
 for %%I in ("%SWF_FILE%") do set "SWF_FILE=%%~fI"
-call "%FUNC_COMMON%" EXIST "%SWF_FILE%"
+call "!FUNC_COMMON!" EXIST "%SWF_FILE%"
 if errorlevel 1 goto END
 echo SWF_FILE: %SWF_FILE%
 
@@ -60,20 +60,20 @@ echo SWF_FILE: %SWF_FILE%
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if "%FLEX_HOME%"=="" (
-	call "%FUNC_COMMON%" ECHO_LANG :UNDEFINE "FLEX_HOME"
+	call "!FUNC_COMMON!" ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
-call "%FUNC_COMMON%" EXIST "%FLEX_HOME%"
+call "!FUNC_COMMON!" EXIST "%FLEX_HOME%"
 if errorlevel 1 goto END
 echo FLEX_HOME: %FLEX_HOME%
 
 set "FLEX_BIN=%FLEX_HOME%\bin"
-call "%FUNC_COMMON%" EXIST "%FLEX_BIN%"
+call "!FUNC_COMMON!" EXIST "%FLEX_BIN%"
 if errorlevel 1 goto END
 echo FLEX_BIN: %FLEX_BIN%
 
 set "FDB=%FLEX_BIN%\fdb.bat"
-call "%FUNC_COMMON%" EXIST "%FDB%"
+call "!FUNC_COMMON!" EXIST "%FDB%"
 if errorlevel 1 goto END
 
 set "PATH=%FLEX_BIN%;%PATH%"
@@ -82,7 +82,7 @@ set "PATH=%FLEX_BIN%;%PATH%"
 :: 3) 启动 fdb（-unit：非交互批处理命令）
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-call "%FUNC_COMMON%" ECHO_LANG :START_MSG ""
+call "!FUNC_COMMON!" ECHO_LANG :START_MSG ""
 echo.
 
 (
@@ -98,7 +98,7 @@ if errorlevel 1 goto END
 timeout /t 1 >nul
 
 echo.
-call "%FUNC_COMMON%" ECHO_LANG :END_MSG ""
+call "!FUNC_COMMON!" ECHO_LANG :END_MSG ""
 exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

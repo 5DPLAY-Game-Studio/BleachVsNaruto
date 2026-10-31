@@ -28,15 +28,15 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 环境变量 %~2 未定义！
+echo 环境变量 !LANG_PARAM! 未定义！
 goto :EOF
 
 :INVALID_MODE
-echo 无效的 MODE=%~2（请使用 full 或 embed）
+echo 无效的 MODE=!LANG_PARAM!（请使用 full 或 embed）
 goto :EOF
 
 :TITLE_FULL
@@ -52,11 +52,11 @@ echo SWC 已嵌入 ASDoc，跳过。
 goto :EOF
 
 :SWC_NOT_FOUND
-echo 未找到 SWC：%~2
+echo 未找到 SWC：!LANG_PARAM!
 goto :EOF
 
 :BUILD_MODULE_FIRST
-echo 请先编译 %~2。
+echo 请先编译 !LANG_PARAM!。
 goto :EOF
 
 :GEN_HTML_START
@@ -68,7 +68,7 @@ echo 正在生成 CORE_Shared ASDoc XML（用于嵌入 SWC）...
 goto :EOF
 
 :OUTPUT_DIR
-echo 输出目录：%~2
+echo 输出目录：!LANG_PARAM!
 goto :EOF
 
 :GEN_FAIL
@@ -76,11 +76,11 @@ echo ASDoc 生成失败。
 goto :EOF
 
 :GEN_OK_HTML
-echo ASDoc 已生成：%~2
+echo ASDoc 已生成：!LANG_PARAM!
 goto :EOF
 
 :GEN_OK_XML
-echo ASDoc XML 已生成：%~2
+echo ASDoc XML 已生成：!LANG_PARAM!
 goto :EOF
 
 :SKIP_SWC_WARN
@@ -92,15 +92,15 @@ echo 缺少 tempdita，无法嵌入 SWC。
 goto :EOF
 
 :SWC_MISSING_WARN
-echo [警告] 未找到 SWC：%~2
+echo [警告] 未找到 SWC：!LANG_PARAM!
 goto :EOF
 
 :BUILD_THEN_RERUN
-echo [警告] 请先编译 %~2，再重新运行以嵌入文档。
+echo [警告] 请先编译 !LANG_PARAM!，再重新运行以嵌入文档。
 goto :EOF
 
 :EMBED_START
-echo 正在将 ASDoc 嵌入 SWC：%~2
+echo 正在将 ASDoc 嵌入 SWC：!LANG_PARAM!
 goto :EOF
 
 :EMBED_FAIL
@@ -112,7 +112,7 @@ echo ASDoc 已嵌入 SWC docs/
 goto :EOF
 
 :SWC_NOT_READY
-echo SWC 尚未就绪，无法嵌入 ASDoc：%~2
+echo SWC 尚未就绪，无法嵌入 ASDoc：!LANG_PARAM!
 goto :EOF
 
 :EMBED_LIBS_START

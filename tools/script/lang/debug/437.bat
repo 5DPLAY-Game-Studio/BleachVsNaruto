@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo Environment variable !LANG_PARAM! is undefined!
 goto :EOF
 
 :TITLE

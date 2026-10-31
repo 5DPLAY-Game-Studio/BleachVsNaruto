@@ -34,24 +34,24 @@ setlocal enabledelayedexpansion
 
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "asdoc_shared"
+call "!FUNC_COMMON!" INIT_LANG "asdoc_shared"
 
 set "REPO_ROOT=%BAT_HOME%..\.."
 for %%I in ("%REPO_ROOT%") do set "REPO_ROOT=%%~fI"
 
-call "%FUNC_COMMON%" ECHO_LANG :EMBED_LIBS_START ""
+call "!FUNC_COMMON!" ECHO_LANG :EMBED_LIBS_START ""
 
 call "%REPO_ROOT%\LIB_KyoLib\tools\embed_asdoc.bat"
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :EMBED_FAIL "LIB_KyoLib"
+	call "!FUNC_COMMON!" ECHO_LANG :EMBED_FAIL "LIB_KyoLib"
 	exit /b 1
 )
 
-call "%BAT_HOME%embed_asdoc_shared.bat"
+call "!BAT_HOME!embed_asdoc_shared.bat"
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :EMBED_FAIL "CORE_Shared"
+	call "!FUNC_COMMON!" ECHO_LANG :EMBED_FAIL "CORE_Shared"
 	exit /b 1
 )
 
-call "%FUNC_COMMON%" ECHO_LANG :EMBED_LIBS_OK ""
+call "!FUNC_COMMON!" ECHO_LANG :EMBED_LIBS_OK ""
 exit /b 0

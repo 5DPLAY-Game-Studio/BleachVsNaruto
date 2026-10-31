@@ -28,15 +28,15 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 파일이 없습니다: %~2
+echo 파일이 없습니다: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 환경 변수 %~2가 정의되지 않았습니다!
+echo 환경 변수 !LANG_PARAM!가 정의되지 않았습니다!
 goto :EOF
 
 :INVALID_MODE
-echo 잘못된 MODE=%~2 (full 또는 embed 사용)
+echo 잘못된 MODE=!LANG_PARAM! (full 또는 embed 사용)
 goto :EOF
 
 :TITLE_FULL
@@ -52,11 +52,11 @@ echo SWC에 ASDoc이 이미 삽입되어 있습니다. 건너뜁니다.
 goto :EOF
 
 :SWC_NOT_FOUND
-echo SWC를 찾을 수 없습니다: %~2
+echo SWC를 찾을 수 없습니다: !LANG_PARAM!
 goto :EOF
 
 :BUILD_MODULE_FIRST
-echo 먼저 %~2를 빌드하세요.
+echo 먼저 !LANG_PARAM!를 빌드하세요.
 goto :EOF
 
 :GEN_HTML_START
@@ -68,7 +68,7 @@ echo SWC용 CORE_Shared ASDoc XML 생성 중...
 goto :EOF
 
 :OUTPUT_DIR
-echo 출력: %~2
+echo 출력: !LANG_PARAM!
 goto :EOF
 
 :GEN_FAIL
@@ -76,11 +76,11 @@ echo ASDoc 생성에 실패했습니다.
 goto :EOF
 
 :GEN_OK_HTML
-echo ASDoc 생성됨: %~2
+echo ASDoc 생성됨: !LANG_PARAM!
 goto :EOF
 
 :GEN_OK_XML
-echo ASDoc XML 생성됨: %~2
+echo ASDoc XML 생성됨: !LANG_PARAM!
 goto :EOF
 
 :SKIP_SWC_WARN
@@ -92,15 +92,15 @@ echo tempdita가 없어 SWC에 삽입할 수 없습니다.
 goto :EOF
 
 :SWC_MISSING_WARN
-echo [경고] SWC를 찾을 수 없습니다: %~2
+echo [경고] SWC를 찾을 수 없습니다: !LANG_PARAM!
 goto :EOF
 
 :BUILD_THEN_RERUN
-echo [경고] 먼저 %~2를 빌드한 뒤 다시 실행하여 문서를 삽입하세요.
+echo [경고] 먼저 !LANG_PARAM!를 빌드한 뒤 다시 실행하여 문서를 삽입하세요.
 goto :EOF
 
 :EMBED_START
-echo SWC에 ASDoc 삽입 중: %~2
+echo SWC에 ASDoc 삽입 중: !LANG_PARAM!
 goto :EOF
 
 :EMBED_FAIL
@@ -112,7 +112,7 @@ echo ASDoc이 SWC docs/에 삽입되었습니다
 goto :EOF
 
 :SWC_NOT_READY
-echo ASDoc 삽입을 위해 SWC가 준비되지 않았습니다: %~2
+echo ASDoc 삽입을 위해 SWC가 준비되지 않았습니다: !LANG_PARAM!
 goto :EOF
 
 :EMBED_LIBS_START

@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 環境変数 %~2 が未定義です。
+echo 環境変数 !LANG_PARAM! が未定義です。
 goto :EOF
 
 :TITLE
@@ -44,11 +44,11 @@ echo SDK adt で SHELL_Pc キャプティブランタイムをパッケージ中...
 goto :EOF
 
 :SDK_INFO
-echo SDK: %~2
+echo SDK: !LANG_PARAM!
 goto :EOF
 
 :OUT_INFO
-echo 出力: %~2
+echo 出力: !LANG_PARAM!
 goto :EOF
 
 :PACKAGE_FAIL
@@ -56,5 +56,5 @@ echo パッケージに失敗しました！
 goto :EOF
 
 :PACKAGE_SUCCESS
-echo パッケージ完了: %~2
+echo パッケージ完了: !LANG_PARAM!
 goto :EOF

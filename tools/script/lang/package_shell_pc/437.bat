@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo Environment variable !LANG_PARAM! is undefined!
 goto :EOF
 
 :TITLE
@@ -44,11 +44,11 @@ echo Packaging SHELL_Pc captive runtime via SDK adt...
 goto :EOF
 
 :SDK_INFO
-echo SDK: %~2
+echo SDK: !LANG_PARAM!
 goto :EOF
 
 :OUT_INFO
-echo Output: %~2
+echo Output: !LANG_PARAM!
 goto :EOF
 
 :PACKAGE_FAIL
@@ -56,5 +56,5 @@ echo Package failed!
 goto :EOF
 
 :PACKAGE_SUCCESS
-echo Package completed successfully: %~2
+echo Package completed successfully: !LANG_PARAM!
 goto :EOF

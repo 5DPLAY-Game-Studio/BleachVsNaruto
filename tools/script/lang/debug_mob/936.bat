@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 环境变量 %~2 未定义！
+echo 环境变量 !LANG_PARAM! 未定义！
 goto :EOF
 
 :TITLE
@@ -40,7 +40,7 @@ title Apache fdb（Flash Player 调试器）
 goto :EOF
 
 :TITLE_ADB
-title Apache fdb（Flash Player 调试器） - [%~2]
+title Apache fdb（Flash Player 调试器） - [!LANG_PARAM!]
 goto :EOF
 
 :NO_DEVICE
@@ -48,23 +48,23 @@ echo 未检测到设备连接...
 goto :EOF
 
 :NO_CMD
-echo 未找到 %~2 命令！
+echo 未找到 !LANG_PARAM! 命令！
 goto :EOF
 
 :CONNECT
-echo 已连接设备：[%~2]
+echo 已连接设备：[!LANG_PARAM!]
 goto :EOF
 
 :NOT_INSTALLED
-echo 应用 [%~2] 未安装！
+echo 应用 [!LANG_PARAM!] 未安装！
 goto :EOF
 
 :INSTALLING
-echo 正在安装应用 [%~2] ...
+echo 正在安装应用 [!LANG_PARAM!] ...
 goto :EOF
 
 :INSTALL_FAIL
-echo 应用安装失败：[%~2]
+echo 应用安装失败：[!LANG_PARAM!]
 goto :EOF
 
 :START_MSG

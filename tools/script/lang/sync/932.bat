@@ -28,7 +28,7 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo ファイルが存在しません: %~2
+echo ファイルが存在しません: !LANG_PARAM!
 goto :EOF
 
 :SYNC_SUCCESS
@@ -36,18 +36,18 @@ echo アセットの同期に成功しました!
 goto :EOF
 
 :DEL_DIR_SUCCESS
-echo ディレクトリは正常に削除されました: %~2
+echo ディレクトリは正常に削除されました: !LANG_PARAM!
 goto :EOF
 
 :DEL_DIR_FAIL
-echo ディレクトリの削除に失敗しました: %~2
+echo ディレクトリの削除に失敗しました: !LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_SUCCESS
-echo ディレクトリは正常にコピーされました: %~2
+echo ディレクトリは正常にコピーされました: !LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_FAIL
-echo ディレクトリのコピーに失敗しました: %~2
+echo ディレクトリのコピーに失敗しました: !LANG_PARAM!
 goto :EOF
 

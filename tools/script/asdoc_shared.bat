@@ -59,18 +59,18 @@ setlocal enabledelayedexpansion
 
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "%~n0"
+call "!FUNC_COMMON!" INIT_LANG "%~n0"
 
 if /i "%MODE%"=="" set MODE=full
 if /i not "%MODE%"=="embed" if /i not "%MODE%"=="full" (
-	call "%FUNC_COMMON%" ECHO_LANG :INVALID_MODE "%MODE%"
+	call "!FUNC_COMMON!" ECHO_LANG :INVALID_MODE "%MODE%"
 	goto END
 )
 
 if /i "%MODE%"=="embed" (
-	call "%FUNC_COMMON%" ECHO_LANG :TITLE_EMBED ""
+	call "!FUNC_COMMON!" ECHO_LANG :TITLE_EMBED ""
 ) else (
-	call "%FUNC_COMMON%" ECHO_LANG :TITLE_FULL ""
+	call "!FUNC_COMMON!" ECHO_LANG :TITLE_FULL ""
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -78,22 +78,22 @@ if /i "%MODE%"=="embed" (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if "%FLEX_HOME%"=="" (
-	call "%FUNC_COMMON%" ECHO_LANG :UNDEFINE "FLEX_HOME"
+	call "!FUNC_COMMON!" ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
-call "%FUNC_COMMON%" EXIST "%FLEX_HOME%"
+call "!FUNC_COMMON!" EXIST "%FLEX_HOME%"
 if errorlevel 1 goto END
 
 set "FLEX_BIN=%FLEX_HOME%\bin"
-call "%FUNC_COMMON%" EXIST "%FLEX_BIN%"
+call "!FUNC_COMMON!" EXIST "%FLEX_BIN%"
 if errorlevel 1 goto END
 
 set "ASDOC_JAR=%FLEX_HOME%\lib\asdoc.jar"
-call "%FUNC_COMMON%" EXIST "%ASDOC_JAR%"
+call "!FUNC_COMMON!" EXIST "%ASDOC_JAR%"
 if errorlevel 1 goto END
 
 set "FLEX_FRAMEWORKS=%FLEX_HOME%\frameworks"
-call "%FUNC_COMMON%" EXIST "%FLEX_FRAMEWORKS%"
+call "!FUNC_COMMON!" EXIST "%FLEX_FRAMEWORKS%"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -109,13 +109,13 @@ set "ASDOC_PS=%BAT_HOME%ps"
 
 set "SHARED_SRC=%MODULE_ROOT%\src"
 set "SHARED_GLOBAL=%MODULE_ROOT%\global"
-call "%FUNC_COMMON%" EXIST "%SHARED_SRC%"
+call "!FUNC_COMMON!" EXIST "%SHARED_SRC%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%SHARED_GLOBAL%"
+call "!FUNC_COMMON!" EXIST "%SHARED_GLOBAL%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%ASDOC_HOME%"
+call "!FUNC_COMMON!" EXIST "%ASDOC_HOME%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%ASDOC_PS%"
+call "!FUNC_COMMON!" EXIST "%ASDOC_PS%"
 if errorlevel 1 goto END
 
 if "%SWC_PATH%"=="" (
@@ -134,7 +134,7 @@ if /i "%IF_MISSING%"=="1" (
 	if exist "%SWC_PATH%" (
 		powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_PS%\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TestHasDocs >nul 2>&1
 		if not errorlevel 1 (
-			call "%FUNC_COMMON%" ECHO_LANG :SKIP_ALREADY_EMBEDDED ""
+			call "!FUNC_COMMON!" ECHO_LANG :SKIP_ALREADY_EMBEDDED ""
 			echo.
 			exit /b 0
 		)
@@ -144,8 +144,8 @@ if /i "%IF_MISSING%"=="1" (
 :: embed 模式必须已有 SWC
 if /i "%MODE%"=="embed" (
 	if not exist "%SWC_PATH%" (
-		call "%FUNC_COMMON%" ECHO_LANG :SWC_NOT_FOUND "%SWC_PATH%"
-		call "%FUNC_COMMON%" ECHO_LANG :BUILD_MODULE_FIRST "CORE_Shared"
+		call "!FUNC_COMMON!" ECHO_LANG :SWC_NOT_FOUND "%SWC_PATH%"
+		call "!FUNC_COMMON!" ECHO_LANG :BUILD_MODULE_FIRST "CORE_Shared"
 		goto END
 	)
 )
@@ -161,7 +161,7 @@ set "ASDOC_ZH_TERMS=%ASDOC_HOME%\zh_CN\ASDoc_terms.xml"
 
 powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_PS%\build_terms_zh.ps1" -OutDir "%ASDOC_HOME%\zh_CN"
 if not exist "%ASDOC_ZH_TERMS%" (
-	call "%FUNC_COMMON%" ECHO_LANG :GEN_FAIL ""
+	call "!FUNC_COMMON!" ECHO_LANG :GEN_FAIL ""
 	goto END
 )
 
@@ -170,18 +170,18 @@ if not exist "%ASDOC_TMPL%\asdoc-util.xslt" (
 	robocopy "%FLEX_HOME%\asdoc\templates" "%ASDOC_TMPL%" /E /NFL /NDL /NJH /NJS /nc /ns /np >nul
 	set RC=!ERRORLEVEL!
 	if !RC! GEQ 8 (
-		call "%FUNC_COMMON%" ECHO_LANG :GEN_FAIL ""
+		call "!FUNC_COMMON!" ECHO_LANG :GEN_FAIL ""
 		goto END
 	)
 )
 copy /Y "%ASDOC_ZH_TERMS%" "%ASDOC_TMPL%\ASDoc_terms.xml" >nul
 
 if /i "%MODE%"=="embed" (
-	call "%FUNC_COMMON%" ECHO_LANG :GEN_XML_START ""
+	call "!FUNC_COMMON!" ECHO_LANG :GEN_XML_START ""
 ) else (
-	call "%FUNC_COMMON%" ECHO_LANG :GEN_HTML_START ""
+	call "!FUNC_COMMON!" ECHO_LANG :GEN_HTML_START ""
 )
-call "%FUNC_COMMON%" ECHO_LANG :OUTPUT_DIR "%DOC_OUT%"
+call "!FUNC_COMMON!" ECHO_LANG :OUTPUT_DIR "%DOC_OUT%"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 4) 运行 asdoc.jar
@@ -191,6 +191,13 @@ call "%FUNC_COMMON%" ECHO_LANG :OUTPUT_DIR "%DOC_OUT%"
 :: 导致 SWC docs/ 过薄。embed 仅改变 -output 目录。
 ::
 
+set "REAL_DOC_OUT=!DOC_OUT!"
+set "ASDOC_DRIVE_BAT=%BAT_HOME%func\asdoc_drive.bat"
+if exist "!ASDOC_DRIVE_BAT!" (
+	call "!ASDOC_DRIVE_BAT!" MOUNT
+	if errorlevel 1 goto END
+)
+if defined ASDOC_DRIVE call :APPLY_ASDOC_DRIVE
 java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
 	+flexlib="%FLEX_FRAMEWORKS%" ^
 	-templates-path "%ASDOC_TMPL%" ^
@@ -204,15 +211,18 @@ java -Xmx1024m -classpath "%ASDOC_JAR%" flex2.tools.ASDoc ^
 	-footer "5DPLAY Game Studio - CORE_Shared" ^
 	-output "%DOC_OUT%"
 
-if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :GEN_FAIL ""
+set "JAVA_ERR=!ERRORLEVEL!"
+if defined ASDOC_DRIVE_BAT if exist "!ASDOC_DRIVE_BAT!" call "!ASDOC_DRIVE_BAT!" UNMOUNT
+set "DOC_OUT=!REAL_DOC_OUT!"
+if not "!JAVA_ERR!"=="0" (
+	call "!FUNC_COMMON!" ECHO_LANG :GEN_FAIL ""
 	goto END
 )
 
 if /i "%MODE%"=="full" (
-	call "%FUNC_COMMON%" ECHO_LANG :GEN_OK_HTML "%DOC_OUT%\index.html"
+	call "!FUNC_COMMON!" ECHO_LANG :GEN_OK_HTML "%DOC_OUT%\index.html"
 ) else (
-	call "%FUNC_COMMON%" ECHO_LANG :GEN_OK_XML "%DOC_OUT%\tempdita"
+	call "!FUNC_COMMON!" ECHO_LANG :GEN_OK_XML "%DOC_OUT%\tempdita"
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -222,29 +232,29 @@ if /i "%MODE%"=="full" (
 set "TEMPDITA=%DOC_OUT%\tempdita"
 
 if /i "%SKIP_SWC%"=="1" (
-	call "%FUNC_COMMON%" ECHO_LANG :SKIP_SWC_WARN ""
+	call "!FUNC_COMMON!" ECHO_LANG :SKIP_SWC_WARN ""
 	goto AFTER_SWC
 )
 
 if not exist "%TEMPDITA%" (
-	call "%FUNC_COMMON%" ECHO_LANG :TEMPDITA_MISSING ""
+	call "!FUNC_COMMON!" ECHO_LANG :TEMPDITA_MISSING ""
 	goto END
 )
 
 if not exist "%SWC_PATH%" (
-	call "%FUNC_COMMON%" ECHO_LANG :SWC_MISSING_WARN "%SWC_PATH%"
-	call "%FUNC_COMMON%" ECHO_LANG :BUILD_THEN_RERUN "CORE_Shared"
+	call "!FUNC_COMMON!" ECHO_LANG :SWC_MISSING_WARN "%SWC_PATH%"
+	call "!FUNC_COMMON!" ECHO_LANG :BUILD_THEN_RERUN "CORE_Shared"
 	if /i "%MODE%"=="embed" goto END
 	goto AFTER_SWC
 )
 
-call "%FUNC_COMMON%" ECHO_LANG :EMBED_START "%SWC_PATH%"
+call "!FUNC_COMMON!" ECHO_LANG :EMBED_START "%SWC_PATH%"
 powershell -NoProfile -ExecutionPolicy Bypass -File "%ASDOC_PS%\inject_docs_swc.ps1" -SwcPath "%SWC_PATH%" -TempDitaDir "%TEMPDITA%"
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :EMBED_FAIL ""
+	call "!FUNC_COMMON!" ECHO_LANG :EMBED_FAIL ""
 	goto END
 )
-call "%FUNC_COMMON%" ECHO_LANG :EMBED_OK ""
+call "!FUNC_COMMON!" ECHO_LANG :EMBED_OK ""
 
 :AFTER_SWC
 
@@ -258,5 +268,16 @@ exit /b 0
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :END
+if defined ASDOC_DRIVE_BAT if exist "!ASDOC_DRIVE_BAT!" call "!ASDOC_DRIVE_BAT!" UNMOUNT
 if /i not "%NO_PAUSE%"=="1" pause >nul
 exit /b 1
+
+:: Point asdoc.jar at the subst drive so sourcefile XML has no &.
+:APPLY_ASDOC_DRIVE
+set "SHARED_SRC=!ASDOC_DRIVE!:\CORE_Shared\src"
+set "SHARED_GLOBAL=!ASDOC_DRIVE!:\CORE_Shared\global"
+set "ASDOC_TMPL=!ASDOC_DRIVE!:\tools\script\asdoc\templates"
+set "DOC_REL=out\asdoc"
+if /i "!MODE!"=="embed" set "DOC_REL=out\asdoc_embed"
+set "DOC_OUT=!ASDOC_DRIVE!:\CORE_Shared\!DOC_REL!"
+exit /b 0

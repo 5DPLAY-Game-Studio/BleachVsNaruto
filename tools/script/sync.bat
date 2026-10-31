@@ -38,7 +38,7 @@ setlocal enabledelayedexpansion
 :: 当前 BAT 文件所在目录（末尾带反斜杠）
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "%~n0"
+call "!FUNC_COMMON!" INIT_LANG "%~n0"
 
 :: 工作目录：调用方当前目录（应为 shared）
 set "WORK_SPACE=%CD%"
@@ -54,9 +54,9 @@ set TMP_NAME=_tmp
 set "ASSETS_DIR=%WORK_SPACE%\%ASSETS_NAME%\%ASSETS_NAME%"
 set "TMP_DIR=%WORK_SPACE%\%TMP_NAME%"
 
-call "%FUNC_COMMON%" EXIST "%ASSETS_DIR%"
+call "!FUNC_COMMON!" EXIST "%ASSETS_DIR%"
 if errorlevel 1 goto END
-call "%FUNC_COMMON%" EXIST "%TMP_DIR%"
+call "!FUNC_COMMON!" EXIST "%TMP_DIR%"
 if errorlevel 1 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -67,7 +67,7 @@ if errorlevel 1 goto END
 set "SHELL_LIST=pc dev mob"
 
 for %%S in (%SHELL_LIST%) do (
-	call "%FUNC_COMMON%" EXIST "%TMP_DIR%\%%S"
+	call "!FUNC_COMMON!" EXIST "%TMP_DIR%\%%S"
 	if errorlevel 1 goto END
 )
 
@@ -86,7 +86,7 @@ for %%S in (%SHELL_LIST%) do (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 echo.
-call "%FUNC_COMMON%" ECHO_LANG :SYNC_SUCCESS ""
+call "!FUNC_COMMON!" ECHO_LANG :SYNC_SUCCESS ""
 exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -99,20 +99,20 @@ exit /b 1
 if not exist "%~1" exit /b 0
 rd /s /q "%~1" >nul 2>nul
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :DEL_DIR_FAIL "%~1"
+	call "!FUNC_COMMON!" ECHO_LANG :DEL_DIR_FAIL "%~1"
 	exit /b 1
 )
-call "%FUNC_COMMON%" ECHO_LANG :DEL_DIR_SUCCESS "%~1"
+call "!FUNC_COMMON!" ECHO_LANG :DEL_DIR_SUCCESS "%~1"
 exit /b 0
 
 :: 复制目录树到目标（%1=源，%2=目标）
 :COPY
 xcopy "%~1" "%~2\" /E /I /Y >nul
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :COPY_DIR_FAIL "%~2"
+	call "!FUNC_COMMON!" ECHO_LANG :COPY_DIR_FAIL "%~2"
 	exit /b 1
 )
-call "%FUNC_COMMON%" ECHO_LANG :COPY_DIR_SUCCESS "%~2"
+call "!FUNC_COMMON!" ECHO_LANG :COPY_DIR_SUCCESS "%~2"
 exit /b 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

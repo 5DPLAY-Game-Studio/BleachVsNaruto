@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo Environment variable !LANG_PARAM! is undefined!
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo Building SHELL_Dev debug chain and SHELL_Pc release package...
 goto :EOF
 
 :COMPILE_START
-echo Compiling: %~2
+echo Compiling: !LANG_PARAM!
 goto :EOF
 
 :COMPILE_OK
-echo Compiled successfully: %~2
+echo Compiled successfully: !LANG_PARAM!
 goto :EOF
 
 :COMPILE_FAIL
-echo Compile failed: %~2
+echo Compile failed: !LANG_PARAM!
 goto :EOF
 
 :SYNC_START
@@ -68,7 +68,7 @@ echo Asset sync failed!
 goto :EOF
 
 :COPY_FAIL
-echo Failed to copy: %~2
+echo Failed to copy: !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
@@ -88,13 +88,13 @@ echo SHELL_Pc package completed successfully!
 goto :EOF
 
 :ASDOC_EMBED_START
-echo Embedding ASDoc into SWC: %~2
+echo Embedding ASDoc into SWC: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_OK
-echo ASDoc embedded: %~2
+echo ASDoc embedded: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_FAIL
-echo ASDoc embed failed: %~2
+echo ASDoc embed failed: !LANG_PARAM!
 goto :EOF

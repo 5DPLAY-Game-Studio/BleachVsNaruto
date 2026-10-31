@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 环境变量 %~2 未定义！
+echo 环境变量 !LANG_PARAM! 未定义！
 goto :EOF
 
 :TITLE

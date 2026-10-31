@@ -38,9 +38,9 @@ setlocal enabledelayedexpansion
 :: 当前 BAT 文件所在目录（末尾带反斜杠）
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
-call "%FUNC_COMMON%" INIT_LANG "%~n0"
+call "!FUNC_COMMON!" INIT_LANG "%~n0"
 
-call "%FUNC_COMMON%" ECHO_LANG :TITLE ""
+call "!FUNC_COMMON!" ECHO_LANG :TITLE ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 1) 调试参数 / 路径
@@ -64,19 +64,19 @@ set "TMP_ADB_DEVICES=%LOG_DIR%\adb_devices.txt"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if "%FLEX_HOME%"=="" (
-	call "%FUNC_COMMON%" ECHO_LANG :UNDEFINE "FLEX_HOME"
+	call "!FUNC_COMMON!" ECHO_LANG :UNDEFINE "FLEX_HOME"
 	goto END
 )
-call "%FUNC_COMMON%" EXIST "%FLEX_HOME%"
+call "!FUNC_COMMON!" EXIST "%FLEX_HOME%"
 if errorlevel 1 goto END
 echo FLEX_HOME: %FLEX_HOME%
 
 set "FLEX_BIN=%FLEX_HOME%\bin"
-call "%FUNC_COMMON%" EXIST "%FLEX_BIN%"
+call "!FUNC_COMMON!" EXIST "%FLEX_BIN%"
 if errorlevel 1 goto END
 
 set "FDB=%FLEX_BIN%\fdb.bat"
-call "%FUNC_COMMON%" EXIST "%FDB%"
+call "!FUNC_COMMON!" EXIST "%FDB%"
 if errorlevel 1 goto END
 
 set "PATH=%FLEX_BIN%;%PATH%"
@@ -111,7 +111,7 @@ if exist "%TMP_ADB_DEVICES%" del /f /q "%TMP_ADB_DEVICES%" >nul 2>nul
 echo.
 
 if !DEVICE_COUNT!==0 (
-	call "%FUNC_COMMON%" ECHO_LANG :NO_DEVICE ""
+	call "!FUNC_COMMON!" ECHO_LANG :NO_DEVICE ""
 	goto END
 )
 
@@ -119,20 +119,20 @@ if !DEVICE_COUNT!==0 (
 :: 4) 安装（若需） / 端口转发 / 启动应用
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-call "%FUNC_COMMON%" ECHO_LANG :TITLE_ADB "!DEVICE_ID!"
-call "%FUNC_COMMON%" ECHO_LANG :CONNECT "!DEVICE_ID!"
+call "!FUNC_COMMON!" ECHO_LANG :TITLE_ADB "!DEVICE_ID!"
+call "!FUNC_COMMON!" ECHO_LANG :CONNECT "!DEVICE_ID!"
 
 adb -s "!DEVICE_ID!" shell pm path %DBG_PACKAGE% | findstr "package:" >nul 2>nul
 if not errorlevel 1 goto INSTALLED
 
-call "%FUNC_COMMON%" ECHO_LANG :NOT_INSTALLED "%DBG_PACKAGE%"
-call "%FUNC_COMMON%" EXIST "%DBG_FILE%"
+call "!FUNC_COMMON!" ECHO_LANG :NOT_INSTALLED "%DBG_PACKAGE%"
+call "!FUNC_COMMON!" EXIST "%DBG_FILE%"
 if errorlevel 1 goto END
 
-call "%FUNC_COMMON%" ECHO_LANG :INSTALLING "%DBG_PACKAGE%"
+call "!FUNC_COMMON!" ECHO_LANG :INSTALLING "%DBG_PACKAGE%"
 adb -s "!DEVICE_ID!" install "%DBG_FILE%"
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :INSTALL_FAIL "%DBG_PACKAGE%"
+	call "!FUNC_COMMON!" ECHO_LANG :INSTALL_FAIL "%DBG_PACKAGE%"
 	goto END
 )
 
@@ -148,7 +148,7 @@ adb -s "!DEVICE_ID!" shell am start -n %DBG_ACTIVITY% >nul
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :LOOP
-call "%FUNC_COMMON%" ECHO_LANG :START_MSG ""
+call "!FUNC_COMMON!" ECHO_LANG :START_MSG ""
 echo.
 
 (
@@ -162,7 +162,7 @@ echo.
 timeout /t 1 >nul
 
 echo.
-call "%FUNC_COMMON%" ECHO_LANG :END_MSG ""
+call "!FUNC_COMMON!" ECHO_LANG :END_MSG ""
 goto LOOP
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -175,7 +175,7 @@ exit /b 1
 :CHK_CMD
 where %1 >nul 2>nul
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :NO_CMD %1
+	call "!FUNC_COMMON!" ECHO_LANG :NO_CMD %1
 	exit /b 1
 )
 exit /b 0

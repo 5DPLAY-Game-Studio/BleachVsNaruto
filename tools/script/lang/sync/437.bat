@@ -28,7 +28,7 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :SYNC_SUCCESS
@@ -36,18 +36,18 @@ echo Synchronizing assets successfully!
 goto :EOF
 
 :DEL_DIR_SUCCESS
-echo The directory was deleted successfully: %~2
+echo The directory was deleted successfully: !LANG_PARAM!
 goto :EOF
 
 :DEL_DIR_FAIL
-echo Failed to delete directory: %~2
+echo Failed to delete directory: !LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_SUCCESS
-echo The directory was copied successfully: %~2
+echo The directory was copied successfully: !LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_FAIL
-echo Failed to copy directory: %~2
+echo Failed to copy directory: !LANG_PARAM!
 goto :EOF
 

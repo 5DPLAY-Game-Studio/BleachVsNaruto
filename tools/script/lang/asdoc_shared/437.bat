@@ -28,15 +28,15 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo File does not exist: %~2
+echo File does not exist: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo Environment variable %~2 is undefined!
+echo Environment variable !LANG_PARAM! is undefined!
 goto :EOF
 
 :INVALID_MODE
-echo Invalid MODE=%~2 (use full or embed)
+echo Invalid MODE=!LANG_PARAM! (use full or embed)
 goto :EOF
 
 :TITLE_FULL
@@ -52,11 +52,11 @@ echo ASDoc already embedded in SWC; skip.
 goto :EOF
 
 :SWC_NOT_FOUND
-echo SWC not found: %~2
+echo SWC not found: !LANG_PARAM!
 goto :EOF
 
 :BUILD_MODULE_FIRST
-echo Build %~2 first.
+echo Build !LANG_PARAM! first.
 goto :EOF
 
 :GEN_HTML_START
@@ -68,7 +68,7 @@ echo Generating CORE_Shared ASDoc XML for SWC...
 goto :EOF
 
 :OUTPUT_DIR
-echo Output: %~2
+echo Output: !LANG_PARAM!
 goto :EOF
 
 :GEN_FAIL
@@ -76,11 +76,11 @@ echo ASDoc generation failed.
 goto :EOF
 
 :GEN_OK_HTML
-echo ASDoc generated: %~2
+echo ASDoc generated: !LANG_PARAM!
 goto :EOF
 
 :GEN_OK_XML
-echo ASDoc XML generated: %~2
+echo ASDoc XML generated: !LANG_PARAM!
 goto :EOF
 
 :SKIP_SWC_WARN
@@ -92,15 +92,15 @@ echo tempdita missing; cannot embed into SWC.
 goto :EOF
 
 :SWC_MISSING_WARN
-echo [WARN] SWC not found: %~2
+echo [WARN] SWC not found: !LANG_PARAM!
 goto :EOF
 
 :BUILD_THEN_RERUN
-echo [WARN] Build %~2 first, then re-run to embed docs.
+echo [WARN] Build !LANG_PARAM! first, then re-run to embed docs.
 goto :EOF
 
 :EMBED_START
-echo Embedding ASDoc into SWC: %~2
+echo Embedding ASDoc into SWC: !LANG_PARAM!
 goto :EOF
 
 :EMBED_FAIL
@@ -112,7 +112,7 @@ echo ASDoc embedded into SWC docs/
 goto :EOF
 
 :SWC_NOT_READY
-echo SWC not ready for ASDoc embed: %~2
+echo SWC not ready for ASDoc embed: !LANG_PARAM!
 goto :EOF
 
 :EMBED_LIBS_START

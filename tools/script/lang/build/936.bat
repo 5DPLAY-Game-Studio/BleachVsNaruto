@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 环境变量 %~2 未定义！
+echo 环境变量 !LANG_PARAM! 未定义！
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo 正在构建 SHELL_Dev 调试链与 SHELL_Pc 发行包...
 goto :EOF
 
 :COMPILE_START
-echo 正在编译： %~2
+echo 正在编译： !LANG_PARAM!
 goto :EOF
 
 :COMPILE_OK
-echo 编译成功： %~2
+echo 编译成功： !LANG_PARAM!
 goto :EOF
 
 :COMPILE_FAIL
-echo 编译失败： %~2
+echo 编译失败： !LANG_PARAM!
 goto :EOF
 
 :SYNC_START
@@ -68,7 +68,7 @@ echo 素材同步失败！
 goto :EOF
 
 :COPY_FAIL
-echo 复制失败： %~2
+echo 复制失败： !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
@@ -88,13 +88,13 @@ echo SHELL_Pc 打包成功！
 goto :EOF
 
 :ASDOC_EMBED_START
-echo 正在将 ASDoc 嵌入 SWC: %~2
+echo 正在将 ASDoc 嵌入 SWC: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_OK
-echo ASDoc 已嵌入: %~2
+echo ASDoc 已嵌入: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_FAIL
-echo ASDoc 嵌入失败: %~2
+echo ASDoc 嵌入失败: !LANG_PARAM!
 goto :EOF

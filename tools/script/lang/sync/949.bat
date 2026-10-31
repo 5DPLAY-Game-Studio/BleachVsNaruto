@@ -28,7 +28,7 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 파일이 존재하지 않습니다: %~2
+echo 파일이 존재하지 않습니다: !LANG_PARAM!
 goto :EOF
 
 :SYNC_SUCCESS
@@ -36,18 +36,18 @@ echo 자산 동기화가 성공적으로 완료되었습니다!
 goto :EOF
 
 :DEL_DIR_SUCCESS
-echo 디렉토리가 성공적으로 삭제되었습니다: %~2
+echo 디렉토리가 성공적으로 삭제되었습니다: !LANG_PARAM!
 goto :EOF
 
 :DEL_DIR_FAIL
-echo 디렉토리 삭제에 실패했습니다: %~2
+echo 디렉토리 삭제에 실패했습니다: !LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_SUCCESS
-echo 디렉토리가 성공적으로 복사되었습니다: %~2
+echo 디렉토리가 성공적으로 복사되었습니다: !LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_FAIL
-echo 디렉토리 복사에 실패했습니다: %~2
+echo 디렉토리 복사에 실패했습니다: !LANG_PARAM!
 goto :EOF
 

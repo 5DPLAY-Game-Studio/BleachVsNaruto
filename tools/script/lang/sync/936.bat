@@ -28,7 +28,7 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 文件不存在：%~2
+echo 文件不存在：!LANG_PARAM!
 goto :EOF
 
 :SYNC_SUCCESS
@@ -36,18 +36,18 @@ echo 同步素材成功！
 goto :EOF
 
 :DEL_DIR_SUCCESS
-echo 删除目录成功：%~2
+echo 删除目录成功：!LANG_PARAM!
 goto :EOF
 
 :DEL_DIR_FAIL
-echo 删除目录失败：%~2
+echo 删除目录失败：!LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_SUCCESS
-echo 复制目录成功：%~2
+echo 复制目录成功：!LANG_PARAM!
 goto :EOF
 
 :COPY_DIR_FAIL
-echo 复制目录失败：%~2
+echo 复制目录失败：!LANG_PARAM!
 goto :EOF
 

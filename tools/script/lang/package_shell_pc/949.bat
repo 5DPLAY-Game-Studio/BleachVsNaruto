@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 파일이 존재하지 않습니다: %~2
+echo 파일이 존재하지 않습니다: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 환경 변수 %~2가 정의되지 않았습니다!
+echo 환경 변수 !LANG_PARAM!가 정의되지 않았습니다!
 goto :EOF
 
 :TITLE
@@ -44,11 +44,11 @@ echo SDK adt로 SHELL_Pc 캡티브 런타임 패키징 중...
 goto :EOF
 
 :SDK_INFO
-echo SDK: %~2
+echo SDK: !LANG_PARAM!
 goto :EOF
 
 :OUT_INFO
-echo 출력: %~2
+echo 출력: !LANG_PARAM!
 goto :EOF
 
 :PACKAGE_FAIL
@@ -56,5 +56,5 @@ echo 패키징 실패!
 goto :EOF
 
 :PACKAGE_SUCCESS
-echo 패키징 성공: %~2
+echo 패키징 성공: !LANG_PARAM!
 goto :EOF

@@ -37,7 +37,7 @@ setlocal enabledelayedexpansion
 set "BAT_HOME=%~dp0"
 set "FUNC_COMMON=%BAT_HOME%func\common.bat"
 :: 复用 asdoc_shared 文案（含 :SWC_NOT_READY）
-call "%FUNC_COMMON%" INIT_LANG "asdoc_shared"
+call "!FUNC_COMMON!" INIT_LANG "asdoc_shared"
 
 set "MODE=embed"
 set "NO_PAUSE=1"
@@ -56,9 +56,9 @@ if not "%~1"=="" (
 :: IDEA Make 后可能短暂占用 SWC
 powershell -NoProfile -ExecutionPolicy Bypass -File "%BAT_HOME%ps\wait_swc_ready.ps1" -SwcPath "!SWC_PATH!" -TimeoutSec 45
 if errorlevel 1 (
-	call "%FUNC_COMMON%" ECHO_LANG :SWC_NOT_READY "!SWC_PATH!"
+	call "!FUNC_COMMON!" ECHO_LANG :SWC_NOT_READY "!SWC_PATH!"
 	exit /b 1
 )
 
-call "%BAT_HOME%asdoc_shared.bat"
+call "!BAT_HOME!asdoc_shared.bat"
 exit /b %ERRORLEVEL%

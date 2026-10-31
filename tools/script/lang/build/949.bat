@@ -32,11 +32,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 파일이 존재하지 않습니다: %~2
+echo 파일이 존재하지 않습니다: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 환경 변수 %~2가 정의되지 않았습니다!
+echo 환경 변수 !LANG_PARAM!가 정의되지 않았습니다!
 goto :EOF
 
 :TITLE
@@ -48,15 +48,15 @@ echo SHELL_Dev 디버그 체인과 SHELL_Pc 릴리스 패키지를 구축하는 중...
 goto :EOF
 
 :COMPILE_START
-echo 컴파일 중: %~2
+echo 컴파일 중: !LANG_PARAM!
 goto :EOF
 
 :COMPILE_OK
-echo 컴파일 성공: %~2
+echo 컴파일 성공: !LANG_PARAM!
 goto :EOF
 
 :COMPILE_FAIL
-echo 컴파일 실패: %~2
+echo 컴파일 실패: !LANG_PARAM!
 goto :EOF
 
 :SYNC_START
@@ -68,7 +68,7 @@ echo 자산 동기화에 실패했습니다!
 goto :EOF
 
 :COPY_FAIL
-echo 복사 실패: %~2
+echo 복사 실패: !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
@@ -88,13 +88,13 @@ echo SHELL_Pc 패키징 성공!
 goto :EOF
 
 :ASDOC_EMBED_START
-echo SWC에 ASDoc 삽입 중: %~2
+echo SWC에 ASDoc 삽입 중: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_OK
-echo ASDoc 삽입 완료: %~2
+echo ASDoc 삽입 완료: !LANG_PARAM!
 goto :EOF
 
 :ASDOC_EMBED_FAIL
-echo ASDoc 삽입 실패: %~2
+echo ASDoc 삽입 실패: !LANG_PARAM!
 goto :EOF

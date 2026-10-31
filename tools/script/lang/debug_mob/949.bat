@@ -28,11 +28,11 @@ if "%1"=="" (
 goto %1
 
 :NOT_EXIST
-echo 파일이 존재하지 않습니다: %~2
+echo 파일이 존재하지 않습니다: !LANG_PARAM!
 goto :EOF
 
 :UNDEFINE
-echo 환경 변수 %~2가 정의되지 않았습니다!
+echo 환경 변수 !LANG_PARAM!가 정의되지 않았습니다!
 goto :EOF
 
 :TITLE
@@ -40,7 +40,7 @@ title Apache fdb (Flash Player 디버거)
 goto :EOF
 
 :TITLE_ADB
-title Apache fdb (Flash Player 디버거) - [%~2]
+title Apache fdb (Flash Player 디버거) - [!LANG_PARAM!]
 goto :EOF
 
 :NO_DEVICE
@@ -48,23 +48,23 @@ echo 기기 연결이 감지되지 않았습니다...
 goto :EOF
 
 :NO_CMD
-echo 명령어 %~2를 찾을 수 없습니다!
+echo 명령어 !LANG_PARAM!를 찾을 수 없습니다!
 goto :EOF
 
 :CONNECT
-echo 연결된 기기: [%~2]
+echo 연결된 기기: [!LANG_PARAM!]
 goto :EOF
 
 :NOT_INSTALLED
-echo [%~2] 애플리케이션이 설치되어 있지 않습니다!
+echo [!LANG_PARAM!] 애플리케이션이 설치되어 있지 않습니다!
 goto :EOF
 
 :INSTALLING
-echo 애플리케이션 설치 중 [%~2] ...
+echo 애플리케이션 설치 중 [!LANG_PARAM!] ...
 goto :EOF
 
 :INSTALL_FAIL
-echo 애플리케이션 설치 실패: [%~2]
+echo 애플리케이션 설치 실패: [!LANG_PARAM!]
 goto :EOF
 
 :START_MSG
