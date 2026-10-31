@@ -24,10 +24,8 @@ import flash.utils.setTimeout;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.interfaces.lan.ILanServerLockLink;
 import net.play5d.game.bvn.ctrler.lan.LanGameMenuCtrl;
-import net.play5d.game.bvn.ctrler.lan.LanServerSyncCore;
-import net.play5d.game.bvn.ctrler.lan.LockFrameServerLogic;
-import net.play5d.game.bvn.ctrler.lan.SelectFighterServerLogic;
-import net.play5d.game.bvn.interfaces.GameInterface;
+import net.play5d.game.bvn.ctrler.lan.LanServerMatch;
+import net.play5d.game.bvn.ctrler.lan.LanServerRoom;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.data.lan.ClientVO;
@@ -40,7 +38,6 @@ import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.win.sockets.udp.UDPSocket;
 import net.play5d.kyo.utils.JsonUtils;
 import net.play5d.game.bvn.ctrler.lan.LANUtils;
-import net.play5d.game.bvn.ctrler.lan.LockFrameLogic;
 import net.play5d.game.bvn.win.utils.MsgType;
 import net.play5d.game.bvn.win.utils.SocketMsgFactory;
 import net.play5d.game.bvn.ui.dialog.LANExitDialog;
@@ -60,8 +57,9 @@ public class LANServerCtrl implements ILanServerLockLink {
     private var _room:LANRoomState;
     private var _clientK:int;
     private var _serverK:int;
-    private var _clients:Vector.<ClientVO> = new Vector.<ClientVO>();
-    private var _udpClientMap:Object       = {};
+    private var _roster:LanServerRoom = new LanServerRoom();
+    private var _match:LanServerMatch = new LanServerMatch();
+    private var _udpClientMap:Object  = {};
     /**
      * 运行帧数
      */
@@ -73,10 +71,6 @@ public class LANServerCtrl implements ILanServerLockLink {
     private var _renderSyncFrame:int;
 
     private var _sendUpdateFrame:int;
-
-    private var _selectLogic:SelectFighterServerLogic;
-    private var _connGameLogic:LockFrameServerLogic;
-    private var _syncCore:LanServerSyncCore;
 
     private var _udpSocket:UDPSocket;
     private var _kickTimeoutInt:int;
@@ -118,18 +112,11 @@ public class LANServerCtrl implements ILanServerLockLink {
             _udpSocket = null;
         }
 
-        if (_selectLogic) {
-            _selectLogic.dispose();
-            _selectLogic = null;
-        }
-        if (_connGameLogic) {
-            _connGameLogic.dispose();
-            _connGameLogic = null;
-        }
+        _match.disposeLogics();
 
-        _clients = new Vector.<ClientVO>();
-        _room    = null;
-        _host    = null;
+        _roster.clear();
+        _room = null;
+        _host = null;
     }
 
     public function sendChat(content:String, name:String = null):void {
@@ -141,7 +128,7 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     public function sendStart():void {
         var msg:Object = SocketMsgFactory.createStartGame();
-        for each(var i:ClientVO in _clients) {
+        for each(var i:ClientVO in _roster.clients) {
             SocketServer.I.sendJson(i.socket, msg);
         }
         if (_room) {
@@ -154,9 +141,9 @@ public class LANServerCtrl implements ILanServerLockLink {
 
         var client:ClientVO;
 
-        for (var i:int; i < _clients.length; i++) {
-            if (_clients[i].id == id) {
-                client = _clients[i];
+        for (var i:int; i < _roster.clients.length; i++) {
+            if (_roster.clients[i].id == id) {
+                client = _roster.clients[i];
 
                 SocketServer.I.sendJson(
                         client.socket,
@@ -189,19 +176,19 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     public function gameStart():void {
         active = true;
-        GameInterface.instance.updateInputConfig();
-        LockFrameLogic.I.initServer(function ():Boolean {
+        _match.activate(function ():Boolean {
             return LANServerCtrl.I.renderGame();
         });
         _renderFrame = 1;
         LANUtils.updateParams();
         _room = null;
 
-        _selectLogic = new SelectFighterServerLogic();
-        _selectLogic.init(sendTCP);
-
-        _connGameLogic = new LockFrameServerLogic();
-        _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
+        _match.attach(
+                this,
+                InputManager.I.socket_input_p1,
+                InputManager.I.socket_input_p2,
+                sendTCP
+        );
 
         LanGameMenuCtrl.I.init(new LANExitDialog(
                 function ():Boolean {
@@ -218,27 +205,14 @@ public class LANServerCtrl implements ILanServerLockLink {
                 }
         ));
 
-        _syncCore ||= new LanServerSyncCore();
-        _syncCore.bind(_connGameLogic, sendTCP);
+        _match.bindSync(sendTCP);
     }
 
     public function gameEnd():void {
         active = false;
-        GameInterface.instance.updateInputConfig();
-        LockFrameLogic.I.dispose();
-
-        if (_selectLogic) {
-            _selectLogic.dispose();
-            _selectLogic = null;
-        }
-        if (_connGameLogic) {
-            _connGameLogic.dispose();
-            _connGameLogic = null;
-        }
-
-        if (_syncCore) {
-            _syncCore.unbind();
-        }
+        _match.releaseLock();
+        _match.disposeLogics();
+        _match.unbindSync();
 
         var room:LANRoomState = new LANRoomState();
         MainGame.stageCtrl.goStage(room);
@@ -249,12 +223,8 @@ public class LANServerCtrl implements ILanServerLockLink {
 
     public function gameQuit():void {
         active = false;
-        GameInterface.instance.updateInputConfig();
-        LockFrameLogic.I.dispose();
-
-        if (_syncCore) {
-            _syncCore.unbind();
-        }
+        _match.releaseLock();
+        _match.unbindSync();
         LanGameMenuCtrl.I.dispose();
 
         stopServer();
@@ -264,17 +234,13 @@ public class LANServerCtrl implements ILanServerLockLink {
     }
 
     public function renderGame():Boolean {
-        if (MainGame.stageCtrl.currentStage is GameStage) {
-            return _connGameLogic.render();
-        }
-
-        InputManager.I.socket_input_p1.freeRender();
-
-        return true;
+        return _match.render(MainGame.stageCtrl.currentStage is GameStage, function ():void {
+            InputManager.I.socket_input_p1.freeRender();
+        });
     }
 
     public function sendTCP(data:Object):void {
-        for each(var i:ClientVO in _clients) {
+        for each(var i:ClientVO in _roster.clients) {
             SocketServer.I.send(i.socket, data);
         }
     }
@@ -294,7 +260,7 @@ public class LANServerCtrl implements ILanServerLockLink {
             return;
         }
 
-        if (_connGameLogic && _connGameLogic.receiveInput(d.getDataByteArray())) {
+        if (_match.receiveInput(d.getDataByteArray())) {
             _udpClientMap[d.fromIP + ':' + d.fromPort] = d.fromIP;
             return;
         }
@@ -323,7 +289,8 @@ public class LANServerCtrl implements ILanServerLockLink {
     }
 
     private function receiveJoin(msgObj:Object, clientSocket:Socket):void {
-        if (_clients.length > 0) {
+        var cv:ClientVO = _roster.accept(clientSocket.remoteAddress, msgObj.name, clientSocket);
+        if (!cv) {
             //超出人数限制
             SocketServer.I.sendJson(
                     clientSocket,
@@ -332,13 +299,6 @@ public class LANServerCtrl implements ILanServerLockLink {
             return;
         }
 
-
-        var cv:ClientVO = new ClientVO();
-        cv.ip           = clientSocket.remoteAddress;
-        cv.name         = msgObj.name;
-        cv.socket       = clientSocket;
-
-        _clients.push(cv);
         if (_room) {
             _room.addPlayer(cv.ip, cv.name);
             sendChat(GetLang('txt.lan_server_ctrl.player_entering', {name: cv.name}));
@@ -354,17 +314,12 @@ public class LANServerCtrl implements ILanServerLockLink {
     }
 
     private function findClient(socket:Socket):ClientVO {
-        for each(var i:ClientVO in _clients) {
-            if (i.socket == socket) {
-                return i;
-            }
-        }
-        return null;
+        return _roster.find(socket);
     }
 
     private function sendClientsChat(content:String, name:String):void {
         var msg:Object = SocketMsgFactory.createChat(content, name);
-        for each(var i:ClientVO in _clients) {
+        for each(var i:ClientVO in _roster.clients) {
             SocketServer.I.sendJson(i.socket, msg);
         }
     }
@@ -385,15 +340,11 @@ public class LANServerCtrl implements ILanServerLockLink {
                         GetLang('alert.lan_server_ctrl.player_exit')
                 );
             }
-            for (var i:int; i < _clients.length; i++) {
-                if (_clients[i].socket == e.clientSocket) {
-                    if (_room) {
-                        _room.removePlayer(_clients[i].ip);
-                        _room.pushChat(GetLang('txt.lan_server_ctrl.player_exit_chat', {name: _clients[i].name}));
-                        _room.setStartAble(false);
-                    }
-                    _clients.splice(i, 1);
-                }
+            var client:ClientVO = _roster.remove(e.clientSocket);
+            if (client && _room) {
+                _room.removePlayer(client.ip);
+                _room.pushChat(GetLang('txt.lan_server_ctrl.player_exit_chat', {name: client.name}));
+                _room.setStartAble(false);
             }
 
             break;
@@ -407,7 +358,7 @@ public class LANServerCtrl implements ILanServerLockLink {
             return;
         }
 
-        if (_selectLogic && _selectLogic.receiveSelect(obj)) {
+        if (_match.receiveSelect(obj)) {
             return;
         }
 

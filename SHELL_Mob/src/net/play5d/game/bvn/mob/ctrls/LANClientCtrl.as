@@ -1,18 +1,11 @@
 package net.play5d.game.bvn.mob.ctrls {
 import flash.events.TimerEvent;
-import flash.text.TextField;
-import flash.text.TextFormat;
 import flash.utils.ByteArray;
 import flash.utils.Timer;
 
 import net.play5d.game.bvn.MainGame;
-import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
-import net.play5d.game.bvn.ctrler.lan.LanClientSyncCore;
-import net.play5d.game.bvn.ctrler.lan.LockFrameClientLogic;
-import net.play5d.game.bvn.ctrler.lan.SelectFighterClientLogic;
-import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.interfaces.GameInterface;
+import net.play5d.game.bvn.ctrler.lan.LanClientMatch;
 import net.play5d.game.bvn.data.lan.LanPorts;
 import net.play5d.game.bvn.mob.data.HostVO;
 import net.play5d.game.bvn.mob.input.InputManager;
@@ -21,7 +14,6 @@ import net.play5d.kyo.air.socket.events.SocketEvent;
 import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.mob.sockets.udp.UDPSocket;
 import net.play5d.kyo.utils.JsonUtils;
-import net.play5d.game.bvn.ctrler.lan.LockFrameLogic;
 import net.play5d.game.bvn.mob.utils.MsgType;
 import net.play5d.game.bvn.mob.utils.SocketMsgFactory;
 import net.play5d.game.bvn.ui.GameUI;
@@ -35,14 +27,11 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     public var active:Boolean;
-    private var _delayText:TextField;
+    private var _match:LanClientMatch = new LanClientMatch();
     private var _socket:SocketClient;
     private var _udpSocket:UDPSocket;
     private var _host:HostVO;
     private var _joinBack:Function;
-    private var _selectLogic:SelectFighterClientLogic;
-    private var _connGameLogic:LockFrameClientLogic;
-    private var _syncCore:LanClientSyncCore;
     private var _onFindHostBack:Function;
     private var _findHostTimer:Timer;
 
@@ -81,10 +70,7 @@ public class LANClientCtrl implements ILanClientLockLink {
      * 更新延迟（毫秒）
      */
     public function updateDelay(v:int):void {
-        if (!_syncCore) {
-            return;
-        }
-        _syncCore.updateDelay(v);
+        _match.updateDelay(v);
     }
 
     public function join(host:HostVO, back:Function):void {
@@ -101,7 +87,7 @@ public class LANClientCtrl implements ILanClientLockLink {
         cancelFindHost();
         disposeTcp();
         disposeUdp();
-        GameEvent.removeEventListener(GameEvent.GAME_START, onRoundStart);
+        _match.unlistenRound();
     }
 
     public function sendTCP(o:Object):void {
@@ -119,35 +105,21 @@ public class LANClientCtrl implements ILanClientLockLink {
     public function gameStart(host:HostVO):void {
         active = true;
 
-        _delayText                   = new TextField();
-        _delayText.text              = '0ms';
-        var tf:TextFormat            = new TextFormat();
-        tf.color                     = 0xffffff;
-        tf.size                      = 16;
-        _delayText.defaultTextFormat = tf;
-        MainGame.I.stage.addChild(_delayText);
-
-        _selectLogic = new SelectFighterClientLogic();
-        _selectLogic.init(sendTCP);
-
-        _connGameLogic = new LockFrameClientLogic();
-        _connGameLogic.init(this, InputManager.I.socket_input_p1, InputManager.I.socket_input_p2);
-
-        _syncCore ||= new LanClientSyncCore(200);
-        _syncCore.bind(_connGameLogic, onSyncFatalError, _delayText);
-
-        GameCtrl.I.autoEndRoundAble    = false;
-        GameCtrl.I.autoStartAble       = false;
-        SelectFighterStage.AUTO_FINISH = false;
-        LoadingState.AUTO_START_GAME   = false;
-
-        GameInterface.instance.updateInputConfig();
-
-        LockFrameLogic.I.initClient(function ():Boolean {
+        _match.showDelay();
+        _match.attach(
+                200,
+                this,
+                InputManager.I.socket_input_p1,
+                InputManager.I.socket_input_p2,
+                sendTCP,
+                onSyncFatalError
+        );
+        _match.arm(function ():Boolean {
             return LANClientCtrl.I.renderGame();
+        }, function (enabled:Boolean):void {
+            LoadingState.AUTO_START_GAME = enabled;
         });
-
-        GameEvent.addEventListener(GameEvent.ROUND_START, onRoundStart);
+        _match.listenRound();
 
         LANGameCtrl.I.gameStart(host);
 
@@ -155,36 +127,10 @@ public class LANClientCtrl implements ILanClientLockLink {
 
     public function gameEnd():void {
         active = false;
-        if (_selectLogic) {
-            _selectLogic.dispose();
-            _selectLogic = null;
-        }
-        if (_syncCore) {
-            _syncCore.unbind();
-        }
-        if (_connGameLogic) {
-            _connGameLogic.dispose();
-            _connGameLogic = null;
-        }
-
-        if (_delayText) {
-            try {
-                _delayText.parent.removeChild(_delayText);
-            }
-            catch (e:Error) {
-                trace(e);
-            }
-            _delayText = null;
-        }
-
-        GameCtrl.I.autoEndRoundAble    = true;
-        GameCtrl.I.autoStartAble       = true;
-        SelectFighterStage.AUTO_FINISH = true;
-        LoadingState.AUTO_START_GAME   = true;
-
-        GameInterface.instance.updateInputConfig();
-
-        LockFrameLogic.I.dispose();
+        _match.detach();
+        _match.disarm(function (enabled:Boolean):void {
+            LoadingState.AUTO_START_GAME = enabled;
+        });
 
         dispose();
 
@@ -192,27 +138,17 @@ public class LANClientCtrl implements ILanClientLockLink {
     }
 
     public function renderGame():Boolean {
-
-        if (MainGame.stageCtrl.currentStage is GameState) {
-            return _connGameLogic.render();
-        }
-
-        InputManager.I.socket_input_p2.freeRender();
-
-        return true;
-
+        return _match.render(MainGame.stageCtrl.currentStage is GameState, function ():void {
+            InputManager.I.socket_input_p2.freeRender();
+        });
     }
 
     public function resetSyncError():void {
-        if (_syncCore) {
-            _syncCore.resetSyncError();
-        }
+        _match.resetSyncError();
     }
 
     public function syncError(wait:Boolean = false):void {
-        if (_syncCore) {
-            _syncCore.syncError(wait);
-        }
+        _match.syncError(wait);
     }
 
     private function onSyncFatalError():void {
@@ -245,13 +181,8 @@ public class LANClientCtrl implements ILanClientLockLink {
         if (receiveHostHandler(data)) {
             return;
         }
-        if (_connGameLogic) {
-            if (_connGameLogic.receiveSyncUpdate(data.getDataByteArray())) {
-                return;
-            }
-            if (_connGameLogic.receiveUpdate(data.getDataByteArray())) {
-                return;
-            }
+        if (_match.receiveUdp(data.getDataByteArray())) {
+            return;
         }
     }
 
@@ -302,10 +233,6 @@ public class LANClientCtrl implements ILanClientLockLink {
         }
     }
 
-    private function receiveSync(o:Object):Boolean {
-        return _syncCore && _syncCore.receiveSync(o);
-    }
-
     private function findHostTimerHandler(e:TimerEvent):void {
         _udpSocket.sendBroadcast(LanPorts.UDP_SERVER, SocketMsgFactory.createFindHostMsg());
     }
@@ -340,11 +267,11 @@ public class LANClientCtrl implements ILanClientLockLink {
             return;
         }
 
-        if (_selectLogic && _selectLogic.receiveSelect(obj)) {
+        if (_match.receiveSelect(obj)) {
             return;
         }
 
-        if (receiveSync(obj)) {
+        if (_match.receiveSync(obj)) {
             return;
         }
 
@@ -353,10 +280,6 @@ public class LANClientCtrl implements ILanClientLockLink {
             receiveJson(json);
         }
 
-    }
-
-    private function onRoundStart(e:GameEvent):void {
-        _syncCore && _syncCore.onRoundStart();
     }
 
 }
