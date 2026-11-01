@@ -34,7 +34,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
-import net.play5d.game.bvn.mob.ScreenRotater;
+import net.play5d.game.bvn.mob.ScreenRotator;
 import net.play5d.game.bvn.mob.ctrls.GamePolyCtrl;
 import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.ctrls.UpdateCtrl;
@@ -155,7 +155,7 @@ public class launch extends Sprite {
         GameConfig.TOUCH_MODE     = true; //开启触屏模式
         GameConfig.TOUCH_BACK_BTN = ScreenPadAsset.cancel;
 
-        ScreenRotater.I.init(stage);
+        ScreenRotator.I.init(stage);
 
         showStartPic();
         initGame();

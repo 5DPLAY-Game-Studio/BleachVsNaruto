@@ -7,11 +7,11 @@ import flash.sensors.Accelerometer;
 /**
  * 利用重力感应自动旋转
  */
-public class ScreenRotater {
-    private static var _i:ScreenRotater;
+public class ScreenRotator {
+    private static var _i:ScreenRotator;
 
-    public static function get I():ScreenRotater {
-        _i ||= new ScreenRotater();
+    public static function get I():ScreenRotator {
+        _i ||= new ScreenRotator();
         return _i;
     }
 
