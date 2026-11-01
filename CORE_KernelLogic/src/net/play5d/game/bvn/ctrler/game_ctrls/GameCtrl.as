@@ -44,7 +44,7 @@ import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.kyo.utils.Keyboard;
+import net.play5d.kyo.utils.KyoKeyboard;
 
 /**
  * 对局门面：暂停、回合、精灵与帧循环。
@@ -152,7 +152,7 @@ public class GameCtrl {
         _roundCtrl ||= new GameRoundCtrl();
         _roundCtrl.bind(this);
 
-        Keyboard.focus();
+        KyoKeyboard.focus();
     }
 
     public function destroy():void {
@@ -463,7 +463,7 @@ public class GameCtrl {
                 _isPauseGame = false;
             }
         }
-        Keyboard.focus();
+        KyoKeyboard.focus();
         _isRenderGame = true;
     }
 

@@ -19,15 +19,13 @@
 package net.play5d.game.bvn.input {
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.interfaces.IGameInput;
-import net.play5d.kyo.utils.Keyboard;
+import net.play5d.kyo.utils.KyoKeyboard;
 
 public class GameKeyInput implements IGameInput {
-
-    /** @private Escape（键码 27）。勿写 flash.ui.Keyboard，会和 kyo Keyboard 重名。 */
-    private static const KEY_ESCAPE:uint = 27;
 
     private var _config:KeyConfigVO;
     private var _downKeys:Object = {};
@@ -43,8 +41,8 @@ public class GameKeyInput implements IGameInput {
     }
 
     public function initialize(stage:Stage):void {
-        Keyboard.initialize(stage);
-        Keyboard.listen(keyBoardHandler);
+        KyoKeyboard.initialize(stage);
+        KyoKeyboard.listen(keyBoardHandler);
     }
 
     public function setConfig(config:Object):void {
@@ -52,7 +50,7 @@ public class GameKeyInput implements IGameInput {
     }
 
     public function focus():void {
-        Keyboard.focus();
+        KyoKeyboard.focus();
     }
 
     public function anyKey():Boolean {
@@ -66,7 +64,7 @@ public class GameKeyInput implements IGameInput {
 
 
     public function back():Boolean {
-        return isDown(KEY_ESCAPE);
+        return isDown(Keyboard.ESCAPE);
     }
 
     public function select():Boolean {

@@ -19,10 +19,11 @@
 package net.play5d.game.bvn.ctrler.lan {
 import flash.display.DisplayObject;
 import flash.events.KeyboardEvent;
+import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
-import net.play5d.kyo.utils.Keyboard;
+import net.play5d.kyo.utils.KyoKeyboard;
 
 /**
  * 联机对局 ESC 退出菜单（对话框由壳注入）。
@@ -32,8 +33,6 @@ import net.play5d.kyo.utils.Keyboard;
 public class LanGameMenuCtrl {
     /** @private */
     private static var _i:LanGameMenuCtrl;
-    /** @private Escape（键码 27）。勿写 flash.ui.Keyboard，会和 kyo Keyboard 重名。 */
-    private static const KEY_ESCAPE:uint = 27;
 
     /**
      * 单例。
@@ -61,7 +60,7 @@ public class LanGameMenuCtrl {
     public function init(dialog:ILanExitDialog):void {
         _exitDialog = dialog;
         _exitDialog.hide();
-        Keyboard.listen(keyHandler);
+        KyoKeyboard.listen(keyHandler);
     }
 
     /**
@@ -79,7 +78,7 @@ public class LanGameMenuCtrl {
             _exitDialog = null;
         }
 
-        Keyboard.unlisten(keyHandler);
+        KyoKeyboard.unlisten(keyHandler);
 
         _isKeyDown = false;
     }
@@ -93,7 +92,7 @@ public class LanGameMenuCtrl {
             if (!_exitDialog) {
                 return;
             }
-            if (e.keyCode == KEY_ESCAPE) {
+            if (e.keyCode == Keyboard.ESCAPE) {
                 _isKeyDown = true;
                 if (_exitDialog.isShowing()) {
                     _exitDialog.hide();
@@ -106,7 +105,7 @@ public class LanGameMenuCtrl {
         }
 
         if (e.type == KeyboardEvent.KEY_UP) {
-            if (e.keyCode == KEY_ESCAPE) {
+            if (e.keyCode == Keyboard.ESCAPE) {
                 _isKeyDown = false;
             }
         }

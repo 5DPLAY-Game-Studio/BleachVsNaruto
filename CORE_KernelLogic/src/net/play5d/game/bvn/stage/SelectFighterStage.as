@@ -51,7 +51,7 @@ import net.play5d.game.bvn.ui.select.SelectFighterListCtrl;
 import net.play5d.game.bvn.ui.select.flow.ISelectModeFlow;
 import net.play5d.game.bvn.ui.select.flow.SelectFlowAction;
 import net.play5d.game.bvn.ui.select.flow.SelectModeFlowFactory;
-import net.play5d.kyo.utils.Keyboard;
+import net.play5d.kyo.utils.KyoKeyboard;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
@@ -114,7 +114,7 @@ public class SelectFighterStage implements IStage {
 
         StateCtrl.I.clearTrans();
 
-        Keyboard.focus();
+        KyoKeyboard.focus();
 
         GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER);
     }
