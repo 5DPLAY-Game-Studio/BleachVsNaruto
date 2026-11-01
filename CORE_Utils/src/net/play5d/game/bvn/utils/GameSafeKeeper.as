@@ -85,8 +85,6 @@ public class GameSafeKeeper {
             return false;
         }
 
-//			trace('checkFile', url);
-
         if (_failFileMap[url]) {
             trace('checkFile Error :: not match! ', url);
             return false;
