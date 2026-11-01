@@ -65,7 +65,7 @@ public class HpBarLerp {
      * </listing>
      */
     public function render(fighter:FighterMain):void {
-        var rate:Number = fighter.hp / fighter.hpMax;
+        var rate:Number = fighter.hpPercent;
 
         if (_redBarMoving && rate != _hprate) {
             _redBar.scaleX = _hprate;

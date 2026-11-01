@@ -50,7 +50,7 @@ public class EnemyHpUI {
     }
 
     public function render():Boolean {
-        var val:Number = _fighter.hp / _fighter.hpMax;
+        var val:Number = _fighter.hpPercent;
         if (val < 0.0001) {
             val = 0.0001;
         }

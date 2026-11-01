@@ -59,7 +59,7 @@ public class EnemyHpFollowUI {
             return _fighter.isAlive;
         }
 
-        var val:Number = _fighter.hp / _fighter.hpMax;
+        var val:Number = _fighter.hpPercent;
         if (val < 0.0001) {
             val = 0.0001;
         }

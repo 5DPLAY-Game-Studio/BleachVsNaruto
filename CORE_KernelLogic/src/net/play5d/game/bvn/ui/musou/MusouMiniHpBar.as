@@ -40,7 +40,7 @@ public class MusouMiniHpBar {
         if (!_fighter) {
             return;
         }
-        _ui.bar_hp.scaleX = getScale(_fighter.hp, _fighter.hpMax);
+        _ui.bar_hp.scaleX = getScale(_fighter.hpPercent, 1);
         _ui.bar_qi.scaleX = getScale(_fighter.qi, 300);
     }
 

@@ -608,7 +608,7 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (_fighter.actionState == FighterActionState.HURT_ING) {
 
-            if (_fighter.hp > _fighter.hpMax * 0.6) {
+            if (_fighter.hpPercent > 0.6) {
                 return;
             }
             if (_fighter.qi < 150) {

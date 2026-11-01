@@ -52,8 +52,8 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     public var isAllowLoseHP:Boolean      = true;//是否伤血
     public var isApplyG:Boolean = true;
     public var heavy:Number = 2; //重量，用于计算角色碰撞处理
-    public var hp:Number    = 1000;
-    public var hpMax:Number = 1000;
+    public var hp:Number    = GameConfig.FIGHTER_HP_MAX;
+    public var hpMax:Number = GameConfig.FIGHTER_HP_MAX;
     public var defense:Number = 0; //防御力
     public var isAllowCrossX:Boolean      = false;
     public var isAllowCrossBottom:Boolean = false;
@@ -166,6 +166,51 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
 
     public function set team(value:TeamVO):void {
         _team = value;
+    }
+
+    /**
+     * 当前血量占最大血量的比例，通常为 0～1。
+     *
+     * @return 血量百分比。
+     * @example
+     * <listing version="3.0">
+     * var rate:Number = sprite.hpPercent;
+     * </listing>
+     * @see #hp
+     * @see #hpMax
+     */
+    public function get hpPercent():Number {
+        return hp / hpMax;
+    }
+
+    /**
+     * 已损失的血量，即最大血量与当前血量之差。
+     *
+     * @return 已损失血量。血量高于上限时为负。
+     * @example
+     * <listing version="3.0">
+     * var lost:Number = sprite.lostHp;
+     * </listing>
+     * @see #hp
+     * @see #hpMax
+     */
+    public function get lostHp():Number {
+        return hpMax - hp;
+    }
+
+    /**
+     * 已损失血量占最大血量的比例，通常为 0～1。
+     *
+     * @return 已损失血量百分比。
+     * @example
+     * <listing version="3.0">
+     * var rate:Number = sprite.lostHpPercent;
+     * </listing>
+     * @see #lostHp
+     * @see #hpMax
+     */
+    public function get lostHpPercent():Number {
+        return lostHp / hpMax;
     }
 
     public function getActive():Boolean {
