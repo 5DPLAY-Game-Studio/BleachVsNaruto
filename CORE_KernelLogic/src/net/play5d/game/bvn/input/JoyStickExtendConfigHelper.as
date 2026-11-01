@@ -24,7 +24,7 @@ package net.play5d.game.bvn.input {
  * <p>供各壳 <code>ExtendConfig</code> 复用默认设备绑定与菜单手柄同步。</p>
  *
  * @see JoyStickConfigVO
- * @see JoySticker
+ * @see JoyStick
  */
 public class JoyStickExtendConfigHelper {
 
@@ -36,7 +36,7 @@ public class JoyStickExtendConfigHelper {
      */
     public static function setDefaultDevice(joy:JoyStickConfigVO, index:int):void {
         if (!joy.deviceIsSet && joy.deviceId == null) {
-            joy.deviceId = JoySticker.getDeviceId(index);
+            joy.deviceId = JoyStick.getDeviceId(index);
         }
     }
 

@@ -23,7 +23,7 @@ import net.play5d.kyo.utils.KyoUtils;
  * 单套手柄键位配置。
  *
  * @see JoyStickSetVO
- * @see JoySticker
+ * @see JoyStick
  */
 public class JoyStickConfigVO {
     /**

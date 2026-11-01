@@ -393,7 +393,7 @@
         "set_ctrl_btn_ui"       : {
           "key_mc_missing": "mc[k{index}] 不存在！"
         },
-        "joy_sticker"           : {
+        "joy_stick"             : {
           "platform_unsupported": "该平台不支持手柄！"
         },
         "game_loading_stage"    : {

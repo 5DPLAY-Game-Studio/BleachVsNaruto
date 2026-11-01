@@ -29,7 +29,7 @@ import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.JoyStickConfigVO;
 import net.play5d.game.bvn.input.JoyStickSetVO;
-import net.play5d.game.bvn.input.JoySticker;
+import net.play5d.game.bvn.input.JoyStick;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.kyo.utils.WebUtils;
@@ -184,7 +184,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
 
     /** @private */
     private function initBtns():void {
-        var joysticks:Vector.<GameInputDevice> = JoySticker.getAllDeivces();
+        var joysticks:Vector.<GameInputDevice> = JoyStick.getAllDeivces();
 
         var joyOptions:Array = [{label: 'NONE', cn: GetLang('txt.joy_stick_set_ui.none'), value: null}];
         for (var i:int; i < joysticks.length; i++) {
@@ -218,14 +218,14 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     /** @private */
     private function renderSet():void {
         if (!_startSet) {
-            if (JoySticker.isDownAnyKey(_tmpJoyConfig.deviceId) == false) {
+            if (JoyStick.isDownAnyKey(_tmpJoyConfig.deviceId) == false) {
                 _startSet = true;
             }
 
             return;
         }
 
-        var jv:JoyStickSetVO = JoySticker.getDownKey(_tmpJoyConfig.deviceId, true);
+        var jv:JoyStickSetVO = JoyStick.getDownKey(_tmpJoyConfig.deviceId, true);
         if (jv) {
             var cur:Object = _mappings[_setIndex];
             if (cur) {
@@ -281,7 +281,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     private function onBtnSelect(e:SetBtnEvent):void {
         switch (e.selectedLabel) {
         case 'SET ALL':
-            if (!JoySticker.isActive(_tmpJoyConfig.deviceId)) {
+            if (!JoyStick.isActive(_tmpJoyConfig.deviceId)) {
                 GameUI.alert(
                     GetLang('alert.joy_stick_set_ui.no_joystick_title'),
                     GetLang('alert.joy_stick_set_ui.no_joystick')

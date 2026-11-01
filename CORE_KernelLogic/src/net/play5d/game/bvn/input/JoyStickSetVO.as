@@ -21,7 +21,7 @@ package net.play5d.game.bvn.input {
  * 手柄单键映射（控件 id + 轴/阈值方向）。
  *
  * @see JoyStickConfigVO
- * @see JoySticker
+ * @see JoyStick
  */
 public class JoyStickSetVO {
     /**

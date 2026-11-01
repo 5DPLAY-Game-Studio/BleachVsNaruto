@@ -25,7 +25,7 @@ import flash.ui.GameInputDevice;
 /**
  * 游戏手柄控制类
  */
-public class JoySticker {
+public class JoyStick {
 
     private static var _gameInput:GameInput;
     private static var _inited:Boolean;
@@ -50,10 +50,10 @@ public class JoySticker {
             return;
         }
 
-        trace('JoySticker.initialize');
+        trace('JoyStick.initialize');
 
         if (!GameInput.isSupported) {
-            TraceLang('debug.trace.data.joy_sticker.platform_unsupported');
+            TraceLang('debug.trace.data.joy_stick.platform_unsupported');
             return;
         }
 
