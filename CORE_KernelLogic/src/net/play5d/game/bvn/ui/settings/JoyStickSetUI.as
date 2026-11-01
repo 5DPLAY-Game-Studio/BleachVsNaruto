@@ -238,10 +238,10 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     /** @private */
     private function initKeyMapping():void {
         _mappings = [
-            {id: 'up2', name: 'UP roker', cn: GetLang('txt.joy_stick_set_ui.key_up2')},
-            {id: 'down2', name: 'DOWN roker', cn: GetLang('txt.joy_stick_set_ui.key_down2')},
-            {id: 'left2', name: 'LEFT roker', cn: GetLang('txt.joy_stick_set_ui.key_left2')},
-            {id: 'right2', name: 'RIGHT roker', cn: GetLang('txt.joy_stick_set_ui.key_right2')},
+            {id: 'up2', name: 'UP rocker', cn: GetLang('txt.joy_stick_set_ui.key_up2')},
+            {id: 'down2', name: 'DOWN rocker', cn: GetLang('txt.joy_stick_set_ui.key_down2')},
+            {id: 'left2', name: 'LEFT rocker', cn: GetLang('txt.joy_stick_set_ui.key_left2')},
+            {id: 'right2', name: 'RIGHT rocker', cn: GetLang('txt.joy_stick_set_ui.key_right2')},
             {id: 'up', name: 'UP button', cn: GetLang('txt.joy_stick_set_ui.key_up')},
             {id: 'down', name: 'DOWN button', cn: GetLang('txt.joy_stick_set_ui.key_down')},
             {id: 'left', name: 'LEFT button', cn: GetLang('txt.joy_stick_set_ui.key_left')},
