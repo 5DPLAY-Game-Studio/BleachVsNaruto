@@ -33,7 +33,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.select.SelectIndexUI;
 import net.play5d.game.bvn.utils.ResUtils;
@@ -89,8 +89,8 @@ public class LoadingStage implements IStage {
         GameEvent.dispatchEvent(GameEvent.FIGHT_LOADING_START);
 
         GameRender.add(render);
-        GameInputer.focus();
-        GameInputer.enabled = true;
+        GameInputter.focus();
+        GameInputter.enabled = true;
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('loading'));
 
@@ -133,14 +133,14 @@ public class LoadingStage implements IStage {
 
         SoundCtrl.I.BGM(null);
 
-        GameInputer.clearInput();
+        GameInputter.clearInput();
         GameRender.remove(render);
 
         GameUI.closeConfirm();
     }
 
     private function render():void {
-        if (GameInputer.back(1)) {
+        if (GameInputter.back(1)) {
             if (GameUI.showingDialog()) {
                 GameUI.cancelConfirm();
             }

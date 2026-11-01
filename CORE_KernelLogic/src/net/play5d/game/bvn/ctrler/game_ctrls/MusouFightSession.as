@@ -28,7 +28,7 @@ import net.play5d.game.bvn.data.musou.MusouMissionVO;
 import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.fighter.FighterAttacker;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 
 /**
  * 无双对局会话。
@@ -91,7 +91,7 @@ public class MusouFightSession implements IFightSession {
      */
     public function start():void {
         _host.clearPause();
-        GameInputer.enabled = true;
+        GameInputter.enabled = true;
         _host.initTeam();
         buildGame();
         _host.beginMatchRender();

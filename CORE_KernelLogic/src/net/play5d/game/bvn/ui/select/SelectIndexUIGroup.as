@@ -32,7 +32,7 @@ import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.kyo.utils.KyoRandom;
 
@@ -205,7 +205,7 @@ public class SelectIndexUIGroup extends Sprite {
         _inputType = inputType;
 
         GameRender.add(render);
-        GameInputer.focus();
+        GameInputter.focus();
 
     }
 
@@ -264,17 +264,17 @@ public class SelectIndexUIGroup extends Sprite {
             return;
         }
 
-        if (GameInputer.up(_inputType, 1)) {
+        if (GameInputter.up(_inputType, 1)) {
             selectIndex(_selectIndex - 1, -1);
             SoundCtrl.I.sndSelect();
         }
 
-        if (GameInputer.down(_inputType, 1)) {
+        if (GameInputter.down(_inputType, 1)) {
             selectIndex(_selectIndex + 1, 1);
             SoundCtrl.I.sndSelect();
         }
 
-        if (GameInputer.select(_inputType, 1)) {
+        if (GameInputter.select(_inputType, 1)) {
             doConfirm();
         }
 

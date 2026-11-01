@@ -31,7 +31,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.input.KyoKeyCode;
 import net.play5d.kyo.stage.IStage;
@@ -80,8 +80,8 @@ public class HowToPlayStage implements IStage {
 
         setTimeout(function ():void {
             GameRender.add(render);
-            GameInputer.focus();
-            GameInputer.enabled = true;
+            GameInputter.focus();
+            GameInputter.enabled = true;
 
             _ui.buttonMode = true;
             _ui.addEventListener(MouseEvent.CLICK, skipBtnHandler);
@@ -107,7 +107,7 @@ public class HowToPlayStage implements IStage {
     }
 
     private function render():void {
-        if (GameInputer.back(1) || GameInputer.select(GameInputType.MENU, 1)) {
+        if (GameInputter.back(1) || GameInputter.select(GameInputType.MENU, 1)) {
             GameRender.remove(render);
             _ui.gotoAndPlay('skip');
         }

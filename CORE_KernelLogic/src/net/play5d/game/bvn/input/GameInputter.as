@@ -29,7 +29,7 @@ import net.play5d.game.bvn.interfaces.IGameInput;
 /**
  * 游戏输入(针对菜单类操作)
  */
-public class GameInputer {
+public class GameInputter {
 
     //按键持续延时，秒
     private static const JUST_DOWN_DELAY:Number = 0.1;
@@ -71,8 +71,8 @@ public class GameInputer {
         p2 ||= new Vector.<IGameInput>([new GameKeyInput()]);
 
         setInput(GameInputType.MENU, menu);
-        GameInputer.setInput(GameInputType.P1, p1);
-        GameInputer.setInput(GameInputType.P2, p2);
+        GameInputter.setInput(GameInputType.P1, p1);
+        GameInputter.setInput(GameInputType.P2, p2);
     }
 
     public static function setInput(type:String, input:Vector.<IGameInput>):void {

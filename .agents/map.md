@@ -54,7 +54,7 @@
 
 | 单例 / 状态 | 类别 | 允许访问 |
 |------------|------|----------|
-| `SoundCtrl` `AssetManager` `GameRender` `GameInputer` | 基础设施服务（Service Locator） | 全局任意 |
+| `SoundCtrl` `AssetManager` `GameRender` `GameInputter` | 基础设施服务（Service Locator） | 全局任意 |
 | `GameData`（`config`/`score`/`select`/`musouData`） | Model | 任意读；对局态字段由所属流程写入（选人流程 / `GameCtrl` / `GameLogic` 计分），勿跨场景散写 |
 | `GameCtrl.gameRunData` / `MusouCtrl.gameRunData` | Controller 内部状态 | 仅 `GameCtrl` 与其子控制器；View 禁写 |
 | `EffectCtrl` | 域服务 | 走门面/注入，勿散落单例 |

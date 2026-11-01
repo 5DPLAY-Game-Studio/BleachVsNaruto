@@ -27,7 +27,7 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
 import net.play5d.game.bvn.win.data.HostVO;
 import net.play5d.game.bvn.win.utils.UIAssetUtil;
@@ -142,7 +142,7 @@ public class HostListDialog implements IStage {
     }
 
     private function render():void {
-        if (GameInputer.up(GameInputType.MENU, 1)) {
+        if (GameInputter.up(GameInputType.MENU, 1)) {
             var prev:HostListItem = _items[_focusIndex - 1];
             if (prev) {
                 SoundCtrl.I.sndSelect();
@@ -155,7 +155,7 @@ public class HostListDialog implements IStage {
                 }
             }
         }
-        if (GameInputer.down(GameInputType.MENU, 1)) {
+        if (GameInputter.down(GameInputType.MENU, 1)) {
             var next:HostListItem = _items[_focusIndex + 1];
             if (next) {
                 SoundCtrl.I.sndSelect();
@@ -167,12 +167,12 @@ public class HostListDialog implements IStage {
                 }
             }
         }
-        if (GameInputer.left(GameInputType.MENU, 1)) {
+        if (GameInputter.left(GameInputType.MENU, 1)) {
             if (prevPage()) {
                 SoundCtrl.I.sndSelect();
             }
         }
-        if (GameInputer.right(GameInputType.MENU, 1)) {
+        if (GameInputter.right(GameInputType.MENU, 1)) {
             if (nextPage()) {
                 SoundCtrl.I.sndSelect();
             }

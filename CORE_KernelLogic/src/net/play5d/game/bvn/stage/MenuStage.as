@@ -31,7 +31,7 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.menu.MenuBtnGroup;
@@ -63,7 +63,7 @@ public class MenuStage extends Sprite implements IStage {
         _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.title, ResUtils.TITLE);
         _ui.gotoAndStop(1);
         GameInterface.instance.initTitleUI(_ui);
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('op'));
     }
@@ -93,8 +93,8 @@ public class MenuStage extends Sprite implements IStage {
                 STAGE.focus = STAGE;
             }
             
-            GameInputer.focus();
-            GameInputer.enabled = true;
+            GameInputter.focus();
+            GameInputter.enabled = true;
 
         }, 800);
 
@@ -132,7 +132,7 @@ public class MenuStage extends Sprite implements IStage {
         }
 
         GameRender.remove(render);
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
     }
 
     private function render():void {
@@ -142,7 +142,7 @@ public class MenuStage extends Sprite implements IStage {
             STAGE.focus = STAGE;
         }
         
-        if (GameInputer.anyKey(1)) {
+        if (GameInputter.anyKey(1)) {
             showBtns();
         }
     }

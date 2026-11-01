@@ -33,7 +33,7 @@ import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.kyo.display.bitmap.BitmapFont;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 
@@ -234,8 +234,8 @@ public class TrainingInputHistoryUI extends Sprite {
             resetMoveEdges();
         }
 
-        var leftDown:Boolean  = GameInputer.left(_inputType, 0);
-        var rightDown:Boolean = GameInputer.right(_inputType, 0);
+        var leftDown:Boolean  = GameInputter.left(_inputType, 0);
+        var rightDown:Boolean = GameInputter.right(_inputType, 0);
         var canMove:Boolean   = state == FighterActionState.NORMAL;
 
         if (canMove && leftDown && !_prevLeft) {
@@ -251,8 +251,8 @@ public class TrainingInputHistoryUI extends Sprite {
         if (state == FighterActionState.DEFENSE_ING &&
             _prevActionState != FighterActionState.DEFENSE_ING) {
             // 幽步（下+冲刺）或其连段间隙不单独记 S，避免 S SL S SL
-            if (!GameInputer.dash(_inputType, 0) &&
-                !(isLastText(FighterInputCmd.GHOST_DASH_S) && GameInputer.down(_inputType, 0))) {
+            if (!GameInputter.dash(_inputType, 0) &&
+                !(isLastText(FighterInputCmd.GHOST_DASH_S) && GameInputter.down(_inputType, 0))) {
                 pushText(FighterInputCmd.DEFENSE);
             }
         }
@@ -328,8 +328,8 @@ public class TrainingInputHistoryUI extends Sprite {
 
     /** @private 暂停等不可操作时只同步边沿状态。 */
     private function syncPrevWithoutPush():void {
-        _prevLeft  = GameInputer.left(_inputType, 0);
-        _prevRight = GameInputer.right(_inputType, 0);
+        _prevLeft  = GameInputter.left(_inputType, 0);
+        _prevRight = GameInputter.right(_inputType, 0);
 
         var fighter:FighterMain = getFighter();
         _prevActionState = fighter ? fighter.actionState : -1;
@@ -399,10 +399,10 @@ public class TrainingInputHistoryUI extends Sprite {
      * @private 摔技左右方向字母；优先当前按键（双边同时按偏右），否则用朝向。
      */
     private function getCatchSideLetter():String {
-        if (GameInputer.right(_inputType, 0)) {
+        if (GameInputter.right(_inputType, 0)) {
             return FighterInputCmd.RIGHT;
         }
-        if (GameInputer.left(_inputType, 0)) {
+        if (GameInputter.left(_inputType, 0)) {
             return FighterInputCmd.LEFT;
         }
         if (_boundFighter && _boundFighter.direct > 0) {

@@ -32,7 +32,7 @@ import net.play5d.game.bvn.data.musou.MusouModel;
 import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
@@ -58,8 +58,8 @@ public class LoadingMusouStage implements IStage {
         GameEvent.dispatchEvent(GameEvent.MUSOU_LOADING_START);
 
         GameRender.add(render);
-        GameInputer.focus();
-        GameInputer.enabled = true;
+        GameInputter.focus();
+        GameInputter.enabled = true;
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('loading'));
 
@@ -84,7 +84,7 @@ public class LoadingMusouStage implements IStage {
 
         SoundCtrl.I.BGM(null);
 
-        GameInputer.clearInput();
+        GameInputter.clearInput();
         GameRender.remove(render);
 
         GameUI.closeConfirm();
@@ -137,7 +137,7 @@ public class LoadingMusouStage implements IStage {
     }
 
     private function render():void {
-        if (GameInputer.back(1)) {
+        if (GameInputter.back(1)) {
             if (GameUI.showingDialog()) {
                 GameUI.cancelConfirm();
             }

@@ -32,7 +32,7 @@ import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
@@ -507,7 +507,7 @@ public class MenuBtnGroup extends Sprite {
 
         var btns:Array = _showIngChildrenBtn ? _showIngChildrenBtn.children : _btns;
 
-        if (GameInputer.up(GameInputType.MENU, 1)) {
+        if (GameInputter.up(GameInputType.MENU, 1)) {
             _btnIndex--;
             if (_btnIndex < 0) {
                 _btnIndex = btns.length - 1;
@@ -515,7 +515,7 @@ public class MenuBtnGroup extends Sprite {
             hoverBtn(btns[_btnIndex]);
         }
 
-        if (GameInputer.down(GameInputType.MENU, 1)) {
+        if (GameInputter.down(GameInputType.MENU, 1)) {
             _btnIndex++;
             if (_btnIndex > btns.length - 1) {
                 _btnIndex = 0;
@@ -523,11 +523,11 @@ public class MenuBtnGroup extends Sprite {
             hoverBtn(btns[_btnIndex]);
         }
 
-        if (GameInputer.select(GameInputType.MENU, 1)) {
+        if (GameInputter.select(GameInputType.MENU, 1)) {
             selectBtn(btns[_btnIndex]);
         }
 
-        if (GameInputer.back(1)) {
+        if (GameInputter.back(1)) {
             if (_showIngChildrenBtn) {
                 _btnIndex = _showIngChildrenBtn.index;
                 closeChildren(true, true);

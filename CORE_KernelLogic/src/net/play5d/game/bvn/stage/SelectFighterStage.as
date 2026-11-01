@@ -41,7 +41,7 @@ import net.play5d.game.bvn.data.vos.SelectStageConfigVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.select.SelectMapUI;
 import net.play5d.game.bvn.ui.select.SelectUIFactory;
@@ -136,7 +136,7 @@ public class SelectFighterStage implements IStage {
 
     private function initSelecter():void {
 
-        GameInputer.enabled = true;
+        GameInputter.enabled = true;
 
         if (_modeFlow.initBothSelecters()) {
             initSelecterP1();
@@ -187,7 +187,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function render():void {
-        if (GameInputer.back(1)) {
+        if (GameInputter.back(1)) {
             if (GameUI.showingDialog()) {
                 GameUI.cancelConfirm();
             }
@@ -215,27 +215,27 @@ public class SelectFighterStage implements IStage {
 
             type = _p1Slt.inputType;
 
-            if (GameInputer.up(type, 1)) {
+            if (GameInputter.up(type, 1)) {
                 _listCtrl.moveSelecter(_p1Slt, 0, -1);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.down(type, 1)) {
+            if (GameInputter.down(type, 1)) {
                 _listCtrl.moveSelecter(_p1Slt, 0, 1);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.left(type, 1)) {
+            if (GameInputter.left(type, 1)) {
                 _listCtrl.moveSelecter(_p1Slt, -1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.right(type, 1)) {
+            if (GameInputter.right(type, 1)) {
                 _listCtrl.moveSelecter(_p1Slt, 1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.select(type, 1)) {
+            if (GameInputter.select(type, 1)) {
                 _p1Slt.select(playerSeltBack);
                 SoundCtrl.I.sndConfirm();
             }
@@ -248,27 +248,27 @@ public class SelectFighterStage implements IStage {
 
             SelectFighterListCtrl.renderRandom(_p2Slt);
 
-            if (GameInputer.up(type, 1)) {
+            if (GameInputter.up(type, 1)) {
                 _listCtrl.moveSelecter(_p2Slt, 0, -1);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.down(type, 1)) {
+            if (GameInputter.down(type, 1)) {
                 _listCtrl.moveSelecter(_p2Slt, 0, 1);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.left(type, 1)) {
+            if (GameInputter.left(type, 1)) {
                 _listCtrl.moveSelecter(_p2Slt, -1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.right(type, 1)) {
+            if (GameInputter.right(type, 1)) {
                 _listCtrl.moveSelecter(_p2Slt, 1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.select(type, 1)) {
+            if (GameInputter.select(type, 1)) {
                 _p2Slt.select(playerSeltBack);
                 SoundCtrl.I.sndConfirm();
             }
@@ -278,17 +278,17 @@ public class SelectFighterStage implements IStage {
         if (_mapSelectUI && _mapSelectUI.enabled) {
             type = _mapSelectUI.inputType;
 
-            if (GameInputer.left(type, 1)) {
+            if (GameInputter.left(type, 1)) {
                 _mapSelectUI.prev();
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.right(type, 1)) {
+            if (GameInputter.right(type, 1)) {
                 _mapSelectUI.next();
                 SoundCtrl.I.sndSelect();
             }
 
-            if (GameInputer.select(type, 1)) {
+            if (GameInputter.select(type, 1)) {
                 _mapSelectUI.select(onMapSelect);
                 SoundCtrl.I.sndConfirm();
             }
@@ -331,7 +331,7 @@ public class SelectFighterStage implements IStage {
 
         clear();
 
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
 
         _mapSelectUI = new SelectMapUI();
         _ui.addChild(_mapSelectUI);
@@ -351,7 +351,7 @@ public class SelectFighterStage implements IStage {
                     _mapSelectUI.inputType = GameInputType.P1;
                     _mapSelectUI.enabled   = true;
                 }
-                GameInputer.enabled = true;
+                GameInputter.enabled = true;
             }
         });
 

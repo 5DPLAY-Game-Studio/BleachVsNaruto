@@ -30,7 +30,7 @@ import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.events.GameEvent;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.stage.CongratulateStage;
 import net.play5d.game.bvn.stage.CreditsStage;
@@ -104,7 +104,7 @@ public class MainGame {
             GameRender.initialize(stage);
 
             GameLogger.log('Initializing game inputter...');
-            GameInputer.initialize(_stage);
+            GameInputter.initialize(_stage);
 
             GameLogger.log('Initializing game scroll rectangle...');
             root.scrollRect = new Rectangle(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
@@ -116,7 +116,7 @@ public class MainGame {
             ConfigCtrl.apply(GameData.I.config);
 
             GameLogger.log('Initializing game inputter configuration...');
-            GameInputer.updateConfig();
+            GameInputter.updateConfig();
 
             GameData.I.loadSaveData();
 
@@ -143,7 +143,7 @@ public class MainGame {
             ConfigCtrl.apply(GameData.I.config);
 
             GameLogger.log('Initializing game inputter configuration...');
-            GameInputer.updateConfig();
+            GameInputter.updateConfig();
 
             EffectModel.I.initialize();
 

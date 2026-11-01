@@ -39,7 +39,7 @@ import net.play5d.game.bvn.fighter.ctrler.FighterKeyCtrl;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
@@ -159,7 +159,7 @@ public class GameCtrl {
 
         GameRender.remove(render);
         GameLogic.clear();
-        GameInputer.clearInput();
+        GameInputter.clearInput();
 
         // 格斗：FighterEventCtrl 原先在此阶段销毁
         if (_fightSession && !_fightSession.getMusouCtrl()) {
@@ -634,7 +634,7 @@ public class GameCtrl {
 
     private function renderPause():void {
         if (_startCtrl || _endCtrl) {
-            if (GameInputer.back(1) || GameInputer.select(GameInputType.MENU, 1)) {
+            if (GameInputter.back(1) || GameInputter.select(GameInputType.MENU, 1)) {
                 if (_startCtrl) {
                     _startCtrl.skip();
                 }
@@ -645,7 +645,7 @@ public class GameCtrl {
             return;
         }
 
-        if (GameInputer.back(1)) {
+        if (GameInputter.back(1)) {
 
             if (GameUI.showingConfirm()) {
                 GameUI.cancelConfirm();

@@ -338,13 +338,13 @@ public class GameInterfaceManager implements IGameInterface {
             InputManager.I.socket_input_p2.enabled = true;
 
             if (LANServerCtrl.I.active) {
-                InputManager.I.socket_input_p1.setInputers([InputManager.I.key_p1, InputManager.I.joy_p1]);
+                InputManager.I.socket_input_p1.setInputters([InputManager.I.key_p1, InputManager.I.joy_p1]);
             }
 
             if (LANClientCtrl.I.active) {
                 InputManager.I.key_p2.setConfig(GameData.I.config.key_p1);
                 InputManager.I.joy_p2.setConfig(_extendsConfig.joy1Config);
-                InputManager.I.socket_input_p2.setInputers([InputManager.I.key_p2, InputManager.I.joy_p2]);
+                InputManager.I.socket_input_p2.setInputters([InputManager.I.key_p2, InputManager.I.joy_p2]);
             }
 
             return true;

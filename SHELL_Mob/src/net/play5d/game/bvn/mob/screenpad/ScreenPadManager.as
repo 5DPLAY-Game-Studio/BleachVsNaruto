@@ -33,13 +33,13 @@ public class ScreenPadManager {
         GameEvent.addEventListener(GameEvent.RESUME_GAME, pauseResumeHandler);
 
         _game          = new ScreenPadGame(stage);
-        _game.inputers = new Vector.<ScreenPadInput>();
-        _game.inputers.push(InputManager.I.screen_p1);
-        _game.menuInputer = InputManager.I.screen_menu;
+        _game.inputters = new Vector.<ScreenPadInput>();
+        _game.inputters.push(InputManager.I.screen_p1);
+        _game.menuInputter = InputManager.I.screen_menu;
 
         _selectFighter          = new ScreenPadSelectFighter(stage);
-        _selectFighter.inputers = new Vector.<ScreenPadInput>();
-        _selectFighter.inputers.push(InputManager.I.screen_menu, InputManager.I.screen_p1);
+        _selectFighter.inputters = new Vector.<ScreenPadInput>();
+        _selectFighter.inputters.push(InputManager.I.screen_menu, InputManager.I.screen_p1);
 
         Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
     }

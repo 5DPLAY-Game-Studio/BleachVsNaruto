@@ -42,7 +42,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MessionModel;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.ResUtils;
@@ -105,7 +105,7 @@ public class WinnerStage implements IStage {
         SoundCtrl.I.BGM(null);
         SoundCtrl.I.playAssetSound('win');
 
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
 
         initText();
 
@@ -127,7 +127,7 @@ public class WinnerStage implements IStage {
      */
     public function destroy(back:Function = null):void {
         GameRender.remove(render);
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
         clearTimeout(_bgmDelay);
         GameEvent.dispatchEvent(GameEvent.WINNER_END);
         if (_ui) {
@@ -245,13 +245,13 @@ public class WinnerStage implements IStage {
     }
 
     private function render():void {
-        if (GameInputer.select(GameInputType.MENU)) {
+        if (GameInputter.select(GameInputType.MENU)) {
             goNext();
         }
     }
 
     private function goNext():void {
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
 
         StateCtrl.I.transIn(function ():void {
             MessionModel.I.messionComplete();
@@ -278,7 +278,7 @@ public class WinnerStage implements IStage {
 
 
         GameRender.add(render);
-        GameInputer.enabled = true;
+        GameInputter.enabled = true;
     }
 
     private function btnHandler(e:MouseEvent):void {

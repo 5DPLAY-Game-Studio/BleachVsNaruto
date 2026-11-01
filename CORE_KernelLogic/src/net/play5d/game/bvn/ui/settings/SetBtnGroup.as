@@ -32,7 +32,7 @@ import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
@@ -75,8 +75,8 @@ public class SetBtnGroup extends Sprite {
         initArrow();
 
         GameRender.add(render, this);
-        GameInputer.focus();
-        GameInputer.enabled = true;
+        GameInputter.focus();
+        GameInputter.enabled = true;
 
     }
 
@@ -113,8 +113,8 @@ public class SetBtnGroup extends Sprite {
 
         GameRender.add(render, this);
 
-        GameInputer.focus();
-        GameInputer.enabled = true;
+        GameInputter.focus();
+        GameInputter.enabled = true;
     }
 
     public function destroy():void {
@@ -387,19 +387,19 @@ public class SetBtnGroup extends Sprite {
         }
         var btn:SetBtn = _btns[_arrowIndex];
 
-        if (GameInputer.up(gameInputType, 1)) {
+        if (GameInputter.up(gameInputType, 1)) {
             if (direct == 1) {
                 setArrowIndex(_arrowIndex - 1);
             }
         }
 
-        if (GameInputer.down(gameInputType, 1)) {
+        if (GameInputter.down(gameInputType, 1)) {
             if (direct == 1) {
                 setArrowIndex(_arrowIndex + 1);
             }
         }
 
-        if (GameInputer.left(gameInputType, 1)) {
+        if (GameInputter.left(gameInputType, 1)) {
             if (direct == 0) {
                 setArrowIndex(_arrowIndex - 1);
             }
@@ -408,7 +408,7 @@ public class SetBtnGroup extends Sprite {
             }
         }
 
-        if (GameInputer.right(gameInputType, 1)) {
+        if (GameInputter.right(gameInputType, 1)) {
             if (direct == 0) {
                 setArrowIndex(_arrowIndex + 1);
             }
@@ -417,7 +417,7 @@ public class SetBtnGroup extends Sprite {
             }
         }
 
-        if (GameInputer.select(gameInputType, 1)) {
+        if (GameInputter.select(gameInputType, 1)) {
             btn.select();
         }
 

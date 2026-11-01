@@ -31,7 +31,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.events.SetBtnEvent;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
@@ -113,7 +113,7 @@ public class CongratulateStage implements IStage {
 
     private function render():void {
 
-        if (GameInputer.back(1)) {
+        if (GameInputter.back(1)) {
             _ui.y = -_exitHeight;
             SoundCtrl.I.sndSelect();
         }

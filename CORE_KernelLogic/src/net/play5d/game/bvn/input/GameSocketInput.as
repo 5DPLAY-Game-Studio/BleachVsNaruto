@@ -45,7 +45,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
     /** @private */
     private var _data:SocketInputData;
     /** @private */
-    private var _inputers:Vector.<IGameInput>;
+    private var _inputters:Vector.<IGameInput>;
     /** @private */
     private var _inputData:int = 0;
     /** @private */
@@ -92,12 +92,12 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
     /**
      * 设置聚合的本地输入源。
      *
-     * @param inputers 本地 <code>IGameInput</code> 列表。
+     * @param inputters 本地 <code>IGameInput</code> 列表。
      */
-    public function setInputers(inputers:Array):void {
-        _inputers = new Vector.<IGameInput>();
-        for each(var i:IGameInput in inputers) {
-            _inputers.push(i);
+    public function setInputters(inputters:Array):void {
+        _inputters = new Vector.<IGameInput>();
+        for each(var i:IGameInput in inputters) {
+            _inputters.push(i);
         }
     }
 
@@ -105,15 +105,15 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
      * 每一帧采集按键，时间范围内按过即有效。
      */
     public function renderInput():void {
-        if (!_inputers || _inputers.length < 1) {
+        if (!_inputters || _inputters.length < 1) {
             return;
         }
 
         var i:int;
-        var l:int = _inputers.length;
+        var l:int = _inputters.length;
         var p:IGameInput;
         for (i = 0; i < l; i++) {
-            p = _inputers[i];
+            p = _inputters[i];
 
             p.up() && (
                     _inputData |= _upK
@@ -154,7 +154,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
      * 非锁帧场景采集（含 select/back）。
      */
     public function freeRender():void {
-        if (!_inputers || _inputers.length < 1) {
+        if (!_inputters || _inputters.length < 1) {
             return;
         }
         if (!_data) {
@@ -164,10 +164,10 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         _data.clear();
 
         var i:int;
-        var l:int = _inputers.length;
+        var l:int = _inputters.length;
         var p:IGameInput;
         for (i = 0; i < l; i++) {
-            p = _inputers[i];
+            p = _inputters[i];
 
             _data.up ||= p.up();
             _data.down ||= p.down();

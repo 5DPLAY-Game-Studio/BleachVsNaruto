@@ -13,7 +13,7 @@ public class ScreenPadSelectFighter {
         _stage = stage;
         build();
     }
-    public var inputers:Vector.<ScreenPadInput>;
+    public var inputters:Vector.<ScreenPadInput>;
     private var _stage:Stage;
     private var _listened:Boolean;
     private var _downCache:Object = {};
@@ -50,7 +50,7 @@ public class ScreenPadSelectFighter {
         catch (e:Error) {
         }
 
-        for each(var p:ScreenPadInput in inputers) {
+        for each(var p:ScreenPadInput in inputters) {
             p.clear();
         }
 
@@ -102,7 +102,7 @@ public class ScreenPadSelectFighter {
         }
     }
 
-    private function setInputerDown(key:Object, down:Boolean):void {
+    private function setInputterDown(key:Object, down:Boolean):void {
 
         if (key == null) {
             return;
@@ -114,10 +114,10 @@ public class ScreenPadSelectFighter {
         var k:String;
         var il:int, kl:int;
 
-        il = inputers.length;
+        il = inputters.length;
 
         for (i = 0; i < il; i++) {
-            t = inputers[i];
+            t = inputters[i];
 
             if (key is String) {
                 t.setDown(key as String, down);
@@ -146,7 +146,7 @@ public class ScreenPadSelectFighter {
             if (_downCache[touchId]) {
                 b = _downCache[touchId].btn;
                 b.touchUP();
-                setInputerDown(_downCache[touchId].key, false);
+                setInputterDown(_downCache[touchId].key, false);
                 delete _downCache[touchId];
             }
             return;
@@ -159,7 +159,7 @@ public class ScreenPadSelectFighter {
                 if (b.checkArea(touchX, touchY)) {
                     b.touchDown(touchX, touchY);
                     _downCache[touchId] = {btn: b, key: b.keyId};
-                    setInputerDown(b.keyId, true);
+                    setInputterDown(b.keyId, true);
                 }
                 break;
             }

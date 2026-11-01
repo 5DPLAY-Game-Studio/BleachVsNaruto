@@ -23,8 +23,8 @@ public class ScreenPadGame extends EventDispatcher {
         _stage = stage;
         build();
     }
-    public var inputers:Vector.<ScreenPadInput>;
-    public var menuInputer:ScreenPadInput;
+    public var inputters:Vector.<ScreenPadInput>;
+    public var menuInputter:ScreenPadInput;
     public var isShowing:Boolean;
     private var _arrow:ScreenPadArrow;
     private var _stage:Stage;
@@ -84,7 +84,7 @@ public class ScreenPadGame extends EventDispatcher {
         catch (e:Error) {
         }
 
-        for each(var p:ScreenPadInput in inputers) {
+        for each(var p:ScreenPadInput in inputters) {
             p.clear();
         }
     }
@@ -355,7 +355,7 @@ public class ScreenPadGame extends EventDispatcher {
             var isDown:Boolean = false;
 
             btn.touchUP();
-            setInputerDown(btn.keyId, false);
+            setInputterDown(btn.keyId, false);
 
             for (var j:String in _downCache) {
                 var cache:Object  = _downCache[j];
@@ -378,35 +378,35 @@ public class ScreenPadGame extends EventDispatcher {
 
             if (btn == _arrow) {
                 if (isDown) {
-                    setInputerDown(_arrow.keyId, true);
-                    setInputerDown(_arrow.getNotDownKeyIds(), false);
+                    setInputterDown(_arrow.keyId, true);
+                    setInputterDown(_arrow.getNotDownKeyIds(), false);
                 }
                 else {
                     _arrow.clearKey();
-                    setInputerDown(_arrow.getAllKeyIds(), false);
+                    setInputterDown(_arrow.getAllKeyIds(), false);
                 }
             }
             else {
-                setInputerDown(btn.keyId, isDown);
+                setInputterDown(btn.keyId, isDown);
             }
 
         }
     }
 
-    private function setInputerDown(key:Object, down:Boolean):void {
+    private function setInputterDown(key:Object, down:Boolean):void {
 
         if (key == null) {
             return;
         }
 
-        if (menuInputer) {
+        if (menuInputter) {
             switch (key) {
             case 'attack':
             case 'jump':
-                menuInputer.setDown('select', down);
+                menuInputter.setDown('select', down);
                 break;
             case 'back':
-                menuInputer.setDown('back', down);
+                menuInputter.setDown('back', down);
                 break;
             }
         }
@@ -417,10 +417,10 @@ public class ScreenPadGame extends EventDispatcher {
         var k:String;
         var il:int, kl:int;
 
-        il = inputers.length;
+        il = inputters.length;
 
         for (i = 0; i < il; i++) {
-            t = inputers[i];
+            t = inputters[i];
 
             if (key is String) {
                 t.setDown(key as String, down);

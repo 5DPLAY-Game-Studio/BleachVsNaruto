@@ -35,7 +35,7 @@ import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
 import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.data.vos.SelectStageConfigVO;
 import net.play5d.game.bvn.debug.Debugger;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.kyo.utils.ArrayMap;
 import net.play5d.kyo.utils.KyoRandom;
 
@@ -259,7 +259,7 @@ public class SelectFighterListCtrl {
 
     public function fadOutList(back:Function = null):void {
 
-        GameInputer.enabled = false;
+        GameInputter.enabled = false;
 
         var outX:Number = GameConfig.GAME_SIZE.x / 2 - 30;
         var outY:Number = GameConfig.GAME_SIZE.y / 2 - 30;

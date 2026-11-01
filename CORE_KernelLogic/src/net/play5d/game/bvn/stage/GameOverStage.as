@@ -33,7 +33,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.input.GameInputType;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;
@@ -135,13 +135,13 @@ public class GameOverStage implements IStage {
             return;
         }
 
-        if (GameInputer.left(GameInputType.MENU, 1)) {
+        if (GameInputter.left(GameInputType.MENU, 1)) {
             setArrow('btn_yes');
         }
-        if (GameInputer.right(GameInputType.MENU, 1)) {
+        if (GameInputter.right(GameInputType.MENU, 1)) {
             setArrow('btn_no');
         }
-        if (GameInputer.select(GameInputType.MENU, 1)) {
+        if (GameInputter.select(GameInputType.MENU, 1)) {
             selectHandler();
         }
 
@@ -173,7 +173,7 @@ public class GameOverStage implements IStage {
         }
 
         GameRender.add(render);
-        GameInputer.focus();
+        GameInputter.focus();
 
         _keyEnabled = true;
 

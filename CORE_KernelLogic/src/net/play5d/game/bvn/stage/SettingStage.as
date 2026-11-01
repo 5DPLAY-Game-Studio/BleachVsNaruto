@@ -36,7 +36,7 @@ import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.events.SetBtnEvent;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
 import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 import net.play5d.game.bvn.ui.settings.SetCtrlBtnUI;
@@ -205,7 +205,7 @@ public class SettingStage implements IStage {
     private function backMenuHandler(e:Event):void {
         GameData.I.saveData();
         ConfigCtrl.apply(GameData.I.config);
-        GameInputer.updateConfig();
+        GameInputter.updateConfig();
         MainGame.I.goMenu();
     }
 
@@ -232,7 +232,7 @@ public class SettingStage implements IStage {
         case 'APPLY':
             GameData.I.saveData();
             ConfigCtrl.apply(GameData.I.config);
-            GameInputer.updateConfig();
+            GameInputter.updateConfig();
             MainGame.I.goMenu();
             break;
         }

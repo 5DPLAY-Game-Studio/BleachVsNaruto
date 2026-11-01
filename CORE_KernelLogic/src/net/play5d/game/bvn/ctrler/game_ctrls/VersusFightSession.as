@@ -33,7 +33,7 @@ import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterAttacker;
 import net.play5d.game.bvn.fighter.FighterMain;
-import net.play5d.game.bvn.input.GameInputer;
+import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
@@ -94,7 +94,7 @@ public class VersusFightSession implements IFightSession {
      */
     public function start():void {
         _host.clearPause();
-        GameInputer.enabled = true;
+        GameInputter.enabled = true;
         _host.gameRunData.reset();
         _host.initTeam();
         buildGame();
