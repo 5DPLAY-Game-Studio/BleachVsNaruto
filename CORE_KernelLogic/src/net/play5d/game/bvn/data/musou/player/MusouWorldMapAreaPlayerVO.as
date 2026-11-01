@@ -26,10 +26,8 @@ public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
 
     public var id:String;
 
-//		public var missions:Vector.<MusouMissionPlayerVO> = new Vector.<MusouMissionPlayerVO>();
     public var name:String;
 
-//		public var isOpen:Boolean;
     private var _passedMissions:Vector.<MusouMissionPlayerVO> = new Vector.<MusouMissionPlayerVO>();
 
     public function passMission(missionId:String, starts:int = 1):Boolean {

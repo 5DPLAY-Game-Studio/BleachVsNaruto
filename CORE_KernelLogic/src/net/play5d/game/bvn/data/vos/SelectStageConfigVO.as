@@ -34,13 +34,10 @@ public class SelectStageConfigVO implements IInstanceVO {
     public var bottom:Number = 0;
     public var left:Number   = 0;
 
-//		public var itemGap:Point = new Point(10,10);
     public var right:Number = 0;
     public var charList:SelectCharListConfigVO;
     public var assistList:SelectCharListConfigVO;
 
-    //	public var HCount:int; //列数
-    //	public var VCount:int; //行数
     public var unitSize:Point = new Point(50, 50);
 
     /**

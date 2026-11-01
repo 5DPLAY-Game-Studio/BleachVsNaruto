@@ -210,7 +210,6 @@ public class GameStartCtrl {
             break;
         case 5:
             //round 1 , ready fight!
-            //					trace("round 1 , ready fight!");
             _uiPlaying = true;
             _state.gameUI.getUI().showStart(function ():void {
                 _uiPlaying = false;

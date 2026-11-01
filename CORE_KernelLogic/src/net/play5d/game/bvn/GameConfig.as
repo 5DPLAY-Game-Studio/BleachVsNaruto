@@ -158,7 +158,6 @@ public class GameConfig {
     public static function setGameFps(v:int):void {
         FPS_GAME   = v;
         SPEED_PLUS = SPEED_PLUS_DEFAULT;
-//			HURT_FRAME_OFFSET = v == 30 ? 4 : 3;
     }
 
 }

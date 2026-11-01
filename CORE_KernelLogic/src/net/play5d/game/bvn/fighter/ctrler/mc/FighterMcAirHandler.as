@@ -72,8 +72,6 @@ public class FighterMcAirHandler extends FighterMcActsPart {
             return;
         }
 
-//			trace("touchFloor" , _action.touchFloor);
-
         var act:String = _action.touchFloor;
 
         if (_isFalling) {
@@ -83,8 +81,6 @@ public class FighterMcAirHandler extends FighterMcActsPart {
         if (act == null) {
             return;
         }
-
-//			_action.clearAction();
 
         var delayParam:Object = act == FighterSpecialFrame.JUMP_TOUCH_FLOOR ? {call: _owner.setAttack, delay: 1} : null;
         _owner.doAction(act, false, delayParam);
@@ -120,7 +116,6 @@ public class FighterMcAirHandler extends FighterMcActsPart {
                 else {
                     _owner.effectCtrler.jump();
                 }
-//					_owner.setJumpQuick();
             }
             return;
         }
@@ -132,7 +127,6 @@ public class FighterMcAirHandler extends FighterMcActsPart {
         var vecy:Number = _fighter.getVecY();
         if (_mc.currentFrameName != FighterSpecialFrame.JUMP_ING && vecy > -_fighter.jumpPower * 0.35) {
             _mc.goFrame(FighterSpecialFrame.JUMP_ING, false);
-//				_owner.setJump();
             _fighter.setAnimateFrameOut(_owner.setJump, 5);
         }
 
@@ -386,8 +380,6 @@ public class FighterMcAirHandler extends FighterMcActsPart {
                 inputText = (act == FighterSpecialFrame.SKILL_AIR_W) ? FighterInputCmd.SKILL_AIR_W : FighterInputCmd.SKILL_AIR_S;
             }
         }
-
-        //			fighter.setVelocity(0,0);
 
         _action.airHitTimes = 0;
         _action.jumpTimes   = 0;

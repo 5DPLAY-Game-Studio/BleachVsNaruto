@@ -73,7 +73,6 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     private var _velocity:Point = new Point();
     private var _damping:Point  = new Point();
 
-//		private var _lastPos:Point = new Point();
     private var _velocity2:Point = new Point();
     private var _damping2:Point  = new Point();
 
@@ -276,10 +275,8 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
         renderVelocity();
         renderFrameOut();
 
-//			trace(_x,_y);
         _mainMc.x = _x;
         _mainMc.y = _y;
-//			_lastPos = new Point(x,y);
     }
 
     public function getDisplay():DisplayObject {
@@ -309,10 +306,6 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     public function getVelocity():Point {
         return _velocity;
     }
-
-//		public function getRealVelocity():Point{
-//			return new Point(x - _lastPos.x , y - _lastPos.y);
-//		}
 
     /**
      * 获取力X
@@ -430,14 +423,8 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
                 _g = g;
             }
         }
-//			_mainMc.y += _g * _speedPlus;
-//			_y += _g * _speedPlus;
         move(0, _g);
     }
-
-//		public function getGForce():Number{
-//			return _g;
-//		}
 
     public function setInAir(v:Boolean):void {
         if (!v) {
@@ -563,7 +550,6 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
      */
     public function setAnimateFrameOut(func:Function, frame:int):void {
         _frameAnimateFuncs.push({func: func, frame: frame});
-        //			_frameFuncs[0] = {func:func,frame:frame};
     }
 
     private function renderVelocity():void {
@@ -603,13 +589,8 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
         if (_destroyed) {
             return;
         }
-//        try {
             render();
             renderAnimate();
-//        }
-//        catch (e:Error) {
-//            Debugger.log('BaseGameSprite.renderSelfEnterFrame', e);
-//        }
     }
 
     /**

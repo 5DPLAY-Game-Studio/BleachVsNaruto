@@ -48,7 +48,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
 
     private var _fighter:FighterMain;
 
-//		private var _initAction:String = "开场";
     private var _rectCache:Object = {};
     private var _doingWankai:Boolean;
     /** @private getCurrentHits 复用缓冲，避免对撞热路径反复 new Array */
@@ -358,39 +357,12 @@ public class FighterCtrler implements IGameSpriteCntlr {
                             camera_ctrler : _cameraCtrler
                         });
         }
-//        else {
-//            // 兼容老版本 ****************************************************************************
-//
-//            if (fighter.mc.setFighterCtrler) {
-//                fighter.mc.setFighterCtrler(this);
-//            }
-//            else {
-//                throw new Error('初始化失败，SWF未定义setFighterCtrler()');
-//            }
-//
-//            if (fighter.mc.setEffectCtrler) {
-//                fighter.mc.setEffectCtrler(_effectCtrl);
-//            }
-//            else {
-//                throw new Error('初始化效果接口失败，SWF未定义setEffectCtrler()');
-//            }
-//
-//            if (fighter.mc.setFighterMcCtrler) {
-//                fighter.mc.setFighterMcCtrler(_fighterMcCtrl);
-//            }
-//            else {
-//                throw new Error('初始化效果接口失败，SWF未定义setFighterMcCtrler()');
-//            }
-//        }
-
-
     }
 
     /**
      * 按GameConfig.FPS_ANIMATE的速率运行
      */
     public function renderAnimate():void {
-//			if(fighterMc) fighterMc.renderAnimate();
         if (_fighterMcCtrl) {
             _fighterMcCtrl.renderAnimate();
         }
@@ -400,7 +372,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
      * 按GameConfig.FPS_MAIN的速率运行
      */
     public function render():void {
-//			if(fighterMc) fighterMc.render();
         if (_fighterMcCtrl) {
             _fighterMcCtrl.render();
         }
@@ -426,7 +397,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
      *         isBreakDef:false});
      */
     public function defineAction(id:String, obj:Object):void {
-//			trace("defineAction",id , obj.hitx , obj.hity);
         hitModel.addHitVO(id, obj);
     }
 
@@ -468,13 +438,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
      */
     public function initMc(mc:MovieClip):void {
         if (mc) {
-//				var fighterMc:FighterMC = new FighterMC();
-//				fighterMc.initialize(mc , _fighter , _fighterMcCtrl);
-//				_fighterMcCtrl.setMc(fighterMc);
-
-//				fighterMc.goFrame(_initAction);
-//				trace('_fighter.actionState' , _fighter.actionState);
-
 
             var fighterMc:FighterMC = _fighterMcCtrl.initMc(mc);
             if (_doingWankai) {
@@ -487,7 +450,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
             }
 
             _fighter.onMcInited();
-//				_fighter.onChangeMC();
 
         }
         else {
@@ -519,10 +481,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
         var hitvo:HitVO;
         var area:Rectangle, area2:Rectangle;
 
-//			var fighterDirect:int = _fighter.direct;
-//			var fighterX:int = _fighter.getDisplay().x;
-//			var fighterY:int = _fighter.getDisplay().y;
-
         for (i; i < areas.length; i++) {
             dobj             = areas[i];
             var dname:String = dobj.name;
@@ -531,8 +489,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
             if (!hitvo) {
                 continue;
             }
-
-//				trace(hitvo.hitx , hitvo.hity);
 
             area              = dobj.area;
             //缓存取出后，需要对重新计算位置
@@ -555,7 +511,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
         catch (e:Error) {
             trace(_fighter.data.name);
             trace('FighterCtrler.getBodyArea::', e);
-//				area = _fighter.getMC().getCurrentBodyArea();
         }
 
         if (area == null) {
@@ -621,9 +576,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
             return;
         }
 
-//			var display:DisplayObject = _fighter.getDisplay();
-//			var targetDisplay:DisplayObject = target.getDisplay();
-
         _fighter.direct = (
                                   _fighter.x < target.x
                           ) ? 1 : -1;
@@ -649,9 +601,6 @@ public class FighterCtrler implements IGameSpriteCntlr {
         if (!target) {
             return;
         }
-
-//			var display:DisplayObject = _fighter.getDisplay();
-//			var targetDisplay:DisplayObject = target.getDisplay();
 
         if (x != null) {
             var numX:Number = Number(x);

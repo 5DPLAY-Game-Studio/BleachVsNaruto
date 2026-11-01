@@ -172,11 +172,6 @@ public class GameOverStage implements IStage {
             setArrow(defaultId);
         }
 
-//			if(!_keyInited){
-//				KeyBoardCtrl.I.addEventListener(KeyEvent.KEY_DOWN,onKeyDown);
-//				KeyBoardCtrl.I.setFocus();
-//			}
-
         GameRender.add(render);
         GameInputer.focus();
 
@@ -265,8 +260,6 @@ public class GameOverStage implements IStage {
 
     private function showContinueComplete(e:Event):void {
         _ui.removeEventListener(Event.COMPLETE, showContinueComplete);
-//			var yesbtn:DisplayObject = _ui.getChildByName('btn_yes');
-//			var nobtn:DisplayObject = _ui.getChildByName('btn_no');
 
         initBtn('btn_yes');
         initBtn('btn_no');

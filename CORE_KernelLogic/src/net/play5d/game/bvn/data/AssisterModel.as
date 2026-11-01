@@ -51,17 +51,6 @@ public class AssisterModel {
         return _assisterObj[id];
     }
 
-//    public function initByXML(xml:XML):void {
-//        _assisterObj = {};
-//
-//        for each(var i:XML in xml.fighter) {
-//            var fv:FighterVO = new FighterVO();
-//            fv.initByXML(i);
-//            _assisterObj[fv.id] = fv;
-//        }
-//
-//    }
-
     public function initByObject(obj:Object):void {
         _assisterObj = {};
 

@@ -48,7 +48,6 @@ public class GameStage extends Sprite implements IStage {
     public function GameStage(gameCtrl:GameCtrl, effectCtrl:EffectCtrl) {
         _gameCtrl   = gameCtrl;
         _effectCtrl = effectCtrl;
-//			this.scrollRect = new Rectangle(0,0,GameConfig.GAME_SIZE.x , GameConfig.GAME_SIZE.y);
 
         _gameLayer.mouseChildren = false;
         _gameLayer.mouseEnabled  = false;
@@ -80,9 +79,6 @@ public class GameStage extends Sprite implements IStage {
     public function getMap():MapMain {
         return _map;
     }
-
-//		private var _renderAnimateGap:int = 0; //刷新动画间隔
-//		private var _renderAnimateFrame:int = 0;
 
     public function setVisibleByClass(cls:Class, visible:Boolean):void {
         GameSpriteUtil.renderGameSpritesCB(function (sp:IGameSprite):void {
@@ -257,7 +253,6 @@ public class GameStage extends Sprite implements IStage {
 
         var stageSize:Point;
         if (_map.mapLayer) {
-//				stageSize = new Point(_map.mapLayer.width , _map.mapLayer.height);
             stageSize = new Point(_map.mapLayer.width, GameConfig.GAME_SIZE.y);
         }
         else {
@@ -313,7 +308,6 @@ public class GameStage extends Sprite implements IStage {
         var tweenSpd:int = GameConfig.CAMERA_TWEEN_SPD / GameConfig.SPEED_PLUS_DEFAULT;
 
         camera.focus([display]);
-//			camera.setZoom(camera.autoZoomMax,false);
         camera.setZoom(3.5);
         camera.tweenSpd = tweenSpd;
     }
@@ -356,7 +350,6 @@ public class GameStage extends Sprite implements IStage {
     public function drawGameRect(rect:Rectangle, color:uint = 0xff0000, alpha:Number = 0.5,
                                  clear:Boolean                                       = false
     ):void {
-//			trace('drawGameRect' , rect);
 
         if (clear) {
             _gameLayer.graphics.clear();
@@ -366,11 +359,6 @@ public class GameStage extends Sprite implements IStage {
         _gameLayer.graphics.drawRect(rect.x, rect.y, rect.width, rect.height);
         _gameLayer.graphics.endFill();
     }
-
-
-//		public function renderAnimate():void{
-//			if(gameUI) gameUI.renderAnimate();
-//		}
 
     public function clearDrawGameRect():void {
         _gameLayer.graphics.clear();
@@ -459,7 +447,6 @@ public class GameStage extends Sprite implements IStage {
         var p1:FighterMain = p1group.currentFighter;
 
         if (p1) {
-//				GameLogic.resetFighterHP(p1);
             p1.x      = _map.p1pos.x;
             p1.y      = _map.p1pos.y;
             p1.direct = 1;

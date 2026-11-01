@@ -38,7 +38,6 @@ public class Assister extends BaseGameSprite {
         super(mainmc);
 
         // TODO
-//			isAlive = false;
 
         if (_mainMc.setAssistCtrler) {
             _ctrler = new AssisterCtrler();
@@ -117,20 +116,6 @@ public class Assister extends BaseGameSprite {
         }
     }
 
-//		public function moveToTarget(offsetX:Number = NaN , offsetY:Number = NaN):void{
-//			var fighter:FighterMain = _owner is FighterMain ? _owner as FighterMain : null;
-//			if(!fighter) return;
-//
-//			var target:IGameSprite = fighter.getCurrentTarget();
-//			if(!target) return;
-//
-//			//			var targetDisplay:DisplayObject = target.getDisplay();
-//			//			if(!targetDisplay) return;
-//
-//			if(!isNaN(offsetX)) _x = target.x + (offsetX * direct);
-//			if(!isNaN(offsetY)) _y = target.y + offsetY;
-//		}
-
     /**
      * 当前攻击的攻击数据 return [FighterHitVO];
      */
@@ -140,8 +125,6 @@ public class Assister extends BaseGameSprite {
         }
 
         var areas:Array = _hitAreaCache.getAreaByFrame(_mainMc.currentFrame) as Array;
-
-        //			trace('get cache' , _mainMc.currentFrame , areas);
 
         if (!areas || areas.length < 1) {
             return null;
@@ -188,7 +171,6 @@ public class Assister extends BaseGameSprite {
     public function goFight():void {
 
         isAttacking = true;
-//			isAlive = true;  //暂时辅助不能被打，被打时放开
         gotoAndPlay(2);
     }
 

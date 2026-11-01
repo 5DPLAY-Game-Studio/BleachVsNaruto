@@ -48,18 +48,11 @@ public class AssetManager {
 
     private var _swfLoader:KyoClassLoader          = new KyoClassLoader();
     private var _soundLoader:KyoSoundLoader        = new KyoSoundLoader();
-//		private var _assetLoader:IAssetLoader = new AssetLoader();
     private var _bitmapLoader:BitmapAssetLoader    = new BitmapAssetLoader();
     private var _bitmapFontLoader:BitmapFontLoader = new BitmapFontLoader();
-//		private var _assetLoader:IAssetLoader = ResUtils.I.callSwfFunction(ResUtils.I.extend, "getAssetLoader");
     private var _assetLoader:IAssetLoader = null;
 
     public function init():void {
-//			if(!_assetLoader){
-//				var extend:* = ResUtils.I.getItemProperty(ResUtils.I.extend, "assetLoader");
-//				_assetLoader = new ExtendAssetLoader(extend);
-//				trace(_assetLoader);
-//			}
     }
 
     public function getFont(id:String):BitmapFont {
@@ -272,19 +265,6 @@ public class AssetManager {
     }
 
     private function loadPreLoadSounds(back:Function, progress:Function):void {
-//			_assetLoader.loadXML("config/preload.xml",function(xml:XML):void{
-//				var sounds:Array = [];
-//				var bgmPath:String = xml.bgm.@path;
-//				var soundPath:String = xml.sound.@path;
-//				for each(var i:XML in xml.bgm.item){
-//					sounds.push(bgmPath+'/'+i.toString());
-//				}
-//				for each(var j:XML in xml.sound.item){
-//					sounds.push(soundPath+'/'+j.toString());
-//				}
-////				_soundLoader.loadSounds(sounds , back , progress);
-//				loadSnds(sounds , back , progress);
-//			});
 
         _assetLoader.loadJSON('config/preload.json', function (obj:Object):void {
             var sounds:Array = [];

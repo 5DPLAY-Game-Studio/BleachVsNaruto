@@ -135,10 +135,8 @@ public class WorldMapPointUI extends EventDispatcher {
             if (_lvTxt) {
                 _lvTxt.visible = false;
             }
-//				if(_maskMc) _maskMc.gotoAndStop(1);
         }
         else {
-//				if(_maskMc) _maskMc.gotoAndStop('current');
             updateFace();
         }
 

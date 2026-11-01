@@ -35,7 +35,6 @@ public class BaseDialog {
     public var yesBack:Function;
     public var noBack:Function;
     protected var _backBtn:SimpleButton;
-//		protected var _ui:Sprite;
     protected var _dialogUI:Sprite;
     protected var _cnTxt:Text;
     protected var _noBtn:SimpleButton;

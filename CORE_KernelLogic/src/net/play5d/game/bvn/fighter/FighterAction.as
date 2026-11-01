@@ -89,7 +89,6 @@ public class FighterAction {
         isHurtFlying       = false;
         isDefenseHiting    = false;
         touchFloorBreakAct = false;
-//			trace("clearState");
 
     }
 

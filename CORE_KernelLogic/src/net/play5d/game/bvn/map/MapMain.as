@@ -58,7 +58,6 @@ public class MapMain {
     public function destroy():void {
         if (mapMc) {
             try {
-                //mapMc.stopAllMovieClips();
                 mapMc.removeChildren();
             }
             catch (e:Error) {
@@ -204,7 +203,6 @@ public class MapMain {
         bgLayer       = new MapLayer(mapMc.getChildByName('bg'));
 
         if (bgLayer.enabled) {
-//				bgLayer.drawBitmap(false, 0);
             bgLayer.normalize();
             mapMc.addChild(bgLayer);
         }

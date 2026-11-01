@@ -94,9 +94,6 @@ public class HitVO implements IInstanceVO {
     // 是否检查方向，若为 true，则当攻击方与被攻击方同向时，无视防御
     public var checkDirect:Boolean = true;
 
-//    // 攻击范围缓存
-//    private var _hitAreaCache:Object = {};
-
     // 攻击范围
     public var currentArea:Rectangle = null;
 
@@ -111,24 +108,6 @@ public class HitVO implements IInstanceVO {
 
     // 对方受到此次伤害后，是否受到重力效果
     public var targetApplyG:Boolean = true;
-
-//    // 克隆键值
-//    private var _cloneKey:Array = [
-//        'id', 'owner', 'power', 'powerAdd', 'powerRate', 'hitType', 'isBreakDef', 'hitx', 'hity', 'hurtTime',
-//        'hurtType', 'currentArea', 'checkDirect', 'slowDown', 'focusTarget'
-//    ];
-//
-//    /**
-//     * 克隆自身
-//     *
-//     * @return 返回自身实例的克隆对象
-//     */
-//    public function clone():HitVO {
-//        var hv:HitVO = new HitVO();
-//        KyoUtils.cloneValue(hv, this, _cloneKey);
-//
-//        return hv;
-//    }
 
     /**
      * 是否为必杀

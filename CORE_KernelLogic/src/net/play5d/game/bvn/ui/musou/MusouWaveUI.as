@@ -39,7 +39,6 @@ public class MusouWaveUI {
         var ct:Sprite = ui.getChildByName('ct_circle') as Sprite;
         ct.addChild(_circleBp);
 
-//			test();
     }
     private var _ui:Sprite;
     private var _txtCur:TextField;
@@ -60,18 +59,7 @@ public class MusouWaveUI {
                                           musouCtrl.getWavePercent() * 360
                                   ) << 0;
         _circleBp.bitmapData    = KyoDrawUtils.drawRing(10, 29, angle, [KyoColor.YELLOW, KyoColor.RED], 1);
-//			_circleBp.bitmapData = KyoDrawUtils.drawRing(10, _radius, angle, [KyoColor.YELLOW, KyoColor.RED],1);
     }
-
-//		private var _radius:Number = 20;
-//		private function test():void{
-//			MainGame.I.stage.addEventListener(MouseEvent.MOUSE_WHEEL, wheelHandler);
-//		}
-//		private function wheelHandler(e:MouseEvent):void{
-//			if(e.delta > 0) _radius += 0.5;
-//			if(e.delta < 0) _radius -= 0.5;
-//			trace(_radius);
-//		}
 
 }
 }

@@ -85,238 +85,13 @@ public class SelectFighterStage implements IStage {
         return _p1Slt && _p1Slt.selectFinish();
     }
 
-//		private function initPageBtn():void{
-//			// 雨兮定制
-//			var upBtn:SimpleButton = _ui.getChildByName("bu2") as SimpleButton;
-//			var upBtn2:SimpleButton = _ui.getChildByName("bu4") as SimpleButton;
-//			var downBtn:SimpleButton = _ui.getChildByName("bu1") as SimpleButton;
-//			var downBtn2:SimpleButton = _ui.getChildByName("bu3") as SimpleButton;
-//
-//			if(GameConfig.TOUCH_MODE){
-//				if(upBtn){
-//					upBtn.addEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-//					upBtn.visible = true;
-//				}
-//				if(upBtn2){
-//					upBtn2.addEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-//					upBtn2.visible = true;
-//				}
-//				if(downBtn){
-//					downBtn.addEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-//					downBtn.visible = true;
-//				}
-//				if(downBtn2){
-//					downBtn2.addEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-//					downBtn2.visible = true;
-//				}
-//			}else{
-//				if(upBtn){
-//					upBtn.addEventListener(MouseEvent.CLICK, pageUpHandler);
-//					upBtn.visible = true;
-//				}
-//				if(upBtn2){
-//					upBtn2.addEventListener(MouseEvent.CLICK, pageUpHandler);
-//					upBtn2.visible = true;
-//				}
-//				if(downBtn){
-//					downBtn.addEventListener(MouseEvent.CLICK, pageDownHandler);
-//					downBtn.visible = true;
-//				}
-//				if(downBtn2){
-//					downBtn2.addEventListener(MouseEvent.CLICK, pageDownHandler);
-//					downBtn2.visible = true;
-//				}
-//			}
-//		}
-//		private function removePageBtn():void{
-//			var upBtn:SimpleButton = _ui.getChildByName("bu2") as SimpleButton;
-//			var upBtn2:SimpleButton = _ui.getChildByName("bu4") as SimpleButton;
-//			var downBtn:SimpleButton = _ui.getChildByName("bu1") as SimpleButton;
-//			var downBtn2:SimpleButton = _ui.getChildByName("bu3") as SimpleButton;
-//
-//			if(upBtn){
-//				upBtn.removeEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-//				upBtn.removeEventListener(MouseEvent.CLICK, pageUpHandler);
-//				upBtn.visible = false;
-//			}
-//			if(upBtn2){
-//				upBtn2.removeEventListener(TouchEvent.TOUCH_TAP, pageUpHandler);
-//				upBtn2.removeEventListener(MouseEvent.CLICK, pageUpHandler);
-//				upBtn2.visible = false;
-//			}
-//			if(downBtn){
-//				downBtn.removeEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-//				downBtn.removeEventListener(MouseEvent.CLICK, pageDownHandler);
-//				downBtn.visible = false;
-//			}
-//			if(downBtn2){
-//				downBtn2.removeEventListener(TouchEvent.TOUCH_TAP, pageDownHandler);
-//				downBtn2.removeEventListener(MouseEvent.CLICK, pageDownHandler);
-//				downBtn2.visible = false;
-//			}
-//		}
-
     public function get p2SelectFinish():Boolean {
         return _p2Slt && _p2Slt.selectFinish();
-    }
-
-    /**
-     * 构建
-     */
-    public function build():void {
-        _ui            = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, ResUtils.SELECT);
-        _fighterListUI = new Sprite();
-
-        _ui.addChild(_fighterListUI);
-
-        _config   = GameData.I.config.select_config;
-        _modeFlow = SelectModeFlowFactory.create();
-        _listCtrl = new SelectFighterListCtrl(_fighterListUI, _config);
-        _listCtrl.tweenTime      = _tweenTime;
-        _listCtrl.onSelectConfrim = playerSeltBack;
-
-        GameRender.add(render);
-        GameInputer.focus();
-        GameInputer.enabled = false;
-
-        nextStep();
-
-        SoundCtrl.I.BGM(AssetManager.I.getSound('select'));
-
-        StateCtrl.I.clearTrans();
-
-        KeyBoarder.focus();
-
-        GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER);
-
-
-    }
-
-    public function setSelect(player:int, selects:Array):void {
-        var selt:SelecterItemUI = player == 1 ? _p1Slt : _p2Slt;
-        selt.setCurrentSelect(selects);
-        selt.removeSelecter();
-        SoundCtrl.I.sndConfrim();
-    }
-
-    public function nextStep():void {
-        var a:SelectFlowAction = _modeFlow.resolveNextStep(_curStep);
-        if (a.nextStep >= 0) {
-            _curStep = a.nextStep;
-        }
-
-        switch (a.action) {
-        case SelectFlowAction.INIT_FIGHTER:
-            initFighter();
-            break;
-        case SelectFlowAction.ENABLE_P2_WITH_P1_INPUT:
-            enableP2WithP1Input();
-            break;
-        case SelectFlowAction.FADOUT_ASSIST:
-            _listCtrl.fadOutList(initAssist);
-            break;
-        case SelectFlowAction.FADOUT_MAP:
-            _listCtrl.fadOutList(initMap);
-            break;
-        case SelectFlowAction.START_ARCADE:
-            startAcradeGame();
-            break;
-        case SelectFlowAction.START_MUSOU:
-            startMusouGame();
-            break;
-        case SelectFlowAction.SELECT_FINISH:
-            selectFinish();
-            break;
-        }
-    }
-
-    public function goLoadGame():void {
-        TraceLang('debug.trace.data.select_fighter_stage.start_game');
-        StateCtrl.I.transIn(MainGame.I.loadGame);
-    }
-
-    /**
-     * 稍后构建
-     */
-    public function afterBuild():void {
-    }
-
-    /**
-     * 销毁
-     * @param back 回调函数
-     */
-    public function destroy(back:Function = null):void {
-        clear();
-        GameRender.remove(render);
-        GameInputer.enabled = false;
-        SoundCtrl.I.BGM(null);
-        GameUI.closeConfrim();
-        _modeFlow = null;
-        if (_listCtrl) {
-            _listCtrl.destroy();
-            _listCtrl = null;
-        }
-
-        if (_backMenuBtn) {
-            _backMenuBtn.removeEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
-            _backMenuBtn.removeEventListener(MouseEvent.CLICK, backMenuHandler);
-            _backMenuBtn.visible = false;
-        }
-    }
-
-    private function initBackBtn():void {
-        if (!GameConfig.TOUCH_BACK_BTN) {
-            return;
-        }
-
-        if (!_backMenuBtn) {
-            _backMenuBtn         = new Sprite();
-            var btnBitmap:Bitmap = new GameConfig.TOUCH_BACK_BTN();
-            btnBitmap.width      = 100;
-            btnBitmap.smoothing  = true;
-            btnBitmap.scaleY     = btnBitmap.scaleX;
-            _backMenuBtn.addChild(btnBitmap);
-
-            if (GameConfig.TOUCH_MODE) {
-                _backMenuBtn.addEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
-            }
-            else {
-                _backMenuBtn.addEventListener(MouseEvent.CLICK, backMenuHandler);
-            }
-        }
-        _ui.addChild(_backMenuBtn);
-    }
-
-    private function initFighter():void {
-        TraceLang('debug.trace.data.select_fighter_stage.init_fighter');
-        clear();
-        _listCtrl.selectState = SelectFighterListCtrl.SELECT_STATE_FIGHTER;
-        _listCtrl.buildList(_config.charList);
-
-        GameData.I.p1Select = new SelectVO();
-        if (_modeFlow.createP2SelectVO()) {
-            GameData.I.p2Select = new SelectVO();
-        }
-
-        GameInputer.enabled = false;
-        setTimeout(initSelecter, _tweenTime);
-        // 雨兮定制删除
-//			initPageBtn();
         if (GameConfig.TOUCH_MODE) {
             initBackBtn();
         }
-//			initSelecter();
     }
 
-    //初始化辅助
-    private function initAssist():void {
-        TraceLang('debug.trace.data.select_fighter_stage.init_assist');
-        clear();
-        _listCtrl.selectState = SelectFighterListCtrl.SELECT_STATE_ASSIST;
-        _listCtrl.buildList(_config.assistList);
-        GameInputer.enabled = false;
-        // 雨兮定制删除
-//			initPageBtn();
         if (GameConfig.TOUCH_MODE) {
             initBackBtn();
         }
@@ -357,8 +132,6 @@ public class SelectFighterStage implements IStage {
             _listCtrl.setSelecters(null, null);
         }
 
-//			removePageBtn();
-
     }
 
     private function initSelecter():void {
@@ -394,7 +167,6 @@ public class SelectFighterStage implements IStage {
 
         _fighterListUI.addChild(_p1Slt.ui);
 
-//			_ui.addChild(_p1Slt.ui);
         _ui.addChild(_p1Slt.group);
         _listCtrl.setSelecters(_p1Slt, _p2Slt);
         _listCtrl.moveSlt(_p1Slt, 0, 0);
@@ -409,7 +181,6 @@ public class SelectFighterStage implements IStage {
 
         _fighterListUI.addChild(_p2Slt.ui);
 
-//			_ui.addChild(_p2Slt.ui);
         _ui.addChild(_p2Slt.group);
         _listCtrl.setSelecters(_p1Slt, _p2Slt);
         _listCtrl.moveSlt(_p2Slt, 9, 0);
@@ -544,8 +315,6 @@ public class SelectFighterStage implements IStage {
                 nextStep();
             }
             selt.destroy();
-//				if(selt == _p1Slt) _p1Slt = null;
-//				if(selt == _p2Slt) _p2Slt = null;
         }
         else {
             if (!selt.randoms) {
@@ -613,7 +382,6 @@ public class SelectFighterStage implements IStage {
     }
 
     private function startMusouGame():void {
-//			MusouMissionModel.I.initMissions();
         selectFinish();
     }
 

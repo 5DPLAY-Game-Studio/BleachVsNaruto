@@ -261,28 +261,6 @@ public class MapLayer extends Sprite {
      * @param v 显示对象
      */
     private function show(v:DisplayObject):void {
-//        for (var i:String in _blurBitmaps) {
-//            if (_blurBitmaps[i] == v) {
-//                continue;
-//            }
-//            try {
-//                removeChild(_blurBitmaps[i]);
-//            }
-//            catch (e:Error) {
-//                trace(e);
-//            }
-//        }
-//
-//        if (_view != v) {
-//            try {
-//                removeChild(_currentShow);
-//            }
-//            catch (e:Error) {
-//                trace(e);
-//            }
-//        }
-//
-//        addChild(v);
 
         // 如果当前显示的对象就是要显示的对象，返回
         if (_currentShow == v) {
@@ -321,7 +299,6 @@ public class MapLayer extends Sprite {
                 continue;
             }
 
-//            area = sp.getBodyArea();
             area = sp.getArea();
             if (!area || area.isEmpty()) {
                 continue;

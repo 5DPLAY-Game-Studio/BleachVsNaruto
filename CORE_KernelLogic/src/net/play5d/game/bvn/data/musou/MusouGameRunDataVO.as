@@ -27,17 +27,9 @@ public class MusouGameRunDataVO implements IInstanceVO {
         TraceLang('debug.trace.data.musou_game_run_data_vo.main');
     }
 
-//		private var _runningWaves:Vector.<MusouWaveRunVO>;
     public var koNum:int = 0;
     public var gameTime:int;
     public var gameTimeMax:int;
 
-//		public function reset():void{
-//			gameTime = 0;
-//			gameTimeMax = 0;
-//			_runningWaves = null;
-//			waves = null;
-//			koNum = 0;
-//		}
 }
 }

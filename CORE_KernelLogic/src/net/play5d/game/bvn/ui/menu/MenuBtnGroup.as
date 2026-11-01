@@ -38,7 +38,6 @@ import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.TouchMoveEvent;
 import net.play5d.game.bvn.utils.TouchUtils;
 
-//import net.play5d.game.bvn.data.musou.MusouMissionModel;
 public class MenuBtnGroup extends Sprite {
 
     public function MenuBtnGroup() {
@@ -171,7 +170,6 @@ public class MenuBtnGroup extends Sprite {
             mouseEnabled = mouseChildren = true;
             enabled     = true;
         };
-//			mouseEnabled = mouseChildren = false;
         enabled = false;
         target.select(callFunc);
     }

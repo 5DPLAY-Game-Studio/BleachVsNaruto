@@ -129,8 +129,6 @@ public class LoadingMusouStage implements IStage {
     }
 
     private function onLoadFinish():void {
-//			trace("onLoadFinish");
-//			return;
 
         GameCtrl.I.setupMusouGame();
         StateCtrl.I.transIn(MainGame.I.goMusouGame, false);

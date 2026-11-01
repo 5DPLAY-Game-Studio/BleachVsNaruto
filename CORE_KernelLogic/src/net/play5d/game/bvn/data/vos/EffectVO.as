@@ -64,13 +64,6 @@ public class EffectVO implements IInstanceVO {
     // 自定义特效声音链接
     public var customSndCls:Class;
 
-//    public function clone():EffectVO {
-//        var o:Object = KyoUtils.itemToObject(this);
-//        delete o['className'];
-//        var ev:EffectVO = new EffectVO(className, o);
-//        return ev;
-//    }
-
     public function cacheBitmapData():void {
 
         bitmapDataCache = new Vector.<BitmapDataCacheVO>();
@@ -114,8 +107,6 @@ public class EffectVO implements IInstanceVO {
                 mc.nextFrame();
                 continue;
             }
-
-//				trace('cache',className , mc.currentFrame);
 
             cache            = new BitmapDataCacheVO();
             cache.bitmapData = bd;

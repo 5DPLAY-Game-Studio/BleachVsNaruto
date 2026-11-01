@@ -63,7 +63,6 @@ public class SelectFighterList extends Sprite {
 
     public function destroy():void {
         this.removeEventListener(MouseEvent.MOUSE_WHEEL, mouseHandler);
-//			TouchUtils.I.unlistenOneFinger(MainGame.I.stage);
         TouchUtils.I.unlistenOneFinger(this);
     }
 
@@ -94,11 +93,9 @@ public class SelectFighterList extends Sprite {
             onChangePage();
         }
 
-//			trace("page", v, (v - 1) * _height);
     }
 
     public function getTotalPage():int {
-//			return Math.ceil(_listHeight / _height);
         return _totalPage;
     }
 
@@ -171,7 +168,6 @@ public class SelectFighterList extends Sprite {
 
     private function listenEvents():void {
         if (GameConfig.TOUCH_MODE) {
-//				TouchUtils.I.listenOneFinger(MainGame.I.stage, touchHandler, false, true);
             TouchUtils.I.listenOneFinger(this, touchHandler, true, false);
         }
         else {
@@ -206,7 +202,6 @@ public class SelectFighterList extends Sprite {
     }
 
     private function mouseHandler(e:MouseEvent):void {
-//			scroll(e.delta * -5);
         if (e.delta < 0) {
             setPage(_curPage + 1);
         }

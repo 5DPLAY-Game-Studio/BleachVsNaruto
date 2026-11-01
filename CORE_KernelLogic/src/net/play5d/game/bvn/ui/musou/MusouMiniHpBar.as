@@ -44,11 +44,6 @@ public class MusouMiniHpBar {
         _ui.bar_qi.scaleX = getScale(_fighter.qi, 300);
     }
 
-
-//		public function render():void{
-//
-//		}
-
     private function updateFace():void {
         var ct:Sprite = _ui.face.getChildByName('ct') as Sprite;
         if (ct) {

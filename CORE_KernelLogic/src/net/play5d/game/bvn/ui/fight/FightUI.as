@@ -236,7 +236,6 @@ public class FightUI implements IGameUI {
         ui.startKOmc.y      = -50;
         ui.startKOmc.$round = round;
         ui.startKOmc.gotoAndStop(round < 5 ? 'start' : 'start_final');
-//			ui.startKOmc.gotoAndStop("start_final");
 
         //fight_in | fight
         ui.startKOmc.addEventListener('fight', onFight);
@@ -293,12 +292,6 @@ public class FightUI implements IGameUI {
             catch (e:Error) {
             }
         }
-
-//			var btn:SetBtn = new SetBtn("CONTINUE", "继续游戏");
-//			btn.hover();
-//			btn.x = 300;
-//			btn.y = 500;
-//			btn.addEventListener(MouseEvent.CLICK, onBtnClick);
 
         var btn:ContinueBtn = new ContinueBtn();
         btn.x               = 300;
@@ -408,7 +401,6 @@ public class FightUI implements IGameUI {
             ui.startKOmc.addEventListener(Event.COMPLETE, koBack);
 
             SoundCtrl.I.playSwcSound(bsKO ? snd_ko_bs : snd_ko);
-            //				fadOut();
             _qibar1.fadOut();
             _qibar2.fadOut();
         }
@@ -441,7 +433,6 @@ public class FightUI implements IGameUI {
                 var winner:FighterMain = _endParam.winner;
                 if (winner) {
                     GameCtrl.I.gameState.cameraFocusOne(winner.getDisplay());
-//						showWinner(winner , _endParam.finishBack);
                     showWinner(winner);
 
                     if (GameMode.isSingleMode()) {
@@ -464,7 +455,6 @@ public class FightUI implements IGameUI {
             if (loser.actionState == FighterActionState.HURT_FLYING) {
                 if (!_isSlowDown) {
                     _isSlowDown = true;
-//						EffectCtrl.I.slowDown(2,0);
                     _flyTimer   = getTimer();
                 }
             }

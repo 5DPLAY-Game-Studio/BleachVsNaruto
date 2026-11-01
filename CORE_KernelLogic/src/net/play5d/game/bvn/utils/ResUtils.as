@@ -47,9 +47,6 @@ public class ResUtils {
     private var _initBack:Function;
     private var _initError:Function;
     private var _inited:Boolean;
-
-//		[Embed(source="/../fonts/simhei.ttf", fontName="黑体", mimeType="application/x-font")]
-//		private var GameFont:Class;
     private var _initing:Boolean;
 
     public function initialize(back:Function = null, error:Function = null):void {
@@ -68,12 +65,6 @@ public class ResUtils {
             }
             return;
         }
-
-//			try {
-//				Security.allowDomain("*");
-//			}catch (e) {
-//				trace(e);
-//			};
 
         _inited  = true;
         _initing = true;

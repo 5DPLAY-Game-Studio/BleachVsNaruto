@@ -26,12 +26,9 @@ public class MusouFighterSellVO implements IInstanceVO {
 
     public function MusouFighterSellVO(fighterId:String, price:int) {
         this.id = fighterId;
-//			this.allowSell = allowSell;
         _price.setValue(price);
     }
 
-//		public var sold:Boolean = false;
-//		public var allowSell:Boolean = false;
     public var id:String;
     private var _price:WrapInteger = new WrapInteger(0);
 

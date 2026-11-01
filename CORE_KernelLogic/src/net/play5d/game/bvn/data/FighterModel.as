@@ -49,7 +49,6 @@ public class FighterModel {
     }
 
     public function getFighter(id:String, clone:Boolean = false):FighterVO {
-//			return _fighterObj[id];
         var fv:FighterVO = _fighterObj[id];
         if (!fv) {
             return null;
@@ -96,17 +95,6 @@ public class FighterModel {
 
         return bv;
     }
-
-//    public function initByXML(xml:XML):void {
-//        _fighterObj = {};
-//
-//        for each(var i:XML in xml.fighter) {
-//            var fv:FighterVO = new FighterVO();
-//            fv.initByXML(i);
-//            _fighterObj[fv.id] = fv;
-//        }
-//
-//    }
 
     public function initByObject(obj:Object):void {
         _fighterObj = {};

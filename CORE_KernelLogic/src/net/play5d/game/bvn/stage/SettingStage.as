@@ -63,7 +63,6 @@ public class SettingStage implements IStage {
      * 构建
      */
     public function build():void {
-//			_oldConfig = KyoUtils.clone(GameData.I.config) as ConfigVO;
         _oldConfig = GameData.I.config.clone() as ConfigVO;
 
         _ui              = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, ResUtils.SETTING);

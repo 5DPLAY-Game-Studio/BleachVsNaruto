@@ -218,7 +218,6 @@ public class WorldMapStage implements IStage {
         GameUI.confrim(GetLang('confirm.world_map.next_mission_title'), txt, function ():void {
             MusouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
-//				MainGame.I.loadGame();
         }, null, true);
 
         GameEvent.dispatchEvent(GameEvent.CONFRIM_MUSOU_NEXT_MISSION);
@@ -276,8 +275,6 @@ public class WorldMapStage implements IStage {
         if (setZommInCenter && _currentPoint) {
             var scaleOffset:Number = _mapUI.scaleX - _scale;
             if (scaleOffset != 0) {
-//					_position.x += GameConfig.GAME_SIZE.x * scaleOffset / 2;
-//					_position.y += GameConfig.GAME_SIZE.y * scaleOffset / 2;
                 _position.x += _currentPoint.getPosition().x * scaleOffset;
                 _position.y += _currentPoint.getPosition().y * scaleOffset;
             }

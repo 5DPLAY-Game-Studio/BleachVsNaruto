@@ -84,8 +84,6 @@ public class GameCamera {
      */
     public var autoZoomMin:Number = 1;
 
-//		public var x:Number = 0;
-//		public var y:Number = 0;
     /**
      * 最大比例
      */
@@ -98,7 +96,6 @@ public class GameCamera {
     private var _focus:Array;
     private var _point:Point;
     private var _stageScale:Number = 1;
-//		private var _scrollRect:Rectangle = new Rectangle();
     /**
      * fixForderRect
      */
@@ -156,7 +153,6 @@ public class GameCamera {
 
     public function getZoom(withTween:Boolean = false):Number {
         return withTween ? _stageScale : _zoom;
-//			return _stageScale;
     }
 
     public function setZoom(value:Number):void {
@@ -279,8 +275,6 @@ public class GameCamera {
             _appliedScrollH = _rect.height;
             _stage.scrollRect = _rect;
         }
-//			_stage.x = -_rect.x;
-//			_stage.y = -_rect.y;
         if (_appliedStageScale != _stageScale) {
             _appliedStageScale = _stageScale;
             _stage.scaleX      = _stage.scaleY = _stageScale;
@@ -354,7 +348,6 @@ public class GameCamera {
         var fx:Number;
         fx = _point ? _point.x : _focus[0].x;
         fx -= _foffsetX + offsetX;
-//			fx *= _zoom;
         setX(fx);
     }
 
@@ -362,7 +355,6 @@ public class GameCamera {
         var fy:Number;
         fy = _point ? _point.y : _focus[0].y;
         fy -= _foffsetY + offsetY;
-//			fy *= _zoom;
         setY(fy);
     }
 

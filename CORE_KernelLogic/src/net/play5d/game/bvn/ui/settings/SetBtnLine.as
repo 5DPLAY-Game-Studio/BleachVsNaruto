@@ -71,7 +71,6 @@ public class SetBtnLine extends Sprite {
             addChild(_txt);
         }
 
-//			this.filters = [new GlowFilter(0,1,3,3,3)];
     }
     private var _txt:TextField;
     private var _line:Sprite;
@@ -101,8 +100,6 @@ public class SetBtnLine extends Sprite {
             _txt.width = width;
             _txt.text  = text;
         }
-
-//			WordEffect.showOneByOne(_txt,0.03);
 
     }
 

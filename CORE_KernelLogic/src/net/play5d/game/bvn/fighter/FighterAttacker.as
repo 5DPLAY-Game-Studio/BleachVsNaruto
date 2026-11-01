@@ -103,8 +103,6 @@ public class FighterAttacker extends BaseGameSprite {
     private var _owner:IGameSprite;
     private var _startX:Number = 0;
 
-//		public var x:Number = 0;
-//		public var y:Number = 0;
     private var _startY:Number = 0;
     private var _hitAreaCache:McAreaCacher      = new McAreaCacher('hit');
     /** @private getCurrentHits 复用缓冲 */
@@ -112,7 +110,6 @@ public class FighterAttacker extends BaseGameSprite {
     private var _hitCheckAreaCache:McAreaCacher = new McAreaCacher('hit_check');
     private var _rectCache:Object               = {};
 
-//		private var _offset:Point = new Point();
     private var _mcOrgPoint:Point;
     private var _isRenderMainAnimate:Boolean = true;
 
@@ -167,8 +164,6 @@ public class FighterAttacker extends BaseGameSprite {
         }
 
         var areas:Array = _hitAreaCache.getAreaByFrame(_mainMc.currentFrame) as Array;
-
-//			trace('get cache' , _mainMc.currentFrame , areas);
 
         if (!areas || areas.length < 1) {
             return null;
@@ -241,18 +236,12 @@ public class FighterAttacker extends BaseGameSprite {
             return;
         }
 
-//			var ownerDisplay:DisplayObject = _owner.getDisplay();
-
-//			if(direct > 0) _x += ownerDisplay.x;
-//			if(direct < 0) _x -= ownerDisplay.x;
-
         if (direct > 0) {
             _x = _owner.x + _startX;
         }
         else {
             _x = _owner.x - _startX;
         }
-//			_x += ownerDisplay.x;
         _y += _owner.y;
 
         if (_owner is FighterMain) {
@@ -262,8 +251,6 @@ public class FighterAttacker extends BaseGameSprite {
             _x += fmc.x;
             _y += fmc.y;
         }
-
-//			_x *= direct;
 
         if (!moveToTargetX && !moveToTargetY) {
             return;
@@ -327,9 +314,6 @@ public class FighterAttacker extends BaseGameSprite {
         if (!target) {
             return;
         }
-
-//			var targetDisplay:DisplayObject = target.getDisplay();
-//			if(!targetDisplay) return;
 
         if (!isNaN(offsetX)) {
             _x = target.x + (
@@ -410,9 +394,6 @@ public class FighterAttacker extends BaseGameSprite {
         if (!target) {
             return;
         }
-
-//			var targetDisplay:DisplayObject = target.getDisplay();
-//			if(!targetDisplay) return;
 
         if (followTargetX) {
             _x = target.x + (
@@ -529,7 +510,6 @@ public class FighterAttacker extends BaseGameSprite {
 
         //写入帧缓存
         _hitAreaCache.cacheAreaByFrame(_mainMc.currentFrame, areaRects);
-//			trace('cache' , _mainMc.currentFrame);
     }
 
     private function getOwnerFighter():FighterMain {

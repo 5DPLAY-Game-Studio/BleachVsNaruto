@@ -114,10 +114,6 @@ public class MenuStage extends Sprite implements IStage {
         b.addEventListener(MouseEvent.CLICK, versionClickHandler);
         _ui.addChild(b);
 
-//			if(GameData.I.isFristRun && MainGame.UPDATE_INFO){
-//				GameData.I.isFristRun = false;
-//				GameUI.alert('UPDATE',MainGame.UPDATE_INFO);
-//			}
     }
 
     /**
@@ -183,11 +179,6 @@ public class MenuStage extends Sprite implements IStage {
             _btnGroup.enabled = true;
         }, 400);
     }
-
-//		private function btnCom(e:Event):void{
-//			_ui.removeEventListener(Event.COMPLETE,btnCom);
-//
-//		}
 
     private function versionClickHandler(e:MouseEvent):void {
         if (MainGame.UPDATE_INFO) {

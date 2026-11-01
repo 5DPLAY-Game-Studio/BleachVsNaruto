@@ -94,15 +94,6 @@ public class MusouUI implements IGameUI {
         }
     }
 
-//		public function updateEnemyHp(f:FighterMain):void{
-//			if(f.musouData.isBoss){
-//				_bossHpBar.setFighter(f);
-//				return;
-//			}else{
-////				_enemyHpBarGroup.updateFighter(f);
-//			}
-//		}
-
     public function setBossHp(f:FighterMain):void {
         if (f != null) {
             if (_bosses.indexOf(f) == -1) {
@@ -140,20 +131,6 @@ public class MusouUI implements IGameUI {
         }
 
     }
-
-//		public function setBossesHp(bosses:Vector.<FighterMain>):void{
-//			if(!bosses || bosses.length < 1){
-//				setBossHp(null);
-//				return;
-//			}
-//
-//			setBossHp(bosses[0]);
-//
-//			var others:Vector.<FighterMain> = bosses.slice(1);
-//			for each(var b:FighterMain in others){
-//				_enemyHpBarGroup.updateFighter(b);
-//			}
-//		}
 
     public function setVolume(v:Number):void {
     }
@@ -261,12 +238,6 @@ public class MusouUI implements IGameUI {
 
         EffectCtrl.I.slowDown(2, 5000);
 
-//			if(!bsKO){
-//				EffectCtrl.I.bgBlur(10, 0);
-//			}
-
-//			EffectCtrl.I.bgBlurEnabled = false;
-
         EffectCtrl.I.shake(5, 0, 1.5);
         SoundCtrl.I.playSwcSound(snd_over_hit);
 
@@ -299,8 +270,6 @@ public class MusouUI implements IGameUI {
         var p1:FighterMain = GameCtrl.I.gameRunData.p1FighterGroup.currentFighter;
 
         GameCtrl.I.gameState.cameraFocusOne(p1.getDisplay());
-//			EffectCtrl.I.slowDown(2, 1000);
-//			p1.win();
 
         KyoTimeout.setTimeout(p1.win, 1000);
 
@@ -326,11 +295,6 @@ public class MusouUI implements IGameUI {
         playStartKO('mission_fail', false, offset, scale);
 
         _startAndKoMc.addEventListener(Event.COMPLETE, completeHandler);
-
-//			var p1:FighterMain = GameCtrl.I.gameRunData.p1FighterGroup.currentFighter;
-//
-//			GameCtrl.I.gameState.cameraFocusOne(p1.getDisplay());
-//			EffectCtrl.I.slowDown(2, 2000);
 
         function completeHandler(e:Event):void {
             _startAndKoMc.removeEventListener(Event.COMPLETE, completeHandler);
@@ -416,12 +380,6 @@ public class MusouUI implements IGameUI {
             catch (e:Error) {
             }
         }
-
-//			var btn:SetBtn = new SetBtn("CONTINUE", "继续游戏");
-//			btn.hover();
-//			btn.x = 300;
-//			btn.y = 500;
-//			btn.addEventListener(MouseEvent.CLICK, onBtnClick);
 
         var btn:ContinueBtn = new ContinueBtn();
         btn.x               = 300;

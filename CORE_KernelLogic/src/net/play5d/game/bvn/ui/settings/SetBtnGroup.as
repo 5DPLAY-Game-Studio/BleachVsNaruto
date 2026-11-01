@@ -63,7 +63,6 @@ public class SetBtnGroup extends Sprite {
     private var _arrow:$common$MC_sltArrow;
     private var _arrowIndex:int = -1;
 
-//		public static var TOUCH_ENABLED:Boolean = true;
     private var _scrollRect:Rectangle;
 
     public function initScroll(W:Number, H:Number):void {
@@ -181,7 +180,6 @@ public class SetBtnGroup extends Sprite {
         if (isScroll) {
             moveScroll();
         }
-//			btn.hover();
 
     }
 
@@ -367,7 +365,6 @@ public class SetBtnGroup extends Sprite {
             }
 
             var H3:Number = H - startY;
-//				var curY:Number = _arrow.y;
 
             var step:Number    = H3 / _btns.length;
             var offsetY:Number = -_arrowIndex * (step - gap);
@@ -432,11 +429,9 @@ public class SetBtnGroup extends Sprite {
      * @param event
      */
     private function touchMoveHandler(event:TouchMoveEvent):void {
-//        trace('touchMoveHandler', TOUCH_ENABLED);
         if (!_scrollRect) {
             return;
         }
-//        if(!TOUCH_ENABLED) return;
 
         switch (event.type) {
         case TouchMoveEvent.TOUCH_MOVE:

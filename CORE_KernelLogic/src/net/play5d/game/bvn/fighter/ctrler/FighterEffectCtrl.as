@@ -63,7 +63,6 @@ public class FighterEffectCtrl {
     }
 
     public function setBishaFace(id:String, face:Class):void {
-//			trace('setBishaFace',id,face);
         _faceObj[id] = face;
     }
 
@@ -76,7 +75,6 @@ public class FighterEffectCtrl {
 
     //SAMPLE: parent.$effect_ctrler.shake(0,2);
     public function shake(powX:Number = 0, powY:Number = 3, time:Number = 0):void {
-//			trace('shake',powX,powY);
         var pow:Number = Math.max(powX, powY);
         EffectCtrl.I.shake(0, pow * 2, time * 1000);
     }

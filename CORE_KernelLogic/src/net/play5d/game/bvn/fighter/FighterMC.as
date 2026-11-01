@@ -39,7 +39,6 @@ public class FighterMC {
 
     private var _mcCtrler:FighterMcCtrler;
     private var _fighter:FighterMain;
-//		private var _action:FighterAction = new FighterAction();
     private var _fighterDisplay:DisplayObject;
     private var _renderMainAnimate:Boolean  = false; //是否执行主时间轴播放
     private var _renderMainAnimateFrame:int = 0; //主时间轴在N帧后停止播放
@@ -132,7 +131,6 @@ public class FighterMC {
         _fighterDisplay = fighter.getDisplay();
 
         _mcCtrler = mcCtrler;
-//			mcCtrler.setMc(this);
     }
 
     public function destroy():void {
@@ -268,10 +266,6 @@ public class FighterMC {
             return true;
         }
 
-//			var labels:Array = _mc.currentLabels;
-//			for each(var i:FrameLabel in labels){
-//				if(i.name == name) return true;
-//			}
         _undefinedFrames.push(name);
 
         TraceLang('debug.trace.data.fighter_mc.keyframe_not_exist', {name: name});
@@ -327,7 +321,6 @@ public class FighterMC {
      * 播放击飞动画
      */
     public function playHurtFly(hitx:Number, hity:Number, showBeHit:Boolean = true):void {
-//			trace('playHurtFly' , hitx , hity);
 
         if (hitx != 0) {
             _fighter.direct = hitx > 0 ? -1 : 1;
@@ -527,7 +520,6 @@ public class FighterMC {
 
         //写入帧缓存
         _hitAreaCache.cacheAreaByFrame(_mc.currentFrame, areaRects);
-//			trace('hitrect cache:',_mc.currentFrame , areaRects);
     }
 
     private function playHurtDown2():void {
@@ -563,7 +555,6 @@ public class FighterMC {
                 goFrame(FighterSpecialFrame.HURT_DOWN, false);
                 _fighter.actionState = FighterActionState.HURT_DOWN;
                 FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.HURT_DOWN);
-//						_fighter.setVelocity(0,0);
                 _fighter.setDamping(GameConfig.HIT_FLOOR_DAMPING_X_HEAVY);
                 _hurtFlyType = FighterHurtFlyType.HURT_FLY_LIE;
 
@@ -593,8 +584,6 @@ public class FighterMC {
                 if (vecy > GameConfig.HIT_FLOOR_TAN_Y_MAX) {
                     vecy = GameConfig.HIT_FLOOR_TAN_Y_MAX;
                 }
-
-//						trace('vecy',vecy);
 
                 _fighter.setVecY(-vecy);
                 _hurtFlyType = FighterHurtFlyType.HURT_FLY_TAN;

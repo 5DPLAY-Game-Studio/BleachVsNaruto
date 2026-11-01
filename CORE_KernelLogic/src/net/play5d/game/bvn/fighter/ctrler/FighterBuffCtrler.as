@@ -40,7 +40,6 @@ public class FighterBuffCtrler {
         if (!buff) {
             return;
         }
-//			_fighter.getCtrler().getEffectCtrl().
         EffectCtrl.I.doEffectById('buff_effect_speed', _fighter.x, _fighter.y);
         EffectCtrl.I.doBuffEffect('buff_speed', _fighter, buff);
     }

@@ -55,19 +55,6 @@ public class MapModel {
         return _mapArray;
     }
 
-//		public function initByXML(xml:XML):void{
-//			_mapObj = {};
-//			_mapArray = [];
-//
-//			for each(var i:XML in xml.map){
-//				var mv:MapVO = new MapVO();
-//				mv.initByXML(i);
-//				_mapObj[mv.id] = mv;
-//				_mapArray.push(mv);
-//			}
-//
-//		}
-
     public function initByObject(obj:Object):void {
         _mapObj   = {};
         _mapArray = [];

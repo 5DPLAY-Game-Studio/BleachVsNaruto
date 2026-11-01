@@ -84,19 +84,6 @@ public class MusouEnemyVO implements IInstanceVO {
     private var exp:int   = 10;
     private var money:int = 10;
 
-//		public static function createByXML(xml:XML):Vector.<MusouEnemyVO>{
-//			var id:String = xml.@id.toString();
-//			var hp:int = xml.@hp;
-//			var amount:int = xml.@amount;
-//			var isBoss:Boolean = xml.@isBoss == "true";
-//			var result:Vector.<MusouEnemyVO> = new Vector.<MusouEnemyVO>();
-//			for(var i:int; i < amount; i++){
-//				var mv:MusouEnemyVO = create(id, hp, isBoss);
-//				result.push(mv);
-//			}
-//			return result;
-//		}
-
     public function getExp():int {
         var levelAdd:int = isBoss ? (
                 level * 10

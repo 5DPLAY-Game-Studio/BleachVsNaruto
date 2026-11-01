@@ -26,7 +26,6 @@ public class FighterBuffVO implements IInstanceVO {
 
     public function FighterBuffVO(param:String, hold:Number = 1) {
         this.param      = param;
-        //		this.value = value;
         this._holdFrame = hold * GameConfig.FPS_GAME;
         this.finished   = false;
     }

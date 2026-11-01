@@ -150,7 +150,6 @@ public class DialogManager {
                 catch (e:Error) {
                 }
 
-//				if(back != null) back();
             }
         });
         if (back != null) {

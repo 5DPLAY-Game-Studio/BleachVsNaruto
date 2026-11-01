@@ -85,7 +85,6 @@ public class EnemyHpUIGroup {
         if (index != -1) {
             _uis.splice(index, 1);
         }
-//			_ct.removeChild(ui.getUI());
     }
 
     private function sortUI():void {

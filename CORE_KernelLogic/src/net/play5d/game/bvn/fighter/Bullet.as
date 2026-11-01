@@ -299,12 +299,6 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
             _bulletArea.y -= mc.y;
         }
 
-//			if(mainDisplay){
-//				_bulletArea = mainDisplay.getBounds(mc);
-//			}else{
-//				_bulletArea = mc.getBounds(mc);
-//			}
-
         direct = owner.direct;
 
         mc.x += owner.x;
@@ -382,7 +376,6 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
             if (mc.currentFrame == mc.totalFrames - 1) {
                 removeSelf();
             }
-//					if(_isHit) if(mc.currentFrame == mc.totalFrames-1) removeSelf();
         }
     }
 
@@ -659,7 +652,6 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
     }
 
     private function getCurrentRect(rect:Rectangle):Rectangle {
-//			var newRect:Rectangle = new Rectangle();
         var newRect:Rectangle = _currentRect;
 
         newRect.x = rect.x * _direct + mc.x;

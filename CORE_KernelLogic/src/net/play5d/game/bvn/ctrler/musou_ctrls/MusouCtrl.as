@@ -95,10 +95,6 @@ public class MusouCtrl {
 
         _gameFinish = false;
 
-//			MusouFighterModel.I.init();
-
-
-//			gameRunData.reset();
     }
 
     public function destroy():void {
@@ -447,8 +443,6 @@ public class MusouCtrl {
             return;
         }
 
-//			if(_addEnemyGap++ < 15) return;
-
         var ev:MusouEnemyVO = _enemyCreators[0].getNextEnemy();
         if (ev) {
             addEmeny(ev);
@@ -504,7 +498,6 @@ public class MusouCtrl {
         }
 
         if (result && result.length > 0) {
-//				trace('==== renderRepeat '+result.length+'   ===============================');
             _enemyCreators.push(new EnemyCreator(result));
         }
     }
@@ -636,7 +629,6 @@ public class MusouCtrl {
                     m.die();
                 }
 
-//					KyoTimeout.setTimeout(missionComplete, 2 * GameConfig.FPS_GAME);
                 missionComplete();
             }
             return;

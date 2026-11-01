@@ -46,21 +46,6 @@ public class MusouMissionVO implements IInstanceVO {
     public var waves:Vector.<MusouWaveVO>;
     public var area:MusouWorldMapAreaVO;
 
-//		public function initByXML(xml:XML):void{
-//
-//			map = xml.@map;
-//			time = int(xml.@time);
-//			if(time < 1){
-//				throw new Error("init musou stage error!");
-//			}
-//			waves = new Vector.<MusouWaveVO>();
-//
-//			for each(var i:XML in xml.wave){
-//				var wave:MusouWaveVO = MusouWaveVO.createByXML(i);
-//				addWave(wave);
-//			}
-//		}
-
     public function initByJsonObject(o:Object):void {
         id         = o.id;
         map        = o.map;

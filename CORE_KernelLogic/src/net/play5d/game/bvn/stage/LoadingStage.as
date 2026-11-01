@@ -39,7 +39,6 @@ import net.play5d.game.bvn.ui.select.SelectIndexUI;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
-//import net.play5d.game.bvn.data.musou.MusouMissionModel;
 public class LoadingStage implements IStage {
 
     public static var AUTO_START_GAME:Boolean = true;
@@ -168,7 +167,6 @@ public class LoadingStage implements IStage {
     }
 
     private function onLoadFinish():void {
-//			trace('loadFin');
 
         TweenLite.to(_sltUI, 1, {
             y: 80, onComplete: function ():void {

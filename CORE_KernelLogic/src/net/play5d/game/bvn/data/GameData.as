@@ -55,7 +55,6 @@ public class GameData {
     public var score:int = 0;
     public var winnerId:String;
 
-//		private const __MUSOU_DATA_ENABLED:Boolean = false;
     public var isFristRun:Boolean = true;
 
     public function loadConfig(back:Function, fail:Function = null):void {
@@ -103,7 +102,6 @@ public class GameData {
 
     public function initData():void {
         musouData.init();
-//			GameData.I.loadSaveData();
     }
 
     public function saveData():void {
@@ -122,8 +120,6 @@ public class GameData {
         if (!o || o.id != SAVE_ID) {
             return;
         }
-
-//			trace('loadSaveData', JSON.stringify(o));
 
         if (o.config) {
             config.readSaveObj(o.config);

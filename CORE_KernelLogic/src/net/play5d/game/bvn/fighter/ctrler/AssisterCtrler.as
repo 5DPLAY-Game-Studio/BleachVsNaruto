@@ -186,10 +186,6 @@ public class AssisterCtrler implements IGameSpriteCntlr {
         }
     }
 
-//		public function moveToTarget(offsetX:Number = NaN , offsetY:Number = NaN):void{
-//			_assister.moveToTarget(offsetX,offsetY);
-//		}
-
     /**
      * 移动到攻击对象
      * @param offsetX X位置偏移
@@ -207,9 +203,6 @@ public class AssisterCtrler implements IGameSpriteCntlr {
         if (!target) {
             return;
         }
-
-        //			var display:DisplayObject = _fighter.getDisplay();
-        //			var targetDisplay:DisplayObject = target.getDisplay();
 
         if (x != null) {
             _assister.x = target.x + Number(x) * _assister.direct;
@@ -259,10 +252,6 @@ public class AssisterCtrler implements IGameSpriteCntlr {
     public function setTouchFloor(frame:String):void {
         _touchFloorFrame = frame;
     }
-
-//		public function justHit(hitId:String):Boolean{
-//			return _assister.justHit(hitId);
-//		}
 
     /**
      * 刚刚攻击到

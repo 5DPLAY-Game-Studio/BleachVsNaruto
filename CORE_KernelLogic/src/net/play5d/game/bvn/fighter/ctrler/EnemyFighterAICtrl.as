@@ -34,7 +34,6 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 public class EnemyFighterAICtrl implements IFighterActionCtrl {
 
     public var fighter:FighterMain;
-//		private var _targetFighter:FighterMain;
     private var _target:IGameSprite;
     private var _followFrame:int   = 0;
     private var _following:Boolean = false;

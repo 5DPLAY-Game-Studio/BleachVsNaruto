@@ -100,12 +100,6 @@ public class AssetLoader implements IAssetLoader {
             }
         }
 
-
-        //			loadAssetBytes(url, function(v:ByteArray):void{
-        //				var s:BytesSound = new BytesSound(v);
-        //				if(back != null) back(s);
-        //			}, fail, progress);
-
     }
 
     public function dispose(url:String):void {
@@ -122,11 +116,6 @@ public class AssetLoader implements IAssetLoader {
     private static function getFullUrl(url:String):String {
         return 'assets/' + url;
     }
-
-    //		private function loadAssetBytes(url:String, back:Function, fail:Function, progress:Function = null):void{
-    //			KyoURLLoader.load('assets/' + url, back, fail, {dataFormat: URLLoaderDataFormat.BINARY}, progress);
-    //		}
-
 
 }
 }

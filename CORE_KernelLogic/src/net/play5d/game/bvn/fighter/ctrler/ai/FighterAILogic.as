@@ -160,19 +160,6 @@ public class FighterAILogic extends FighterAILogicBase {
         updateGhostStep();
     }
 
-//		public override function onDoAction():void{
-//			super.onDoAction();
-//			if(!_fighter || !_target) return;
-//
-//			updateDashAI();
-//
-//			updateAttackAI();
-//			updateSkill();
-//			updateBisha();
-//
-//			updateCache();
-//		}
-
     protected override function updateActionAI():void {
         updateDashAI();
 
@@ -264,13 +251,6 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (!moveLeft && !moveRight) {
             _moveFrame = GameConfig.FPS_GAME;
-//				if(_fighter.direct == _target.direct){
-//					if(_fighter.x > _target.x){
-//						moveLeft = true;
-//					}else{
-//						moveRight = true;
-//					}
-//				}
         }
 
     }
@@ -351,16 +331,6 @@ public class FighterAILogic extends FighterAILogicBase {
     }
 
     private function updateDefenseAI():void {
-
-//			if(defense){
-//				if(_defenseFrame > 0){
-//					_defenseFrame--;
-//					return;
-//				}else{
-//					_defenseFrame = GameConfig.FPS_GAME;
-//				}
-//			}
-
 
         if (defense) {
             var ctobj:Object                      = beginRateObj();
@@ -628,8 +598,6 @@ public class FighterAILogic extends FighterAILogicBase {
         var callObj:Object                      = beginRateObj();
         callObj.defult                          = R_CALL;
         callObj[FighterActionState.DEFENSE_ING] = R_CALL_D;
-//			callObj[FighterActionState.ATTACK_ING] = [0,0,0,1,2,2];
-//			callObj[FighterActionState.SKILL_ING] = [0,0,0,1,1,1];
         callObj[FighterActionState.BISHA_ING]       = R0;
         callObj[FighterActionState.BISHA_SUPER_ING] = R0;
         assist                                      = getAIByFighterState(callObj);

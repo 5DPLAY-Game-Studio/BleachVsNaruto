@@ -75,7 +75,6 @@ public class GameInterface {
             {txt: 'OPTION', cn: GetLang('txt.game_interface.option')},
             {txt: 'TRAINING', cn: GetLang('txt.game_interface.training')},
             {txt: 'CREDITS', cn: GetLang('txt.game_interface.credits')},
-//            {txt: 'MORE GAMES', cn: GetLang('txt.game_interface.more_games')}
         ];
         return a;
     }

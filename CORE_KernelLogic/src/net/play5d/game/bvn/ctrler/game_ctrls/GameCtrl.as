@@ -261,7 +261,6 @@ public class GameCtrl {
         if (team) {
             sp.team = team;
             team.addChild(sp);
-//				Debugger.log('addGameSprite' , teamId , sp);
 
             if (sp is FighterMain) {
                 (
@@ -285,7 +284,6 @@ public class GameCtrl {
             team.removeChild(sp);
         }
         else {
-//				Debugger.log("GameCtrl.removeGameSprite :: team is null!");
         }
         sp.destroy(dispose);
     }
@@ -693,13 +691,10 @@ public class GameCtrl {
         }
 
         EffectCtrl.I.render();
-//			KeyBoardCtrl.I.render();
         gameState.render();
         if (!_isRenderGame) {
             return;
         }
-
-//			return; //debug
 
         checkRenderAnimate();
 
@@ -732,10 +727,6 @@ public class GameCtrl {
                 _roundCtrl.onEndFinished();
             }
         }
-
-//			if(actionEnable && !_startCtrl && !_endCtrl){
-//				renderGameTime();
-//			}
 
         if (_trainingCtrl) {
             _trainingCtrl.render();

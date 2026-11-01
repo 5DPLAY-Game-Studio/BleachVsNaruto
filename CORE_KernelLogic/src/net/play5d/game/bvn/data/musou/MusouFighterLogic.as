@@ -46,28 +46,6 @@ public class MusouFighterLogic {
         LV_BANKAI
     ];
 
-
-//		public static const LV_DASH_AIR:int = 4;
-//		public static const LV_GHOST_STEP:int = 12;
-//
-//		public static const LV_SKILL1:int = 3;
-//		public static const LV_SKILL2:int = 5;
-//		public static const LV_SKILL_AIR:int = 2;
-//
-//		public static const LV_ZHAO1:int = 0;
-//		public static const LV_ZHAO2:int = 6;
-//		public static const LV_ZHAO3:int = 4;
-//
-//		public static const LV_CATCH1:int = 4;
-//		public static const LV_CATCH2:int = 4;
-//
-//		public static const LV_BISHA:int = 0;
-//		public static const LV_BISHA_AIR:int = 3;
-//		public static const LV_BISHA_UP:int = 4;
-//		public static const LV_BISHA_SUPER:int = 6;
-//
-//		public static const LV_BANKAI:int = 10;
-
     public function MusouFighterLogic(v:MusouFighterVO) {
         _fightData = v;
     }
@@ -85,23 +63,12 @@ public class MusouFighterLogic {
         return _fightData.getEnergy();
     }
 
-//		public function getSpeed(spd:int):int{
-//			if(!enabled()) return 0;
-//			return spd * (_fightData.getSpeed() * 0.5);
-//		}
-
     public function initFighterProps(f:FighterMain):void {
         f.initAttackAddDmg(_fightData.getAttackDmg(), _fightData.getSkillDmg(), _fightData.getBishaDmg());
-//			f.defense = _fightData.getDefense();
     }
-
-//		public function getDefense():int{
-//			return _fightData.getDefense();
-//		}
 
     public function canDash():Boolean {
         return true;
-//			return _fightData.getLevel() >= 0;
     }
 
     public function canDashAir():Boolean {
@@ -162,7 +129,6 @@ public class MusouFighterLogic {
 
     public function canBankai():Boolean {
         return _fightData.getLevel() >= LV_BANKAI;
-//			return false;
     }
 
 }

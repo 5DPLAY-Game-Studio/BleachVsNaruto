@@ -70,12 +70,10 @@ public class SelectFighterItem extends EventDispatcher {
             ui.more_bg.mouseEnabled             = ui.more_bg.mouseChildren = false;
             var ct:ColorTransform               = new ColorTransform();
             ct.redOffset                        = 255;
-            //			ct.greenOffset = 255;
             ct.blueOffset                       = -255;
             ui.more_bg.transform.colorTransform = ct;
         }
 
-//        ui.warning.visible = fighterData.hasWarning;
         if (!fighterData.hasWarning) {
             ui.removeChild(ui.warning);
         }

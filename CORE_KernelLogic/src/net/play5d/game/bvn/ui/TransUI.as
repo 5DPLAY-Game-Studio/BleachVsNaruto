@@ -29,7 +29,6 @@ public class TransUI {
     private var _renderAnimateFrame:int = 0;
     private var _fadInBack:Function;
 
-//		private var _justRender:Boolean;
     private var _fadOutBack:Function;
     private var _rendering:Boolean = true;
 
@@ -38,7 +37,6 @@ public class TransUI {
     }
 
     public function fadIn(back:Function = null):void {
-//			trace('fadIn');
         _fadOutBack = null;
 
         _fadInBack = back;
@@ -49,7 +47,6 @@ public class TransUI {
     public function fadOut(back:Function = null):void {
         _fadInBack = null;
 
-//			trace('fadOut');
         _fadOutBack = back;
         ui.gotoAndStop('fadout');
         startRender();
@@ -88,8 +85,6 @@ public class TransUI {
     }
 
     private function renderAnimate():void {
-
-//			trace('TrainsUI.renderAnimate',ui.currentFrame,ui.currentFrameLabel);
 
         if (ui.currentFrameLabel == 'stop') {
 

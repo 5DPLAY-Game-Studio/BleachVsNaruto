@@ -27,17 +27,10 @@ import net.play5d.game.bvn.GameConfig;
 
 public class ShineEffectView extends Bitmap {
 
-//		private static var _source:BitmapData = new BitmapData(GameConfig.GAME_SIZE.x / 10 , GameConfig.GAME_SIZE.y /
-// 10,false,0xffffff);
-
     private const _skipFrameRate:Number = 1.2;
 
     public function ShineEffectView() {
         super(null, PixelSnapping.NEVER, false);
-
-//			width = GameConfig.GAME_SIZE.x;
-//			height = GameConfig.GAME_SIZE.y;
-
 
     }
     public var onRemove:Function;
@@ -77,7 +70,6 @@ public class ShineEffectView extends Bitmap {
         this.width  = GameConfig.GAME_SIZE.x;
         this.height = GameConfig.GAME_SIZE.y;
 
-//			this.transform.colorTransform.color = color;
         isActive = true;
 
         var halfC:uint = 0xffffff >> 1;
@@ -156,7 +148,6 @@ public class ShineEffectView extends Bitmap {
                 }
             }
         }
-//			trace('skip' , _loseAlpha);
         _startTimer = getTimer();
     }
 

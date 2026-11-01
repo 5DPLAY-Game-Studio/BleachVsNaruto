@@ -21,7 +21,6 @@ import net.play5d.game.bvn.data.*;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-//import net.play5d.game.bvn.data.musou.MusouWaveRunVO;
 /**
  * 记录运行游戏时需要的相关数据
  */
@@ -127,7 +126,6 @@ public class GameRunDataVO implements IInstanceVO {
         round++;
         gameTime    = gameTimeMax;
         isTimerOver = false;
-//			lastWinner = null;
     }
 
     public function setAllowLoseHP(v:Boolean):void {

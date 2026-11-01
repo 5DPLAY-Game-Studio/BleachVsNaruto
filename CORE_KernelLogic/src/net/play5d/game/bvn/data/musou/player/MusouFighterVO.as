@@ -38,12 +38,10 @@ public class MusouFighterVO implements ISaveData, IInstanceVO {
     private var _exp:WrapInteger   = new WrapInteger(0);
     private var _atk:WrapInteger      = new WrapInteger(0);
     private var _skillAtk:WrapInteger = new WrapInteger(0);
-//		private var _def:WrapInteger = new WrapInteger(0);
     private var _bishaAtk:WrapInteger = new WrapInteger(0);
     private var _hp:WrapInteger     = new WrapInteger(0);
     private var _qi:WrapInteger     = new WrapInteger(0);
 
-//		public var fighterData:FighterVO;
     private var _energy:WrapInteger = new WrapInteger(0);
 
     public function getAttackDmg():int {
@@ -58,12 +56,6 @@ public class MusouFighterVO implements ISaveData, IInstanceVO {
         return _bishaAtk.getValue();
     }
 
-//		public function getDefense():int{
-//			return _def.getValue();
-//		}
-//		public function getSpeed():int{
-//			return _spd.getValue();
-//		}
     public function getHP():int {
         return _hp.getValue();
     }
@@ -88,8 +80,6 @@ public class MusouFighterVO implements ISaveData, IInstanceVO {
         var lv:int      = _level.getValue();
         var val:int     = _exp.getValue() + v;
         var nextExp:int = LevelModel.getLevelUpExp(lv);
-
-//			trace('addExp:: ' + val + '/' + nextExp, '. add', v);
 
         if (val >= nextExp) {
             var isLimit:Boolean = updateLevel(lv + 1);
@@ -146,8 +136,6 @@ public class MusouFighterVO implements ISaveData, IInstanceVO {
         _atk.setValue(lv * 10);
         _skillAtk.setValue(lv * 15);
         _bishaAtk.setValue(lv * 17);
-
-//			_def.setValue( lv * 3 );
 
         _hp.setValue(1000 + lv * 150);
         _energy.setValue(50 + lv * 10);

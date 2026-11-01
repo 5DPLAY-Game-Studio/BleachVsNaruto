@@ -66,18 +66,13 @@ public class GameLogic {
             return false;
         }
 
-        //			if(!target.isApplyG) return true;
-
         if (target.getVecY() < 0) {
             target.isTouchBottom = false;
             return true;
         }
 
-        //			var targetDisplay:DisplayObject = target.getDisplay();
-
         if (target.y > _map.playerBottom - GameConfig.G) {
             target.y             = _map.playerBottom;
-            //				if(target.getVecY() > 0) target.setVecY(0);
             target.isTouchBottom = true;
             return false;
         }
@@ -135,14 +130,6 @@ public class GameLogic {
     }
 
     public static function addHits(id:Object, targetID:Object, uiID:int):int {
-
-        //			//防止出现使用冲突
-        //			for each(var o:Object in _hitsObj){
-        //				if(o.id != id && o.uiID == uiID){
-        //					uiID = o.uiID == 1 ? 2 : 1;
-        //				}
-        //			}
-
         if (_hitsObj[id] == undefined) {
             _hitsObj[id] = {hits: 0, targetID: targetID, uiID: uiID};
         }
@@ -358,11 +345,6 @@ public class GameLogic {
         v.isAlive = true;
     }
 
-    //		public static function isTouchBottom(sp:IGameSprite):Boolean{
-    //			if(sp.allowCrossMapBottom()) return false;
-    //			return sp.y >= _map.bottom;
-    //		}
-
     public static function setMessionEnemyAttack(v:FighterMain):void {
         var mv:MessionStageVO = MessionModel.I.getCurrentMessionStage();
         if (mv) {
@@ -394,13 +376,11 @@ public class GameLogic {
         TraceLang('debug.trace.data.game_logic.set_game_mode', {mode: v});
         switch (v) {
         case 1:
-//            ResUtils.WINNER = '$loading$MC_stageWinner';
             GameConfig.SHOW_UI_STATUS = 1;
             GameEndCtrl.SHOW_CONTINUE = true;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
             break;
         case 2:
-//            ResUtils.WINNER = '$loading$MC_stageWinner2';
             GameConfig.SHOW_UI_STATUS = 1;
             GameConfig.MAP_LOGO_STATE = MapLogoState.SHOW_MINE;
             GameEndCtrl.SHOW_CONTINUE = true;
@@ -423,34 +403,6 @@ public class GameLogic {
         var rate:Number = GameData.I.config.keyInputMode == 0 ? 1 : 0.8;
         GameData.I.score += score * rate;
     }
-
-    //		public static function startVsMode(p1:FighterMain , p2:FighterMain , map:MapMain):void{
-    //			if(p1){
-    //				p1.initialize();
-    //				var ctrl:FighterKeyCtrl = new FighterKeyCtrl();
-    //				ctrl.config = GameData.I.config.key_p1;
-    //				p1.setCtrl(ctrl);
-    //			}
-    //
-    //			if(p2){
-    //				p2.initialize();
-    //				var ctrl2:FighterKeyCtrl = new FighterKeyCtrl();
-    //				ctrl2.config = GameData.I.config.key_p2;
-    //				p2.setCtrl(ctrl2);
-    //			}
-    //
-    //			if(map){
-    //				map.initialize();
-    //				setMap(map);
-    //			}
-    //
-    //			var gs:GameState = new GameState();
-    //			gs.initFight(p1,p2,map);
-    //
-    //			GameCtrl.I.startGame(0);
-    //
-    //			bleachvsnaruto.stageCtrl.goStage(gs);
-    //		}
 
 }
 

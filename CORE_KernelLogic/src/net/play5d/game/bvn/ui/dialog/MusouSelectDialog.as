@@ -139,8 +139,6 @@ public class MusouSelectDialog extends BaseDialog {
 
         _selectFace = AssetManager.I.getFighterFaceWin(fv);
         if (_selectFace) {
-//				_selectFace.x = 498;
-//				_selectFace.y = 3;
             _ui.ct_face.addChildAt(_selectFace, 0);
         }
     }

@@ -321,13 +321,6 @@ public class SoundCtrl {
     }
 
     /**
-     * @deprecated 请改用 <code>warmMenuSounds</code>。
-     */
-    public function warmMenuSelectSound():void {
-        warmMenuSounds();
-    }
-
-    /**
      * 预实例化单个 SWC 声音类并做一次静音播放，打通解码 / 混音路径。
      *
      * @param sndCls 声音类链接。

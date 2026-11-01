@@ -144,8 +144,6 @@ public class EffectCtrl {
             renderFreeze();
         }
 
-        //			if(_shineEffect) _shineEffect.render();
-
         _slowHandler.render();
         renderShine();
 
@@ -400,10 +398,6 @@ public class EffectCtrl {
     public function slowDownResume():void {
         _slowHandler.slowDownResume();
     }
-
-    //		public function dash(target:FighterMain):void{
-    //			doEffectById('dash',target.x,target.y);
-    //		}
 
     public function BGEffect(id:String, hold:Number = -1):void {
         var data:EffectVO = EffectModel.I.getEffect(id);

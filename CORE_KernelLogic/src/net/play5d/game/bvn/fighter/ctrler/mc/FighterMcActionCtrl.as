@@ -237,16 +237,10 @@ public class FighterMcActionCtrl {
      * 跟随位移目标。
      */
     public function renderMoveTarget():void {
-//			var target:IGameSprite = _rt.fighter.getCurrentTarget();
         var target:IGameSprite = _moveTargetParam.target;
         if (!target) {
             return;
         }
-//			var targetDisplay:DisplayObject = target.getDisplay();
-//			if(!targetDisplay) return;
-
-//			var selfDisplay:DisplayObject = _rt.fighter.getDisplay();
-//			if(!selfDisplay) return;
 
         var aimX:Number;
         var aimY:Number;
@@ -282,7 +276,6 @@ public class FighterMcActionCtrl {
                 }
                 if (target.y > aimY + _moveTargetParam.speed.y) {
                     if (target is BaseGameSprite) {
-//							(target as BaseGameSprite).isApplyG = false;
                         (
                                 target as BaseGameSprite
                         ).setVecY(-_moveTargetParam.speed.y);

@@ -41,7 +41,6 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 public class FighterMcCtrler {
 
     public function FighterMcCtrler(fighter:FighterMain) {
-//			_mc = mc;
         _rt              = new FighterMcRuntime();
         _rt.fighter      = fighter;
         _rt.action       = new FighterAction();
@@ -195,11 +194,8 @@ public class FighterMcCtrler {
 
         _actionCtrl.resetAutoDirect();
 
-//			if(_rt.doingAirAction){
-//			if(_rt.fighter.isInAir){
         if (!_rt.isTouchFloor && _rt.fighter.isInAir) {
             _actionCtrl.fall();
-//				trace('!_rt.isTouchFloor.fall');
         }
         else {
             var isPlay:Boolean = true;
@@ -499,7 +495,6 @@ public class FighterMcCtrler {
         }
         _rt.action.touchFloor         = action;
         _rt.action.touchFloorBreakAct = breakAct;
-//			trace('setTouchFloor' ,action , breakAct);
     }
 
     //设定万解
@@ -562,11 +557,7 @@ public class FighterMcCtrler {
     //结束动作  parent.$mc_ctrler.endAct();
     public function endAct():void {
         _rt.action.clearAction();
-//			isApplyG(true);
-        //			_rt.doingAction = null;
         _rt.fighter.actionState = FighterActionState.FREEZE;
-//			_rt.fighter.isAllowBeHit = true;
-//			_rt.fighter.isCross = false;
         _actionCtrl.clearMoveTarget();
         setSteelBody(false);
     }
@@ -631,7 +622,6 @@ public class FighterMcCtrler {
 
     public function moveMC(mmc:DisplayObject, x:Object = null, y:Object = null):void {
         var target:IGameSprite = _rt.fighter.getCurrentTarget();
-//			var targetDisplay:DisplayObject = target ? target.getDisplay() : null;
 
         if (x) {
             if (x is Number) {
@@ -725,8 +715,6 @@ public class FighterMcCtrler {
         if (_rt.actionCtrler) {
             _rt.actionCtrler.render();
         }
-
-//			renderAssist();
 
         if (_rt.action.isHurtFlying) {
             _hurtCtrl.renderHurtFlying();

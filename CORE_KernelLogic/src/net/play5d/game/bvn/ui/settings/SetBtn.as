@@ -31,7 +31,6 @@ public class SetBtn extends Sprite {
         super();
 
         this.buttonMode = true;
-//			this.mouseChildren = false;
 
         _label      = new BitmapFontText(AssetManager.I.getFont('font1'));
         _label.text = label;

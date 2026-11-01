@@ -71,15 +71,6 @@ public class GameRunFactory {
         return map;
     }
 
-//		public static function getCacheFighter(data:FighterVO):FighterMain{
-//			if(_fighterCache[data]) return _fighterCache[data];
-//
-//			var fm:FighterMain = createFighterByData(data);
-//			_fighterCache[data] = fm;
-//
-//			return fm;
-//		}
-
     public static function createAssisterByData(data:FighterVO, playerId:String):Assister {
         var mc:MovieClip      = GameStageLoadCtrl.I.getAssisterMc(data.fileUrl, playerId);
         var assister:Assister = new Assister(mc);

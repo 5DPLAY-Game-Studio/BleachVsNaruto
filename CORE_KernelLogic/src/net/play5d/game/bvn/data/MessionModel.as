@@ -42,16 +42,6 @@ public class MessionModel {
         return _messions;
     }
 
-//		public function initByXML(xml:XML):void{
-//			_messions = [];
-//
-//			for each(var i:XML in xml.design){
-//				var mv:MessionVO = new MessionVO();
-//				mv.initByXML(i);
-//				_messions.push(mv);
-//			}
-//		}
-
     public function initByObject(obj:Object):void {
         _messions = [];
 
@@ -92,7 +82,6 @@ public class MessionModel {
         GameData.I.p2Select ||= new SelectVO();
 
         // 清除之前的队伍配置，避免模式切换时残留
-        // GameData.I.p2Select.fighter1 = null;     // fighter1 无论如何都是必须使用的，都会被后续覆盖
         GameData.I.p2Select.fighter2 = null;
         GameData.I.p2Select.fighter3 = null;
 
@@ -107,11 +96,6 @@ public class MessionModel {
 
         AI_LEVEL = GameData.I.config.AI_level;
 
-//			trace('p1::',GameData.I.p1Select.toString());
-//			trace('p2::',GameData.I.p2Select.toString());
-
-//        TraceLang('debug.trace.data.mission_model.p1_data', {data: GameData.I.p1Select});
-//        TraceLang('debug.trace.data.mission_model.p2_data', {data: GameData.I.p2Select});
     }
 
     public function reset():void {

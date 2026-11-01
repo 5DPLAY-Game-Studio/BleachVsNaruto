@@ -53,16 +53,6 @@ public interface IGameSprite {
     function get y():Number;
     function set y(v:Number):void;
 
-//    /**
-//     * 宽度
-//     */
-//    function get width():Number;
-//
-//    /**
-//     * 高度
-//     */
-//    function get height():Number;
-
     /**
      * 队伍，同一队伍不可攻击
      */
@@ -102,18 +92,6 @@ public interface IGameSprite {
      * @return 显示对象
      */
     function getDisplay():DisplayObject;
-
-//    /**
-//     * 应用重力
-//     * @param g 重力大小
-//     */
-//    function applyG(g:Number):void;
-//
-//    /**
-//     * 置是否在空中
-//     * @param v 是否在空中
-//     */
-//    function setInAir(v:Boolean):void;
 
     ////////////////////////////////////////////////////////////
 

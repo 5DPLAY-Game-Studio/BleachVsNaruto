@@ -123,7 +123,6 @@ public class CongratulateStage implements IStage {
         if (_ui.y < -_exitHeight) {
             GameRender.remove(render);
             _bg.alpha           = 1;
-//				MainGame.I.goLogo();
             _btngroup.keyEnable = true;
         }
     }

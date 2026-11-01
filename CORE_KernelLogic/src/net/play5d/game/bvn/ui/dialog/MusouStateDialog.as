@@ -167,8 +167,6 @@ public class MusouStateDialog extends BaseDialog {
             return;
         }
 
-//			ct.removeChildren();
-
         if (_face) {
             ct.removeChild(_face);
         }
@@ -210,9 +208,6 @@ public class MusouStateDialog extends BaseDialog {
         _introText2.text = 'ATK ' + (
                 _currentFighter.getAttackDmg() * 10
         );
-
-//			_introText2.text = "ATK " + (_currentFighter.getAttackDmg() * 10) + "\n" +
-//				"DEF " + (_currentFighter.getDefense() * 10);
     }
 
     private function initBigFaces():void {

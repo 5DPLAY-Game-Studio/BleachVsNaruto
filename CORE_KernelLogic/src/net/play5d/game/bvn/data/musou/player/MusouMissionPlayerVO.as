@@ -25,20 +25,17 @@ public class MusouMissionPlayerVO implements ISaveData, IInstanceVO {
     include '../../../../../../../../include/Clone.as';
 
     public var id:String;
-//		public var isPassed:Boolean = false;
     public var stars:int = 0;
 
     public function toSaveObj():Object {
         var o:Object = {};
         o.id         = id;
-//			o.isPassed = isPassed;
         o.stars      = stars;
         return o;
     }
 
     public function readSaveObj(o:Object):void {
         id    = o.id;
-//			isPassed = o.isPassed;
         stars = o.stars;
     }
 }

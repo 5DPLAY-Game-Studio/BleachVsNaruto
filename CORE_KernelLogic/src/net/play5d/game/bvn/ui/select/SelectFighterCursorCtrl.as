@@ -101,7 +101,6 @@ public class SelectFighterCursorCtrl {
                 }
                 for (i = y; i < _list.curListConfig.VCount; i++) {
                     sf = getHLineFighter(slt.x, i);
-//						if(sf && !slt.isSelected(sf.selectData.fighterID)) break;
                     if (sf) {
                         break;
                     }
@@ -115,7 +114,6 @@ public class SelectFighterCursorCtrl {
                 }
                 for (i = y; i >= 0; i--) {
                     sf = getHLineFighter(slt.x, i);
-//						if(sf && !slt.isSelected(sf.selectData.fighterID)) break;
                     if (sf) {
                         break;
                     }

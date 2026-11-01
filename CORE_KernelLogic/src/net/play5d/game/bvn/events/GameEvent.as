@@ -54,8 +54,6 @@ public class GameEvent extends Event {
     public static const MONEY_UPDATE:String = 'MONEY_UPDATE';
 
     public static const LEVEL_UP:String = 'LEVEL_UP';
-//		public static const SELECT_FIGHTER_INDEX_FINISH:String = 'SELECT_FIGHTER_INDEX_FINISH';
-
 
     public static const ENTER_MUSOU_STAGE:String  = 'ENTER_MUSOU_STAGE';
     public static const ENTER_TEAM_STAGE:String   = 'ENTER_TEAM_STAGE';
@@ -110,7 +108,6 @@ public class GameEvent extends Event {
 
     public static function dispatchEvent(type:String, param:* = null, bubbles:Boolean = false,
                                          cancelable:Boolean = false):void {
-//			trace("dispatch GameEvent ::", type, param);
         _dispatcher.dispatchEvent(new GameEvent(type, param, bubbles, cancelable));
     }
 

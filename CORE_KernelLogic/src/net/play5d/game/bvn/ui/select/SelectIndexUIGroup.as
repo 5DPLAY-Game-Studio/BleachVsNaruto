@@ -310,7 +310,6 @@ public class SelectIndexUIGroup extends Sprite {
         isFinish = true;
         updateOrder();
         if (onFinish != null) {
-//				setTimeout(onFinish,1000);
             GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER_INDEX, getOrder());
             onFinish();
         }
@@ -325,7 +324,6 @@ public class SelectIndexUIGroup extends Sprite {
             if (Math.abs(ty - fui.y) > 2) {
                 TweenLite.to(fui, 0.2, {y: ty});
             }
-//				_fighters[i].ui.y = i * _gy;
         }
     }
 

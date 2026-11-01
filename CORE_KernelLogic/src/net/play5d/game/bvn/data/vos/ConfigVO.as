@@ -163,16 +163,5 @@ public class ConfigVO implements ISaveData, IInstanceVO {
         }
     }
 
-
-//		/**
-//		 * 扩展设置
-//		 * @param key
-//		 * @param value
-//		 */
-//		public function setExtend(key:String , value:Object):void{
-//			extendObj ||= {};
-//			extendObj[key] = value;
-//		}
-
 }
 }

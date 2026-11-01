@@ -37,8 +37,6 @@ public class ConfrimUI extends BaseDialog {
 
     public function ConfrimUI() {
         super();
-//			_ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, 'dialog_confrim');
-//			_dialogUI= _ui;
 
         build();
     }
@@ -46,8 +44,6 @@ public class ConfrimUI extends BaseDialog {
     private var _old_cnTxt:TextField;
     private var _btnGroup:SetBtnGroup;
 
-//		public var yesBack:Function;
-//		public var noBack:Function;
     private var _ui:Sprite;
 
     override protected function onDestroy():void {
@@ -80,8 +76,6 @@ public class ConfrimUI extends BaseDialog {
                               GameConfig.GAME_SIZE.x - _enTxt.width
                       ) / 2;
 
-//			if(!cn) return;
-
         if (_old_cnTxt) {
             _old_cnTxt.text = cn ? cn : "";
         }
@@ -93,12 +87,6 @@ public class ConfrimUI extends BaseDialog {
     private function build():void {
         _ui       = new Sprite();
         _dialogUI = _ui;
-
-//			var bg:Sprite = new Sprite();
-//			bg.graphics.beginFill(0x000000,0.3);
-//			bg.graphics.drawRect(0,0,GameConfig.GAME_SIZE.x,GameConfig.GAME_SIZE.y);
-//			bg.graphics.endFill();
-//			addChild(bg);
 
         var box:Box = new Box(GameConfig.GAME_SIZE.x, 300, 0, 0.8);
         box.y       = (

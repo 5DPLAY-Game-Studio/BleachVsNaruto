@@ -39,20 +39,16 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         FighterEventDispatcher.addEventListener(FighterEvent.BIRTH, onEnemyEvent);
         FighterEventDispatcher.addEventListener(FighterEvent.HURT, onEnemyEvent);
         FighterEventDispatcher.addEventListener(FighterEvent.DEFENSE, onEnemyEvent);
-//			FighterEventDispatcher.addEventListener(FighterEvent.DEAD, onEnemyEvent);
         FighterEventDispatcher.addEventListener(FighterEvent.IDLE, onEnemyEvent);
         FighterEventDispatcher.addEventListener(FighterEvent.HURT_RESUME, onEnemyEvent);
         FighterEventDispatcher.addEventListener(FighterEvent.HURT_DOWN, onEnemyEvent);
 
         FighterEventDispatcher.addEventListener(FighterEvent.DO_SPECIAL, changeFighter);
-//			FighterEventDispatcher.addEventListener(FighterEvent.IDLE,onIdle);
         FighterEventDispatcher.addEventListener(FighterEvent.DIE, onDie);
         FighterEventDispatcher.addEventListener(FighterEvent.DEAD, onDead);
     }
 
     private function onEnemyBeHit(f:FighterMain):void {
-//			var ui:MusouUI = GameUI.I.getUI() as MusouUI;
-//			if(ui) ui.updateEnemyHp(f);
 
         GameCtrl.I.getMusouCtrl().updateEnemy(f);
     }
@@ -125,10 +121,6 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
         case FighterEvent.DEFENSE:
             onEnemyBeHit(f);
             break;
-//				case FighterEvent.DEAD:
-//					MusouLogic.I.removeHitTarget(f);
-//					onEnemyDead(f);
-//					break;
         case FighterEvent.IDLE:
         case FighterEvent.HURT_RESUME:
         case FighterEvent.HURT_DOWN:
@@ -185,7 +177,6 @@ public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
             GameCtrl.I.getMusouCtrl().onSelfDead(fighter);
         }
         if (TeamID.TEAM_2 == fighter.team.id) {
-//            MusouLogic.I.removeHitTarget(fighter);
             onEnemyDead(fighter);
         }
     }

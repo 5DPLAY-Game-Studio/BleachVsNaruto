@@ -265,9 +265,7 @@ public class FighterMcHurtCtrl {
             targetBGS.isAllowReversePush
         ) {
             if (Math.abs(_fighter.x - target.x) < 100) {
-//                var dampingX:Number = _isDefense ?
 //                                      GameConfig.DEFENSE_DAMPING_X :
-//                                      (hitVO.hurtType == 1 ? 0.2 : GameConfig.HURT_DAMPING_X);
                 var dampingX:Number = 0.3;
                 var vecX:Number     = -hitVO.hitx * targetBGS.direct * 1.4;
                 if (vecX > 20) {
@@ -280,30 +278,6 @@ public class FighterMcHurtCtrl {
                 targetBGS.setVec2(vecX, 0, dampingX, 0);
             }
         }
-
-//        if (_isDefense) {
-//            if (hitVO.isBreakDef && hitVO.hitType == HitType.CATCH) {
-//                doHurt(hitVO, hitRect);
-//                return;
-//            }
-//
-//            if (hitVO.checkDirect && hitVO.owner) {
-//                if (checkDefDirect(hitVO.owner)) {
-//                    doHurt(hitVO, hitRect);
-//                    return;
-//                }
-//            }
-//
-//            doDefenseHit(hitVO, hitRect);
-//        }
-//        else {
-//            if (_fighter.isSteelBody && _fighter.isAlive) {
-//                doSteelHurt(hitVO, hitRect);
-//            }
-//            else {
-//                doHurt(hitVO, hitRect);
-//            }
-//        }
 
         if (_fighter.isSteelBody) {
             if (_fighter.isAlive) {
@@ -359,8 +333,6 @@ public class FighterMcHurtCtrl {
      */
     public function renderDefense(setActions:Boolean = true, isJustDefense:Boolean = false):void {
 
-//			renderBeHitGap();
-
         if (_actionCtrler.moveLEFT()) {
             if (_fighter.direct != -1) {
                 _fighter.direct = -1;
@@ -406,7 +378,6 @@ public class FighterMcHurtCtrl {
      * 设定防御动作
      */
     private function setDefenseAction(setActions:Boolean = true, isJustDefense:Boolean = false):void {
-//			trace('setDefenseAction');
 
         if (setActions) {
             _action.clearAction();
@@ -458,11 +429,6 @@ public class FighterMcHurtCtrl {
     }
 
     private function doSteelHurt(hitvo:HitVO, hitRect:Rectangle):void {
-
-//			if(_fighter.energyOverLoad){
-//				doHurt(hitvo, hitRect);
-//				return;
-//			}
 
         if (!_fighter.isSuperSteelBody && (
                 _fighter.energyOverLoad || hitvo.isBisha() || hitvo.isCatch()
@@ -524,7 +490,6 @@ public class FighterMcHurtCtrl {
             _fighter.setVec2(vev2X, vev2Y, Math.abs(hitx * 0.1), Math.abs(hity * 0.1));
         }
 
-//			if(hitvo && hitRect) EffectCtrl.I.doHitEffect(hitvo , hitRect , _fighter);
         if (hitvo && hitRect) {
             EffectCtrl.I.doSteelHitEffect(hitvo, hitRect, _fighter);
         }
@@ -716,7 +681,6 @@ public class FighterMcHurtCtrl {
      * 受击僵直动画帧。
      */
     public function renderHurtAnimate():void {
-//			renderBeHitGap();
         if (_hurtHoldFrame-- <= 0) {
 
             if (!_fighter.isAlive) {
@@ -737,7 +701,6 @@ public class FighterMcHurtCtrl {
                 hurtResume();
             }
 
-//				trace("恢复被打");
         }
     }
 
@@ -753,7 +716,6 @@ public class FighterMcHurtCtrl {
     private function renderBeHitGap():void {
         if (_beHitGap > 0) {
             if (--_beHitGap <= 0) {
-//					trace('isAllowBeHit');
                 _fighter.isAllowBeHit = true;
             }
         }
@@ -785,7 +747,6 @@ public class FighterMcHurtCtrl {
         }
 
         if (!_fighter.hasEnergy(defEnergy, false)) {
-//				trace('break def');
             _fighter.useEnergy(defEnergy);
             doBreakDefense(hitvo, hitRect);
             return;
@@ -851,7 +812,6 @@ public class FighterMcHurtCtrl {
         _isDefense = false;
 
         var hitx:Number = hitvo.hitx;
-//			trace('hitx',hitx);
         if (hitx < 5) {
             hitx = 5;
         }
@@ -862,8 +822,6 @@ public class FighterMcHurtCtrl {
         if (hitvo.owner) {
             hitx *= hitvo.owner.direct;
         }
-
-//			trace('hitx2',hitx);
 
         _action.clearState();
 
@@ -889,7 +847,6 @@ public class FighterMcHurtCtrl {
      * 正在防御
      */
     public function renderDefensHiting():void {
-//			renderBeHitGap();
         if (_defenseHoldFrame > 0) {
             _defenseHoldFrame--;
         }

@@ -82,12 +82,10 @@ public class SelectFighterUI {
         if (_playerData) {
             _lvTxt.visible = true;
             _lvTxt.text    = 'Lv.' + _playerData.getLevel();
-//				KyoDisplayUtils.grayMC(_faceImg, true);
             ui.alpha       = 1;
         }
         else {
             _lvTxt.visible = false;
-//				KyoDisplayUtils.grayMC(_faceImg);
             ui.alpha       = .5;
         }
     }

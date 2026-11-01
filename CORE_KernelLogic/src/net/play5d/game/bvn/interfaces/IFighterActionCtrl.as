@@ -28,8 +28,6 @@ public interface IFighterActionCtrl {
 
     function enabled():Boolean;
 
-//		function setEnabled(v:Boolean):void;
-
     function moveLEFT():Boolean;
 
     function moveRIGHT():Boolean;

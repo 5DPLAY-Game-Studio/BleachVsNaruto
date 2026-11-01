@@ -299,10 +299,6 @@ public class FightBar {
         addChildren(_winUI2.ui);
         addChildren(_ui.scoremc);
 
-//			_energyBar2.bar.rotation = 180;
-//			_energyBar2.bar.x += 17;
-//			_energyBar2.bar.y += 5;
-
         updateBitmap();
 
         setChildrenVisible(false);
@@ -339,7 +335,6 @@ public class FightBar {
     }
 
     private function updateBitmap():void {
-//			_bp.bitmapData.dispose();
         _bp.bitmapData.copyPixels(_empytBd, new Rectangle(0, 0, _empytBd.width, _empytBd.height), new Point());
         _bp.bitmapData.draw(_ui, _drawMatrix);
     }

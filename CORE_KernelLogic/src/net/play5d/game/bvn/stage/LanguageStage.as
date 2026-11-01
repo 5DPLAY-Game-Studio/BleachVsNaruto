@@ -137,7 +137,6 @@ public class LanguageStage implements IStage {
         _currentSelected = null;
         _clickCallBack   = null;
         _fontLoading     = false;
-//        _ui            = null;
     }
 
     ////////////////////////////////////////////////////////////////////////////////

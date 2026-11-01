@@ -53,17 +53,5 @@ public class SelectVO implements IInstanceVO {
                String(fighter3) + ",fuzhu=" + String(fuzhu) + "}";
     }
 
-//    public function toString():String {
-//        return JSON.stringify(
-//                {
-//                    select: {
-//                        fighter1: fighter1,
-//                        fighter2: fighter2,
-//                        fighter3: fighter3,
-//                        fuzhu   : fuzhu
-//                    }
-//                }
-//        );
-//    }
 }
 }

@@ -27,11 +27,6 @@ import net.play5d.game.bvn.utils.ResUtils;
 
 public class MusouConfrimUI extends BaseDialog {
 
-//		private var _cnTxt:Text;
-
-//		public var yesBack:Function;
-//		public var noBack:Function;
-
     public function MusouConfrimUI() {
         super();
 
@@ -44,8 +39,6 @@ public class MusouConfrimUI extends BaseDialog {
         build();
     }
 
-//		protected var _noBtn:SimpleButton;
-//		protected var _yesBtn:SimpleButton;
     private var _ui:$dialog$MC_confirm;
 
     protected override function onDestroy():void {

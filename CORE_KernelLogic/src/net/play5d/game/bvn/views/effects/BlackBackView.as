@@ -55,25 +55,13 @@ public class BlackBackView extends Sprite {
         removeBishaFace();
     }
 
-//		public function render():void{
-//
-//		}
-
     public function renderAnimate():void {
-//			if(isRenderFadIn) renderFadIn();
-//			if(isRenderFadOut) renderFadOut();
     }
 
     public function fadIn():void {
-//			isRenderFadIn = true;
-//			this.alpha = 0;
-//			this.visible = true;
     }
 
     public function fadOut():void {
-//			isRenderFadOut = true;
-//			this.alpha = 1;
-//			this.visible = false;
         removeBishaFace();
         try {
             parent.removeChild(this);
@@ -81,24 +69,6 @@ public class BlackBackView extends Sprite {
         catch (e:Error) {
         }
     }
-
-//		private function renderFadIn():void{
-//			this.alpha += 0.1;
-//			if(alpha >= 1){
-//				isRenderFadIn = false;
-//			}
-//		}
-//
-//		private function renderFadOut():void{
-//			this.alpha -= 0.1;
-//			if(alpha <= 0){
-//				isRenderFadOut = false;
-//
-//				removeBishaFace();
-//
-//			}
-//		}
-
 
     public function showBishaFace(faceid:int, face:DisplayObject):void {
         if (!_bishaFace) {

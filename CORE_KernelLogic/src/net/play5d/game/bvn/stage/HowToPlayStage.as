@@ -36,7 +36,6 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.input.KyoKeyCode;
 import net.play5d.kyo.stage.IStage;
 
-//import net.play5d.game.bvn.ctrl.KeyBoardCtrl;
 public class HowToPlayStage implements IStage {
 
     private var _ui:$how2play$MC_movieHow2Play;
@@ -87,8 +86,6 @@ public class HowToPlayStage implements IStage {
             _ui.buttonMode = true;
             _ui.addEventListener(MouseEvent.CLICK, skipBtnHandler);
         }, 100);
-//				_ui.skip_btn.addEventListener(MouseEvent.CLICK, skipBtnHandler);
-//			},1000);
 
     }
 

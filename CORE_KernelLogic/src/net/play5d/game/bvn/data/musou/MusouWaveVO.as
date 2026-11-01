@@ -23,32 +23,6 @@ public class MusouWaveVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-//		public static function createByXML(xml:XML):MusouWaveVO{
-//			var wave:MusouWaveVO = new MusouWaveVO();
-//			wave.hold = int(xml.@hold);
-//			for each(var j:XML in xml.enemy){
-//				wave.addEnemy(MusouEnemyVO.createByXML(j));
-//			}
-//
-//			if(xml.repeat.length() > 0){
-//				for each(var r:XML in xml.repeat){
-//					if(r.enemy.length() > 0){
-//						var waveRepeat:MusouWaveRepeatVO = new MusouWaveRepeatVO();
-//						wave.addRepeat(waveRepeat);
-//
-//						waveRepeat.type = int(r.@type);
-//						waveRepeat.hold = int(r.@hold);
-//
-//						for each(var e:XML in r.enemy){
-//							waveRepeat.addEnemy(MusouEnemyVO.createByXML(e));
-//						}
-//
-//					}
-//				}
-//			}
-//			return wave;
-//		}
-
     public static function createByJSON(json:Object):MusouWaveVO {
         var wave:MusouWaveVO = new MusouWaveVO();
         wave.hold            = int(json.hold);

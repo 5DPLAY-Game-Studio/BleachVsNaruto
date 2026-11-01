@@ -191,8 +191,6 @@ public class WinnerStage implements IStage {
             setText(txt, _winSay);
             txtmc.addChild(txt);
 
-//				testFighterSays(txt);
-
         }
     }
 

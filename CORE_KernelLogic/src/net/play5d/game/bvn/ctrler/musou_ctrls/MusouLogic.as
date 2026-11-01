@@ -106,9 +106,6 @@ public class MusouLogic {
     }
 
     public function passMission(mission:MusouMissionVO):void {
-//			var md:MusouPlayerData = GameData.I.musouData;
-//			var map:MusouWorldMapPlayerVO = GameData.I.musouData.getCurrentMap();
-
 
         var area:MusouWorldMapAreaPlayerVO = GameData.I.musouData.getCurrentArea();
 
@@ -210,7 +207,6 @@ public class MusouLogic {
             bs  = lv * 15;
 
             f.initAttackAddDmg(atk, skl, bs);
-//				f.defense = lv * 2;
 
         }
         else {

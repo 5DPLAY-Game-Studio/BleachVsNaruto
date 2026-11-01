@@ -70,7 +70,6 @@ public class CreditsStage implements IStage {
         _ui.addChild(_creditsSp);
 
         _btngroup = new SetBtnGroup();
-//			_btngroup.x = 20;
         _btngroup.y = GameConfig.GAME_SIZE.y - 150;
         _btngroup.setBtnData([{label: 'BACK', cn: GetLang('txt.common.back')}]);
         _btngroup.addEventListener(SetBtnEvent.SELECT, selectBtnHandler);
@@ -98,11 +97,9 @@ public class CreditsStage implements IStage {
 
     private static function getCreditsText():String {
 
-//			var msg:String = "设计、美术、程序：剑jian" + "<br/>" +
 //				"人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +
 //				"         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
 //				"策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
-//				"卓越贡献：社长、渺渺" + "<br/>";
         return GetLang('txt.credits_stage.body');
     }
 
@@ -125,8 +122,6 @@ public class CreditsStage implements IStage {
 
         txt.x = 30;
         txt.y = 25;
-
-//			txt.mouseEnabled = false;
 
         sp.addChild(txt);
 

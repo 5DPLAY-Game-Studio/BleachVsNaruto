@@ -59,29 +59,6 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
                               (target as BaseGameSprite).id :
                               null;
 
-//        var hitsObj:Object = GameLogic.getHitsObj(fighter.id);
-//        var uiId:int       = TeamID.TEAM_1;
-//        if (hitsObj && hitsObj.uiID) {
-//            uiId = hitsObj.uiID;
-//        }
-//        else {
-//            if (fighter.getDisplay() && target.getDisplay()) {
-//                uiId = fighter.getDisplay().x > target.getDisplay().x ?
-//                       TeamID.TEAM_2 :
-//                       TeamID.TEAM_1;
-//            }
-//        }
-
-//        var uiId:int;
-//        switch (fighter.team.id) {
-//        case TeamID.TEAM_1:
-//            uiId = TeamID.TEAM_1;
-//            break;
-//        case TeamID.TEAM_2:
-//            uiId = TeamID.TEAM_2;
-//            break;
-//        }
-
         var uiId:int = fighter.team.id;
 
         var hits:int = GameLogic.addHits(fighter.id, targetId, uiId);
@@ -92,7 +69,6 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
 
     //清除连击数字
     private function removeHits(targetId:String):void {
-//			trace('removeHits', targetId);
         var o:Object = GameLogic.getHitsObjByTargetId(targetId);
         if (o) {
             GameCtrl.I.gameState.gameUI.getUI().hideHits(o.uiID);
@@ -146,8 +122,6 @@ public class FighterEventCtrl extends BaseFighterEventCtrl {
      * @param e 角色事件
      */
     private function onHitTarget(e:FighterEvent):void {
-//        trace("onHitTarget");
-
         addHits(e.fighter as FighterMain, e.params.target);
 
         if (GameMode.isArcade() && TeamID.TEAM_1 == e.fighter.team.id) {

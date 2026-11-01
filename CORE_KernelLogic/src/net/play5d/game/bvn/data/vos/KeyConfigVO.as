@@ -60,14 +60,6 @@ public class KeyConfigVO implements IInstanceVO {
         selects ||= [attack];
     }
 
-//		public function getSelectKeyCode():Array{
-//			return selects;
-//		}
-
-//		public function isSelectKey(code:int):Boolean{
-//			return selects.indexOf(code) != -1;
-//		}
-
     public function toSaveObj():Object {
         var o:Object = KyoUtils.itemToObject(this);
         delete o['id'];
@@ -77,13 +69,6 @@ public class KeyConfigVO implements IInstanceVO {
     public function readSaveObj(o:Object):void {
         KyoUtils.setValueByObject(this, o);
     }
-
-//    public function clone():KeyConfigVO {
-//        var o:Object           = toSaveObj();
-//        var newKey:KeyConfigVO = new KeyConfigVO(id);
-//        newKey.readSaveObj(o);
-//        return newKey;
-//    }
 
 }
 }

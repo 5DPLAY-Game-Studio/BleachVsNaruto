@@ -63,20 +63,6 @@ public class FighterAILogicBase {
         updateContOrder();
     }
 
-//		public final function updateAI(target:IGameSprite):void{
-//			_target = target;
-//			_targetFighter = _target as FighterMain;
-//
-//			updateConting();
-//
-//			_fighterAction ||= _fighter.getCtrler().getMcCtrl().getAction();
-//
-//			updateActionAI();
-//
-//			updateContOrder();
-//
-//		}
-
     public final function targetInDistance(target:IGameSprite, disX:Number, disY:Number):Boolean {
         var dis:Point = getTargetDistance(target);
         return dis.x <= disX && dis.y <= disY;
@@ -93,10 +79,6 @@ public class FighterAILogicBase {
         }
         return area.intersects(hr);
     }
-
-//		public function onDoAction():void{
-//			updateConting();
-//		}
 
     protected function addContOrder(id:String, order:int):void {
         var index:int = _contOrder.indexOf(id);
@@ -221,8 +203,6 @@ public class FighterAILogicBase {
         }
 
         _contOrder.sortOn('order', Array.DESCENDING);
-
-//			trace('updateContOrder',JSON.stringify(_contOrder));
 
         for (var i:int = 1; i < _contOrder.length; i++) {
             var id:String = _contOrder[i].id;

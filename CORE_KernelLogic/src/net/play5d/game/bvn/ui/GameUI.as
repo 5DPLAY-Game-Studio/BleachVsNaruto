@@ -97,7 +97,6 @@ public class GameUI {
                 yes();
             }
             closeConfrim();
-//				GameEvent.dispatchEvent(GameEvent.UI_CONFRIM_CLOSE);
         }
 
         function noClose():void {
@@ -157,7 +156,6 @@ public class GameUI {
     public function GameUI() {
         I = this;
 
-//        SHOW_HP_TEXT = GameMode.currentMode == GameMode.TRAINING && GameConfig.ALLOW_SHOW_HP_TEXT;
         SHOW_HP_TEXT = GameData.I.config.isShowHp;
 
         _renderAnimateGap = Math.ceil(GameConfig.FPS_GAME / GameConfig.FPS_ANIMATE) - 1;

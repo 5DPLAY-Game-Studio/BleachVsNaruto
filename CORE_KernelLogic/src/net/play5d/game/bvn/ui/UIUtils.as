@@ -44,11 +44,6 @@ public class UIUtils {
             text.defaultTextFormat = tf;
             text.embedFonts        = true;
 
-//				var tf:TextFormat = new TextFormat();
-//				if(textFormatParam.font != null) textFormatParam.font = undefined;
-//				KyoUtils.setValueByObject(tf,textFormatParam);
-//				text.defaultTextFormat = tf;
-
         }
 
         if (formatTextFunction != null) {

@@ -60,15 +60,6 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
      * 特殊技（援助）输入。
      */
     public function renderSpecial():void {
-//			if(_fighter.actionState != FighterActionState.NORNAL && _fighter.actionState !=
-// FighterActionState.DEFENSE_ING) return;
-
-//			if(_actionCtrler.specailSkill()){
-//				if(_fighter.fzqi >= _fighter.fzqiMax){
-//					_fighter.fzqi = 0;
-//					FighterEventDispatcher.dispatchEvent(_fighter,FighterEvent.DO_SPECIAL);
-//				}
-//			}
 
         if (_actionLogic.specailSkill()) {
             FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DO_SPECIAL);
@@ -235,17 +226,14 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
         _owner.setAttack();
 
         _owner.setZhao1();
-//			_owner.setZhao2();
         _owner.setZhao3();
 
-//			_owner.setSkill1();
         _owner.setSkill2();
 
         _owner.setJump();
         _owner.setDash();
         _owner.setBisha();
         _owner.setBishaUP();
-//			_owner.setBishaSUPER();
 
         _owner.setDefense();
 
@@ -278,7 +266,6 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
         if (_action.isMoving) {
             return;
         }
-//			_mc.goFrame(action,false);
         _mc.goFrame(action, true);
         _fighter.actionState = FighterActionState.NORMAL;
         setMoveAction();
@@ -331,8 +318,6 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
         if (!allowCatch()) {
             return;
         }
-//			if(!_action.CDOK("catch")) return;
-//			_action.setCD("catch" , 5000);
 
         _owner.doAction(action, false, null, getCatchInputSideLetter() + btnLetter);
         _fighter.actionState = FighterActionState.SKILL_ING;

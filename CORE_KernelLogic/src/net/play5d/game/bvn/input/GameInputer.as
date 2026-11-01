@@ -126,11 +126,6 @@ public class GameInputer {
                 delete _justDownDelayKeys[i];
             }
         }
-//			for(i in _justDownKeys){
-//				o = _justDownKeys[i];
-//				isDown = call(o.type , o.funcName);
-//				if(!isDown) delete _justDownKeys[i];
-//			}
         renderListenKeys();
     }
 
@@ -231,14 +226,6 @@ public class GameInputer {
         return o.ids.indexOf(funcName) != -1;
     }
 
-//		public static function listen(func:Function):void{
-//			callVoid('listen' , func);
-//		}
-//
-//		public static function unListen(func:Function):void{
-//			callVoid('unListen' , func);
-//		}
-
     private static function isDown(type:String, funcName:String, justDown:int = 0,
                                    isListenCall:Boolean                       = false
     ):Boolean {
@@ -257,8 +244,6 @@ public class GameInputer {
     private static function isJustDown(type:String, funcName:String):Boolean {
 
         var id:String = type + '_' + funcName;
-
-//			if(listened) return _justDownKeys[id];
 
         var isDown:Boolean = call(type, funcName);
         if (!isDown) {

@@ -142,10 +142,6 @@ public class SelecterItemUI {
             return;
         }
 
-//			trace('P'+_playerType+"::",currentFighter.id);
-
-//			if(randoms) currentFighter = KyoRandom.getRandomInArray(randoms, false);
-
         if (isSelectAssist) {
             selectVO.fuzhu = currentFighter.id;
         }

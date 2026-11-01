@@ -357,9 +357,6 @@ public class SelectFighterListCtrl {
 
         _fighterListUI.addChild(si.ui);
 
-//			si.ui.x = sv.x * (unitWidth + _config.itemGap.x);
-//			si.ui.y = sv.y * (unitHeight + _config.itemGap.y);
-
         _itemObj[sv.x + ',' + sv.y] = si;
 
         return si;
@@ -419,7 +416,6 @@ public class SelectFighterListCtrl {
             return;
         }
 
-//			if(isHoverFighter(curSlt, target)){
         if (curSlt.touchHoverItem == target) {
             doSelect(target);
             curSlt.touchHoverItem = null;

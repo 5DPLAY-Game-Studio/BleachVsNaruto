@@ -32,13 +32,6 @@ public class BitmapAssetLoader {
     private var _progressBack:Function;
 
     public function getBitmap(id:String):Bitmap {
-//			var r:DisplayObject = _cacheObj[id];
-//
-//			if(r == null) return null;
-//
-//			if(r is BitmapData){
-//				return new Bitmap(r as BitmapData);
-//			}
 
         var bd:BitmapData = _cacheObj[id];
         if (bd == null) {
@@ -91,11 +84,9 @@ public class BitmapAssetLoader {
             }
             catch (e:Error) {
                 trace('BitmapAssetLoader.cacheBitmap::', e);
-//					cache = content;
             }
         }
         else {
-//				cache = loader;
         }
 
         if (cache) {

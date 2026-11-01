@@ -24,7 +24,6 @@ public class McAreaCacher {
 
     public function McAreaCacher(name:String) {
         this.name = name;
-//			trace('new McAreaCacher');
     }
     public var name:String;
     private var _idCache:Object    = {};
@@ -39,18 +38,15 @@ public class McAreaCacher {
      * 是否已定义区域
      */
     public function areaFrameDefined(frame:int):Boolean {
-//			trace('areaFrameDefined' , frame , _frameCache[frame]);
         return _frameCache[frame] !== undefined;
     }
 
     public function getAreaByFrame(frame:int):Object {
-//			trace('getAreaByFrame' , frame , _frameCache[frame]);
         return _frameCache[frame];
     }
 
     public function cacheAreaByFrame(frame:int, area:Object):void {
         _frameCache[frame] = area;
-//			trace('cacheAreaByFrame' , frame , _frameCache[frame]);
     }
 
     /**
@@ -84,10 +80,6 @@ public class McAreaCacher {
                 cacheObj[i] = customParam[i];
             }
         }
-
-//			if(displayName.indexOf("atm") != -1){
-//				cacheObj.id = displayName.replace("atm","");
-//			}
 
         _idCache[cacheid] = cacheObj;
         return cacheObj;

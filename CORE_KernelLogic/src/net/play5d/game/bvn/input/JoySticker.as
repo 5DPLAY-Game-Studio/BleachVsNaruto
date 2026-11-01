@@ -116,10 +116,6 @@ public class JoySticker {
             return ctrl.value < -0.5;
         }
 
-//			if(key.value > 0){
-//				return ctrl.value > key.value;
-//			}
-
         return false;
     }
 
@@ -192,7 +188,6 @@ public class JoySticker {
     private static function addDeivce(device:GameInputDevice):void {
         device.enabled = true;
         _gameDeivces.push(device);
-//			var id:int = _gameDeivces.length;
         var id:String  = device.id;
         _deivceMap[id] = device;
         trace('addDevice:' + id, ':', device.id);
@@ -217,22 +212,6 @@ public class JoySticker {
 
     }
 
-//		/**
-//		 * 是否移动摇杆
-//		 * @param deviceID
-//		 * @return -1:左(上)，1：右（下），0：没动
-//		 */
-//		public static function isMove(deviceID:String , key:int = 1):int{
-//			var device:GameInputDevice = getDeive(deviceID);
-//			if(!device) return 0;
-//
-//			var ctrl:GameInputControl = device.getControlAt(key);
-//			if(ctrl.value < ctrl.minValue/2) return -1;
-//			if(ctrl.value > ctrl.maxValue/2) return 1;
-//
-//			return 0;
-//		}
-
     private static function getDeive(deviceId:String):GameInputDevice {
         return _deivceMap[deviceId];
     }
@@ -255,15 +234,10 @@ public class JoySticker {
         if (val < -0.5) {
             return -1;
         }
-//			if(val > 0.5) return 0.5;
 
         return 0;
 
     }
-
-//		public static function justDownKey(deviceID:String):JoyStickSetVO{
-//			var id:String =
-//		}
 
     private static function joystickHandler(e:GameInputEvent):void {
         switch (e.type) {

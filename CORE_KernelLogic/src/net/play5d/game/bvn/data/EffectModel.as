@@ -32,7 +32,6 @@ public class EffectModel {
         return _i;
     }
 
-    //		private var _hitEffects:Object;
     private var _effect:Object;
 
     public function initialize():void {
@@ -185,7 +184,6 @@ public class EffectModel {
             sound: 'snd_hit_dian', blendMode: BlendMode.HARDLIGHT, specialEffectId: 'shock_ing', freeze: 400,
             shine: {color: 0x8288D2, alpha: 0.2}, shake: {pow: 6, time: 400}
         });
-        //			addHitEffect(HitType.STONE , "XG_kanx" , {freeze:500});
 
     }
 
@@ -228,7 +226,6 @@ public class EffectModel {
             sound: 'snd_defx', freeze: 400, blendMode: BlendMode.ADD, followDirect: true,
             shine: {color: 0x8288D2, alpha: 0.2}, shake: {pow: 6, time: 400}
         });
-//			addDefenseEffect(HitType.STONE , "XG_kanx" , {freeze:500});
 
     }
 

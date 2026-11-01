@@ -182,9 +182,6 @@ public class MenuBtn extends EventDispatcher {
             return;
         }
         ui.bg.visible = false;
-//			TweenLite.to(ui.bg,0.1,{scaleX:0.01,onComplete:function():void{
-//				ui.bg.visible = false;
-//			}});
     }
 
     public function select(back:Function = null):void {

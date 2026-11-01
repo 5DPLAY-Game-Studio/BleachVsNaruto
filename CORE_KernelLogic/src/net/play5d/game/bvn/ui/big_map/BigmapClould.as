@@ -98,9 +98,5 @@ public class BigmapClould extends Sprite {
         ) - 100;
     }
 
-//		private function getRandomY():Number{
-//			return _bounds.y + ( (_bounds.height / 20) * (Math.random() * 20) );
-//		}
-
 }
 }

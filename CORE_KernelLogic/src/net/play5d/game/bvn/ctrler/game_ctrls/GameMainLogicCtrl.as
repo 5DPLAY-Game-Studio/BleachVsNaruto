@@ -123,9 +123,6 @@ public class GameMainLogicCtrl {
         var childLen:int;
         var displays:Vector.<IGameSprite> = _gameState.getGameSprites();
 
-        //			if(_renderAnimate) gameState.renderAnimate();
-
-
         for (i = 0; i < displays.length; i++) {
             renderGameSprite(displays[i]);
         }
@@ -142,9 +139,6 @@ public class GameMainLogicCtrl {
                 if (sp == null || sp.isDestroyed()) {
                     continue;
                 }
-
-//					renderGameSprite(sp);
-
 
                 //两两匹配，比如有3个：1与2,3比较，2与3比较
                 for (k = i + 1; k < teamLen; k++) {
@@ -217,9 +211,6 @@ public class GameMainLogicCtrl {
         if (!intersectInto(bodyA, bodyB, _bodyHitRect) || _bodyHitRect.isEmpty()) {
             return;
         }
-
-//			var displayA:DisplayObject = A.getDisplay();
-//			var displayB:DisplayObject = B.getDisplay();
 
         var vecA:Number = ba.getVecX();
         var vecB:Number = bb.getVecX();
@@ -369,14 +360,6 @@ public class GameMainLogicCtrl {
             if (bodyB) {
                 _gameState.drawGameRect(bodyB, 0xffff00, 0.5);
             }
-//				if(A is FighterMain){
-//					var ckhitA:Rectangle = (A as FighterMain).getHitRange(FighterHitRange.ATTACK);
-//					if(ckhitA) _gameState.drawGameRect(ckhitA , 0x00ff00 , 0.5);
-//				}
-//				if(B is FighterMain){
-//					var ckhitB:Rectangle = (B as FighterMain).getHitRange(FighterHitRange.ATTACK);
-//					if(ckhitB) _gameState.drawGameRect(ckhitB , 0x00ff00 , 0.5);
-//				}
 
         }
 

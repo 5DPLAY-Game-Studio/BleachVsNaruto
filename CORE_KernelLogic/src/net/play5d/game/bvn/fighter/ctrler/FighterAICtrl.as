@@ -28,41 +28,14 @@ public class FighterAICtrl implements IFighterActionCtrl {
 
     public var AILevel:int; //1-6  very easy,easy,normal,hrad,very hard,hell
     public var fighter:FighterMain;
-//		private var _targetFighter:FighterMain;
     private var _target:IGameSprite;
     private var _ai_update_gap:int;
     private var _ai_update_frame:int;
     private var _AIlogic:FighterAILogic;
 
     public function initialize():void {
-//			_fighter.addEventListener(FighterEvent.DO_ACTION,onFighterDoAction);
-//			AILevel = level;
 
         _AIlogic = new FighterAILogic(AILevel, fighter);
-
-//			switch(AILevel){
-//				case 0:
-//				case 1: //very easy
-//					_ai_update_gap = 1 * GameConfig.FPS_GAME;
-//					break;
-//				case 2: //easy
-//					_ai_update_gap = 0.5 * GameConfig.FPS_GAME;
-//					break;
-//				case 3: //normal
-//					_ai_update_gap = 0.3 * GameConfig.FPS_GAME;
-//					break;
-//				case 4: //hard
-//					_ai_update_gap = 0.1 * GameConfig.FPS_GAME;
-//					break;
-//				case 5: //very hard
-//					_ai_update_gap = 0.05 * GameConfig.FPS_GAME;
-//					break;
-//				case 6: //hell
-//					_ai_update_gap = 1;
-//					break;
-//			}
-//
-//			if(_ai_update_gap < 1) _ai_update_gap = 1;
 
     }
 
@@ -73,26 +46,13 @@ public class FighterAICtrl implements IFighterActionCtrl {
             _AIlogic.destroy();
             _AIlogic = null;
         }
-//			_fighter.removeEventListener(FighterEvent.DO_ACTION,onFighterDoAction);
     }
-
-//		private function onFighterDoAction(e:FighterEvent):void{
-//			_AIlogic.onDoAction();
-//		}
 
     public function enabled():Boolean {
         return GameCtrl.I.actionEnable;
     }
 
     public function render():void {
-//			_ai_update_frame++;
-//			_AIlogic.render();
-//			if(_ai_update_frame > _ai_update_gap){
-//				_target = _fighter.getCurrentTarget();
-////				_targetFighter = _target as FighterMain;
-//				_AIlogic.updateAI(_target);
-//				_ai_update_frame = 0;
-//			}
     }
 
     public function renderAnimate():void {

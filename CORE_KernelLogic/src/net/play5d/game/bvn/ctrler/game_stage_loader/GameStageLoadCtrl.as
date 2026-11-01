@@ -251,14 +251,6 @@ public class GameStageLoadCtrl extends EventDispatcher {
         _loadStep = 1;
 
         setTimeout(startLoadingMaps, 300);
-
-//			loadMaps(convertLoadAssets(mapDatas, {id:"id", name: "name", url: "fileUrl"}), function():void{
-//
-//				loadFighters(convertLoadAssets(fighterDatas, {id:"id", name: "name", url: "fileUrl"}),
-// function():void{  loadAssisters(convertLoadAssets(assisterDatas, {id:"id", name: "name", url: "fileUrl"}),
-// function():void{  loadBgms(bgmDatas, function():void{ trace("All Finish"); if(finishBack != null) finishBack(); });
-// }); }); });
-
     }
 
     private function startLoadingMaps():void {
@@ -498,7 +490,6 @@ public class GameStageLoadCtrl extends EventDispatcher {
             var fv:LoadAssetVO = assets.shift();
             currentAsset       = fv;
             _curLoadName       = fv.name;
-            //				GameLoader.loadSWF(fv.url, loadSucc, onLoadError, onLoadProgress);
 
             loadFunc(fv, loadSucess);
         }

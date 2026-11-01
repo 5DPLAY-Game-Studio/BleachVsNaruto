@@ -71,10 +71,6 @@ public class FighterHitModel {
         return getHitVO(id);
     }
 
-//		public function isHitAreaDisplay(display:DisplayObject):Boolean{
-//			return display.name.indexOf('atm') != -1;
-//		}
-
     /**
      * 增加HitVO，重复将直接替换
      * @param id

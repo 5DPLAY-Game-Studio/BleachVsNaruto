@@ -67,7 +67,6 @@ public class MoveTargetParamVO implements IInstanceVO {
     public function setTarget(v:IGameSprite):void {
         target = v;
         if (target is BaseGameSprite) {
-//				(target as BaseGameSprite).isApplyG = false;
             (
                     target as BaseGameSprite
             ).setVelocity(0, 0);

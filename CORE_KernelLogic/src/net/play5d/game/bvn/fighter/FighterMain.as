@@ -244,7 +244,6 @@ public class FighterMain extends BaseGameSprite {
     }
 
     public override function getBodyArea():Rectangle {
-//			if(!isAllowBeHit) return null;
         if (!_fighterCtrl) {
             return null;
         }
@@ -478,10 +477,6 @@ public class FighterMain extends BaseGameSprite {
         }
     }
 
-//		public override function applayG(g:Number):void{
-//			super.applayG(g);
-//		}
-
     public function initialized():Boolean {
         return _fighterCtrl != null;
     }
@@ -650,11 +645,6 @@ public class FighterMain extends BaseGameSprite {
     public function hasWankai():Boolean {
         return _fighterCtrl.getMcCtrl().getFighterMc().checkFrame(FighterSpecialFrame.BANKAI);
     }
-
-//		public function onChangeMC():void{
-//			_area = _mainMc.getBounds(_mainMc);
-//			_area = getBodyArea();
-//		}
 
     public function die():void {
         hp      = 0;

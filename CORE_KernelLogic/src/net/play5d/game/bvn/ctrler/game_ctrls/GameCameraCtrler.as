@@ -67,10 +67,6 @@ public class GameCameraCtrler {
         }
     }
 
-//    public function render():void {
-//        _camera.render();
-//    }
-
     //////////////////////////////////////////////////////////////////////////////////////////
 
     /**

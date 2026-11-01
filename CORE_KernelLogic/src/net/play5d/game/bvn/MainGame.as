@@ -55,7 +55,6 @@ import net.play5d.kyo.utils.KyoTimeout;
 
 public class MainGame {
 
-//		public static const PUBLISH_VERSION_TYPE:int = PublishVersion.COM_4399;
     public static const VERSION:String     = GameVersion.VERSION;
     public static var VERSION_LABEL:String = GameVersion.VERSION; // 显示在右下角，与更新逻辑无关
     public static var VERSION_DATE:String  = '2021.10.14';
