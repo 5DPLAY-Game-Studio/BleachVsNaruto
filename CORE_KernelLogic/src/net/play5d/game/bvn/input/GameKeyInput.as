@@ -26,6 +26,9 @@ import net.play5d.kyo.utils.Keyboard;
 
 public class GameKeyInput implements IGameInput {
 
+    /** @private Escape（键码 27）。勿写 flash.ui.Keyboard，会和 kyo Keyboard 重名。 */
+    private static const KEY_ESCAPE:uint = 27;
+
     private var _config:KeyConfigVO;
     private var _downKeys:Object = {};
 
@@ -63,7 +66,7 @@ public class GameKeyInput implements IGameInput {
 
 
     public function back():Boolean {
-        return isDown(flash.ui.Keyboard.ESCAPE);
+        return isDown(KEY_ESCAPE);
     }
 
     public function select():Boolean {

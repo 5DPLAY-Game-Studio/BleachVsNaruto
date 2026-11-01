@@ -32,6 +32,8 @@ import net.play5d.kyo.utils.Keyboard;
 public class LanGameMenuCtrl {
     /** @private */
     private static var _i:LanGameMenuCtrl;
+    /** @private Escape（键码 27）。勿写 flash.ui.Keyboard，会和 kyo Keyboard 重名。 */
+    private static const KEY_ESCAPE:uint = 27;
 
     /**
      * 单例。
@@ -91,7 +93,7 @@ public class LanGameMenuCtrl {
             if (!_exitDialog) {
                 return;
             }
-            if (e.keyCode == flash.ui.Keyboard.ESCAPE) {
+            if (e.keyCode == KEY_ESCAPE) {
                 _isKeyDown = true;
                 if (_exitDialog.isShowing()) {
                     _exitDialog.hide();
@@ -104,7 +106,7 @@ public class LanGameMenuCtrl {
         }
 
         if (e.type == KeyboardEvent.KEY_UP) {
-            if (e.keyCode == flash.ui.Keyboard.ESCAPE) {
+            if (e.keyCode == KEY_ESCAPE) {
                 _isKeyDown = false;
             }
         }

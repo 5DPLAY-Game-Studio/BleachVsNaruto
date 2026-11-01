@@ -87,11 +87,157 @@ public class SelectFighterStage implements IStage {
 
     public function get p2SelectFinish():Boolean {
         return _p2Slt && _p2Slt.selectFinish();
+    }
+
+    /**
+     * 构建
+     */
+    public function build():void {
+        _ui            = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, ResUtils.SELECT);
+        _fighterListUI = new Sprite();
+
+        _ui.addChild(_fighterListUI);
+
+        _config   = GameData.I.config.select_config;
+        _modeFlow = SelectModeFlowFactory.create();
+        _listCtrl = new SelectFighterListCtrl(_fighterListUI, _config);
+        _listCtrl.tweenTime       = _tweenTime;
+        _listCtrl.onSelectConfirm = playerSeltBack;
+
+        GameRender.add(render);
+        GameInputter.focus();
+        GameInputter.enabled = false;
+
+        nextStep();
+
+        SoundCtrl.I.BGM(AssetManager.I.getSound('select'));
+
+        StateCtrl.I.clearTrans();
+
+        Keyboard.focus();
+
+        GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER);
+    }
+
+    public function setSelect(player:int, selects:Array):void {
+        var selt:SelectorItemUI = player == 1 ? _p1Slt : _p2Slt;
+        selt.setCurrentSelect(selects);
+        selt.removeSelector();
+        SoundCtrl.I.sndConfirm();
+    }
+
+    public function nextStep():void {
+        var a:SelectFlowAction = _modeFlow.resolveNextStep(_curStep);
+        if (a.nextStep >= 0) {
+            _curStep = a.nextStep;
+        }
+
+        switch (a.action) {
+        case SelectFlowAction.INIT_FIGHTER:
+            initFighter();
+            break;
+        case SelectFlowAction.ENABLE_P2_WITH_P1_INPUT:
+            enableP2WithP1Input();
+            break;
+        case SelectFlowAction.FADOUT_ASSIST:
+            _listCtrl.fadOutList(initAssist);
+            break;
+        case SelectFlowAction.FADOUT_MAP:
+            _listCtrl.fadOutList(initMap);
+            break;
+        case SelectFlowAction.START_ARCADE:
+            startAcradeGame();
+            break;
+        case SelectFlowAction.START_MUSOU:
+            startMusouGame();
+            break;
+        case SelectFlowAction.SELECT_FINISH:
+            selectFinish();
+            break;
+        }
+    }
+
+    public function goLoadGame():void {
+        TraceLang('debug.trace.data.select_fighter_stage.start_game');
+        StateCtrl.I.transIn(MainGame.I.loadGame);
+    }
+
+    /**
+     * 稍后构建
+     */
+    public function afterBuild():void {
+    }
+
+    /**
+     * 销毁
+     * @param back 回调函数
+     */
+    public function destroy(back:Function = null):void {
+        clear();
+        GameRender.remove(render);
+        GameInputter.enabled = false;
+        SoundCtrl.I.BGM(null);
+        GameUI.closeConfirm();
+        _modeFlow = null;
+        if (_listCtrl) {
+            _listCtrl.destroy();
+            _listCtrl = null;
+        }
+
+        if (_backMenuBtn) {
+            _backMenuBtn.removeEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
+            _backMenuBtn.removeEventListener(MouseEvent.CLICK, backMenuHandler);
+            _backMenuBtn.visible = false;
+        }
+    }
+
+    private function initBackBtn():void {
+        if (!GameConfig.TOUCH_BACK_BTN) {
+            return;
+        }
+
+        if (!_backMenuBtn) {
+            _backMenuBtn         = new Sprite();
+            var btnBitmap:Bitmap = new GameConfig.TOUCH_BACK_BTN();
+            btnBitmap.width      = 100;
+            btnBitmap.smoothing  = true;
+            btnBitmap.scaleY     = btnBitmap.scaleX;
+            _backMenuBtn.addChild(btnBitmap);
+
+            if (GameConfig.TOUCH_MODE) {
+                _backMenuBtn.addEventListener(TouchEvent.TOUCH_TAP, backMenuHandler);
+            }
+            else {
+                _backMenuBtn.addEventListener(MouseEvent.CLICK, backMenuHandler);
+            }
+        }
+        _ui.addChild(_backMenuBtn);
+    }
+
+    private function initFighter():void {
+        TraceLang('debug.trace.data.select_fighter_stage.init_fighter');
+        clear();
+        _listCtrl.selectState = SelectFighterListCtrl.SELECT_STATE_FIGHTER;
+        _listCtrl.buildList(_config.charList);
+
+        GameData.I.p1Select = new SelectVO();
+        if (_modeFlow.createP2SelectVO()) {
+            GameData.I.p2Select = new SelectVO();
+        }
+
+        GameInputter.enabled = false;
+        setTimeout(initSelector, _tweenTime);
         if (GameConfig.TOUCH_MODE) {
             initBackBtn();
         }
     }
 
+    private function initAssist():void {
+        TraceLang('debug.trace.data.select_fighter_stage.init_assist');
+        clear();
+        _listCtrl.selectState = SelectFighterListCtrl.SELECT_STATE_ASSIST;
+        _listCtrl.buildList(_config.assistList);
+        GameInputter.enabled = false;
         if (GameConfig.TOUCH_MODE) {
             initBackBtn();
         }
