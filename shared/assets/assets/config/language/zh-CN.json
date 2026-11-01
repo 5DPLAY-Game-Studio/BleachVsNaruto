@@ -509,7 +509,7 @@
         "embed_swf"           : {
           "no_movie_clip_data": "未发现 swf 的 movieClipData ！"
         },
-        "selecter_item_ui"    : {
+        "selector_item_ui"    : {
           "select_vo_unset": "未设置 selectVO！"
         },
         "ad_event_listener"   : {

@@ -44,12 +44,12 @@ public interface ISelectModeFlow {
      * @return 双人同时选为 <code>true</code>。
      * @example
      * <listing version="3.0">
-     * if (flow.initBothSelecters()) {
+     * if (flow.initBothSelectors()) {
      *     // ...
      * }
      * </listing>
      */
-    function initBothSelecters():Boolean;
+    function initBothSelectors():Boolean;
 
     /**
      * 单人完成选择后是否需等另一方（双人对战）。

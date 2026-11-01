@@ -46,7 +46,7 @@ import net.play5d.kyo.utils.KyoRandom;
  *
  * @see SelectFighterStage
  * @see SelectFighterCursorCtrl
- * @see SelecterItemUI
+ * @see SelectorItemUI
  */
 public class SelectFighterListCtrl {
 
@@ -67,9 +67,9 @@ public class SelectFighterListCtrl {
     /** @private */
     private var _itemObj:Object;
     /** @private */
-    private var _p1Slt:SelecterItemUI;
+    private var _p1Slt:SelectorItemUI;
     /** @private */
-    private var _p2Slt:SelecterItemUI;
+    private var _p2Slt:SelectorItemUI;
     /** @private */
     private var _selectState:int;
     /** @private */
@@ -138,16 +138,16 @@ public class SelectFighterListCtrl {
      * @param p2 P2 选人器。
      * @example
      * <listing version="3.0">
-     * ctrl.setSelecters(p1, p2);
+     * ctrl.setSelectors(p1, p2);
      * </listing>
      */
-    public function setSelecters(p1:SelecterItemUI, p2:SelecterItemUI):void {
+    public function setSelectors(p1:SelectorItemUI, p2:SelectorItemUI):void {
         _p1Slt = p1;
         _p2Slt = p2;
     }
 
     /**
-     * 确认选择回调（参数为 <code>SelecterItemUI</code>）。
+     * 确认选择回调（参数为 <code>SelectorItemUI</code>）。
      *
      * @param v 回调。
      * @example
@@ -401,7 +401,7 @@ public class SelectFighterListCtrl {
             return;
         }
 
-        var curSlt:SelecterItemUI = null;
+        var curSlt:SelectorItemUI = null;
 
         if (_p1Slt && _p1Slt.enabled) {
             curSlt = _p1Slt;
@@ -463,7 +463,7 @@ public class SelectFighterListCtrl {
     /**
      * 格子是否已被该选人器选过。
      */
-    public static function checkSelected(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
+    public static function checkSelected(slt:SelectorItemUI, sf:SelectFighterItem):Boolean {
 
         if (!sf.selectData && !sf.fighterData) {
             return false;
@@ -509,7 +509,7 @@ public class SelectFighterListCtrl {
         return _itemObj[x + ',' + y];
     }
 
-    public static function renderRandom(selt:SelecterItemUI):void {
+    public static function renderRandom(selt:SelectorItemUI):void {
         if (selt.randoms) {
             if (selt.randFrame > 0) {
                 selt.randFrame = 0;
@@ -544,12 +544,12 @@ public class SelectFighterListCtrl {
     }
 
     /** @private */
-    public function get p1Slt():SelecterItemUI {
+    public function get p1Slt():SelectorItemUI {
         return _p1Slt;
     }
 
     /** @private */
-    public function get p2Slt():SelecterItemUI {
+    public function get p2Slt():SelectorItemUI {
         return _p2Slt;
     }
 
@@ -592,15 +592,15 @@ public class SelectFighterListCtrl {
     /**
      * 移动光标到格子。
      */
-    public function moveSlt(slt:SelecterItemUI, x:int, y:int, fix:Boolean = true):Boolean {
+    public function moveSlt(slt:SelectorItemUI, x:int, y:int, fix:Boolean = true):Boolean {
         return _cursor.moveSlt(slt, x, y, fix);
     }
 
     /**
      * 相对移动光标。
      */
-    public function moveSelecter(slt:SelecterItemUI, addX:int, addY:int):void {
-        _cursor.moveSelecter(slt, addX, addY);
+    public function moveSelector(slt:SelectorItemUI, addX:int, addY:int):void {
+        _cursor.moveSelector(slt, addX, addY);
     }
 
 }

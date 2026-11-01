@@ -46,7 +46,7 @@ import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.select.SelectMapUI;
 import net.play5d.game.bvn.ui.select.SelectUIFactory;
 import net.play5d.game.bvn.ui.select.SelectedFighterGroup;
-import net.play5d.game.bvn.ui.select.SelecterItemUI;
+import net.play5d.game.bvn.ui.select.SelectorItemUI;
 import net.play5d.game.bvn.ui.select.SelectFighterListCtrl;
 import net.play5d.game.bvn.ui.select.flow.ISelectModeFlow;
 import net.play5d.game.bvn.ui.select.flow.SelectFlowAction;
@@ -63,8 +63,8 @@ public class SelectFighterStage implements IStage {
     private var _fighterListUI:Sprite;
     private var _config:SelectStageConfigVO;
     private var _listCtrl:SelectFighterListCtrl;
-    private var _p1Slt:SelecterItemUI;
-    private var _p2Slt:SelecterItemUI;
+    private var _p1Slt:SelectorItemUI;
+    private var _p2Slt:SelectorItemUI;
     private var _p1SelectedGroup:SelectedFighterGroup;
     private var _p2SelectedGroup:SelectedFighterGroup;
     private var _mapSelectUI:SelectMapUI;
@@ -95,7 +95,7 @@ public class SelectFighterStage implements IStage {
         if (GameConfig.TOUCH_MODE) {
             initBackBtn();
         }
-        setTimeout(initSelecter, _tweenTime);
+        setTimeout(initSelector, _tweenTime);
     }
 
     private function clear():void {
@@ -129,22 +129,22 @@ public class SelectFighterStage implements IStage {
         }
 
         if (_listCtrl) {
-            _listCtrl.setSelecters(null, null);
+            _listCtrl.setSelectors(null, null);
         }
 
     }
 
-    private function initSelecter():void {
+    private function initSelector():void {
 
         GameInputter.enabled = true;
 
-        if (_modeFlow.initBothSelecters()) {
-            initSelecterP1();
-            initSelecterP2();
+        if (_modeFlow.initBothSelectors()) {
+            initSelectorP1();
+            initSelectorP2();
             _twoPlayerSelectFin = false;
         }
         else {
-            initSelecterP1();
+            initSelectorP1();
         }
     }
 
@@ -152,14 +152,14 @@ public class SelectFighterStage implements IStage {
      * CPU / 观战：P1 选完后用 P1 键位为 P2 选人。
      */
     private function enableP2WithP1Input():void {
-        _p1Slt.removeSelecter();
+        _p1Slt.removeSelector();
         _p1Slt.enabled = false;
-        initSelecterP2();
+        initSelectorP2();
         _p2Slt.inputType = GameInputType.P1;
     }
 
-    private function initSelecterP1():void {
-        _p1Slt                  = SelectUIFactory.createSelecter(1);
+    private function initSelectorP1():void {
+        _p1Slt                  = SelectUIFactory.createSelector(1);
         _p1Slt.isSelectAssist   = _listCtrl.selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST;
         _p1Slt.selectTimesCount = (
                                           GameMode.isTeamMode() && !_p1Slt.isSelectAssist
@@ -168,12 +168,12 @@ public class SelectFighterStage implements IStage {
         _fighterListUI.addChild(_p1Slt.ui);
 
         _ui.addChild(_p1Slt.group);
-        _listCtrl.setSelecters(_p1Slt, _p2Slt);
+        _listCtrl.setSelectors(_p1Slt, _p2Slt);
         _listCtrl.moveSlt(_p1Slt, 0, 0);
     }
 
-    private function initSelecterP2():void {
-        _p2Slt                  = SelectUIFactory.createSelecter(2);
+    private function initSelectorP2():void {
+        _p2Slt                  = SelectUIFactory.createSelector(2);
         _p2Slt.isSelectAssist   = _listCtrl.selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST;
         _p2Slt.selectTimesCount = (
                                           GameMode.isTeamMode() && !_p2Slt.isSelectAssist
@@ -182,7 +182,7 @@ public class SelectFighterStage implements IStage {
         _fighterListUI.addChild(_p2Slt.ui);
 
         _ui.addChild(_p2Slt.group);
-        _listCtrl.setSelecters(_p1Slt, _p2Slt);
+        _listCtrl.setSelectors(_p1Slt, _p2Slt);
         _listCtrl.moveSlt(_p2Slt, 9, 0);
     }
 
@@ -216,22 +216,22 @@ public class SelectFighterStage implements IStage {
             type = _p1Slt.inputType;
 
             if (GameInputter.up(type, 1)) {
-                _listCtrl.moveSelecter(_p1Slt, 0, -1);
+                _listCtrl.moveSelector(_p1Slt, 0, -1);
                 SoundCtrl.I.sndSelect();
             }
 
             if (GameInputter.down(type, 1)) {
-                _listCtrl.moveSelecter(_p1Slt, 0, 1);
+                _listCtrl.moveSelector(_p1Slt, 0, 1);
                 SoundCtrl.I.sndSelect();
             }
 
             if (GameInputter.left(type, 1)) {
-                _listCtrl.moveSelecter(_p1Slt, -1, 0);
+                _listCtrl.moveSelector(_p1Slt, -1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
             if (GameInputter.right(type, 1)) {
-                _listCtrl.moveSelecter(_p1Slt, 1, 0);
+                _listCtrl.moveSelector(_p1Slt, 1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
@@ -249,22 +249,22 @@ public class SelectFighterStage implements IStage {
             SelectFighterListCtrl.renderRandom(_p2Slt);
 
             if (GameInputter.up(type, 1)) {
-                _listCtrl.moveSelecter(_p2Slt, 0, -1);
+                _listCtrl.moveSelector(_p2Slt, 0, -1);
                 SoundCtrl.I.sndSelect();
             }
 
             if (GameInputter.down(type, 1)) {
-                _listCtrl.moveSelecter(_p2Slt, 0, 1);
+                _listCtrl.moveSelector(_p2Slt, 0, 1);
                 SoundCtrl.I.sndSelect();
             }
 
             if (GameInputter.left(type, 1)) {
-                _listCtrl.moveSelecter(_p2Slt, -1, 0);
+                _listCtrl.moveSelector(_p2Slt, -1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
             if (GameInputter.right(type, 1)) {
-                _listCtrl.moveSelecter(_p2Slt, 1, 0);
+                _listCtrl.moveSelector(_p2Slt, 1, 0);
                 SoundCtrl.I.sndSelect();
             }
 
@@ -297,12 +297,12 @@ public class SelectFighterStage implements IStage {
 
     }
 
-    private function playerSeltBack(selt:SelecterItemUI):void {
+    private function playerSeltBack(selt:SelectorItemUI):void {
         if (selt.selectFinish()) {
             if (_modeFlow.shouldWaitBothPlayers()) {
                 GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER_STEP, selt.getCurrentSelectes());
 
-                var otherSlt:SelecterItemUI = selt == _p1Slt ? _p2Slt : _p1Slt;
+                var otherSlt:SelectorItemUI = selt == _p1Slt ? _p2Slt : _p1Slt;
                 if (otherSlt && otherSlt.selectFinish() && !_twoPlayerSelectFin) {
                     _twoPlayerSelectFin = true;
                     if (!AUTO_FINISH) {

@@ -35,7 +35,7 @@ public class MusouSelectFlow implements ISelectModeFlow {
     /**
      * @inheritDoc
      */
-    public function initBothSelecters():Boolean {
+    public function initBothSelectors():Boolean {
         return false;
     }
 

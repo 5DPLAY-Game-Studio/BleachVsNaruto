@@ -24,8 +24,8 @@ import net.play5d.game.bvn.utils.ResUtils;
 
 public class SelectUIFactory {
 
-    public static function createSelecter(playerType:int = 1):SelecterItemUI {
-        var ui:SelecterItemUI = new SelecterItemUI(playerType);
+    public static function createSelector(playerType:int = 1):SelectorItemUI {
+        var ui:SelectorItemUI = new SelectorItemUI(playerType);
 
         ui.inputType = playerType == 1 ? GameInputType.P1 : GameInputType.P2;
         ui.selectVO  = playerType == 1 ? GameData.I.p1Select : GameData.I.p2Select;

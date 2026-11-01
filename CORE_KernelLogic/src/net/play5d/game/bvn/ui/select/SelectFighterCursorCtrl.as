@@ -53,7 +53,7 @@ public class SelectFighterCursorCtrl {
         _list = null;
     }
 
-    public function moveSlt(slt:SelecterItemUI, x:int, y:int, fix:Boolean = true):Boolean {
+    public function moveSlt(slt:SelectorItemUI, x:int, y:int, fix:Boolean = true):Boolean {
         var sf:SelectFighterItem = _list.getFighterItemAt(x, y);
         var left:Boolean, right:Boolean, up:Boolean, down:Boolean;
 
@@ -151,7 +151,7 @@ public class SelectFighterCursorCtrl {
         return true;
     }
 
-    private function isHoverFighter(slt:SelecterItemUI, sf:SelectFighterItem):Boolean {
+    private function isHoverFighter(slt:SelectorItemUI, sf:SelectFighterItem):Boolean {
         if (!sf.selectData) {
             return false;
         }
@@ -162,7 +162,7 @@ public class SelectFighterCursorCtrl {
                );
     }
 
-    public function moveToSelectFighter(slt:SelecterItemUI, sf:SelectFighterItem):void {
+    public function moveToSelectFighter(slt:SelectorItemUI, sf:SelectFighterItem):void {
         if (!sf || !sf.selectData) {
             return;
         }
@@ -185,7 +185,7 @@ public class SelectFighterCursorCtrl {
         showMoreFighters(slt, sf);
     }
 
-    public function moveToSelectFighterMore(slt:SelecterItemUI, sf:SelectFighterItem):void {
+    public function moveToSelectFighterMore(slt:SelectorItemUI, sf:SelectFighterItem):void {
         slt.randoms = null;
 
         slt.moreX = sf.position.x;
@@ -202,9 +202,9 @@ public class SelectFighterCursorCtrl {
     /**
      * 人物关联的更多人物。
      */
-    private function showMoreFighters(slt:SelecterItemUI, sf:SelectFighterItem):void {
+    private function showMoreFighters(slt:SelectorItemUI, sf:SelectFighterItem):void {
 
-        if (slt.showingMoreSelecter == sf) {
+        if (slt.showingMoreSelector == sf) {
             return;
         }
 
@@ -334,19 +334,19 @@ public class SelectFighterCursorCtrl {
         }
     }
 
-    private function moveMoreSlt(slt:SelecterItemUI, x:int, y:int):Boolean {
+    private function moveMoreSlt(slt:SelectorItemUI, x:int, y:int):Boolean {
         var moreFighters:ArrayMap = _list.moreFighterMap[slt];
 
         if (!moreFighters || moreFighters.length < 1) {
             return false;
         }
 
-        if (x == 0 && y == 0 && slt.showingMoreSelecter) {
+        if (x == 0 && y == 0 && slt.showingMoreSelector) {
             slt.moreX = 0;
             slt.moreY = 0;
 
-            slt.moveTo(slt.showingMoreSelecter.ui.x, slt.showingMoreSelecter.ui.y);
-            slt.currentFighter = slt.showingMoreSelecter.fighterData;
+            slt.moveTo(slt.showingMoreSelector.ui.x, slt.showingMoreSelector.ui.y);
+            slt.currentFighter = slt.showingMoreSelector.fighterData;
             if (slt.group) {
                 slt.group.updateFighter(slt.currentFighter);
             }
@@ -383,7 +383,7 @@ public class SelectFighterCursorCtrl {
      * *******************************************************************************************************************************************************
      */
 
-    private function checkRandom(slt:SelecterItemUI):Boolean {
+    private function checkRandom(slt:SelectorItemUI):Boolean {
         if (slt.currentFighter.id.indexOf('random') != -1) {
             switch (_list.selectState) {
             case SelectFighterListCtrl.SELECT_STATE_FIGHTER:
@@ -438,7 +438,7 @@ public class SelectFighterCursorCtrl {
         return null;
     }
 
-    public function moveSelecter(slt:SelecterItemUI, addX:int, addY:int):void {
+    public function moveSelector(slt:SelectorItemUI, addX:int, addY:int):void {
         if (slt.moreEnabled()) {
             if (moveMoreSlt(slt, slt.moreX + addX, slt.moreY + addY)) {
                 return;

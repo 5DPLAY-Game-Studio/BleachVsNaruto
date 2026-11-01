@@ -23,9 +23,9 @@ import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoDisplayUtils;
-public class SelecterItemUI {
+public class SelectorItemUI {
 
-    public function SelecterItemUI(playerType:int = 1) {
+    public function SelectorItemUI(playerType:int = 1) {
         _playerType     = playerType;
         ui              = ResUtils.I.createDisplayObject(ResUtils.swfLib.select, '$select$MC_selectItemMc');
         ui.mouseEnabled = ui.mouseChildren = false;
@@ -43,7 +43,7 @@ public class SelecterItemUI {
     public var y:int;
     public var moreX:int            = 0;
     public var moreY:int            = 0;
-    public var showingMoreSelecter:SelectFighterItem;
+    public var showingMoreSelector:SelectFighterItem;
 
     public var enabled:Boolean = true;
 
@@ -98,26 +98,26 @@ public class SelecterItemUI {
         return _moreEnable;
     }
 
-    public function setMoreEnabled(enab:Boolean, curSelecter:SelectFighterItem = null):void {
+    public function setMoreEnabled(enab:Boolean, curSelector:SelectFighterItem = null):void {
         _moreEnable = enab;
 
         if (enab) {
             this.moreX = 0;
             this.moreY = 0;
-            if (!curSelecter) {
+            if (!curSelector) {
                 ThrowError(Error, 'Need SelectFighterItem !!');
                 return;
             }
-            this.showingMoreSelecter = curSelecter;
-            if (this.showingMoreSelecter) {
-                this.showingMoreSelecter.setMoreNumberVisible(false);
+            this.showingMoreSelector = curSelector;
+            if (this.showingMoreSelector) {
+                this.showingMoreSelector.setMoreNumberVisible(false);
             }
         }
         else {
-            if (this.showingMoreSelecter) {
-                this.showingMoreSelecter.setMoreNumberVisible(true);
+            if (this.showingMoreSelector) {
+                this.showingMoreSelector.setMoreNumberVisible(true);
             }
-            this.showingMoreSelecter = null;
+            this.showingMoreSelector = null;
         }
 
     }
@@ -138,7 +138,7 @@ public class SelecterItemUI {
     public function select(back:Function = null):void {
 
         if (!selectVO) {
-            ThrowError(Error, GetLang('debug.error.data.selecter_item_ui.select_vo_unset'));
+            ThrowError(Error, GetLang('debug.error.data.selector_item_ui.select_vo_unset'));
             return;
         }
 
@@ -191,11 +191,11 @@ public class SelecterItemUI {
 
     public function destroy():void {
         enabled = false;
-        removeSelecter();
+        removeSelector();
         removeGroup();
     }
 
-    public function removeSelecter():void {
+    public function removeSelector():void {
         if (ui && ui.parent) {
             try {
                 ui.parent.removeChild(ui);
