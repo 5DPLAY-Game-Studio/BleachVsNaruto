@@ -36,7 +36,7 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
-import net.play5d.game.bvn.data.MessionModel;
+import net.play5d.game.bvn.data.MissionModel;
 import net.play5d.game.bvn.data.vos.SelectStageConfigVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.events.GameEvent;
@@ -377,7 +377,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function startAcradeGame():void {
-        MessionModel.I.initMession();
+        MissionModel.I.initMission();
         selectFinish();
     }
 

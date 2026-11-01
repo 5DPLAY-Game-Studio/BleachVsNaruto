@@ -39,7 +39,7 @@ import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
-import net.play5d.game.bvn.data.MessionModel;
+import net.play5d.game.bvn.data.MissionModel;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputter;
@@ -254,7 +254,7 @@ public class WinnerStage implements IStage {
         GameInputter.enabled = false;
 
         StateCtrl.I.transIn(function ():void {
-            MessionModel.I.messionComplete();
+            MissionModel.I.missionComplete();
             if (GameMode.isArcade()) {
                 GameLogic.addScoreByPassMission();
             }

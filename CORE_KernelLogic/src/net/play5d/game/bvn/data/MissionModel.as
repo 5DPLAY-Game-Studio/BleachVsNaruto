@@ -18,39 +18,39 @@
 
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.data.vos.FighterVO;
-import net.play5d.game.bvn.data.vos.MessionStageVO;
-import net.play5d.game.bvn.data.vos.MessionVO;
+import net.play5d.game.bvn.data.vos.MissionStageVO;
+import net.play5d.game.bvn.data.vos.MissionVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 
-public class MessionModel {
+public class MissionModel {
 
-    private static var _i:MessionModel;
+    private static var _i:MissionModel;
 
-    public static function get I():MessionModel {
-        _i ||= new MessionModel();
+    public static function get I():MissionModel {
+        _i ||= new MissionModel();
         return _i;
     }
 
     public var AI_LEVEL:int = 3;  //1-6
-    private var _curMession:MessionVO;  //当前关卡
+    private var _curMission:MissionVO;  //当前关卡
     private var _curStageId:int;  //当前关卡ID
-    private var _curStage:MessionStageVO;  //当前关卡
-    [ArrayElementType('net.play5d.game.bvn.data.vos.MessionVO')]
-    private var _messions:Array;
+    private var _curStage:MissionStageVO;  //当前关卡
+    [ArrayElementType('net.play5d.game.bvn.data.vos.MissionVO')]
+    private var _missions:Array;
 
     public function getAllMissions():Array {
-        return _messions;
+        return _missions;
     }
 
     public function initByObject(obj:Object):void {
-        _messions = [];
+        _missions = [];
 
         var levelArr:Array = obj['level'];
         for each(var level:Object in levelArr) {
-            var messionVO:MessionVO = new MessionVO();
-            messionVO.initByObject(level);
+            var missionVO:MissionVO = new MissionVO();
+            missionVO.initByObject(level);
 
-            _messions.push(messionVO);
+            _missions.push(missionVO);
         }
     }
 
@@ -59,8 +59,8 @@ public class MessionModel {
      * @param comicType 0=死神，1=火影
      * @param gameMode 0=team，1=single
      */
-    public function getMession(comicType:int, gameMode:int):MessionVO {
-        for each(var i:MessionVO in _messions) {
+    public function getMission(comicType:int, gameMode:int):MissionVO {
+        for each(var i:MissionVO in _missions) {
             if (i.comicType == comicType && i.gameMode == gameMode) {
                 return i;
             }
@@ -68,15 +68,15 @@ public class MessionModel {
         return null;
     }
 
-    public function getCurrentMessionStage():MessionStageVO {
+    public function getCurrentMissionStage():MissionStageVO {
         return _curStage;
     }
 
-    public function initMession():void {
+    public function initMission():void {
         var fighter:FighterVO = FighterModel.I.getFighter(GameData.I.p1Select.fighter1);
         var gameMode:int      = GameMode.isTeamMode() ? 0 : 1;
-        var mv:MessionVO      = getMession(fighter.comicType, gameMode);
-        _curMession           = mv;
+        var mv:MissionVO      = getMission(fighter.comicType, gameMode);
+        _curMission           = mv;
         _curStage             = mv.stageList[_curStageId];
 
         GameData.I.p2Select ||= new SelectVO();
@@ -101,11 +101,11 @@ public class MessionModel {
     public function reset():void {
         _curStageId      = 0;
         _curStage        = null;
-        _curMession      = null;
+        _curMission      = null;
         GameData.I.score = 0;
     }
 
-    public function messionComplete():void {
+    public function missionComplete():void {
         if (missionAllComplete()) {
             TraceLang('debug.trace.data.mission_model.mission_all_over');
             return;
@@ -113,11 +113,11 @@ public class MessionModel {
 
         _curStageId++;
 
-        initMession();
+        initMission();
     }
 
     public function missionAllComplete():Boolean {
-        return _curStageId >= _curMession.stageList.length - 1;
+        return _curStageId >= _curMission.stageList.length - 1;
     }
 
 

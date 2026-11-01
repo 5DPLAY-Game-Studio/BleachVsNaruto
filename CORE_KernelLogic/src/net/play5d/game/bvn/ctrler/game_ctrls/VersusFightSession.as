@@ -27,7 +27,7 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.MapModel;
-import net.play5d.game.bvn.data.MessionModel;
+import net.play5d.game.bvn.data.MissionModel;
 import net.play5d.game.bvn.data.TeamID;
 import net.play5d.game.bvn.data.vos.GameRunDataVO;
 import net.play5d.game.bvn.events.GameEvent;
@@ -180,7 +180,7 @@ public class VersusFightSession implements IFightSession {
 
         if (GameMode.isArcade()) {
             if (TeamID.TEAM_1 == runData.lastWinnerTeam.id) {
-                if (MessionModel.I.missionAllComplete()) {
+                if (MissionModel.I.missionAllComplete()) {
                     TraceLang('debug.trace.data.game_ctrl.cleared');
                     MainGame.I.goCongratulations();
                 }

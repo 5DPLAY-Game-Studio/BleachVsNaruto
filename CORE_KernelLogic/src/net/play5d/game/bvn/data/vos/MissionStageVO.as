@@ -20,20 +20,20 @@ package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoRandom;
 
-public class MessionStageVO implements IInstanceVO {
+public class MissionStageVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
     public var fighters:Array;
     public var assister:String;
     public var map:String;
-    public var mession:MessionVO;
+    public var mission:MissionVO;
     public var attackRate:Number = 1;
     public var hpRate:Number     = 1;
 
     public function getFighters():Array {
         //team
-        if (mession.gameMode == 0) {
+        if (mission.gameMode == 0) {
             var a:Array    = [];
             a              = a.concat(fighters);
             var addlen:int = 3 - a.length;

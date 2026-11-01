@@ -26,8 +26,8 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameEndCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
 import net.play5d.game.bvn.data.MapLogoState;
-import net.play5d.game.bvn.data.MessionModel;
-import net.play5d.game.bvn.data.vos.MessionStageVO;
+import net.play5d.game.bvn.data.MissionModel;
+import net.play5d.game.bvn.data.vos.MissionStageVO;
 import net.play5d.game.bvn.data.vos.SelectCharListConfigVO;
 import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.events.GameEvent;
@@ -330,23 +330,23 @@ public class GameLogic {
     }
 
     public static function resetFighterHP(v:FighterMain):void {
-        var messionRate:Number = 1;
-        if (GameMode.isArcade() && MessionModel.I.getCurrentMessionStage()) {
-            messionRate = MessionModel.I.getCurrentMessionStage().hpRate;
+        var missionRate:Number = 1;
+        if (GameMode.isArcade() && MissionModel.I.getCurrentMissionStage()) {
+            missionRate = MissionModel.I.getCurrentMissionStage().hpRate;
         }
 
         if (v.customHpMax > 0) {
-            v.hp = v.hpMax = v.customHpMax * GameData.I.config.fighterHP * messionRate;
+            v.hp = v.hpMax = v.customHpMax * GameData.I.config.fighterHP * missionRate;
         }
         else {
-            v.hp = v.hpMax = GameConfig.FIGHTER_HP_MAX * GameData.I.config.fighterHP * messionRate;
+            v.hp = v.hpMax = GameConfig.FIGHTER_HP_MAX * GameData.I.config.fighterHP * missionRate;
         }
 
         v.isAlive = true;
     }
 
-    public static function setMessionEnemyAttack(v:FighterMain):void {
-        var mv:MessionStageVO = MessionModel.I.getCurrentMessionStage();
+    public static function setMissionEnemyAttack(v:FighterMain):void {
+        var mv:MissionStageVO = MissionModel.I.getCurrentMissionStage();
         if (mv) {
             v.attackRate = mv.attackRate;
         }

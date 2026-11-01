@@ -28,8 +28,8 @@ import net.play5d.game.bvn.data.musou.player.MusouPlayerData;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.vos.MapVO;
-import net.play5d.game.bvn.data.vos.MessionStageVO;
-import net.play5d.game.bvn.data.vos.MessionVO;
+import net.play5d.game.bvn.data.vos.MissionStageVO;
+import net.play5d.game.bvn.data.vos.MissionVO;
 import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.data.vos.SelectVO;
 import net.play5d.game.bvn.debug.Debugger;
@@ -71,7 +71,7 @@ public class GameData {
         }
 
         function loadMissionBack(data:Object):void {
-            MessionModel.I.initByObject(data);
+            MissionModel.I.initByObject(data);
 
             MusouModel.I.loadMapData(loadMusouDataBack, failWith('txt.game_data.load_musou_fail'));
         }
@@ -232,10 +232,10 @@ public class GameData {
         var missMaps:Array      = [];
         var missAssisters:Array = [];
 
-        var missions:Array = MessionModel.I.getAllMissions();
-        for each(var m:MessionVO in missions) {
-            var ms:Vector.<MessionStageVO> = m.stageList;
-            for each(var s:MessionStageVO in ms) {
+        var missions:Array = MissionModel.I.getAllMissions();
+        for each(var m:MissionVO in missions) {
+            var ms:Vector.<MissionStageVO> = m.stageList;
+            for each(var s:MissionStageVO in ms) {
 
                 if (s.fighters) {
                     var kept:Array = [];

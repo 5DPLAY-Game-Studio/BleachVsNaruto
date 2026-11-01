@@ -19,25 +19,25 @@
 package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
-public class MessionVO implements IInstanceVO {
+public class MissionVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
     public var comicType:int;
     public var gameMode:int;
-    public var stageList:Vector.<MessionStageVO>;
+    public var stageList:Vector.<MissionStageVO>;
 
     public function initByObject(obj:Object):void {
         comicType = obj['comic_type'];
         gameMode  = obj['game_mode'];
 
-        stageList = new Vector.<MessionStageVO>();
+        stageList = new Vector.<MissionStageVO>();
 
         var stageArr:Array = obj['stage'];
         for each (var stageObj:Object in stageArr) {
-            var msv:MessionStageVO = new MessionStageVO();
+            var msv:MissionStageVO = new MissionStageVO();
 
-            msv.mession  = this;
+            msv.mission  = this;
             msv.fighters = stageObj['fighter'];
             msv.assister = stageObj['assistant'];
             msv.map      = stageObj['map'];

@@ -237,7 +237,7 @@ public class GameStage extends Sprite implements IStage {
         if (P2) {
             GameLogic.resetFighterHP(P2);
             if (GameMode.isArcade()) {
-                GameLogic.setMessionEnemyAttack(P2);
+                GameLogic.setMissionEnemyAttack(P2);
             }
             P2.x      = _map.p2pos.x;
             P2.y      = _map.p2pos.y;

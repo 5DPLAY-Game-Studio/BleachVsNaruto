@@ -73,7 +73,7 @@
 |------|------|------|
 | `packs.json` + `packs/**/meta.json` | `PackRegistry` | `FighterModel` / `AssisterModel` / `MapModel` |
 | `select.json` | `loadJSON` | `SelectStageConfigVO.initByObject` |
-| `mission.json` | `loadJSON` | `MessionModel.initByObject` |
+| `mission.json` | `loadJSON` | `MissionModel.initByObject` |
 
 ---
 

@@ -29,7 +29,7 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.data.GameMode;
-import net.play5d.game.bvn.data.MessionModel;
+import net.play5d.game.bvn.data.MissionModel;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputter;
@@ -303,7 +303,7 @@ public class MenuBtnGroup extends Sprite {
         case 'TEAM ACRADE':
             func = function ():void {
                 GameMode.currentMode = GameMode.TEAM_ARCADE;
-                MessionModel.I.reset();
+                MissionModel.I.reset();
                 if (GameConfig.SHOW_HOW_TO_PLAY) {
                     MainGame.I.goHowToPlay();
                 }
@@ -341,7 +341,7 @@ public class MenuBtnGroup extends Sprite {
         case 'SINGLE ACRADE':
             func = function ():void {
                 GameMode.currentMode = GameMode.SINGLE_ARCADE;
-                MessionModel.I.reset();
+                MissionModel.I.reset();
                 if (GameConfig.SHOW_HOW_TO_PLAY) {
                     MainGame.I.goHowToPlay();
                 }
@@ -379,7 +379,7 @@ public class MenuBtnGroup extends Sprite {
         case 'SURVIVOR':
             func = function ():void {
                 GameMode.currentMode = GameMode.SURVIVOR;
-                MessionModel.I.reset();
+                MissionModel.I.reset();
                 MainGame.I.goSelect();
             };
             break;
