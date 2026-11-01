@@ -20,3 +20,7 @@
 | 写/改 `tools/script` bat / lang / func | [`.agents/bat_script.md`](.agents/bat_script.md) |
 | 写/改 `tools/jsfl` | [`.agents/jsfl.md`](.agents/jsfl.md) |
 | 在 `.agents/` 新建 AI md | [`.agents/doc_rules.md`](.agents/doc_rules.md) |
+
+## 收尾
+
+本次任务改过工程文件时：按改动内容，对照近期 `git log` 的说明风格，拟一条中文 git 提交信息，附在回答末尾。只附信息，不执行提交。
