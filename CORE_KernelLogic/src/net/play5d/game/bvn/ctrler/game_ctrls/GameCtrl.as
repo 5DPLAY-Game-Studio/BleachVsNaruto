@@ -610,14 +610,14 @@ public class GameCtrl {
     /**
      * 清除暂停标记，供会话开局。
      */
-    function clearPause():void {
+    internal function clearPause():void {
         _isPauseGame = false;
     }
 
     /**
      * 注册主循环，供会话开局。
      */
-    function beginMatchRender():void {
+    internal function beginMatchRender():void {
         GameRender.add(render);
     }
 
@@ -627,7 +627,7 @@ public class GameCtrl {
      * @param p1 左侧角色。
      * @param p2 右侧角色。
      */
-    function attachTraining(p1:FighterMain, p2:FighterMain):void {
+    internal function attachTraining(p1:FighterMain, p2:FighterMain):void {
         _trainingCtrl = new TrainingCtrl();
         _trainingCtrl.initialize([p1, p2]);
     }
@@ -669,7 +669,7 @@ public class GameCtrl {
     /**
      * 按当前模式重建队伍表。
      */
-    function initTeam():void {
+    internal function initTeam():void {
         _teamMap.clear();
 
         var teams:Array = GameMode.getAllTeams();
