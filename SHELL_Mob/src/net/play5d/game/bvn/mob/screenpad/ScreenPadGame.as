@@ -95,7 +95,6 @@ public class ScreenPadGame extends EventDispatcher {
             return;
         }
 
-//			fighter.qi >= 100
         try {
             if (_autoHideSuperSkill) {
                 setBtnVisible('superSkill', fighter.qi >= 100);
