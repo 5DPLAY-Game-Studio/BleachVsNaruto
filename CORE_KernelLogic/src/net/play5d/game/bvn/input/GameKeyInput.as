@@ -19,11 +19,10 @@
 package net.play5d.game.bvn.input {
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
-import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.data.vos.KeyConfigVO;
 import net.play5d.game.bvn.interfaces.IGameInput;
-import net.play5d.kyo.utils.KeyBoarder;
+import net.play5d.kyo.utils.Keyboard;
 
 public class GameKeyInput implements IGameInput {
 
@@ -41,8 +40,8 @@ public class GameKeyInput implements IGameInput {
     }
 
     public function initialize(stage:Stage):void {
-        KeyBoarder.initialize(stage);
-        KeyBoarder.listen(keyBoardHandler);
+        Keyboard.initialize(stage);
+        Keyboard.listen(keyBoardHandler);
     }
 
     public function setConfig(config:Object):void {
@@ -50,7 +49,7 @@ public class GameKeyInput implements IGameInput {
     }
 
     public function focus():void {
-        KeyBoarder.focus();
+        Keyboard.focus();
     }
 
     public function anyKey():Boolean {
@@ -64,7 +63,7 @@ public class GameKeyInput implements IGameInput {
 
 
     public function back():Boolean {
-        return isDown(Keyboard.ESCAPE);
+        return isDown(flash.ui.Keyboard.ESCAPE);
     }
 
     public function select():Boolean {

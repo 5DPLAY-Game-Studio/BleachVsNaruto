@@ -19,11 +19,10 @@
 package net.play5d.game.bvn.ctrler.lan {
 import flash.display.DisplayObject;
 import flash.events.KeyboardEvent;
-import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
-import net.play5d.kyo.utils.KeyBoarder;
+import net.play5d.kyo.utils.Keyboard;
 
 /**
  * 联机对局 ESC 退出菜单（对话框由壳注入）。
@@ -60,7 +59,7 @@ public class LanGameMenuCtrl {
     public function init(dialog:ILanExitDialog):void {
         _exitDialog = dialog;
         _exitDialog.hide();
-        KeyBoarder.listen(keyHandler);
+        Keyboard.listen(keyHandler);
     }
 
     /**
@@ -78,7 +77,7 @@ public class LanGameMenuCtrl {
             _exitDialog = null;
         }
 
-        KeyBoarder.unlisten(keyHandler);
+        Keyboard.unlisten(keyHandler);
 
         _isKeyDown = false;
     }
@@ -92,7 +91,7 @@ public class LanGameMenuCtrl {
             if (!_exitDialog) {
                 return;
             }
-            if (e.keyCode == Keyboard.ESCAPE) {
+            if (e.keyCode == flash.ui.Keyboard.ESCAPE) {
                 _isKeyDown = true;
                 if (_exitDialog.isShowing()) {
                     _exitDialog.hide();
@@ -105,7 +104,7 @@ public class LanGameMenuCtrl {
         }
 
         if (e.type == KeyboardEvent.KEY_UP) {
-            if (e.keyCode == Keyboard.ESCAPE) {
+            if (e.keyCode == flash.ui.Keyboard.ESCAPE) {
                 _isKeyDown = false;
             }
         }
