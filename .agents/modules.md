@@ -33,6 +33,7 @@
 | `SHELL_Mob` | 移动端壳 | |
 | `tools` | 脚本与工具 | bat → [`bat_script.md`](bat_script.md)；jsfl → [`jsfl.md`](jsfl.md) |
 | `keysign` | 签名相关 | |
+| `docs` | 人读说明 | `CHANGELOG`、`HOW2BUILD`、其它语言 `README_*`；简体中文 `README.md` 仍在根目录 |
 | `out` | 构建输出 | 勿当源码改 |
 | `.idea` / `.vscode` | IDE 配置 | 含代码风格 `Project.xml` |
 

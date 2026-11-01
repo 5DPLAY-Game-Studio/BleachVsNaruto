@@ -101,7 +101,7 @@
 
 ### 新增
 
-- 新增 [AGENTS.md](AGENTS.md) 文件以帮助 AI 助理理解项目。
+- 新增 [AGENTS.md](../AGENTS.md) 文件以帮助 AI 助理理解项目。
 
 ### 更改
 

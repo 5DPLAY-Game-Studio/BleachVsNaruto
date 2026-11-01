@@ -34,7 +34,7 @@
 
 # 死神vs火影 <!-- omit in toc -->
 
-简体中文 | [English](README_en.md) | [日本語](README_ja.md) | [한국인](README_ko.md) | [Tiếng Việt](README_vi.md)
+简体中文 | [English](docs/README_en.md) | [日本語](docs/README_ja.md) | [한국인](docs/README_ko.md) | [Tiếng Việt](docs/README_vi.md)
 
 **死神vs火影** 是一个由 **剑jian** 及其所属制作组 **5DPLAY Game Studio** 制作的同人新概念策略格斗游戏。
 
@@ -74,11 +74,11 @@
 
 ## 更新日志
 
-有关本工程的详细更新日志，请参阅 [CHANGELOG.md](CHANGELOG.md) 文件。
+有关本工程的详细更新日志，请参阅 [CHANGELOG.md](docs/CHANGELOG.md) 文件。
 
 ## 如何从源码构建
 
-要想从源码构建本程序，您应该阅读 [HOW2BUILD.md](HOW2BUILD.md) 文件作为参考依据。
+要想从源码构建本程序，您应该阅读 [HOW2BUILD.md](docs/HOW2BUILD.md) 文件作为参考依据。
 
 如果您是初次了解本工程，建议使用 `master` 分支，其功能通常会更为稳定。
 

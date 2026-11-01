@@ -1,5 +1,5 @@
 <p align = "center">
-<a href  = "https://bvn-sports.com/"><img src = "title.png" /></a>
+<a href  = "https://bvn-sports.com/"><img src = "../title.png" /></a>
 </p>
 
 <p align = "center">
@@ -34,7 +34,7 @@
 
 # Bleach vs Naruto <!-- omit in toc -->
 
-[简体中文](README.md) | English | [日本語](README_ja.md) | [한국인](README_ko.md) | [Tiếng Việt](README_vi.md)
+[简体中文](../README.md) | English | [日本語](README_ja.md) | [한국인](README_ko.md) | [Tiếng Việt](README_vi.md)
 
 **Bleach vs Naruto** is a new concept strategy fighting game developed by **剑jian** and its production team **5DPLAY Game Studio**.
 

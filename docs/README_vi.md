@@ -1,5 +1,5 @@
 <p align = "center">
-<a href  = "https://bvn-sports.com/"><img src = "title.png" /></a>
+<a href  = "https://bvn-sports.com/"><img src = "../title.png" /></a>
 </p>
 
 <p align = "center">
@@ -34,7 +34,7 @@
 
 # Bleach vs Naruto <!-- omit in toc -->
 
-[简体中文](README.md) | [English](README_en.md) | [日本語](README_ja.md) | [한국인](README_ko.md) | Tiếng Việt
+[简体中文](../README.md) | [English](README_en.md) | [日本語](README_ja.md) | [한국인](README_ko.md) | Tiếng Việt
 
 **Bleach vs Naruto** là một trò chơi chiến thuật đối kháng với ý tưởng hoàn toàn mới, được phát triển bởi **剑jian** và đội ngũ sản xuất **5DPLAY Game Studio**.**Bleach vs Naruto** là một trò chơi chiến thuật đối kháng với ý tưởng hoàn toàn mới, được phát triển bởi **剑jian** và đội ngũ sản xuất **5DPLAY Game Studio**.
 

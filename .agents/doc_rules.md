@@ -1,6 +1,6 @@
 # `.agents` 文档写法（AI）
 
-读者：仅 AI。`AGENTS.md` 与 `.agents/*.md` 均非给人读。在 `.agents/` **新建或改写**时遵守本文；人读说明见 `CHANGELOG.md` / `HOW2BUILD.md` / `README.md`。
+读者：仅 AI。`AGENTS.md` 与 `.agents/*.md` 均非给人读。在 `.agents/` **新建或改写**时遵守本文；人读说明见 `docs/CHANGELOG.md` / `docs/HOW2BUILD.md` / `README.md`。
 
 现有：`AGENTS.md`（入口索引）← `modules.md` `build_order.md` `map.md` `components.md` `code_style.md` `json_style.md` `comment.md` `codegen.md` `kyolib.md` `warmup.md` `i18n.md` `bat_script.md` `jsfl.md` `doc_rules.md`。
 
@@ -27,7 +27,7 @@
 - 与 `AGENTS.md` 或其它 `.agents` 文件大段复制同一内容（改一处链过去）
 - 无必要的每类一文件「记忆缓存」
 - 过期仍留错入口（发现漂移立即改索引，勿另开影子文档）
-- 把根目录人读文档（README / CHANGELOG）的冗长结构强加到本目录 AI 文档
+- 把人读文档（`README.md` / `docs/CHANGELOG.md`）的冗长结构强加到本目录 AI 文档
 
 ---
 
