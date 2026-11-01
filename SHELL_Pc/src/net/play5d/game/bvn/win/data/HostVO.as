@@ -49,9 +49,6 @@ public class HostVO {
 
     public function readJson(json:String):void {
         var o:Object = JSON.parse(json);
-//			ip = o.ip;
-//			tcpPort = o.tcpPort;
-//			udpPort = o.udpPort;
         ownerName       = o.ownerName;
         name            = o.name;
         password        = o.password;
