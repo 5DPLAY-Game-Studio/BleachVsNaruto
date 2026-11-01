@@ -189,10 +189,10 @@ public class SelectFighterStage implements IStage {
     private function render():void {
         if (GameInputer.back(1)) {
             if (GameUI.showingDialog()) {
-                GameUI.cancelConfrim();
+                GameUI.cancelConfirm();
             }
             else {
-                GameUI.confrim(
+                GameUI.confirm(
                     GetLang('confirm.common.back_menu_title'),
                     GetLang('confirm.common.back_menu'),
                     MainGame.I.goMenu,
@@ -237,7 +237,7 @@ public class SelectFighterStage implements IStage {
 
             if (GameInputer.select(type, 1)) {
                 _p1Slt.select(playerSeltBack);
-                SoundCtrl.I.sndConfrim();
+                SoundCtrl.I.sndConfirm();
             }
 
         }
@@ -270,7 +270,7 @@ public class SelectFighterStage implements IStage {
 
             if (GameInputer.select(type, 1)) {
                 _p2Slt.select(playerSeltBack);
-                SoundCtrl.I.sndConfrim();
+                SoundCtrl.I.sndConfirm();
             }
 
         }
@@ -290,7 +290,7 @@ public class SelectFighterStage implements IStage {
 
             if (GameInputer.select(type, 1)) {
                 _mapSelectUI.select(onMapSelect);
-                SoundCtrl.I.sndConfrim();
+                SoundCtrl.I.sndConfirm();
             }
 
         }
@@ -347,7 +347,7 @@ public class SelectFighterStage implements IStage {
         TweenLite.to(_mapSelectUI, 0.3, {
             x: oldX, y: oldY, scaleX: 1, scaleY: 1, ease: Back.easeOut, onComplete: function ():void {
                 if (_mapSelectUI) {
-                    _mapSelectUI.addMouseEvents(mapPrevHandler, mapNextHandler, mapConfrimHandler);
+                    _mapSelectUI.addMouseEvents(mapPrevHandler, mapNextHandler, mapConfirmHandler);
                     _mapSelectUI.inputType = GameInputType.P1;
                     _mapSelectUI.enabled   = true;
                 }
@@ -368,7 +368,7 @@ public class SelectFighterStage implements IStage {
         _mapSelectUI.next();
     }
 
-    private function mapConfrimHandler():void {
+    private function mapConfirmHandler():void {
         _mapSelectUI.select(onMapSelect);
     }
 
@@ -394,7 +394,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function backMenuHandler(e:Event):void {
-        GameUI.confrim(
+        GameUI.confirm(
             GetLang('confirm.common.back_menu_title'),
             GetLang('confirm.common.back_menu'),
             MainGame.I.goMenu,

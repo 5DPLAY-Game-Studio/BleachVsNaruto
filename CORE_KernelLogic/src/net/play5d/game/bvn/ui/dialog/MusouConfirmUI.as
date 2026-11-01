@@ -25,9 +25,9 @@ import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 
-public class MusouConfrimUI extends BaseDialog {
+public class MusouConfirmUI extends BaseDialog {
 
-    public function MusouConfrimUI() {
+    public function MusouConfirmUI() {
         super();
 
         width  = 495;

@@ -121,7 +121,7 @@ public class HostDetailDialog implements IStage {
 
     private function joinHandler(e:MouseEvent):void {
 
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
 
         if (_data.password) {
             if (_ui.pass.txt.text != _data.password) {

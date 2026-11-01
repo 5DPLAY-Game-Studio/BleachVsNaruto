@@ -187,7 +187,7 @@ public class MenuBtn extends EventDispatcher {
     public function select(back:Function = null):void {
         ui.alpha = -1;
         TweenLite.to(ui, 1, {alpha: 1, ease: Elastic.easeOut, onComplete: back});
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
     }
 
     public function openChild():void {

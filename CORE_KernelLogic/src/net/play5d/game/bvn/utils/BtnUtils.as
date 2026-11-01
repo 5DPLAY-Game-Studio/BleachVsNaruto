@@ -107,7 +107,7 @@ public class BtnUtils {
             return;
         }
 
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
         o.handler(o.target);
     }
 

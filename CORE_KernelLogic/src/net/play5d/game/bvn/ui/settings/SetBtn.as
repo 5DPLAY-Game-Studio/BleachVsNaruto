@@ -90,7 +90,7 @@ public class SetBtn extends Sprite {
         var e:SetBtnEvent = new SetBtnEvent(SetBtnEvent.SELECT);
         e.selectedLabel   = label;
         dispatchEvent(e);
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
     }
 
     public function setOption(arr:Array):void {

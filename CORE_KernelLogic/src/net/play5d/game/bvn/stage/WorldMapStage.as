@@ -215,7 +215,7 @@ public class WorldMapStage implements IStage {
         var txt:String        = allFinish ?
                 GetLang('confirm.world_map.next_mission_all_finish') :
                 GetLang('confirm.world_map.next_mission');
-        GameUI.confrim(GetLang('confirm.world_map.next_mission_title'), txt, function ():void {
+        GameUI.confirm(GetLang('confirm.world_map.next_mission_title'), txt, function ():void {
             MusouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
         }, null, true);
@@ -306,7 +306,7 @@ public class WorldMapStage implements IStage {
     }
 
     private function backHandler(...params):void {
-        GameUI.confrim(
+        GameUI.confirm(
                 GetLang('confirm.world_map.exit_title'),
                 GetLang('confirm.world_map.exit'),
                 MainGame.I.goMenu

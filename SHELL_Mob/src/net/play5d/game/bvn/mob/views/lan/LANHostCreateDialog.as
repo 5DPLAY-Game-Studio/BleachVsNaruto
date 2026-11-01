@@ -103,7 +103,7 @@ public class LANHostCreateDialog implements Istage {
 
         _isOK = true;
 
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
 
         close();
     }

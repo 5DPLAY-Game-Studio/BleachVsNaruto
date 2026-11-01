@@ -17,7 +17,7 @@
  */
 
 package net.play5d.game.bvn.ui.dialog {
-public class AlertUI extends MusouConfrimUI {
+public class AlertUI extends MusouConfirmUI {
 
     public function AlertUI() {
         super();

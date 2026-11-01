@@ -87,7 +87,7 @@ public class LoadingMusouStage implements IStage {
         GameInputer.clearInput();
         GameRender.remove(render);
 
-        GameUI.closeConfrim();
+        GameUI.closeConfirm();
     }
 
     private function startLoad():void {
@@ -139,10 +139,10 @@ public class LoadingMusouStage implements IStage {
     private function render():void {
         if (GameInputer.back(1)) {
             if (GameUI.showingDialog()) {
-                GameUI.cancelConfrim();
+                GameUI.cancelConfirm();
             }
             else {
-                GameUI.confrim(
+                GameUI.confirm(
                     GetLang('confirm.common.back_menu_title'),
                     GetLang('confirm.common.back_menu'),
                     MainGame.I.goMenu,

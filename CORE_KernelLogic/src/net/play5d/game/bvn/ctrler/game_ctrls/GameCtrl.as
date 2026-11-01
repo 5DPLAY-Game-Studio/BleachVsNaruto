@@ -647,8 +647,8 @@ public class GameCtrl {
 
         if (GameInputer.back(1)) {
 
-            if (GameUI.showingConfrim()) {
-                GameUI.cancelConfrim();
+            if (GameUI.showingConfirm()) {
+                GameUI.cancelConfirm();
                 return;
             }
 

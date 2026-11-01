@@ -75,7 +75,7 @@ public class SelectFighterListCtrl {
     /** @private */
     private var _tweenTime:int = 500;
     /** @private */
-    private var _onSelectConfrim:Function;
+    private var _onSelectConfirm:Function;
     /** @private */
     private var _moreFighterMap:Dictionary = new Dictionary();
     /** @private */
@@ -152,11 +152,11 @@ public class SelectFighterListCtrl {
      * @param v 回调。
      * @example
      * <listing version="3.0">
-     * ctrl.onSelectConfrim = playerSeltBack;
+     * ctrl.onSelectConfirm = playerSeltBack;
      * </listing>
      */
-    public function set onSelectConfrim(v:Function):void {
-        _onSelectConfrim = v;
+    public function set onSelectConfirm(v:Function):void {
+        _onSelectConfirm = v;
     }
 
     /**
@@ -177,7 +177,7 @@ public class SelectFighterListCtrl {
         _config           = null;
         _p1Slt            = null;
         _p2Slt            = null;
-        _onSelectConfrim  = null;
+        _onSelectConfirm  = null;
         _moreFighterMap   = null;
         _moreFighterCache = null;
     }
@@ -488,16 +488,16 @@ public class SelectFighterListCtrl {
             if (checkSelected(_p1Slt, target)) {
                 return;
             }
-            _p1Slt.select(_onSelectConfrim);
-            SoundCtrl.I.sndConfrim();
+            _p1Slt.select(_onSelectConfirm);
+            SoundCtrl.I.sndConfirm();
             return;
         }
         if (_p2Slt && _p2Slt.enabled) {
             if (checkSelected(_p2Slt, target)) {
                 return;
             }
-            _p2Slt.select(_onSelectConfrim);
-            SoundCtrl.I.sndConfrim();
+            _p2Slt.select(_onSelectConfirm);
+            SoundCtrl.I.sndConfirm();
             return;
         }
     }
@@ -554,8 +554,8 @@ public class SelectFighterListCtrl {
     }
 
     /** @private */
-    public function get onSelectConfrimFn():Function {
-        return _onSelectConfrim;
+    public function get onSelectConfirmFn():Function {
+        return _onSelectConfirm;
     }
 
     /** @private */

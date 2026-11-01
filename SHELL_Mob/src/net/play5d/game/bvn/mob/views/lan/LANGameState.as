@@ -214,7 +214,7 @@ public class LANGameState implements Istage {
     private function startGameHost(t:DisplayObject):void {
         trace('startGameHost');
         btnTouchEffect(t, null, false);
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
 
         LANServerCtrl.I.sendGameStart();
         LANServerCtrl.I.gameStart();

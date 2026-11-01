@@ -111,7 +111,7 @@ public class BasePauseDialog extends Sprite {
         this.visible        = false;
         _btnGroup.keyEnable = false;
         if (_closeConfirmOnHide) {
-            GameUI.closeConfrim();
+            GameUI.closeConfirm();
         }
 
         return true;

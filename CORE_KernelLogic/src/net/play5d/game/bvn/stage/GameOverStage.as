@@ -159,7 +159,7 @@ public class GameOverStage implements IStage {
             MainGame.I.goLogo();
             break;
         }
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
     }
 
     private function initArrow(defaultId:String = null):void {

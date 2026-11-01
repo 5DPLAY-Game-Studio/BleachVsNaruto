@@ -88,7 +88,7 @@ public class LANHostCreateDialog implements IStage {
 
     private function btnHandler():void {
 
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
 
         var name:String = _ui.txt_hostname.text;
         var pass:String = '';

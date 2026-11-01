@@ -33,9 +33,9 @@ import net.play5d.game.bvn.utils.BtnUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.display.shapes.Box;
 
-public class ConfrimUI extends BaseDialog {
+public class ConfirmUI extends BaseDialog {
 
-    public function ConfrimUI() {
+    public function ConfirmUI() {
         super();
 
         build();

@@ -29,9 +29,9 @@ import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.dialog.AlertUI;
 import net.play5d.game.bvn.ui.dialog.BaseDialog;
-import net.play5d.game.bvn.ui.dialog.ConfrimUI;
+import net.play5d.game.bvn.ui.dialog.ConfirmUI;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
-import net.play5d.game.bvn.ui.dialog.MusouConfrimUI;
+import net.play5d.game.bvn.ui.dialog.MusouConfirmUI;
 import net.play5d.game.bvn.ui.fight.FightUI;
 import net.play5d.game.bvn.ui.musou.MusouUI;
 
@@ -46,19 +46,19 @@ public class GameUI {
     public static var SHOW_CN_TEXT:Boolean = true;
 
     public static var SHOW_HP_TEXT:Boolean = false;
-    private static var _confrimUI:BaseDialog;
-    private static var _confrimUICls:Class;
+    private static var _confirmUI:BaseDialog;
+    private static var _confirmUICls:Class;
     private static var _alertUI:AlertUI;
     private static var _transUI:TransUI;
     private static var _quickTransUI:QuickTransUI;
     private static var _transContainer:Sprite;
 
     public static function showingDialog():Boolean {
-        return _confrimUI != null || _alertUI != null;
+        return _confirmUI != null || _alertUI != null;
     }
 
-    public static function showingConfrim():Boolean {
-        return _confrimUI != null;
+    public static function showingConfirm():Boolean {
+        return _confirmUI != null;
     }
 
     public static function showingAlert():Boolean {
@@ -74,36 +74,36 @@ public class GameUI {
      * @param no 点击【取消】执行的回调
      * @param isMusouStyle 是否为无双样式
      */
-    public static function confrim(
+    public static function confirm(
             enMsg:String = null, cnMsg:String = null,
             yes:Function = null, no:Function = null,
             isMusouStyle:Boolean = false
     ):void {
-        closeConfrim();
+        closeConfirm();
 
-        _confrimUICls = isMusouStyle ? MusouConfrimUI : ConfrimUI;
+        _confirmUICls = isMusouStyle ? MusouConfirmUI : ConfirmUI;
 
-        _confrimUI = new _confrimUICls();
-        _confrimUI.setMsg(enMsg, cnMsg);
-        _confrimUI.yesBack = yesClose;
-        _confrimUI.noBack  = noClose;
+        _confirmUI = new _confirmUICls();
+        _confirmUI.setMsg(enMsg, cnMsg);
+        _confirmUI.yesBack = yesClose;
+        _confirmUI.noBack  = noClose;
 
         GameEvent.dispatchEvent(GameEvent.UI_CONFRIM);
 
-        DialogManager.showDialog(_confrimUI, false);
+        DialogManager.showDialog(_confirmUI, false);
 
         function yesClose():void {
             if (yes != null) {
                 yes();
             }
-            closeConfrim();
+            closeConfirm();
         }
 
         function noClose():void {
             if (no != null) {
                 no();
             }
-            closeConfrim();
+            closeConfirm();
             GameEvent.dispatchEvent(GameEvent.UI_CONFRIM_CLOSE);
         }
 
@@ -135,20 +135,20 @@ public class GameUI {
         }
     }
 
-    public static function closeConfrim():void {
-        if (_confrimUI) {
-            DialogManager.closeDialog(_confrimUI);
-            _confrimUI = null;
+    public static function closeConfirm():void {
+        if (_confirmUI) {
+            DialogManager.closeDialog(_confirmUI);
+            _confirmUI = null;
         }
     }
 
-    public static function cancelConfrim():void {
-        if (_confrimUI) {
-            if (_confrimUI.noBack != null) {
-                _confrimUI.noBack();
+    public static function cancelConfirm():void {
+        if (_confirmUI) {
+            if (_confirmUI.noBack != null) {
+                _confirmUI.noBack();
             }
             else {
-                closeConfrim();
+                closeConfirm();
             }
         }
     }

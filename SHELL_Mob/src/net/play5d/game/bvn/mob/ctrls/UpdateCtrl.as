@@ -48,7 +48,7 @@ public class UpdateCtrl {
                 ? GetLang('confirm.update_ctrl.update_info_prefix', {detail: version.info})
                 : '';
 
-        GameUI.confrim(
+        GameUI.confirm(
                 GetLang('alert.menu_stage.update_title'),
                 GetLang('confirm.update_ctrl.optional_update', {info: updateInfo}),
                 function ():void {

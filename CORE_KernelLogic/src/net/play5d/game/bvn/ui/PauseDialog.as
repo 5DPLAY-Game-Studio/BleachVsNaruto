@@ -44,7 +44,7 @@ public class PauseDialog extends BasePauseDialog {
         }
 
         _btnGroup.keyEnable = false;
-        GameUI.confrim(
+        GameUI.confirm(
                 GetLang('confirm.common.back_menu_title'),
                 GetLang('confirm.common.back_menu'),
                 function ():void {

@@ -298,7 +298,7 @@ public class WinnerStage implements IStage {
             goNext();
             break;
         case btns.btn_exit:
-            GameUI.confrim(
+            GameUI.confirm(
                 GetLang('confirm.common.back_menu_title'),
                 GetLang('confirm.common.back_menu'),
                 MainGame.I.goMenu,
@@ -309,7 +309,7 @@ public class WinnerStage implements IStage {
             break;
         }
 
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
     }
 }
 }

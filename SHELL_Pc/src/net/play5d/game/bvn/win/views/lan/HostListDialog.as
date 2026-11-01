@@ -229,7 +229,7 @@ public class HostListDialog implements IStage {
         }
 
         if (type == MouseEvent.CLICK) {
-            SoundCtrl.I.sndConfrim();
+            SoundCtrl.I.sndConfirm();
             showHostDetail(item.data);
         }
     }

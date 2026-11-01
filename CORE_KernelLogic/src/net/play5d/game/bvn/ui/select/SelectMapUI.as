@@ -52,16 +52,16 @@ public class SelectMapUI extends Sprite {
     private var _picCache:Object = {};
     private var _prevListener:Function;
     private var _nextListener:Function;
-    private var _confrimListener:Function;
+    private var _confirmListener:Function;
 
-    public function addMouseEvents(prev:Function, next:Function, confrim:Function):void {
+    public function addMouseEvents(prev:Function, next:Function, confirm:Function):void {
         _mapmc.left_arrow.buttonMode  = true;
         _mapmc.right_arrow.buttonMode = true;
         _mapmc.kuang.buttonMode       = true;
 
         _prevListener    = prev;
         _nextListener    = next;
-        _confrimListener = confrim;
+        _confirmListener = confirm;
 
         if (GameConfig.TOUCH_MODE) {
             _mapmc.left_arrow.addEventListener(TouchEvent.TOUCH_TAP, touchHandler);
@@ -84,7 +84,7 @@ public class SelectMapUI extends Sprite {
 
         _prevListener    = null;
         _nextListener    = null;
-        _confrimListener = null;
+        _confirmListener = null;
 
         if (_mapmc) {
 
@@ -214,12 +214,12 @@ public class SelectMapUI extends Sprite {
             }
             break;
         case _mapmc.kuang:
-            if (_confrimListener != null) {
-                _confrimListener();
+            if (_confirmListener != null) {
+                _confirmListener();
             }
             break;
         }
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
     }
 
     private function mouseHandler(e:MouseEvent):void {
@@ -241,12 +241,12 @@ public class SelectMapUI extends Sprite {
             }
             break;
         case _mapmc.kuang:
-            if (_confrimListener != null) {
-                _confrimListener();
+            if (_confirmListener != null) {
+                _confirmListener();
             }
             break;
         }
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
     }
 
 

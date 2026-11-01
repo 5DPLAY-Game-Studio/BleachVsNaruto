@@ -275,12 +275,12 @@ public class SelectIndexUIGroup extends Sprite {
         }
 
         if (GameInputer.select(_inputType, 1)) {
-            doConfrim();
+            doConfirm();
         }
 
     }
 
-    private function doConfrim():void {
+    private function doConfirm():void {
         if (_selectItem) {
             _selectItem.setFighterIndex(_currentSelectId);
             _currentSelectId++;
@@ -292,7 +292,7 @@ public class SelectIndexUIGroup extends Sprite {
                 updateOrder();
                 selectIndex(1, 1);
             }
-            SoundCtrl.I.sndConfrim();
+            SoundCtrl.I.sndConfirm();
         }
     }
 
@@ -339,7 +339,7 @@ public class SelectIndexUIGroup extends Sprite {
         }
 
         selectIndex(index);
-        doConfrim();
+        doConfirm();
     }
 
     private function selectFighterMouseHandler(e:MouseEvent):void {
@@ -359,7 +359,7 @@ public class SelectIndexUIGroup extends Sprite {
             SoundCtrl.I.sndSelect();
             break;
         case MouseEvent.CLICK:
-            doConfrim();
+            doConfirm();
             break;
         }
     }

@@ -357,7 +357,7 @@ public class SoundCtrl {
     }
 
     //确定音效
-    public function sndConfrim():void {
+    public function sndConfirm():void {
         playSwcSound(snd_menu2);
     }
 

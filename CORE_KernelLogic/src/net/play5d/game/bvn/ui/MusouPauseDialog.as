@@ -45,7 +45,7 @@ public class MusouPauseDialog extends BasePauseDialog {
         }
 
         _btnGroup.keyEnable = false;
-        GameUI.confrim(
+        GameUI.confirm(
                 GetLang('confirm.musou_pause_dialog.back_map_title'),
                 GetLang('confirm.musou_pause_dialog.back_map'),
                 function ():void {

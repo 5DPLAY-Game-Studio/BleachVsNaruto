@@ -235,7 +235,7 @@ public class LANRoomState implements IStage {
 
     private function startGame():void {
         if (_isOwner) {
-            SoundCtrl.I.sndConfrim();
+            SoundCtrl.I.sndConfirm();
             LANServerCtrl.I.sendStart();
         }
     }

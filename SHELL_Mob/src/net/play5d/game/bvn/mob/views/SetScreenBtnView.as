@@ -131,7 +131,7 @@ public class SetScreenBtnView extends Sprite {
     private function onOptionChange(e:SetBtnEvent):void {
         if (e.optionKey == 'joyMode') {
             if (GameInterfaceManager.config.screenPadConfig.joySet) {
-                GameUI.confrim(
+                GameUI.confirm(
                         GetLang('confirm.set_screen_btn_view.lose_custom_title'),
                         GetLang('confirm.set_screen_btn_view.lose_custom'),
                         function ():void {

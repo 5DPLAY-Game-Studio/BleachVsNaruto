@@ -234,7 +234,7 @@ public class CustomScreenBtnView {
         }
 
         if (target.name == 'ok') {
-            SoundCtrl.I.sndConfrim();
+            SoundCtrl.I.sndConfirm();
         }
         else {
             SoundCtrl.I.sndSelect();

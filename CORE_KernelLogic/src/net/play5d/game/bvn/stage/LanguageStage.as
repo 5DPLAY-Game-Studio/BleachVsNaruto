@@ -319,7 +319,7 @@ public class LanguageStage implements IStage {
             return;
         }
 
-        SoundCtrl.I.sndConfrim();
+        SoundCtrl.I.sndConfirm();
 
         // 所选语言
         var language:String = target.language;

@@ -155,7 +155,7 @@ public class MusouLogic {
             return;
         }
 
-        GameUI.confrim(
+        GameUI.confirm(
                 GetLang('confirm.musou_ctrl.unlock_fighter_title'),
                 GetLang('confirm.musou_ctrl.unlock_fighter', {amount: data.getPrice()}),
                 function ():void {

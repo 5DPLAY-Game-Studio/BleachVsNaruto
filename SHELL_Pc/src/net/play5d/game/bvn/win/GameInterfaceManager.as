@@ -149,7 +149,7 @@ public class GameInterfaceManager implements IGameInterface {
             {txt: 'MORE GAMES', cn: GetLang('txt.game_interface.more_games')},
             {
                 txt: 'EXIT', cn: GetLang('txt.game_interface_manager.exit'), func: function ():void {
-                    GameUI.confrim(
+                    GameUI.confirm(
                             GetLang('confirm.exit_game_title'),
                             GetLang('confirm.exit_game'),
                             NativeApplication.nativeApplication.exit
