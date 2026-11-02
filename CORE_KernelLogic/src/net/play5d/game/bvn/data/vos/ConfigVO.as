@@ -145,6 +145,9 @@ public class ConfigVO implements ISaveData, IInstanceVO {
             catch (e:Error) {
                 GameLogger.error('sys', 'ConfigVO.getValueByKey: ' + e);
             }
+        }
+
+        return null;
     }
 
     public function setValueByKey(key:String, value:*):void {
@@ -159,6 +162,8 @@ public class ConfigVO implements ISaveData, IInstanceVO {
             catch (e:Error) {
                 GameLogger.error('sys', 'ConfigVO.setValueByKey: ' + e);
             }
+        }
+    }
 
 }
 }
