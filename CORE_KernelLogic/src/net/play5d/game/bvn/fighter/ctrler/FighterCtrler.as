@@ -28,6 +28,7 @@ import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
+import net.play5d.game.bvn.fighter.utils.HitAreaUtil;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
@@ -469,34 +470,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             trace('FighterCtrler.getCurrentHits::', e);
         }
 
-        if (!areas || areas.length < 1) {
-            return null;
-        }
-
-        var hits:Array = _hitsBuf;
-        hits.length    = 0;
-
-        var i:int;
-        var dobj:Object;
-        var hitvo:HitVO;
-        var area:Rectangle, area2:Rectangle;
-
-        for (i; i < areas.length; i++) {
-            dobj             = areas[i];
-            var dname:String = dobj.name;
-            hitvo            = dobj.hitVO;
-
-            if (!hitvo) {
-                continue;
-            }
-
-            area              = dobj.area;
-            //缓存取出后，需要对重新计算位置
-            hitvo.currentArea = getCurrentRect(area, 'hit' + i);
-            hits.push(hitvo);
-        }
-
-        return hits;
+        return HitAreaUtil.collectCurrentHits(areas, _hitsBuf, getCurrentRect);
     }
 
     /**
