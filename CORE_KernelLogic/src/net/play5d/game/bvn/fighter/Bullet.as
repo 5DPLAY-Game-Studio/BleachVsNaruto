@@ -323,12 +323,7 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
         _destroyed = true;
 
         if (mc) {
-            try {
-                mc.stopAllMovieClips();
-            }
-            catch (e:Error) {
-                trace(e);
-            }
+            KyoDisplayUtils.stopAllMovieClips(mc);
             mc = null;
         }
 

@@ -41,6 +41,7 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.kyo.stage.IStage;
+import net.play5d.kyo.utils.KyoDisplayUtils;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
 
 public class GameStage extends Sprite implements IStage {
@@ -179,7 +180,7 @@ public class GameStage extends Sprite implements IStage {
         if (!(sp is BaseGameSprite) && display is MovieClip) {
             var mc:MovieClip = display as MovieClip;
 
-            mc.stopAllMovieClips();
+            KyoDisplayUtils.stopAllMovieClips(mc);
             mc.gotoAndStop(1);
         }
 

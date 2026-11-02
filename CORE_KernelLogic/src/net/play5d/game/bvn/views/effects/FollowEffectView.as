@@ -178,7 +178,7 @@ public class FollowEffectView implements IGameSprite {
 
         target = null;
         if (mc) {
-            mc.stopAllMovieClips();
+            KyoDisplayUtils.stopAllMovieClips(mc);
             mc = null;
         }
 

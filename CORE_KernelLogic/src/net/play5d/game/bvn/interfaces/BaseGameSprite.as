@@ -31,6 +31,7 @@ import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.data.vos.TeamVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.models.HitVO;
+import net.play5d.kyo.utils.KyoDisplayUtils;
 import net.play5d.kyo.utils.UUID;
 
 import net.play5d.kyo.utils.KyoMath;
@@ -247,12 +248,7 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
 
         if (dispose) {
             if (_mainMc) {
-                try {
-                    _mainMc.stopAllMovieClips();
-                }
-                catch (e:Error) {
-                    trace(e);
-                }
+                KyoDisplayUtils.stopAllMovieClips(_mainMc);
                 _mainMc = null;
             }
         }

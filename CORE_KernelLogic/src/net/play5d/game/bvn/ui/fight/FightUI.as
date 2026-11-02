@@ -41,6 +41,7 @@ import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
 import net.play5d.game.bvn.ui.PauseDialog;
 import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.kyo.utils.KyoDisplayUtils;
 
 public class FightUI implements IGameUI {
 
@@ -165,14 +166,9 @@ public class FightUI implements IGameUI {
             _inputHistory2 = null;
         }
         if (ui) {
-            try {
-                ui.removeChildren();
-                ui.stopAllMovieClips();
-            }
-            catch (e:Error) {
-                trace(e);
-            }
-
+            // 先停子剪辑。卸掉子节点之后就没有可停的对象了
+            KyoDisplayUtils.stopAllMovieClips(ui);
+            ui.removeChildren();
             ui = null;
         }
     }
