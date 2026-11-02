@@ -437,8 +437,8 @@ public class AssetManager {
             fontXML = xml;
 
             var bpurl:String  = xml.pages.page.@file;
-            var floder:String = url.substr(0, url.lastIndexOf('/') + 1);
-            fontBitmapUrl     = floder + bpurl;
+            var folder:String = url.substr(0, url.lastIndexOf('/') + 1);
+            fontBitmapUrl     = folder + bpurl;
 
             _assetLoader.loadBitmap(fontBitmapUrl, bitmapCom, bitmapFail);
         }
