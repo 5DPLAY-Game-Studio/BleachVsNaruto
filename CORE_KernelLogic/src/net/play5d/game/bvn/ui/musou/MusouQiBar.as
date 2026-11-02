@@ -24,6 +24,7 @@ import flash.display.Sprite;
 import flash.geom.Point;
 
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.ui.QiBarScale;
 
 public class MusouQiBar {
 
@@ -102,17 +103,7 @@ public class MusouQiBar {
             _bar3.visible = v > 2;
         }
 
-        if (v > 2) {
-            _bar1.scaleX = _bar2.scaleX = 1;
-            _bar3.scaleX = v - 2;
-        }
-        else if (v > 1) {
-            _bar1.scaleX = 1;
-            _bar2.scaleX = v - 1;
-        }
-        else {
-            _bar1.scaleX = v;
-        }
+        QiBarScale.apply(_bar1, _bar2, _bar3, v);
     }
 
 }

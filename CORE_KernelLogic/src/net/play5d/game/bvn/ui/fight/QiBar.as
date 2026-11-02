@@ -272,6 +272,7 @@ public class QiBar {
 import flash.display.DisplayObject;
 import flash.geom.Rectangle;
 
+import net.play5d.game.bvn.ui.QiBarScale;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 internal class InsBar {
     public function InsBar(ui:$fight$MC_qiBarMc) {
@@ -299,17 +300,7 @@ internal class InsBar {
         _ui.bar.bar3.visible = v > 2;
         _ui.bar.bar4.visible = v >= 3;
 
-        if (v > 2) {
-            _ui.bar.bar1.scaleX = _ui.bar.bar2.scaleX = 1;
-            _ui.bar.bar3.scaleX = v - 2;
-        }
-        else if (v > 1) {
-            _ui.bar.bar1.scaleX = 1;
-            _ui.bar.bar2.scaleX = v - 1;
-        }
-        else {
-            _ui.bar.bar1.scaleX = v;
-        }
+        QiBarScale.apply(_ui.bar.bar1, _ui.bar.bar2, _ui.bar.bar3, v);
 
         var frame:int = int(v) + 1;
         _ui.txtmc.gotoAndStop(frame);
