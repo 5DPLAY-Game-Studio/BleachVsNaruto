@@ -260,7 +260,7 @@ public class JoyStick {
             removeDevice(e.device);
             break;
         case GameInputEvent.DEVICE_UNUSABLE:
-            GameLogger.debug('input', 'unuse ' + e.device);
+            GameLogger.debug('input', 'unused ' + e.device);
             removeDevice(e.device);
             break;
         }
