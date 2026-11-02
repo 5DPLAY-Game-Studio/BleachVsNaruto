@@ -223,10 +223,8 @@ public class MusouUI implements IGameUI {
     public function showBossKO(boss:FighterMain, finishBack:Function = null):void {
         EffectCtrl.I.doEffectById('hit_end', boss.x, boss.y);
         EffectCtrl.I.shine(0xffffff, 0.5);
-        GameCtrl.I.gameState.cameraFocusOne(boss.getDisplay());
 
         EffectCtrl.I.freezeEnabled = false;
-        GameCtrl.I.pause();
 
         var bsKO:Boolean = false;
 
@@ -235,8 +233,6 @@ public class MusouUI implements IGameUI {
             bsKO = true;
             EffectCtrl.I.BGEffect('kobg', 2);
         }
-
-        EffectCtrl.I.slowDown(2, 5000);
 
         EffectCtrl.I.shake(5, 0, 1.5);
         SoundCtrl.I.playSwcSound(snd_over_hit);
@@ -251,7 +247,6 @@ public class MusouUI implements IGameUI {
 
         function koBack(e:Event):void {
             EffectCtrl.I.freezeEnabled = true;
-            GameCtrl.I.resume();
 
             if (finishBack != null) {
                 finishBack();
@@ -268,8 +263,6 @@ public class MusouUI implements IGameUI {
         _startAndKoMc.addEventListener(Event.COMPLETE, completeHandler);
 
         var p1:FighterMain = GameCtrl.I.gameRunData.p1FighterGroup.currentFighter;
-
-        GameCtrl.I.gameState.cameraFocusOne(p1.getDisplay());
 
         KyoTimeout.setTimeout(p1.win, 1000);
 

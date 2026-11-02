@@ -190,6 +190,22 @@ public class GameUI {
         (_ui as FightUI).initialize(p1, p2);
     }
 
+    /**
+     * 对战：播放胜者名称和胜场。
+     *
+     * @param winner 胜者。
+     * @example
+     * <listing version="3.0">
+     * GameUI.I.showKoWinner(winner);
+     * </listing>
+     */
+    public function showKoWinner(winner:FighterMain):void {
+        var ui:FightUI = _ui as FightUI;
+        if (ui) {
+            ui.presentWinner(winner);
+        }
+    }
+
     public function initMission(p1:GameRunFighterGroup):void {
         var volume:Number = GameData.I.config.soundVolume;
 

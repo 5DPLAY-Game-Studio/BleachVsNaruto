@@ -22,7 +22,6 @@ import flash.display.MovieClip;
 import flash.events.Event;
 import flash.geom.Point;
 import flash.media.SoundTransform;
-import flash.utils.getTimer;
 import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.GameConfig;
@@ -88,13 +87,8 @@ public class FightUI implements IGameUI {
     private var _hits1:HitsUI;
     private var _hits2:HitsUI;
     private var _endParam:Object;
-    private var _renderEnd:Boolean;
-    private var _playOver:Boolean;
-    private var _showWinnerDelay:int;
     private var _drawGame:Boolean;
-    private var _isSlowDown:Boolean;
     private var _pauseDialog:PauseDialog;
-    private var _flyTimer:Number = 0;
     private var _p1PosUI:$fight$SP_playerPos1;
     private var _p2PosUI:$fight$SP_playerPos2;
     private var _inputHistory1:TrainingInputHistoryUI;
@@ -115,6 +109,25 @@ public class FightUI implements IGameUI {
 
     public function showWins(fighter:FighterMain, wins:int):void {
         _fightbar.showWin(fighter, wins);
+    }
+
+    /**
+     * 播放胜者名称和胜场。
+     *
+     * @param winner 胜者。
+     * @example
+     * <listing version="3.0">
+     * ui.presentWinner(winner);
+     * </listing>
+     */
+    public function presentWinner(winner:FighterMain):void {
+        if (!winner) {
+            return;
+        }
+        showWinner(winner);
+        if (GameMode.isSingleMode()) {
+            showWins(winner, GameCtrl.I.gameRunData.getWins(winner));
+        }
     }
 
     public function destroy():void {
@@ -183,10 +196,6 @@ public class FightUI implements IGameUI {
         var zoom:Number = GameCtrl.I.gameState.camera.getZoom();
 
         renderPlayerPosUI(zoom);
-
-        if (_renderEnd) {
-            renderEnd();
-        }
     }
 
     public function renderAnimate():void {
@@ -263,9 +272,6 @@ public class FightUI implements IGameUI {
         _endParam.finishBack = finishBack;
 
         _drawGame = params ? params.drawGame : false;
-
-        _renderEnd = true;
-        _playOver  = false;
 
         if (GameCtrl.I.gameRunData.isTimerOver) {
             playTimeOver();
@@ -355,19 +361,12 @@ public class FightUI implements IGameUI {
     }
 
     private function playKO(loser:FighterMain = null):void {
-
-        _showWinnerDelay           = 0;
         EffectCtrl.I.freezeEnabled = false;
-
-        _isSlowDown = false;
 
         if (loser) {
             EffectCtrl.I.doEffectById('hit_end', loser.x, loser.y);
             EffectCtrl.I.shine(0xffffff, 0.5);
-            GameCtrl.I.gameState.cameraFocusOne(loser.getDisplay());
         }
-
-        GameCtrl.I.pause();
 
         var bsKO:Boolean = false;
 
@@ -417,66 +416,6 @@ public class FightUI implements IGameUI {
     private function playDrawGame():void {
         ui.startKOmc.gotoAndStop('drawgame');
         ui.startKOmc.addEventListener(Event.COMPLETE, drawGameBack);
-    }
-
-    private function renderEnd():void {
-        if (!_playOver) {
-            return;
-        }
-        if (!_endParam) {
-            return;
-        }
-
-        if (_showWinnerDelay > 0) {
-            _showWinnerDelay--;
-            if (_showWinnerDelay <= 0) {
-                var winner:FighterMain = _endParam.winner;
-                if (winner) {
-                    GameCtrl.I.gameState.cameraFocusOne(winner.getDisplay());
-                    showWinner(winner);
-
-                    if (GameMode.isSingleMode()) {
-                        showWins(winner, GameCtrl.I.gameRunData.getWins(winner));
-                    }
-
-                    if (_endParam) {
-                        _endParam.finishBack();
-                    }
-                }
-                _renderEnd = false;
-                _endParam  = null;
-            }
-            return;
-        }
-
-        var loser:FighterMain = _endParam.loser;
-
-        if (loser) {
-            if (loser.actionState == FighterActionState.HURT_FLYING) {
-                if (!_isSlowDown) {
-                    _isSlowDown = true;
-                    _flyTimer   = getTimer();
-                }
-            }
-            if (loser.actionState == FighterActionState.DEAD) {
-                if (_isSlowDown) {
-
-                    if (getTimer() - _flyTimer < 2000) {
-                        _showWinnerDelay = 2 * GameConfig.FPS_GAME;
-                    }
-                    else {
-                        _showWinnerDelay = 1 * GameConfig.FPS_GAME;
-                    }
-                    EffectCtrl.I.slowDownResume();
-                }
-                else {
-                    _showWinnerDelay = 2 * GameConfig.FPS_GAME;
-                    EffectCtrl.I.slowDownResume();
-                }
-            }
-        }
-
-
     }
 
     private function showWinner(winner:FighterMain, back:Function = null):void {
@@ -574,10 +513,10 @@ public class FightUI implements IGameUI {
         EffectCtrl.I.freezeEnabled = true;
         EffectCtrl.I.bgBlurEnabled = true;
         ui.startKOmc.removeEventListener(Event.COMPLETE, koBack);
-        _playOver = true;
-        GameCtrl.I.resume();
-        GameCtrl.I.slowRate = 2;
-        EffectCtrl.I.slowDown(2, 0);
+        var onKoClip:Function = _endParam ? _endParam.onKoClip : null;
+        if (onKoClip != null) {
+            onKoClip();
+        }
     }
 
     private function timeoverBack(e:Event):void {
@@ -586,11 +525,12 @@ public class FightUI implements IGameUI {
 
         if (_drawGame) {
             playDrawGame();
-            _showWinnerDelay = 0;
         }
         else {
-            _playOver        = true;
-            _showWinnerDelay = 1 * GameConfig.FPS_GAME;
+            var onTimeOverClip:Function = _endParam ? _endParam.onTimeOverClip : null;
+            if (onTimeOverClip != null) {
+                onTimeOverClip();
+            }
         }
 
     }

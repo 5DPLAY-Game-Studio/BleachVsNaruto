@@ -25,6 +25,7 @@ import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.ctrler.game_ctrls.KoPresentCtrl;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
@@ -382,8 +383,11 @@ public class MusouCtrl {
 
     public function onBossDie(f:FighterMain):void {
         TraceLang('debug.trace.data.musou_ctrl.boss_die');
+        KoPresentCtrl.focus(f);
+        KoPresentCtrl.hold();
+        KoPresentCtrl.slow(2, 5000);
         GameUI.I.showMusouBossKO(f, function ():void {
-
+            KoPresentCtrl.release();
         });
     }
 
@@ -590,6 +594,7 @@ public class MusouCtrl {
         GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         GameCtrl.I.actionEnable = false;
+        KoPresentCtrl.focus(GameCtrl.I.gameRunData.p1FighterGroup.currentFighter);
         GameUI.I.showMusouWin(function ():void {
             TraceLang('debug.trace.data.musou_ctrl.mission_complete_complete');
 

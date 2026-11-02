@@ -17,6 +17,8 @@
  */
 
 package net.play5d.game.bvn.ctrler.game_ctrls {
+import flash.utils.getTimer;
+
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.StateCtrl;
 import net.play5d.game.bvn.data.GameMode;
@@ -35,6 +37,16 @@ public class GameEndCtrl {
     private var _isRender:Boolean;
     private var _holdFrame:int;
     private var _drawGame:Boolean;
+    /** @private KO 影片结束后，观察败者并切胜者镜头 */
+    private var _koWatch:Boolean;
+    /** @private 跳过启动当帧，与界面下一帧再观察一致 */
+    private var _koArm:int;
+    /** @private 败者已经进入击飞 */
+    private var _slowOn:Boolean;
+    /** @private 击飞开始时间 */
+    private var _flyTimer:int;
+    /** @private 切胜者镜头前的等待帧 */
+    private var _winnerDelay:int;
 
     public function initialize(winner:FighterMain, loser:FighterMain):void {
         GameCtrl.I.gameRunData.setAllowLoseHP(false);
@@ -64,6 +76,8 @@ public class GameEndCtrl {
         if (!_isRender) {
             return false;
         }
+
+        watchKo();
 
         if (_holdFrame-- > 0) {
             return false;
@@ -121,9 +135,22 @@ public class GameEndCtrl {
     private function renderEND():Boolean {
         switch (_step) {
         case 0:
+            if (!GameCtrl.I.gameRunData.isTimerOver) {
+                KoPresentCtrl.focus(_loser);
+                KoPresentCtrl.hold();
+            }
             GameUI.I.getUI().showEnd(function ():void {
                 _holdFrame = 0;
-            }, {winner: _winner, loser: _loser});
+            }, {
+                winner        : _winner,
+                loser         : _loser,
+                onKoClip      : function ():void {
+                    beginKoWatch(true);
+                },
+                onTimeOverClip: function ():void {
+                    beginKoWatch(false);
+                }
+            });
             _step      = 1;
             _holdFrame = 10 * GameConfig.FPS_GAME;
             break;
@@ -183,6 +210,67 @@ public class GameEndCtrl {
         return false;
     }
 
+    private function beginKoWatch(applySlow:Boolean):void {
+        _koWatch     = true;
+        _koArm       = 1;
+        _slowOn      = false;
+        _winnerDelay = 0;
+        if (applySlow) {
+            KoPresentCtrl.release();
+            KoPresentCtrl.slow(2, 0);
+        }
+        else {
+            _winnerDelay = GameConfig.FPS_GAME;
+        }
+    }
+
+    private function watchKo():void {
+        if (!_koWatch) {
+            return;
+        }
+        if (_koArm > 0) {
+            _koArm--;
+            return;
+        }
+        if (_winnerDelay > 0) {
+            _winnerDelay--;
+            if (_winnerDelay <= 0) {
+                showKoWinner();
+            }
+            return;
+        }
+        if (!_loser) {
+            return;
+        }
+
+        if (_loser.actionState == FighterActionState.HURT_FLYING) {
+            if (!_slowOn) {
+                _slowOn   = true;
+                _flyTimer = getTimer();
+            }
+        }
+        if (_loser.actionState == FighterActionState.DEAD) {
+            if (_slowOn) {
+                if (getTimer() - _flyTimer < 2000) {
+                    _winnerDelay = 2 * GameConfig.FPS_GAME;
+                }
+                else {
+                    _winnerDelay = GameConfig.FPS_GAME;
+                }
+            }
+            else {
+                _winnerDelay = 2 * GameConfig.FPS_GAME;
+            }
+            KoPresentCtrl.clearSlow();
+        }
+    }
+
+    private function showKoWinner():void {
+        _koWatch = false;
+        KoPresentCtrl.focus(_winner);
+        GameUI.I.showKoWinner(_winner);
+        _holdFrame = 0;
+    }
 
 }
 }
