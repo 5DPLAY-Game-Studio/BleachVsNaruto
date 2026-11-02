@@ -24,6 +24,10 @@ import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
+import flash.events.UncaughtErrorEvent;
+import flash.filesystem.File;
+import flash.filesystem.FileMode;
+import flash.filesystem.FileStream;
 import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.GameConfig;
@@ -44,6 +48,7 @@ import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
 import net.play5d.game.bvn.ui.fight.FightUI;
 import net.play5d.game.bvn.utils.AssetLoader;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.SwfLib;
 import net.play5d.game.bvn.utils.URL;
@@ -52,6 +57,12 @@ import net.play5d.kyo.utils.KyoTimerUtils;
 [SWF(frameRate='30', backgroundColor='#000000')]
 public class launch extends Sprite {
     public function launch() {
+        if (loaderInfo) {
+            loaderInfo.uncaughtErrorEvents.addEventListener(
+                UncaughtErrorEvent.UNCAUGHT_ERROR,
+                onUncaughtError
+            );
+        }
         if (stage) {
             initialize();
         }
@@ -64,6 +75,7 @@ public class launch extends Sprite {
     private var _startBitmap:Bitmap;
     private var _isActive:Boolean = true;
     private var _assetLoader:AssetLoader = new AssetLoader();
+    private var _reportingUncaught:Boolean;
 
     private function showStartPic():void {
         RootSprite.STAGE = stage;
@@ -143,6 +155,45 @@ public class launch extends Sprite {
 
     private function initFailHandler(msg:String):void {
         NativeApplication.nativeApplication.exit();
+    }
+
+    private function onUncaughtError(event:UncaughtErrorEvent):void {
+        if (_reportingUncaught) {
+            return;
+        }
+        _reportingUncaught = true;
+
+        var text:String = 'uncaught: ' + UncaughtText(event);
+        GameLogger.error('sys', text);
+        writeUncaught(text);
+    }
+
+    private function writeUncaught(text:String):void {
+        var stream:FileStream = new FileStream();
+        var opened:Boolean    = false;
+        try {
+            var file:File = File.applicationStorageDirectory.resolvePath('logs/bvn.log');
+            var dir:File  = file.parent;
+            if (dir && !dir.exists) {
+                dir.createDirectory();
+            }
+            stream.open(file, FileMode.APPEND);
+            opened = true;
+            stream.writeUTFBytes('ERROR [sys] ' + text + File.lineEnding);
+        }
+        catch (error:Error) {
+            trace('uncaught log failed: ' + error.message);
+        }
+        finally {
+            if (opened) {
+                try {
+                    stream.close();
+                }
+                catch (closeError:Error) {
+                    // 关闭失败不再向外抛，避免盖住原来的未捕获错误
+                }
+            }
+        }
     }
 
     private function initialize(e:Event = null):void {

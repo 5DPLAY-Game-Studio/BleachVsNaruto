@@ -55,6 +55,7 @@ public function get _ALL_GLOBALS_():* {
         ThrowError,
         Trace,
         TraceLang,
+        UncaughtText,
 
         //////////////////////////////////////////////////
 

@@ -21,6 +21,7 @@ import flash.display.Sprite;
 import flash.display.StageDisplayState;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
+import flash.events.UncaughtErrorEvent;
 import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.GameQuality;
@@ -46,6 +47,12 @@ import net.play5d.game.bvn.win.utils.UIAssetUtil;
 [SWF(width='800', height='600', frameRate='30', backgroundColor='#000000')]
 public class launch extends Sprite {
     public function launch() {
+        if (loaderInfo) {
+            loaderInfo.uncaughtErrorEvents.addEventListener(
+                UncaughtErrorEvent.UNCAUGHT_ERROR,
+                onUncaughtError
+            );
+        }
         if (stage) {
             initialize();
         }
@@ -55,6 +62,7 @@ public class launch extends Sprite {
     }
     private var _mainGame:MainGame;
     private var _assetLoader:AssetLoader = new AssetLoader();
+    private var _reportingUncaught:Boolean;
 
     private function buildGame():void {
         GameLogger.log('buildGame');
@@ -90,6 +98,15 @@ public class launch extends Sprite {
         else {
             GameLogger.error('load', 'init fail');
         }
+    }
+
+    private function onUncaughtError(event:UncaughtErrorEvent):void {
+        if (_reportingUncaught) {
+            return;
+        }
+        _reportingUncaught = true;
+        // ERROR 会让 Loger 立刻刷盘
+        GameLogger.error('sys', 'uncaught: ' + UncaughtText(event));
     }
 
     private function initialize(e:Event = null):void {
