@@ -313,8 +313,8 @@ public class GameData {
                                 }));
                     }
 
-                    var ememies:Array = mv.getAllEnemieIds();
-                    for each(var f:String in ememies) {
+                    var enemies:Array = mv.getAllEnemyIds();
+                    for each(var f:String in enemies) {
                         var fighter:FighterVO = FighterModel.I.getFighter(f);
                         if (fighter == null) {
                             Debugger.log(

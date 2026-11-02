@@ -79,7 +79,7 @@ public class MusouWaveVO implements IInstanceVO {
         return result;
     }
 
-    public function getAllEnemieIds():Array {
+    public function getAllEnemyIds():Array {
         var result:Array                     = [];
         var allEnemies:Vector.<MusouEnemyVO> = getAllEnemies();
 

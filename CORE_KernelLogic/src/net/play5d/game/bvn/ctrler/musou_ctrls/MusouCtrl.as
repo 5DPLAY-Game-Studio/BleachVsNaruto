@@ -449,7 +449,7 @@ public class MusouCtrl {
 
         var ev:MusouEnemyVO = _enemyCreators[0].getNextEnemy();
         if (ev) {
-            addEmeny(ev);
+            addEnemy(ev);
         }
         else {
             _enemyCreators.shift();
@@ -538,7 +538,7 @@ public class MusouCtrl {
 
     }
 
-    private function addEmeny(data:MusouEnemyVO):void {
+    private function addEnemy(data:MusouEnemyVO):void {
         var enemy:FighterMain = GameRunFactory.createEnemyByData(data);
         _stageEnemies.push(enemy);
         addEnemyFighter(enemy);

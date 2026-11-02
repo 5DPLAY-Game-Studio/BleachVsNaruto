@@ -34,7 +34,7 @@ public class FighterVO implements IInstanceVO {
     public var faceBarUrl:String;
     public var faceWinUrl:String;
     public var contactFriends:Array;
-    public var contactEnemys:Array;
+    public var contactEnemies:Array;
     public var says:Array;
     public var bgm:String;
     public var bgmRate:Number = 1;
@@ -82,7 +82,7 @@ public class FighterVO implements IInstanceVO {
         }
 
         contactFriends = [];
-        contactEnemys  = [];
+        contactEnemies = [];
 
         if (dataObj['says']) {
             says = dataObj['says'];

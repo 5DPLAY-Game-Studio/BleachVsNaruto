@@ -95,7 +95,7 @@ public class EffectCtrl {
     private var _onFreezeOver:Vector.<Function> = null;
 
     private var _frameEffectCount:Dictionary = new Dictionary();
-    private var _removeEnemieMap:Object = {};
+    private var _removeEnemyMap:Object = {};
 
     public function destroy():void {
         // 执行销毁时结束震动
@@ -499,7 +499,7 @@ public class EffectCtrl {
      * 移除敌人效果
      */
     public function removeEnemyEffect(f:FighterMain, callback:Function = null):void {
-        _removeEnemieMap[UUID.create()] = {fighter: f, callback: callback};
+        _removeEnemyMap[UUID.create()] = {fighter: f, callback: callback};
     }
 
     private function renderShine():void {
@@ -594,13 +594,13 @@ public class EffectCtrl {
     }
 
     private function renderRemoveEnemy():void {
-        for (var i:String in _removeEnemieMap) {
-            var o:Object          = _removeEnemieMap[i];
+        for (var i:String in _removeEnemyMap) {
+            var o:Object          = _removeEnemyMap[i];
             var f:FighterMain     = o.fighter;
             var callback:Function = o.callback;
 
             if (!f) {
-                delete _removeEnemieMap[i];
+                delete _removeEnemyMap[i];
                 continue;
             }
 
@@ -613,7 +613,7 @@ public class EffectCtrl {
                 }
                 o.fighter  = null;
                 o.callback = null;
-                delete _removeEnemieMap[i];
+                delete _removeEnemyMap[i];
             }
         }
 

@@ -105,7 +105,7 @@ public class LoadingMusouStage implements IStage {
             fighters.push(fvos[i].id);
         }
 
-        var enemyIds:Array = mission.getAllEnemieIds();
+        var enemyIds:Array  = mission.getAllEnemyIds();
         fighters           = fighters.concat(enemyIds);
 
         var bossIds:Array = mission.getBossIds();
