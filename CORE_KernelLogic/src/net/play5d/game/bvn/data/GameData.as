@@ -55,7 +55,7 @@ public class GameData {
     public var score:int = 0;
     public var winnerId:String;
 
-    public var isFristRun:Boolean = true;
+    public var isFirstRun:Boolean = true;
 
     public function loadConfig(back:Function, fail:Function = null):void {
 
