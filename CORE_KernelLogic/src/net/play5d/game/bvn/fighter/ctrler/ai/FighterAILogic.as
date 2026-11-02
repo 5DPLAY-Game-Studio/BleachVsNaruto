@@ -184,7 +184,7 @@ public class FighterAILogic extends FighterAILogicBase {
         downJump = false;
 
         var downJumpObj:Object                    = beginRateObj();
-        downJumpObj['defult']                     = R_DJ;
+        downJumpObj['default']                    = R_DJ;
         downJumpObj[FighterActionState.SKILL_ING] = R0;
         downJumpObj[FighterActionState.BISHA_ING] = downJumpObj[FighterActionState.BISHA_SUPER_ING] = R0;
 
@@ -219,7 +219,7 @@ public class FighterAILogic extends FighterAILogicBase {
         }
         else {
             var moveObj:Object                     = beginRateObj();
-            moveObj['defult']                      = R_MV;
+            moveObj['default']                     = R_MV;
             moveObj[FighterActionState.ATTACK_ING] = R_MV_ATK;
             moveObj[FighterActionState.SKILL_ING]  = R_MV_SK;
             moveObj[FighterActionState.BISHA_ING]  = moveObj[FighterActionState.BISHA_SUPER_ING] = R_MV_BS;
@@ -259,16 +259,16 @@ public class FighterAILogic extends FighterAILogicBase {
         var jumpObj:Object = beginRateObj();
 
         if (_isConting) {
-            jumpObj['defult']                    = R_JP_C;
+            jumpObj['default']                   = R_JP_C;
             jumpObj[FighterActionState.HURT_ING] = R_JP_CH;
         }
         else {
             if (_fighter.y > _target.y + _jumpKeep) {
-                jumpObj['defult']                     = R_JP_UP;
+                jumpObj['default']                    = R_JP_UP;
                 jumpObj[FighterActionState.BISHA_ING] = jumpObj[FighterActionState.BISHA_SUPER_ING] = R_MV_BS;
             }
             else {
-                jumpObj['defult']                     = R_JP_LO;
+                jumpObj['default']                    = R_JP_LO;
                 jumpObj[FighterActionState.BISHA_ING] = jumpObj[FighterActionState.BISHA_SUPER_ING] = R_JP_LB;
             }
         }
@@ -284,11 +284,11 @@ public class FighterAILogic extends FighterAILogicBase {
         var jumpObj:Object = beginRateObj();
 
         if (_fighter.y < _target.y - _jumpKeep) {
-            jumpObj['defult']                     = R_JP_UP;
+            jumpObj['default']                    = R_JP_UP;
             jumpObj[FighterActionState.BISHA_ING] = jumpObj[FighterActionState.BISHA_SUPER_ING] = R_MV_BS;
         }
         else {
-            jumpObj['defult']                     = R_JP_LO;
+            jumpObj['default']                    = R_JP_LO;
             jumpObj[FighterActionState.BISHA_ING] = jumpObj[FighterActionState.BISHA_SUPER_ING] = R_JP_LB;
         }
 
@@ -303,25 +303,25 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (_fighter.energy < 40) {
             if (dis > _dashKeep && _fighter.direct == direct) {
-                dashObj['defult']                      = R_DSH1;
+                dashObj['default']                     = R_DSH1;
                 dashObj[FighterActionState.ATTACK_ING] = dashObj[FighterActionState.SKILL_ING] = R_DSH2;
                 dashObj[FighterActionState.BISHA_ING]  = dashObj[FighterActionState.BISHA_SUPER_ING] = R0;
             }
             else {
-                dashObj['defult']                      = R_DSH3;
+                dashObj['default']                     = R_DSH3;
                 dashObj[FighterActionState.ATTACK_ING] = dashObj[FighterActionState.SKILL_ING] =
                         dashObj[FighterActionState.BISHA_ING] = dashObj[FighterActionState.BISHA_SUPER_ING] = R0;
             }
         }
         else {
             if (dis > _dashKeep && _fighter.direct != _target.direct) {
-                dashObj['defult']                      = R_DSH4;
+                dashObj['default']                     = R_DSH4;
                 dashObj[FighterActionState.ATTACK_ING] = R_DSH5;
                 dashObj[FighterActionState.SKILL_ING]  = R_DSH6;
                 dashObj[FighterActionState.BISHA_ING]  = dashObj[FighterActionState.BISHA_SUPER_ING] = R0;
             }
             else {
-                dashObj['defult']                      = R_DSH7;
+                dashObj['default']                     = R_DSH7;
                 dashObj[FighterActionState.ATTACK_ING] = dashObj[FighterActionState.SKILL_ING] =
                         dashObj[FighterActionState.BISHA_ING] = dashObj[FighterActionState.BISHA_SUPER_ING] = R0;
             }
@@ -334,7 +334,7 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (defense) {
             var ctobj:Object                      = beginRateObj();
-            ctobj['defult']                       = R_DEF_C;
+            ctobj['default']                      = R_DEF_C;
             ctobj[FighterActionState.FREEZE]      = R_DEF_F;
             ctobj[FighterActionState.NORMAL]      = R_DEF_N;
             ctobj[FighterActionState.HURT_ING]    = R0;
@@ -352,7 +352,7 @@ public class FighterAILogic extends FighterAILogicBase {
         var resultObj:Object = beginRateObj();
 
 
-        resultObj['defult'] = R0;
+        resultObj['default'] = R0;
         if (distance.x < 100 && distance.y < 100) {
             resultObj[FighterActionState.ATTACK_ING] = R_DEF_N2;
         }
@@ -419,7 +419,7 @@ public class FighterAILogic extends FighterAILogicBase {
         }
 
         var attackObj:Object                       = beginRateObj();
-        attackObj.defult                           = _isConting ? R_ATK_C : R_ATK_D;
+        attackObj['default']                       = _isConting ? R_ATK_C : R_ATK_D;
         attackObj[FighterActionState.DEFENSE_ING]  = R_ATK_DF;
         attackObj[FighterActionState.HURT_ACT_ING] = R_ATK_HA;
         attackObj[FighterActionState.ATTACK_ING]   = R_ATK_A;
@@ -478,11 +478,11 @@ public class FighterAILogic extends FighterAILogicBase {
         var result:Boolean  = false;
 
         if (isBreakAct(hitId)) {
-            skillObj.defult                          = _isConting ? R_SK_B1 : R_SK_B2;
+            skillObj['default']                      = _isConting ? R_SK_B1 : R_SK_B2;
             skillObj[FighterActionState.DEFENSE_ING] = _isConting ? R_SK_B3 : R_SK_B4;
         }
         else {
-            skillObj.defult                          = _isConting ? R_SK_N1 : R_SK_N2;
+            skillObj['default']                      = _isConting ? R_SK_N1 : R_SK_N2;
             skillObj[FighterActionState.DEFENSE_ING] = R_SK_N3;
         }
 
@@ -509,11 +509,11 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (_fighter.qi >= qi) {
             if (isBreakAct(hitId)) {
-                bishaObj.defult                          = _isConting ? R_BS_B1 : R_BS_B2;
+                bishaObj['default']                      = _isConting ? R_BS_B1 : R_BS_B2;
                 bishaObj[FighterActionState.DEFENSE_ING] = _isConting ? R_BS_B3 : R_BS_B4;
             }
             else {
-                bishaObj.defult                          = _isConting ? R_BS_N1 : R_BS_N2;
+                bishaObj['default']                      = _isConting ? R_BS_N1 : R_BS_N2;
                 bishaObj[FighterActionState.HURT_ING]    = R_BS_H;
                 bishaObj[FighterActionState.JUMP_ING]    = R_BS_J;
                 bishaObj[FighterActionState.DEFENSE_ING] = _isConting ? R_BS_D1 : R_BS_D2;
@@ -553,11 +553,11 @@ public class FighterAILogic extends FighterAILogicBase {
 
         var dis:Point = getTargetDistance(_target);
         if (dis.x < 50) {
-            cacheObj.defult                          = R_CA_N;
+            cacheObj['default']                      = R_CA_N;
             cacheObj[FighterActionState.DEFENSE_ING] = R_CA_D;
         }
         else {
-            cacheObj.defult                          = R_CA_NF;
+            cacheObj['default']                      = R_CA_NF;
             cacheObj[FighterActionState.DEFENSE_ING] = R_CA_DF;
         }
 
@@ -587,7 +587,7 @@ public class FighterAILogic extends FighterAILogicBase {
 
             //被打反击
             var breakObj:Object                    = beginRateObj();
-            breakObj.defult                        = R_BRK;
+            breakObj['default']                    = R_BRK;
             breakObj[FighterActionState.SKILL_ING] = R_BRK_S;
             specialSkill                           = getAIByFighterState(breakObj);
         }
@@ -596,7 +596,7 @@ public class FighterAILogic extends FighterAILogicBase {
     private function updateAssist():void {
         //招唤
         var callObj:Object                      = beginRateObj();
-        callObj.defult                          = R_CALL;
+        callObj['default']                      = R_CALL;
         callObj[FighterActionState.DEFENSE_ING] = R_CALL_D;
         callObj[FighterActionState.BISHA_ING]       = R0;
         callObj[FighterActionState.BISHA_SUPER_ING] = R0;
@@ -620,14 +620,14 @@ public class FighterAILogic extends FighterAILogicBase {
         }
 
         var ghostStepObj:Object                   = beginRateObj();
-        ghostStepObj.defult                       = R0;
+        ghostStepObj['default']                   = R0;
         ghostStepObj[FighterActionState.HURT_ING] = R_GS;
 
         ghostStep = getAIByFighterState(ghostStepObj);
 
         if (_target.y - _fighter.y < -80 && _target.y - _fighter.y > -100) {
             var ghostJumpObj:Object                   = beginRateObj();
-            ghostJumpObj.defult                       = R0;
+            ghostJumpObj['default']                   = R0;
             ghostJumpObj[FighterActionState.HURT_ING] = R_GS_J;
             ghostJump                                 = getAIByFighterState(ghostJumpObj);
         }
@@ -637,7 +637,7 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (_target.y - _fighter.y < 80 && _target.y - _fighter.y > 100) {
             var ghostDwonObj:Object                   = beginRateObj();
-            ghostDwonObj.defult                       = R0;
+            ghostDwonObj['default']                   = R0;
             ghostDwonObj[FighterActionState.HURT_ING] = R_GS_D;
             ghostJumpDowm                             = getAIByFighterState(ghostDwonObj);
         }

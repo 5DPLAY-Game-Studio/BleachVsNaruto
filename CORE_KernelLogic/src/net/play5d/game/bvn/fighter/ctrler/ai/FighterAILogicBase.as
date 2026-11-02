@@ -102,10 +102,10 @@ public class FighterAILogicBase {
     }
 
     protected function getAIByFighterState(stateObj:Object):Boolean {
-        var defult:Array    = stateObj.defult;
+        var defaults:Array  = stateObj['default'];
         var arr:Array;
         var targetState:int = _targetFighter ? _targetFighter.actionState : -1;
-        arr                 = stateObj && stateObj[targetState] ? stateObj[targetState] : defult;
+        arr                 = stateObj && stateObj[targetState] ? stateObj[targetState] : defaults;
         return getAIResult(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
     }
 
