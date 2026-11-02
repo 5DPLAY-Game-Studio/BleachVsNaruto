@@ -344,22 +344,7 @@ public class FighterAttacker extends BaseGameSprite {
     }
 
     public function getCheckHitRect(name:String):Rectangle {
-        var d:DisplayObject = _mainMc.getChildByName(name);
-        if (!d) {
-            return null;
-        }
-
-        var cacheObj:Object = _hitCheckAreaCache.getAreaByDisplay(d);
-
-        if (cacheObj) {
-            return cacheObj.area;
-        }
-
-        var rect:Rectangle = d.getBounds(_mainMc);
-
-        _hitCheckAreaCache.cacheAreaByDisplay(d, rect);
-
-        return rect;
+        return HitAreaUtil.getCheckHitRect(_mainMc, name, _hitCheckAreaCache, _mainMc);
     }
 
     private function renderFollowTarget():void {

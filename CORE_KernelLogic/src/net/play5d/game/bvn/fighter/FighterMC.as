@@ -32,6 +32,7 @@ import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
+import net.play5d.game.bvn.fighter.utils.HitAreaUtil;
 import net.play5d.game.bvn.fighter.utils.McAreaCacher;
 import net.play5d.game.bvn.utils.MCUtils;
 
@@ -299,22 +300,7 @@ public class FighterMC {
     }
 
     public function getCheckHitRect(name:String):Rectangle {
-        var d:DisplayObject = _mc.getChildByName(name);
-        if (!d) {
-            return null;
-        }
-
-        var cacheObj:Object = _hitCheckAreaCache.getAreaByDisplay(d);
-
-        if (cacheObj) {
-            return cacheObj.area;
-        }
-
-        var rect:Rectangle = d.getBounds(_fighterDisplay);
-
-        _hitCheckAreaCache.cacheAreaByDisplay(d, rect);
-
-        return rect;
+        return HitAreaUtil.getCheckHitRect(_mc, name, _hitCheckAreaCache, _fighterDisplay);
     }
 
     /**

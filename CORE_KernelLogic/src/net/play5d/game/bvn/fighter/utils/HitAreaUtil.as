@@ -17,16 +17,19 @@
  */
 
 package net.play5d.game.bvn.fighter.utils {
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.fighter.models.HitVO;
 
 /**
- * 帧缓存攻击区域的收集，以及按朝向换算世界坐标。
+ * 帧缓存攻击区域的收集、按名取判定包围盒，以及按朝向换算世界坐标。
  *
  * <p>区域来源、朝向、位置和矩形缓存由调用方提供。</p>
  *
  * @see #collectCurrentHits()
+ * @see #getCheckHitRect()
  * @see #toWorldRect()
  */
 public class HitAreaUtil {
@@ -112,6 +115,42 @@ public class HitAreaUtil {
         world.height = rect.height;
 
         return world;
+    }
+
+    /**
+     * 按子对象名取局部包围盒，并写入 <code>McAreaCacher</code>。
+     *
+     * @param host 查找子对象的容器。
+     * @param name 子对象名。
+     * @param cache 判定包围盒缓存。
+     * @param boundsTarget <code>getBounds</code> 的坐标空间。
+     * @return 局部包围盒；没有该子对象时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var area:Rectangle = HitAreaUtil.getCheckHitRect(mc, 'hit1', cache, mc);
+     * </listing>
+     * @see McAreaCacher#getAreaByDisplay()
+     */
+    public static function getCheckHitRect(
+            host        :DisplayObjectContainer,
+            name        :String,
+            cache       :McAreaCacher,
+            boundsTarget:DisplayObject
+    ):Rectangle {
+        var child:DisplayObject = host.getChildByName(name);
+        if (!child) {
+            return null;
+        }
+
+        var cacheObj:Object = cache.getAreaByDisplay(child);
+        if (cacheObj) {
+            return cacheObj.area;
+        }
+
+        var rect:Rectangle = child.getBounds(boundsTarget);
+        cache.cacheAreaByDisplay(child, rect);
+
+        return rect;
     }
 
 }
