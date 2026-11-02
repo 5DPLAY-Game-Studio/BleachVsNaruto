@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.ctrler {
 import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.display.DisplayObject;
 import flash.display.Loader;
 import flash.geom.Point;
@@ -325,15 +326,21 @@ public class AssetManager {
     }
 
     private function initAssets():void {
-        var font1:BitmapFont = getFont('font1');
-        if (font1) {
-            font1.charGap  = -8;
-            font1.spaceGap = 10;
-            font1.offsetY  = -5;
-        }
+        applyFont1Metrics();
 
         // 基础资源就绪后统一预热，避免进入菜单 / 对战后首次交互卡顿
         WarmupCtrl.I.warmBasic();
+    }
+
+    // 每次登记 font1 都要写。只在加载收尾写一次的话，重复完成回调会换上新实例，字距回到 0。
+    private function applyFont1Metrics():void {
+        var font1:BitmapFont = getFont('font1');
+        if (!font1) {
+            return;
+        }
+        font1.charGap  = -8;
+        font1.spaceGap = 10;
+        font1.offsetY  = -5;
     }
 
     private function loadGraphics(
@@ -437,7 +444,12 @@ public class AssetManager {
 
         function bitmapCom(d:DisplayObject):void {
             var bp:Bitmap = d as Bitmap;
-            _bitmapFontLoader.addFont(fontXML, bp.bitmapData);
+            if (bp && bp.bitmapData) {
+                // 拷走贴图再交给字库。随后 Loader.unloadAndStop 可能释放原图。
+                var atlas:BitmapData = bp.bitmapData.clone();
+                _bitmapFontLoader.addFont(fontXML, atlas);
+                applyFont1Metrics();
+            }
             _assetLoader.dispose(fontBitmapUrl);
             if (back != null) {
                 back();
