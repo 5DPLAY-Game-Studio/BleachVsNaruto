@@ -40,7 +40,7 @@ public class QiBar {
         _ui.addEventListener(Event.COMPLETE, uiPlayComplete);
 
         if (GameUI.BITMAP_UI) {
-            _ui.gotoAndStop('fadin_fin');
+            _ui.gotoAndStop('fadein_fin');
             _ui.visible = false;
         }
     }
@@ -142,7 +142,7 @@ public class QiBar {
             return;
         }
         var curFrame:String = _ui.currentFrameLabel;
-        if (curFrame == 'fadin_fin' || curFrame == 'fadout_fin') {
+        if (curFrame == 'fadein_fin' || curFrame == 'fadeout_fin') {
             _isRenderAnimate = false;
             return;
         }
@@ -163,11 +163,11 @@ public class QiBar {
 
         if (animate) {
             setCacheBitmap(false);
-            _ui.gotoAndStop('fadin');
+            _ui.gotoAndStop('fadein');
             _isRenderAnimate = true;
         }
         else {
-            _ui.gotoAndStop('fadin_fin');
+            _ui.gotoAndStop('fadein_fin');
             setCacheBitmap(true);
         }
 
@@ -185,7 +185,7 @@ public class QiBar {
         }
 
         if (animate) {
-            _ui.gotoAndStop('fadout');
+            _ui.gotoAndStop('fadeout');
             _isRenderAnimate = true;
             setCacheBitmap(false);
         }

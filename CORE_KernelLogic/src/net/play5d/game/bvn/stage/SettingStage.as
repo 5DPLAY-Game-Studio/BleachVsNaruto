@@ -105,7 +105,7 @@ public class SettingStage implements IStage {
 
         _btnGroup.keyEnable = false;
 
-        _man.gotoAndPlay('key_fadin');
+        _man.gotoAndPlay('key_fadein');
     }
 
     /**
@@ -194,7 +194,7 @@ public class SettingStage implements IStage {
             _innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET, innerSetHandler);
             _innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
         }
-        _man.gotoAndPlay('key_fadout');
+        _man.gotoAndPlay('key_fadeout');
 
     }
 

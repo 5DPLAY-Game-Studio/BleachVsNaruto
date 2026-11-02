@@ -69,7 +69,7 @@ public class HitsUI {
             return;
         }
         _isShow = true;
-        _mc.gotoAndPlay('fadin');
+        _mc.gotoAndPlay('fadein');
     }
 
     public function hide():void {
@@ -77,7 +77,7 @@ public class HitsUI {
             return;
         }
         _isShow = false;
-        _mc.gotoAndPlay("fadout");
+        _mc.gotoAndPlay('fadeout');
     }
 
 

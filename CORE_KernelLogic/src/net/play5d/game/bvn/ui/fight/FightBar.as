@@ -223,11 +223,11 @@ public class FightBar {
         _ui.visible = true;
 
         if (animate) {
-            _ui.gotoAndStop('fadin');
+            _ui.gotoAndStop('fadein');
             _isRenderAnimate = true;
         }
         else {
-            _ui.gotoAndStop('fadin_fin');
+            _ui.gotoAndStop('fadein_fin');
         }
 
     }
@@ -244,7 +244,7 @@ public class FightBar {
         }
 
         if (animate) {
-            _ui.gotoAndStop('fadout');
+            _ui.gotoAndStop('fadeout');
             _isRenderAnimate = true;
         }
         else {
@@ -257,7 +257,7 @@ public class FightBar {
             return;
         }
         var curFrame:String = _ui.currentFrameLabel;
-        if (curFrame == 'fadin_fin' || curFrame == 'fadout_fin') {
+        if (curFrame == 'fadein_fin' || curFrame == 'fadeout_fin') {
             _isRenderAnimate = false;
             return;
         }
@@ -265,7 +265,7 @@ public class FightBar {
     }
 
     private function initBitmapUI():void {
-        _ui.gotoAndStop('fadin_fin');
+        _ui.gotoAndStop('fadein_fin');
         _parent = _ui.parent;
 
         try {

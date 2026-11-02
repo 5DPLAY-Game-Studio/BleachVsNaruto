@@ -40,7 +40,7 @@ public class TransUI {
         _fadeOutBack = null;
 
         _fadeInBack = back;
-        ui.gotoAndStop('fadin');
+        ui.gotoAndStop('fadein');
         startRender();
     }
 
@@ -48,7 +48,7 @@ public class TransUI {
         _fadeInBack = null;
 
         _fadeOutBack = back;
-        ui.gotoAndStop('fadout');
+        ui.gotoAndStop('fadeout');
         startRender();
     }
 
