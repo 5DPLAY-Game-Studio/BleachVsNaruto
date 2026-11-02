@@ -29,6 +29,7 @@ import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.utils.HitAreaUtil;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
@@ -467,7 +468,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             areas = _fighter.getMC().getCurrentHitArea();
         }
         catch (e:Error) {
-            trace('FighterCtrler.getCurrentHits::', e);
+            GameLogger.error('fight', 'FighterCtrler.getCurrentHits: ' + e);
         }
 
         return HitAreaUtil.collectCurrentHits(areas, _hitsBuf, getCurrentRect);
@@ -483,8 +484,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             area             = mc.getCurrentBodyArea();
         }
         catch (e:Error) {
-            trace(_fighter.data.name);
-            trace('FighterCtrler.getBodyArea::', e);
+            GameLogger.error('fight', 'FighterCtrler.getBodyArea: ' + _fighter.data.name + ' ' + e);
         }
 
         if (area == null) {

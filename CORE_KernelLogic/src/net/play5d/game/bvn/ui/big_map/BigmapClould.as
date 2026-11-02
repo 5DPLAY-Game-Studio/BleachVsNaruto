@@ -21,6 +21,7 @@ import flash.display.Sprite;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class BigmapClould extends Sprite {
 
@@ -56,7 +57,7 @@ public class BigmapClould extends Sprite {
         for each(var i:CloudView in _clouds) {
             if (i.render()) {
                 try {
-                    trace('remove cloud');
+                    GameLogger.debug('ui', 'remove cloud');
                     var index:int = _clouds.indexOf(i);
                     if (index != -1) {
                         _clouds.splice(_clouds.indexOf(i), 1);
@@ -64,7 +65,7 @@ public class BigmapClould extends Sprite {
                     this.removeChild(i.mc);
                 }
                 catch (e:Error) {
-                    trace('BigmapClould', e);
+                    GameLogger.error('ui', 'BigmapClould ' + e);
                 }
             }
         }

@@ -39,6 +39,7 @@ import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
 import net.play5d.game.bvn.ui.dialog.MusouStateDialog;
 import net.play5d.game.bvn.utils.BtnUtils;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class WorldMapPointUI extends EventDispatcher {
 
@@ -100,7 +101,7 @@ public class WorldMapPointUI extends EventDispatcher {
             }
         }
         catch (e:Error) {
-            trace('WorldMapPointUI', e);
+            GameLogger.error('ui', 'WorldMapPointUI ' + e);
         }
 
     }

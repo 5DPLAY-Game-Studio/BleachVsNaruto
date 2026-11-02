@@ -28,13 +28,14 @@ import net.play5d.game.bvn.data.lan.UDPDataVO;
 import net.play5d.game.bvn.data.lan.UdpHandlerList;
 import net.play5d.game.bvn.data.lan.UdpPacketUtils;
 import net.play5d.game.bvn.interfaces.lan.IUdpTransport;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * UDP协议收发消息管理器（Pc / DatagramSocket）。
  */
 public class UDPSocket implements IUdpTransport {
     public function UDPSocket() {
-        trace('DatagramSocket.isSupported = ', DatagramSocket.isSupported);
+        GameLogger.debug('net', 'DatagramSocket.isSupported=' + DatagramSocket.isSupported);
         _udpsocket = new DatagramSocket();
     }
     private var _udpsocket:DatagramSocket;

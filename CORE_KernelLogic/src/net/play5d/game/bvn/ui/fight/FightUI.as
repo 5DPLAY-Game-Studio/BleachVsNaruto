@@ -40,6 +40,7 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.ContinueBtn;
 import net.play5d.game.bvn.ui.IGameUI;
 import net.play5d.game.bvn.ui.PauseDialog;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 
@@ -76,7 +77,7 @@ public class FightUI implements IGameUI {
         }
 
         if (GameMode.isArcade()) {
-            trace('fightUI.initialize');
+            GameLogger.debug('fight', 'fightUI.initialize');
             _fightbar.initScore();
             GameEvent.addEventListener(GameEvent.SCORE_UPDATE, updateScore);
         }

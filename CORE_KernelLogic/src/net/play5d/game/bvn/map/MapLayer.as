@@ -32,6 +32,7 @@ import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.MapLogoState;
 import net.play5d.game.bvn.interfaces.IGameSprite;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * 地图图层
@@ -209,7 +210,7 @@ public class MapLayer extends Sprite {
             show(bp);
         }
         catch (e:Error) {
-            trace('MapLayer.setSmoothing error ::', e);
+            GameLogger.error('fight', 'MapLayer.setSmoothing: ' + e);
         }
     }
 
@@ -243,7 +244,7 @@ public class MapLayer extends Sprite {
         }
 
         var b:Bitmap = drawBitmap(true, 0);
-        trace('addBlurBitmap', id);
+        GameLogger.debug('fight', 'addBlurBitmap ' + id);
 
         // 模糊滤镜
         var filter:BlurFilter = new BlurFilter(blurX, blurY, 1);
@@ -274,7 +275,7 @@ public class MapLayer extends Sprite {
                 removeChild(_currentShow);
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('fight', String(e));
             }
         }
 

@@ -59,6 +59,7 @@ import net.play5d.game.bvn.utils.SwfLib;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.game.bvn.utils.AssetLoader;
 import net.play5d.game.bvn.utils.GithubUtils;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.storage.KyoSharedObject;
 
@@ -651,7 +652,7 @@ public class FighterTester extends Sprite {
         AssetManager.I.setAssetLoader(_assetLoader);
         GameInterface.instance = new GameInterfaceManager();
 
-        trace('AssetManager.I.setAssetLoader');
+        GameLogger.debug('sys', 'AssetManager.I.setAssetLoader');
 
         GameData.I.config.AI_level     = 1;
         GameData.I.config.quality      = GameQuality.LOW;

@@ -25,6 +25,7 @@ import net.play5d.game.bvn.data.lan.LanMsgType;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.ctrler.lan.LANUtils;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * 锁帧算法（客户端）。
@@ -170,7 +171,7 @@ public class LockFrameClientLogic {
             _link.resetSyncError();
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('net', String(e));
             _link.syncError(true);
         }
 

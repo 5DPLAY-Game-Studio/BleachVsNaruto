@@ -32,6 +32,7 @@ import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class GameStageLoadCtrl extends EventDispatcher {
 
@@ -451,9 +452,9 @@ public class GameStageLoadCtrl extends EventDispatcher {
                 l.unload();
             }
             catch (e2:Error) {
-                trace(e2);
+                GameLogger.error('load', String(e2));
             }
-            trace(e);
+            GameLogger.error('load', String(e));
         }
     }
 

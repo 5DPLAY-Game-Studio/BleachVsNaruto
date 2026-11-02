@@ -11,6 +11,7 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.mob.views.GameSideBg;
 import net.play5d.game.bvn.ui.UIUtils;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class RootSprite {
     public static var FULL_SCREEN_SIZE:Point = new Point();
@@ -67,10 +68,10 @@ public class RootSprite {
     }
 
     private function updateGameSize():void {
-        trace('updateGameSize');
+        GameLogger.debug('ui', 'updateGameSize');
 
         if (!_gameSprite) {
-            trace('_gameSprite is null, return!');
+            GameLogger.debug('ui', 'game sprite is null');
             return;
         }
 
@@ -119,7 +120,7 @@ public class RootSprite {
             Math.abs(_gameSprite.y - Y) < 1 &&
             Math.abs(_gameSprite.scaleX - XScale) < 1 &&
             Math.abs(_gameSprite.scaleY - YScale) < 1) {
-            trace('scale samed, return!');
+            GameLogger.debug('ui', 'scale unchanged');
             return;
         }
 
@@ -158,11 +159,9 @@ public class RootSprite {
 
         _showGameSide = showGameSide;
 
-        trace('==== UPDATE GAME SIZE =========================================');
-        trace('stage W & H :', stageWidth, stageHeight);
-        trace('game rect :', _gameSprite.x, _gameSprite.y, sizeX * XScale, sizeY * YScale);
-        trace('game scale :', GameConfig.GAME_SCALE.x, GameConfig.GAME_SCALE.y);
-        trace('====------------------=========================================');
+        GameLogger.debug('ui', 'stage=' + stageWidth + 'x' + stageHeight
+                + ' rect=' + _gameSprite.x + ',' + _gameSprite.y + ',' + (sizeX * XScale) + ',' + (sizeY * YScale)
+                + ' scale=' + GameConfig.GAME_SCALE.x + ',' + GameConfig.GAME_SCALE.y);
     }
 
     public function updateFullScreenSize(e:Event = null):void {

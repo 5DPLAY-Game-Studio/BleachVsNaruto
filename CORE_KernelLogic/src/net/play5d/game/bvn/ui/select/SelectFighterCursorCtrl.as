@@ -25,6 +25,7 @@ import net.play5d.game.bvn.data.AssisterModel;
 import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.debug.Debugger;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.utils.ArrayMap;
 
 /**
@@ -253,7 +254,7 @@ public class SelectFighterCursorCtrl {
 
         for (i = 0; i < fighterIds.length; i++) {
             var fid:String = fighterIds[i];
-            trace(fid);
+            GameLogger.debug('ui', fid);
 
             var fv:FighterVO = _list.selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(fid) :
                                FighterModel.I.getFighter(fid);
@@ -310,7 +311,7 @@ public class SelectFighterCursorCtrl {
             }
 
             si = new SelectFighterItem(fv, null, true);
-            trace(posSN, morePosition, si.fighterData.id);
+            GameLogger.debug('ui', posSN + ' ' + morePosition + ' ' + si.fighterData.id);
 
             _list.bindItemInput(si);
 

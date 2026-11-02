@@ -25,6 +25,7 @@ import flash.filters.GlowFilter;
 import flash.system.System;
 
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.ui.UIUtils;
 import net.play5d.kyo.display.BitmapText;
 
@@ -39,7 +40,7 @@ public class Debugger {
     private static var _stage:Stage;
 
     public static function log(...params):void {
-        trace.call(null, params);
+        GameLogger.debug('sys', params.join(' '));
     }
 
     public static function errorMsg(msg:String):void {

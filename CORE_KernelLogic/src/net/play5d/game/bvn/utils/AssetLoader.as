@@ -46,7 +46,7 @@ public class AssetLoader implements IAssetLoader {
                 back(json);
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('load', String(e));
                 if (fail != null) {
                     fail();
                 }

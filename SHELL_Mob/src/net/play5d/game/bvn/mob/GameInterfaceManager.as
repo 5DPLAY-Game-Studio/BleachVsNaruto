@@ -21,6 +21,7 @@ import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.kyo.air.utils.FileUtils;
 import net.play5d.game.bvn.mob.views.ViewManager;
 import net.play5d.game.bvn.utils.CreditsSpriteUtil;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.GameSafeKeeper;
 import net.play5d.game.bvn.utils.URL;
 
@@ -52,7 +53,7 @@ public class GameInterfaceManager implements IGameInterface {
         var file:File   = File.applicationStorageDirectory.resolvePath('bvnsave.sav');
 
         FileUtils.writeFile(file.nativePath, json);
-        trace('saveData', json);
+        GameLogger.debug('sys', 'saveData ' + json);
     }
 
     public function loadGame():Object {

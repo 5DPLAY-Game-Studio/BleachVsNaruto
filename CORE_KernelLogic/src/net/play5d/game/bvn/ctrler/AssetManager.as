@@ -31,6 +31,7 @@ import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.interfaces.IAssetLoader;
 import net.play5d.game.bvn.utils.BitmapAssetLoader;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.display.bitmap.BitmapFont;
 import net.play5d.kyo.display.bitmap.BitmapFontLoader;
 import net.play5d.kyo.loader.KyoClassLoader;
@@ -385,7 +386,7 @@ public class AssetManager {
             // 偶发 IO 失败时重试一次
             if (curRetry < 1) {
                 curRetry++;
-                trace('load SWF retry: ' + curUrl);
+                GameLogger.warn('load', 'load SWF retry: ' + curUrl);
                 _assetLoader.loadSwf(curUrl, loadCom, loadFail, progress);
                 return;
             }
@@ -406,7 +407,7 @@ public class AssetManager {
                 TraceLang('debug.trace.data.asset_manager.load_swf_fail', {url: url});
             }
             else {
-                trace('load SWF fail: ' + url);
+                GameLogger.error('load', 'load SWF fail: ' + url);
             }
         }
 

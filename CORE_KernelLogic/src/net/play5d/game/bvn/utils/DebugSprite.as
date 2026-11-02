@@ -40,9 +40,8 @@ public class DebugSprite extends Sprite {
         target.x = x;
         target.y = y;
 
-        trace('================== debug apply set ========================');
-        trace('x:', target.x, 'y:', target.y, 'width:', target.width, 'height:', target.height);
-        trace('-----------------------------------------------------------');
+        GameLogger.debug('sys', 'debug apply set x=' + target.x + ' y=' + target.y
+                + ' width=' + target.width + ' height=' + target.height);
     }
 
     public function destroy():void {

@@ -5,6 +5,8 @@ import flash.geom.Matrix;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
+import net.play5d.game.bvn.utils.GameLogger;
+
 public class GameSideBg extends Bitmap {
     public function GameSideBg(screenSize:Point, gameSize:Rectangle) {
         super(null, 'auto', false);
@@ -79,7 +81,7 @@ public class GameSideBg extends Bitmap {
             this.parent.removeChild(this);
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('ui', String(e));
         }
         if (this.bitmapData) {
             this.bitmapData.dispose();

@@ -23,6 +23,7 @@ import net.play5d.game.bvn.data.lan.SocketInputBitCodec;
 import net.play5d.game.bvn.data.lan.SocketInputData;
 import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * 联机锁帧用 Socket 输入通道。
@@ -202,7 +203,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
      */
     public function setSocketData(msg:int):void {
         if (!_data) {
-            trace('GameSocketInput.data is null!');
+            GameLogger.warn('input', 'GameSocketInput.data is null');
             return;
         }
 

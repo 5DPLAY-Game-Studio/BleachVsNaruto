@@ -43,6 +43,7 @@ import net.play5d.game.bvn.win.utils.SocketMsgFactory;
 import net.play5d.game.bvn.ui.dialog.LANExitDialog;
 import net.play5d.game.bvn.win.views.lan.LANGameState;
 import net.play5d.game.bvn.win.views.lan.LANRoomState;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class LANServerCtrl implements ILanServerLockLink {
     private static var _i:LANServerCtrl;
@@ -325,7 +326,7 @@ public class LANServerCtrl implements ILanServerLockLink {
     }
 
     private function socketHandler(e:SocketEvent):void {
-        trace(e);
+        GameLogger.debug('net', String(e));
         switch (e.type) {
         case SocketEvent.CLIENT_CONNECT:
 

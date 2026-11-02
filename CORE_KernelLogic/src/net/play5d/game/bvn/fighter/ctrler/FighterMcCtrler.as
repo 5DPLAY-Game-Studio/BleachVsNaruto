@@ -34,6 +34,7 @@ import net.play5d.game.bvn.fighter.ctrler.mc.FighterMcHurtCtrl;
 import net.play5d.game.bvn.fighter.ctrler.mc.FighterMcRuntime;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
@@ -165,7 +166,7 @@ public class FighterMcCtrler {
         frame ||= FighterSpecialFrame.IDLE;
 
         if (!_rt.fighter.isAlive && !isIgnoreAlive) {
-            trace('not alive!!!');
+            GameLogger.debug('fight', 'not alive');
             return;
         }
 

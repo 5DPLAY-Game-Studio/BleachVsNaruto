@@ -34,6 +34,7 @@ import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputter;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;
@@ -221,7 +222,7 @@ public class GameOverStage implements IStage {
                 }
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('ui', String(e));
             }
 
         }

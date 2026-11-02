@@ -96,7 +96,7 @@ public class EmbedSwf {
      */
     public function call(func:String, params:Array = null):* {
         if (!_content) {
-            trace('swf is null !');
+            GameLogger.warn('load', 'swf is null');
             return null;
         }
 

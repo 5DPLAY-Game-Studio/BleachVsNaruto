@@ -22,6 +22,8 @@ import flash.ui.GameInput;
 import flash.ui.GameInputControl;
 import flash.ui.GameInputDevice;
 
+import net.play5d.game.bvn.utils.GameLogger;
+
 /**
  * 游戏手柄控制类
  */
@@ -50,7 +52,7 @@ public class JoyStick {
             return;
         }
 
-        trace('JoyStick.initialize');
+        GameLogger.debug('input', 'JoyStick.initialize');
 
         if (!GameInput.isSupported) {
             TraceLang('debug.trace.data.joy_stick.platform_unsupported');
@@ -153,7 +155,8 @@ public class JoyStick {
 
                 var jv:JoyStickSetVO = new JoyStickSetVO(i, val);
                 _downKey             = jv;
-                trace('isDown', jv.id + '_' + jv.value);
+                GameLogger.debug('input', 'isDown ' + jv.id + '_' + jv.value);
+
                 return jv;
             }
         }
@@ -166,19 +169,18 @@ public class JoyStick {
      * @param device
      */
     private static function outputDeviceInfo(device:GameInputDevice):void {
-        trace('device.enabled - ' + device.enabled);
-        trace('device.id - ' + device.id);
-        trace('device.name - ' + device.name);
-        trace('device.numControls - ' + device.numControls);
-        trace('device.sampleInterval - ' + device.sampleInterval);
-        trace('device.MAX_BUFFER - ' + GameInputDevice.MAX_BUFFER_SIZE);
-
-        trace('buttonNum', device.numControls); //这个是按钮数量
+        var buttons:Array = [];
         for (var i:int; i < device.numControls; i++) {
-            var ctrl:GameInputControl = device.getControlAt(i); //这里传入N，返回第几个按钮的值
-            trace('button:' + i + ':' + ctrl.id);
+            var ctrl:GameInputControl = device.getControlAt(i);
+            buttons.push(i + ':' + ctrl.id);
         }
-
+        GameLogger.debug('input', 'device enabled=' + device.enabled
+                + ' id=' + device.id
+                + ' name=' + device.name
+                + ' numControls=' + device.numControls
+                + ' sampleInterval=' + device.sampleInterval
+                + ' maxBuffer=' + GameInputDevice.MAX_BUFFER_SIZE
+                + ' buttons=' + buttons.join(','));
     }
 
     /**
@@ -190,7 +192,7 @@ public class JoyStick {
         _gameDeivces.push(device);
         var id:String  = device.id;
         _deivceMap[id] = device;
-        trace('addDevice:' + id, ':', device.id);
+        GameLogger.debug('input', 'addDevice ' + id);
     }
 
     /**
@@ -242,7 +244,7 @@ public class JoyStick {
     private static function joystickHandler(e:GameInputEvent):void {
         switch (e.type) {
         case GameInputEvent.DEVICE_ADDED:
-            trace('connected', e.device, GameInput.numDevices);
+            GameLogger.debug('input', 'connected ' + e.device + ' ' + GameInput.numDevices);
             outputDeviceInfo(e.device);
 
             if (GameInput.numDevices < 3) {
@@ -254,11 +256,11 @@ public class JoyStick {
 
             break;
         case GameInputEvent.DEVICE_REMOVED:
-            trace('disconnected', e.device);
+            GameLogger.debug('input', 'disconnected ' + e.device);
             removeDevice(e.device);
             break;
         case GameInputEvent.DEVICE_UNUSABLE:
-            trace('unuse', e.device);
+            GameLogger.debug('input', 'unuse ' + e.device);
             removeDevice(e.device);
             break;
         }

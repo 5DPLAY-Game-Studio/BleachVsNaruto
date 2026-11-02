@@ -25,6 +25,7 @@ import net.play5d.game.bvn.interfaces.ISaveData;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.utils.KyoUtils;
 
 /**
@@ -142,10 +143,8 @@ public class ConfigVO implements ISaveData, IInstanceVO {
                 return extendConfig[key];
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('sys', 'ConfigVO.getValueByKey: ' + e);
             }
-        }
-        return null;
     }
 
     public function setValueByKey(key:String, value:*):void {
@@ -158,10 +157,8 @@ public class ConfigVO implements ISaveData, IInstanceVO {
                 extendConfig[key] = value;
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('sys', 'ConfigVO.setValueByKey: ' + e);
             }
-        }
-    }
 
 }
 }

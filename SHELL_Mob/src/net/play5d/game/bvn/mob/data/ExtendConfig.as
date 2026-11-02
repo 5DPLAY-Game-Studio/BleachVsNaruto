@@ -2,6 +2,7 @@ package net.play5d.game.bvn.mob.data {
 import net.play5d.game.bvn.interfaces.IExtendConfig;
 import net.play5d.game.bvn.input.JoyStickConfigVO;
 import net.play5d.game.bvn.input.JoyStickExtendConfigHelper;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class ExtendConfig implements IExtendConfig {
 
@@ -54,7 +55,7 @@ public class ExtendConfig implements IExtendConfig {
             return;
         }
 
-        trace('initDefaultDevices');
+        GameLogger.debug('input', 'initDefaultDevices');
 
         _isInitDefaultJoystick = true;
 

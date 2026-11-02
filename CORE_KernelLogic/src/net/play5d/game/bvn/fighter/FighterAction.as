@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.fighter {
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * 角色状态及可执行动作定义
@@ -157,7 +158,7 @@ public class FighterAction {
 
     public function setCD(id:String, time:int):void {
         _cdObj[id] = time / GameConfig.FPS_GAME;
-        trace(_cdObj[id]);
+        GameLogger.debug('fight', 'setCD ' + id + ' ' + _cdObj[id]);
     }
 
     public function CDOK(id:String):Boolean {

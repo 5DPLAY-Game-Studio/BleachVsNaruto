@@ -58,7 +58,7 @@ public class GameSafeKeeper {
         }
 
         function failBack(e:* = null):void {
-            trace('loadSafeFile fail:', e);
+            GameLogger.error('load', 'loadSafeFile fail: ' + e);
             _configFailed = true;
             if (fail != null) {
                 fail();
@@ -86,7 +86,8 @@ public class GameSafeKeeper {
         }
 
         if (_failFileMap[url]) {
-            trace('checkFile Error :: not match! ', url);
+            GameLogger.error('load', 'checkFile not match: ' + url);
+
             return false;
         }
 
@@ -96,7 +97,8 @@ public class GameSafeKeeper {
 
         var md5:String = _fileSaveMap[url];
         if (!md5) {
-            trace('checkFile Error :: md5 not found! ', url);
+            GameLogger.error('load', 'checkFile md5 not found: ' + url);
+
             return false;
         }
 
@@ -106,10 +108,11 @@ public class GameSafeKeeper {
             return true;
         }
 
-        trace('checkFile Error :: md5 not match! ', url);
+        GameLogger.error('load', 'checkFile md5 not match: ' + url);
 
         _failFileMap[url] = 1;
         _fileFailed       = true;
+
         return false;
     }
 

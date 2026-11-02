@@ -8,6 +8,7 @@ import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.mob.data.ScreenPadConfigVO;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.settings.SetBtnGroup;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class SetScreenBtnView extends Sprite {
 
@@ -102,7 +103,7 @@ public class SetScreenBtnView extends Sprite {
                 _btnGroup = null;
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('ui', String(e));
             }
 
         }
@@ -111,7 +112,7 @@ public class SetScreenBtnView extends Sprite {
             this.parent.removeChild(this);
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('ui', String(e));
         }
 
     }

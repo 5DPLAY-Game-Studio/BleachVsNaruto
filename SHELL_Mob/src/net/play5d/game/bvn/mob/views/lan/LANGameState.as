@@ -15,6 +15,7 @@ import net.play5d.game.bvn.mob.data.HostVO;
 import net.play5d.game.bvn.mob.events.LanEvent;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.stage.effect.ZoomEffect;
 
 public class LANGameState implements Istage {
@@ -104,7 +105,7 @@ public class LANGameState implements Istage {
 
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('net', String(e));
         }
 
         function onDialogClose():void {
@@ -120,7 +121,7 @@ public class LANGameState implements Istage {
 
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('net', String(e));
             }
         }
 
@@ -140,7 +141,7 @@ public class LANGameState implements Istage {
             ScreenPadManager.addTouchListener(_ui.btn_back, backHandler);
 
             //setting
-            trace(setting);
+            GameLogger.debug('net', String(setting));
 
             var hv:HostVO = new HostVO();
             hv.gameMode   = setting.game_mode;
@@ -212,7 +213,7 @@ public class LANGameState implements Istage {
     }
 
     private function startGameHost(t:DisplayObject):void {
-        trace('startGameHost');
+        GameLogger.debug('net', 'startGameHost');
         btnTouchEffect(t, null, false);
         SoundCtrl.I.sndConfirm();
 

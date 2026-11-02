@@ -60,7 +60,7 @@ public class BitmapAssetLoader {
         }
 
         function loadFail():void {
-            trace('BitmapAssetLoader.loadFail ::', url);
+            GameLogger.error('load', 'BitmapAssetLoader.loadFail: ' + url);
             if (back != null) {
                 back();
             }
@@ -72,7 +72,7 @@ public class BitmapAssetLoader {
         var content:Bitmap = bp as Bitmap;
 
         if (!content) {
-            trace('BitmapAssetLoader.cacheBitmap Error');
+            GameLogger.error('load', 'BitmapAssetLoader.cacheBitmap Error');
             return;
         }
 
@@ -83,7 +83,7 @@ public class BitmapAssetLoader {
                 cache = content.bitmapData;
             }
             catch (e:Error) {
-                trace('BitmapAssetLoader.cacheBitmap::', e);
+                GameLogger.error('load', 'BitmapAssetLoader.cacheBitmap: ' + e);
             }
         }
         else {

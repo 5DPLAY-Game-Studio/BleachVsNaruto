@@ -40,6 +40,7 @@ import net.play5d.game.bvn.map.MapLayerCacheUtil;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.CreditsSpriteUtil;
 import net.play5d.game.bvn.utils.EmbedAssetUtils;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.PayUtils;
 import net.play5d.game.bvn.utils.URL;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
@@ -92,7 +93,7 @@ public class GameInterfaceManager implements IGameInterface {
     public function saveGame(data:Object):void {
         var json:String = JSON.stringify(data);
         FileUtils.writeAppFolderFile('bvnsave.sav', json);
-        trace('saveData', json);
+        GameLogger.debug('sys', 'saveData ' + json);
     }
 
     public function loadGame():Object {

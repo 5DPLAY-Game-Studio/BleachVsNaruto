@@ -4,6 +4,7 @@ import com.adobe.crypto.MD5;
 import flash.filesystem.File;
 
 import net.play5d.game.bvn.mob.data.VersionInfoVO;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.air.utils.FileUtils;
 import net.play5d.kyo.loader.KyoURLLoader;
 
@@ -36,7 +37,7 @@ public class GamePolyCtrl {
 
             var url:String = urls.shift();
             url += '?rand=' + int(Math.random() * 10000);
-            trace('request::' + url);
+            GameLogger.debug('load', 'request ' + url);
 
             KyoURLLoader.load(url, function (data:String):void {
                 if (!parseConfig(data)) {
@@ -83,7 +84,8 @@ public class GamePolyCtrl {
             return true;
         }
         catch (e:Error) {
-            trace('GamePolyCtrl.parseConfig', e);
+            GameLogger.error('load', 'GamePolyCtrl.parseConfig ' + e);
+
             return false;
         }
 

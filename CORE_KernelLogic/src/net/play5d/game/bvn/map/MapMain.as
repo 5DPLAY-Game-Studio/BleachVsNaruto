@@ -27,6 +27,7 @@ import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class MapMain {
 
@@ -61,7 +62,7 @@ public class MapMain {
                 mapMc.removeChildren();
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('fight', String(e));
             }
             mapMc = null;
         }

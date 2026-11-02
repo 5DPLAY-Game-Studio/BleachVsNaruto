@@ -22,6 +22,7 @@ import flash.events.KeyboardEvent;
 import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
 import net.play5d.kyo.utils.KyoKeyboard;
 
@@ -72,7 +73,7 @@ public class LanGameMenuCtrl {
                 MainGame.I.root.removeChild(_exitDialog as DisplayObject);
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('net', String(e));
             }
             _exitDialog.destroy();
             _exitDialog = null;

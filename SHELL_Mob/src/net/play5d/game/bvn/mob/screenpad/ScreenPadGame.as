@@ -14,6 +14,7 @@ import net.play5d.game.bvn.mob.GameInterfaceManager;
 import net.play5d.game.bvn.mob.RootSprite;
 import net.play5d.game.bvn.mob.events.ScreenPadEvent;
 import net.play5d.game.bvn.mob.input.ScreenPadInput;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 
 public class ScreenPadGame extends EventDispatcher {
@@ -107,7 +108,7 @@ public class ScreenPadGame extends EventDispatcher {
             }
         }
         catch (e:Error) {
-            trace('ScreenPadGame.render', e);
+            GameLogger.error('input', 'ScreenPadGame.render ' + e);
         }
 
         renderTouch();
@@ -159,7 +160,7 @@ public class ScreenPadGame extends EventDispatcher {
                 _editStageView.parent.removeChild(_editStageView);
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('input', String(e));
             }
             _editStageView = null;
         }
@@ -173,7 +174,7 @@ public class ScreenPadGame extends EventDispatcher {
                     i.display.bitmapData.dispose();
                 }
                 catch (e:Error) {
-                    trace(e);
+                    GameLogger.error('input', String(e));
                 }
             }
             _btns = null;

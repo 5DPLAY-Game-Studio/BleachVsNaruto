@@ -21,6 +21,7 @@ import net.play5d.kyo.utils.JsonUtils;
 import net.play5d.game.bvn.mob.utils.MsgType;
 import net.play5d.game.bvn.mob.utils.SocketMsgFactory;
 import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink {
     private static var _i:LANServerCtrl;
@@ -210,7 +211,7 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
     }
 
     private function socketHandler(e:SocketEvent):void {
-        trace(e);
+        GameLogger.debug('net', String(e));
         switch (e.type) {
         case SocketEvent.CLIENT_CONNECT:
 

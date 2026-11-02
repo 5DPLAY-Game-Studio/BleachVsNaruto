@@ -163,7 +163,7 @@ public class MainGame {
     public function setFPS(v:Number):void {
         _fps             = v;
         _stage.frameRate = v;
-        trace('Setting FPS:: ' + v);
+        GameLogger.debug('sys', 'Setting FPS: ' + v);
     }
 
     public function setQuality(v:String):void {
@@ -172,7 +172,7 @@ public class MainGame {
         }
         _quality       = v;
         _stage.quality = v;
-        trace('Setting Quality:: ' + v);
+        GameLogger.debug('sys', 'Setting Quality: ' + v);
     }
 
     /**

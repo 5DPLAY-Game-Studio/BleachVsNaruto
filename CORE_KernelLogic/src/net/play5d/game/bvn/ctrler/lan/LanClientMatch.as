@@ -28,6 +28,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
 import net.play5d.game.bvn.interfaces.lan.ILanSocketInput;
 import net.play5d.game.bvn.stage.SelectFighterStage;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * 局域网客户端锁帧会话。
@@ -317,7 +318,7 @@ public class LanClientMatch {
             _delayText.parent.removeChild(_delayText);
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('net', String(e));
         }
         _delayText = null;
     }

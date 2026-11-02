@@ -28,6 +28,7 @@ import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSpriteCntlr;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class FighterAttackerCtrler implements IGameSpriteCntlr {
 
@@ -195,7 +196,7 @@ public class FighterAttackerCtrler implements IGameSpriteCntlr {
     public function fire(mcName:String, params:Object = null):void {
 
         if (!owner_fighter_ctrler || !owner_fighter_ctrler.hitModel) {
-            trace('hitModel error!');
+            GameLogger.error('fight', 'hitModel error');
             return;
         }
 
@@ -206,7 +207,7 @@ public class FighterAttackerCtrler implements IGameSpriteCntlr {
 
             var hv:HitVO = owner_fighter_ctrler.hitModel.getHitVOByDisplayName(mcName);
             if (!hv) {
-                trace('hitVO error!');
+                GameLogger.error('fight', 'hitVO error');
                 return;
             }
 

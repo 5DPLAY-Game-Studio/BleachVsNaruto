@@ -25,6 +25,7 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.lan.LanSyncType;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.utils.KyoTimeout;
 
 /**
@@ -220,7 +221,7 @@ public class LanClientSyncCore {
             }
         }
         catch (e:Error) {
-            trace('LanSyncType.GAME_START', e);
+            GameLogger.error('net', 'LanSyncType.GAME_START ' + e);
             syncError(true);
             clearTimeout(_syncStartInt);
             _syncStartInt = setTimeout(syncStartGame, 500);
@@ -279,7 +280,7 @@ public class LanClientSyncCore {
             _syncErrorTimes = 0;
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('net', String(e));
             syncError(true);
             clearTimeout(_syncRoundInt);
             _syncRoundInt = setTimeout(syncRoundFinish, 500, arr);

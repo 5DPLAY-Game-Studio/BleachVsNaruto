@@ -16,6 +16,7 @@ import net.play5d.game.bvn.mob.screenpad.ScreenPadGame;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class CustomScreenBtnView {
     public function CustomScreenBtnView() {
@@ -123,7 +124,7 @@ public class CustomScreenBtnView {
                 _ui.parent.removeChild(_ui);
             }
             catch (e:Error) {
-                trace(e);
+                GameLogger.error('ui', String(e));
             }
             _ui = null;
         }

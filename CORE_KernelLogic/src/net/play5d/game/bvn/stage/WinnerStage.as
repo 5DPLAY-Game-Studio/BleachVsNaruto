@@ -45,6 +45,7 @@ import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;
@@ -231,7 +232,7 @@ public class WinnerStage implements IStage {
                 return;
             }
             setText(txt, says[sayIndex].say);
-            trace(says[sayIndex].id);
+            GameLogger.debug('ui', String(says[sayIndex].id));
         }
 
     }

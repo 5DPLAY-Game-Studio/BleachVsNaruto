@@ -128,7 +128,7 @@ public class launch extends Sprite {
     }
 
     private function initUI():void {
-        trace('initUI');
+        GameLogger.debug('sys', 'initUI');
         UIAssetUtil.I.initialize(initGameConfig);
     }
 
@@ -188,7 +188,7 @@ public class launch extends Sprite {
             }
 
             _isActive = false;
-            trace('pause');
+            GameLogger.debug('sys', 'pause');
             KyoTimerUtils.pauseAllTimer();
             MobileCtrler.I.pause();
         }
@@ -198,7 +198,7 @@ public class launch extends Sprite {
             }
 
             _isActive = true;
-            trace('resume');
+            GameLogger.debug('sys', 'resume');
             KyoTimerUtils.resumeAllTimer();
             MobileCtrler.I.resume();
         }

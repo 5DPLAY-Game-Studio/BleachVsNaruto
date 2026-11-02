@@ -20,6 +20,7 @@ package net.play5d.game.bvn.fighter.ctrler {
 import net.play5d.game.bvn.ctrler.EffectCtrl;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.fighter.vos.FighterBuffVO;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class FighterBuffCtrler {
 
@@ -99,7 +100,7 @@ public class FighterBuffCtrler {
             return buff;
         }
         catch (e:Error) {
-            trace(e);
+            GameLogger.error('fight', String(e));
             return null;
         }
 

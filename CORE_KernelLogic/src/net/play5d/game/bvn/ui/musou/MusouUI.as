@@ -36,6 +36,7 @@ import net.play5d.game.bvn.ui.fight.HitsUI;
 import net.play5d.game.bvn.ui.musou.enemy.BossHpUI;
 import net.play5d.game.bvn.ui.musou.enemy.EnemyHpUIGroup;
 import net.play5d.game.bvn.ui.musou.enemy.MusouEnemyBarCtrl;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.utils.KyoTimeout;
 
@@ -188,7 +189,7 @@ public class MusouUI implements IGameUI {
     }
 
     public function showStart(finishBack:Function = null, params:Object = null):void {
-        trace('Musou Start!!');
+        GameLogger.debug('musou', 'Musou Start');
 
         playStartKO('mission_start', false);
 
@@ -204,7 +205,7 @@ public class MusouUI implements IGameUI {
     }
 
     public function showEnd(finishBack:Function = null, params:Object = null):void {
-        trace('Musou End!!');
+        GameLogger.debug('musou', 'Musou End');
     }
 
     public function showBossIn(finishBack:Function = null):void {

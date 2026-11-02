@@ -3,6 +3,7 @@ import flash.system.System;
 
 import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class MobileCtrler {
     private static var _i:MobileCtrler;
@@ -14,14 +15,14 @@ public class MobileCtrler {
 
 
     public function pause():void {
-        trace('pause process');
+        GameLogger.debug('sys', 'pause process');
         System.pause();
         GameCtrl.I.pause(true);
         SoundCtrl.I.pauseBGM();
     }
 
     public function resume():void {
-        trace('resume process');
+        GameLogger.debug('sys', 'resume process');
         System.resume();
         SoundCtrl.I.resumeBGM();
     }
