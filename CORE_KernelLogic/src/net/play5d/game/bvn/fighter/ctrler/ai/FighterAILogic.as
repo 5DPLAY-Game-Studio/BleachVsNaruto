@@ -258,7 +258,7 @@ public class FighterAILogic extends FighterAILogicBase {
     private function updateJumpAI():void {
         var jumpObj:Object = beginRateObj();
 
-        if (_isConting) {
+        if (_isContinuing) {
             jumpObj['default']                   = R_JP_C;
             jumpObj[FighterActionState.HURT_ING] = R_JP_CH;
         }
@@ -275,7 +275,7 @@ public class FighterAILogic extends FighterAILogicBase {
 
         jump = getAIByFighterState(jumpObj);
 
-        if (_isConting && jump) {
+        if (_isContinuing && jump) {
             addContOrder('jump', 10);
         }
     }
@@ -419,7 +419,7 @@ public class FighterAILogic extends FighterAILogicBase {
         }
 
         var attackObj:Object                       = beginRateObj();
-        attackObj['default']                       = _isConting ? R_ATK_C : R_ATK_D;
+        attackObj['default']                       = _isContinuing ? R_ATK_C : R_ATK_D;
         attackObj[FighterActionState.DEFENSE_ING]  = R_ATK_DF;
         attackObj[FighterActionState.HURT_ACT_ING] = R_ATK_HA;
         attackObj[FighterActionState.ATTACK_ING]   = R_ATK_A;
@@ -435,7 +435,7 @@ public class FighterAILogic extends FighterAILogicBase {
 
         var order:int = 10;
 
-        if (_isConting) {
+        if (_isContinuing) {
             attack    = true;
             attackAIR = _fighter.y < _target.y;
 
@@ -478,11 +478,11 @@ public class FighterAILogic extends FighterAILogicBase {
         var result:Boolean  = false;
 
         if (isBreakAct(hitId)) {
-            skillObj['default']                      = _isConting ? R_SK_B1 : R_SK_B2;
-            skillObj[FighterActionState.DEFENSE_ING] = _isConting ? R_SK_B3 : R_SK_B4;
+            skillObj['default']                      = _isContinuing ? R_SK_B1 : R_SK_B2;
+            skillObj[FighterActionState.DEFENSE_ING] = _isContinuing ? R_SK_B3 : R_SK_B4;
         }
         else {
-            skillObj['default']                      = _isConting ? R_SK_N1 : R_SK_N2;
+            skillObj['default']                      = _isContinuing ? R_SK_N1 : R_SK_N2;
             skillObj[FighterActionState.DEFENSE_ING] = R_SK_N3;
         }
 
@@ -495,7 +495,7 @@ public class FighterAILogic extends FighterAILogicBase {
         result = getAIByFighterState(skillObj) && targetCanBeHit() && targetInRange(range);
 
         if (result) {
-            if (_isConting) {
+            if (_isContinuing) {
                 addContOrder(id, isHitDownAct(hitId) ? order : order + 100);
             }
         }
@@ -509,14 +509,14 @@ public class FighterAILogic extends FighterAILogicBase {
 
         if (_fighter.qi >= qi) {
             if (isBreakAct(hitId)) {
-                bishaObj['default']                      = _isConting ? R_BS_B1 : R_BS_B2;
-                bishaObj[FighterActionState.DEFENSE_ING] = _isConting ? R_BS_B3 : R_BS_B4;
+                bishaObj['default']                      = _isContinuing ? R_BS_B1 : R_BS_B2;
+                bishaObj[FighterActionState.DEFENSE_ING] = _isContinuing ? R_BS_B3 : R_BS_B4;
             }
             else {
-                bishaObj['default']                      = _isConting ? R_BS_N1 : R_BS_N2;
+                bishaObj['default']                      = _isContinuing ? R_BS_N1 : R_BS_N2;
                 bishaObj[FighterActionState.HURT_ING]    = R_BS_H;
                 bishaObj[FighterActionState.JUMP_ING]    = R_BS_J;
-                bishaObj[FighterActionState.DEFENSE_ING] = _isConting ? R_BS_D1 : R_BS_D2;
+                bishaObj[FighterActionState.DEFENSE_ING] = _isContinuing ? R_BS_D1 : R_BS_D2;
             }
 
             bishaObj[FighterActionState.HURT_ACT_ING] = R_BS_HA;
@@ -529,7 +529,7 @@ public class FighterAILogic extends FighterAILogicBase {
         }
 
         if (result) {
-            if (_isConting) {
+            if (_isContinuing) {
                 addContOrder(id, order);
             }
         }

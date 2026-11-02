@@ -37,7 +37,7 @@ public class FighterAILogicBase {
     protected var _fighterAction:FighterAction;
     protected var _target:IGameSprite;
     protected var _targetFighter:FighterMain;
-    protected var _isConting:Boolean;
+    protected var _isContinuing:Boolean;
     private var _breakActCache:Object   = {};
     private var _hitDownActCache:Object = {};
     //连招优先级
@@ -57,7 +57,7 @@ public class FighterAILogicBase {
     public function render():void {
         _target        = _fighter.getCurrentTarget();
         _targetFighter = _target as FighterMain;
-        updateConting();
+        updateContinuing();
         _fighterAction ||= _fighter.getCtrler().getMcCtrl().getAction();
         updateActionAI();
         updateContOrder();
@@ -90,8 +90,8 @@ public class FighterAILogicBase {
         }
     }
 
-    protected function updateConting():void {
-        _isConting = _fighter.actionState == FighterActionState.ATTACK_ING || _fighter.actionState ==
+    protected function updateContinuing():void {
+        _isContinuing = _fighter.actionState == FighterActionState.ATTACK_ING || _fighter.actionState ==
                      FighterActionState.SKILL_ING ||
                      _fighter.actionState == FighterActionState.BISHA_ING || _fighter.actionState ==
                      FighterActionState.BISHA_SUPER_ING;
