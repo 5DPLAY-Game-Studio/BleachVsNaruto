@@ -63,8 +63,23 @@ public class EffectVO implements IInstanceVO {
     public var customMcCls:Class;
     // 自定义特效声音链接
     public var customSndCls:Class;
+    /** @private 相同 className 共用的帧位图与帧标签 */
+    private static var _sharedFrameCache:Object;
 
+    /**
+     * 把元件逐帧画成位图。
+     *
+     * <p>相同 <code>className</code> 共用一份帧数据。连续相同的静帧复用上一帧，并释放本次位图。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * effect.cacheBitmapData();
+     * </listing>
+     */
     public function cacheBitmapData():void {
+        if (useSharedFrames()) {
+            return;
+        }
 
         bitmapDataCache = new Vector.<BitmapDataCacheVO>();
         frameLabelCache = {};
@@ -101,11 +116,18 @@ public class EffectVO implements IInstanceVO {
             var offsetX:Number = bounds.x;
             var offsetY:Number = bounds.y;
 
-            if (cache && cache.offsetX == offsetX && cache.offsetY == offsetY && cache.bitmapData.compare(bd) ==
-                0x00000000) {
-                bitmapDataCache.push(cache);
-                mc.nextFrame();
-                continue;
+            if (cache && cache.offsetX == offsetX && cache.offsetY == offsetY) {
+                var compared:Object = cache.bitmapData.compare(bd);
+                var diff:BitmapData = compared as BitmapData;
+                if (diff) {
+                    diff.dispose();
+                }
+                else if (compared == 0) {
+                    bd.dispose();
+                    bitmapDataCache.push(cache);
+                    mc.nextFrame();
+                    continue;
+                }
             }
 
             cache            = new BitmapDataCacheVO();
@@ -121,6 +143,32 @@ public class EffectVO implements IInstanceVO {
         bounds = null;
         cache  = null;
 
+        storeSharedFrames();
+    }
+
+    private function useSharedFrames():Boolean {
+        if (!className || !_sharedFrameCache) {
+            return false;
+        }
+        var shared:Object = _sharedFrameCache[className];
+        if (!shared) {
+            return false;
+        }
+        bitmapDataCache = shared.frames;
+        frameLabelCache = shared.labels;
+
+        return true;
+    }
+
+    private function storeSharedFrames():void {
+        if (!className) {
+            return;
+        }
+        _sharedFrameCache ||= {};
+        _sharedFrameCache[className] = {
+            frames: bitmapDataCache,
+            labels: frameLabelCache
+        };
     }
 
 }
