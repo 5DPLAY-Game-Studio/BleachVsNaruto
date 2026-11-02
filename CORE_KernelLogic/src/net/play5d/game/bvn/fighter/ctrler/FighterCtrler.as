@@ -504,30 +504,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
     }
 
     public function getCurrentRect(rect:Rectangle, cacheId:String = null):Rectangle {
-        var newRect:Rectangle;
-
-        if (cacheId == null) {
-            newRect = new Rectangle();
-        }
-        else {
-            if (_rectCache[cacheId]) {
-                newRect = _rectCache[cacheId];
-            }
-            else {
-                newRect             = new Rectangle();
-                _rectCache[cacheId] = newRect;
-            }
-        }
-
-        newRect.x = rect.x * _fighter.direct + _fighter.x;
-        if (_fighter.direct < 0) {
-            newRect.x -= rect.width;
-        }
-
-        newRect.y      = rect.y + _fighter.y;
-        newRect.width  = rect.width;
-        newRect.height = rect.height;
-        return newRect;
+        return HitAreaUtil.toWorldRect(rect, _fighter.direct, _fighter.x, _fighter.y, _rectCache, cacheId);
     }
 
     //万解 SAMPLE: parent.$fighter_ctrler.doWanKai();

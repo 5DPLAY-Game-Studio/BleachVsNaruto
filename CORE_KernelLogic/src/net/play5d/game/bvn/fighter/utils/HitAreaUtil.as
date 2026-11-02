@@ -17,14 +17,17 @@
  */
 
 package net.play5d.game.bvn.fighter.utils {
+import flash.geom.Rectangle;
+
 import net.play5d.game.bvn.fighter.models.HitVO;
 
 /**
- * 把帧缓存里的攻击区域收成当前命中列表。
+ * 帧缓存攻击区域的收集，以及按朝向换算世界坐标。
  *
- * <p>区域来源和世界坐标换算由调用方提供。坐标换算沿用各自的 <code>getCurrentRect</code>。</p>
+ * <p>区域来源、朝向、位置和矩形缓存由调用方提供。</p>
  *
  * @see #collectCurrentHits()
+ * @see #toWorldRect()
  */
 public class HitAreaUtil {
 
@@ -60,6 +63,55 @@ public class HitAreaUtil {
         }
 
         return hitsBuf;
+    }
+
+    /**
+     * 按朝向把局部矩形变到世界坐标，并按 <code>cacheId</code> 复用结果矩形。
+     *
+     * <p>朝向为负时，x 再减去矩形宽度，使翻转后的区域仍盖住原范围。</p>
+     *
+     * @param rect 局部矩形。
+     * @param direct 朝向。<code>1</code> 向右，负值向左。
+     * @param x 世界坐标 x。
+     * @param y 世界坐标 y。
+     * @param rectCache <code>cacheId</code> 非空时使用的矩形缓存；键为缓存 id。
+     * @param cacheId 缓存键。为空时每次新建矩形。
+     * @return 世界坐标矩形。
+     * @example
+     * <listing version="3.0">
+     * var world:Rectangle = HitAreaUtil.toWorldRect(area, direct, x, y, rectCache, 'hit0');
+     * </listing>
+     */
+    public static function toWorldRect(
+            rect     :Rectangle,
+            direct   :int,
+            x        :Number,
+            y        :Number,
+            rectCache:Object = null,
+            cacheId  :String = null
+    ):Rectangle {
+        var world:Rectangle;
+        if (cacheId == null) {
+            world = new Rectangle();
+        }
+        else if (rectCache[cacheId]) {
+            world = rectCache[cacheId];
+        }
+        else {
+            world              = new Rectangle();
+            rectCache[cacheId] = world;
+        }
+
+        world.x = rect.x * direct + x;
+        if (direct < 0) {
+            world.x -= rect.width;
+        }
+
+        world.y      = rect.y + y;
+        world.width  = rect.width;
+        world.height = rect.height;
+
+        return world;
     }
 
 }

@@ -396,30 +396,7 @@ public class FighterAttacker extends BaseGameSprite {
     }
 
     private function getCurrentRect(rect:Rectangle, cacheId:String = null):Rectangle {
-        var newRect:Rectangle;
-
-        if (cacheId == null) {
-            newRect = new Rectangle();
-        }
-        else {
-            if (_rectCache[cacheId]) {
-                newRect = _rectCache[cacheId];
-            }
-            else {
-                newRect             = new Rectangle();
-                _rectCache[cacheId] = newRect;
-            }
-        }
-
-        newRect.x = rect.x * direct + _x;
-        if (direct < 0) {
-            newRect.x -= rect.width;
-        }
-
-        newRect.y      = rect.y + _y;
-        newRect.width  = rect.width;
-        newRect.height = rect.height;
-        return newRect;
+        return HitAreaUtil.toWorldRect(rect, direct, _x, _y, _rectCache, cacheId);
     }
 
     private function getHitModel():FighterHitModel {
