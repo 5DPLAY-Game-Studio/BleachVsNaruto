@@ -36,7 +36,7 @@ import net.play5d.game.bvn.data.musou.MusouWorldMapAreaVO;
 import net.play5d.game.bvn.data.musou.MusouWorldMapVO;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.ui.GameUI;
-import net.play5d.game.bvn.ui.big_map.BigmapClould;
+import net.play5d.game.bvn.ui.big_map.BigmapCloud;
 import net.play5d.game.bvn.ui.big_map.WorldMapPointUI;
 import net.play5d.game.bvn.ui.dialog.DialogManager;
 import net.play5d.game.bvn.utils.BtnUtils;
@@ -59,7 +59,7 @@ public class WorldMapStage implements IStage {
     private var _scale:Number   = 1;
     private var _position:Point = new Point();
     private var _currentPoint:WorldMapPointUI;
-    private var _cloudUI:BigmapClould;
+    private var _cloudUI:BigmapCloud;
     private var _backBtn:DisplayObject;
 
     /**
@@ -98,7 +98,7 @@ public class WorldMapStage implements IStage {
 
         initPointUIs();
 
-        _cloudUI = new BigmapClould(_mapUI.getBounds(_mapUI));
+        _cloudUI = new BigmapCloud(_mapUI.getBounds(_mapUI));
         _ui.addChild(_cloudUI);
 
         _cloudUI.init();

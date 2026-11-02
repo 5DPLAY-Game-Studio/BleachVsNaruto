@@ -23,9 +23,9 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.utils.GameLogger;
 
-public class BigmapClould extends Sprite {
+public class BigmapCloud extends Sprite {
 
-    public function BigmapClould(bounds:Rectangle) {
+    public function BigmapCloud(bounds:Rectangle) {
         super();
         _bounds       = bounds;
         mouseChildren = mouseEnabled = false;
@@ -65,7 +65,7 @@ public class BigmapClould extends Sprite {
                     this.removeChild(i.mc);
                 }
                 catch (e:Error) {
-                    GameLogger.error('ui', 'BigmapClould ' + e);
+                    GameLogger.error('ui', 'BigmapCloud ' + e);
                 }
             }
         }
