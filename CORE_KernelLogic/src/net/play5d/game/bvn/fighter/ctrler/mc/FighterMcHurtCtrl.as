@@ -636,7 +636,7 @@ public class FighterMcHurtCtrl {
      */
     private function renderHurtBreak():void {
 
-        if (!_actionCtrler.specailSkill()) {
+        if (!_actionCtrler.specialSkill()) {
             return;
         }
 

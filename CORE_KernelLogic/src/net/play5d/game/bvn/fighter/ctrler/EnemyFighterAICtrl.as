@@ -161,7 +161,7 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
         return false;
     }
 
-    public function specailSkill():Boolean {
+    public function specialSkill():Boolean {
         return false;
     }
 

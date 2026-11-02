@@ -139,7 +139,7 @@ public class FighterAICtrl implements IFighterActionCtrl {
         return _AIlogic.assist;
     }
 
-    public function specailSkill():Boolean {
+    public function specialSkill():Boolean {
         return _AIlogic.specialSkill;
     }
 

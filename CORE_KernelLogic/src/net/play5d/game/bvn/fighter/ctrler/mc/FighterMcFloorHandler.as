@@ -61,7 +61,7 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
      */
     public function renderSpecial():void {
 
-        if (_actionLogic.specailSkill()) {
+        if (_actionLogic.specialSkill()) {
             FighterEventDispatcher.dispatchEvent(_fighter, FighterEvent.DO_SPECIAL);
         }
 

@@ -67,7 +67,7 @@ public interface IFighterActionCtrl {
 
     function assist():Boolean;
 
-    function specailSkill():Boolean;
+    function specialSkill():Boolean;
 
     function attackAIR():Boolean;
 

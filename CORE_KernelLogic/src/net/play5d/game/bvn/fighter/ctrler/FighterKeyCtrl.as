@@ -152,7 +152,7 @@ public class FighterKeyCtrl implements IFighterActionCtrl {
         return GameInputter.special(inputType, 0);
     }
 
-    public function specailSkill():Boolean {
+    public function specialSkill():Boolean {
         return GameInputter.special(inputType, 0);
     }
 

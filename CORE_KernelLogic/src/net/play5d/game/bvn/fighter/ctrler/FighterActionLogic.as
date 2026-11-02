@@ -238,8 +238,8 @@ public class FighterActionLogic {
         return _actionCtrler.waiKaiS();
     }
 
-    public function specailSkill():Boolean {
-        return _actionCtrler.specailSkill();
+    public function specialSkill():Boolean {
+        return _actionCtrler.specialSkill();
     }
 
 }

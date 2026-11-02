@@ -47,7 +47,7 @@ public class EnemyBossAICtrl extends FighterAICtrl {
         return false;
     }
 
-    public override function specailSkill():Boolean {
+    public override function specialSkill():Boolean {
         return false;
     }
 
