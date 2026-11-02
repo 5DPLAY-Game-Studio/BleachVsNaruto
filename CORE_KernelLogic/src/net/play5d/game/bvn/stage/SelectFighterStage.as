@@ -439,7 +439,7 @@ public class SelectFighterStage implements IStage {
     private function playerSeltBack(selt:SelectorItemUI):void {
         if (selt.selectFinish()) {
             if (_modeFlow.shouldWaitBothPlayers()) {
-                GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER_STEP, selt.getCurrentSelectes());
+                GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER_STEP, selt.getCurrentSelects());
 
                 var otherSlt:SelectorItemUI = selt == _p1Slt ? _p2Slt : _p1Slt;
                 if (otherSlt && otherSlt.selectFinish() && !_twoPlayerSelectFin) {

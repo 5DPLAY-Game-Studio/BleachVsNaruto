@@ -61,7 +61,7 @@ public class SelectorItemUI {
         return selectTimes >= selectTimesCount;
     }
 
-    public function getCurrentSelectes():Array {
+    public function getCurrentSelects():Array {
         if (isSelectAssist) {
             return [selectVO.fuzhu];
         }
