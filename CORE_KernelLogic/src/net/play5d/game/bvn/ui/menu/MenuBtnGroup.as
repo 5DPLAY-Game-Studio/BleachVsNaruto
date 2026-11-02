@@ -150,7 +150,7 @@ public class MenuBtnGroup extends Sprite {
 
     protected function selectBtn(target:MenuBtn):void {
         if (target.children) {
-            toogleChildren(target);
+            toggleChildren(target);
             return;
         }
 
@@ -420,7 +420,7 @@ public class MenuBtnGroup extends Sprite {
 
     }
 
-    private function toogleChildren(btn:MenuBtn):void {
+    private function toggleChildren(btn:MenuBtn):void {
         if (_showIngChildrenBtn) {
             var isSame:Boolean = btn == _showIngChildrenBtn;
             if (!isSame) {
