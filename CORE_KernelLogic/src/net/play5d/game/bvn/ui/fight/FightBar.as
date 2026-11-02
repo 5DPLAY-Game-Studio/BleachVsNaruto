@@ -88,7 +88,7 @@ public class FightBar {
     private var _parent:DisplayObjectContainer;
     private var _children:Vector.<DisplayObject>;
     private var _drawMatrix:Matrix;
-    private var _empytBd:BitmapData;
+    private var _emptyBd:BitmapData;
 
     private var _ui:$fight$MC_hpBar;
 
@@ -128,9 +128,9 @@ public class FightBar {
                 _bp.bitmapData.dispose();
                 _bp = null;
             }
-            if (_empytBd) {
-                _empytBd.dispose();
-                _empytBd = null;
+            if (_emptyBd) {
+                _emptyBd.dispose();
+                _emptyBd = null;
             }
             _drawMatrix = null;
             for each(var d:DisplayObject in _children) {
@@ -285,7 +285,7 @@ public class FightBar {
         _bp.x          = bds.x;
         _bp.y          = bds.y;
 
-        _empytBd = new BitmapData(_ui.width, _ui.height, true, 0);
+        _emptyBd = new BitmapData(_ui.width, _ui.height, true, 0);
 
         addChildren(_hpBar1.ui);
         addChildren(_hpBar2.ui);
@@ -335,7 +335,7 @@ public class FightBar {
     }
 
     private function updateBitmap():void {
-        _bp.bitmapData.copyPixels(_empytBd, new Rectangle(0, 0, _empytBd.width, _empytBd.height), new Point());
+        _bp.bitmapData.copyPixels(_emptyBd, new Rectangle(0, 0, _emptyBd.width, _emptyBd.height), new Point());
         _bp.bitmapData.draw(_ui, _drawMatrix);
     }
 
