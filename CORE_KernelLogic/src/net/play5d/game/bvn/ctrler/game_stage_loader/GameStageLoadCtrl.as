@@ -492,10 +492,10 @@ public class GameStageLoadCtrl extends EventDispatcher {
             currentAsset       = fv;
             _curLoadName       = fv.name;
 
-            loadFunc(fv, loadSucess);
+            loadFunc(fv, loadSuccess);
         }
 
-        function loadSucess():void {
+        function loadSuccess():void {
             _curLoadStep++;
             loadNext();
         }
