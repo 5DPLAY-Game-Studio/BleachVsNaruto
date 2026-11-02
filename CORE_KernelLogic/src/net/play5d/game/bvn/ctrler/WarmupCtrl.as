@@ -197,7 +197,7 @@ public class WarmupCtrl {
     private function warmBgmPlayer():void {
         try {
             var vol:Number = GameData.I && GameData.I.config ? GameData.I.config.bgmVolume : 0.7;
-            SoundCtrl.I.setBgmVolumn(vol);
+            SoundCtrl.I.setBgmVolume(vol);
         }
         catch (e:Error) {
         }

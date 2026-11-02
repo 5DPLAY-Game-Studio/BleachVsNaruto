@@ -52,11 +52,11 @@ public class SoundCtrl {
     /** @private 静音预热用 */
     private var _silentTransform:SoundTransform;
 
-    public function setSoundVolumn(v:Number):void {
+    public function setSoundVolume(v:Number):void {
         _sndTransform.volume = v;
     }
 
-    public function setBgmVolumn(v:Number):void {
+    public function setBgmVolume(v:Number):void {
         if (!_bgSound) {
             _bgSound = new KyoBGSounder();
         }

@@ -88,8 +88,8 @@ public class ConfigCtrl {
      * </listing>
      */
     public static function applyVolume(config:ConfigVO):void {
-        SoundCtrl.I.setBgmVolumn(config.bgmVolume);
-        SoundCtrl.I.setSoundVolumn(config.soundVolume);
+        SoundCtrl.I.setBgmVolume(config.bgmVolume);
+        SoundCtrl.I.setSoundVolume(config.soundVolume);
     }
 }
 }
