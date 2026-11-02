@@ -369,7 +369,7 @@ public class FighterMcHurtCtrl {
             if (_defenseFrameDelay > -5) {
                 return;
             }
-            _action.isDefending = false;
+            _action.isDefenseing = false;
             _mc.goFrame(FighterSpecialFrame.DEFENSE_RESUME, false, 0, {call: _owner.idle, delay: 1});
         }
     }
@@ -383,7 +383,7 @@ public class FighterMcHurtCtrl {
             _action.clearAction();
             _action.clearState();
 
-            _action.isDefending = true;
+            _action.isDefenseing = true;
             _owner.setSkill1();
             _owner.setZhao2();
             _owner.setBishaSUPER();
@@ -408,7 +408,7 @@ public class FighterMcHurtCtrl {
      * 执行防御
      */
     public function doDefense():void {
-        if (_action.isDefending) {
+        if (_action.isDefenseing) {
             return;
         }
 

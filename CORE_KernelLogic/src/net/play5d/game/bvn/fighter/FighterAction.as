@@ -27,7 +27,7 @@ public class FighterAction {
 
     public var isMoving:Boolean;
     public var isJumping:Boolean;
-    public var isDefending:Boolean;
+    public var isDefenseing:Boolean;
     public var isDashing:Boolean;
     public var isHurting:Boolean; //被打
     public var isHurtFlying:Boolean; //击飞
@@ -84,7 +84,7 @@ public class FighterAction {
     public function clearState():void {
         isMoving           = false;
         isJumping          = false;
-        isDefending        = false;
+        isDefenseing       = false;
         isDashing          = false;
         isHurting          = false;
         isHurtFlying       = false;

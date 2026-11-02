@@ -152,7 +152,7 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
         if (_action.isMoving) {
             renderMoving();
         }
-        if (_action.isDefending) {
+        if (_action.isDefenseing) {
             _hurt.renderDefense();
         }
 

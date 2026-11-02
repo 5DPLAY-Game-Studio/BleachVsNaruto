@@ -782,7 +782,7 @@ public class FighterMcCtrler {
             }
 
             _actionCtrl.tickDoActionFrame();
-            if (_rt.action.isDefending) {
+            if (_rt.action.isDefenseing) {
                 _hurtCtrl.renderDefenseAnimate();
             }
         }
@@ -861,9 +861,9 @@ public class FighterMcCtrler {
 
         _rt.fighter.setVelocity(0, 0);
 
-        _rt.action.isMoving    = false;
-        _rt.action.isDefending = false;
-        _rt.action.isDashing   = false;
+        _rt.action.isMoving     = false;
+        _rt.action.isDefenseing = false;
+        _rt.action.isDashing    = false;
 
         _rt.doingAction    = action;
         _rt.doingAirAction = airAct ? action : null;
