@@ -196,9 +196,9 @@ public class FighterAILogic extends FighterAILogicBase {
         moveLeft  = false;
         moveRight = false;
 
-        var isDefensing:Boolean = _fighter.actionState == FighterActionState.DEFENSE_ING;
+        var isDefending:Boolean = _fighter.actionState == FighterActionState.DEFENSE_ING;
 
-        if (isDefensing) {
+        if (isDefending) {
             var defenseMove:Boolean = getAIResult(1, 2, 4, 5, 6, 8);
             if (defenseMove) {
                 if (_fighter.x > _target.x + 20) {

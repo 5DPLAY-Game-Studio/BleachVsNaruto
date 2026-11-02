@@ -774,7 +774,7 @@ public class FighterMcCtrler {
                 _hurtCtrl.renderHurtAnimate();
             }
             if (_rt.action.isDefenseHitting) {
-                _hurtCtrl.renderDefensHitting();
+                _hurtCtrl.renderDefenseHitting();
             }
 
             if (_rt.action.isJumping) {
@@ -782,7 +782,7 @@ public class FighterMcCtrler {
             }
 
             _actionCtrl.tickDoActionFrame();
-            if (_rt.action.isDefensing) {
+            if (_rt.action.isDefending) {
                 _hurtCtrl.renderDefenseAnimate();
             }
         }
@@ -862,7 +862,7 @@ public class FighterMcCtrler {
         _rt.fighter.setVelocity(0, 0);
 
         _rt.action.isMoving    = false;
-        _rt.action.isDefensing = false;
+        _rt.action.isDefending = false;
         _rt.action.isDashing   = false;
 
         _rt.doingAction    = action;
