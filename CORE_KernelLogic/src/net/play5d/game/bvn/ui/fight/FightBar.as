@@ -99,7 +99,7 @@ public class FightBar {
     public function destroy():void {
         if (_ui) {
             _ui.removeEventListener(Event.COMPLETE, uiPlayComplete);
-            _ui.gotoAndStop('destory');
+            _ui.gotoAndStop('destroy');
             _ui = null;
         }
 
