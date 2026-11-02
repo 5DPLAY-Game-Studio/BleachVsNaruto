@@ -119,7 +119,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: 'VERY HARD', cn: GetLang('txt.set_btn_group.com_level_very_hard'), value: 5},
                     {label: 'HELL', cn: GetLang('txt.set_btn_group.com_level_hell'), value: 6}
                 ],
-                optoinKey: 'AI_level'
+                optionKey: 'AI_level'
             },
             {
                 txt      : 'LIFE', cn: GetLang('txt.set_btn_group.life'),
@@ -130,7 +130,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: '300%', cn: '300%', value: 3},
                     {label: '500%', cn: '500%', value: 5}
                 ],
-                optoinKey: 'fighterHP'
+                optionKey: 'fighterHP'
             },
             {
                 txt      : 'TIME', cn: GetLang('txt.set_btn_group.time'),
@@ -140,7 +140,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: '90s', cn: GetLang('txt.set_btn_group.time_90'), value: 90},
                     {label: '∞', cn: GetLang('txt.set_btn_group.time_unlimited'), value: -1}
                 ],
-                optoinKey: 'fightTime'
+                optionKey: 'fightTime'
             },
             {
                 txt      : 'SCREEN MODE', cn: GetLang('txt.game_interface_manager.screen_mode'),
@@ -148,7 +148,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: 'FILL', cn: GetLang('txt.game_interface_manager.screen_fill'), value: 0},
                     {label: 'RATIO', cn: GetLang('txt.game_interface_manager.screen_ratio'), value: 1}
                 ],
-                optoinKey: 'screenMode'
+                optionKey: 'screenMode'
             },
             {
                 txt      : 'SOUND', cn: GetLang('txt.set_btn_group.sound'),
@@ -160,7 +160,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: '70%', cn: '70%', value: 0.7},
                     {label: '100%', cn: '100%', value: 1}
                 ],
-                optoinKey: 'soundVolume'
+                optionKey: 'soundVolume'
             },
             {
                 txt      : 'BGM', cn: GetLang('txt.set_btn_group.bgm'),
@@ -172,7 +172,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: '70%', cn: '70%', value: 0.7},
                     {label: '100%', cn: '100%', value: 1}
                 ],
-                optoinKey: 'bgmVolume'
+                optionKey: 'bgmVolume'
             },
             {
                 txt      : 'QUALITY', cn: GetLang('txt.set_btn_group.quality'),
@@ -182,7 +182,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: 'HIGH', cn: GetLang('txt.set_btn_group.quality_high'), value: GameQuality.HIGH},
                     {label: 'BEST', cn: GetLang('txt.set_btn_group.quality_best'), value: GameQuality.BEST}
                 ],
-                optoinKey: 'quality'
+                optionKey: 'quality'
             },
             {
                 txt      : 'SHOW HP', cn: GetLang('txt.set_btn_group.show_hp'),
@@ -190,7 +190,7 @@ public class GameInterfaceManager implements IGameInterface {
                     {label: 'SHOW', cn: GetLang('txt.set_btn_group.hp_show'), value: true},
                     {label: 'HIDE', cn: GetLang('txt.set_btn_group.hp_hide'), value: false},
                 ],
-                optoinKey: 'isShowHp'
+                optionKey: 'isShowHp'
             }
         ];
     }

@@ -34,7 +34,7 @@ public class SetScreenBtnView extends Sprite {
                                          {label: 'TYPE 1', cn: GetLang('txt.set_screen_btn_view.type_1'), value: 0},
                                          {label: 'TYPE 2', cn: GetLang('txt.set_screen_btn_view.type_2'), value: 1},
                                      ],
-                                     optoinKey  : 'joyMode',
+                                     optionKey  : 'joyMode',
                                      optionValue: config.joyMode
                                  },
 
@@ -47,7 +47,7 @@ public class SetScreenBtnView extends Sprite {
                                          {label: '70%', cn: '70%', value: 0.7},
                                          {label: '100%', cn: '100%', value: 1}
                                      ],
-                                     optoinKey  : 'joyAlpha',
+                                     optionKey  : 'joyAlpha',
                                      optionValue: config.joyAlpha
                                  },
 
@@ -57,7 +57,7 @@ public class SetScreenBtnView extends Sprite {
                                          {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
                                          {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
                                      ],
-                                     optoinKey  : 'superSkillAutoHide',
+                                     optionKey  : 'superSkillAutoHide',
                                      optionValue: config.superSkillAutoHide
                                  },
 
@@ -67,7 +67,7 @@ public class SetScreenBtnView extends Sprite {
                                          {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
                                          {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
                                      ],
-                                     optoinKey  : 'wankaiAutoHide',
+                                     optionKey  : 'wankaiAutoHide',
                                      optionValue: config.wankaiAutoHide
                                  },
 
@@ -77,7 +77,7 @@ public class SetScreenBtnView extends Sprite {
                                          {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
                                          {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
                                      ],
-                                     optoinKey  : 'specialAutoHide',
+                                     optionKey  : 'specialAutoHide',
                                      optionValue: config.specialAutoHide
                                  },
 

@@ -200,7 +200,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         _btnGroup.startY = 30;
         _btnGroup.setBtnData([
                                  {
-                                     label      : 'USE JOY', cn: GetLang('txt.joy_stick_set_ui.use_joy'), options: joyOptions, optoinKey: 'deviceId',
+                                     label      : 'USE JOY', cn: GetLang('txt.joy_stick_set_ui.use_joy'), options: joyOptions, optionKey: 'deviceId',
                                      optionValue: _tmpJoyConfig.deviceId
                                  },
                                  {label: 'SET ALL', cn: GetLang('txt.common.set_all')},
@@ -210,7 +210,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
                                  {label: 'CANCEL', cn: GetLang('txt.common.cancel')}
                              ]);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnSelect);
-        _btnGroup.addEventListener(SetBtnEvent.OPTION_CHANGE, onOptoinChange);
+        _btnGroup.addEventListener(SetBtnEvent.OPTION_CHANGE, onOptionChange);
 
         _ui.addChild(_btnGroup);
     }
@@ -321,7 +321,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     }
 
     /** @private */
-    private function onOptoinChange(e:SetBtnEvent):void {
+    private function onOptionChange(e:SetBtnEvent):void {
         if (e.optionKey == 'deviceId') {
             _tmpJoyConfig.deviceId    = e.optionValue;
             _tmpJoyConfig.deviceIsSet = true;
