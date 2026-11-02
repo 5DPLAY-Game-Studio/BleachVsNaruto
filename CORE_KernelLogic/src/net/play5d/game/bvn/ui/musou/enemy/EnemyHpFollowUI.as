@@ -21,6 +21,7 @@ import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.kyo.utils.KyoMath;
 
 public class EnemyHpFollowUI {
 
@@ -59,18 +60,10 @@ public class EnemyHpFollowUI {
             return _fighter.isAlive;
         }
 
-        var val:Number = _fighter.hpPercent;
-        if (val < 0.0001) {
-            val = 0.0001;
-        }
-        if (val > 1) {
-            val = 1;
-        }
-
         _ui.x = _fighter.x;
         _ui.y = _fighter.y - 50;
 
-        _bar.scaleX = val;
+        _bar.scaleX = KyoMath.fixRange(_fighter.hpPercent, 0.0001, 1);
 
         if (--_showDelay <= 0) {
             _ui.visible = false;

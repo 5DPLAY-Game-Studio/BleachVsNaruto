@@ -22,6 +22,7 @@ import flash.display.Sprite;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.kyo.utils.KyoMath;
 
 public class MusouMiniHpBar {
 
@@ -40,8 +41,8 @@ public class MusouMiniHpBar {
         if (!_fighter) {
             return;
         }
-        _ui.bar_hp.scaleX = getScale(_fighter.hpPercent, 1);
-        _ui.bar_qi.scaleX = getScale(_fighter.qi, 300);
+        _ui.bar_hp.scaleX = KyoMath.fixRange(_fighter.hpPercent, 0.0001, 1);
+        _ui.bar_qi.scaleX = KyoMath.fixRange(_fighter.qi / 300, 0.0001, 1);
     }
 
     private function updateFace():void {
@@ -54,17 +55,6 @@ public class MusouMiniHpBar {
             }
         }
 
-    }
-
-    private static function getScale(val:Number, max:Number):Number {
-        var rate:Number = val / max;
-        if (rate < 0.0001) {
-            rate = 0.0001;
-        }
-        if (rate > 1) {
-            rate = 1;
-        }
-        return rate;
     }
 
 }

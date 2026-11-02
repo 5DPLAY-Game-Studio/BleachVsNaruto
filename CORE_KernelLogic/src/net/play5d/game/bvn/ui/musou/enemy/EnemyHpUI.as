@@ -22,6 +22,7 @@ import flash.display.Sprite;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.fighter.FighterMain;
+import net.play5d.kyo.utils.KyoMath;
 
 public class EnemyHpUI {
 
@@ -50,15 +51,7 @@ public class EnemyHpUI {
     }
 
     public function render():Boolean {
-        var val:Number = _fighter.hpPercent;
-        if (val < 0.0001) {
-            val = 0.0001;
-        }
-        if (val > 1) {
-            val = 1;
-        }
-
-        _bar.scaleX = val;
+        _bar.scaleX = KyoMath.fixRange(_fighter.hpPercent, 0.0001, 1);
 
         return _fighter.isAlive;
     }
