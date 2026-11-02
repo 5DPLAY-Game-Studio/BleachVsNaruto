@@ -41,7 +41,7 @@ import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.ctrls.UpdateCtrl;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadAsset;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
-import net.play5d.game.bvn.mob.utils.Loger;
+import net.play5d.game.bvn.mob.utils.Logger;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
 import net.play5d.game.bvn.ui.fight.FightUI;
@@ -55,7 +55,7 @@ import net.play5d.kyo.utils.KyoTimerUtils;
 [SWF(frameRate='30', backgroundColor='#000000')]
 public class launch extends Sprite {
     public function launch() {
-        GameLogger.setLoger(new Loger());
+        GameLogger.setLogger(new Logger());
         if (loaderInfo) {
             loaderInfo.uncaughtErrorEvents.addEventListener(
                 UncaughtErrorEvent.UNCAUGHT_ERROR,
@@ -161,7 +161,7 @@ public class launch extends Sprite {
             return;
         }
         _reportingUncaught = true;
-        // ERROR 会让 Loger 立刻刷盘
+        // ERROR 会让 Logger 立刻刷盘
         GameLogger.error('sys', 'uncaught: ' + UncaughtText(event));
     }
 

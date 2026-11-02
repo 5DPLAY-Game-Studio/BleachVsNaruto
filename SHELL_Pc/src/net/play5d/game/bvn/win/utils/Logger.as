@@ -38,11 +38,11 @@ import net.play5d.game.bvn.interfaces.ILogger;
  *
  * @example
  * <listing version="3.0">
- * GameLogger.setLoger(new Loger());
+ * GameLogger.setLogger(new Logger());
  * </listing>
  * @see net.play5d.game.bvn.interfaces.ILogger
  */
-public class Loger implements ILogger {
+public class Logger implements ILogger {
 
     /** @private */
     private static const MAX_LINES:int      = 32;
@@ -81,10 +81,10 @@ public class Loger implements ILogger {
      *
      * @example
      * <listing version="3.0">
-     * var logger:Loger = new Loger();
+     * var logger:Logger = new Logger();
      * </listing>
      */
-    public function Loger() {
+    public function Logger() {
         NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExiting);
         _timer = new Timer(FLUSH_INTERVAL);
         _timer.addEventListener(TimerEvent.TIMER, onTimer);
@@ -241,7 +241,7 @@ public class Loger implements ILogger {
         }
 
         _failureReported = true;
-        trace('Loger file disabled: ' + error.message);
+        trace('Logger file disabled: ' + error.message);
     }
 
 }

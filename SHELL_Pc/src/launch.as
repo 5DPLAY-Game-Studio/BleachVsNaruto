@@ -40,7 +40,7 @@ import net.play5d.game.bvn.utils.URL;
 import net.play5d.game.bvn.win.GameInterfaceManager;
 import net.play5d.game.bvn.win.MusouDebugger;
 import net.play5d.game.bvn.utils.SwfLib;
-import net.play5d.game.bvn.win.utils.Loger;
+import net.play5d.game.bvn.win.utils.Logger;
 import net.play5d.game.bvn.win.utils.PackModScanner;
 import net.play5d.game.bvn.win.utils.UIAssetUtil;
 
@@ -105,12 +105,12 @@ public class launch extends Sprite {
             return;
         }
         _reportingUncaught = true;
-        // ERROR 会让 Loger 立刻刷盘
+        // ERROR 会让 Logger 立刻刷盘
         GameLogger.error('sys', 'uncaught: ' + UncaughtText(event));
     }
 
     private function initialize(e:Event = null):void {
-        GameLogger.setLoger(new Loger());
+        GameLogger.setLogger(new Logger());
         GameLogger.log('init...');
 
         removeEventListener(Event.ADDED_TO_STAGE, initialize);

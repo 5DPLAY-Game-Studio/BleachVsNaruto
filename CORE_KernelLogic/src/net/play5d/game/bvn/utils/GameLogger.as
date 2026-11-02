@@ -48,7 +48,7 @@ public class GameLogger {
     public static const DEBUG:int = 4;
 
     /** @private */
-    private static var _loger:ILogger;
+    private static var _logger:ILogger;
     /** @private 负值表示按调试环境自动选择阈值 */
     private static var _threshold:int = -1;
 
@@ -60,12 +60,12 @@ public class GameLogger {
      * @param v <code>ILogger</code>，或 <code>null</code> 清除。
      * @example
      * <listing version="3.0">
-     * GameLogger.setLoger(logger);
+     * GameLogger.setLogger(logger);
      * </listing>
      * @see net.play5d.game.bvn.interfaces.ILogger
      */
-    public static function setLoger(v:Object):void {
-        _loger = v as ILogger;
+    public static function setLogger(v:Object):void {
+        _logger = v as ILogger;
     }
 
     /**
@@ -182,8 +182,8 @@ public class GameLogger {
         }
 
         var line:String = formatLine(level, category, message);
-        if (_loger) {
-            _loger.log(line);
+        if (_logger) {
+            _logger.log(line);
         }
         else {
             trace(line);
