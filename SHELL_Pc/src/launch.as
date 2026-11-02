@@ -84,7 +84,12 @@ public class launch extends Sprite {
     }
 
     private function initFailHandler(msg:String):void {
-        GameLogger.log('init fail');
+        if (msg) {
+            GameLogger.error('load', 'init fail: ' + msg);
+        }
+        else {
+            GameLogger.error('load', 'init fail');
+        }
     }
 
     private function initialize(e:Event = null):void {
