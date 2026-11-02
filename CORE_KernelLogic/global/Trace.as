@@ -17,30 +17,54 @@
  */
 
 package {
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
- * 输出带多语言调试前缀的字符串。
+ * 按调试级别输出带多语言前缀的字符串。
  *
- * <p><code>params</code> 非 <code>null</code> 时先对 <code>message</code> 执行
- * <code>Format</code>；为 <code>null</code> 时视为已格式化完成。</p>
+ * <p><code>params</code> 非 <code>null</code> 时先 <code>Format</code>。
+ * 格式化或取前缀失败时退回原文，不加前缀。
+ * 经 <code>GameLogger.debug</code> 输出，分类为 <code>trace</code>。
+ * 当前阈值低于 <code>DEBUG</code> 时不输出。</p>
  *
  * @param message 消息模板或已格式化的完整消息。
  * @param params 占位符参数；可为 <code>null</code>。
- * @throws ArgumentError 由 <code>Format</code> 在缺键时抛出。
  * @example
  * <listing version="3.0">
  * Trace('今天是星期{weekday}，天气：{weather}', {weekday: 1, weather: '晴'});
- * // 输出形如："* 跟踪 : 今天是星期1，天气：晴"
+ * // 调试阈值下形如："12:00:00.000 DEBUG [trace] * 跟踪 : 今天是星期1，天气：晴"
  * </listing>
  * @see Format
  * @see TraceLang
  * @see GetLangText
+ * @see net.play5d.game.bvn.utils.GameLogger#debug()
  */
 public function Trace(message:String, params:Object = null):void {
-    if (params != null) {
-        message = Format(message, params);
+    if (GameLogger.threshold < GameLogger.DEBUG) {
+        return;
     }
 
-    trace(GetLangText('debug.trace.prefix') + message);
+    var text:String = message;
+    if (params != null) {
+        try {
+            text = Format(message, params);
+        }
+        catch (error:Error) {
+            text = message;
+        }
+    }
+
+    var prefix:String = '';
+    try {
+        prefix = GetLangText('debug.trace.prefix');
+    }
+    catch (error:Error) {
+        prefix = '';
+    }
+    if (!prefix || prefix == '[N/A]') {
+        prefix = '';
+    }
+
+    GameLogger.debug('trace', prefix + text);
 }
 }

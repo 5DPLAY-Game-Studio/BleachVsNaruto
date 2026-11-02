@@ -17,15 +17,17 @@
  */
 
 package {
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
- * 按语言包路径取文案（可带命名占位符），再带调试前缀输出。
+ * 按语言包路径取文案（可带命名占位符），再按调试级别输出。
  *
- * <p>等价于 <code>Trace(GetLang(tree, params))</code>。</p>
+ * <p>语言包可用时等价于 <code>Trace(GetLang(tree, params))</code>。
+ * 取文案失败或得到 <code>[N/A]</code> 时改为输出路径本身。
+ * 当前阈值低于 <code>DEBUG</code> 时不输出。</p>
  *
  * @param tree 点分树形路径。
  * @param params 占位符名到替换值的映射；可为 <code>null</code>。
- * @throws ArgumentError 由 <code>Format</code> 在缺键时抛出。
  * @example
  * <listing version="3.0">
  * TraceLang('debug.trace.prefix');
@@ -33,8 +35,24 @@ package {
  * </listing>
  * @see GetLang
  * @see Trace
+ * @see net.play5d.game.bvn.utils.GameLogger#debug()
  */
 public function TraceLang(tree:String, params:Object = null):void {
-    Trace(GetLang(tree, params));
+    if (GameLogger.threshold < GameLogger.DEBUG) {
+        return;
+    }
+
+    var text:String;
+    try {
+        text = GetLang(tree, params);
+    }
+    catch (error:Error) {
+        text = tree;
+    }
+    if (!text || text == '[N/A]') {
+        text = tree;
+    }
+
+    Trace(text);
 }
 }

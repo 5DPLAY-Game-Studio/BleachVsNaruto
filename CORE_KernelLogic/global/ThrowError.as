@@ -17,14 +17,15 @@
  */
 
 package {
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
- * 抛出或仅打印错误（调试版可真正 throw）。
+ * 抛出或仅记录错误（调试版可真正 throw）。
  *
  * <p><code>errorParam</code> 可为 <code>Error</code> 实例或其子类的
  * <code>Class</code>。传入 <code>Class</code> 时以 <code>message</code>
- * 构造。非调试环境或 <code>isThrow</code> 为 <code>false</code> 时只打印堆栈，
- * 不抛出。</p>
+ * 构造。非调试环境或 <code>isThrow</code> 为 <code>false</code> 时只记录堆栈，
+ * 不抛出。记录走 <code>GameLogger.error</code>，分类 <code>sys</code>，使用英文或堆栈原文。</p>
  *
  * @param errorParam <code>Error</code> 实例，或可 <code>new</code> 出
  *                   <code>Error</code> 的类。
@@ -38,7 +39,7 @@ package {
  * ThrowError(Error, '仅打印', false);
  * </listing>
  * @see IsDebugger
- * @see Printf
+ * @see net.play5d.game.bvn.utils.GameLogger#error()
  */
 public function ThrowError(errorParam:*, message:String = '', isThrow:Boolean = true):void {
     var error:Error          = errorParam as Error;
@@ -57,10 +58,10 @@ public function ThrowError(errorParam:*, message:String = '', isThrow:Boolean = 
 
     if (!error) {
         if (errorParam is Class) {
-            Printf('Error class is not instantiated or is of wrong type');
+            GameLogger.error('sys', 'Error class is not instantiated or is of wrong type');
         }
         else {
-            Printf('Error parameter is invalid');
+            GameLogger.error('sys', 'Error parameter is invalid');
         }
         return;
     }
@@ -70,7 +71,7 @@ public function ThrowError(errorParam:*, message:String = '', isThrow:Boolean = 
     }
 
     // 堆栈/文案可能含 { }，不走 Printf/Format
-    trace(error.getStackTrace() || error.toString());
+    GameLogger.error('sys', error.getStackTrace() || error.toString());
 
     if (IsDebugger() && isThrow) {
         throw error;
