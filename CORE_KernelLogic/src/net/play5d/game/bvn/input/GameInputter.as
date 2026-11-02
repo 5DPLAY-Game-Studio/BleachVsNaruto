@@ -192,7 +192,22 @@ public class GameInputter {
     }
 
     private static function setConfig(type:String, config:Object):void {
-        call(type, 'setConfig', config);
+        if (!enabled) {
+            return;
+        }
+        var inputs:Vector.<IGameInput> = _inputMap[type];
+        if (!inputs) {
+            return;
+        }
+
+        var input:IGameInput;
+        for (var i:int; i < inputs.length; i++) {
+            input = inputs[i];
+            if (!input.enabled) {
+                continue;
+            }
+            input.setConfig(config);
+        }
     }
 
     private static function renderListenKeys():void {
@@ -271,41 +286,86 @@ public class GameInputter {
         return _justDownDelayKeys[id] && _justDownDelayKeys[id] > 0;
     }
 
-    private static function call(type:String, funcName:String, ...params):Boolean {
+    private static function call(type:String, funcName:String):Boolean {
         if (!enabled) {
             return false;
         }
-        if (!_inputMap[type]) {
+        var inputs:Vector.<IGameInput> = _inputMap[type];
+        if (!inputs) {
             return false;
         }
 
-        var inputs:Vector.<IGameInput> = _inputMap[type];
-
+        var input:IGameInput;
         for (var i:int; i < inputs.length; i++) {
-            if (!inputs[i].enabled) {
+            input = inputs[i];
+            if (!input.enabled) {
                 continue;
             }
-            var func:Function = inputs[i][funcName];
-            if (func != null) {
-                if (func.apply(null, params)) {
-                    return true;
-                }
+            if (query(input, funcName)) {
+                return true;
             }
         }
+
         return false;
     }
 
-    private static function callVoid(funcName:String, ...params):void {
-        var p:Vector.<IGameInput>;
+    // 按键名直接对应接口方法，查询时不分配参数数组。
+    private static function query(input:IGameInput, funcName:String):Boolean {
+        switch (funcName) {
+        case 'anyKey':
+            return input.anyKey();
+        case 'back':
+            return input.back();
+        case 'select':
+            return input.select();
+        case 'up':
+            return input.up();
+        case 'down':
+            return input.down();
+        case 'left':
+            return input.left();
+        case 'right':
+            return input.right();
+        case 'attack':
+            return input.attack();
+        case 'jump':
+            return input.jump();
+        case 'dash':
+            return input.dash();
+        case 'skill':
+            return input.skill();
+        case 'superSkill':
+            return input.superSkill();
+        case 'special':
+            return input.special();
+        case 'wankai':
+            return input.wankai();
+        default:
+            return false;
+        }
+    }
+
+    private static function callVoid(funcName:String, stage:Stage = null):void {
+        var inputs:Vector.<IGameInput>;
+        var input:IGameInput;
         var i:int;
-        for each(p in _inputMap) {
-            for (i = 0; i < p.length; i++) {
-                if (!p[i].enabled) {
+
+        for each(inputs in _inputMap) {
+            for (i = 0; i < inputs.length; i++) {
+                input = inputs[i];
+                if (!input.enabled) {
                     continue;
                 }
-                var func:Function = p[i][funcName];
-                if (func != null) {
-                    func.apply(null, params);
+                switch (funcName) {
+                case 'initialize':
+                    input.initialize(stage);
+                    break;
+                case 'focus':
+                    input.focus();
+                    break;
+                case 'clear':
+                    input.clear();
+                    break;
                 }
             }
         }
