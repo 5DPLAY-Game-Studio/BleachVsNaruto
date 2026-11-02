@@ -134,7 +134,7 @@ public class EffectModel {
 
         initHitEffect();
         initDefenseEffect();
-        initSpeicalEffect();
+        initSpecialEffect();
         initBuffEffect();
         initSteelHitEffect();
 
@@ -324,7 +324,7 @@ public class EffectModel {
 
     }
 
-    private function initSpeicalEffect():void {
+    private function initSpecialEffect():void {
         _effect['fire_ing']  = new EffectVO(
                 'xg_fire_ing', {
                     blendMode: BlendMode.ADD, isSpecial: true, targetColorOffset: [-255, -255, -255]
