@@ -304,7 +304,7 @@ public class FighterMcAirHandler extends FighterMcActsPart {
     /**
      * 执行从空中的板上跳下
      */
-    public function doJumpDown(acion:String):void {
+    public function doJumpDown(action:String):void {
         if (_fighter.isTouchBottom) {
             return;
         }
@@ -314,7 +314,7 @@ public class FighterMcAirHandler extends FighterMcActsPart {
         _fighter.setDamping(0, 1);
         _fighter.y += 1;
         _hurt.clearDefense();
-        _mc.goFrame(acion, false);
+        _mc.goFrame(action, false);
         _owner.setTouchFloor();
     }
 
