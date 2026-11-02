@@ -417,13 +417,13 @@ public class FighterMcHurtCtrl {
         setDefenseAction();
     }
 
-    private function checkDefDirect(hiter:IGameSprite):Boolean {
+    private function checkDefDirect(hitter:IGameSprite):Boolean {
         var minx:int = 5;
-        if (_fighter.x < hiter.x - minx) {
-            return _fighter.direct < 0 && hiter.direct < 0;
+        if (_fighter.x < hitter.x - minx) {
+            return _fighter.direct < 0 && hitter.direct < 0;
         }
-        if (_fighter.x > hiter.x + minx) {
-            return _fighter.direct > 0 && hiter.direct > 0;
+        if (_fighter.x > hitter.x + minx) {
+            return _fighter.direct > 0 && hitter.direct > 0;
         }
         return false;
     }
