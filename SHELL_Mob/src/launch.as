@@ -25,9 +25,6 @@ import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
 import flash.events.UncaughtErrorEvent;
-import flash.filesystem.File;
-import flash.filesystem.FileMode;
-import flash.filesystem.FileStream;
 import flash.ui.Keyboard;
 
 import net.play5d.game.bvn.GameConfig;
@@ -44,6 +41,7 @@ import net.play5d.game.bvn.mob.ctrls.MobileCtrler;
 import net.play5d.game.bvn.mob.ctrls.UpdateCtrl;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadAsset;
 import net.play5d.game.bvn.mob.screenpad.ScreenPadManager;
+import net.play5d.game.bvn.mob.utils.Loger;
 import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
 import net.play5d.game.bvn.ui.fight.FightUI;
@@ -57,6 +55,7 @@ import net.play5d.kyo.utils.KyoTimerUtils;
 [SWF(frameRate='30', backgroundColor='#000000')]
 public class launch extends Sprite {
     public function launch() {
+        GameLogger.setLoger(new Loger());
         if (loaderInfo) {
             loaderInfo.uncaughtErrorEvents.addEventListener(
                 UncaughtErrorEvent.UNCAUGHT_ERROR,
@@ -162,38 +161,8 @@ public class launch extends Sprite {
             return;
         }
         _reportingUncaught = true;
-
-        var text:String = 'uncaught: ' + UncaughtText(event);
-        GameLogger.error('sys', text);
-        writeUncaught(text);
-    }
-
-    private function writeUncaught(text:String):void {
-        var stream:FileStream = new FileStream();
-        var opened:Boolean    = false;
-        try {
-            var file:File = File.applicationStorageDirectory.resolvePath('logs/bvn.log');
-            var dir:File  = file.parent;
-            if (dir && !dir.exists) {
-                dir.createDirectory();
-            }
-            stream.open(file, FileMode.APPEND);
-            opened = true;
-            stream.writeUTFBytes('ERROR [sys] ' + text + File.lineEnding);
-        }
-        catch (error:Error) {
-            trace('uncaught log failed: ' + error.message);
-        }
-        finally {
-            if (opened) {
-                try {
-                    stream.close();
-                }
-                catch (closeError:Error) {
-                    // 关闭失败不再向外抛，避免盖住原来的未捕获错误
-                }
-            }
-        }
+        // ERROR 会让 Loger 立刻刷盘
+        GameLogger.error('sys', 'uncaught: ' + UncaughtText(event));
     }
 
     private function initialize(e:Event = null):void {
