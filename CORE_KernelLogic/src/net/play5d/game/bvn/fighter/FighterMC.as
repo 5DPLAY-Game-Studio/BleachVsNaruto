@@ -30,8 +30,6 @@ import net.play5d.game.bvn.data.fighter.FighterHitRange;
 import net.play5d.game.bvn.data.fighter.FighterSpecialFrame;
 import net.play5d.game.bvn.fighter.events.FighterEvent;
 import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
-import net.play5d.game.bvn.fighter.models.FighterHitModel;
-import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.utils.HitAreaUtil;
 import net.play5d.game.bvn.fighter.utils.McAreaCacher;
 import net.play5d.game.bvn.utils.MCUtils;
@@ -464,48 +462,10 @@ public class FighterMC {
         if (!_hitAreaCache) {
             return;
         }
-        //判断是否已定义过
-        if (_hitAreaCache.areaFrameDefined(_mc.currentFrame)) {
-            return;
-        }
 
-        //取帧缓存
-        var area:Object = _hitAreaCache.getAreaByFrame(_mc.currentFrame);
-        if (area != null) {
-            return;
-        } //已有，跳出
-
-        var hitModel:FighterHitModel = _fighter.getCtrler().hitModel;
-
-        var areaRects:Array = [];
-
-        for (var i:int; i < _mc.numChildren; i++) {
-            var d:DisplayObject = _mc.getChildAt(i);
-            var hitvo:HitVO     = hitModel.getHitVOByDisplayName(d.name);
-
-            if (d == null || hitvo == null) {
-                continue;
-            }
-
-            //取缓存
-            var areaCached:Object = _hitAreaCache.getAreaByDisplay(d);
-            if (areaCached == null) {
-                //无缓存，创建并写入缓存
-                var areaRect:Rectangle  = d.getBounds(_fighterDisplay);
-                var areaCacheObj:Object = _hitAreaCache.cacheAreaByDisplay(d, areaRect, {hitVO: hitvo});
-                areaRects.push(areaCacheObj);
-            }
-            else {
-                areaRects.push(areaCached);
-            }
-        }
-
-        if (areaRects.length < 1) {
-            areaRects = null;
-        }
-
-        //写入帧缓存
-        _hitAreaCache.cacheAreaByFrame(_mc.currentFrame, areaRects);
+        HitAreaUtil.findHitArea(
+                _mc, _mc.currentFrame, _hitAreaCache, _fighterDisplay, _fighter.getCtrler().hitModel, true
+        );
     }
 
     private function playHurtDown2():void {

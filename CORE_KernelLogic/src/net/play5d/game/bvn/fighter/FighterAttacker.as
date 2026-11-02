@@ -17,7 +17,6 @@
  */
 
 package net.play5d.game.bvn.fighter {
-import flash.display.DisplayObject;
 import flash.display.MovieClip;
 import flash.geom.Point;
 import flash.geom.Rectangle;
@@ -408,46 +407,7 @@ public class FighterAttacker extends BaseGameSprite {
             return;
         }
 
-        //判断是否已定义过
-        if (_hitAreaCache.areaFrameDefined(_mainMc.currentFrame)) {
-            return;
-        }
-
-        //取帧缓存
-        var area:Object = _hitAreaCache.getAreaByFrame(_mainMc.currentFrame);
-        if (area != null) {
-            return;
-        } //已有，跳出
-
-        var areaRects:Array = [];
-
-        for (var i:int; i < _mainMc.numChildren; i++) {
-            var d:DisplayObject = _mainMc.getChildAt(i);
-            var hitvo:HitVO     = hitModel.getHitVOByDisplayName(d.name);
-
-            if (d == null || hitvo == null) {
-                continue;
-            }
-
-            //取缓存
-            var areaCached:Object = _hitAreaCache.getAreaByDisplay(d);
-            if (areaCached == null) {
-                //无缓存，创建并写入缓存
-                var areaRect:Rectangle  = d.getBounds(_mainMc);
-                var areaCacheObj:Object = _hitAreaCache.cacheAreaByDisplay(d, areaRect, {hitVO: hitvo});
-                areaRects.push(areaCacheObj);
-            }
-            else {
-                areaRects.push(areaCached);
-            }
-        }
-
-        if (areaRects.length < 1) {
-            areaRects = null;
-        }
-
-        //写入帧缓存
-        _hitAreaCache.cacheAreaByFrame(_mainMc.currentFrame, areaRects);
+        HitAreaUtil.findHitArea(_mainMc, _mainMc.currentFrame, _hitAreaCache, _mainMc, hitModel, true);
     }
 
     private function getOwnerFighter():FighterMain {

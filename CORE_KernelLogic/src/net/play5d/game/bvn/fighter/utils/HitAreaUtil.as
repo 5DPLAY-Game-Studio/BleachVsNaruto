@@ -21,14 +21,16 @@ import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.geom.Rectangle;
 
+import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.fighter.models.HitVO;
 
 /**
- * 帧缓存攻击区域的收集、按名取判定包围盒，以及按朝向换算世界坐标。
+ * 帧缓存攻击区域的扫描与收集、按名取判定包围盒，以及按朝向换算世界坐标。
  *
  * <p>区域来源、朝向、位置和矩形缓存由调用方提供。</p>
  *
  * @see #collectCurrentHits()
+ * @see #findHitArea()
  * @see #getCheckHitRect()
  * @see #toWorldRect()
  */
@@ -151,6 +153,67 @@ public class HitAreaUtil {
         cache.cacheAreaByDisplay(child, rect);
 
         return rect;
+    }
+
+    /**
+     * 扫描容器子节点，按名取 <code>HitVO</code>，并写入该帧的区域缓存。
+     *
+     * <p>本帧已经写过缓存时直接返回。没有任何命中子节点时写入 <code>null</code>，避免下一帧把「未命中」当成「尚未扫描」。</p>
+     *
+     * @param host 子节点容器。
+     * @param frame 时间轴帧。
+     * @param cache 帧区域缓存。为空时直接返回。
+     * @param boundsTarget <code>getBounds</code> 的坐标空间。
+     * @param hitModel 判定表。
+     * @param byDisplayName 为 <code>true</code> 时用 <code>getHitVOByDisplayName</code>，否则用 <code>getHitVO</code>。
+     * @example
+     * <listing version="3.0">
+     * HitAreaUtil.findHitArea(mc, mc.currentFrame, cache, mc, hitModel, false);
+     * </listing>
+     * @see FighterHitModel#getHitVO()
+     * @see FighterHitModel#getHitVOByDisplayName()
+     */
+    public static function findHitArea(
+            host         :DisplayObjectContainer,
+            frame        :int,
+            cache        :McAreaCacher,
+            boundsTarget :DisplayObject,
+            hitModel     :FighterHitModel,
+            byDisplayName:Boolean
+    ):void {
+        if (!cache || cache.areaFrameDefined(frame) || cache.getAreaByFrame(frame) != null) {
+            return;
+        }
+
+        var areaRects:Array = [];
+        for (var i:int = 0; i < host.numChildren; i++) {
+            var child:DisplayObject = host.getChildAt(i);
+            var hitvo:HitVO;
+            if (byDisplayName) {
+                hitvo = hitModel.getHitVOByDisplayName(child.name);
+            }
+            else {
+                hitvo = hitModel.getHitVO(child.name);
+            }
+            if (child == null || hitvo == null) {
+                continue;
+            }
+
+            var areaCached:Object = cache.getAreaByDisplay(child);
+            if (areaCached == null) {
+                var areaRect:Rectangle = child.getBounds(boundsTarget);
+                areaRects.push(cache.cacheAreaByDisplay(child, areaRect, {hitVO: hitvo}));
+            }
+            else {
+                areaRects.push(areaCached);
+            }
+        }
+
+        if (areaRects.length < 1) {
+            areaRects = null;
+        }
+
+        cache.cacheAreaByFrame(frame, areaRects);
     }
 
 }
