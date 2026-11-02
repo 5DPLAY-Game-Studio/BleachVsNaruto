@@ -93,6 +93,10 @@ public class GameCamera {
     private var _stage:DisplayObject;
     private var _stageBounds:Rectangle;
     private var _rect:Rectangle;
+    /** @private 缓动小数坐标；_rect 只保留像素，scrollRect 才不会每帧重写 */
+    private var _easeX:Number = 0;
+    /** @private */
+    private var _easeY:Number = 0;
     private var _focus:Array;
     private var _point:Point;
     private var _stageScale:Number = 1;
@@ -236,13 +240,12 @@ public class GameCamera {
         _noTweenRect.x = v;
 
         if (tweenSpd > 1) {
-            _rect.x += (
-                               v - _rect.x
-                       ) / tweenSpd;
+            _easeX += (v - _easeX) / tweenSpd;
         }
         else {
-            _rect.x = v;
+            _easeX = v;
         }
+        _rect.x = Math.round(_easeX);
     }
 
     public function setY(v:Number):void {
@@ -259,11 +262,12 @@ public class GameCamera {
         _noTweenRect.y = v;
 
         if (tweenSpd > 1) {
-            _rect.y += (v - _rect.y) / tweenSpd;
+            _easeY += (v - _easeY) / tweenSpd;
         }
         else {
-            _rect.y = v;
+            _easeY = v;
         }
+        _rect.y = Math.round(_easeY);
     }
 
     private function applySet():void {
