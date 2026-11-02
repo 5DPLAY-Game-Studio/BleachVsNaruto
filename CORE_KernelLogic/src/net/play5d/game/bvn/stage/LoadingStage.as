@@ -145,14 +145,7 @@ public class LoadingStage implements IStage {
                 GameUI.cancelConfirm();
             }
             else {
-                GameUI.confirm(
-                    GetLang('confirm.common.back_menu_title'),
-                    GetLang('confirm.common.back_menu'),
-                    MainGame.I.goMenu,
-                    null,
-                    IsMobile()
-                );
-                GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
+                GameUI.confirmBackMenu(IsMobile());
             }
         }
     }

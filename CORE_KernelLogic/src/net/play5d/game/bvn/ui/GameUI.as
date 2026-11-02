@@ -109,6 +109,31 @@ public class GameUI {
 
     }
 
+    /**
+     * 弹出返回主菜单确认框，确定后进入主菜单。
+     *
+     * <p>同时派发 <code>GameEvent.CONFRIM_BACK_MENU</code>。</p>
+     *
+     * @param isMusouStyle 是否使用无双确认框样式。
+     * @default false
+     * @example
+     * <listing version="3.0">
+     * GameUI.confirmBackMenu(IsMobile());
+     * </listing>
+     * @see #confirm()
+     * @see GameEvent#CONFRIM_BACK_MENU
+     */
+    public static function confirmBackMenu(isMusouStyle:Boolean = false):void {
+        confirm(
+                GetLang('confirm.common.back_menu_title'),
+                GetLang('confirm.common.back_menu'),
+                MainGame.I.goMenu,
+                null,
+                isMusouStyle
+        );
+        GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
+    }
+
     public static function alert(enMsg:String = null, cnMsg:String = null, close:Function = null):void {
         closeAlert();
         _alertUI = new AlertUI();
