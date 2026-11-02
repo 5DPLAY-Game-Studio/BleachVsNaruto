@@ -128,7 +128,7 @@ public class MenuBtnGroup extends Sprite {
     }
 
     protected function touchHandler(type:String, target:MenuBtn):void {
-        if (TouchUtils.I.isDraging()) {
+        if (TouchUtils.I.isDragging()) {
             return;
         }
 

@@ -37,13 +37,13 @@ public class TouchUtils {
     }
 
     private var _oneFingerPoint:TouchPoint;
-    private var _oneFingerDraging:Boolean;
+    private var _oneFingerDragging:Boolean;
     private var _callBackMap:Dictionary = new Dictionary();
     private var _stage:Stage;
     private var _checkDragDis:Number = 0;
     private var _callTwoBackMap:Dictionary = new Dictionary();
     private var _twoFingerMap:ArrayMap     = new ArrayMap();
-    private var _twoFingerDraging:Boolean;
+    private var _twoFingerDragging:Boolean;
     private var _twoFingerDelta:Number     = 0;
 
     public function init(stage:Stage):void {
@@ -51,8 +51,8 @@ public class TouchUtils {
         _checkDragDis = KyoDisplayUtils.cm2pixel(0.1);
     }
 
-    public function isDraging():Boolean {
-        return _oneFingerDraging || _twoFingerDraging;
+    public function isDragging():Boolean {
+        return _oneFingerDragging || _twoFingerDragging;
     }
 
     // 单点触摸
@@ -106,7 +106,7 @@ public class TouchUtils {
 
         _oneFingerPoint.target = d;
 
-        _oneFingerDraging = false;
+        _oneFingerDragging = false;
 
         _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
         _stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
@@ -125,8 +125,8 @@ public class TouchUtils {
             _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageOneFingerHandler);
             _stage.removeEventListener(TouchEvent.TOUCH_END, stageOneFingerHandler);
 
-            _oneFingerPoint   = null;
-            _oneFingerDraging = false;
+            _oneFingerPoint    = null;
+            _oneFingerDragging = false;
             return;
         }
 
@@ -140,7 +140,7 @@ public class TouchUtils {
 
             setTimeout(function ():void {
                 _oneFingerPoint   = null;
-                _oneFingerDraging = false;
+                _oneFingerDragging = false;
             }, 300);
 
             return;
@@ -149,8 +149,8 @@ public class TouchUtils {
         var deltaX:Number = e.stageX - _oneFingerPoint.stageX;
         var deltaY:Number = e.stageY - _oneFingerPoint.stageY;
 
-        if (!_oneFingerDraging) {
-            _oneFingerDraging = tc.getDragDistance(deltaX, deltaY) > _checkDragDis;
+        if (!_oneFingerDragging) {
+            _oneFingerDragging = tc.getDragDistance(deltaX, deltaY) > _checkDragDis;
             return;
         }
 
@@ -176,8 +176,8 @@ public class TouchUtils {
         _twoFingerMap.push(tp.touchId, tp);
 
         if (_twoFingerMap.length == 2) {
-            _twoFingerDraging = false;
-            _twoFingerDelta   = 0;
+            _twoFingerDragging = false;
+            _twoFingerDelta    = 0;
 
             _stage.removeEventListener(TouchEvent.TOUCH_MOVE, stageTwoFingerHandler);
             _stage.removeEventListener(TouchEvent.TOUCH_END, stageTwoFingerHandler);
@@ -226,9 +226,9 @@ public class TouchUtils {
                 tc.callEnd();
 
                 setTimeout(function ():void {
-                    _twoFingerMap     = new ArrayMap();
-                    _twoFingerDraging = false;
-                    _twoFingerDelta   = 0;
+                    _twoFingerMap      = new ArrayMap();
+                    _twoFingerDragging = false;
+                    _twoFingerDelta    = 0;
                 }, 300);
             }
 
@@ -236,8 +236,8 @@ public class TouchUtils {
         }
 
         var delta:Number = Math.abs(p1.stageX - p2.stageX) + Math.abs(p1.stageY - p2.stageY);
-        if (!_twoFingerDraging) {
-            _twoFingerDraging = delta > _checkDragDis;
+        if (!_twoFingerDragging) {
+            _twoFingerDragging = delta > _checkDragDis;
         }
 
         _twoFingerDelta = delta - _twoFingerDelta;
