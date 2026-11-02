@@ -32,9 +32,9 @@ public class JoyStick {
     private static var _gameInput:GameInput;
     private static var _inited:Boolean;
 
-    private static var _gameDeivces:Vector.<GameInputDevice>;
+    private static var _gameDevices:Vector.<GameInputDevice>;
 
-    private static var _deivceMap:Object;
+    private static var _deviceMap:Object;
     private static var _downKey:JoyStickSetVO;
     /** @private 设备列表变更回调（可选） */
     private static var _onDevicesChanged:Function;
@@ -61,8 +61,8 @@ public class JoyStick {
 
         _inited = true;
 
-        _gameDeivces = new Vector.<GameInputDevice>();
-        _deivceMap   = {};
+        _gameDevices = new Vector.<GameInputDevice>();
+        _deviceMap   = {};
 
         _gameInput = new GameInput();
         _gameInput.addEventListener(GameInputEvent.DEVICE_ADDED, joystickHandler);
@@ -70,15 +70,15 @@ public class JoyStick {
         _gameInput.addEventListener(GameInputEvent.DEVICE_UNUSABLE, joystickHandler);
     }
 
-    public static function getAllDeivces():Vector.<GameInputDevice> {
-        return _gameDeivces;
+    public static function getAllDevices():Vector.<GameInputDevice> {
+        return _gameDevices;
     }
 
     public static function getDeviceId(index:int):String {
-        if (index >= _gameDeivces.length) {
+        if (index >= _gameDevices.length) {
             return null;
         }
-        var device:GameInputDevice = _gameDeivces[index];
+        var device:GameInputDevice = _gameDevices[index];
         if (device) {
             return device.id;
         }
@@ -86,7 +86,7 @@ public class JoyStick {
     }
 
     public static function isActive(deviceId:String):Boolean {
-        var device:GameInputDevice = getDeive(deviceId);
+        var device:GameInputDevice = getDevice(deviceId);
         return device && device.enabled;
     }
 
@@ -96,7 +96,7 @@ public class JoyStick {
      * @param key
      */
     public static function isDown(deviceId:String, key:JoyStickSetVO):Boolean {
-        var device:GameInputDevice = getDeive(deviceId);
+        var device:GameInputDevice = getDevice(deviceId);
         if (!device) {
             return false;
         }
@@ -122,7 +122,7 @@ public class JoyStick {
     }
 
     public static function isDownAnyKey(deviceId:String):Boolean {
-        var device:GameInputDevice = getDeive(deviceId);
+        var device:GameInputDevice = getDevice(deviceId);
         if (!device) {
             return false;
         }
@@ -136,7 +136,7 @@ public class JoyStick {
     }
 
     public static function getDownKey(deviceID:String, isJustDown:Boolean):JoyStickSetVO {
-        var device:GameInputDevice = getDeive(deviceID);
+        var device:GameInputDevice = getDevice(deviceID);
         if (!device) {
             return null;
         }
@@ -187,11 +187,11 @@ public class JoyStick {
      * 启用设备
      * @param device
      */
-    private static function addDeivce(device:GameInputDevice):void {
+    private static function addDevice(device:GameInputDevice):void {
         device.enabled = true;
-        _gameDeivces.push(device);
+        _gameDevices.push(device);
         var id:String  = device.id;
-        _deivceMap[id] = device;
+        _deviceMap[id] = device;
         GameLogger.debug('input', 'addDevice ' + id);
     }
 
@@ -201,21 +201,21 @@ public class JoyStick {
      */
     private static function removeDevice(device:GameInputDevice):void {
         device.enabled = false;
-        var id:int     = _gameDeivces.indexOf(device);
+        var id:int     = _gameDevices.indexOf(device);
         if (id != -1) {
-            _gameDeivces.splice(id, 1);
+            _gameDevices.splice(id, 1);
         }
 
-        for (var i:String in _deivceMap) {
-            if (_deivceMap[i] == device) {
-                delete _deivceMap[i];
+        for (var i:String in _deviceMap) {
+            if (_deviceMap[i] == device) {
+                delete _deviceMap[i];
             }
         }
 
     }
 
-    private static function getDeive(deviceId:String):GameInputDevice {
-        return _deivceMap[deviceId];
+    private static function getDevice(deviceId:String):GameInputDevice {
+        return _deviceMap[deviceId];
     }
 
     private static function checkDownValue(device:GameInputDevice, key:int):Number {
@@ -248,7 +248,7 @@ public class JoyStick {
             outputDeviceInfo(e.device);
 
             if (GameInput.numDevices < 3) {
-                addDeivce(e.device);
+                addDevice(e.device);
                 if (_onDevicesChanged != null) {
                     _onDevicesChanged();
                 }

@@ -184,7 +184,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
 
     /** @private */
     private function initBtns():void {
-        var joysticks:Vector.<GameInputDevice> = JoyStick.getAllDeivces();
+        var joysticks:Vector.<GameInputDevice> = JoyStick.getAllDevices();
 
         var joyOptions:Array = [{label: 'NONE', cn: GetLang('txt.joy_stick_set_ui.none'), value: null}];
         for (var i:int; i < joysticks.length; i++) {
