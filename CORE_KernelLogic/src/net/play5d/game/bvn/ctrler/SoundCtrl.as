@@ -47,6 +47,8 @@ public class SoundCtrl {
     private var _lastSndTime:int;
     /** @private SWC 声音类 -&gt; 复用实例，避免每次 new */
     private var _swcSoundCache:Dictionary;
+    /** @private effect.swf 声音类名 -&gt; 复用实例 */
+    private var _effectSoundCache:Dictionary;
     /** @private 静音预热用 */
     private var _silentTransform:SoundTransform;
 
@@ -87,7 +89,7 @@ public class SoundCtrl {
             return;
         }
 
-        var sound:Sound = AssetManager.I.getEffect(name);
+        var sound:Sound = getCachedEffectSound(name);
         if (sound) {
             var st:SoundTransform = _sndTransform;
             if (vol != 1) {
@@ -321,6 +323,38 @@ public class SoundCtrl {
     }
 
     /**
+     * 预实例化 effect.swf 中的一个声音类，并做一次静音播放。
+     *
+     * <p>同一类名只保留一份 <code>Sound</code>。重复调用直接命中缓存。</p>
+     *
+     * @param name 声音类名，如 <code>snd_kan1</code>。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.warmEffectSound('snd_kan1');
+     * </listing>
+     */
+    public function warmEffectSound(name:String):void {
+        if (!name) {
+            return;
+        }
+        try {
+            var snd:Sound = getCachedEffectSound(name);
+            if (!snd) {
+                return;
+            }
+            if (!_silentTransform) {
+                _silentTransform = new SoundTransform(0);
+            }
+            var ch:SoundChannel = snd.play(0, 0, _silentTransform);
+            if (ch) {
+                ch.stop();
+            }
+        }
+        catch (e:Error) {
+        }
+    }
+
+    /**
      * 预实例化单个 SWC 声音类并做一次静音播放，打通解码 / 混音路径。
      *
      * @param sndCls 声音类链接。
@@ -341,6 +375,21 @@ public class SoundCtrl {
         }
         catch (e:Error) {
         }
+    }
+
+    /**
+     * @private 取得或创建并缓存 effect.swf 声音。类缺失时与原先一样抛错。
+     */
+    private function getCachedEffectSound(name:String):Sound {
+        _effectSoundCache ||= new Dictionary();
+        var snd:Sound = _effectSoundCache[name] as Sound;
+        if (!snd) {
+            snd = AssetManager.I.getEffect(name) as Sound;
+            if (snd) {
+                _effectSoundCache[name] = snd;
+            }
+        }
+        return snd;
     }
 
     /**

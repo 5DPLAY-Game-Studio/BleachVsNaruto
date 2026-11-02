@@ -19,6 +19,7 @@
 package net.play5d.game.bvn.data {
 import flash.display.BlendMode;
 
+import net.play5d.game.bvn.ctrler.SoundCtrl;
 import net.play5d.game.bvn.data.vos.EffectVO;
 
 import net.play5d.game.bvn.data.fighter.FighterDefenseType;
@@ -37,6 +38,7 @@ public class EffectModel {
     public function initialize():void {
         initEffects();
         cacheEffects();
+        warmSounds();
     }
 
     public function getEffect(id:String):EffectVO {
@@ -143,6 +145,17 @@ public class EffectModel {
     private function cacheEffects():void {
         for each(var e:EffectVO in _effect) {
             e.cacheBitmapData();
+        }
+    }
+
+    private function warmSounds():void {
+        var seen:Object = {};
+        for each(var e:EffectVO in _effect) {
+            if (!e.sound || seen[e.sound]) {
+                continue;
+            }
+            seen[e.sound] = true;
+            SoundCtrl.I.warmEffectSound(e.sound);
         }
     }
 
