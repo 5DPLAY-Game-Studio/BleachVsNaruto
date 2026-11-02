@@ -4,6 +4,7 @@ import flash.utils.ByteArray;
 import flash.utils.Timer;
 
 import net.play5d.game.bvn.MainGame;
+import net.play5d.game.bvn.stage.LoadingStage;
 import net.play5d.game.bvn.interfaces.lan.ILanClientLockLink;
 import net.play5d.game.bvn.ctrler.lan.LanClientMatch;
 import net.play5d.game.bvn.data.lan.LanPorts;
@@ -117,7 +118,7 @@ public class LANClientCtrl implements ILanClientLockLink {
         _match.arm(function ():Boolean {
             return LANClientCtrl.I.renderGame();
         }, function (enabled:Boolean):void {
-            LoadingState.AUTO_START_GAME = enabled;
+            LoadingStage.AUTO_START_GAME = enabled;
         });
         _match.listenRound();
 
@@ -129,7 +130,7 @@ public class LANClientCtrl implements ILanClientLockLink {
         active = false;
         _match.detach();
         _match.disarm(function (enabled:Boolean):void {
-            LoadingState.AUTO_START_GAME = enabled;
+            LoadingStage.AUTO_START_GAME = enabled;
         });
 
         dispose();
