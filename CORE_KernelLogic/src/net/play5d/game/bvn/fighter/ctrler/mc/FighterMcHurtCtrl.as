@@ -353,7 +353,7 @@ public class FighterMcHurtCtrl {
      * 防御动画帧：持续按防或收招。
      */
     public function renderDefenseAnimate():void {
-        if (_action.isDefenseHiting) {
+        if (_action.isDefenseHitting) {
             return;
         }
         if (_defenseFrameDelay-- > 0) {
@@ -763,7 +763,7 @@ public class FighterMcHurtCtrl {
             hitx *= hitvo.owner.direct;
         }
 
-        _action.isDefenseHiting = true;
+        _action.isDefenseHitting = true;
 
         if (hitvo.hurtType == 0) {
             _defenseHoldFrame = int((
@@ -846,13 +846,13 @@ public class FighterMcHurtCtrl {
     /**
      * 正在防御
      */
-    public function renderDefensHiting():void {
+    public function renderDefensHitting():void {
         if (_defenseHoldFrame > 0) {
             _defenseHoldFrame--;
         }
         else {
             if (_fighter.getVecX() == 0) {
-                _action.isDefenseHiting = false;
+                _action.isDefenseHitting = false;
             }
         }
     }

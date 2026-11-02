@@ -31,7 +31,7 @@ public class FighterAction {
     public var isDashing:Boolean;
     public var isHurting:Boolean; //被打
     public var isHurtFlying:Boolean; //击飞
-    public var isDefenseHiting:Boolean; //正在防住
+    public var isDefenseHitting:Boolean; //正在防住
     public var airMove:Boolean;
     public var touchFloor:String;
     public var touchFloorBreakAct:Boolean = false;
@@ -88,7 +88,7 @@ public class FighterAction {
         isDashing          = false;
         isHurting          = false;
         isHurtFlying       = false;
-        isDefenseHiting    = false;
+        isDefenseHitting   = false;
         touchFloorBreakAct = false;
 
     }

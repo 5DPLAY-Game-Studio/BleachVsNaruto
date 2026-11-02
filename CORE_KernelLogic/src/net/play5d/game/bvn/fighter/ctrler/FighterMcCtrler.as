@@ -727,7 +727,7 @@ public class FighterMcCtrler {
             return;
         }
 
-        if (_rt.action.isDefenseHiting) {
+        if (_rt.action.isDefenseHitting) {
             _hurtCtrl.renderDefense(false, true);
             return;
         }
@@ -773,8 +773,8 @@ public class FighterMcCtrler {
             if (_rt.action.isHurting) {
                 _hurtCtrl.renderHurtAnimate();
             }
-            if (_rt.action.isDefenseHiting) {
-                _hurtCtrl.renderDefensHiting();
+            if (_rt.action.isDefenseHitting) {
+                _hurtCtrl.renderDefensHitting();
             }
 
             if (_rt.action.isJumping) {
