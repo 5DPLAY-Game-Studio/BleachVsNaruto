@@ -75,7 +75,7 @@ public class GameInterfaceManager implements IGameInterface {
 
             {
                 txt: 'TEAM PLAY', cn: GetLang('txt.game_interface.team_play'), children: [
-                    {txt: 'TEAM ACRADE', cn: GetLang('txt.game_interface.team_play_acrade')},
+                    {txt: 'TEAM ARCADE', cn: GetLang('txt.game_interface.team_play_arcade')},
                     {txt: 'TEAM VS CPU', cn: GetLang('txt.game_interface.team_play_vs_CPU')},
                     {txt: 'TEAM WATCH', cn: GetLang('txt.game_interface.team_play_watch')}
                 ]
@@ -83,7 +83,7 @@ public class GameInterfaceManager implements IGameInterface {
 
             {
                 txt: 'SINGLE PLAY', cn: GetLang('txt.game_interface.single_play'), children: [
-                    {txt: 'SINGLE ACRADE', cn: GetLang('txt.game_interface.single_play_acrade')},
+                    {txt: 'SINGLE ARCADE', cn: GetLang('txt.game_interface.single_play_arcade')},
                     {txt: 'SINGLE VS CPU', cn: GetLang('txt.game_interface.single_play_vs_CPU')},
                     {txt: 'SINGLE WATCH', cn: GetLang('txt.game_interface.single_play_watch')}
                 ]
@@ -91,7 +91,7 @@ public class GameInterfaceManager implements IGameInterface {
 
             {
                 txt: 'MUSOU PLAY', cn: GetLang('txt.game_interface.musou_play'), children: [
-                    {txt: 'MUSOU ACRADE', cn: GetLang('txt.game_interface.musou_acrade')}
+                    {txt: 'MUSOU ARCADE', cn: GetLang('txt.game_interface.musou_arcade')}
                 ]
             },
 

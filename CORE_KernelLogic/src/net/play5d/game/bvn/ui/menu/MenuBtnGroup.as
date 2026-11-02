@@ -300,7 +300,7 @@ public class MenuBtnGroup extends Sprite {
     private function getFucByLabel(label:String):Function {
         var func:Function;
         switch (label) {
-        case 'TEAM ACRADE':
+        case 'TEAM ARCADE':
             func = function ():void {
                 GameMode.currentMode = GameMode.TEAM_ARCADE;
                 MissionModel.I.reset();
@@ -338,7 +338,7 @@ public class MenuBtnGroup extends Sprite {
                 GameEvent.dispatchEvent(GameEvent.ENTER_TEAM_STAGE);
             };
             break;
-        case 'SINGLE ACRADE':
+        case 'SINGLE ARCADE':
             func = function ():void {
                 GameMode.currentMode = GameMode.SINGLE_ARCADE;
                 MissionModel.I.reset();
@@ -383,7 +383,7 @@ public class MenuBtnGroup extends Sprite {
                 MainGame.I.goSelect();
             };
             break;
-        case 'MUSOU ACRADE':
+        case 'MUSOU ARCADE':
             func = function ():void {
                 GameMode.currentMode = GameMode.MUSOU_ARCADE;
                 MainGame.I.goWorldMap();

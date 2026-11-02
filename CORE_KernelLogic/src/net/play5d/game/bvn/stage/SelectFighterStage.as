@@ -146,7 +146,7 @@ public class SelectFighterStage implements IStage {
             _listCtrl.fadOutList(initMap);
             break;
         case SelectFlowAction.START_ARCADE:
-            startAcradeGame();
+            startArcadeGame();
             break;
         case SelectFlowAction.START_MUSOU:
             startMusouGame();
@@ -515,7 +515,7 @@ public class SelectFighterStage implements IStage {
         nextStep();
     }
 
-    private function startAcradeGame():void {
+    private function startArcadeGame():void {
         MissionModel.I.initMission();
         selectFinish();
     }
