@@ -400,7 +400,7 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
         _damping.y += y;
     }
 
-    public function applayG(g:Number):void {
+    public function applyG(g:Number):void {
 
         if (!isApplyG) {
             _g = 0;

@@ -306,7 +306,7 @@ public class GameMainLogicCtrl {
                 var bsp:BaseGameSprite = sp as BaseGameSprite;
                 var inAir:Boolean      = GameLogic.isInAir(bsp);
                 if (inAir) {
-                    bsp.applayG(GameConfig.G);
+                    bsp.applyG(GameConfig.G);
                 }
                 bsp.setInAir(inAir);
             }
