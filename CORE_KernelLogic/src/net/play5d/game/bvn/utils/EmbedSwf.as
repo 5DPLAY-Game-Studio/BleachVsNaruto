@@ -42,7 +42,8 @@ public class EmbedSwf {
         var bytes:ByteArray = _swf.movieClipData;
 
         if (!bytes) {
-            ThrowError(Error, GetLang('debug.error.data.embed_swf.no_movie_clip_data'));
+            // 资源初始化早于语言包，不能 GetLang
+            ThrowError(Error, 'EmbedSwf: movieClipData is missing');
             return;
         }
 

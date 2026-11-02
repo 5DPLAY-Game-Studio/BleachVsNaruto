@@ -217,7 +217,8 @@ public class LanguageStage implements IStage {
      */
     private function addLanguageItem(langArr:Array, fontPathArr:Array):void {
         if (langArr.length != fontPathArr.length) {
-            ThrowError(Error, GetLang('debug.error.data.language_stage.element_count_mismatch'));
+            // 语言包尚未就绪，不能 GetLang
+            ThrowError(Error, 'LanguageStage: language element count mismatch');
             return;
         }
 
@@ -328,7 +329,8 @@ public class LanguageStage implements IStage {
 
         // 如果是不支持的语言，输出不支持
         if (!LanguageType.isSupported(language)) {
-            ThrowError(Error, GetLang('debug.error.data.language_stage.unsupported_language'));
+            // 语言包在此后才加载，不能 GetLang
+            ThrowError(Error, 'LanguageStage: unsupported language: ' + language);
             return;
         }
 
