@@ -61,7 +61,7 @@
 |------|------|
 | `CountryItem` / `LanguageStage` | 已做：scale 展开、光栅化、悬停只切当前项、音效缓存 |
 | `SoundCtrl.playSwcSound` | 已全局 Class→Sound 缓存 + early/common 预热；选图/选人等 `sndSelect` 无需再单点预热 |
-| `MenuBtn` / `MenuBtnGroup` | 已做：`warmCommon` 光栅化底板；`hoverBtn` 只切当前项；fadIn Back 由探针覆盖 |
+| `MenuBtn` / `MenuBtnGroup` | 已做：`warmCommon` 光栅化底板；`hoverBtn` 只切当前项；fadeIn Back 由探针覆盖 |
 | `SetBtn` / `SetBtnLine` / `SetBtnGroup` | 已做：`SetBtnLine.warmCommon`；`setArrowIndex` 只切当前项（本就有同 index 早退） |
 | `SelectMapUI` / `SelectIndexUIGroup` | 仅 `sndSelect`，音效侧已覆盖；无 scale≈0 悬停底板 |
 | `WorldMapPointUI` / 选人缩放 | 较晚界面 + Back 已在 `warmBasic` 探针；不必再为每个 MC 做 `warmUp` |

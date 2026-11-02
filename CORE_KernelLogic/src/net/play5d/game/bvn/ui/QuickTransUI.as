@@ -41,13 +41,13 @@ public class QuickTransUI extends Sprite {
     private var _down:Box;
     private var _center:Number = 0;
 
-    public function fadInAndOut(back:Function = null):void {
-        fadIn(function ():void {
-            fadOut(back);
+    public function fadeInAndOut(back:Function = null):void {
+        fadeIn(function ():void {
+            fadeOut(back);
         });
     }
 
-    public function fadIn(back:Function = null):void {
+    public function fadeIn(back:Function = null):void {
         _up.y   = -_center;
         _down.y = GameConfig.GAME_SIZE.y;
 
@@ -55,7 +55,7 @@ public class QuickTransUI extends Sprite {
         TweenLite.to(_down, 0.1, {y: _center, onComplete: back});
     }
 
-    public function fadOut(back:Function = null):void {
+    public function fadeOut(back:Function = null):void {
         TweenLite.to(_up, 0.1, {y: -_center});
         TweenLite.to(_down, 0.1, {y: GameConfig.GAME_SIZE.y, onComplete: back});
     }

@@ -55,7 +55,7 @@ public class QiBar {
     private var _tweenSpd:Number = 0.5;
     private var _moveFin:Boolean = true;
     private var _moveType:int    = 0;
-    private var _isFadIn:Boolean;
+    private var _isFadeIn:Boolean;
     private var _isRenderAnimate:Boolean;
     private var _faceBp:Bitmap;
 
@@ -149,11 +149,11 @@ public class QiBar {
         _ui.nextFrame();
     }
 
-    public function fadIn(animate:Boolean = true):void {
-        if (_isFadIn) {
+    public function fadeIn(animate:Boolean = true):void {
+        if (_isFadeIn) {
             return;
         }
-        _isFadIn = true;
+        _isFadeIn = true;
 
         _ui.visible = true;
 
@@ -173,11 +173,11 @@ public class QiBar {
 
     }
 
-    public function fadOut(animate:Boolean = true):void {
-        if (!_isFadIn) {
+    public function fadeOut(animate:Boolean = true):void {
+        if (!_isFadeIn) {
             return;
         }
-        _isFadIn = false;
+        _isFadeIn = false;
 
         if (GameUI.BITMAP_UI) {
             _ui.visible = false;
@@ -257,7 +257,7 @@ public class QiBar {
     }
 
     private function uiPlayComplete(e:Event):void {
-        if (_isFadIn) {
+        if (_isFadeIn) {
             _ui.visible = true;
             setCacheBitmap(true);
         }

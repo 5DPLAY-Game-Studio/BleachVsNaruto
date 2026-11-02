@@ -203,7 +203,7 @@ public class GameEndCtrl {
         case 3:
             _isRender = false;
             GameUI.I.getUI().clearStartAndEnd();
-            GameUI.I.getUI().fadOut(false);
+            GameUI.I.getUI().fadeOut(false);
             return true;
             break;
         }

@@ -84,7 +84,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
         updateKeyMapping();
     }
 
-    public function fadIn():void {
+    public function fadeIn():void {
         var duration:Number = 0.3;
         ui.y                = GameConfig.GAME_SIZE.y;
         TweenLite.to(ui, duration, {
@@ -96,7 +96,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
         ui.visible = true;
     }
 
-    public function fadOut():void {
+    public function fadeOut():void {
         var duration:Number = 0.3;
         _btnGroup.keyEnable = false;
         TweenLite.to(ui, duration, {

@@ -113,7 +113,7 @@ public class GameStartCtrl {
                 _state.cameraResume();
                 _uiPlaying = false;
                 _step      = 6;
-                _state.gameUI.getUI().fadIn(true);
+                _state.gameUI.getUI().fadeIn(true);
 
                 _p1.idle();
                 _p2.idle();

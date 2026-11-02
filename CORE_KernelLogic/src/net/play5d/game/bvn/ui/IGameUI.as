@@ -24,9 +24,9 @@ public interface IGameUI {
 
     function destroy():void;
 
-    function fadIn(animate:Boolean = true):void;
+    function fadeIn(animate:Boolean = true):void;
 
-    function fadOut(animate:Boolean = true):void;
+    function fadeOut(animate:Boolean = true):void;
 
     function getUI():DisplayObject;
 

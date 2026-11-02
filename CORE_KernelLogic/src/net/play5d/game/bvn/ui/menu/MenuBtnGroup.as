@@ -81,7 +81,7 @@ public class MenuBtnGroup extends Sprite {
         _hoverBtn = null;
     }
 
-    public function fadIn(duration:Number = 0.5, itemDelay:Number = 0.05):void {
+    public function fadeIn(duration:Number = 0.5, itemDelay:Number = 0.05):void {
         for (var i:int; i < _btns.length; i++) {
             var b:MenuBtn = _btns[i];
             b.ui.scaleX   = 0.01;

@@ -162,7 +162,7 @@ public class VersusFightSession implements IFightSession {
 
         if (GameMode.currentMode == GameMode.TRAINING) {
             _host.actionEnable = true;
-            GameUI.I.fadIn();
+            GameUI.I.fadeIn();
             SoundCtrl.I.smartPlayGameBGM('map');
         }
         else {

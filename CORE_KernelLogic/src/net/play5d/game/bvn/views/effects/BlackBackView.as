@@ -38,8 +38,8 @@ public class BlackBackView extends Sprite {
         addChild(_bg);
     }
     private var _bishaFace:BishaFaceEffectView;
-    private var isRenderFadIn:Boolean;
-    private var isRenderFadOut:Boolean;
+    private var isRenderFadeIn:Boolean;
+    private var isRenderFadeOut:Boolean;
     private var _bg:Bitmap;
 
     public function destroy():void {
@@ -58,10 +58,10 @@ public class BlackBackView extends Sprite {
     public function renderAnimate():void {
     }
 
-    public function fadIn():void {
+    public function fadeIn():void {
     }
 
-    public function fadOut():void {
+    public function fadeOut():void {
         removeBishaFace();
         try {
             parent.removeChild(this);
@@ -84,7 +84,7 @@ public class BlackBackView extends Sprite {
         }
 
         _bishaFace.setFace(faceid, face);
-        _bishaFace.fadIn();
+        _bishaFace.fadeIn();
     }
 
     private function removeBishaFace():void {

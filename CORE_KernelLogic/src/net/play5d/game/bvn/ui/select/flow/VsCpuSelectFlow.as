@@ -56,11 +56,11 @@ public class VsCpuSelectFlow implements ISelectModeFlow {
         case 1:
             return new SelectFlowAction(SelectFlowAction.ENABLE_P2_WITH_P1_INPUT, 2);
         case 2:
-            return new SelectFlowAction(SelectFlowAction.FADOUT_ASSIST, 3);
+            return new SelectFlowAction(SelectFlowAction.FADEOUT_ASSIST, 3);
         case 3:
             return new SelectFlowAction(SelectFlowAction.ENABLE_P2_WITH_P1_INPUT, 4);
         case 4:
-            return new SelectFlowAction(SelectFlowAction.FADOUT_MAP, 5);
+            return new SelectFlowAction(SelectFlowAction.FADEOUT_MAP, 5);
         case 5:
             return new SelectFlowAction(SelectFlowAction.SELECT_FINISH, -1);
         }

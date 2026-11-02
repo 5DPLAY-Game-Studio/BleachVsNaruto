@@ -46,7 +46,7 @@ public class MusouQiBar {
     private var _tweenSpd:Number = 0.5;
     private var _moveFin:Boolean = true;
     private var _moveType:int    = 0;
-    private var _isFadIn:Boolean;
+    private var _isFadeIn:Boolean;
     private var _isRenderAnimate:Boolean;
     private var _faceBp:Bitmap;
     private var _bar1:DisplayObject;

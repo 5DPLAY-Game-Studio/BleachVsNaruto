@@ -75,7 +75,7 @@ public class FightBar {
 
     private var _score:FightScoreUI;
 
-    private var _isFadIn:Boolean;
+    private var _isFadeIn:Boolean;
 
     private var _timerMc:FightTimeUI;
 
@@ -209,11 +209,11 @@ public class FightBar {
         _timerMc.render();
     }
 
-    public function fadIn(animate:Boolean):void {
-        if (_isFadIn) {
+    public function fadeIn(animate:Boolean):void {
+        if (_isFadeIn) {
             return;
         }
-        _isFadIn = true;
+        _isFadeIn = true;
 
         if (GameUI.BITMAP_UI) {
             setChildrenVisible(true);
@@ -232,11 +232,11 @@ public class FightBar {
 
     }
 
-    public function fadOut(animate:Boolean):void {
-        if (!_isFadIn) {
+    public function fadeOut(animate:Boolean):void {
+        if (!_isFadeIn) {
             return;
         }
-        _isFadIn = false;
+        _isFadeIn = false;
 
         if (GameUI.BITMAP_UI) {
             setChildrenVisible(false);
@@ -340,7 +340,7 @@ public class FightBar {
     }
 
     private function uiPlayComplete(e:Event):void {
-        if (_isFadIn) {
+        if (_isFadeIn) {
             _ui.visible = true;
         }
         else {

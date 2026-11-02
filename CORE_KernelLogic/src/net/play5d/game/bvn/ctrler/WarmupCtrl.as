@@ -175,7 +175,7 @@ public class WarmupCtrl {
         var probe:Sprite = getProbe();
         TweenLite.killTweensOf(probe);
 
-        // MenuBtn.hover / MenuBtnGroup.fadIn
+        // MenuBtn.hover / MenuBtnGroup.fadeIn
         probe.scaleX = 0.01;
         TweenLite.to(probe, 0, {scaleX: 1, ease: Back.easeOut});
 

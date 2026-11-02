@@ -157,7 +157,7 @@ public class EffectBlackBackHandler {
         GameCtrl.I.pause();
         GameCtrl.I.setRenderHit(false);
         _gameStage.addChildAt(_blackBack, 0);
-        _blackBack.fadIn();
+        _blackBack.fadeIn();
         if (face && target is FighterMain) {
             showFace(target as FighterMain, face);
         }
@@ -188,7 +188,7 @@ public class EffectBlackBackHandler {
             GameCtrl.I.resume();
             GameCtrl.I.gameState.cameraResume();
             GameCtrl.I.setRenderHit(true);
-            _blackBack.fadOut();
+            _blackBack.fadeOut();
 
             _gameStage.getMap().setVisible(true);
             _gameStage.setVisibleByClass(BitmapFilterView, true);
@@ -210,7 +210,7 @@ public class EffectBlackBackHandler {
         GameCtrl.I.pause();
         GameCtrl.I.setRenderHit(false);
         _gameStage.addChildAt(_blackBack, 0);
-        _blackBack.fadIn();
+        _blackBack.fadeIn();
         if (face) {
             showFace(target, face);
         }
@@ -235,7 +235,7 @@ public class EffectBlackBackHandler {
         if (cancelJustRenderAnimate(target)) {
             GameCtrl.I.resume();
             GameCtrl.I.gameState.cameraResume();
-            _blackBack.fadOut();
+            _blackBack.fadeOut();
             GameCtrl.I.setRenderHit(true);
             _gameStage.getMap().setVisible(true);
         }
@@ -296,7 +296,7 @@ public class EffectBlackBackHandler {
         justRenderAnimate(target);
         GameCtrl.I.pause();
         _gameStage.addChildAt(_blackBack, 0);
-        _blackBack.fadIn();
+        _blackBack.fadeIn();
         _gameStage.getMap().setVisible(false);
         SoundCtrl.I.playSwcSound(snd_ghost_jump);
     }
@@ -315,7 +315,7 @@ public class EffectBlackBackHandler {
         var cancel2:Boolean = cancelJustRenderAnimate(target);
         if (cancel1 && cancel2) {
             GameCtrl.I.resume();
-            _blackBack.fadOut();
+            _blackBack.fadeOut();
             _gameStage.getMap().setVisible(true);
         }
     }
@@ -460,7 +460,7 @@ public class EffectBlackBackHandler {
     /** @private */
     private function endReplaceSkill():void {
         GameCtrl.I.resume();
-        _blackBack.fadOut();
+        _blackBack.fadeOut();
         _gameStage.getMap().setVisible(true);
         _replaceSkillFrameHold = 0;
     }
@@ -482,7 +482,7 @@ public class EffectBlackBackHandler {
         _ctrl.doEffectById('explodeSp2', _explodeEffectPos.x, _explodeEffectPos.y);
 
         GameCtrl.I.resume();
-        _blackBack.fadOut();
+        _blackBack.fadeOut();
         _gameStage.getMap().setVisible(true);
         _explodeSkillFrame = 0;
     }

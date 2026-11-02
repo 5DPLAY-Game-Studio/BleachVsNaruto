@@ -99,7 +99,7 @@ public class SettingStage implements IStage {
         innerUI.addEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
 
         _ui.addChild(innerUI.getUI());
-        innerUI.fadIn();
+        innerUI.fadeIn();
 
         TweenLite.to(_btnGroup, 0.2, {y: -GameConfig.GAME_SIZE.y, onComplete: tweenComplete});
 
@@ -190,7 +190,7 @@ public class SettingStage implements IStage {
         _btnGroup.visible = true;
 
         if (_innerSetUI) {
-            _innerSetUI.fadOut();
+            _innerSetUI.fadeOut();
             _innerSetUI.removeEventListener(SetBtnEvent.APPLY_SET, innerSetHandler);
             _innerSetUI.removeEventListener(SetBtnEvent.CANCEL_SET, innerSetHandler);
         }

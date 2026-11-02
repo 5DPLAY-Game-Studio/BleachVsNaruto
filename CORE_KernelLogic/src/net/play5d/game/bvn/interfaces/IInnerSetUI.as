@@ -21,9 +21,9 @@ import flash.display.DisplayObject;
 import flash.events.IEventDispatcher;
 
 public interface IInnerSetUI extends IEventDispatcher {
-    function fadIn():void;
+    function fadeIn():void;
 
-    function fadOut():void;
+    function fadeOut():void;
 
     function getUI():DisplayObject;
 

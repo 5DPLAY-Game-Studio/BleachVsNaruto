@@ -27,27 +27,27 @@ public class TransUI {
     public var ui:$common$MC_transition = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_transition');
     private var _renderAnimateGap:int   = 0; //刷新动画间隔
     private var _renderAnimateFrame:int = 0;
-    private var _fadInBack:Function;
+    private var _fadeInBack:Function;
 
-    private var _fadOutBack:Function;
+    private var _fadeOutBack:Function;
     private var _rendering:Boolean = true;
 
     public function destroy():void {
         GameRender.remove(render);
     }
 
-    public function fadIn(back:Function = null):void {
-        _fadOutBack = null;
+    public function fadeIn(back:Function = null):void {
+        _fadeOutBack = null;
 
-        _fadInBack = back;
+        _fadeInBack = back;
         ui.gotoAndStop('fadin');
         startRender();
     }
 
-    public function fadOut(back:Function = null):void {
-        _fadInBack = null;
+    public function fadeOut(back:Function = null):void {
+        _fadeInBack = null;
 
-        _fadOutBack = back;
+        _fadeOutBack = back;
         ui.gotoAndStop('fadout');
         startRender();
     }
@@ -88,16 +88,16 @@ public class TransUI {
 
         if (ui.currentFrameLabel == 'stop') {
 
-            //这里要处理在fadinback中定义了fadoutback的情况，所以只能这样写
+            //这里要处理在fadeinback中定义了fadeoutback的情况，所以只能这样写
 
-            if (_fadInBack != null) {
-                _fadInBack();
-                _fadInBack = null;
+            if (_fadeInBack != null) {
+                _fadeInBack();
+                _fadeInBack = null;
                 return;
             }
-            if (_fadOutBack != null) {
-                _fadOutBack();
-                _fadOutBack = null;
+            if (_fadeOutBack != null) {
+                _fadeOutBack();
+                _fadeOutBack = null;
                 return;
             }
 

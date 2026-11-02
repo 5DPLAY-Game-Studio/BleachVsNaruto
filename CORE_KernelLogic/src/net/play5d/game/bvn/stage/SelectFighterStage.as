@@ -139,11 +139,11 @@ public class SelectFighterStage implements IStage {
         case SelectFlowAction.ENABLE_P2_WITH_P1_INPUT:
             enableP2WithP1Input();
             break;
-        case SelectFlowAction.FADOUT_ASSIST:
-            _listCtrl.fadOutList(initAssist);
+        case SelectFlowAction.FADEOUT_ASSIST:
+            _listCtrl.fadeOutList(initAssist);
             break;
-        case SelectFlowAction.FADOUT_MAP:
-            _listCtrl.fadOutList(initMap);
+        case SelectFlowAction.FADEOUT_MAP:
+            _listCtrl.fadeOutList(initMap);
             break;
         case SelectFlowAction.START_ARCADE:
             startArcadeGame();

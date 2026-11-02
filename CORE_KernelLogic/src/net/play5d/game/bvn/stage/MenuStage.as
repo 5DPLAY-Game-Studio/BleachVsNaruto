@@ -174,7 +174,7 @@ public class MenuStage extends Sprite implements IStage {
         }
 
         _btnGroup.build();
-        _btnGroup.fadIn(0.2, 0.04);
+        _btnGroup.fadeIn(0.2, 0.04);
         setTimeout(function ():void {
             _btnGroup.enabled = true;
         }, 400);

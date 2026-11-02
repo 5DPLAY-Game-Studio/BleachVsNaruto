@@ -54,9 +54,9 @@ public class VsPeopleSelectFlow implements ISelectModeFlow {
         case 0:
             return new SelectFlowAction(SelectFlowAction.INIT_FIGHTER, 1);
         case 1:
-            return new SelectFlowAction(SelectFlowAction.FADOUT_ASSIST, 3);
+            return new SelectFlowAction(SelectFlowAction.FADEOUT_ASSIST, 3);
         case 3:
-            return new SelectFlowAction(SelectFlowAction.FADOUT_MAP, 5);
+            return new SelectFlowAction(SelectFlowAction.FADEOUT_MAP, 5);
         case 5:
             return new SelectFlowAction(SelectFlowAction.SELECT_FINISH, -1);
         }

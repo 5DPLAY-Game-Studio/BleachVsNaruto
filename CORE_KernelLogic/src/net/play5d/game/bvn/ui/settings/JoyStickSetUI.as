@@ -117,10 +117,10 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
      * 入场动画。
      * @example
      * <listing version="3.0">
-     * ui.fadIn();
+     * ui.fadeIn();
      * </listing>
      */
-    public function fadIn():void {
+    public function fadeIn():void {
         _bp.y = 600;
         TweenLite.to(_bp, 0.3, {y: 240});
     }
@@ -129,10 +129,10 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
      * 退场动画。
      * @example
      * <listing version="3.0">
-     * ui.fadOut();
+     * ui.fadeOut();
      * </listing>
      */
-    public function fadOut():void {
+    public function fadeOut():void {
         TweenLite.to(_ui, 0.3, {y: 600});
     }
 

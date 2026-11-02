@@ -255,17 +255,17 @@ public class GameUI {
         }
     }
 
-    public function fadIn():void {
+    public function fadeIn():void {
         if (_ui) {
             var volume:Number = GameData.I.config.soundVolume;
-            _ui.fadIn();
+            _ui.fadeIn();
             _ui.setVolume(volume);
         }
     }
 
-    public function fadOut():void {
+    public function fadeOut():void {
         if (_ui) {
-            _ui.fadOut();
+            _ui.fadeOut();
         }
     }
 
@@ -399,10 +399,10 @@ public class GameUI {
     public static function transIn(back:Function = null, removeAfterComplete:Boolean = false):void {
         addTransUI();
         if (removeAfterComplete) {
-            _transUI.fadIn(removeSelf);
+            _transUI.fadeIn(removeSelf);
         }
         else {
-            _transUI.fadIn(back);
+            _transUI.fadeIn(back);
         }
 
         function removeSelf():void {
@@ -422,10 +422,10 @@ public class GameUI {
     public static function transOut(back:Function = null, removeAfterComplete:Boolean = true):void {
         addTransUI();
         if (removeAfterComplete) {
-            _transUI.fadOut(removeSelf);
+            _transUI.fadeOut(removeSelf);
         }
         else {
-            _transUI.fadOut(back);
+            _transUI.fadeOut(back);
         }
 
         function removeSelf():void {
@@ -452,7 +452,7 @@ public class GameUI {
         }
         _quickTransUI ||= new QuickTransUI();
         _transContainer.addChild(_quickTransUI);
-        _quickTransUI.fadInAndOut(transCom);
+        _quickTransUI.fadeInAndOut(transCom);
 
         function transCom():void {
             try {

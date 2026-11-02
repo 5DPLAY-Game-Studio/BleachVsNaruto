@@ -257,7 +257,7 @@ public class SelectFighterListCtrl {
         TweenLite.to(_fighterListUI, .2, {y: toY});
     }
 
-    public function fadOutList(back:Function = null):void {
+    public function fadeOutList(back:Function = null):void {
 
         GameInputter.enabled = false;
 

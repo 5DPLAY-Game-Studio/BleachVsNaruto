@@ -202,25 +202,25 @@ public class FightUI implements IGameUI {
         renderStartAndKO();
     }
 
-    public function fadIn(animate:Boolean = true):void {
-        _fightbar.fadIn(animate);
+    public function fadeIn(animate:Boolean = true):void {
+        _fightbar.fadeIn(animate);
 
         if (QI_BAR_MODE == FightQiBarMode.TOP) {
-            _qibar1.fadIn(false);
-            _qibar2.fadIn(false);
+            _qibar1.fadeIn(false);
+            _qibar2.fadeIn(false);
             _qibar1.setPosAndScale(120, 60, 0.8);
             _qibar2.setPosAndScale(675, 60, 0.8);
         }
         else {
-            _qibar1.fadIn(animate);
-            _qibar2.fadIn(animate);
+            _qibar1.fadeIn(animate);
+            _qibar2.fadeIn(animate);
         }
     }
 
-    public function fadOut(animate:Boolean = true):void {
-        _fightbar.fadOut(animate);
-        _qibar1.fadOut(animate);
-        _qibar2.fadOut(animate);
+    public function fadeOut(animate:Boolean = true):void {
+        _fightbar.fadeOut(animate);
+        _qibar1.fadeOut(animate);
+        _qibar2.fadeOut(animate);
     }
 
     public function showHits(hits:int, id:int):void {
@@ -235,7 +235,7 @@ public class FightUI implements IGameUI {
 
     public function showStart(finishBack:Function = null, params:Object = null):void {
 
-        fadIn();
+        fadeIn();
 
         var round:int = GameCtrl.I.gameRunData.round;
 
@@ -397,8 +397,8 @@ public class FightUI implements IGameUI {
             ui.startKOmc.addEventListener(Event.COMPLETE, koBack);
 
             SoundCtrl.I.playSwcSound(bsKO ? snd_ko_bs : snd_ko);
-            _qibar1.fadOut();
-            _qibar2.fadOut();
+            _qibar1.fadeOut();
+            _qibar2.fadeOut();
         }
     }
 
@@ -406,8 +406,8 @@ public class FightUI implements IGameUI {
         ui.startKOmc.y = 0;
         ui.startKOmc.gotoAndStop('timeover');
         ui.startKOmc.addEventListener(Event.COMPLETE, timeoverBack);
-        _qibar1.fadOut();
-        _qibar2.fadOut();
+        _qibar1.fadeOut();
+        _qibar2.fadeOut();
     }
 
     private function playDrawGame():void {

@@ -45,7 +45,7 @@ public class BishaFaceEffectView {
         facemc.addChild(face);
     }
 
-    public function fadIn():void {
+    public function fadeIn():void {
         mc.gotoAndPlay(2);
     }
 

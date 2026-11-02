@@ -57,13 +57,13 @@ public class DialogManager {
                            ) / 2 : 0;
         v.show(x, y);
 
-        fadIn(v);
+        fadeIn(v);
 
         _showingDialogs.push(v);
     }
 
     public static function closeDialog(v:BaseDialog):void {
-        fadOut(v, tweenBack);
+        fadeOut(v, tweenBack);
 
         function tweenBack():void {
             var index:int = _showingDialogs.indexOf(v);
@@ -85,7 +85,7 @@ public class DialogManager {
                 }
 
                 addDialogBg();
-                fadIn(last);
+                fadeIn(last);
             }
         }
 
@@ -119,7 +119,7 @@ public class DialogManager {
         _dialogBG.alpha = 0.7;
     }
 
-    private static function fadIn(d:BaseDialog, back:Function = null):void {
+    private static function fadeIn(d:BaseDialog, back:Function = null):void {
         var view:DisplayObject = d.getDisplay();
 
         var y:Number = view.y;
@@ -138,7 +138,7 @@ public class DialogManager {
         });
     }
 
-    private static function fadOut(d:BaseDialog, back:Function):void {
+    private static function fadeOut(d:BaseDialog, back:Function):void {
         var view:DisplayObject = d.getDisplay();
         TweenLite.to(view, 0.2, {
             y: view.y - 10, alpha: 0, onComplete: function ():void {

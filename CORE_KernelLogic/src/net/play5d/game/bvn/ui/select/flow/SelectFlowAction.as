@@ -32,9 +32,9 @@ public class SelectFlowAction {
     /** 关闭 P1 光标并开启 P2（P1 键位控 P2，用于 CPU/观战侧选人） */
     public static const ENABLE_P2_WITH_P1_INPUT:int = 2;
     /** 淡出列表后进入援助选人 */
-    public static const FADOUT_ASSIST:int = 3;
+    public static const FADEOUT_ASSIST:int = 3;
     /** 淡出列表后进入地图选择 */
-    public static const FADOUT_MAP:int = 4;
+    public static const FADEOUT_MAP:int = 4;
     /** 闯关开局 */
     public static const START_ARCADE:int = 5;
     /** 无双开局 */

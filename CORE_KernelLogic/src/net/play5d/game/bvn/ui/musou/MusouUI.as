@@ -147,10 +147,10 @@ public class MusouUI implements IGameUI {
         }
     }
 
-    public function fadIn(animate:Boolean = true):void {
+    public function fadeIn(animate:Boolean = true):void {
     }
 
-    public function fadOut(animate:Boolean = true):void {
+    public function fadeOut(animate:Boolean = true):void {
     }
 
     public function getUI():DisplayObject {
