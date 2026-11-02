@@ -19,7 +19,7 @@
 package net.play5d.game.bvn.interfaces.lan {
 
 /**
- * UDP 传输抽象（壳侧实现：AndroidUDP / DatagramSocket）。
+ * UDP 传输抽象（Pc / Mob 均用 <code>DatagramSocket</code>）。
  *
  * <p>收包回调签名为 <code>Function(UDPDataVO):void</code>。</p>
  *
