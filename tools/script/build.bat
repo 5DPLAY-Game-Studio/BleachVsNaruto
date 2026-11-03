@@ -19,12 +19,13 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::
 :: 用途
-::   使用纯 FlexSDK（compc / amxmlc）构建 SHELL_Dev 调试链，
-::   不依赖 IDEA 或 VSCode。
+::   使用纯 FlexSDK（compc / amxmlc / adt）构建 SHELL_Dev 调试链，
+::   并打包 SHELL_Pc、SHELL_Mob 发行版。不依赖 IDEA 或 VSCode。
 ::
 :: 用法
 ::   tools\script\build.bat
 ::   之后可选用：tools\script\debug.bat
+::   移动端调试：tools\script\debug_mob.bat
 ::
 :: 前置条件
 ::   FLEX_HOME 指向 Flex/AIR SDK 根目录（flex4.16.1-air51.0.1.1）。
@@ -33,9 +34,9 @@
 ::   [Module]/flex-config.xml
 ::   tools\script\conf\sdk-external.xml - 库 SWC 将 Flex/AIR/MX 标为 external
 ::
-:: 编译顺序（SHELL_Dev 最小链）：
+:: 编译顺序（SHELL_* 最小链）：
 ::   LIB_Other -> LIB_KyoLib -> CORE_Shared -> CORE_KernelLogic
-::   -> CORE_Utils -> sync.bat -> SHELL_Dev
+::   -> CORE_Utils -> sync.bat -> SHELL_Dev -> SHELL_Pc -> SHELL_Mob
 :: CORE_Components 一并编译（供独立组件消费；SHELL_* 不依赖）
 ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -94,10 +95,13 @@ set "MOD_DEV=%REPO_ROOT%\SHELL_Dev"
 set "OUT_DEV=%OUT_ROOT%\SHELL_Dev"
 set "MOD_PC=%REPO_ROOT%\SHELL_Pc"
 set "OUT_PC=%OUT_ROOT%\SHELL_Pc"
+set "MOD_MOB=%REPO_ROOT%\SHELL_Mob"
+set "OUT_MOB=%OUT_ROOT%\SHELL_Mob"
 
 set "SHARED_DIR=%REPO_ROOT%\shared"
 set "SYNC_BAT=%BAT_HOME%sync.bat"
 set "PACKAGE_PC_BAT=%BAT_HOME%package_shell_pc.bat"
+set "PACKAGE_MOB_BAT=%BAT_HOME%package_shell_mob.bat"
 set "FLEX_CFG=flex-config.xml"
 
 :: 库模块编译顺序（含 CORE_Components；VSCode SHELL_Dev 链可跳过 Components）
@@ -118,9 +122,15 @@ set "OUT_ICON=%OUT_DEV%\icon"
 set "PC_MAIN_AS=%MOD_PC%\src\launch.as"
 set "PC_CFG=%MOD_PC%\%FLEX_CFG%"
 
+:: SHELL_Mob 源文件与配置（发行版，debug 关闭，与 SHELL_Pc 一致）
+set "MOB_MAIN_AS=%MOD_MOB%\src\launch.as"
+set "MOB_CFG=%MOD_MOB%\%FLEX_CFG%"
+
 call "!FUNC_COMMON!" EXIST "%MOD_DEV%"
 if errorlevel 1 goto END
 call "!FUNC_COMMON!" EXIST "%MOD_PC%"
+if errorlevel 1 goto END
+call "!FUNC_COMMON!" EXIST "%MOD_MOB%"
 if errorlevel 1 goto END
 call "!FUNC_COMMON!" EXIST "%SHARED_DIR%"
 if errorlevel 1 goto END
@@ -128,10 +138,13 @@ call "!FUNC_COMMON!" EXIST "%SYNC_BAT%"
 if errorlevel 1 goto END
 call "!FUNC_COMMON!" EXIST "%PACKAGE_PC_BAT%"
 if errorlevel 1 goto END
+call "!FUNC_COMMON!" EXIST "%PACKAGE_MOB_BAT%"
+if errorlevel 1 goto END
 
 :: 确保各模块输出目录存在（compc / amxmlc 写入 out\production）
 if not exist "%OUT_DEV%" mkdir "%OUT_DEV%"
 if not exist "%OUT_PC%" mkdir "%OUT_PC%"
+if not exist "%OUT_MOB%" mkdir "%OUT_MOB%"
 for %%M in (%LIB_MODULES%) do (
 	if not exist "%OUT_ROOT%\%%M" mkdir "%OUT_ROOT%\%%M"
 )
@@ -238,6 +251,35 @@ if errorlevel 1 (
 	goto END
 )
 call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_PC_OK ""
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 9) 编译 SHELL_Mob（amxmlc / AIR；不加载 sdk-external，应用 Merges 框架）
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+call "!FUNC_COMMON!" EXIST "%MOB_CFG%"
+if errorlevel 1 goto END
+call "!FUNC_COMMON!" EXIST "%MOB_MAIN_AS%"
+if errorlevel 1 goto END
+
+call "!FUNC_COMMON!" ECHO_LANG :COMPILE_START "SHELL_Mob"
+call "%AMXMLC%" -load-config+="%MOB_CFG%" "%MOB_MAIN_AS%"
+if errorlevel 1 (
+	call "!FUNC_COMMON!" ECHO_LANG :COMPILE_FAIL "SHELL_Mob"
+	goto END
+)
+call "!FUNC_COMMON!" ECHO_LANG :COMPILE_OK "SHELL_Mob"
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: 10) 打包 SHELL_Mob（SDK adt APK）
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_MOB_START ""
+call "%PACKAGE_MOB_BAT%"
+if errorlevel 1 (
+	call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_MOB_FAIL ""
+	goto END
+)
+call "!FUNC_COMMON!" ECHO_LANG :PACKAGE_MOB_OK ""
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

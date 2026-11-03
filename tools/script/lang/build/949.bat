@@ -44,7 +44,7 @@ title 빌드 프로젝트
 goto :EOF
 
 :BUILD_START
-echo SHELL_Dev 디버그 체인과 SHELL_Pc 릴리스 패키지를 구축하는 중...
+echo SHELL_Dev 디버그 체인, SHELL_Pc 와 SHELL_Mob 릴리스 패키지를 구축하는 중...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,7 @@ echo 복사 실패: !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
-echo 빌드 성공（SHELL_Dev + SHELL_Pc 패키지）!
+echo 빌드 성공（SHELL_Dev + SHELL_Pc + SHELL_Mob 패키지）!
 goto :EOF
 
 :PACKAGE_PC_START
@@ -85,6 +85,18 @@ goto :EOF
 
 :PACKAGE_PC_OK
 echo SHELL_Pc 패키징 성공!
+goto :EOF
+
+:PACKAGE_MOB_START
+echo SHELL_Mob APK 패키징 중...
+goto :EOF
+
+:PACKAGE_MOB_FAIL
+echo SHELL_Mob 패키징 실패!
+goto :EOF
+
+:PACKAGE_MOB_OK
+echo SHELL_Mob 패키징 성공!
 goto :EOF
 
 :ASDOC_EMBED_START

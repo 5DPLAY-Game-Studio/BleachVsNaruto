@@ -84,6 +84,42 @@
                 "ActionScript: compile release - SHELL_Pc/asconfig.json"
             ]
         },
+        // SHELL_Mob
+        {
+            "label"         : "ActionScript: compile release - SHELL_Mob/asconfig.json",
+            "type"          : "actionscript",
+            "debug"         : false,
+            "asconfig"      : "SHELL_Mob/asconfig.json",
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile debug - LIB_KyoLib/asconfig.json",
+                "ActionScript: compile debug - CORE_Shared/asconfig.json",
+                "ActionScript: compile debug - CORE_KernelLogic/asconfig.json",
+                "ActionScript: compile debug - CORE_Utils/asconfig.json",
+                "5DPLAY_TOOLS - SyncAssets"
+            ]
+        },
+        // SHELL_Mob：Android APK 发行版 → out/production/SHELL_Mob/launch.apk
+        {
+            "label"         : "SHELL_Mob: package Android APK",
+            "type"          : "shell",
+            "command"       : "\"${workspaceFolder}\\tools\\script\\package_shell_mob.bat\"",
+            "options"       : {
+                "cwd"       : "${workspaceFolder}\\tools\\script",
+                "shell"     : {
+                    "executable": "cmd.exe",
+                    "args"     : ["/d", "/c"]
+                }
+            },
+            "group"         : "build",
+            "problemMatcher": [],
+            "dependsOrder"  : "sequence",
+            "dependsOn"     : [
+                "ActionScript: compile release - SHELL_Mob/asconfig.json"
+            ]
+        },
 
         /******************** 构建组件 ********************/
         

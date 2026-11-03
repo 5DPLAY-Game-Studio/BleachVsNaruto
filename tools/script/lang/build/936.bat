@@ -44,7 +44,7 @@ title 构建项目
 goto :EOF
 
 :BUILD_START
-echo 正在构建 SHELL_Dev 调试链与 SHELL_Pc 发行包...
+echo 正在构建 SHELL_Dev 调试链、SHELL_Pc 与 SHELL_Mob 发行包...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,7 @@ echo 复制失败： !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
-echo 构建成功完成（SHELL_Dev + SHELL_Pc 打包）！
+echo 构建成功完成（SHELL_Dev + SHELL_Pc + SHELL_Mob 打包）！
 goto :EOF
 
 :PACKAGE_PC_START
@@ -85,6 +85,18 @@ goto :EOF
 
 :PACKAGE_PC_OK
 echo SHELL_Pc 打包成功！
+goto :EOF
+
+:PACKAGE_MOB_START
+echo 正在打包 SHELL_Mob APK 发行版...
+goto :EOF
+
+:PACKAGE_MOB_FAIL
+echo SHELL_Mob 打包失败！
+goto :EOF
+
+:PACKAGE_MOB_OK
+echo SHELL_Mob 打包成功！
 goto :EOF
 
 :ASDOC_EMBED_START

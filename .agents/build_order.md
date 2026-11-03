@@ -46,7 +46,7 @@ sync.bat / shared assets ──────────────────�
 
 ## 三管道对照
 
-| 步骤 | `build.bat` | VSCode `SHELL_Dev` / `SHELL_Pc` | IDEA `SHELL_*` Run |
+| 步骤 | `build.bat` | VSCode `SHELL_*` | IDEA `SHELL_*` Run |
 |------|-------------|-----------------------------------|--------------------|
 | LIB_Other | ✓ | ✓（经 KyoLib task） | ✓ Make |
 | LIB_KyoLib + embed | ✓ 紧随 compc | ✓ 紧随 compc | Embed **在 Make 后** |
@@ -54,7 +54,7 @@ sync.bat / shared assets ──────────────────�
 | CORE_Components | ✓（依赖 KyoLib+Shared） | ✓ 独立 task（depends KyoLib+Shared） | ✓ 若模块在工程内 |
 | KernelLogic / Utils | ✓ | ✓ | ✓ Make |
 | sync | 库后、壳前 | 壳 task 末依赖 | **Make 前** SyncAssets |
-| SHELL | amxmlc Dev + amxmlc Pc + `package_shell_pc.bat` | asconfig Dev / Pc；Pc 发行用 `SHELL_Pc: package Windows captive runtime`（SDK `adt -target bundle`）→ `out/production/SHELL_Pc/launch` | Make |
+| SHELL | amxmlc Dev + amxmlc Pc + `package_shell_pc.bat`；amxmlc Mob + `package_shell_mob.bat` | asconfig Dev / Pc / Mob；Pc 发行 `SHELL_Pc: package Windows captive runtime`（`adt -target bundle`）→ `out/production/SHELL_Pc/launch`；Mob 发行 `SHELL_Mob: package Android APK`（`adt -target apk`）→ `out/production/SHELL_Mob/launch.apk` | Make（Mob 打包描述在 iml `packaging-android`） |
 
 ---
 

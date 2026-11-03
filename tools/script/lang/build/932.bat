@@ -44,7 +44,7 @@ title ビルド プロジェクト
 goto :EOF
 
 :BUILD_START
-echo SHELL_Dev デバッグチェーンと SHELL_Pc リリースパッケージを構築中...
+echo SHELL_Dev デバッグチェーン、SHELL_Pc と SHELL_Mob のリリースパッケージを構築中...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,7 @@ echo コピーに失敗しました: !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
-echo ビルド完了（SHELL_Dev + SHELL_Pc パッケージ）！
+echo ビルド完了（SHELL_Dev + SHELL_Pc + SHELL_Mob パッケージ）！
 goto :EOF
 
 :PACKAGE_PC_START
@@ -85,6 +85,18 @@ goto :EOF
 
 :PACKAGE_PC_OK
 echo SHELL_Pc のパッケージが完了しました！
+goto :EOF
+
+:PACKAGE_MOB_START
+echo SHELL_Mob APK をパッケージ中...
+goto :EOF
+
+:PACKAGE_MOB_FAIL
+echo SHELL_Mob のパッケージに失敗しました！
+goto :EOF
+
+:PACKAGE_MOB_OK
+echo SHELL_Mob のパッケージが完了しました！
 goto :EOF
 
 :ASDOC_EMBED_START

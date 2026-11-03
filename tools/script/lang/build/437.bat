@@ -44,7 +44,7 @@ title Build Project
 goto :EOF
 
 :BUILD_START
-echo Building SHELL_Dev debug chain and SHELL_Pc release package...
+echo Building SHELL_Dev debug chain, SHELL_Pc and SHELL_Mob release packages...
 goto :EOF
 
 :COMPILE_START
@@ -72,7 +72,7 @@ echo Failed to copy: !LANG_PARAM!
 goto :EOF
 
 :BUILD_SUCCESS
-echo Build completed successfully (SHELL_Dev + SHELL_Pc package)!
+echo Build completed successfully (SHELL_Dev + SHELL_Pc + SHELL_Mob packages)!
 goto :EOF
 
 :PACKAGE_PC_START
@@ -85,6 +85,18 @@ goto :EOF
 
 :PACKAGE_PC_OK
 echo SHELL_Pc package completed successfully!
+goto :EOF
+
+:PACKAGE_MOB_START
+echo Packaging SHELL_Mob APK...
+goto :EOF
+
+:PACKAGE_MOB_FAIL
+echo SHELL_Mob package failed!
+goto :EOF
+
+:PACKAGE_MOB_OK
+echo SHELL_Mob package completed successfully!
 goto :EOF
 
 :ASDOC_EMBED_START
