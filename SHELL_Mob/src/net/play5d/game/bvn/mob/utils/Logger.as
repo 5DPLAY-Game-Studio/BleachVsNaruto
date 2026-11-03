@@ -31,9 +31,9 @@ import net.play5d.game.bvn.interfaces.ILogger;
 /**
  * 移动文件日志：缓冲后追加到用户目录，并按大小轮转。
  *
- * <p>路径为应用存储目录下的 <code>logs/bvn.log</code>。
+ * <p>每次启动按本地时间新建文件，例如 <code>logs/2026-11-03_09-54-12.log</code>。
  * 缓冲满 32 行或 8KB、级别为 <code>ERROR</code>、或每隔 1 秒时落盘。
- * 单文件达到 512KB 时轮转，连当前文件共保留 3 个。
+ * 单文件达到 512KB 时在该文件名后加序号轮转，连当前文件共保留 3 个。
  * 写入失败只报告一次并停止写文件。应用退出时刷出剩余缓冲。</p>
  *
  * @example
@@ -57,12 +57,12 @@ public class Logger implements ILogger {
     /** @private */
     private static const LOG_DIR:String     = 'logs';
     /** @private */
-    private static const LOG_NAME:String    = 'bvn.log';
-    /** @private */
     private static const ERROR_LEVEL:String = 'ERROR';
 
     /** @private */
     private var _file:File;
+    /** @private 本次启动的日志文件名 */
+    private var _logName:String;
     /** @private */
     private var _timer:Timer;
     /** @private */
@@ -85,6 +85,7 @@ public class Logger implements ILogger {
      * </listing>
      */
     public function Logger() {
+        _logName = startupLogName();
         NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExiting);
         _timer = new Timer(FLUSH_INTERVAL);
         _timer.addEventListener(TimerEvent.TIMER, onTimer);
@@ -176,7 +177,7 @@ public class Logger implements ILogger {
         if (!dir.exists) {
             dir.createDirectory();
         }
-        _file = dir.resolvePath(LOG_NAME);
+        _file = dir.resolvePath(_logName);
     }
 
     /** @private */
@@ -195,12 +196,33 @@ public class Logger implements ILogger {
             source.moveTo(backupFile(dir, i), true);
         }
 
-        _file = dir.resolvePath(LOG_NAME);
+        _file = dir.resolvePath(_logName);
     }
 
     /** @private */
-    private static function backupFile(dir:File, index:int):File {
-        return dir.resolvePath('bvn.' + index + '.log');
+    private function backupFile(dir:File, index:int):File {
+        var dot:int     = _logName.lastIndexOf('.');
+        var stem:String = dot < 0 ? _logName : _logName.substring(0, dot);
+        return dir.resolvePath(stem + '.' + index + '.log');
+    }
+
+    /** @private */
+    private static function startupLogName():String {
+        var now:Date = new Date();
+
+        return pad(now.fullYear, 4) + '-' + pad(now.month + 1, 2) + '-' + pad(now.date, 2)
+                + '_' + pad(now.hours, 2) + '-' + pad(now.minutes, 2) + '-' + pad(now.seconds, 2)
+                + '.log';
+    }
+
+    /** @private */
+    private static function pad(value:int, width:int):String {
+        var text:String = String(value);
+        while (text.length < width) {
+            text = '0' + text;
+        }
+
+        return text;
     }
 
     /** @private */
