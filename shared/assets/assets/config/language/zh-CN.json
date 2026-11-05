@@ -381,6 +381,9 @@
         "debug_util"            : {
           "debug_position": "DebugUtil.debugPosition:: 调试位置失败！"
         },
+        "fighter_api_proxy"     : {
+          "invalid_call": "门面 {api} 上没有 {name}（{kind}），已记入 FighterApiProxy.records"
+        },
         "fighter_mc"            : {
           "keyframe_not_exist": "关键帧不存在： {name}"
         },

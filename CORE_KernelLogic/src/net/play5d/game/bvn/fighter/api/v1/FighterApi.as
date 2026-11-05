@@ -20,6 +20,7 @@ package net.play5d.game.bvn.fighter.api.v1 {
 import flash.display.DisplayObject;
 import flash.geom.Rectangle;
 
+import net.play5d.game.bvn.fighter.api.FighterApiProxy;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.fighter.models.FighterHitModel;
 import net.play5d.game.bvn.interfaces.IGameSprite;
@@ -27,11 +28,11 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 /**
  * 角色时间轴第 1 版角色门面。
  *
- * <p>签名和默认值与当前 <code>$fighter_ctrler</code> 一致，调用原样转发。销毁、渲染、<code>initMc</code> 和控制器取值留在 <code>FighterCtrler</code>。</p>
+ * <p>签名和默认值与当前 <code>$fighter_ctrler</code> 一致，调用原样转发。销毁、渲染、<code>initMc</code> 和控制器取值留在 <code>FighterCtrler</code>。没有的成员记入 <code>FighterApiProxy.records</code>。</p>
  *
  * @see FighterCtrler
  */
-public class FighterApi {
+public class FighterApi extends FighterApiProxy {
 
     /** @private */
     private var _fighter:FighterCtrler;

@@ -19,18 +19,19 @@
 package net.play5d.game.bvn.fighter.api.v1 {
 import flash.display.DisplayObject;
 
+import net.play5d.game.bvn.fighter.api.FighterApiProxy;
 import net.play5d.game.bvn.fighter.ctrler.FighterAttackerCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
 
 /**
  * 角色时间轴第 1 版动作门面。
  *
- * <p>签名和默认值与当前 <code>$mc_ctrler</code> 的帧调用一致，调用原样转发。渲染、受击、开场胜负和 <code>doAction</code> 留在控制器。<code>effectCtrler</code> 返回构造时传入的特效门。</p>
+ * <p>签名和默认值与当前 <code>$mc_ctrler</code> 的帧调用一致，调用原样转发。渲染、受击、开场胜负和 <code>doAction</code> 留在控制器。<code>effectCtrler</code> 返回构造时传入的特效门。没有的成员记入 <code>FighterApiProxy.records</code>。</p>
  *
  * @see FighterMcCtrler
  * @see FighterEffectApi
  */
-public class FighterMcApi {
+public class FighterMcApi extends FighterApiProxy {
 
     /** @private */
     private var _mc:FighterMcCtrler;

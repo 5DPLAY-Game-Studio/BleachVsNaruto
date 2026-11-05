@@ -17,16 +17,17 @@
  */
 
 package net.play5d.game.bvn.fighter.api.v1 {
+import net.play5d.game.bvn.fighter.api.FighterApiProxy;
 import net.play5d.game.bvn.fighter.ctrler.FighterCameraCtrler;
 
 /**
  * 角色时间轴第 1 版镜头门面。
  *
- * <p>聚焦三个方法，以及当前注入对象从镜头控制器继承、时间轴能够直接调到的操纵方法。调用原样转发。绑定目标、销毁和场景尺寸留在控制器。</p>
+ * <p>聚焦三个方法，以及当前注入对象从镜头控制器继承、时间轴能够直接调到的操纵方法。调用原样转发。绑定目标、销毁和场景尺寸留在控制器。没有的成员记入 <code>FighterApiProxy.records</code>。</p>
  *
  * @see FighterCameraCtrler
  */
-public class FighterCameraApi {
+public class FighterCameraApi extends FighterApiProxy {
 
     /** @private */
     private var _camera:FighterCameraCtrler;

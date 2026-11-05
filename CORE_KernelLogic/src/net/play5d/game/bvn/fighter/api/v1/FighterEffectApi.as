@@ -17,16 +17,17 @@
  */
 
 package net.play5d.game.bvn.fighter.api.v1 {
+import net.play5d.game.bvn.fighter.api.FighterApiProxy;
 import net.play5d.game.bvn.fighter.ctrler.FighterEffectCtrl;
 
 /**
  * 角色时间轴第 1 版特效门面。
  *
- * <p>签名和默认值与当前 <code>$effect_ctrler</code> 一致，调用原样转发。销毁、必杀立绘登记和 <code>clean</code> 留在控制器。</p>
+ * <p>签名和默认值与当前 <code>$effect_ctrler</code> 一致，调用原样转发。销毁、必杀立绘登记和 <code>clean</code> 留在控制器。没有的成员记入 <code>FighterApiProxy.records</code>。</p>
  *
  * @see FighterEffectCtrl
  */
-public class FighterEffectApi {
+public class FighterEffectApi extends FighterApiProxy {
 
     /** @private */
     private var _effect:FighterEffectCtrl;
