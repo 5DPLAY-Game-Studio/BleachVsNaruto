@@ -9,7 +9,7 @@
 | 场景（菜单/选人/对战/加载/地图） | `stage/` → `MenuStage` `SelectFighterStage` `GameStage` `Loading*` `WorldMapStage` |
 | 对战流程 | `ctrler/game_ctrls/` → `GameCtrl` + `GameRoundCtrl` + `IFightSession`（`VersusFightSession` / `MusouFightSession`）；生成 `GameRunFactory`；Sprite 染色 `GameSpriteUtil` |
 | 无双 / 闯关 | `ctrler/musou_ctrls/` `data/musou/` `ui/musou/` `ui/big_map/` |
-| 角色 / 动作 / 受击 | `fighter/` `fighter/ctrler/` → `FighterMcCtrler`（时间轴门面，`$mc_ctrler`）+ `fighter/ctrler/mc/`（`FighterMcRuntime` / Hurt / Action + Floor/Air/Ghost Handler）；`FighterActionLogic`；`fighter/models/` → `HitVO` |
+| 角色 / 动作 / 受击 | `fighter/` `fighter/ctrler/`；时间轴注入 `fighter/api/`（`FighterApiFactory`，缺省第 1 版 `$fighter_ctrler` / `$mc_ctrler` / `$effect_ctrler` / `$camera_ctrler`）+ `fighter/ctrler/mc/`（`FighterMcRuntime` / Hurt / Action + Floor/Air/Ghost Handler）；`FighterActionLogic`；`fighter/models/` → `HitVO` |
 | 援助 | `fighter/Assister.as` `fighter/ctrler/AssisterCtrler.as` |
 | AI | `fighter/ctrler/EnemyFighterAICtrl.as` `fighter/ctrler/ai/` |
 | 输入 | `input/` `ctrler/KeyEvent.as` `data/vos/KeyConfigVO.as` |

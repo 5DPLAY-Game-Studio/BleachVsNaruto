@@ -22,6 +22,8 @@ import flash.display.MovieClip;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
+import net.play5d.game.bvn.fighter.api.FighterApiFactory;
+import net.play5d.game.bvn.fighter.api.FighterApiPorts;
 import net.play5d.game.bvn.fighter.FighterMC;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.data.fighter.FighterActionState;
@@ -349,14 +351,17 @@ public class FighterCtrler implements IGameSpriteCntlr {
         _cameraCtrler.setTarget(fighter);
         _fighterMcCtrl.effectCtrler = _effectCtrl;
 
-        // 注入到角色 main_mc：可在时间轴用 parent.$fighter_ctrler / $mc_ctrler / $effect_ctrler / $camera_ctrler
+        // 按 main_mc.API_VERSION 注入门面，时间轴仍用 $fighter_ctrler / $mc_ctrler / $effect_ctrler / $camera_ctrler
         var initFighter:Function = fighter.mc.initFighter;
         if (initFighter != null) {
+            var ports:FighterApiPorts = FighterApiFactory.create(fighter.mc, this, _fighterMcCtrl,
+                                                                 _effectCtrl, _cameraCtrler
+            );
             initFighter({
-                            fighter_ctrler: this,
-                            mc_ctrler     : _fighterMcCtrl,
-                            effect_ctrler : _effectCtrl,
-                            camera_ctrler : _cameraCtrler
+                            fighter_ctrler: ports.fighter,
+                            mc_ctrler     : ports.mc,
+                            effect_ctrler : ports.effect,
+                            camera_ctrler : ports.camera
                         });
         }
     }
