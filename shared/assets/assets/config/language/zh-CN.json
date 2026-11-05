@@ -475,6 +475,10 @@
         "bullet"              : {
           "do_hit": "跳转 [{frame}] 帧失败！"
         },
+        "fighter_api_factory" : {
+          "mc_is_null"      : "角色 main_mc 为空，无法选择 API 版本！",
+          "unknown_version": "不支持的角色 API 版本： {version}"
+        },
         "fighter_attacker"    : {
           "unsupported_type": "不支持的类型！"
         },
