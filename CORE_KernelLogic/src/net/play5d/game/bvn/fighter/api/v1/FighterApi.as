@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.fighter.api.v1 {
 import flash.display.DisplayObject;
+import flash.display.MovieClip;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.fighter.api.FighterApiProxy;
@@ -28,7 +29,7 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 /**
  * 角色时间轴第 1 版角色门面。
  *
- * <p>签名和默认值与当前 <code>$fighter_ctrler</code> 一致，调用原样转发。销毁、渲染、<code>initMc</code> 和控制器取值留在 <code>FighterCtrler</code>。没有的成员记入 <code>FighterApiProxy.records</code>。</p>
+ * <p>签名和默认值与当前 <code>$fighter_ctrler</code> 一致，调用原样转发。时间轴起始帧的 <code>initMc</code> 也从这里转到控制器。销毁、渲染和控制器取值留在 <code>FighterCtrler</code>。没有的成员记入 <code>FighterApiProxy.records</code>。</p>
  *
  * @see FighterCtrler
  */
@@ -48,6 +49,19 @@ public class FighterApi extends FighterApiProxy {
      */
     public function FighterApi(fighter:FighterCtrler) {
         _fighter = fighter;
+    }
+
+    /**
+     * 装上动作元件并停到待机。时间轴在起始帧调用。
+     *
+     * @param mc 动作元件。
+     * @example
+     * <listing version="3.0">
+     * api.initMc(mc);
+     * </listing>
+     */
+    public function initMc(mc:MovieClip):void {
+        _fighter.initMc(mc);
     }
 
     /**
