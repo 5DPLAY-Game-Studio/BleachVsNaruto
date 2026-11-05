@@ -24,6 +24,7 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.GameLogic;
 import net.play5d.game.bvn.data.vos.FighterVO;
+import net.play5d.game.bvn.fighter.api.AssisterApiFactory;
 import net.play5d.game.bvn.fighter.ctrler.AssisterCtrler;
 import net.play5d.game.bvn.fighter.models.HitVO;
 import net.play5d.game.bvn.fighter.utils.HitAreaUtil;
@@ -41,7 +42,7 @@ public class Assister extends BaseGameSprite {
         if (_mainMc.setAssistCtrler) {
             _ctrler = new AssisterCtrler();
             _ctrler.initAssister(this);
-            _mainMc.setAssistCtrler(_ctrler);
+            _mainMc.setAssistCtrler(AssisterApiFactory.create(_mainMc, _ctrler));
         }
         else {
             ThrowError(Error, GetLang('debug.error.data.assister.init_fail', {functionName: 'setAssistCtrler()'}));

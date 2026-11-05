@@ -473,7 +473,9 @@
           "init_musou_stage_fail": "初始化 无双场景 失败！"
         },
         "assister"            : {
-          "init_fail": "初始化失败！未定义函数 {functionName}"
+          "init_fail"       : "初始化失败！未定义函数 {functionName}",
+          "mc_is_null"      : "辅助 main_mc 为空，无法选择 API 版本！",
+          "unknown_version": "不支持的辅助 API 版本： {version}"
         },
         "bullet"              : {
           "do_hit": "跳转 [{frame}] 帧失败！"
