@@ -19,7 +19,6 @@
 package net.play5d.game.bvn.fighter.api {
 import flash.utils.Dictionary;
 import flash.utils.Proxy;
-import flash.utils.QName;
 import flash.utils.describeType;
 import flash.utils.flash_proxy;
 import flash.utils.getQualifiedClassName;
@@ -147,7 +146,8 @@ public class FighterApiProxy extends Proxy {
      * @private 类上是否声明了该公开成员。
      */
     private function knows(name:String):Boolean {
-        var cache:Object = _known[constructor];
+        var typeName:String = getQualifiedClassName(this);
+        var cache:Object   = _known[typeName];
         if (!cache) {
             cache = {};
             var info:XML = describeType(this);
@@ -155,7 +155,7 @@ public class FighterApiProxy extends Proxy {
             mark(cache, info.accessor);
             mark(cache, info.variable);
             mark(cache, info.constant);
-            _known[constructor] = cache;
+            _known[typeName] = cache;
         }
 
         return cache[name] == true;
@@ -178,11 +178,13 @@ public class FighterApiProxy extends Proxy {
 
     /** @private */
     private static function localName(name:*):String {
-        if (name is QName) {
-            return QName(name).localName;
+        var text:String = String(name);
+        var cut:int     = text.lastIndexOf('::');
+        if (cut >= 0) {
+            return text.substr(cut + 2);
         }
 
-        return String(name);
+        return text;
     }
 
     /** @private */
