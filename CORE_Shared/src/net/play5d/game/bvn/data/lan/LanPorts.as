@@ -31,6 +31,6 @@ public class LanPorts {
     /** UDP 客户端侦听端口 */
     public static const UDP_CLIENT:int = 17478;
     /** TCP 会话端口 */
-    public static const TCP:int = 17511;
+    public static const TCP:int        = 17511;
 }
 }

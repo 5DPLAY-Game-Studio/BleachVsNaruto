@@ -33,11 +33,11 @@ public class UdpPacketUtils {
     include '../../../../../../../include/ImportVersion.as';
 
     /** @private 线格式：字符串 */
-    private static const WIRE_STRING:int = 1;
+    private static const WIRE_STRING:int    = 1;
     /** @private 线格式：二进制 */
     private static const WIRE_BYTEARRAY:int = 2;
     /** @private 线格式：对象 */
-    private static const WIRE_OBJECT:int = 3;
+    private static const WIRE_OBJECT:int    = 3;
 
     /**
      * 将消息编码为 UDP 载荷。

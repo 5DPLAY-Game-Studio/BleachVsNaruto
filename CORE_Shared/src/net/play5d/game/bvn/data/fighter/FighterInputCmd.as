@@ -29,14 +29,14 @@ public class FighterInputCmd {
     include '../../../../../../../include/ImportVersion.as';
 
     /** 左移（A） */
-    public static const LEFT:String  = 'A';
+    public static const LEFT:String    = 'A';
     /** 右移（D） */
-    public static const RIGHT:String = 'D';
+    public static const RIGHT:String   = 'D';
     /** 防御（S） */
     public static const DEFENSE:String = 'S';
 
     /** 普通攻击（J） */
-    public static const ATTACK:String = 'J';
+    public static const ATTACK:String  = 'J';
     /** 砍技 1（SJ） */
     public static const SKILL_1:String = 'SJ';
     /** 砍技 2（WJ） */
@@ -68,9 +68,9 @@ public class FighterInputCmd {
     public static const SKILL_AIR_S:String = 'SKU';
 
     /** 瞬步 / 起身（L） */
-    public static const DASH:String = 'L';
+    public static const DASH:String      = 'L';
     /** 跳（K） */
-    public static const JUMP:String = 'K';
+    public static const JUMP:String      = 'K';
     /** 落（SK） */
     public static const JUMP_DOWN:String = 'SK';
 
