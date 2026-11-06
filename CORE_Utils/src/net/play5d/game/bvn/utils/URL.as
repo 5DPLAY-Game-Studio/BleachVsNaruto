@@ -70,7 +70,7 @@ public class URL {
         go(DOWNLOAD, false);
     }
 
-    public static function download_android(...params):void {
+    public static function downloadAndroid(...params):void {
         go(DOWNLOAD_ANDROID);
     }
 
