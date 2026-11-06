@@ -19,137 +19,137 @@
 package net.play5d.game.bvn.interfaces {
 
 /**
- * 内嵌 UI SWF 资源库契约。
+ * 界面 SWF 路径契约。
  *
- * <p>各入口注入实现后，运行时按模块取出对应 SWF 的 <code>Class</code> 再实例化界面元件。
- * Embed 实现不在本库；默认实现位于工具层的 <code>SwfLib</code>。</p>
+ * <p>各入口注入实现后，运行时按模块取出相对 <code>assets/</code> 的路径，再载入当前域实例化界面元件。
+ * 默认实现位于工具层的 <code>SwfLib</code>。</p>
  *
  * @example
  * <listing version="3.0">
  * var lib:ISwfLib = swfLib;
- * var titleSwf:Class = lib.title;
+ * var titleSwf:String = lib.title;
  * </listing>
  */
 public interface ISwfLib {
 
     /**
-     * 大地图 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 大地图 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.big_map;
+     * var url:String = swfLib.big_map;
      * </listing>
      */
-    function get big_map():Class;
+    function get big_map():String;
 
     /**
-     * 共享通用 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 共享通用 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.common;
+     * var url:String = swfLib.common;
      * </listing>
      */
-    function get common():Class;
+    function get common():String;
 
     /**
-     * 对话框 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 对话框 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.dialog;
+     * var url:String = swfLib.dialog;
      * </listing>
      */
-    function get dialog():Class;
+    function get dialog():String;
 
     /**
-     * 战斗 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 战斗 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.fight;
+     * var url:String = swfLib.fight;
      * </listing>
      */
-    function get fight():Class;
+    function get fight():String;
 
     /**
-     * 游戏结束 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 游戏结束 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.game_over;
+     * var url:String = swfLib.game_over;
      * </listing>
      */
-    function get game_over():Class;
+    function get game_over():String;
 
     /**
-     * 操作说明 / 教程 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 操作说明 / 教程 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.how2play;
+     * var url:String = swfLib.how2play;
      * </listing>
      */
-    function get how2play():Class;
+    function get how2play():String;
 
     /**
-     * 多语言选择 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 多语言选择 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.language;
+     * var url:String = swfLib.language;
      * </listing>
      */
-    function get language():Class;
+    function get language():String;
 
     /**
-     * 加载界面 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 加载界面 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.loading;
+     * var url:String = swfLib.loading;
      * </listing>
      */
-    function get loading():Class;
+    function get loading():String;
 
     /**
-     * 无双模式 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 无双模式 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.musou;
+     * var url:String = swfLib.musou;
      * </listing>
      */
-    function get musou():Class;
+    function get musou():String;
 
     /**
-     * 选人 / 选图界面 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 选人 / 选图界面 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.select;
+     * var url:String = swfLib.select;
      * </listing>
      */
-    function get select():Class;
+    function get select():String;
 
     /**
-     * 设置界面 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 设置界面 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.setting;
+     * var url:String = swfLib.setting;
      * </listing>
      */
-    function get setting():Class;
+    function get setting():String;
 
     /**
-     * 标题（主菜单）界面 UI SWF 类。
-     * @return Embed 得到的 SWF <code>Class</code>。
+     * 标题（主菜单）界面 UI SWF。
+     * @return 相对 <code>assets/</code> 的路径。
      * @example
      * <listing version="3.0">
-     * var c:Class = swfLib.title;
+     * var url:String = swfLib.title;
      * </listing>
      */
-    function get title():Class;
+    function get title():String;
 }
 }

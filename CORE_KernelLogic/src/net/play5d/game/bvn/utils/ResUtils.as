@@ -20,11 +20,13 @@ package net.play5d.game.bvn.utils {
 import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.media.SoundTransform;
+import flash.utils.ByteArray;
 import flash.utils.Dictionary;
 import flash.utils.describeType;
 
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.interfaces.ISwfLib;
+import net.play5d.kyo.loader.KyoLoaderLite;
 
 public class ResUtils {
 
@@ -74,33 +76,24 @@ public class ResUtils {
         _initBack  = back;
         _initError = error;
 
-        var xml:XML  = describeType(swfLib);
-        var o:Object = {};
+        var xml:XML = describeType(swfLib);
 
         for each(var j:XML in xml.accessor) {
-            var k:String  = j.@name;
-            var cls:Class = swfLib[k];
-
-            var swf:EmbedSwf = new EmbedSwf(cls);
-            swf.ready      = swfReadyBack;
-            swf.error      = swfErrorBack;
-            _swfPool[cls]  = swf;
-
+            var value:* = swfLib[String(j.@name)];
+            if (value is String && value) {
+                openSwf(value);
+            }
         }
 
     }
 
-    public function addSwf(c:Class):void {
+    public function addSwf(url:String):void {
         _swfPool ||= new Dictionary();
-
-        var swf:EmbedSwf = new EmbedSwf(c);
-        swf.ready      = swfReadyBack;
-        swf.error      = swfErrorBack;
-        _swfPool[c]    = swf;
+        openSwf(url);
     }
 
-    public function createDisplayObject(embedSwf:Class, itemName:String):* {
-        var cls:Class = getItemClass(embedSwf, itemName);
+    public function createDisplayObject(swf:String, itemName:String):* {
+        var cls:Class = getItemClass(swf, itemName);
         if (cls) {
             var d:* = new cls();
             if (d is Sprite) {
@@ -114,8 +107,8 @@ public class ResUtils {
         }
     }
 
-    public function createBitmapData(embedSwf:Class, itemName:String, width:int, height:int):BitmapData {
-        var cls:Class = getItemClass(embedSwf, itemName);
+    public function createBitmapData(swf:String, itemName:String, width:int, height:int):BitmapData {
+        var cls:Class = getItemClass(swf, itemName);
         if (!cls) {
             return null;
         }
@@ -123,41 +116,44 @@ public class ResUtils {
         return bd;
     }
 
-    public function getItemClass(embedSwf:Class, itemName:String):Class {
-
-        if (!_swfPool) {
-            throw new Error(GetLang('log.error.load.res_utils.not_initialized'));
-        }
-
-        var swf:EmbedSwf = _swfPool[embedSwf];
-        if (!swf) {
-            throw new Error('swf is undefined!');
-        }
-        return swf.getClass(itemName);
+    public function getItemClass(swf:String, itemName:String):Class {
+        return find(swf).getClass(itemName);
     }
 
-    public function getItemProperty(embedSwf:Class, name:String):* {
-        if (!_swfPool) {
-            throw new Error(GetLang('log.error.load.res_utils.not_initialized'));
-        }
-
-        var swf:EmbedSwf = _swfPool[embedSwf];
-        if (!swf) {
-            throw new Error('swf is undefined!');
-        }
-        return swf.getProperty(name);
+    public function getItemProperty(swf:String, name:String):* {
+        return find(swf).getProperty(name);
     }
 
-    public function callSwfFunction(embedSwf:Class, func:String, params:Array = null):* {
+    public function callSwfFunction(swf:String, func:String, params:Array = null):* {
+        return find(swf).call(func, params);
+    }
+
+    /** @private */
+    private function openSwf(url:String):void {
+        var swf:EmbedSwf = new EmbedSwf();
+        swf.ready        = swfReadyBack;
+        swf.error        = swfErrorBack;
+        _swfPool[url]    = swf;
+
+        KyoLoaderLite.loadBytes('assets/' + url, function (bytes:ByteArray):void {
+            swf.open(bytes);
+        }, function ():void {
+            swfErrorBack(url);
+        });
+    }
+
+    /** @private */
+    private function find(swf:String):EmbedSwf {
         if (!_swfPool) {
             throw new Error(GetLang('log.error.load.res_utils.not_initialized'));
         }
 
-        var swf:EmbedSwf = _swfPool[embedSwf];
-        if (!swf) {
+        var loaded:EmbedSwf = _swfPool[swf];
+        if (!loaded) {
             throw new Error('swf is undefined!');
         }
-        return swf.call(func, params);
+
+        return loaded;
     }
 
     private function swfReadyBack(target:EmbedSwf):void {

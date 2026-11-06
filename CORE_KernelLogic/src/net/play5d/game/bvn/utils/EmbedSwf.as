@@ -21,12 +21,16 @@ import flash.display.DisplayObject;
 import flash.display.Loader;
 import flash.display.LoaderInfo;
 import flash.events.Event;
+import flash.events.IOErrorEvent;
+import flash.events.SecurityErrorEvent;
 import flash.system.ApplicationDomain;
 import flash.system.LoaderContext;
 import flash.utils.ByteArray;
 
 /**
- * 从 Embed SWF（含 <code>movieClipData</code>）加载到当前域，供取类与属性。
+ * 把 SWF 字节载入当前域，供取类与属性。
+ *
+ * <p>嵌入类走构造函数。界面文件先读出字节，再调用 <code>open</code>。</p>
  *
  * @see #getClass()
  * @see ResUtils
@@ -34,26 +38,40 @@ import flash.utils.ByteArray;
 public class EmbedSwf {
 
     /**
-     * @param swfClass Embed 生成的 SWF 类。
+     * 从嵌入类开始加载。不传类时留给 <code>open</code>。
+     * @param swfClass 含 <code>movieClipData</code> 的嵌入类。
      */
-    public function EmbedSwf(swfClass:Class) {
+    public function EmbedSwf(swfClass:Class = null) {
+        if (!swfClass) {
+            return;
+        }
+
         _swf = new swfClass();
-
         var bytes:ByteArray = _swf.movieClipData;
-
         if (!bytes) {
             // 资源初始化早于语言包，不能 GetLang
             ThrowError(Error, 'EmbedSwf: movieClipData is missing');
             return;
         }
 
-        var loader:Loader = new Loader();
-        loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadComplete, false, 0, true);
+        start(bytes);
+    }
 
-        var lc:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
-        lc.allowCodeImport   = true;
+    /**
+     * 把已读到的 SWF 字节载入当前域。
+     * @param bytes SWF 字节。
+     * @example
+     * <listing version="3.0">
+     * swf.open(bytes);
+     * </listing>
+     */
+    public function open(bytes:ByteArray):void {
+        if (!bytes) {
+            fail('EmbedSwf: swf bytes are missing');
+            return;
+        }
 
-        loader.loadBytes(bytes, lc);
+        start(bytes);
     }
 
     /** 是否加载完成 */
@@ -107,6 +125,32 @@ public class EmbedSwf {
         catch (e:Error) {
             ThrowError(e, 'swf.' + func + ' call failed ! ');
             return null;
+        }
+    }
+
+    /** @private */
+    private function start(bytes:ByteArray):void {
+        var loader:Loader = new Loader();
+        loader.contentLoaderInfo.addEventListener(Event.COMPLETE, loadComplete, false, 0, true);
+        loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loadFailed, false, 0, true);
+        loader.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loadFailed, false, 0, true);
+
+        var lc:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain);
+        lc.allowCodeImport   = true;
+
+        loader.loadBytes(bytes, lc);
+    }
+
+    /** @private */
+    private function loadFailed(e:Event):void {
+        fail(e.toString());
+    }
+
+    /** @private */
+    private function fail(msg:String):void {
+        if (error != null) {
+            error(msg);
+            error = null;
         }
     }
 
