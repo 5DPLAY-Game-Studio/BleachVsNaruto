@@ -26,11 +26,11 @@ import flash.events.MouseEvent;
 import flash.utils.ByteArray;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
-import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.data.GameQuality;
+import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.interfaces.IGameInput;
 import net.play5d.game.bvn.interfaces.IExtendConfig;

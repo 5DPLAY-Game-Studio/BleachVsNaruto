@@ -32,7 +32,6 @@ import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.StateCtrl;
@@ -43,6 +42,7 @@ import net.play5d.game.bvn.data.FighterModel;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
+import net.play5d.game.bvn.data.GameQuality;
 import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.data.vos.SelectVO;

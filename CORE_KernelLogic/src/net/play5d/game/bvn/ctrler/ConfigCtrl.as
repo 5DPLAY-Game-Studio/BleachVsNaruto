@@ -20,7 +20,7 @@ package net.play5d.game.bvn.ctrler {
 import flash.display.StageQuality;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.GameQuality;
+import net.play5d.game.bvn.data.GameQuality;
 import net.play5d.game.bvn.data.vos.ConfigVO;
 import net.play5d.game.bvn.interfaces.GameInterface;
 

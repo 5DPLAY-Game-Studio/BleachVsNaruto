@@ -28,8 +28,8 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.GameConfig;
-import net.play5d.game.bvn.GameQuality;
 import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.data.GameQuality;
 import net.play5d.game.bvn.data.MapLogoState;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.utils.GameLogger;
