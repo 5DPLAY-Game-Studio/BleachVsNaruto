@@ -36,6 +36,7 @@ import net.play5d.game.bvn.data.vos.SelectCharListItemVO;
 import net.play5d.game.bvn.data.vos.SelectStageConfigVO;
 import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.input.GameInputter;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.utils.ArrayMap;
 import net.play5d.kyo.utils.KyoRandom;
 

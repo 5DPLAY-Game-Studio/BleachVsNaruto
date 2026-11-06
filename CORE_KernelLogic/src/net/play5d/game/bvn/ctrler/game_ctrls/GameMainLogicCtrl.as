@@ -29,6 +29,7 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.stage.GameStage;
+import net.play5d.game.bvn.utils.GameLogger;
 
 /**
  * 游戏主逻辑控制类

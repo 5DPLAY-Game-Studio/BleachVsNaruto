@@ -44,6 +44,7 @@ import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.utils.KyoKeyboard;
 
 /**

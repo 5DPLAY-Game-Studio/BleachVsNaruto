@@ -31,6 +31,7 @@ import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.fighter.Assister;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.map.MapMain;
+import net.play5d.game.bvn.utils.GameLogger;
 
 public class GameLoader {
 
