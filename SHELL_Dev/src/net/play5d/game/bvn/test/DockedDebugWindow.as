@@ -32,11 +32,12 @@ import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.NativeWindowBoundsEvent;
 import flash.events.NativeWindowDisplayStateEvent;
+import flash.geom.Rectangle;
 
 /**
  * 吸附于主窗口右侧的调试 NativeWindow。
  *
- * <p>与主窗同为 <code>gpu</code> 渲染模式；主窗移动/缩放时同步位置与高度，
+ * <p>与主窗同为 <code>gpu</code> 渲染模式；主窗移动/缩放（含拖动过程）时同步位置与高度，
  * 并将内容在窗口客户区内居中。亮暗模式由外部按钮调用 <code>toggleDarkMode()</code>，
  * 作用于共享 <code>SteelTheme</code>，并通过 <code>onDarkModeChange</code> 通知持久化。</p>
  *
@@ -84,6 +85,8 @@ public class DockedDebugWindow {
     private var _darkMode:Boolean;
     /** @private 正在执行吸附，避免 MOVE 回调递归 */
     private var _docking:Boolean;
+    /** @private 主窗拖动/缩放预览中，x/y 尚未写回 */
+    private var _preview:Boolean;
 
     /**
      * @param mainWindow 游戏主窗口。
@@ -186,14 +189,17 @@ public class DockedDebugWindow {
         dock();
         layoutContent();
 
-        _mainWindow.addEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
-        _mainWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, onBoundsChange);
+        // 拖动过程中通常只派发 moving/resizing，且此时 x/y 仍是旧值
+        _mainWindow.addEventListener(NativeWindowBoundsEvent.MOVING, onMainBounds);
+        _mainWindow.addEventListener(NativeWindowBoundsEvent.RESIZING, onMainBounds);
+        _mainWindow.addEventListener(NativeWindowBoundsEvent.MOVE, onMainBounds);
+        _mainWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, onMainBounds);
         _mainWindow.addEventListener(
                 NativeWindowDisplayStateEvent.DISPLAY_STATE_CHANGE,
                 onMainDisplayStateChange
         );
         _mainWindow.addEventListener(Event.CLOSING, onMainClosing);
-        _window.addEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
+        _window.addEventListener(NativeWindowBoundsEvent.MOVE, onDebugMoved);
     }
 
     /**
@@ -239,20 +245,38 @@ public class DockedDebugWindow {
      * 吸附到主窗右侧并对齐高度。
      */
     private function dock():void {
-        if (!isOpen || _docking || !_mainWindow) {
+        if (!_mainWindow) {
             return;
         }
 
-        var dockX:Number = _mainWindow.x + _mainWindow.width;
-        var dockY:Number = _mainWindow.y;
+        dockTo(new Rectangle(_mainWindow.x, _mainWindow.y, _mainWindow.width, _mainWindow.height));
+    }
+
+    /**
+     * 按给定主窗边界吸附。拖动预览时边界来自 <code>afterBounds</code>。
+     * @param mainBounds 主窗当前或即将生效的边界。
+     */
+    private function dockTo(mainBounds:Rectangle):void {
+        if (!isOpen || _docking || !mainBounds) {
+            return;
+        }
+
+        var dockX:Number     = mainBounds.x + mainBounds.width;
+        var dockY:Number     = mainBounds.y;
+        var dockH:Number     = mainBounds.height;
+        var relayout:Boolean = _window.height != dockH;
 
         _docking = true;
-        _window.height = _mainWindow.height;
-        _window.x      = dockX;
-        _window.y      = dockY;
+        if (relayout) {
+            _window.height = dockH;
+        }
+        _window.x = dockX;
+        _window.y = dockY;
         _docking = false;
 
-        layoutContent();
+        if (relayout) {
+            layoutContent();
+        }
     }
 
     /**
@@ -301,7 +325,19 @@ public class DockedDebugWindow {
         return DebugThemeChrome.bgColor(_darkMode);
     }
 
-    private function onBoundsChange(e:NativeWindowBoundsEvent):void {
+    private function onMainBounds(e:NativeWindowBoundsEvent):void {
+        _preview = e.type == NativeWindowBoundsEvent.MOVING || e.type == NativeWindowBoundsEvent.RESIZING;
+        dockTo(e.afterBounds);
+    }
+
+    /**
+     * 调试窗被单独挪动时拉回主窗。预览阶段主窗坐标尚未提交，不能在这里重算。
+     */
+    private function onDebugMoved(e:NativeWindowBoundsEvent):void {
+        if (_preview) {
+            return;
+        }
+
         dock();
     }
 
@@ -309,6 +345,8 @@ public class DockedDebugWindow {
         if (!isOpen) {
             return;
         }
+
+        _preview = false;
 
         if (_mainWindow.displayState == NativeWindowDisplayState.MINIMIZED) {
             _window.visible = false;
@@ -328,8 +366,10 @@ public class DockedDebugWindow {
             return;
         }
 
-        _mainWindow.removeEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
-        _mainWindow.removeEventListener(NativeWindowBoundsEvent.RESIZE, onBoundsChange);
+        _mainWindow.removeEventListener(NativeWindowBoundsEvent.MOVING, onMainBounds);
+        _mainWindow.removeEventListener(NativeWindowBoundsEvent.RESIZING, onMainBounds);
+        _mainWindow.removeEventListener(NativeWindowBoundsEvent.MOVE, onMainBounds);
+        _mainWindow.removeEventListener(NativeWindowBoundsEvent.RESIZE, onMainBounds);
         _mainWindow.removeEventListener(
                 NativeWindowDisplayStateEvent.DISPLAY_STATE_CHANGE,
                 onMainDisplayStateChange
@@ -337,7 +377,7 @@ public class DockedDebugWindow {
         _mainWindow.removeEventListener(Event.CLOSING, onMainClosing);
 
         if (_window && !_window.closed) {
-            _window.removeEventListener(NativeWindowBoundsEvent.MOVE, onBoundsChange);
+            _window.removeEventListener(NativeWindowBoundsEvent.MOVE, onDebugMoved);
         }
     }
 }
