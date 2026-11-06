@@ -24,18 +24,18 @@ public class HostVO {
     public var ownerName:String;
     public var name:String;
     public var password:String;
-    public var gameMode:int = 1;
+    public var gameMode:int    = 1;
     /**
      * 状态：0=正常，1=满
      */
-    public var status:int = 0;
+    public var status:int      = 0;
     public var updateTime:Date = new Date();
 
     public function toJson():String {
         var o:Object = {
-//				ip:ip,
-//				tcpPort: tcpPort,
-//				udpPort: udpPort,
+//              ip:ip,
+//              tcpPort: tcpPort,
+//              udpPort: udpPort,
             ownerName : ownerName,
             name      : name,
             password  : password,

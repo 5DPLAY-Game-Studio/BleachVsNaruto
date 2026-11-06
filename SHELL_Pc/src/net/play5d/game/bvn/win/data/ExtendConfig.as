@@ -27,7 +27,7 @@ public class ExtendConfig implements IExtendConfig {
     public var joyMenuConfig:JoyStickConfigVO = new JoyStickConfigVO();
     public var joy1Config:JoyStickConfigVO    = new JoyStickConfigVO();
     public var joy2Config:JoyStickConfigVO    = new JoyStickConfigVO();
-    public var isFullScreen:Boolean = false;
+    public var isFullScreen:Boolean           = false;
     private var _isInitDefaultJoystick:Boolean;
 
     public function toSaveObj():Object {

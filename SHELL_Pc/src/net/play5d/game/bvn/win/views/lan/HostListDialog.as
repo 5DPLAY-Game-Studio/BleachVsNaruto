@@ -44,7 +44,7 @@ public class HostListDialog implements IStage {
     private var _txtPage:TextField;
     private var _txtTotalpage:TextField;
     private var _btns:Array;
-    private var _items:Array = [];
+    private var _items:Array   = [];
     private var _focusIndex:int;
     private var _hosts:Vector.<HostVO>;
     private var _page:int      = 1;
