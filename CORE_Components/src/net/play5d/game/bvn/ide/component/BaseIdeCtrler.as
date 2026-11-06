@@ -399,7 +399,7 @@ public class BaseIdeCtrler extends BaseComponent {
             if (isColorLiteral(s)) {
                 return normalizeColorLiteral(s);
             }
-            return "'" + s.split("'").join("\\'") + "'";
+            return '\'' + s.split('\'').join('\\\'') + '\'';
         }
         if (value is Boolean) {
             return value ? 'true' : 'false';
