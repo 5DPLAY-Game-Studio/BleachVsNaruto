@@ -32,8 +32,8 @@ public class UpdateCtrl {
 
         if (version.forceUpdate) {
             GameUI.alert(
-                    GetLang('alert.menu_stage.update_title'),
-                    GetLang('alert.update_ctrl.force_update'),
+                    GetLang('menu.update.title'),
+                    GetLang('update.force'),
                     function ():void {
                         WebUtils.getURL(version.url);
                         if (updateBack != null) {
@@ -45,12 +45,12 @@ public class UpdateCtrl {
         }
 
         var updateInfo:String = version.info
-                ? GetLang('confirm.update_ctrl.update_info_prefix', {detail: version.info})
+                ? GetLang('update.info_prefix', {detail: version.info})
                 : '';
 
         GameUI.confirm(
-                GetLang('alert.menu_stage.update_title'),
-                GetLang('confirm.update_ctrl.optional_update', {info: updateInfo}),
+                GetLang('menu.update.title'),
+                GetLang('update.optional', {info: updateInfo}),
                 function ():void {
                     WebUtils.getURL(version.url);
                     if (updateBack != null) {

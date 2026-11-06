@@ -259,7 +259,7 @@ public class SelectFighterCursorCtrl {
             var fv:FighterVO = _list.selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(fid) :
                                FighterModel.I.getFighter(fid);
             if (!fv) {
-                Debugger.log(GetLang('debug.log.data.select_fighter_stage.fighter_data_missing', {fighterId: fid}));
+                LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.fighter_data_missing', {fighterId: fid});
                 continue;
             }
 
@@ -275,10 +275,10 @@ public class SelectFighterCursorCtrl {
 
                 var pos:Point = posArr[psn];
                 if (!pos) {
-                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_undefined', {
+                    LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.pos_undefined', {
                         psn  : psn + ' / ',
                         posSN: posSN
-                    }));
+                    });
                     continue;
                 }
 
@@ -294,15 +294,15 @@ public class SelectFighterCursorCtrl {
                 );
 
                 if (mmx < 0 || mmx > GameConfig.GAME_SIZE.x) {
-                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_x_oob', {
+                    LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.pos_x_oob', {
                         detail: '(' + mmx + ')  ' + psn + ' / ' + posSN
-                    }));
+                    });
                     continue;
                 }
                 if (mmy < 0 || mmy > GameConfig.GAME_SIZE.y) {
-                    Debugger.log(GetLang('debug.log.data.select_fighter_stage.pos_y_oob', {
+                    LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.pos_y_oob', {
                         detail: '(' + mmy + ')  ' + psn + ' / ' + posSN
-                    }));
+                    });
                     continue;
                 }
 

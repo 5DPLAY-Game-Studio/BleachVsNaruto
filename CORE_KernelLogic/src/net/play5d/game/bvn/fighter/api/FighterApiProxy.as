@@ -135,7 +135,7 @@ public class FighterApiProxy extends Proxy {
         };
         _seen[key] = row;
         _records.push(row);
-        TraceLang('debug.trace.data.fighter_api_proxy.invalid_call', {
+        TraceLang('fighter_api_proxy.invalid_call', {
             api : api,
             kind: kind,
             name: method

@@ -148,7 +148,7 @@ public class LANServerCtrl implements ILanServerLockLink {
 
                 SocketServer.I.sendJson(
                         client.socket,
-                        SocketMsgFactory.createKickOutMsg(GetLang('txt.lan_server_ctrl.kick_out'))
+                        SocketMsgFactory.createKickOutMsg(GetLang('lan.kick_out'))
                 );
 
                 if (_kickTimeoutInt == 0) {
@@ -275,7 +275,7 @@ public class LANServerCtrl implements ILanServerLockLink {
         case MsgType.JOIN_IN:
             if (_room) {
                 _room.setStartAble(true);
-                sendChat(GetLang('txt.lan_server_ctrl.player_enter', {name: msgObj.name}));
+                sendChat(GetLang('lan.player_enter', {name: msgObj.name}));
             }
             break;
         case MsgType.CHAT:
@@ -295,14 +295,14 @@ public class LANServerCtrl implements ILanServerLockLink {
             //超出人数限制
             SocketServer.I.sendJson(
                     clientSocket,
-                    SocketMsgFactory.createJoinFailMsg(GetLang('txt.lan_server_ctrl.room_full'))
+                    SocketMsgFactory.createJoinFailMsg(GetLang('lan.room_full'))
             );
             return;
         }
 
         if (_room) {
             _room.addPlayer(cv.ip, cv.name);
-            sendChat(GetLang('txt.lan_server_ctrl.player_entering', {name: cv.name}));
+            sendChat(GetLang('lan.player_entering', {name: cv.name}));
             _room.setStartAble(false);
         }
 
@@ -337,14 +337,14 @@ public class LANServerCtrl implements ILanServerLockLink {
             if (active) {
                 gameEnd();
                 GameUI.alert(
-                        GetLang('alert.lan_server_ctrl.player_exit_title'),
-                        GetLang('alert.lan_server_ctrl.player_exit')
+                        GetLang('lan.player_exit.title'),
+                        GetLang('lan.player_exit')
                 );
             }
             var client:ClientVO = _roster.remove(e.clientSocket);
             if (client && _room) {
                 _room.removePlayer(client.ip);
-                _room.pushChat(GetLang('txt.lan_server_ctrl.player_exit_chat', {name: client.name}));
+                _room.pushChat(GetLang('lan.player_exit_chat', {name: client.name}));
                 _room.setStartAble(false);
             }
 

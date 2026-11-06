@@ -44,10 +44,10 @@ public class AssisterApiFactory {
      */
     public static function create(mainMc:MovieClip, ctrler:AssisterCtrler):FighterApiProxy {
         if (!mainMc) {
-            ThrowError(Error, GetLang('debug.error.data.assister.mc_is_null'));
+            ThrowError(Error, GetLang('log.error.fight.assister.mc_is_null'));
         }
 
-        var unknownKey:String = 'debug.error.data.assister.unknown_version';
+        var unknownKey:String = 'log.error.fight.assister.unknown_version';
         var version:int       = FighterApiVersion.read(mainMc, unknownKey);
         var effectCls:Class   = FighterApiVersion.find(version, 'FighterEffectApi', unknownKey);
         var cameraCls:Class   = FighterApiVersion.find(version, 'FighterCameraApi', unknownKey);

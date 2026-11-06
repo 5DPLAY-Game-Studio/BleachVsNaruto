@@ -74,31 +74,31 @@ public class GameInterfaceManager implements IGameInterface {
         var a:Array = [
 
             {
-                txt: 'TEAM PLAY', cn: GetLang('txt.game_interface.team_play'), children: [
-                    {txt: 'TEAM ARCADE', cn: GetLang('txt.game_interface.team_play_arcade')},
-                    {txt: 'TEAM VS CPU', cn: GetLang('txt.game_interface.team_play_vs_CPU')},
-                    {txt: 'TEAM WATCH', cn: GetLang('txt.game_interface.team_play_watch')}
+                txt: 'TEAM PLAY', cn: GetLang('menu.team_play'), children: [
+                    {txt: 'TEAM ARCADE', cn: GetLang('menu.team_arcade')},
+                    {txt: 'TEAM VS CPU', cn: GetLang('menu.team_vs_cpu')},
+                    {txt: 'TEAM WATCH', cn: GetLang('menu.team_watch')}
                 ]
             },
 
             {
-                txt: 'SINGLE PLAY', cn: GetLang('txt.game_interface.single_play'), children: [
-                    {txt: 'SINGLE ARCADE', cn: GetLang('txt.game_interface.single_play_arcade')},
-                    {txt: 'SINGLE VS CPU', cn: GetLang('txt.game_interface.single_play_vs_CPU')},
-                    {txt: 'SINGLE WATCH', cn: GetLang('txt.game_interface.single_play_watch')}
+                txt: 'SINGLE PLAY', cn: GetLang('menu.single_play'), children: [
+                    {txt: 'SINGLE ARCADE', cn: GetLang('menu.single_arcade')},
+                    {txt: 'SINGLE VS CPU', cn: GetLang('menu.single_vs_cpu')},
+                    {txt: 'SINGLE WATCH', cn: GetLang('menu.single_watch')}
                 ]
             },
 
             {
-                txt: 'MUSOU PLAY', cn: GetLang('txt.game_interface.musou_play'), children: [
-                    {txt: 'MUSOU ARCADE', cn: GetLang('txt.game_interface.musou_arcade')}
+                txt: 'MUSOU PLAY', cn: GetLang('menu.musou_play'), children: [
+                    {txt: 'MUSOU ARCADE', cn: GetLang('menu.musou_arcade')}
                 ]
             },
 
             /*{txt:'SURVIVOR',cn:'挑战模式'},*/ //暂未开放
-            {txt: 'OPTION', cn: GetLang('txt.game_interface.option')},
-            {txt: 'TRAINING', cn: GetLang('txt.game_interface.training')},
-            {txt: 'CREDITS', cn: GetLang('txt.game_interface.credits')},
+            {txt: 'OPTION', cn: GetLang('menu.option')},
+            {txt: 'TRAINING', cn: GetLang('menu.training')},
+            {txt: 'CREDITS', cn: GetLang('menu.credits')},
         ];
         return a;
     }
@@ -106,23 +106,23 @@ public class GameInterfaceManager implements IGameInterface {
     public function getSettingMenu():Array {
         return [
             {
-                txt   : 'JOY SET', cn: GetLang('txt.game_interface_manager.joy_set'),
+                txt   : 'JOY SET', cn: GetLang('settings.joy_set'),
                 select: ViewManager.I.setScreenBtns
             },
             {
-                txt      : 'COM LEVEL', cn: GetLang('txt.set_btn_group.com_level'),
+                txt      : 'COM LEVEL', cn: GetLang('settings.difficulty'),
                 options  : [
-                    {label: 'VERY EASY', cn: GetLang('txt.set_btn_group.com_level_very_easy'), value: 1},
-                    {label: 'EASY', cn: GetLang('txt.set_btn_group.com_level_easy'), value: 2},
-                    {label: 'NORMAL', cn: GetLang('txt.set_btn_group.com_level_normal'), value: 3},
-                    {label: 'HARD', cn: GetLang('txt.set_btn_group.com_level_hard'), value: 4},
-                    {label: 'VERY HARD', cn: GetLang('txt.set_btn_group.com_level_very_hard'), value: 5},
-                    {label: 'HELL', cn: GetLang('txt.set_btn_group.com_level_hell'), value: 6}
+                    {label: 'VERY EASY', cn: GetLang('settings.difficulty.very_easy'), value: 1},
+                    {label: 'EASY', cn: GetLang('settings.difficulty.easy'), value: 2},
+                    {label: 'NORMAL', cn: GetLang('settings.difficulty.normal'), value: 3},
+                    {label: 'HARD', cn: GetLang('settings.difficulty.hard'), value: 4},
+                    {label: 'VERY HARD', cn: GetLang('settings.difficulty.very_hard'), value: 5},
+                    {label: 'HELL', cn: GetLang('settings.difficulty.hell'), value: 6}
                 ],
                 optionKey: 'AI_level'
             },
             {
-                txt      : 'LIFE', cn: GetLang('txt.set_btn_group.life'),
+                txt      : 'LIFE', cn: GetLang('settings.life'),
                 options  : [
                     {label: '50%', cn: '50%', value: 0.5},
                     {label: '100%', cn: '100%', value: 1},
@@ -133,25 +133,25 @@ public class GameInterfaceManager implements IGameInterface {
                 optionKey: 'fighterHP'
             },
             {
-                txt      : 'TIME', cn: GetLang('txt.set_btn_group.time'),
+                txt      : 'TIME', cn: GetLang('settings.time'),
                 options  : [
-                    {label: '30s', cn: GetLang('txt.set_btn_group.time_30'), value: 30},
-                    {label: '60s', cn: GetLang('txt.set_btn_group.time_60'), value: 60},
-                    {label: '90s', cn: GetLang('txt.set_btn_group.time_90'), value: 90},
-                    {label: '∞', cn: GetLang('txt.set_btn_group.time_unlimited'), value: -1}
+                    {label: '30s', cn: GetLang('settings.time.30'), value: 30},
+                    {label: '60s', cn: GetLang('settings.time.60'), value: 60},
+                    {label: '90s', cn: GetLang('settings.time.90'), value: 90},
+                    {label: '∞', cn: GetLang('settings.time.unlimited'), value: -1}
                 ],
                 optionKey: 'fightTime'
             },
             {
-                txt      : 'SCREEN MODE', cn: GetLang('txt.game_interface_manager.screen_mode'),
+                txt      : 'SCREEN MODE', cn: GetLang('settings.screen_mode'),
                 options  : [
-                    {label: 'FILL', cn: GetLang('txt.game_interface_manager.screen_fill'), value: 0},
-                    {label: 'RATIO', cn: GetLang('txt.game_interface_manager.screen_ratio'), value: 1}
+                    {label: 'FILL', cn: GetLang('settings.screen_fill'), value: 0},
+                    {label: 'RATIO', cn: GetLang('settings.screen_ratio'), value: 1}
                 ],
                 optionKey: 'screenMode'
             },
             {
-                txt      : 'SOUND', cn: GetLang('txt.set_btn_group.sound'),
+                txt      : 'SOUND', cn: GetLang('settings.sound'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -163,7 +163,7 @@ public class GameInterfaceManager implements IGameInterface {
                 optionKey: 'soundVolume'
             },
             {
-                txt      : 'BGM', cn: GetLang('txt.set_btn_group.bgm'),
+                txt      : 'BGM', cn: GetLang('settings.bgm'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -175,20 +175,20 @@ public class GameInterfaceManager implements IGameInterface {
                 optionKey: 'bgmVolume'
             },
             {
-                txt      : 'QUALITY', cn: GetLang('txt.set_btn_group.quality'),
+                txt      : 'QUALITY', cn: GetLang('settings.quality'),
                 options  : [
-                    {label: 'LOW', cn: GetLang('txt.set_btn_group.quality_low'), value: GameQuality.LOW},
-                    {label: 'MEDIUM', cn: GetLang('txt.set_btn_group.quality_medium'), value: GameQuality.MEDIUM},
-                    {label: 'HIGH', cn: GetLang('txt.set_btn_group.quality_high'), value: GameQuality.HIGH},
-                    {label: 'BEST', cn: GetLang('txt.set_btn_group.quality_best'), value: GameQuality.BEST}
+                    {label: 'LOW', cn: GetLang('settings.quality.low'), value: GameQuality.LOW},
+                    {label: 'MEDIUM', cn: GetLang('settings.quality.medium'), value: GameQuality.MEDIUM},
+                    {label: 'HIGH', cn: GetLang('settings.quality.high'), value: GameQuality.HIGH},
+                    {label: 'BEST', cn: GetLang('settings.quality.best'), value: GameQuality.BEST}
                 ],
                 optionKey: 'quality'
             },
             {
-                txt      : 'SHOW HP', cn: GetLang('txt.set_btn_group.show_hp'),
+                txt      : 'SHOW HP', cn: GetLang('settings.show_hp'),
                 options  : [
-                    {label: 'SHOW', cn: GetLang('txt.set_btn_group.hp_show'), value: true},
-                    {label: 'HIDE', cn: GetLang('txt.set_btn_group.hp_hide'), value: false},
+                    {label: 'SHOW', cn: GetLang('settings.hp_show'), value: true},
+                    {label: 'HIDE', cn: GetLang('settings.hp_hide'), value: false},
                 ],
                 optionKey: 'isShowHp'
             }
@@ -296,7 +296,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function getCredits(creditsInfo:String):Sprite {
-        return CreditsSpriteUtil.build(creditsInfo, 'txt.game_interface_manager.credits_footer');
+        return CreditsSpriteUtil.build(creditsInfo, 'credits.footer');
     }
 
     public function checkFile(url:String, file:ByteArray):Boolean {

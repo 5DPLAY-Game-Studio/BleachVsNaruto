@@ -31,9 +31,9 @@ public class PauseDialog extends BasePauseDialog {
      */
     public function PauseDialog() {
         super([
-                  {label: 'GAME TITLE', cn: GetLang('txt.pause_dialog.game_title')},
-                  {label: 'MOVE LIST', cn: GetLang('txt.common.move_list')},
-                  {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
+                  {label: 'GAME TITLE', cn: GetLang('fight.back_title')},
+                  {label: 'MOVE LIST', cn: GetLang('common.move_list')},
+                  {label: 'CONTINUE', cn: GetLang('common.continue')}
               ]);
     }
 
@@ -45,8 +45,8 @@ public class PauseDialog extends BasePauseDialog {
 
         _btnGroup.keyEnable = false;
         GameUI.confirm(
-                GetLang('confirm.common.back_menu_title'),
-                GetLang('confirm.common.back_menu'),
+                GetLang('common.back_menu.title'),
+                GetLang('common.back_menu'),
                 function ():void {
                     MainGame.I.goMenu();
                 },

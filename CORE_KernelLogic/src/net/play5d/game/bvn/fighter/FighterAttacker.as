@@ -394,7 +394,7 @@ public class FighterAttacker extends BaseGameSprite {
                     _owner as Assister
             ).getCtrler().hitModel;
         }
-        ThrowError(Error, GetLang('debug.error.data.fighter_attacker.unsupported_type'));
+        ThrowError(Error, GetLang('log.error.fight.fighter_attacker.unsupported_type'));
         return null;
     }
 

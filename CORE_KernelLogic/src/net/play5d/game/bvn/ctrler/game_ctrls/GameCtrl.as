@@ -270,7 +270,7 @@ public class GameCtrl {
 
         }
         else {
-            Debugger.log(GetLang('debug.log.data.game_ctrl.team_null', {name: 'team'}));
+            LogLang(GameLogger.DEBUG, 'sys', 'game_ctrl.team_null', {name: 'team'});
         }
     }
 

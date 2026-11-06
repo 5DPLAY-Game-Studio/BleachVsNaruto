@@ -42,7 +42,7 @@ public class DebugUtil {
         }
 
         if (!d.parent && !container) {
-            TraceLang('debug.trace.data.debug_util.debug_position');
+            TraceLang('debug_util.debug_position');
             return;
         }
 

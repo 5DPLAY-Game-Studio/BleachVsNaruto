@@ -193,7 +193,7 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
             //超出人数限制
             SocketServer.I.sendJson(
                     clientSocket,
-                    SocketMsgFactory.createJoinFailMsg(GetLang('txt.lan_server_ctrl.room_full'))
+                    SocketMsgFactory.createJoinFailMsg(GetLang('lan.room_full'))
             );
             return;
         }
@@ -222,8 +222,8 @@ public class LANServerCtrl extends EventDispatcher implements ILanServerLockLink
             if (active) {
                 gameEnd();
                 GameUI.alert(
-                        GetLang('alert.lan_server_ctrl.player_exit_title'),
-                        GetLang('alert.lan_server_ctrl.player_exit')
+                        GetLang('lan.player_exit.title'),
+                        GetLang('lan.player_exit')
                 );
             }
 

@@ -62,7 +62,7 @@ public class GameLogic {
 
     public static function isInAir(target:BaseGameSprite):Boolean {
         if (!_map) {
-            TraceLang('debug.trace.data.game_logic.map_null');
+            TraceLang('game_logic.map_null');
             return false;
         }
 
@@ -111,7 +111,7 @@ public class GameLogic {
 
     public static function isTouchBottomFloor(target:IGameSprite):Boolean {
         if (!_map) {
-            TraceLang('debug.trace.data.game_logic.map_null');
+            TraceLang('game_logic.map_null');
             return false;
         }
 
@@ -120,7 +120,7 @@ public class GameLogic {
 
     public static function isOutRange(target:IGameSprite):Boolean {
         if (!_map) {
-            TraceLang('debug.trace.data.game_logic.map_null');
+            TraceLang('game_logic.map_null');
             return false;
         }
 
@@ -373,7 +373,7 @@ public class GameLogic {
     }
 
     public static function setGameMode(v:int):void {
-        TraceLang('debug.trace.data.game_logic.set_game_mode', {mode: v});
+        TraceLang('game_logic.set_game_mode', {mode: v});
         switch (v) {
         case 1:
             GameConfig.SHOW_UI_STATUS = 1;

@@ -138,7 +138,7 @@ public class HostListDialog implements IStage {
 
     private function updatePage():void {
         _txtPage.text      = _page.toString();
-        _txtTotalpage.text = GetLang('txt.host_list_dialog.page_suffix', {page: _totalPage});
+        _txtTotalpage.text = GetLang('lan.page_suffix', {page: _totalPage});
     }
 
     private function render():void {

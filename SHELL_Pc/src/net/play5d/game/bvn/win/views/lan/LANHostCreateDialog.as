@@ -64,7 +64,7 @@ public class LANHostCreateDialog implements IStage {
 
         _ui.txt_pass.visible = false;
 
-        _ui.comb_mode.addItem({label: GetLang('txt.lan_host_create_dialog.mode_team_combo'), data: 1});
+        _ui.comb_mode.addItem({label: GetLang('lan.mode_team_combo'), data: 1});
     }
 
     /**
@@ -96,8 +96,8 @@ public class LANHostCreateDialog implements IStage {
 
         if (name == '') {
             GameUI.alert(
-                    GetLang('alert.input_host_name_title'),
-                    GetLang('alert.input_host_name')
+                    GetLang('lan.input_host_name.title'),
+                    GetLang('lan.input_host_name')
             );
             return;
         }

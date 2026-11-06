@@ -29,17 +29,17 @@ public class SetScreenBtnView extends Sprite {
         _btnGroup.setBtnData([
 
                                  {
-                                     label      : 'PREINSTALL', cn: GetLang('txt.set_screen_btn_view.preinstall'),
+                                     label      : 'PREINSTALL', cn: GetLang('settings.screen.preinstall'),
                                      options    : [
-                                         {label: 'TYPE 1', cn: GetLang('txt.set_screen_btn_view.type_1'), value: 0},
-                                         {label: 'TYPE 2', cn: GetLang('txt.set_screen_btn_view.type_2'), value: 1},
+                                         {label: 'TYPE 1', cn: GetLang('settings.screen.type_1'), value: 0},
+                                         {label: 'TYPE 2', cn: GetLang('settings.screen.type_2'), value: 1},
                                      ],
                                      optionKey  : 'joyMode',
                                      optionValue: config.joyMode
                                  },
 
                                  {
-                                     label      : 'ALPHA', cn: GetLang('txt.set_screen_btn_view.alpha'),
+                                     label      : 'ALPHA', cn: GetLang('settings.screen.alpha'),
                                      options    : [
                                          {label: '10%', cn: '10%', value: 0.1},
                                          {label: '30%', cn: '30%', value: 0.3},
@@ -52,37 +52,37 @@ public class SetScreenBtnView extends Sprite {
                                  },
 
                                  {
-                                     label      : 'SP SKILL', cn: GetLang('txt.set_screen_btn_view.sp_skill'),
+                                     label      : 'SP SKILL', cn: GetLang('settings.screen.sp_skill'),
                                      options    : [
-                                         {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
-                                         {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
+                                         {label: 'AUTO', cn: GetLang('settings.screen.auto_show'), value: true},
+                                         {label: 'ALWAYS', cn: GetLang('settings.screen.always_show'), value: false}
                                      ],
                                      optionKey  : 'superSkillAutoHide',
                                      optionValue: config.superSkillAutoHide
                                  },
 
                                  {
-                                     label      : 'WANKAI', cn: GetLang('txt.set_screen_btn_view.wankai'),
+                                     label      : 'WANKAI', cn: GetLang('settings.screen.wankai'),
                                      options    : [
-                                         {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
-                                         {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
+                                         {label: 'AUTO', cn: GetLang('settings.screen.auto_show'), value: true},
+                                         {label: 'ALWAYS', cn: GetLang('settings.screen.always_show'), value: false}
                                      ],
                                      optionKey  : 'wankaiAutoHide',
                                      optionValue: config.wankaiAutoHide
                                  },
 
                                  {
-                                     label      : 'SPECIAL', cn: GetLang('txt.set_screen_btn_view.special'),
+                                     label      : 'SPECIAL', cn: GetLang('settings.screen.special'),
                                      options    : [
-                                         {label: 'AUTO', cn: GetLang('txt.set_screen_btn_view.auto_show'), value: true},
-                                         {label: 'ALWAYS', cn: GetLang('txt.set_screen_btn_view.always_show'), value: false}
+                                         {label: 'AUTO', cn: GetLang('settings.screen.auto_show'), value: true},
+                                         {label: 'ALWAYS', cn: GetLang('settings.screen.always_show'), value: false}
                                      ],
                                      optionKey  : 'specialAutoHide',
                                      optionValue: config.specialAutoHide
                                  },
 
-                                 {label: 'CUSTOM', cn: GetLang('txt.set_screen_btn_view.custom')},
-                                 {label: 'APPLY', cn: GetLang('txt.set_screen_btn_view.apply')}
+                                 {label: 'CUSTOM', cn: GetLang('settings.screen.custom')},
+                                 {label: 'APPLY', cn: GetLang('settings.screen.apply')}
                              ]);
         _btnGroup.initScroll(RootSprite.FULL_SCREEN_SIZE.x, RootSprite.FULL_SCREEN_SIZE.y);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnSelect);
@@ -133,8 +133,8 @@ public class SetScreenBtnView extends Sprite {
         if (e.optionKey == 'joyMode') {
             if (GameInterfaceManager.config.screenPadConfig.joySet) {
                 GameUI.confirm(
-                        GetLang('confirm.set_screen_btn_view.lose_custom_title'),
-                        GetLang('confirm.set_screen_btn_view.lose_custom'),
+                        GetLang('settings.lose_custom.title'),
+                        GetLang('settings.lose_custom'),
                         function ():void {
                             GameInterfaceManager.config.screenPadConfig.joySet = null;
                             var config:ScreenPadConfigVO                       = GameInterfaceManager.config.screenPadConfig;

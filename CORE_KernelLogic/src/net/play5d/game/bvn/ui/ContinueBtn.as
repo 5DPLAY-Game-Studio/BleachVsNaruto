@@ -31,7 +31,7 @@ public class ContinueBtn extends Sprite {
         _btnGroup.startX = 0;
         _btnGroup.startY = 0;
         _btnGroup.setBtnData([
-                                 {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
+                                 {label: 'CONTINUE', cn: GetLang('common.continue')}
                              ], 2);
         addChild(_btnGroup);
     }

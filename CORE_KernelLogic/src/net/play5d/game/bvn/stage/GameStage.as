@@ -473,7 +473,7 @@ public class GameStage extends Sprite implements IStage {
 
     public function initCamera():void {
         if (camera) {
-            ThrowError(Error, GetLang('debug.error.data.game_stage.camera_already_init'));
+            ThrowError(Error, GetLang('log.error.fight.game_stage.camera_already_init'));
             return;
         }
 

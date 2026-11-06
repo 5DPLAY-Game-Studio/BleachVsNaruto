@@ -126,7 +126,7 @@ public class GameRoundCtrl {
     }
 
     private function fightTimeover():void {
-        TraceLang('debug.trace.data.game_ctrl.time_over');
+        TraceLang('game_ctrl.time_over');
 
         _owner.actionEnable = false;
 
@@ -149,7 +149,7 @@ public class GameRoundCtrl {
     }
 
     private function runNext():void {
-        TraceLang('debug.trace.data.game_ctrl.current_mode', {mode: GameMode.currentMode});
+        TraceLang('game_ctrl.current_mode', {mode: GameMode.currentMode});
 
         _owner.gameRunData.nextRound();
 

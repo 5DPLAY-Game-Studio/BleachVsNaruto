@@ -52,10 +52,10 @@ public class FighterApiFactory {
                                   effect:FighterEffectCtrl, camera:FighterCameraCtrler
     ):FighterApiPorts {
         if (!mainMc) {
-            ThrowError(Error, GetLang('debug.error.data.fighter_api_factory.mc_is_null'));
+            ThrowError(Error, GetLang('log.error.fight.fighter_api_factory.mc_is_null'));
         }
 
-        var unknownKey:String = 'debug.error.data.fighter_api_factory.unknown_version';
+        var unknownKey:String = 'log.error.fight.fighter_api_factory.unknown_version';
         var version:int       = FighterApiVersion.read(mainMc, unknownKey);
         var effectCls:Class   = FighterApiVersion.find(version, 'FighterEffectApi', unknownKey);
         var cameraCls:Class   = FighterApiVersion.find(version, 'FighterCameraApi', unknownKey);

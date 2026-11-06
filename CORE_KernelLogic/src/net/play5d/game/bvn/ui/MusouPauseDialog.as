@@ -32,9 +32,9 @@ public class MusouPauseDialog extends BasePauseDialog {
      */
     public function MusouPauseDialog() {
         super([
-                  {label: 'BACK MAP', cn: GetLang('txt.musou_pause_dialog.back_map')},
-                  {label: 'MOVE LIST', cn: GetLang('txt.common.move_list')},
-                  {label: 'CONTINUE', cn: GetLang('txt.common.continue')}
+                  {label: 'BACK MAP', cn: GetLang('musou.back_map_btn')},
+                  {label: 'MOVE LIST', cn: GetLang('common.move_list')},
+                  {label: 'CONTINUE', cn: GetLang('common.continue')}
               ], true);
     }
 
@@ -46,8 +46,8 @@ public class MusouPauseDialog extends BasePauseDialog {
 
         _btnGroup.keyEnable = false;
         GameUI.confirm(
-                GetLang('confirm.musou_pause_dialog.back_map_title'),
-                GetLang('confirm.musou_pause_dialog.back_map'),
+                GetLang('musou.back_map.title'),
+                GetLang('musou.back_map'),
                 function ():void {
                     MainGame.I.goWorldMap();
                     GameEvent.dispatchEvent(GameEvent.MUSOU_BACK_MAP);

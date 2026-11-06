@@ -294,7 +294,7 @@ public class MusouPlayerData implements ISaveData {
     }
 
     private function initMap():void {
-        TraceLang('debug.trace.data.musou_player_data.init_map');
+        TraceLang('musou_player_data.init_map');
 
         var map:MusouWorldMapPlayerVO = new MusouWorldMapPlayerVO();
         map.id                        = _currentMapId;
@@ -304,7 +304,7 @@ public class MusouPlayerData implements ISaveData {
 
         for each(var m:MusouWorldMapAreaVO in map2.areas) {
             if (!m.preOpens || m.preOpens.length < 1) {
-                TraceLang('debug.trace.data.musou_logic.open_map_area', {areaId: m.id});
+                TraceLang('musou_logic.open_map_area', {areaId: m.id});
                 map.openArea(m.id);
             }
         }

@@ -293,8 +293,8 @@ public class SpriteInspectorWindow {
         }
 
         _idleMode     = true;
-        _window.title = GetLang('dev.txt.sprite_inspector_window.title');
-        _header.text  = GetLang('dev.txt.sprite_inspector_window.idle');
+        _window.title = GetLang('dev.sprite_inspector.title');
+        _header.text  = GetLang('dev.sprite_inspector.idle');
         clearRows();
         closeDetailPopup();
         _scroll.visible = false;
@@ -324,7 +324,7 @@ public class SpriteInspectorWindow {
         options.minimizable  = true;
 
         _window                 = new NativeWindow(options);
-        _window.title           = GetLang('dev.txt.sprite_inspector_window.title');
+        _window.title           = GetLang('dev.sprite_inspector.title');
         _window.stage.scaleMode = StageScaleMode.NO_SCALE;
         _window.stage.align     = StageAlign.TOP_LEFT;
         _window.stage.stageFocusRect = false;
@@ -456,7 +456,7 @@ public class SpriteInspectorWindow {
 
         var qname:String = getQualifiedClassName(_target);
         var short:String = InspectPropUtil.shortClassName(_target);
-        _window.title    = GetLang('dev.txt.sprite_inspector_window.title_locked', {name: short});
+        _window.title    = GetLang('dev.sprite_inspector.title_locked', {name: short});
         _header.text     = qname;
 
         var props:Array = InspectPropUtil.getPublicProps(_target);

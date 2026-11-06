@@ -364,7 +364,7 @@ public class GameCamera {
 
     private function renderZoom():void {
         if (_zoom <= 0) {
-            ThrowError(Error, GetLang('debug.error.data.game_camera.zoom_invalid'));
+            ThrowError(Error, GetLang('log.error.fight.game_camera.zoom_invalid'));
             return;
         }
 

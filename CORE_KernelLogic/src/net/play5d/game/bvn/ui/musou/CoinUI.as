@@ -70,8 +70,8 @@ public class CoinUI {
 
     private function addMoneyBack(money:int):void {
         GameUI.alert(
-            GetLang('alert.coin_ui.money_title'),
-            GetLang('alert.coin_ui.money', {amount: money})
+            GetLang('musou.money.title'),
+            GetLang('musou.money', {amount: money})
         );
         GameData.I.musouData.addMoney(money);
     }

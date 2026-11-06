@@ -317,7 +317,7 @@ public class GameMainLogicCtrl {
             }
         }
         catch (e:Error) {
-            Debugger.log(GetLang('debug.log.data.game_main_logic_ctrler.render_game_sprite', {error: e}));
+            LogLang(GameLogger.DEBUG, 'fight', 'game_main_logic_ctrler.render_game_sprite', {error: e});
         }
 
     }

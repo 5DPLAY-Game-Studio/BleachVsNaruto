@@ -71,7 +71,7 @@ public class CreditsStage implements IStage {
 
         _btngroup = new SetBtnGroup();
         _btngroup.y = GameConfig.GAME_SIZE.y - 150;
-        _btngroup.setBtnData([{label: 'BACK', cn: GetLang('txt.common.back')}]);
+        _btngroup.setBtnData([{label: 'BACK', cn: GetLang('common.back')}]);
         _btngroup.addEventListener(SetBtnEvent.SELECT, selectBtnHandler);
         _ui.addChild(_btngroup);
 
@@ -100,7 +100,7 @@ public class CreditsStage implements IStage {
 //				"人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +
 //				"         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
 //				"策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
-        return GetLang('txt.credits_stage.body');
+        return GetLang('credits.body');
     }
 
     private function getDefaultCredits(msg:String):Sprite {

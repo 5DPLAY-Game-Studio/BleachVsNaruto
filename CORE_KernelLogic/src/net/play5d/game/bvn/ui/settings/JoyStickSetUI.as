@@ -186,7 +186,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     private function initBtns():void {
         var joysticks:Vector.<GameInputDevice> = JoyStick.getAllDevices();
 
-        var joyOptions:Array = [{label: 'NONE', cn: GetLang('txt.joy_stick_set_ui.none'), value: null}];
+        var joyOptions:Array = [{label: 'NONE', cn: GetLang('settings.joy.none'), value: null}];
         for (var i:int; i < joysticks.length; i++) {
             var di:GameInputDevice = joysticks[i];
             joyOptions.push({
@@ -200,14 +200,14 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         _btnGroup.startY = 30;
         _btnGroup.setBtnData([
                                  {
-                                     label      : 'USE JOY', cn: GetLang('txt.joy_stick_set_ui.use_joy'), options: joyOptions, optionKey: 'deviceId',
+                                     label      : 'USE JOY', cn: GetLang('settings.joy.use'), options: joyOptions, optionKey: 'deviceId',
                                      optionValue: _tmpJoyConfig.deviceId
                                  },
-                                 {label: 'SET ALL', cn: GetLang('txt.common.set_all')},
-                                 {label: 'SET DEFAULT', cn: GetLang('txt.common.set_default')},
-                                 {label: 'BUY JOY', cn: GetLang('txt.joy_stick_set_ui.buy_joy')},
-                                 {label: 'APPLY', cn: GetLang('txt.common.apply')},
-                                 {label: 'CANCEL', cn: GetLang('txt.common.cancel')}
+                                 {label: 'SET ALL', cn: GetLang('common.set_all')},
+                                 {label: 'SET DEFAULT', cn: GetLang('common.set_default')},
+                                 {label: 'BUY JOY', cn: GetLang('settings.joy.buy')},
+                                 {label: 'APPLY', cn: GetLang('common.apply')},
+                                 {label: 'CANCEL', cn: GetLang('common.cancel')}
                              ]);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, onBtnSelect);
         _btnGroup.addEventListener(SetBtnEvent.OPTION_CHANGE, onOptionChange);
@@ -238,23 +238,23 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
     /** @private */
     private function initKeyMapping():void {
         _mappings = [
-            {id: 'up2', name: 'UP rocker', cn: GetLang('txt.joy_stick_set_ui.key_up2')},
-            {id: 'down2', name: 'DOWN rocker', cn: GetLang('txt.joy_stick_set_ui.key_down2')},
-            {id: 'left2', name: 'LEFT rocker', cn: GetLang('txt.joy_stick_set_ui.key_left2')},
-            {id: 'right2', name: 'RIGHT rocker', cn: GetLang('txt.joy_stick_set_ui.key_right2')},
-            {id: 'up', name: 'UP button', cn: GetLang('txt.joy_stick_set_ui.key_up')},
-            {id: 'down', name: 'DOWN button', cn: GetLang('txt.joy_stick_set_ui.key_down')},
-            {id: 'left', name: 'LEFT button', cn: GetLang('txt.joy_stick_set_ui.key_left')},
-            {id: 'right', name: 'RIGHT button', cn: GetLang('txt.joy_stick_set_ui.key_right')},
-            {id: 'attack', name: 'ATTACK', cn: GetLang('txt.joy_stick_set_ui.key_attack')},
-            {id: 'jump', name: 'JUMP', cn: GetLang('txt.joy_stick_set_ui.key_jump')},
-            {id: 'dash', name: 'DASH', cn: GetLang('txt.joy_stick_set_ui.key_dash')},
-            {id: 'skill', name: 'SKILL', cn: GetLang('txt.joy_stick_set_ui.key_skill')},
-            {id: 'superSkill', name: 'SUPER SKILL', cn: GetLang('txt.joy_stick_set_ui.key_super_skill')},
-            {id: 'special', name: 'SPECIAL', cn: GetLang('txt.joy_stick_set_ui.key_special')},
-            {id: 'waikai', name: 'BANN KAI', cn: GetLang('txt.joy_stick_set_ui.key_waikai')},
-            {id: 'back', name: 'BACK', cn: GetLang('txt.joy_stick_set_ui.key_back')},
-            {id: 'select', name: 'SELECT', cn: GetLang('txt.joy_stick_set_ui.key_select')},
+            {id: 'up2', name: 'UP rocker', cn: GetLang('settings.joy.key_up2')},
+            {id: 'down2', name: 'DOWN rocker', cn: GetLang('settings.joy.key_down2')},
+            {id: 'left2', name: 'LEFT rocker', cn: GetLang('settings.joy.key_left2')},
+            {id: 'right2', name: 'RIGHT rocker', cn: GetLang('settings.joy.key_right2')},
+            {id: 'up', name: 'UP button', cn: GetLang('settings.joy.key_up')},
+            {id: 'down', name: 'DOWN button', cn: GetLang('settings.joy.key_down')},
+            {id: 'left', name: 'LEFT button', cn: GetLang('settings.joy.key_left')},
+            {id: 'right', name: 'RIGHT button', cn: GetLang('settings.joy.key_right')},
+            {id: 'attack', name: 'ATTACK', cn: GetLang('settings.joy.key_attack')},
+            {id: 'jump', name: 'JUMP', cn: GetLang('settings.joy.key_jump')},
+            {id: 'dash', name: 'DASH', cn: GetLang('settings.joy.key_dash')},
+            {id: 'skill', name: 'SKILL', cn: GetLang('settings.joy.key_skill')},
+            {id: 'superSkill', name: 'SUPER SKILL', cn: GetLang('settings.joy.key_super_skill')},
+            {id: 'special', name: 'SPECIAL', cn: GetLang('settings.joy.key_special')},
+            {id: 'waikai', name: 'BANN KAI', cn: GetLang('settings.joy.key_waikai')},
+            {id: 'back', name: 'BACK', cn: GetLang('settings.joy.key_back')},
+            {id: 'select', name: 'SELECT', cn: GetLang('settings.joy.key_select')},
         ];
     }
 
@@ -283,8 +283,8 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
         case 'SET ALL':
             if (!JoyStick.isActive(_tmpJoyConfig.deviceId)) {
                 GameUI.alert(
-                    GetLang('alert.joy_stick_set_ui.no_joystick_title'),
-                    GetLang('alert.joy_stick_set_ui.no_joystick')
+                    GetLang('settings.no_joystick.title'),
+                    GetLang('settings.no_joystick')
                 );
 
                 return;
@@ -300,8 +300,8 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
             _tmpJoyConfig          = new JoyStickConfigVO();
             _tmpJoyConfig.deviceId = _deviceId;
             GameUI.alert(
-                GetLang('alert.joy_stick_set_ui.set_default_ok_title'),
-                GetLang('alert.joy_stick_set_ui.set_default_ok')
+                GetLang('settings.joystick_default.title'),
+                GetLang('settings.joystick_default')
             );
             break;
         case 'BUY JOY':

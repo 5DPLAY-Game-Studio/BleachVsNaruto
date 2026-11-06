@@ -54,8 +54,8 @@ public class HostDetailDialog implements IStage {
     public function setData(data:HostVO):void {
         _data             = data;
         _ui.txt_name.text = data.name;
-        _ui.txt_mode.text = GetLang('txt.host_detail_dialog.game_mode', {mode: data.getGameModeStr()});
-        _ui.txt_time.text = GetLang('txt.host_detail_dialog.create_time', {time: LANUtils.getTimeStr(data.updateTime)});
+        _ui.txt_mode.text = GetLang('lan.host_game_mode', {mode: data.getGameModeStr()});
+        _ui.txt_time.text = GetLang('lan.host_create_time', {time: LANUtils.getTimeStr(data.updateTime)});
 
         if (data.password) {
             initPass();
@@ -100,7 +100,7 @@ public class HostDetailDialog implements IStage {
         }
         else {
             if (msg) {
-                GameUI.alert(GetLang('alert.failed_title'), msg);
+                GameUI.alert(GetLang('lan.failed.title'), msg);
             }
         }
     }
@@ -126,8 +126,8 @@ public class HostDetailDialog implements IStage {
         if (_data.password) {
             if (_ui.pass.txt.text != _data.password) {
                 GameUI.alert(
-                        GetLang('alert.password_incorrect_title'),
-                        GetLang('alert.password_incorrect')
+                        GetLang('lan.password_incorrect.title'),
+                        GetLang('lan.password_incorrect')
                 );
                 return;
             }

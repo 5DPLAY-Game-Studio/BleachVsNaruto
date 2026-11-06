@@ -44,7 +44,7 @@ public class Debugger {
     }
 
     public static function errorMsg(msg:String):void {
-        TraceLang('debug.trace.data.debugger.error_msg', {message: '\n' + msg});
+        TraceLang('debugger.error_msg', {message: '\n' + msg});
         if (onErrorMsgCall != null) {
             onErrorMsgCall(msg);
         }

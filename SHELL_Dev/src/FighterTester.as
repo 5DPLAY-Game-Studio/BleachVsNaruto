@@ -191,7 +191,7 @@ public class FighterTester extends Sprite {
                 }
         )();
         _p1InputId = addField(
-                GetLang('dev.txt.fighter_tester.p1_fighter_id'),
+                GetLang('dev.fighter_tester.p1_fighter_id'),
                 fighterData,
                 0,
                 fieldSlot,
@@ -222,21 +222,21 @@ public class FighterTester extends Sprite {
                 }
         )();
         _p1FzInputId = addField(
-                GetLang('dev.txt.fighter_tester.p1_assistant_id'),
+                GetLang('dev.fighter_tester.p1_assistant_id'),
                 assistantData,
                 1,
                 fieldSlot,
                 lx
         );
         _p2InputId = addField(
-                GetLang('dev.txt.fighter_tester.p2_fighter_id'),
+                GetLang('dev.fighter_tester.p2_fighter_id'),
                 fighterData,
                 2,
                 fieldSlot,
                 lx
         );
         _p2FzInputId = addField(
-                GetLang('dev.txt.fighter_tester.p2_assistant_id'),
+                GetLang('dev.fighter_tester.p2_assistant_id'),
                 assistantData,
                 3,
                 fieldSlot,
@@ -267,7 +267,7 @@ public class FighterTester extends Sprite {
                 }
         )();
         _mapInputId = addField(
-                GetLang('dev.txt.fighter_tester.map_id'),
+                GetLang('dev.fighter_tester.map_id'),
                 mapData,
                 4,
                 fieldSlot,
@@ -282,7 +282,7 @@ public class FighterTester extends Sprite {
             }
         ];
         _fpsInput = addField(
-                GetLang('dev.txt.fighter_tester.game_fps'),
+                GetLang('dev.fighter_tester.game_fps'),
                 fpsData,
                 5,
                 fieldSlot,
@@ -291,13 +291,13 @@ public class FighterTester extends Sprite {
 
         var recoverData:Array = [
             {
-                text: GetLang('txt.options.enable')
+                text: GetLang('common.enable')
             }, {
-                text: GetLang('txt.options.disable')
+                text: GetLang('common.disable')
             }
         ];
         _autoReceiveHp = addField(
-                GetLang('dev.txt.fighter_tester.training_recover'),
+                GetLang('dev.fighter_tester.training_recover'),
                 recoverData,
                 6,
                 fieldSlot,
@@ -306,9 +306,9 @@ public class FighterTester extends Sprite {
 
         _themeBtn = addButton(themeButtonLabel(), by, bx, BUTTON_WIDTH, btnH, onThemeButtonClick);
         by += btnH + BUTTON_GAP;
-        addButton(GetLang('dev.txt.fighter_tester.show_hit_area'), by, bx, BUTTON_WIDTH, btnH, renderMainClickHandler);
+        addButton(GetLang('dev.fighter_tester.show_hit_area'), by, bx, BUTTON_WIDTH, btnH, renderMainClickHandler);
         by += btnH + BUTTON_GAP;
-        addButton(GetLang('dev.txt.fighter_tester.show_sprite_bounds'), by, bx, BUTTON_WIDTH, btnH, renderSpriteBoundsClickHandler);
+        addButton(GetLang('dev.fighter_tester.show_sprite_bounds'), by, bx, BUTTON_WIDTH, btnH, renderSpriteBoundsClickHandler);
 
         // 错误区占下半；初次用正文显示提示，点测试后清空，之后只承接 Debugger
         _debugText          = new TextArea();
@@ -319,9 +319,9 @@ public class FighterTester extends Sprite {
         _debugText.height   = halfH;
         _rightCol.addChild(_debugText);
         applyDebugTextAreaStyle();
-        setDebugLogText(GetLang('dev.txt.fighter_tester.error_message_prompt'));
+        setDebugLogText(GetLang('dev.fighter_tester.error_message_prompt'));
 
-        _testBtn        = new Button(GetLang('dev.txt.fighter_tester.btn_test'));
+        _testBtn        = new Button(GetLang('dev.fighter_tester.btn_test'));
         _testBtn.x      = COL_PAD;
         _testBtn.y      = COL_PAD + mainH + TEST_BUTTON_GAP;
         _testBtn.width  = DEBUG_PANEL_WIDTH - COL_PAD * 2;
@@ -405,7 +405,7 @@ public class FighterTester extends Sprite {
      * @return 按钮文字。
      */
     private function themeButtonLabel():String {
-        return _darkMode ? GetLang('dev.txt.fighter_tester.theme_light') : GetLang('dev.txt.fighter_tester.theme_dark');
+        return _darkMode ? GetLang('dev.fighter_tester.theme_light') : GetLang('dev.fighter_tester.theme_dark');
     }
 
     /**
@@ -600,7 +600,7 @@ public class FighterTester extends Sprite {
 
         GameMode.currentMode = GameMode.TRAINING;
 
-        TrainingCtrl.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == GetLang('txt.options.enable');
+        TrainingCtrl.RECOVER_HP = _autoReceiveHp.selectedItem[KEY] == GetLang('common.enable');
 
         GameData.I.p1Select          = new SelectVO();
         GameData.I.p2Select          = new SelectVO();
@@ -698,11 +698,11 @@ public class FighterTester extends Sprite {
         }
 
         if (DebugMain.I.isRender) {
-            btn.text = GetLang('dev.txt.fighter_tester.show_hit_area');
+            btn.text = GetLang('dev.fighter_tester.show_hit_area');
         }
         else {
             DebugMain.I.initialize();
-            btn.text = GetLang('dev.txt.fighter_tester.hide_hit_area');
+            btn.text = GetLang('dev.fighter_tester.hide_hit_area');
         }
 
         DebugMain.I.isRender = !DebugMain.I.isRender;
@@ -715,14 +715,14 @@ public class FighterTester extends Sprite {
         }
 
         if (DebugSpriteBounds.I.isRender) {
-            btn.text = GetLang('dev.txt.fighter_tester.show_sprite_bounds');
+            btn.text = GetLang('dev.fighter_tester.show_sprite_bounds');
             if (_spriteInspector) {
                 _spriteInspector.stop();
             }
         }
         else {
             DebugSpriteBounds.I.initialize();
-            btn.text = GetLang('dev.txt.fighter_tester.hide_sprite_bounds');
+            btn.text = GetLang('dev.fighter_tester.hide_sprite_bounds');
             if (!_spriteInspector) {
                 _spriteInspector = new SpriteInspectorWindow(stage.nativeWindow, _theme, _darkMode);
             }

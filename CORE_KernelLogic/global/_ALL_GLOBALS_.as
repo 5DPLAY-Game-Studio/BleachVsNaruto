@@ -46,6 +46,7 @@ public function get _ALL_GLOBALS_():* {
         IsHarmanRuntime,
         IsMobile,
         LANGUAGE,
+        LogLang,
         P1,
         P2,
         PlaySound,

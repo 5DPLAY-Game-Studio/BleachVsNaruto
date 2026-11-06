@@ -58,7 +58,7 @@ public class HostVO {
     }
 
     public function getListName():String {
-        var after:String = status == 1 ? GetLang('txt.host_vo.full') : '';
+        var after:String = status == 1 ? GetLang('lan.full') : '';
 
         return name + after;
     }
@@ -66,10 +66,10 @@ public class HostVO {
     public function getGameModeStr():String {
         switch (gameMode) {
         case 1:
-            return GetLang('txt.host_vo.mode_team');
+            return GetLang('lan.mode_team');
             break;
         case 2:
-            return GetLang('txt.host_vo.mode_single');
+            return GetLang('lan.mode_single');
             break;
         }
         return null;

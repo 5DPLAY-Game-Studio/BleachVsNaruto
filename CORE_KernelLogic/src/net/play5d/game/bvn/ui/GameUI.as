@@ -125,8 +125,8 @@ public class GameUI {
      */
     public static function confirmBackMenu(isMusouStyle:Boolean = false):void {
         confirm(
-                GetLang('confirm.common.back_menu_title'),
-                GetLang('confirm.common.back_menu'),
+                GetLang('common.back_menu.title'),
+                GetLang('common.back_menu'),
                 MainGame.I.goMenu,
                 null,
                 isMusouStyle

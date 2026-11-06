@@ -59,21 +59,21 @@ public class GameData {
 
     public function loadConfig(back:Function, fail:Function = null):void {
 
-        PackRegistry.I.load(loadPacksBack, failWith('txt.game_data.load_fighter_fail'));
+        PackRegistry.I.load(loadPacksBack, failWith('loading.fighter_fail'));
 
         function loadPacksBack():void {
-            AssetManager.I.loadJSON('config/select.json', loadSelectBack, failWith('txt.game_data.load_select_fail'));
+            AssetManager.I.loadJSON('config/select.json', loadSelectBack, failWith('loading.select_fail'));
         }
 
         function loadSelectBack(data:Object):void {
             config.select_config.initByObject(data);
-            AssetManager.I.loadJSON('config/mission.json', loadMissionBack, failWith('txt.game_data.load_mission_fail'));
+            AssetManager.I.loadJSON('config/mission.json', loadMissionBack, failWith('loading.mission_fail'));
         }
 
         function loadMissionBack(data:Object):void {
             MissionModel.I.initByObject(data);
 
-            MusouModel.I.loadMapData(loadMusouDataBack, failWith('txt.game_data.load_musou_fail'));
+            MusouModel.I.loadMapData(loadMusouDataBack, failWith('loading.musou_fail'));
         }
 
         function loadMusouDataBack():void {
@@ -134,7 +134,7 @@ public class GameData {
         AssetManager.I.loadJSON(url, function (data:Object):void {
             setSelectData(data);
         }, function ():void {
-            TraceLang('debug.trace.data.game_data.load_select_error');
+            TraceLang('game_data.load_select_error');
         });
     }
 
@@ -192,7 +192,7 @@ public class GameData {
             if (missAssisters.length > 0) {
                 msg += 'assister : ' + missAssisters.join(' , ') + ' ; ';
             }
-            Debugger.log(GetLang('debug.error.data.game_data.verify_select_fail', {file: 'select.json', message: msg}));
+            LogLang(GameLogger.DEBUG, 'load', 'game_data.verify_select_fail', {file: 'select.json', message: msg});
         }
     }
 
@@ -285,7 +285,7 @@ public class GameData {
             if (missMaps.length > 0) {
                 msg += 'map : ' + missMaps.join(' , ') + ' ; ';
             }
-            Debugger.log(GetLang('debug.error.data.game_data.verify_mission_fail', {file: 'mission.json', message: msg}));
+            LogLang(GameLogger.DEBUG, 'load', 'game_data.verify_mission_fail', {file: 'mission.json', message: msg});
         }
     }
 
@@ -305,24 +305,22 @@ public class GameData {
 
                     var map:MapVO = MapModel.I.getMap(mv.map);
                     if (map == null) {
-                        Debugger.log(
-                                GetLang('debug.error.data.game_data.verify_musou_fail', {
-                                    musouId: musouId,
-                                    type   : 'map',
-                                    value  : mv.map
-                                }));
+                        LogLang(GameLogger.DEBUG, 'load', 'game_data.verify_musou_fail', {
+                            musouId: musouId,
+                            type   : 'map',
+                            value  : mv.map
+                        });
                     }
 
                     var enemies:Array = mv.getAllEnemyIds();
                     for each(var f:String in enemies) {
                         var fighter:FighterVO = FighterModel.I.getFighter(f);
                         if (fighter == null) {
-                            Debugger.log(
-                                    GetLang('debug.error.data.game_data.verify_musou_fail', {
-                                        musouId: musouId,
-                                        type   : 'fighter',
-                                        value  : f
-                                    }));
+                            LogLang(GameLogger.DEBUG, 'load', 'game_data.verify_musou_fail', {
+                                musouId: musouId,
+                                type   : 'fighter',
+                                value  : f
+                            });
                         }
                     }
 
@@ -345,7 +343,7 @@ public class GameData {
         if (missFighters.length > 0) {
             var msg:String = '';
             msg += 'fighter : ' + missFighters.join(' , ') + ' ; ';
-            Debugger.log(GetLang('debug.error.data.game_data.verify_fighter_model_fail', {message: msg}));
+            LogLang(GameLogger.DEBUG, 'load', 'game_data.verify_fighter_model_fail', {message: msg});
         }
 
     }

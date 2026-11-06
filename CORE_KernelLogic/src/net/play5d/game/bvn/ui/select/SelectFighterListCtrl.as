@@ -344,7 +344,7 @@ public class SelectFighterListCtrl {
         var fv:FighterVO = _selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(sv.fighterID) :
                            FighterModel.I.getFighter(sv.fighterID);
         if (!fv) {
-            Debugger.log(GetLang('debug.log.data.select_fighter_stage.fighter_data_missing', {fighterId: sv.fighterID}));
+            LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.fighter_data_missing', {fighterId: sv.fighterID});
             return null;
         }
 

@@ -95,7 +95,7 @@ public class MusouModel {
             var id:String = mapIds.shift();
 
             var partUrl:String = 'config/musou/' + map.id + '/' + id + '.json';
-            TraceLang('debug.trace.data.musou_model.load_area', {areaUrl: partUrl});
+            TraceLang('musou_model.load_area', {areaUrl: partUrl});
             AssetManager.I.loadJSON(partUrl, loadNext, fail);
         }
 
@@ -103,7 +103,7 @@ public class MusouModel {
     }
 
     private function initMapArea(area:MusouWorldMapAreaVO, d:Object):void {
-        TraceLang('debug.trace.data.musou_model.init_map_area', {areaId: d.id});
+        TraceLang('musou_model.init_map_area', {areaId: d.id});
 
         area.id   = d.id;
         area.name = d.name;

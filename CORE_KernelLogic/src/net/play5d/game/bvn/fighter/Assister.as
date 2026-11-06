@@ -45,7 +45,7 @@ public class Assister extends BaseGameSprite {
             _mainMc.setAssistCtrler(AssisterApiFactory.create(_mainMc, _ctrler));
         }
         else {
-            ThrowError(Error, GetLang('debug.error.data.assister.init_fail', {functionName: 'setAssistCtrler()'}));
+            ThrowError(Error, GetLang('log.error.fight.assister.init_fail', {functionName: 'setAssistCtrler()'}));
         }
     }
     public var onRemove:Function;

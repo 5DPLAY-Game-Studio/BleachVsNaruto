@@ -41,7 +41,7 @@ public class CreditsSpriteUtil {
      *
      * @example
      * <listing version="3.0">
-     * return CreditsSpriteUtil.build(info, 'txt.game_interface_manager.credits_footer');
+     * return CreditsSpriteUtil.build(info, 'credits.footer');
      * </listing>
      */
     public static function build(creditsInfo:String, footerLangKey:String):Sprite {

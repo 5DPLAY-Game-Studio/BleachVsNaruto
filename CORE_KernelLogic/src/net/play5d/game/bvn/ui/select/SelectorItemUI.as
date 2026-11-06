@@ -138,7 +138,7 @@ public class SelectorItemUI {
     public function select(back:Function = null):void {
 
         if (!selectVO) {
-            ThrowError(Error, GetLang('debug.error.data.selector_item_ui.select_vo_unset'));
+            ThrowError(Error, GetLang('log.error.ui.selector_item_ui.select_vo_unset'));
             return;
         }
 

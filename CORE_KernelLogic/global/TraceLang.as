@@ -20,39 +20,22 @@ package {
 import net.play5d.game.bvn.utils.GameLogger;
 
 /**
- * 按语言包路径取文案（可带命名占位符），再按调试级别输出。
+ * 按调试级别输出一条跟踪文案。
  *
- * <p>语言包可用时等价于 <code>Trace(GetLang(tree, params))</code>。
- * 取文案失败或得到 <code>[N/A]</code> 时改为输出路径本身。
- * 当前阈值低于 <code>DEBUG</code> 时不输出。</p>
+ * <p>等价于 <code>LogLang(GameLogger.DEBUG, 'trace', event, params)</code>。
+ * 语言包键为 <code>log.debug.trace.{event}</code>。</p>
  *
- * @param tree 点分树形路径。
+ * @param event 事件路径，如 <code>game_ctrl.current_mode</code>。
  * @param params 占位符名到替换值的映射；可为 <code>null</code>。
  * @example
  * <listing version="3.0">
- * TraceLang('debug.trace.prefix');
- * TraceLang('debug.trace.data.game_ctrl.current_mode', {mode: GameMode.currentMode});
+ * TraceLang('game_ctrl.time_over');
+ * TraceLang('game_ctrl.current_mode', {mode: GameMode.currentMode});
  * </listing>
- * @see GetLang
- * @see Trace
+ * @see LogLang
  * @see net.play5d.game.bvn.utils.GameLogger#debug()
  */
-public function TraceLang(tree:String, params:Object = null):void {
-    if (GameLogger.threshold < GameLogger.DEBUG) {
-        return;
-    }
-
-    var text:String;
-    try {
-        text = GetLang(tree, params);
-    }
-    catch (error:Error) {
-        text = tree;
-    }
-    if (!text || text == '[N/A]') {
-        text = tree;
-    }
-
-    Trace(text);
+public function TraceLang(event:String, params:Object = null):void {
+    LogLang(GameLogger.DEBUG, 'trace', event, params);
 }
 }

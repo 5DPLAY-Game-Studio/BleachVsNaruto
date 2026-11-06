@@ -77,8 +77,8 @@ public class ProfileDialog implements IStage {
         var newName:String = _ui.txt.text;
         if (newName == '') {
             GameUI.alert(
-                    GetLang('alert.input_name_title'),
-                    GetLang('alert.input_name')
+                    GetLang('lan.input_name.title'),
+                    GetLang('lan.input_name')
             );
             return;
         }

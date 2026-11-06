@@ -53,9 +53,9 @@ public class GameLoader {
 
         var fv:FighterVO = FighterModel.I.getFighter(fighterId, true);
         if (!fv) {
-            TraceLang('debug.trace.data.game_loader.fighter_id_error', {fighterId: fighterId});
+            TraceLang('game_loader.fighter_id_error', {fighterId: fighterId});
             if (fail != null) {
-                fail(GetLang('txt.game_loader.fighter_id_error'));
+                fail(GetLang('loading.fighter_id_error'));
             }
             return;
         }
@@ -75,7 +75,7 @@ public class GameLoader {
                 cachevo.MainClass            = mainMcClass as Class;
             }
             catch (e:Error) {
-                TraceLang('debug.trace.data.game_loader.fighter_load_error', {error: e});
+                TraceLang('game_loader.fighter_load_error', {error: e});
             }
 
             if (back != null) {
@@ -143,9 +143,9 @@ public class GameLoader {
     ):void {
         var fv:FighterVO = AssisterModel.I.getAssister(fighterId, true);
         if (!fv) {
-            TraceLang('debug.trace.data.game_loader.assister_id_error', {fighterId: fighterId});
+            TraceLang('game_loader.assister_id_error', {fighterId: fighterId});
             if (fail != null) {
-                fail(GetLang('txt.game_loader.assister_id_error'));
+                fail(GetLang('loading.assister_id_error'));
             }
             return;
         }
@@ -173,9 +173,9 @@ public class GameLoader {
     ):void {
         var mv:MapVO = MapModel.I.getMap(mapId);
         if (!mv) {
-            TraceLang('debug.trace.data.game_loader.map_id_error', {mapId: mapId});
+            TraceLang('game_loader.map_id_error', {mapId: mapId});
             if (fail != null) {
-                fail(GetLang('txt.game_loader.map_id_error'));
+                fail(GetLang('loading.map_id_error'));
             }
             return;
         }
@@ -212,7 +212,7 @@ public class GameLoader {
                 l.unloadAndStop(true);
             }
             catch (e:Error) {
-                TraceLang('debug.trace.data.game_loader.unload_cache_error', {error: e});
+                TraceLang('game_loader.unload_cache_error', {error: e});
                 l.unload();
             }
         }
@@ -232,9 +232,9 @@ public class GameLoader {
         }
 
         function loadIOError():void {
-            Debugger.log(GetLang('debug.log.data.game_loader.load_swf_error', {url: url}));
+            LogLang(GameLogger.DEBUG, 'load', 'game_loader.load_swf_error', {url: url});
             if (fail != null) {
-                fail(GetLang('txt.game_loader.load_swf_error'));
+                fail(GetLang('loading.load_swf_error'));
             }
         }
 

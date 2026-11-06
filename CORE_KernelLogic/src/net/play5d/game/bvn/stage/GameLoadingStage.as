@@ -52,7 +52,7 @@ public class GameLoadingStage implements IStage {
 
         if (AssetManager.I.needPreLoad()) {
             AssetManager.I.loadPreLoad(loadPreloadBack, loadPreloadFail, loadPreloadProgress);
-            msg(GetLang('txt.game_loading_stage.prepare'));
+            msg(GetLang('loading.prepare'));
         }
         else {
             loadPreloadBack();
@@ -75,12 +75,12 @@ public class GameLoadingStage implements IStage {
 
     private function loadPreloadBack():void {
         GameData.I.loadConfig(loadConfigBack, loadConfigFail);
-        msg(GetLang('txt.game_loading_stage.loading_config'));
+        msg(GetLang('loading.config'));
     }
 
     private function loadPreloadFail(errorStr:String = null):void {
-        Debugger.log(GetLang('debug.log.data.game_loading_stage.preload_fail', {error: errorStr || ''}));
-        msg(GetLang('txt.game_loading_stage.prepare_fail'));
+        LogLang(GameLogger.DEBUG, 'load', 'game_loading_stage.preload_fail', {error: errorStr || ''});
+        msg(GetLang('loading.prepare_fail'));
         if (_initFail != null) {
             _initFail(errorStr);
         }
@@ -94,8 +94,8 @@ public class GameLoadingStage implements IStage {
     }
 
     private function loadConfigFail(errorStr:String):void {
-        Debugger.log(GetLang('debug.log.data.game_loading_stage.config_fail', {error: errorStr || ''}));
-        msg(GetLang('txt.game_loading_stage.config_fail'));
+        LogLang(GameLogger.DEBUG, 'load', 'game_loading_stage.config_fail', {error: errorStr || ''});
+        msg(GetLang('loading.config_fail'));
         if (_initFail != null) {
             _initFail(errorStr);
         }
@@ -103,12 +103,12 @@ public class GameLoadingStage implements IStage {
 
     private function loadConfigBack():void {
         AssetManager.I.loadBasic(loadAssetBack, loadAssetProgress);
-        msg(GetLang('txt.game_loading_stage.loading_assets'));
+        msg(GetLang('loading.assets'));
     }
 
     private function loadAssetProgress(p:Number, message:String, step:int, totalStep:int):void {
         if (p > 1) {
-            TraceLang('debug.trace.data.game_loading_stage.progress_over_100', {where: message});
+            TraceLang('game_loading_stage.progress_over_100', {where: message});
             p = 1;
         }
         if (step > totalStep) {
@@ -119,7 +119,7 @@ public class GameLoadingStage implements IStage {
         }
         _ui.bar.bar.scaleX = p;
 
-        var txt:String = GetLang('txt.game_loading_stage.loading_step', {
+        var txt:String = GetLang('loading.step', {
             itemName : message,
             step     : step,
             totalStep: totalStep

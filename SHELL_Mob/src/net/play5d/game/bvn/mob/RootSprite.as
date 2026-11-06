@@ -43,7 +43,7 @@ public class RootSprite {
         _mainGame = new MainGame();
         _mainGame.initialize(_gameSprite, STAGE, function ():void {
             _mainGame.goLanguage(function ():void {
-                TraceLang('debug.trace.data.root_sprite.current_font', {fontName: FONT.fontName});
+                TraceLang('root_sprite.current_font', {fontName: FONT.fontName});
                 UIUtils.LOCK_FONT = FONT.fontName;
 
                 GameData.I.saveData();

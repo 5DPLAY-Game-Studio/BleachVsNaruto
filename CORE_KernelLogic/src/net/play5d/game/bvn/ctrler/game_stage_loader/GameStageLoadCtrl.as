@@ -111,7 +111,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             }
 
             throw new Error(
-                    GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', {
+                    GetLang('log.error.load.game_stage_load_ctrl.not_find_main_mc', {
                         fileUrl: fileUrl,
                         mainMc : DefinedClass.MC_MAIN
                     }));
@@ -142,7 +142,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             }
 
             throw new Error(
-                    GetLang('debug.error.data.game_stage_load_ctrl.not_find_main_mc', {
+                    GetLang('log.error.load.game_stage_load_ctrl.not_find_main_mc', {
                         fileUrl: fileUrl,
                         mainMc : DefinedClass.MC_MAIN
                     }));
@@ -183,7 +183,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             for each(id in maps) {
                 var mv:MapVO = MapModel.I.getMap(id);
                 if (!mv) {
-                    throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.get_map_data_fail'));
+                    throw new Error(GetLang('log.error.load.game_stage_load_ctrl.get_map_data_fail'));
                 }
                 mapDatas.push(mv);
             }
@@ -198,7 +198,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             for each(id in fighters) {
                 var fv:FighterVO = FighterModel.I.getFighter(id);
                 if (!fv) {
-                    throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.get_fighter_data_fail'));
+                    throw new Error(GetLang('log.error.load.game_stage_load_ctrl.get_fighter_data_fail'));
                 }
                 fighterDatas.push(fv);
             }
@@ -212,7 +212,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             for each(id in assisters) {
                 var av:FighterVO = AssisterModel.I.getAssister(id);
                 if (!av) {
-                    throw new Error(GetLang('debug.error.data.game_stage_load_ctrl.get_assistant_data_fail'));
+                    throw new Error(GetLang('log.error.load.game_stage_load_ctrl.get_assistant_data_fail'));
                 }
                 assisterDatas.push(av);
             }
@@ -275,7 +275,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
 
     private function startloadBGM():void {
         loadBgms(_loadBgmDatas, function ():void {
-            TraceLang('debug.trace.data.game_stage_load_ctrl.load_all_finish');
+            TraceLang('game_stage_load_ctrl.load_all_finish');
             if (_loadFinishBack != null) {
                 _loadFinishBack();
                 _loadFinishBack = null;
@@ -402,22 +402,22 @@ public class GameStageLoadCtrl extends EventDispatcher {
         var itemName:String;
         switch (_loadingType) {
         case GameStageLoadDefine.TYPE_MAP:
-            itemName = GetLang('txt.game_stage_load_ctrl.map');
+            itemName = GetLang('loading.map');
             break;
         case GameStageLoadDefine.TYPE_FIGHTER:
-            itemName = GetLang('txt.game_stage_load_ctrl.fighter');
+            itemName = GetLang('loading.fighter');
             break;
         case GameStageLoadDefine.TYPE_ASSISTER:
-            itemName = GetLang('txt.game_stage_load_ctrl.assistant');
+            itemName = GetLang('loading.assistant');
             break;
         case GameStageLoadDefine.TYPE_BGM:
-            itemName = GetLang('txt.game_stage_load_ctrl.bgm');
+            itemName = GetLang('loading.bgm');
             break;
         }
 
         var msg:String;
         if (_curLoadName) {
-            msg = GetLang('txt.game_stage_load_ctrl.loading_has_name', {
+            msg = GetLang('loading.has_name', {
                 itemName  : itemName,
                 loadName  : _curLoadName,
                 step      : _loadStep,
@@ -425,7 +425,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
             });
         }
         else {
-            msg = GetLang('txt.game_stage_load_ctrl.loading_no_name', {
+            msg = GetLang('loading.no_name', {
                 itemName  : itemName,
                 step      : _loadStep,
                 stepLength: _loadStepLength

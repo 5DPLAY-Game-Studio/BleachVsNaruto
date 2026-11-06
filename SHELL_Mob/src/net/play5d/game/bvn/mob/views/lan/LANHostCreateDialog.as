@@ -54,16 +54,16 @@ public class LANHostCreateDialog implements Istage {
     private function initSettingData():void {
         _settingData = [
             {
-                title  : GetLang('txt.lan_host_create_dialog.game_mode'),
+                title  : GetLang('lan.game_mode'),
                 en     : 'Game Mode',
                 key    : 'game_mode',
                 options: [
-                    {name: GetLang('txt.lan_host_create_dialog.game_mode_team'), en: 'Team vs', value: 1},
-                    {name: GetLang('txt.lan_host_create_dialog.game_mode_single'), en: 'Single vs', value: 2}
+                    {name: GetLang('lan.game_mode_team'), en: 'Team vs', value: 1},
+                    {name: GetLang('lan.game_mode_single'), en: 'Single vs', value: 2}
                 ]
             },
             {
-                title  : GetLang('txt.lan_host_create_dialog.game_time'),
+                title  : GetLang('lan.game_time'),
                 en     : 'Game Time',
                 key    : 'game_time',
                 options: [
@@ -72,7 +72,7 @@ public class LANHostCreateDialog implements Istage {
                 ]
             },
             {
-                title  : GetLang('txt.lan_host_create_dialog.hp'),
+                title  : GetLang('lan.hp'),
                 en     : 'HP',
                 key    : 'hp',
                 options: [

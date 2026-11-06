@@ -44,7 +44,7 @@ public class MusouFighterModel {
 
     public function addFighter(id:String, price:int):void {
         if (containsFighter(id)) {
-            TraceLang('debug.trace.data.musou_fighter_model.repeat_add', {fighterId: id});
+            TraceLang('musou_fighter_model.repeat_add', {fighterId: id});
             return;
         }
         fighters.push(new MusouFighterSellVO(id, price));

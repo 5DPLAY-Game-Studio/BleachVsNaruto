@@ -84,7 +84,7 @@ public class MusouFighterVO implements ISaveData, IInstanceVO {
         if (val >= nextExp) {
             var isLimit:Boolean = updateLevel(lv + 1);
             if (!isLimit) {
-                TraceLang('debug.trace.data.musou_fighter_vo.level_up');
+                TraceLang('musou_fighter_vo.level_up');
                 GameEvent.dispatchEvent(GameEvent.LEVEL_UP, this);
                 _exp.setValue(val - nextExp);
             }

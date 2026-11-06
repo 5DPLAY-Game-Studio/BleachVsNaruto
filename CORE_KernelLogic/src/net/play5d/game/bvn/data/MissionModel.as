@@ -107,7 +107,7 @@ public class MissionModel {
 
     public function missionComplete():void {
         if (missionAllComplete()) {
-            TraceLang('debug.trace.data.mission_model.mission_all_over');
+            TraceLang('mission_model.mission_all_over');
             return;
         }
 

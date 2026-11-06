@@ -54,7 +54,7 @@ public class FighterMain extends BaseGameSprite {
         _area     = null;
 
         if (!mainMc) {
-            ThrowError(Error, GetLang('debug.error.data.fighter_main.main_mc_is_null'));
+            ThrowError(Error, GetLang('log.error.fight.fighter_main.main_mc_is_null'));
         }
     }
     public var qi:Number    = 0;
@@ -484,7 +484,7 @@ public class FighterMain extends BaseGameSprite {
     public function initialize():void {
 
         if (_fighterCtrl) {
-            ThrowError(Error, GetLang('debug.error.data.fighter_main.fighter_ctrler_initialized'));
+            ThrowError(Error, GetLang('log.error.fight.fighter_main.fighter_ctrler_initialized'));
             return;
         }
 

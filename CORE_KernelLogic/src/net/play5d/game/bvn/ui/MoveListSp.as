@@ -38,7 +38,7 @@ public class MoveListSp extends Sprite {
         addChild(_pic);
 
         _btns = new SetBtnGroup();
-        _btns.setBtnData([{label: 'BACK', cn: GetLang('txt.common.back')}]);
+        _btns.setBtnData([{label: 'BACK', cn: GetLang('common.back')}]);
         _btns.addEventListener(SetBtnEvent.SELECT, onSelect);
         _btns.x = 250;
         _btns.y = GameConfig.GAME_SIZE.y - 130;

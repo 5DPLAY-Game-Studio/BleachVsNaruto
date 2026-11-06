@@ -91,7 +91,7 @@ public class GameInterfaceManager implements IGameInterface {
     }
 
     public function getCredits(creditsInfo:String):Sprite {
-        return CreditsSpriteUtil.build(creditsInfo, 'dev.txt.game_interface_manager.commit');
+        return CreditsSpriteUtil.build(creditsInfo, 'dev.credits.commit');
     }
 
     public function checkFile(url:String, file:ByteArray):Boolean {

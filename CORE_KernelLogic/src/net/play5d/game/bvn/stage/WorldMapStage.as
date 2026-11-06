@@ -213,9 +213,9 @@ public class WorldMapStage implements IStage {
     private function gotoMission(data:MusouWorldMapAreaVO):void {
         var allFinish:Boolean = MusouLogic.I.getAreaPercent(data.id) >= 1;
         var txt:String        = allFinish ?
-                GetLang('confirm.world_map.next_mission_all_finish') :
-                GetLang('confirm.world_map.next_mission');
-        GameUI.confirm(GetLang('confirm.world_map.next_mission_title'), txt, function ():void {
+                GetLang('world_map.next_mission_all_finish') :
+                GetLang('world_map.next_mission');
+        GameUI.confirm(GetLang('world_map.next_mission.title'), txt, function ():void {
             MusouModel.I.currentMission = MusouLogic.I.getNextMission(data);
             StateCtrl.I.transIn(MainGame.I.loadGame, true);
         }, null, true);
@@ -307,8 +307,8 @@ public class WorldMapStage implements IStage {
 
     private function backHandler(...params):void {
         GameUI.confirm(
-                GetLang('confirm.world_map.exit_title'),
-                GetLang('confirm.world_map.exit'),
+                GetLang('world_map.exit.title'),
+                GetLang('world_map.exit'),
                 MainGame.I.goMenu
         );
         GameEvent.dispatchEvent(GameEvent.CONFRIM_BACK_MENU);
@@ -326,8 +326,8 @@ public class WorldMapStage implements IStage {
 
         if (data.building()) {
             GameUI.alert(
-                    GetLang('alert.world_map.not_open_title'),
-                    GetLang('alert.world_map.not_open')
+                    GetLang('world_map.not_open.title'),
+                    GetLang('world_map.not_open')
             );
             return;
         }

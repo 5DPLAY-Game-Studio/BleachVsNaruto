@@ -98,7 +98,7 @@ public class FighterVO implements IInstanceVO {
         }
 
         if (startFrame != 0 && !bgm) {
-            TraceLang('debug.trace.data.fighter_vo.undefined_bgm', {fighterId: id});
+            TraceLang('fighter_vo.undefined_bgm', {fighterId: id});
         }
     }
 

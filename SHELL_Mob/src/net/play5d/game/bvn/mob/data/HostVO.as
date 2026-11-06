@@ -46,10 +46,10 @@ public class HostVO {
     public function getGameModeStr():String {
         switch (gameMode) {
         case 1:
-            return GetLang('txt.host_vo.mode_team');
+            return GetLang('lan.mode_team');
             break;
         case 2:
-            return GetLang('txt.host_vo.mode_single');
+            return GetLang('lan.mode_single');
             break;
         }
         return null;

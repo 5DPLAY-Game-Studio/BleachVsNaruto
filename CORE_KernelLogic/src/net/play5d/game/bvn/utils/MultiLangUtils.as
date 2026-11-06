@@ -17,7 +17,6 @@
  */
 
 package net.play5d.game.bvn.utils {
-import net.play5d.alice.utils.ClassUtils;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.LanguageType;
 
@@ -28,9 +27,6 @@ import net.play5d.game.bvn.data.LanguageType;
  * 中文亦无定义时由 <code>GetLangText</code> 返回 <code>[N/A]</code>。</p>
  */
 public class MultiLangUtils {
-
-    // 分隔符
-    private const SEPARATOR:String = '.';
 
     // 单例
     private static var _instance:MultiLangUtils;
@@ -103,28 +99,30 @@ public class MultiLangUtils {
     }
 
     /**
-     * 得到当前语言文本
-     * @param tree 文本的树形路径
-     * @return 当前语言文本；缺键时回退 zh-CN；皆无则 <code>null</code>
+     * 得到当前语言文本。
+     *
+     * @param key 语言包完整键。
+     * @return 当前语言文本；缺键时回退 zh-CN；皆无则 <code>null</code>。
      */
-    public function getLangText(tree:String):String {
+    public function getLangText(key:String):String {
         if (!_languageObj && !_fallbackObj) {
             return null;
         }
 
-        if (_cacheObj.hasOwnProperty(tree)) {
-            return _cacheObj[tree];
+        if (_cacheObj.hasOwnProperty(key)) {
+            return _cacheObj[key];
         }
 
-        var text:String = lookupText(_languageObj, tree);
+        var text:String = lookupText(_languageObj, key);
         if (!text) {
-            text = lookupText(_fallbackObj, tree);
+            text = lookupText(_fallbackObj, key);
         }
         if (!text) {
             return null;
         }
 
-        _cacheObj[tree] = text;
+        _cacheObj[key] = text;
+
         return text;
     }
 
@@ -136,14 +134,15 @@ public class MultiLangUtils {
     }
 
     /**
-     * @private 按点分路径取字符串叶节点
+     * @private 按完整键取字符串
      */
-    private function lookupText(obj:Object, tree:String):String {
-        if (!obj) {
+    private function lookupText(obj:Object, key:String):String {
+        if (!obj || !obj.hasOwnProperty(key)) {
             return null;
         }
 
-        var text:String = ClassUtils.continuousAccess(obj, tree.split(SEPARATOR));
+        var text:String = obj[key];
+
         return text || null;
     }
 

@@ -24,7 +24,7 @@ public class MusouGameRunDataVO implements IInstanceVO {
     include '../../../../../../../include/Clone.as';
 
     public function MusouGameRunDataVO() {
-        TraceLang('debug.trace.data.musou_game_run_data_vo.main');
+        TraceLang('musou_game_run_data_vo.main');
     }
 
     public var koNum:int = 0;

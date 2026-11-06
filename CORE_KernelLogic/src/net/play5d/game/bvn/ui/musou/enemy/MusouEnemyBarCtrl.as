@@ -69,7 +69,7 @@ public class MusouEnemyBarCtrl {
                     _gameLayer.removeChild(b.getUI());
                 }
                 catch (e:Error) {
-                    TraceLang('debug.trace.data.musou_enemy_bar_ctrl.remove_bar_error');
+                    TraceLang('musou_enemy_bar_ctrl.remove_bar_error');
                 }
                 b.destroy();
                 delete _barMap[f];

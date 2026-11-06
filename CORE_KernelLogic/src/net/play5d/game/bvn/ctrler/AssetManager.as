@@ -107,22 +107,22 @@ public class AssetManager {
 
             switch (loadStep) {
             case 1:
-                type = GetLang('txt.asset_manager.sound');
+                type = GetLang('loading.sound');
                 loadProgress(0);
                 loadPreLoadSounds(loadNext, loadProgress);
                 break;
             case 2:
-                type = GetLang('txt.asset_manager.effect');
+                type = GetLang('loading.effect');
                 loadProgress(0);
                 loadGraphics([_effectSwfPath], loadNext, loadProgress);
                 break;
             case 3:
-                type = GetLang('txt.asset_manager.font');
+                type = GetLang('loading.font');
                 loadProgress(0);
                 loadFonts(loadNext, loadProgress);
                 break;
             case 4:
-                type = GetLang('txt.asset_manager.bitmap');
+                type = GetLang('loading.bitmap');
                 loadProgress(0);
                 loadBitmaps(loadNext, loadProgress);
                 break;
@@ -312,7 +312,7 @@ public class AssetManager {
         }
 
         function loadErr():void {
-            TraceLang('debug.trace.data.asset_manager.load_sound_fail', {url: curUrl});
+            TraceLang('asset_manager.load_sound_fail', {url: curUrl});
             loadNext();
         }
 
@@ -403,8 +403,8 @@ public class AssetManager {
 
         function logSwfFail(url:String):void {
             // 语言页早于语言包初始化，TraceLang 会变成 [N/A][N/A]
-            if (GetLangText('debug.trace.data.asset_manager.load_swf_fail') != '[N/A]') {
-                TraceLang('debug.trace.data.asset_manager.load_swf_fail', {url: url});
+            if (GetLangText('log.debug.trace.asset_manager.load_swf_fail') != '[N/A]') {
+                TraceLang('asset_manager.load_swf_fail', {url: url});
             }
             else {
                 GameLogger.error('load', 'load SWF fail: ' + url);
@@ -458,11 +458,11 @@ public class AssetManager {
         }
 
         function bitmapFail():void {
-            TraceLang('debug.trace.data.asset_manager.load_font_bitmap_fail', {url: url});
+            TraceLang('asset_manager.load_font_bitmap_fail', {url: url});
         }
 
         function loadXMLFail():void {
-            TraceLang('debug.trace.data.asset_manager.load_font_xml_fail', {url: url});
+            TraceLang('asset_manager.load_font_xml_fail', {url: url});
         }
     }
 

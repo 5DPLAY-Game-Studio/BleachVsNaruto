@@ -82,10 +82,10 @@ public class SetBtnGroup extends Sprite {
 
     public function initKeySet():void {
         setBtnData([
-                       {label: 'SET ALL', cn: GetLang('txt.common.set_all')},
-                       {label: 'SET DEFAULT', cn: GetLang('txt.common.set_default')},
-                       {label: 'APPLY', cn: GetLang('txt.common.apply')},
-                       {label: 'CANCEL', cn: GetLang('txt.common.cancel')}
+                       {label: 'SET ALL', cn: GetLang('common.set_all')},
+                       {label: 'SET DEFAULT', cn: GetLang('common.set_default')},
+                       {label: 'APPLY', cn: GetLang('common.apply')},
+                       {label: 'CANCEL', cn: GetLang('common.cancel')}
                    ]);
     }
 
@@ -188,30 +188,30 @@ public class SetBtnGroup extends Sprite {
 
         var settingMenu:Array = GameInterface.instance.getSettingMenu();
         settingMenu ||= [
-            {txt: 'P1 KEY SET', cn: GetLang('txt.set_btn_group.p1_key_set')},
-            {txt: 'P2 KEY SET', cn: GetLang('txt.set_btn_group.p2_key_set')},
+            {txt: 'P1 KEY SET', cn: GetLang('settings.p1_keys')},
+            {txt: 'P2 KEY SET', cn: GetLang('settings.p2_keys')},
             {
-                txt      : 'COM LEVEL', cn: GetLang('txt.set_btn_group.com_level'),
+                txt      : 'COM LEVEL', cn: GetLang('settings.difficulty'),
                 options  : [
-                    {label: 'VERY EASY', cn: GetLang('txt.set_btn_group.com_level_very_easy'), value: 1},
-                    {label: 'EASY', cn: GetLang('txt.set_btn_group.com_level_easy'), value: 2},
-                    {label: 'NORMAL', cn: GetLang('txt.set_btn_group.com_level_normal'), value: 3},
-                    {label: 'HARD', cn: GetLang('txt.set_btn_group.com_level_hard'), value: 4},
-                    {label: 'VERY HARD', cn: GetLang('txt.set_btn_group.com_level_very_hard'), value: 5},
-                    {label: 'HELL', cn: GetLang('txt.set_btn_group.com_level_hell'), value: 6}
+                    {label: 'VERY EASY', cn: GetLang('settings.difficulty.very_easy'), value: 1},
+                    {label: 'EASY', cn: GetLang('settings.difficulty.easy'), value: 2},
+                    {label: 'NORMAL', cn: GetLang('settings.difficulty.normal'), value: 3},
+                    {label: 'HARD', cn: GetLang('settings.difficulty.hard'), value: 4},
+                    {label: 'VERY HARD', cn: GetLang('settings.difficulty.very_hard'), value: 5},
+                    {label: 'HELL', cn: GetLang('settings.difficulty.hell'), value: 6}
                 ],
                 optionKey: 'AI_level'
             },
             {
-                txt      : 'OPERATE MODE', cn: GetLang('txt.set_btn_group.operate_mode'),
+                txt      : 'OPERATE MODE', cn: GetLang('settings.operate_mode'),
                 options  : [
-                    {label: 'NORMAL', cn: GetLang('txt.set_btn_group.operate_normal'), value: 0},
-                    {label: 'CLASSIC', cn: GetLang('txt.set_btn_group.operate_classic'), value: 1}
+                    {label: 'NORMAL', cn: GetLang('settings.operate_normal'), value: 0},
+                    {label: 'CLASSIC', cn: GetLang('settings.operate_classic'), value: 1}
                 ],
                 optionKey: 'keyInputMode'
             },
             {
-                txt      : 'LIFE', cn: GetLang('txt.set_btn_group.life'),
+                txt      : 'LIFE', cn: GetLang('settings.life'),
                 options  : [
                     {label: '50%', cn: '50%', value: 0.5},
                     {label: '100%', cn: '100%', value: 1},
@@ -222,17 +222,17 @@ public class SetBtnGroup extends Sprite {
                 optionKey: 'fighterHP'
             },
             {
-                txt      : 'TIME', cn: GetLang('txt.set_btn_group.time'),
+                txt      : 'TIME', cn: GetLang('settings.time'),
                 options  : [
-                    {label: '30s', cn: GetLang('txt.set_btn_group.time_30'), value: 30},
-                    {label: '60s', cn: GetLang('txt.set_btn_group.time_60'), value: 60},
-                    {label: '90s', cn: GetLang('txt.set_btn_group.time_90'), value: 90},
-                    {label: '∞', cn: GetLang('txt.set_btn_group.time_unlimited'), value: -1}
+                    {label: '30s', cn: GetLang('settings.time.30'), value: 30},
+                    {label: '60s', cn: GetLang('settings.time.60'), value: 60},
+                    {label: '90s', cn: GetLang('settings.time.90'), value: 90},
+                    {label: '∞', cn: GetLang('settings.time.unlimited'), value: -1}
                 ],
                 optionKey: 'fightTime'
             },
             {
-                txt      : 'SOUND', cn: GetLang('txt.set_btn_group.sound'),
+                txt      : 'SOUND', cn: GetLang('settings.sound'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -244,7 +244,7 @@ public class SetBtnGroup extends Sprite {
                 optionKey: 'soundVolume'
             },
             {
-                txt      : 'BGM', cn: GetLang('txt.set_btn_group.bgm'),
+                txt      : 'BGM', cn: GetLang('settings.bgm'),
                 options  : [
                     {label: '0%', cn: '0%', value: 0},
                     {label: '10%', cn: '10%', value: 0.1},
@@ -256,20 +256,20 @@ public class SetBtnGroup extends Sprite {
                 optionKey: 'bgmVolume'
             },
             {
-                txt      : 'QUALITY', cn: GetLang('txt.set_btn_group.quality'),
+                txt      : 'QUALITY', cn: GetLang('settings.quality'),
                 options  : [
-                    {label: 'LOW', cn: GetLang('txt.set_btn_group.quality_low'), value: GameQuality.LOW},
-                    {label: 'MEDIUM', cn: GetLang('txt.set_btn_group.quality_medium'), value: GameQuality.MEDIUM},
-                    {label: 'HIGH', cn: GetLang('txt.set_btn_group.quality_high'), value: GameQuality.HIGH},
-                    {label: 'BEST', cn: GetLang('txt.set_btn_group.quality_best'), value: GameQuality.BEST}
+                    {label: 'LOW', cn: GetLang('settings.quality.low'), value: GameQuality.LOW},
+                    {label: 'MEDIUM', cn: GetLang('settings.quality.medium'), value: GameQuality.MEDIUM},
+                    {label: 'HIGH', cn: GetLang('settings.quality.high'), value: GameQuality.HIGH},
+                    {label: 'BEST', cn: GetLang('settings.quality.best'), value: GameQuality.BEST}
                 ],
                 optionKey: 'quality'
             },
             {
-                txt      : 'SHOW HP', cn: GetLang('txt.set_btn_group.show_hp'),
+                txt      : 'SHOW HP', cn: GetLang('settings.show_hp'),
                 options  : [
-                    {label: 'SHOW', cn: GetLang('txt.set_btn_group.hp_show'), value: true},
-                    {label: 'HIDE', cn: GetLang('txt.set_btn_group.hp_hide'), value: false},
+                    {label: 'SHOW', cn: GetLang('settings.hp_show'), value: true},
+                    {label: 'HIDE', cn: GetLang('settings.hp_hide'), value: false},
                 ],
                 optionKey: 'isShowHp'
             }
@@ -290,8 +290,8 @@ public class SetBtnGroup extends Sprite {
             }
         }
 
-        addBtn('CANCEL', GetLang('txt.common.cancel'));
-        addBtn('APPLY', GetLang('txt.common.apply'));
+        addBtn('CANCEL', GetLang('common.cancel'));
+        addBtn('APPLY', GetLang('common.apply'));
 
         this.graphics.beginFill(0, 0);
         this.graphics.drawRect(0, 0, GameConfig.GAME_SIZE.x, _btns[_btns.length - 1].y + 300);

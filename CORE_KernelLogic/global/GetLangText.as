@@ -20,26 +20,26 @@ package {
 import net.play5d.game.bvn.utils.MultiLangUtils;
 
 /**
- * 按点分树形路径从语言包取得原始文案（不替换命名占位符）。
+ * 按完整键从语言包取得原始文案（不替换命名占位符）。
  *
  * <p>文案来自 <code>config/language/{locale}.json</code>，由
  * <code>MultiLangUtils</code> 加载。当前语言缺键时静默回退
  * <code>zh-CN</code>；中文亦无则返回 <code>[N/A]</code>。
  * 需替换 <code>{name}</code> 时请用 <code>GetLang</code>。</p>
  *
- * @param tree 点分树形路径（如 <code>debug.trace.prefix</code>）。
+ * @param key 语言包完整键。
  * @return 语言包中的原始字符串；两级皆无时为 <code>[N/A]</code>。
  * @example
  * <listing version="3.0">
- * GetLangText('debug.trace.prefix');
- * GetLangText('alert.musou_ctrl.need_more_money'); // 仍含 {amount} 原文
+ * GetLangText('common.yes');
+ * GetLangText('musou.need_more_money'); // 仍含 {amount} 原文
  * </listing>
  * @see GetLang
  * @see LANGUAGE
  * @see net.play5d.game.bvn.utils.MultiLangUtils
  */
-public function GetLangText(tree:String):String {
-    var langText:String = MultiLangUtils.I.getLangText(tree);
+public function GetLangText(key:String):String {
+    var langText:String = MultiLangUtils.I.getLangText(key);
     return langText || '[N/A]';
 }
 }

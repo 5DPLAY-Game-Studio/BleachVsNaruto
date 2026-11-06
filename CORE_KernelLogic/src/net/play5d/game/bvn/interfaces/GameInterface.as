@@ -49,32 +49,32 @@ public class GameInterface {
         var a:Array = [
 
             {
-                txt: 'TEAM PLAY', cn: GetLang('txt.game_interface.team_play'), children: [
-                    {txt: 'TEAM ARCADE', cn: GetLang('txt.game_interface.team_play_arcade')},
-                    {txt: 'TEAM VS PEOPLE', cn: GetLang('txt.game_interface.team_play_vs_people')},
-                    {txt: 'TEAM VS CPU', cn: GetLang('txt.game_interface.team_play_vs_CPU')},
-                    {txt: 'TEAM WATCH', cn: GetLang('txt.game_interface.team_play_watch')}
+                txt: 'TEAM PLAY', cn: GetLang('menu.team_play'), children: [
+                    {txt: 'TEAM ARCADE', cn: GetLang('menu.team_arcade')},
+                    {txt: 'TEAM VS PEOPLE', cn: GetLang('menu.team_vs_people')},
+                    {txt: 'TEAM VS CPU', cn: GetLang('menu.team_vs_cpu')},
+                    {txt: 'TEAM WATCH', cn: GetLang('menu.team_watch')}
                 ]
             },
 
             {
-                txt: 'SINGLE PLAY', cn: GetLang('txt.game_interface.single_play'), children: [
-                    {txt: 'SINGLE ARCADE', cn: GetLang('txt.game_interface.single_play_arcade')},
-                    {txt: 'SINGLE VS PEOPLE', cn: GetLang('txt.game_interface.single_play_vs_people')},
-                    {txt: 'SINGLE VS CPU', cn: GetLang('txt.game_interface.single_play_vs_CPU')},
-                    {txt: 'SINGLE WATCH', cn: GetLang('txt.game_interface.single_play_watch')}
+                txt: 'SINGLE PLAY', cn: GetLang('menu.single_play'), children: [
+                    {txt: 'SINGLE ARCADE', cn: GetLang('menu.single_arcade')},
+                    {txt: 'SINGLE VS PEOPLE', cn: GetLang('menu.single_vs_people')},
+                    {txt: 'SINGLE VS CPU', cn: GetLang('menu.single_vs_cpu')},
+                    {txt: 'SINGLE WATCH', cn: GetLang('menu.single_watch')}
                 ]
             },
 
             {
-                txt: 'MUSOU PLAY', cn: GetLang('txt.game_interface.musou_play'), children: [
-                    {txt: 'MUSOU ARCADE', cn: GetLang('txt.game_interface.musou_arcade')}
+                txt: 'MUSOU PLAY', cn: GetLang('menu.musou_play'), children: [
+                    {txt: 'MUSOU ARCADE', cn: GetLang('menu.musou_arcade')}
                 ]
             },
 
-            {txt: 'OPTION', cn: GetLang('txt.game_interface.option')},
-            {txt: 'TRAINING', cn: GetLang('txt.game_interface.training')},
-            {txt: 'CREDITS', cn: GetLang('txt.game_interface.credits')},
+            {txt: 'OPTION', cn: GetLang('menu.option')},
+            {txt: 'TRAINING', cn: GetLang('menu.training')},
+            {txt: 'CREDITS', cn: GetLang('menu.credits')},
         ];
         return a;
     }

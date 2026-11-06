@@ -155,8 +155,8 @@ public class LANClientCtrl implements ILanClientLockLink {
     private function onSyncFatalError():void {
         gameEnd();
         GameUI.alert(
-                GetLang('alert.lan_client_ctrl.disconnect_title'),
-                GetLang('alert.lan_client_ctrl.disconnect_error')
+                GetLang('lan.disconnect.title'),
+                GetLang('lan.disconnect_error')
         );
     }
 
@@ -247,8 +247,8 @@ public class LANClientCtrl implements ILanClientLockLink {
             if (active) {
                 gameEnd();
                 GameUI.alert(
-                        GetLang('alert.lan_client_ctrl.disconnect_title'),
-                        GetLang('alert.lan_client_ctrl.disconnect_host')
+                        GetLang('lan.disconnect.title'),
+                        GetLang('lan.disconnect_host')
                 );
             }
             else {

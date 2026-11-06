@@ -57,7 +57,7 @@ public class MusouMissionVO implements IInstanceVO {
         }
 
         if (!map || time < 1) {
-            throw new Error(GetLang('debug.error.data.musou_mission_vo.init_musou_stage_fail'));
+            throw new Error(GetLang('log.error.musou.musou_mission_vo.init_musou_stage_fail'));
         }
 
         var wvs:Array = o.waves;

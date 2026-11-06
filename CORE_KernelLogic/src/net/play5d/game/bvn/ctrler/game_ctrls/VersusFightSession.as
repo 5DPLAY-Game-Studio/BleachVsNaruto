@@ -140,7 +140,7 @@ public class VersusFightSession implements IFightSession {
 
         var map:MapMain = GameRunFactory.createMapByData(runData.map);
         if (!p1 || !p2 || !map) {
-            ThrowError(Error, GetLang('debug.error.data.game_ctrl.build_game_fail'));
+            ThrowError(Error, GetLang('log.error.fight.game_ctrl.build_game_fail'));
             return;
         }
 
@@ -181,24 +181,24 @@ public class VersusFightSession implements IFightSession {
         if (GameMode.isArcade()) {
             if (TeamID.TEAM_1 == runData.lastWinnerTeam.id) {
                 if (MissionModel.I.missionAllComplete()) {
-                    TraceLang('debug.trace.data.game_ctrl.cleared');
+                    TraceLang('game_ctrl.cleared');
                     MainGame.I.goCongratulations();
                 }
                 else {
-                    TraceLang('debug.trace.data.game_ctrl.next');
+                    TraceLang('game_ctrl.next');
                     GameData.I.winnerId = runData.p1FighterGroup.currentFighter.data.id;
                     MainGame.I.goWinner();
                 }
             }
             else {
-                TraceLang('debug.trace.data.game_ctrl.continue');
+                TraceLang('game_ctrl.continue');
                 runData.continueLoser = runData.p1FighterGroup.currentFighter;
                 MainGame.I.goContinue();
             }
         }
 
         if (GameMode.isVsCPU() || GameMode.isVsPeople()) {
-            TraceLang('debug.trace.data.game_ctrl.back_select');
+            TraceLang('game_ctrl.back_select');
             GameEvent.dispatchEvent(GameEvent.GAME_END);
             MainGame.I.goSelect();
         }

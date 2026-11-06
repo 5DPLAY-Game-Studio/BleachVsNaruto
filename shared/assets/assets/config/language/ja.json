@@ -1,11 +1,3 @@
 {
-  "stage": {
-    "menu": {
-      "option": {
-        "txt": "ゲーム設定"
-      }
-    }
-  },
-
-  "data" : {}
+  "menu.option": "ゲーム設定"
 }

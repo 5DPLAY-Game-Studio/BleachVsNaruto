@@ -158,7 +158,7 @@ public class SelectFighterStage implements IStage {
     }
 
     public function goLoadGame():void {
-        TraceLang('debug.trace.data.select_fighter_stage.start_game');
+        TraceLang('select_fighter_stage.start_game');
         StateCtrl.I.transIn(MainGame.I.loadGame);
     }
 
@@ -215,7 +215,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function initFighter():void {
-        TraceLang('debug.trace.data.select_fighter_stage.init_fighter');
+        TraceLang('select_fighter_stage.init_fighter');
         clear();
         _listCtrl.selectState = SelectFighterListCtrl.SELECT_STATE_FIGHTER;
         _listCtrl.buildList(_config.charList);
@@ -233,7 +233,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function initAssist():void {
-        TraceLang('debug.trace.data.select_fighter_stage.init_assist');
+        TraceLang('select_fighter_stage.init_assist');
         clear();
         _listCtrl.selectState = SelectFighterListCtrl.SELECT_STATE_ASSIST;
         _listCtrl.buildList(_config.assistList);
@@ -464,7 +464,7 @@ public class SelectFighterStage implements IStage {
     }
 
     private function initMap():void {
-        TraceLang('debug.trace.data.select_fighter_stage.select_map');
+        TraceLang('select_fighter_stage.select_map');
 
         GameEvent.dispatchEvent(GameEvent.SELECT_MAP);
 

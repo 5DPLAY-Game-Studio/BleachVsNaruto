@@ -19,24 +19,24 @@
 package {
 
 /**
- * 按点分树形路径取当前语言文案，并用命名占位符格式化。
+ * 按完整键取当前语言文案，并用命名占位符格式化。
  *
- * <p>等价于 <code>Format(GetLangText(tree), params)</code>。</p>
+ * <p>等价于 <code>Format(GetLangText(key), params)</code>。键与语言包扁平键一致。</p>
  *
- * @param tree 点分树形路径（如 <code>alert.musou_ctrl.need_more_money</code>）。
+ * @param key 语言包完整键，如 <code>musou.need_more_money</code>。
  * @param params 占位符名到替换值的映射；可为 <code>null</code>。
  * @return 格式化后的当前语言文本。
  * @throws ArgumentError 由 <code>Format</code> 在缺键时抛出。
  * @example
  * <listing version="3.0">
- * GetLang('debug.trace.prefix');
- * GetLang('alert.musou_ctrl.need_more_money', {amount: 100});
+ * GetLang('common.yes');
+ * GetLang('musou.need_more_money', {amount: 100});
  * </listing>
  * @see GetLangText
  * @see Format
  * @see LANGUAGE
  */
-public function GetLang(tree:String, params:Object = null):String {
-    return Format(GetLangText(tree), params);
+public function GetLang(key:String, params:Object = null):String {
+    return Format(GetLangText(key), params);
 }
 }

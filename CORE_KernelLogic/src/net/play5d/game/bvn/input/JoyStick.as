@@ -55,7 +55,7 @@ public class JoyStick {
         GameLogger.debug('input', 'JoyStick.initialize');
 
         if (!GameInput.isSupported) {
-            TraceLang('debug.trace.data.joy_stick.platform_unsupported');
+            TraceLang('joy_stick.platform_unsupported');
             return;
         }
 

@@ -55,7 +55,7 @@ public class EmbedSwfAssetUtil {
     public function initialize(back:Function = null):void {
 
         if (_initing) {
-            throw new Error(GetLang('debug.error.data.embed_swf_asset_util.init_in_progress'));
+            throw new Error(GetLang('log.error.load.embed_swf_asset_util.init_in_progress'));
         }
 
         if (_inited) {
@@ -122,7 +122,7 @@ public class EmbedSwfAssetUtil {
     public function getItemClass(itemName:String):Class {
 
         if (!_swfPool) {
-            throw new Error(GetLang('debug.error.data.embed_swf_asset_util.not_initialized'));
+            throw new Error(GetLang('log.error.load.embed_swf_asset_util.not_initialized'));
         }
 
         var ui:Class     = getUiClass();

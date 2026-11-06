@@ -122,16 +122,16 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
     private function initKeyMapping():void {
         var kmc:MovieClip = ui.keysmc;
         var keys:Array    = [
-            {id: 'up', name: 'UP', cn: GetLang('txt.set_ctrl_btn_ui.key_up')},
-            {id: 'down', name: 'DOWN', cn: GetLang('txt.set_ctrl_btn_ui.key_down')},
-            {id: 'left', name: 'LEFT', cn: GetLang('txt.set_ctrl_btn_ui.key_left')},
-            {id: 'right', name: 'RIGHT', cn: GetLang('txt.set_ctrl_btn_ui.key_right')},
-            {id: 'attack', name: 'ATTACK', cn: GetLang('txt.set_ctrl_btn_ui.key_attack')},
-            {id: 'jump', name: 'JUMP', cn: GetLang('txt.set_ctrl_btn_ui.key_jump')},
-            {id: 'dash', name: 'DASH', cn: GetLang('txt.set_ctrl_btn_ui.key_dash')},
-            {id: 'skill', name: 'SKILL', cn: GetLang('txt.set_ctrl_btn_ui.key_skill')},
-            {id: 'superKill', name: 'SUPER SKILL', cn: GetLang('txt.set_ctrl_btn_ui.key_super_kill')},
-            {id: 'jiaohue', name: 'SPECIAL', cn: GetLang('txt.set_ctrl_btn_ui.key_special')}
+            {id: 'up', name: 'UP', cn: GetLang('settings.pad.key_up')},
+            {id: 'down', name: 'DOWN', cn: GetLang('settings.pad.key_down')},
+            {id: 'left', name: 'LEFT', cn: GetLang('settings.pad.key_left')},
+            {id: 'right', name: 'RIGHT', cn: GetLang('settings.pad.key_right')},
+            {id: 'attack', name: 'ATTACK', cn: GetLang('settings.pad.key_attack')},
+            {id: 'jump', name: 'JUMP', cn: GetLang('settings.pad.key_jump')},
+            {id: 'dash', name: 'DASH', cn: GetLang('settings.pad.key_dash')},
+            {id: 'skill', name: 'SKILL', cn: GetLang('settings.pad.key_skill')},
+            {id: 'superKill', name: 'SUPER SKILL', cn: GetLang('settings.pad.key_super_skill')},
+            {id: 'jiaohue', name: 'SPECIAL', cn: GetLang('settings.pad.key_special')}
         ];
 
         _keyMappings = [];
@@ -141,7 +141,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
             var kui:Sprite = kmc.getChildByName('k' + i) as Sprite;
             var o:Object   = keys[i];
             if (!kui) {
-                TraceLang('debug.trace.data.set_ctrl_btn_ui.key_mc_missing', {index: i});
+                TraceLang('set_ctrl_btn_ui.key_mc_missing', {index: i});
                 continue;
             }
             var km:KeyMapping = new KeyMapping(kui, o.id, o.name, o.cn);

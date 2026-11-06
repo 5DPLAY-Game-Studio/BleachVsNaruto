@@ -114,8 +114,8 @@ public class ConfirmUI extends BaseDialog {
         _btnGroup.direct = 0;
         _btnGroup.gap    = 200;
         _btnGroup.setBtnData([
-                                 {label: 'YES', cn: GetLang('txt.common.yes')},
-                                 {label: 'NO', cn: GetLang('txt.common.no')}
+                                 {label: 'YES', cn: GetLang('common.yes')},
+                                 {label: 'NO', cn: GetLang('common.no')}
                              ], 1);
         _btnGroup.addEventListener(SetBtnEvent.SELECT, selectHandler);
         _btnGroup.x = (

@@ -54,7 +54,7 @@ public class FighterApiVersion {
      * @throws Error 声明了值，但不是不小于 <code>1</code> 的整数。
      * @example
      * <listing version="3.0">
-     * FighterApiVersion.read(mainMc, 'debug.error.data.fighter_api_factory.unknown_version');
+     * FighterApiVersion.read(mainMc, 'log.error.fight.fighter_api_factory.unknown_version');
      * </listing>
      */
     public static function read(mainMc:MovieClip, unknownKey:String):int {
@@ -80,7 +80,7 @@ public class FighterApiVersion {
      * @throws Error <code>api/vN</code> 中没有这个类。
      * @example
      * <listing version="3.0">
-     * var cls:Class = FighterApiVersion.find(1, 'FighterApi', 'debug.error.data.fighter_api_factory.unknown_version');
+     * var cls:Class = FighterApiVersion.find(1, 'FighterApi', 'log.error.fight.fighter_api_factory.unknown_version');
      * </listing>
      */
     public static function find(version:int, name:String, unknownKey:String):Class {

@@ -129,7 +129,7 @@ public class MusouCtrl {
         var map:MapMain    = GameRunFactory.createMapByData(GameCtrl.I.gameRunData.map);
 
         if (!p1 || !map) {
-            ThrowError(Error, GetLang('debug.error.data.musou_ctrl.build_game_fail'));
+            ThrowError(Error, GetLang('log.error.musou.musou_ctrl.build_game_fail'));
             return;
         }
 
@@ -268,7 +268,7 @@ public class MusouCtrl {
     }
 
     public function onSelfDie(f:FighterMain):void {
-        TraceLang('debug.trace.data.musou_ctrl.self_die');
+        TraceLang('musou_ctrl.self_die');
         GameCtrl.I.actionEnable = false;
 
         EffectCtrl.I.doEffectById('hit_end', f.x, f.y);
@@ -284,7 +284,7 @@ public class MusouCtrl {
         GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         GameUI.I.showMusouLose(function ():void {
-            TraceLang('debug.trace.data.musou_ctrl.self_die_complete');
+            TraceLang('musou_ctrl.self_die_complete');
             backToWorldMap();
         });
     }
@@ -306,7 +306,7 @@ public class MusouCtrl {
         to.fzqi   = to.fzqiMax;
         to.direct = from.direct;
 
-        TraceLang('debug.trace.data.musou_ctrl.show_fzqi', {fzqi: to.fzqi, fzqiMax: to.fzqiMax});
+        TraceLang('musou_ctrl.show_fzqi', {fzqi: to.fzqi, fzqiMax: to.fzqiMax});
 
         if (to.initialized()) {
             GameCtrl.I.addGameSprite(to.team.id, to);
@@ -382,7 +382,7 @@ public class MusouCtrl {
     }
 
     public function onBossDie(f:FighterMain):void {
-        TraceLang('debug.trace.data.musou_ctrl.boss_die');
+        TraceLang('musou_ctrl.boss_die');
         KoPresentCtrl.focus(f);
         KoPresentCtrl.hold();
         KoPresentCtrl.slow(2, 5000);
@@ -518,11 +518,11 @@ public class MusouCtrl {
 
     private function nextWave():void {
         if (_runningWaves.length < 1) {
-            TraceLang('debug.trace.data.musou_ctrl.wave_end');
+            TraceLang('musou_ctrl.wave_end');
             return;
         }
 
-        TraceLang('debug.trace.data.musou_ctrl.wave_next');
+        TraceLang('musou_ctrl.wave_next');
 
         var wave:MusouWaveVO = _runningWaves.shift();
         _runningWave         = wave;
@@ -567,13 +567,13 @@ public class MusouCtrl {
     }
 
     private function onTimeOver():void {
-        TraceLang('debug.trace.data.musou_ctrl.time_over');
+        TraceLang('musou_ctrl.time_over');
         GameCtrl.I.actionEnable = false;
 
         GameEvent.dispatchEvent(GameEvent.MUSOU_MISSION_FINISH);
 
         GameUI.I.showMusouLose(function ():void {
-            TraceLang('debug.trace.data.musou_ctrl.time_over_complete');
+            TraceLang('musou_ctrl.time_over_complete');
             backToWorldMap();
         });
     }
@@ -587,7 +587,7 @@ public class MusouCtrl {
         _missionComplete = true;
         _runningWave     = null;
 
-        TraceLang('debug.trace.data.musou_ctrl.mission_complete');
+        TraceLang('musou_ctrl.mission_complete');
 
         SoundCtrl.I.BGM(AssetManager.I.getSound('win'), false);
 
@@ -596,7 +596,7 @@ public class MusouCtrl {
         GameCtrl.I.actionEnable = false;
         KoPresentCtrl.focus(GameCtrl.I.gameRunData.p1FighterGroup.currentFighter);
         GameUI.I.showMusouWin(function ():void {
-            TraceLang('debug.trace.data.musou_ctrl.mission_complete_complete');
+            TraceLang('musou_ctrl.mission_complete_complete');
 
             MusouLogic.I.passMission(_mission);
             backToWorldMap();

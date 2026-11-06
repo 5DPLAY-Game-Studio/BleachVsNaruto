@@ -133,7 +133,7 @@ public class UDPSocket implements IUdpTransport {
             send(_broadCastAddress, port, msg);
         }
         else {
-            TraceLang('debug.trace.data.udp_socket.broadcast_fail');
+            TraceLang('udp_socket.broadcast_fail');
         }
     }
 
