@@ -68,7 +68,7 @@ public class SelectFighterStage implements IStage {
     private var _p1SelectedGroup:SelectedFighterGroup;
     private var _p2SelectedGroup:SelectedFighterGroup;
     private var _mapSelectUI:SelectMapUI;
-    private var _curStep:int = 0;
+    private var _curStep:int   = 0;
     private var _tweenTime:int = 500;
     private var _twoPlayerSelectFin:Boolean;  //解决两玩家同时选人
     private var _modeFlow:ISelectModeFlow;

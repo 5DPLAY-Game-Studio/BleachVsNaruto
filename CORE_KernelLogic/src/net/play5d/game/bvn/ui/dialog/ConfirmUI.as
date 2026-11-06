@@ -77,10 +77,10 @@ public class ConfirmUI extends BaseDialog {
                       ) / 2;
 
         if (_old_cnTxt) {
-            _old_cnTxt.text = cn ? cn : "";
+            _old_cnTxt.text = cn ? cn : '';
         }
         if (_cnTxt) {
-            _cnTxt.text = cn ? cn : "";
+            _cnTxt.text = cn ? cn : '';
         }
     }
 

@@ -97,7 +97,7 @@ public class FighterCameraCtrler extends GameCameraCtrler {
             focusTarget = fighter.getCurrentTarget() as FighterMain;
         }
         else if (_target is Assister) {
-            var assister:Assister = _target as Assister;
+            var assister:Assister         = _target as Assister;
             var assisterOwner:FighterMain = assister.getOwner() as FighterMain;
             focusTarget = assisterOwner.getCurrentTarget() as FighterMain;
         }

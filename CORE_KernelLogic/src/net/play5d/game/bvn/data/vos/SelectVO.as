@@ -24,7 +24,7 @@ public class SelectVO implements IInstanceVO {
     include '../../../../../../../include/Clone.as';
 
 
-//		选中的人物ID
+//      选中的人物ID
     public var fighter1:String;
     public var fighter2:String;
     public var fighter3:String;
@@ -49,8 +49,8 @@ public class SelectVO implements IInstanceVO {
     }
 
     public function toString():String {
-        return "SelectVO{fighter1=" + String(fighter1) + ",fighter2=" + String(fighter2) + ",fighter3=" +
-               String(fighter3) + ",fuzhu=" + String(fuzhu) + "}";
+        return 'SelectVO{fighter1=' + String(fighter1) + ',fighter2=' + String(fighter2) + ',fighter3=' +
+               String(fighter3) + ',fuzhu=' + String(fuzhu) + '}';
     }
 
 }

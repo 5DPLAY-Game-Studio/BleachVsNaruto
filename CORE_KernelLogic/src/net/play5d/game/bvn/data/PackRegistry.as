@@ -232,7 +232,7 @@ public class PackRegistry {
                 }
             }
 
-            var variantId:String = v['id'] != null ? String(v['id']) : null;
+            var variantId:String  = v['id'] != null ? String(v['id']) : null;
             // language.{locale}.name/says[id] → 兼容旧形态
             var localePack:Object = PackLangUtil.pickLocalePack(meta['language'] as Object);
             var nameRaw:*         = lookupRootI18n(localePack ? localePack['name'] : null, variantId);

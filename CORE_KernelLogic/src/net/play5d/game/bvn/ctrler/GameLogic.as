@@ -48,7 +48,7 @@ public class GameLogic {
     private static var _map:MapMain;
     private static var _camera:GameCamera;
     private static var _floorContact:Dictionary = new Dictionary();
-    private static var _hitsObj:Object = {};
+    private static var _hitsObj:Object          = {};
 
     public static function initGameLogic(map:MapMain, camera:GameCamera):void {
         _map    = map;
@@ -282,8 +282,8 @@ public class GameLogic {
      */
     public static function fixGameSpritePosition(sp:IGameSprite):void {
         if (!sp.allowCrossMapXY()) {
-            var left:Number = _map.left + GameConfig.X_SIDE_OFFSET;
-            var right:Number = _map.right - GameConfig.X_SIDE_OFFSET;
+            var left:Number    = _map.left + GameConfig.X_SIDE_OFFSET;
+            var right:Number   = _map.right - GameConfig.X_SIDE_OFFSET;
             var offsetX:Number = GameConfig.X_SIDE_OFFSET;
 
             var camzoom:Number    = _camera.getZoom();

@@ -34,10 +34,10 @@ public class ShineEffectView extends Bitmap {
 
     }
     public var onRemove:Function;
-    public var isActive:Boolean = true;
+    public var isActive:Boolean   = true;
     private var _loseAlpha:Number = 1;
     private var _alpha:int;
-    private var _renderGap:int = 0;
+    private var _renderGap:int    = 0;
     private var _renderFrame:int;
     private var _isDestroyed:Boolean;
     private var _startTimer:int;

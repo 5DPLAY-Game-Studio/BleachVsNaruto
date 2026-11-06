@@ -85,8 +85,8 @@ public class MusouMissionVO implements IInstanceVO {
     public function getAllEnemyIds():Array {
         var result:Array = [];
         for (var i:int; i < waves.length; i++) {
-            var w:MusouWaveVO   = waves[i];
-            var enemyIds:Array  = w.getAllEnemyIds();
+            var w:MusouWaveVO  = waves[i];
+            var enemyIds:Array = w.getAllEnemyIds();
             if (enemyIds) {
                 for each(var e:String in enemyIds) {
                     if (result.indexOf(e) == -1) {

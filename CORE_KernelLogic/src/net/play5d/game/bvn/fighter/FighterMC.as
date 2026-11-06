@@ -45,23 +45,23 @@ public class FighterMC {
     private var _curMainFrameCount:int; //当前主动画已执行的帧数
     private var _curFrameCount:int; //当前动画已执行的帧数
     private var _mc:MovieClip; //movieclip元件
-    private var _undefinedFrames:Array = []; //不存在的帧名称缓冲池
-    private var _hurtFlyFrame:int = 0; //击飞中空中的帧数
+    private var _undefinedFrames:Array      = []; //不存在的帧名称缓冲池
+    private var _hurtFlyFrame:int           = 0; //击飞中空中的帧数
     private var _hurtDownFrame:int; //倒地的时间
 
-    private var _hurtFlyType:int = FighterHurtFlyType.NO_HURT_FLY;
-    private var _hurtYMin:Number = 0;
+    private var _hurtFlyType:int                  = FighterHurtFlyType.NO_HURT_FLY;
+    private var _hurtYMin:Number                  = 0;
     private var _isHeavyDownAttack:Boolean;
-    private var _bodyAreaCache:McAreaCacher     = new McAreaCacher('body');
-    private var _hitAreaCache:McAreaCacher      = new McAreaCacher('hit');
-    private var _hitCheckAreaCache:McAreaCacher = new McAreaCacher('hit_check');
+    private var _bodyAreaCache:McAreaCacher       = new McAreaCacher('body');
+    private var _hitAreaCache:McAreaCacher        = new McAreaCacher('hit');
+    private var _hitCheckAreaCache:McAreaCacher   = new McAreaCacher('hit_check');
     private var _hitRangeInited:Boolean;
     private var _hitRangeObj:Object;
-    private var _goFrameDelay:Object = null;
-    private var _hitx:Number = 0;
-    private var _hity:Number = 0;
-    private var _childAnimFrame:int      = -1;
-    private var _childAnimChildCount:int = -1;
+    private var _goFrameDelay:Object              = null;
+    private var _hitx:Number                      = 0;
+    private var _hity:Number                      = 0;
+    private var _childAnimFrame:int               = -1;
+    private var _childAnimChildCount:int          = -1;
     private var _childAnimList:Vector.<MovieClip> = new Vector.<MovieClip>();
     private var _childAnimTotals:Vector.<int>     = new Vector.<int>();
 
@@ -115,9 +115,9 @@ public class FighterMC {
             return '';
         }
         ensureChildAnimCache();
-        var key:String                   = String(_mc.currentFrame);
-        var list:Vector.<MovieClip>      = _childAnimList;
-        var n:int                        = list.length;
+        var key:String              = String(_mc.currentFrame);
+        var list:Vector.<MovieClip> = _childAnimList;
+        var n:int                   = list.length;
         for (var i:int = 0; i < n; i++) {
             key += '_' + list[i].currentFrame;
         }

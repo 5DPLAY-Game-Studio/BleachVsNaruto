@@ -55,9 +55,9 @@ public class FighterMcHurtCtrl {
     private var _rt:FighterMcRuntime;
 
     /** @private 被打延时 */
-    private var _hurtHoldFrame:int = 0;
+    private var _hurtHoldFrame:int     = 0;
     /** @private 防御延时 */
-    private var _defenseHoldFrame:int = 0;
+    private var _defenseHoldFrame:int  = 0;
     /** @private 受攻击间隔(帧) */
     private var _beHitGap:int;
     /** @private 是否正在防御 */
@@ -286,8 +286,7 @@ public class FighterMcHurtCtrl {
         }
         else if (_isDefense &&
                  !(hitVO.isBreakDef && hitVO.hitType == HitType.CATCH) &&
-                 !(hitVO.checkDirect && hitVO.owner && checkDefDirect(hitVO.owner)))
-        {
+                 !(hitVO.checkDirect && hitVO.owner && checkDefDirect(hitVO.owner))) {
             doDefenseHit(hitVO, hitRect);
         }
         else {

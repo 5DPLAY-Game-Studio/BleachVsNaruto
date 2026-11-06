@@ -31,10 +31,10 @@ public class TouchMoveEvent extends Event {
     public var deltaX:Number;
     public var deltaY:Number;
     public var delta:Number;
-    public var startX:Number = 0;
-    public var startY:Number = 0;
-    public var endX:Number = 0;
-    public var endY:Number = 0;
+    public var startX:Number    = 0;
+    public var startY:Number    = 0;
+    public var endX:Number      = 0;
+    public var endY:Number      = 0;
     public var distanceX:Number = 0; // 从触摸开始到结束的X距离
     public var distanceY:Number = 0; // 从触摸开始到结束的Y距离
 }

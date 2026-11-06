@@ -47,13 +47,13 @@ public class SetBtnGroup extends Sprite {
             TouchUtils.I.listenOneFinger(this, touchMoveHandler, false, true);
         }
     }
-    public var keyEnable:Boolean = true;
-    public var startX:Number = 100;
+    public var keyEnable:Boolean    = true;
+    public var startX:Number        = 100;
     // 按钮选项组的开始 Y 坐标
-    public var startY:Number = 50;
+    public var startY:Number        = 50;
     // 按钮选项组的结束 Y 坐标
-    public var endY:Number   = 0; //scroll时使用
-    public var gap:Number    = 75;
+    public var endY:Number          = 0; //scroll时使用
+    public var gap:Number           = 75;
     /**
      * 排列方向： 0=横向，1=纵向
      */
@@ -61,7 +61,7 @@ public class SetBtnGroup extends Sprite {
     public var gameInputType:String = GameInputType.MENU;
     private var _btns:Vector.<SetBtn>;
     private var _arrow:$common$MC_sltArrow;
-    private var _arrowIndex:int = -1;
+    private var _arrowIndex:int     = -1;
 
     private var _scrollRect:Rectangle;
 

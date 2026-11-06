@@ -37,7 +37,7 @@ public class FighterVO implements IInstanceVO {
     public var contactEnemies:Array;
     public var says:Array;
     public var bgm:String;
-    public var bgmRate:Number = 1;
+    public var bgmRate:Number     = 1;
     // 是否值得注意
     public var hasWarning:Boolean = false;
 

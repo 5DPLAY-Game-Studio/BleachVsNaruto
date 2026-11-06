@@ -63,7 +63,7 @@ public class SelectedFighterUI extends EventDispatcher {
         }
     }
     public var ui:Sprite;
-    public var trueY:Number = 0;
+    public var trueY:Number       = 0;
     private var _fighterIndex:int = -1;
     private var _face:DisplayObject;
     private var _fighter:FighterVO;
@@ -114,8 +114,8 @@ public class SelectedFighterUI extends EventDispatcher {
             _text.text = vo.name;
         }
 
-        var ctm:$select$SP_ct  = ui.getChildByName('ct') as $select$SP_ct;
-        var ct:Sprite = ctm ? ctm.getChildByName('ct') as Sprite : null;
+        var ctm:$select$SP_ct = ui.getChildByName('ct') as $select$SP_ct;
+        var ct:Sprite         = ctm ? ctm.getChildByName('ct') as Sprite : null;
         if (ct) {
 
             if (_face) {

@@ -100,10 +100,10 @@ public class GameEvent extends Event {
 
     ////////////////////////////////////////////////////////////////////////////////////
 
-    public static const UI_CONFRIM:String       = 'UI_CONFRIM';
-    public static const UI_CONFRIM_CLOSE:String = 'UI_CONFRIM_CLOSE';
-    public static const UI_ALERT:String         = 'UI_ALERT';
-    public static const UI_ALERT_CLOSE:String   = 'UI_ALERT_CLOSE';
+    public static const UI_CONFRIM:String          = 'UI_CONFRIM';
+    public static const UI_CONFRIM_CLOSE:String    = 'UI_CONFRIM_CLOSE';
+    public static const UI_ALERT:String            = 'UI_ALERT';
+    public static const UI_ALERT_CLOSE:String      = 'UI_ALERT_CLOSE';
     private static var _dispatcher:EventDispatcher = new EventDispatcher();
 
     public static function dispatchEvent(type:String, param:* = null, bubbles:Boolean = false,

@@ -55,34 +55,34 @@ import net.play5d.kyo.display.bitmap.BitmapFontText;
 public class TrainingInputHistoryUI extends Sprite {
 
     /** @private 最新输入基准 Y（贴近辅助头像上方）。 */
-    private static const BASE_Y:Number                       = 490;
+    private static const BASE_Y:Number               = 490;
     /**
      * @private 最旧项消失上限 Y（贴近连击数字 / hits）。
      * <p>继续上移会越过此线并淡出，不进入主头像区域。</p>
      */
-    private static const TOP_Y:Number                        = 150;
+    private static const TOP_Y:Number                = 150;
     /** @private 行距 */
-    private static const LINE_GAP:Number                     = 34;
+    private static const LINE_GAP:Number             = 34;
     /** @private 相对高度可容纳层数再减 1 */
-    private static const MAX_LAYERS_CUT:int                  = 1;
+    private static const MAX_LAYERS_CUT:int          = 1;
     /** @private 可见行数上限（由 BASE/TOP/行距预计算） */
-    private static const MAX_ITEMS:int                       = int((BASE_Y - TOP_Y) / LINE_GAP) - MAX_LAYERS_CUT + 1;
+    private static const MAX_ITEMS:int               = int((BASE_Y - TOP_Y) / LINE_GAP) - MAX_LAYERS_CUT + 1;
     /** @private 位图字缩放 */
-    private static const TEXT_SCALE:Number                   = 0.7;
+    private static const TEXT_SCALE:Number           = 0.7;
     /** @private 上移动画时长（秒） */
-    private static const MOVE_TIME:Number                    = 0.12;
+    private static const MOVE_TIME:Number            = 0.12;
     /** @private 淡出时长（秒） */
-    private static const FADE_TIME:Number                    = 0.5;
+    private static const FADE_TIME:Number            = 0.5;
     /** @private 站立待机后延迟清空（秒） */
-    private static const IDLE_HOLD_SEC:Number                = 1;
+    private static const IDLE_HOLD_SEC:Number        = 1;
     /** @private 连段衔接符 */
-    private static const COMBO_SEP:String                    = '-';
+    private static const COMBO_SEP:String            = '-';
     /** @private 普通攻击帧前缀（砍） */
-    private static const ATTACK_CHAR:String                  = FighterSpecialFrame.ATTACK.charAt(0);
+    private static const ATTACK_CHAR:String          = FighterSpecialFrame.ATTACK.charAt(0);
     /** @private 砍技前缀（砍技），用于排除普通连段误判 */
-    private static const SKILL_PREFIX:String                 = FighterSpecialFrame.SKILL_1.substr(0, 2);
+    private static const SKILL_PREFIX:String         = FighterSpecialFrame.SKILL_1.substr(0, 2);
     /** @private 菜单选中同款红色 ColorTransform */
-    private static const HIGHLIGHT_CT:ColorTransform         = new ColorTransform(1, 1, 1, 1, 50, -30, -30, 0);
+    private static const HIGHLIGHT_CT:ColorTransform = new ColorTransform(1, 1, 1, 1, 50, -30, -30, 0);
 
     /**
      * @private 帧标签 → 输入串（键/值均来自 CORE_Shared）。

@@ -37,7 +37,7 @@ import net.play5d.game.bvn.interfaces.GameInterface;
 
 public class GameData {
 
-    private const SAVE_ID:String = 'bvn3.5A';
+    private const SAVE_ID:String               = 'bvn3.5A';
     // 是否启动无双模式的数据保存
     private const __MUSOU_DATA_ENABLED:Boolean = true;
     private static var _i:GameData;
@@ -52,7 +52,7 @@ public class GameData {
     public var p1Select:SelectVO;
     public var p2Select:SelectVO;
     public var selectMap:String;
-    public var score:int = 0;
+    public var score:int                 = 0;
     public var winnerId:String;
 
     public var isFirstRun:Boolean = true;

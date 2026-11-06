@@ -85,7 +85,7 @@ public class MissionModel {
         GameData.I.p2Select.fighter2 = null;
         GameData.I.p2Select.fighter3 = null;
 
-        var fighters:Array = _curStage.getFighters();
+        var fighters:Array  = _curStage.getFighters();
         var fightersLen:int = fighters.length;
         for (var i:int = 0; i < fightersLen; i++) {
             GameData.I.p2Select['fighter' + (i + 1)] = fighters[i];

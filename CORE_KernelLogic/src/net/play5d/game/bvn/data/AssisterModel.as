@@ -55,7 +55,7 @@ public class AssisterModel {
         _assisterObj = {};
 
         var pathObj:Object = obj['fighter']['path'];
-        var dataArr:Array = obj['fighter']['data'];
+        var dataArr:Array  = obj['fighter']['data'];
         for each (var data:Object in dataArr) {
             var newData:Object = {
                 path: pathObj,

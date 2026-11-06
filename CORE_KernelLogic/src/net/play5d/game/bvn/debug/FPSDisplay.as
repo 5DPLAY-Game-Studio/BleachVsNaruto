@@ -43,32 +43,32 @@ import flash.utils.getTimer;
  */
 public class FPSDisplay {
     /** @private EMA 平滑系数 */
-    private static const EMA_ALPHA:Number = 0.15;
+    private static const EMA_ALPHA:Number  = 0.15;
     /** @private 1 - EMA_ALPHA，避免每帧重复计算 */
-    private static const EMA_KEEP:Number = 1 - EMA_ALPHA;
+    private static const EMA_KEEP:Number   = 1 - EMA_ALPHA;
     /** @private 采样窗口（毫秒） */
-    private static const SAMPLE_MS:int = 100;
+    private static const SAMPLE_MS:int     = 100;
     /** @private 异常停顿阈值（毫秒），超出则重置采样 */
-    private static const MAX_DELTA_MS:int = 500;
+    private static const MAX_DELTA_MS:int  = 500;
     /** @private 良好：实际/目标 ≥ 此值 → 绿 */
     private static const GOOD_RATIO:Number = 0.95;
     /** @private 警告：实际/目标 ≥ 此值 → 黄，否则红 */
     private static const WARN_RATIO:Number = 0.85;
     /** @private */
-    private static const COLOR_GOOD:uint = 0x44FF44;
+    private static const COLOR_GOOD:uint   = 0x44FF44;
     /** @private */
-    private static const COLOR_WARN:uint = 0xFFFF00;
+    private static const COLOR_WARN:uint   = 0xFFFF00;
     /** @private */
-    private static const COLOR_BAD:uint = 0xFF4444;
+    private static const COLOR_BAD:uint    = 0xFF4444;
     /** @private */
-    private static const POS_X:Number = 4;
+    private static const POS_X:Number      = 4;
     /** @private */
-    private static const POS_Y:Number = 4;
+    private static const POS_Y:Number      = 4;
     /** @private */
-    private static const FONT_SIZE:int = 10;
+    private static const FONT_SIZE:int     = 10;
 
     /** @private 复用描边，避免 show 时重复分配 */
-    private static const GLOW:GlowFilter = new GlowFilter(0x000000, 1, 2, 2, 3);
+    private static const GLOW:GlowFilter   = new GlowFilter(0x000000, 1, 2, 2, 3);
     /** @private 复用字号格式 */
     private static const FORMAT:TextFormat = new TextFormat('_sans', FONT_SIZE);
 

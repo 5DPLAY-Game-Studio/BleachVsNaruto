@@ -33,11 +33,11 @@ import flash.utils.getQualifiedClassName;
 public class FighterApiProxy extends Proxy {
 
     /** @private */
-    private static var _records:Array      = [];
+    private static var _records:Array    = [];
     /** @private */
-    private static var _seen:Object        = {};
+    private static var _seen:Object      = {};
     /** @private 每个门面类已声明的公开成员 */
-    private static var _known:Dictionary   = new Dictionary();
+    private static var _known:Dictionary = new Dictionary();
 
     /**
      * 本局已经碰到的无效调用。
@@ -147,7 +147,7 @@ public class FighterApiProxy extends Proxy {
      */
     private function knows(name:String):Boolean {
         var typeName:String = getQualifiedClassName(this);
-        var cache:Object   = _known[typeName];
+        var cache:Object    = _known[typeName];
         if (!cache) {
             cache = {};
             var info:XML = describeType(this);

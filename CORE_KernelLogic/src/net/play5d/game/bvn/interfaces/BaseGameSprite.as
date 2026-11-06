@@ -45,34 +45,34 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
     }
     public var isInAir:Boolean; //是否在空中
     public var isTouchBottom:Boolean; //是否在底层地面上
-    public var isAllowBeHit:Boolean = true; //是否可以被打
-    public var isCross:Boolean      = false; //是否穿过其他角色
+    public var isAllowBeHit:Boolean       = true; //是否可以被打
+    public var isCross:Boolean            = false; //是否穿过其他角色
     // 是否允许受到因版边攻击造成的反向推动
     public var isAllowReversePush:Boolean = true;
-    public var isAlive:Boolean            = true;//是否活着
-    public var isAllowLoseHP:Boolean      = true;//是否伤血
-    public var isApplyG:Boolean = true;
-    public var heavy:Number = 2; //重量，用于计算角色碰撞处理
-    public var hp:Number    = GameConfig.FIGHTER_HP_MAX;
-    public var hpMax:Number = GameConfig.FIGHTER_HP_MAX;
-    public var defense:Number = 0; //防御力
+    public var isAlive:Boolean            = true; //是否活着
+    public var isAllowLoseHP:Boolean      = true; //是否伤血
+    public var isApplyG:Boolean           = true;
+    public var heavy:Number               = 2; //重量，用于计算角色碰撞处理
+    public var hp:Number                  = GameConfig.FIGHTER_HP_MAX;
+    public var hpMax:Number               = GameConfig.FIGHTER_HP_MAX;
+    public var defense:Number             = 0; //防御力
     public var isAllowCrossX:Boolean      = false;
     public var isAllowCrossBottom:Boolean = false;
-    public var id:String = UUID.create();
-    protected var _g:Number            = 0; //重力
+    public var id:String                  = UUID.create();
+    protected var _g:Number               = 0; //重力
     protected var _mainMc:MovieClip;
-    protected var _isTouchSide:Boolean = false;
-    protected var _isActive:Boolean = false;
+    protected var _isTouchSide:Boolean    = false;
+    protected var _isActive:Boolean       = false;
     protected var _area:Rectangle;
     /** @private getArea 复用世界坐标矩形 */
-    private var _areaWorld:Rectangle = new Rectangle();
+    private var _areaWorld:Rectangle      = new Rectangle();
     protected var _destroyed:Boolean;
-    private var _frameFuncs:Array        = []; //在N帧后调用，临时保存的FUNCTION数组
-    private var _frameAnimateFuncs:Array = []; //在N帧后调用，临时保存的FUNCTION数组
-    private var _speedPlus:Number   = GameConfig.SPEED_PLUS; //速度比率
-    private var _dampingRate:Number = 1; //速度减缓比率
-    private var _velocity:Point = new Point();
-    private var _damping:Point  = new Point();
+    private var _frameFuncs:Array         = []; //在N帧后调用，临时保存的FUNCTION数组
+    private var _frameAnimateFuncs:Array  = []; //在N帧后调用，临时保存的FUNCTION数组
+    private var _speedPlus:Number         = GameConfig.SPEED_PLUS; //速度比率
+    private var _dampingRate:Number       = 1; //速度减缓比率
+    private var _velocity:Point           = new Point();
+    private var _damping:Point            = new Point();
 
     private var _velocity2:Point = new Point();
     private var _damping2:Point  = new Point();

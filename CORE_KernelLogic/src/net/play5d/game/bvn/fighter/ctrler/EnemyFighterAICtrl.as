@@ -42,8 +42,8 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
     private var _moveRight:Boolean = false;
     private var _jump:Boolean      = false;
     private var _jumpDown:Boolean  = false;
-    private var _attackFrame:int = 0;
-    private var _attack:Boolean = false;
+    private var _attackFrame:int   = 0;
+    private var _attack:Boolean    = false;
     private var _zhao:Boolean;
 
     public function initialize():void {

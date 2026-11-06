@@ -58,9 +58,9 @@ public class LockFrameServerLogic {
     /** @private */
     private var _renderSyncFrame:int;
     /** @private */
-    private var _clientK:int = -1;
+    private var _clientK:int        = -1;
     /** @private */
-    private var _serverK:int = 0;
+    private var _serverK:int        = 0;
     /** @private */
     private var _syncUpdateArr:ByteArray;
     /** @private */

@@ -22,21 +22,21 @@ import net.play5d.game.bvn.fighter.FighterMain;
 
 public class MusouFighterLogic {
 
-    public static const LV_DASH_AIR:int   = 0;
-    public static const LV_GHOST_STEP:int = 0;
-    public static const LV_SKILL1:int    = 0;
-    public static const LV_SKILL2:int    = 0;
-    public static const LV_SKILL_AIR:int = 0;
-    public static const LV_ZHAO1:int = 0;
-    public static const LV_ZHAO2:int = 0;
-    public static const LV_ZHAO3:int = 0;
-    public static const LV_CATCH1:int = 0;
-    public static const LV_CATCH2:int = 0;
-    public static const LV_BISHA:int       = 0;
-    public static const LV_BISHA_AIR:int   = 0;
-    public static const LV_BISHA_UP:int    = 0;
-    public static const LV_BISHA_SUPER:int = 0;
-    public static const LV_BANKAI:int = 0;
+    public static const LV_DASH_AIR:int         = 0;
+    public static const LV_GHOST_STEP:int       = 0;
+    public static const LV_SKILL1:int           = 0;
+    public static const LV_SKILL2:int           = 0;
+    public static const LV_SKILL_AIR:int        = 0;
+    public static const LV_ZHAO1:int            = 0;
+    public static const LV_ZHAO2:int            = 0;
+    public static const LV_ZHAO3:int            = 0;
+    public static const LV_CATCH1:int           = 0;
+    public static const LV_CATCH2:int           = 0;
+    public static const LV_BISHA:int            = 0;
+    public static const LV_BISHA_AIR:int        = 0;
+    public static const LV_BISHA_UP:int         = 0;
+    public static const LV_BISHA_SUPER:int      = 0;
+    public static const LV_BANKAI:int           = 0;
     public static const ALL_ACTION_LEVELS:Array = [
         LV_DASH_AIR, LV_GHOST_STEP,
         LV_SKILL1, LV_SKILL2, LV_SKILL_AIR,

@@ -64,11 +64,11 @@ public class FighterAction {
     public var bishaAIR:String;
     public var airHitTimes:int;
     public var jumpTimes:int;
-    public var bishaQi:int      = 100;
-    public var bishaUPQi:int    = 100;
-    public var bishaSUPERQi:int = 300;
-    public var bishaAIRQi:int   = 100;
-    private var _cdObj:Object = {};
+    public var bishaQi:int                = 100;
+    public var bishaUPQi:int              = 100;
+    public var bishaSUPERQi:int           = 300;
+    public var bishaAIRQi:int             = 100;
+    private var _cdObj:Object             = {};
 
     /**
      * 清除状态和动作

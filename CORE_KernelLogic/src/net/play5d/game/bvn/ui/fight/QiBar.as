@@ -49,8 +49,8 @@ public class QiBar {
     private var _bar:InsBar;
     private var _fzBar:InsFzBar;
     private var _fzReadyMc:MovieClip;
-    private var _qiRate:Number = 0;
-    private var _fzRate:Number = 0;
+    private var _qiRate:Number   = 0;
+    private var _fzRate:Number   = 0;
     private var _orgPose:Point;
     private var _tweenSpd:Number = 0.5;
     private var _moveFin:Boolean = true;

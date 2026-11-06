@@ -73,7 +73,7 @@ public class DebugSpriteBounds {
     /** @private 线框线宽 */
     private static const LINE_THICKNESS:Number = 1;
     /** @private 边框与跟踪填充透明度 */
-    private static const DRAW_ALPHA:Number = 0.33;
+    private static const DRAW_ALPHA:Number     = 0.33;
 
     /**
      * 是否绘制精灵线框。
@@ -88,7 +88,7 @@ public class DebugSpriteBounds {
     /** @private 叠加绘制层（单 Shape） */
     private var _overlay:Shape;
     /** @private 本帧待绘项（复用，避免每帧 new Array） */
-    private var _items:Array = [];
+    private var _items:Array        = [];
     /** @private 路径比较临时缓冲 */
     private var _pathA:Vector.<int> = new Vector.<int>();
     /** @private */
@@ -337,7 +337,7 @@ public class DebugSpriteBounds {
         _hoveredSprite = topIndex >= 0 ? (_items[topIndex].sprite as IGameSprite) : null;
 
         for (i = 0; i < _items.length; i++) {
-            var item:Object     = _items[i];
+            var item:Object    = _items[i];
             var sp:IGameSprite = item.sprite as IGameSprite;
             var fill:Boolean   = i == topIndex || (_trackedSprite != null && sp == _trackedSprite);
             drawWireframe(item.color, item.area as Rectangle, fill);

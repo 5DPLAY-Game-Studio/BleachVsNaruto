@@ -55,7 +55,7 @@ public class MenuBtnGroup extends Sprite {
     private var _btnIndex:int;
     private var _startPoint:Point;
     private var _btnHeight:Number = 0;
-    private var _btns:Array = [];
+    private var _btns:Array       = [];
     private var _showIngChildrenBtn:MenuBtn;
     /** @private 当前悬停项，避免每次全量遍历 */
     private var _hoverBtn:MenuBtn;
@@ -243,8 +243,8 @@ public class MenuBtnGroup extends Sprite {
             return;
         }
 
-        var W:Number  = GameConfig.GAME_SIZE.x - 20;//最左端
-        var W2:Number = _startPoint.x + this.width;//组件的左端
+        var W:Number  = GameConfig.GAME_SIZE.x - 20; //最左端
+        var W2:Number = _startPoint.x + this.width; //组件的左端
 
         if (W2 < W) {
             return;

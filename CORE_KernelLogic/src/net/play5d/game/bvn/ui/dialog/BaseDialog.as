@@ -30,8 +30,8 @@ public class BaseDialog {
 
     public var offsetX:Number = 0;
     public var offsetY:Number = 0;
-    public var width:Number  = 0;
-    public var height:Number = 0;
+    public var width:Number   = 0;
+    public var height:Number  = 0;
     public var yesBack:Function;
     public var noBack:Function;
     protected var _backBtn:SimpleButton;

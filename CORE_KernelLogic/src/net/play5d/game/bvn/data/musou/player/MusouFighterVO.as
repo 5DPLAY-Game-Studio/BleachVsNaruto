@@ -34,13 +34,13 @@ public class MusouFighterVO implements ISaveData, IInstanceVO {
         updateLevel(_level.getValue());
     }
     public var id:String;
-    private var _level:WrapInteger = new WrapInteger(0);
-    private var _exp:WrapInteger   = new WrapInteger(0);
+    private var _level:WrapInteger    = new WrapInteger(0);
+    private var _exp:WrapInteger      = new WrapInteger(0);
     private var _atk:WrapInteger      = new WrapInteger(0);
     private var _skillAtk:WrapInteger = new WrapInteger(0);
     private var _bishaAtk:WrapInteger = new WrapInteger(0);
-    private var _hp:WrapInteger     = new WrapInteger(0);
-    private var _qi:WrapInteger     = new WrapInteger(0);
+    private var _hp:WrapInteger       = new WrapInteger(0);
+    private var _qi:WrapInteger       = new WrapInteger(0);
 
     private var _energy:WrapInteger = new WrapInteger(0);
 

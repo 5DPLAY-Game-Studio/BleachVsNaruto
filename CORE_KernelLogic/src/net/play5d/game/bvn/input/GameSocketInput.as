@@ -48,7 +48,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
     /** @private */
     private var _inputters:Vector.<IGameInput>;
     /** @private */
-    private var _inputData:int = 0;
+    private var _inputData:int   = 0;
     /** @private */
     private var _upK:int;
     /** @private */

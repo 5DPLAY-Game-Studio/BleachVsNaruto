@@ -97,9 +97,9 @@ public class CreditsStage implements IStage {
 
     private static function getCreditsText():String {
 
-//				"人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +
-//				"         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
-//				"策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
+//              "人物制作：剑jian、数字化流天、L、V.临界幻想、Azrael，影、赤炎、水、 " + "<br/>" +
+//              "         洗橙子、酸菜鱼、星空、卡布托、司徒、小海、主流" + "<br/>" +
+//              "策划测试：剑jian、数字化流天、社长、渺渺" + "<br/>" +
         return GetLang('credits.body');
     }
 

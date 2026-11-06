@@ -60,20 +60,20 @@ public class ShadowEffectView {
         _addBpFrame = 0;
     }
     public var target:DisplayObject;
-    public var r:int = 0;
-    public var g:int = 0;
-    public var b:int = 0;
+    public var r:int                           = 0;
+    public var g:int                           = 0;
+    public var b:int                           = 0;
     public var owner:BaseGameSprite;
     public var container:Sprite;
     public var stopShadow:Boolean;
     public var onRemove:Function;
-    private var _bps:Vector.<Bitmap> = new Vector.<Bitmap>();
+    private var _bps:Vector.<Bitmap>           = new Vector.<Bitmap>();
     /** @private Bitmap -&gt; 缓存键（String）或 false（未入缓存） */
-    private var _bpCached:Dictionary = new Dictionary();
-    private var _alphaLoss:Number    = 0.1;
-    private var _alphaStart:Number   = 0.8;
-    private var _addBpGap:int        = 1;
-    private var _addBpFrame:int      = 0;
+    private var _bpCached:Dictionary           = new Dictionary();
+    private var _alphaLoss:Number              = 0.1;
+    private var _alphaStart:Number             = 0.8;
+    private var _addBpGap:int                  = 1;
+    private var _addBpFrame:int                = 0;
     /** @private 复用颜色变换，避免采样时反复分配 */
     private var _colorTransform:ColorTransform = new ColorTransform();
 

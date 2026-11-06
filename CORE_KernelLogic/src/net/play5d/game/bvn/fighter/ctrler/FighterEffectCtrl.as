@@ -48,7 +48,7 @@ public class FighterEffectCtrl {
     private var _isGlowIng:Boolean;
 
     /** @private 发光扩展偏移（白 / 黄共用） */
-    private static const GLOW_OFFSET:Point = new Point(20, 20);
+    private static const GLOW_OFFSET:Point     = new Point(20, 20);
     /** @private */
     private static const GLOW_WHITE:GlowFilter =
             new GlowFilter(0xffffff, 1, 20, 20, 2, 1, false, true);

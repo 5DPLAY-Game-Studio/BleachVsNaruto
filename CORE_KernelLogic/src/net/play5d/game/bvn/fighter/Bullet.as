@@ -39,12 +39,12 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
      * 子弹，波
      * @param mc 显示对象
      * @param params 参数 {
-     * 						x:Number(速度X)|{start:Number(开始速度),add:Number(加速度),max:Number(最大速度)} ,
-     * 						y:Number(速度Y)|{start:Number(开始速度),add:Number(加速度),max:Number(最大速度)} ,
-     * 						hold:int(持续帧数) ,
-     * 						hits:int(攻击次数) ,
-     * 						onHit:{delayFrame:int(延迟帧数,&gt;=0),func:Function(回调)}
-     * 					 }
+     *                      x:Number(速度X)|{start:Number(开始速度),add:Number(加速度),max:Number(最大速度)} ,
+     *                      y:Number(速度Y)|{start:Number(开始速度),add:Number(加速度),max:Number(最大速度)} ,
+     *                      hold:int(持续帧数) ,
+     *                      hits:int(攻击次数) ,
+     *                      onHit:{delayFrame:int(延迟帧数,&gt;=0),func:Function(回调)}
+     *                   }
      */
     public function Bullet(mc:MovieClip, params:Object = null) {
         this.mc    = mc;
@@ -121,14 +121,14 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
         }
 
     }
-    public var speed:Point = new Point(5, 0);
-    public var hp:int    = 100;
-    public var hpMax:int = 100;
-    public var addSpeed:Point = new Point();
-    public var maxSpeed:Point = new Point(999, 999);
-    public var minSpeed:Point = new Point(-999, -999);
-    public var hitSpeed:Point = new Point(NaN, NaN);
-    public var holdFrame:int = -1;
+    public var speed:Point        = new Point(5, 0);
+    public var hp:int             = 100;
+    public var hpMax:int          = 100;
+    public var addSpeed:Point     = new Point();
+    public var maxSpeed:Point     = new Point(999, 999);
+    public var minSpeed:Point     = new Point(-999, -999);
+    public var hitSpeed:Point     = new Point(NaN, NaN);
+    public var holdFrame:int      = -1;
     public var onRemove:Function;
     /**
      * doHit 后的延迟回调配置。
@@ -141,7 +141,7 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
      */
     public var onHit:Object;
     public var mc:MovieClip;
-    public var hitTimes:int = -1;
+    public var hitTimes:int       = -1;
     public var owner:IGameSprite;
     private var _area:Rectangle;
     private var _orgScale:Point;

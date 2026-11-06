@@ -56,8 +56,8 @@ public class WorldMapStage implements IStage {
     private var _pointUIs:Vector.<WorldMapPointUI>;
     private var _downUIPos:Point    = new Point();
     private var _downMousePos:Point = new Point();
-    private var _scale:Number   = 1;
-    private var _position:Point = new Point();
+    private var _scale:Number       = 1;
+    private var _position:Point     = new Point();
     private var _currentPoint:WorldMapPointUI;
     private var _cloudUI:BigmapCloud;
     private var _backBtn:DisplayObject;

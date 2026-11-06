@@ -67,8 +67,8 @@ public class MusouCtrl {
     private var _resumeGap:int;
     private var _enemyCreators:Vector.<EnemyCreator> = new Vector.<EnemyCreator>();
     private var _missionComplete:Boolean;
-    private var _gameFinish:Boolean = false;
-    private var _addEnemyGap:int = 0;
+    private var _gameFinish:Boolean                  = false;
+    private var _addEnemyGap:int                     = 0;
     private var _introBoss:FighterMain;
     private var _bossInAnimate:Boolean;
 

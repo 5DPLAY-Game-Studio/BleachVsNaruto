@@ -63,7 +63,7 @@ public class EffectCtrl {
         return _i;
     }
 
-    public var shineMaxCount:int = 3;
+    public var shineMaxCount:int     = 3;
     public var freezeEnabled:Boolean = true;
 
     /**
@@ -95,7 +95,7 @@ public class EffectCtrl {
     private var _onFreezeOver:Vector.<Function> = null;
 
     private var _frameEffectCount:Dictionary = new Dictionary();
-    private var _removeEnemyMap:Object = {};
+    private var _removeEnemyMap:Object       = {};
 
     public function destroy():void {
         // 执行销毁时结束震动

@@ -377,12 +377,12 @@ public class EffectModel {
 
     private function addEnemyHitEffect(type:int, className:String, param:Object = null):void {
         var effect:EffectVO          = new EffectVO(className, param);
-        _effect["hit_enemy_" + type] = effect;
+        _effect['hit_enemy_' + type] = effect;
     }
 
     private function addEnemyDefenseEffect(type:int, className:String, param:Object = null):void {
         var effect:EffectVO              = new EffectVO(className, param);
-        _effect["defense_enemy_" + type] = effect;
+        _effect['defense_enemy_' + type] = effect;
     }
 
 }

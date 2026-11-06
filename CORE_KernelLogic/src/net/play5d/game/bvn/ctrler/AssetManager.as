@@ -52,7 +52,7 @@ public class AssetManager {
     private var _soundLoader:KyoSoundLoader        = new KyoSoundLoader();
     private var _bitmapLoader:BitmapAssetLoader    = new BitmapAssetLoader();
     private var _bitmapFontLoader:BitmapFontLoader = new BitmapFontLoader();
-    private var _assetLoader:IAssetLoader = null;
+    private var _assetLoader:IAssetLoader          = null;
 
     public function init():void {
     }

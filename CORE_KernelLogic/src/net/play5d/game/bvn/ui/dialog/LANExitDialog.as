@@ -52,8 +52,8 @@ public class LANExitDialog extends Sprite implements ILanExitDialog {
     public function LANExitDialog(
             isClientActive:Function,
             isServerActive:Function,
-            onClientEnd:Function,
-            onServerQuit:Function
+            onClientEnd   :Function,
+            onServerQuit  :Function
     ) {
         _isClientActive = isClientActive;
         _isServerActive = isServerActive;

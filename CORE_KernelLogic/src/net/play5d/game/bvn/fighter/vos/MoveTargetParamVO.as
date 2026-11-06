@@ -30,10 +30,10 @@ public class MoveTargetParamVO implements IInstanceVO {
 
     /**
      * params:{
-     * 		x:Number X位置
-     * 		y:Number Y位置
-     * 		followmc:String 按MC的位置移动目标，MC名称
-     * 		speed:Number|{x:Number,y:Number} 移动速度，0或不设置时，直接移动到相应位置
+     *      x:Number X位置
+     *      y:Number Y位置
+     *      followmc:String 按MC的位置移动目标，MC名称
+     *      speed:Number|{x:Number,y:Number} 移动速度，0或不设置时，直接移动到相应位置
      * }
      */
     public function MoveTargetParamVO(params:Object = null) {

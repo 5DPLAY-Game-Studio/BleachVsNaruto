@@ -42,7 +42,7 @@ public class GameStartCtrl {
     private var _step:int;
     private var _holdFrame:int;
     private var _uiPlaying:Boolean;
-    private var _introTeamId:int = -1; //-1=both
+    private var _introTeamId:int     = -1; //-1=both
     private var _musouFinish:Boolean = false;
 
     public function destroy():void {

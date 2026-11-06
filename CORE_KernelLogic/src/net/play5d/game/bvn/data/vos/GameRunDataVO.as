@@ -32,15 +32,15 @@ public class GameRunDataVO implements IInstanceVO {
     public const p2FighterGroup:GameRunFighterGroup = new GameRunFighterGroup();
 
     public var map:MapVO;
-    public var p1Wins:int = 0;
-    public var p2Wins:int = 0;
+    public var p1Wins:int       = 0;
+    public var p2Wins:int       = 0;
     public var lastWinnerTeam:TeamVO;
     public var continueLoser:FighterMain;
     public var lastWinner:FighterMain;
     public var lastWinnerHp:int = 1000;
     public var lastLoserData:FighterVO;
-    public var lastLoserQi:int = 0;
-    public var round:int = 1;
+    public var lastLoserQi:int  = 0;
+    public var round:int        = 1;
     public var gameTime:int;
     public var gameTimeMax:int; //-1时，无限时
     public var isTimerOver:Boolean;

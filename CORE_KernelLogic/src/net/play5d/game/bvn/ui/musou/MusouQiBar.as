@@ -41,7 +41,7 @@ public class MusouQiBar {
     }
     private var _ui:Sprite;
     private var _fighter:FighterMain;
-    private var _qiRate:Number = 0;
+    private var _qiRate:Number   = 0;
     private var _orgPose:Point;
     private var _tweenSpd:Number = 0.5;
     private var _moveFin:Boolean = true;
@@ -54,7 +54,7 @@ public class MusouQiBar {
     private var _bar3:DisplayObject;
     private var _maxBar:MovieClip;
     private var _maxPlaying:Boolean;
-    private var _process:Number = 0;
+    private var _process:Number  = 0;
 
     public function setFighter(fighter:FighterMain):void {
         _fighter = fighter;

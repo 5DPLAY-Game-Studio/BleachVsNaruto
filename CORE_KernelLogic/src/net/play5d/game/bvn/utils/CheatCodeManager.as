@@ -221,7 +221,7 @@ public class CheatCodeManager {
         }
 
         /** 生成唯一的作弊码 ID */
-        var id:String = UUID.create();
+        var id:String            = UUID.create();
         var entry:CheatCodeEntry = new CheatCodeEntry({
             code        : code,
             success     : success,
@@ -240,7 +240,7 @@ public class CheatCodeManager {
 
         // 返回注销函数
         return function():void {
-            unregister(id); 
+            unregister(id);
         };
     }
 
@@ -471,48 +471,48 @@ import net.play5d.kyo.input.KyoKeyVO;
  * </ol>
  */
 class CheatCodeEntry {
-    
-    /** 
+
+    /**
      * 原始作弊码字符串（如 "W|S|A|K"）
-     * 
+     *
      * <p>用于调试和日志输出，不参与匹配逻辑。</p>
      */
     public var code:String;
-    
-    /** 
+
+    /**
      * 成功触发作弊码时调用的回调函数
-     * 
+     *
      * <p>该函数无参数，无返回值。在作弊码完整匹配时被调用。</p>
      */
     public var success:Function;
-    
-    /** 
+
+    /**
      * 是否只允许触发一次
-     * 
+     *
      * <p>默认为 false。设为 true 时，作弊码只会触发一次，
      * 触发后通过 hasSucceeded 标志跳过后续匹配。</p>
      */
     public var isRunOnce:Boolean;
-    
-    /** 
+
+    /**
      * 解析后的按键序列向量
-     * 
+     *
      * <p>包含 KyoKeyVO 对象，每个对象代表一个按键。
      * 匹配时按顺序检查每个按键。</p>
      */
     public var keys:Vector.<KyoKeyVO>;
-    
-    /** 
+
+    /**
      * 当前按键匹配进度（从 0 开始）
-     * 
+     *
      * <p>表示当前已经成功匹配到第几个按键。
      * 范围：0 到 keys.length - 1。</p>
      */
     public var currentIndex:int;
-    
-    /** 
+
+    /**
      * 是否已成功触发过（仅用于 isRunOnce 为 true 的情况）
-     * 
+     *
      * <p>当 isRunOnce 为 true 且作弊码已触发时，该值为 true，
      * 后续按键将跳过此作弊码的匹配检查。</p>
      */
@@ -528,7 +528,7 @@ class CheatCodeEntry {
      */
     public function CheatCodeEntry(params:Object) {
         this.code           = params.code;
-        this.success        = params.success;   
+        this.success        = params.success;
         this.isRunOnce      = params.isRunOnce;
         this.keys           = params.keys;
         this.currentIndex   = params.currentIndex;

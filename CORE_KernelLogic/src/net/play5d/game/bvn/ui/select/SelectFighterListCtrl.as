@@ -73,11 +73,11 @@ public class SelectFighterListCtrl {
     /** @private */
     private var _selectState:int;
     /** @private */
-    private var _tweenTime:int = 500;
+    private var _tweenTime:int               = 500;
     /** @private */
     private var _onSelectConfirm:Function;
     /** @private */
-    private var _moreFighterMap:Dictionary = new Dictionary();
+    private var _moreFighterMap:Dictionary   = new Dictionary();
     /** @private */
     private var _moreFighterCache:Dictionary = new Dictionary();
 

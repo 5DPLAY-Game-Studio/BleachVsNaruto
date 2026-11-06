@@ -42,7 +42,7 @@ public class SelectMapUI extends Sprite {
         super();
         build();
     }
-    public var enabled:Boolean = false;
+    public var enabled:Boolean   = false;
     public var inputType:String;
     private var _mapmc:$select$SP_selectMap;
     private var _txtmc:$select$SP_selectMapText;

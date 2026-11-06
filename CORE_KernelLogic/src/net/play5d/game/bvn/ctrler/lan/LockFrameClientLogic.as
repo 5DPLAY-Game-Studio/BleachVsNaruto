@@ -62,7 +62,7 @@ public class LockFrameClientLogic {
     /** @private */
     private var _lastSendK:int;
     /** @private */
-    private var _delayTimer:int = 0;
+    private var _delayTimer:int     = 0;
     /** @private */
     private var _sendAnyWay:Boolean = false;
     /** @private 准备包发送节流计数 */

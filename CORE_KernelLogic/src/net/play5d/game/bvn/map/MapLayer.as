@@ -59,7 +59,7 @@ public class MapLayer extends Sprite {
     // 视图显示对象
     private var _view:DisplayObject;
     // 模糊滤镜位图
-    private var _blurBitmaps:Object = {};
+    private var _blurBitmaps:Object      = {};
     // 是否平滑
     private var _smoothing:Boolean;
     // 当前显示对象
@@ -67,7 +67,7 @@ public class MapLayer extends Sprite {
     /** @private 光学遮挡降频计数 */
     private var _opticalFrame:int;
     /** @private renderOptical 复用边界矩形 */
-    private var _opticalRect:Rectangle = new Rectangle();
+    private var _opticalRect:Rectangle   = new Rectangle();
     /** @private 光学检测降频间隔（逻辑帧） */
     private static const OPTICAL_GAP:int = 2;
 

@@ -62,7 +62,7 @@ public class GameCamera {
     /**
      * 是否跟随X
      */
-    public var focusX:Boolean = true;
+    public var focusX:Boolean     = true;
     /**
      * 是否跟随Y
      */
@@ -70,11 +70,11 @@ public class GameCamera {
     /**
      * 焦点位置偏移X
      */
-    public var offsetX:Number = 0;
+    public var offsetX:Number     = 0;
     /**
      * 焦点位置偏移Y
      */
-    public var offsetY:Number = 0;
+    public var offsetY:Number     = 0;
     /**
      * 自动缩放，跟随多个对象的位置，只有一个焦点时无效
      */
@@ -87,32 +87,32 @@ public class GameCamera {
     /**
      * 最大比例
      */
-    public var autoZoomMax:Number = 3;
-    private var _zoom:Number = 1;
+    public var autoZoomMax:Number         = 3;
+    private var _zoom:Number              = 1;
     private var _noTweenRect:Rectangle;
     private var _stage:DisplayObject;
     private var _stageBounds:Rectangle;
     private var _rect:Rectangle;
     /** @private 缓动小数坐标；_rect 只保留像素，scrollRect 才不会每帧重写 */
-    private var _easeX:Number = 0;
+    private var _easeX:Number             = 0;
     /** @private */
-    private var _easeY:Number = 0;
+    private var _easeY:Number             = 0;
     private var _focus:Array;
     private var _point:Point;
-    private var _stageScale:Number = 1;
+    private var _stageScale:Number        = 1;
     /**
      * fixForderRect
      */
     private var _fbR:Rectangle;
-    private var _foffsetX:Number   = 0;
-    private var _foffsetY:Number   = 0;
+    private var _foffsetX:Number          = 0;
+    private var _foffsetY:Number          = 0;
     private var _screenSize:Point;
     /** @private 上次写入 scrollRect / scale，未变化则跳过赋值 */
-    private var _appliedScrollX:Number     = NaN;
-    private var _appliedScrollY:Number     = NaN;
-    private var _appliedScrollW:Number     = NaN;
-    private var _appliedScrollH:Number     = NaN;
-    private var _appliedStageScale:Number  = NaN;
+    private var _appliedScrollX:Number    = NaN;
+    private var _appliedScrollY:Number    = NaN;
+    private var _appliedScrollW:Number    = NaN;
+    private var _appliedScrollH:Number    = NaN;
+    private var _appliedStageScale:Number = NaN;
 
     public function destroy():void {
         stageSize = null;

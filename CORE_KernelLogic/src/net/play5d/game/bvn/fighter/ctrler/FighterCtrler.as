@@ -55,7 +55,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
     private var _rectCache:Object = {};
     private var _doingWankai:Boolean;
     /** @private getCurrentHits 复用缓冲，避免对撞热路径反复 new Array */
-    private var _hitsBuf:Array = [];
+    private var _hitsBuf:Array    = [];
 
     //由FLASH IDE调用，定义血量
     public function get hp():Number {
@@ -496,7 +496,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
             return null;
         }
 
-//			//缓存取出后，需要对重新计算位置
+//          //缓存取出后，需要对重新计算位置
         return getCurrentRect(area, 'body');
     }
 
@@ -597,7 +597,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
         if (area == null) {
             return null;
         }
-        //			//缓存取出后，需要对重新计算位置
+        //          //缓存取出后，需要对重新计算位置
         return getCurrentRect(area, 'hitRange_' + id);
     }
 

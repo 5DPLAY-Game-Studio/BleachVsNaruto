@@ -44,9 +44,9 @@ import net.play5d.game.bvn.views.effects.BlackBackView;
 public class EffectBlackBackHandler {
 
     /** @private 每帧向目标倍率逼近的步长 */
-    private static const BLACK_BACK_RATE:Number = 0.025;
+    private static const BLACK_BACK_RATE:Number   = 0.025;
     /** @private 必杀中背景变暗目标倍率 */
-    private static const BLACK_BACK_DARK:Number = 0.3;
+    private static const BLACK_BACK_DARK:Number   = 0.3;
     /** @private 正常亮度倍率 */
     private static const BLACK_BACK_NORMAL:Number = 1;
 

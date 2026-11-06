@@ -148,7 +148,7 @@ public class CountryItem extends Sprite {
     // 是否被选中
     private var _selected:Boolean;
     /** @private 选中条目标 scaleX（相对元件固有宽度） */
-    private var _expandScale:Number = 1;
+    private var _expandScale:Number  = 1;
     /** @private 底条固有宽度（scaleX=1） */
     private var _baseNaturalW:Number = 0;
 
@@ -209,8 +209,8 @@ public class CountryItem extends Sprite {
      */
     override public function addEventListener(
             type:String, listener:Function,
-            useCapture:Boolean       = false,
-            priority:int             = 0,
+            useCapture      :Boolean       = false,
+            priority        :int             = 0,
             useWeakReference:Boolean = false
     ):void {
         _top.addEventListener(type, listener, useCapture, priority, useWeakReference);

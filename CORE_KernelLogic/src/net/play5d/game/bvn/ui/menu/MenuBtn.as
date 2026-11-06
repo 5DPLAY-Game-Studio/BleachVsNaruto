@@ -133,7 +133,7 @@ public class MenuBtn extends EventDispatcher {
     public var cn:String;
     public var label:String;
     public var func:Function;
-    public var height:Number = 75;
+    public var height:Number      = 75;
     public var index:int;
     public var children:Array;
     private var _bitmapText:BitmapFontText;

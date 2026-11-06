@@ -25,7 +25,7 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 
 public class BishaFaceEffectView {
 
-    public var mc:MovieClip = AssetManager.I.getEffect('bisha_face_mc');
+    public var mc:MovieClip     = AssetManager.I.getEffect('bisha_face_mc');
     private var _faceObj:Object = {};
 
     /**

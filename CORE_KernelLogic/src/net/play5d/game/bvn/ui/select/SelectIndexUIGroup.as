@@ -39,13 +39,13 @@ import net.play5d.kyo.utils.KyoRandom;
 public class SelectIndexUIGroup extends Sprite {
 
     public var isFinish:Boolean;
-    public var fzx:Number          = 0;
-    public var fzy:Number          = 325;
+    public var fzx:Number            = 0;
+    public var fzy:Number            = 325;
     public var onFinish:Function;
-    public var fighterOffset:Point = new Point();
+    public var fighterOffset:Point   = new Point();
     private var _fighters:Vector.<SelectedFighterUI>;
     private var _fighterScale:Number = 1;
-    private var _fzScale:Number = 1;
+    private var _fzScale:Number      = 1;
     private var _arrowOffset:Point   = new Point();
     private var _arrow:DisplayObject;
     private var _selectIndex:int;

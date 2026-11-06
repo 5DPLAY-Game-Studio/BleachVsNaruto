@@ -93,10 +93,9 @@ public class GameSpriteUtil {
      * @param ct 颜色变换通道。
      */
     public static function autoChangeSpColor(
-            sp:IGameSprite,
+            sp   :IGameSprite,
             owner:IGameSprite = null,
-            ct:ColorTransform = null):void
-    {
+            ct   :ColorTransform = null):void {
         if (!sp) {
             return;
         }
@@ -120,15 +119,13 @@ public class GameSpriteUtil {
         }
         else if (sp is FighterAttacker) {
             if (owner is FighterMain && isSameFighter ||
-                owner is Assister && isSameAssister)
-            {
+                owner is Assister && isSameAssister) {
                 changeSpColor(sp, ct);
             }
         }
         else if (sp is Bullet || sp is FollowEffectView) {
             if (owner is FighterMain && isSameFighter ||
-                owner is Assister && isSameAssister)
-            {
+                owner is Assister && isSameAssister) {
                 changeSpColor(sp, ct);
             }
             else if (owner is FighterAttacker) {

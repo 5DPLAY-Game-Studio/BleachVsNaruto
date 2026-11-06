@@ -86,13 +86,13 @@ public class MenuStage extends Sprite implements IStage {
             }
 
             GameRender.add(render);
-            
+
             // 设置焦点到 stage，确保键盘事件能被捕获
             // 特别是从设置菜单返回时，鼠标点击按钮会转移焦点
             if (STAGE) {
                 STAGE.focus = STAGE;
             }
-            
+
             GameInputter.focus();
             GameInputter.enabled = true;
 
@@ -141,7 +141,7 @@ public class MenuStage extends Sprite implements IStage {
         if (STAGE && STAGE.focus != STAGE) {
             STAGE.focus = STAGE;
         }
-        
+
         if (GameInputter.anyKey(1)) {
             showBtns();
         }

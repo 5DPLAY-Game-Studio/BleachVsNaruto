@@ -32,10 +32,10 @@ import net.play5d.game.bvn.interfaces.IGameInput;
 public class GameInputter {
 
     //按键持续延时，秒
-    private static const JUST_DOWN_DELAY:Number = 0.1;
-    private static var _enabled:Boolean       = true;
-    private static var _isFocused:Boolean     = false;
-    private static var _inputMap:Dictionary = new Dictionary();
+    private static const JUST_DOWN_DELAY:Number  = 0.1;
+    private static var _enabled:Boolean          = true;
+    private static var _isFocused:Boolean        = false;
+    private static var _inputMap:Dictionary      = new Dictionary();
     private static var _justDownKeys:Object      = {};
     private static var _justDownDelayKeys:Object = {};
     private static var _listenKeys:Object;

@@ -40,21 +40,21 @@ public class EffectView {
     public var display:Bitmap;
     public var autoRemove:Boolean = true;
     public var loopPlay:Boolean   = false;
-    public var holdFrame:int = -1;
-    public var isActive:Boolean = true;
+    public var holdFrame:int      = -1;
+    public var isActive:Boolean   = true;
     protected var _target:IGameSprite;
     protected var _data:EffectVO;
     private var _onRemoveFuncs:Array;
     private var _isDestroyed:Boolean;
     private var _bitmapDatas:Vector.<BitmapDataCacheVO>;
     private var _frameLabels:Object;
-    private var _orgX:Number = 0;
-    private var _orgY:Number = 0;
+    private var _orgX:Number      = 0;
+    private var _orgY:Number      = 0;
     private var _curFrame:int;
     private var _rotation:int;
     private var _direct:int;
-    private var _offsetSrc:Point = new Point();
-    private var _offsetRot:Point = new Point();
+    private var _offsetSrc:Point  = new Point();
+    private var _offsetRot:Point  = new Point();
 
     /**
      * 抽象方法，设置关联对象

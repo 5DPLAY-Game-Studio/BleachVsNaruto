@@ -55,8 +55,8 @@ public class GameMainLogicCtrl {
     /** @private */
     private var _hitResultB:Object     = {hitVO: null, hitRect: null};
     private var _gameState:GameStage;
-    private var _leftSide:Number  = 0;
-    private var _rightSide:Number = 0;
+    private var _leftSide:Number       = 0;
+    private var _rightSide:Number      = 0;
     private var _teamMap:TeamMap;
     private var _renderAnimate:Boolean;
 
@@ -449,9 +449,9 @@ public class GameMainLogicCtrl {
      * @return 有交集时为 <code>true</code>。
      */
     private static function intersectInto(a:Rectangle, b:Rectangle, out:Rectangle):Boolean {
-        var x:Number = a.x > b.x ? a.x : b.x;
-        var y:Number = a.y > b.y ? a.y : b.y;
-        var r:Number = a.right < b.right ? a.right : b.right;
+        var x:Number   = a.x > b.x ? a.x : b.x;
+        var y:Number   = a.y > b.y ? a.y : b.y;
+        var r:Number   = a.right < b.right ? a.right : b.right;
         var bot:Number = a.bottom < b.bottom ? a.bottom : b.bottom;
         if (r <= x || bot <= y) {
             out.setTo(0, 0, 0, 0);

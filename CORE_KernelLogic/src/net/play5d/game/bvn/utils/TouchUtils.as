@@ -38,9 +38,9 @@ public class TouchUtils {
 
     private var _oneFingerPoint:TouchPoint;
     private var _oneFingerDragging:Boolean;
-    private var _callBackMap:Dictionary = new Dictionary();
+    private var _callBackMap:Dictionary    = new Dictionary();
     private var _stage:Stage;
-    private var _checkDragDis:Number = 0;
+    private var _checkDragDis:Number       = 0;
     private var _callTwoBackMap:Dictionary = new Dictionary();
     private var _twoFingerMap:ArrayMap     = new ArrayMap();
     private var _twoFingerDragging:Boolean;
@@ -266,8 +266,8 @@ internal class TouchPoint {
         this.touchId = touchId;
     }
     public var touchId:int;
-    public var stageX:Number = 0;
-    public var stageY:Number = 0;
+    public var stageX:Number        = 0;
+    public var stageY:Number        = 0;
     public var target:DisplayObject = null;
 
 }

@@ -64,22 +64,22 @@ public class GameCtrl {
     }
 
     public var gameState:GameStage; //游戏主场景
-    public var actionEnable:Boolean = false; //是否可操作
+    public var actionEnable:Boolean     = false; //是否可操作
     public var autoStartAble:Boolean    = true; //是否可以本机逻辑开始游戏
     public var autoEndRoundAble:Boolean = true; //是否可以本机逻辑结束游戏
     public var fightFinished:Boolean;
-    public var slowRate:Number = 0;
+    public var slowRate:Number          = 0;
     /**
      * 队伍
      */
-    private var _teamMap:TeamMap = new TeamMap();
+    private var _teamMap:TeamMap        = new TeamMap();
     private var _startCtrl:GameStartCtrl; //开场控制
     private var _fightSession:IFightSession; //格斗 / 无双会话
     private var _trainingCtrl:TrainingCtrl; //练习模式控制
     private var _mainLogicCtrl:GameMainLogicCtrl; //游戏主逻辑控制
     private var _endCtrl:GameEndCtrl; //KO，结束游戏控制
     private var _roundCtrl:GameRoundCtrl; //回合推进
-    private var _isRenderGame:Boolean = true;
+    private var _isRenderGame:Boolean   = true;
     private var _isPauseGame:Boolean; //暂停
     private var _gameRunning:Boolean;
     private var _renderTimeFrame:int;

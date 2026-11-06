@@ -202,7 +202,7 @@ public class GameStage extends Sprite implements IStage {
 
     public function initFight(
             p1group:GameRunFighterGroup, p2group:GameRunFighterGroup,
-            map:MapMain,
+            map     :MapMain,
             initBack:Function = null
     ):void {
         _map           = map;
@@ -380,9 +380,9 @@ public class GameStage extends Sprite implements IStage {
 
         if (_gameSprites) {
             while (_gameSprites.length > 0) {
-                var continueLoser:FighterMain = _gameCtrl.gameRunData.continueLoser;
+                var continueLoser:FighterMain     = _gameCtrl.gameRunData.continueLoser;
                 var removedGameSprite:IGameSprite = _gameSprites.shift();
-                var isDispose:Boolean = continueLoser && removedGameSprite != continueLoser;
+                var isDispose:Boolean             = continueLoser && removedGameSprite != continueLoser;
 
                 removeGameSprite(removedGameSprite, isDispose);
             }

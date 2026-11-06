@@ -41,9 +41,9 @@ public class FighterAILogicBase {
     private var _breakActCache:Object   = {};
     private var _hitDownActCache:Object = {};
     //连招优先级
-    private var _contOrder:Array = [];
+    private var _contOrder:Array        = [];
     /** @private getTargetDistance 复用 */
-    private var _distancePoint:Point = new Point();
+    private var _distancePoint:Point    = new Point();
 
     public function destroy():void {
         _fighter         = null;

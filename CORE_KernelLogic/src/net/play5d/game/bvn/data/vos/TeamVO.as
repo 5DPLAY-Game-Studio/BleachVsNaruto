@@ -32,7 +32,7 @@ public class TeamVO implements IInstanceVO {
 
     public var id:int;
     public var name:String;
-    public var children:Vector.<IGameSprite> = new Vector.<IGameSprite>();
+    public var children:Vector.<IGameSprite>   = new Vector.<IGameSprite>();
     /** @private getAliveChildren 复用缓冲 */
     private var _aliveBuf:Vector.<IGameSprite> = new Vector.<IGameSprite>();
 

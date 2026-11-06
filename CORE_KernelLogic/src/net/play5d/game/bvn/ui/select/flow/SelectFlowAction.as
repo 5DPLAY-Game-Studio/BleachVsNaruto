@@ -26,21 +26,21 @@ package net.play5d.game.bvn.ui.select.flow {
 public class SelectFlowAction {
 
     /** 无动作（仅更新步号时不用） */
-    public static const NONE:int = 0;
+    public static const NONE:int                    = 0;
     /** 初始化角色列表与选人器 */
-    public static const INIT_FIGHTER:int = 1;
+    public static const INIT_FIGHTER:int            = 1;
     /** 关闭 P1 光标并开启 P2（P1 键位控 P2，用于 CPU/观战侧选人） */
     public static const ENABLE_P2_WITH_P1_INPUT:int = 2;
     /** 淡出列表后进入援助选人 */
-    public static const FADEOUT_ASSIST:int = 3;
+    public static const FADEOUT_ASSIST:int          = 3;
     /** 淡出列表后进入地图选择 */
-    public static const FADEOUT_MAP:int = 4;
+    public static const FADEOUT_MAP:int             = 4;
     /** 闯关开局 */
-    public static const START_ARCADE:int = 5;
+    public static const START_ARCADE:int            = 5;
     /** 无双开局 */
-    public static const START_MUSOU:int = 6;
+    public static const START_MUSOU:int             = 6;
     /** 选人完成进入加载 */
-    public static const SELECT_FINISH:int = 7;
+    public static const SELECT_FINISH:int           = 7;
 
     /**
      * 动作类型，见本类常量。

@@ -57,15 +57,15 @@ public class FighterMain extends BaseGameSprite {
             ThrowError(Error, GetLang('log.error.fight.fighter_main.main_mc_is_null'));
         }
     }
-    public var qi:Number    = 0;
-    public var qiMax:Number = 300;
+    public var qi:Number              = 0;
+    public var qiMax:Number           = 300;
     public var energy:Number          = 100; //体力，关系到瞬步，防御
     public var energyMax:Number       = 100; //体力，关系到瞬步，防御
     public var energyOverLoad:Boolean = false; //体力超载
-    public var customHpMax:int = 0; //自定义血量
-    public var fzqi:Number      = 100; //辅助气
-    public var speed:Number     = 6;
-    public var jumpPower:Number = 15;
+    public var customHpMax:int        = 0; //自定义血量
+    public var fzqi:Number            = 100; //辅助气
+    public var speed:Number           = 6;
+    public var jumpPower:Number       = 15;
 
     public var isSteelBody:Boolean      = false; //刚身状态
     public var isSuperSteelBody:Boolean = false; //超级刚身状态

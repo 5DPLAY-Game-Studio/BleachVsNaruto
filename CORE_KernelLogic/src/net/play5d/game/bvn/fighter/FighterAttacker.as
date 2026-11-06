@@ -103,10 +103,10 @@ public class FighterAttacker extends BaseGameSprite {
     private var _owner:IGameSprite;
     private var _startX:Number = 0;
 
-    private var _startY:Number = 0;
+    private var _startY:Number                  = 0;
     private var _hitAreaCache:McAreaCacher      = new McAreaCacher('hit');
     /** @private getCurrentHits 复用缓冲 */
-    private var _hitsBuf:Array = [];
+    private var _hitsBuf:Array                  = [];
     private var _hitCheckAreaCache:McAreaCacher = new McAreaCacher('hit_check');
     private var _rectCache:Object               = {};
 
