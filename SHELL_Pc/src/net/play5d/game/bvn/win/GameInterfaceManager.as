@@ -18,6 +18,7 @@
 
 package net.play5d.game.bvn.win {
 import flash.desktop.NativeApplication;
+import flash.display.Bitmap;
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.display.StageDisplayState;
@@ -39,8 +40,8 @@ import net.play5d.game.bvn.interfaces.IGameInterface;
 import net.play5d.game.bvn.map.MapLayerCacheUtil;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.CreditsSpriteUtil;
-import net.play5d.game.bvn.utils.EmbedAssetUtils;
 import net.play5d.game.bvn.utils.GameLogger;
+import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.game.bvn.utils.PayUtils;
 import net.play5d.game.bvn.utils.URL;
 import net.play5d.game.bvn.win.ctrls.LANClientCtrl;
@@ -410,53 +411,64 @@ public class GameInterfaceManager implements IGameInterface {
 
     public function getCredits(creditsInfo:String):Sprite {
         var sp:Sprite = CreditsSpriteUtil.build(creditsInfo, 'credits.footer');
+        var android:Sprite;
+        var alipay:Sprite;
+        var weixin:Sprite;
 
-        var android:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getAndroid());
-        android.y          = 400;
-        android.x          = 300;
-        android.width      = 150;
-        android.height     = 194;
-        android.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
-        sp.addChild(android);
-
-        var alipay:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getAlipay());
-        alipay.y          = 400;
-        alipay.x          = android.x + 170;
-        alipay.width      = 150;
-        alipay.height     = 194;
-        alipay.alpha      = 0.2;
-        alipay.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
-        sp.addChild(alipay);
-
-        var weixin:Sprite = PayUtils.getPaySp(EmbedAssetUtils.getWeixin());
-        weixin.y          = 400;
-        weixin.x          = alipay.x + 170;
-        weixin.width      = 150;
-        weixin.height     = 194;
-        weixin.alpha      = 0.2;
-        weixin.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
-        sp.addChild(weixin);
+        loadPay(sp, 'android.png', 300, 1, function (icon:Sprite):void {
+            android = icon;
+            icon.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
+        });
+        loadPay(sp, 'alipay.png', 470, 0.2, function (icon:Sprite):void {
+            alipay = icon;
+            icon.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
+        });
+        loadPay(sp, 'weixin.png', 640, 0.2, function (icon:Sprite):void {
+            weixin = icon;
+            icon.addEventListener(MouseEvent.MOUSE_OVER, payOverHandler);
+        });
 
         function payOverHandler(e:MouseEvent):void {
             if (e.currentTarget == alipay) {
-                alipay.alpha  = 1;
-                weixin.alpha  = 0.2;
-                android.alpha = 0.2;
+                setPayAlpha(alipay, 1);
+                setPayAlpha(weixin, 0.2);
+                setPayAlpha(android, 0.2);
             }
-
             if (e.currentTarget == weixin) {
-                alipay.alpha  = 0.2;
-                weixin.alpha  = 1;
-                android.alpha = 0.2;
+                setPayAlpha(alipay, 0.2);
+                setPayAlpha(weixin, 1);
+                setPayAlpha(android, 0.2);
             }
             if (e.currentTarget == android) {
-                alipay.alpha  = 0.2;
-                weixin.alpha  = 0.2;
-                android.alpha = 1;
+                setPayAlpha(alipay, 0.2);
+                setPayAlpha(weixin, 0.2);
+                setPayAlpha(android, 1);
             }
         }
 
         return sp;
+    }
+
+    /** @private */
+    private function loadPay(sp:Sprite, file:String, x:Number, alpha:Number, ready:Function):void {
+        UiBitmap.load(file, function (bmp:Bitmap):void {
+            bmp.smoothing = true;
+            var icon:Sprite = PayUtils.getPaySp(bmp);
+            icon.x          = x;
+            icon.y          = 400;
+            icon.width      = 150;
+            icon.height     = 194;
+            icon.alpha      = alpha;
+            sp.addChild(icon);
+            ready(icon);
+        });
+    }
+
+    /** @private */
+    private function setPayAlpha(icon:Sprite, alpha:Number):void {
+        if (icon) {
+            icon.alpha = alpha;
+        }
     }
 
     public function checkFile(url:String, file:ByteArray):Boolean {

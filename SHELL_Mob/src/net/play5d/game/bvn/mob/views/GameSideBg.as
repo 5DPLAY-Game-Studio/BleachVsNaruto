@@ -6,18 +6,45 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.utils.GameLogger;
+import net.play5d.game.bvn.utils.UiBitmap;
 
 public class GameSideBg extends Bitmap {
     public function GameSideBg(screenSize:Point, gameSize:Rectangle) {
         super(null, 'auto', false);
         update(screenSize, gameSize);
     }
-    [Embed(source='/../assets/side_bg.png')]
-    private var _sideBg:Class;
-    [Embed(source='/../assets/side_shadow.png')]
-    private var _sideShadow:Class;
+    /** @private */
+    private var _loading:Boolean;
+    /** @private */
+    private var _screenSize:Point;
+    /** @private */
+    private var _gameSize:Rectangle;
 
     public function update(screenSize:Point, gameSize:Rectangle):void {
+        _screenSize = screenSize;
+        _gameSize   = gameSize;
+
+        var sidebg:Bitmap = UiBitmap.create('side_bg.png');
+        var shadow:Bitmap = UiBitmap.create('side_shadow.png');
+        if (!sidebg || !shadow) {
+            if (sidebg) {
+                sidebg.bitmapData.dispose();
+            }
+            if (shadow) {
+                shadow.bitmapData.dispose();
+            }
+            if (_loading) {
+                return;
+            }
+            _loading = true;
+            UiBitmap.loadAll(['side_bg.png', 'side_shadow.png'], function ():void {
+                _loading = false;
+                update(_screenSize, _gameSize);
+            }, function ():void {
+                _loading = false;
+            });
+            return;
+        }
 
         if (this.bitmapData) {
             this.bitmapData.dispose();
@@ -34,7 +61,6 @@ public class GameSideBg extends Bitmap {
 
         var bd:BitmapData = new BitmapData(screenSize.x, screenSize.y, false, 0);
 
-        var sidebg:Bitmap = new _sideBg();
         sidebg.height     = screenSize.y;
         sidebg.scaleX     = sidebg.scaleY;
 
@@ -52,7 +78,6 @@ public class GameSideBg extends Bitmap {
         var rect2:Rectangle = new Rectangle(gameSize.right, 0, screenSize.x, screenSize.y);
         bd.draw(sidebg, mtx2, null, null, rect2);
 
-        var shadow:Bitmap = new _sideShadow();
         shadow.height     = screenSize.y;
         shadow.scaleX     = shadow.scaleY;
 

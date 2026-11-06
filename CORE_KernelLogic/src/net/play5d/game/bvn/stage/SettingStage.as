@@ -41,6 +41,7 @@ import net.play5d.game.bvn.interfaces.IInnerSetUI;
 import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 import net.play5d.game.bvn.ui.settings.SetCtrlBtnUI;
 import net.play5d.game.bvn.utils.ResUtils;
+import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.kyo.stage.IStage;
 
 public class SettingStage implements IStage {
@@ -140,7 +141,10 @@ public class SettingStage implements IStage {
 
         if (!_backMenuBtn) {
             _backMenuBtn         = new Sprite();
-            var btnBitmap:Bitmap = new GameConfig.TOUCH_BACK_BTN();
+            var btnBitmap:Bitmap = UiBitmap.create(GameConfig.TOUCH_BACK_BTN);
+            if (!btnBitmap) {
+                return;
+            }
             btnBitmap.width      = 100;
             btnBitmap.smoothing  = true;
             btnBitmap.scaleY     = btnBitmap.scaleX;

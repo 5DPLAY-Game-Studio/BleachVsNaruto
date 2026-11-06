@@ -29,6 +29,7 @@ import flash.events.TouchEvent;
 import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.GameConfig;
+import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.GameRender;
@@ -198,7 +199,10 @@ public class SelectFighterStage implements IStage {
 
         if (!_backMenuBtn) {
             _backMenuBtn         = new Sprite();
-            var btnBitmap:Bitmap = new GameConfig.TOUCH_BACK_BTN();
+            var btnBitmap:Bitmap = UiBitmap.create(GameConfig.TOUCH_BACK_BTN);
+            if (!btnBitmap) {
+                return;
+            }
             btnBitmap.width      = 100;
             btnBitmap.smoothing  = true;
             btnBitmap.scaleY     = btnBitmap.scaleX;

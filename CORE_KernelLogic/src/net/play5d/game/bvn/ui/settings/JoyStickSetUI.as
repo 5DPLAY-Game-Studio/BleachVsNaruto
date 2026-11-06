@@ -32,6 +32,7 @@ import net.play5d.game.bvn.input.JoyStickSetVO;
 import net.play5d.game.bvn.input.JoyStick;
 import net.play5d.game.bvn.interfaces.IInnerSetUI;
 import net.play5d.game.bvn.ui.GameUI;
+import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.kyo.utils.WebUtils;
 
 /**
@@ -54,10 +55,13 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
      */
     public function JoyStickSetUI() {
         _ui   = new Sprite();
-        _bp   = new _joybitmap();
+        _bp   = new Bitmap(null, 'auto', true);
         _bp.x = 170;
         _bp.y = 250;
         _ui.addChild(_bp);
+        UiBitmap.load('setting_joy.png', function (bmp:Bitmap):void {
+            _bp.bitmapData = bmp.bitmapData;
+        });
 
         _tmpJoyConfig = new JoyStickConfigVO();
 
@@ -70,9 +74,6 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
      */
     public var onApplyJoyConfig:Function;
 
-    /** @private */
-    [Embed(source='/../assets/setting_joy.png')]
-    private var _joybitmap:Class;
     /** @private */
     private var _btnGroup:SetBtnGroup;
     /** @private */

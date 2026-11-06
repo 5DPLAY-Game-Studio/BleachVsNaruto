@@ -6,6 +6,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.Timer;
 
+import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 
 public class ScreenPadArrow extends ScreenPadBtnBase {
@@ -36,8 +37,8 @@ public class ScreenPadArrow extends ScreenPadBtnBase {
 
         _resetPoint = new Point(_orgBounds.x, _orgBounds.y);
 
-        _lightH = new ScreenPadAsset.light();
-        _lightV = new ScreenPadAsset.light();
+        _lightH = UiBitmap.create(ScreenPadAsset.light);
+        _lightV = UiBitmap.create(ScreenPadAsset.light);
 
         _lightH.scaleX = _lightH.scaleY = _orgScale;
         _lightV.scaleX = _lightV.scaleY = _orgScale;

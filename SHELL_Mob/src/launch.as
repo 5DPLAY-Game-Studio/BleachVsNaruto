@@ -46,6 +46,7 @@ import net.play5d.game.bvn.mob.utils.UIAssetUtil;
 import net.play5d.game.bvn.ui.fight.FightQiBarMode;
 import net.play5d.game.bvn.ui.fight.FightUI;
 import net.play5d.game.bvn.utils.AssetLoader;
+import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.SwfLib;
@@ -69,8 +70,6 @@ public class launch extends Sprite {
             addEventListener(Event.ADDED_TO_STAGE, initialize);
         }
     }
-    [Embed(source='/../assets/startup.png')]
-    private var startupBitmap:Class;
     private var _startBitmap:Bitmap;
     private var _isActive:Boolean        = true;
     private var _assetLoader:AssetLoader = new AssetLoader();
@@ -84,11 +83,15 @@ public class launch extends Sprite {
         stage.addEventListener(Event.DEACTIVATE, activeHandler);
         stage.addEventListener(Event.ACTIVATE, activeHandler);
 
-        _startBitmap        = new startupBitmap();
-        _startBitmap.width  = RootSprite.FULL_SCREEN_SIZE.x;
-        _startBitmap.height = RootSprite.FULL_SCREEN_SIZE.y;
-
-        addChild(_startBitmap);
+        UiBitmap.load('startup.png', function (bmp:Bitmap):void {
+            _startBitmap        = bmp;
+            _startBitmap.width  = RootSprite.FULL_SCREEN_SIZE.x;
+            _startBitmap.height = RootSprite.FULL_SCREEN_SIZE.y;
+            addChild(_startBitmap);
+            initGame();
+        }, function ():void {
+            initGame();
+        });
     }
 
     private function removeStartBitmap():void {
@@ -122,9 +125,7 @@ public class launch extends Sprite {
 
         URL.MARK = 'bvn_mob' + MainGame.VERSION;
 
-        ScreenPadManager.initialize(stage);
-
-        initUI();
+        ScreenPadManager.initialize(stage, initUI);
     }
 
     private function initUI():void {
@@ -178,7 +179,6 @@ public class launch extends Sprite {
         ScreenRotator.I.init(stage);
 
         showStartPic();
-        initGame();
     }
 
     private function activeHandler(e:Event):void {

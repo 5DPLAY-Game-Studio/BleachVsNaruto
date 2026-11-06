@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2024, 5DPLAY Game Studio
+ * Copyright (C) 2021-2026, 5DPLAY Game Studio
  * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,55 +19,71 @@
 package net.play5d.game.bvn.utils {
 import flash.display.Bitmap;
 
+/**
+ * 支付图标。文件在 <code>assets/ui/bitmap</code>。
+ *
+ * @see UiBitmap
+ */
 public class EmbedAssetUtils {
 
-    [Embed(source='/../assets/alipay.png')]
-    private static var alipayPNG:Class;
-
-    [Embed(source='/../assets/weixin.png')]
-    private static var weixinPNG:Class;
-
-    [Embed(source='/../assets/patreon.png')]
-    private static var patreonPNG:Class;
-
-    [Embed(source='/../assets/android.png')]
-    private static var androidPNG:Class;
-
-    private static var _alipay:Bitmap;
-    private static var _weixin:Bitmap;
-    private static var _patreon:Bitmap;
-    private static var _android:Bitmap;
-
-    public static function getAndroid():Bitmap {
-        if (!_android) {
-            _android           = new androidPNG();
-            _android.smoothing = true;
-        }
-        return _android;
+    /**
+     * 读取 Android 图标。
+     *
+     * @param back 成功回调，参数为位图。
+     * @example
+     * <listing version="3.0">
+     * EmbedAssetUtils.getAndroid(onIcon);
+     * </listing>
+     */
+    public static function getAndroid(back:Function):void {
+        load('android.png', back);
     }
 
-    public static function getAlipay():Bitmap {
-        if (!_alipay) {
-            _alipay           = new alipayPNG();
-            _alipay.smoothing = true;
-        }
-        return _alipay;
+    /**
+     * 读取支付宝图标。
+     *
+     * @param back 成功回调，参数为位图。
+     * @example
+     * <listing version="3.0">
+     * EmbedAssetUtils.getAlipay(onIcon);
+     * </listing>
+     */
+    public static function getAlipay(back:Function):void {
+        load('alipay.png', back);
     }
 
-    public static function getWeixin():Bitmap {
-        if (!_weixin) {
-            _weixin           = new weixinPNG();
-            _weixin.smoothing = true;
-        }
-        return _weixin;
+    /**
+     * 读取微信图标。
+     *
+     * @param back 成功回调，参数为位图。
+     * @example
+     * <listing version="3.0">
+     * EmbedAssetUtils.getWeixin(onIcon);
+     * </listing>
+     */
+    public static function getWeixin(back:Function):void {
+        load('weixin.png', back);
     }
 
-    public static function getPatreon():Bitmap {
-        if (!_patreon) {
-            _patreon           = new patreonPNG();
-            _patreon.smoothing = true;
-        }
-        return _patreon;
+    /**
+     * 读取 Patreon 图标。
+     *
+     * @param back 成功回调，参数为位图。
+     * @example
+     * <listing version="3.0">
+     * EmbedAssetUtils.getPatreon(onIcon);
+     * </listing>
+     */
+    public static function getPatreon(back:Function):void {
+        load('patreon.png', back);
+    }
+
+    /** @private */
+    private static function load(name:String, back:Function):void {
+        UiBitmap.load(name, function (bmp:Bitmap):void {
+            bmp.smoothing = true;
+            back(bmp);
+        });
     }
 
 }

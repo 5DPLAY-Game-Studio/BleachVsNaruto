@@ -15,6 +15,7 @@ import net.play5d.game.bvn.mob.input.InputManager;
 import net.play5d.game.bvn.mob.input.ScreenPadInput;
 import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.stage.SelectFighterStage;
+import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.kyo.stage.events.KyoStageEvent;
 
 public class ScreenPadManager {
@@ -26,22 +27,30 @@ public class ScreenPadManager {
 
     private static var _listened:Dictionary = new Dictionary();
 
-    public static function initialize(stage:Stage):void {
+    public static function initialize(stage:Stage, back:Function = null):void {
         _stage = stage;
 
         GameEvent.addEventListener(GameEvent.PAUSE_GAME, pauseResumeHandler);
         GameEvent.addEventListener(GameEvent.RESUME_GAME, pauseResumeHandler);
 
-        _game          = new ScreenPadGame(stage);
-        _game.inputters = new Vector.<ScreenPadInput>();
-        _game.inputters.push(InputManager.I.screen_p1);
-        _game.menuInputter = InputManager.I.screen_menu;
+        ScreenPadAsset.load(function ():void {
+            _game           = new ScreenPadGame(stage);
+            _game.inputters = new Vector.<ScreenPadInput>();
+            _game.inputters.push(InputManager.I.screen_p1);
+            _game.menuInputter = InputManager.I.screen_menu;
 
-        _selectFighter          = new ScreenPadSelectFighter(stage);
-        _selectFighter.inputters = new Vector.<ScreenPadInput>();
-        _selectFighter.inputters.push(InputManager.I.screen_menu, InputManager.I.screen_p1);
+            _selectFighter           = new ScreenPadSelectFighter(stage);
+            _selectFighter.inputters = new Vector.<ScreenPadInput>();
+            _selectFighter.inputters.push(InputManager.I.screen_menu, InputManager.I.screen_p1);
 
-        Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+            Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+
+            if (back != null) {
+                back();
+            }
+        }, function ():void {
+            GameLogger.error('ui', 'screen pad bitmap load failed');
+        });
     }
 
     public static function reBuild():void {

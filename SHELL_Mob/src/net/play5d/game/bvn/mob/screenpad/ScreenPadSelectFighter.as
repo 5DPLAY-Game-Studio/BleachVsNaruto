@@ -67,7 +67,7 @@ public class ScreenPadSelectFighter {
     }
 
     private function addBtn(
-            keyId:String, asset:Class, left:Number = 0, top:Number = 0, right:Number = 0, bottom:Number = 0,
+            keyId:String, asset:String, left:Number = 0, top:Number = 0, right:Number = 0, bottom:Number = 0,
             areaAdd:Number                                                                              = 0, btnSize:Number = 0
     ):ScreenPadBtn {
         var size:Point = new Point();

@@ -257,7 +257,7 @@ public class ScreenPadGame extends EventDispatcher {
         addBtn('wankai', ScreenPadAsset.wanjie, 0.1, 0, 0, 3.5, 0.3, 0.7);
     }
 
-    private function addArrow(keyIds:Array, asset:Class, left:Number = 0, top:Number = 0, right:Number = 0,
+    private function addArrow(keyIds:Array, asset:String, left:Number = 0, top:Number = 0, right:Number = 0,
                               bottom:Number                                                            = 0, areaAdd:Number = 0
     ):ScreenPadArrow {
         var size:Point = new Point();
@@ -287,7 +287,7 @@ public class ScreenPadGame extends EventDispatcher {
         return arrow;
     }
 
-    private function addBtn(keyId:String, asset:Class, left:Number = 0, top:Number = 0, right:Number = 0,
+    private function addBtn(keyId:String, asset:String, left:Number = 0, top:Number = 0, right:Number = 0,
                             bottom:Number                                                            = 0, areaAdd:Number = 0,
                             btnSize:Number                                                           = 1.1
     ):ScreenPadBtn {

@@ -25,17 +25,19 @@ import flash.utils.setTimeout;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.events.SetBtnEvent;
 import net.play5d.game.bvn.ui.settings.SetBtnGroup;
+import net.play5d.game.bvn.utils.UiBitmap;
 
 public class MoveListSp extends Sprite {
 
     public function MoveListSp() {
         super();
 
-        _pic        = new _picClass();
-        _pic.width  = GameConfig.GAME_SIZE.x;
-        _pic.height = GameConfig.GAME_SIZE.y;
-
-        addChild(_pic);
+        UiBitmap.load('movelist.jpg', function (bmp:Bitmap):void {
+            _pic        = bmp;
+            _pic.width  = GameConfig.GAME_SIZE.x;
+            _pic.height = GameConfig.GAME_SIZE.y;
+            addChildAt(_pic, 0);
+        });
 
         _btns = new SetBtnGroup();
         _btns.setBtnData([{label: 'BACK', cn: GetLang('common.back')}]);
@@ -45,8 +47,7 @@ public class MoveListSp extends Sprite {
         addChild(_btns);
     }
     public var onBackSelect:Function;
-    [Embed(source='/../assets/movelist.jpg')]
-    private var _picClass:Class;
+    /** @private */
     private var _pic:Bitmap;
     private var _btns:SetBtnGroup;
 
