@@ -17,11 +17,6 @@
  */
 
 package net.play5d.game.bvn.fighter.api {
-import net.play5d.game.bvn.fighter.api.v1.FighterApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterCameraApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterEffectApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterMcApi;
-
 /**
  * 一次初始化造出的四扇角色时间轴门面。
  *
@@ -37,22 +32,22 @@ public class FighterApiPorts {
     /**
      * 角色门面，对应 <code>$fighter_ctrler</code>。
      */
-    public var fighter:FighterApi;
+    public var fighter:FighterApiProxy;
 
     /**
      * 动作门面，对应 <code>$mc_ctrler</code>。
      */
-    public var mc:FighterMcApi;
+    public var mc:FighterApiProxy;
 
     /**
      * 特效门面，对应 <code>$effect_ctrler</code>。
      */
-    public var effect:FighterEffectApi;
+    public var effect:FighterApiProxy;
 
     /**
      * 镜头门面，对应 <code>$camera_ctrler</code>。
      */
-    public var camera:FighterCameraApi;
+    public var camera:FighterApiProxy;
 
 }
 }

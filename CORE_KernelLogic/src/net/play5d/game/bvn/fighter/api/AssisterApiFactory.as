@@ -19,17 +19,14 @@
 package net.play5d.game.bvn.fighter.api {
 import flash.display.MovieClip;
 
-import net.play5d.game.bvn.fighter.api.v1.AssisterApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterCameraApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterEffectApi;
 import net.play5d.game.bvn.fighter.ctrler.AssisterCtrler;
 
 /**
  * 按辅助声明的 API 版本组装时间轴门面。
  *
- * <p><code>main_mc.API_VERSION</code> 缺省为 <code>1</code>，与主人的角色版本无关。只有整数 <code>1</code> 会造出门面。</p>
+ * <p><code>main_mc.API_VERSION</code> 缺省为 <code>1</code>，与主人的角色版本无关。版本是几就载入 <code>api/v几</code> 的 <code>AssisterApi</code>，没有该类则拒绝。</p>
  *
- * @see AssisterApi
+ * @see FighterApiVersion
  */
 public class AssisterApiFactory {
 
@@ -38,40 +35,25 @@ public class AssisterApiFactory {
      *
      * @param mainMc 辅助主时间轴。读取其上的 <code>API_VERSION</code>。
      * @param ctrler 已经 <code>initAssister</code> 的控制器。
-     * @return 第 1 版门面。特效门和镜头门绑定在这个辅助上。
-     * @throws Error <code>mainMc</code> 为空，或版本不是受支持的整数。
+     * @return 该版本的辅助门面。特效门和镜头门绑定在这个辅助上。
+     * @throws Error <code>mainMc</code> 为空，版本非法，或该版本没有对应门面。
      * @example
      * <listing version="3.0">
-     * var api:AssisterApi = AssisterApiFactory.create(mainMc, ctrler);
+     * AssisterApiFactory.create(mainMc, ctrler);
      * </listing>
      */
-    public static function create(mainMc:MovieClip, ctrler:AssisterCtrler):AssisterApi {
+    public static function create(mainMc:MovieClip, ctrler:AssisterCtrler):FighterApiProxy {
         if (!mainMc) {
             ThrowError(Error, GetLang('debug.error.data.assister.mc_is_null'));
         }
 
-        var version:int = versionOf(mainMc);
-        if (version != 1) {
-            ThrowError(Error, GetLang('debug.error.data.assister.unknown_version', {version: version}));
-        }
+        var unknownKey:String = 'debug.error.data.assister.unknown_version';
+        var version:int       = FighterApiVersion.read(mainMc, unknownKey);
+        var effectCls:Class   = FighterApiVersion.find(version, 'FighterEffectApi', unknownKey);
+        var cameraCls:Class   = FighterApiVersion.find(version, 'FighterCameraApi', unknownKey);
+        var assistCls:Class   = FighterApiVersion.find(version, 'AssisterApi', unknownKey);
 
-        return new AssisterApi(ctrler, new FighterEffectApi(ctrler.effect), new FighterCameraApi(ctrler.camera));
-    }
-
-    /**
-     * @private 读取版本。缺省为 1；非整数在此拒绝。
-     */
-    private static function versionOf(mainMc:MovieClip):int {
-        var raw:* = mainMc.API_VERSION;
-        if (raw == undefined || raw == null) {
-            return 1;
-        }
-        var numeric:Boolean = raw is int || raw is uint || raw is Number;
-        if (!numeric || isNaN(raw) || raw == Infinity || raw == -Infinity || int(raw) != raw) {
-            ThrowError(Error, GetLang('debug.error.data.assister.unknown_version', {version: String(raw)}));
-        }
-
-        return int(raw);
+        return new assistCls(ctrler, new effectCls(ctrler.effect), new cameraCls(ctrler.camera)) as FighterApiProxy;
     }
 
 }

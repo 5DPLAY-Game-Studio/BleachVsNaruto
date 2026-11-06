@@ -19,10 +19,6 @@
 package net.play5d.game.bvn.fighter.api {
 import flash.display.MovieClip;
 
-import net.play5d.game.bvn.fighter.api.v1.FighterApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterCameraApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterEffectApi;
-import net.play5d.game.bvn.fighter.api.v1.FighterMcApi;
 import net.play5d.game.bvn.fighter.ctrler.FighterCameraCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterCtrler;
 import net.play5d.game.bvn.fighter.ctrler.FighterEffectCtrl;
@@ -31,7 +27,7 @@ import net.play5d.game.bvn.fighter.ctrler.FighterMcCtrler;
 /**
  * 按角色声明的 API 版本组装时间轴门面。
  *
- * <p><code>main_mc.API_VERSION</code> 缺省为 <code>1</code>。只有整数 <code>1</code> 会造出四扇门，其它值直接拒绝。</p>
+ * <p><code>main_mc.API_VERSION</code> 缺省为 <code>1</code>，对应 <code>api/v1</code>。版本是几就载入 <code>api/v几</code> 的同名门面，没有该类则拒绝。</p>
  *
  * @see FighterApiPorts
  */
@@ -46,7 +42,7 @@ public class FighterApiFactory {
      * @param effect 特效控制器。
      * @param camera 镜头控制器。
      * @return 四扇门。特效门与动作门上的 <code>effectCtrler</code> 是同一个实例。
-     * @throws Error <code>mainMc</code> 为空，或版本不是受支持的整数。
+     * @throws Error <code>mainMc</code> 为空，版本非法，或该版本没有对应门面。
      * @example
      * <listing version="3.0">
      * var ports:FighterApiPorts = FighterApiFactory.create(mainMc, fighter, mc, effect, camera);
@@ -59,36 +55,22 @@ public class FighterApiFactory {
             ThrowError(Error, GetLang('debug.error.data.fighter_api_factory.mc_is_null'));
         }
 
-        var version:int = versionOf(mainMc);
-        if (version != 1) {
-            ThrowError(Error, GetLang('debug.error.data.fighter_api_factory.unknown_version', {version: version}));
-        }
+        var unknownKey:String = 'debug.error.data.fighter_api_factory.unknown_version';
+        var version:int       = FighterApiVersion.read(mainMc, unknownKey);
+        var effectCls:Class   = FighterApiVersion.find(version, 'FighterEffectApi', unknownKey);
+        var cameraCls:Class   = FighterApiVersion.find(version, 'FighterCameraApi', unknownKey);
+        var fighterCls:Class  = FighterApiVersion.find(version, 'FighterApi', unknownKey);
+        var mcCls:Class       = FighterApiVersion.find(version, 'FighterMcApi', unknownKey);
 
-        var effectApi:FighterEffectApi = new FighterEffectApi(effect);
-        var ports:FighterApiPorts      = new FighterApiPorts();
+        var effectApi:FighterApiProxy = new effectCls(effect) as FighterApiProxy;
+        var ports:FighterApiPorts     = new FighterApiPorts();
         ports.version = version;
         ports.effect  = effectApi;
-        ports.camera  = new FighterCameraApi(camera);
-        ports.fighter = new FighterApi(fighter);
-        ports.mc     = new FighterMcApi(mcCtrler, effectApi);
+        ports.camera  = new cameraCls(camera) as FighterApiProxy;
+        ports.fighter = new fighterCls(fighter) as FighterApiProxy;
+        ports.mc      = new mcCls(mcCtrler, effectApi) as FighterApiProxy;
 
         return ports;
-    }
-
-    /**
-     * @private 读取版本。缺省为 1；非整数在此拒绝。
-     */
-    private static function versionOf(mainMc:MovieClip):int {
-        var raw:* = mainMc.API_VERSION;
-        if (raw == undefined || raw == null) {
-            return 1;
-        }
-        var numeric:Boolean = raw is int || raw is uint || raw is Number;
-        if (!numeric || isNaN(raw) || raw == Infinity || raw == -Infinity || int(raw) != raw) {
-            ThrowError(Error, GetLang('debug.error.data.fighter_api_factory.unknown_version', {version: String(raw)}));
-        }
-
-        return int(raw);
     }
 
 }
