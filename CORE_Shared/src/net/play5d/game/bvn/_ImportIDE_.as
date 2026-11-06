@@ -42,6 +42,7 @@ public class _ImportIDE_ extends Sprite {
         return new <Class>[
             // net.play5d.game.bvn.data
             DefinedClass,
+            GameInputType,
             GameMode,
             GameQuality,
             HitType,

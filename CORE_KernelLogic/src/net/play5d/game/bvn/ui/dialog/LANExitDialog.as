@@ -21,7 +21,7 @@ import flash.display.Sprite;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.events.SetBtnEvent;
-import net.play5d.game.bvn.input.GameInputType;
+import net.play5d.game.bvn.data.GameInputType;
 import net.play5d.game.bvn.interfaces.lan.ILanExitDialog;
 import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.settings.SetBtnGroup;

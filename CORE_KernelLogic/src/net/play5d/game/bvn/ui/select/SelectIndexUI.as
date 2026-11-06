@@ -24,8 +24,8 @@ import flash.utils.setTimeout;
 
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.data.GameData;
+import net.play5d.game.bvn.data.GameInputType;
 import net.play5d.game.bvn.data.GameMode;
-import net.play5d.game.bvn.input.GameInputType;
 import net.play5d.game.bvn.utils.ResUtils;
 
 public class SelectIndexUI extends Sprite {

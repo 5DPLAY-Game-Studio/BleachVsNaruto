@@ -32,10 +32,11 @@ import net.play5d.game.bvn.interfaces.IGameInput;
  *
  * @example
  * <listing version="3.0">
- * var inputs:Vector.&lt;IGameInput&gt; = gameInterface.getGameInput('P1');
+ * var inputs:Vector.&lt;IGameInput&gt; = gameInterface.getGameInput(GameInputType.P1);
  * </listing>
  * @see IExtendConfig
  * @see IGameInput
+ * @see net.play5d.game.bvn.data.GameInputType
  */
 public interface IGameInterface {
     /**
@@ -98,12 +99,13 @@ public interface IGameInterface {
 
     /**
      * 按类型取得输入设备列表。
-     * @param type 输入类型（如菜单 / P1 / P2）。
+     * @param type 输入槽位，取 <code>GameInputType</code> 的常量。
      * @return 输入实现向量。
      * @example
      * <listing version="3.0">
-     * var list:Vector.&lt;IGameInput&gt; = instance.getGameInput('MENU');
+     * var list:Vector.&lt;IGameInput&gt; = instance.getGameInput(GameInputType.MENU);
      * </listing>
+     * @see net.play5d.game.bvn.data.GameInputType
      */
     function getGameInput(type:String):Vector.<IGameInput>;
 
