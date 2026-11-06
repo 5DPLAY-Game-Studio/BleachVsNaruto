@@ -54,9 +54,9 @@ import flash.geom.Rectangle;
  */
 public class DockedDebugWindow {
     /** @private 默认内容宽 */
-    private static const DEFAULT_WIDTH:Number = 400;
+    private static const DEFAULT_WIDTH:Number          = 400;
     /** @private 默认内容高 */
-    private static const DEFAULT_HEIGHT:Number = 600;
+    private static const DEFAULT_HEIGHT:Number         = 600;
     /** @private 默认内容底边（用于垂直居中） */
     private static const DEFAULT_CONTENT_BOTTOM:Number = 520;
 

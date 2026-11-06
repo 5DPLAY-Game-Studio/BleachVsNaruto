@@ -71,27 +71,27 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
  */
 public class SpriteInspectorWindow {
     /** @private */
-    private static const PANEL_WIDTH:Number = 384;
+    private static const PANEL_WIDTH:Number  = 384;
     /** @private */
     private static const PANEL_HEIGHT:Number = 480;
     /** @private */
-    private static const PAD:Number = 6;
+    private static const PAD:Number          = 6;
     /** @private */
-    private static const HEADER_H:Number = 22;
+    private static const HEADER_H:Number     = 22;
     /** @private */
-    private static const ROW_H:Number = 22;
+    private static const ROW_H:Number        = 22;
     /** @private */
-    private static const ROW_GAP:Number = 2;
+    private static const ROW_GAP:Number      = 2;
     /** @private */
-    private static const NAME_W:Number = 120;
+    private static const NAME_W:Number       = 120;
     /** @private 属性值锁定勾选宽 */
-    private static const LOCK_W:Number = 20;
+    private static const LOCK_W:Number       = 20;
     /** @private */
-    private static const VALUE_W:Number = 200;
+    private static const VALUE_W:Number      = 200;
     /** @private 控件字号 */
-    private static const FONT_SIZE:Number = 11;
+    private static const FONT_SIZE:Number    = 11;
     /** @private 分帧建行每批数量 */
-    private static const BUILD_BATCH:int = 16;
+    private static const BUILD_BATCH:int     = 16;
 
     /** @private */
     private var _mainWindow:NativeWindow;
@@ -126,7 +126,7 @@ public class SpriteInspectorWindow {
     /** @private 窗口装饰条高度 */
     private var _chromeH:Number;
     /** @private 行列表（顺序遍历） */
-    private var _rowList:Array = [];
+    private var _rowList:Array    = [];
     /** @private 待分帧构建的属性 */
     private var _pendingProps:Array;
     /** @private 分帧构建游标 */
@@ -503,9 +503,9 @@ public class SpriteInspectorWindow {
      * @param meta 属性元数据 <code>{name, type, writable}</code>。
      */
     private function addRow(meta:Object):void {
-        var propName:String   = String(meta.name);
-        var typeName:String   = String(meta.type);
-        var writable:Boolean  = Boolean(meta.writable);
+        var propName:String  = String(meta.name);
+        var typeName:String  = String(meta.type);
+        var writable:Boolean = Boolean(meta.writable);
         var editable:Boolean = writable && InspectPropUtil.isEditableType(typeName);
 
         var hLayout:HorizontalLayout = new HorizontalLayout();

@@ -32,15 +32,15 @@ import feathers.text.TextFormat;
  */
 public class DebugThemeChrome {
     /** Steel 暗色底 */
-    public static const BG_DARK:uint = 0x383838;
+    public static const BG_DARK:uint              = 0x383838;
     /** Steel 亮色底 */
-    public static const BG_LIGHT:uint = 0xf8f8f8;
+    public static const BG_LIGHT:uint             = 0xf8f8f8;
     /** Steel 暗色主文字 */
-    public static const TEXT_DARK:uint = 0xf1f1f1;
+    public static const TEXT_DARK:uint            = 0xf1f1f1;
     /** Steel 亮色主文字 */
-    public static const TEXT_LIGHT:uint = 0x1f1f1f;
+    public static const TEXT_LIGHT:uint           = 0x1f1f1f;
     /** Steel 暗色次文字 */
-    public static const TEXT_SECONDARY_DARK:uint = 0xafafaf;
+    public static const TEXT_SECONDARY_DARK:uint  = 0xafafaf;
     /** Steel 亮色次文字 */
     public static const TEXT_SECONDARY_LIGHT:uint = 0x6f6f6f;
 

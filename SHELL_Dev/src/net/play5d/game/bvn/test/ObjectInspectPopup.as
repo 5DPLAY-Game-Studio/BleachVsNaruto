@@ -64,35 +64,35 @@ import net.play5d.game.bvn.ctrler.GameRender;
  */
 public class ObjectInspectPopup {
     /** @private */
-    private static const PANEL_W:Number = 344;
+    private static const PANEL_W:Number       = 344;
     /** @private */
-    private static const PANEL_H:Number = 360;
+    private static const PANEL_H:Number       = 360;
     /** @private */
-    private static const PAD:Number = 6;
+    private static const PAD:Number           = 6;
     /** @private */
-    private static const HEADER_H:Number = 22;
+    private static const HEADER_H:Number      = 22;
     /** @private */
-    private static const ROW_H:Number = 22;
+    private static const ROW_H:Number         = 22;
     /** @private */
-    private static const ROW_GAP:Number = 2;
+    private static const ROW_GAP:Number       = 2;
     /** @private */
-    private static const NAME_W:Number = 110;
+    private static const NAME_W:Number        = 110;
     /** @private 属性值锁定勾选宽 */
-    private static const LOCK_W:Number = 20;
+    private static const LOCK_W:Number        = 20;
     /** @private */
-    private static const VALUE_W:Number = 180;
+    private static const VALUE_W:Number       = 180;
     /** @private */
-    private static const FONT_SIZE:Number = 11;
+    private static const FONT_SIZE:Number     = 11;
     /** @private */
-    private static const MAX_DEPTH:int = 8;
+    private static const MAX_DEPTH:int        = 8;
     /** @private 分帧建行每批数量 */
-    private static const BUILD_BATCH:int = 16;
+    private static const BUILD_BATCH:int      = 16;
     /** @private 展示模式：tostring / props / empty */
     private static const MODE_TOSTRING:String = 'tostring';
     /** @private */
-    private static const MODE_PROPS:String = 'props';
+    private static const MODE_PROPS:String    = 'props';
     /** @private */
-    private static const MODE_EMPTY:String = 'empty';
+    private static const MODE_EMPTY:String    = 'empty';
 
     /** @private */
     private var _owner:NativeWindow;
@@ -125,7 +125,7 @@ public class ObjectInspectPopup {
     /** @private tostring 模式文本 */
     private var _toStringLabel:Label;
     /** @private 行列表（顺序遍历） */
-    private var _rowList:Array = [];
+    private var _rowList:Array     = [];
     /** @private 待分帧构建的属性元数据 */
     private var _pendingProps:Array;
     /** @private 分帧构建游标 */
@@ -863,7 +863,7 @@ public class ObjectInspectPopup {
         }
         var sw:Number = _window.stage.stageWidth;
         var sh:Number = _window.stage.stageHeight;
-        var bg:uint = DebugThemeChrome.bgColor(_darkMode);
+        var bg:uint   = DebugThemeChrome.bgColor(_darkMode);
 
         _root.graphics.clear();
         _root.graphics.beginFill(bg, 1);

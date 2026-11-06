@@ -68,33 +68,33 @@ public class FighterTester extends Sprite {
     private const KEY:String = 'text';
 
     /** @private 调试面板内容宽（左右分栏） */
-    private static const DEBUG_PANEL_WIDTH:Number = 400;
+    private static const DEBUG_PANEL_WIDTH:Number  = 400;
     /** @private 调试面板内容高 */
     private static const DEBUG_PANEL_HEIGHT:Number = 600;
     /** @private 列内边距 */
-    private static const COL_PAD:Number = 10;
+    private static const COL_PAD:Number            = 10;
     /** @private 左右列间距 */
-    private static const COL_GAP:Number = 10;
+    private static const COL_GAP:Number            = 10;
     /** @private 单列宽 */
-    private static const COL_WIDTH:Number = 185;
+    private static const COL_WIDTH:Number          = 185;
     /** @private 下拉/输入控件宽 */
-    private static const CONTROL_WIDTH:Number = 175;
+    private static const CONTROL_WIDTH:Number      = 175;
     /** @private 按钮宽 */
-    private static const BUTTON_WIDTH:Number = 175;
+    private static const BUTTON_WIDTH:Number       = 175;
     /** @private 左栏标签行高 */
-    private static const LABEL_HEIGHT:Number = 22;
+    private static const LABEL_HEIGHT:Number       = 22;
     /** @private 左栏字段组数（标签+下拉） */
-    private static const FIELD_COUNT:int = 7;
+    private static const FIELD_COUNT:int           = 7;
     /** @private 右栏功能按钮数（不含底部测试） */
-    private static const SIDE_BUTTON_COUNT:int = 3;
+    private static const SIDE_BUTTON_COUNT:int     = 3;
     /** @private 右栏功能按钮高 */
     private static const SIDE_BUTTON_HEIGHT:Number = 34;
     /** @private 右栏功能按钮行距 */
-    private static const BUTTON_GAP:Number = 10;
+    private static const BUTTON_GAP:Number         = 10;
     /** @private 底部测试按钮高 */
     private static const TEST_BUTTON_HEIGHT:Number = 40;
     /** @private 底部测试按钮与上方内容间距 */
-    private static const TEST_BUTTON_GAP:Number = 10;
+    private static const TEST_BUTTON_GAP:Number    = 10;
 
     public function FighterTester() {
         // 忽略旧版角色
@@ -156,16 +156,16 @@ public class FighterTester extends Sprite {
         _testContent.addChild(_rightCol);
         _testUI.addChild(_testContent);
 
-        var colH:Number  = DEBUG_PANEL_HEIGHT - COL_PAD * 2;
-        var mainH:Number = colH - TEST_BUTTON_HEIGHT - TEST_BUTTON_GAP;
-        var lx:Number    = (COL_WIDTH - CONTROL_WIDTH) * 0.5;
-        var bx:Number    = (COL_WIDTH - BUTTON_WIDTH) * 0.5;
+        var colH:Number      = DEBUG_PANEL_HEIGHT - COL_PAD * 2;
+        var mainH:Number     = colH - TEST_BUTTON_HEIGHT - TEST_BUTTON_GAP;
+        var lx:Number        = (COL_WIDTH - CONTROL_WIDTH) * 0.5;
+        var bx:Number        = (COL_WIDTH - BUTTON_WIDTH) * 0.5;
         var fieldSlot:Number = mainH / FIELD_COUNT;
         var halfH:Number     = mainH * 0.5;
         var btnH:Number      = SIDE_BUTTON_HEIGHT;
         var stackH:Number    = btnH * SIDE_BUTTON_COUNT + BUTTON_GAP * (SIDE_BUTTON_COUNT - 1);
         // 上半区垂直居中按钮组，上下留白
-        var by:Number = Math.max(BUTTON_GAP, (halfH - stackH) * 0.5);
+        var by:Number        = Math.max(BUTTON_GAP, (halfH - stackH) * 0.5);
 
         var fighterData:Array = (
                 function ():Array {
