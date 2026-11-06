@@ -11,10 +11,10 @@ public class InputManager {
         return _i;
     }
 
-    public var screen_menu:ScreenPadInput = new ScreenPadInput();
-    public var screen_p1:ScreenPadInput   = new ScreenPadInput();
-    public var joy_menu:GameJoystickInput = new GameJoystickInput(1);
-    public var joy_p1:GameJoystickInput   = new GameJoystickInput(1);
+    public var screen_menu:ScreenPadInput      = new ScreenPadInput();
+    public var screen_p1:ScreenPadInput        = new ScreenPadInput();
+    public var joy_menu:GameJoystickInput      = new GameJoystickInput(1);
+    public var joy_p1:GameJoystickInput        = new GameJoystickInput(1);
     public var socket_input_p1:GameSocketInput = new GameSocketInput();
     public var socket_input_p2:GameSocketInput = new GameSocketInput();
 }

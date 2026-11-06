@@ -72,7 +72,7 @@ public class launch extends Sprite {
     [Embed(source='/../assets/startup.png')]
     private var startupBitmap:Class;
     private var _startBitmap:Bitmap;
-    private var _isActive:Boolean = true;
+    private var _isActive:Boolean        = true;
     private var _assetLoader:AssetLoader = new AssetLoader();
     private var _reportingUncaught:Boolean;
 

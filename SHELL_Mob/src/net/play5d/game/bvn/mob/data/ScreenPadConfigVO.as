@@ -4,11 +4,11 @@ public class ScreenPadConfigVO {
     /**
      * 按键模式
      */
-    public var joyMode:int             = 1;
+    public var joyMode:int                = 1;
     /**
      * 透明度
      */
-    public var joyAlpha:Number         = 0.7;
+    public var joyAlpha:Number            = 0.7;
     /**
      * 位置，大小
      */
@@ -16,11 +16,11 @@ public class ScreenPadConfigVO {
     /**
      * 万解自动隐藏
      */
-    public var wankaiAutoHide:Boolean  = true;
+    public var wankaiAutoHide:Boolean     = true;
     /**
      * 特殊键自动隐藏
      */
-    public var specialAutoHide:Boolean = true;
+    public var specialAutoHide:Boolean    = true;
     /**
      * 必杀键自动隐藏
      */

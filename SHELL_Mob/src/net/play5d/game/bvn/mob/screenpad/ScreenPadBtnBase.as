@@ -4,11 +4,11 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 public class ScreenPadBtnBase {
-    public var moveAble:Boolean = false;
+    public var moveAble:Boolean    = false;
     public var display:Bitmap;
-    public var touchPos:Point   = new Point();
+    public var touchPos:Point      = new Point();
     public var keyId:Object;
-    public var areaAdd:Number = 0;
+    public var areaAdd:Number      = 0;
     protected var _orgScale:Number = 1;
     protected var _orgBounds:Rectangle;
     protected var _area:Rectangle;

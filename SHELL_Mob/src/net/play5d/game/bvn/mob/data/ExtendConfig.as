@@ -6,12 +6,12 @@ import net.play5d.game.bvn.utils.GameLogger;
 
 public class ExtendConfig implements IExtendConfig {
 
-    public var joyMenuConfig:JoyStickConfigVO = new JoyStickConfigVO();
-    public var joy1Config:JoyStickConfigVO    = new JoyStickConfigVO();
+    public var joyMenuConfig:JoyStickConfigVO    = new JoyStickConfigVO();
+    public var joy1Config:JoyStickConfigVO       = new JoyStickConfigVO();
     /**
      * 屏幕尺寸定义：0=拉伸，1=居中
      */
-    public var screenMode:int = 1;
+    public var screenMode:int                    = 1;
     /**
      * 按键设置
      */

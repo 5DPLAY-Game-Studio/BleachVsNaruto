@@ -27,7 +27,7 @@ import net.play5d.game.bvn.utils.URL;
 
 public class GameInterfaceManager implements IGameInterface {
 
-    public static var ENGLISH_VERSION:Boolean = false;
+    public static var ENGLISH_VERSION:Boolean      = false;
     private static var _extendsConfig:ExtendConfig = new ExtendConfig();
 
     public static function get config():ExtendConfig {
