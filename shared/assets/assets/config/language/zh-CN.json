@@ -340,5 +340,15 @@
   "log.error.ui.ad_group.add_ad_first"                         : "add ad first!",
   "log.error.ui.language_stage.element_count_mismatch"         : "语言元素数目不匹配！",
   "log.error.ui.language_stage.unsupported_language"           : "不支持的语言！",
-  "log.error.ui.selector_item_ui.select_vo_unset"              : "未设置 selectVO！"
+  "log.error.ui.selector_item_ui.select_vo_unset"              : "未设置 selectVO！",
+  "log.info.sys.launch.ready"                                  : "初始化完成",
+  "log.info.sys.main_game.config"                              : "正在初始化游戏配置...",
+  "log.info.sys.main_game.data"                                : "正在初始化游戏数据...",
+  "log.info.sys.main_game.input"                               : "正在初始化输入...",
+  "log.info.sys.main_game.input_config"                        : "正在初始化输入配置...",
+  "log.info.sys.main_game.loading"                             : "正在初始化游戏加载...",
+  "log.info.sys.main_game.render"                              : "正在初始化画面渲染...",
+  "log.info.sys.main_game.resources_ready"                     : "资源初始化完成",
+  "log.info.sys.main_game.scroll_rect"                         : "正在初始化滚动区域...",
+  "log.info.sys.main_game.stage_ctrl"                          : "正在初始化场景控制器..."
 }

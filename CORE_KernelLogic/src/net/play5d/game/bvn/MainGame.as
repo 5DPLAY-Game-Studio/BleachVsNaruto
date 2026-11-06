@@ -29,6 +29,7 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.data.EffectModel;
 import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameMode;
+import net.play5d.game.bvn.data.LanguageType;
 import net.play5d.game.bvn.events.GameEvent;
 import net.play5d.game.bvn.input.GameInputter;
 import net.play5d.game.bvn.interfaces.GameInterface;
@@ -48,6 +49,7 @@ import net.play5d.game.bvn.stage.SettingStage;
 import net.play5d.game.bvn.stage.WinnerStage;
 import net.play5d.game.bvn.stage.WorldMapStage;
 import net.play5d.game.bvn.utils.GameLogger;
+import net.play5d.game.bvn.utils.MultiLangUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.TouchUtils;
 import net.play5d.kyo.stage.KyoStageCtrl;
@@ -94,31 +96,37 @@ public class MainGame {
 
         function resInitBack():void {
             AssetManager.I.init();
+            GameData.I.loadSaveData();
 
-            GameLogger.log('Initializing resources completed!');
+            // 存档语言先于启动日志。语言界面点选后会再加载一次。
+            var language:String = GameData.I.config.language || LanguageType.CHINESE_SIMPLIFIED;
+            LANGUAGE            = language;
+            MultiLangUtils.I.initialize(language, boot, initFail);
+        }
+
+        function boot():void {
+            LogLang(GameLogger.INFO, 'sys', 'main_game.resources_ready');
 
             _rootSprite = root;
             _stage      = stage;
 
-            GameLogger.log('Initializing game rendering...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.render');
             GameRender.initialize(stage);
 
-            GameLogger.log('Initializing game inputter...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.input');
             GameInputter.initialize(_stage);
 
-            GameLogger.log('Initializing game scroll rectangle...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.scroll_rect');
             root.scrollRect = new Rectangle(0, 0, GameConfig.GAME_SIZE.x, GameConfig.GAME_SIZE.y);
 
-            GameLogger.log('Initializing scene controller...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.stage_ctrl');
             stageCtrl = new KyoStageCtrl(_rootSprite);
 
-            GameLogger.log('Initializing game configuration...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.config');
             ConfigCtrl.apply(GameData.I.config);
 
-            GameLogger.log('Initializing game inputter configuration...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.input_config');
             GameInputter.updateConfig();
-
-            GameData.I.loadSaveData();
 
             if (initBack != null) {
                 initBack();
@@ -127,7 +135,7 @@ public class MainGame {
     }
 
     public function initializeLoad(initBack:Function = null, initFail:Function = null):void {
-        GameLogger.log('Initializing game loading...');
+        LogLang(GameLogger.INFO, 'sys', 'main_game.loading');
 
         var loadingState:GameLoadingStage = new GameLoadingStage();
         stageCtrl.goStage(loadingState);
@@ -136,13 +144,13 @@ public class MainGame {
         GameEvent.dispatchEvent(GameEvent.LOAD_GAME_START);
 
         function loadGameBack():void {
-            GameLogger.log('Initializing game data...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.data');
             GameData.I.initData();
 
-            GameLogger.log('Initializing game configuration...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.config');
             ConfigCtrl.apply(GameData.I.config);
 
-            GameLogger.log('Initializing game inputter configuration...');
+            LogLang(GameLogger.INFO, 'sys', 'main_game.input_config');
             GameInputter.updateConfig();
 
             EffectModel.I.initialize();

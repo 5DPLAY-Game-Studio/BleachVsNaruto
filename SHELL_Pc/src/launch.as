@@ -86,7 +86,7 @@ public class launch extends Sprite {
     }
 
     private function initBackHandler():void {
-        GameLogger.log('init ok');
+        LogLang(GameLogger.INFO, 'sys', 'launch.ready');
 
         UIAssetUtil.I.initialize(_mainGame.goLogo);
     }
