@@ -155,9 +155,9 @@ public class LANRoomState implements IStage {
 
         _playerMap[id] = item;
 
-        var ct_player:Sprite = _ui.ct_player;
-        item.ui.y            = 60;
-        ct_player.addChild(item.ui);
+        var ctPlayer:Sprite = _ui.ct_player;
+        item.ui.y           = 60;
+        ctPlayer.addChild(item.ui);
     }
 
     public function removePlayer(id:String):void {
@@ -256,8 +256,8 @@ public class LANRoomState implements IStage {
         item.type.gotoAndStop(1);
         item.btn_out.visible = false;
 
-        var ct_player:Sprite = _ui.ct_player;
-        ct_player.addChild(item);
+        var ctPlayer:Sprite = _ui.ct_player;
+        ctPlayer.addChild(item);
     }
 
     private function startTimerHandler(e:TimerEvent):void {
