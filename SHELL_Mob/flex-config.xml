@@ -40,7 +40,6 @@
 		<!-- 源代码路径，通常内容是和 include-sources 相同 -->
 		<source-path>
 			<path-element>src</path-element>
-			<path-element>assets</path-element>
 			<path-element>drawable</path-element>
 			<path-element>../CORE_KernelLogic/global</path-element>
 

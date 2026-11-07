@@ -29,7 +29,6 @@
         // 源代码路径，用于 VSCode 代码支持提示，通常内容是和 include-sources 相同
         "source-path": [
             "src",
-            "assets",
             "drawable",
             "../CORE_KernelLogic/global",
 
