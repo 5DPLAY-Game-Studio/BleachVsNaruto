@@ -131,7 +131,7 @@ public class SoundCtrl {
             return;
         }
 
-        AssetManager.I.loadSound('sounds/' + name + '.mp3', function (snd:Sound):void {
+        AssetManager.I.loadCachedSound('sounds/' + name + '.mp3', function (snd:Sound):void {
             playSound(snd);
         });
     }
@@ -405,7 +405,7 @@ public class SoundCtrl {
      * @private 载入 <code>assets/sounds</code> 中的音效并静音播放一次。
      */
     private function warmSoundFile(name:String):void {
-        AssetManager.I.loadSound('sounds/' + name + '.mp3', function (snd:Sound):void {
+        AssetManager.I.loadCachedSound('sounds/' + name + '.mp3', function (snd:Sound):void {
             silentPlay(snd);
         });
     }

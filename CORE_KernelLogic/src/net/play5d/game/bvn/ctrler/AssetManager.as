@@ -158,10 +158,10 @@ public class AssetManager {
      * @param fail 失败回调，签名为 <code>function():void</code>；可为 <code>null</code>。
      * @example
      * <listing version="3.0">
-     * AssetManager.I.loadSound('sounds/snd_menu1.mp3', onSound);
+     * AssetManager.I.loadCachedSound('sounds/snd_menu1.mp3', onSound);
      * </listing>
      */
-    public function loadSound(url:String, back:Function = null, fail:Function = null):void {
+    public function loadCachedSound(url:String, back:Function = null, fail:Function = null):void {
         if (!url) {
             return;
         }
