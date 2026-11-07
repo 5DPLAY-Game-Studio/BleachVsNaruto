@@ -42,7 +42,7 @@ import net.play5d.kyo.utils.BitmapDataPool;
  * <code>warmBasic</code> 在 <code>AssetManager.loadBasic</code> 完成后执行。</p>
  *
  * @see SoundCtrl#warmMenuSounds()
- * @see SoundCtrl#warmCommonSwcSounds()
+ * @see SoundCtrl#warmCommonSounds()
  * @see MenuBtn#warmCommon()
  * @see SetBtnLine#warmCommon()
  * @example
@@ -107,7 +107,7 @@ public class WarmupCtrl {
     /**
      * 基础资源加载完成后的完整预热。
      *
-     * <p>幂等。预热位图字体、缓动插件、常用 SWC 音、菜单 / 设置类缩放探针、
+     * <p>幂等。预热位图字体、缓动插件、常用界面音、菜单 / 设置类缩放探针、
      * BGM 播放器、对话框遮罩与 <code>BitmapDataPool</code>。</p>
      */
     public function warmBasic():void {
@@ -120,7 +120,7 @@ public class WarmupCtrl {
         warmEarly();
 
         warmTweenPlugins();
-        SoundCtrl.I.warmCommonSwcSounds();
+        SoundCtrl.I.warmCommonSounds();
         warmBitmapFont();
         MenuBtn.warmCommon();
         SetBtnLine.warmCommon();

@@ -236,14 +236,14 @@ public class MusouUI implements IGameUI {
         }
 
         EffectCtrl.I.shake(5, 0, 1.5);
-        SoundCtrl.I.playSwcSound(snd_over_hit);
+        SoundCtrl.I.playSoundFile('snd_over_hit');
 
         KyoTimeout.setTimeout(playKO2, 1000);
 
         function playKO2():void {
             _startAndKoMc.addEventListener(Event.COMPLETE, koBack);
             playStartKO('boss_ko', false);
-            SoundCtrl.I.playSwcSound(bsKO ? snd_ko_bs : snd_ko);
+            SoundCtrl.I.playSoundFile(bsKO ? 'snd_ko_bs' : 'snd_ko');
         }
 
         function koBack(e:Event):void {

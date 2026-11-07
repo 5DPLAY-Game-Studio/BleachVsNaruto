@@ -73,7 +73,7 @@ public class GameOverStage implements IStage {
     public function showGameOver():void {
         _ui.addEventListener(Event.COMPLETE, gameOverComplete, false, 0, true);
         _ui.gotoAndPlay('gameover');
-        SoundCtrl.I.playSwcSound(snd_gameover);
+        SoundCtrl.I.playSoundFile('snd_gameover');
         SoundCtrl.I.BGM(null);
 
         addScore();

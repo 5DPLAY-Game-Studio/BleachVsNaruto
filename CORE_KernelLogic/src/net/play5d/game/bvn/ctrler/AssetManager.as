@@ -53,6 +53,8 @@ public class AssetManager {
     private var _bitmapLoader:BitmapAssetLoader    = new BitmapAssetLoader();
     private var _bitmapFontLoader:BitmapFontLoader = new BitmapFontLoader();
     private var _assetLoader:IAssetLoader          = null;
+    /** @private 同一路径的声音尚未载入完成时，排队成功回调 */
+    private var _soundWait:Object;
 
     public function init():void {
     }
@@ -144,6 +146,77 @@ public class AssetManager {
 
     public function getSound(name:String):Sound {
         return _soundLoader.getSound(name);
+    }
+
+    /**
+     * 加载声音并写入缓存。
+     *
+     * <p>已缓存则立即回调。同一路径并发只发起一次请求，其余回调排队。</p>
+     *
+     * @param url 相对 <code>assets/</code> 的路径，如 <code>sounds/snd_menu1.mp3</code>。
+     * @param back 成功回调，签名为 <code>function(sound:Sound):void</code>；可为 <code>null</code>。
+     * @param fail 失败回调，签名为 <code>function():void</code>；可为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadSound('sounds/snd_menu1.mp3', onSound);
+     * </listing>
+     */
+    public function loadSound(url:String, back:Function = null, fail:Function = null):void {
+        if (!url) {
+            return;
+        }
+
+        var cached:Sound = _soundLoader.getSound(url);
+        if (cached) {
+            if (back != null) {
+                back(cached);
+            }
+            return;
+        }
+
+        _soundWait ||= {};
+        var wait:Array = _soundWait[url];
+        if (wait) {
+            if (back != null) {
+                wait.push(back);
+            }
+            return;
+        }
+
+        wait = [];
+        if (back != null) {
+            wait.push(back);
+        }
+        _soundWait[url] = wait;
+
+        if (!_assetLoader) {
+            delete _soundWait[url];
+            if (fail != null) {
+                fail();
+            }
+            return;
+        }
+
+        _assetLoader.loadSound(url, onSound, onFail, null);
+
+        function onSound(snd:Sound):void {
+            _soundLoader.addSound(url, snd);
+            var cbs:Array = _soundWait[url];
+            delete _soundWait[url];
+            if (!cbs) {
+                return;
+            }
+            for each (var cb:Function in cbs) {
+                cb(snd);
+            }
+        }
+
+        function onFail():void {
+            delete _soundWait[url];
+            if (fail != null) {
+                fail();
+            }
+        }
     }
 
     public function getFighterFace(fv:FighterVO, size:Point = null):DisplayObject {
@@ -302,6 +375,10 @@ public class AssetManager {
             }
 
             curUrl = snds.shift();
+            if (_soundLoader.getSound(curUrl)) {
+                loadNext();
+                return;
+            }
             _assetLoader.loadSound(curUrl, loadCom, loadErr, loadProgress);
         }
 

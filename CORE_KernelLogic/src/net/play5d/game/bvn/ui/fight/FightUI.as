@@ -387,7 +387,7 @@ public class FightUI implements IGameUI {
         EffectCtrl.I.bgBlurEnabled = false;
 
         EffectCtrl.I.shake(5, 0, 1.5);
-        SoundCtrl.I.playSwcSound(snd_over_hit);
+        SoundCtrl.I.playSoundFile('snd_over_hit');
 
         setTimeout(playKO2, 500);
 
@@ -396,7 +396,7 @@ public class FightUI implements IGameUI {
             ui.startKOmc.gotoAndStop('ko');
             ui.startKOmc.addEventListener(Event.COMPLETE, koBack);
 
-            SoundCtrl.I.playSwcSound(bsKO ? snd_ko_bs : snd_ko);
+            SoundCtrl.I.playSoundFile(bsKO ? 'snd_ko_bs' : 'snd_ko');
             _qibar1.fadeOut();
             _qibar2.fadeOut();
         }

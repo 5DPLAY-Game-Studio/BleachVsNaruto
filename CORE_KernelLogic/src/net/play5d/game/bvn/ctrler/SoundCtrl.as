@@ -109,6 +109,34 @@ public class SoundCtrl {
     }
 
     /**
+     * 播放 <code>assets/sounds</code> 中的音效。
+     *
+     * <p>文件名为类名加 <code>.mp3</code>。已缓存则立即播放；
+     * 尚未载入时先加载再播，供语言页在基础资源预载之前使用。</p>
+     *
+     * @param name 文件名（不含后缀），如 <code>snd_menu1</code>。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.playSoundFile('snd_menu1');
+     * </listing>
+     */
+    public function playSoundFile(name:String):void {
+        if (name == null) {
+            return;
+        }
+
+        var sound:Sound = AssetManager.I.getSound(name);
+        if (sound) {
+            playSound(sound);
+            return;
+        }
+
+        AssetManager.I.loadSound('sounds/' + name + '.mp3', function (snd:Sound):void {
+            playSound(snd);
+        });
+    }
+
+    /**
      * 播放声音（类链接）
      *
      * @param sndCls 声音类链接
@@ -294,32 +322,45 @@ public class SoundCtrl {
 
     //选择音效
     public function sndSelect():void {
-        playSwcSound(snd_menu1);
+        playSoundFile('snd_menu1');
     }
 
     /**
-     * 预实例化菜单选择 / 确认音（语言页早期可用）。
+     * 预加载菜单选择 / 确认音，并做一次静音播放。
+     *
+     * <p>语言页阶段基础资源尚未预载，本方法自行载入
+     * <code>snd_menu1.mp3</code> 与 <code>snd_menu2.mp3</code>。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.warmMenuSounds();
+     * </listing>
      */
     public function warmMenuSounds():void {
-        warmSwcSound(snd_menu1);
-        warmSwcSound(snd_menu2);
+        warmSoundFile('snd_menu1');
+        warmSoundFile('snd_menu2');
     }
 
     /**
-     * 预实例化常用 SWC 音效，避免首次 <code>new Sound</code> 卡顿。
+     * 预加载常用界面音效，并做一次静音播放。
      *
-     * <p>含菜单、胜负 / KO、幽步等。</p>
+     * <p>含菜单、胜负 / KO、幽步等。应在 <code>loadBasic</code> 之后调用。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.warmCommonSounds();
+     * </listing>
      */
-    public function warmCommonSwcSounds():void {
+    public function warmCommonSounds():void {
         warmMenuSounds();
-        warmSwcSound(snd_menu5);
-        warmSwcSound(snd_gameover);
-        warmSwcSound(snd_over_hit);
-        warmSwcSound(snd_ko);
-        warmSwcSound(snd_ko_bs);
-        warmSwcSound(snd_ghost_jump);
-        warmSwcSound(snd_ghost_jump2);
-        warmSwcSound(snd_ghost_dash);
+        warmSoundFile('snd_menu5');
+        warmSoundFile('snd_gameover');
+        warmSoundFile('snd_over_hit');
+        warmSoundFile('snd_ko');
+        warmSoundFile('snd_ko_bs');
+        warmSoundFile('snd_ghost_jump');
+        warmSoundFile('snd_ghost_jump2');
+        warmSoundFile('snd_ghost_dash');
     }
 
     /**
@@ -338,17 +379,7 @@ public class SoundCtrl {
             return;
         }
         try {
-            var snd:Sound = getCachedEffectSound(name);
-            if (!snd) {
-                return;
-            }
-            if (!_silentTransform) {
-                _silentTransform = new SoundTransform(0);
-            }
-            var ch:SoundChannel = snd.play(0, 0, _silentTransform);
-            if (ch) {
-                ch.stop();
-            }
+            silentPlay(getCachedEffectSound(name));
         }
         catch (e:Error) {
         }
@@ -364,7 +395,29 @@ public class SoundCtrl {
             return;
         }
         try {
-            var snd:Sound = getCachedSwcSound(sndCls);
+            silentPlay(getCachedSwcSound(sndCls));
+        }
+        catch (e:Error) {
+        }
+    }
+
+    /**
+     * @private 载入 <code>assets/sounds</code> 中的音效并静音播放一次。
+     */
+    private function warmSoundFile(name:String):void {
+        AssetManager.I.loadSound('sounds/' + name + '.mp3', function (snd:Sound):void {
+            silentPlay(snd);
+        });
+    }
+
+    /**
+     * @private 静音播放一次，打通解码 / 混音路径。
+     */
+    private function silentPlay(snd:Sound):void {
+        if (!snd) {
+            return;
+        }
+        try {
             if (!_silentTransform) {
                 _silentTransform = new SoundTransform(0);
             }
@@ -407,7 +460,7 @@ public class SoundCtrl {
 
     //确定音效
     public function sndConfirm():void {
-        playSwcSound(snd_menu2);
+        playSoundFile('snd_menu2');
     }
 
     /**

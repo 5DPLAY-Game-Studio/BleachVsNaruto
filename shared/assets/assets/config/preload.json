@@ -18,7 +18,20 @@
     "item": [
       "step1.mp3",
       "step2.mp3",
-      "step3.mp3"
+      "step3.mp3",
+      "snd_error.mp3",
+      "snd_gameover.mp3",
+      "snd_ghost_dash.mp3",
+      "snd_ghost_jump.mp3",
+      "snd_ghost_jump2.mp3",
+      "snd_ko.mp3",
+      "snd_ko_bs.mp3",
+      "snd_menu1.mp3",
+      "snd_menu2.mp3",
+      "snd_menu3.mp3",
+      "snd_menu4.mp3",
+      "snd_menu5.mp3",
+      "snd_over_hit.mp3"
     ]
   }
 }

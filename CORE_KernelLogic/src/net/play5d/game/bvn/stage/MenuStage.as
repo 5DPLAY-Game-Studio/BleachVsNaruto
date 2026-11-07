@@ -158,7 +158,7 @@ public class MenuStage extends Sprite implements IStage {
 
         _ui.gotoAndPlay('menu');
 
-        SoundCtrl.I.playSwcSound(snd_menu5);
+        SoundCtrl.I.playSoundFile('snd_menu5');
 
         _btnGroup         = new MenuBtnGroup();
         _btnGroup.enabled = false;

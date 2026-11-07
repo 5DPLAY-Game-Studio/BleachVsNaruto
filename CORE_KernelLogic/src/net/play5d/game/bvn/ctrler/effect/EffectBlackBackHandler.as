@@ -298,7 +298,7 @@ public class EffectBlackBackHandler {
         _gameStage.addChildAt(_blackBack, 0);
         _blackBack.fadeIn();
         _gameStage.getMap().setVisible(false);
-        SoundCtrl.I.playSwcSound(snd_ghost_jump);
+        SoundCtrl.I.playSoundFile('snd_ghost_jump');
     }
 
     /**
