@@ -112,9 +112,9 @@ public class FollowEffectView implements IGameSprite {
     public function get colorTransform():ColorTransform {
         return _colorTransform;
     }
-    public function set colorTransform(ct:ColorTransform):void {
-        _colorTransform = ct;
-        mc.transform.colorTransform = ct ? ct : new ColorTransform();
+    public function set colorTransform(colorTransform:ColorTransform):void {
+        _colorTransform = colorTransform;
+        mc.transform.colorTransform = colorTransform ? colorTransform : new ColorTransform();
     }
 
     // 方向

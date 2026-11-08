@@ -70,19 +70,19 @@ public class GameSpriteUtil {
      * 更改游戏 Sprite 颜色，默认绿色偏移 -85。
      *
      * @param sp 指定 <code>IGameSprite</code>。
-     * @param ct 颜色变换通道。
+     * @param colorTransform 颜色变换通道。
      */
-    public static function changeSpColor(sp:IGameSprite, ct:ColorTransform = null):void {
+    public static function changeSpColor(sp:IGameSprite, colorTransform:ColorTransform = null):void {
         if (!sp) {
             return;
         }
 
-        ct ||= new ColorTransform(
+        colorTransform ||= new ColorTransform(
                 1, 1, 1, 1,
                 0, -85, 0, 0
         );
 
-        sp.colorTransform = ct;
+        sp.colorTransform = colorTransform;
     }
 
     /**
@@ -90,18 +90,18 @@ public class GameSpriteUtil {
      *
      * @param sp 指定 <code>IGameSprite</code>。
      * @param owner 所有者。
-     * @param ct 颜色变换通道。
+     * @param colorTransform 颜色变换通道。
      */
     public static function autoChangeSpColor(
-            sp   :IGameSprite,
-            owner:IGameSprite = null,
-            ct   :ColorTransform = null):void {
+            sp            :IGameSprite,
+            owner         :IGameSprite = null,
+            colorTransform:ColorTransform = null):void {
         if (!sp) {
             return;
         }
 
         if (!owner) {
-            changeSpColor(sp, ct);
+            changeSpColor(sp, colorTransform);
             return;
         }
 
@@ -114,23 +114,23 @@ public class GameSpriteUtil {
 
         if (sp is Assister) {
             if (isSameAssister) {
-                changeSpColor(sp, ct);
+                changeSpColor(sp, colorTransform);
             }
         }
         else if (sp is FighterAttacker) {
             if (owner is FighterMain && isSameFighter ||
                 owner is Assister && isSameAssister) {
-                changeSpColor(sp, ct);
+                changeSpColor(sp, colorTransform);
             }
         }
         else if (sp is Bullet || sp is FollowEffectView) {
             if (owner is FighterMain && isSameFighter ||
                 owner is Assister && isSameAssister) {
-                changeSpColor(sp, ct);
+                changeSpColor(sp, colorTransform);
             }
             else if (owner is FighterAttacker) {
                 owner = (owner as FighterAttacker).getOwner();
-                autoChangeSpColor(sp, owner, ct);
+                autoChangeSpColor(sp, owner, colorTransform);
             }
         }
     }

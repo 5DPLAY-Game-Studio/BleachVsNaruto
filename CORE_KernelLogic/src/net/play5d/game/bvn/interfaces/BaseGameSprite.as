@@ -107,9 +107,9 @@ public class BaseGameSprite extends EventDispatcher implements IGameSprite {
         return _colorTransform;
     }
 
-    public function set colorTransform(ct:ColorTransform):void {
-        _colorTransform = ct;
-        _mainMc.transform.colorTransform = ct ? ct : new ColorTransform();
+    public function set colorTransform(colorTransform:ColorTransform):void {
+        _colorTransform = colorTransform;
+        _mainMc.transform.colorTransform = colorTransform ? colorTransform : new ColorTransform();
     }
 
     protected var _x:Number = 0;

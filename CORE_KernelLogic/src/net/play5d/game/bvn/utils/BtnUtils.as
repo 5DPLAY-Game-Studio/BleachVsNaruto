@@ -85,19 +85,19 @@ public class BtnUtils {
     }
 
     private static function overEffect(btn:DisplayObject, v:Boolean):void {
-        var obj:Object           = _btnMap[btn];
-        var orgCT:ColorTransform = obj.transform;
+        var obj:Object                       = _btnMap[btn];
+        var orgColorTransform:ColorTransform = obj.transform;
 
         if (v) {
-            var ct:ColorTransform        = KyoDisplayUtils.cloneColorTransform(orgCT);
-            ct.redOffset += 30;
-            ct.greenOffset += 30;
-            ct.blueOffset += 30;
-            btn.transform.colorTransform = ct;
+            var colorTransform:ColorTransform        = KyoDisplayUtils.cloneColorTransform(orgColorTransform);
+            colorTransform.redOffset += 30;
+            colorTransform.greenOffset += 30;
+            colorTransform.blueOffset += 30;
+            btn.transform.colorTransform             = colorTransform;
             SoundCtrl.I.sndSelect();
         }
         else {
-            btn.transform.colorTransform = orgCT;
+            btn.transform.colorTransform             = orgColorTransform;
         }
     }
 

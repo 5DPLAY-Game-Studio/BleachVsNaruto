@@ -126,17 +126,17 @@ public class ShadowEffectView {
     }
 
     private function addShadowBp():void {
-        var ct:ColorTransform;
+        var colorTransform:ColorTransform;
         if (r != 0 || g != 0 || b != 0) {
             _colorTransform.redOffset   = r;
             _colorTransform.greenOffset = g;
             _colorTransform.blueOffset  = b;
-            ct                          = _colorTransform;
+            colorTransform              = _colorTransform;
         }
 
         var cache:DisplayFrameBitmapCache = DisplayFrameBitmapCache.I;
         var key:String                    = buildCacheKey();
-        var vo:BitmapDataCacheVO          = cache.drawShadow(target, key, ct);
+        var vo:BitmapDataCacheVO          = cache.drawShadow(target, key, colorTransform);
         if (vo == null || vo.bitmapData == null) {
             return;
         }

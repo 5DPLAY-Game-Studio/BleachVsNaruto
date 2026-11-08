@@ -213,9 +213,9 @@ public class Bullet implements IGameSprite, IGameSpriteCntlr {
         return _colorTransform;
     }
 
-    public function set colorTransform(ct:ColorTransform):void {
-        _colorTransform = ct;
-        mc.transform.colorTransform = ct ? ct : new ColorTransform();
+    public function set colorTransform(colorTransform:ColorTransform):void {
+        _colorTransform = colorTransform;
+        mc.transform.colorTransform = colorTransform ? colorTransform : new ColorTransform();
     }
 
     public function get team():TeamVO {

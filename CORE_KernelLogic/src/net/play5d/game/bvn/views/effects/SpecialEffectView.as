@@ -41,11 +41,11 @@ public class SpecialEffectView extends EffectView {
         if (v is FighterMain) {
             _fighter = v as FighterMain;
             if (_data.targetColorOffset) {
-                var ct:ColorTransform = new ColorTransform();
-                ct.redOffset          = _data.targetColorOffset[0];
-                ct.greenOffset        = _data.targetColorOffset[1];
-                ct.blueOffset         = _data.targetColorOffset[2];
-                _fighter.changeColor(ct);
+                var colorTransform:ColorTransform = new ColorTransform();
+                colorTransform.redOffset          = _data.targetColorOffset[0];
+                colorTransform.greenOffset        = _data.targetColorOffset[1];
+                colorTransform.blueOffset         = _data.targetColorOffset[2];
+                _fighter.changeColor(colorTransform);
             }
         }
     }

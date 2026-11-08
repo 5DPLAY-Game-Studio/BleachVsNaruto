@@ -89,8 +89,8 @@ public class MapMain {
     /**
      * 设置MapMain颜色通道
      */
-    public function setColorTransform(ct:ColorTransform):void {
-        _colorTransform = ct;
+    public function setColorTransform(colorTransform:ColorTransform):void {
+        _colorTransform = colorTransform;
 
         if (mapLayer && mapLayer.enabled) {
             mapLayer.transform.colorTransform = _colorTransform;

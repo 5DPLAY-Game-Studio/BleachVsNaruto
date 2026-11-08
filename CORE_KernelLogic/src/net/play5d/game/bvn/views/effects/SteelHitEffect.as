@@ -39,17 +39,17 @@ public class SteelHitEffect extends EffectView {
             _fighter = v as FighterMain;
 
             if (_fighter.isSteelBody) {
-                var ct:ColorTransform = new ColorTransform();
-                ct.redOffset          = 150;
-                ct.greenOffset        = 150;
-                ct.blueOffset         = 150;
+                var colorTransform:ColorTransform = new ColorTransform();
+                colorTransform.redOffset          = 150;
+                colorTransform.greenOffset        = 150;
+                colorTransform.blueOffset         = 150;
 
                 if (_fighter.isSuperSteelBody) {
-                    ct.blueOffset = 0;
+                    colorTransform.blueOffset = 0;
                     EffectCtrl.I.shine(0xffff00, 0.3);
                 }
 
-                _fighter.changeColor(ct);
+                _fighter.changeColor(colorTransform);
                 EffectCtrl.I.setOnFreezeOver(function ():void {
                     _fighter.resumeColor();
                 });

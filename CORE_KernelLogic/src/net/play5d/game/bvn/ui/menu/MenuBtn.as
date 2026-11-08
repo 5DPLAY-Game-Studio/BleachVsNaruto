@@ -196,11 +196,11 @@ public class MenuBtn extends EventDispatcher {
         }
         _isOpen = true;
         ui.bg.gotoAndStop(2);
-        var ct:ColorTransform = new ColorTransform();
-        ct.redOffset          = 50;
-        ct.greenOffset        = -30;
-        ct.blueOffset         = -30;
-        _bitmapText.applyColorTransform(ct);
+        var colorTransform:ColorTransform = new ColorTransform();
+        colorTransform.redOffset          = 50;
+        colorTransform.greenOffset        = -30;
+        colorTransform.blueOffset         = -30;
+        _bitmapText.applyColorTransform(colorTransform);
     }
 
     public function closeChild():void {
@@ -235,12 +235,12 @@ public class MenuBtn extends EventDispatcher {
     }
 
     public function childMode():void {
-        var ct:ColorTransform = new ColorTransform();
-        ct.redOffset          = 50;
-        ct.greenOffset        = -30;
-        ct.blueOffset         = -30;
+        var colorTransform:ColorTransform = new ColorTransform();
+        colorTransform.redOffset          = 50;
+        colorTransform.greenOffset        = -30;
+        colorTransform.blueOffset         = -30;
 
-        _bitmapText.applyColorTransform(ct);
+        _bitmapText.applyColorTransform(colorTransform);
         _bitmapText.scaleX = _bitmapText.scaleY = 0.75;
         _bitmapText.x      = -_bitmapText.width / 2;
 

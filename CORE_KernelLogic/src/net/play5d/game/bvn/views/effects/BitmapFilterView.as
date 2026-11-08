@@ -78,7 +78,7 @@ public class BitmapFilterView implements IGameSprite {
     }
 
     /** @private */
-    public function set colorTransform(ct:ColorTransform):void {
+    public function set colorTransform(colorTransform:ColorTransform):void {
     }
 
     public function get direct():int {

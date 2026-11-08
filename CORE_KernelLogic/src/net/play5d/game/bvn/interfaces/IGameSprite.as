@@ -33,7 +33,7 @@ public interface IGameSprite {
      * 颜色变换通道
      */
     function get colorTransform():ColorTransform;
-    function set colorTransform(ct:ColorTransform):void;
+    function set colorTransform(colorTransform:ColorTransform):void;
 
     /**
      * 方向
