@@ -19,7 +19,7 @@ public class ScreenRotator {
      * 灵敏度，0.1 ~ 0.9
      */
     public var sensitivity:Number = 0.8;
-    private var _accer:Accelerometer;
+    private var _accelerometer:Accelerometer;
     private var _currentOrientation:String;
     private var _stage:Stage;
 
@@ -39,8 +39,8 @@ public class ScreenRotator {
 
         setOrientation(StageOrientation.ROTATED_RIGHT);
 
-        _accer = new Accelerometer();
-        _accer.addEventListener(AccelerometerEvent.UPDATE, accUpdate);
+        _accelerometer = new Accelerometer();
+        _accelerometer.addEventListener(AccelerometerEvent.UPDATE, accUpdate);
     }
 
     private function setOrientation(v:String):void {
