@@ -19,7 +19,7 @@
 | 9 | 路径类赋值一律 `set "VAR=..."`；含空格路径全程加引号；`::` 注释避免 `<...>`（易被当成重定向） |
 | 10 | 新增/改 `ECHO_LANG` 标签时，同步改齐 `lang/<name>/` 下 **437/932/936/949**，并按各自编码保存 |
 | 11 | 优先可维护与检逻辑错误；发现共用模式可回写已改脚本并抽到 `func/` |
-| 12 | 仓库路径可能含空格与 `&`：对含 `&` 的路径用 `!VAR!` 调用/echo（`%VAR%` 在解析前展开会拆命令）。写根路径见 `publish.bat`（`pushd` + 相对重定向 + `echo(!VAR!`）；`ECHO_LANG` 经 `LANG_PARAM` + `pushd BAT_HOME` 相对调用 lang。asdoc.jar 会把 `sourcefile` 原样写入 XML，`&` 会导致解析失败；经 `func\asdoc_drive.bat` subst 到无 `&` 盘符再调用 |
+| 12 | 仓库路径可能含空格与 `&`：对含 `&` 的路径用 `!VAR!` 调用/echo（`%VAR%` 在解析前展开会拆命令）。`publish.bat` 的根路径文件必须由 PowerShell 写成 **UTF-8 无 BOM**（`FLfile.read` 按 UTF-8 解码，GBK 会在第一个中文字节截成 `D:\` 并扫完整盘）。`ECHO_LANG` 经 `LANG_PARAM` + `pushd BAT_HOME` 相对调用 lang。asdoc.jar 会把 `sourcefile` 原样写入 XML，`&` 会导致解析失败；经 `func\asdoc_drive.bat` subst 到无 `&` 盘符再调用 |
 | 13 | `lang` 文案参数用 `!LANG_PARAM!`（由 `ECHO_LANG` 写入），**不要**再用 `%~2`（无引号展开遇 `&` 会截断） |
 
 ## NEVER

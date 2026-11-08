@@ -59,6 +59,10 @@ goto :EOF
 echo 書き込みに失敗しました: !LANG_PARAM!
 goto :EOF
 
+:ROOT_UNSAFE
+echo 公開ルートが BleachVsNaruto_FlashSrc ではないため、他のフォルダ走査を中止しました。
+goto :EOF
+
 :LAUNCH
 echo Flash/Animate (JSFL) を起動します。ウィンドウが開く場合がありますので、完了するまでお待ちください...
 goto :EOF

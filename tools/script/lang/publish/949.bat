@@ -59,6 +59,10 @@ goto :EOF
 echo 쓰기 실패: !LANG_PARAM!
 goto :EOF
 
+:ROOT_UNSAFE
+echo 게시 루트가 BleachVsNaruto_FlashSrc 이 아니어서 다른 폴더 검색을 중단했습니다.
+goto :EOF
+
 :LAUNCH
 echo Flash/Animate(JSFL) 를 실행합니다. 창이 열릴 수 있으니 완료될 때까지 기다려 주십시오...
 goto :EOF

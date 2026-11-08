@@ -104,11 +104,20 @@ if errorlevel 1 (
 	goto END
 )
 if not exist "log" mkdir "log"
-> "log\_publish_root.txt" echo(!FLASH_SRC!
+:: FLfile.read is UTF-8. GBK echo stops at the first non-ASCII byte (D:\),
+:: and that drive URI exists, so publish would walk the whole disk.
+powershell -NoProfile -Command "[IO.File]::WriteAllText($env:ROOT_FILE, $env:FLASH_SRC, (New-Object Text.UTF8Encoding $false))"
 set "WRITE_ERR=!errorlevel!"
+:: 截成盘符时文件里不会有 FlashSrc 目录名，拒绝启动以免扫完整盘
+findstr /C:"BleachVsNaruto_FlashSrc" "log\_publish_root.txt" >nul
+set "ROOT_OK=!errorlevel!"
 popd
 if not "!WRITE_ERR!"=="0" (
 	call "!FUNC_COMMON!" ECHO_LANG :WRITE_FAIL "!ROOT_FILE!"
+	goto END
+)
+if not "!ROOT_OK!"=="0" (
+	call "!FUNC_COMMON!" ECHO_LANG :ROOT_UNSAFE ""
 	goto END
 )
 if not exist "!ROOT_FILE!" (
@@ -155,6 +164,8 @@ if "!PUBLISH_CODE!"=="0" (
 )
 
 call "!FUNC_COMMON!" ECHO_LANG :PUBLISH_FAIL "!PUBLISH_CODE!"
+echo.
+type "!RESULT_FILE!"
 goto END
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

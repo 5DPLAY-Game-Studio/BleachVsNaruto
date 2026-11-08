@@ -59,6 +59,10 @@ goto :EOF
 echo Failed to write: !LANG_PARAM!
 goto :EOF
 
+:ROOT_UNSAFE
+echo Publish root is not BleachVsNaruto_FlashSrc. Stopped to avoid scanning other folders.
+goto :EOF
+
 :LAUNCH
 echo Launching Flash/Animate (JSFL). Window may open; wait until it finishes...
 goto :EOF

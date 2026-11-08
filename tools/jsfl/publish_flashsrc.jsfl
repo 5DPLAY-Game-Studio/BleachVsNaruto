@@ -20,8 +20,12 @@
  * BleachVsNaruto_FlashSrc 非交互批量发布脚本。
  * 由 tools/script/publish.bat 调用（勿使用 browseForFolderURL）。
  *
- * 根路径：tools/script/log/_publish_root.txt（由 publish.bat 写入），
+ * 根路径：tools/script/log/_publish_root.txt（由 publish.bat 以 UTF-8 写入）。
+ * FLfile.read 按 UTF-8 解码；GBK 文件会在第一个中文字节处截成 D:\，
+ * 该 URI 指向盘符且 exists 为真，会递归发布该盘上的其他 fla。
  * 若不存在则回退为 fl.scriptURI 相对路径 ../../BleachVsNaruto_FlashSrc。
+ * 路径中的空格与 & 会百分号编码后再交给 FLfile。
+ * 解析结果不是以 BleachVsNaruto_FlashSrc 结尾则拒绝发布。
  *
  * 结果：tools/script/log/_publish_result.txt（首行：0=成功，1=失败）。
  */
@@ -32,24 +36,36 @@ var LOG_TAG = "[publish_flashsrc]";
 /** @type {Function} */
 var trace = fl.trace;
 
+/** @type {string[]} */
+var logLines = [];
+
 main();
 
 /**
  * 入口：读根目录 → 收集 fla/xfl → 逐个发布 → 写结果并退出。
  */
 function main() {
-	var scriptDir  = dirnameURI(fl.scriptURI);
+	var scriptDir  = escapeFileURI(dirnameURI(fl.scriptURI));
 	var rootFile   = scriptDir + "/../script/log/_publish_root.txt";
 	var resultFile = scriptDir + "/../script/log/_publish_result.txt";
 
 	// 先写失败码，避免 Animate 异常退出时 bat 误判成功
 	writeResult(resultFile, "1");
 
-	var folderUrl = readRootURI(rootFile) || (scriptDir + "/../../BleachVsNaruto_FlashSrc");
+	var folderUrl = readRootURI(rootFile) || escapeFileURI(scriptDir + "/../../BleachVsNaruto_FlashSrc");
 	folderUrl = normalizeDirURI(folderUrl);
+
+	// 截断成盘符时 exists 仍为真，会把 D 盘其他目录的 fla 一并发布
+	if (!isFlashSrcRoot(folderUrl)) {
+		log("Refuse publish, root is not BleachVsNaruto_FlashSrc: " + folderUrl);
+		writeResult(resultFile, "1");
+		tryQuit();
+		return;
+	}
 
 	if (!FLfile.exists(folderUrl)) {
 		log("FlashSrc root not found: " + folderUrl);
+		writeResult(resultFile, "1");
 		tryQuit();
 		return;
 	}
@@ -91,11 +107,13 @@ function main() {
 }
 
 /**
- * 带前缀输出日志。
+ * 带前缀输出日志，并记入结果文件。
  * @param {string} msg 日志内容
  */
 function log(msg) {
-	trace(LOG_TAG + " " + msg);
+	var line = LOG_TAG + " " + msg;
+	trace(line);
+	logLines.push(line);
 }
 
 /**
@@ -110,20 +128,23 @@ function readRootURI(rootFile) {
 	}
 
 	var raw = trimString(FLfile.read(rootFile));
+	if (raw.charAt(0) === "\uFEFF") {
+		raw = raw.substring(1);
+	}
 	if (!raw) {
 		return null;
 	}
 
 	if (raw.indexOf("file://") === 0) {
-		return raw;
+		return escapeFileURI(raw);
 	}
 
 	return winPathToURI(raw);
 }
 
 /**
- * 将 Windows 路径转为 JSFL file URI。
- * 例：D:/a/b → file:///D|/a/b
+ * 将 Windows 路径转为 JSFL file URI，并对每一段做百分号编码。
+ * 例：D:/a b/c&d → file:///D|/a%20b/c%26d
  * @param {string} path Windows 或 POSIX 路径
  * @return {string} file URI 或原样返回
  */
@@ -132,15 +153,65 @@ function winPathToURI(path) {
 
 	// D:/... → file:///D|/...
 	if (path.charAt(1) === ":") {
-		return "file:///" + path.charAt(0) + "|" + path.substring(2);
+		return "file:///" + path.charAt(0) + "|" + encodePathTail(path.substring(2));
 	}
 
 	// /... → file:///...
 	if (path.charAt(0) === "/") {
-		return "file://" + path;
+		return "file://" + encodePathTail(path);
 	}
 
-	return path;
+	return escapeFileURI(path);
+}
+
+/**
+ * 编码路径中 / 以外的各段。空段跳过，避免出现双斜杠。
+ * @param {string} path 使用 / 的路径
+ * @return {string} 以 / 连接的编码结果
+ */
+function encodePathTail(path) {
+	var parts = String(path).split("/");
+	var encoded = "";
+	for (var i = 0; i < parts.length; i++) {
+		if (!parts[i]) {
+			continue;
+		}
+		encoded += "/" + encodePathSegment(parts[i]);
+	}
+	return encoded;
+}
+
+/**
+ * 编码单个路径段。只转义空格与 &（及 #），中文保持原样。
+ * encodeURIComponent 会把中文变成 %E4%BB%A3 这类序列，FLfile 无法打开。
+ * @param {string} seg 原始路径段
+ * @return {string} 编码后的路径段
+ */
+function encodePathSegment(seg) {
+	return escapeFileURI(seg);
+}
+
+/**
+ * 转义 URI 里未编码的空格与 &，避免 FLfile 把路径截成盘符。
+ * @param {string} uri 可能含空格或 & 的 URI
+ * @return {string} 替换后的 URI
+ */
+function escapeFileURI(uri) {
+	return String(uri).replace(/ /g, "%20").replace(/&/g, "%26").replace(/#/g, "%23");
+}
+
+/**
+ * 仅允许发布 BleachVsNaruto_FlashSrc 目录本身。
+ * @param {string} uri 规范化后的目录 URI
+ * @return {boolean} 是否以 FlashSrc 目录名结尾
+ */
+function isFlashSrcRoot(uri) {
+	var tail = "BleachVsNaruto_FlashSrc";
+	uri = String(uri);
+	if (uri.length < tail.length) {
+		return false;
+	}
+	return uri.substring(uri.length - tail.length) === tail;
 }
 
 /**
@@ -194,11 +265,16 @@ function trimString(value) {
  * @param {string} code       "0"=成功，"1"=失败
  */
 function writeResult(resultFile, code) {
+	var body = String(code);
+	if (logLines.length > 0) {
+		body += "\n" + logLines.join("\n");
+	}
+	body += "\n";
 	try {
-		FLfile.write(resultFile, String(code) + "\n");
+		FLfile.write(resultFile, body);
 	}
 	catch (e) {
-		log("Cannot write result: " + e);
+		trace(LOG_TAG + " Cannot write result: " + e);
 	}
 }
 
@@ -232,7 +308,7 @@ function getFilesByDir(dirUrl) {
 	var flaFileList = FLfile.listFolder(dirUrl + "/" + flaMask, "files");
 	if (flaFileList) {
 		for (var i = 0; i < flaFileList.length; i++) {
-			files.push(dirUrl + "/" + flaFileList[i]);
+			files.push(dirUrl + "/" + encodePathSegment(flaFileList[i]));
 		}
 	}
 
@@ -243,8 +319,9 @@ function getFilesByDir(dirUrl) {
 
 	for (var j = 0; j < dirList.length; j++) {
 		var dir     = dirList[j];
-		var curDir  = dirUrl + "/" + dir;
-		var xflFile = curDir + "/" + dir + xflSuf;
+		var encDir  = encodePathSegment(dir);
+		var curDir  = dirUrl + "/" + encDir;
+		var xflFile = curDir + "/" + encDir + xflSuf;
 
 		// 无同名 .xfl：当作普通子目录继续搜
 		if (!FLfile.exists(xflFile)) {

@@ -59,6 +59,10 @@ goto :EOF
 echo 写入失败： !LANG_PARAM!
 goto :EOF
 
+:ROOT_UNSAFE
+echo 发布根路径不是 BleachVsNaruto_FlashSrc，已停止，以免扫描其他目录。
+goto :EOF
+
 :LAUNCH
 echo 正在启动 Flash/Animate (JSFL)。可能会弹出窗口；请等待其完成……
 goto :EOF
