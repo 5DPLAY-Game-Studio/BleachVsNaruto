@@ -27,34 +27,34 @@ public class MusouEnemyVO implements IInstanceVO {
             fighterID:String, maxHp:int = 200, atk:int = 0, isBoss:Boolean = false, exp:int = 10,
             money:int                                                                       = 10
     ):MusouEnemyVO {
-        var ev:MusouEnemyVO = new MusouEnemyVO();
+        var musouEnemyVO:MusouEnemyVO = new MusouEnemyVO();
 
-        ev.fighterID = fighterID;
-        ev.isBoss    = isBoss;
+        musouEnemyVO.fighterID = fighterID;
+        musouEnemyVO.isBoss    = isBoss;
 
         if (maxHp > 0) {
-            ev.maxHp = maxHp;
+            musouEnemyVO.maxHp = maxHp;
         }
 
         if (atk > 0) {
-            ev.atk = atk;
+            musouEnemyVO.atk = atk;
         }
 
         if (exp > 0) {
-            ev.exp = exp;
+            musouEnemyVO.exp = exp;
         }
         else {
-            ev.exp = isBoss ? 100 : 10;
+            musouEnemyVO.exp = isBoss ? 100 : 10;
         }
 
         if (money > 0) {
-            ev.money = money;
+            musouEnemyVO.money = money;
         }
         else {
-            ev.money = isBoss ? 100 : 10;
+            musouEnemyVO.money = isBoss ? 100 : 10;
         }
 
-        return ev;
+        return musouEnemyVO;
     }
 
     public static function createByJSON(json:Object):Vector.<MusouEnemyVO> {

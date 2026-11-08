@@ -447,9 +447,9 @@ public class MusouCtrl {
             return;
         }
 
-        var ev:MusouEnemyVO = _enemyCreators[0].getNextEnemy();
-        if (ev) {
-            addEnemy(ev);
+        var musouEnemyVO:MusouEnemyVO = _enemyCreators[0].getNextEnemy();
+        if (musouEnemyVO) {
+            addEnemy(musouEnemyVO);
         }
         else {
             _enemyCreators.shift();

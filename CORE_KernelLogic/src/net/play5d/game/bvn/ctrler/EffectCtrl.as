@@ -511,12 +511,12 @@ public class EffectCtrl {
     }
 
     private function renderAnimate():void {
-        var ev:EffectView;
+        var effectView:EffectView;
         var i:int = 0;
 
         for (i = 0; i < _effects.length; i++) {
-            ev = _effects[i];
-            ev.renderAnimate();
+            effectView = _effects[i];
+            effectView.renderAnimate();
         }
 
         _shadowHandler.renderAnimate();
