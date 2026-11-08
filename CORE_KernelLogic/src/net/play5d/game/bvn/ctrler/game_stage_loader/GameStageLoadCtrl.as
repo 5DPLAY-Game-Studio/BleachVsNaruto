@@ -284,13 +284,13 @@ public class GameStageLoadCtrl extends EventDispatcher {
     }
 
     private function loadMaps(maps:Vector.<LoadAssetVO>, callback:Function):void {
-        function load(lv:LoadAssetVO, succBack:Function):void {
-            GameLoader.loadSWF(lv.url, loadSucc, onLoadError, onLoadProgress);
+        function load(lv:LoadAssetVO, successBack:Function):void {
+            GameLoader.loadSWF(lv.url, loadSuccess, onLoadError, onLoadProgress);
 
-            function loadSucc(l:Loader):void {
+            function loadSuccess(l:Loader):void {
                 _mapCache[lv.url] = l.content;
                 disposeLoader(l);
-                succBack();
+                successBack();
             }
         }
 
@@ -299,37 +299,37 @@ public class GameStageLoadCtrl extends EventDispatcher {
     }
 
     private function loadFighters(fighters:Vector.<LoadAssetVO>, callback:Function):void {
-        function load(lv:LoadAssetVO, succBack:Function):void {
-            function loadSucc(l:Loader):void {
+        function load(lv:LoadAssetVO, successBack:Function):void {
+            function loadSuccess(l:Loader):void {
                 _fighterCache[lv.url] = {
                     domain: l.contentLoaderInfo.applicationDomain,
                     mc    : null
                 };
                 disposeLoader(l);
-                succBack();
+                successBack();
             }
 
-            function loadSucc2(l:Loader):void {
+            function loadSuccess2(l:Loader):void {
                 _fighterCache[lv.url] = {
                     domain: l.contentLoaderInfo.applicationDomain,
                     mc    : l.content
                 };
                 disposeLoader(l);
-                GameLoader.loadSWF(lv.url, loadSucc3, onLoadError, onLoadProgress);
+                GameLoader.loadSWF(lv.url, loadSuccess3, onLoadError, onLoadProgress);
             }
 
-            function loadSucc3(l:Loader):void {
+            function loadSuccess3(l:Loader):void {
                 _fighterCache[lv.url].mcSlave = l.content;
                 disposeLoader(l);
-                succBack();
+                successBack();
             }
 
 
             if (IGNORE_OLD_FIGHTER) {
-                GameLoader.loadSWF(lv.url, loadSucc2, onLoadError, onLoadProgress);
+                GameLoader.loadSWF(lv.url, loadSuccess2, onLoadError, onLoadProgress);
             }
             else {
-                GameLoader.loadSWF(lv.url, loadSucc, onLoadError, onLoadProgress);
+                GameLoader.loadSWF(lv.url, loadSuccess, onLoadError, onLoadProgress);
             }
 
 
@@ -340,9 +340,9 @@ public class GameStageLoadCtrl extends EventDispatcher {
     }
 
     private function loadAssisters(assissters:Vector.<LoadAssetVO>, callback:Function):void {
-        function load(lv:LoadAssetVO, succBack:Function):void {
+        function load(lv:LoadAssetVO, successBack:Function):void {
 
-            function loadSucc(l:Loader):void {
+            function loadSuccess(l:Loader):void {
                 _assisterCache[lv.url] = {
                     domain: l.contentLoaderInfo.applicationDomain,
                     mc    : (
@@ -350,29 +350,29 @@ public class GameStageLoadCtrl extends EventDispatcher {
                     )
                 };
                 disposeLoader(l);
-                succBack();
+                successBack();
             }
 
-            function loadSucc2(l:Loader):void {
+            function loadSuccess2(l:Loader):void {
                 _assisterCache[lv.url] = {
                     domain: l.contentLoaderInfo.applicationDomain,
                     mc    : l.content
                 };
                 disposeLoader(l);
-                GameLoader.loadSWF(lv.url, loadSucc3, onLoadError, onLoadProgress);
+                GameLoader.loadSWF(lv.url, loadSuccess3, onLoadError, onLoadProgress);
             }
 
-            function loadSucc3(l:Loader):void {
+            function loadSuccess3(l:Loader):void {
                 _assisterCache[lv.url].mcSlave = l.content;
                 disposeLoader(l);
-                succBack();
+                successBack();
             }
 
             if (IGNORE_OLD_FIGHTER) {
-                GameLoader.loadSWF(lv.url, loadSucc2, onLoadError, onLoadProgress);
+                GameLoader.loadSWF(lv.url, loadSuccess2, onLoadError, onLoadProgress);
             }
             else {
-                GameLoader.loadSWF(lv.url, loadSucc, onLoadError, onLoadProgress);
+                GameLoader.loadSWF(lv.url, loadSuccess, onLoadError, onLoadProgress);
             }
         }
 
@@ -381,7 +381,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
     }
 
     private function loadBgms(bgms:Vector.<BgmVO>, callback:Function):void {
-        function succBack():void {
+        function successBack():void {
             _loadStep++;
             _curLoadName = null;
             callback();
@@ -395,7 +395,7 @@ public class GameStageLoadCtrl extends EventDispatcher {
         _loadingType       = GameStageLoadDefine.TYPE_BGM;
         _curLoadStep       = 0;
         _curLoadStepLength = 1;
-        SoundCtrl.I.loadFightBGM(bgms, succBack, callback, onLoadProgress);
+        SoundCtrl.I.loadFightBGM(bgms, successBack, callback, onLoadProgress);
     }
 
     private function onLoadProgress(v:Number):void {
