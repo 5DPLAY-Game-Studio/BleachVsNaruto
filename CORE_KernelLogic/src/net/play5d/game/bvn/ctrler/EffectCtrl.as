@@ -303,11 +303,11 @@ public class EffectCtrl {
         if (_shineEffects.length > shineMaxCount) {
             _shineEffects[0].removeSelf();
         }
-        var sv:ShineEffectView = _manager.getShine();
-        sv.init(color, alpha);
-        sv.onRemove = removeShine;
-        _shineEffects.push(sv);
-        _gameStage.addChild(sv);
+        var shineEffectView:ShineEffectView = _manager.getShine();
+        shineEffectView.init(color, alpha);
+        shineEffectView.onRemove = removeShine;
+        _shineEffects.push(shineEffectView);
+        _gameStage.addChild(shineEffectView);
     }
 
     public function startShake(sx:Number, sy:Number):void {
@@ -503,10 +503,10 @@ public class EffectCtrl {
     }
 
     private function renderShine():void {
-        var i:int, sv:ShineEffectView;
+        var i:int, shineEffectView:ShineEffectView;
         for (i = 0; i < _shineEffects.length; i++) {
-            sv = _shineEffects[i];
-            sv.render();
+            shineEffectView = _shineEffects[i];
+            shineEffectView.render();
         }
     }
 

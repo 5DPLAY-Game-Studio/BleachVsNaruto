@@ -63,9 +63,9 @@ public class SelectStageConfigVO implements IInstanceVO {
     }
 
     private function newListByObject(listArr:Array):SelectCharListConfigVO {
-        var sv:SelectCharListConfigVO = new SelectCharListConfigVO();
+        var selectCharListConfigVO:SelectCharListConfigVO = new SelectCharListConfigVO();
 
-        sv.VCount = listArr.length;
+        selectCharListConfigVO.VCount = listArr.length;
 
         for (var y:int = 0; y < listArr.length; y++) {
             var row:Object  = listArr[y];
@@ -77,8 +77,8 @@ public class SelectStageConfigVO implements IInstanceVO {
                 rowOffset = new Point(rowOffsetArr[0], rowOffsetArr[1]);
             }
 
-            if (sv.HCount < items.length) {
-                sv.HCount = items.length;
+            if (selectCharListConfigVO.HCount < items.length) {
+                selectCharListConfigVO.HCount = items.length;
             }
 
             for (var x:int = 0; x < items.length; x++) {
@@ -109,11 +109,11 @@ public class SelectStageConfigVO implements IInstanceVO {
 
                 var cv:SelectCharListItemVO = new SelectCharListItemVO(x, y, fighterID, offset);
                 cv.moreFighterIDs           = moreIds;
-                sv.list.push(cv);
+                selectCharListConfigVO.list.push(cv);
             }
         }
 
-        return sv;
+        return selectCharListConfigVO;
     }
 
 }

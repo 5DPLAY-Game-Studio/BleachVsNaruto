@@ -107,14 +107,14 @@ public class SelectFighterList extends Sprite {
         _fighterItems = new Vector.<SelectFighterUI>();
 
         for (var i:int; i < fighters.length; i++) {
-            var sv:MusouFighterSellVO = fighters[i];
-            var isInTeam:Boolean      = false;
+            var musouFighterSellVO:MusouFighterSellVO = fighters[i];
+            var isInTeam:Boolean                      = false;
 
-            if (currentFighterIds.indexOf(sv.id) != -1) {
+            if (currentFighterIds.indexOf(musouFighterSellVO.id) != -1) {
                 continue;
             }
 
-            var ui:SelectFighterUI = new SelectFighterUI(sv);
+            var ui:SelectFighterUI = new SelectFighterUI(musouFighterSellVO);
 
             BtnUtils.btnMode(ui.ui);
             BtnUtils.initBtn(ui.ui, selectHandler, ui);

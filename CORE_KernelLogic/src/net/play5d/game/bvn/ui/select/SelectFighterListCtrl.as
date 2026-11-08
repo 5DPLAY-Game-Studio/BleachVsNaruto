@@ -337,28 +337,28 @@ public class SelectFighterListCtrl {
         }
     }
 
-    private function addFighterItem(sv:SelectCharListItemVO):SelectFighterItem {
-        if (!sv.fighterID) {
+    private function addFighterItem(selectCharListItemVO:SelectCharListItemVO):SelectFighterItem {
+        if (!selectCharListItemVO.fighterID) {
             return null;
         }
 
-        var fv:FighterVO = _selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(sv.fighterID) :
-                           FighterModel.I.getFighter(sv.fighterID);
+        var fv:FighterVO = _selectState == SelectFighterListCtrl.SELECT_STATE_ASSIST ? AssisterModel.I.getAssister(selectCharListItemVO.fighterID) :
+                           FighterModel.I.getFighter(selectCharListItemVO.fighterID);
         if (!fv) {
-            LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.fighter_data_missing', {fighterId: sv.fighterID});
+            LogLang(GameLogger.DEBUG, 'ui', 'select_fighter_stage.fighter_data_missing', {fighterId: selectCharListItemVO.fighterID});
             return null;
         }
 
         var unitWidth:Number  = 60;
         var unitHeight:Number = 60;
 
-        var si:SelectFighterItem = new SelectFighterItem(fv, sv);
+        var si:SelectFighterItem = new SelectFighterItem(fv, selectCharListItemVO);
 
         bindItemInput(si);
 
         _fighterListUI.addChild(si.ui);
 
-        _itemObj[sv.x + ',' + sv.y] = si;
+        _itemObj[selectCharListItemVO.x + ',' + selectCharListItemVO.y] = si;
 
         return si;
     }

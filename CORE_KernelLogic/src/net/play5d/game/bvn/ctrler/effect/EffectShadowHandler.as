@@ -84,22 +84,22 @@ public class EffectShadowHandler {
             return;
         }
 
-        var sv:ShadowEffectView = _shadowEffects[target];
+        var shadowEffectView:ShadowEffectView = _shadowEffects[target];
 
-        if (sv) {
-            sv.r          = r;
-            sv.g          = g;
-            sv.b          = b;
-            sv.owner      = owner;
-            sv.stopShadow = false;
+        if (shadowEffectView) {
+            shadowEffectView.r          = r;
+            shadowEffectView.g          = g;
+            shadowEffectView.b          = b;
+            shadowEffectView.owner      = owner;
+            shadowEffectView.stopShadow = false;
             return;
         }
 
-        sv           = new ShadowEffectView(target, r, g, b, owner);
-        sv.onRemove  = removeShadow;
-        sv.container = _effectLayer;
+        shadowEffectView           = new ShadowEffectView(target, r, g, b, owner);
+        shadowEffectView.onRemove  = removeShadow;
+        shadowEffectView.container = _effectLayer;
 
-        _shadowEffects[target] = sv;
+        _shadowEffects[target] = shadowEffectView;
     }
 
     /**
@@ -119,9 +119,9 @@ public class EffectShadowHandler {
         if (!_shadowEffects) {
             return;
         }
-        var sv:ShadowEffectView = _shadowEffects[target];
-        if (sv) {
-            sv.stopShadow = true;
+        var shadowEffectView:ShadowEffectView = _shadowEffects[target];
+        if (shadowEffectView) {
+            shadowEffectView.stopShadow = true;
         }
     }
 
