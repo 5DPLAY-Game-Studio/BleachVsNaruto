@@ -217,25 +217,25 @@ public class FighterActionLogic {
         return _actionCtrler.ghostJumpDown();
     }
 
-    public function waiKai():Boolean {
+    public function banKai():Boolean {
         if (_musouLogic && !_musouLogic.canBankai()) {
             return false;
         }
-        return _actionCtrler.waiKai();
+        return _actionCtrler.banKai();
     }
 
-    public function waiKaiW():Boolean {
+    public function banKaiW():Boolean {
         if (_musouLogic && !_musouLogic.canBankai()) {
             return false;
         }
-        return _actionCtrler.waiKaiW();
+        return _actionCtrler.banKaiW();
     }
 
-    public function waiKaiS():Boolean {
+    public function banKaiS():Boolean {
         if (_musouLogic && !_musouLogic.canBankai()) {
             return false;
         }
-        return _actionCtrler.waiKaiS();
+        return _actionCtrler.banKaiS();
     }
 
     public function specialSkill():Boolean {

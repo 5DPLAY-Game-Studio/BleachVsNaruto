@@ -71,7 +71,7 @@ public class JoyStickConfigVO {
     /** 特殊 */
     public var special:JoyStickSetVO    = new JoyStickSetVO(8, 1);
     /** 万解 */
-    public var waikai:JoyStickSetVO     = new JoyStickSetVO(10, 1);
+    public var bankai:JoyStickSetVO     = new JoyStickSetVO(10, 1);
     /** 返回 */
     public var back:JoyStickSetVO       = new JoyStickSetVO(12, 1);
     /** 确认 */

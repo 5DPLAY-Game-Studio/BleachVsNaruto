@@ -53,7 +53,7 @@ public class FighterCtrler implements IGameSpriteCntlr {
     private var _fighter:FighterMain;
 
     private var _rectCache:Object = {};
-    private var _doingWankai:Boolean;
+    private var _doingBankai:Boolean;
     /** @private getCurrentHits 复用缓冲，避免对撞热路径反复 new Array */
     private var _hitsBuf:Array    = [];
 
@@ -447,10 +447,10 @@ public class FighterCtrler implements IGameSpriteCntlr {
         if (mc) {
 
             var fighterMc:FighterMC = _fighterMcCtrl.initMc(mc);
-            if (_doingWankai) {
+            if (_doingBankai) {
                 _fighter.actionState = FighterActionState.WAN_KAI_ING;
                 fighterMc.goFrame(FighterSpecialFrame.SAY_INTRO);
-                _doingWankai = false;
+                _doingBankai = false;
             }
             else {
                 _fighterMcCtrl.idle();
@@ -512,9 +512,9 @@ public class FighterCtrler implements IGameSpriteCntlr {
         return HitAreaUtil.toWorldRect(rect, _fighter.direct, _fighter.x, _fighter.y, _rectCache, cacheId);
     }
 
-    //万解 SAMPLE: parent.$fighter_ctrler.doWanKai();
-    public function doWanKai(frame:int = 0):void {
-        _doingWankai = true;
+    //万解 SAMPLE: parent.$fighter_ctrler.doBanKai();
+    public function doBanKai(frame:int = 0):void {
+        _doingBankai = true;
         if (frame == 0) {
             _fighter.mc.nextFrame();
         }

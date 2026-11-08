@@ -253,7 +253,7 @@ public class JoyStickSetUI extends EventDispatcher implements IInnerSetUI {
             {id: 'skill', name: 'SKILL', cn: GetLang('settings.joy.key_skill')},
             {id: 'superSkill', name: 'SUPER SKILL', cn: GetLang('settings.joy.key_super_skill')},
             {id: 'special', name: 'SPECIAL', cn: GetLang('settings.joy.key_special')},
-            {id: 'waikai', name: 'BANN KAI', cn: GetLang('settings.joy.key_waikai')},
+            {id: 'bankai', name: 'BAN KAI', cn: GetLang('settings.joy.key_bankai')},
             {id: 'back', name: 'BACK', cn: GetLang('settings.joy.key_back')},
             {id: 'select', name: 'SELECT', cn: GetLang('settings.joy.key_select')},
         ];

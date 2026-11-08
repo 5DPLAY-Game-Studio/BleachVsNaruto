@@ -56,9 +56,9 @@ public class FighterAction {
     public var bishaUP:String;
     public var bishaSUPER:String;
     public var hurtAction:String;
-    public var waiKai:String;
-    public var waiKaiW:String;
-    public var waiKaiS:String;
+    public var banKai:String;
+    public var banKaiW:String;
+    public var banKaiS:String;
     public var attackAIR:String;
     public var skillAIR:String;
     public var bishaAIR:String;
@@ -134,7 +134,7 @@ public class FighterAction {
 
         hurtAction = null;
 
-        waiKai = null;
+        banKai = null;
 
         attackAIR = null;
         skillAIR  = null;

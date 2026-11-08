@@ -182,8 +182,8 @@ public class GameInputter {
         return isDown(type, 'special', justDown);
     }
 
-    public static function wankai(type:String, justDown:int = 0):Boolean {
-        return isDown(type, 'wankai', justDown);
+    public static function bankai(type:String, justDown:int = 0):Boolean {
+        return isDown(type, 'bankai', justDown);
     }
 
     public static function clearInput():void {
@@ -339,8 +339,8 @@ public class GameInputter {
             return input.superSkill();
         case 'special':
             return input.special();
-        case 'wankai':
-            return input.wankai();
+        case 'bankai':
+            return input.bankai();
         default:
             return false;
         }

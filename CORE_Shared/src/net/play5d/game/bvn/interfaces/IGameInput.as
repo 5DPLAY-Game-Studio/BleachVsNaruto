@@ -258,12 +258,12 @@ public interface IGameInput {
      * @return 按下为 <code>true</code>。
      * @example
      * <listing version="3.0">
-     * if (input.wankai()) {
+     * if (input.bankai()) {
      *     // ...
      * }
      * </listing>
      */
-    function wankai():Boolean;
+    function bankai():Boolean;
 
     /**
      * 清空缓冲或瞬时状态。

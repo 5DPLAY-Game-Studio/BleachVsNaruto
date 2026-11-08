@@ -116,7 +116,7 @@ public class GameKeyInput implements IGameInput {
         return isDown(_config.beckons);
     }
 
-    public function wankai():Boolean {
+    public function bankai():Boolean {
         return isDown(_config.attack) && isDown(_config.jump);
     }
 

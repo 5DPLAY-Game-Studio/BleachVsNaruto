@@ -128,18 +128,18 @@ public class FighterEffectCtrl {
         EffectCtrl.I.endBisha(_target);
     }
 
-    //开始万解 SAMPLE: parent.$effect_ctrler.startWanKai('一户万解');
-    public function startWanKai(face:String = null):void {
+    //开始万解 SAMPLE: parent.$effect_ctrler.startBanKai('一户万解');
+    public function startBanKai(face:String = null):void {
         var faceDisplay:DisplayObject = face ? getFace(face) : null;
-        EffectCtrl.I.wanKai(_target as FighterMain, faceDisplay);
+        EffectCtrl.I.banKai(_target as FighterMain, faceDisplay);
     }
 
-    //结束万解 parent.$effect_ctrler.endWanKai();
-    public function endWanKai():void {
+    //结束万解 parent.$effect_ctrler.endBanKai();
+    public function endBanKai():void {
         if ((
                     _target as FighterMain
             ).actionState == FighterActionState.WAN_KAI_ING) {
-            EffectCtrl.I.endWanKai(_target as FighterMain);
+            EffectCtrl.I.endBanKai(_target as FighterMain);
         }
     }
 

@@ -598,11 +598,11 @@ public class FighterApi extends FighterApiProxy {
      * @param frame 要停的帧。默认 <code>0</code>，表示下一帧。
      * @example
      * <listing version="3.0">
-     * api.doWanKai();
+     * api.doBanKai();
      * </listing>
      */
-    public function doWanKai(frame:int = 0):void {
-        _fighter.doWanKai(frame);
+    public function doBanKai(frame:int = 0):void {
+        _fighter.doBanKai(frame);
     }
 
     /**

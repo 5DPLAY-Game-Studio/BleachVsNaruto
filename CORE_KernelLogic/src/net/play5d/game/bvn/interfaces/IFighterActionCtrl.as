@@ -75,11 +75,11 @@ public interface IFighterActionCtrl {
 
     function bishaAIR():Boolean;
 
-    function waiKai():Boolean;
+    function banKai():Boolean;
 
-    function waiKaiW():Boolean;
+    function banKaiW():Boolean;
 
-    function waiKaiS():Boolean;
+    function banKaiS():Boolean;
 
     function ghostStep():Boolean;
 

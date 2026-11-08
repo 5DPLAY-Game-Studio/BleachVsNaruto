@@ -177,15 +177,15 @@ public class EnemyFighterAICtrl implements IFighterActionCtrl {
         return false;
     }
 
-    public function waiKai():Boolean {
+    public function banKai():Boolean {
         return false;
     }
 
-    public function waiKaiW():Boolean {
+    public function banKaiW():Boolean {
         return false;
     }
 
-    public function waiKaiS():Boolean {
+    public function banKaiS():Boolean {
         return false;
     }
 

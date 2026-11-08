@@ -183,33 +183,33 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
      *
      * @return 是否已消耗本帧输入。
      */
-    public function renderWanKaiCtrl():Boolean {
+    public function renderBanKaiCtrl():Boolean {
         if (!_actionLogic || !_actionLogic.enabled()) {
             return false;
         }
 
-        if (_actionLogic.waiKai()) {
-            return checkDoWankai(_action.waiKai, FighterSpecialFrame.BANKAI, FighterInputCmd.BANKAI);
+        if (_actionLogic.banKai()) {
+            return checkDoBankai(_action.banKai, FighterSpecialFrame.BANKAI, FighterInputCmd.BANKAI);
         }
-        if (_actionLogic.waiKaiW()) {
-            return checkDoWankai(_action.waiKaiW, FighterSpecialFrame.BANKAI_W, FighterInputCmd.BANKAI_W);
+        if (_actionLogic.banKaiW()) {
+            return checkDoBankai(_action.banKaiW, FighterSpecialFrame.BANKAI_W, FighterInputCmd.BANKAI_W);
         }
-        if (_actionLogic.waiKaiS()) {
-            return checkDoWankai(_action.waiKaiS, FighterSpecialFrame.BANKAI_S, FighterInputCmd.BANKAI_S);
+        if (_actionLogic.banKaiS()) {
+            return checkDoBankai(_action.banKaiS, FighterSpecialFrame.BANKAI_S, FighterInputCmd.BANKAI_S);
         }
 
         return false;
     }
 
-    private function checkDoWankai(action:String, attackingAct:String, inputText:String):Boolean {
+    private function checkDoBankai(action:String, attackingAct:String, inputText:String):Boolean {
         if (action) {
-            doWaiKaiAction(action, inputText);
+            doBanKaiAction(action, inputText);
             return true;
         }
 
         if (_doingAction == FighterSpecialFrame.ATTACK) {
             if (_rt.doActionFrame < 2) {
-                doWaiKaiAction(attackingAct, inputText);
+                doBanKaiAction(attackingAct, inputText);
                 return true;
             }
         }
@@ -364,7 +364,7 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
      * 执行万解
      * @param inputText 练习模式输入历史指令（如 JK / WJK / SJK）
      */
-    public function doWaiKaiAction(action:String, inputText:String):void {
+    public function doBanKaiAction(action:String, inputText:String):void {
         if (!_mc.checkFrame(action)) {
             return;
         }

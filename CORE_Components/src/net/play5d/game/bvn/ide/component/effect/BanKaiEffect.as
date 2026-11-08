@@ -22,13 +22,13 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 /**
  * 开始万解 IDE 组件。
  *
- * <p>FighterMain 时间轴组件：调用 <code>$effect_ctrler.startWanKai</code>。需配对 <code>EndWanKaiEffect</code>。</p>
+ * <p>FighterMain 时间轴组件：调用 <code>$effect_ctrler.startBanKai</code>。需配对 <code>EndBanKaiEffect</code>。</p>
  * <p><code>face</code> 为已通过 <code>defineBishaFace</code> 注册的特写 id；空串表示无特写。</p>
  *
- * @see net.play5d.game.bvn.ide.component.effect.EndWanKaiEffect
+ * @see net.play5d.game.bvn.ide.component.effect.EndBanKaiEffect
  * @see net.play5d.game.bvn.ide.component.BaseEffect
  */
-public class WanKaiEffect extends BaseEffect {
+public class BanKaiEffect extends BaseEffect {
 
     /** @private 万解特写 id */
     private var _face:String = '';
@@ -36,7 +36,7 @@ public class WanKaiEffect extends BaseEffect {
     /**
      * 构造方法。
      */
-    public function WanKaiEffect() {
+    public function BanKaiEffect() {
         super.title = '效果_万解';
         refreshPreview();
     }
@@ -64,12 +64,12 @@ public class WanKaiEffect extends BaseEffect {
      * @inheritDoc
      */
     override public function doAction():void {
-        invokeEffect('startWanKai', [_face ? _face : null]);
+        invokeEffect('startBanKai', [_face ? _face : null]);
     }
 
     /** @private */
     private function refreshPreview():void {
-        updateCallPreview('startWanKai', [_face ? _face : null]);
+        updateCallPreview('startBanKai', [_face ? _face : null]);
     }
 }
 }

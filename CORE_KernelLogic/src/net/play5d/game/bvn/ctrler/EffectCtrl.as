@@ -340,12 +340,12 @@ public class EffectCtrl {
         _blackBackHandler.endBisha(target);
     }
 
-    public function wanKai(target:FighterMain, face:DisplayObject = null):void {
-        _blackBackHandler.wanKai(target, face);
+    public function banKai(target:FighterMain, face:DisplayObject = null):void {
+        _blackBackHandler.banKai(target, face);
     }
 
-    public function endWanKai(target:FighterMain):void {
-        _blackBackHandler.endWanKai(target);
+    public function endBanKai(target:FighterMain):void {
+        _blackBackHandler.endBanKai(target);
     }
 
     public function jumpEffect(x:Number, y:Number):void {

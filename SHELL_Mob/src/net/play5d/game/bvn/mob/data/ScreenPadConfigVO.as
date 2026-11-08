@@ -16,7 +16,7 @@ public class ScreenPadConfigVO {
     /**
      * 万解自动隐藏
      */
-    public var wankaiAutoHide:Boolean     = true;
+    public var bankaiAutoHide:Boolean     = true;
     /**
      * 特殊键自动隐藏
      */
@@ -31,7 +31,7 @@ public class ScreenPadConfigVO {
             joyMode           : joyMode,
             joyAlpha          : joyAlpha,
             joySet            : joySet,
-            wankaiAutoHide    : wankaiAutoHide,
+            bankaiAutoHide    : bankaiAutoHide,
             specialAutoHide   : specialAutoHide,
             superSkillAutoHide: superSkillAutoHide
         };
@@ -50,8 +50,8 @@ public class ScreenPadConfigVO {
         if (o.joySet != undefined) {
             joySet = o.joySet;
         }
-        if (o.wankaiAutoHide != undefined) {
-            wankaiAutoHide = o.wankaiAutoHide;
+        if (o.bankaiAutoHide != undefined) {
+            bankaiAutoHide = o.bankaiAutoHide;
         }
         if (o.specialAutoHide != undefined) {
             specialAutoHide = o.specialAutoHide;

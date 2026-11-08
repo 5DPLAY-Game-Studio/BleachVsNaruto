@@ -288,7 +288,7 @@ public class GameSocketInput implements IGameInput, ILanSocketInput {
         return _data && _data.special;
     }
 
-    public function wankai():Boolean {
+    public function bankai():Boolean {
         return _data && _data.attack && _data.jump;
     }
 

@@ -269,7 +269,7 @@ public class FighterMcCtrler {
         setBishaUP();
         setBishaSUPER();
 
-        setWankai();
+        setBankai();
 
     }
 
@@ -499,15 +499,15 @@ public class FighterMcCtrler {
     }
 
     //设定万解
-    public function setWankai():void {
+    public function setBankai():void {
         if (_rt.mc.checkFrame(FighterSpecialFrame.BANKAI)) {
-            _rt.action.waiKai = FighterSpecialFrame.BANKAI;
+            _rt.action.banKai = FighterSpecialFrame.BANKAI;
         }
         if (_rt.mc.checkFrame(FighterSpecialFrame.BANKAI_W)) {
-            _rt.action.waiKaiW = FighterSpecialFrame.BANKAI_W;
+            _rt.action.banKaiW = FighterSpecialFrame.BANKAI_W;
         }
         if (_rt.mc.checkFrame(FighterSpecialFrame.BANKAI_S)) {
-            _rt.action.waiKaiS = FighterSpecialFrame.BANKAI_S;
+            _rt.action.banKaiS = FighterSpecialFrame.BANKAI_S;
         }
     }
 
@@ -735,7 +735,7 @@ public class FighterMcCtrler {
         if (_rt.action.hitTarget) {
             _actionCtrl.renderCheckTargetHit();
         }
-        if (_actionCtrl.renderWanKaiCtrl()) {
+        if (_actionCtrl.renderBanKaiCtrl()) {
             return;
         }
 

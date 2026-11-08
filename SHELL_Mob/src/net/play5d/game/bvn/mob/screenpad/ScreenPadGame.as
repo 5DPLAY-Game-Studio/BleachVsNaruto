@@ -36,7 +36,7 @@ public class ScreenPadGame extends EventDispatcher {
     private var _btns:Vector.<ScreenPadBtnBase>;
     private var _autoHideSpecial:Boolean;
     private var _autoHideSuperSkill:Boolean;
-    private var _autoHideWankai:Boolean;
+    private var _autoHideBankai:Boolean;
     private var _editingBtn:ScreenPadBtnBase;
     private var _editingBtnDownPos:Point;
     private var _editingStageDownPos:Point;
@@ -103,8 +103,8 @@ public class ScreenPadGame extends EventDispatcher {
             if (_autoHideSpecial) {
                 setBtnVisible('special', specialEnabled(fighter));
             }
-            if (_autoHideWankai) {
-                setBtnVisible('wankai', fighter.qi >= 300 && fighter.hasWankai());
+            if (_autoHideBankai) {
+                setBtnVisible('bankai', fighter.qi >= 300 && fighter.hasBankai());
             }
         }
         catch (e:Error) {
@@ -188,7 +188,7 @@ public class ScreenPadGame extends EventDispatcher {
 
         _autoHideSuperSkill = GameInterfaceManager.config.screenPadConfig.superSkillAutoHide;
         _autoHideSpecial    = GameInterfaceManager.config.screenPadConfig.specialAutoHide;
-        _autoHideWankai     = GameInterfaceManager.config.screenPadConfig.wankaiAutoHide;
+        _autoHideBankai     = GameInterfaceManager.config.screenPadConfig.bankaiAutoHide;
 
         _arrow = addArrow(['up', 'down', 'left', 'right'], ScreenPadAsset.arrow, 0.2, 0, 0, 0.2, 0.5);
 
@@ -242,7 +242,7 @@ public class ScreenPadGame extends EventDispatcher {
         addBtn('superSkill', ScreenPadAsset.spskill, 0, 0, 0.2, 3.5, 0.3, 0.7);
         addBtn('special', ScreenPadAsset.special, 0.2, 0, 0, 3.2, 0.3, 0.7);
 
-        addBtn('wankai', ScreenPadAsset.wanjie, 0.2, 0.5, 0, 0, 0.3, 0.7);
+        addBtn('bankai', ScreenPadAsset.wanjie, 0.2, 0.5, 0, 0, 0.3, 0.7);
     }
 
     private function addBtnMode2():void {
@@ -254,7 +254,7 @@ public class ScreenPadGame extends EventDispatcher {
         addBtn('superSkill', ScreenPadAsset.spskill, 0, 0, 0.2, 3.5, 0.3, 0.7);
         addBtn('special', ScreenPadAsset.special, 0, 0, 2.3, 3.5, 0.3, 0.7);
 
-        addBtn('wankai', ScreenPadAsset.wanjie, 0.1, 0, 0, 3.5, 0.3, 0.7);
+        addBtn('bankai', ScreenPadAsset.wanjie, 0.1, 0, 0, 3.5, 0.3, 0.7);
     }
 
     private function addArrow(keyIds:Array, asset:String, left:Number = 0, top:Number = 0, right:Number = 0,

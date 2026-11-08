@@ -168,18 +168,18 @@ public class FighterKeyCtrl implements IFighterActionCtrl {
         return GameInputter.superSkill(inputType, _justDown);
     }
 
-    public function waiKai():Boolean {
-        return GameInputter.wankai(inputType, 0) && !(
+    public function banKai():Boolean {
+        return GameInputter.bankai(inputType, 0) && !(
                 GameInputter.up(inputType, 0) || GameInputter.down(inputType, 0)
         );
     }
 
-    public function waiKaiW():Boolean {
-        return GameInputter.up(inputType, 0) && GameInputter.wankai(inputType, 0);
+    public function banKaiW():Boolean {
+        return GameInputter.up(inputType, 0) && GameInputter.bankai(inputType, 0);
     }
 
-    public function waiKaiS():Boolean {
-        return GameInputter.down(inputType, 0) && GameInputter.wankai(inputType, 0);
+    public function banKaiS():Boolean {
+        return GameInputter.down(inputType, 0) && GameInputter.bankai(inputType, 0);
     }
 
     public function ghostStep():Boolean {

@@ -202,10 +202,10 @@ public class EffectBlackBackHandler {
      * @param face 特写。
      * @example
      * <listing version="3.0">
-     * handler.wanKai(fighter, face);
+     * handler.banKai(fighter, face);
      * </listing>
      */
-    public function wanKai(target:FighterMain, face:DisplayObject = null):void {
+    public function banKai(target:FighterMain, face:DisplayObject = null):void {
         justRenderAnimate(target);
         GameCtrl.I.pause();
         GameCtrl.I.setRenderHit(false);
@@ -228,10 +228,10 @@ public class EffectBlackBackHandler {
      * @param target 发动方。
      * @example
      * <listing version="3.0">
-     * handler.endWanKai(fighter);
+     * handler.endBanKai(fighter);
      * </listing>
      */
-    public function endWanKai(target:FighterMain):void {
+    public function endBanKai(target:FighterMain):void {
         if (cancelJustRenderAnimate(target)) {
             GameCtrl.I.resume();
             GameCtrl.I.gameState.cameraResume();

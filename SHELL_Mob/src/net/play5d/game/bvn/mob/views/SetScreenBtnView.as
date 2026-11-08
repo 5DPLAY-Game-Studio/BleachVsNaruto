@@ -62,13 +62,13 @@ public class SetScreenBtnView extends Sprite {
                                  },
 
                                  {
-                                     label      : 'WANKAI', cn: GetLang('settings.screen.wankai'),
+                                     label      : 'BANKAI', cn: GetLang('settings.screen.bankai'),
                                      options    : [
                                          {label: 'AUTO', cn: GetLang('settings.screen.auto_show'), value: true},
                                          {label: 'ALWAYS', cn: GetLang('settings.screen.always_show'), value: false}
                                      ],
-                                     optionKey  : 'wankaiAutoHide',
-                                     optionValue: config.wankaiAutoHide
+                                     optionKey  : 'bankaiAutoHide',
+                                     optionValue: config.bankaiAutoHide
                                  },
 
                                  {

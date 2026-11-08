@@ -84,8 +84,8 @@ public class ScreenPadInput implements IGameInput {
         return isDownObj['special'];
     }
 
-    public function wankai():Boolean {
-        return isDownObj['wankai'];
+    public function bankai():Boolean {
+        return isDownObj['bankai'];
     }
 
     public function clear():void {

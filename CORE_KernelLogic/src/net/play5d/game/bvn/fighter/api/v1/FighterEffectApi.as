@@ -171,11 +171,11 @@ public class FighterEffectApi extends FighterApiProxy {
      * @param face 立绘 id。默认 <code>null</code>。
      * @example
      * <listing version="3.0">
-     * api.startWanKai('一户万解');
+     * api.startBanKai('一户万解');
      * </listing>
      */
-    public function startWanKai(face:String = null):void {
-        _effect.startWanKai(face);
+    public function startBanKai(face:String = null):void {
+        _effect.startBanKai(face);
     }
 
     /**
@@ -183,11 +183,11 @@ public class FighterEffectApi extends FighterApiProxy {
      *
      * @example
      * <listing version="3.0">
-     * api.endWanKai();
+     * api.endBanKai();
      * </listing>
      */
-    public function endWanKai():void {
-        _effect.endWanKai();
+    public function endBanKai():void {
+        _effect.endBanKai();
     }
 
     /**

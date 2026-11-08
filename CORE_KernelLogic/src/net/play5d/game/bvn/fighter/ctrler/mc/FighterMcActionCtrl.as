@@ -208,8 +208,8 @@ public class FighterMcActionCtrl {
      *
      * @return 是否已消耗本帧输入。
      */
-    public function renderWanKaiCtrl():Boolean {
-        return _floor.renderWanKaiCtrl();
+    public function renderBanKaiCtrl():Boolean {
+        return _floor.renderBanKaiCtrl();
     }
 
     /**

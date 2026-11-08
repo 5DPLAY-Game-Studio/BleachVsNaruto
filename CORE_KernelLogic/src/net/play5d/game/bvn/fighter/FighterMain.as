@@ -642,7 +642,7 @@ public class FighterMain extends BaseGameSprite {
         _replaceSkillFrame = 30;
     }
 
-    public function hasWankai():Boolean {
+    public function hasBankai():Boolean {
         return _fighterCtrl.getMcCtrl().getFighterMc().checkFrame(FighterSpecialFrame.BANKAI);
     }
 

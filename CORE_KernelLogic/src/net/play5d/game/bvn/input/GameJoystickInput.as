@@ -196,11 +196,11 @@ public class GameJoystickInput implements IGameInput {
         return JoyStick.isDown(_config.deviceId, _config.special);
     }
 
-    public function wankai():Boolean {
+    public function bankai():Boolean {
         if (!_enabled) {
             return false;
         }
-        return JoyStick.isDown(_config.deviceId, _config.waikai);
+        return JoyStick.isDown(_config.deviceId, _config.bankai);
     }
 
     public function clear():void {
