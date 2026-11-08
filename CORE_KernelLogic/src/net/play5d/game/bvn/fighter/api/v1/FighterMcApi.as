@@ -500,10 +500,10 @@ public class FighterMcApi extends FighterApiProxy {
      *
      * @example
      * <listing version="3.0">
-     * api.setBankai();
+     * api.setWankai();
      * </listing>
      */
-    public function setBankai():void {
+    public function setWankai():void {
         _mc.setBankai();
     }
 
