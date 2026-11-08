@@ -38,9 +38,9 @@ public class MusouWorldMapPlayerVO implements ISaveData, IInstanceVO {
 
     public function openArea(id:String):void {
         if (!getOpenArea(id)) {
-            var av:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
-            av.id                            = id;
-            _openAreas.push(av);
+            var musouWorldMapAreaPlayerVO:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
+            musouWorldMapAreaPlayerVO.id                            = id;
+            _openAreas.push(musouWorldMapAreaPlayerVO);
         }
     }
 
@@ -65,10 +65,10 @@ public class MusouWorldMapPlayerVO implements ISaveData, IInstanceVO {
         if (o.areas) {
             _openAreas = new Vector.<MusouWorldMapAreaPlayerVO>();
             for (var i:int; i < o.areas.length; i++) {
-                var ad:Object                    = o.areas[i];
-                var av:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
-                av.readSaveObj(ad);
-                _openAreas.push(av);
+                var ad:Object                                           = o.areas[i];
+                var musouWorldMapAreaPlayerVO:MusouWorldMapAreaPlayerVO = new MusouWorldMapAreaPlayerVO();
+                musouWorldMapAreaPlayerVO.readSaveObj(ad);
+                _openAreas.push(musouWorldMapAreaPlayerVO);
             }
         }
     }

@@ -210,11 +210,11 @@ public class GameStageLoadCtrl extends EventDispatcher {
             assisterDatas = new Vector.<FighterVO>();
 
             for each(id in assisters) {
-                var av:FighterVO = AssisterModel.I.getAssister(id);
-                if (!av) {
+                var fighterVO:FighterVO = AssisterModel.I.getAssister(id);
+                if (!fighterVO) {
                     throw new Error(GetLang('log.error.load.game_stage_load_ctrl.get_assistant_data_fail'));
                 }
-                assisterDatas.push(av);
+                assisterDatas.push(fighterVO);
             }
         }
 
