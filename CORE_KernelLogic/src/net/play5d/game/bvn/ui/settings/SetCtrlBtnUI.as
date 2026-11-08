@@ -131,7 +131,7 @@ public class SetCtrlBtnUI extends EventDispatcher implements IInnerSetUI {
             {id: 'dash', name: 'DASH', cn: GetLang('settings.pad.key_dash')},
             {id: 'skill', name: 'SKILL', cn: GetLang('settings.pad.key_skill')},
             {id: 'superKill', name: 'SUPER SKILL', cn: GetLang('settings.pad.key_super_skill')},
-            {id: 'jiaohue', name: 'SPECIAL', cn: GetLang('settings.pad.key_special')}
+            {id: 'beckons', name: 'SPECIAL', cn: GetLang('settings.pad.key_special')}
         ];
 
         _keyMappings = [];
