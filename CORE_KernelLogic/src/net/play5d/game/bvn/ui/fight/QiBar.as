@@ -32,8 +32,8 @@ public class QiBar {
 
     public function QiBar(ui:$fight$MC_qiBar) {
         _ui        = ui;
-        _bar       = new InsBar(_ui.barmc);
-        _fzBar     = new InsFzBar(_ui.fzqibar);
+        _bar       = new InsideBar(_ui.barmc);
+        _fzBar     = new InsideFzBar(_ui.fzqibar);
         _fzReadyMc = _ui.readymc;
         _orgPose   = new Point(_ui.x, _ui.y);
 
@@ -46,8 +46,8 @@ public class QiBar {
     }
     private var _ui:$fight$MC_qiBar;
     private var _fighter:FighterMain;
-    private var _bar:InsBar;
-    private var _fzBar:InsFzBar;
+    private var _bar:InsideBar;
+    private var _fzBar:InsideFzBar;
     private var _fzReadyMc:MovieClip;
     private var _qiRate:Number   = 0;
     private var _fzRate:Number   = 0;
@@ -274,8 +274,8 @@ import flash.geom.Rectangle;
 
 import net.play5d.game.bvn.ui.QiBarScale;
 import net.play5d.kyo.utils.KyoDisplayUtils;
-internal class InsBar {
-    public function InsBar(ui:$fight$MC_qiBarMc) {
+internal class InsideBar {
+    public function InsideBar(ui:$fight$MC_qiBarMc) {
         _ui = ui;
         setProcess(0);
     }
@@ -312,8 +312,8 @@ internal class InsBar {
 
 }
 
-internal class InsFzBar {
-    public function InsFzBar(ui:$fight$MC_qiBarFzQi) {
+internal class InsideFzBar {
+    public function InsideFzBar(ui:$fight$MC_qiBarFzQi) {
         _ui                  = ui;
         var bounds:Rectangle = _ui.barmc.getBounds(_ui.barmc);
         _scroll              = new Rectangle(0, 0, _ui.barmc.width, _ui.barmc.height);
