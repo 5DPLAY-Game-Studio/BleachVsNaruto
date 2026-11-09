@@ -27,11 +27,9 @@ import net.play5d.kyo.utils.KyoUtils;
  */
 public class JoyStickConfigVO {
     /**
-     * 构造默认键位。
-     */
-
-    /**
-     * 设备 id。
+     * 设备 id。还没绑定时是 null。
+     *
+     * @default null
      */
     public var deviceId:String;
     /**
@@ -78,8 +76,14 @@ public class JoyStickConfigVO {
     public var select:JoyStickSetVO     = new JoyStickSetVO(13, 1);
 
     /**
-     * 从普通对象填充字段。
-     * @param obj 键值表。
+     * 从普通对象填充已有字段。表里没有的字段保持原值。
+     *
+     * @param obj 键值表。null 时抛错。键位字段的值会交给 <code>JoyStickSetVO.readObj</code>。
+     * @throws TypeError <code>obj</code> 为 null，或键位值不能读 <code>id</code> 时。
+     * @example
+     * <listing version="3.0">
+     * config.readObj(saved);
+     * </listing>
      */
     public function readObj(obj:Object):void {
         for (var i:String in obj) {
@@ -97,8 +101,13 @@ public class JoyStickConfigVO {
     }
 
     /**
-     * 导出为普通对象（含嵌套 <code>JoyStickSetVO</code>）。
-     * @return 可序列化对象。
+     * 导出各公开字段。键位值仍是原来的 <code>JoyStickSetVO</code>。
+     *
+     * @return 字段名到当前值的对象。
+     * @example
+     * <listing version="3.0">
+     * var saved:Object = config.toObj();
+     * </listing>
      */
     public function toObj():Object {
         var vs:Array = KyoUtils.getItemVariables(this);

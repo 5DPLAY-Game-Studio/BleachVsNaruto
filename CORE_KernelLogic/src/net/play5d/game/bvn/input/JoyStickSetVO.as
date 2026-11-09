@@ -25,8 +25,10 @@ package net.play5d.game.bvn.input {
  */
 public class JoyStickSetVO {
     /**
+     * 按控件序号和方向建一条映射。不传方向时记 1。
+     *
      * @param id 控件索引。
-     * @param value 轴方向阈值符号（正/负）或按钮标记。
+     * @param value 正数、负数或按钮标记。默认 1。
      */
     public function JoyStickSetVO(id:int, value:Number = 1) {
         this.id    = id;
@@ -38,14 +40,19 @@ public class JoyStickSetVO {
      */
     public var id:int;
     /**
-     * 轴方向 / 按钮值。
-     * @default 0
+     * 轴方向或按钮值。构造时不传则是 1。
      */
     public var value:Number = 0;
 
     /**
-     * 从普通对象读取。
-     * @param o 含 <code>id</code> / <code>value</code>。
+     * 写入控件序号和值。
+     *
+     * @param o 含 <code>id</code> 和 <code>value</code>。null 时抛错。
+     * @throws TypeError <code>o</code> 为 null 时。
+     * @example
+     * <listing version="3.0">
+     * key.readObj(saved);
+     * </listing>
      */
     public function readObj(o:Object):void {
         this.id    = o.id;
@@ -53,8 +60,13 @@ public class JoyStickSetVO {
     }
 
     /**
-     * 导出为普通对象。
-     * @return 含 <code>id</code> / <code>value</code>。
+     * 导出控件序号和值。
+     *
+     * @return 含 <code>id</code> 和 <code>value</code> 的对象。
+     * @example
+     * <listing version="3.0">
+     * var saved:Object = key.toObj();
+     * </listing>
      */
     public function toObj():Object {
         var o:Object = {};
