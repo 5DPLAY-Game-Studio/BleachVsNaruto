@@ -39,7 +39,13 @@ import net.play5d.kyo.utils.KyoTimeout;
 public class LanClientSyncCore {
 
     /**
-     * @param delayBiasMs 延迟显示修正（毫秒），Mob 常用 200，Pc 常用 100。
+     * 记下延迟修正。
+     *
+     * @param delayBiasMs 延迟显示修正（毫秒）。默认 100。Mob 常用 200，Pc 常用 100。
+     * @example
+     * <listing version="3.0">
+     * var core:LanClientSyncCore = new LanClientSyncCore(100);
+     * </listing>
      */
     public function LanClientSyncCore(delayBiasMs:int = 100) {
         _delayBiasMs = delayBiasMs;

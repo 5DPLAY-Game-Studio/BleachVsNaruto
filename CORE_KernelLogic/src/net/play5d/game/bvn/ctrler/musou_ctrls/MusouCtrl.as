@@ -49,37 +49,107 @@ import net.play5d.game.bvn.interfaces.IFighterActionCtrl;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.ui.GameUI;
 
+/**
+ * 无双关卡：刷怪、换人、头目登场和胜负。
+ *
+ * <p><code>render</code> 是空的，刷怪和计时都在 <code>renderAnimate</code>，而且操作被关掉时不会跑。
+ * 波次进度在当前波已经走完时为 1；计时走到负的那一帧会大于 1。
+ * 头目登场有一半几率去播角色曲。那次调用找到曲子时还会再播头目曲，没找到时头目曲不会播。
+ * 直接调用 <code>addEnemyFighter</code> 不会放进在场列表。</p>
+ *
+ * @see MusouLogic
+ * @see GameCtrl
+ */
 public class MusouCtrl {
 
+    /**
+     * 本关无双运行数据。构造时创建，之后一直是这一份。
+     */
     public const gameRunData:MusouGameRunDataVO = new MusouGameRunDataVO();
 
+    /**
+     * 本关波次总数。
+     *
+     * @default 0
+     */
     public var waveCount:int;
+    /**
+     * 已经开始的波次数。
+     *
+     * @default 0
+     */
     public var currentWave:int;
+    /** @private */
     private var _mission:MusouMissionVO;
+    /** @private */
     private var _runningWaves:Vector.<MusouWaveVO>;
+    /** @private */
     private var _runningWave:MusouWaveVO;
+    /** @private */
     private var _stageEnemies:Vector.<FighterMain>;
+    /** @private */
     private var _bossCount:int;
+    /** @private */
     private var _renderTimer:int;
+    /** @private */
     private var _renderTimerMax:int;
+    /** @private */
     private var _fighterEventCtrl:MusouFighterEventCtrl;
+    /** @private */
     private var _changeFighterGap:int;
+    /** @private */
     private var _resumeGap:int;
+    /** @private */
     private var _enemyCreators:Vector.<EnemyCreator> = new Vector.<EnemyCreator>();
+    /** @private */
     private var _missionComplete:Boolean;
+    /** @private */
     private var _gameFinish:Boolean                  = false;
+    /** @private */
     private var _addEnemyGap:int                     = 0;
+    /** @private */
     private var _introBoss:FighterMain;
+    /** @private */
     private var _bossInAnimate:Boolean;
 
+    /**
+     * 取本关的角色事件控制。还没初始化时为 <code>null</code>。
+     *
+     * @return 事件控制。
+     * @example
+     * <listing version="3.0">
+     * var events:MusouFighterEventCtrl = ctrl.getFighterEventCtrl();
+     * </listing>
+     */
     public function getFighterEventCtrl():MusouFighterEventCtrl {
         return _fighterEventCtrl;
     }
 
+    /**
+     * 本关是否已经进入结束。
+     *
+     * <p>自己倒下或通关时为 <code>true</code>。时间到不会改这个值。</p>
+     *
+     * @return 已结束时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var done:Boolean = ctrl.getGameFinished();
+     * </listing>
+     */
     public function getGameFinished():Boolean {
         return _gameFinish;
     }
 
+    /**
+     * 读当前关卡，并接上无双角色事件。
+     *
+     * <p>当前关卡为空时抛错。再调用一次会换掉事件控制，上一份不会销毁。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.initialize();
+     * </listing>
+     */
     public function initialize():void {
         _mission         = MusouModel.I.currentMission;
         _missionComplete = false;
@@ -98,6 +168,16 @@ public class MusouCtrl {
 
     }
 
+    /**
+     * 去掉升级监听并销毁角色事件控制。
+     *
+     * <p>场上的敌人不会清掉。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.destroy();
+     * </listing>
+     */
     public function destroy():void {
         GameEvent.removeEventListener(GameEvent.LEVEL_UP, onLevelUp);
 
@@ -112,6 +192,17 @@ public class MusouCtrl {
 
     }
 
+    /**
+     * 按当前任务把三人队伍和地图放进场景，并开始无双开场。
+     *
+     * <p>角色或地图没建出来时记错误并返回。调试器里这次错误会抛出。
+     * 大约七成播当前角色的曲子，否则播地图曲。每次调用都会再挂一个升级监听。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.buildGame();
+     * </listing>
+     */
     public function buildGame():void {
         _runningWaves = _mission.waves.concat();
 
@@ -161,9 +252,17 @@ public class MusouCtrl {
 
     }
 
+    /**
+     * 空方法。刷怪在 <code>renderAnimate</code>。
+     */
     public function render():void {
     }
 
+    /**
+     * 推进头目登场。操作开着时再推进波次、刷怪、计时和换人冷却。
+     *
+     * <p>操作开着、但还没 <code>buildGame</code> 时，读波次列表会抛错。</p>
+     */
     public function renderAnimate():void {
         renderBossIn();
 
@@ -182,6 +281,18 @@ public class MusouCtrl {
         }
     }
 
+    /**
+     * 当前波次进行了多少。
+     *
+     * <p>初始化之前两个计数字段都是 0，结果是 1。还没到最后一波、且这一波没有计时上限时为 0。
+     * 计时走到负的那一帧会大于 1。</p>
+     *
+     * @return 进度。
+     * @example
+     * <listing version="3.0">
+     * var per:Number = ctrl.getWavePercent();
+     * </listing>
+     */
     public function getWavePercent():Number {
         if (currentWave >= waveCount) {
             return 1;
@@ -194,6 +305,18 @@ public class MusouCtrl {
         );
     }
 
+    /**
+     * 把敌人放到当前角色附近，播出场并加入 2 队。
+     *
+     * <p>为空时直接返回。还没初始化的头目用头目 AI，其它用小兵 AI；已经初始化过的改为复活。
+     * 不会写入在场列表。当前角色为空时抛错。</p>
+     *
+     * @param fighter 敌人。
+     * @example
+     * <listing version="3.0">
+     * ctrl.addEnemyFighter(enemy);
+     * </listing>
+     */
     public function addEnemyFighter(fighter:FighterMain):void {
         if (!fighter) {
             return;
@@ -256,6 +379,17 @@ public class MusouCtrl {
 
     }
 
+    /**
+     * 从在场列表和场景拿掉敌人，并检查是否进入下一波或通关。
+     *
+     * <p>不在列表里也会从场景拿掉。</p>
+     *
+     * @param enemy 敌人。
+     * @example
+     * <listing version="3.0">
+     * ctrl.removeEnemy(enemy);
+     * </listing>
+     */
     public function removeEnemy(enemy:FighterMain):void {
         var index:int = _stageEnemies.indexOf(enemy);
         if (index != -1) {
@@ -267,6 +401,15 @@ public class MusouCtrl {
         checkNextOrWin();
     }
 
+    /**
+     * 自己进入死亡动作：关掉操作，播终结闪光，镜头跟过去并慢放 5 秒。
+     *
+     * @param f 倒下的角色。
+     * @example
+     * <listing version="3.0">
+     * ctrl.onSelfDie(fighter);
+     * </listing>
+     */
     public function onSelfDie(f:FighterMain):void {
         TraceLang('musou_ctrl.self_die');
         GameCtrl.I.actionEnable = false;
@@ -278,6 +421,15 @@ public class MusouCtrl {
         EffectCtrl.I.slowDown(2, 5000);
     }
 
+    /**
+     * 自己已经倒下：标成结束，弹出失败，确认后回世界地图。
+     *
+     * @param f 倒下的角色。当前没有使用。
+     * @example
+     * <listing version="3.0">
+     * ctrl.onSelfDead(fighter);
+     * </listing>
+     */
     public function onSelfDead(f:FighterMain):void {
         _gameFinish = true;
 
@@ -289,10 +441,31 @@ public class MusouCtrl {
         });
     }
 
+    /**
+     * 直接按通关处理。已经通关过时什么都不做。
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.anyWaypassMission();
+     * </listing>
+     */
     public function anyWaypassMission():void {
         missionComplete();
     }
 
+    /**
+     * 换成另一个自己人，并写满援助气。
+     *
+     * <p>换人冷却还没结束时直接返回。冷却是 1 秒的动作帧，而且操作关掉时不倒数。
+     * 目标已经初始化过时按它自己的队伍放回去；还没初始化时固定放进 1 队。</p>
+     *
+     * @param from 当前角色。
+     * @param to 换上去的角色。
+     * @example
+     * <listing version="3.0">
+     * ctrl.changeFighter(current, next);
+     * </listing>
+     */
     public function changeFighter(from:FighterMain, to:FighterMain):void {
         if (_changeFighterGap > 0) {
             return;
@@ -327,10 +500,29 @@ public class MusouCtrl {
         updateCamera();
     }
 
+    /**
+     * 刷新这个敌人的血条。
+     *
+     * @param v 敌人。
+     * @example
+     * <listing version="3.0">
+     * ctrl.updateEnemy(enemy);
+     * </listing>
+     */
     public function updateEnemy(v:FighterMain):void {
         GameUI.I.updateMusouEnemyBar(v);
     }
 
+    /**
+     * 镜头看自己和第一个还活着的头目。
+     *
+     * <p>在场列表还没建时抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.updateCamera();
+     * </listing>
+     */
     public function updateCamera():void {
         var p1:FighterMain              = GameCtrl.I.gameRunData.p1FighterGroup.currentFighter;
         var bosses:Vector.<FighterMain> = getBossEnemies(true);
@@ -348,6 +540,18 @@ public class MusouCtrl {
 
     }
 
+    /**
+     * 头目登场：关掉操作，镜头跟过去，并播登场界面。
+     *
+     * <p>界面存在时先停掉背景音乐。登场回调里有一半几率去播角色曲；找到时还会再播头目曲，没找到时头目曲不会播。
+     * 没有界面时不停音乐，台词说完并且不在开场动作里之后会重新打开操作。</p>
+     *
+     * @param f 头目。
+     * @example
+     * <listing version="3.0">
+     * ctrl.onBossBirth(boss);
+     * </listing>
+     */
     public function onBossBirth(f:FighterMain):void {
         GameCtrl.I.actionEnable = false;
 
@@ -381,6 +585,15 @@ public class MusouCtrl {
 
     }
 
+    /**
+     * 头目进入死亡动作：镜头、定格和 5 秒慢放，并弹出 KO。
+     *
+     * @param f 头目。
+     * @example
+     * <listing version="3.0">
+     * ctrl.onBossDie(boss);
+     * </listing>
+     */
     public function onBossDie(f:FighterMain):void {
         TraceLang('musou_ctrl.boss_die');
         KoPresentCtrl.focus(f);
@@ -391,6 +604,17 @@ public class MusouCtrl {
         });
     }
 
+    /**
+     * 头目已经倒下。场上没有其它存活头目时，剩下的敌人进入死亡并通关。
+     *
+     * <p>还有存活头目时只更新镜头。</p>
+     *
+     * @param f 头目。当前没有使用。
+     * @example
+     * <listing version="3.0">
+     * ctrl.onBossDead(boss);
+     * </listing>
+     */
     public function onBossDead(f:FighterMain):void {
         updateCamera();
         checkNextOrWin(true);
@@ -705,12 +929,28 @@ public class MusouCtrl {
 
 import net.play5d.game.bvn.data.musou.MusouEnemyVO;
 
+/**
+ * 按顺序吐出一份敌人列表。
+ *
+ * @private
+ */
 internal class EnemyCreator {
+    /**
+     * 复制一份敌人列表。传入的数组之后再改，不会影响这里。
+     *
+     * @param enemies 敌人数据。
+     */
     public function EnemyCreator(enemies:Vector.<MusouEnemyVO>) {
         _addEnemies = enemies.concat();
     }
+    /** @private */
     private var _addEnemies:Vector.<MusouEnemyVO>;
 
+    /**
+     * 取出下一个敌人。
+     *
+     * @return 敌人数据；列表空了为 <code>null</code>。
+     */
     public function getNextEnemy():MusouEnemyVO {
         if (_addEnemies.length < 1) {
             return null;

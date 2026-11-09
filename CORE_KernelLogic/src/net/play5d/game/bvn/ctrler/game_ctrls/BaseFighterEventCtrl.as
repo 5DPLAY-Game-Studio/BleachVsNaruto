@@ -28,10 +28,27 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.views.effects.FollowEffectView;
 
+/**
+ * 角色事件的公共监听：子弹、攻击体和跟随特效。
+ *
+ * <p><code>initialize</code> 和 <code>destroy</code> 都会清掉 <code>FighterEventDispatcher</code> 上的全部监听，不单是本类加上的。</p>
+ *
+ * @see FighterEventCtrl
+ * @see net.play5d.game.bvn.ctrler.musou_ctrls.MusouFighterEventCtrl
+ */
 public class BaseFighterEventCtrl {
 
+    /** @private */
     private var _attackers:Array = [];
 
+    /**
+     * 清掉已有监听后，接上子弹、攻击体和跟随特效。
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.initialize();
+     * </listing>
+     */
     public function initialize():void {
         FighterEventDispatcher.removeAllListeners();
 
@@ -40,6 +57,17 @@ public class BaseFighterEventCtrl {
         FighterEventDispatcher.addEventListener(FighterEvent.ADD_EFFECT, addFollowEffect);
     }
 
+    /**
+     * 按名字和队伍查找还在场上的攻击体。
+     *
+     * @param name 攻击体名字。
+     * @param team 队伍 id。
+     * @return 第一份匹配；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var a:FighterAttacker = ctrl.getAttacker('wave', teamId);
+     * </listing>
+     */
     public function getAttacker(name:String, team:int):FighterAttacker {
         for each(var i:FighterAttacker in _attackers) {
             if (i.name == name && i.team.id == team) {
@@ -49,6 +77,14 @@ public class BaseFighterEventCtrl {
         return null;
     }
 
+    /**
+     * 清掉 <code>FighterEventDispatcher</code> 上的全部监听。
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.destroy();
+     * </listing>
+     */
     public function destroy():void {
         FighterEventDispatcher.removeAllListeners();
     }

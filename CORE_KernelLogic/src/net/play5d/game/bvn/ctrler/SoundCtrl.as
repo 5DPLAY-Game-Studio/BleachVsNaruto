@@ -29,21 +29,47 @@ import net.play5d.kyo.loader.KyoSoundLoader;
 import net.play5d.kyo.sound.KyoBGSounder;
 import net.play5d.kyo.utils.KyoRandom;
 
+/**
+ * 音效和战斗背景音乐。
+ *
+ * <p>无双闯关里，距上次真正播出去的声音不足 20 毫秒时，特效、随机、文件和 SWC 声音会被丢掉。
+ * <code>playAssetSound</code> 不看这个间隔。暂停中调用 <code>BGM</code> 只记下待播的一首，恢复时再播，不再恢复原来那首。
+ * <code>playFighterBGM</code> 找到并切过去时返回 <code>false</code>，没有这首时返回 <code>true</code>。</p>
+ *
+ * @see AssetManager
+ */
 public class SoundCtrl {
 
+    /** @private */
     private static var _i:SoundCtrl;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 声音控制。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.sndSelect();
+     * </listing>
+     */
     public static function get I():SoundCtrl {
         _i ||= new SoundCtrl();
         return _i;
     }
 
+    /** @private */
     private var _bgSound:KyoBGSounder;
+    /** @private */
     private var _soundLoader:KyoSoundLoader;
+    /** @private */
     private var _bgmObj:Object;
+    /** @private */
     private var _bgmPaused:Boolean           = false;
+    /** @private */
     private var _waitingSound:Object;
+    /** @private */
     private var _sndTransform:SoundTransform = new SoundTransform();
+    /** @private */
     private var _lastSndTime:int;
     /** @private SWC 声音类 -&gt; 复用实例，避免每次 new */
     private var _swcSoundCache:Dictionary;
@@ -52,10 +78,30 @@ public class SoundCtrl {
     /** @private 静音预热用 */
     private var _silentTransform:SoundTransform;
 
+    /**
+     * 设置之后播放的音效音量。
+     *
+     * <p>已经在播的声音不会改。</p>
+     *
+     * @param v 音量。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.setSoundVolume(0.5);
+     * </listing>
+     */
     public function setSoundVolume(v:Number):void {
         _sndTransform.volume = v;
     }
 
+    /**
+     * 设置背景音乐音量。还没有播放器时会先建一个。
+     *
+     * @param v 音量。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.setBgmVolume(0.5);
+     * </listing>
+     */
     public function setBgmVolume(v:Number):void {
         if (!_bgSound) {
             _bgSound = new KyoBGSounder();
@@ -63,6 +109,18 @@ public class SoundCtrl {
         _bgSound.volume = v;
     }
 
+    /**
+     * 播放基础资源里的音效。
+     *
+     * <p>名字为空或资源里没有时直接返回。不看无双的 20 毫秒间隔。<code>vol</code> 不是 1 时再乘上当前音效音量。</p>
+     *
+     * @param name 资源名。
+     * @param vol 相对音量。默认 1。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.playAssetSound('snd_hit');
+     * </listing>
+     */
     public function playAssetSound(name:String, vol:Number = 1):void {
 
         if (name == null) {
@@ -81,6 +139,18 @@ public class SoundCtrl {
         }
     }
 
+    /**
+     * 播放 effect 包里的音效，并缓存实例。
+     *
+     * <p>无双里距上次播放不足 20 毫秒时丢掉。类不存在时会抛错。</p>
+     *
+     * @param name 声音类名。
+     * @param vol 相对音量。默认 1。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.playEffectSound('snd_kan1');
+     * </listing>
+     */
     public function playEffectSound(name:String, vol:Number = 1):void {
         if (name == null) {
             return;
@@ -100,6 +170,17 @@ public class SoundCtrl {
         }
     }
 
+    /**
+     * 从给出的资源名里随机播一个。
+     *
+     * <p>无双里距上次播放不足 20 毫秒时整次丢掉，不会抽名字。</p>
+     *
+     * @param params 资源名。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.playAssetSoundRandom('snd_a', 'snd_b');
+     * </listing>
+     */
     public function playAssetSoundRandom(...params):void {
         if (keepSoundNoise()) {
             return;
@@ -167,6 +248,19 @@ public class SoundCtrl {
         _lastSndTime = getTimer();
     }
 
+    /**
+     * 切换背景音乐。
+     *
+     * <p>和当前是同一份对象时不重播。暂停中只把这首记下来，恢复时播放，原来那首不再继续。
+     * 传入 <code>null</code> 且当前正在播时会停掉。</p>
+     *
+     * @param sound 声音或其它 <code>KyoBGSounder</code> 接受的对象。
+     * @param loop 是否循环。默认 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.BGM(sound);
+     * </listing>
+     */
     public function BGM(sound:Object, loop:Boolean = true):void {
 
         if (_bgmPaused) {
@@ -190,6 +284,14 @@ public class SoundCtrl {
         }
     }
 
+    /**
+     * 暂停背景音乐。已经暂停时直接返回。
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.pauseBGM();
+     * </listing>
+     */
     public function pauseBGM():void {
         if (_bgmPaused) {
             return;
@@ -200,6 +302,16 @@ public class SoundCtrl {
         }
     }
 
+    /**
+     * 恢复背景音乐。
+     *
+     * <p>暂停期间记下了新曲子时改播那首，不再恢复原来的进度。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.resumeBGM();
+     * </listing>
+     */
     public function resumeBGM():void {
         if (!_bgmPaused) {
             return;
@@ -218,12 +330,19 @@ public class SoundCtrl {
     }
 
     /**
-     * 加载战斗BGM
-     * @param arr {id:Object,url:String,rate:Number(0-1)} , 如果是场景ID，ID值为'map'
-     * @param success
-     * @param fail
-     * @param progress
+     * 按列表加载战斗背景音乐，并换掉上一批记录。
      *
+     * <p>某一首失败时跳过，继续下一首。进度回调收到的是当前这一首自己的进度，不是整批比例。
+     * 列表为空时仍会建加载器，并立刻调用成功回调。</p>
+     *
+     * @param arr 曲目。id 为 <code>map</code> 时表示场景曲。
+     * @param success 全部尝试结束后的回调，含跳过失败的情况。
+     * @param fail 未使用。可省略。
+     * @param progress 单首进度，范围 0 到 1。可省略。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.loadFightBGM(list, function ():void {});
+     * </listing>
      */
     public function loadFightBGM(arr:Vector.<BgmVO>, success:Function, fail:Function = null,
                                  progress:Function                                    = null
@@ -272,10 +391,31 @@ public class SoundCtrl {
 
     }
 
+    /**
+     * 播放火影或死神的头目曲。
+     *
+     * @param isNaruto 为 <code>true</code> 时播 <code>boss_naruto</code>，否则播 <code>boss_bleach</code>。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.playBossBGM(true);
+     * </listing>
+     */
     public function playBossBGM(isNaruto:Boolean):void {
         playFighterBGM(isNaruto ? 'boss_naruto' : 'boss_bleach');
     }
 
+    /**
+     * 按角色 id 切战斗背景音乐。
+     *
+     * <p>还没加载过曲目表时会抛错。找到时切过去并返回 <code>false</code>；没有这首时返回 <code>true</code>，当前音乐不动。</p>
+     *
+     * @param id 曲目 id。
+     * @return 没有这首时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var missing:Boolean = SoundCtrl.I.playFighterBGM(id);
+     * </listing>
+     */
     public function playFighterBGM(id:String):Boolean {
         var o:Object = _bgmObj[id];
         if (!o) {
@@ -288,6 +428,18 @@ public class SoundCtrl {
         return false;
     }
 
+    /**
+     * 按权重决定播角色曲还是地图曲。
+     *
+     * <p>id 不是 <code>map</code> 且没有这首，或随机数大于 <code>rate</code> 时，改播 <code>map</code>。
+     * 地图曲也不存在时直接返回。曲目表还没加载时会抛错。</p>
+     *
+     * @param id 角色 id 或 <code>map</code>。
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.smartPlayGameBGM(fighterId);
+     * </listing>
+     */
     public function smartPlayGameBGM(id:String):void {
 
         var o:Object = _bgmObj[id];
@@ -312,6 +464,16 @@ public class SoundCtrl {
         BGM(sound);
     }
 
+    /**
+     * 停掉战斗背景音乐并卸载已加载的曲目。
+     *
+     * <p>正在暂停时，这次停播只会记成待播的空值，当前声音要等恢复时才停。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.unloadFightBGM();
+     * </listing>
+     */
     public function unloadFightBGM():void {
         BGM(null);
         if (_soundLoader) {
@@ -320,7 +482,14 @@ public class SoundCtrl {
         }
     }
 
-    //选择音效
+    /**
+     * 播放菜单选择音 <code>snd_menu1</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.sndSelect();
+     * </listing>
+     */
     public function sndSelect():void {
         playSoundFile('snd_menu1');
     }
@@ -458,7 +627,14 @@ public class SoundCtrl {
         return snd;
     }
 
-    //确定音效
+    /**
+     * 播放菜单确认音 <code>snd_menu2</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * SoundCtrl.I.sndConfirm();
+     * </listing>
+     */
     public function sndConfirm():void {
         playSoundFile('snd_menu2');
     }

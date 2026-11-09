@@ -34,42 +34,92 @@ import net.play5d.game.bvn.data.MapModel;
 import net.play5d.game.bvn.data.vos.MapVO;
 import net.play5d.game.bvn.utils.GameLogger;
 
+/**
+ * 对局素材加载：地图、角色、援助和背景音乐。
+ *
+ * <p>取角色或援助时，路径不在缓存里会在读 <code>domain</code> 时抛错；条目在但没有 <code>domain</code> 时返回 <code>null</code>。
+ * 类定义找不到时，玩家 id 为 <code>1</code> 且缓存了 <code>mc</code> 就返回那一份，否则返回 <code>mcSlave</code>。
+ * 地图返回缓存里的同一个显示对象，没有这个路径时为 <code>undefined</code>。
+ * <code>loadGame</code> 里地图、角色、援助传 <code>null</code> 时，300 毫秒后开始加载会抛错；空数组可以。背景音乐可以是 <code>null</code>。找不到的曲目会跳过。</p>
+ *
+ * @see GameStageLoadDefine
+ */
 public class GameStageLoadCtrl extends EventDispatcher {
 
-    // 是否忽略旧版角色
+    /**
+     * 为 <code>true</code> 时，角色和援助会再加载一份，分别放进 <code>mc</code> 和 <code>mcSlave</code>。
+     *
+     * @default false
+     */
     public static var IGNORE_OLD_FIGHTER:Boolean = false;
+    /** @private */
     private static var _i:GameStageLoadCtrl;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 对局加载控制。
+     * @example
+     * <listing version="3.0">
+     * GameStageLoadCtrl.I.init(onProgress, onError);
+     * </listing>
+     */
     public static function get I():GameStageLoadCtrl {
         _i ||= new GameStageLoadCtrl();
         return _i;
     }
+    /** @private */
     private var _loadingType:int;
 
+    /** @private */
     private var _fighterCache:Object;
+    /** @private */
     private var _assisterCache:Object;
+    /** @private */
     private var _mapCache:Object;
 
+    /** @private */
     private var _progressCallBack:Function;
+    /** @private */
     private var _errorCallBack:Function;
 
+    /** @private */
     private var _loadStep:int;
+    /** @private */
     private var _loadStepLength:int;
 
+    /** @private */
     private var _curLoadStep:int;
+    /** @private */
     private var _curLoadStepLength:int;
 
+    /** @private */
     private var _curLoadName:String;
 
-    ////
-
+    /** @private */
     private var _loadMapDatas:Vector.<MapVO>;
+    /** @private */
     private var _loadFighterDatas:Vector.<FighterVO>;
+    /** @private */
     private var _loadAssisterDatas:Vector.<FighterVO>;
+    /** @private */
     private var _loadBgmDatas:Vector.<BgmVO>;
 
+    /** @private */
     private var _loadFinishBack:Function;
 
+    /**
+     * 清空三类缓存并记下进度、失败回调。
+     *
+     * <p>进度回调为空时，加载过程中的进度上报会抛错。</p>
+     *
+     * @param progressCallBack 进度回调，参数是文案和 0 到 1 的进度。可省略。
+     * @param errorCallBack 失败回调。可省略。省略后失败上报会抛错。
+     * @example
+     * <listing version="3.0">
+     * GameStageLoadCtrl.I.init(function (msg:String, p:Number):void {}, function (msg:String):void {});
+     * </listing>
+     */
     public function init(progressCallBack:Function = null, errorCallBack:Function = null):void {
         _fighterCache  = {};
         _assisterCache = {};
@@ -82,6 +132,16 @@ public class GameStageLoadCtrl extends EventDispatcher {
         _errorCallBack   = errorCallBack;
     }
 
+    /**
+     * 丢掉三类缓存。
+     *
+     * <p>之后再取影片会抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameStageLoadCtrl.I.dispose();
+     * </listing>
+     */
     public function dispose():void {
         _fighterCache  = null;
         _assisterCache = null;
@@ -89,6 +149,20 @@ public class GameStageLoadCtrl extends EventDispatcher {
     }
 
 
+    /**
+     * 按路径取一个角色影片。
+     *
+     * <p>路径不在缓存里时抛错。没有域时返回 <code>null</code>。
+     * 找不到主时间轴类时，玩家 id 为 <code>1</code> 且缓存了 <code>mc</code> 就返回那一份，否则返回 <code>mcSlave</code>。</p>
+     *
+     * @param fileUrl 角色 SWF 路径，也是缓存键。
+     * @param playerId 玩家 id。<code>1</code> 才会用到 <code>mc</code>。
+     * @return 影片。
+     * @example
+     * <listing version="3.0">
+     * var mc:MovieClip = GameStageLoadCtrl.I.getFighterMc(url, '1');
+     * </listing>
+     */
     public function getFighterMc(fileUrl:String, playerId:String):MovieClip {
         var obj:Object = _fighterCache[fileUrl];
 
@@ -120,6 +194,17 @@ public class GameStageLoadCtrl extends EventDispatcher {
         return null;
     }
 
+    /**
+     * 按路径取一个援助影片。规则和角色相同。
+     *
+     * @param fileUrl 援助 SWF 路径。
+     * @param playerId 玩家 id。
+     * @return 影片。
+     * @example
+     * <listing version="3.0">
+     * var mc:MovieClip = GameStageLoadCtrl.I.getAssisterMc(url, '1');
+     * </listing>
+     */
     public function getAssisterMc(fileUrl:String, playerId:String):MovieClip {
         var obj:Object = _assisterCache[fileUrl];
 
@@ -151,18 +236,38 @@ public class GameStageLoadCtrl extends EventDispatcher {
         return null;
     }
 
+    /**
+     * 取缓存里的地图显示对象。
+     *
+     * <p>每次返回同一份。路径不在缓存里时为 <code>undefined</code>。缓存被清掉后抛错。</p>
+     *
+     * @param fileUrl 地图 SWF 路径。
+     * @return 显示对象。
+     * @example
+     * <listing version="3.0">
+     * var mc:MovieClip = GameStageLoadCtrl.I.getMapMc(url);
+     * </listing>
+     */
     public function getMapMc(fileUrl:String):MovieClip {
         return _mapCache[fileUrl];
     }
 
 
     /**
-     * 加载游戏所有素材，所有参数均为String数组，可以为NULL
-     * @param maps
-     * @param fighters
-     * @param assisters
-     * @param bgms
+     * 按 id 加载一局用到的地图、角色、援助和背景音乐。
      *
+     * <p>地图、角色、援助里有找不到的 id 时立刻抛错。背景音乐找不到就跳过。
+     * 前三类传 <code>null</code> 时，开始加载后会抛错；空数组可以。结束回调只调用一次。</p>
+     *
+     * @param maps 地图 id。
+     * @param fighters 角色 id。
+     * @param assisters 援助 id。
+     * @param bgms 曲目 id。可以是 <code>null</code>。
+     * @param finishBack 全部结束后的回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * GameStageLoadCtrl.I.loadGame(maps, fighters, assisters, bgms, function ():void {});
+     * </listing>
      */
     public function loadGame(maps:Array, fighters:Array, assisters:Array, bgms:Array, finishBack:Function = null):void {
         _loadStep       = 0;
@@ -533,8 +638,16 @@ public class GameStageLoadCtrl extends EventDispatcher {
 }
 }
 
+/**
+ * 加载条目。
+ *
+ * @private
+ */
 internal class LoadAssetVO {
+    /** @private */
     public var id:String;
+    /** @private */
     public var url:String;
+    /** @private */
     public var name:String;
 }

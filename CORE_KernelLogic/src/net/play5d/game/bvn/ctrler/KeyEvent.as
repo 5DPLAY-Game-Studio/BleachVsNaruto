@@ -19,18 +19,62 @@
 package net.play5d.game.bvn.ctrler {
 import flash.events.Event;
 
+/**
+ * 游戏按键事件。
+ *
+ * <p>类型字符串是本类的 <code>KEY_DOWN</code> / <code>KEY_UP</code>，不是 <code>KeyboardEvent</code>。
+ * 没有覆写 <code>clone</code>，再派发时 <code>keyCode</code> 和 <code>justDown</code> 会丢。</p>
+ *
+ * @see flash.events.Event
+ */
 public class KeyEvent extends Event {
 
+    /**
+     * <code>keyDown</code> 的类型字符串。
+     *
+     * @eventType KEY_DOWN
+     * @default KEY_DOWN
+     */
     public static const KEY_DOWN:String = 'KEY_DOWN';
+    /**
+     * <code>keyUp</code> 的类型字符串。
+     *
+     * @eventType KEY_UP
+     * @default KEY_UP
+     */
     public static const KEY_UP:String   = 'KEY_UP';
 
+    /**
+     * 构造按键事件。
+     *
+     * @param type <code>KEY_DOWN</code> 或 <code>KEY_UP</code>。
+     * @param keyCode 键值。
+     * @param justDown 是否本帧刚按下。默认 <code>false</code>。
+     * @param bubbles 是否冒泡。默认 <code>false</code>。
+     * @param cancelable 是否可取消。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * var e:KeyEvent = new KeyEvent(KeyEvent.KEY_DOWN, 65, true);
+     * </listing>
+     */
     public function KeyEvent(
             type:String, keyCode:uint, justDown:Boolean = false, bubbles:Boolean = false, cancelable:Boolean = false) {
         this.keyCode = keyCode;
         this.justDown = justDown;
         super(type, bubbles, cancelable);
     }
+
+    /**
+     * 键值。
+     *
+     * @default 0
+     */
     public var keyCode:uint;
+    /**
+     * 是否本帧刚按下。
+     *
+     * @default false
+     */
     public var justDown:Boolean;
 }
 }

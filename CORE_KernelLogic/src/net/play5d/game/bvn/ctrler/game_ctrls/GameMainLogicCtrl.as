@@ -32,10 +32,21 @@ import net.play5d.game.bvn.stage.GameStage;
 import net.play5d.game.bvn.utils.GameLogger;
 
 /**
- * 游戏主逻辑控制类
+ * 每帧推动精灵、身体互挤和攻击判定。
+ *
+ * <p>攻击判定和动作渲染只在调用过 <code>renderAnimate</code> 的那一帧发生，帧末会清掉这个标记。
+ * <code>renderHit</code> 为 <code>false</code> 时仍会推动精灵，但跳过身体和攻击判定。
+ * <code>destroy</code> 是空的。单个精灵渲染抛错时记一条调试日志，这一帧继续处理后面的精灵。</p>
+ *
+ * @see GameLogic
  */
 public class GameMainLogicCtrl {
 
+    /**
+     * 是否做身体和攻击判定。
+     *
+     * @default true
+     */
     public var renderHit:Boolean = true;
 
     /** @private 身体重叠粗测距离（像素） */
@@ -55,12 +66,29 @@ public class GameMainLogicCtrl {
     private var _hitResultA:Object     = {hitVO: null, hitRect: null};
     /** @private */
     private var _hitResultB:Object     = {hitVO: null, hitRect: null};
+    /** @private */
     private var _gameState:GameStage;
+    /** @private */
     private var _leftSide:Number       = 0;
+    /** @private */
     private var _rightSide:Number      = 0;
+    /** @private */
     private var _teamMap:TeamMap;
+    /** @private */
     private var _renderAnimate:Boolean;
 
+    /**
+     * 记下场景和队伍，并用当前地图算出左右边界。
+     *
+     * <p>地图为空时抛错。</p>
+     *
+     * @param gameState 对局场景。
+     * @param teamMap 队伍表。
+     * @example
+     * <listing version="3.0">
+     * logic.initialize(stage, teamMap);
+     * </listing>
+     */
     public function initialize(gameState:GameStage, teamMap:TeamMap):void {
         _gameState = gameState;
         _teamMap   = teamMap;
@@ -71,6 +99,15 @@ public class GameMainLogicCtrl {
         _rightSide = map.right - GameConfig.X_SIDE_OFFSET;
     }
 
+    /**
+     * 写下全局速度倍率，并写到每个还在场上的精灵。
+     *
+     * @param v 速度倍率。
+     * @example
+     * <listing version="3.0">
+     * logic.setSpeedPlus(1);
+     * </listing>
+     */
     public function setSpeedPlus(v:Number):void {
         GameConfig.SPEED_PLUS = v;
         var i:int, team:TeamVO;
@@ -90,21 +127,38 @@ public class GameMainLogicCtrl {
 
     }
 
+    /**
+     * 空方法。场景和队伍引用还在。
+     */
     public function destroy():void {
 
     }
 
+    /**
+     * 推动本帧的精灵，并做身体互挤。
+     *
+     * <p>本帧调用过 <code>renderAnimate</code> 时，同时做攻击判定和动作渲染。</p>
+     */
     public function render():void {
         renderMainLogic();
     }
 
+    /**
+     * 让下一次 <code>render</code> 做攻击判定和动作渲染。
+     *
+     * <p>标记在那一帧结束时清掉。中间没调用 <code>render</code> 时会留到下一次。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * logic.renderAnimate();
+     * </listing>
+     */
     public function renderAnimate():void {
         _renderAnimate = true;
     }
 
     /**
-     * 暂停时，需要运行的
-     *
+     * 暂停帧。当前什么都不做。
      */
     public function renderPause():void {
 

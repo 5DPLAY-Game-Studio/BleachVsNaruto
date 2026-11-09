@@ -22,18 +22,32 @@ import flash.display.BitmapData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 /**
- * 位图数据缓存值对象
+ * 一帧位图和它相对注册点的偏移。
+ *
+ * @see DisplayFrameBitmapCache
  */
 public class BitmapDataCacheVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    // 位图数据
+    /**
+     * 位图数据。
+     *
+     * @default null
+     */
     public var bitmapData:BitmapData;
 
-    // X 偏移
+    /**
+     * 相对注册点的横向偏移。
+     *
+     * @default 0
+     */
     public var offsetX:Number = 0;
-    // Y 偏移
+    /**
+     * 相对注册点的纵向偏移。
+     *
+     * @default 0
+     */
     public var offsetY:Number = 0;
 
 }

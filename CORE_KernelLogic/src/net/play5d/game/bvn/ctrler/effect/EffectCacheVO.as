@@ -20,11 +20,28 @@ package net.play5d.game.bvn.ctrler.effect {
 import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 同一份受击数据上，普通目标与无双小兵各自的特效。
+ *
+ * <p>两字段不会同时被 <code>EffectManager</code> 写上。后查到的那一种会换掉整份对象。</p>
+ *
+ * @see EffectManager
+ */
 public class EffectCacheVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
+    /**
+     * 普通目标的特效。
+     *
+     * @default null
+     */
     public var normal:EffectVO;
+    /**
+     * 无双小兵的特效。
+     *
+     * @default null
+     */
     public var musouEnemy:EffectVO;
 }
 }

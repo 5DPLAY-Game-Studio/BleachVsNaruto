@@ -26,14 +26,20 @@ import flash.utils.Dictionary;
  */
 public class GameRender {
 
-    // 是否渲染
+    /**
+     * 是否执行渲染回调。
+     *
+     * <p>为 <code>false</code> 时本帧的前、主、后回调都不调用。监听本身还在。</p>
+     *
+     * @default true
+     */
     public static var isRender:Boolean = true;
 
-    // 先于主渲染之前渲染
+    /** @private 先于主渲染 */
     private static var _beforeFuncs:Vector.<Function>;
-    // 主渲染
+    /** @private 主渲染，键是显示对象 */
     private static var _funcs:Dictionary = new Dictionary();
-    // 后于主渲染之后渲染
+    /** @private 后于主渲染 */
     private static var _afterFuncs:Vector.<Function>;
 
     /**

@@ -33,14 +33,35 @@ import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.map.MapMain;
 import net.play5d.game.bvn.utils.GameLogger;
 
+/**
+ * 按 id 加载角色、援助和地图的 SWF，并缓存角色。
+ *
+ * <p>角色缓存命中时，<code>loadAndCacheFighter</code> 的回调不带参数；<code>loadFighter</code> 的回调带新建的角色。
+ * id 不存在时走失败回调，参数是一句加载文案。SWF 里没有 <code>main_mc</code> 时仍会缓存，之后用 <code>loader.content</code> 当影片。
+ * <code>dispose</code> 先把缓存字段置空，再卸载已经记下的 Loader；正在进行的加载不会取消。</p>
+ *
+ * @see AssetManager
+ */
 public class GameLoader {
 
-    // 角色缓存{ String: <FighterCacheVO> }
+    /** @private */
     private static var _fighterCache:Object = {};
 
-    // swf缓存
+    /** @private */
     private static var _loadedSwfCache:Vector.<Loader> = new Vector.<Loader>();
 
+    /**
+     * 加载并缓存角色 SWF。已经缓存时直接回调。
+     *
+     * @param fighterId 角色 id。
+     * @param back 成功回调，不带参数。
+     * @param fail 失败回调，参数是一句文案。可省略。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * GameLoader.loadAndCacheFighter(id, function ():void {}, function (msg:String):void {});
+     * </listing>
+     */
     public static function loadAndCacheFighter(fighterId:String, back:Function, fail:Function = null,
                                                progress:Function                               = null
     ):void {
@@ -85,6 +106,19 @@ public class GameLoader {
         }
     }
 
+    /**
+     * 取缓存角色；没有缓存时先加载再回调。
+     *
+     * @param fighterId 角色 id。
+     * @param back 成功回调。带附加参数时为 <code>back(fighter, customBackParam)</code>，否则为 <code>back(fighter)</code>。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @param customBackParam 附加参数。可省略。
+     * @example
+     * <listing version="3.0">
+     * GameLoader.loadFighter(id, function (f:FighterMain):void {});
+     * </listing>
+     */
     public static function loadFighter(fighterId:String, back:Function, fail:Function = null, progress:Function = null,
                                        customBackParam:Object                                                  = null
     ):void {
@@ -119,6 +153,16 @@ public class GameLoader {
 
     }
 
+    /**
+     * 用缓存新建一个角色。
+     *
+     * @param fighterId 角色 id。
+     * @return 新角色；没有缓存时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var f:FighterMain = GameLoader.createCacheFighter(id);
+     * </listing>
+     */
     public static function createCacheFighter(fighterId:String):FighterMain {
         var fcv:FighterCacheVO = _fighterCache[fighterId];
         if (!fcv) {
@@ -139,6 +183,19 @@ public class GameLoader {
         return fighter;
     }
 
+    /**
+     * 加载援助 SWF 并在回调里给出实例。不缓存。
+     *
+     * @param fighterId 援助 id。
+     * @param back 成功回调，参数是 <code>Assister</code>。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @param customBackParam 附加参数。有值时作为回调的第二个参数。
+     * @example
+     * <listing version="3.0">
+     * GameLoader.loadAssister(id, function (a:Assister):void {});
+     * </listing>
+     */
     public static function loadAssister(fighterId:String, back:Function, fail:Function = null, progress:Function = null,
                                         customBackParam:Object                                                  = null
     ):void {
@@ -169,6 +226,19 @@ public class GameLoader {
 
     }
 
+    /**
+     * 加载地图 SWF 并在回调里给出实例。不缓存。
+     *
+     * @param mapId 地图 id。
+     * @param back 成功回调，参数是 <code>MapMain</code>。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @param customBackParam 附加参数。有值时作为回调的第二个参数。
+     * @example
+     * <listing version="3.0">
+     * GameLoader.loadMap(id, function (map:MapMain):void {});
+     * </listing>
+     */
     public static function loadMap(mapId:String, back:Function, fail:Function = null, progress:Function = null,
                                    customBackParam:Object                                              = null
     ):void {
@@ -198,6 +268,16 @@ public class GameLoader {
         }
     }
 
+    /**
+     * 清空角色缓存并卸载已记下的 SWF。
+     *
+     * <p>卸载失败时改调 <code>unload</code>。进行中的加载不会取消。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameLoader.dispose();
+     * </listing>
+     */
     public static function dispose():void {
 
         for (var i:String in _fighterCache) {
@@ -221,6 +301,18 @@ public class GameLoader {
         _fighterCache = {};
     }
 
+    /**
+     * 加载一份 SWF 并记入卸载列表。
+     *
+     * @param url 地址。
+     * @param back 成功回调，参数是 <code>Loader</code>。调用一次后不再回调。
+     * @param fail 失败回调，参数是一句加载文案。可省略。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * GameLoader.loadSWF(url, function (loader:Loader):void {});
+     * </listing>
+     */
     public static function loadSWF(url:String, back:Function, fail:Function = null, progress:Function = null):void {
         AssetManager.I.loadSWF(url, loadComplete, loadIOError, progress);
 
@@ -249,8 +341,16 @@ import flash.display.Loader;
 
 import net.play5d.game.bvn.data.vos.FighterVO;
 
+/**
+ * 一份已加载角色的 Loader、主类和数据。
+ *
+ * @private
+ */
 internal class FighterCacheVO {
+    /** @private */
     public var loader:Loader;
+    /** @private */
     public var MainClass:Class;
+    /** @private */
     public var fighterData:FighterVO;
 }

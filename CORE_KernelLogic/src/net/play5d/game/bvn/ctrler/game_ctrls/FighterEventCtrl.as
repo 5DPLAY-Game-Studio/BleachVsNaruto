@@ -31,8 +31,18 @@ import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 
+/**
+ * 格斗对局的角色事件：援助、连击和死亡。
+ *
+ * <p>援助只在普通或防御中、且援助气已满时召唤。气会先扣成 0，当前援助不存在时随后抛错。连击数大于 1 才显示。闯关模式只给 1 队的命中加分。</p>
+ *
+ * @see BaseFighterEventCtrl
+ */
 public class FighterEventCtrl extends BaseFighterEventCtrl {
 
+    /**
+     * 在基类监听之外接上援助、命中、起身、死亡和待机。
+     */
     public override function initialize():void {
         super.initialize();
 

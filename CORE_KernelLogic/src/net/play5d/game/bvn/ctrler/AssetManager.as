@@ -38,35 +38,97 @@ import net.play5d.kyo.loader.KyoClassLoader;
 import net.play5d.kyo.loader.KyoSoundLoader;
 import net.play5d.kyo.utils.KyoArrayUtils;
 
+/**
+ * 字体、特效类、声音、头像和加载器入口。
+ *
+ * <p>头像和地图图取到的是缓存里的同一张位图，改宽高会留到下一次。
+ * <code>getEffect</code> 在类不存在时抛错。加载器还没设置时，加载和卸载会抛错。
+ * <code>loadCachedSound</code> 对空地址直接返回，失败回调也不会走；同一路径同时加载时，失败只调用最先那一次的失败回调。</p>
+ *
+ * @see IAssetLoader
+ */
 public class AssetManager {
 
+    /** @private */
     private const _effectSwfPath:String = 'effect.swf';
+    /** @private */
     private static var _i:AssetManager;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 资源管理。
+     * @example
+     * <listing version="3.0">
+     * var font:BitmapFont = AssetManager.I.getFont(id);
+     * </listing>
+     */
     public static function get I():AssetManager {
         _i ||= new AssetManager();
         return _i;
     }
 
+    /** @private */
     private var _swfLoader:KyoClassLoader          = new KyoClassLoader();
+    /** @private */
     private var _soundLoader:KyoSoundLoader        = new KyoSoundLoader();
+    /** @private */
     private var _bitmapLoader:BitmapAssetLoader    = new BitmapAssetLoader();
+    /** @private */
     private var _bitmapFontLoader:BitmapFontLoader = new BitmapFontLoader();
+    /** @private */
     private var _assetLoader:IAssetLoader          = null;
     /** @private 同一路径的声音尚未载入完成时，排队成功回调 */
     private var _soundWait:Object;
 
+    /**
+     * 空方法。
+     */
     public function init():void {
     }
 
+    /**
+     * 按 id 取已加载的位图字体。
+     *
+     * @param id 字体 id。
+     * @return 字体；没有这个 id 时为 <code>undefined</code>。
+     * @example
+     * <listing version="3.0">
+     * var font:BitmapFont = AssetManager.I.getFont(id);
+     * </listing>
+     */
     public function getFont(id:String):BitmapFont {
         return _bitmapFontLoader.getFont(id);
     }
 
+    /**
+     * 换上实际的资源加载器。
+     *
+     * <p>传 <code>null</code> 之后，加载和卸载会抛错。</p>
+     *
+     * @param v 加载器。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.setAssetLoader(loader);
+     * </listing>
+     */
     public function setAssetLoader(v:IAssetLoader):void {
         _assetLoader = v;
     }
 
+    /**
+     * 按声音、特效、字体、位图的顺序加载基础资源。
+     *
+     * <p>进度回调是 <code>progress(进度, 文案, 当前步, 4)</code>。进度大于 1 时收成 1。
+     * 收尾之后迟到的进度不再上报。</p>
+     *
+     * @param back 四步都结束后的回调。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadBasic(function ():void {});
+     * </listing>
+     */
     public function loadBasic(back:Function, progress:Function = null):void {
         var loadStep:int     = 0;
         var loadCount:int    = 4;
@@ -134,16 +196,51 @@ public class AssetManager {
         loadNext();
     }
 
+    /**
+     * 从已加载的 SWF 里取类。
+     *
+     * <p>这份 SWF 还没加载，或里面没有这个类时抛错。</p>
+     *
+     * @param className 类名。
+     * @param swfPath SWF 路径。
+     * @return 类。
+     * @example
+     * <listing version="3.0">
+     * var cls:Class = AssetManager.I.getClass('main_mc', 'effect.swf');
+     * </listing>
+     */
     public function getClass(className:String, swfPath:String):Class {
         var cls:Class = _swfLoader.getClass(className, swfPath);
         return cls;
     }
 
+    /**
+     * 用 <code>effect.swf</code> 里的类新建一个实例。
+     *
+     * <p>类不存在时抛错。</p>
+     *
+     * @param className 类名。
+     * @return 新实例。
+     * @example
+     * <listing version="3.0">
+     * var fx:* = AssetManager.I.getEffect('hit_fx');
+     * </listing>
+     */
     public function getEffect(className:String):* {
         var cls:Class = _swfLoader.getClass(className, _effectSwfPath);
         return new cls();
     }
 
+    /**
+     * 按名字取已缓存的声音。
+     *
+     * @param name 声音名或路径，跟写入缓存时用的键一致。
+     * @return 声音；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var snd:Sound = AssetManager.I.getSound(name);
+     * </listing>
+     */
     public function getSound(name:String):Sound {
         return _soundLoader.getSound(name);
     }
@@ -219,6 +316,19 @@ public class AssetManager {
         }
     }
 
+    /**
+     * 取角色小头像，默认 50×50。
+     *
+     * <p>改的是缓存里的同一张图。没有图或 <code>fv</code> 为空时，前者返回 <code>null</code>，后者抛错。</p>
+     *
+     * @param fv 角色数据。
+     * @param size 目标宽高。省略时为 50×50。
+     * @return 位图；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var face:DisplayObject = AssetManager.I.getFighterFace(fv);
+     * </listing>
+     */
     public function getFighterFace(fv:FighterVO, size:Point = null):DisplayObject {
         var bp:Bitmap = _bitmapLoader.getBitmap(fv.faceUrl);
         if (!bp) {
@@ -233,6 +343,19 @@ public class AssetManager {
         return bp;
     }
 
+    /**
+     * 取角色大头像，默认 245×62。
+     *
+     * <p>改的是缓存里的同一张图。<code>fv</code> 为空时抛错。</p>
+     *
+     * @param fv 角色数据。
+     * @param size 目标宽高。省略时为 245×62。
+     * @return 位图；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var face:DisplayObject = AssetManager.I.getFighterFaceBig(fv);
+     * </listing>
+     */
     public function getFighterFaceBig(fv:FighterVO, size:Point = null):DisplayObject {
         var bp:Bitmap = _bitmapLoader.getBitmap(fv.faceBigUrl);
         if (!bp) {
@@ -247,6 +370,19 @@ public class AssetManager {
         return bp;
     }
 
+    /**
+     * 取角色血条头像，默认 102×64。
+     *
+     * <p>改的是缓存里的同一张图。<code>fv</code> 为空时抛错。</p>
+     *
+     * @param fv 角色数据。
+     * @param size 目标宽高。省略时为 102×64。
+     * @return 位图；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var face:DisplayObject = AssetManager.I.getFighterFaceBar(fv);
+     * </listing>
+     */
     public function getFighterFaceBar(fv:FighterVO, size:Point = null):DisplayObject {
         var bp:Bitmap = _bitmapLoader.getBitmap(fv.faceBarUrl);
         if (!bp) {
@@ -261,6 +397,19 @@ public class AssetManager {
         return bp;
     }
 
+    /**
+     * 取角色胜利图，默认 300×250。
+     *
+     * <p>数据或地址为空时返回 <code>null</code>。改的是缓存里的同一张图。</p>
+     *
+     * @param fv 角色数据。
+     * @param size 目标宽高。省略时为 300×250。
+     * @return 位图；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var face:DisplayObject = AssetManager.I.getFighterFaceWin(fv);
+     * </listing>
+     */
     public function getFighterFaceWin(fv:FighterVO, size:Point = null):DisplayObject {
         if (!fv) {
             return null;
@@ -281,6 +430,19 @@ public class AssetManager {
         return bp;
     }
 
+    /**
+     * 取地图预览图，默认 450×240。
+     *
+     * <p>改的是缓存里的同一张图。<code>mv</code> 为空时抛错。</p>
+     *
+     * @param mv 地图数据。
+     * @param size 目标宽高。省略时为 450×240。
+     * @return 位图；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var pic:DisplayObject = AssetManager.I.getMapPic(mv);
+     * </listing>
+     */
     public function getMapPic(mv:MapVO, size:Point = null):DisplayObject {
         var bp:Bitmap = _bitmapLoader.getBitmap(mv.picUrl);
         if (!bp) {
@@ -294,26 +456,105 @@ public class AssetManager {
         return bp;
     }
 
+    /**
+     * 把 XML 加载交给当前加载器。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param url 地址。
+     * @param back 成功回调。
+     * @param fail 失败回调。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadXML(url, onOk, onFail);
+     * </listing>
+     */
     public function loadXML(url:String, back:Function, fail:Function):void {
         _assetLoader.loadXML(url, back, fail);
     }
 
+    /**
+     * 把 JSON 加载交给当前加载器。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param url 地址。
+     * @param back 成功回调。
+     * @param fail 失败回调。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadJSON(url, onOk, onFail);
+     * </listing>
+     */
     public function loadJSON(url:String, back:Function, fail:Function):void {
         _assetLoader.loadJSON(url, back, fail);
     }
 
+    /**
+     * 把 SWF 加载交给当前加载器。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param url 地址。
+     * @param back 成功回调。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadSWF(url, onOk);
+     * </listing>
+     */
     public function loadSWF(url:String, back:Function, fail:Function = null, progress:Function = null):void {
         _assetLoader.loadSwf(url, back, fail, progress);
     }
 
+    /**
+     * 把声音加载交给当前加载器。不写入本类的声音缓存。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param url 地址。
+     * @param back 成功回调。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadSound(url, onOk);
+     * </listing>
+     */
     public function loadSound(url:String, back:Function, fail:Function = null, progress:Function = null):void {
         _assetLoader.loadSound(url, back, fail, progress);
     }
 
+    /**
+     * 把位图加载交给当前加载器。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param url 地址。
+     * @param back 成功回调。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadBitmap(url, onOk);
+     * </listing>
+     */
     public function loadBitmap(url:String, back:Function, fail:Function = null, progress:Function = null):void {
         _assetLoader.loadBitmap(url, back, fail, progress);
     }
 
+    /**
+     * 按地址卸载一份资源。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param url 地址。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.disposeAsset(url);
+     * </listing>
+     */
     public function disposeAsset(url:String):void {
         _assetLoader.dispose(url);
     }
@@ -331,10 +572,34 @@ public class AssetManager {
         loadGraphics(loadarray, back, progress, fail);
     }
 
+    /**
+     * 当前加载器是否还有预加载。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @return 需要预加载时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var need:Boolean = AssetManager.I.needPreLoad();
+     * </listing>
+     */
     public function needPreLoad():Boolean {
         return _assetLoader.needPreLoad();
     }
 
+    /**
+     * 把预加载交给当前加载器。
+     *
+     * <p>加载器还没设置时抛错。</p>
+     *
+     * @param back 成功回调。
+     * @param fail 失败回调。可省略。
+     * @param progress 进度回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * AssetManager.I.loadPreLoad(function ():void {});
+     * </listing>
+     */
     public function loadPreLoad(back:Function, fail:Function = null, progress:Function = null):void {
         _assetLoader.loadPreLoad(back, fail, progress);
     }

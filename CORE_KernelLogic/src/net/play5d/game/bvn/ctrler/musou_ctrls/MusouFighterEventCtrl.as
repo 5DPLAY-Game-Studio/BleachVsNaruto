@@ -29,8 +29,19 @@ import net.play5d.game.bvn.fighter.events.FighterEventDispatcher;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.ui.GameUI;
 
+/**
+ * 无双对局的角色事件：连击、换人和敌人死亡。
+ *
+ * <p>必杀在这里用来换人，只处理 1 队。没有下一个存活角色时什么都不做。连击只统计 1 队打中角色的情况。敌人死透时，小兵等消散回调再移出，头目在这里直接结束，不走消散。</p>
+ *
+ * @see BaseFighterEventCtrl
+ * @see MusouCtrl
+ */
 public class MusouFighterEventCtrl extends BaseFighterEventCtrl {
 
+    /**
+     * 在基类监听之外接上命中、敌人状态、换人和死亡。
+     */
     public override function initialize():void {
         super.initialize();
 

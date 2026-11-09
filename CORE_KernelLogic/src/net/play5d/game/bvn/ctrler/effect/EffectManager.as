@@ -30,13 +30,36 @@ import net.play5d.game.bvn.views.effects.ShineEffectView;
 import net.play5d.game.bvn.views.effects.SpecialEffectView;
 import net.play5d.game.bvn.views.effects.SteelHitEffect;
 
+/**
+ * 特效视图和受击特效数据的缓存。
+ *
+ * <p>受击和防御按 <code>HitVO</code> 对象引用分开缓存普通与无双小兵。后查到的那一种会整份换掉缓存，先查到的另一种下次要重新取。
+ * 没查到数据时写入的 <code>null</code> 不会留下，下次仍会再查。视图按同一份 <code>EffectVO</code> 复用已经停掉的实例。</p>
+ *
+ * @see EffectCacheVO
+ * @see EffectCtrl
+ */
 public class EffectManager {
 
+    /** @private */
     private var _viewCache:Dictionary                = new Dictionary();
+    /** @private */
     private var _hitCache:Dictionary                 = new Dictionary();
+    /** @private */
     private var _defCache:Dictionary                 = new Dictionary();
+    /** @private */
     private var _shineCache:Vector.<ShineEffectView> = new Vector.<ShineEffectView>();
 
+    /**
+     * 销毁已创建的视图并清空缓存。
+     *
+     * <p>之后再取特效会抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * manager.destroy();
+     * </listing>
+     */
     public function destroy():void {
         for each(var i:Vector.<EffectView> in _viewCache) {
             for each(var j:EffectView in i) {
@@ -53,6 +76,19 @@ public class EffectManager {
         _shineCache = null;
     }
 
+    /**
+     * 取受击特效数据。
+     *
+     * <p>目标是无双小兵时走小兵表，否则优先 <code>customEffectVO</code>。克隆之后若震动的 <code>pow</code> 非 0，会写到 <code>shake.y</code>；<code>x</code> 和 <code>y</code> 都是 0 时把 <code>x</code> 改成 3。</p>
+     *
+     * @param hitvo 受击数据，同时作为缓存键。
+     * @param target 受击目标；可省略。
+     * @return 特效数据；表里没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var vo:EffectVO = manager.getHitEffectVOByHitVO(hit, target);
+     * </listing>
+     */
     public function getHitEffectVOByHitVO(hitvo:HitVO, target:IGameSprite = null):EffectVO {
         var cacheVO:EffectCacheVO = _hitCache[hitvo];
 
@@ -116,6 +152,20 @@ public class EffectManager {
         return effect;
     }
 
+    /**
+     * 取防御特效数据。
+     *
+     * <p>不改震动字段。缓存覆盖规则和受击特效相同。</p>
+     *
+     * @param hitvo 受击数据，同时作为缓存键。
+     * @param defenseType 防御类型。
+     * @param target 受击目标；可省略。
+     * @return 特效数据；表里没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var vo:EffectVO = manager.getDefenseEffectVOByHitVO(hit, defenseType, target);
+     * </listing>
+     */
     public function getDefenseEffectVOByHitVO(hitvo:HitVO, defenseType:int, target:IGameSprite = null):EffectVO {
         var cacheVO:EffectCacheVO = _defCache[hitvo];
 
@@ -161,6 +211,16 @@ public class EffectManager {
     }
 
 
+    /**
+     * 取一个当前没在播的视图；没有就按数据类型新建。
+     *
+     * @param data 特效数据，同时作为缓存键。另一份克隆不会复用这里的视图。
+     * @return 特效视图。
+     * @example
+     * <listing version="3.0">
+     * var view:EffectView = manager.getEffectView(data);
+     * </listing>
+     */
     public function getEffectView(data:EffectVO):EffectView {
         var evs:Vector.<EffectView> = _viewCache[data];
         if (evs) {
@@ -196,6 +256,15 @@ public class EffectManager {
         return effectView;
     }
 
+    /**
+     * 取一个当前没在播的闪光；没有就新建。
+     *
+     * @return 闪光视图。
+     * @example
+     * <listing version="3.0">
+     * var shine:ShineEffectView = manager.getShine();
+     * </listing>
+     */
     public function getShine():ShineEffectView {
         var l:int = _shineCache.length;
         for (var i:int; i < l; i++) {

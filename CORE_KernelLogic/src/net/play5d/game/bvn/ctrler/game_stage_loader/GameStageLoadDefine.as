@@ -17,11 +17,20 @@
  */
 
 package net.play5d.game.bvn.ctrler.game_stage_loader {
+/**
+ * 对局素材加载类型。
+ *
+ * @see GameStageLoadCtrl
+ */
 public class GameStageLoadDefine {
 
+    /** 地图。 @default 0 */
     public static const TYPE_MAP:int      = 0;
+    /** 角色。 @default 1 */
     public static const TYPE_FIGHTER:int  = 1;
+    /** 援助。 @default 2 */
     public static const TYPE_ASSISTER:int = 2;
+    /** 背景音乐。 @default 3 */
     public static const TYPE_BGM:int      = 3;
 }
 }

@@ -50,24 +50,78 @@ import net.play5d.game.bvn.views.effects.ShineEffectView;
 import net.play5d.game.bvn.views.effects.SpecialEffectView;
 import net.play5d.kyo.utils.UUID;
 
+/**
+ * 对局特效入口：受击、定格、闪光、震动和黑屏。
+ *
+ * <p>同一份特效数据在一帧里从第 4 次开始会被丢掉，定格和震动也不会发生。
+ * 定格取当前和这次里更长的帧数，更短的一次直接返回，也不会再次暂停。
+ * 援助按 <code>comicType == 1</code> 播火影出场，其它播死神；敌人出生正好相反，<code>0</code> 播死神。
+ * 移除敌人只在动作帧里把透明度每次减 0.05，到 0 再调用回调，角色本身还在。</p>
+ *
+ * @see EffectManager
+ */
 public class EffectCtrl {
 
-    public static var EFFECT_SMOOTHING:Boolean = true; //特效抗锯齿
-    public static var SHADOW_ENABLED:Boolean   = true; //残影开关
-    public static var SHAKE_ENABLED:Boolean    = true; //震动开关
-    public static var BG_BULR_ENABLED:Boolean  = true; //背景模糊开关
+    /**
+     * 特效是否抗锯齿。
+     *
+     * @default true
+     */
+    public static var EFFECT_SMOOTHING:Boolean = true;
+    /**
+     * 是否开启残影。
+     *
+     * @default true
+     */
+    public static var SHADOW_ENABLED:Boolean   = true;
+    /**
+     * 是否开启震动。
+     *
+     * @default true
+     */
+    public static var SHAKE_ENABLED:Boolean    = true;
+    /**
+     * 是否开启背景模糊。字段名里的拼写是现有接口。
+     *
+     * @default true
+     */
+    public static var BG_BULR_ENABLED:Boolean  = true;
+    /** @private */
     private static var _i:EffectCtrl;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 特效控制。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.jumpEffect(x, y);
+     * </listing>
+     */
     public static function get I():EffectCtrl {
         _i ||= new EffectCtrl();
         return _i;
     }
 
+    /**
+     * 同时存在的闪光上限。已经超过这个数时，先摘掉最早的一个再加。
+     *
+     * @default 3
+     */
     public var shineMaxCount:int     = 3;
+    /**
+     * 是否接受定格。
+     *
+     * @default true
+     */
     public var freezeEnabled:Boolean = true;
 
     /**
      * 是否允许背景模糊。
+     *
+     * <p>读的是慢放处理器上的开关。</p>
+     *
+     * @return 允许时为 <code>true</code>。
      */
     public function get bgBlurEnabled():Boolean {
         return _slowHandler.bgBlurEnabled;
@@ -78,25 +132,50 @@ public class EffectCtrl {
         _slowHandler.bgBlurEnabled = v;
     }
 
+    /** @private */
     private var _gameStage:GameStage;
+    /** @private */
     private var _effectLayer:Sprite;
+    /** @private */
     private var _manager:EffectManager;
+    /** @private */
     private var _freezeFrame:int                         = 0;
+    /** @private */
     private var _effects:Vector.<EffectView>;
+    /** @private */
     private var _shineEffects:Vector.<ShineEffectView>;
+    /** @private */
     private var _filterEffects:Vector.<BitmapFilterView> = new Vector.<BitmapFilterView>();
 
+    /** @private */
     private var _shakeHandler:EffectShakeHandler         = new EffectShakeHandler();
+    /** @private */
     private var _slowHandler:EffectSlowHandler           = new EffectSlowHandler();
+    /** @private */
     private var _hitHandler:EffectHitHandler             = new EffectHitHandler();
+    /** @private */
     private var _shadowHandler:EffectShadowHandler       = new EffectShadowHandler();
+    /** @private */
     private var _blackBackHandler:EffectBlackBackHandler = new EffectBlackBackHandler();
 
+    /** @private */
     private var _onFreezeOver:Vector.<Function> = null;
 
+    /** @private */
     private var _frameEffectCount:Dictionary = new Dictionary();
+    /** @private */
     private var _removeEnemyMap:Object       = {};
 
+    /**
+     * 销毁各处理器并丢掉特效列表。
+     *
+     * <p>之后再 <code>render</code> 会抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.destroy();
+     * </listing>
+     */
     public function destroy():void {
         // 执行销毁时结束震动
         _shakeHandler.destroy();
@@ -120,6 +199,18 @@ public class EffectCtrl {
 
     }
 
+    /**
+     * 建好特效层并初始化各处理器。
+     *
+     * <p>再调用一次会换掉列表，上一批视图不会销毁。</p>
+     *
+     * @param gameStage 对局场景。
+     * @param effectLayer 特效层。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.initialize(stage, layer);
+     * </listing>
+     */
     public function initialize(gameStage:GameStage, effectLayer:Sprite):void {
         DisplayFrameBitmapCache.I.clear();
 
@@ -139,6 +230,11 @@ public class EffectCtrl {
 
     }
 
+    /**
+     * 推进定格、闪光和特效。动作帧由慢放处理器决定。
+     *
+     * <p>还没 <code>initialize</code> 时会抛错。</p>
+     */
     public function render():void {
         if (freezeEnabled) {
             renderFreeze();
@@ -161,18 +257,66 @@ public class EffectCtrl {
 
     }
 
+    /**
+     * 播放受击特效。
+     *
+     * @param hitvo 受击数据。
+     * @param hitRect 命中区域。
+     * @param target 受击目标。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doHitEffect(hitvo, rect, target);
+     * </listing>
+     */
     public function doHitEffect(hitvo:HitVO, hitRect:Rectangle, target:IGameSprite = null):void {
         _hitHandler.doHitEffect(hitvo, hitRect, target);
     }
 
+    /**
+     * 播放防御特效。
+     *
+     * @param hitvo 受击数据。
+     * @param hitRect 命中区域。
+     * @param defenseType 防御类型。
+     * @param target 受击目标。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doDefenseEffect(hitvo, rect, defenseType, target);
+     * </listing>
+     */
     public function doDefenseEffect(hitvo:HitVO, hitRect:Rectangle, defenseType:int, target:IGameSprite = null):void {
         _hitHandler.doDefenseEffect(hitvo, hitRect, defenseType, target);
     }
 
+    /**
+     * 播放钢体受击特效。
+     *
+     * @param hitvo 受击数据。
+     * @param hitRect 命中区域。
+     * @param target 受击目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doSteelHitEffect(hitvo, rect, target);
+     * </listing>
+     */
     public function doSteelHitEffect(hitvo:HitVO, hitRect:Rectangle, target:IGameSprite):void {
         _hitHandler.doSteelHitEffect(hitvo, hitRect, target);
     }
 
+    /**
+     * 按 id 播放特效。找不到这份数据时什么都不做。
+     *
+     * @param id 特效 id。
+     * @param x 横坐标。
+     * @param y 纵坐标。
+     * @param direct 朝向。默认 1。
+     * @param target 跟随目标。可省略。
+     * @param playSnd 是否播放特效音。默认 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doEffectById('jump', x, y);
+     * </listing>
+     */
     public function doEffectById(
             id:String, x:Number, y:Number, direct:int = 1, target:IGameSprite = null, playSnd:Boolean = true):void {
         var effect:EffectVO = EffectModel.I.getEffect(id);
@@ -181,6 +325,17 @@ public class EffectCtrl {
         }
     }
 
+    /**
+     * 播放援助出场特效。
+     *
+     * <p><code>comicType</code> 为 1 时播火影，其它值播死神。<code>fz</code> 为空时抛错。</p>
+     *
+     * @param fz 援助。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.assisterEffect(assister);
+     * </listing>
+     */
     public function assisterEffect(fz:Assister):void {
         var isNaruto:Boolean = fz.data.comicType == 1;
         if (isNaruto) {
@@ -191,6 +346,22 @@ public class EffectCtrl {
         }
     }
 
+    /**
+     * 按特效数据播放，并带上定格、震动、闪光和慢放。
+     *
+     * <p>同一份数据这一帧超过 3 次就直接返回。视图没建出来、又传了 <code>target</code> 时，设置跟随目标会抛错。</p>
+     *
+     * @param effect 特效数据，同时作为本帧计数的键。
+     * @param ex 横坐标。
+     * @param ey 纵坐标。
+     * @param direct 朝向。默认 1。
+     * @param target 跟随目标。可省略。
+     * @param playSnd 是否播放特效音。默认 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doEffectVO(effect, x, y);
+     * </listing>
+     */
     public function doEffectVO(
             effect:EffectVO, ex:Number, ey:Number, direct:int = 1, target:IGameSprite = null,
             playSnd:Boolean                                                           = true
@@ -248,6 +419,18 @@ public class EffectCtrl {
         }
     }
 
+    /**
+     * 播放特殊特效并跟着目标。
+     *
+     * <p>找不到这份特效时会抛错。</p>
+     *
+     * @param id 特效 id。
+     * @param target 目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doSpecialEffect(id, fighter);
+     * </listing>
+     */
     public function doSpecialEffect(id:String, target:FighterMain):void {
         var data:EffectVO            = EffectModel.I.getEffect(id);
         var effect:SpecialEffectView = addEffect(data, target.x, target.y, target.direct) as SpecialEffectView;
@@ -257,6 +440,19 @@ public class EffectCtrl {
         }
     }
 
+    /**
+     * 播放 buff 特效并写上 buff 数据。
+     *
+     * <p>找不到这份特效时会抛错。</p>
+     *
+     * @param id 特效 id。
+     * @param target 目标。
+     * @param buff buff 数据。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.doBuffEffect(id, fighter, buff);
+     * </listing>
+     */
     public function doBuffEffect(id:String, target:FighterMain, buff:FighterBuffVO):void {
         var data:EffectVO         = EffectModel.I.getEffect(id);
         var effect:BuffEffectView = addEffect(data, target.x, target.y, target.direct) as BuffEffectView;
@@ -267,6 +463,18 @@ public class EffectCtrl {
         }
     }
 
+    /**
+     * 按毫秒定格，并暂停对局。
+     *
+     * <p>开关关掉、时间小于 1，或换算后不足 1 帧时直接返回。当前定格更长时也直接返回，不会改成更短的。
+     * 时间大于 300 且当前慢放倍率大于 0 时，再加一段背景模糊。</p>
+     *
+     * @param time 毫秒。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.freeze(200);
+     * </listing>
+     */
     public function freeze(time:int):void {
         if (!freezeEnabled) {
             return;
@@ -294,6 +502,19 @@ public class EffectCtrl {
         GameCtrl.I.pause();
     }
 
+    /**
+     * 在场景上加一层闪光。
+     *
+     * <p><code>FPS_SHINE_EFFECT</code> 为 0 时直接返回。已经超过 <code>shineMaxCount</code> 时先摘掉最早的一层。
+     * 还没初始化时会抛错。</p>
+     *
+     * @param color 颜色。默认 <code>0xffffff</code>。
+     * @param alpha 透明度。默认 0.2。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.shine();
+     * </listing>
+     */
     public function shine(color:uint = 0xffffff, alpha:Number = 0.2):void {
 
         if (GameConfig.FPS_SHINE_EFFECT == 0) {
@@ -310,59 +531,188 @@ public class EffectCtrl {
         _gameStage.addChild(shineEffectView);
     }
 
+    /**
+     * 开始持续震动。
+     *
+     * @param sx 横向幅度。
+     * @param sy 纵向幅度。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.startShake(4, 0);
+     * </listing>
+     */
     public function startShake(sx:Number, sy:Number):void {
         _shakeHandler.startShake(sx, sy);
     }
 
+    /**
+     * 结束持续震动。
+     *
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.endShake();
+     * </listing>
+     */
     public function endShake():void {
         _shakeHandler.endShake();
     }
 
+    /**
+     * 按给定幅度震一段时间。
+     *
+     * @param powX 横向幅度。默认 0。
+     * @param powY 纵向幅度。默认 3。
+     * @param time 毫秒。默认 500。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.shake();
+     * </listing>
+     */
     public function shake(powX:Number = 0, powY:Number = 3, time:int = 500):void {
         _shakeHandler.shake(powX, powY, time);
     }
 
+    /**
+     * 给一个显示对象加残影。
+     *
+     * @param target 显示对象。
+     * @param r 红。默认 0。
+     * @param g 绿。默认 0。
+     * @param b 蓝。默认 0。
+     * @param owner 所属精灵。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.startShadow(display);
+     * </listing>
+     */
     public function startShadow(
             target:DisplayObject, r:int = 0, g:int = 0, b:int = 0, owner:BaseGameSprite = null
     ):void {
         _shadowHandler.startShadow(target, r, g, b, owner);
     }
 
+    /**
+     * 去掉这个显示对象的残影。
+     *
+     * @param target 显示对象。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.endShadow(display);
+     * </listing>
+     */
     public function endShadow(target:DisplayObject):void {
         _shadowHandler.endShadow(target);
     }
 
+    /**
+     * 播放必杀黑屏。
+     *
+     * @param target 释放者。
+     * @param isSuper 是否超必杀。默认 <code>false</code>。
+     * @param face 头像。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.bisha(fighter);
+     * </listing>
+     */
     public function bisha(target:BaseGameSprite, isSuper:Boolean = false, face:DisplayObject = null):void {
         _blackBackHandler.bisha(target, isSuper, face);
     }
 
+    /**
+     * 结束这个目标的必杀黑屏。
+     *
+     * @param target 释放者。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.endBisha(fighter);
+     * </listing>
+     */
     public function endBisha(target:BaseGameSprite):void {
         _blackBackHandler.endBisha(target);
     }
 
+    /**
+     * 播放卍解黑屏。
+     *
+     * @param target 释放者。
+     * @param face 头像。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.banKai(fighter);
+     * </listing>
+     */
     public function banKai(target:FighterMain, face:DisplayObject = null):void {
         _blackBackHandler.banKai(target, face);
     }
 
+    /**
+     * 结束这个目标的卍解黑屏。
+     *
+     * @param target 释放者。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.endBanKai(fighter);
+     * </listing>
+     */
     public function endBanKai(target:FighterMain):void {
         _blackBackHandler.endBanKai(target);
     }
 
+    /**
+     * 播放起跳特效 <code>jump</code>。
+     *
+     * @param x 横坐标。
+     * @param y 纵坐标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.jumpEffect(x, y);
+     * </listing>
+     */
     public function jumpEffect(x:Number, y:Number):void {
         doEffectById('jump', x, y);
     }
 
+    /**
+     * 播放空中起跳特效 <code>jump_air</code>。
+     *
+     * @param x 横坐标。
+     * @param y 纵坐标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.jumpAirEffect(x, y);
+     * </listing>
+     */
     public function jumpAirEffect(x:Number, y:Number):void {
         doEffectById('jump_air', x, y);
     }
 
+    /**
+     * 播放落地特效 <code>touch_floor</code>。
+     *
+     * @param x 横坐标。
+     * @param y 纵坐标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.touchFloorEffect(x, y);
+     * </listing>
+     */
     public function touchFloorEffect(x:Number, y:Number):void {
         doEffectById('touch_floor', x, y);
     }
 
     /**
-     * 击落地效果
-     * @param type 0=弹，1=正常落地，2=重落地
+     * 按落地类型播放击地特效。
+     *
+     * <p>弹地播 <code>hit_floor</code>，普通播 <code>hit_floor_low</code>，重击同时播 <code>hit_floor_heavy</code> 和 <code>hit_floor_yan</code>。其它类型什么都不做。</p>
+     *
+     * @param type 落地类型，见 <code>FighterHitFloorType</code>。
+     * @param x 横坐标。
+     * @param y 纵坐标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.hitFloorEffect(type, x, y);
+     * </listing>
      */
     public function hitFloorEffect(type:int, x:Number, y:Number):void {
         switch (type) {
@@ -381,24 +731,71 @@ public class EffectCtrl {
     }
 
     /**
-     * 慢放效果
+     * 慢放。
+     *
+     * @param rate 倍率。
+     * @param time 毫秒。默认 1000。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.slowDown(2);
+     * </listing>
      */
     public function slowDown(rate:Number, time:int = 1000):void {
         _slowHandler.slowDown(rate, time);
     }
 
+    /**
+     * 背景模糊一段时间。
+     *
+     * @param blurX 横向模糊。
+     * @param blurY 纵向模糊。
+     * @param time 毫秒。默认 1000。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.bgBlur(8, 0);
+     * </listing>
+     */
     public function bgBlur(blurX:Number, blurY:Number, time:int = 1000):void {
         _slowHandler.bgBlur(blurX, blurY, time);
     }
 
+    /**
+     * 取消背景模糊。
+     *
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.cancelBgBlur();
+     * </listing>
+     */
     public function cancelBgBlur():void {
         _slowHandler.cancelBgBlur();
     }
 
+    /**
+     * 结束慢放。
+     *
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.slowDownResume();
+     * </listing>
+     */
     public function slowDownResume():void {
         _slowHandler.slowDownResume();
     }
 
+    /**
+     * 在地图底下播放全屏特效，并先把地图藏起来。
+     *
+     * <p>找不到特效时直接返回。<code>hold</code> 不是 -1 时写成停留帧；视图没建出来时这一步会抛错。
+     * 特效移除后才把地图重新显示。</p>
+     *
+     * @param id 特效 id。
+     * @param hold 停留秒数。默认 -1，表示不改停留帧。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.BGEffect(id);
+     * </listing>
+     */
     public function BGEffect(id:String, hold:Number = -1):void {
         var data:EffectVO = EffectModel.I.getEffect(id);
         if (!data) {
@@ -418,6 +815,17 @@ public class EffectCtrl {
         }
     }
 
+    /**
+     * 登记定格结束时要调用的函数。
+     *
+     * <p>会追加，不会替换。定格数到 0 时全部调用一次，然后清掉。这次定格没真正开始时，回调会留到下一次定格结束。</p>
+     *
+     * @param v 回调，没有参数。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.setOnFreezeOver(onOver);
+     * </listing>
+     */
     public function setOnFreezeOver(v:Function):void {
         if (!_onFreezeOver) {
             _onFreezeOver = new Vector.<Function>();
@@ -426,30 +834,69 @@ public class EffectCtrl {
     }
 
     /**
-     * 替身术
-     * @param target
+     * 播放替身术。
+     *
+     * @param target 目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.replaceSkill(sprite);
+     * </listing>
      */
     public function replaceSkill(target:BaseGameSprite):void {
         _blackBackHandler.replaceSkill(target);
     }
 
     /**
-     * 灵压爆发
+     * 播放灵压爆发。
+     *
+     * @param target 目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.energyExplode(sprite);
+     * </listing>
      */
     public function energyExplode(target:BaseGameSprite):void {
         _blackBackHandler.energyExplode(target);
     }
 
+    /**
+     * 开始瞬步。
+     *
+     * @param target 目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.ghostStep(sprite);
+     * </listing>
+     */
     public function ghostStep(target:BaseGameSprite):void {
         _blackBackHandler.ghostStep(target);
     }
 
+    /**
+     * 结束瞬步。
+     *
+     * @param target 目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.endGhostStep(sprite);
+     * </listing>
+     */
     public function endGhostStep(target:BaseGameSprite):void {
         _blackBackHandler.endGhostStep(target);
     }
 
     /**
-     * 持续滤镜效果
+     * 给目标加持续滤镜。同一个目标再次调用时改滤镜，不另加一层。
+     *
+     * <p>新滤镜放进 0 队、深度 0。</p>
+     *
+     * @param target 目标。
+     * @param filter 滤镜。
+     * @param filterOffset 偏移。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.startFilter(sprite, filter);
+     * </listing>
      */
     public function startFilter(target:BaseGameSprite, filter:BitmapFilter, filterOffset:Point = null):void {
         var bv:BitmapFilterView;
@@ -471,6 +918,17 @@ public class EffectCtrl {
 
     }
 
+    /**
+     * 去掉这个目标上的持续滤镜，并销毁那一层。
+     *
+     * <p>只处理第一份匹配。</p>
+     *
+     * @param target 目标。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.endFilter(sprite);
+     * </listing>
+     */
     public function endFilter(target:BaseGameSprite):void {
         for (var i:int = 0; i < _filterEffects.length; i++) {
             var bv:BitmapFilterView = _filterEffects[i];
@@ -483,7 +941,15 @@ public class EffectCtrl {
     }
 
     /**
-     * 敌人出生效果
+     * 把显示透明度设成 1，并播放出场特效，不播特效音。
+     *
+     * <p><code>comicType</code> 为 0 时播死神，其它值播火影。</p>
+     *
+     * @param f 敌人。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.enemyBirthEffect(enemy);
+     * </listing>
      */
     public function enemyBirthEffect(f:FighterMain):void {
         f.getDisplay().alpha = 1;
@@ -496,7 +962,16 @@ public class EffectCtrl {
     }
 
     /**
-     * 移除敌人效果
+     * 登记一个敌人，在动作帧里把透明度每次减 0.05。
+     *
+     * <p>到 0 时调用 <code>callback</code>。角色不会被移出场景。逻辑帧不推进这段淡出。</p>
+     *
+     * @param f 敌人。
+     * @param callback 淡出结束后的回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * EffectCtrl.I.removeEnemyEffect(enemy, onGone);
+     * </listing>
      */
     public function removeEnemyEffect(f:FighterMain, callback:Function = null):void {
         _removeEnemyMap[UUID.create()] = {fighter: f, callback: callback};

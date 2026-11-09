@@ -30,9 +30,18 @@ import net.play5d.game.bvn.stage.GameCamera;
  */
 public class GameCameraCtrler {
 
-    // 游戏镜头实例
+    /** @private */
     private var _camera:GameCamera;
 
+    /**
+     * 绑上镜头。
+     *
+     * @param camera 镜头。为 <code>null</code> 时只记下空引用。
+     * @example
+     * <listing version="3.0">
+     * var ctrl:GameCameraCtrler = new GameCameraCtrler(camera);
+     * </listing>
+     */
     public function GameCameraCtrler(camera:GameCamera) {
         setCamera(camera);
     }

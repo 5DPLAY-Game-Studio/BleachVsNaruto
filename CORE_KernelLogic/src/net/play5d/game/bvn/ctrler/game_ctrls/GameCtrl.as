@@ -56,52 +56,148 @@ import net.play5d.kyo.utils.KyoKeyboard;
  */
 public class GameCtrl {
 
+    /**
+     * 本局运行数据。构造时创建，之后一直是这一份。
+     */
     public const gameRunData:GameRunDataVO = new GameRunDataVO();
+    /** @private */
     private static var _i:GameCtrl;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 对局控制。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.pause(true);
+     * </listing>
+     */
     public static function get I():GameCtrl {
         _i ||= new GameCtrl();
         return _i;
     }
 
-    public var gameState:GameStage; //游戏主场景
-    public var actionEnable:Boolean     = false; //是否可操作
-    public var autoStartAble:Boolean    = true; //是否可以本机逻辑开始游戏
-    public var autoEndRoundAble:Boolean = true; //是否可以本机逻辑结束游戏
-    public var fightFinished:Boolean;
-    public var slowRate:Number          = 0;
     /**
-     * 队伍
+     * 对局场景。
+     *
+     * @default null
      */
+    public var gameState:GameStage;
+    /**
+     * 是否允许操作。开场和结束演出期间会被写成 <code>false</code>。
+     *
+     * @default false
+     */
+    public var actionEnable:Boolean     = false;
+    /**
+     * 为 <code>false</code> 时，<code>startGame</code> 和 <code>startMusouGame</code> 直接返回。
+     *
+     * @default true
+     */
+    public var autoStartAble:Boolean    = true;
+    /**
+     * 为 <code>false</code> 时，<code>gameEnd</code> 直接返回。<code>doGameEnd</code> 不看这个开关。
+     *
+     * @default true
+     */
+    public var autoEndRoundAble:Boolean = true;
+    /**
+     * 本场是否已经走完结束流程。
+     *
+     * @default false
+     */
+    public var fightFinished:Boolean;
+    /**
+     * 当前慢放倍率。0 表示没有慢放。
+     *
+     * @default 0
+     */
+    public var slowRate:Number          = 0;
+    /** @private */
     private var _teamMap:TeamMap        = new TeamMap();
-    private var _startCtrl:GameStartCtrl; //开场控制
-    private var _fightSession:IFightSession; //格斗 / 无双会话
-    private var _trainingCtrl:TrainingCtrl; //练习模式控制
-    private var _mainLogicCtrl:GameMainLogicCtrl; //游戏主逻辑控制
-    private var _endCtrl:GameEndCtrl; //KO，结束游戏控制
-    private var _roundCtrl:GameRoundCtrl; //回合推进
+    /** @private */
+    private var _startCtrl:GameStartCtrl;
+    /** @private */
+    private var _fightSession:IFightSession;
+    /** @private */
+    private var _trainingCtrl:TrainingCtrl;
+    /** @private */
+    private var _mainLogicCtrl:GameMainLogicCtrl;
+    /** @private */
+    private var _endCtrl:GameEndCtrl;
+    /** @private */
+    private var _roundCtrl:GameRoundCtrl;
+    /** @private */
     private var _isRenderGame:Boolean   = true;
-    private var _isPauseGame:Boolean; //暂停
+    /** @private */
+    private var _isPauseGame:Boolean;
+    /** @private */
     private var _gameRunning:Boolean;
+    /** @private */
     private var _renderTimeFrame:int;
-    private var _renderAnimateGap:int   = 0; //刷新动画间隔
+    /** @private */
+    private var _renderAnimateGap:int   = 0;
+    /** @private */
     private var _renderAnimateFrame:int = 0;
-    private var _gameStartAndPause:Boolean; //游戏开始时暂停
+    /** @private */
+    private var _gameStartAndPause:Boolean;
 
+    /**
+     * 按名字和队伍找攻击体。
+     *
+     * <p>会话还没建时抛错。</p>
+     *
+     * @param name 攻击体名字。
+     * @param team 队伍 id。
+     * @return 攻击体；没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var a:FighterAttacker = GameCtrl.I.getAttacker(name, team);
+     * </listing>
+     */
     public function getAttacker(name:String, team:int):FighterAttacker {
         return _fightSession.getAttacker(name, team);
     }
 
+    /**
+     * 开关身体和攻击判定。主逻辑还没建时什么都不做。
+     *
+     * @param v 是否判定。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.setRenderHit(false);
+     * </listing>
+     */
     public function setRenderHit(v:Boolean):void {
         if (_mainLogicCtrl) {
             _mainLogicCtrl.renderHit = v;
         }
     }
 
+    /**
+     * 取当前无双控制。
+     *
+     * <p>还没有会话时返回 <code>null</code>。</p>
+     *
+     * @return 无双控制；格斗会话上为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var musou:MusouCtrl = GameCtrl.I.getMusouCtrl();
+     * </listing>
+     */
     public function getMusouCtrl():MusouCtrl {
         return _fightSession ? _fightSession.getMusouCtrl() : null;
     }
 
+    /**
+     * 取队伍表。返回的是内部那一份。
+     *
+     * @return 队伍表。
+     * @example
+     * <listing version="3.0">
+     * var teams:TeamMap = GameCtrl.I.getTeamMap();
+     * </listing>
+     */
     public function getTeamMap():TeamMap {
         return _teamMap;
     }
@@ -127,12 +223,32 @@ public class GameCtrl {
     }
 
 
+    /**
+     * 按角色数据从场景里找场上角色。
+     *
+     * <p>场景还没设上时抛错。</p>
+     *
+     * @param data 角色数据。
+     * @return 场上角色。
+     * @example
+     * <listing version="3.0">
+     * var f:FighterMain = GameCtrl.I.getFighterByData(data);
+     * </listing>
+     */
     public function getFighterByData(data:FighterVO):FighterMain {
         return this.gameState.getFighterByData(data);
     }
 
     /**
-     * 初始化
+     * 绑上场景，并保证有一份格斗会话。
+     *
+     * <p>还没有会话时新建格斗会话。动作帧间隔是 <code>ceil(逻辑帧 / 动作帧) - 1</code>。</p>
+     *
+     * @param gameState 对局场景。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.initialize(stage);
+     * </listing>
      */
     public function initialize(gameState:GameStage):void {
         this.gameState = gameState;
@@ -156,6 +272,16 @@ public class GameCtrl {
         KyoKeyboard.focus();
     }
 
+    /**
+     * 卸掉渲染、输入和各控制器，并清掉加载缓存。
+     *
+     * <p>格斗会话在清队伍之前销毁。无双会话留到清场景之后再销毁。不防重入。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.destroy();
+     * </listing>
+     */
     public function destroy():void {
 
         GameRender.remove(render);
@@ -229,9 +355,16 @@ public class GameCtrl {
     }
 
     /**
-     * 获得敌方队伍
-     * @param sp 游戏元件
-     * @return 敌方队伍
+     * 取精灵对面的队伍。
+     *
+     * <p>没有队伍，或队伍不是 1、2 时返回 <code>null</code>。</p>
+     *
+     * @param sp 精灵。
+     * @return 敌方队伍。
+     * @example
+     * <listing version="3.0">
+     * var team:TeamVO = GameCtrl.I.getEnemyTeam(sprite);
+     * </listing>
      */
     public function getEnemyTeam(sp:IGameSprite):TeamVO {
         if (sp.team) {
@@ -247,7 +380,18 @@ public class GameCtrl {
     }
 
     /**
-     * 增加游戏元件
+     * 把精灵放进场景和队伍。
+     *
+     * <p><code>index</code> 不是 -1 时插到该深度。队伍不存在时只记一条调试日志，精灵仍留在场景里，且没有队伍。
+     * 场景还没设上时抛错。</p>
+     *
+     * @param teamId 队伍 id。
+     * @param sp 精灵。
+     * @param index 深度。默认 -1，加到显示列表末尾。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.addGameSprite(teamId, sprite);
+     * </listing>
      */
     public function addGameSprite(teamId:int, sp:IGameSprite, index:int = -1):void {
 
@@ -276,7 +420,16 @@ public class GameCtrl {
     }
 
     /**
-     * 删除
+     * 从场景和队伍拿掉精灵，并调用它的 <code>destroy</code>。
+     *
+     * <p>场景还没设上时抛错。</p>
+     *
+     * @param sp 精灵。
+     * @param dispose 是否连显示对象一起释放。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.removeGameSprite(sprite);
+     * </listing>
      */
     public function removeGameSprite(sp:IGameSprite, dispose:Boolean = false):void {
         gameState.removeGameSprite(sp);
@@ -290,7 +443,14 @@ public class GameCtrl {
     }
 
     /**
-     * 开始游戏
+     * 本机开始格斗。
+     *
+     * <p><code>autoStartAble</code> 为 <code>false</code> 时直接返回，结束标记也不会清。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.startGame();
+     * </listing>
      */
     public function startGame():void {
         if (!autoStartAble) {
@@ -303,7 +463,7 @@ public class GameCtrl {
     /**
      * 开始无双对局。
      *
-     * <p>标志位之后交给当前无双会话开局。</p>
+     * <p><code>autoStartAble</code> 为 <code>false</code> 时直接返回。当前会话不是无双会话时，后面的调用会抛错。</p>
      *
      * @example
      * <listing version="3.0">
@@ -348,6 +508,19 @@ public class GameCtrl {
         versusSession().prepare(sort1, sort2);
     }
 
+    /**
+     * 初始化角色、装上操作或 AI，放进队伍并派发出生。
+     *
+     * <p><code>fighter</code> 为空时直接返回。1 队在观战模式用 AI，否则用 P1 键。2 队在对电脑或闯关时用 AI，否则用 P2 键。
+     * 其它队伍 id 仍会初始化和入队，操作器是 <code>null</code>。经典键位在 <code>keyInputMode == 1</code> 时打开。</p>
+     *
+     * @param fighter 角色。
+     * @param team 队伍 id。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.addFighter(fighter, 1);
+     * </listing>
+     */
     public function addFighter(fighter:FighterMain, team:int):void {
         if (!fighter) {
             return;
@@ -391,6 +564,18 @@ public class GameCtrl {
         FighterEventDispatcher.dispatchEvent(fighter, FighterEvent.BIRTH);
     }
 
+    /**
+     * 从场上拿掉角色。
+     *
+     * <p><code>fighter</code> 为空时直接返回。</p>
+     *
+     * @param fighter 角色。
+     * @param isDispose 是否连显示对象一起释放。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.removeFighter(fighter);
+     * </listing>
+     */
     public function removeFighter(fighter:FighterMain, isDispose:Boolean = false):void {
         if (!fighter) {
             return;
@@ -398,6 +583,14 @@ public class GameCtrl {
         removeGameSprite(fighter, isDispose);
     }
 
+    /**
+     * 开始下一回合。回合控制还没建时什么都不做。
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.startNextRound();
+     * </listing>
+     */
     public function startNextRound():void {
         if (_roundCtrl) {
             _roundCtrl.startNextRound();
@@ -419,17 +612,50 @@ public class GameCtrl {
         }
     }
 
+    /**
+     * 新建开场控制并关掉操作。
+     *
+     * <p>上一份开场控制不会销毁。场景还没设上时，开场控制里记的是空场景。</p>
+     *
+     * @return 新的开场控制。
+     * @example
+     * <listing version="3.0">
+     * var start:GameStartCtrl = GameCtrl.I.initStart();
+     * </listing>
+     */
     public function initStart():GameStartCtrl {
         _startCtrl   = new GameStartCtrl(GameCtrl.I.gameState);
         actionEnable = false;
         return _startCtrl;
     }
 
+    /**
+     * 新建主逻辑。上一份不会销毁。
+     *
+     * <p>场景还没设上时抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.initMainLogic();
+     * </listing>
+     */
     public function initMainLogic():void {
         _mainLogicCtrl = new GameMainLogicCtrl();
         _mainLogicCtrl.initialize(gameState, _teamMap);
     }
 
+    /**
+     * 暂停逻辑帧。
+     *
+     * <p>对局没在跑时直接返回。开场、结束或会话已结束时，只记下“开场后再暂停”，逻辑帧继续。
+     * <code>pauseUI</code> 为 <code>true</code> 且当前没暂停时，会派发暂停事件并让界面进入暂停。</p>
+     *
+     * @param pauseUI 是否同时暂停界面。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.pause(true);
+     * </listing>
+     */
     public function pause(pauseUI:Boolean = false):void {
         if (!_gameRunning) {
             return;
@@ -451,6 +677,17 @@ public class GameCtrl {
         _isRenderGame = false;
     }
 
+    /**
+     * 恢复逻辑帧，并让键盘重新得到焦点。
+     *
+     * <p>对局没在跑时直接返回。界面恢复返回 <code>false</code> 时，暂停标记还在，但逻辑帧已经恢复。</p>
+     *
+     * @param resumeUI 是否同时恢复界面。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.resume(true);
+     * </listing>
+     */
     public function resume(resumeUI:Boolean = false):void {
         if (!_gameRunning) {
             return;
@@ -469,7 +706,16 @@ public class GameCtrl {
     }
 
     /**
-     * 游戏结束，KO
+     * 本机结束本回合。
+     *
+     * <p><code>autoEndRoundAble</code> 为 <code>false</code>，或已经有一份结束控制时，直接返回。</p>
+     *
+     * @param winner 胜者。
+     * @param loser 败者。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.gameEnd(winner, loser);
+     * </listing>
      */
     public function gameEnd(winner:FighterMain, loser:FighterMain):void {
         if (!autoEndRoundAble) {
@@ -481,6 +727,19 @@ public class GameCtrl {
         doGameEnd(winner, loser);
     }
 
+    /**
+     * 记下胜负、胜场，并开始结束演出。
+     *
+     * <p>不看 <code>autoEndRoundAble</code>。胜者或败者为空时抛错。
+     * 1 队获胜且败者体力不大于 0、又是闯关时，再加 KO 分。其它队伍 id 不加胜场。</p>
+     *
+     * @param winner 胜者。
+     * @param loser 败者。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.doGameEnd(winner, loser);
+     * </listing>
+     */
     public function doGameEnd(winner:FighterMain, loser:FighterMain):void {
         gameRunData.lastWinnerTeam = winner.team;
         gameRunData.lastWinner     = winner;
@@ -509,6 +768,16 @@ public class GameCtrl {
         GameEvent.dispatchEvent(GameEvent.ROUND_END);
     }
 
+    /**
+     * 开始平局演出。
+     *
+     * <p>已经有结束控制时直接返回。不看 <code>autoEndRoundAble</code>。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.drawGame();
+     * </listing>
+     */
     public function drawGame():void {
         if (_endCtrl) {
             return;
@@ -525,6 +794,17 @@ public class GameCtrl {
         GameEvent.dispatchEvent(GameEvent.ROUND_END);
     }
 
+    /**
+     * 按倍率放慢动作、移动和镜头。
+     *
+     * <p>倍率为 0 时会除以 0。主逻辑或场景还没建时抛错。</p>
+     *
+     * @param rate 倍率，大于 0。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.slow(2);
+     * </listing>
+     */
     public function slow(rate:Number):void {
         slowRate              = rate;
         var animateFps:Number = GameConfig.FPS_ANIMATE / rate;
@@ -533,6 +813,16 @@ public class GameCtrl {
         gameState.camera.tweenSpd = GameConfig.CAMERA_TWEEN_SPD * rate;
     }
 
+    /**
+     * 恢复正常速度，并把 <code>slowRate</code> 写成 0。
+     *
+     * <p>主逻辑或场景还没建时抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.slowResume();
+     * </listing>
+     */
     public function slowResume():void {
         slowRate = 0;
         setAnimateFPS(GameConfig.FPS_ANIMATE);
@@ -540,6 +830,17 @@ public class GameCtrl {
         gameState.camera.tweenSpd = GameConfig.CAMERA_TWEEN_SPD;
     }
 
+    /**
+     * 角色倒下时，用敌方队伍里第一个角色当胜者并结束回合。
+     *
+     * <p>找不到胜者时仍会进入结束流程，随后在读胜者队伍时抛错。</p>
+     *
+     * @param loser 倒下的角色。
+     * @example
+     * <listing version="3.0">
+     * GameCtrl.I.onFighterDie(loser);
+     * </listing>
+     */
     public function onFighterDie(loser:FighterMain):void {
         var winner:FighterMain;
 

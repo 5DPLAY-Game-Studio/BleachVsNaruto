@@ -27,15 +27,34 @@ import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.GameUI;
 
+/**
+ * 对局结束演出：KO、平局和续关等待。
+ *
+ * <p><code>render</code> 返回 <code>true</code> 表示演出结束。<code>initialize</code> 不会清掉平局标记，之前调用过 <code>drawGame</code> 时仍走平局。
+ * <code>SHOW_CONTINUE</code> 为 <code>true</code> 时 <code>skip</code> 直接返回。小队或生存模式会按剩余时间给 <code>lastWinner</code> 加体力，<code>lastWinner</code> 为空时抛错。</p>
+ *
+ * @see KoPresentCtrl
+ */
 public class GameEndCtrl {
 
+    /**
+     * 是否在结束演出里等续关。
+     *
+     * @default false
+     */
     public static var SHOW_CONTINUE:Boolean = false;
 
+    /** @private */
     private var _winner:FighterMain;
+    /** @private */
     private var _loser:FighterMain;
+    /** @private */
     private var _step:int;
+    /** @private */
     private var _isRender:Boolean;
+    /** @private */
     private var _holdFrame:int;
+    /** @private */
     private var _drawGame:Boolean;
     /** @private KO 影片结束后，观察败者并切胜者镜头 */
     private var _koWatch:Boolean;
@@ -48,6 +67,16 @@ public class GameEndCtrl {
     /** @private 切胜者镜头前的等待帧 */
     private var _winnerDelay:int;
 
+    /**
+     * 开始胜负演出，并禁止再掉体力。
+     *
+     * @param winner 胜者。
+     * @param loser 败者。
+     * @example
+     * <listing version="3.0">
+     * end.initialize(winner, loser);
+     * </listing>
+     */
     public function initialize(winner:FighterMain, loser:FighterMain):void {
         GameCtrl.I.gameRunData.setAllowLoseHP(false);
 
@@ -57,6 +86,14 @@ public class GameEndCtrl {
         _isRender = true;
     }
 
+    /**
+     * 改为平局演出，并禁止再掉体力。
+     *
+     * @example
+     * <listing version="3.0">
+     * end.drawGame();
+     * </listing>
+     */
     public function drawGame():void {
 
         GameCtrl.I.gameRunData.setAllowLoseHP(false);
@@ -66,11 +103,21 @@ public class GameEndCtrl {
         _isRender = true;
     }
 
+    /**
+     * 丢掉胜负双方的引用。
+     *
+     * <p>演出还在跑时，之后的 <code>render</code> 可能抛错。</p>
+     */
     public function destroy():void {
         _winner = null;
         _loser  = null;
     }
 
+    /**
+     * 推进结束演出。
+     *
+     * @return 演出结束时为 <code>true</code>。还在等待或尚未开始时为 <code>false</code>。
+     */
     public function render():Boolean {
 
         if (!_isRender) {
@@ -90,6 +137,16 @@ public class GameEndCtrl {
 
     }
 
+    /**
+     * 把当前等待帧清掉。
+     *
+     * <p>只在步骤为 2 且没在等续关时生效。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * end.skip();
+     * </listing>
+     */
     public function skip():void {
         if (SHOW_CONTINUE) {
             return;

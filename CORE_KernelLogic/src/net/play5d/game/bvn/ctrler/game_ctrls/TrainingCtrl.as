@@ -23,17 +23,50 @@ import net.play5d.game.bvn.data.fighter.FighterActionState;
 import net.play5d.game.bvn.fighter.FighterMain;
 
 /**
- * 练习模式控制类
+ * 练习模式的体力、气和援助气回复。
+ *
+ * <p>受击中的体力计时每帧被重置为 1 秒，受击结束后才开始倒数。气和援助气不受受击影响，掉下去之后等 2 秒再回满。
+ * 开关在倒数到 0 时才看，中途关掉就不会回。</p>
+ *
+ * @see StateCtrl
  */
 public class TrainingCtrl {
 
+    /**
+     * 是否回满体力。
+     *
+     * @default true
+     */
     public static var RECOVER_HP:Boolean    = true;
+    /**
+     * 是否回满气。
+     *
+     * @default true
+     */
     public static var RECOVER_QI:Boolean    = true;
+    /**
+     * 是否回满援助气。
+     *
+     * @default true
+     */
     public static var RECOVER_FZ_QI:Boolean = true;
 
+    /** @private */
     private var _trainAddDelay:Object;
+    /** @private */
     private var _fighters:Array;
 
+    /**
+     * 记下角色并把气设为满，然后播放退场。
+     *
+     * <p><code>fighters</code> 为 <code>null</code> 时会抛错。相同 <code>id</code> 共用一条计时。</p>
+     *
+     * @param fighters 场上角色。
+     * @example
+     * <listing version="3.0">
+     * ctrl.initialize([p1, p2]);
+     * </listing>
+     */
     public function initialize(fighters:Array):void {
         _fighters = fighters;
 
@@ -46,11 +79,24 @@ public class TrainingCtrl {
         StateCtrl.I.transOut(null, true);
     }
 
+    /**
+     * 丢掉角色和计时。
+     *
+     * <p>之后再 <code>render</code> 会抛错。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * ctrl.destroy();
+     * </listing>
+     */
     public function destroy():void {
         _fighters      = null;
         _trainAddDelay = null;
     }
 
+    /**
+     * 按帧推进回复计时，到点后按开关回满。
+     */
     public function render():void {
         for each(var i:FighterMain in _fighters) {
             var hpid:String = i.id + '_hp';
