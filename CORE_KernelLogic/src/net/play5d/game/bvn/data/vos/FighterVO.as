@@ -20,33 +20,127 @@ package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoRandom;
 
+/**
+ * 角色或援助的展示数据和背景音乐。
+ *
+     * <p>初始化会把好友、敌人列表清成空数组，不读配置里的对应字段。
+     * 没有 <code>start_frame</code> 时开场帧留着 0。有开场帧却没有背景音乐时打一条日志。
+     * 没有胜利台词时，随机台词返回 <code>null</code>。</p>
+ *
+ * @see FighterModel
+ */
 public class FighterVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
+    /**
+     * 角色 id。
+     *
+     * @default null
+     */
     public var id:String;
+    /**
+     * 名字。
+     *
+     * @default null
+     */
     public var name:String;
-    public var comicType:int; //0=死神,1=火影
+    /**
+     * 漫画类型。0 为死神，1 为火影。
+     *
+     * @default 0
+     */
+    public var comicType:int;
+    /**
+     * 角色 SWF 地址。
+     *
+     * @default null
+     */
     public var fileUrl:String;
+    /**
+     * 开场帧。配置没写时保持 0。
+     *
+     * @default 0
+     */
     public var startFrame:int;
+    /**
+     * 小头像地址。
+     *
+     * @default null
+     */
     public var faceUrl:String;
+    /**
+     * 大头像地址。
+     *
+     * @default null
+     */
     public var faceBigUrl:String;
+    /**
+     * 血条头像地址。
+     *
+     * @default null
+     */
     public var faceBarUrl:String;
+    /**
+     * 胜利图地址。
+     *
+     * @default null
+     */
     public var faceWinUrl:String;
+    /**
+     * 好友 id。初始化后是空数组。
+     *
+     * @default null
+     */
     public var contactFriends:Array;
+    /**
+     * 敌人 id。初始化后是空数组。
+     *
+     * @default null
+     */
     public var contactEnemies:Array;
+    /**
+     * 胜利台词。
+     *
+     * @default null
+     */
     public var says:Array;
+    /**
+     * 背景音乐地址。
+     *
+     * @default null
+     */
     public var bgm:String;
+    /**
+     * 背景音乐权重。配置写了 <code>bgm</code> 却没有 <code>rate</code> 时会变成 <code>NaN</code>。
+     *
+     * @default 1
+     */
     public var bgmRate:Number     = 1;
-    // 是否值得注意
+    /**
+     * 是否需要提示。
+     *
+     * @default false
+     */
     public var hasWarning:Boolean = false;
 
+    /**
+     * 是否存活。包数据里通常不用。
+     *
+     * @default false
+     */
     public var isAlive:Boolean;
 
     /**
-     * 通过对象进行初始化
+     * 用角色包里的一条记录填写字段。
      *
-     * @param obj 对象
+     * <p>没有 <code>path</code> 或 <code>data</code> 时抛错。</p>
+     *
+     * @param obj 含 <code>path</code> 和 <code>data</code> 的对象。
+     * @example
+     * <listing version="3.0">
+     * vo.initByObject(obj);
+     * </listing>
      */
     public function initByObject(obj:Object):void {
         var pathObj:Object = obj['path'];
@@ -103,9 +197,15 @@ public class FighterVO implements IInstanceVO {
     }
 
     /**
-     * 获得随机胜利语言
+     * 从胜利台词里随机一句。
      *
-     * @return 随机胜利语言
+     * <p>没有台词或空数组时返回 <code>null</code>。</p>
+     *
+     * @return 一句台词。
+     * @example
+     * <listing version="3.0">
+     * var line:String = vo.getRandSay();
+     * </listing>
      */
     public function getRandSay():String {
         return KyoRandom.getRandomInArray(says);

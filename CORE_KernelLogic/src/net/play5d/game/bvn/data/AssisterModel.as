@@ -19,21 +19,62 @@
 package net.play5d.game.bvn.data {
 import net.play5d.game.bvn.data.vos.FighterVO;
 
+/**
+ * 已注册的援助。
+ *
+ * <p><code>getAssister</code> 的 <code>clone</code> 参数不会使用，返回的一直是表里那一份。
+ * 没有这个 id 时为 <code>undefined</code>。表还没建时抛错。</p>
+ *
+ * @see FighterVO
+ */
 public class AssisterModel {
 
+    /** @private */
     private static var _i:AssisterModel;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 援助表。
+     * @example
+     * <listing version="3.0">
+     * var vo:FighterVO = AssisterModel.I.getAssister(id);
+     * </listing>
+     */
     public static function get I():AssisterModel {
         _i ||= new AssisterModel();
         return _i;
     }
 
+    /** @private */
     private var _assisterObj:Object;
 
+    /**
+     * 取全部援助表。返回的是内部那一份。
+     *
+     * @return id 到援助数据的对象。还没初始化时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var all:Object = AssisterModel.I.getAllAssisters();
+     * </listing>
+     */
     public function getAllAssisters():Object {
         return _assisterObj;
     }
 
+    /**
+     * 按漫画类型和条件筛选援助。
+     *
+     * <p>条件先判断。表还没建时抛错。</p>
+     *
+     * @param comicType 漫画类型。默认 -1，表示不限。
+     * @param condition 过滤函数。可省略。
+     * @return 新的数组。
+     * @example
+     * <listing version="3.0">
+     * var list:Vector.&lt;FighterVO&gt; = AssisterModel.I.getAssisters();
+     * </listing>
+     */
     public function getAssisters(comicType:int = -1, condition:Function = null):Vector.<FighterVO> {
         var vec:Vector.<FighterVO> = new Vector.<FighterVO>();
         for each(var i:FighterVO in _assisterObj) {
@@ -47,10 +88,34 @@ public class AssisterModel {
         return vec;
     }
 
+    /**
+     * 按 id 取援助。
+     *
+     * <p><code>clone</code> 不会使用。</p>
+     *
+     * @param id 援助 id。
+     * @param clone 未使用。默认 <code>false</code>。
+     * @return 表里的那一份。没有时为 <code>undefined</code>。
+     * @example
+     * <listing version="3.0">
+     * var vo:FighterVO = AssisterModel.I.getAssister(id);
+     * </listing>
+     */
     public function getAssister(id:String, clone:Boolean = false):FighterVO {
         return _assisterObj[id];
     }
 
+    /**
+     * 用援助包对象重建整张表。
+     *
+     * <p>结构和角色包相同。缺少 <code>fighter</code> 时抛错。</p>
+     *
+     * @param obj 含 <code>fighter.path</code> 和 <code>fighter.data</code> 的对象。
+     * @example
+     * <listing version="3.0">
+     * AssisterModel.I.initByObject(obj);
+     * </listing>
+     */
     public function initByObject(obj:Object):void {
         _assisterObj = {};
 

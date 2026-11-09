@@ -37,6 +37,7 @@ import net.play5d.game.bvn.utils.PackLangUtil;
  */
 public class PackRegistry {
 
+    /** @private */
     private static var _i:PackRegistry;
 
     /**

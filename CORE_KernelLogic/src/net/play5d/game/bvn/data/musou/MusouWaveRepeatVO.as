@@ -19,24 +19,60 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 一波敌人的重复刷出。
+ *
+ * <p>类型 0 按时间重复。类型 1 等这一组敌人死掉，再等 <code>hold</code> 秒。
+ * <code>_holdFrame</code> 是运行时倒数的帧数，名字保持现有写法。</p>
+ *
+ * @see MusouWaveVO
+ */
 public class MusouWaveRepeatVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
     /**
-     * 类型：
-     * 0=按时间重复
-     * 1=当该节点中的敌人DEAD后，在等待时间之后进行重复
+     * 重复类型。0 按时间，1 等敌人死亡后再等。
+     *
+     * @default 0
      */
     public var type:int;
+    /**
+     * 等待秒数。
+     *
+     * @default 0
+     */
     public var hold:int;
+    /**
+     * 所属波次。加入敌人时会写到每个敌人上。
+     *
+     * @default null
+     */
     public var wave:MusouWaveVO;
     /**
-     * 敌人数组 （{id: fighterID, amount: 数量, hp: 血量}）
+     * 要重复刷出的敌人。
+     *
+     * @default null
      */
     public var enemies:Vector.<MusouEnemyVO>;
+    /**
+     * 运行时剩余等待帧。
+     *
+     * @default 0
+     */
     public var _holdFrame:int;
 
+    /**
+     * 追加敌人，并写上本波和本重复。
+     *
+     * <p><code>enemyAdds</code> 为空时抛错。</p>
+     *
+     * @param enemyAdds 敌人。
+     * @example
+     * <listing version="3.0">
+     * repeat.addEnemy(enemies);
+     * </listing>
+     */
     public function addEnemy(enemyAdds:Vector.<MusouEnemyVO>):void {
         enemies ||= new Vector.<MusouEnemyVO>();
 

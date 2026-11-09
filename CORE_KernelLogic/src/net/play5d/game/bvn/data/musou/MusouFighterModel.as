@@ -17,19 +17,51 @@
  */
 
 package net.play5d.game.bvn.data.musou {
+/**
+ * 无双商店角色和价格。
+ *
+ * <p>第一次 <code>init</code> 才填内置列表。之后再调不会重填。<code>allCustom</code> 会把列表换成空的，并挡住后面的 <code>init</code>。
+ * 还没初始化就 <code>addFighter</code> 会抛错。重复 id 只打日志，不覆盖价格。</p>
+ *
+ * @see MusouFighterSellVO
+ */
 public class MusouFighterModel {
 
+    /** @private */
     private static var _i:MusouFighterModel;
 
+    /**
+     * 单例。第一次访问时创建。
+     *
+     * @return 商店数据。
+     * @example
+     * <listing version="3.0">
+     * var model:MusouFighterModel = MusouFighterModel.I;
+     * </listing>
+     */
     public static function get I():MusouFighterModel {
         _i ||= new MusouFighterModel();
         return _i;
     }
 
 
+    /**
+     * 在售角色。初始化前为 <code>null</code>。
+     *
+     * @default null
+     */
     public var fighters:Vector.<MusouFighterSellVO>;
+    /** @private */
     private var _inited:Boolean = false;
 
+    /**
+     * 填内置商店。已经填过，或调用过 <code>allCustom</code> 时直接返回。
+     *
+     * @example
+     * <listing version="3.0">
+     * MusouFighterModel.I.init();
+     * </listing>
+     */
     public function init():void {
         if (!_inited) {
             initFighters();
@@ -37,11 +69,31 @@ public class MusouFighterModel {
         }
     }
 
+    /**
+     * 换成空列表，并让之后的 <code>init</code> 不再填内置角色。
+     *
+     * @example
+     * <listing version="3.0">
+     * MusouFighterModel.I.allCustom();
+     * </listing>
+     */
     public function allCustom():void {
         fighters = new Vector.<MusouFighterSellVO>();
         _inited  = true;
     }
 
+    /**
+     * 追加一个在售角色。
+     *
+     * <p>已经有这个 id 时打日志并返回。列表还是 <code>null</code> 时抛错。</p>
+     *
+     * @param id 角色 id。
+     * @param price 价格。
+     * @example
+     * <listing version="3.0">
+     * MusouFighterModel.I.addFighter(id, 5000);
+     * </listing>
+     */
     public function addFighter(id:String, price:int):void {
         if (containsFighter(id)) {
             TraceLang('musou_fighter_model.repeat_add', {fighterId: id});
@@ -50,6 +102,7 @@ public class MusouFighterModel {
         fighters.push(new MusouFighterSellVO(id, price));
     }
 
+    /** @private */
     private function initFighters():void {
         fighters = new Vector.<MusouFighterSellVO>();
         fighters.push(new MusouFighterSellVO('ichigo', 5000));
@@ -115,6 +168,7 @@ public class MusouFighterModel {
 
     }
 
+    /** @private */
     private function containsFighter(id:String):Boolean {
         for each(var f:MusouFighterSellVO in fighters) {
             if (f.id == id) {

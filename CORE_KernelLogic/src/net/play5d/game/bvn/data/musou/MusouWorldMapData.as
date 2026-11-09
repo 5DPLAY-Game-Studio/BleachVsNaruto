@@ -19,17 +19,42 @@
 package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.ISaveData;
 
+/**
+ * 世界地图存档占位。
+ *
+ * <p>保存一直返回 <code>null</code>。读取什么都不做。</p>
+ */
 public class MusouWorldMapData implements ISaveData {
 
+    /** @private */
     private var _mapAreaList:Vector.<MusouWorldMapAreaVO>;
 
+    /**
+     * 保存。当前固定返回 <code>null</code>。
+     *
+     * @return <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var o:Object = data.toSaveObj();
+     * </listing>
+     */
     public function toSaveObj():Object {
         return null;
     }
 
+    /**
+     * 读取。当前不写任何字段。
+     *
+     * @param o 存档对象。可以是 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * data.readSaveObj(o);
+     * </listing>
+     */
     public function readSaveObj(o:Object):void {
     }
 
+    /** @private */
     private function initMapAreas():void {
     }
 }

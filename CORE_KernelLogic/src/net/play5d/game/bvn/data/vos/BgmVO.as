@@ -20,17 +20,31 @@ package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
 /**
- * BGM 值对象
+ * 一首背景音乐的 id、权重和地址。
+ *
+ * @see MapModel
  */
 public class BgmVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
-    // 音乐 ID
+    /**
+     * 曲目 id。地图曲会写成 <code>map</code>。
+     *
+     * @default null
+     */
     public var id:String;
-    // 播放概率
+    /**
+     * 播放权重。
+     *
+     * @default NaN
+     */
     public var rate:Number;
-    // 资源路径
+    /**
+     * 资源路径。
+     *
+     * @default null
+     */
     public var url:String;
 
 }

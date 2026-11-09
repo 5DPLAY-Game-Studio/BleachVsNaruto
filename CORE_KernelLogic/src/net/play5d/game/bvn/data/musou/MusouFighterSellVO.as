@@ -20,18 +20,46 @@ package net.play5d.game.bvn.data.musou {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.WrapInteger;
 
+/**
+ * 无双商店里的一个角色和价格。
+ */
 public class MusouFighterSellVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
+    /**
+     * 记下角色 id 和价格。
+     *
+     * @param fighterId 角色 id。
+     * @param price 价格。
+     * @example
+     * <listing version="3.0">
+     * var sell:MusouFighterSellVO = new MusouFighterSellVO(id, 1000);
+     * </listing>
+     */
     public function MusouFighterSellVO(fighterId:String, price:int) {
         this.id = fighterId;
         _price.setValue(price);
     }
 
+    /**
+     * 角色 id。
+     *
+     * @default null
+     */
     public var id:String;
+    /** @private */
     private var _price:WrapInteger = new WrapInteger(0);
 
+    /**
+     * 取价格。
+     *
+     * @return 价格。
+     * @example
+     * <listing version="3.0">
+     * var price:int = sell.getPrice();
+     * </listing>
+     */
     public function getPrice():int {
         return _price.getValue();
     }

@@ -29,12 +29,29 @@ import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
 /**
- * 效果值对象
+ * 一份特效的类名、震动、定格和帧缓存。
+ *
+ * <p>帧缓存按 <code>className</code> 共用。循环停在 <code>currentFrame &lt; totalFrames</code>，所以最后一帧不会画进去。只有 1 帧时缓存是空数组。
+ * 宽或高小于 1 的帧记成 <code>null</code>。连续两帧画面和偏移都一样时复用上一帧。</p>
+ *
+ * @see EffectModel
  */
 public class EffectVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
+    /**
+     * 记下类名，并把 <code>param</code> 里的同名字段写上来。
+     *
+     * <p><code>param</code> 为空时不写字段。</p>
+     *
+     * @param className 特效类名。没有类名、又有自定义类时，缓存改用自定义类。
+     * @param param 要写上的字段。默认 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var fx:EffectVO = new EffectVO('XG_jump', {sound: 'snd_jump'});
+     * </listing>
+     */
     public function EffectVO(className:String, param:Object = null) {
         this.className = className;
         if (param) {
@@ -42,26 +59,114 @@ public class EffectVO implements IInstanceVO {
         }
     }
 
+    /**
+     * 特效类名。
+     *
+     * @default null
+     */
     public var className:String;
-    public var shine:Object;//闪光{color,alpha}
-    public var shake:Object;//震动{x,y|pow,time[毫秒，可选]} , 当设置pow时，x,y无效，根据hitvo.hitx,hity进行震动
-    public var freeze:int;//暂停时间（毫秒）
-    public var sound:String; //声音(暂时不用)
-    public var randRotate:Boolean; //随机角度旋转
-    public var followDirect:Boolean; //跟随角色朝向
-    public var slowDown:Object; //慢放效果{rate[慢放倍数],time[慢放时间（毫秒）]}
+    /**
+     * 闪光。常用字段是 <code>color</code> 和 <code>alpha</code>。
+     *
+     * @default null
+     */
+    public var shine:Object;
+    /**
+     * 震动。有 <code>pow</code> 时，播放处会改写 <code>y</code>。
+     *
+     * @default null
+     */
+    public var shake:Object;
+    /**
+     * 定格毫秒。
+     *
+     * @default 0
+     */
+    public var freeze:int;
+    /**
+     * 音效类名。
+     *
+     * @default null
+     */
+    public var sound:String;
+    /**
+     * 是否随机旋转。
+     *
+     * @default false
+     */
+    public var randRotate:Boolean;
+    /**
+     * 是否跟着角色朝向。
+     *
+     * @default false
+     */
+    public var followDirect:Boolean;
+    /**
+     * 慢放。常用字段是 <code>rate</code> 和 <code>time</code>。
+     *
+     * @default null
+     */
+    public var slowDown:Object;
+    /**
+     * 混合模式。
+     *
+     * @default normal
+     */
     public var blendMode:String   = BlendMode.NORMAL;
+    /**
+     * 逐帧位图。缓存前为 <code>null</code>。
+     *
+     * @default null
+     */
     public var bitmapDataCache:Vector.<BitmapDataCacheVO>;
+    /**
+     * 帧号到帧标签。缓存前为 <code>null</code>。
+     *
+     * @default null
+     */
     public var frameLabelCache:Object;
+    /**
+     * 跟着目标再播的特殊特效 id。
+     *
+     * @default null
+     */
     public var specialEffectId:String;
+    /**
+     * 目标颜色偏移。
+     *
+     * @default null
+     */
     public var targetColorOffset:Array;
+    /**
+     * 是否特殊特效。
+     *
+     * @default false
+     */
     public var isSpecial:Boolean  = false;
+    /**
+     * 是否 buff 特效。
+     *
+     * @default false
+     */
     public var isBuff:Boolean     = false;
+    /**
+     * 是否钢体受击特效。
+     *
+     * @default false
+     */
     public var isSteelHit:Boolean = false;
 
-    // 自定义特效元件链接
+    /**
+     * 自定义影片类。没有 <code>className</code> 时缓存用它。
+     *
+     * @default null
+     */
     public var customMcCls:Class;
-    // 自定义特效声音链接
+    /**
+     * 自定义声音类。
+     *
+     * @default null
+     */
     public var customSndCls:Class;
     /** @private 相同 className 共用的帧位图与帧标签 */
     private static var _sharedFrameCache:Object;
@@ -146,6 +251,7 @@ public class EffectVO implements IInstanceVO {
         storeSharedFrames();
     }
 
+    /** @private */
     private function useSharedFrames():Boolean {
         if (!className || !_sharedFrameCache) {
             return false;
@@ -160,6 +266,7 @@ public class EffectVO implements IInstanceVO {
         return true;
     }
 
+    /** @private */
     private function storeSharedFrames():void {
         if (!className) {
             return;

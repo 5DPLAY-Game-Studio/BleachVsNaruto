@@ -19,8 +19,23 @@
 package net.play5d.game.bvn.data.musou.utils {
 import net.play5d.game.bvn.data.musou.player.MusouFighterVO;
 
+/**
+ * 按 id 新建一份无双角色数据。其它字段保持默认。
+ *
+ * @see MusouFighterVO
+ */
 public class MusouFighterFactory {
 
+    /**
+     * 新建角色数据并写上 id。
+     *
+     * @param id 角色 id。
+     * @return 新的角色数据。
+     * @example
+     * <listing version="3.0">
+     * var vo:MusouFighterVO = MusouFighterFactory.create(id);
+     * </listing>
+     */
     public static function create(id:String):MusouFighterVO {
         var mv:MusouFighterVO = new MusouFighterVO();
         mv.id                 = id;

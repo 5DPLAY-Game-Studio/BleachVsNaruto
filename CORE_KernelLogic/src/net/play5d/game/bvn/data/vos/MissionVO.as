@@ -19,14 +19,45 @@
 package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 一条闯关：漫画类型、模式和小关列表。
+ *
+ * <p>攻击或体力倍率没写、写成 0 或负数时，小关保持默认 1。没有 <code>stage</code> 时初始化会抛错。</p>
+ *
+ * @see MissionStageVO
+ */
 public class MissionVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
+    /**
+     * 漫画类型。0 为死神，1 为火影。
+     *
+     * @default 0
+     */
     public var comicType:int;
+    /**
+     * 模式。0 为组队，1 为单人。
+     *
+     * @default 0
+     */
     public var gameMode:int;
+    /**
+     * 小关列表。
+     *
+     * @default null
+     */
     public var stageList:Vector.<MissionStageVO>;
 
+    /**
+     * 用一条关卡记录填写字段。
+     *
+     * @param obj 含 <code>comic_type</code>、<code>game_mode</code>、<code>stage</code> 的对象。
+     * @example
+     * <listing version="3.0">
+     * vo.initByObject(obj);
+     * </listing>
+     */
     public function initByObject(obj:Object):void {
         comicType = obj['comic_type'];
         gameMode  = obj['game_mode'];

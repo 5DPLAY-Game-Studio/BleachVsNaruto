@@ -20,16 +20,47 @@ package net.play5d.game.bvn.data.musou.player {
 import net.play5d.game.bvn.interfaces.ISaveData;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 玩家在一个区域里的通关记录。
+ *
+ * <p>第一次通过返回 <code>true</code>，再通过只改星数并返回 <code>false</code>。
+ * 最后一条记录是按通过顺序的最后一次，不是 id 最大的那关。
+ * 读取时没有 <code>missions</code> 会把已有记录清掉。</p>
+ *
+ * @see MusouMissionPlayerVO
+ */
 public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
 
     include '../../../../../../../../include/Clone.as';
 
+    /**
+     * 区域 id。
+     *
+     * @default null
+     */
     public var id:String;
 
+    /**
+     * 名字。
+     *
+     * @default null
+     */
     public var name:String;
 
+    /** @private */
     private var _passedMissions:Vector.<MusouMissionPlayerVO> = new Vector.<MusouMissionPlayerVO>();
 
+    /**
+     * 记下通关并写上星数。
+     *
+     * @param missionId 关卡 id。
+     * @param starts 星数。默认 1。已通过时也会覆盖原来的星数。
+     * @return 这次是不是第一次通过。
+     * @example
+     * <listing version="3.0">
+     * var first:Boolean = area.passMission(id, 1);
+     * </listing>
+     */
     public function passMission(missionId:String, starts:int = 1):Boolean {
         var isNewPassed:Boolean = false;
 
@@ -47,6 +78,16 @@ public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
     }
 
 
+    /**
+     * 按关卡 id 取通关记录。
+     *
+     * @param id 关卡 id。
+     * @return 记录。没有时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var passed:MusouMissionPlayerVO = area.getPassedMission(id);
+     * </listing>
+     */
     public function getPassedMission(id:String):MusouMissionPlayerVO {
         for (var i:int; i < _passedMissions.length; i++) {
             if (_passedMissions[i].id == id) {
@@ -56,6 +97,15 @@ public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
         return null;
     }
 
+    /**
+     * 最后一次通过的关卡。
+     *
+     * @return 记录。还没通过时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var last:MusouMissionPlayerVO = area.getLastPassedMission();
+     * </listing>
+     */
     public function getLastPassedMission():MusouMissionPlayerVO {
         if (_passedMissions.length < 1) {
             return null;
@@ -63,10 +113,28 @@ public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
         return _passedMissions[_passedMissions.length - 1];
     }
 
+    /**
+     * 已通过的关卡数。
+     *
+     * @return 数量。
+     * @example
+     * <listing version="3.0">
+     * var n:int = area.getPassedMissionAmount();
+     * </listing>
+     */
     public function getPassedMissionAmount():int {
         return _passedMissions.length;
     }
 
+    /**
+     * 存区域 id、名字和通关列表。
+     *
+     * @return 存档对象。
+     * @example
+     * <listing version="3.0">
+     * var o:Object = area.toSaveObj();
+     * </listing>
+     */
     public function toSaveObj():Object {
         var o:Object = {};
         o.id         = id;
@@ -79,6 +147,17 @@ public class MusouWorldMapAreaPlayerVO implements ISaveData, IInstanceVO {
         return o;
     }
 
+    /**
+     * 读区域和通关列表。
+     *
+     * <p>对象为空时抛错。没有 <code>missions</code> 时通关列表变成空的。</p>
+     *
+     * @param o 存档对象。
+     * @example
+     * <listing version="3.0">
+     * area.readSaveObj(o);
+     * </listing>
+     */
     public function readSaveObj(o:Object):void {
         id   = o.id;
         name = o.name;

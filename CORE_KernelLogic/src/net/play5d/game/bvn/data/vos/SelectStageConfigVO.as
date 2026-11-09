@@ -21,29 +21,62 @@ import flash.geom.Point;
 
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 选人界面的布局和两份列表。
+ *
+ * <p>初始化时缺布局数字会写成 <code>NaN</code>，不会留着字段原来的默认值。
+ * 空格子也会放进列表。行偏移和格子偏移会相加。列数取最长那一行。</p>
+ */
 public class SelectStageConfigVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
 
+    /** 左边。 @default 0 */
     public var x:Number      = 0;
+    /** 上边。 @default 0 */
     public var y:Number      = 0;
+    /** 宽。 @default 800 */
     public var width:Number  = 800;
+    /** 高。 @default 600 */
     public var height:Number = 600;
+    /** 上边距。 @default 0 */
     public var top:Number    = 0;
+    /** 下边距。 @default 0 */
     public var bottom:Number = 0;
+    /** 左边距。 @default 0 */
     public var left:Number   = 0;
 
+    /** 右边距。 @default 0 */
     public var right:Number = 0;
+    /**
+     * 角色列表。初始化前为 <code>null</code>。
+     *
+     * @default null
+     */
     public var charList:SelectCharListConfigVO;
+    /**
+     * 援助列表。初始化前为 <code>null</code>。
+     *
+     * @default null
+     */
     public var assistList:SelectCharListConfigVO;
 
+    /**
+     * 一格的默认尺寸。
+     */
     public var unitSize:Point = new Point(50, 50);
 
     /**
-     * 通过对象进行初始化
+     * 用选人 JSON 填写布局和两份列表。
      *
-     * @param obj 对象
+     * <p>没有 <code>stage_setting</code>、<code>char_list</code> 或 <code>assist_list</code> 时抛错。</p>
+     *
+     * @param obj 选人配置对象。
+     * @example
+     * <listing version="3.0">
+     * stage.initByObject(data);
+     * </listing>
      */
     public function initByObject(obj:Object):void {
         var layoutObj:Object = obj['stage_setting']['layout'];
@@ -62,6 +95,7 @@ public class SelectStageConfigVO implements IInstanceVO {
         assistList = newListByObject(obj['assist_list'] as Array);
     }
 
+    /** @private */
     private function newListByObject(listArr:Array):SelectCharListConfigVO {
         var selectCharListConfigVO:SelectCharListConfigVO = new SelectCharListConfigVO();
 

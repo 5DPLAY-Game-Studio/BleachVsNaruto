@@ -17,10 +17,22 @@
  */
 
 package net.play5d.game.bvn.data.musou {
+/**
+ * 无双升级所需经验。
+ *
+ * <p>等级不大于 0 时返回 0。正等级返回 1 到该级每一级公式的和。每一级是 <code>int(3.8 * n * n - 1.2 * n + 48.6)</code>。</p>
+ */
 public class LevelModel {
 
     /**
-     * 角色升级需要的经验值
+     * 升到这个等级一共需要的经验。
+     *
+     * @param level 目标等级。
+     * @return 累计经验。不大于 0 时为 0。
+     * @example
+     * <listing version="3.0">
+     * var exp:int = LevelModel.getLevelUpExp(2);
+     * </listing>
      */
     public static function getLevelUpExp(level:int):int {
         if (level <= 0) {

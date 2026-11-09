@@ -19,20 +19,59 @@
 package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 一张地图的 id、影片、预览图和背景音乐。
+ *
+ * <p>初始化时，对象里没有 <code>file</code> 或 <code>img</code> 键就用 id 拼默认文件名。键在但值为空时，对应地址写成 <code>null</code>。
+ * 背景音乐没有或为空时写成 <code>null</code>。</p>
+ *
+ * @see MapModel
+ */
 public class MapVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
+    /**
+     * 地图 id。
+     *
+     * @default null
+     */
     public var id:String;
+    /**
+     * 地图名字。
+     *
+     * @default null
+     */
     public var name:String;
+    /**
+     * 地图 SWF 地址。
+     *
+     * @default null
+     */
     public var fileUrl:String;
+    /**
+     * 预览图地址。
+     *
+     * @default null
+     */
     public var picUrl:String;
+    /**
+     * 背景音乐地址。
+     *
+     * @default null
+     */
     public var bgm:String;
 
     /**
-     * 通过对象进行初始化。
+     * 用地图包里的一条记录填写字段。
+     *
+     * <p>没有 <code>path</code> 时抛错。</p>
      *
      * @param obj 含 <code>path</code> 与地图字段的对象。
+     * @example
+     * <listing version="3.0">
+     * vo.initByObject(obj);
+     * </listing>
      */
     public function initByObject(obj:Object):void {
         var pathObj:Object = obj['path'];

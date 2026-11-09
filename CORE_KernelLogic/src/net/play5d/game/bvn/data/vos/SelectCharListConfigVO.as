@@ -19,13 +19,31 @@
 package net.play5d.game.bvn.data.vos {
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 选人列表的格子和行列数。
+ *
+ * <p><code>HCount</code> 和 <code>VCount</code> 由选人配置初始化时写入。这里默认都是 0。</p>
+ */
 public class SelectCharListConfigVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
 
+    /**
+     * 格子。构造时是空数组。
+     */
     public var list:Array = [];
-    public var HCount:int; //列数
-    public var VCount:int; //行数
+    /**
+     * 列数。
+     *
+     * @default 0
+     */
+    public var HCount:int;
+    /**
+     * 行数。
+     *
+     * @default 0
+     */
+    public var VCount:int;
 }
 }

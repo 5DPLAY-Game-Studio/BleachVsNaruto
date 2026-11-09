@@ -24,35 +24,108 @@ import net.play5d.game.bvn.data.vos.EffectVO;
 
 import net.play5d.game.bvn.data.fighter.FighterDefenseType;
 
+/**
+ * 内置特效表。
+ *
+ * <p>还没 <code>initialize</code> 时取值会抛错。徒手防御会把斩击类型改成打。
+ * 普通防御找不到对应类型时改用重魔法防御。无双小兵防御没有这个回退。</p>
+ *
+ * @see EffectVO
+ * @see net.play5d.game.bvn.data.fighter.FighterDefenseType
+ */
 public class EffectModel {
 
+    /** @private */
     private static var _i:EffectModel;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 特效表。
+     * @example
+     * <listing version="3.0">
+     * EffectModel.I.initialize();
+     * </listing>
+     */
     public static function get I():EffectModel {
         _i ||= new EffectModel();
         return _i;
     }
 
+    /** @private */
     private var _effect:Object;
 
+    /**
+     * 建表、缓存位图，并预热用到的音效。
+     *
+     * <p>再调用一次会换掉整张表。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * EffectModel.I.initialize();
+     * </listing>
+     */
     public function initialize():void {
         initEffects();
         cacheEffects();
         warmSounds();
     }
 
+    /**
+     * 按 id 取特效。
+     *
+     * @param id 特效 id。
+     * @return 特效。没有时为 <code>undefined</code>。表还没建时抛错。
+     * @example
+     * <listing version="3.0">
+     * var fx:EffectVO = EffectModel.I.getEffect('jump');
+     * </listing>
+     */
     public function getEffect(id:String):EffectVO {
         return _effect[id];
     }
 
+    /**
+     * 按受击类型取普通受击特效。
+     *
+     * @param type 受击类型。
+     * @return 特效。没有这个类型时为 <code>undefined</code>。
+     * @example
+     * <listing version="3.0">
+     * var fx:EffectVO = EffectModel.I.getHitEffect(type);
+     * </listing>
+     */
     public function getHitEffect(type:int):EffectVO {
         return _effect['hit_' + type];
     }
 
+    /**
+     * 按受击类型取无双小兵受击特效。
+     *
+     * @param type 受击类型。
+     * @return 特效。没有这个类型时为 <code>undefined</code>。
+     * @example
+     * <listing version="3.0">
+     * var fx:EffectVO = EffectModel.I.getMusouEnemyHitEffect(type);
+     * </listing>
+     */
     public function getMusouEnemyHitEffect(type:int):EffectVO {
         return _effect['hit_enemy_' + type];
     }
 
+    /**
+     * 按受击和防御类型取无双小兵防御特效。
+     *
+     * <p>徒手时，斩和重斩会改成打和重打。找不到时为 <code>undefined</code>，没有回退。</p>
+     *
+     * @param hitType 受击类型。
+     * @param defenseType 防御类型。
+     * @return 特效。
+     * @example
+     * <listing version="3.0">
+     * var fx:EffectVO = EffectModel.I.getMusouEnemyDefenseEffect(hitType, defenseType);
+     * </listing>
+     */
     public function getMusouEnemyDefenseEffect(hitType:int, defenseType:int):EffectVO {
         switch (defenseType) {
         case FighterDefenseType.SWORD:
@@ -70,6 +143,19 @@ public class EffectModel {
         return _effect['defense_enemy_' + hitType];
     }
 
+    /**
+     * 按受击和防御类型取普通防御特效。
+     *
+     * <p>徒手时的改类型和无双小兵相同。找不到时改用重魔法防御。</p>
+     *
+     * @param hitType 受击类型。
+     * @param defenseType 防御类型。
+     * @return 特效。
+     * @example
+     * <listing version="3.0">
+     * var fx:EffectVO = EffectModel.I.getDefenseEffect(hitType, defenseType);
+     * </listing>
+     */
     public function getDefenseEffect(hitType:int, defenseType:int):EffectVO {
         switch (defenseType) {
         case FighterDefenseType.SWORD:
@@ -89,6 +175,7 @@ public class EffectModel {
         return effect ? effect : _effect['defense_' + HitType.MAGIC_HEAVY];
     }
 
+    /** @private */
     private function initEffects():void {
         _effect = {};
 
@@ -142,12 +229,14 @@ public class EffectModel {
         initMusouEnemyDefenseEffect();
     }
 
+    /** @private */
     private function cacheEffects():void {
         for each(var e:EffectVO in _effect) {
             e.cacheBitmapData();
         }
     }
 
+    /** @private */
     private function warmSounds():void {
         var seen:Object = {};
         for each(var e:EffectVO in _effect) {
@@ -159,6 +248,7 @@ public class EffectModel {
         }
     }
 
+    /** @private */
     private function initHitEffect():void {
 
         addHitEffect(HitType.CATCH, 'xg_catch_hit', {freeze: 400, sound: 'snd_hit_cache'});
@@ -200,6 +290,7 @@ public class EffectModel {
 
     }
 
+    /** @private */
     private function initDefenseEffect():void {
 
         addDefenseEffect(HitType.KAN, 'XG_fykan',
@@ -242,6 +333,7 @@ public class EffectModel {
 
     }
 
+    /** @private */
     private function initMusouEnemyHitEffect():void {
         addEnemyHitEffect(HitType.CATCH, 'xg_catch_hit', {freeze: 200, sound: 'snd_hit_cache'});
 
@@ -283,6 +375,7 @@ public class EffectModel {
         });
     }
 
+    /** @private */
     private function initMusouEnemyDefenseEffect():void {
         addEnemyDefenseEffect(HitType.KAN, 'XG_fykan',
                               {sound: 'snd_fykan', freeze: 50, blendMode: BlendMode.ADD, followDirect: true}
@@ -324,6 +417,7 @@ public class EffectModel {
 
     }
 
+    /** @private */
     private function initSpecialEffect():void {
         _effect['fire_ing']  = new EffectVO(
                 'xg_fire_ing', {
@@ -337,6 +431,7 @@ public class EffectModel {
                 });
     }
 
+    /** @private */
     private function initBuffEffect():void {
         _effect['buff_effect_speed']   = new EffectVO('xg_buff_effect_speed', {blendMode: BlendMode.ADD});
         _effect['buff_effect_power']   = new EffectVO('xg_buff_effect_power', {blendMode: BlendMode.ADD});
@@ -347,6 +442,7 @@ public class EffectModel {
         _effect['buff_defense'] = new EffectVO('xg_buff_defense', {blendMode: BlendMode.ADD, isBuff: true});
     }
 
+    /** @private */
     private function initSteelHitEffect():void {
         _effect['steel_hit_kan']  = new EffectVO(
                 'XG_kan2', {
@@ -365,21 +461,25 @@ public class EffectModel {
                 });
     }
 
+    /** @private */
     private function addHitEffect(type:int, className:String, param:Object = null):void {
         var effect:EffectVO    = new EffectVO(className, param);
         _effect['hit_' + type] = effect;
     }
 
+    /** @private */
     private function addDefenseEffect(type:int, className:String, param:Object = null):void {
         var effect:EffectVO        = new EffectVO(className, param);
         _effect['defense_' + type] = effect;
     }
 
+    /** @private */
     private function addEnemyHitEffect(type:int, className:String, param:Object = null):void {
         var effect:EffectVO          = new EffectVO(className, param);
         _effect['hit_enemy_' + type] = effect;
     }
 
+    /** @private */
     private function addEnemyDefenseEffect(type:int, className:String, param:Object = null):void {
         var effect:EffectVO              = new EffectVO(className, param);
         _effect['defense_enemy_' + type] = effect;

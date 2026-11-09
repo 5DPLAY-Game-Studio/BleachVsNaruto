@@ -36,28 +36,97 @@ import net.play5d.game.bvn.debug.Debugger;
 import net.play5d.game.bvn.interfaces.GameInterface;
 import net.play5d.game.bvn.utils.GameLogger;
 
+/**
+ * 配置、分数、选人和无双存档。
+ *
+ * <p>读档时存档 id 不是 <code>bvn3.5A</code> 就直接返回，当前数据不动。
+ * 加载配置时，选人、关卡、无双里缺失的角色会清掉或只记日志，不会抛错。关卡里缺失的地图只记日志，id 还留着。
+ * <code>loadSelect</code> 失败时只打一条日志。</p>
+ *
+ * @see ConfigVO
+ * @see MusouPlayerData
+ */
 public class GameData {
 
+    /** @private */
     private const SAVE_ID:String               = 'bvn3.5A';
-    // 是否启动无双模式的数据保存
+    /** @private */
     private const __MUSOU_DATA_ENABLED:Boolean = true;
+    /** @private */
     private static var _i:GameData;
 
+    /**
+     * 唯一实例。第一次读取时创建。
+     *
+     * @return 游戏数据。
+     * @example
+     * <listing version="3.0">
+     * GameData.I.loadSaveData();
+     * </listing>
+     */
     public static function get I():GameData {
         _i ||= new GameData();
         return _i;
     }
 
+    /**
+     * 当前配置。构造时就有一份。
+     */
     public var config:ConfigVO           = new ConfigVO();
+    /**
+     * 无双玩家数据。构造时就有一份。
+     */
     public var musouData:MusouPlayerData = new MusouPlayerData();
+    /**
+     * P1 选人。
+     *
+     * @default null
+     */
     public var p1Select:SelectVO;
+    /**
+     * P2 选人。
+     *
+     * @default null
+     */
     public var p2Select:SelectVO;
+    /**
+     * 当前地图 id。
+     *
+     * @default null
+     */
     public var selectMap:String;
+    /**
+     * 闯关分数。
+     *
+     * @default 0
+     */
     public var score:int                 = 0;
+    /**
+     * 胜者角色 id。
+     *
+     * @default null
+     */
     public var winnerId:String;
 
+    /**
+     * 是否第一次运行。读档不会改它。
+     *
+     * @default true
+     */
     public var isFirstRun:Boolean = true;
 
+    /**
+     * 按包、选人、关卡、无双的顺序加载配置。
+     *
+     * <p>某一步失败时，<code>fail</code> 收到一句加载文案。成功后会做缺失校验。</p>
+     *
+     * @param back 全部完成后的回调。
+     * @param fail 失败回调。可省略。
+     * @example
+     * <listing version="3.0">
+     * GameData.I.loadConfig(function ():void {}, function (msg:String):void {});
+     * </listing>
+     */
     public function loadConfig(back:Function, fail:Function = null):void {
 
         PackRegistry.I.load(loadPacksBack, failWith('loading.fighter_fail'));
@@ -101,10 +170,28 @@ public class GameData {
 
     }
 
+    /**
+     * 初始化无双玩家数据。
+     *
+     * @example
+     * <listing version="3.0">
+     * GameData.I.initData();
+     * </listing>
+     */
     public function initData():void {
         musouData.init();
     }
 
+    /**
+     * 把配置和无双数据交给壳保存。
+     *
+     * <p>存档 id 固定为 <code>bvn3.5A</code>。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameData.I.saveData();
+     * </listing>
+     */
     public function saveData():void {
         var o:Object = {};
         o.id         = SAVE_ID;
@@ -116,6 +203,16 @@ public class GameData {
         GameInterface.instance.saveGame(o);
     }
 
+    /**
+     * 从壳读取存档。
+     *
+     * <p>没有存档，或 id 对不上时直接返回。无双段会读入。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * GameData.I.loadSaveData();
+     * </listing>
+     */
     public function loadSaveData():void {
         var o:Object = GameInterface.instance.loadGame();
         if (!o || o.id != SAVE_ID) {
@@ -131,6 +228,17 @@ public class GameData {
         }
     }
 
+    /**
+     * 异步加载一份选人 JSON，成功后换成当前选人配置。
+     *
+     * <p>失败只打日志，没有失败回调。</p>
+     *
+     * @param url 相对资源根的地址。
+     * @example
+     * <listing version="3.0">
+     * GameData.I.loadSelect('config/select.json');
+     * </listing>
+     */
     public function loadSelect(url:String):void {
         AssetManager.I.loadJSON(url, function (data:Object):void {
             setSelectData(data);
@@ -139,11 +247,21 @@ public class GameData {
         });
     }
 
+    /**
+     * 用对象初始化当前选人配置。
+     *
+     * @param data 选人 JSON 对象。
+     * @example
+     * <listing version="3.0">
+     * GameData.I.setSelectData(data);
+     * </listing>
+     */
     public function setSelectData(data:Object):void {
         config.select_config.initByObject(data);
     }
 
     // 验证选人（缺失软降级：空槽 / 过滤 more，不抛错）
+    /** @private */
     private function validateSelect():void {
         var missFighters:Array  = [];
         var missAssisters:Array = [];
@@ -228,6 +346,7 @@ public class GameData {
     }
 
     // 验证关卡（缺失软降级：跳过缺角 id，不抛错）
+    /** @private */
     private function validateMissionData():void {
         var missFighters:Array  = [];
         var missMaps:Array      = [];
@@ -291,6 +410,7 @@ public class GameData {
     }
 
     // 验证无双关卡（缺失软降级：仅日志，不抛错）
+    /** @private */
     private function validateMusouData():void {
         var mapObj:Object = MusouModel.I.getAllMap();
 
