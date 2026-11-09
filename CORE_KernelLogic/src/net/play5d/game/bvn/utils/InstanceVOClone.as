@@ -22,7 +22,7 @@ import flash.utils.getDefinitionByName;
 import flash.utils.getQualifiedClassName;
 
 import net.play5d.game.bvn.interfaces.IInstanceVO;
-import net.play5d.alice.utils.ClassUtils;
+import net.play5d.kyo.utils.KyoClassUtils;
 
 /**
  * <code>IInstanceVO</code> 浅克隆工具。
@@ -81,7 +81,7 @@ public class InstanceVOClone {
     private static function getPropertyKeys(cls:Class):Array {
         var keys:Array = _propCache[cls] as Array;
         if (!keys) {
-            keys            = ClassUtils.getClassProperty(cls);
+            keys            = KyoClassUtils.getClassProperty(cls);
             _propCache[cls] = keys;
         }
         return keys;
