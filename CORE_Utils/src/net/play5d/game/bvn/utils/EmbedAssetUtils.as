@@ -20,7 +20,9 @@ package net.play5d.game.bvn.utils {
 import flash.display.Bitmap;
 
 /**
- * 支付图标。文件在 <code>assets/ui/bitmap</code>。
+ * 按文件名读取界面位图图标。
+ *
+ * <p>文件在 <code>assets/ui/bitmap</code>，读入后开启平滑。</p>
  *
  * @see UiBitmap
  */
@@ -78,7 +80,7 @@ public class EmbedAssetUtils {
         load('patreon.png', back);
     }
 
-    /** @private */
+    /** @private 读取位图并开启平滑后回调 */
     private static function load(name:String, back:Function):void {
         UiBitmap.load(name, function (bmp:Bitmap):void {
             bmp.smoothing = true;

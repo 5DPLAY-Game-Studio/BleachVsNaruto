@@ -22,68 +22,76 @@ import flash.utils.ByteArray;
 import mx.utils.StringUtil;
 
 /**
- * Github 实用工具类
+ * 读取编译期嵌入的分支提交哈希，并拼出 GitHub 链接。
  *
- * <p>在编译期通过 <code>[Embed]</code> 嵌入 <code>master</code> / <code>develop</code> 分支 tip 的提交哈希，
- * 运行时按 <code>IsDebugger()</code> 选择对应分支 hash 并拼接 GitHub 链接。</p>
+ * <p>调试版用 <code>develop</code>，否则用 <code>master</code>。哈希是编译时刻的分支 tip，不是当前 <code>HEAD</code>。</p>
  *
- * <p><b>注意：</b>此处 hash 为<b>编译时刻</b>分支 tip，并非当前 <code>HEAD</code> 或本次构建所在分支。</p>
- *
+ * @example
+ * <listing version="3.0">
+ * var label:String = GithubUtils.getCommitsDisplayLabel();
+ * </listing>
  * @see URL#GITHUB
+ * @see #getCommitsHash()
  */
 public class GithubUtils {
 
-    /** Git 完整提交哈希格式（40 位十六进制） */
+    /** @private Git 完整提交哈希格式（40 位十六进制） */
     private static const HASH_PATTERN:RegExp = /^[0-9a-f]{40}$/i;
 
-    /** 短 hash 显示长度（与 Git 默认 abbreviated 一致） */
+    /** @private 短哈希显示长度，与 Git 默认缩写一致 */
     private static const HASH_SHORT_LENGTH:uint = 7;
 
-    /** 主分支名称 */
+    /**
+     * 主分支名称。
+     *
+     * @default master
+     */
     public static const BRANCH_MASTER:String  = 'master';
-    /** 开发分支名称 */
+
+    /**
+     * 开发分支名称。
+     *
+     * @default develop
+     */
     public static const BRANCH_DEVELOP:String = 'develop';
 
-    /** 缓存的主分支 tip 提交哈希；<code>null</code> 表示尚未读取 */
+    /** @private 缓存的主分支 tip；尚未读取时为 null */
     private static var _cachedMasterHash:String;
 
-    /** 缓存的开发分支 tip 提交哈希；<code>null</code> 表示尚未读取 */
+    /** @private 缓存的开发分支 tip；尚未读取时为 null */
     private static var _cachedDevelopHash:String;
 
-    // --------------------------------------------------
-    // ★ 若属性 _masterCommitHash 或 _developCommitHash 的嵌
-    //     入标签 Embed 标红，可以通过【文件(F)】->【设置(T)】->
-    //     【编辑器】->【文件类型】->【忽略的文件和文件夹】选项卡中
-    //     移除 【.git】 选项
-    //
-    //  ↓
-    //  ↓
-    // --------------------------------------------------
-
-    /** 主分支提交哈希 */
+    /** @private 主分支 tip。Embed 标红时，到 IDEA 忽略的文件和文件夹里去掉 .git */
     [Embed(source='/../../.git/refs/heads/master', mimeType='application/octet-stream')]
     private static const _masterCommitHash:Class;
 
-    /** 开发分支提交哈希 */
+    /** @private 开发分支 tip */
     [Embed(source='/../../.git/refs/heads/develop', mimeType='application/octet-stream')]
     private static const _developCommitHash:Class;
 
     /**
-     * 获取编译期嵌入的分支 tip 提交哈希
+     * 获取编译期嵌入的分支 tip 提交哈希。
      *
-     * <p>调试版（<code>IsDebugger()</code> 为 <code>true</code>）返回 <code>develop</code> 分支 tip；
-     * 否则返回 <code>master</code> 分支 tip。</p>
+     * <p><code>IsDebugger()</code> 为真时返回 <code>develop</code>，否则返回 <code>master</code>。</p>
      *
-     * @return 40 位提交哈希；读取或校验失败时返回空字符串
+     * @return 40 位提交哈希；读取或校验失败时返回空字符串。
+     * @example
+     * <listing version="3.0">
+     * GithubUtils.getCommitsHash();
+     * </listing>
      */
     public static function getCommitsHash():String {
         return IsDebugger() ? getDevelopCommitHash() : getMasterCommitHash();
     }
 
     /**
-     * 获取当前运行时对应分支的短提交哈希（前 7 位）
+     * 获取当前分支 tip 的短提交哈希。
      *
-     * @return 短 hash；完整 hash 无效时返回空字符串
+     * @return 前 7 位；完整哈希无效时返回空字符串。
+     * @example
+     * <listing version="3.0">
+     * GithubUtils.getCommitsHashShort();
+     * </listing>
      */
     public static function getCommitsHashShort():String {
         var hash:String = getCommitsHash();
@@ -95,23 +103,34 @@ public class GithubUtils {
     }
 
     /**
-     * 获取当前运行时对应的分支名称
+     * 获取当前运行时对应的分支名称。
      *
-     * <p>调试版（<code>IsDebugger()</code> 为 <code>true</code>）返回 <code>develop</code>；
-     * 否则返回 <code>master</code>。</p>
+     * <p><code>IsDebugger()</code> 为真时返回 <code>develop</code>，否则返回 <code>master</code>。</p>
      *
-     * @return 分支名称
+     * @return 分支名称。
+     * @example
+     * <listing version="3.0">
+     * GithubUtils.getCommitBranch();
+     * </listing>
+     * @see #BRANCH_DEVELOP
+     * @see #BRANCH_MASTER
      */
     public static function getCommitBranch():String {
         return IsDebugger() ? BRANCH_DEVELOP : BRANCH_MASTER;
     }
 
     /**
-     * 获取 Credits 等 UI 使用的提交展示文本
+     * 获取提交展示文本。
      *
-     * <p>格式为 <code>分支@短hash</code>，例如 <code>develop@a8dbce1</code>。</p>
+     * <p>格式为 <code>分支&#64;短哈希</code>，例如 <code>develop&#64;a8dbce1</code>。</p>
      *
-     * @return 展示文本；hash 无效时返回空字符串
+     * @return 展示文本；哈希无效时返回空字符串。
+     * @example
+     * <listing version="3.0">
+     * GithubUtils.getCommitsDisplayLabel();
+     * </listing>
+     * @see #getCommitBranch()
+     * @see #getCommitsHashShort()
      */
     public static function getCommitsDisplayLabel():String {
         var hashShort:String = getCommitsHashShort();
@@ -123,29 +142,43 @@ public class GithubUtils {
     }
 
     /**
-     * 通过提交哈希在浏览器中打开 GitHub 提交页
+     * 在浏览器中打开该提交的 GitHub 页面。
      *
-     * @param hash 提交哈希
+     * @param hash 提交哈希。
+     * @example
+     * <listing version="3.0">
+     * GithubUtils.goCommitsByHash(GithubUtils.getCommitsHash());
+     * </listing>
+     * @see #getCommitsUrlByHash()
      */
     public static function goCommitsByHash(hash:String):void {
         URL.go(getCommitsUrlByHash(hash), false);
     }
 
     /**
-     * 获取分支提交列表地址
+     * 获取当前分支的提交列表地址。
      *
-     * @return 分支提交列表 GitHub 地址
+     * @return GitHub 提交列表地址。
+     * @example
+     * <listing version="3.0">
+     * var url:String = GithubUtils.getBranchUrl();
+     * </listing>
+     * @see URL#GITHUB
      */
     public static function getBranchUrl():String {
         return URL.GITHUB + '/commits/' + getCommitBranch() + '/';
     }
 
     /**
-     * 通过提交哈希获取对应的 GitHub 地址
+     * 取得某次提交的 GitHub 地址。
      *
-     * @param hash 提交哈希
-     *
-     * @return 提交页地址；hash 无效时返回仓库首页地址
+     * @param hash 提交哈希。
+     * @return 提交页地址；哈希无效时返回仓库首页。
+     * @example
+     * <listing version="3.0">
+     * GithubUtils.getCommitsUrlByHash(GithubUtils.getCommitsHash());
+     * </listing>
+     * @see URL#GITHUB
      */
     public static function getCommitsUrlByHash(hash:String):String {
         if (!isValidHash(hash)) {
@@ -155,11 +188,7 @@ public class GithubUtils {
         return URL.GITHUB + '/commit/' + hash;
     }
 
-    /**
-     * 获取并缓存主分支 tip 提交哈希
-     *
-     * @return 40 位提交哈希；读取或校验失败时返回空字符串
-     */
+    /** @private 读取并缓存主分支 tip，失败返回空串 */
     private static function getMasterCommitHash():String {
         if (_cachedMasterHash == null) {
             _cachedMasterHash = readEmbeddedHash(_masterCommitHash);
@@ -168,11 +197,7 @@ public class GithubUtils {
         return _cachedMasterHash;
     }
 
-    /**
-     * 获取并缓存开发分支 tip 提交哈希
-     *
-     * @return 40 位提交哈希；读取或校验失败时返回空字符串
-     */
+    /** @private 读取并缓存开发分支 tip，失败返回空串 */
     private static function getDevelopCommitHash():String {
         if (_cachedDevelopHash == null) {
             _cachedDevelopHash = readEmbeddedHash(_developCommitHash);
@@ -181,13 +206,7 @@ public class GithubUtils {
         return _cachedDevelopHash;
     }
 
-    /**
-     * 读取 Embed 嵌入的分支 ref 文件内容并校验为合法提交哈希
-     *
-     * @param embedClass Embed 生成的 <code>Class</code> 引用
-     *
-     * @return 40 位提交哈希；读取或校验失败时返回空字符串
-     */
+    /** @private 读取 Embed 字节并校验为 40 位哈希，失败返回空串 */
     private static function readEmbeddedHash(embedClass:Class):String {
         var bytes:ByteArray = new embedClass() as ByteArray;
         if (!bytes || bytes.length == 0) {
@@ -200,13 +219,7 @@ public class GithubUtils {
         return isValidHash(hash) ? hash : '';
     }
 
-    /**
-     * 校验是否为合法的 Git 完整提交哈希
-     *
-     * @param hash 待校验字符串
-     *
-     * @return 合法返回 <code>true</code>，否则返回 <code>false</code>
-     */
+    /** @private 是否为 40 位十六进制提交哈希 */
     private static function isValidHash(hash:String):Boolean {
         return hash && HASH_PATTERN.test(hash);
     }

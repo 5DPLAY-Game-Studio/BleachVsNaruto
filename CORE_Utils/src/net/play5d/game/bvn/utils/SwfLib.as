@@ -24,18 +24,19 @@ import net.play5d.game.bvn.interfaces.ISwfLib;
  *
  * <p>返回相对 <code>assets/</code> 的路径，文件在 <code>assets/ui</code>。供 Dev / Pc / Mob 入口注入。</p>
  *
- * @see net.play5d.game.bvn.interfaces.ISwfLib
  * @example
  * <listing version="3.0">
  * var lib:ISwfLib = new SwfLib();
  * var titleUrl:String = lib.title;
  * </listing>
+ * @see net.play5d.game.bvn.interfaces.ISwfLib
  */
 public class SwfLib implements ISwfLib {
 
     /**
      * 大地图 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/big_map.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().big_map;
@@ -48,6 +49,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 共享通用 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/common.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().common;
@@ -60,6 +62,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 对话框 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/dialog.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().dialog;
@@ -72,6 +75,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 战斗 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/fight.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().fight;
@@ -84,6 +88,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 游戏结束 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/game_over.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().game_over;
@@ -96,6 +101,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 操作说明 / 教程 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/how2play.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().how2play;
@@ -108,6 +114,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 多语言选择 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/language.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().language;
@@ -120,6 +127,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 加载界面 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/loading.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().loading;
@@ -132,6 +140,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 无双模式 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/musou.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().musou;
@@ -144,6 +153,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 选人 / 选图界面 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/select.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().select;
@@ -156,6 +166,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 设置界面 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/setting.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().setting;
@@ -168,6 +179,7 @@ public class SwfLib implements ISwfLib {
     /**
      * 标题（主菜单）界面 UI SWF。
      * @return 相对 <code>assets/</code> 的路径。
+     * @default ui/title.swf
      * @example
      * <listing version="3.0">
      * var url:String = new SwfLib().title;
