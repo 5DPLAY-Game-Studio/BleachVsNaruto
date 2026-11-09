@@ -38,6 +38,17 @@ public class BtnUtils {
     private static var _btnMap:Dictionary = new Dictionary();
 
 
+    /**
+     * 设置按钮光标和子对象鼠标。按钮为 null 时直接返回。
+     *
+     * @param btn 按钮。
+     * @param buttonMode 是否手型。默认 true。
+     * @param mouseChildren 子对象是否接收鼠标。默认 false。
+     * @example
+     * <listing version="3.0">
+     * BtnUtils.btnMode(btn);
+     * </listing>
+     */
     public static function btnMode(btn:Sprite, buttonMode:Boolean = true, mouseChildren:Boolean = false):void {
         if (!btn) {
             return;
@@ -47,6 +58,19 @@ public class BtnUtils {
         btn.mouseChildren = mouseChildren;
     }
 
+    /**
+     * 登记点击。按钮为 null 时直接返回。目标为空时改成按钮自己，包括 0 和空字符串。
+     *
+     * <p>触控模式只听抬起。鼠标模式听移入、移出和点击，移入会变亮并播放选择音。同一个按钮再登记，监听不会加第二次，回调和当时的颜色换成新的一份。回调为 null 时，点击不播放确认音。</p>
+     *
+     * @param btn 按钮。
+     * @param handler 点击回调，参数是目标。
+     * @param target 交给回调的对象。默认 null，实际改成按钮自己。
+     * @example
+     * <listing version="3.0">
+     * BtnUtils.initBtn(btn, onClick);
+     * </listing>
+     */
     public static function initBtn(btn:DisplayObject, handler:Function, target:* = null):void {
         if (!btn) {
             return;
@@ -69,6 +93,15 @@ public class BtnUtils {
 
     }
 
+    /**
+     * 摘掉触控和鼠标监听，并忘掉回调。按钮为 null 时直接返回。没登记过时，移除监听没有效果。
+     *
+     * @param btn 按钮。
+     * @example
+     * <listing version="3.0">
+     * BtnUtils.destroyBtn(btn);
+     * </listing>
+     */
     public static function destroyBtn(btn:DisplayObject):void {
         if (!btn) {
             return;

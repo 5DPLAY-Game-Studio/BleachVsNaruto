@@ -23,6 +23,11 @@ import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 
+/**
+ * 按队列加载位图。某一张失败或不是位图时记日志并继续下一张，队列仍会走完。
+ *
+ * <p>取图时每次新建一个 <code>Bitmap</code>，像素仍是缓存里的同一份。<code>loadQueue</code> 进行中再调一次，会换掉队列和回调，进行中的那张完成后继续走新队列。</p>
+ */
 public class BitmapAssetLoader {
 
     private var _queueLength:int;
@@ -31,6 +36,16 @@ public class BitmapAssetLoader {
     private var _successBack:Function;
     private var _progressBack:Function;
 
+    /**
+     * 按地址取出一张新位图。还没缓存时返回 null。
+     *
+     * @param id 加载时用的地址。
+     * @return 新的位图。没有缓存时为 null。
+     * @example
+     * <listing version="3.0">
+     * var bmp:Bitmap = loader.getBitmap(url);
+     * </listing>
+     */
     public function getBitmap(id:String):Bitmap {
 
         var bd:BitmapData = _cacheObj[id];
@@ -40,6 +55,18 @@ public class BitmapAssetLoader {
         return new Bitmap(bd);
     }
 
+    /**
+     * 按数组顺序加载。空数组会立刻调用成功回调。进度是已完成张数加上当前这张的进度，再除以总数。
+     *
+     * @param urls 地址数组。null 时抛错。内容会被复制。
+     * @param success 全部走完时调用，不带参数。为 null 时走完也不调用。
+     * @param progress 进度回调，参数是 0 到 1 的比值。默认 null。
+     * @throws TypeError 地址数组为 null 时。
+     * @example
+     * <listing version="3.0">
+     * loader.loadQueue(urls, onDone, onProgress);
+     * </listing>
+     */
     public function loadQueue(urls:Array, success:Function, progress:Function = null):void {
         _successBack  = success;
         _progressBack = progress;
