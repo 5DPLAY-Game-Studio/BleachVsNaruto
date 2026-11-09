@@ -38,7 +38,8 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
  * 判定面调试叠加层。
  *
  * <p>开启后在游戏图层顶部用单个 <code>Shape</code> 绘制被打面、攻击面与判定面，
- * 每帧清屏重绘，避免反复创建子显示对象。</p>
+ * 每帧清屏重绘。没有对局时不卸层。没有 <code>P1</code> 或 <code>P2</code> 时卸掉叠加层。
+ * 绿色是身体，红色是攻击面，黄色是判定面。</p>
  *
  * @example
  * <listing version="3.0">
@@ -53,8 +54,13 @@ public class DebugMain {
     private static var _i:DebugMain;
 
     /**
-     * 单例。
+     * 单例。第一次访问时创建。
+     *
      * @return 全局实例。
+     * @example
+     * <listing version="3.0">
+     * var debug:DebugMain = DebugMain.I;
+     * </listing>
      */
     public static function get I():DebugMain {
         _i ||= new DebugMain();

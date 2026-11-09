@@ -43,7 +43,8 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameSpriteUtil;
  * 显示对象相对游戏层的 <code>getBounds</code>（当前帧可视/重绘区域）线框（透明度 0.33）。
  * 鼠标掠过时最顶层命中 MC 半透明填充；左键点击锁定跟踪（锁定目标亦保持填充）；
  * 右键清除跟踪。跟踪实体销毁后自动清空，等待下次点击锁定。
- * 仅处理角色、援助、子弹与独立道具。</p>
+ * 仅处理角色、援助、子弹与独立道具。关掉 <code>isRender</code> 会清掉跟踪并卸掉叠加层。
+ * 没有对局时只清画面和跟踪，叠加层还留在原来的游戏层上。</p>
  *
  * @example
  * <listing version="3.0">
@@ -61,8 +62,13 @@ public class DebugSpriteBounds {
     private static var _i:DebugSpriteBounds;
 
     /**
-     * 单例。
+     * 单例。第一次访问时创建。
+     *
      * @return 全局实例。
+     * @example
+     * <listing version="3.0">
+     * var bounds:DebugSpriteBounds = DebugSpriteBounds.I;
+     * </listing>
      */
     public static function get I():DebugSpriteBounds {
         _i ||= new DebugSpriteBounds();
@@ -103,9 +109,14 @@ public class DebugSpriteBounds {
     private var _stage:Stage;
 
     /**
-     * 点击锁定的跟踪实体；未锁定或已清除时为 <code>null</code>。
+     * 点击锁定的跟踪实体。未锁定或已清除时为 <code>null</code>。
+     *
      * @return 当前跟踪实体。
      * @default null
+     * @example
+     * <listing version="3.0">
+     * var sp:IGameSprite = DebugSpriteBounds.I.trackedSprite;
+     * </listing>
      */
     public function get trackedSprite():IGameSprite {
         return _trackedSprite;

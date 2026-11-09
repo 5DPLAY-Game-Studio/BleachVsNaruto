@@ -24,12 +24,39 @@ import flash.utils.Dictionary;
 
 import net.play5d.game.bvn.utils.DebugSprite;
 
+/**
+ * 给显示对象套一个可拖动的黄框，松手后把框的位置写回对象。
+ *
+ * <p><code>enabled</code> 固定为 <code>true</code>，方法开头的开关判断不会提前返回。
+ * 同一个对象再调一次会先拆掉上一只框。对象没有父级、又没传入容器时只打日志并返回。
+ * 按下时框提到父级最前，透明度变成 0.7；松开后透明度变成 0.1，并把框的 <code>x</code>、<code>y</code> 写到对象上。</p>
+ *
+ * @see net.play5d.game.bvn.utils.DebugSprite
+ */
 public class DebugUtil {
 
+    /** @private */
     private static const map:Dictionary = new Dictionary();
 
+    /**
+     * 是否允许套框。当前固定为 <code>true</code>。
+     *
+     * @default true
+     */
     public static const enabled:Boolean = true;
 
+    /**
+     * 在容器里放一只黄框，拖完后把位置写回对象。
+     *
+     * <p><code>d</code> 为空时抛错。没传容器时用对象自己的父级。</p>
+     *
+     * @param d 要定位的显示对象。
+     * @param container 黄框的父级。默认 <code>null</code>，改用 <code>d.parent</code>。
+     * @example
+     * <listing version="3.0">
+     * DebugUtil.debugPosition(sprite);
+     * </listing>
+     */
     public static function debugPosition(d:DisplayObject, container:DisplayObjectContainer = null):void {
         if (!enabled) {
             return;
