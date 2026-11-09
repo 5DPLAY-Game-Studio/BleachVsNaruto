@@ -40,8 +40,21 @@ import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;
 import net.play5d.kyo.utils.KyoTimeout;
 
+/**
+ * 继续或结束。
+ *
+ * <p>构造时清掉转场并停在第 1 帧。继续播放 <code>continue</code> 并摆上角色，结束播放 <code>gameover</code>、停掉背景音乐并写分数。
+ * 稍后构建总会派发继续事件，和当前播的是哪一段无关。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class GameOverStage implements IStage {
 
+    /**
+     * 清掉转场，创建界面并停在第 1 帧。
+     *
+     * @throws Error 结束界面资源创建失败时。
+     */
     public function GameOverStage() {
         StateCtrl.I.clearTrans();
         _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.game_over, ResUtils.GAME_OVER);
@@ -62,6 +75,14 @@ public class GameOverStage implements IStage {
         return _ui;
     }
 
+    /**
+     * 播放继续动画，摆上角色，并换成继续音乐。
+     *
+     * @example
+     * <listing version="3.0">
+     * stage.showContinue();
+     * </listing>
+     */
     public function showContinue():void {
         _ui.addEventListener(Event.COMPLETE, showContinueComplete, false, 0, true);
         _ui.gotoAndPlay('continue');
@@ -70,6 +91,14 @@ public class GameOverStage implements IStage {
         SoundCtrl.I.BGM(AssetManager.I.getSound('continue'));
     }
 
+    /**
+     * 播放结束动画，停掉背景音乐，并写上分数。
+     *
+     * @example
+     * <listing version="3.0">
+     * stage.showGameOver();
+     * </listing>
+     */
     public function showGameOver():void {
         _ui.addEventListener(Event.COMPLETE, gameOverComplete, false, 0, true);
         _ui.gotoAndPlay('gameover');

@@ -24,6 +24,13 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 标志动画。
+ *
+ * <p>从第 2 帧播放，播完进入菜单。销毁只摘掉播完监听。界面还没建就销毁会抛错。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class LogoStage implements IStage {
 
     private var _ui:$common$MC_logo;

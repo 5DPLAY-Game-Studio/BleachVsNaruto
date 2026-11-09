@@ -35,6 +35,13 @@ import net.play5d.game.bvn.ui.settings.SetBtnGroup;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 制作人员。
+ *
+ * <p>壳能给出名单时用壳的显示对象，给不出时用默认文本。返回按钮在画面底部往上 150。壳实例缺失时构建会抛错。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class CreditsStage implements IStage {
 
     private var _ui:Sprite;

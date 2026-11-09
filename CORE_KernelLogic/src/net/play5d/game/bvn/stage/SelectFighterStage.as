@@ -56,8 +56,22 @@ import net.play5d.kyo.utils.KyoKeyboard;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 选人、援助和地图。
+ *
+ * <p>自动完成默认开着。构建时关掉输入并立刻进入流程的下一步。1P 或 2P 选择器还没建时，对应的完成状态为假。
+ * <code>setSelect</code> 只有玩家编号 1 用 1P，其它编号都写到 2P。选择器还没建时抛错。
+ * 下一步由当前模式决定，不认识的动作什么都不做。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class SelectFighterStage implements IStage {
 
+    /**
+     * 选完后是否自动进入下一步。
+     *
+     * @default true
+     */
     public static var AUTO_FINISH:Boolean = true;
 
     private var _ui:$select$MC_stgSelect;
@@ -82,10 +96,28 @@ public class SelectFighterStage implements IStage {
         return _ui;
     }
 
+    /**
+     * 1P 是否选完。选择器还没建时为假。
+     *
+     * @return 选完时为 true。
+     * @example
+     * <listing version="3.0">
+     * var done:Boolean = stage.p1SelectFinish;
+     * </listing>
+     */
     public function get p1SelectFinish():Boolean {
         return _p1Slt && _p1Slt.selectFinish();
     }
 
+    /**
+     * 2P 是否选完。选择器还没建时为假。
+     *
+     * @return 选完时为 true。
+     * @example
+     * <listing version="3.0">
+     * var done:Boolean = stage.p2SelectFinish;
+     * </listing>
+     */
     public function get p2SelectFinish():Boolean {
         return _p2Slt && _p2Slt.selectFinish();
     }
@@ -120,6 +152,17 @@ public class SelectFighterStage implements IStage {
         GameEvent.dispatchEvent(GameEvent.SELECT_FIGHTER);
     }
 
+    /**
+     * 把一份选择写进某一方并收起选择器。
+     *
+     * @param player 1 使用 1P。其它编号使用 2P。
+     * @param selects 当前选择。
+     * @throws TypeError 那一方的选择器还没建时。
+     * @example
+     * <listing version="3.0">
+     * stage.setSelect(1, selects);
+     * </listing>
+     */
     public function setSelect(player:int, selects:Array):void {
         var selt:SelectorItemUI = player == 1 ? _p1Slt : _p2Slt;
         selt.setCurrentSelect(selects);
@@ -127,6 +170,14 @@ public class SelectFighterStage implements IStage {
         SoundCtrl.I.sndConfirm();
     }
 
+    /**
+     * 按当前模式走下一步。返回的步骤编号不小于 0 时才改当前步骤。不认识的动作什么都不做。
+     *
+     * @example
+     * <listing version="3.0">
+     * stage.nextStep();
+     * </listing>
+     */
     public function nextStep():void {
         var a:SelectFlowAction = _modeFlow.resolveNextStep(_curStep);
         if (a.nextStep >= 0) {
@@ -158,6 +209,14 @@ public class SelectFighterStage implements IStage {
         }
     }
 
+    /**
+     * 转入对战加载。
+     *
+     * @example
+     * <listing version="3.0">
+     * stage.goLoadGame();
+     * </listing>
+     */
     public function goLoadGame():void {
         TraceLang('select_fighter_stage.start_game');
         StateCtrl.I.transIn(MainGame.I.loadGame);

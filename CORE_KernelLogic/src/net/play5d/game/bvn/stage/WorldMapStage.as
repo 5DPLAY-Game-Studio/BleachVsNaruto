@@ -45,6 +45,13 @@ import net.play5d.game.bvn.utils.TouchMoveEvent;
 import net.play5d.game.bvn.utils.TouchUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 无双大地图。
+ *
+ * <p>稍后构建才开始拖拽，并聚焦当前点。销毁时摘掉舞台上的鼠标和触摸。舞台缺失时抛错。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class WorldMapStage implements IStage {
 
     private var _ui:Sprite;

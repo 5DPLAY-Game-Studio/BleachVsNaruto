@@ -50,6 +50,14 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 胜利画面。
+ *
+ * <p>构建时写出 <code>SCORE</code> 加当前分数，并取胜利者台词。多人时把胜利者头像放在第一张。胜利者不在已选列表里时，取头像的下标是 -1。
+ * 销毁时派发胜利结束，并停在 <code>destroy</code> 帧。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class WinnerStage implements IStage {
 
     private var _ui:MovieClip;

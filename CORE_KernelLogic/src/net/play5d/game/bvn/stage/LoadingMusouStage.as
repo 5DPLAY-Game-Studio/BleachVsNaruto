@@ -37,6 +37,14 @@ import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 无双战前加载。
+ *
+ * <p>构建时就派发加载开始，转场出去之后才真正加载。援助列表传的是 null。背景音乐里会放进队伍第一个人和头目 id 数组。
+ * 队伍是空的时读第一个人会抛错。加载完成后先装配无双对局，再派发加载结束。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class LoadingMusouStage implements IStage {
 
     private var _ui:$loading$MC_loadingFight;

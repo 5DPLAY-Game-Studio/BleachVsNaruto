@@ -27,6 +27,14 @@ import net.play5d.game.bvn.utils.GameLogger;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 启动时的资源加载。
+ *
+ * <p>需要预加载时先走预加载，否则直接读配置，再加载基础资源。进度超过 1 时改成 1。步骤小于 1 时改成 1，大于总步数时改成总步数。
+ * 失败时调用失败回调并不再继续。成功回调只调用一次，随后两个回调都清掉。界面还没构建时写进度会抛错。销毁和稍后构建是空的。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class GameLoadingStage implements IStage {
 
     private var _ui:$loading$MC_loadingCover;
@@ -47,6 +55,17 @@ public class GameLoadingStage implements IStage {
         _ui = ResUtils.I.createDisplayObject(ResUtils.swfLib.loading, '$loading$MC_loadingCover');
     }
 
+    /**
+     * 开始预加载或直接读配置。
+     *
+     * @param succ 资源都好了之后调用。没有下一次。
+     * @param fail 预加载或配置失败时调用，参数是错误文字。
+     * @throws TypeError 界面还没构建时。
+     * @example
+     * <listing version="3.0">
+     * stage.loadGame(onOk, onFail);
+     * </listing>
+     */
     public function loadGame(succ:Function, fail:Function):void {
         _initBack = succ;
         _initFail = fail;

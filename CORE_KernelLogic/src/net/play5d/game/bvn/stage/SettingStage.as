@@ -44,6 +44,13 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.game.bvn.utils.UiBitmap;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 设置界面。
+ *
+ * <p>构建时克隆一份当前配置。进入内页会先拆掉上一块内页，再把主按钮组移出画面并关掉它的按键。人物播 <code>key_fadein</code>。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class SettingStage implements IStage {
 
     private var _ui:$setting$MC_stgSetUI;
@@ -87,6 +94,16 @@ public class SettingStage implements IStage {
         SoundCtrl.I.BGM(AssetManager.I.getSound('back'));
     }
 
+    /**
+     * 打开一块内页。已有内页会先拆掉。
+     *
+     * @param innerUI 内页。null 时加监听会抛错。
+     * @throws TypeError 内页为 null 时。
+     * @example
+     * <listing version="3.0">
+     * stage.goInnerSetPage(page);
+     * </listing>
+     */
     public function goInnerSetPage(innerUI:IInnerSetUI):void {
         function tweenComplete():void {
             _btnGroup.visible = false;

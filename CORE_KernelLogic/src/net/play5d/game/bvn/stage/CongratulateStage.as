@@ -37,6 +37,15 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 通关祝贺。
+ *
+ * <p>背景透明度从 -1 开始，每帧加 0.005，卷轴结束时改成 1。返回键把界面直接拨到退出位置。
+ * 按钮在卷轴结束前不接收按键。选中后回标题。播完时派发全通事件，分数写成 <code>FINAL SCORE</code> 加当前分数。
+ * 按钮还没建时读它的纵坐标会抛错。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class CongratulateStage implements IStage {
 
     private var _mainUI:Sprite;
@@ -52,6 +61,16 @@ public class CongratulateStage implements IStage {
         return _mainUI;
     }
 
+    /**
+     * 滚动中的内容。构建前是 null。
+     *
+     * @return 内容精灵。
+     * @default null
+     * @example
+     * <listing version="3.0">
+     * var page:Sprite = stage.innerUI;
+     * </listing>
+     */
     public function get innerUI():Sprite {
         return _ui;
     }
@@ -86,6 +105,16 @@ public class CongratulateStage implements IStage {
 
     }
 
+    /**
+     * 返回按钮组的纵坐标。按钮还没建时抛错。
+     *
+     * @return 纵坐标。
+     * @throws TypeError 按钮组为 null 时。
+     * @example
+     * <listing version="3.0">
+     * var y:Number = stage.getBtnY();
+     * </listing>
+     */
     public function getBtnY():Number {
         return _btngroup.y;
     }

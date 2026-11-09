@@ -38,6 +38,13 @@ import net.play5d.game.bvn.utils.MultiLangUtils;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 语言选择。
+ *
+ * <p>语言数量和字体路径数量不一致时记错并返回，列表不会建。字体在点选之后才加载。销毁时卸掉背景和国家项。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class LanguageStage implements IStage {
 
     // 加载进度条

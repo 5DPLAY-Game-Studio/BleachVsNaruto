@@ -36,6 +36,14 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.input.KyoKeyCode;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 操作说明。
+ *
+ * <p>从第 2 帧播放，并铺一层不透明的全屏矩形。按键名只在能查出名字时写入，查不到就留着影片里的字。
+ * 大约 100 毫秒后才开始听返回、菜单确认和点击，这些都会播跳过。播完进入选人。销毁时停在 <code>destroy</code> 帧。界面还没建就销毁会抛错。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class HowToPlayStage implements IStage {
 
     private var _ui:$how2play$MC_movieHow2Play;

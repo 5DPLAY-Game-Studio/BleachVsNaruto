@@ -40,9 +40,26 @@ import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.shapes.Box;
 import net.play5d.kyo.stage.IStage;
 
+/**
+ * 标题菜单。
+ *
+ * <p>构建时停在第 1 帧并关掉输入，壳会往标题上加自己的界面。壳实例缺失时抛错。按钮位置和间距是共享的点，改它们会影响到之后的菜单。</p>
+ *
+ * @see net.play5d.kyo.stage.IStage
+ */
 public class MenuStage extends Sprite implements IStage {
 
+    /**
+     * 菜单左上角。共享的同一个点。
+     *
+     * @default 470,100
+     */
     public static var MenuPosition:Point = new Point(470, 100);
+    /**
+     * 菜单项间距。横向是 -40。共享的同一个点。
+     *
+     * @default -40,5
+     */
     public static var MenuGap:Point      = new Point(-40, 5);
 
     private var _ui:$title$MC_stgTitle;
