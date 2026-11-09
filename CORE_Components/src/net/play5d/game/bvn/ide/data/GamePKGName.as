@@ -33,11 +33,15 @@ public class GamePKGName {
 
     /**
      * fighter 包路径前缀。
+     *
+     * @default net.play5d.game.bvn.fighter::
      */
     public static const FIGHTER:String = PREF + 'fighter' + SUF;
 
     /**
      * ctrler.game_ctrls 包路径前缀。
+     *
+     * @default net.play5d.game.bvn.ctrler.game_ctrls::
      */
     public static const CTRLER_GAMECTRLS:String = PREF + 'ctrler.game_ctrls' + SUF;
 }

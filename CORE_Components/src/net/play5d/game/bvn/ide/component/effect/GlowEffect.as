@@ -34,7 +34,13 @@ public class GlowEffect extends BaseEffect {
     private var _color:uint = 0xffffff;
 
     /**
-     * 构造方法。
+     * 设置发光标题，并按当前颜色刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:GlowEffect = new GlowEffect();
+     * effect.color = 0x66ccff;
+     * </listing>
      */
     public function GlowEffect() {
         super.title = '效果_发光';

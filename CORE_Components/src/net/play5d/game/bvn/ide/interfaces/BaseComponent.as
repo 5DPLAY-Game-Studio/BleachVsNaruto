@@ -36,17 +36,41 @@ public class BaseComponent extends MovieClip implements IComponents {
     /** @private 游戏元件实体（惰性创建） */
     protected var _gameSpriteEntity:GameSpriteEntity;
 
-    /** @private 自身类引用 */
+    /**
+     * 自身游戏精灵。
+     *
+     * <p><code>bindContext</code> 时写入；销毁后为 <code>null</code>。</p>
+     *
+     * @default null
+     * @see #bindContext()
+     */
     protected var $self:* = null;
 
-    /** @private 对手主人类引用（FighterMain） */
+    /**
+     * 对手主人类引用，解析后为 FighterMain。
+     *
+     * @default null
+     * @see #bindContext()
+     */
     protected var $target:* = null;
 
-    /** @private 最顶主人类引用（FighterMain） */
+    /**
+     * 最顶主人类引用，解析后为 FighterMain。
+     *
+     * @default null
+     * @see #bindContext()
+     */
     protected var $owner:* = null;
 
     /**
-     * 构造方法。
+     * 挂到舞台后，把 <code>init</code> 登记到第 0 帧。
+     *
+     * <p>没有 <code>root</code> 时不登记，供检查器预览实例使用。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * var component:BaseComponent = new BaseComponent();
+     * </listing>
      */
     public function BaseComponent() {
         if (!root) {
@@ -83,6 +107,10 @@ public class BaseComponent extends MovieClip implements IComponents {
      *
      * <p>第一帧执行：绑定上下文 → 隐藏 → 动作 → 销毁。</p>
      *
+     * @example
+     * <listing version="3.0">
+     * component.init();
+     * </listing>
      * @see #doAction()
      * @see #destroy()
      */
@@ -94,9 +122,14 @@ public class BaseComponent extends MovieClip implements IComponents {
     }
 
     /**
-     * 要详细执行的动作。
+     * 执行组件动作。
      *
-     * <p>子类覆盖实现具体逻辑。</p>
+     * <p>基类为空实现，子类覆盖后调用对应控制器。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * doAction();
+     * </listing>
      */
     public function doAction():void {
     }
@@ -106,6 +139,13 @@ public class BaseComponent extends MovieClip implements IComponents {
      *
      * <p>仅在需要 <code>$self</code> / <code>$target</code> / <code>$owner</code> 时创建实体。</p>
      *
+     * @example
+     * <listing version="3.0">
+     * bindContext();
+     * </listing>
+     * @see #$self
+     * @see #$target
+     * @see #$owner
      * @see net.play5d.game.bvn.ide.entity.GameSpriteEntity
      */
     protected function bindContext():void {
@@ -119,7 +159,12 @@ public class BaseComponent extends MovieClip implements IComponents {
     }
 
     /**
-     * 隐藏自身。
+     * 隐藏自身，避免模板出现在画面上。
+     *
+     * @example
+     * <listing version="3.0">
+     * hidden();
+     * </listing>
      */
     protected function hidden():void {
         visible = false;

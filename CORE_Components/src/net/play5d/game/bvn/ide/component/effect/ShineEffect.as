@@ -33,7 +33,13 @@ public class ShineEffect extends BaseEffect {
     private var _color:uint = 0xffffff;
 
     /**
-     * 构造方法。
+     * 设置闪光标题，并按当前颜色刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:ShineEffect = new ShineEffect();
+     * effect.color = 0xffcc00;
+     * </listing>
      */
     public function ShineEffect() {
         super.title = '效果_闪光';

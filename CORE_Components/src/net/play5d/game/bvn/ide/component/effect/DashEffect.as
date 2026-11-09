@@ -32,7 +32,13 @@ public class DashEffect extends BaseEffect {
     private var _playSound:Boolean = true;
 
     /**
-     * 构造方法。
+     * 设置瞬步标题，并按是否播放音效刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:DashEffect = new DashEffect();
+     * effect.playSound = false;
+     * </listing>
      */
     public function DashEffect() {
         super.title = '效果_瞬步';

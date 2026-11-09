@@ -32,7 +32,13 @@ public class SlowDownEffect extends BaseEffect {
     private var _time:Number = 0;
 
     /**
-     * 构造方法。
+     * 设置慢放标题，并按当前时长刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:SlowDownEffect = new SlowDownEffect();
+     * effect.time = 0.4;
+     * </listing>
      */
     public function SlowDownEffect() {
         super.title = '效果_慢放';

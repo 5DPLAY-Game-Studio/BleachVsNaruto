@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EndShakeEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定结束持续震动，动作帧调用 <code>endShake</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EndShakeEffect();
+     * </listing>
      */
     public function EndShakeEffect() {
         bindNoArgCall('效果_结束震动', 'endShake');

@@ -92,6 +92,10 @@ public class IdeRuntimeUtils {
      * @param target 控制器对象。
      * @param methodNames 方法名列表。
      * @return 全部存在返回 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * IdeRuntimeUtils.requireMethods(ctrler, ['shine', 'shake']);
+     * </listing>
      */
     public static function requireMethods(target:*, methodNames:Array):Boolean {
         if (!target || !methodNames) {
@@ -112,6 +116,10 @@ public class IdeRuntimeUtils {
      * @param from 起始显示对象。
      * @return 角色主控制器；未找到时返回 <code>null</code>。
      *
+     * @example
+     * <listing version="3.0">
+     * var ctrler:* = IdeRuntimeUtils.findFighterCtrler(this);
+     * </listing>
      * @see #FIGHTER_CTRLER_PROP
      */
     public static function findFighterCtrler(from:DisplayObject):* {
@@ -124,6 +132,10 @@ public class IdeRuntimeUtils {
      * @param from 起始显示对象。
      * @return MC 控制器；未找到时返回 <code>null</code>。
      *
+     * @example
+     * <listing version="3.0">
+     * var ctrler:* = IdeRuntimeUtils.findMcCtrler(this);
+     * </listing>
      * @see #MC_CTRLER_PROP
      */
     public static function findMcCtrler(from:DisplayObject):* {
@@ -168,6 +180,10 @@ public class IdeRuntimeUtils {
      * @param requiredMethods 可选，需具备的方法名列表。
      * @return 镜头控制器；未找到或校验失败时返回 <code>null</code>。
      *
+     * @example
+     * <listing version="3.0">
+     * var ctrler:* = IdeRuntimeUtils.findCameraCtrler(this, ['focusSelf']);
+     * </listing>
      * @see #CAMERA_CTRLER_PROP
      */
     public static function findCameraCtrler(from:DisplayObject, requiredMethods:Array = null):* {
@@ -184,7 +200,7 @@ public class IdeRuntimeUtils {
         return ctrler;
     }
 
-    /** @private */
+    /** @private 沿 parent 链读取注入属性，缺失时 trace */
     private static function findInjected(from:DisplayObject, prop:String, warnIfMissing:Boolean):* {
         if (!from) {
             if (warnIfMissing) {

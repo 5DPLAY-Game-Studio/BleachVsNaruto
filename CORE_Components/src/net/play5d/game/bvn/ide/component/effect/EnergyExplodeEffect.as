@@ -29,7 +29,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EnergyExplodeEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定灵压爆发效果，动作帧调用 <code>energyExplode</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EnergyExplodeEffect();
+     * </listing>
      */
     public function EnergyExplodeEffect() {
         bindNoArgCall('效果_灵压爆发', 'energyExplode');

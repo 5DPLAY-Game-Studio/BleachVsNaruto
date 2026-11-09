@@ -35,7 +35,14 @@ public class ShakeEffect extends BaseEffect {
     private var _powY:Number = 0;
 
     /**
-     * 构造方法。
+     * 设置震动标题，并按当前幅度刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:ShakeEffect = new ShakeEffect();
+     * effect.powX = 8;
+     * effect.powY = 4;
+     * </listing>
      */
     public function ShakeEffect() {
         super.title = '效果_震动';

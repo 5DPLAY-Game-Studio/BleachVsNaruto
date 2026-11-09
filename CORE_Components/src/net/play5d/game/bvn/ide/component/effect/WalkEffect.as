@@ -29,7 +29,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class WalkEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定走路效果，动作帧调用 <code>walk</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new WalkEffect();
+     * </listing>
      */
     public function WalkEffect() {
         bindNoArgCall('效果_走路', 'walk');

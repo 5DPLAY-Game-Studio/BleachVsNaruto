@@ -29,7 +29,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class JumpAirEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定空中跳跃效果，动作帧调用 <code>jumpAir</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new JumpAirEffect();
+     * </listing>
      */
     public function JumpAirEffect() {
         bindNoArgCall('效果_空中跳跃', 'jumpAir');

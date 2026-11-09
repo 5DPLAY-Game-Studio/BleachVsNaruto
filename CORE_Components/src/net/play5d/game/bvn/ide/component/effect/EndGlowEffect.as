@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EndGlowEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定结束发光，动作帧调用 <code>endGlow</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EndGlowEffect();
+     * </listing>
      */
     public function EndGlowEffect() {
         bindNoArgCall('效果_结束发光', 'endGlow');

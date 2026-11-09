@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EndGhostStepEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定结束幽步，动作帧调用 <code>endGhostStep</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EndGhostStepEffect();
+     * </listing>
      */
     public function EndGhostStepEffect() {
         bindNoArgCall('效果_结束幽步', 'endGhostStep');

@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EndBanKaiEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定结束万解，动作帧调用 <code>endBanKai</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EndBanKaiEffect();
+     * </listing>
      */
     public function EndBanKaiEffect() {
         bindNoArgCall('效果_结束万解', 'endBanKai');

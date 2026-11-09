@@ -22,7 +22,7 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 /**
  * 开始幽步 IDE 组件。
  *
- * <p>仅面向 FighterMain 时间轴组件：调用 <code>$effect_ctrler.ghostStep</code>。</p>
+ * <p>仅面向 FighterMain 时间轴组件：调用 <code>$effect_ctrler.ghostStep</code>。需配对 <code>EndGhostStepEffect</code>。</p>
  *
  * @see net.play5d.game.bvn.ide.component.effect.EndGhostStepEffect
  * @see net.play5d.game.bvn.ide.component.BaseEffect
@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class GhostStepEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定幽步效果，动作帧调用 <code>ghostStep</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new GhostStepEffect();
+     * </listing>
      */
     public function GhostStepEffect() {
         bindNoArgCall('效果_幽步', 'ghostStep');

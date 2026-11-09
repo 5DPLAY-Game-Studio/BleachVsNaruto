@@ -67,10 +67,22 @@ public class BaseIdeCtrler extends BaseComponent {
      */
     public var textTxt:TextField = null;
 
-    /** @private 已解析的控制器 */
+    /**
+     * 已解析的控制器。
+     *
+     * <p><code>resolveCtrler</code> 写入；未找到时为 <code>null</code>。</p>
+     *
+     * @default null
+     * @see #resolveCtrler()
+     */
     protected var _ctrler:* = null;
 
-    /** @private 诊断用属性名（如 <code>$effect_ctrler</code>） */
+    /**
+     * 诊断与预览用的注入属性名，如 <code>$effect_ctrler</code>。
+     *
+     * @default ''
+     * @see #resolveCtrler()
+     */
     protected var _ctrlerProp:String = '';
 
     /** @private 背景最小宽度（取自模板初始宽度） */
@@ -80,7 +92,12 @@ public class BaseIdeCtrler extends BaseComponent {
     private static const PAD_X:Number = 4;
 
     /**
-     * 构造方法。
+     * 绑定模板皮肤上的标题、预览文字和背景。
+     *
+     * @example
+     * <listing version="3.0">
+     * var component:BaseIdeCtrler = new BaseIdeCtrler();
+     * </listing>
      */
     public function BaseIdeCtrler() {
         super();
@@ -145,7 +162,14 @@ public class BaseIdeCtrler extends BaseComponent {
     /**
      * 第一帧要执行的代码。
      *
-     * <p>解析控制器后隐藏、执行动作并销毁。</p>
+     * <p>解析控制器后隐藏、执行动作并销毁。不调用 <code>bindContext</code>。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * component.init();
+     * </listing>
+     * @see #resolveCtrler()
+     * @see #doAction()
      */
     override public function init():void {
         resolveCtrler();
@@ -158,7 +182,13 @@ public class BaseIdeCtrler extends BaseComponent {
     /**
      * 绑定模板皮肤子节点。
      *
-     * <p>优先从 <code>mc</code> 取 <code>titleTxt</code> / <code>textTxt</code> / <code>bg</code>。</p>
+     * <p>优先从 <code>mc</code> 取 <code>titleTxt</code> / <code>textTxt</code> / <code>bg</code>；没有 <code>mc</code> 时从根节点查找。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * bindSkin();
+     * </listing>
+     * @see #mc
      */
     protected function bindSkin():void {
         mc = getChildByName('mc') as MovieClip;
@@ -180,7 +210,14 @@ public class BaseIdeCtrler extends BaseComponent {
     }
 
     /**
-     * 按预览文字宽度调节文本框与背景板。
+     * 按标题和预览文字的宽度调节文本框与背景板。
+     *
+     * <p>宽度不会小于模板背景的初始宽度。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * layoutPreview();
+     * </listing>
      */
     protected function layoutPreview():void {
         if (!textTxt && !titleTxt) {
@@ -213,6 +250,10 @@ public class BaseIdeCtrler extends BaseComponent {
      * 更新检查器预览文字。
      *
      * @param v 预览字符串。
+     * @example
+     * <listing version="3.0">
+     * updatePreviewText('parent.$effect_ctrler.walk();');
+     * </listing>
      */
     protected function updatePreviewText(v:String):void {
         if (textTxt) {
@@ -274,6 +315,10 @@ public class BaseIdeCtrler extends BaseComponent {
      * @param args 参数列表。
      * @param rawArgs 为 <code>true</code> 时参数已是字面量字符串，不再二次格式化。
      * @return 形如 <code>parent.$effect_ctrler.bisha(false, 'ichigo1');</code> 的字符串。
+     * @example
+     * <listing version="3.0">
+     * formatCallCode('bisha', [false, 'ichigo1']);
+     * </listing>
      */
     protected function formatCallCode(methodName:String, args:Array = null, rawArgs:Boolean = false):String {
         var prop:String = _ctrlerProp ? _ctrlerProp : '$ctrler';
@@ -339,7 +384,17 @@ public class BaseIdeCtrler extends BaseComponent {
     /**
      * 解析注入控制器。
      *
-     * <p>子类覆盖：调用对应 <code>IdeRuntimeUtils.findXxxCtrler</code>，并设置 <code>_ctrlerProp</code>。</p>
+     * <p>基类为空实现。子类覆盖后写入 <code>_ctrler</code> 与 <code>_ctrlerProp</code>。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * override protected function resolveCtrler():void {
+     *     _ctrlerProp = IdeRuntimeUtils.EFFECT_CTRLER_PROP;
+     *     _ctrler     = IdeRuntimeUtils.findEffectCtrler(this);
+     * }
+     * </listing>
+     * @see #_ctrler
+     * @see net.play5d.game.bvn.ide.utils.IdeRuntimeUtils
      */
     protected function resolveCtrler():void {
     }

@@ -36,7 +36,13 @@ public class StartShakeEffect extends BaseEffect {
     private var _powY:Number = 3;
 
     /**
-     * 构造方法。
+     * 设置持续震动标题，并按当前幅度刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:StartShakeEffect = new StartShakeEffect();
+     * effect.powY = 6;
+     * </listing>
      */
     public function StartShakeEffect() {
         super.title = '效果_开始震动';

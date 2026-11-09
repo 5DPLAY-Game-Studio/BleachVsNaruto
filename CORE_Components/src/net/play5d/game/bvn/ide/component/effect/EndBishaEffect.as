@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EndBishaEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定结束必杀，动作帧调用 <code>endBisha</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EndBishaEffect();
+     * </listing>
      */
     public function EndBishaEffect() {
         bindNoArgCall('效果_结束必杀', 'endBisha');

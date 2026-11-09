@@ -37,7 +37,13 @@ public class BishaEffect extends BaseEffect {
     private var _face:String = '';
 
     /**
-     * 构造方法。
+     * 设置必杀标题，并按当前特写参数刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:BishaEffect = new BishaEffect();
+     * effect.face = 'ichigo1';
+     * </listing>
      */
     public function BishaEffect() {
         super.title = '效果_必杀';
@@ -67,7 +73,7 @@ public class BishaEffect extends BaseEffect {
      * <p>关键参数；须事先由角色脚本 <code>defineBishaFace</code> 注册。</p>
      *
      * @return 特写 id。
-     * @default
+     * @default ''
      */
     public function get face():String {
         return _face;

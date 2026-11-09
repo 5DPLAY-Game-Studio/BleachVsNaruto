@@ -30,7 +30,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class EndShadowEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定结束残影，动作帧调用 <code>endShadow</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new EndShadowEffect();
+     * </listing>
      */
     public function EndShadowEffect() {
         bindNoArgCall('效果_结束残影', 'endShadow');

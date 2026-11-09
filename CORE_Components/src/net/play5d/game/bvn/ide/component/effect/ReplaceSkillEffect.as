@@ -29,7 +29,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class ReplaceSkillEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定替身术效果，动作帧调用 <code>replaceSkill</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new ReplaceSkillEffect();
+     * </listing>
      */
     public function ReplaceSkillEffect() {
         bindNoArgCall('效果_替身术', 'replaceSkill');

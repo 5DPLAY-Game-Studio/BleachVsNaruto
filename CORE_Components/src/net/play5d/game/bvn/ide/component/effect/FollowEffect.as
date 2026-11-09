@@ -37,7 +37,14 @@ public class FollowEffect extends BaseEffect {
     private var _isUnderBody:Boolean = false;
 
     /**
-     * 构造方法。
+     * 设置跟随特效标题，并按当前实例名刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:FollowEffect = new FollowEffect();
+     * effect.mcName = 'aura_mc';
+     * effect.isUnderBody = true;
+     * </listing>
      */
     public function FollowEffect() {
         super.title = '效果_跟随特效';
@@ -50,7 +57,7 @@ public class FollowEffect extends BaseEffect {
      * <p>对应角色主 MC 上 <code>getChildByName</code> 的子元件名。</p>
      *
      * @return 实例名。
-     * @default
+     * @default ''
      */
     public function get mcName():String {
         return _mcName;

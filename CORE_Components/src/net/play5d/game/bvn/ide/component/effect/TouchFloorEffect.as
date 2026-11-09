@@ -29,7 +29,12 @@ import net.play5d.game.bvn.ide.component.BaseEffect;
 public class TouchFloorEffect extends BaseEffect {
 
     /**
-     * 构造方法。
+     * 绑定触地效果，动作帧调用 <code>touchFloor</code>。
+     *
+     * @example
+     * <listing version="3.0">
+     * new TouchFloorEffect();
+     * </listing>
      */
     public function TouchFloorEffect() {
         bindNoArgCall('效果_触地', 'touchFloor');

@@ -70,9 +70,13 @@ public class GameSpriteEntity {
     private var _selfType:String = null;
 
     /**
-     * 构造方法。
+     * 按组件父级显示对象建立实体，并准备反射类。
      *
-     * @param component 组件。
+     * @param component 所在 IDE 组件。
+     * @example
+     * <listing version="3.0">
+     * var entity:GameSpriteEntity = new GameSpriteEntity(this);
+     * </listing>
      */
     public function GameSpriteEntity(component:BaseComponent) {
         ensureClasses();
@@ -80,7 +84,12 @@ public class GameSpriteEntity {
     }
 
     /**
-     * 销毁自身。
+     * 断开显示对象与精灵引用。
+     *
+     * @example
+     * <listing version="3.0">
+     * entity.destroy();
+     * </listing>
      */
     public function destroy():void {
         _thisMc   = null;
@@ -94,6 +103,7 @@ public class GameSpriteEntity {
      * 自身游戏精灵引用。
      *
      * @return 自身游戏精灵；未找到时返回 <code>null</code>。
+     * @default null
      */
     public function get self():* {
         if (_self) {
@@ -110,6 +120,7 @@ public class GameSpriteEntity {
 
             for each (var sp:* in gameSprites) {
                 var d:DisplayObject = sp.getDisplay();
+                // 组件挂在主 MC 上，或再包一层时都算自身
                 if (d == _thisMc || (_thisMc.parent && d == _thisMc.parent)) {
                     _self = sp;
                     return _self;
@@ -126,6 +137,7 @@ public class GameSpriteEntity {
      * 对手主人类引用（始终为 FighterMain）。
      *
      * @return 对手 FighterMain；未找到时返回 <code>null</code>。
+     * @default null
      */
     public function get target():* {
         if (_target) {
@@ -149,6 +161,7 @@ public class GameSpriteEntity {
      * 最顶主人类引用（始终为 FighterMain）。
      *
      * @return 玩家 FighterMain；未找到时返回 <code>null</code>。
+     * @default null
      */
     public function get owner():* {
         if (_owner) {
@@ -164,6 +177,10 @@ public class GameSpriteEntity {
      *
      * @return 自身类型字符串（见 <code>GameSpriteType</code>）。
      *
+     * @example
+     * <listing version="3.0">
+     * var type:String = entity.getSelfType();
+     * </listing>
      * @see net.play5d.game.bvn.ide.data.GameSpriteType
      */
     public function getSelfType():String {
@@ -175,7 +192,7 @@ public class GameSpriteEntity {
         return _selfType;
     }
 
-    /** @private */
+    /** @private 反射加载 FighterMain 等类，只执行一次 */
     private static function ensureClasses():void {
         if (_classesReady) {
             return;
@@ -189,7 +206,7 @@ public class GameSpriteEntity {
         GameCtrl        = GameSpriteUtils.getGameClass(GamePKGName.CTRLER_GAMECTRLS + 'GameCtrl');
     }
 
-    /** @private */
+    /** @private 沿 owner 上溯到 FighterMain */
     private function resolveFighterOwner(sp:*):* {
         if (!sp) {
             return null;
@@ -223,7 +240,7 @@ public class GameSpriteEntity {
         return resolveFighterOwner(next);
     }
 
-    /** @private */
+    /** @private 用反射类判断精灵类型 */
     private static function getType(sp:*):String {
         if (!sp) {
             return GameSpriteType.UNKNOWN;

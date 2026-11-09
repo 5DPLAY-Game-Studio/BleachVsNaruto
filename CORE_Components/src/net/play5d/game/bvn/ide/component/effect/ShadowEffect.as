@@ -43,7 +43,13 @@ public class ShadowEffect extends BaseEffect {
     private var _color:uint = 0xffffff;
 
     /**
-     * 构造方法。
+     * 设置残影标题，并按当前颜色刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:ShadowEffect = new ShadowEffect();
+     * effect.color = 0x888888;
+     * </listing>
      */
     public function ShadowEffect() {
         super.title = '效果_残影';

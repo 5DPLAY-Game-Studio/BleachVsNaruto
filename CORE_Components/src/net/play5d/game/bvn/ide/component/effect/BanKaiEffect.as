@@ -34,7 +34,13 @@ public class BanKaiEffect extends BaseEffect {
     private var _face:String = '';
 
     /**
-     * 构造方法。
+     * 设置万解标题，并按当前特写参数刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:BanKaiEffect = new BanKaiEffect();
+     * effect.face = 'ichigo_bankai';
+     * </listing>
      */
     public function BanKaiEffect() {
         super.title = '效果_万解';
@@ -47,7 +53,7 @@ public class BanKaiEffect extends BaseEffect {
      * <p>须事先由角色脚本 <code>defineBishaFace</code> 注册；空串表示无特写。</p>
      *
      * @return 特写 id。
-     * @default
+     * @default ''
      */
     public function get face():String {
         return _face;

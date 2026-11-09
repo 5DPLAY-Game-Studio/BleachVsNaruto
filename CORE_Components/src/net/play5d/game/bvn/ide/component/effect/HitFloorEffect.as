@@ -51,7 +51,14 @@ public class HitFloorEffect extends BaseEffect {
     private var _shakePow:Number = 0;
 
     /**
-     * 构造方法。
+     * 设置击落地标题，并按当前落地类型刷新调用预览。
+     *
+     * @example
+     * <listing version="3.0">
+     * var effect:HitFloorEffect = new HitFloorEffect();
+     * effect.type = '重击';
+     * effect.shakePow = 6;
+     * </listing>
      */
     public function HitFloorEffect() {
         super.title = '效果_击落地';
