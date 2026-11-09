@@ -20,9 +20,19 @@ import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.game.bvn.utils.InstanceVOClone;
 
 /**
- * 克隆自身
- * @param arg 参数
- * @return 返回自身实例的克隆对象
+ * 浅克隆当前值对象。
+ *
+ * <p>只复制公开变量，嵌套对象仍是同一引用。构造参数最多两个。调试环境下多出来的参数会抛出 <code>ArgumentError</code>。发行环境只记一条错误，随后对空实例写属性时会抛错。</p>
+ *
+ * @param arg 传给新实例构造函数的参数，最多两个。
+ * @return 同类型的新实例。
+ * @throws ArgumentError 调试环境下参数超过两个。
+ * @example
+ * <listing version="3.0">
+ * var copy:IInstanceVO = vo.clone();
+ * var copy2:IInstanceVO = vo.clone(vo.id);
+ * </listing>
+ * @see net.play5d.game.bvn.utils.InstanceVOClone
  */
 public function clone(...arg):IInstanceVO {
     return InstanceVOClone.clone(this, arg);

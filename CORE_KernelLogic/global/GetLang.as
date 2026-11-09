@@ -26,7 +26,7 @@ package {
  * @param key 语言包完整键，如 <code>musou.need_more_money</code>。
  * @param params 占位符名到替换值的映射；可为 <code>null</code>。
  * @return 格式化后的当前语言文本。
- * @throws ArgumentError 由 <code>Format</code> 在缺键时抛出。
+ * @throws ArgumentError 模板里的占位符在 <code>params</code> 中没有对应键时，由 <code>Format</code> 抛出。语言包缺键时返回 <code>[N/A]</code>，不抛错。
  * @example
  * <listing version="3.0">
  * GetLang('common.yes');

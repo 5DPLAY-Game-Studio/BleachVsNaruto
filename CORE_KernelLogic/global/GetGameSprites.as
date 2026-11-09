@@ -26,7 +26,8 @@ import net.play5d.game.bvn.stage.GameStage;
  * 获取场上游戏元件列表，可按队伍与条件筛选。
  *
  * <p><code>teamId</code> 为 <code>0</code> 或 <code>TeamID.UNKNOWN</code> 时不按队伍过滤。
- * <code>gameState</code> 未就绪时返回空向量。无 <code>team</code> 的元件在按队伍筛选时被跳过。</p>
+ * <code>gameState</code> 未就绪时返回空向量。条件函数先于队伍判断执行。
+ * 无 <code>team</code> 的元件在按队伍筛选时被跳过。返回的向量是新建的，里面仍是场上的元件。</p>
  *
  * @param teamId 队伍 ID；默认 <code>0</code>（视为不过滤）。
  * @param condition 筛选函数 <code>function(sp:IGameSprite):Boolean</code>；

@@ -26,6 +26,8 @@ import net.play5d.game.bvn.utils.GameLogger;
  * <code>ERROR</code> / <code>WARN</code> / <code>INFO</code> / <code>DEBUG</code> 对应，
  * 分类与本次 <code>GameLogger</code> 调用相同。
  * 级别高于当前阈值时不取文案、不输出。
+ * 不是 <code>ERROR</code> / <code>WARN</code> / <code>INFO</code> / <code>DEBUG</code> 时，文案键和输出都按 debug 处理。
+ * 分类为空时，语言键里会留下空的一段，例如 <code>log.debug..事件</code>；<code>GameLogger</code> 输出时才把分类写成 <code>sys</code>。
  * 取文案失败或得到 <code>[N/A]</code> 时改为输出完整键。</p>
  *
  * @param level <code>GameLogger</code> 级别常量。

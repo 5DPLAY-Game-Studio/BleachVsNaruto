@@ -22,8 +22,8 @@ import flash.system.Capabilities;
 /**
  * 解析当前播放器/运行时版本字符串。
  *
- * <p>结果在首次调用后缓存于函数对象。解析失败（版本串不符合预期格式）时返回
- * <code>null</code>。</p>
+ * <p>解析成功后缓存于函数对象。版本串不符合 <code>平台 主,次,生成,内部</code> 时返回
+ * <code>null</code>，并且不写入缓存，下次还会再解析。</p>
  *
  * @return 含下列字段的对象；失败时为 <code>null</code>：
  * <ul>

@@ -24,11 +24,11 @@ import net.play5d.game.bvn.utils.MultiLangUtils;
  *
  * <p>文案来自 <code>config/language/{locale}.json</code>，由
  * <code>MultiLangUtils</code> 加载。当前语言缺键时静默回退
- * <code>zh-CN</code>；中文亦无则返回 <code>[N/A]</code>。
+ * <code>zh-CN</code>；中文亦无、文案是空串，或语言包还没加载时，返回 <code>[N/A]</code>。
  * 需替换 <code>{name}</code> 时请用 <code>GetLang</code>。</p>
  *
  * @param key 语言包完整键。
- * @return 语言包中的原始字符串；两级皆无时为 <code>[N/A]</code>。
+ * @return 语言包中的原始字符串；没有可用文案时为 <code>[N/A]</code>。
  * @example
  * <listing version="3.0">
  * GetLangText('common.yes');

@@ -24,8 +24,8 @@ import net.play5d.game.bvn.utils.GameLogger;
  *
  * <p><code>errorParam</code> 可为 <code>Error</code> 实例或其子类的
  * <code>Class</code>。传入 <code>Class</code> 时以 <code>message</code>
- * 构造。非调试环境或 <code>isThrow</code> 为 <code>false</code> 时只记录堆栈，
- * 不抛出。记录走 <code>GameLogger.error</code>，分类 <code>sys</code>，使用英文或堆栈原文。</p>
+ * 构造。无论是否抛出，都会先用 <code>GameLogger.error</code> 记一条，分类 <code>sys</code>。
+ * 发行播放器没有堆栈时记 <code>toString</code>。非调试环境或 <code>isThrow</code> 为 <code>false</code> 时到此为止，不抛出。</p>
  *
  * @param errorParam <code>Error</code> 实例，或可 <code>new</code> 出
  *                   <code>Error</code> 的类。

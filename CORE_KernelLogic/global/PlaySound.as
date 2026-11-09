@@ -24,7 +24,8 @@ import net.play5d.game.bvn.ctrler.SoundCtrl;
 /**
  * 播放音效（<code>Sound</code> 实例或 SWC 声音类）。
  *
- * <p>委托 <code>SoundCtrl</code>；类型不匹配时静默忽略。</p>
+ * <p>委托 <code>SoundCtrl</code>；<code>null</code> 或类型不匹配时静默忽略。
+ * 无双闯关里，距离上一次播放不足 20 毫秒的音效会被丢掉。</p>
  *
  * @param obj <code>Sound</code> 实例，或可实例化为声音的 <code>Class</code>。
  * @example

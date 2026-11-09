@@ -23,8 +23,8 @@ import net.play5d.game.bvn.utils.CheatCodeManager;
  * 注册键盘作弊码，成功输入后触发回调。
  *
  * <p>委托 <code>CheatCodeManager</code>。按键以 <code>|</code> 分隔，名称与
- * <code>KyoKeyCode</code> 一致（不区分大小写）。须在 <code>STAGE</code>
- * 就绪后调用。</p>
+ * <code>KyoKeyCode</code> 的常量名一致，区分大小写。<code>STAGE</code> 尚未赋值、
+ * 名称为空或对不上常量时返回 <code>null</code>。<code>code</code> 为 <code>null</code> 时会抛错。</p>
  *
  * @param code 按键序列，如 <code>'W|S|A|K'</code>。
  * @param success 触发成功时的回调。

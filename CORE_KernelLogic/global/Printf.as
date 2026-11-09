@@ -21,7 +21,8 @@ package {
 /**
  * 使用命名占位符格式化字符串并 <code>trace</code> 输出（无调试前缀）。
  *
- * <p>始终调用 <code>Format(format, params)</code>；缺键时抛出 <code>ArgumentError</code>。</p>
+ * <p>始终调用 <code>Format(format, params)</code>；占位符缺键时抛出 <code>ArgumentError</code>。
+ * 不受 <code>GameLogger</code> 阈值影响。</p>
  *
  * @param format 源字符串。
  * @param params 占位符名到替换值的映射；可为 <code>null</code>。

@@ -21,7 +21,8 @@ package {
 /**
  * 判断当前是否为 Harman 运行时。
  *
- * <p>主版本号 &gt;= 33 视为 Harman 运行时；结果进程内缓存于函数对象。</p>
+ * <p>主版本号 &gt;= 33 视为 Harman 运行时；结果进程内缓存于函数对象。
+ * <code>GetRuntimeType</code> 这次解析失败时，会把「不是 Harman」缓存下来，之后不再重试。</p>
  *
  * @return 主版本号 &gt;= 33 时为 <code>true</code>，否则为 <code>false</code>。
  * @example

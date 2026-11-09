@@ -19,7 +19,7 @@
 package {
 
 /**
- * 当前语言区域代码（如 <code>zh_CN</code>）。
+ * 当前语言区域代码（如 <code>zh-CN</code>）。
  *
  * <p>由多语言系统在加载语言包时写入；未初始化前为 <code>null</code>。</p>
  *
