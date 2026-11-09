@@ -23,8 +23,16 @@ import flash.geom.Rectangle;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.utils.GameLogger;
 
+/**
+ * 大地图上的云层。横坐标或纵坐标传 0 时会被当成没传，改成随机横坐标或边界下方。同一帧里删掉飘走的云时，下一朵可能被跳过。销毁后再渲染会抛错。
+ */
 public class BigmapCloud extends Sprite {
 
+    /**
+     * 记下云的活动范围，并关掉鼠标。
+     *
+     * @param bounds 范围。null 时，初始化和渲染会抛错。
+     */
     public function BigmapCloud(bounds:Rectangle) {
         super();
         _bounds       = bounds;
@@ -34,12 +42,29 @@ public class BigmapCloud extends Sprite {
     private var _createFrame:int;
     private var _bounds:Rectangle;
 
+    /**
+     * 从范围上沿往下，每隔 50 放一朵云。范围为空时一朵都不放。
+     *
+     * @throws TypeError 范围缺失时。
+     * @example
+     * <listing version="3.0">
+     * clouds.init();
+     * </listing>
+     */
     public function init():void {
         for (var i:int = _bounds.y + 100; i < _bounds.height; i += 50) {
             addCloud(getRandomX(), i);
         }
     }
 
+    /**
+     * 摘掉云。移除失败只吞掉。之后渲染会抛错。
+     *
+     * @example
+     * <listing version="3.0">
+     * clouds.destroy();
+     * </listing>
+     */
     public function destroy():void {
         if (_clouds) {
             for each(var i:CloudView in _clouds) {
@@ -53,6 +78,15 @@ public class BigmapCloud extends Sprite {
         }
     }
 
+    /**
+     * 上移云，并按界面帧率大约每 5 秒补一朵。第一帧就会补。销毁后抛错。
+     *
+     * @throws TypeError 已经销毁时。
+     * @example
+     * <listing version="3.0">
+     * clouds.render();
+     * </listing>
+     */
     public function render():void {
         for each(var i:CloudView in _clouds) {
             if (i.render()) {

@@ -22,8 +22,22 @@ import net.play5d.game.bvn.data.GameData;
 import net.play5d.game.bvn.data.GameInputType;
 import net.play5d.game.bvn.utils.ResUtils;
 
+/**
+ * 选人光标工厂。玩家编号不是 1 时都当成 2P，包括 0。条上会先放一个空位。
+ */
 public class SelectUIFactory {
 
+    /**
+     * 建好光标、输入槽和已选条。
+     *
+     * @param playerType 默认 1。只有 1 使用 1P 的选择和输入。
+     * @return 光标。
+     * @throws TypeError 存档或资源缺失时。
+     * @example
+     * <listing version="3.0">
+     * var cursor:SelectorItemUI = SelectUIFactory.createSelector(1);
+     * </listing>
+     */
     public static function createSelector(playerType:int = 1):SelectorItemUI {
         var ui:SelectorItemUI = new SelectorItemUI(playerType);
 

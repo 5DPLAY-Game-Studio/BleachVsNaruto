@@ -22,13 +22,31 @@ import flash.display.DisplayObject;
 import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.data.vos.FighterVO;
 
+/**
+ * 血条旁的头像。<code>setDirect</code> 是空的。每次设置有数据时都再加一张图，不先清掉旧的。没有图时只保持可见。传入 null 则藏起。
+ */
 public class FightFaceUI {
 
+    /**
+     * 记下头像影片。
+     *
+     * @param ui 头像影片。null 时抛错。
+     * @throws TypeError 影片为 null 时。
+     */
     public function FightFaceUI(ui:$fight$MC_hpBarFace) {
         _ui = ui;
     }
     private var _ui:$fight$MC_hpBarFace;
 
+    /**
+     * 显示这个角色的头像。null 时藏起。有图就追加到容器里。
+     *
+     * @param v 角色数据。
+     * @example
+     * <listing version="3.0">
+     * face.setData(data);
+     * </listing>
+     */
     public function setData(v:FighterVO):void {
         if (!v) {
             _ui.visible = false;
@@ -43,6 +61,11 @@ public class FightFaceUI {
         }
     }
 
+    /**
+     * 空实现。
+     *
+     * @param v 朝向。不使用。
+     */
     public function setDirect(v:int):void {
     }
 

@@ -22,8 +22,16 @@ import net.play5d.game.bvn.MainGame;
 import net.play5d.game.bvn.ctrler.GameRender;
 import net.play5d.game.bvn.utils.ResUtils;
 
+/**
+ * 通用转场影片。字段初始化时就创建影片，资源缺失时第一次用到这个类会抛错。
+ *
+ * <p>进入会清掉退出回调，退出会清掉进入回调。播到 <code>stop</code> 时先调进入回调并返回，这一帧不停止渲染。进入回调里再登记的退出，要等下一帧才调用。两个回调都空时才停渲染。</p>
+ */
 public class TransUI {
 
+    /**
+     * 转场影片。类加载时创建。
+     */
     public var ui:$common$MC_transition = ResUtils.I.createDisplayObject(ResUtils.swfLib.common, '$common$MC_transition');
     private var _renderAnimateGap:int   = 0; //刷新动画间隔
     private var _renderAnimateFrame:int = 0;
@@ -32,10 +40,27 @@ public class TransUI {
     private var _fadeOutBack:Function;
     private var _rendering:Boolean = true;
 
+    /**
+     * 停止渲染。影片还留着。
+     *
+     * @example
+     * <listing version="3.0">
+     * trans.destroy();
+     * </listing>
+     */
     public function destroy():void {
         GameRender.remove(render);
     }
 
+    /**
+     * 从 <code>fadein</code> 开始播。会清掉退出回调。
+     *
+     * @param back 播到 <code>stop</code> 时调用。默认 null。
+     * @example
+     * <listing version="3.0">
+     * trans.fadeIn(onIn);
+     * </listing>
+     */
     public function fadeIn(back:Function = null):void {
         _fadeOutBack = null;
 
@@ -44,6 +69,15 @@ public class TransUI {
         startRender();
     }
 
+    /**
+     * 从 <code>fadeout</code> 开始播。会清掉进入回调。
+     *
+     * @param back 播到 <code>stop</code> 时调用。默认 null。
+     * @example
+     * <listing version="3.0">
+     * trans.fadeOut(onOut);
+     * </listing>
+     */
     public function fadeOut(back:Function = null):void {
         _fadeInBack = null;
 

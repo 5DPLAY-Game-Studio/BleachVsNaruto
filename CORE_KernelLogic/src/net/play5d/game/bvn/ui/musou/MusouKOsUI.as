@@ -23,8 +23,17 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 
+/**
+ * 无双击倒数。每次 <code>update</code> 读当前对局的 <code>koNum</code>。对局缺失时抛错。
+ */
 public class MusouKOsUI {
 
+    /**
+     * 把击倒数字加到给定容器上。容器为 null 时抛错。
+     *
+     * @param ui 容器。
+     * @throws TypeError 容器或字体缺失时。
+     */
     public function MusouKOsUI(ui:Sprite) {
         _text = new BitmapFontText(AssetManager.I.getFont('font1'));
         ui.addChild(_text);
@@ -32,6 +41,15 @@ public class MusouKOsUI {
     private var _ct:Sprite;
     private var _text:BitmapFontText;
 
+    /**
+     * 用当前击倒数刷新文字。
+     *
+     * @throws TypeError 无双对局缺失时。
+     * @example
+     * <listing version="3.0">
+     * kos.update();
+     * </listing>
+     */
     public function update():void {
         _text.text = GameCtrl.I.getMusouCtrl().gameRunData.koNum.toString();
     }

@@ -26,8 +26,17 @@ import net.play5d.game.bvn.ctrler.musou_ctrls.MusouCtrl;
 import net.play5d.kyo.utils.KyoColor;
 import net.play5d.kyo.utils.KyoDrawUtils;
 
+/**
+ * 无双波次。没有 <code>ct_circle</code> 时构造抛错。文本缺失时刷新抛错。圆环角度是进度乘 360 后的整数。
+ */
 public class MusouWaveUI {
 
+    /**
+     * 记下波次文本，并在圆环容器里放一张位图。
+     *
+     * @param ui 波次界面。null 或没有圆环容器时抛错。
+     * @throws TypeError 界面或圆环容器缺失时。
+     */
     public function MusouWaveUI(ui:Sprite) {
         _ui = ui;
 
@@ -46,6 +55,15 @@ public class MusouWaveUI {
     private var _circleMc:Sprite;
     private var _circleBp:Bitmap;
 
+    /**
+     * 刷新当前波、总波和圆环。
+     *
+     * @throws TypeError 文本或无双对局缺失时。
+     * @example
+     * <listing version="3.0">
+     * wave.renderAnimate();
+     * </listing>
+     */
     public function renderAnimate():void {
         var musouCtrl:MusouCtrl = GameCtrl.I.getMusouCtrl();
         _txtCur.text            = musouCtrl.currentWave.toString();

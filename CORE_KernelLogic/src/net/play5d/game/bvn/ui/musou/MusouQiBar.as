@@ -26,8 +26,17 @@ import flash.geom.Point;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.QiBarScale;
 
+/**
+ * 无双气条。气按 100 一格，超过 3 记成 3。差小于 0.01 时贴齐，否则每帧补上差值的 0.4。结果低于 0.0001 时写成 0.0001。满 3 时藏起三截并只播一次满条。掉下去时从第 1 帧再播，三截按大于 0、1、2 显示。
+ */
 public class MusouQiBar {
 
+    /**
+     * 记下三截气条和满条影片。满条先停在第 1 帧并隐藏。缺件时抛错。
+     *
+     * @param ui 气条容器。
+     * @throws TypeError 容器或子件缺失时。
+     */
     public function MusouQiBar(ui:Sprite) {
         _ui = ui;
 
@@ -56,10 +65,28 @@ public class MusouQiBar {
     private var _maxPlaying:Boolean;
     private var _process:Number  = 0;
 
+    /**
+     * 记下角色。传 null 时，下次渲染抛错。
+     *
+     * @param fighter 角色。
+     * @example
+     * <listing version="3.0">
+     * bar.setFighter(fighter);
+     * </listing>
+     */
     public function setFighter(fighter:FighterMain):void {
         _fighter = fighter;
     }
 
+    /**
+     * 按气量推进显示。没有角色时抛错。
+     *
+     * @throws TypeError 还没有角色时。
+     * @example
+     * <listing version="3.0">
+     * bar.render();
+     * </listing>
+     */
     public function render():void {
         _qiRate = _fighter.qi / 100;
         if (_qiRate > 3) {
@@ -83,6 +110,15 @@ public class MusouQiBar {
     }
 
     //0-3
+    /**
+     * 直接写成这个进度。大于等于 3 时只留满条。
+     *
+     * @param v 进度，通常在 0 到 3。
+     * @example
+     * <listing version="3.0">
+     * bar.setProcess(1.5);
+     * </listing>
+     */
     public function setProcess(v:Number):void {
         _process        = v;
         _maxBar.visible = v >= 3;

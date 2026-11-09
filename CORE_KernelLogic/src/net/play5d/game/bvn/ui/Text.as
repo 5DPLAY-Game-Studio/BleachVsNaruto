@@ -21,8 +21,17 @@ import flash.filters.DropShadowFilter;
 
 import net.play5d.kyo.display.BitmapText;
 
+/**
+ * 带阴影的位图字。字体固定是 Arial。宽高读的是内部文本框，不是排版后的像素边界。
+ */
 public class Text extends BitmapText {
 
+    /**
+     * 白色、20 号是默认。阴影用一份默认投影。
+     *
+     * @param color 字色。默认白色。
+     * @param size 字号。默认 20。
+     */
     public function Text(color:uint = 0xffffff, size:int = 20) {
         super(true, color, [new DropShadowFilter()]);
 
@@ -31,10 +40,20 @@ public class Text extends BitmapText {
 
     }
 
+    /**
+     * 文本框报告的文字宽度。
+     *
+     * @return 文字宽度。
+     */
     public override function get textWidth():Number {
         return _tf.textWidth;
     }
 
+    /**
+     * 文本框报告的文字高度。
+     *
+     * @return 文字高度。
+     */
     public override function get textHeight():Number {
         return _tf.textHeight;
     }

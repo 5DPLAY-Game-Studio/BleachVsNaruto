@@ -26,8 +26,20 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 import net.play5d.kyo.input.KyoKeyCode;
 
+/**
+ * 一个键位的显示。方向键缩到 0.8，最宽 40，并下移 5。其它键最宽 60。超宽时改宽度，再把纵向缩放设成横向缩放。
+ */
 public class KeyMapping {
 
+    /**
+     * 记下键位并把变暗的文字加到容器上。字体缺失时抛错。
+     *
+     * @param mc 容器。null 时抛错。
+     * @param keyId 键编号。
+     * @param name 显示名。
+     * @param cn 中文名。
+     * @throws TypeError 容器或字体缺失时。
+     */
     public function KeyMapping(mc:Sprite, keyId:String, name:String, cn:String) {
         this.mc    = mc;
         this.keyId = keyId;
@@ -43,12 +55,35 @@ public class KeyMapping {
 
         mc.addChild(_keyTxt);
     }
+    /**
+     * 键的显示名。
+     */
     public var name:String;
+    /**
+     * 键位容器。
+     */
     public var mc:Sprite;
+    /**
+     * 键编号。方向键是 up、down、left、right。
+     */
     public var keyId:String;
+    /**
+     * 中文名。
+     */
     public var cn:String;
     private var _keyTxt:BitmapFontText;
 
+    /**
+     * 显示这个键。没传名字，或名字是空字符串时，用键码去查。查不到再转大写会抛错。
+     *
+     * @param code 键码。
+     * @param keyName 显示文字。默认 null，改为按键码查询。
+     * @throws TypeError 名字最终是 null 时。
+     * @example
+     * <listing version="3.0">
+     * mapping.setKey(code);
+     * </listing>
+     */
     public function setKey(code:int, keyName:String = null):void {
         keyName ||= KyoKeyCode.code2name(code);
         _keyTxt.text = keyName.toUpperCase();

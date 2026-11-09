@@ -23,8 +23,17 @@ import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.ui.energy.EnergyBarFill;
 import net.play5d.game.bvn.ui.energy.EnergyBarLabel;
 
+/**
+ * 无双能量条。超载优先于低能量闪烁。比例低于 0.3 且没超载时闪。还没设角色就渲染会抛错。能量上限是 0 时比例变成 Infinity。
+ */
 public class MusouEnergyBar {
 
+    /**
+     * 用界面上的条和文字建能量显示。缺件时抛错。
+     *
+     * @param ui 能量条影片。
+     * @throws TypeError 影片或子件缺失时。
+     */
     public function MusouEnergyBar(ui:$musou$MC_energyBar) {
         _ui = ui;
 
@@ -42,14 +51,40 @@ public class MusouEnergyBar {
 
     private var _ui:$musou$MC_energyBar;
 
+    /**
+     * 能量条影片。
+     *
+     * @return 影片。
+     * @example
+     * <listing version="3.0">
+     * var view:DisplayObject = bar.ui;
+     * </listing>
+     */
     public function get ui():DisplayObject {
         return _ui;
     }
 
+    /**
+     * 忘掉角色。界面还留着，之后渲染会抛错。
+     *
+     * @example
+     * <listing version="3.0">
+     * bar.destroy();
+     * </listing>
+     */
     public function destroy():void {
         _fighter = null;
     }
 
+    /**
+     * 换角色。有数据时按作品类型改文字。数据为空则不改文字。
+     *
+     * @param v 角色。null 时下次渲染抛错。
+     * @example
+     * <listing version="3.0">
+     * bar.setFighter(fighter);
+     * </listing>
+     */
     public function setFighter(v:FighterMain):void {
         _fighter = v;
 
@@ -58,6 +93,15 @@ public class MusouEnergyBar {
         }
     }
 
+    /**
+     * 按能量刷新条和文字。没有角色时抛错。
+     *
+     * @throws TypeError 还没有角色时。
+     * @example
+     * <listing version="3.0">
+     * bar.render();
+     * </listing>
+     */
     public function render():void {
 
         _bar.rate = _fighter.energy / _fighter.energyMax;

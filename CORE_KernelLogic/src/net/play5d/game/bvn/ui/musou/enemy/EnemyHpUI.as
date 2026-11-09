@@ -24,8 +24,17 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.kyo.utils.KyoMath;
 
+/**
+ * 敌人血条。血量比例夹在 0.0001 和 1 之间。<code>destroy</code> 是空的。没有头像图时不往容器里加东西。
+ */
 public class EnemyHpUI {
 
+    /**
+     * 建血条并尝试放上头像。角色为 null，或没有脸容器时抛错。
+     *
+     * @param fighter 敌人。
+     * @throws TypeError 角色或脸容器缺失时。
+     */
     public function EnemyHpUI(fighter:FighterMain) {
         _ui      = new $musou$MC_enemyHpBar();
         _bar     = _ui.getChildByName('bar');
@@ -42,20 +51,56 @@ public class EnemyHpUI {
     private var _bar:DisplayObject;
     private var _faceCt:Sprite;
 
+    /**
+     * 这条血条对应的角色。
+     *
+     * @return 角色。
+     * @example
+     * <listing version="3.0">
+     * var fighter:FighterMain = bar.getFighter();
+     * </listing>
+     */
     public function getFighter():FighterMain {
         return _fighter;
     }
 
+    /**
+     * 血条显示对象。
+     *
+     * @return 显示对象。
+     * @example
+     * <listing version="3.0">
+     * var view:DisplayObject = bar.getUI();
+     * </listing>
+     */
     public function getUI():DisplayObject {
         return _ui;
     }
 
+    /**
+     * 按血量改缩放。
+     *
+     * @return 角色还活着时为 true。
+     * @throws TypeError 血条缺失时。
+     * @example
+     * <listing version="3.0">
+     * var alive:Boolean = bar.render();
+     * </listing>
+     */
     public function render():Boolean {
         _bar.scaleX = KyoMath.fixRange(_fighter.hpPercent, 0.0001, 1);
 
         return _fighter.isAlive;
     }
 
+    /**
+     * 空实现。显示对象还留着。
+     *
+     * @example
+     * <listing version="3.0">
+     * bar.destroy();
+     * </listing>
+     */
     public function destroy():void {
 
     }

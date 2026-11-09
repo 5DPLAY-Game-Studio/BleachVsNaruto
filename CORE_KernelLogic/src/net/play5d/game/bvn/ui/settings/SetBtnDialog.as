@@ -24,8 +24,16 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.bitmap.BitmapFontText;
 
+/**
+ * 等按键的提示。构造后影片是隐藏的，但 <code>isShow</code> 初始是 true，要等 <code>show</code> 或 <code>hide</code> 才和可见性一致。
+ */
 public class SetBtnDialog {
 
+    /**
+     * 创建提示并先隐藏。字体缺失时抛错。
+     *
+     * @throws TypeError 资源或字体缺失时。
+     */
     public function SetBtnDialog() {
         ui         = ResUtils.I.createDisplayObject(ResUtils.swfLib.setting, '$setting$SP_keySetDialog');
         ui.visible = false;
@@ -44,12 +52,30 @@ public class SetBtnDialog {
         _cntxt                   = ui.txt;
         _cntxt.defaultTextFormat = new TextFormat('楷体', 20);
     }
+    /**
+     * 提示影片。构造后是隐藏的。
+     */
     public var ui:$setting$SP_keySetDialog;
+    /**
+     * 是否算显示中。构造后是 true，和影片的隐藏不一致。
+     *
+     * @default true
+     */
     public var isShow:Boolean = true;
     private var _pushTxt:BitmapFontText;
     private var _keyNameTxt:BitmapFontText;
     private var _cntxt:TextField;
 
+    /**
+     * 显示提示，并把 <code>isShow</code> 写成 true。
+     *
+     * @param name 键名，画在中间。
+     * @param cn 中文名，交给文案。
+     * @example
+     * <listing version="3.0">
+     * dialog.show(name, cn);
+     * </listing>
+     */
     public function show(name:String, cn:String):void {
         ui.visible = true;
 
@@ -60,6 +86,14 @@ public class SetBtnDialog {
         isShow = true;
     }
 
+    /**
+     * 隐藏提示，并把 <code>isShow</code> 写成 false。
+     *
+     * @example
+     * <listing version="3.0">
+     * dialog.hide();
+     * </listing>
+     */
     public function hide():void {
         ui.visible = false;
         isShow     = false;

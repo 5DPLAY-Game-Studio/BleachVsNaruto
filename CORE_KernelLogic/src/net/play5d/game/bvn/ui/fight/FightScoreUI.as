@@ -20,8 +20,17 @@ package net.play5d.game.bvn.ui.fight {
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.MCNumber;
 
+/**
+ * 对局分数。数字从 0 起，每次 <code>setScore</code> 直接改显示。
+ */
 public class FightScoreUI {
 
+    /**
+     * 在界面的 <code>ct</code> 上放分数数字。界面为 null 时抛错。
+     *
+     * @param ui 分数影片。
+     * @throws TypeError 界面为 null 时。
+     */
     public function FightScoreUI(ui:$fight$MC_score) {
         _ui = ui;
 
@@ -32,6 +41,15 @@ public class FightScoreUI {
     private var _ui:$fight$MC_score;
     private var _numberMc:MCNumber;
 
+    /**
+     * 把分数写成这个整数。
+     *
+     * @param v 分数。
+     * @example
+     * <listing version="3.0">
+     * score.setScore(12);
+     * </listing>
+     */
     public function setScore(v:int):void {
         _numberMc.number = v;
     }

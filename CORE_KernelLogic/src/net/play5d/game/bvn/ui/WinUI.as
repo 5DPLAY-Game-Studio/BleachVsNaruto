@@ -23,8 +23,17 @@ import flash.display.MovieClip;
 import net.play5d.game.bvn.data.vos.FighterVO;
 import net.play5d.game.bvn.data.TeamID;
 
+/**
+ * 胜利标。胜场不是 1 或 2，或作品不是 0 和 1 时，什么都不播。角色为 null 时直接返回。1 胜时 1 队用 <code>w1</code>，其它队用 <code>w2</code>。2 胜时对调。
+ */
 public class WinUI {
 
+    /**
+     * 记下胜利影片和队伍。
+     *
+     * @param ui 胜利影片。
+     * @param team 队伍编号。
+     */
     public function WinUI(ui:$fight$MC_win, team:int) {
         _ui   = ui;
         _team = team;
@@ -33,10 +42,29 @@ public class WinUI {
 
     private var _ui:$fight$MC_win;
 
+    /**
+     * 胜利影片。
+     *
+     * @return 影片。
+     * @example
+     * <listing version="3.0">
+     * var view:DisplayObject = win.ui;
+     * </listing>
+     */
     public function get ui():DisplayObject {
         return _ui;
     }
 
+    /**
+     * 按胜场和作品播放入场。角色为 null，或胜场不是 1 和 2 时直接返回。
+     *
+     * @param fighter 胜利角色。
+     * @param wins 胜场，只用 1 和 2。
+     * @example
+     * <listing version="3.0">
+     * win.show(fighter, 1);
+     * </listing>
+     */
     public function show(fighter:FighterVO, wins:int):void {
         if (!fighter) {
             return;

@@ -24,8 +24,14 @@ import flash.display.Sprite;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.kyo.display.shapes.Box;
 
+/**
+ * 上下两块遮罩的短转场。每段 0.1 秒，完成回调挂在下面那块上。
+ */
 public class QuickTransUI extends Sprite {
 
+    /**
+     * 按当前画面高度各建半屏遮罩。
+     */
     public function QuickTransUI() {
         super();
 
@@ -41,12 +47,30 @@ public class QuickTransUI extends Sprite {
     private var _down:Box;
     private var _center:Number = 0;
 
+    /**
+     * 先合上再打开。回调在打开结束时调用。
+     *
+     * @param back 完成回调。默认 null。
+     * @example
+     * <listing version="3.0">
+     * trans.fadeInAndOut(onDone);
+     * </listing>
+     */
     public function fadeInAndOut(back:Function = null):void {
         fadeIn(function ():void {
             fadeOut(back);
         });
     }
 
+    /**
+     * 两块遮罩在 0.1 秒内合到画面中间。
+     *
+     * @param back 下面那块到位后调用。默认 null。
+     * @example
+     * <listing version="3.0">
+     * trans.fadeIn(onClosed);
+     * </listing>
+     */
     public function fadeIn(back:Function = null):void {
         _up.y   = -_center;
         _down.y = GameConfig.GAME_SIZE.y;
@@ -55,6 +79,15 @@ public class QuickTransUI extends Sprite {
         TweenLite.to(_down, 0.1, {y: _center, onComplete: back});
     }
 
+    /**
+     * 两块遮罩在 0.1 秒内退出画面。
+     *
+     * @param back 下面那块到位后调用。默认 null。
+     * @example
+     * <listing version="3.0">
+     * trans.fadeOut(onOpen);
+     * </listing>
+     */
     public function fadeOut(back:Function = null):void {
         TweenLite.to(_up, 0.1, {y: -_center});
         TweenLite.to(_down, 0.1, {y: GameConfig.GAME_SIZE.y, onComplete: back});

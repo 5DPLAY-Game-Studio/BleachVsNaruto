@@ -24,19 +24,46 @@ import net.play5d.game.bvn.ctrler.AssetManager;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.kyo.utils.KyoMath;
 
+/**
+ * 小血条和气条。比例夹在 0.0001 和 1 之间。气按 300 为满。没有角色时渲染直接返回，设置 null 时换头像会抛错。
+ */
 public class MusouMiniHpBar {
 
+    /**
+     * 记下界面。
+     *
+     * @param ui 小血条影片。null 时抛错。
+     * @throws TypeError 界面为 null 时。
+     */
     public function MusouMiniHpBar(ui:$musou$MC_miniHpBar) {
         _ui = ui;
     }
     private var _ui:$musou$MC_miniHpBar;
     private var _fighter:FighterMain;
 
+    /**
+     * 换角色并刷新头像。传 null 时读数据会抛错。没有头像图时，旧头像还留着。
+     *
+     * @param f 角色。
+     * @throws TypeError 角色为 null 时。
+     * @example
+     * <listing version="3.0">
+     * bar.setFighter(fighter);
+     * </listing>
+     */
     public function setFighter(f:FighterMain):void {
         _fighter = f;
         updateFace();
     }
 
+    /**
+     * 刷新血和气的缩放。没有角色时直接返回。
+     *
+     * @example
+     * <listing version="3.0">
+     * bar.renderAnimate();
+     * </listing>
+     */
     public function renderAnimate():void {
         if (!_fighter) {
             return;

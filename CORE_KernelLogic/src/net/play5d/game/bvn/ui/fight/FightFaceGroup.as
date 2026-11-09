@@ -21,8 +21,17 @@ import flash.display.DisplayObject;
 
 import net.play5d.game.bvn.data.GameRunFighterGroup;
 
+/**
+ * 一组三个头像。没有当前角色时会先关掉位图缓存，然后直接返回，缓存不会重新打开。当前数据对不上三个槽时，后两个头像保持原样。
+ */
 public class FightFaceGroup {
 
+    /**
+     * 用界面上的三张脸建头像。缺脸时抛错。
+     *
+     * @param ui 头像组影片。
+     * @throws TypeError 影片或其中一张脸缺失时。
+     */
     public function FightFaceGroup(ui:$fight$MC_hpBarFaceGroup) {
         _ui = ui;
 
@@ -38,10 +47,29 @@ public class FightFaceGroup {
 
     private var _ui:$fight$MC_hpBarFaceGroup;
 
+    /**
+     * 头像组影片。
+     *
+     * @return 影片。
+     * @example
+     * <listing version="3.0">
+     * var view:DisplayObject = faces.ui;
+     * </listing>
+     */
     public function get ui():DisplayObject {
         return _ui;
     }
 
+    /**
+     * 按当前出战角色重排三张脸。组为 null 时抛错。没有当前角色时直接返回，后两张不更新。
+     *
+     * @param fighterGroup 角色组。默认 null，传 null 会抛错。
+     * @throws TypeError 组为 null 时。
+     * @example
+     * <listing version="3.0">
+     * faces.setFighter(group);
+     * </listing>
+     */
     public function setFighter(fighterGroup:GameRunFighterGroup = null):void {
 
         _ui.cacheAsBitmap = false;
@@ -69,6 +97,15 @@ public class FightFaceGroup {
         _ui.cacheAsBitmap = true;
     }
 
+    /**
+     * 把朝向交给三张脸。脸的实现是空的。
+     *
+     * @param v 朝向。
+     * @example
+     * <listing version="3.0">
+     * faces.setDirect(1);
+     * </listing>
+     */
     public function setDirect(v:int):void {
         _face1.setDirect(v);
         _face2.setDirect(v);

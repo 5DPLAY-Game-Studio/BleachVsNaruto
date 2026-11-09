@@ -23,8 +23,17 @@ import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.MCNumber;
 
+/**
+ * 对局倒计时。上限是 -1 时显示无限并不再改数字。其它时候数字和上次相同就跳过。
+ */
 public class FightTimeUI {
 
+    /**
+     * 按本局时间上限决定显示无限还是数字。对局数据缺失时抛错。
+     *
+     * @param ui 时间影片。
+     * @throws TypeError 影片或对局数据缺失时。
+     */
     public function FightTimeUI(ui:$fight$MC_time) {
         _ui = ui;
 
@@ -54,10 +63,28 @@ public class FightTimeUI {
     /** @private 上次显示的秒数，未变则跳过 MCNumber 重建 */
     private var _lastTime:int = int.MIN_VALUE;
 
+    /**
+     * 数字显示。无限时间时是 null。
+     *
+     * @return 数字显示对象。
+     * @example
+     * <listing version="3.0">
+     * var view:DisplayObject = time.timeUI;
+     * </listing>
+     */
     public function get timeUI():DisplayObject {
         return _numMc;
     }
 
+    /**
+     * 刷新剩余时间。无限时间，或秒数没变时直接返回。
+     *
+     * @throws TypeError 对局数据缺失时。
+     * @example
+     * <listing version="3.0">
+     * time.render();
+     * </listing>
+     */
     public function render():void {
         if (!_renderTime) {
             return;

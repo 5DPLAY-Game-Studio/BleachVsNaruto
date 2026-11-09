@@ -17,10 +17,28 @@
  */
 
 package net.play5d.game.bvn.ui.fight {
+/**
+ * 气条跟谁走。
+ */
 public class FightQiBarMode {
 
+    /**
+     * 跟着镜头自动摆。
+     *
+     * @default 0
+     */
     public static const AUTO:int   = 0;
+    /**
+     * 固定在上面。
+     *
+     * @default 1
+     */
     public static const TOP:int    = 1;
+    /**
+     * 固定在下面。
+     *
+     * @default 2
+     */
     public static const BOTTOM:int = 2;
 
 }

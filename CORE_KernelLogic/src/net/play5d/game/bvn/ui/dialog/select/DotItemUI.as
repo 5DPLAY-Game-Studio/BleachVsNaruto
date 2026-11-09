@@ -21,21 +21,50 @@ import flash.display.MovieClip;
 
 import net.play5d.game.bvn.utils.ResUtils;
 
+/**
+ * 分页圆点。构造后停在第 2 帧，也就是未选中。选中改到第 1 帧。
+ */
 public class DotItemUI {
 
+    /**
+     * 创建圆点并停在未选中帧。
+     */
     public function DotItemUI() {
         _ui               = ResUtils.I.createDisplayObject(ResUtils.swfLib.dialog, '$dialog$MC_dot');
         _ui.mouseChildren = false;
         _ui.buttonMode    = true;
         _ui.gotoAndStop(2);
     }
+    /**
+     * 这个点代表的页。构造时是 0，要另外赋值。
+     *
+     * @default 0
+     */
     public var page:int = 0;
     private var _ui:$dialog$MC_dot;
 
+    /**
+     * 圆点影片。
+     *
+     * @return 影片。
+     * @example
+     * <listing version="3.0">
+     * var clip:MovieClip = dot.getUI();
+     * </listing>
+     */
     public function getUI():MovieClip {
         return _ui;
     }
 
+    /**
+     * 选中或取消。选中停第 1 帧，取消停第 2 帧。
+     *
+     * @param v 是否选中。
+     * @example
+     * <listing version="3.0">
+     * dot.focus(true);
+     * </listing>
+     */
     public function focus(v:Boolean):void {
         _ui.gotoAndStop(v ? 1 : 2);
     }

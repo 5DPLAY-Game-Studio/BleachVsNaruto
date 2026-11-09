@@ -17,13 +17,22 @@
  */
 
 package net.play5d.game.bvn.ui.dialog {
+/**
+ * 只有确认按钮的提示。构造时就建好，否按钮藏起，确认钮放到 253。
+ */
 public class AlertUI extends MusouConfirmUI {
 
+    /**
+     * 建好界面并藏起否按钮。
+     */
     public function AlertUI() {
         super();
         build();
     }
 
+    /**
+     * 藏起否按钮，并把确认钮放到 253。
+     */
     protected override function build():void {
         super.build();
 

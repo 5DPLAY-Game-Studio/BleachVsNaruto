@@ -24,8 +24,17 @@ import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 import net.play5d.kyo.utils.KyoTimerFormat;
 
+/**
+ * 无双已用时间。没有名为 <code>text</code> 的文本时，刷新什么都不写。秒数是游戏时间除以动画帧率后的整数。
+ */
 public class MusouTimeUI {
 
+    /**
+     * 记下界面和时间文本。没有 <code>text</code> 时文本留空。
+     *
+     * @param ui 时间界面。null 时抛错。
+     * @throws TypeError 界面为 null 时。
+     */
     public function MusouTimeUI(ui:Sprite) {
         _ui  = ui;
         _txt = ui.getChildByName('text') as TextField;
@@ -33,6 +42,15 @@ public class MusouTimeUI {
     private var _ui:Sprite;
     private var _txt:TextField;
 
+    /**
+     * 把已用时间写成时分秒。没有文本时直接返回。
+     *
+     * @throws TypeError 无双对局缺失时。
+     * @example
+     * <listing version="3.0">
+     * time.renderAnimate();
+     * </listing>
+     */
     public function renderAnimate():void {
         if (_txt) {
             var sec:int = GameCtrl.I.getMusouCtrl().gameRunData.gameTime / GameConfig.FPS_ANIMATE;

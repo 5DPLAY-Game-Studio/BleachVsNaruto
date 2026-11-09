@@ -23,8 +23,17 @@ import flash.geom.Point;
 import net.play5d.game.bvn.utils.ResUtils;
 import net.play5d.kyo.display.MCNumber;
 
+/**
+ * 连击数字。已经显示时再 <code>show</code> 播 <code>update</code>，否则播 <code>fadein</code>。名字是 <code>hits1</code> 时会按数字宽度改影片横坐标。没显示时 <code>hide</code> 直接返回。
+ */
 public class HitsUI {
 
+    /**
+     * 在影片的 <code>ct</code> 上放连击数字。
+     *
+     * @param mc 连击影片。null 时抛错。
+     * @throws TypeError 影片缺失时。
+     */
     public function HitsUI(mc:MovieClip) {
         _mc           = mc;
         var cls:Class = ResUtils.I.getItemClass(ResUtils.swfLib.fight, '$fight$MC_hitsNumer');
@@ -37,6 +46,14 @@ public class HitsUI {
     private var _isShow:Boolean;
     private var _orgPos:Point;
 
+    /**
+     * 摘掉数字。移除失败只吞掉。
+     *
+     * @example
+     * <listing version="3.0">
+     * hits.destroy();
+     * </listing>
+     */
     public function destroy():void {
         if (_txtmc) {
             try {
@@ -54,6 +71,16 @@ public class HitsUI {
         _orgPos = null;
     }
 
+    /**
+     * 显示连击数。已经显示时播更新，否则播进入。
+     *
+     * @param num 连击数。
+     * @throws TypeError 已经销毁时。
+     * @example
+     * <listing version="3.0">
+     * hits.show(8);
+     * </listing>
+     */
     public function show(num:int):void {
         _txtmc.number = num;
 
@@ -72,6 +99,14 @@ public class HitsUI {
         _mc.gotoAndPlay('fadein');
     }
 
+    /**
+     * 播放退出。当前没显示时直接返回。
+     *
+     * @example
+     * <listing version="3.0">
+     * hits.hide();
+     * </listing>
+     */
     public function hide():void {
         if (!_isShow) {
             return;

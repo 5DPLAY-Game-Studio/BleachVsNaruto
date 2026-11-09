@@ -27,10 +27,24 @@ import net.play5d.game.bvn.ui.GameUI;
 import net.play5d.game.bvn.ui.Text;
 import net.play5d.game.bvn.utils.BtnUtils;
 
+/**
+ * 无双金币。构造时就读一次金额。<code>ADD_ABLE</code> 为 false 时停在第 2 帧，不能点。每次金额事件都会把文字再加进影片。
+ */
 public class CoinUI {
 
+    /**
+     * 是否允许点金币加钱。
+     *
+     * @default true
+     */
     public static var ADD_ABLE:Boolean = true;
 
+    /**
+     * 按 <code>ADD_ABLE</code> 停到可点或不可点的帧，并立刻刷新金额。
+     *
+     * @param ui 金币影片。null 或存档缺失时抛错。
+     * @throws TypeError 影片或无双存档缺失时。
+     */
     public function CoinUI(ui:MovieClip) {
         _ui             = ui;
         _moneyTxt       = new Text(0xFFFFFF, 16);
@@ -55,6 +69,14 @@ public class CoinUI {
     private var _ui:MovieClip;
     private var _moneyTxt:Text;
 
+    /**
+     * 不再听金额变化。按钮和文字还留着。
+     *
+     * @example
+     * <listing version="3.0">
+     * coin.destroy();
+     * </listing>
+     */
     public function destroy():void {
         GameEvent.removeEventListener(GameEvent.MONEY_UPDATE, update);
     }

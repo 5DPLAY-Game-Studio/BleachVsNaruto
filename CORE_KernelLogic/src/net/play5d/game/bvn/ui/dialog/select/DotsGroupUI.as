@@ -24,11 +24,28 @@ import flash.events.TouchEvent;
 
 import net.play5d.game.bvn.GameConfig;
 
+/**
+ * 一排分页点。页号从 1 起。再次 <code>update</code> 不摘掉旧点，只换内部数组。还没更新就按页刷新或销毁会抛错。
+ */
 public class DotsGroupUI extends Sprite {
 
+    /**
+     * 点被点到时调用，参数是页号。null 时点击什么都不做。
+     *
+     * @default null
+     */
     public var onDotClick:Function;
     private var _dotArr:Array;
 
+    /**
+     * 按总数重建点数组并追加到自己身上。第一点选中。总数是 0 时数组变空，旧的点还留在显示列表里。
+     *
+     * @param total 点数。
+     * @example
+     * <listing version="3.0">
+     * dots.update(4);
+     * </listing>
+     */
     public function update(total:int):void {
         _dotArr = [];
 
@@ -56,12 +73,31 @@ public class DotsGroupUI extends Sprite {
         }
     }
 
+    /**
+     * 只亮页号相同的点。还没 <code>update</code> 时抛错。
+     *
+     * @param v 页号。
+     * @throws TypeError 点数组还不存在时。
+     * @example
+     * <listing version="3.0">
+     * dots.updateByPage(1);
+     * </listing>
+     */
     public function updateByPage(v:int):void {
         for each(var d:DotItemUI in _dotArr) {
             d.focus(d.page == v);
         }
     }
 
+    /**
+     * 摘掉点和鼠标、触摸监听。点还留在显示列表里。还没更新时抛错。
+     *
+     * @throws TypeError 点数组还不存在时。
+     * @example
+     * <listing version="3.0">
+     * dots.destroy();
+     * </listing>
+     */
     public function destroy():void {
         for each(var d:DotItemUI in _dotArr) {
             d.getUI().removeEventListener(TouchEvent.TOUCH_TAP, touchHandler);
