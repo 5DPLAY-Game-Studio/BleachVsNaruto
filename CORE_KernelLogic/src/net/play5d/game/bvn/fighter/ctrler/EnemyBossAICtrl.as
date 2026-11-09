@@ -17,48 +17,108 @@
  */
 
 package net.play5d.game.bvn.fighter.ctrler {
+/**
+ * 头目 AI。这些招式固定返回 <code>false</code>，不走父类。
+ *
+ * @see FighterAICtrl
+ */
 public class EnemyBossAICtrl extends FighterAICtrl {
 
+    /**
+     * 不放卍解。
+     *
+     * @return <code>false</code>。
+     */
     public override function banKai():Boolean {
         return false;
     }
 
+    /**
+     * 不放前卍解。
+     *
+     * @return <code>false</code>。
+     */
     public override function banKaiW():Boolean {
         return false;
     }
 
+    /**
+     * 不放后卍解。
+     *
+     * @return <code>false</code>。
+     */
     public override function banKaiS():Boolean {
         return false;
     }
 
+    /**
+     * 不放残影步。
+     *
+     * @return <code>false</code>。
+     */
     public override function ghostStep():Boolean {
         return false;
     }
 
+    /**
+     * 不放残影跳。
+     *
+     * @return <code>false</code>。
+     */
     public override function ghostJump():Boolean {
         return false;
     }
 
+    /**
+     * 不放残影下跳。
+     *
+     * @return <code>false</code>。
+     */
     public override function ghostJumpDown():Boolean {
         return false;
     }
 
+    /**
+     * 不叫援助。
+     *
+     * @return <code>false</code>。
+     */
     public override function assist():Boolean {
         return false;
     }
 
+    /**
+     * 不放特殊技能。
+     *
+     * @return <code>false</code>。
+     */
     public override function specialSkill():Boolean {
         return false;
     }
 
+    /**
+     * 不放超必杀。
+     *
+     * @return <code>false</code>。
+     */
     public override function bishaSUPER():Boolean {
         return false;
     }
 
+    /**
+     * 不放投技 1。
+     *
+     * @return <code>false</code>。
+     */
     public override function catch1():Boolean {
         return false;
     }
 
+    /**
+     * 不放投技 2。
+     *
+     * @return <code>false</code>。
+     */
     public override function catch2():Boolean {
         return false;
     }

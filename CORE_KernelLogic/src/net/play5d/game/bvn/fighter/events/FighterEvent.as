@@ -22,57 +22,132 @@ import flash.events.Event;
 import net.play5d.game.bvn.interfaces.BaseGameSprite;
 
 /**
- * 角色事件
+ * 角色出生、攻击、受击和死亡事件。
+ *
+ * <p>没有覆写 <code>clone</code>。重派后 <code>fighter</code> 和 <code>params</code> 都是 <code>null</code>。
+ * 构造时也不写这两个字段。</p>
+ *
+ * @see flash.events.Event
+ * @see FighterEventDispatcher
  */
 public class FighterEvent extends Event {
 
-    // 角色创建
+    /**
+     * 角色创建。
+     *
+     * @eventType BIRTH
+     */
     public static const BIRTH:String = 'BIRTH';
 
-    // 发射子弹
+    /**
+     * 发射子弹。
+     *
+     * @eventType FIRE_BULLET
+     */
     public static const FIRE_BULLET:String  = 'FIRE_BULLET';
-    // 加入攻击对象
+    /**
+     * 加入攻击对象。
+     *
+     * @eventType ADD_ATTACKER
+     */
     public static const ADD_ATTACKER:String = 'ADD_ATTACKER';
-    // 加入特效对象
+    /**
+     * 加入特效对象。
+     *
+     * @eventType ADD_EFFECT
+     */
     public static const ADD_EFFECT:String   = 'ADD_EFFECT';
 
-    // 攻击到目标
+    /**
+     * 攻击到目标。
+     *
+     * @eventType HIT_TARGET
+     */
     public static const HIT_TARGET:String  = 'HIT_TARGET';
-    // 被打
+    /**
+     * 被打。
+     *
+     * @eventType HURT
+     */
     public static const HURT:String        = 'HURT';
-    // 从被打状态恢复
+    /**
+     * 从被打状态恢复。
+     *
+     * @eventType HURT_RESUME
+     */
     public static const HURT_RESUME:String = 'HURT_RESUME';
-    // 被击倒
+    /**
+     * 被击倒。
+     *
+     * @eventType HURT_DOWN
+     */
     public static const HURT_DOWN:String   = 'HURT_DOWN';
 
-    // 防御
+    /**
+     * 防御。
+     *
+     * @eventType DEFENSE
+     */
     public static const DEFENSE:String = 'DEFENSE';
-    // 恢复站立
+    /**
+     * 恢复站立。
+     *
+     * @eventType IDLE
+     */
     public static const IDLE:String    = 'IDLE';
 
-    // 死亡
+    /**
+     * 死亡。
+     *
+     * @eventType DIE
+     */
     public static const DIE:String  = 'DIE';
-    // 死透（死亡&击倒）
+    /**
+     * 死透，死亡并且击倒。
+     *
+     * @eventType DEAD
+     */
     public static const DEAD:String = 'DEAD';
 
-    // 执行动作
+    /**
+     * 执行动作。
+     *
+     * @eventType DO_ACTION
+     */
     public static const DO_ACTION:String  = 'DO_ACTION';
-    // 执行特殊
+    /**
+     * 执行特殊。
+     *
+     * @eventType DO_SPECIAL
+     */
     public static const DO_SPECIAL:String = 'DO_SPECIAL';
 
     /**
-     * 构造方法
-     * @param type 事件的类型
-     * @param bubbles 事件是否为冒泡事件
-     * @param cancelable 是否可以阻止与事件相关联的行为
+     * 用事件名构造。附加字段保持 <code>null</code>。
+     *
+     * @param type 事件名。为空时父类构造抛错。
+     * @param bubbles 是否冒泡。默认 <code>false</code>。
+     * @param cancelable 是否可取消。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * var e:FighterEvent = new FighterEvent(FighterEvent.DIE);
+     * </listing>
      */
     public function FighterEvent(type:String, bubbles:Boolean = false, cancelable:Boolean = false) {
         super(type, bubbles, cancelable);
     }
 
-    // 传递参数
+    /**
+     * 附加参数。
+     *
+     * @default null
+     */
     public var params:Object;
-    // 目标对象
+    /**
+     * 发出这次事件的角色。
+     *
+     * @default null
+     */
     public var fighter:BaseGameSprite;
 }
 }

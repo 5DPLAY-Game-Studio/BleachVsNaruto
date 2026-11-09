@@ -31,16 +31,28 @@ import net.play5d.game.bvn.interfaces.IInstanceVO;
 import net.play5d.kyo.utils.KyoUtils;
 
 /**
- * 攻击值对象
+ * 一次攻击的威力、击退和受击。
+ *
+ * <p>构造时如果类型是斩击，并且僵直小于 100 毫秒，会改成 100。
+ * 带了自定义特效时会立刻做帧缓存，类名对不上会抛错。
+ * 必杀和技能只看 id 里有没有那几个字母，空 id 返回 <code>false</code>。
+ * 伤害按 <code>(power + power * powerAdd / 100) * powerRate</code> 取整。
+ * 弱打击只在主人是无双小兵、并且这次不是重击或击飞时成立。</p>
+ *
+ * @see FighterHitModel
  */
 public class HitVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
     /**
-     * 攻击值对象
+     * 用对象填写同名字段。对象为空时只留默认值。
      *
-     * @param obj 对象参数
+     * @param obj 字段来源。默认 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var hit:HitVO = new HitVO(obj);
+     * </listing>
      */
     public function HitVO(obj:Object = null) {
         if (obj) {
@@ -60,59 +72,134 @@ public class HitVO implements IInstanceVO {
         }
     }
 
-    // 攻击 id
+    /**
+     * 攻击 id。
+     *
+     * @default null
+     */
     public var id:String         = null;
-    // 所有者
+    /**
+     * 发出这次攻击的对象。
+     *
+     * @default null
+     */
     public var owner:IGameSprite = null;
 
-    // 攻击力
+    /**
+     * 基础威力。
+     *
+     * @default 0
+     */
     public var power:Number     = 0;
-    // 叠加攻击力
+    /**
+     * 威力百分比加成。
+     *
+     * @default 0
+     */
     public var powerAdd:Number  = 0;
-    // 攻击倍数
+    /**
+     * 威力倍率。
+     *
+     * @default 1
+     */
     public var powerRate:Number = 1;
 
-    // 攻击类型
+    /**
+     * 攻击类型。默认是斩击。
+     *
+     * @default 1
+     */
     public var hitType:int = HitType.KAN;
 
-    // 是否造成破防效果
+    /**
+     * 是否破防。
+     *
+     * @default false
+     */
     public var isBreakDef:Boolean = false;
 
-    // 击退速度
+    /**
+     * 击退速度。
+     *
+     * @default 0
+     */
     public var hitx:Number = 0;
-    // 击飞速度
+    /**
+     * 击飞速度。
+     *
+     * @default 0
+     */
     public var hity:Number = 0;
 
-    // 僵直时间（毫秒）
+    /**
+     * 僵直毫秒。斩击且小于 100 时，构造会改成 100。
+     *
+     * @default 300
+     */
     public var hurtTime:Number = 300;
-    // 受击类型（0 被打， 1 击飞）
+    /**
+     * 受击类型。0 是被打，1 是击飞。
+     *
+     * @default 0
+     */
     public var hurtType:int    = FighterHurtType.HURT;
 
-    // 受击后的慢放时间（毫秒）
+    /**
+     * 受击慢放毫秒。
+     *
+     * @default 0
+     */
     public var slowDown:Number = 0;
 
-    // 是否检查方向，若为 true，则当攻击方与被攻击方同向时，无视防御
+    /**
+     * 同向时是否无视防御。
+     *
+     * @default true
+     */
     public var checkDirect:Boolean = true;
 
-    // 攻击范围
+    /**
+     * 当前攻击范围。
+     *
+     * @default null
+     */
     public var currentArea:Rectangle = null;
 
-    // 攻击到对方时，设置对方为焦点
+    /**
+     * 命中后是否把对方设成镜头焦点。
+     *
+     * @default false
+     */
     public var focusTarget:Boolean = false;
 
-    // 自定义击打效果参数
-    // {customMcCls: mc_cls, customSndCls: snd_cls, ...}
+    /**
+     * 自定义打击效果参数。
+     *
+     * @default null
+     */
     public var customEffect:Object     = null;
-    // 自定义打击效果 EffectVO
+    /**
+     * 由自定义参数建成的特效。构造前为 <code>null</code>。
+     *
+     * @default null
+     */
     public var customEffectVO:EffectVO = null;
 
-    // 对方受到此次伤害后，是否受到重力效果
+    /**
+     * 对方吃下这次伤害后是否仍受重力。
+     *
+     * @default true
+     */
     public var targetApplyG:Boolean = true;
 
     /**
-     * 是否为必杀
+     * id 里是否含有 <code>bs</code>。空 id 为 <code>false</code>。
      *
-     * @return 是否为必杀
+     * @return 含有时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var bisha:Boolean = hit.isBisha();
+     * </listing>
      */
     public function isBisha():Boolean {
         if (id == null) {
@@ -126,9 +213,13 @@ public class HitVO implements IInstanceVO {
     }
 
     /**
-     * 是否为普通技能
+     * id 里是否含有 <code>tz</code>、<code>kj</code>、<code>zh</code> 或 <code>sh</code>。空 id 为 <code>false</code>。
      *
-     * @return 是否为普通技能
+     * @return 含有时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var skill:Boolean = hit.isSkill();
+     * </listing>
      */
     public function isSkill():Boolean {
         if (id == null) {
@@ -142,18 +233,26 @@ public class HitVO implements IInstanceVO {
     }
 
     /**
-     * 是否为摔技
+     * 是否为投技。类型是投，并且破防，才为 <code>true</code>。
      *
-     * @return 是否为摔技
+     * @return 两者都成立时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var caught:Boolean = hit.isCatch();
+     * </listing>
      */
     public function isCatch():Boolean {
         return hitType == HitType.CATCH && isBreakDef;
     }
 
     /**
-     * 获取当前攻击伤害
+     * 按威力和倍率算出的整数伤害。
      *
-     * @return 当前攻击伤害
+     * @return 截成整数后的伤害。
+     * @example
+     * <listing version="3.0">
+     * var dmg:int = hit.getDamage();
+     * </listing>
      */
     public function getDamage():int {
         var powAdd:Number = power * (powerAdd / 100);
@@ -162,9 +261,13 @@ public class HitVO implements IInstanceVO {
     }
 
     /**
-     * 是否为弱打击伤害
+     * 这次是否算弱打击。没有主人、重击或击飞时为 <code>false</code>。
      *
-     * @return 是否为弱打击伤害
+     * @return 主人是无双小兵时为 <code>true</code>。
+     * @example
+     * <listing version="3.0">
+     * var weak:Boolean = hit.isWeakHit();
+     * </listing>
      */
     public function isWeakHit():Boolean {
         if (!owner) {
@@ -194,12 +297,7 @@ public class HitVO implements IInstanceVO {
         return false;
     }
 
-    /**
-     * 检查敌人 FighterMain 是否不为 Boss
-     *
-     * @param fighter 敌人 FighterMain
-     * @return 敌人 FighterMain 是否不为 Boss
-     */
+    /** @private */
     private static function checkEnemyFighter(fighter:FighterMain):Boolean {
         if (!fighter || !fighter.musouEnemyData) {
             return false;

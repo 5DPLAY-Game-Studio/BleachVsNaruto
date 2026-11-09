@@ -50,6 +50,9 @@ public class FighterMcFloorHandler extends FighterMcActsPart {
         _ghost = ghost;
     }
 
+    /**
+     * 清掉空中和幽步对手，再交给父类。
+     */
     public override function destroy():void {
         _air   = null;
         _ghost = null;

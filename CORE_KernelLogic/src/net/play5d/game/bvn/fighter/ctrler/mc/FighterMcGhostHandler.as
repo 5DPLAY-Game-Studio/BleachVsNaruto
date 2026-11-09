@@ -43,10 +43,23 @@ public class FighterMcGhostHandler extends FighterMcActsPart {
         return _ghostStepIng;
     }
 
+    /**
+     * 只交给父类。幽步标记还留着。
+     */
     public override function destroy():void {
         super.destroy();
     }
 
+    /**
+     * 气不少于 60，并且能量够 80 或还没过载时，花掉这些并进入幽步，再向前移 8。
+     *
+     * <p>条件不够时什么都不花。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * ghost.doGhostStep();
+     * </listing>
+     */
     public function doGhostStep():void {
         if (startGhostStep()) {
             _owner.move(8, 0);
@@ -56,6 +69,14 @@ public class FighterMcGhostHandler extends FighterMcActsPart {
         }
     }
 
+    /**
+     * 条件同幽步。成功后向上移 12，跳跃次数减 1。
+     *
+     * @example
+     * <listing version="3.0">
+     * ghost.doGhostJump();
+     * </listing>
+     */
     public function doGhostJump():void {
         if (startGhostStep()) {
             _owner.move(0, -12);
@@ -67,6 +88,14 @@ public class FighterMcGhostHandler extends FighterMcActsPart {
         }
     }
 
+    /**
+     * 条件同幽步。成功后向下移 15。训练记录记的是残影冲，和下跳不是同一个指令。
+     *
+     * @example
+     * <listing version="3.0">
+     * ghost.doGhostJumpDown();
+     * </listing>
+     */
     public function doGhostJumpDown():void {
         if (startGhostStep()) {
             _owner.move(0, 15);
@@ -76,6 +105,7 @@ public class FighterMcGhostHandler extends FighterMcActsPart {
         }
     }
 
+    /** @private */
     private function startGhostStep():Boolean {
         if (_fighter.qi < 60) {
             return false;

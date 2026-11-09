@@ -26,30 +26,68 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.stage.GameCamera;
 
 /**
- * 角色镜头控制器
+ * 把角色、援助转成显示对象后再交给镜头。
+ *
+ * <p>聚焦参数为空，或里面没有角色时直接返回。攻击体和子弹对对手聚焦时不选目标。
+ * 援助的主人不是角色时，对对手聚焦会抛错。</p>
+ *
+ * @see net.play5d.game.bvn.ctrler.game_ctrls.GameCameraCtrler
  */
 public class FighterCameraCtrler extends GameCameraCtrler {
 
-    // 绑定目标
+    /** @private */
     private var _target:IGameSprite;
 
+    /**
+     * 把镜头交给父类保存。
+     *
+     * @param camera 游戏镜头。
+     * @example
+     * <listing version="3.0">
+     * var cam:FighterCameraCtrler = new FighterCameraCtrler(camera);
+     * </listing>
+     */
     public function FighterCameraCtrler(camera:GameCamera) {
         super(camera);
     }
 
+    /**
+     * 记下要跟着的对象。可以是 <code>null</code>。
+     *
+     * @param target 角色、援助、攻击体或子弹。
+     * @example
+     * <listing version="3.0">
+     * cam.setTarget(fighter);
+     * </listing>
+     */
     public function setTarget(target:IGameSprite):void {
         _target = target;
     }
 
+    /**
+     * 当前跟着的对象。
+     *
+     * @return 对象。还没设置时为 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var sp:IGameSprite = cam.getTarget();
+     * </listing>
+     */
     public function getTarget():IGameSprite {
         return _target;
     }
 
     /**
-     * 镜头聚焦
+     * 把角色换成显示对象后聚焦。
      *
-     * @param focusParam 要聚焦的显示对象参数，该参数类型可为 IGameSprite 或者其数组
-     * @param noTween 是否不进行补间
+     * <p>参数为空时返回。不是角色的项会跳过。</p>
+     *
+     * @param focusParam 一个角色，或角色数组。
+     * @param noTween 是否跳过补间。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * cam.focus(fighter, false);
+     * </listing>
      */
     override public function focus(focusParam:Object, noTween:Boolean = false):void {
         if (!focusParam) {
@@ -76,18 +114,28 @@ public class FighterCameraCtrler extends GameCameraCtrler {
     }
 
     /**
-     * 镜头聚焦自身
+     * 聚焦当前对象。对象为空时什么都不做。
      *
-     * @param noTween 是否不进行补间
+     * @param noTween 是否跳过补间。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * cam.focusSelf(false);
+     * </listing>
      */
     public function focusSelf(noTween:Boolean = false):void {
         focus(_target, noTween);
     }
 
     /**
-     * 镜头聚焦对手
+     * 聚焦当前对象的对手。
      *
-     * @param noTween 是否不进行补间
+     * <p>攻击体和子弹没有对手，直接返回。援助的主人不是角色时抛错。</p>
+     *
+     * @param noTween 是否跳过补间。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * cam.focusTarget(false);
+     * </listing>
      */
     public function focusTarget(noTween:Boolean = false):void {
         var focusTarget:IGameSprite = null;

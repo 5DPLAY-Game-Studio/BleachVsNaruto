@@ -34,8 +34,16 @@ import net.play5d.game.bvn.fighter.utils.HitAreaUtil;
 import net.play5d.game.bvn.fighter.utils.McAreaCacher;
 import net.play5d.game.bvn.utils.MCUtils;
 
+/**
+ * 角色影片的播放、区域和击飞。
+ *
+ * <p>还没 <code>initialize</code>，或已经 <code>destroy</code> 之后，读写影片会抛错。
+ * 横坐标的写入读的是当前值，传入的数不会写上。纵坐标的写入会改到影片。
+ * 第一次取攻击范围时会把 <code>AImain</code> 停到第 2 帧再停回第 1 帧并藏起来。没有 <code>AImain</code> 时这次取值抛错。</p>
+ */
 public class FighterMC {
 
+    /** @private */
     private var _mcCtrler:FighterMcCtrler;
     private var _fighter:FighterMain;
     private var _fighterDisplay:DisplayObject;
@@ -72,22 +80,43 @@ public class FighterMC {
         return _curFrameName;
     }
 
+    /**
+     * 影片横坐标。写入时赋的是当前值，传入的数不会生效。
+     *
+     * @return 当前横坐标。
+     */
     public function get x():Number {
         return _mc.x;
     }
 
+    /** @private */
     public function set x(v:Number):void {
         _mc.x = x;
     }
 
+    /**
+     * 影片纵坐标。
+     *
+     * @return 当前纵坐标。
+     */
     public function get y():Number {
         return _mc.y;
     }
 
+    /** @private */
     public function set y(v:Number):void {
         _mc.y = v;
     }
 
+    /**
+     * 影片当前帧号。
+     *
+     * @return 帧号。
+     * @example
+     * <listing version="3.0">
+     * var frame:int = mc.getCurrentFrame();
+     * </listing>
+     */
     public function getCurrentFrame():int {
         return _mc.currentFrame;
     }
@@ -124,6 +153,17 @@ public class FighterMC {
         return key;
     }
 
+    /**
+     * 接上影片、角色和控制器。空引用留到之后取值才抛错。
+     *
+     * @param mc 角色影片。
+     * @param fighter 角色。
+     * @param mcCtrler 影片控制器。
+     * @example
+     * <listing version="3.0">
+     * mc.initialize(clip, fighter, ctrler);
+     * </listing>
+     */
     public function initialize(mc:MovieClip, fighter:FighterMain, mcCtrler:FighterMcCtrler):void {
         _mc             = mc;
         _fighter        = fighter;
@@ -132,6 +172,14 @@ public class FighterMC {
         _mcCtrler = mcCtrler;
     }
 
+    /**
+     * 销毁三份区域缓存并清空影片和角色。
+     *
+     * @example
+     * <listing version="3.0">
+     * mc.destroy();
+     * </listing>
+     */
     public function destroy():void {
         if (_bodyAreaCache) {
             _bodyAreaCache.destroy();
@@ -153,6 +201,16 @@ public class FighterMC {
         _childAnimTotals = null;
     }
 
+    /**
+     * 按名字取影片的子对象。没有时为 <code>null</code>。
+     *
+     * @param name 子对象名。
+     * @return 子对象。
+     * @example
+     * <listing version="3.0">
+     * var child:DisplayObject = mc.getChildByName(name);
+     * </listing>
+     */
     public function getChildByName(name:String):DisplayObject {
         return _mc.getChildByName(name);
     }
@@ -285,6 +343,15 @@ public class FighterMC {
         return rt;
     }
 
+    /**
+     * 当前帧缓存的身体区域。没缓存时为 <code>null</code>。
+     *
+     * @return 区域。
+     * @example
+     * <listing version="3.0">
+     * var body:Rectangle = mc.getCurrentBodyArea();
+     * </listing>
+     */
     public function getCurrentBodyArea():Rectangle {
         var obj:Object = _bodyAreaCache.getAreaByFrame(_mc.currentFrame);
         if (obj) {
@@ -293,10 +360,29 @@ public class FighterMC {
         return null;
     }
 
+    /**
+     * 当前帧缓存的攻击区域。没缓存时为 <code>null</code>。
+     *
+     * @return 区域数组。
+     * @example
+     * <listing version="3.0">
+     * var hits:Array = mc.getCurrentHitArea();
+     * </listing>
+     */
     public function getCurrentHitArea():Array {
         return _hitAreaCache.getAreaByFrame(_mc.currentFrame) as Array;
     }
 
+    /**
+     * 按名字取判定矩形。没有这个子对象时为 <code>null</code>。
+     *
+     * @param name 子对象名。
+     * @return 相对角色显示对象的范围。
+     * @example
+     * <listing version="3.0">
+     * var rect:Rectangle = mc.getCheckHitRect(name);
+     * </listing>
+     */
     public function getCheckHitRect(name:String):Rectangle {
         return HitAreaUtil.getCheckHitRect(_mc, name, _hitCheckAreaCache, _fighterDisplay);
     }
@@ -356,6 +442,16 @@ public class FighterMC {
         _hurtFlyType = FighterHurtFlyType.NO_HURT_FLY;
     }
 
+    /**
+     * 按 id 取预先扫好的攻击范围。没有这个 id 时为 <code>undefined</code>。
+     *
+     * @param id 范围 id。
+     * @return 范围。
+     * @example
+     * <listing version="3.0">
+     * var range:Rectangle = mc.getHitRange(id);
+     * </listing>
+     */
     public function getHitRange(id:String):Rectangle {
         if (!_hitRangeInited) {
             initHitRange();

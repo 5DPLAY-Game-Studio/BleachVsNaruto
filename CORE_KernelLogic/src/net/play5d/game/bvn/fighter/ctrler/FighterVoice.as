@@ -17,10 +17,28 @@
  */
 
 package net.play5d.game.bvn.fighter.ctrler {
+/**
+ * 角色语音的种类编号。
+ */
 public class FighterVoice {
 
+    /**
+     * 受击。
+     *
+     * @default 0
+     */
     public static const HURT:int     = 0;
+    /**
+     * 击飞。
+     *
+     * @default 1
+     */
     public static const HURT_FLY:int = 1;
+    /**
+     * 死亡。
+     *
+     * @default 2
+     */
     public static const DIE:int      = 2;
 
 }

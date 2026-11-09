@@ -24,17 +24,28 @@ import net.play5d.game.bvn.interfaces.BaseGameSprite;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.interfaces.IInstanceVO;
 
+/**
+ * 把目标移到指定点，或跟着某个元件走。
+ *
+ * <p>没传参数时坐标保持 <code>NaN</code>，速度保持 <code>null</code>。
+ * 速度为 0、空，或没写时也保持 <code>null</code>，调用方会直接放到目标点。
+ * 速度是一个数字时，横向和纵向都用这个数字乘上当前速度倍率。
+ * <code>clear</code> 只把角色的重力开关打开，不清掉目标。</p>
+ */
 public class MoveTargetParamVO implements IInstanceVO {
 
     include '../../../../../../../include/Clone.as';
 
     /**
-     * params:{
-     *      x:Number X位置
-     *      y:Number Y位置
-     *      followmc:String 按MC的位置移动目标，MC名称
-     *      speed:Number|{x:Number,y:Number} 移动速度，0或不设置时，直接移动到相应位置
-     * }
+     * 从参数对象读坐标、跟随元件和速度。
+     *
+     * <p><code>params</code> 为空时什么都不写。缺的坐标写成 0。缺的跟随名写成 <code>null</code>。</p>
+     *
+     * @param params 含 <code>x</code>、<code>y</code>、<code>followmc</code>、<code>speed</code> 的对象。默认 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * var move:MoveTargetParamVO = new MoveTargetParamVO({x: 10, y: 0, speed: 2});
+     * </listing>
      */
     public function MoveTargetParamVO(params:Object = null) {
         if (!params) {
@@ -57,13 +68,46 @@ public class MoveTargetParamVO implements IInstanceVO {
         }
 
     }
+    /**
+     * 目标横坐标。没初始化时为 <code>NaN</code>。
+     *
+     * @default NaN
+     */
     public var x:Number;
+    /**
+     * 目标纵坐标。没初始化时为 <code>NaN</code>。
+     *
+     * @default NaN
+     */
     public var y:Number;
+    /**
+     * 要跟随的元件名。
+     *
+     * @default null
+     */
     public var followMcName:String;
+    /**
+     * 被移动的对象。
+     *
+     * @default null
+     */
     public var target:IGameSprite;
-    //移动速度，为NULL时，直接移动到相应位置
+    /**
+     * 每帧速度。为 <code>null</code> 时直接放到目标点。
+     *
+     * @default null
+     */
     public var speed:Point;
 
+    /**
+     * 记下目标。目标是角色时把速度清成 0。
+     *
+     * @param v 被移动的对象。可以是 <code>null</code>。
+     * @example
+     * <listing version="3.0">
+     * move.setTarget(fighter);
+     * </listing>
+     */
     public function setTarget(v:IGameSprite):void {
         target = v;
         if (target is BaseGameSprite) {
@@ -73,6 +117,14 @@ public class MoveTargetParamVO implements IInstanceVO {
         }
     }
 
+    /**
+     * 目标是角色时重新打开重力。目标引用还留着。
+     *
+     * @example
+     * <listing version="3.0">
+     * move.clear();
+     * </listing>
+     */
     public function clear():void {
         if (target) {
             if (target is BaseGameSprite) {

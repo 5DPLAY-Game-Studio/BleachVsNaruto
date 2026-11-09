@@ -57,6 +57,9 @@ public class FighterMcAirHandler extends FighterMcActsPart {
         _floor = floor;
     }
 
+    /**
+     * 清掉空中和地面对手，再交给父类。
+     */
     public override function destroy():void {
         _ghost = null;
         _floor = null;
