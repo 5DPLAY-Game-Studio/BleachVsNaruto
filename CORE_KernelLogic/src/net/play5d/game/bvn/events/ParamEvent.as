@@ -19,12 +19,36 @@
 package net.play5d.game.bvn.events {
 import flash.events.Event;
 
+/**
+ * 带一个自定义参数的事件。
+ *
+ * <p>工程里没有构造它的代码。没有覆写 <code>clone</code>，重派后新事件上的 <code>param</code> 是 <code>null</code>。</p>
+ *
+ * @see flash.events.Event
+ */
 public class ParamEvent extends Event {
 
+    /**
+     * 记下参数。赋值发生在调用父类构造之前。
+     *
+     * @param type 事件名。为空时父类构造抛错。
+     * @param param 随事件带走的值。
+     * @param bubbles 是否冒泡。默认 <code>false</code>。
+     * @param cancelable 是否可取消。默认 <code>false</code>。
+     * @example
+     * <listing version="3.0">
+     * var e:ParamEvent = new ParamEvent('CUSTOM', value);
+     * </listing>
+     */
     public function ParamEvent(type:String, param:*, bubbles:Boolean = false, cancelable:Boolean = false) {
         this.param = param;
         super(type, bubbles, cancelable);
     }
+    /**
+     * 构造时写入的参数。
+     *
+     * @default null
+     */
     public var param:*;
 }
 }
