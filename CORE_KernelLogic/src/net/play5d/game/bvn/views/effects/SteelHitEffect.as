@@ -24,13 +24,33 @@ import net.play5d.game.bvn.data.vos.EffectVO;
 import net.play5d.game.bvn.fighter.FighterMain;
 import net.play5d.game.bvn.interfaces.IGameSprite;
 
+/**
+ * 钢体受击闪白。只有目标是角色且处于钢体时才改色。
+ *
+ * <p>普通钢体的三色偏移都是 150。超级钢体把蓝色偏移改成 0，并闪一层黄色。冻结结束时恢复颜色。不是钢体时什么都不做。</p>
+ */
 public class SteelHitEffect extends EffectView {
 
+    /**
+     * 用特效数据创建。
+     *
+     * @param data 特效数据。null 时抛错。
+     * @throws TypeError 数据为 null 时。
+     */
     public function SteelHitEffect(data:EffectVO) {
         super(data);
     }
     private var _fighter:FighterMain;
 
+    /**
+     * 是钢体角色时改色，并在冻结结束时恢复。其它目标直接返回。
+     *
+     * @param v 目标。
+     * @example
+     * <listing version="3.0">
+     * view.setTarget(fighter);
+     * </listing>
+     */
     public override function setTarget(v:IGameSprite):void {
         super.setTarget(v);
 

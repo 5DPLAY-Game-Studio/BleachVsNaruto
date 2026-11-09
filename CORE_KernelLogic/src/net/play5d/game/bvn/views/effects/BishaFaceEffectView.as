@@ -23,15 +23,23 @@ import flash.display.MovieClip;
 
 import net.play5d.game.bvn.ctrler.AssetManager;
 
+/**
+ * 必杀立绘。影片在字段初始化时取出，取不到时后面的播放和换图会抛错。没有对应脸槽时 <code>setFace</code> 直接返回。换上的图固定改成 254×180，旧图不摘掉。
+ */
 public class BishaFaceEffectView {
 
+    /**
+     * 立绘影片。
+     */
     public var mc:MovieClip     = AssetManager.I.getEffect('bisha_face_mc');
     private var _faceObj:Object = {};
 
     /**
-     * 设置角色图
-     * @param faceId 1 | 2
-     * @param face
+     * 设置角色图。没有 <code>facemc</code> 加编号的槽时直接返回。图为 null 时抛错。
+     *
+     * @param faceId 脸槽编号，拼到 <code>facemc</code> 后面。
+     * @param face 脸图。宽高会被写成 254 和 180。
+     * @throws TypeError 影片或脸图为 null 时。
      */
     public function setFace(faceId:int, face:DisplayObject):void {
         var facemc:MovieClip = mc['facemc' + faceId];
@@ -45,10 +53,27 @@ public class BishaFaceEffectView {
         facemc.addChild(face);
     }
 
+    /**
+     * 从第 2 帧开始播。影片为 null 时抛错。
+     *
+     * @throws TypeError 影片为 null 时。
+     * @example
+     * <listing version="3.0">
+     * view.fadeIn();
+     * </listing>
+     */
     public function fadeIn():void {
         mc.gotoAndPlay(2);
     }
 
+    /**
+     * 释放位图脸的像素。影片和其他类型的脸还留着。
+     *
+     * @example
+     * <listing version="3.0">
+     * view.destroy();
+     * </listing>
+     */
     public function destroy():void {
         for each(var i:DisplayObject in _faceObj) {
             if (i is Bitmap) {

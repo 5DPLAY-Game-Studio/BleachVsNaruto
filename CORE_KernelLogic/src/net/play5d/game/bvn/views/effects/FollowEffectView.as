@@ -33,16 +33,28 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.utils.MCUtils;
 import net.play5d.kyo.utils.KyoDisplayUtils;
 /**
- * 跟随效果视图
+ * 跟着角色影片走的特效。
+ *
+ * <p>设置目标时会走一次方向设置，影片横坐标会被再乘上方向，然后才把这个位置记成原点。之后的跟随自己改缩放和坐标，不要再设置方向。角色帧和上次相差不是 0 或 1 时只调用 <code>onRemove</code>，不把影片拿下来。动画播到总帧数减 1 时同样只通知移除，最后一帧不会出现。标签 <code>loop</code> 停到 <code>loop_start</code>，没有这个标签就停到第 1 帧。</p>
+ *
+ * <p><code>destroy</code> 不看 <code>dispose</code>，也不从父级移除，也不调用 <code>onRemove</code>。<code>getActive</code> 固定返回 false。</p>
  */
 public class FollowEffectView implements IGameSprite {
 
-    // 跟随的目标
+    /**
+     * 跟随的目标。销毁后是 null。
+     */
     public var target:BaseGameSprite;
 
-    // 特效 mc
+    /**
+     * 特效影片。销毁后是 null。
+     */
     public var mc:MovieClip;
-    // 移除自身时调用
+    /**
+     * 帧跳开或播到移除标签时调用，参数是这个视图。null 时不调用。
+     *
+     * @default null
+     */
     public var onRemove:Function;
 
     // 主人物的 FighterMC
@@ -62,8 +74,10 @@ public class FollowEffectView implements IGameSprite {
     private var _loopFrame:Object;
 
     /**
-     * 构造方法
-     * @param mc 特效 mc
+     * 创建跟随特效。有 <code>loop_start</code> 标签时循环停在那里，否则停在第 1 帧。影片为 null 时抛错。
+     *
+     * @param mc 特效影片。
+     * @throws TypeError 影片为 null 时。
      */
     public function FollowEffectView(mc:MovieClip) {
         this.mc = mc;
@@ -75,8 +89,14 @@ public class FollowEffectView implements IGameSprite {
     }
 
     /**
-     * 置跟随目标
-     * @param target 跟随目标
+     * 开始跟随。目标为 null 时抛错。不是角色时要能读到 <code>mc.currentFrame</code>，没有影片会抛错。
+     *
+     * @param target 跟随目标。
+     * @throws TypeError 目标为 null，或不是角色且没有影片时。
+     * @example
+     * <listing version="3.0">
+     * view.setTarget(fighter);
+     * </listing>
      */
     public function setTarget(target:BaseGameSprite):void {
         this.target = target;
@@ -107,11 +127,14 @@ public class FollowEffectView implements IGameSprite {
     private var _colorTransform:ColorTransform = new ColorTransform();
 
     /**
-     * 颜色变换通道
+     * 颜色变换。设置 null 时字段变成 null，影片上换成一份恒等变换。影片已清空时抛错。
+     *
+     * @return 当前变换。设置 null 之后是 null。
      */
     public function get colorTransform():ColorTransform {
         return _colorTransform;
     }
+    /** @private */
     public function set colorTransform(colorTransform:ColorTransform):void {
         _colorTransform = colorTransform;
         mc.transform.colorTransform = colorTransform ? colorTransform : new ColorTransform();
@@ -120,11 +143,14 @@ public class FollowEffectView implements IGameSprite {
     // 方向
     private var _direct:int;
     /**
-     * 方向，仅限初始化使用，更新位置不可用
+     * 方向。设置时把缩放和旋转乘上方向，并把当前横坐标再乘一次。跟随过程中的位置更新不走这个设置。
+     *
+     * @return 当前方向。
      */
     public function get direct():int {
         return _direct;
     }
+    /** @private */
     public function set direct(value:int):void {
         _direct = value;
 
@@ -135,21 +161,29 @@ public class FollowEffectView implements IGameSprite {
     }
 
     /**
-     * 坐标 x
+     * 影片横坐标。影片已清空时抛错。
+     *
+     * @return 横坐标。
+     * @throws TypeError 影片为 null 时。
      */
     public function get x():Number {
         return mc.x;
     }
+    /** @private */
     public function set x(v:Number):void {
         mc.x = v;
     }
 
     /**
-     * 坐标 y
+     * 影片纵坐标。影片已清空时抛错。
+     *
+     * @return 纵坐标。
+     * @throws TypeError 影片为 null 时。
      */
     public function get y():Number {
         return mc.y;
     }
+    /** @private */
     public function set y(v:Number):void {
         mc.y = v;
     }
@@ -157,18 +191,26 @@ public class FollowEffectView implements IGameSprite {
     // 队伍，同一队伍不可攻击
     private var _team:TeamVO;
     /**
-     * 队伍，同一队伍不可攻击
+     * 队伍。只存下来，攻击判定不读它。
+     *
+     * @return 队伍。默认 null。
      */
     public function get team():TeamVO {
         return _team;
     }
+    /** @private */
     public function set team(v:TeamVO):void {
         _team = v;
     }
 
     /**
-     * 销毁
-     * @param dispose 处理
+     * 停掉影片并清空引用。第二次调用直接返回。<code>dispose</code> 不使用，传 false 也会清掉。不从父级移除，也不调用 <code>onRemove</code>。
+     *
+     * @param dispose 不使用。默认 true。
+     * @example
+     * <listing version="3.0">
+     * view.destroy();
+     * </listing>
      */
     public function destroy(dispose:Boolean = true):void {
         if (_destroyed) {
@@ -202,7 +244,13 @@ public class FollowEffectView implements IGameSprite {
     }
 
     /**
-     * 处理逻辑使用，按 GameConfig.FPS_MAIN 帧率调用
+     * 跟上目标，并比较角色帧。和上次相差不是 0 或 1 时通知移除。目标已清空时抛错。
+     *
+     * @throws TypeError 目标为 null 时。
+     * @example
+     * <listing version="3.0">
+     * view.render();
+     * </listing>
      */
     public function render():void {
         // 更新位置
@@ -219,7 +267,13 @@ public class FollowEffectView implements IGameSprite {
         }
     }
     /**
-     * 处理动画渲染，按GameConfig.FPS_ANIMATE帧率调用
+     * 影片下一帧。标签 <code>loop</code> 停到循环帧，<code>remove</code> 通知移除。没有这两个标签、且当前帧等于总帧数减 1 时也通知移除。影片已清空时抛错。
+     *
+     * @throws TypeError 影片为 null 时。
+     * @example
+     * <listing version="3.0">
+     * view.renderAnimate();
+     * </listing>
      */
     public function renderAnimate():void {
         mc.nextFrame();
@@ -265,47 +319,53 @@ public class FollowEffectView implements IGameSprite {
     }
 
     /**
-     * 返回自身的区域
-     * @return 自身的区域
+     * 自身范围。
+     *
+     * @return 固定 null。
      */
     public function getArea():Rectangle {
         return null;
     }
 
     /**
-     * 返回被打的区域
-     * @return 被打的区域
+     * 受击范围。
+     *
+     * @return 固定 null。
      */
     public function getBodyArea():Rectangle {
         return null;
     }
 
     /**
-     * 返回当前攻击的区域
-     * @return 当前攻击的区域 [FighterHitVO]
+     * 当前攻击数据。
+     *
+     * @return 固定 null。
      */
     public function getCurrentHits():Array {
         return null;
     }
 
     /**
-     * 是否可穿越地图的 XY
-     * @return 是否可穿越地图的 XY
+     * 是否允许穿出地图左右和上沿。
+     *
+     * @return 固定 true。
      */
     public function allowCrossMapXY():Boolean {
         return true;
     }
     /**
-     * 是否可穿越地图的底线
-     * @return 是否可穿越地图的底线
+     * 是否允许穿出地图底边。
+     *
+     * @return 固定 true。
      */
     public function allowCrossMapBottom():Boolean {
         return true;
     }
 
     /**
-     * 取是否触碰版边
-     * @return 是否触碰版边
+     * 是否贴边。
+     *
+     * @return 固定 false。
      */
     public function getIsTouchSide():Boolean {
         return false;
@@ -326,22 +386,24 @@ public class FollowEffectView implements IGameSprite {
 
     /**
      * 置音量
-     * @param v 音量 0-1
+     * @param v 音量。不限制在 0 到 1。影片为 null 时直接返回。
      */
     public function setVolume(v:Number):void {
         KyoDisplayUtils.setMcVolume(mc, v);
     }
 
     /**
-     * 取是否在场景中
-     * @return 是否在场景中
+     * 是否在场景中。
+     *
+     * @return 固定 false。
      */
     public function getActive():Boolean {
         return false;
     }
     /**
-     * 置是否在场景中
-     * @param v 是否在场景中
+     * 空实现。
+     *
+     * @param v 不使用。
      */
     public function setActive(v:Boolean):void {
     }

@@ -42,11 +42,15 @@ import net.play5d.kyo.utils.BitmapDataPool;
 public class ShadowEffectView {
 
     /**
+     * 按目标抓残影并淡出。三色偏移默认都是 0，全是 0 时不染色。
+     *
+     * <p>取样计数从 0 开始，间隔是 1，要等计数先自增再大于间隔才抓一张，所以第 3 次 <code>render</code> 才出现第一张，之后每 3 次一张。新残影从 0.8 开始，同一帧先减 0.1。同一帧里连续两张都淡完时，后一张要等下一帧。容器还没赋值就取样会抛错。<code>stopShadow</code> 之后不再取样，残影清空的下一次渲染才调用 <code>onRemove</code>。</p>
+     *
      * @param target 残影源显示对象。
-     * @param r 红色偏移。
-     * @param g 绿色偏移。
-     * @param b 蓝色偏移。
-     * @param owner 可选所属精灵，用于帧缓存键（通常为 <code>FighterMain</code>）。
+     * @param r 红色偏移。默认 0。
+     * @param g 绿色偏移。默认 0。
+     * @param b 蓝色偏移。默认 0。
+     * @param owner 可选所属精灵，用于帧缓存键。默认 null。通常是角色。
      */
     public function ShadowEffectView(
             target:DisplayObject, r:int = 0, g:int = 0, b:int = 0, owner:BaseGameSprite = null
@@ -59,13 +63,51 @@ public class ShadowEffectView {
 
         _addBpFrame = 0;
     }
+    /**
+     * 残影源。销毁后是 null。
+     */
     public var target:DisplayObject;
+    /**
+     * 红色偏移。全是 0 时不染色。
+     *
+     * @default 0
+     */
     public var r:int                           = 0;
+    /**
+     * 绿色偏移。
+     *
+     * @default 0
+     */
     public var g:int                           = 0;
+    /**
+     * 蓝色偏移。
+     *
+     * @default 0
+     */
     public var b:int                           = 0;
+    /**
+     * 用来生成缓存键的所属精灵。不是角色时键为空。
+     *
+     * @default null
+     */
     public var owner:BaseGameSprite;
+    /**
+     * 残影加到这个容器的最底层。取样前必须赋值。
+     *
+     * @default null
+     */
     public var container:Sprite;
+    /**
+     * 为 true 时不再抓新残影。
+     *
+     * @default false
+     */
     public var stopShadow:Boolean;
+    /**
+     * 残影已经停并且清空后的下一次渲染调用。null 时不调用。
+     *
+     * @default null
+     */
     public var onRemove:Function;
     private var _bps:Vector.<Bitmap>           = new Vector.<Bitmap>();
     /** @private Bitmap -&gt; 缓存键（String）或 false（未入缓存） */
@@ -99,7 +141,13 @@ public class ShadowEffectView {
     }
 
     /**
-     * 每动画帧推进：采样新残影并淡出旧残影。
+     * 取样或淡出。已经销毁时抛错。停掉之后没有残影时通知移除。
+     *
+     * @throws TypeError 已经销毁，或容器、目标缺失时。
+     * @example
+     * <listing version="3.0">
+     * shadow.render();
+     * </listing>
      */
     public function render():void {
 

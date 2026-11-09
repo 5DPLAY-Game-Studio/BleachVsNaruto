@@ -25,15 +25,33 @@ import flash.utils.getTimer;
 
 import net.play5d.game.bvn.GameConfig;
 
+/**
+ * 全屏闪光。像素是画面十分之一，显示时拉到整屏。颜色大于 <code>0x7fffff</code> 用加色，否则用变暗，并把透明度乘 0.8。
+ *
+ * <p>内部透明度按百分数取整后往下减。减到 5 或以下就移除。帧间隔大于 0 时，不是间隔整数倍的调用直接返回。实际耗时超过预计的 1.2 倍时，会把每次减去的量加大。</p>
+ */
 public class ShineEffectView extends Bitmap {
 
     private const _skipFrameRate:Number = 1.2;
 
+    /**
+     * 创建空位图，像素对齐关闭，平滑关闭。
+     */
     public function ShineEffectView() {
         super(null, PixelSnapping.NEVER, false);
 
     }
+    /**
+     * 移除时调用，参数是这个闪光。null 时不调用。
+     *
+     * @default null
+     */
     public var onRemove:Function;
+    /**
+     * 是否还在显示。移除后变成 false。
+     *
+     * @default true
+     */
     public var isActive:Boolean   = true;
     private var _loseAlpha:Number = 1;
     private var _alpha:int;
@@ -43,6 +61,14 @@ public class ShineEffectView extends Bitmap {
     private var _startTimer:int;
     private var _frameTime:int;
 
+    /**
+     * 还在显示时先移除并通知，再释放像素。
+     *
+     * @example
+     * <listing version="3.0">
+     * shine.destroy();
+     * </listing>
+     */
     public function destroy():void {
         _isDestroyed = true;
         if (isActive) {
@@ -54,6 +80,16 @@ public class ShineEffectView extends Bitmap {
         }
     }
 
+    /**
+     * 按颜色铺满画面。尺寸没变就填原像素，变了就新建。默认白色、透明度 0.2。
+     *
+     * @param color 填充色。默认白色。
+     * @param alpha 透明度。变暗时会再乘 0.8。默认 0.2。
+     * @example
+     * <listing version="3.0">
+     * shine.init(0xffffff, 0.2);
+     * </listing>
+     */
     public function init(color:uint = 0xffffff, alpha:Number = 0.2):void {
         var w:int = int(GameConfig.GAME_SIZE.x / 10);
         var h:int = int(GameConfig.GAME_SIZE.y / 10);
@@ -95,6 +131,14 @@ public class ShineEffectView extends Bitmap {
 
     }
 
+    /**
+     * 按间隔减透明度。已经销毁时直接返回。减到 5 或以下就移除。
+     *
+     * @example
+     * <listing version="3.0">
+     * shine.render();
+     * </listing>
+     */
     public function render():void {
         if (_isDestroyed) {
             return;
@@ -118,6 +162,14 @@ public class ShineEffectView extends Bitmap {
         }
     }
 
+    /**
+     * 从父级移除并通知 <code>onRemove</code>。没有父级时吞掉。再调用会再次通知。
+     *
+     * @example
+     * <listing version="3.0">
+     * shine.removeSelf();
+     * </listing>
+     */
     public function removeSelf():void {
 
         isActive = false;

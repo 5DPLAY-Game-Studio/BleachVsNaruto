@@ -43,6 +43,16 @@ import net.play5d.kyo.utils.BitmapDataPool;
  */
 public class BitmapFilterView implements IGameSprite {
 
+    /**
+     * 盖住目标的滤镜位图。目标为 null 时抛错。偏移先存下来，为 null 时渲染读坐标会抛错。
+     *
+     * <p>角色的动画帧计数从 0 记起。第一次渲染时如果计数仍是 0，这一帧不画，接着读边界会抛错。<code>update</code> 会把帧计数改成 -1，下一次就会画。</p>
+     *
+     * @param target 被覆盖的精灵。
+     * @param filter 滤镜。
+     * @param filterOffset 绘制和摆放用的偏移。默认 null。
+     * @throws TypeError 目标为 null 时。
+     */
     public function BitmapFilterView(target:BaseGameSprite, filter:BitmapFilter, filterOffset:Point = null) {
         _bitmap     = new Bitmap(null, 'auto', false);
         this.target = target;
@@ -55,6 +65,9 @@ public class BitmapFilterView implements IGameSprite {
         _filter        = filter;
         _filterOffset  = filterOffset;
     }
+    /**
+     * 被覆盖的精灵。<code>destroy(true)</code> 之后是 null。
+     */
     public var target:BaseGameSprite;
     private var _bitmap:Bitmap;
     private var _filter:BitmapFilter;
@@ -71,7 +84,9 @@ public class BitmapFilterView implements IGameSprite {
     private var _cacheKey:String;
 
     /**
-     * 颜色变换通道
+     * 颜色变换。
+     *
+     * @return 固定 null。
      */
     public function get colorTransform():ColorTransform {
         return null;
@@ -81,6 +96,12 @@ public class BitmapFilterView implements IGameSprite {
     public function set colorTransform(colorTransform:ColorTransform):void {
     }
 
+    /**
+     * 目标的方向。目标已清空时抛错。设置方向没有效果，渲染仍读目标自己的方向。
+     *
+     * @return 目标方向。0 也走朝左的摆法。
+     * @throws TypeError 目标为 null 时。
+     */
     public function get direct():int {
         return target.direct;
     }
@@ -90,6 +111,11 @@ public class BitmapFilterView implements IGameSprite {
 
     }
 
+    /**
+     * 位图横坐标。每次渲染都会按目标和偏移重写。
+     *
+     * @return 当前横坐标。
+     */
     public function get x():Number {
         return _bitmap.x;
     }
@@ -99,6 +125,11 @@ public class BitmapFilterView implements IGameSprite {
         _bitmap.x = v;
     }
 
+    /**
+     * 位图纵坐标。每次渲染都会按目标和偏移重写。
+     *
+     * @return 当前纵坐标。
+     */
     public function get y():Number {
         return _bitmap.y;
     }
@@ -108,6 +139,11 @@ public class BitmapFilterView implements IGameSprite {
         _bitmap.y = v;
     }
 
+    /**
+     * 队伍。
+     *
+     * @return 固定 null。
+     */
     public function get team():TeamVO {
         return null;
     }
@@ -117,26 +153,77 @@ public class BitmapFilterView implements IGameSprite {
 
     }
 
+    /**
+     * 是否标成激活。默认 false。渲染不看这个值。
+     *
+     * @return 激活标记。
+     * @default false
+     * @example
+     * <listing version="3.0">
+     * var on:Boolean = view.getActive();
+     * </listing>
+     */
     public function getActive():Boolean {
         return _isActive;
     }
 
+    /**
+     * 只改激活标记。
+     *
+     * @param v 是否激活。
+     * @example
+     * <listing version="3.0">
+     * view.setActive(true);
+     * </listing>
+     */
     public function setActive(v:Boolean):void {
         _isActive = v;
     }
 
+    /**
+     * 空实现。
+     *
+     * @param v 音量。不使用。
+     */
     public function setVolume(v:Number):void {
     }
 
+    /**
+     * 换滤镜和偏移，并让下一帧重画。偏移为 null 时，下次渲染抛错。
+     *
+     * @param filter 滤镜。
+     * @param filterOffset 偏移。默认 null。
+     * @example
+     * <listing version="3.0">
+     * view.update(filter, offset);
+     * </listing>
+     */
     public function update(filter:BitmapFilter, filterOffset:Point = null):void {
         _filter       = filter;
         _filterOffset = filterOffset;
         _bitmapFrame  = -1;
     }
 
+    /**
+     * 空实现。
+     *
+     * @example
+     * <listing version="3.0">
+     * view.renderAnimate();
+     * </listing>
+     */
     public function renderAnimate():void {
     }
 
+    /**
+     * 重画并跟上目标。没有目标、显示对象已空，或已经销毁时直接返回。偏移或边界还没有时抛错。
+     *
+     * @throws TypeError 偏移或边界缺失时。
+     * @example
+     * <listing version="3.0">
+     * view.render();
+     * </listing>
+     */
     public function render():void {
         if (!target || !_targetDisplay) {
             return;
@@ -159,54 +246,133 @@ public class BitmapFilterView implements IGameSprite {
         _bitmap.y = _targetDisplay.y - _filterOffset.y + _targetBounds.y;
     }
 
+    /**
+     * 是否已按释放销毁。<code>destroy(false)</code> 不会把它变成 true。
+     *
+     * @return 已销毁时为 true。
+     * @example
+     * <listing version="3.0">
+     * var gone:Boolean = view.isDestroyed();
+     * </listing>
+     */
     public function isDestroyed():Boolean {
         return _isDestroyed;
     }
 
+    /**
+     * 滤镜位图。销毁后这张位图还在，只是像素被清掉。
+     *
+     * @return 位图。
+     * @example
+     * <listing version="3.0">
+     * var viewBmp:DisplayObject = view.getDisplay();
+     * </listing>
+     */
     public function getDisplay():DisplayObject {
         return _bitmap;
     }
 
+    /**
+     * 空实现。
+     *
+     * @param hitvo 攻击数据。不使用。
+     * @param target 被打中的对象。不使用。
+     */
     public function hit(hitvo:HitVO, target:IGameSprite):void {
 
     }
 
+    /**
+     * 空实现。
+     *
+     * @param hitvo 攻击数据。不使用。
+     * @param hitRect 攻击范围。默认 null。
+     */
     public function beHit(hitvo:HitVO, hitRect:Rectangle = null):void {
 
     }
 
+    /**
+     * 自身范围。
+     *
+     * @return 固定 null。
+     */
     public function getArea():Rectangle {
         return null;
     }
 
+    /**
+     * 受击范围。
+     *
+     * @return 固定 null。
+     */
     public function getBodyArea():Rectangle {
         return null;
     }
 
+    /**
+     * 当前攻击数据。
+     *
+     * @return 固定 null。
+     */
     public function getCurrentHits():Array {
         return null;
     }
 
+    /**
+     * 是否允许穿出地图左右和上沿。
+     *
+     * @return 固定 true。
+     */
     public function allowCrossMapXY():Boolean {
         return true;
     }
 
+    /**
+     * 是否允许穿出地图底边。
+     *
+     * @return 固定 true。
+     */
     public function allowCrossMapBottom():Boolean {
         return true;
     }
 
+    /**
+     * 是否贴边。
+     *
+     * @return 固定 false。
+     */
     public function getIsTouchSide():Boolean {
         return false;
     }
 
+    /**
+     * 空实现。
+     *
+     * @param v 是否贴边。不使用。
+     */
     public function setIsTouchSide(v:Boolean):void {
 
     }
 
+    /**
+     * 空实现。
+     *
+     * @param v 速度倍率。不使用。
+     */
     public function setSpeedRate(v:Number):void {
 
     }
 
+    /**
+     * 释放像素并清空引用。参数为 false 时什么都不做，销毁标记也不变。不从父级移除位图。
+     *
+     * @param dispose 为 true 时释放。默认 true。
+     * @example
+     * <listing version="3.0">
+     * view.destroy();
+     * </listing>
+     */
     public function destroy(dispose:Boolean = true):void {
         if (dispose) {
             clearBitmapData();

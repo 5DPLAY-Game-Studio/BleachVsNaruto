@@ -25,8 +25,16 @@ import flash.display.Sprite;
 import net.play5d.game.bvn.GameConfig;
 import net.play5d.game.bvn.ctrler.game_ctrls.GameCtrl;
 
+/**
+ * 全屏黑底。像素是画面的十分之一，再拉到整屏，不透明黑色。
+ *
+ * <p><code>fadeIn</code> 和 <code>renderAnimate</code> 是空的。<code>fadeOut</code> 摘掉自己和必杀立绘引用，不释放黑底像素。立绘影片销毁后仍留在显示列表里。</p>
+ */
 public class BlackBackView extends Sprite {
 
+    /**
+     * 铺上黑底。
+     */
     public function BlackBackView() {
         super();
 
@@ -42,6 +50,14 @@ public class BlackBackView extends Sprite {
     private var isRenderFadeOut:Boolean;
     private var _bg:Bitmap;
 
+    /**
+     * 摘掉黑底并释放像素，同时释放立绘位图。移除失败只吞掉。
+     *
+     * @example
+     * <listing version="3.0">
+     * back.destroy();
+     * </listing>
+     */
     public function destroy():void {
         if (_bg) {
             try {
@@ -55,12 +71,36 @@ public class BlackBackView extends Sprite {
         removeBishaFace();
     }
 
+    /**
+     * 空实现。
+     *
+     * @example
+     * <listing version="3.0">
+     * back.renderAnimate();
+     * </listing>
+     */
     public function renderAnimate():void {
     }
 
+    /**
+     * 空实现。
+     *
+     * @example
+     * <listing version="3.0">
+     * back.fadeIn();
+     * </listing>
+     */
     public function fadeIn():void {
     }
 
+    /**
+     * 清掉立绘引用，并尝试从父级移除自己。没有父级时吞掉。黑底像素不释放。
+     *
+     * @example
+     * <listing version="3.0">
+     * back.fadeOut();
+     * </listing>
+     */
     public function fadeOut():void {
         removeBishaFace();
         try {
@@ -70,6 +110,17 @@ public class BlackBackView extends Sprite {
         }
     }
 
+    /**
+     * 显示必杀立绘。第一次会创建并加入。纵坐标是 <code>100 + 100 / 镜头缩放</code>，没有镜头时缩放按 1。缩放是 0 时变成 Infinity。每次都会从第 2 帧重播。
+     *
+     * @param faceid 脸槽编号。
+     * @param face 脸图。
+     * @throws TypeError 立绘影片或脸图缺失时。
+     * @example
+     * <listing version="3.0">
+     * back.showBishaFace(1, face);
+     * </listing>
+     */
     public function showBishaFace(faceid:int, face:DisplayObject):void {
         if (!_bishaFace) {
             _bishaFace      = new BishaFaceEffectView();
