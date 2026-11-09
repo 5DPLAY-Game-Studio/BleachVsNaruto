@@ -29,9 +29,17 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterHurtType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 被打 */
+    /**
+     * 被打。
+     *
+     * @default 0
+     */
     public static const HURT:int     = 0;
-    /** 击飞 */
+    /**
+     * 击飞。
+     *
+     * @default 1
+     */
     public static const HURT_FLY:int = 1;
 }
 }

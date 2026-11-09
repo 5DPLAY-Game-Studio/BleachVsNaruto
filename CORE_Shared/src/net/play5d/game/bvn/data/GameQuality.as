@@ -26,15 +26,35 @@ package net.play5d.game.bvn.data {
 public class GameQuality {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 低 */
+    /**
+     * 低。
+     *
+     * @default low
+     */
     public static const LOW:String    = 'low';
-    /** 中 */
+    /**
+     * 中。
+     *
+     * @default medium
+     */
     public static const MEDIUM:String = 'medium';
-    /** 高 */
+    /**
+     * 高。
+     *
+     * @default high
+     */
     public static const HIGH:String   = 'high';
-    /** 更高 */
+    /**
+     * 更高。
+     *
+     * @default higher
+     */
     public static const HIGHER:String = 'higher';
-    /** 最高 */
+    /**
+     * 最高。
+     *
+     * @default best
+     */
     public static const BEST:String   = 'best';
 }
 }

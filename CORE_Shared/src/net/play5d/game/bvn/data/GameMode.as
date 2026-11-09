@@ -30,31 +30,75 @@ package net.play5d.game.bvn.data {
 public class GameMode {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 小队闯关模式 */
+    /**
+     * 小队闯关模式。
+     *
+     * @default 10
+     */
     public static const TEAM_ARCADE:int    = 10;
-    /** 小队双人对战 */
+    /**
+     * 小队双人对战。
+     *
+     * @default 11
+     */
     public static const TEAM_VS_PEOPLE:int = 11;
-    /** 小队对战电脑 */
+    /**
+     * 小队对战电脑。
+     *
+     * @default 12
+     */
     public static const TEAM_VS_CPU:int    = 12;
-    /** 小队观战模式 */
+    /**
+     * 小队观战模式。
+     *
+     * @default 13
+     */
     public static const TEAM_WATCH:int     = 13;
 
-    /** 单人闯关模式 */
+    /**
+     * 单人闯关模式。
+     *
+     * @default 20
+     */
     public static const SINGLE_ARCADE:int    = 20;
-    /** 单人双人对战 */
+    /**
+     * 单人双人对战。
+     *
+     * @default 21
+     */
     public static const SINGLE_VS_PEOPLE:int = 21;
-    /** 单人对战电脑 */
+    /**
+     * 单人对战电脑。
+     *
+     * @default 22
+     */
     public static const SINGLE_VS_CPU:int    = 22;
-    /** 单人观战模式 */
+    /**
+     * 单人观战模式。
+     *
+     * @default 23
+     */
     public static const SINGLE_WATCH:int     = 23;
 
-    /** 挑战模式（未启用） */
+    /**
+     * 挑战模式（未启用）。
+     *
+     * @default 30
+     */
     public static const SURVIVOR:int = 30;
 
-    /** 练习模式 */
+    /**
+     * 练习模式。
+     *
+     * @default 40
+     */
     public static const TRAINING:int = 40;
 
-    /** 无双冒险 */
+    /**
+     * 无双冒险。
+     *
+     * @default 100
+     */
     public static const MUSOU_ARCADE:int = 100;
 
     /**

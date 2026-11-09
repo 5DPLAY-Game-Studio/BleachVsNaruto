@@ -29,27 +29,63 @@ package net.play5d.game.bvn.data.lan {
 public class LanMsgType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 聊天 */
+    /**
+     * 聊天。
+     *
+     * @default CHAT
+     */
     public static const CHAT:String = 'CHAT';
 
-    /** 开始游戏 */
+    /**
+     * 开始游戏。
+     *
+     * @default START_GAME
+     */
     public static const START_GAME:String = 'START_GAME';
 
-    /** 请求加入 */
+    /**
+     * 请求加入。
+     *
+     * @default JOIN
+     */
     public static const JOIN:String      = 'JOIN';
-    /** 已加入房间 */
+    /**
+     * 已加入房间。
+     *
+     * @default JOIN_IN
+     */
     public static const JOIN_IN:String   = 'JOIN_IN';
-    /** 加入结果回包 */
+    /**
+     * 加入结果回包。
+     *
+     * @default JOIN_BACK
+     */
     public static const JOIN_BACK:String = 'JOIN_BACK';
 
-    /** 踢出房间 */
+    /**
+     * 踢出房间。
+     *
+     * @default KICK_OUT
+     */
     public static const KICK_OUT:String = 'KICK_OUT';
 
-    /** 输入发送 */
+    /**
+     * 输入发送。
+     *
+     * @default 8
+     */
     public static const INPUT_SEND:int   = 8;
-    /** 输入更新 */
+    /**
+     * 输入更新。
+     *
+     * @default 9
+     */
     public static const INPUT_UPDATE:int = 9;
-    /** 输入同步 */
+    /**
+     * 输入同步。
+     *
+     * @default 10
+     */
     public static const INPUT_SYNC:int   = 10;
 
 }

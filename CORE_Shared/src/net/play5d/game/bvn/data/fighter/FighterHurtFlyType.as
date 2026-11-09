@@ -29,16 +29,36 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterHurtFlyType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 没有击飞 */
+    /**
+     * 没有击飞。
+     *
+     * @default 0
+     */
     public static const NO_HURT_FLY:int = 0;
 
-    /** 击飞 */
+    /**
+     * 击飞。
+     *
+     * @default 1
+     */
     public static const HURT_FLY_ING:int  = 1;
-    /** 落地 */
+    /**
+     * 落地。
+     *
+     * @default 2
+     */
     public static const HURT_FLY_FALL:int = 2;
-    /** 弹起 */
+    /**
+     * 弹起。
+     *
+     * @default 3
+     */
     public static const HURT_FLY_TAN:int  = 3;
-    /** 倒地 */
+    /**
+     * 倒地。
+     *
+     * @default 4
+     */
     public static const HURT_FLY_LIE:int  = 4;
 }
 }

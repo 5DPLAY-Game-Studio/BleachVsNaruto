@@ -26,9 +26,17 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterDefenseType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 剑伤/砍伤 */
+    /**
+     * 剑伤/砍伤。
+     *
+     * @default 0
+     */
     public static const SWORD:int = 0;
-    /** 拳击/打击 */
+    /**
+     * 拳击/打击。
+     *
+     * @default 1
+     */
     public static const HAND:int  = 1;
 }
 }

@@ -31,11 +31,23 @@ package net.play5d.game.bvn.data.lan {
 public class UdpDataType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 二进制载荷 */
+    /**
+     * 二进制载荷。
+     *
+     * @default 1
+     */
     public static const BYTEARRAY:int = 1;
-    /** UTF 字符串 */
+    /**
+     * UTF 字符串。
+     *
+     * @default 2
+     */
     public static const STRING:int    = 2;
-    /** AMF 对象 */
+    /**
+     * AMF 对象。
+     *
+     * @default 3
+     */
     public static const OBJECT:int    = 3;
 }
 }

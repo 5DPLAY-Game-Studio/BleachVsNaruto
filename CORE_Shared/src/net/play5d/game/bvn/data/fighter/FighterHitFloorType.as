@@ -26,11 +26,23 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterHitFloorType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 弹起 */
+    /**
+     * 弹起。
+     *
+     * @default 0
+     */
     public static const TAN:int    = 0;
-    /** 正常落地 */
+    /**
+     * 正常落地。
+     *
+     * @default 1
+     */
     public static const NORMAL:int = 1;
-    /** 重落地 */
+    /**
+     * 重落地。
+     *
+     * @default 2
+     */
     public static const HEAVY:int  = 2;
 }
 }

@@ -26,11 +26,23 @@ package net.play5d.game.bvn.data.lan {
 public class LanPorts {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** UDP 主机广播 / 发现端口 */
+    /**
+     * UDP 主机广播 / 发现端口。
+     *
+     * @default 17477
+     */
     public static const UDP_SERVER:int = 17477;
-    /** UDP 客户端侦听端口 */
+    /**
+     * UDP 客户端侦听端口。
+     *
+     * @default 17478
+     */
     public static const UDP_CLIENT:int = 17478;
-    /** TCP 会话端口 */
+    /**
+     * TCP 会话端口。
+     *
+     * @default 17511
+     */
     public static const TCP:int        = 17511;
 }
 }

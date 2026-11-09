@@ -26,7 +26,11 @@ package net.play5d.game.bvn.data {
 public class DefinedClass {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 主界面 MovieClip 链接名 */
+    /**
+     * 主界面 MovieClip 链接名。
+     *
+     * @default main_mc
+     */
     public static const MC_MAIN:String = 'main_mc';
 }
 }

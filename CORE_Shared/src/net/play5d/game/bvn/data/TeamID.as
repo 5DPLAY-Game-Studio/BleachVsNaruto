@@ -26,12 +26,24 @@ package net.play5d.game.bvn.data {
 public class TeamID {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 未知队伍 */
+    /**
+     * 未知队伍。
+     *
+     * @default -1
+     */
     public static const UNKNOWN:int = -1;
 
-    /** 队伍 1 */
+    /**
+     * 队伍 1。
+     *
+     * @default 1
+     */
     public static const TEAM_1:int = 1;
-    /** 队伍 2 */
+    /**
+     * 队伍 2。
+     *
+     * @default 2
+     */
     public static const TEAM_2:int = 2;
 }
 }

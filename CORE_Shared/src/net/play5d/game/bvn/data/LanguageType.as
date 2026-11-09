@@ -26,17 +26,41 @@ package net.play5d.game.bvn.data {
 public class LanguageType {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 简体中文 */
+    /**
+     * 简体中文。
+     *
+     * @default zh-CN
+     */
     public static const CHINESE_SIMPLIFIED:String  = 'zh-CN';
-    /** 繁体中文 */
+    /**
+     * 繁体中文。
+     *
+     * @default zh-TW
+     */
     public static const CHINESE_TRADITIONAL:String = 'zh-TW';
-    /** 英文 */
+    /**
+     * 英文。
+     *
+     * @default en
+     */
     public static const ENGLISH:String             = 'en';
-    /** 日文 */
+    /**
+     * 日文。
+     *
+     * @default ja
+     */
     public static const JAPANESE:String            = 'ja';
-    /** 韩文 */
+    /**
+     * 韩文。
+     *
+     * @default ko
+     */
     public static const KOREAN:String              = 'ko';
-    /** 越南语 */
+    /**
+     * 越南语。
+     *
+     * @default vi
+     */
     public static const VIETNAMESE:String          = 'vi';
 
     /** @private 全部支持的语言码 */

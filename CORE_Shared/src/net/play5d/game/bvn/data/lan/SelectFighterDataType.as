@@ -24,18 +24,42 @@ package net.play5d.game.bvn.data.lan {
 public class SelectFighterDataType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 选人包键 */
+    /**
+     * 选人包键。
+     *
+     * @default SELECT
+     */
     public static const KEY:String = 'SELECT';
 
-    /** 选择角色 */
+    /**
+     * 选择角色。
+     *
+     * @default 1
+     */
     public static const SELECT:int         = 1;
-    /** 进入下一步 */
+    /**
+     * 进入下一步。
+     *
+     * @default 2
+     */
     public static const NEXT_STEP:int      = 2;
-    /** 选人完成 */
+    /**
+     * 选人完成。
+     *
+     * @default 3
+     */
     public static const FIGHTER_FINISH:int = 3;
-    /** 选择出战顺序 */
+    /**
+     * 选择出战顺序。
+     *
+     * @default 4
+     */
     public static const INDEX:int          = 4;
-    /** 出战顺序完成 */
+    /**
+     * 出战顺序完成。
+     *
+     * @default 5
+     */
     public static const INDEX_FINISH:int   = 5;
 
 }

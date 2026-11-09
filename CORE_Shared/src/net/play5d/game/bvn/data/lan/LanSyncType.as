@@ -24,14 +24,30 @@ package net.play5d.game.bvn.data.lan {
 public class LanSyncType {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 对局开始 */
+    /**
+     * 对局开始。
+     *
+     * @default 3
+     */
     public static const GAME_START:int  = 3;
-    /** 对局结束 */
+    /**
+     * 对局结束。
+     *
+     * @default 4
+     */
     public static const GAME_FINISH:int = 4;
 
-    /** 回合开始 */
+    /**
+     * 回合开始。
+     *
+     * @default 6
+     */
     public static const ROUND_START:int  = 6;
-    /** 回合结束 */
+    /**
+     * 回合结束。
+     *
+     * @default 7
+     */
     public static const ROUND_FINISH:int = 7;
 
 }

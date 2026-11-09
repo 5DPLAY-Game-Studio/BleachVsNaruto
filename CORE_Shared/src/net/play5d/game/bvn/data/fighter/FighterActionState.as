@@ -29,48 +29,124 @@ package net.play5d.game.bvn.data.fighter {
 public class FighterActionState {
     include '../../../../../../../include/ImportVersion.as';
 
-    /** 正常 */
+    /**
+     * 正常。
+     *
+     * @default 0
+     */
     public static const NORMAL:int = 0;
-    /** 硬直（动作结束后摇） */
+    /**
+     * 硬直（动作结束后摇）。
+     *
+     * @default 40
+     */
     public static const FREEZE:int = 40;
 
-    /** 正在普通攻击（J / KJ） */
+    /**
+     * 正在普通攻击（J / KJ）。
+     *
+     * @default 10
+     */
     public static const ATTACK_ING:int      = 10;
-    /** 正在释放技能（WJ / SJ / U / WU / SU / KU） */
+    /**
+     * 正在释放技能（WJ / SJ / U / WU / SU / KU）。
+     *
+     * @default 11
+     */
     public static const SKILL_ING:int       = 11;
-    /** 正在释放必杀（I / WI / KI） */
+    /**
+     * 正在释放必杀（I / WI / KI）。
+     *
+     * @default 12
+     */
     public static const BISHA_ING:int       = 12;
-    /** 正在释放超必杀（SI） */
+    /**
+     * 正在释放超必杀（SI）。
+     *
+     * @default 13
+     */
     public static const BISHA_SUPER_ING:int = 13;
 
-    /** 正在跳跃（K） */
+    /**
+     * 正在跳跃（K）。
+     *
+     * @default 14
+     */
     public static const JUMP_ING:int     = 14;
-    /** 正在瞬步（L） */
+    /**
+     * 正在瞬步（L）。
+     *
+     * @default 15
+     */
     public static const DASH_ING:int     = 15;
-    /** 正在执行受击触发动作（如反击等） */
+    /**
+     * 正在执行受击触发动作（如反击等）。
+     *
+     * @default 16
+     */
     public static const HURT_ACT_ING:int = 16;
 
-    /** 正在防御（S） */
+    /**
+     * 正在防御（S）。
+     *
+     * @default 20
+     */
     public static const DEFENSE_ING:int   = 20;
-    /** 正在被打 */
+    /**
+     * 正在被打。
+     *
+     * @default 21
+     */
     public static const HURT_ING:int      = 21;
-    /** 正在被击飞 */
+    /**
+     * 正在被击飞。
+     *
+     * @default 22
+     */
     public static const HURT_FLYING:int   = 22;
-    /** 击飞后落地 */
+    /**
+     * 击飞后落地。
+     *
+     * @default 23
+     */
     public static const HURT_DOWN:int     = 23;
-    /** 落地后弹起 */
+    /**
+     * 落地后弹起。
+     *
+     * @default 24
+     */
     public static const HURT_DOWN_TAN:int = 24;
 
-    /** 死亡 */
+    /**
+     * 死亡。
+     *
+     * @default 30
+     */
     public static const DEAD:int = 30;
 
-    /** 正在万解/变身 */
+    /**
+     * 正在万解/变身。
+     *
+     * @default 50
+     */
     public static const WAN_KAI_ING:int = 50;
-    /** 正在执行开场 */
+    /**
+     * 正在执行开场。
+     *
+     * @default 60
+     */
     public static const KAI_CHANG:int   = 60;
-    /** 正在执行胜利 */
+    /**
+     * 正在执行胜利。
+     *
+     * @default 61
+     */
     public static const WIN:int         = 61;
-    /** 正在执行失败 */
+    /**
+     * 正在执行失败。
+     *
+     * @default 62
+     */
     public static const LOSE:int        = 62;
 
     /** @private 不允许进行胜利的动作状态（必杀、超必杀、万解） */

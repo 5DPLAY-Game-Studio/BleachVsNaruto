@@ -26,12 +26,24 @@ package net.play5d.game.bvn.data {
 public class MapLogoState {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 不显示 */
+    /**
+     * 不显示。
+     *
+     * @default 0
+     */
     public static const HIDE:int = 0;
 
-    /** 显示 4399 Logo */
+    /**
+     * 显示 4399 Logo。
+     *
+     * @default 1
+     */
     public static const SHOW_4399:int = 1;
-    /** 显示 MINE Logo */
+    /**
+     * 显示 MINE Logo。
+     *
+     * @default 2
+     */
     public static const SHOW_MINE:int = 2;
 }
 }

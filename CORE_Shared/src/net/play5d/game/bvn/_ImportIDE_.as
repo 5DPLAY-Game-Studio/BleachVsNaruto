@@ -95,6 +95,11 @@ public class _ImportIDE_ extends Sprite {
 
     /**
      * 构造导入主类，并触发全局符号链接。
+     *
+     * @example
+     * <listing version="3.0">
+     * new _ImportIDE_();
+     * </listing>
      */
     public function _ImportIDE_() {
         _SHARED_GLOBALS_;

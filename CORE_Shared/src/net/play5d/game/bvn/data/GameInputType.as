@@ -28,11 +28,23 @@ package net.play5d.game.bvn.data {
 public class GameInputType {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 菜单 */
+    /**
+     * 菜单。
+     *
+     * @default MENU
+     */
     public static const MENU:String = 'MENU';
-    /** 1P */
+    /**
+     * 1P。
+     *
+     * @default P1
+     */
     public static const P1:String   = 'P1';
-    /** 2P */
+    /**
+     * 2P。
+     *
+     * @default P2
+     */
     public static const P2:String   = 'P2';
 }
 }

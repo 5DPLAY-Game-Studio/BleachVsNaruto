@@ -26,34 +26,82 @@ package net.play5d.game.bvn.data {
 public class HitType {
     include '../../../../../../include/ImportVersion.as';
 
-    /** 没有特效 */
+    /**
+     * 没有特效。
+     *
+     * @default 0
+     */
     public static const NONE:int = 0;
 
-    /** 砍 */
+    /**
+     * 砍。
+     *
+     * @default 1
+     */
     public static const KAN:int       = 1;
-    /** 重砍 */
+    /**
+     * 重砍。
+     *
+     * @default 6
+     */
     public static const KAN_HEAVY:int = 6;
 
-    /** 打 */
+    /**
+     * 打。
+     *
+     * @default 2
+     */
     public static const DA:int       = 2;
-    /** 重打 */
+    /**
+     * 重打。
+     *
+     * @default 3
+     */
     public static const DA_HEAVY:int = 3;
 
-    /** 魔法轻击 */
+    /**
+     * 魔法轻击。
+     *
+     * @default 4
+     */
     public static const MAGIC:int       = 4;
-    /** 魔法重击 */
+    /**
+     * 魔法重击。
+     *
+     * @default 5
+     */
     public static const MAGIC_HEAVY:int = 5;
 
-    /** 火焰 */
+    /**
+     * 火焰。
+     *
+     * @default 7
+     */
     public static const FIRE:int     = 7;
-    /** 冰冻 */
+    /**
+     * 冰冻。
+     *
+     * @default 8
+     */
     public static const ICE:int      = 8;
-    /** 雷电 */
+    /**
+     * 雷电。
+     *
+     * @default 9
+     */
     public static const ELECTRIC:int = 9;
-    /** 石化 */
+    /**
+     * 石化。
+     *
+     * @default 10
+     */
     public static const STONE:int    = 10;
 
-    /** 摔技 */
+    /**
+     * 摔技。
+     *
+     * @default 11
+     */
     public static const CATCH:int = 11;
 
     /** @private 属于重击类型的类型（重砍、重打、魔法重击、火焰、冰冻、雷电） */
