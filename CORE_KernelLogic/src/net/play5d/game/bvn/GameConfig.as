@@ -22,139 +22,505 @@ import flash.geom.Point;
 
 import net.play5d.game.bvn.data.MapLogoState;
 
+/**
+ * 全局数值。<code>GAME_SIZE</code> 和 <code>GAME_SCALE</code> 各是同一份 <code>Point</code>，改 <code>x</code>、<code>y</code> 会影响所有读取方。
+ *
+ * <p><code>SPEED_PLUS_DEFAULT</code> 是动画帧率除以游戏帧率。<code>setGameFps</code> 只改 <code>FPS_GAME</code> 和 <code>SPEED_PLUS</code>，不改舞台帧率。游戏帧率写成 0 时，这个比值变成 Infinity。</p>
+ */
 public class GameConfig {
 
-    // 调试模式
+    /**
+     * 是否调试模式。
+     *
+     * @default false
+     */
     public static var DEBUG_MODE:Boolean = false;
-    // 触屏模式
+    /**
+     * 是否触屏。为 true 时，<code>MainGame.initialize</code> 会初始化触摸。
+     *
+     * @default false
+     */
     public static var TOUCH_MODE:Boolean = false;
-    // 触屏返回按钮文件名（assets/ui/bitmap，由壳注入）
+    /**
+     * 触屏返回按钮文件名，相对 <code>assets/ui/bitmap</code>，由壳写入。
+     *
+     * @default null
+     */
     public static var TOUCH_BACK_BTN:String;
 
     ///////////////////////////////////////////////////////////////////////////
 
-    // 重力
+    /**
+     * 重力。
+     *
+     * @default 12
+     */
     public static const G:Number          = 12;
-    // 重力加速度
+    /**
+     * 每帧累加的重力增量。
+     *
+     * @default 1.2
+     */
     public static const G_ADD:Number      = 1.2;
-    // 在地面上的重力
+    /**
+     * 落回地面时写入的重力。
+     *
+     * @default 4
+     */
     public static const G_ON_FLOOR:Number = 4;
 
     ///////////////////////////////////////////////////////////////////////////
 
-    // 游戏尺寸
+    /**
+     * 游戏画面尺寸，800×600。引用不能换，坐标可以改。
+     *
+     * @default 800,600
+     */
     public static const GAME_SIZE:Point = new Point(800, 600);
-    // 游戏与场景之间的比例
+    /**
+     * 游戏相对场景的缩放。单指拖动的位移会除以它。
+     *
+     * @default 1,1
+     */
     public static var GAME_SCALE:Point  = new Point(1, 1);
 
     ///////////////////////////////////////////////////////////////////////////
 
-    // 游戏帧率
+    /**
+     * 对局帧率。<code>setGameFps</code> 会改它。
+     *
+     * @default 60
+     */
     public static var FPS_GAME:int         = 60;
-    // UI界面帧率
+    /**
+     * 界面帧率。
+     *
+     * @default 30
+     */
     public static const FPS_UI:int         = 30;
-    // 动画帧率
+    /**
+     * 动画帧率。
+     *
+     * @default 30
+     */
     public static const FPS_ANIMATE:int    = 30;
-    // 闪光效果的FPS
+    /**
+     * 闪光效果帧率。
+     *
+     * @default 15
+     */
     public static var FPS_SHINE_EFFECT:int = 15;
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public static const BULLET_HOLD_FRAME_PLUS:Number      = 2; //发射的波，子弹的持续时间比率
-    public static const JUMP_DELAY_FRAME:int               = 2; //跳时，停留在起跳时的帧数，延时(动画FPS)
-    public static const JUMP_DELAY_FRAME_AIR:int           = 1; //跳时，停留在起跳时的帧数，延时(动画FPS)
-    public static const JUMP_DAMPING:Number                = 0.5; //跳跃阻尼
-    public static const HURT_JUMP_FRAME:int                = 15; //击飞时，在空中停留的最短时间(动画FPS)
-    public static const HURT_GAP_FRAME:int                 = 4; //受攻击的间隔(无敌时间 动画FPS)
-    public static const BREAK_DEF_GAP_FRAME:int            = 4; //破防时的无敌时间(动画FPS)
-    public static const BREAK_DEF_DOWN_GAP_FRAME:int       = 10; //破防时的无敌时间(击飞)(动画FPS)
-    public static const BREAK_DEF_HOLD_FRAME:int           = 0.7 * 60; //破防时的停顿(动画FPS)
-    public static const DEFENSE_GAP_FRAME:int              = 4; //防御攻击的间隔(动画FPS)
-    public static const DEFENSE_DAMPING_X:Number           = 1; //被打时的速度阻尼X
-    public static const DEFENSE_GAP_FRAME_DOWN:int         = 8; //防御击倒型攻击的间隔(动画FPS)
-    public static const DEFENSE_LOSE_HP_RATE:Number        = 0.05; //防御攻击时的受伤比率
-    public static const DEFENSE_HOLD_FRAME_MIN:int         = 5; //防御击倒型攻击的间隔(动画FPS)
-    public static const DEFENSE_HOLD_FRAME_MAX:int         = 10; //防御击倒型攻击的间隔(动画FPS)
-    public static const DEFENSE_HOLD_FRAME_DOWN:int        = 10; //防御击倒型攻击的间隔(动画FPS)
-    public static const HURT_DAMPING_X:Number              = 0.1; //被打时的速度阻尼X
-    public static const HURT_DAMPING_Y:Number              = 0.5; //被打时的速度阻尼Y
-    public static const HURT_Y_ADD_INAIR:Number            = 3; //被打时，在空中时，被打到空中时的Y增加
-    public static const HURT_Y_ADD:Number                  = 6; //被打到空中时的Y增加
-    public static const STEEL_HURT_GAP_FRAME:int           = 4; //刚身受攻击的间隔(无敌时间 动画FPS)
-    public static const STEEL_HURT_DOWN_GAP_FRAME:int      = 10; //刚身受攻击(击飞)的间隔(无敌时间 动画FPS)
-    public static const STEEL_HURT_HP_PERCENT:Number       = 0.65; //刚身受攻击的损血百分比
-    public static const STEEL_SUPER_HURT_HP_PERCENT:Number = 0.3; //刚身(超级)受攻击的损血百分比
-    public static const HURT_FLY_DAMPING_X:Number          = 0; //被击飞时的速度阻尼X
-    public static const HURT_FLY_DAMPING_Y:Number          = 0.5; //被击飞时的速度阻尼Y
-    public static const HIT_FLOOR_DAMPING_X:Number         = 2; //被击飞时的，接触到地面的阻尼X
-    public static const HIT_FLOOR_DAMPING_X_HEAVY:Number   = 4; //被重击地面时，接触到地面的阻尼X
-    public static const HIT_FLOOR_TAN_Y_MIN:Number         = 3; //被击飞时的，接触到地面弹起的Y，最小值
-    public static const HIT_FLOOR_TAN_Y_MAX:Number         = 8; //被击飞时的，接触到地面弹起的Y，最大值
-    public static const HIT_DOWN_FRAME:int                 = 15; //在地面躺上时间
-    public static const HIT_DOWN_FRAME_HEAVY:int           = 30; //重击到地面时，躺的时间
-    public static const HIT_DOWN_BY_HITY:int               = 5; //当hity大于该值时，执行直接击倒，重击效果
-    public static const NO_TOUCH_BAN_ON_VECY:int           = 5; //当vecY大于该值时，不能站在空中的板上
-    public static const X_SIDE_OFFSET:int                  = 10; //角色边界距离补正，像素
-    public static const HURT_DOWN_JUMP_FRAME:int           = 20; //倒地起身的帧数
-    public static const HURT_DOWN_JUMP_DAMPING:int         = 1; //倒地起身的速度减值
+    /**
+     * 发射体持续时间倍率。
+     *
+     * @default 2
+     */
+    public static const BULLET_HOLD_FRAME_PLUS:Number      = 2;
+    /**
+     * 地面起跳停留的动画帧数。
+     *
+     * @default 2
+     */
+    public static const JUMP_DELAY_FRAME:int               = 2;
+    /**
+     * 空中起跳停留的动画帧数。
+     *
+     * @default 1
+     */
+    public static const JUMP_DELAY_FRAME_AIR:int           = 1;
+    /**
+     * 跳跃阻尼。
+     *
+     * @default 0.5
+     */
+    public static const JUMP_DAMPING:Number                = 0.5;
+    /**
+     * 击飞后留在空中的最短动画帧数。
+     *
+     * @default 15
+     */
+    public static const HURT_JUMP_FRAME:int                = 15;
+    /**
+     * 受击后的无敌动画帧数。
+     *
+     * @default 4
+     */
+    public static const HURT_GAP_FRAME:int                 = 4;
+    /**
+     * 破防后的无敌动画帧数。
+     *
+     * @default 4
+     */
+    public static const BREAK_DEF_GAP_FRAME:int            = 4;
+    /**
+     * 破防击飞后的无敌动画帧数。
+     *
+     * @default 10
+     */
+    public static const BREAK_DEF_DOWN_GAP_FRAME:int       = 10;
+    /**
+     * 破防停顿的动画帧数。表达式是 <code>0.7 * 60</code>，赋给 <code>int</code> 时截断。
+     */
+    public static const BREAK_DEF_HOLD_FRAME:int           = 0.7 * 60;
+    /**
+     * 防御命中的间隔，动画帧。
+     *
+     * @default 4
+     */
+    public static const DEFENSE_GAP_FRAME:int              = 4;
+    /**
+     * 防御时的横向速度阻尼。
+     *
+     * @default 1
+     */
+    public static const DEFENSE_DAMPING_X:Number           = 1;
+    /**
+     * 防御击倒的间隔，动画帧。
+     *
+     * @default 8
+     */
+    public static const DEFENSE_GAP_FRAME_DOWN:int         = 8;
+    /**
+     * 防御时的扣血比例。
+     *
+     * @default 0.05
+     */
+    public static const DEFENSE_LOSE_HP_RATE:Number        = 0.05;
+    /**
+     * 防御停顿的最短动画帧数。
+     *
+     * @default 5
+     */
+    public static const DEFENSE_HOLD_FRAME_MIN:int         = 5;
+    /**
+     * 防御停顿的最长动画帧数。
+     *
+     * @default 10
+     */
+    public static const DEFENSE_HOLD_FRAME_MAX:int         = 10;
+    /**
+     * 防御击倒的停顿动画帧数。
+     *
+     * @default 10
+     */
+    public static const DEFENSE_HOLD_FRAME_DOWN:int        = 10;
+    /**
+     * 受击时的横向速度阻尼。
+     *
+     * @default 0.1
+     */
+    public static const HURT_DAMPING_X:Number              = 0.1;
+    /**
+     * 受击时的纵向速度阻尼。
+     *
+     * @default 0.5
+     */
+    public static const HURT_DAMPING_Y:Number              = 0.5;
+    /**
+     * 人已经在空中时，再被打上天追加的纵向速度。
+     *
+     * @default 3
+     */
+    public static const HURT_Y_ADD_INAIR:Number            = 3;
+    /**
+     * 被打上天追加的纵向速度。
+     *
+     * @default 6
+     */
+    public static const HURT_Y_ADD:Number                  = 6;
+    /**
+     * 钢体受击的无敌动画帧数。
+     *
+     * @default 4
+     */
+    public static const STEEL_HURT_GAP_FRAME:int           = 4;
+    /**
+     * 钢体被击飞的无敌动画帧数。
+     *
+     * @default 10
+     */
+    public static const STEEL_HURT_DOWN_GAP_FRAME:int      = 10;
+    /**
+     * 钢体受击扣血比例。
+     *
+     * @default 0.65
+     */
+    public static const STEEL_HURT_HP_PERCENT:Number       = 0.65;
+    /**
+     * 超级钢体受击扣血比例。
+     *
+     * @default 0.3
+     */
+    public static const STEEL_SUPER_HURT_HP_PERCENT:Number = 0.3;
+    /**
+     * 击飞时的横向速度阻尼。
+     *
+     * @default 0
+     */
+    public static const HURT_FLY_DAMPING_X:Number          = 0;
+    /**
+     * 击飞时的纵向速度阻尼。
+     *
+     * @default 0.5
+     */
+    public static const HURT_FLY_DAMPING_Y:Number          = 0.5;
+    /**
+     * 击飞落地时的横向阻尼。
+     *
+     * @default 2
+     */
+    public static const HIT_FLOOR_DAMPING_X:Number         = 2;
+    /**
+     * 重击落地时的横向阻尼。
+     *
+     * @default 4
+     */
+    public static const HIT_FLOOR_DAMPING_X_HEAVY:Number   = 4;
+    /**
+     * 落地弹起的最小纵向速度。
+     *
+     * @default 3
+     */
+    public static const HIT_FLOOR_TAN_Y_MIN:Number         = 3;
+    /**
+     * 落地弹起的最大纵向速度。
+     *
+     * @default 8
+     */
+    public static const HIT_FLOOR_TAN_Y_MAX:Number         = 8;
+    /**
+     * 倒地躺着的动画帧数。
+     *
+     * @default 15
+     */
+    public static const HIT_DOWN_FRAME:int                 = 15;
+    /**
+     * 重击倒地躺着的动画帧数。
+     *
+     * @default 30
+     */
+    public static const HIT_DOWN_FRAME_HEAVY:int           = 30;
+    /**
+     * 攻击纵向速度大于这个值时按重击倒地。
+     *
+     * @default 5
+     */
+    public static const HIT_DOWN_BY_HITY:int               = 5;
+    /**
+     * 纵向速度大于这个值时不能落在空中平台上。
+     *
+     * @default 5
+     */
+    public static const NO_TOUCH_BAN_ON_VECY:int           = 5;
+    /**
+     * 角色贴边时的像素补正。
+     *
+     * @default 10
+     */
+    public static const X_SIDE_OFFSET:int                  = 10;
+    /**
+     * 倒地起身的动画帧数。
+     *
+     * @default 20
+     */
+    public static const HURT_DOWN_JUMP_FRAME:int           = 20;
+    /**
+     * 倒地起身时减去的速度。
+     *
+     * @default 1
+     */
+    public static const HURT_DOWN_JUMP_DAMPING:int         = 1;
 
     ///////////////////////////////////////////////////////////////////////////
 
-    // 使用能量后，等待一定时间后自动加能量（秒）
+    /**
+     * 用过能量后，隔这么多秒才开始自动回复。
+     *
+     * @default 0.8
+     */
     public static const USE_ENERGY_CD:Number                  = 0.8;
-    // 每一帧增加的能量
+    /**
+     * 普通状态每帧增加的能量。
+     *
+     * @default 2
+     */
     public static const ENERGY_ADD_NORMAL:Number              = 2;
-    // 防御时每一帧增加的能量
+    /**
+     * 防御时每帧增加的能量。
+     *
+     * @default 0.8
+     */
     public static const ENERGY_ADD_DEFENSE:Number             = 0.8;
-    // 攻击时每一帧增加的能量
+    /**
+     * 攻击时每帧增加的能量。
+     *
+     * @default 1.1
+     */
     public static const ENERGY_ADD_ATTACKING:Number           = 1.1;
-    // 每一帧增加的能量(超载)
+    /**
+     * 超载时每帧增加的能量。
+     *
+     * @default 0.6
+     */
     public static const ENERGY_ADD_OVER_LOAD_PERFRAME:Number  = 0.6;
-    // 体力到达多少时，恢复超载
+    /**
+     * 能量回到这个值时解除超载。
+     *
+     * @default 30
+     */
     public static const ENERGY_ADD_OVER_LOAD_RESUME:Number    = 30;
-    // 受到破防攻击时候，耐力减少的比例
+    /**
+     * 被破防时能量减少的比例。
+     *
+     * @default 0.9
+     */
     public static const ENERGY_LOSE_DEFENSE_BREAK_RATE:Number = 0.9;
 
     ///////////////////////////////////////////////////////////////////////////
 
-    // 0.02 必杀攻击到对方的气增量
+    /**
+     * 必杀命中时的加气比例。当前是 0。
+     *
+     * @default 0
+     */
     public static const QI_ADD_HIT_BISHA_RATE:Number    = 0;
-    // 攻击到对方的气增量
+    /**
+     * 普通命中时的加气比例。
+     *
+     * @default 0.17
+     */
     public static const QI_ADD_HIT_RATE:Number          = 0.17;
-    // 攻击到对方的气增量
+    /**
+     * 子弹命中时的加气比例。
+     *
+     * @default 0.1
+     */
     public static const QI_ADD_HIT_BULLET_RATE:Number   = 0.1;
-    // 攻击到对方的气增量
+    /**
+     * 攻击体命中时的加气比例。
+     *
+     * @default 0.13
+     */
     public static const QI_ADD_HIT_ATTACKER_RATE:Number = 0.13;
-    // 辅助到对方的气增量
+    /**
+     * 辅助命中时的加气比例。
+     *
+     * @default 0.15
+     */
     public static const QI_ADD_HIT_ASSISTER_RATE:Number = 0.15;
-    // 攻击到对方的气增加最大值
+    /**
+     * 命中加气的上限。
+     *
+     * @default 15
+     */
     public static const QI_ADD_HIT_MAX:Number           = 15;
-    // 受到对方攻击时的气增量
+    /**
+     * 被打时的加气比例。
+     *
+     * @default 0.08
+     */
     public static const QI_ADD_HURT_RATE:Number         = 0.08;
-    // 受到对方攻击时的气增加最大值
+    /**
+     * 被打加气的上限。
+     *
+     * @default 20
+     */
     public static const QI_ADD_HURT_MAX:Number          = 20;
-    // 每一帧增加的辅助气量
+    /**
+     * 每帧增加的辅助气。
+     *
+     * @default 0.2
+     */
     public static const FUZHU_QI_ADD_PERFRAME:Number    = 0.2;
 
     ///////////////////////////////////////////////////////////////////////////
 
+    /**
+     * 镜头缓动除数。大于 1 时缓动。
+     *
+     * @default 2.5
+     */
     public static const CAMERA_TWEEN_SPD:Number = 2.5;
+    /**
+     * 角色血量上限。
+     *
+     * @default 1000
+     */
     public static const FIGHTER_HP_MAX:int      = 1000;
 
-    public static var QUALITY_UI:String          = StageQuality.LOW; //UI界面画质
-    public static var QUALITY_GAME:String        = StageQuality.LOW; //游戏界面画质
+    /**
+     * 界面画质。
+     *
+     * @default low
+     */
+    public static var QUALITY_UI:String          = StageQuality.LOW;
+    /**
+     * 对局画质。
+     *
+     * @default low
+     */
+    public static var QUALITY_GAME:String        = StageQuality.LOW;
+    /**
+     * 是否进入操作说明。
+     *
+     * @default true
+     */
     public static var SHOW_HOW_TO_PLAY:Boolean   = true;
+    /**
+     * 是否允许显示血量数字。
+     *
+     * @default true
+     */
     public static var ALLOW_SHOW_HP_TEXT:Boolean = true;
-    public static var SPEED_PLUS:Number          = SPEED_PLUS_DEFAULT; //速度比率
-    public static var HURT_FRAME_OFFSET:int      = 3; //受击时间补正，帧数
-    public static var MAP_LOGO_STATE:int         = MapLogoState.HIDE; //是否显示地图中的LOGO 0=不显示，1=显示
-    public static var SHOW_UI_STATUS:int         = 0; // UI 布局模式：0 默认；1 紧凑（选人顺序栏/战斗 HUD 等）
+    /**
+     * 当前速度倍率。初始化时等于当时的 <code>SPEED_PLUS_DEFAULT</code>，之后只在 <code>setGameFps</code> 里重算。
+     */
+    public static var SPEED_PLUS:Number          = SPEED_PLUS_DEFAULT;
+    /**
+     * 受击时间补正，帧数。
+     *
+     * @default 3
+     */
+    public static var HURT_FRAME_OFFSET:int      = 3;
+    /**
+     * 地图标志。0 隐藏，1 是 4399，2 是自己的标志。
+     *
+     * @default 0
+     * @see net.play5d.game.bvn.data.MapLogoState
+     */
+    public static var MAP_LOGO_STATE:int         = MapLogoState.HIDE;
+    /**
+     * 界面布局。0 是默认，1 是紧凑，用于选人顺序栏和对局界面。
+     *
+     * @default 0
+     */
+    public static var SHOW_UI_STATUS:int         = 0;
 
-    //默认速度比率
+    /**
+     * 默认速度倍率，动画帧率除以游戏帧率。
+     *
+     * @return 当前比值。游戏帧率是 0 时为 Infinity。
+     * @example
+     * <listing version="3.0">
+     * var rate:Number = GameConfig.SPEED_PLUS_DEFAULT;
+     * </listing>
+     */
     public static function get SPEED_PLUS_DEFAULT():Number {
         return FPS_ANIMATE / FPS_GAME;
     }
 
+    /**
+     * 改游戏帧率，并按新比值重写 <code>SPEED_PLUS</code>。不改舞台帧率。
+     *
+     * @param v 游戏帧率。0 时速度倍率变成 Infinity。
+     * @example
+     * <listing version="3.0">
+     * GameConfig.setGameFps(30);
+     * </listing>
+     */
     public static function setGameFps(v:int):void {
         FPS_GAME   = v;
         SPEED_PLUS = SPEED_PLUS_DEFAULT;

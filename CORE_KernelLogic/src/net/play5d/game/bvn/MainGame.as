@@ -55,18 +55,52 @@ import net.play5d.game.bvn.utils.TouchUtils;
 import net.play5d.kyo.stage.KyoStageCtrl;
 import net.play5d.kyo.utils.KyoTimeout;
 
+/**
+ * 场景入口。构造时把自己写成 <code>I</code>，再构造一次会换掉。
+ *
+ * <p><code>stageCtrl</code> 要等 <code>initialize</code> 的资源回调走完才有，在那之前切场景会抛错。切场景默认拒绝换成同类，但帧率、画质和 <code>ENTER_STAGE</code> 仍会执行。<code>loadGame</code> 允许换成同类。<code>goCongratulations</code> 和 <code>goLanguage</code> 不派 <code>ENTER_STAGE</code>。</p>
+ */
 public class MainGame {
 
+    /**
+     * 版本号，取自 <code>GameVersion.VERSION</code>。
+     */
     public static const VERSION:String     = GameVersion.VERSION;
-    public static var VERSION_LABEL:String = GameVersion.VERSION; // 显示在右下角，与更新逻辑无关
+    /**
+     * 右下角显示的版本文字，不参与更新判断。初始和 <code>VERSION</code> 相同，之后可以单独改。
+     */
+    public static var VERSION_LABEL:String = GameVersion.VERSION;
+    /**
+     * 版本日期。
+     *
+     * @default 2021.10.14
+     */
     public static var VERSION_DATE:String  = '2021.10.14';
 
+    /**
+     * 更新说明。
+     *
+     * @default null
+     */
     public static var UPDATE_INFO:String;
 
+    /**
+     * 场景控制器。资源回调完成前是 null。
+     *
+     * @default null
+     */
     public static var stageCtrl:KyoStageCtrl;
 
+    /**
+     * 最近一次构造的实例。
+     *
+     * @default null
+     */
     public static var I:MainGame;
 
+    /**
+     * 把 <code>I</code> 写成自己。
+     */
     public function MainGame() {
         I = this;
     }
@@ -77,14 +111,39 @@ public class MainGame {
 
     private var _stage:Stage;
 
+    /**
+     * 舞台。资源回调完成前是 null。
+     *
+     * @return 舞台。
+     */
     public function get stage():Stage {
         return _stage;
     }
 
+    /**
+     * 根显示对象。资源回调完成前是 null。
+     *
+     * @return 根显示对象。
+     */
     public function get root():Sprite {
         return _rootSprite;
     }
 
+    /**
+     * 初始化资源和输入。先打开 SWF 库，根显示对象交给超时器。触屏模式会初始化触摸。
+     *
+     * <p>库加载成功后读存档语言，空字符串也改用简体，再初始化多语言。多语言完成后才记下根和舞台、启动渲染和输入、把滚动区域设成游戏尺寸、创建 <code>stageCtrl</code> 并套用配置，然后调用成功回调。失败回调交给资源和多语言。再次走到完成回调会再套一遍配置，并新建一个 <code>stageCtrl</code>。</p>
+     *
+     * @param root 根显示对象。
+     * @param stage 舞台。触屏模式下为 null 时，第一次按下才抛错。
+     * @param initBack 全部就绪后调用。默认 null。
+     * @param initFail 资源或多语言失败时调用。默认 null。
+     * @throws Error 库正在初始化，或库还没赋值时。
+     * @example
+     * <listing version="3.0">
+     * game.initialize(root, stage, onReady, onFail);
+     * </listing>
+     */
     public function initialize(root:Sprite, stage:Stage, initBack:Function = null, initFail:Function = null):void {
         ResUtils.I.initialize(resInitBack, initFail);
 
@@ -134,6 +193,19 @@ public class MainGame {
         }
     }
 
+    /**
+     * 进入加载场景并加载游戏数据。调用时就派 <code>LOAD_GAME_START</code>，完成回调里才派 <code>LOAD_GAME_COMPLETE</code>。
+     *
+     * <p><code>stageCtrl</code> 还没有时抛错。完成后会初始化数据、再套配置、初始化效果，然后调用成功回调。</p>
+     *
+     * @param initBack 加载并初始化完成后调用。默认 null。
+     * @param initFail 交给加载场景。默认 null。
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.initializeLoad(onLoaded, onFail);
+     * </listing>
+     */
     public function initializeLoad(initBack:Function = null, initFail:Function = null):void {
         LogLang(GameLogger.INFO, 'sys', 'main_game.loading');
 
@@ -164,16 +236,45 @@ public class MainGame {
 
     }
 
+    /**
+     * 自己记下的帧率。默认 60，不是舞台上的当前值。
+     *
+     * @return 帧率。
+     * @example
+     * <listing version="3.0">
+     * var fps:Number = game.getFPS();
+     * </listing>
+     */
     public function getFPS():Number {
         return _fps;
     }
 
+    /**
+     * 同时改自己记下的帧率和舞台帧率。舞台还没有时抛错。
+     *
+     * @param v 帧率。
+     * @throws TypeError 舞台还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.setFPS(30);
+     * </listing>
+     */
     public function setFPS(v:Number):void {
         _fps             = v;
         _stage.frameRate = v;
         GameLogger.debug('sys', 'Setting FPS: ' + v);
     }
 
+    /**
+     * 改舞台画质。和上次相同则直接返回。初始值是 null，第一次一定会写。舞台还没有时抛错。
+     *
+     * @param v 画质。
+     * @throws TypeError 舞台还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.setQuality(GameConfig.QUALITY_UI);
+     * </listing>
+     */
     public function setQuality(v:String):void {
         if (_quality == v) {
             return;
@@ -184,7 +285,13 @@ public class MainGame {
     }
 
     /**
-     * LOGO界面
+     * 进入标志场景，帧率和画质改成界面用的。场景控制器还没有时抛错。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goLogo();
+     * </listing>
      */
     public function goLogo():void {
         stageCtrl.goStage(new LogoStage());
@@ -195,7 +302,13 @@ public class MainGame {
     }
 
     /**
-     * 开始界面
+     * 进入标题。先把自动结束回合、自动开战、选人自动完成、加载后自动开战都写成 true。
+     *
+     * @throws TypeError 场景控制器或对局控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goMenu();
+     * </listing>
      */
     public function goMenu():void {
         resetDefault();
@@ -207,7 +320,13 @@ public class MainGame {
     }
 
     /**
-     * HOW TO PLAY
+     * 进入操作说明，帧率和画质改成界面用的。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goHowToPlay();
+     * </listing>
      */
     public function goHowToPlay():void {
         stageCtrl.goStage(new HowToPlayStage());
@@ -217,7 +336,13 @@ public class MainGame {
     }
 
     /**
-     * 选人界面
+     * 进入选人，帧率和画质改成界面用的。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goSelect();
+     * </listing>
      */
     public function goSelect():void {
         stageCtrl.goStage(new SelectFighterStage());
@@ -227,7 +352,13 @@ public class MainGame {
     }
 
     /**
-     * 加载游戏
+     * 进入加载场景，并允许换成同类场景。无双街机用无双加载，其它模式用普通加载。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.loadGame();
+     * </listing>
      */
     public function loadGame():void {
         if (GameMode.currentMode == GameMode.MUSOU_ARCADE) {
@@ -245,14 +376,26 @@ public class MainGame {
     }
 
     /**
-     * 游戏界面
+     * 进入对局并调用 <code>startGame</code>。启动抛错时，帧率、画质和进入事件都不会改。
+     *
+     * @throws TypeError 对局控制器或场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goGame();
+     * </listing>
      */
     public function goGame():void {
         enterGameStage(GameCtrl.I.startGame);
     }
 
     /**
-     * 无双模式游戏界面
+     * 进入对局并调用 <code>startMusouGame</code>。启动抛错时，帧率、画质和进入事件都不会改。
+     *
+     * @throws TypeError 对局控制器或场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goMusouGame();
+     * </listing>
      */
     public function goMusouGame():void {
         enterGameStage(GameCtrl.I.startMusouGame);
@@ -272,7 +415,13 @@ public class MainGame {
     }
 
     /**
-     * 设置界面
+     * 进入设置，帧率和画质改成界面用的。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goOption();
+     * </listing>
      */
     public function goOption():void {
         stageCtrl.goStage(new SettingStage());
@@ -282,7 +431,13 @@ public class MainGame {
     }
 
     /**
-     * CONTINUE界面
+     * 进入继续画面。和结束画面是同一个场景类，这里播继续。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goContinue();
+     * </listing>
      */
     public function goContinue():void {
         var stg:GameOverStage = new GameOverStage();
@@ -294,7 +449,13 @@ public class MainGame {
     }
 
     /**
-     * GAME OVER界面
+     * 进入结束画面。和继续画面是同一个场景类，这里播结束。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goGameOver();
+     * </listing>
      */
     public function goGameOver():void {
         var stg:GameOverStage = new GameOverStage();
@@ -306,7 +467,13 @@ public class MainGame {
     }
 
     /**
-     * WINNER界面
+     * 进入胜利场景，帧率和画质改成界面用的。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goWinner();
+     * </listing>
      */
     public function goWinner():void {
         var stg:WinnerStage = new WinnerStage();
@@ -317,7 +484,13 @@ public class MainGame {
     }
 
     /**
-     * 制作组界面
+     * 进入制作组场景，帧率和画质改成界面用的。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goCredits();
+     * </listing>
      */
     public function goCredits():void {
         stageCtrl.goStage(new CreditsStage());
@@ -327,7 +500,13 @@ public class MainGame {
     }
 
     /**
-     * 更多游戏
+     * 派更多游戏事件，再交给外壳。没有外壳实例时抛错。
+     *
+     * @throws TypeError 外壳实例为 null 时。
+     * @example
+     * <listing version="3.0">
+     * game.moreGames();
+     * </listing>
      */
     public function moreGames():void {
         GameEvent.dispatchEvent(GameEvent.MORE_GAMES);
@@ -335,7 +514,13 @@ public class MainGame {
     }
 
     /**
-     * 通关
+     * 进入通关场景。不派进入场景事件。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goCongratulations();
+     * </listing>
      */
     public function goCongratulations():void {
         stageCtrl.goStage(new CongratulateStage());
@@ -344,21 +529,39 @@ public class MainGame {
     }
 
     /**
-     * 提交分数
+     * 把当前分数交给外壳。没有外壳实例时抛错。
+     *
+     * @throws TypeError 外壳实例为 null 时。
+     * @example
+     * <listing version="3.0">
+     * game.submitScore();
+     * </listing>
      */
     public function submitScore():void {
         GameInterface.instance.submitScore(GameData.I.score);
     }
 
     /**
-     * 排行榜
+     * 打开外壳排行榜。没有外壳实例时抛错。
+     *
+     * @throws TypeError 外壳实例为 null 时。
+     * @example
+     * <listing version="3.0">
+     * game.showRank();
+     * </listing>
      */
     public function showRank():void {
         GameInterface.instance.showRank();
     }
 
     /**
-     * 大地图
+     * 进入大地图，帧率和画质改成界面用的。
+     *
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goWorldMap();
+     * </listing>
      */
     public function goWorldMap():void {
         stageCtrl.goStage(new WorldMapStage());
@@ -369,8 +572,14 @@ public class MainGame {
     }
 
     /**
-     * 前往【语言选择】场景
-     * @param clickCallBack 点击回调事件
+     * 进入语言选择。回调直接赋给场景，不派进入场景事件。
+     *
+     * @param clickCallBack 点选语言后的回调。默认 null。
+     * @throws TypeError 场景控制器还没有时。
+     * @example
+     * <listing version="3.0">
+     * game.goLanguage(onLang);
+     * </listing>
      */
     public function goLanguage(clickCallBack:Function = null):void {
         var languageStage:LanguageStage = new LanguageStage();
