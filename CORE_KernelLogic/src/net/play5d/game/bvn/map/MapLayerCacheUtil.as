@@ -22,8 +22,7 @@ import flash.geom.Matrix;
 /**
  * 对局地图层位图缓存工具。
  *
- * <p>在构建对局后为地图主层启用 <code>cacheAsBitmapMatrix</code> /
- * <code>cacheAsBitmap</code>，供各壳 <code>afterBuildGame</code> 复用。</p>
+ * <p>构建对局后给各地层打开位图缓存，供各壳 <code>afterBuildGame</code> 复用。背景层和另外三层写的属性不一样。</p>
  *
  * @see MapMain
  */
@@ -32,7 +31,9 @@ public class MapLayerCacheUtil {
     /**
      * 为地图各层启用位图缓存。
      *
-     * @param map 当前对局地图；为 null 时忽略。
+     * <p>主层、前景和固定前景写入单位矩阵的 <code>cacheAsBitmapMatrix</code>。背景层只把 <code>cacheAsBitmap</code> 设为 true。地图或某一层为 null 时跳过该层。</p>
+     *
+     * @param map 当前对局地图。null 时直接返回。
      *
      * @example
      * <listing version="3.0">

@@ -35,7 +35,13 @@ import net.play5d.game.bvn.interfaces.IGameSprite;
 import net.play5d.game.bvn.utils.GameLogger;
 
 /**
- * 地图图层
+ * 地图里的一层视图。
+ *
+ * <p>构造时视图为 null，则 <code>enabled</code> 保持 false，视图也留空。有视图时把视图的坐标挪到本层，视图自身归零。
+ * 模糊只是换成半分辨率位图来显示，光学仍检查原始视图里的影片剪辑。位图按模糊整数值缓存。
+ * <code>destroy</code> 只释放位图视图的像素，模糊缓存和显示列表不动。视图不是位图时，销毁什么都不做。</p>
+ *
+ * @see MapMain
  */
 public class MapLayer extends Sprite {
 
@@ -53,16 +59,20 @@ public class MapLayer extends Sprite {
         initView(view);
     }
 
-    // 可用性
+    /**
+     * 这一层是否可用。有视图的构造会写成 true。
+     *
+     * @default false
+     */
     public var enabled:Boolean = false;
 
-    // 视图显示对象
+    /** @private */
     private var _view:DisplayObject;
-    // 模糊滤镜位图
+    /** @private */
     private var _blurBitmaps:Object      = {};
-    // 是否平滑
+    /** @private 未写入，光学渲染不靠它提前返回 */
     private var _smoothing:Boolean;
-    // 当前显示对象
+    /** @private */
     private var _currentShow:DisplayObject;
     /** @private 光学遮挡降频计数 */
     private var _opticalFrame:int;
@@ -72,14 +82,29 @@ public class MapLayer extends Sprite {
     private static const OPTICAL_GAP:int = 2;
 
     /**
-     * 获取地图显示对象
+     * 原始视图。构造时传入 null，这里就是 null。
+     *
+     * @return 视图显示对象。
+     * @example
+     * <listing version="3.0">
+     * var view:DisplayObject = layer.getView();
+     * </listing>
      */
     public function getView():DisplayObject {
         return _view;
     }
 
     /**
-     * 正常化
+     * 按画质设置位图平滑，并按标志决定显示哪个 logo。
+     *
+     * <p>没有视图时直接返回。位图，以及精灵的直接子位图，只在画质为最佳时平滑。
+     * 先藏起 <code>logo4399</code> 和 <code>logo_mine</code>，再按 <code>MAP_LOGO_STATE</code> 打开对应的一个。读取画质时配置缺失会抛错。</p>
+     *
+     * @throws TypeError 配置不存在时。
+     * @example
+     * <listing version="3.0">
+     * layer.normalize();
+     * </listing>
      */
     public function normalize():void {
         if (!_view) {
@@ -127,9 +152,16 @@ public class MapLayer extends Sprite {
     }
 
     /**
-     * 渲染光学可见性（透明度变化）
+     * 让挡住角色的影片剪辑变半透明。
      *
-     * @param gameSps 指定游戏元件
+     * <p>没有视图、视图不是精灵，或没有子对象时直接返回。每两次调用才真正检查一次。
+     * 角色列表为空时，影片剪辑的透明度改回 1。相交时透明度是 0.5，否则是 1。已销毁或区域为空的角色跳过。</p>
+     *
+     * @param gameSps 要检测的角色。null 或空数组会把影片剪辑透明度改回 1。
+     * @example
+     * <listing version="3.0">
+     * layer.renderOptical(sprites);
+     * </listing>
      */
     public function renderOptical(gameSps:Vector.<IGameSprite>):void {
         if (!_view || _smoothing) {
@@ -179,7 +211,14 @@ public class MapLayer extends Sprite {
     }
 
     /**
-     * 销毁
+     * 释放位图视图的像素。
+     *
+     * <p>视图不是位图时什么都不做。模糊缓存不释放，对象也不从父级移除。</p>
+     *
+     * @example
+     * <listing version="3.0">
+     * layer.destroy();
+     * </listing>
      */
     public function destroy():void {
         var b:Bitmap;
@@ -190,10 +229,16 @@ public class MapLayer extends Sprite {
     }
 
     /**
-     * 设置平滑效果
+     * 换成模糊位图，或在模糊值都不大于 0 时改回原视图。
      *
-     * @param blurX 横向模糊值
-     * @param blurY 纵向模糊值
+     * <p>没有视图时直接返回。位图按取整后的横纵模糊值缓存，绘制成一半尺寸再放大回去。出错只记日志。</p>
+     *
+     * @param blurX 横向模糊，默认 0。
+     * @param blurY 纵向模糊，默认 0。
+     * @example
+     * <listing version="3.0">
+     * layer.setSmoothing(2, 0);
+     * </listing>
      */
     public function setSmoothing(blurX:Number = 0, blurY:Number = 0):void {
         if (!_view) {
