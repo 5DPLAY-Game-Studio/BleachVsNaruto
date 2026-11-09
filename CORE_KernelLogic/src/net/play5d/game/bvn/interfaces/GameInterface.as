@@ -33,7 +33,9 @@ import flash.utils.ByteArray;
  */
 public class GameInterface {
     /**
-     * 当前壳实现；未注入时部分静态方法走默认逻辑。
+     * 当前壳实现。未注入时是 null，<code>checkFile</code> 和 <code>addMoney</code> 走默认逻辑。
+     *
+     * @default null
      */
     public static var instance:IGameInterface;
 
@@ -99,8 +101,12 @@ public class GameInterface {
     }
 
     /**
-     * 增加无双金币；无实例时回退随机小数额。
-     * @param back 成功回调，签名为 <code>function(money:int):void</code>。
+     * 增加无双金币。金额先转成 int，小于 1 或大于 5000 时不调用原来的回调。
+     *
+     * <p>没有壳实例时，用 100 以上、不足 600 的随机数再走同一套限制。</p>
+     *
+     * @param back 成功回调，签名为 <code>function(money:int):void</code>。金额被丢掉时不会调用。null 且金额通过时会抛错。
+     * @throws TypeError 金额通过但 <code>back</code> 为 null 时。
      * @example
      * <listing version="3.0">
      * GameInterface.addMoney(function (mm:int):void {

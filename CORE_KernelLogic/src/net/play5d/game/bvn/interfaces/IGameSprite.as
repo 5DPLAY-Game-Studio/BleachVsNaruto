@@ -33,37 +33,47 @@ public interface IGameSprite {
      * 颜色变换通道
      */
     function get colorTransform():ColorTransform;
+
+    /** @private */
     function set colorTransform(colorTransform:ColorTransform):void;
 
     /**
      * 方向
      */
     function get direct():int;
+
+    /** @private */
     function set direct(value:int):void;
 
     /**
      * 坐标 x
      */
     function get x():Number;
+
+    /** @private */
     function set x(v:Number):void;
 
     /**
      * 坐标 y
      */
     function get y():Number;
+
+    /** @private */
     function set y(v:Number):void;
 
     /**
      * 队伍，同一队伍不可攻击
      */
     function get team():TeamVO;
+
+    /** @private */
     function set team(v:TeamVO):void;
 
     ////////////////////////////////////////////////////////////
 
     /**
      * 销毁
-     * @param dispose 处理
+     * @param dispose 为 true 时释放显示对象。默认 true。
      */
     function destroy(dispose:Boolean = true):void;
 
@@ -124,8 +134,9 @@ public interface IGameSprite {
     function getBodyArea():Rectangle;
 
     /**
-     * 返回当前攻击的区域
-     * @return 当前攻击的区域 [FighterHitVO]
+     * 当前打出去的攻击数据。
+     *
+     * @return 攻击数据。没有时可以返回 null。
      */
     function getCurrentHits():Array;
 
@@ -167,7 +178,7 @@ public interface IGameSprite {
 
     /**
      * 置音量
-     * @param v 音量 0-1
+     * @param v 音量。
      */
     function setVolume(v:Number):void;
 

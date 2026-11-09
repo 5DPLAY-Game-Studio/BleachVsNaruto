@@ -17,6 +17,11 @@
  */
 
 package net.play5d.game.bvn.interfaces {
+/**
+ * 精灵控制器上的目标、主人和自身。
+ *
+ * <p><code>getTargetAll</code> 默认只要活着的目标。</p>
+ */
 public interface IGameSpriteCntlr {
 
     /**
@@ -27,7 +32,7 @@ public interface IGameSpriteCntlr {
 
     /**
      * 获取所有目标的 IGameSprite
-     * @param isOnlyAlive 是否仅获取存活的目标
+     * @param isOnlyAlive 是否只要活着的目标。默认 true。
      * @return 目标全部游戏精灵
      */
     function getTargetAll(isOnlyAlive:Boolean = true):Vector.<IGameSprite>;

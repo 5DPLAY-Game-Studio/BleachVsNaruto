@@ -20,13 +20,34 @@ package net.play5d.game.bvn.interfaces {
 import flash.display.DisplayObject;
 import flash.events.IEventDispatcher;
 
+/**
+ * 嵌在设置界面里的一块子界面。
+ *
+ * <p><code>fadeIn</code> 负责显示并进入，<code>fadeOut</code> 负责离开并藏起。</p>
+ *
+ * @see flash.events.IEventDispatcher
+ */
 public interface IInnerSetUI extends IEventDispatcher {
+    /**
+     * 显示并播放进入。
+     */
     function fadeIn():void;
 
+    /**
+     * 播放离开并藏起。
+     */
     function fadeOut():void;
 
+    /**
+     * 这块子界面的显示对象。
+     *
+     * @return 显示对象。
+     */
     function getUI():DisplayObject;
 
+    /**
+     * 卸掉子界面并释放内部按钮。
+     */
     function destroy():void;
 }
 }
