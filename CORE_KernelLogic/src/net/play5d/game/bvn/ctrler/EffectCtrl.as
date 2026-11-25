@@ -899,21 +899,21 @@ public class EffectCtrl {
      * </listing>
      */
     public function startFilter(target:BaseGameSprite, filter:BitmapFilter, filterOffset:Point = null):void {
-        var bv:BitmapFilterView;
+        var bitmapFilterView:BitmapFilterView;
         for each(var i:BitmapFilterView in _filterEffects) {
             if (i.target == target) {
-                bv = i;
+                bitmapFilterView = i;
                 break;
             }
         }
 
-        if (!bv) {
-            bv = new BitmapFilterView(target, filter, filterOffset);
-            GameCtrl.I.addGameSprite(0, bv, 0);
-            _filterEffects.push(bv);
+        if (!bitmapFilterView) {
+            bitmapFilterView = new BitmapFilterView(target, filter, filterOffset);
+            GameCtrl.I.addGameSprite(0, bitmapFilterView, 0);
+            _filterEffects.push(bitmapFilterView);
         }
         else {
-            bv.update(filter, filterOffset);
+            bitmapFilterView.update(filter, filterOffset);
         }
 
     }
@@ -931,9 +931,9 @@ public class EffectCtrl {
      */
     public function endFilter(target:BaseGameSprite):void {
         for (var i:int = 0; i < _filterEffects.length; i++) {
-            var bv:BitmapFilterView = _filterEffects[i];
-            if (bv.target == target) {
-                GameCtrl.I.removeGameSprite(bv, true);
+            var bitmapFilterView:BitmapFilterView = _filterEffects[i];
+            if (bitmapFilterView.target == target) {
+                GameCtrl.I.removeGameSprite(bitmapFilterView, true);
                 _filterEffects.splice(i, 1);
                 break;
             }

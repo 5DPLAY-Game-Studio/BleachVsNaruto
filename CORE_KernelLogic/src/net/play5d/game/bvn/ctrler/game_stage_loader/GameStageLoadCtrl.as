@@ -329,18 +329,18 @@ public class GameStageLoadCtrl extends EventDispatcher {
             bgmDatas = new Vector.<BgmVO>();
 
             for each(id in bgms) {
-                var bv:BgmVO = FighterModel.I.getFighterBGM(id);
-                if (!bv) {
-                    bv = MapModel.I.getMapBGM(id);
+                var bgmVO:BgmVO = FighterModel.I.getFighterBGM(id);
+                if (!bgmVO) {
+                    bgmVO = MapModel.I.getMapBGM(id);
                 }
-                if (!bv) {
-                    bv = FighterModel.I.getFighterBGM(id);
+                if (!bgmVO) {
+                    bgmVO = FighterModel.I.getFighterBGM(id);
                 }
-                if (!bv) {
-                    bv = FighterModel.I.getBossBGM(id);
+                if (!bgmVO) {
+                    bgmVO = FighterModel.I.getBossBGM(id);
                 }
-                if (bv) {
-                    bgmDatas.push(bv);
+                if (bgmVO) {
+                    bgmDatas.push(bgmVO);
                 }
             }
         }

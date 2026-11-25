@@ -146,11 +146,11 @@ public class FighterModel {
             return null;
         }
 
-        var bv:BgmVO = new BgmVO();
-        bv.id        = fv.id;
-        bv.url       = fv.bgm;
-        bv.rate      = fv.bgmRate;
-        return bv;
+        var bgmVO:BgmVO = new BgmVO();
+        bgmVO.id        = fv.id;
+        bgmVO.url       = fv.bgm;
+        bgmVO.rate      = fv.bgmRate;
+        return bgmVO;
     }
 
     /**
@@ -166,22 +166,22 @@ public class FighterModel {
      * </listing>
      */
     public function getBossBGM(id:String):BgmVO {
-        var bv:BgmVO = new BgmVO();
-        bv.id        = id;
-        bv.rate      = 1;
+        var bgmVO:BgmVO = new BgmVO();
+        bgmVO.id        = id;
+        bgmVO.rate      = 1;
 
         switch (id) {
         case 'boss_naruto':
-            bv.url = 'bgm/narutoboss.mp3';
+            bgmVO.url = 'bgm/narutoboss.mp3';
             break;
         case 'boss_bleach':
-            bv.url = 'bgm/bleachboss.mp3';
+            bgmVO.url = 'bgm/bleachboss.mp3';
             break;
         default:
             return null;
         }
 
-        return bv;
+        return bgmVO;
     }
 
     /**

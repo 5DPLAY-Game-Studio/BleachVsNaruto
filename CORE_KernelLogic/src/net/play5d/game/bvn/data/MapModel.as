@@ -85,11 +85,11 @@ public class MapModel {
             return null;
         }
 
-        var bv:BgmVO = new BgmVO();
-        bv.id        = 'map';
-        bv.url       = mv.bgm;
-        bv.rate      = 1;
-        return bv;
+        var bgmVO:BgmVO = new BgmVO();
+        bgmVO.id        = 'map';
+        bgmVO.url       = mv.bgm;
+        bgmVO.rate      = 1;
+        return bgmVO;
     }
 
     /**
