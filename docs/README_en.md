@@ -66,7 +66,8 @@ Here, you can challenge the limits of your own operation and reaction, or you ca
 
 The current major version is 3.7, and we are working on updating it, but it is not yet ideal. If you have any issues, please report them in the issue tracker (or any other contact method that can reach our team).
 
-The project is currently in the **Alpha** state, and the development work will be directly controlled and pushed by the project leader for the time being. When the project development progress reaches the **Beta** stage, the development workflow will be transformed into the **Fork - Branch - Commit - Pull - Pull Request** mode.
+> [!WARNING]
+> The project is currently in the **Alpha** state, and the development work will be directly controlled and pushed by the project leader for the time being. When the project development progress reaches the **Beta** stage, the development workflow will be transformed into the **Fork - Branch - Commit - Pull - Pull Request** mode.
 
 ## Download Binary Game
 

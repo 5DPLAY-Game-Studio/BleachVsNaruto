@@ -66,7 +66,8 @@ Tại đây, bạn có thể thử thách giới hạn khả năng vận hành v
 
 Phiên bản chính hiện tại là 3.7, và chúng tôi đang nỗ lực cập nhật nó, nhưng vẫn chưa hoàn hảo. Nếu bạn gặp bất kỳ sự cố nào, vui lòng báo cáo trong trình theo dõi sự cố (hoặc bất kỳ phương thức liên hệ nào khác có thể liên lạc được với nhóm của chúng tôi).
 
-Dự án hiện đang ở giai đoạn **Alpha**, và công việc phát triển sẽ do trưởng dự án trực tiếp kiểm soát và thúc đẩy trong thời gian này. Khi tiến độ phát triển dự án đạt đến giai đoạn **Beta**, quy trình phát triển sẽ được chuyển sang chế độ **Fork - Branch - Commit - Pull - Pull Request**.
+> [!WARNING]
+> Dự án hiện đang ở giai đoạn **Alpha**, và công việc phát triển sẽ do trưởng dự án trực tiếp kiểm soát và thúc đẩy trong thời gian này. Khi tiến độ phát triển dự án đạt đến giai đoạn **Beta**, quy trình phát triển sẽ được chuyển sang chế độ **Fork - Branch - Commit - Pull - Pull Request**.
 
 ## Tải xuống trò chơi Binary
 
